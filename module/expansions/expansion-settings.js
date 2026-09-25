@@ -48,11 +48,15 @@ export const EXPANSION_CHOICES = {
 
     cotf: "Call of the Forsaken",
 
+    tds: "The Darkened Sea",
+
     tbm: "The Broken Mirror",
 
     eok: "Empires of Kunark",
 
     ros: "Ring of Scale",
+
+    tbl: "The Burning Lands",
 
     tov: "Torment of Velious",
 
@@ -62,5 +66,9 @@ export const EXPANSION_CHOICES = {
 
     nos: "Night of Shadows",
 
-    ls: "Laurion's Song"
+    ls: "Laurion's Song",
+
+    tob: "The Outer Brood",
+
+    sor: "Shattering of Ro"
 };
