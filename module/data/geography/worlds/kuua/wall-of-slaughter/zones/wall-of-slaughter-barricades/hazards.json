@@ -1,0 +1,27 @@
+{
+  "zone": "wall-of-slaughter-barricades",
+  "hazards": [
+    {
+      "id": "barricade-collapse",
+      "name": "Barricade Collapse",
+      "severity": "high",
+      "trigger": "proximity-to-fortified-barricade",
+      "effects": [
+        "knockdown",
+        "physical-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "discord-wall-eruption",
+      "name": "Discord Wall Eruption",
+      "severity": "extreme",
+      "trigger": "proximity-to-discord-wall-fracture",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "random-teleport"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-scar-east",
+  "hazards": [
+    {
+      "id": "wind-shear",
+      "name": "Wind Shear",
+      "severity": "extreme",
+      "trigger": "proximity-to-wind-pocket",
+      "effects": [
+        "knockback",
+        "arcane-damage",
+        "disorientation"
+      ]
+    },
+    {
+      "id": "ridge-fall",
+      "name": "Ridge Fall",
+      "severity": "high",
+      "trigger": "movement-on-ridge-line",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "unreal-hollows-travel",
+  "zone": "unreal-hollows",
+
+  "nodes": [
+    "false-memory-cavern",
+    "unreal-crater",
+    "distortion-hollow",
+    "sovereign-chamber"
+  ],
+
+  "edges": [
+    {
+      "from": "false-memory-cavern",
+      "to": "unreal-crater",
+      "type": "memory-slip"
+    },
+    {
+      "from": "unreal-crater",
+      "to": "distortion-hollow",
+      "type": "unreal-transition",
+      "requirements": {
+        "existence-anchor": true
+      }
+    },
+    {
+      "from": "distortion-hollow",
+      "to": "sovereign-chamber",
+      "type": "echo-path",
+      "requirements": {
+        "memory-stability": true
+      }
+    }
+  ]
+}

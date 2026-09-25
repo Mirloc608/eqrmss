@@ -1,0 +1,44 @@
+{
+  "zone": "throne-of-underfoot",
+
+  "terrain": [
+    "divine-throne-platform",
+    "stone-crystal-convergence",
+    "magma-heart-pillars",
+    "sanctum-of-brell"
+  ],
+
+  "lighting": "divine-core-radiance",
+
+  "hazards": [
+    {
+      "id": "divine-resonance-burst",
+      "dc": 24,
+      "effect": "massive-force_damage_and_stun"
+    },
+    {
+      "id": "magma-core-eruption",
+      "dc": 23,
+      "effect": "fire_damage_and_knockback"
+    },
+    {
+      "id": "crystal-convergence-flare",
+      "dc": 22,
+      "effect": "radiant_damage_and_blindness"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "mythic",
+    "restSafety": "none",
+    "notes": "The Throne responds to Brell’s will; terrain may shift, collapse, or reshape during combat."
+  },
+
+  "environmentTags": [
+    "divine",
+    "stone",
+    "crystal",
+    "magma",
+    "raid-final"
+  ]
+}

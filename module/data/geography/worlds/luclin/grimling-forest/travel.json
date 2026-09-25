@@ -1,0 +1,25 @@
+{
+  "region": "grimling-forest",
+
+  "nodes": [
+    { "id": "grimling-warfront", "name": "Grimling Warfront" },
+    { "id": "grimling-encampments", "name": "Grimling Encampments" },
+    { "id": "forest-heartlands", "name": "Forest Heartlands" },
+    { "id": "burrow-warrens", "name": "Burrow Warrens" },
+    { "id": "acrylia-approach", "name": "Acrylia Approach" },
+    { "id": "patrol-routes", "name": "Seru Patrol Routes" }
+  ],
+
+  "edges": [
+    { "from": "grimling-warfront", "to": "grimling-encampments", "method": "warfront trail" },
+    { "from": "grimling-encampments", "to": "forest-heartlands", "method": "forest breach" },
+    { "from": "forest-heartlands", "to": "burrow-warrens", "method": "root tunnel" },
+    { "from": "burrow-warrens", "to": "acrylia-approach", "method": "acrylia vein tunnel" },
+    { "from": "grimling-warfront", "to": "patrol-routes", "method": "savanna crossing" }
+  ],
+
+  "externalConnections": [
+    { "to": "shadeweavers-thicket", "method": "forest pass" },
+    { "to": "hollowshade-moor", "method": "savanna trail" }
+  ]
+}

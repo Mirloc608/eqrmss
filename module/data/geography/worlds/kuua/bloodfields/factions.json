@@ -1,0 +1,38 @@
+{
+  "region": "bloodfields",
+
+  "factions": [
+    {
+      "id": "muramite-legion",
+      "name": "Muramite Legion",
+      "importance": "critical",
+      "description": "The primary Muramite military force pushing across the Bloodfields.",
+      "allies": ["muramite-command"],
+      "enemies": ["dranik-resistance"]
+    },
+    {
+      "id": "muramite-command",
+      "name": "Muramite Command",
+      "importance": "major",
+      "description": "Officers and overseers directing warfront operations.",
+      "allies": ["muramite-legion"],
+      "enemies": ["dranik-resistance"]
+    },
+    {
+      "id": "dranik-resistance",
+      "name": "Dranik Resistance",
+      "importance": "major",
+      "description": "Resistance fighters attempting sabotage and infiltration.",
+      "allies": null,
+      "enemies": ["muramite-legion", "muramite-command"]
+    },
+    {
+      "id": "discord-entities",
+      "name": "Discord Entities",
+      "importance": "major",
+      "description": "Manifestations emerging from ruptured rifts.",
+      "allies": null,
+      "enemies": ["muramite-legion", "dranik-resistance"]
+    }
+  ]
+}

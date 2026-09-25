@@ -1,0 +1,15 @@
+<div class="tab" data-group="primary" data-tab="spells">
+  <h3>Spell Lists &amp; Magic Items</h3>
+  <div class="panel">
+    <table class="rmss-table">
+      <thead><tr><th>Spell List Name</th><th>Realm</th><th>Type</th><th>Ranks</th><th>Bonus</th></tr></thead>
+      <tbody>
+        {{#each actor.items}}
+          {{#if (eq this.type "spellList")}}
+          <tr><td>{{this.name}}</td><td>{{this.system.realm}}</td><td>{{this.system.type}}</td><td>{{this.system.ranks}}</td><td>{{this.system.bonus}}</td></tr>
+          {{/if}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

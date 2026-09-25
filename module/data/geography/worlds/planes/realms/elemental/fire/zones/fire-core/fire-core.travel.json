@@ -1,0 +1,35 @@
+{
+  "id": "fire-core-travel",
+  "zone": "fire-core",
+
+  "nodes": [
+    "heart-chamber",
+    "pyroclast-fissure",
+    "flame-well",
+    "core-throne"
+  ],
+
+  "edges": [
+    {
+      "from": "heart-chamber",
+      "to": "pyroclast-fissure",
+      "type": "flame-flow"
+    },
+    {
+      "from": "pyroclast-fissure",
+      "to": "flame-well",
+      "type": "eruption-transition",
+      "requirements": {
+        "heat-resistance": true
+      }
+    },
+    {
+      "from": "flame-well",
+      "to": "core-throne",
+      "type": "core-path",
+      "requirements": {
+        "elemental-attunement-fire": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "region": "dranik-hollows",
+
+  "factions": [
+    {
+      "id": "muramite-legion",
+      "name": "Muramite Legion",
+      "importance": "critical",
+      "description": "Muramite soldiers occupying the Hollows and patrolling deeper caverns.",
+      "allies": ["muramite-inquisitors"],
+      "enemies": ["dragorn-resistance"]
+    },
+    {
+      "id": "muramite-inquisitors",
+      "name": "Muramite Inquisitors",
+      "importance": "major",
+      "description": "Inquisitors overseeing torture pits and Discord rituals within the Hollows.",
+      "allies": ["muramite-legion"],
+      "enemies": ["dragorn-resistance"]
+    },
+    {
+      "id": "dragorn-resistance",
+      "name": "Dragorn Resistance",
+      "importance": "minor",
+      "description": "Rebels using hidden alcoves and collapsed tunnels to strike at Muramite forces.",
+      "allies": null,
+      "enemies": ["muramite-legion", "muramite-inquisitors"]
+    },
+    {
+      "id": "discord-manifestations",
+      "name": "Discord Manifestations",
+      "importance": "critical",
+      "description": "Arcane anomalies spawned by Discord ruptures throughout the Hollows.",
+      "allies": null,
+      "enemies": ["dragorn-resistance", "muramite-legion"]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "discordian-crucible-travel",
+  "dungeon": "discordian-crucible",
+
+  "nodes": [
+    "dungeon-entry",
+    "outer-forgeworks",
+    "siphon-chambers",
+    "engine-core",
+    "corruption-heart-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "outer-forgeworks", "type": "forge-path" },
+    { "from": "outer-forgeworks", "to": "siphon-chambers", "type": "siphon-transition" },
+    { "from": "siphon-chambers", "to": "engine-core", "type": "core-descent" },
+    {
+      "from": "engine-core",
+      "to": "corruption-heart-lair",
+      "type": "heart-ascent",
+      "requirements": { "discord-attunement": true }
+    }
+  ]
+}

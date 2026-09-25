@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+
+  "id": "lay-on-hands",
+
+  "name": "Lay On Hands",
+
+  "type": "signature",
+
+  "category": "signature",
+
+  "description": "Channels divine grace to restore massive health.",
+
+  "ranked": true,
+
+  "maxRank": 12,
+
+  "requirements": {},
+
+  "effects": [
+    {
+      "type": "healing",
+
+      "formula": {
+        "basePercent": 15,
+        "percentPerRank": 10
+      },
+
+      "modifiers": {
+        "target": "max-hit-points"
+      }
+    }
+  ]
+}

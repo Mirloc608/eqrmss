@@ -1,0 +1,37 @@
+{
+  "dungeon": "underfoot-throne",
+
+  "levels": [
+    {
+      "id": "throne-approach",
+      "name": "Throne Approach",
+      "description": "The divine path leading to Brell’s sanctum.",
+      "hazards": [
+        { "id": "stone-resonance", "dc": 36, "effect": "damage_and_knockback" }
+      ]
+    },
+    {
+      "id": "brells-sanctum",
+      "name": "Brell’s Sanctum",
+      "description": "The inner sanctum where divine resonance pulses.",
+      "hazards": [
+        { "id": "divine-feedback", "dc": 37, "effect": "fear_and_dot" }
+      ]
+    },
+    {
+      "id": "throne-of-underfoot",
+      "name": "Throne of Underfoot",
+      "description": "The divine seat itself, where Brell’s authority manifests.",
+      "hazards": [
+        { "id": "divine-collapse", "dc": 38, "effect": "stat_decay_and_massive_damage" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "divine",
+    "stone",
+    "crystal",
+    "magma"
+  ]
+}

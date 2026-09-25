@@ -1,0 +1,22 @@
+{
+  "id": "scrapforge",
+  "key": "scrapforge",
+  "name": "Scrapforge",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "innovation",
+
+  "description": "The Scrapforge is a colossal foundry where broken constructs are reforged into new horrors. Sparks and molten metal fill the air.",
+
+  "hazards": [
+    { "id": "forge-eruption", "dc": 37, "effect": "massive_damage" },
+    { "id": "scrap-collapse", "dc": 36, "effect": "stat_decay_and_stun" }
+  ],
+
+  "encounters": [
+    { "creature": "Scrapforged Titan", "level": 97 },
+    { "creature": "Molten Construct", "level": 98 }
+  ],
+
+  "tags": ["innovation", "forge", "outer"]
+}

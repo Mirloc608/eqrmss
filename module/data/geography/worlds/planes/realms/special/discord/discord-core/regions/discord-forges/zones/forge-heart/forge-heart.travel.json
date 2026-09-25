@@ -1,0 +1,10 @@
+{
+  "id": "forge-heart-travel",
+  "zone": "forge-heart",
+
+  "nodes": ["entry", "siphon-pillar", "forge-core"],
+  "edges": [
+    { "from": "entry", "to": "siphon-pillar", "type": "forge-path" },
+    { "from": "siphon-pillar", "to": "forge-core", "type": "core-ascent" }
+  ]
+}

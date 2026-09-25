@@ -1,0 +1,38 @@
+{
+  "id": "riftspire-reaches-travel",
+  "region": "riftspire-reaches",
+
+  "nodes": [
+    "spire-ascendant",
+    "riftseekers-perch",
+    "skyfracture-terraces",
+    "attunement-nexus"
+  ],
+
+  "edges": [
+    {
+      "from": "spire-ascendant",
+      "to": "riftseekers-perch",
+      "type": "spire-climb",
+      "requirements": {
+        "rift-stability-anchor": true
+      }
+    },
+    {
+      "from": "riftseekers-perch",
+      "to": "skyfracture-terraces",
+      "type": "skyfracture-transition",
+      "requirements": {
+        "anti-void-ward": true
+      }
+    },
+    {
+      "from": "skyfracture-terraces",
+      "to": "attunement-nexus",
+      "type": "nexus-ascent",
+      "requirements": {
+        "rift-attunement": true
+      }
+    }
+  ]
+}

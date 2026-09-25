@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-sewers-purifying-plant",
+  "nodes": [
+    {
+      "id": "filtration-chamber",
+      "type": "chamber",
+      "label": "Filtration Chamber"
+    },
+    {
+      "id": "pressure-valve-hall",
+      "type": "hall",
+      "label": "Pressure Valve Hall"
+    },
+    {
+      "id": "overflow-reservoir",
+      "type": "reservoir",
+      "label": "Overflow Reservoir"
+    }
+  ],
+  "edges": [
+    {
+      "from": "filtration-chamber",
+      "to": "pressure-valve-hall",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route through malfunctioning filtration machinery."
+    },
+    {
+      "from": "pressure-valve-hall",
+      "to": "overflow-reservoir",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord‑corrupted water overflow."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-sewers-pool-of-sludge",
+      "type": "forward",
+      "description": "The Plant leads toward the Pool of Sludge."
+    },
+    {
+      "to": "draniks-scar",
+      "type": "back",
+      "description": "The Plant connects back to Dranik’s Scar."
+    }
+  ]
+}

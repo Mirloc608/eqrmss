@@ -1,0 +1,716 @@
+[
+  {
+    "_id": "wiz-markars-discord-56-r1",
+    "name": "Markar's Discord",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "wizard",
+      "level": 56,
+      "school": "evocation",
+      "target": "single",
+      "range": 1400,
+      "castTime": 4,
+      "manaCost": 300,
+      "effects": [
+        { "type": "control", "effect": "stun", "duration": 8 },
+        { "type": "damage", "element": "arcane", "amount": 750 }
+      ],
+      "description": "Discordant energy stuns the target and deals heavy damage."
+    }
+  },
+  {
+    "_id": "wiz-retribution-of-alkabor-56-r1",
+    "name": "Retribution of Al'Kabor",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "wizard",
+      "level": 56,
+      "school": "evocation",
+      "target": "area",
+      "range": 1400,
+      "castTime": 6,
+      "manaCost": 662,
+      "effects": [
+        { "type": "damage", "element": "arcane", "amount": 301, "radius": 30 }
+      ],
+      "description": "Al'Kabor’s retribution damages multiple enemies with arcane energy."
+    }
+  },
+  {
+    "_id": "wiz-jylls-zephyr-of-ice-56-r1",
+    "name": "Jyll's Zephyr of Ice",
+    "type": "spell",
+    "img": "icons/magic/water/aoe-frost.webp",
+    "system": {
+      "class": "wizard",
+      "level": 56,
+      "school": "evocation",
+      "target": "area",
+      "range": 1000,
+      "castTime": 5,
+      "manaCost": 313,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 594, "radius": 20 }
+      ],
+      "description": "Summons a zephyr of ice that damages nearby enemies."
+    }
+  },
+  {
+    "_id": "wiz-decession-56-r1",
+    "name": "Decession",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-self.webp",
+    "system": {
+      "class": "wizard",
+      "level": 56,
+      "school": "alteration",
+      "target": "single",
+      "range": "zone",
+      "castTime": 3,
+      "manaCost": 650,
+      "effects": [
+        { "type": "utility", "effect": "evacuate-single" }
+      ],
+      "description": "Evacuates a single party member to a safe point in the zone."
+    }
+  },
+  {
+    "_id": "wiz-draught-of-ice-57-r1",
+    "name": "Draught of Ice",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear.webp",
+    "system": {
+      "class": "wizard",
+      "level": 57,
+      "school": "evocation",
+      "target": "single",
+      "range": 1400,
+      "castTime": 3,
+      "manaCost": 216,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 793 }
+      ],
+      "description": "A quick icy draught that deals heavy single‑target damage."
+    }
+  },
+  {
+    "_id": "wiz-pillar-of-flame-57-r1",
+    "name": "Pillar of Flame",
+    "type": "spell",
+    "img": "icons/magic/fire/aoe-flame.webp",
+    "system": {
+      "class": "wizard",
+      "level": 57,
+      "school": "evocation",
+      "target": "area",
+      "range": 1400,
+      "castTime": 5,
+      "manaCost": 364,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 652, "radius": 20 }
+      ],
+      "description": "Summons a pillar of flame that damages multiple enemies."
+    }
+  },
+  {
+    "_id": "wiz-eye-of-tallon-57-r1",
+    "name": "Eye of Tallon",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-floating.webp",
+    "system": {
+      "class": "wizard",
+      "level": 57,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 65,
+      "effects": [
+        { "type": "utility", "effect": "eye-of-zomm" },
+        { "type": "utility", "effect": "invisibility" },
+        { "type": "utility", "effect": "magnification", "amount": 120 },
+        { "type": "utility", "effect": "see-invisible" }
+      ],
+      "description": "Summons an eye of Tallon, granting vision, invisibility, magnification, and see invisibility."
+    }
+  },
+  {
+    "_id": "wiz-fetter-58-r1",
+    "name": "Fetter",
+    "type": "spell",
+    "img": "icons/magic/nature/root-entangle.webp",
+    "system": {
+      "class": "wizard",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 75,
+      "effects": [
+        { "type": "control", "effect": "root", "duration": 60 }
+      ],
+      "description": "Roots the target in place with fettering magic."
+    }
+  },
+  {
+    "_id": "wiz-lure-of-lightning-58-r1",
+    "name": "Lure of Lightning",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt-large.webp",
+    "system": {
+      "class": "wizard",
+      "level": 58,
+      "school": "evocation",
+      "target": "single",
+      "range": 1400,
+      "castTime": 4,
+      "manaCost": 310,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 882 }
+      ],
+      "description": "A lure of lightning that deals heavy single‑target damage."
+    }
+  },
+  {
+    "_id": "wiz-tears-of-prexus-58-r1",
+    "name": "Tears of Prexus",
+    "type": "spell",
+    "img": "icons/magic/water/aoe-frost.webp",
+    "system": {
+      "class": "wizard",
+      "level": 58,
+      "school": "evocation",
+      "target": "area",
+      "range": 1400,
+      "castTime": 6,
+      "manaCost": 421,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 896, "radius": 30 }
+      ],
+      "description": "Summons tears of Prexus that damage multiple enemies with cold."
+    }
+  },
+  {
+    "_id": "wiz-manasink-58-r1",
+    "name": "Manasink",
+    "type": "spell",
+    "img": "icons/magic/arcane/shield-energy-blue.webp",
+    "system": {
+      "class": "wizard",
+      "level": 58,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 200,
+      "effects": [
+        { "type": "buff", "stat": "absorb-magic-damage", "amount": 250 }
+      ],
+      "description": "Creates a manasink barrier that absorbs incoming magical damage."
+    }
+  },
+  {
+    "_id": "wiz-spellshield-58-r1",
+    "name": "Spellshield",
+    "type": "spell",
+    "img": "icons/magic/arcane/shield-energy-green.webp",
+    "system": {
+      "class": "wizard",
+      "level": 58,
+      "school": "abjuration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 350,
+      "effects": [
+        { "type": "buff", "stat": "absorb-magic-damage", "amount": 110, "cap": 800 }
+      ],
+      "description": "Shields the target against magical damage, absorbing up to 800 points."
+    }
+  },
+  {
+    "_id": "wiz-reflect-58-r1",
+    "name": "Reflect",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "wizard",
+      "level": 58,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 150,
+      "effects": [
+        { "type": "buff", "stat": "reflect-chance", "amount": 50 }
+      ],
+      "description": "Creates a reflective aura that has a 50% chance to reflect incoming spells."
+    }
+  },
+  {
+    "_id": "wiz-translocate-bloodfields-58-r1",
+    "name": "Translocate Bloodfields",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-desert.webp",
+    "system": {
+      "class": "wizard",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 225,
+      "effects": [
+        { "type": "utility", "effect": "translocate", "destination": "bloodfields" }
+      ],
+      "description": "Translocates a single target to the Bloodfields."
+    }
+  },
+  {
+    "_id": "wiz-invert-gravity-59-r1",
+    "name": "Invert Gravity",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "wizard",
+      "level": 59,
+      "school": "alteration",
+      "target": "area",
+      "range": 1000,
+      "castTime": 5,
+      "manaCost": 500,
+      "effects": [
+        { "type": "damage", "element": "arcane", "amount": 250, "radius": 20 },
+        { "type": "control", "effect": "toss-up", "amount": 350 }
+      ],
+      "description": "Inverts gravity, damaging enemies and tossing them into the air."
+    }
+  },
+  {
+    "_id": "wiz-vengeance-of-alkabor-59-r1",
+    "name": "Vengeance of Al'Kabor",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy-blue.webp",
+    "system": {
+      "class": "wizard",
+      "level": 59,
+      "school": "evocation",
+      "target": "area",
+      "range": 1400,
+      "castTime": 6,
+      "manaCost": 700,
+      "effects": [
+        { "type": "damage", "element": "arcane", "amount": 352, "radius": 30 },
+        { "type": "control", "effect": "stun", "duration": 1 }
+      ],
+      "description": "Al'Kabor’s vengeance damages and briefly stuns multiple enemies."
+    }
+  },
+  {
+    "_id": "wiz-flaming-sword-of-xuzl-59-r1",
+    "name": "Flaming Sword of Xuzl",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "wizard",
+      "level": 59,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 250,
+      "effects": [
+        { "type": "utility", "effect": "summon-pet", "pet": "flaming-sword" }
+      ],
+      "description": "Summons a flaming sword pet to fight for the caster."
+    }
+  },
+  {
+    "_id": "wiz-porlos-fury-60-r1",
+    "name": "Porlos' Fury",
+    "type": "spell",
+    "img": "icons/magic/fire/aoe-flame-dragon.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "evocation",
+      "target": "boss",
+      "range": 1600,
+      "castTime": 6,
+      "manaCost": 450,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 2000 }
+      ],
+      "description": "Unleashes Porlos’ fury, devastating dragon foes with immense fire damage."
+    }
+  },
+  {
+    "_id": "wiz-hsagras-wrath-60-r1",
+    "name": "Hsagra's Wrath",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy-giant.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "evocation",
+      "target": "boss",
+      "range": 1600,
+      "castTime": 6,
+      "manaCost": 450,
+      "effects": [
+        { "type": "damage", "element": "arcane", "amount": 2000 }
+      ],
+      "description": "Calls down Hsagra’s wrath, devastating giant foes with immense arcane damage."
+    }
+  },
+  {
+    "_id": "wiz-sunstrike-60-r1",
+    "name": "Sunstrike",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-sunbeam.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 1600,
+      "castTime": 6,
+      "manaCost": 450,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 1800 }
+      ],
+      "description": "A devastating sunstrike that deals massive fire damage to a single target."
+    }
+  },
+  {
+    "_id": "wiz-disintegrate-60-r1",
+    "name": "Disintegrate",
+    "type": "spell",
+    "img": "icons/magic/arcane/disintegrate.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 1200,
+      "castTime": 6,
+      "manaCost": 650,
+      "effects": [
+        { "type": "utility", "effect": "destroy-target" }
+      ],
+      "description": "Disintegrates the target, annihilating them completely."
+    }
+  },
+  {
+    "_id": "wiz-greater-familiar-60-r1",
+    "name": "Greater Familiar",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 650,
+      "effects": [
+        { "type": "utility", "effect": "summon-familiar", "familiar": "greater" },
+        { "type": "buff", "stat": "resist-all", "amount": 25 },
+        { "type": "buff", "stat": "effective-casting-level", "amount": 8 },
+        { "type": "utility", "effect": "see-invisible" },
+        { "type": "buff", "stat": "mana-pool", "amount": 150 },
+        { "type": "buff", "stat": "mana-regen", "amount": 4 }
+      ],
+      "description": "Summons a greater familiar that boosts resistances, spellcasting, mana pool, and regeneration."
+    }
+  },
+  {
+    "_id": "wiz-focus-refined-essence-60-r1",
+    "name": "Focus Refined Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 400,
+      "effects": [
+        { "type": "utility", "effect": "summon-item", "item": "refined-essence" }
+      ],
+      "description": "Summons a refined empowering essence for spellcasters."
+    }
+  },
+  {
+    "_id": "wiz-translocate-sunderock-60-r1",
+    "name": "Translocate Sunderock Springs",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-mountain.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 225,
+      "effects": [
+        { "type": "utility", "effect": "translocate", "destination": "sunderock-springs" }
+      ],
+      "description": "Translocates a single target to Sunderock Springs."
+    }
+  },
+  {
+    "_id": "wiz-sunderock-portal-60-r1",
+    "name": "Sunderock Springs Portal",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-mountain-group.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-group", "destination": "sunderock-springs" }
+      ],
+      "description": "Teleports the entire group to Sunderock Springs."
+    }
+  },
+  {
+    "_id": "wiz-sunderock-gate-60-r1",
+    "name": "Sunderock Springs Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-mountain-self.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 150,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "sunderock-springs" }
+      ],
+      "description": "Teleports the caster to Sunderock Springs."
+    }
+  },
+  {
+    "_id": "wiz-ice-spear-of-solist-60-r1",
+    "name": "Ice Spear of Solist",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 1600,
+      "castTime": 5,
+      "manaCost": 221,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 1076 }
+      ],
+      "description": "Launches a spear of ice that deals massive cold damage to a single target."
+    }
+  },
+  {
+    "_id": "wiz-winds-of-gelid-60-r1",
+    "name": "Winds of Gelid",
+    "type": "spell",
+    "img": "icons/magic/water/aoe-frost.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "evocation",
+      "target": "area",
+      "range": 1400,
+      "castTime": 6,
+      "manaCost": 875,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 1260, "radius": 30 }
+      ],
+      "description": "Summons gelid winds that deal devastating cold damage to all nearby enemies."
+    }
+  },
+  {
+    "_id": "wiz-lure-of-ice-60-r1",
+    "name": "Lure of Ice",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 1600,
+      "castTime": 4,
+      "manaCost": 310,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 882 }
+      ],
+      "description": "A lure of ice that deals heavy single‑target damage."
+    }
+  },
+  {
+    "_id": "wiz-ancient-destruction-of-ice-60-r1",
+    "name": "Ancient Destruction of Ice",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear-large.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 1600,
+      "castTime": 5,
+      "manaCost": 200,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 1150 }
+      ],
+      "description": "An ancient spell that devastates a single target with destructive ice energy."
+    }
+  },
+  {
+    "_id": "wiz-ancient-greater-concussion-60-r1",
+    "name": "Ancient Greater Concussion",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 800,
+      "castTime": 2,
+      "manaCost": 25,
+      "effects": [
+        { "type": "utility", "effect": "reduce-hate", "amount": 600 }
+      ],
+      "description": "Greatly reduces the target’s hate toward the caster, lowering aggro."
+    }
+  },
+  {
+    "_id": "wiz-teleport-primary-anchor-60-r1",
+    "name": "Teleport Primary Anchor",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-anchor.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "alteration",
+      "target": "area",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 750,
+      "effects": [
+        { "type": "utility", "effect": "teleport-anchor", "destination": "primary-anchor" }
+      ],
+      "description": "Teleports all nearby allies to the Primary Anchor."
+    }
+  },
+  {
+    "_id": "wiz-teleport-secondary-anchor-60-r1",
+    "name": "Teleport Secondary Anchor",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-anchor.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "alteration",
+      "target": "area",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 750,
+      "effects": [
+        { "type": "utility", "effect": "teleport-anchor", "destination": "secondary-anchor" }
+      ],
+      "description": "Teleports all nearby allies to the Secondary Anchor."
+    }
+  },
+  {
+    "_id": "wiz-elnericks-electrical-rending-60-r1",
+    "name": "Elnerick's Electrical Rending",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt-large.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 1600,
+      "castTime": 5,
+      "manaCost": 421,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 1796 }
+      ],
+      "description": "Elnerick’s electrical rending devastates a single target with immense lightning damage."
+    }
+  },
+  {
+    "_id": "wiz-garrisons-superior-sundering-60-r1",
+    "name": "Garrison's Superior Sundering",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 1600,
+      "castTime": 6,
+      "manaCost": 480,
+      "effects": [
+        { "type": "damage", "element": "arcane", "amount": 2000 }
+      ],
+      "description": "Garrison’s superior sundering tears through a single target with devastating arcane energy."
+    }
+  },
+  {
+    "_id": "wiz-teleport-guild-hall-anchor-60-r1",
+    "name": "Teleport Guild Hall Anchor",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-anchor-guild.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "alteration",
+      "target": "area",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 750,
+      "effects": [
+        { "type": "utility", "effect": "teleport-anchor", "destination": "guild-hall-anchor" }
+      ],
+      "description": "Teleports all nearby allies to the Guild Hall Anchor."
+    }
+  },
+  {
+    "_id": "wiz-translocate-barindu-60-r1",
+    "name": "Translocate Barindu",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-city.webp",
+    "system": {
+      "class": "wizard",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 500,
+      "effects": [
+        { "type": "utility", "effect": "translocate", "destination": "barindu" }
+      ],
+      "description": "Translocates a single target to Barindu."
+    }
+  }
+]

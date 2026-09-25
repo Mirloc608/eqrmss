@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-catacombs-halls",
+  "nodes": [
+    {
+      "id": "ceremonial-hall",
+      "type": "hall",
+      "label": "Ceremonial Hall"
+    },
+    {
+      "id": "execution-chamber",
+      "type": "chamber",
+      "label": "Execution Chamber"
+    },
+    {
+      "id": "discord-sanctum",
+      "type": "sanctum",
+      "label": "Discord Sanctum"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ceremonial-hall",
+      "to": "execution-chamber",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A guarded route connecting ceremonial halls to execution chambers."
+    },
+    {
+      "from": "execution-chamber",
+      "to": "discord-sanctum",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into the Discord sanctum."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-catacombs-chambers",
+      "type": "back",
+      "description": "The Halls connect back to the Chambers."
+    },
+    {
+      "to": "catacombs-of-anguish",
+      "type": "forward",
+      "description": "The Halls lead toward the Catacombs of Anguish."
+    }
+  ]
+}

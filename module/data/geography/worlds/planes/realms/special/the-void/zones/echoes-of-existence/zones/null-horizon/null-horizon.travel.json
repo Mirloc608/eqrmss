@@ -1,0 +1,35 @@
+{
+  "id": "null-horizon-travel",
+  "zone": "null-horizon",
+
+  "nodes": [
+    "event-horizon",
+    "echo-bridge",
+    "nonspace-rift",
+    "horizon-core"
+  ],
+
+  "edges": [
+    {
+      "from": "event-horizon",
+      "to": "echo-bridge",
+      "type": "echo-flow"
+    },
+    {
+      "from": "echo-bridge",
+      "to": "nonspace-rift",
+      "type": "fade-transition",
+      "requirements": {
+        "existence-anchor": true
+      }
+    },
+    {
+      "from": "nonspace-rift",
+      "to": "horizon-core",
+      "type": "null-path",
+      "requirements": {
+        "memory-stability": true
+      }
+    }
+  ]
+}

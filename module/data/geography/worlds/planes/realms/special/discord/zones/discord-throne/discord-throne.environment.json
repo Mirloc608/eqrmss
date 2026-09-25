@@ -1,0 +1,44 @@
+{
+  "zone": "discord-throne",
+
+  "terrain": [
+    "discord-command-spire",
+    "shadow-throne-platforms",
+    "rift-command-channels",
+    "corruption-vein-conduits"
+  ],
+
+  "lighting": "throne-glow",
+
+  "hazards": [
+    {
+      "id": "command-surge",
+      "dc": 33,
+      "effect": "forced_movement_and_damage"
+    },
+    {
+      "id": "shadow-overflow",
+      "dc": 34,
+      "effect": "fear_and_dot"
+    },
+    {
+      "id": "rift-collapse",
+      "dc": 35,
+      "effect": "stun_and_knockback"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "Discord command energy destabilizes terrain; shadow platforms shift unpredictably."
+  },
+
+  "environmentTags": [
+    "discord",
+    "command",
+    "shadow",
+    "corruption",
+    "dimensional"
+  ]
+}

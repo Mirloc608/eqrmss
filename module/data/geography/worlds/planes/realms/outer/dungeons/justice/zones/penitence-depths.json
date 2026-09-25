@@ -1,0 +1,27 @@
+{
+  "id": "penitence-depths",
+  "key": "penitence-depths",
+  "name": "Penitence Depths",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "justice",
+
+  "description": "The Penitence Depths are the Tribunal’s prison, where condemned souls are held in eternal judgment. Shadows of guilt haunt the corridors.",
+
+  "hazards": [
+    { "id": "penitence-surge", "dc": 38, "effect": "stat_decay_and_massive_damage" }
+  ],
+
+  "encounters": [
+    { "creature": "Penitence Wraith", "level": 99 },
+    { "creature": "Tribunal Enforcer", "level": 100 }
+  ],
+
+  "boss": {
+    "name": "The Tribunal",
+    "level": 100,
+    "role": "boss"
+  },
+
+  "tags": ["justice", "penitence", "outer"]
+}

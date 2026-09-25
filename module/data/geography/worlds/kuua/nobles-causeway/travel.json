@@ -1,0 +1,52 @@
+{
+  "id": "causeway-region-travel",
+  "region": "causeway-region",
+
+  "nodes": [
+    "nobles-causeway",
+    "causeway-lower-terrace",
+    "causeway-upper-terrace",
+    "causeway-fissure-ridge",
+    "causeway-ruined-shrines"
+  ],
+
+  "edges": [
+    {
+      "from": "nobles-causeway",
+      "to": "causeway-lower-terrace",
+      "type": "valley-transition",
+      "difficulty": "moderate"
+    },
+    {
+      "from": "causeway-lower-terrace",
+      "to": "causeway-upper-terrace",
+      "type": "elevation-ascent",
+      "difficulty": "high"
+    },
+    {
+      "from": "causeway-upper-terrace",
+      "to": "causeway-fissure-ridge",
+      "type": "arcane-zone",
+      "difficulty": "extreme"
+    },
+    {
+      "from": "causeway-upper-terrace",
+      "to": "causeway-ruined-shrines",
+      "type": "ruin-path",
+      "difficulty": "high"
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "dranik-scar",
+      "type": "back",
+      "description": "Causeway Region connects back to Dragorn territory."
+    },
+    {
+      "to": "wall-of-slaughter",
+      "type": "forward",
+      "description": "Causeway Region leads directly into the Muramite warfront."
+    }
+  ]
+}

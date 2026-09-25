@@ -1,0 +1,47 @@
+{
+  "region": "citadel-complex",
+
+  "nodes": [
+    { "id": "citadel-outer-ring", "type": "zone", "label": "Citadel Outer Ring" },
+    { "id": "citadel-barracks", "type": "zone", "label": "Citadel Barracks" },
+    { "id": "citadel-sanctum", "type": "zone", "label": "Citadel Sanctum" },
+    { "id": "citadel-core", "type": "zone", "label": "Citadel Core" }
+  ],
+
+  "edges": [
+    {
+      "from": "citadel-outer-ring",
+      "to": "citadel-barracks",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A fortified passage from the outer defenses to the barracks."
+    },
+    {
+      "from": "citadel-barracks",
+      "to": "citadel-sanctum",
+      "difficulty": "high",
+      "type": "internal",
+      "description": "A guarded route into sanctum halls and arcane chambers."
+    },
+    {
+      "from": "citadel-sanctum",
+      "to": "citadel-core",
+      "difficulty": "extreme",
+      "type": "internal",
+      "description": "A heavily warded path into the inner core of the Citadel."
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "wall-of-slaughter",
+      "type": "back",
+      "description": "The Citadel Complex connects back to the Wall of Slaughter."
+    },
+    {
+      "to": "anguish",
+      "type": "forward",
+      "description": "The Citadel Core leads toward Anguish, the final Muramite stronghold."
+    }
+  ]
+}

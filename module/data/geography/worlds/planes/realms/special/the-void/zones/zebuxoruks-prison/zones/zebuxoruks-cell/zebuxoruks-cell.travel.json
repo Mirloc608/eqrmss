@@ -1,0 +1,35 @@
+{
+  "id": "zebuxoruks-cell-travel",
+  "zone": "zebuxoruks-cell",
+
+  "nodes": [
+    "void-core",
+    "chain-nexus",
+    "stasis-field",
+    "binding-throne"
+  ],
+
+  "edges": [
+    {
+      "from": "void-core",
+      "to": "chain-nexus",
+      "type": "void-flow"
+    },
+    {
+      "from": "chain-nexus",
+      "to": "stasis-field",
+      "type": "eternity-transition",
+      "requirements": {
+        "temporal-anchor": true
+      }
+    },
+    {
+      "from": "stasis-field",
+      "to": "binding-throne",
+      "type": "null-binding",
+      "requirements": {
+        "void-attunement": true
+      }
+    }
+  ]
+}

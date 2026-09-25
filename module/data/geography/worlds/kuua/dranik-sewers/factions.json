@@ -1,0 +1,38 @@
+{
+  "region": "dranik-sewers",
+
+  "factions": [
+    {
+      "id": "muramite-legion",
+      "name": "Muramite Legion",
+      "importance": "critical",
+      "description": "Muramite soldiers occupying the sewers and maintaining control of water routes.",
+      "allies": ["muramite-inquisitors"],
+      "enemies": ["dragorn-resistance"]
+    },
+    {
+      "id": "muramite-inquisitors",
+      "name": "Muramite Inquisitors",
+      "importance": "major",
+      "description": "Inquisitors overseeing experiments, torture pits, and Discord rituals.",
+      "allies": ["muramite-legion"],
+      "enemies": ["dragorn-resistance"]
+    },
+    {
+      "id": "dragorn-resistance",
+      "name": "Dragorn Resistance",
+      "importance": "minor",
+      "description": "Rebels attempting infiltration and sabotage within the sewers.",
+      "allies": null,
+      "enemies": ["muramite-legion", "muramite-inquisitors"]
+    },
+    {
+      "id": "discord-manifestations",
+      "name": "Discord Manifestations",
+      "importance": "critical",
+      "description": "Arcane anomalies and corrupted creatures spawned by Discord energy.",
+      "allies": null,
+      "enemies": ["dragorn-resistance", "muramite-legion"]
+    }
+  ]
+}

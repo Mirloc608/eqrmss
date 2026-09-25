@@ -1,0 +1,48 @@
+{
+  "zone": "citadel-barracks",
+  "nodes": [
+    {
+      "id": "training-yard",
+      "type": "yard",
+      "label": "Training Yard"
+    },
+    {
+      "id": "bunkhouse-row",
+      "type": "bunkhouses",
+      "label": "Bunkhouse Row"
+    },
+    {
+      "id": "beast-pits",
+      "type": "pits",
+      "label": "Beast Pits"
+    }
+  ],
+  "edges": [
+    {
+      "from": "training-yard",
+      "to": "bunkhouse-row",
+      "difficulty": "low",
+      "type": "internal",
+      "description": "A direct route used by soldiers moving between drills and rest."
+    },
+    {
+      "from": "bunkhouse-row",
+      "to": "beast-pits",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A guarded route into the warbeast pits."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "citadel-outer-ring",
+      "type": "back",
+      "description": "The Barracks connect back to the Outer Ring."
+    },
+    {
+      "to": "citadel-sanctum",
+      "type": "forward",
+      "description": "The Barracks lead deeper into the Citadel Sanctum."
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "id": "eqrmss",
+  "title": "EverQuest - Rolemaster Standard System",
+  "description": "The Rolemaster Standard System for EverQuest and FoundryVTT.",
+  "version": "1.0.6",
+  "authors": [
+    { "name": "Mirloc608" }
+  ],
+
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+
+  "scripts": [],
+
+  "esmodules": [
+    "eqrmss.js",
+
+    "module/apps/eqrmss-character-creation-wizard.js",
+    "module/apps/eqrmss-character-creation-wizard-data.js",
+    "module/apps/eqrmss-character-creation-wizard-rules.js",
+    "module/apps/eqrmss-character-creation-wizard-finalizer.js"
+  ],
+
+  "styles": [
+    "styles/eqrmss.css",
+    "styles/eqrmss-character-creation-wizard.css"
+  ],
+
+  "packs": [
+    { "name": "skills", "label": "EQ Skills", "system": "eqrmss", "path": "./packs/abilities/skills.db", "type": "Item" },
+    { "name": "skill_categories", "label": "EQ Skill Categories", "system": "eqrmss", "path": "./packs/abilities/skill_categories.db", "type": "Item" },
+    { "name": "aa", "label": "EQ Alternate Advancement", "system": "eqrmss", "path": "./packs/abilities/aa.db", "type": "Item" },
+    { "name": "spells", "label": "EQ Spells", "system": "eqrmss", "path": "./packs/abilities/spells.db", "type": "Item" },
+    { "name": "songs", "label": "EQ Bard Songs", "system": "eqrmss", "path": "./packs/abilities/songs.db", "type": "Item" },
+    { "name": "eqrmss-abilities", "label": "EQRMSS Abilities", "system": "eqrmss", "path": "./packs/abilities/eqrmss-abilities.db", "type": "Item" },
+
+    { "name": "combat_actions_bard", "label": "EQ Bard Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/bard-actions.db", "type": "Item" },
+    { "name": "combat_actions_beastlord", "label": "EQ Beastlord Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/beastlord-actions.db", "type": "Item" },
+    { "name": "combat_actions_berserker", "label": "EQ Berserker Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/berserker-actions.db", "type": "Item" },
+    { "name": "combat_actions_cleric", "label": "EQ Cleric Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/cleric-actions.db", "type": "Item" },
+    { "name": "combat_actions_druid", "label": "EQ Druid Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/druid-actions.db", "type": "Item" },
+    { "name": "combat_actions_enchanter", "label": "EQ Enchanter Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/enchanter-actions.db", "type": "Item" },
+    { "name": "combat_actions_magician", "label": "EQ Magician Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/magician-actions.db", "type": "Item" },
+    { "name": "combat_actions_monk", "label": "EQ Monk Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/monk-actions.db", "type": "Item" },
+    { "name": "combat_actions_necromancer", "label": "EQ Necromancer Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/necromancer-actions.db", "type": "Item" },
+    { "name": "combat_actions_paladin", "label": "EQ Paladin Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/paladin-actions.db", "type": "Item" },
+    { "name": "combat_actions_ranger", "label": "EQ Ranger Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/ranger-actions.db", "type": "Item" },
+    { "name": "combat_actions_rogue", "label": "EQ Rogue Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/rogue-actions.db", "type": "Item" },
+    { "name": "combat_actions_shadowknight", "label": "EQ Shadowknight Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/shadowknight-actions.db", "type": "Item" },
+    { "name": "combat_actions_shaman", "label": "EQ Shaman Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/shaman-actions.db", "type": "Item" },
+    { "name": "combat_actions_warrior", "label": "EQ Warrior Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/warrior-actions.db", "type": "Item" },
+    { "name": "combat_actions_wizard", "label": "EQ Wizard Combat Actions", "system": "eqrmss", "path": "./packs/abilities/combat-actions/wizard-actions.db", "type": "Item" },
+
+    { "name": "weapons", "label": "EQ Weapons", "system": "eqrmss", "path": "./packs/items/weapons.db", "type": "Item" },
+    { "name": "armor", "label": "EQ Armor", "system": "eqrmss", "path": "./packs/items/armor.db", "type": "Item" },
+    { "name": "shields", "label": "EQ Shields", "system": "eqrmss", "path": "./packs/items/shields.db", "type": "Item" },
+    { "name": "jewelry", "label": "EQ Jewelry", "system": "eqrmss", "path": "./packs/items/jewelry.db", "type": "Item" },
+    { "name": "consumables", "label": "EQ Consumables", "system": "eqrmss", "path": "./packs/items/consumables.db", "type": "Item" },
+    { "name": "instruments", "label": "EQ Bard Instruments", "system": "eqrmss", "path": "./packs/items/instruments.db", "type": "Item" },
+
+    { "name": "actor_classes", "label": "EQ Classes", "system": "eqrmss", "path": "./packs/actors/classes.db", "type": "Item" },
+    { "name": "actor_races", "label": "EQ Races", "system": "eqrmss", "path": "./packs/actors/races.db", "type": "Item" },
+    { "name": "cities", "label": "Cities", "system": "eqrmss", "path": "./packs/world/cities.db", "type": "Item" },
+    { "name": "actor_npcs", "label": "EQ NPCs", "system": "eqrmss", "path": "./packs/actors/npcs.db", "type": "Actor" },
+    { "name": "actor_pets", "label": "EQ Pets", "system": "eqrmss", "path": "./packs/actors/pets.db", "type": "Actor" },
+
+    { "name": "templates", "label": "EQRMSS Templates", "system": "eqrmss", "path": "./packs/templates.db", "type": "Item" },
+    { "name": "languages", "label": "EQ Languages", "system": "eqrmss", "path": "./packs/world/languages.db", "type": "Item" },
+    { "name": "factions", "label": "EQ Factions", "system": "eqrmss", "path": "./packs/world/factions.db", "type": "Item" },
+    { "name": "deities", "label": "EQ Deities", "system": "eqrmss", "path": "./packs/world/deities.db", "type": "Item" },
+    { "name": "training_packages", "label": "EQ Training Packages", "system": "eqrmss", "path": "./packs/world/training_packages.db", "type": "Item" }
+  ],
+
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "npc": {},
+      "companion": {},
+      "pet": {},
+      "mercenary": {},
+      "*": {}
+    },
+    "Item": {
+      "weapon": {},
+      "armor": {},
+      "shield": {},
+      "jewelry": {},
+      "consumable": {},
+      "instrument": {},
+      "skill": {},
+      "skill_category": {},
+      "spell": {},
+      "song": {},
+      "aa": {},
+      "class": {},
+      "race": {},
+      "language": {},
+      "deity": {},
+      "faction": {},
+      "training_package": {},
+      "herb_or_poison": {},
+      "transport": {},
+      "combat_action": {},
+      "*": {}
+    }
+  },
+
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
+
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+
+  "license": "LICENSE.txt",
+
+  "flags": {
+    "eqrmss": {
+      "schemaVersion": 2
+    }
+  }
+}

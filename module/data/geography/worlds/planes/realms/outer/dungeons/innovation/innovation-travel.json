@@ -1,0 +1,24 @@
+{
+  "id": "innovation-region-travel",
+  "plane": "innovation",
+
+  "nodes": [
+    "region-entry",
+    "clockwork-maze",
+    "scrapforge",
+    "mechanized-core",
+    "innovator-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "clockwork-maze", "type": "gear-path" },
+    { "from": "clockwork-maze", "to": "scrapforge", "type": "forge-transition" },
+    { "from": "scrapforge", "to": "mechanized-core", "type": "core-ascent" },
+    {
+      "from": "mechanized-core",
+      "to": "innovator-throne",
+      "type": "prime-access",
+      "requirements": { "outer-attunement": true }
+    }
+  ]
+}

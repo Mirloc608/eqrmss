@@ -1,0 +1,486 @@
+{
+  "planId": "EQRMSS-WORKER-DELEGATION-001",
+  "planVersion": "1.0.0",
+  "status": "AUTHORIZED",
+  "authorization": {
+    "status": "AUTHORIZED",
+    "scope": [
+      "P001"
+    ],
+    "planFingerprint": "4f3febaa4244c64bfa790c4191478fc85441f50ab94fddf8b06842f83d8fbe49",
+    "authorizedAt": "2026-09-18T00:52:33.345Z"
+  },
+  "source": {
+    "type": "repository-evidence",
+    "description": "Frozen EQRMSS worker delegation plan established from direct inspection of the authoritative plan state, state transition rules, plan-state manager, MCP dispatcher, and Continue agent configuration."
+  },
+  "objective": "Establish a controlled worker-delegation boundary in which the EQRMSS MCP dispatcher can resolve an explicitly authorized frozen task to its assigned logical worker and construct an exact worker handoff, initially without granting workers arbitrary repository-write capability.",
+  "constraints": [
+    "The Planner does not implement EQRMSS repository changes.",
+    "current-plan.json remains the authoritative source for task identity, worker assignment, scope, non-scope, dependencies, outputs, and validation.",
+    "Worker resolution must not redefine or mutate frozen task identity.",
+    "Authorization must be persisted before worker handoff.",
+    "The dispatcher must verify authorization and dependencies before worker execution.",
+    "The dispatcher must preserve the exact plan ID, plan version, task ID, task title, task objective, worker, scope, non-scope, inputs, output, validation, and dependencies in the worker handoff.",
+    "Workers must not receive arbitrary repository-write capability during this delegation phase.",
+    "The configured Continue manifest is configuration evidence and is not itself a runtime dependency of the remote MCP dispatcher.",
+    "The obsolete or conflicting workflows.json definition must not be treated as authoritative worker configuration without additional evidence.",
+    "The M17 Qwen 3.5 9B endpoint must not be silently substituted for a logical worker assignment.",
+    "No worker may alter frozen plan state or expand task scope.",
+    "Material changes to frozen task identity or execution requirements require replanning and new authorization."
+  ],
+  "tasks": {
+    "P001": {
+      "id": "P001",
+      "title": "Define the server-side worker execution registry",
+      "objective": "Establish an authoritative server-side mapping from EQRMSS logical worker identifiers to configured worker execution targets without changing the logical worker identity stored in frozen plans.",
+      "worker": "reasoning",
+      "scope": [
+        "Define the execution-registry structure required by the dispatcher.",
+        "Represent the logical worker identifiers defined by the EQRMSS Planner vocabulary.",
+        "Represent the currently established worker-to-agent/model mappings as configuration data where supported by available execution evidence.",
+        "Preserve the distinction between logical worker identity and concrete model/provider identity.",
+        "Identify unavailable or unresolved execution targets explicitly rather than inventing them.",
+        "Keep the registry independent of Continue workstation-local configuration."
+      ],
+      "nonScope": [
+        "Changing current-plan.json task definitions.",
+        "Changing the Planner worker vocabulary.",
+        "Changing Continue configuration.",
+        "Changing ~/.continue/config.yaml.",
+        "Changing ~/.continue/eqrmss_agent_manifest.json.",
+        "Changing workflows.json.",
+        "Implementing repository-write capabilities.",
+        "Implementing arbitrary shell execution.",
+        "Implementing authentication changes.",
+        "Assigning the M17 Qwen model to a logical worker without explicit authorization.",
+        "Changing EQRMSS source files unrelated to worker delegation."
+      ],
+      "inputs": [
+        ".agents/state/current-plan.json",
+        ".agents/state/state-transition-rules.json",
+        ".agents/mcp/eqrmss-dispatcher.js",
+        "Continue agent manifest evidence showing logical worker-to-model mappings.",
+        "Continue model configuration evidence showing configured model transports."
+      ],
+      "dependencies": [
+        "None"
+      ],
+      "output": [
+        "A server-side worker execution registry definition suitable for controlled dispatcher resolution.",
+        "A report identifying any logical workers whose execution targets remain unresolved."
+      ],
+      "validation": [
+        "Verify every registry entry has a logical worker identifier.",
+        "Verify registry entries do not redefine task identity.",
+        "Verify configured model/provider information is represented only where established by evidence.",
+        "Verify unresolved workers are explicitly identified rather than assigned guessed execution targets.",
+        "Verify the registry does not grant repository-write authority."
+      ]
+    },
+    "P002": {
+      "id": "P002",
+      "title": "Add frozen-worker resolution to the MCP dispatcher",
+      "objective": "Extend the EQRMSS MCP dispatcher so an exact task's authoritative logical worker can be resolved through the server-side worker execution registry without changing task identity or authorization state.",
+      "worker": "code",
+      "scope": [
+        "Inspect the existing EQRMSS MCP dispatcher implementation.",
+        "Add worker-registry loading using the server-side registry established by P001.",
+        "Resolve the worker from the exact task returned by current-plan.json.",
+        "Reject unknown or unresolved logical workers.",
+        "Preserve the exact worker identifier from the authoritative task.",
+        "Expose only the minimum dispatcher capability required for controlled worker resolution.",
+        "Preserve the existing read-only plan-state capabilities."
+      ],
+      "nonScope": [
+        "Changing task definitions.",
+        "Changing plan authorization state.",
+        "Authorizing tasks.",
+        "Reauthorizing tasks.",
+        "Executing arbitrary repository commands.",
+        "Granting workers repository-write access.",
+        "Changing Continue configuration.",
+        "Changing model assignments.",
+        "Changing the state transition rules.",
+        "Changing unrelated MCP tools.",
+        "Implementing unrestricted worker execution."
+      ],
+      "inputs": [
+        ".agents/mcp/eqrmss-dispatcher.js",
+        ".agents/state/current-plan.json",
+        ".agents/state/state-transition-rules.json",
+        "P001 worker execution registry."
+      ],
+      "dependencies": [
+        "P001"
+      ],
+      "output": [
+        "Updated MCP dispatcher implementation containing controlled logical-worker resolution."
+      ],
+      "validation": [
+        "Verify an exact authoritative task resolves to its frozen worker identifier.",
+        "Verify an unknown worker identifier is rejected.",
+        "Verify an unresolved worker target is rejected rather than guessed.",
+        "Verify worker resolution does not modify current-plan.json.",
+        "Verify existing eqrmss_plan_status behavior remains functional.",
+        "Verify existing eqrmss_get_task behavior remains functional.",
+        "Verify the dispatcher does not expose arbitrary repository-write execution."
+      ]
+    },
+    "P003": {
+      "id": "P003",
+      "title": "Create the controlled authorized-task worker handoff boundary",
+      "objective": "Add a dispatcher-controlled handoff operation that accepts an exact task ID only after authoritative plan, authorization, fingerprint, and dependency checks, then constructs the complete frozen worker handoff without granting arbitrary repository-write capability.",
+      "worker": "code",
+      "scope": [
+        "Inspect the existing dispatcher and state-manager interfaces before implementation.",
+        "Add a controlled worker-handoff operation.",
+        "Require an exact task ID.",
+        "Read the authoritative current-plan.json before resolving the task.",
+        "Verify the task exists in the authoritative plan.",
+        "Verify the plan is in an executable state.",
+        "Verify persisted authorization includes the exact task.",
+        "Verify the frozen plan fingerprint remains valid.",
+        "Verify task dependencies are satisfied.",
+        "Resolve the worker using the P001 registry and P002 resolution layer.",
+        "Construct the complete worker handoff from frozen plan state.",
+        "Include planId.",
+        "Include planVersion.",
+        "Include taskId.",
+        "Include taskTitle.",
+        "Include taskObjective.",
+        "Include worker.",
+        "Include scope.",
+        "Include nonScope.",
+        "Include inputs.",
+        "Include output.",
+        "Include validation.",
+        "Include dependencies.",
+        "Ensure the initial handoff boundary does not grant arbitrary repository-write capability."
+      ],
+      "nonScope": [
+        "Changing the task definition.",
+        "Changing task authorization.",
+        "Changing the plan fingerprint.",
+        "Expanding task scope.",
+        "Executing arbitrary shell commands.",
+        "Writing arbitrary repository files on behalf of the worker.",
+        "Granting unrestricted filesystem access.",
+        "Granting workers authority to modify current-plan.json.",
+        "Allowing workers to modify plan state directly.",
+        "Allowing workers to select a different model than the resolved execution target.",
+        "Changing the logical worker assigned by current-plan.json.",
+        "Implementing completion validation.",
+        "Changing unrelated MCP functionality."
+      ],
+      "inputs": [
+        ".agents/mcp/eqrmss-dispatcher.js",
+        ".agents/state/current-plan.json",
+        ".agents/state/plan-state-manager.js",
+        ".agents/state/state-transition-rules.json",
+        "P001 worker execution registry.",
+        "P002 worker-resolution implementation."
+      ],
+      "dependencies": [
+        "P001",
+        "P002"
+      ],
+      "output": [
+        "Controlled MCP worker-handoff capability producing a complete frozen handoff object.",
+        "Execution-boundary behavior that rejects unauthorized or invalid task requests before reaching a worker."
+      ],
+      "validation": [
+        "Verify an unauthorized task cannot cross the handoff boundary.",
+        "Verify a task outside persisted authorization scope is rejected.",
+        "Verify a task with unsatisfied dependencies is rejected.",
+        "Verify a task with a changed frozen-plan fingerprint is rejected.",
+        "Verify the handoff contains all required identity and contract fields.",
+        "Verify every handoff field matches authoritative current-plan.json.",
+        "Verify the handoff cannot alter current-plan.json.",
+        "Verify the handoff cannot grant arbitrary repository-write capability.",
+        "Verify an unknown worker cannot cross the handoff boundary."
+      ]
+    },
+    "P004": {
+      "id": "P004",
+      "title": "Enforce the complete worker-handoff contract at execution",
+      "objective": "Align the state-manager execution boundary with the worker-handoff requirements defined by the state-transition rules so execution cannot proceed from a partial task identity alone.",
+      "worker": "code",
+      "scope": [
+        "Inspect the existing beginExecution implementation and exact task identity validation.",
+        "Inspect the state-transition rules defining required worker handoff fields.",
+        "Add or adapt execution-boundary validation so the complete worker handoff contract is enforced before EXECUTING state is persisted.",
+        "Validate planId.",
+        "Validate planVersion.",
+        "Validate taskId.",
+        "Validate taskTitle.",
+        "Validate taskObjective.",
+        "Validate worker.",
+        "Validate scope.",
+        "Validate nonScope.",
+        "Validate inputs.",
+        "Validate output.",
+        "Validate validation.",
+        "Validate dependencies.",
+        "Preserve the existing authorization and dependency checks.",
+        "Preserve frozen-plan fingerprint enforcement.",
+        "Preserve audit behavior."
+      ],
+      "nonScope": [
+        "Changing state-transition semantics unrelated to worker handoff.",
+        "Changing task definitions.",
+        "Changing task authorization semantics.",
+        "Changing worker assignments.",
+        "Adding new worker types.",
+        "Implementing worker model invocation.",
+        "Implementing repository-write capability.",
+        "Changing current-plan.json task content.",
+        "Changing Continue configuration.",
+        "Changing unrelated state-manager commands."
+      ],
+      "inputs": [
+        ".agents/state/plan-state-manager.js",
+        ".agents/state/state-transition-rules.json",
+        ".agents/state/current-plan.json",
+        "P003 complete worker-handoff boundary."
+      ],
+      "dependencies": [
+        "P003"
+      ],
+      "output": [
+        "Updated plan-state-manager execution validation enforcing the complete worker-handoff contract."
+      ],
+      "validation": [
+        "Verify a complete matching worker handoff can pass execution validation.",
+        "Verify a missing required handoff field is rejected.",
+        "Verify a mismatched planId is rejected.",
+        "Verify a mismatched planVersion is rejected.",
+        "Verify a mismatched taskId is rejected.",
+        "Verify a mismatched taskTitle is rejected.",
+        "Verify a mismatched taskObjective is rejected.",
+        "Verify a mismatched worker is rejected.",
+        "Verify scope, non-scope, inputs, output, validation, and dependencies are validated against authoritative task state.",
+        "Verify execution cannot proceed after a material plan change.",
+        "Verify audit information remains intact."
+      ]
+    },
+    "P005": {
+      "id": "P005",
+      "title": "Validate controlled worker delegation end to end",
+      "objective": "Demonstrate that the delegation boundary correctly accepts an explicitly authorized frozen task and rejects unauthorized, mismatched, dependency-blocked, worker-unresolved, and scope-expanding requests without repository-write authority.",
+      "worker": "validator",
+      "scope": [
+        "Construct controlled validation cases for worker delegation.",
+        "Verify authoritative task resolution.",
+        "Verify persisted authorization enforcement.",
+        "Verify dependency enforcement.",
+        "Verify frozen-plan fingerprint enforcement.",
+        "Verify logical-worker resolution.",
+        "Verify complete worker-handoff identity.",
+        "Verify complete worker-handoff contract fields.",
+        "Verify rejection of unknown workers.",
+        "Verify rejection of unresolved execution targets.",
+        "Verify repository-write capability is absent from the initial delegation boundary.",
+        "Verify workers cannot change plan state directly.",
+        "Verify workers cannot expand task scope.",
+        "Verify successful handoff reaches only the configured execution boundary defined by the plan."
+      ],
+      "nonScope": [
+        "Implementing new worker functionality.",
+        "Changing worker assignments.",
+        "Changing model configuration.",
+        "Granting repository-write capability.",
+        "Authorizing additional tasks.",
+        "Changing current-plan.json.",
+        "Changing task definitions.",
+        "Expanding delegation into unrestricted agent orchestration.",
+        "Changing unrelated EQRMSS behavior."
+      ],
+      "inputs": [
+        ".agents/state/current-plan.json",
+        ".agents/state/plan-state-manager.js",
+        ".agents/state/state-transition-rules.json",
+        ".agents/mcp/eqrmss-dispatcher.js",
+        "P001 worker execution registry.",
+        "P002 worker resolution.",
+        "P003 controlled handoff boundary.",
+        "P004 complete handoff enforcement."
+      ],
+      "dependencies": [
+        "P004"
+      ],
+      "output": [
+        "Validation report covering successful authorized handoff and required rejection cases."
+      ],
+      "validation": [
+        "Authorized task handoff succeeds when all frozen requirements are satisfied.",
+        "Unauthorized task handoff fails.",
+        "Unknown task ID fails.",
+        "Unknown worker fails.",
+        "Unresolved worker execution target fails.",
+        "Unsatisfied dependency fails.",
+        "Material plan change fails.",
+        "Task identity mismatch fails.",
+        "Missing worker-handoff contract field fails.",
+        "Scope expansion is rejected.",
+        "Repository-write capability is not exposed by the initial delegation boundary.",
+        "Plan state remains protected from worker mutation."
+      ]
+    }
+  },
+  "evidence": {
+    "repositoryEvidence": [
+      {
+        "path": ".agents/state/current-plan.json",
+        "classification": "READ",
+        "facts": [
+          "The canonical plan state contains plan identity, status, authorization state, task definitions, worker assignments, dependencies, outputs, and validation requirements.",
+          "The current commissioning plan is complete and therefore is not reused as the delegation plan.",
+          "The current task definition demonstrates the authoritative task.worker field."
+        ]
+      },
+      {
+        "path": ".agents/state/plan-state-manager.js",
+        "classification": "READ",
+        "facts": [
+          "The state manager reads and persists canonical plan state.",
+          "The state manager validates persisted authorization.",
+          "The state manager verifies frozen-plan fingerprints.",
+          "The state manager resolves exact tasks from canonical state.",
+          "The state manager verifies task dependencies.",
+          "beginExecution transitions an authorized task to EXECUTING.",
+          "ensureExactTaskIdentity can validate supplied plan and task identity fields but currently permits omitted handoff fields.",
+          "beginExecution currently invokes ensureExactTaskIdentity without supplying a worker handoff object.",
+          "The state manager records execution identity including task ID, plan ID, plan version, title, worker, start time, and plan fingerprint."
+        ]
+      },
+      {
+        "path": ".agents/state/state-transition-rules.json",
+        "classification": "READ",
+        "facts": [
+          "The canonical state file is .agents/state/current-plan.json.",
+          "Worker handoff requires persisted authorization.",
+          "Worker handoff requires exact task identity.",
+          "beginExecution requires exact plan identity, task identity, frozen task state, dependencies, and no material plan change.",
+          "The worker handoff contract includes planId, planVersion, taskId, taskTitle, taskObjective, worker, scope, nonScope, inputs, output, validation, and dependencies.",
+          "Worker resolution is associated with .agents/state/current-plan.json.",
+          "Workers may not change plan state.",
+          "Workers may not expand scope.",
+          "Worker claims alone are insufficient for completion.",
+          "Audit information is required."
+        ]
+      },
+      {
+        "path": ".agents/mcp/eqrmss-dispatcher.js",
+        "classification": "READ",
+        "facts": [
+          "The MCP dispatcher is a Node-based Streamable HTTP service.",
+          "The dispatcher reads .agents/state/current-plan.json as its authoritative state source.",
+          "The dispatcher currently exposes eqrmss_plan_status.",
+          "The dispatcher currently exposes eqrmss_get_task.",
+          "The dispatcher currently does not invoke workers.",
+          "The dispatcher currently does not modify current-plan.json.",
+          "The dispatcher currently does not modify repository source files.",
+          "The dispatcher currently does not provide worker execution capability."
+        ]
+      }
+    ],
+    "externalAndConfigurationEvidence": [
+      {
+        "path": "~/.continue/config.yaml",
+        "classification": "EXTERNAL",
+        "facts": [
+          "Continue defines multiple EQRMSS model configurations.",
+          "The configuration includes OpenRouter models and a local llama.cpp Qwen 3.5 9B endpoint.",
+          "The configuration keeps secrets outside the intended committed configuration through environment-based secret handling, although the inspected pasted configuration contained an exposed OpenRouter key that requires rotation.",
+          "The local Qwen 3.5 9B model is configured through llama.cpp at the M17 endpoint."
+        ]
+      },
+      {
+        "path": "~/.continue/eqrmss_agent_manifest.json",
+        "classification": "EXTERNAL",
+        "facts": [
+          "The manifest defines EQRMSS Code Worker mapped to EQRMSS Gemma Code.",
+          "The manifest defines EQRMSS JSON Worker mapped to EQRMSS Dots Data.",
+          "The manifest defines EQRMSS Schema Worker mapped to EQRMSS Dots Data.",
+          "The manifest defines EQRMSS Spellbook Worker mapped to EQRMSS Gemma Fast.",
+          "The manifest defines EQRMSS Reasoning Worker mapped to EQRMSS Nemotron Reasoning.",
+          "The manifest defines EQRMSS Fast Worker mapped to EQRMSS Inkling Small.",
+          "The manifest is located on the Continue workstation rather than on docker-srv1."
+        ]
+      },
+      {
+        "path": "~/.continue/workflows.json",
+        "classification": "EXTERNAL",
+        "facts": [
+          "The file defines an alternate workflow using openrouter/free for planning and ollama/starcoder2:3b for execution.",
+          "The configuration does not match the currently established EQRMSS worker/model manifest.",
+          "Its actual consumption by the current Continue version was not established during this planning investigation."
+        ]
+      }
+    ]
+  },
+  "unknown": [
+    "The final server-side worker registry file path and exact serialization format have not yet been implemented or established.",
+    "The exact remote execution protocol for invoking each configured worker model has not yet been established.",
+    "The exact mechanism by which the dispatcher will communicate with an OpenRouter-backed worker has not yet been implemented.",
+    "The exact mechanism by which the dispatcher could communicate with the M17 llama.cpp endpoint has not yet been implemented.",
+    "The execution targets for the logical workers code, data, schema, reasoning, fast, and spellbook require server-side resolution before execution.",
+    "The actual runtime consumption of ~/.continue/workflows.json has not been established.",
+    "The initial delegation phase deliberately does not establish arbitrary repository-write capability.",
+    "A worker execution result protocol and completion-state integration are outside this first delegation phase unless required by implementation evidence."
+  ],
+  "scopeExpansionCandidates": [
+    {
+      "item": "Worker authentication and transport security",
+      "reason": "The current dispatcher does not have a configured EQRMSS_MCP_TOKEN, and worker execution will introduce a new trust boundary.",
+      "status": "OUT_OF_SCOPE_FOR_INITIAL_DELEGATION"
+    },
+    {
+      "item": "Worker result ingestion and completion automation",
+      "reason": "The current phase establishes controlled handoff and execution boundaries; automatic result ingestion and task completion require additional execution-state design.",
+      "status": "OUT_OF_SCOPE_FOR_INITIAL_DELEGATION"
+    },
+    {
+      "item": "Repository-write sandboxing for workers",
+      "reason": "The initial delegation phase explicitly excludes arbitrary repository-write capability. A later authorized plan may establish a controlled write boundary.",
+      "status": "OUT_OF_SCOPE_FOR_INITIAL_DELEGATION"
+    },
+    {
+      "item": "Continue-native delegation integration",
+      "reason": "Continue 2.0.0 evidence does not establish a usable native worker invocation mechanism, so direct dispatcher-controlled execution is being planned instead.",
+      "status": "OUT_OF_SCOPE_FOR_INITIAL_DELEGATION"
+    }
+  ],
+  "planRules": {
+    "frozen": true,
+    "readyDoesNotAuthorize": true,
+    "repositorySearchCannotDefineTaskIdentity": true,
+    "missingTaskDefinitionIsBlocking": true,
+    "authorizationDoesNotReplan": true,
+    "plannerDoesNotImplement": true,
+    "workerMayNotChangePlanState": true,
+    "workerMayNotExpandScope": true,
+    "repositoryWriteCapabilityNotGrantedByThisPlan": true
+  },
+  "supersession": {
+    "status": "CURRENT",
+    "supersededBy": null
+  },
+  "auditHistory": [
+    {
+      "timestamp": "2026-09-18T00:52:33.345Z",
+      "actor": "Plan State Manager",
+      "action": "authorize",
+      "planId": "EQRMSS-WORKER-DELEGATION-001",
+      "planVersion": "1.0.0",
+      "previousState": "READY",
+      "newState": "AUTHORIZED",
+      "taskScope": [
+        "P001"
+      ]
+    }
+  ],
+  "execution": null,
+  "validation": null
+}

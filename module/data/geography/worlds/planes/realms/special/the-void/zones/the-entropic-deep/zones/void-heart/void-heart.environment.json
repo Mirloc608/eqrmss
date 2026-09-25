@@ -1,0 +1,44 @@
+{
+  "zone": "void-heart",
+
+  "terrain": [
+    "central-pressure-chamber",
+    "null-core-basin",
+    "entropy-convergence-rings",
+    "void-pulse-nexus"
+  ],
+
+  "lighting": "void-pulse-darklight",
+
+  "hazards": [
+    {
+      "id": "void-pulse",
+      "dc": 26,
+      "effect": "void_damage_and_temporal_stagger"
+    },
+    {
+      "id": "pressure-collapse",
+      "dc": 25,
+      "effect": "force_damage_and_knockdown"
+    },
+    {
+      "id": "entropy-convergence",
+      "dc": 24,
+      "effect": "stat_decay_and_radiant_void_damage"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "The Void Heart pulses at irregular intervals; movement timing becomes critical."
+  },
+
+  "environmentTags": [
+    "void",
+    "entropy",
+    "collapse",
+    "cosmic",
+    "raid"
+  ]
+}

@@ -1,0 +1,289 @@
+  [
+  {
+    "_id": "wiz-true-north-1-r1",
+    "name": "True North",
+    "type": "spell",
+    "img": "icons/magic/arcane/compass.webp",
+    "system": {
+      "class": "wizard",
+      "level": 1,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 1,
+      "manaCost": 5,
+      "effects": [
+        { "type": "utility", "effect": "true-north" }
+      ],
+      "description": "Magically orients the caster to face true north."
+    }
+  },
+  {
+    "_id": "wiz-minor-shielding-1-r1",
+    "name": "Minor Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "wizard",
+      "level": 1,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 10,
+      "effects": [
+        { "type": "buff", "stat": "hp", "amount": 6 },
+        { "type": "buff", "stat": "ac", "amount": 3 }
+      ],
+      "description": "Provides a minor protective barrier, increasing AC and HP slightly."
+    }
+  },
+  {
+    "_id": "wiz-blast-of-cold-1-r1",
+    "name": "Blast of Cold",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "wizard",
+      "level": 1,
+      "school": "evocation",
+      "target": "single",
+      "range": 600,
+      "castTime": 2,
+      "manaCost": 8,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 10 }
+      ],
+      "description": "A small blast of cold energy that damages a single target."
+    }
+  },
+  {
+    "_id": "wiz-sphere-of-light-1-r1",
+    "name": "Sphere of Light",
+    "type": "spell",
+    "img": "icons/magic/light/sphere-glow.webp",
+    "system": {
+      "class": "wizard",
+      "level": 1,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 10,
+      "effects": [
+        { "type": "utility", "effect": "summon-item", "item": "light-globe" }
+      ],
+      "description": "Summons a glowing sphere of light to illuminate dark areas."
+    }
+  },
+  {
+    "_id": "wiz-numbing-cold-1-r1",
+    "name": "Numbing Cold",
+    "type": "spell",
+    "img": "icons/magic/water/aoe-frost.webp",
+    "system": {
+      "class": "wizard",
+      "level": 1,
+      "school": "evocation",
+      "target": "area",
+      "range": 500,
+      "castTime": 3,
+      "manaCost": 6,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 14, "radius": 10 }
+      ],
+      "description": "A chilling wave of cold that damages all nearby enemies."
+    }
+  },
+  {
+    "_id": "wiz-frost-bolt-1-r1",
+    "name": "Frost Bolt",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "wizard",
+      "level": 1,
+      "school": "evocation",
+      "target": "single",
+      "range": 600,
+      "castTime": 3,
+      "manaCost": 6,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 8 }
+      ],
+      "description": "Launches a shard of ice at the target, dealing cold damage."
+    }
+  },
+  {
+    "_id": "wiz-okeils-radiation-2-r1",
+    "name": "O'Keil's Radiation",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "wizard",
+      "level": 2,
+      "school": "abjuration",
+      "target": "single",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 15,
+      "effects": [
+        { "type": "buff", "stat": "damage-shield", "element": "fire", "amount": 2 },
+        { "type": "buff", "stat": "resist-fire", "amount": 5 }
+      ],
+      "description": "Creates a fiery aura that damages attackers and increases fire resistance."
+    }
+  },
+  {
+    "_id": "wiz-glimpse-2-r1",
+    "name": "Glimpse",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "wizard",
+      "level": 2,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 1,
+      "manaCost": 5,
+      "effects": [
+        { "type": "utility", "effect": "magnification", "amount": 55 }
+      ],
+      "description": "Enhances the caster’s vision, magnifying distant objects."
+    }
+  },
+  {
+    "_id": "wiz-root-3-r1",
+    "name": "Root",
+    "type": "spell",
+    "img": "icons/magic/nature/root-entangle.webp",
+    "system": {
+      "class": "wizard",
+      "level": 3,
+      "school": "alteration",
+      "target": "single",
+      "range": 500,
+      "castTime": 2,
+      "manaCost": 30,
+      "effects": [
+        { "type": "control", "effect": "immobilize", "duration": 30 }
+      ],
+      "description": "Immobilizes the target, preventing movement but allowing attacks and spellcasting."
+    }
+  },
+  {
+    "_id": "wiz-fade-3-r1",
+    "name": "Fade",
+    "type": "spell",
+    "img": "icons/magic/arcane/shadowstep.webp",
+    "system": {
+      "class": "wizard",
+      "level": 3,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1,
+      "manaCost": 10,
+      "effects": [
+        { "type": "utility", "effect": "shadowstep" }
+      ],
+      "description": "Instantly shifts the caster a short distance away."
+    }
+  },
+  {
+    "_id": "wiz-gate-4-r1",
+    "name": "Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-self.webp",
+    "system": {
+      "class": "wizard",
+      "level": 4,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 70,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "bind-point" }
+      ],
+      "description": "Teleports the caster to their bind point."
+    }
+  },
+  {
+    "_id": "wiz-shock-of-fire-4-r1",
+    "name": "Shock of Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "wizard",
+      "level": 4,
+      "school": "evocation",
+      "target": "single",
+      "range": 700,
+      "castTime": 3,
+      "manaCost": 10,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 10 }
+      ],
+      "description": "A quick burst of fire that damages a single target."
+    }
+  },
+  {
+    "_id": "wiz-see-invisible-4-r1",
+    "name": "See Invisible",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "wizard",
+      "level": 4,
+      "school": "divination",
+      "target": "single",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 25,
+      "effects": [
+        { "type": "utility", "effect": "detect-invisible", "duration": 600 }
+      ],
+      "description": "Allows the target to see invisible creatures."
+    }
+  },
+  {
+    "_id": "wiz-fingers-of-fire-5-r1",
+    "name": "Fingers of Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/aoe-flame.webp",
+    "system": {
+      "class": "wizard",
+      "level": 5,
+      "school": "evocation",
+      "target": "area",
+      "range": 600,
+      "castTime": 4,
+      "manaCost": 47,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 14, "radius": 15 }
+      ],
+      "description": "Unleashes fiery blasts from the caster’s hands, damaging all nearby enemies."
+    }
+  },
+  {
+    "_id": "wiz-fire-bolt-5-r1",
+    "name": "Fire Bolt",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "wizard",
+      "level": 5,
+      "school": "evocation",
+      "target": "single",
+      "range": 1000,
+      "castTime": 4,
+      "manaCost": 28,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 35 }
+      ],
+      "description": "Launches a powerful bolt of fire at the target, dealing significant damage."
+    }
+  }
+]

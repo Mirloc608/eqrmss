@@ -1,0 +1,90 @@
+{
+  "id": "paladin",
+  "key": "paladin",
+  "name": "Paladin",
+  "type": "discipline-catalog",
+  "disciplines": [
+    {
+      "id": "resistant",
+      "name": "Resistant Discipline",
+      "level": 51,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 40,
+      "effects": [
+        {
+          "type": "RESIST_ALL",
+          "value": 20
+        }
+      ]
+    },
+
+    {
+      "id": "fearless",
+      "name": "Fearless Discipline",
+      "level": 54,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 50,
+      "effects": [
+        {
+          "type": "FEAR_IMMUNITY",
+          "value": true
+        }
+      ]
+    },
+
+    {
+      "id": "holyforge",
+      "name": "Holyforge Discipline",
+      "level": 55,
+      "family": "offensive",
+      "durationRounds": 5,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "CRITICAL_HIT_BONUS",
+          "value": 200
+        },
+        {
+          "type": "CRIPPLING_BLOW_BONUS",
+          "value": 20
+        },
+        {
+          "type": "SLAY_UNDEAD_BONUS",
+          "value": 140
+        }
+      ]
+    },
+
+    {
+      "id": "deflection",
+      "name": "Deflection Discipline",
+      "level": 59,
+      "family": "stand",
+      "durationRounds": 3,
+      "reuseRounds": 150,
+      "effects": [
+        {
+          "type": "BLOCK_CHANCE",
+          "value": 100
+        }
+      ]
+    },
+
+    {
+      "id": "sanctification",
+      "name": "Sanctification Discipline",
+      "level": 60,
+      "family": "defensive",
+      "durationRounds": 3,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "SPELL_IMMUNITY",
+          "value": true
+        }
+      ]
+    }
+  ]
+}

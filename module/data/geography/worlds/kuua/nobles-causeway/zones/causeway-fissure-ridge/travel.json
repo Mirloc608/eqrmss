@@ -1,0 +1,48 @@
+{
+  "zone": "causeway-fissure-ridge",
+  "nodes": [
+    {
+      "id": "ridge-chasm",
+      "type": "chasm",
+      "label": "Ridge Chasm"
+    },
+    {
+      "id": "fractured-stone-bridge",
+      "type": "bridge",
+      "label": "Fractured Stone Bridge"
+    },
+    {
+      "id": "arcane-rift",
+      "type": "fissure",
+      "label": "Arcane Rift"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ridge-chasm",
+      "to": "fractured-stone-bridge",
+      "difficulty": "high",
+      "type": "internal",
+      "description": "A dangerous route across unstable ridge terrain."
+    },
+    {
+      "from": "ridge-chasm",
+      "to": "arcane-rift",
+      "difficulty": "extreme",
+      "type": "arcane",
+      "description": "A perilous path into Discord rift zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "causeway-upper-terrace",
+      "type": "back",
+      "description": "Fissure Ridge descends to the Upper Terrace."
+    },
+    {
+      "to": "causeway-ruined-shrines",
+      "type": "side",
+      "description": "Fissure Ridge connects laterally to the Ruined Shrines."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "zone": "sanctum-rift-heart",
+  "hazards": [
+    {
+      "id": "rift-tear",
+      "name": "Rift Tear",
+      "severity": "extreme",
+      "trigger": "proximity-to-rift-chasm",
+      "effects": [
+        "arcane-damage",
+        "random-teleport",
+        "stun"
+      ]
+    },
+    {
+      "id": "platform-drop",
+      "name": "Platform Drop",
+      "severity": "high",
+      "trigger": "movement-on-unstable-platform",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "zone": "sanctum-frost",
+  "hazards": [
+    {
+      "id": "ice-slip",
+      "name": "Ice Slip",
+      "severity": "high",
+      "trigger": "movement-on-frost-platform",
+      "effects": [
+        "fall-damage",
+        "knockdown",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "frost-lock",
+      "name": "Frost Lock",
+      "severity": "extreme",
+      "trigger": "proximity-to-frost-pylon",
+      "effects": [
+        "movement-freeze",
+        "spell-interruption",
+        "cold-damage"
+      ]
+    }
+  ]
+}

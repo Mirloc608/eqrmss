@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-citadel-lower-prison",
+  "hazards": [
+    {
+      "id": "ward-flare",
+      "name": "Ward Flare",
+      "severity": "extreme",
+      "trigger": "proximity-to-interrogation-chamber",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "random-displacement"
+      ]
+    },
+    {
+      "id": "cell-collapse",
+      "name": "Cell Collapse",
+      "severity": "high",
+      "trigger": "movement-in-holding-cells",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-command",
+  "nodes": [
+    {
+      "id": "command-hall",
+      "type": "hall",
+      "label": "Command Hall"
+    },
+    {
+      "id": "strategy-table",
+      "type": "table",
+      "label": "Strategy Table"
+    },
+    {
+      "id": "warded-chamber",
+      "type": "chamber",
+      "label": "Warded Chamber"
+    }
+  ],
+  "edges": [
+    {
+      "from": "command-hall",
+      "to": "strategy-table",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by officers moving between planning alcoves."
+    },
+    {
+      "from": "command-hall",
+      "to": "warded-chamber",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord ward zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-sanctum",
+      "type": "back",
+      "description": "Command connects back to the Sanctum."
+    },
+    {
+      "to": "muramite-citadel-arena",
+      "type": "forward",
+      "description": "Command leads deeper into the Arena."
+    }
+  ]
+}

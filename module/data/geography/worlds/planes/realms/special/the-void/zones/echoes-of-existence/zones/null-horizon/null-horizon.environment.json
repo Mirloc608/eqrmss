@@ -1,0 +1,44 @@
+{
+  "zone": "null-horizon",
+
+  "terrain": [
+    "event-horizon-plains",
+    "echo-fade-bridges",
+    "nonspace-rifts",
+    "memory-dissolution-fields"
+  ],
+
+  "lighting": "horizon-fade-glow",
+
+  "hazards": [
+    {
+      "id": "echo-fade",
+      "dc": 24,
+      "effect": "void_damage_and_memory_loss"
+    },
+    {
+      "id": "nonspace-collapse",
+      "dc": 25,
+      "effect": "force_damage_and_position-scramble"
+    },
+    {
+      "id": "horizon-shear",
+      "dc": 26,
+      "effect": "stat_decay_and_reality-distortion"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "none",
+    "notes": "The Null Horizon is the edge of existence; movement may lead to conceptual rather than physical locations."
+  },
+
+  "environmentTags": [
+    "echo",
+    "nonspace",
+    "void",
+    "cosmic",
+    "raid"
+  ]
+}

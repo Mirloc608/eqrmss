@@ -1,0 +1,44 @@
+{
+  "zone": "inferno-maw",
+
+  "terrain": [
+    "lava-throat-caverns",
+    "firestorm-chasms",
+    "emberfall-bridges",
+    "molten-pressure-wells"
+  ],
+
+  "lighting": "inferno-glare",
+
+  "hazards": [
+    {
+      "id": "firestorm-burst",
+      "dc": 26,
+      "effect": "fire_damage_and_knockback"
+    },
+    {
+      "id": "lava-throat-eruption",
+      "dc": 27,
+      "effect": "fire_damage_and_burning"
+    },
+    {
+      "id": "molten-pressure-crush",
+      "dc": 28,
+      "effect": "force_damage_and_stun"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "The Maw constantly shifts as molten flows reshape the caverns."
+  },
+
+  "environmentTags": [
+    "fire",
+    "lava",
+    "molten",
+    "elemental",
+    "raid"
+  ]
+}

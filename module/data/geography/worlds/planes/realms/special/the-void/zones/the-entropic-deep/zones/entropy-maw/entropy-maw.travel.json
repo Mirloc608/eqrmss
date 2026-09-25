@@ -1,0 +1,35 @@
+{
+  "id": "entropy-maw-travel",
+  "zone": "entropy-maw",
+
+  "nodes": [
+    "entropy-well",
+    "collapse-funnel",
+    "null-pressure-field",
+    "maw-core"
+  ],
+
+  "edges": [
+    {
+      "from": "entropy-well",
+      "to": "collapse-funnel",
+      "type": "entropy-flow"
+    },
+    {
+      "from": "collapse-funnel",
+      "to": "null-pressure-field",
+      "type": "void-shear",
+      "requirements": {
+        "entropy-shielding": true
+      }
+    },
+    {
+      "from": "null-pressure-field",
+      "to": "maw-core",
+      "type": "collapse-path",
+      "requirements": {
+        "void-pressure-resistance": true
+      }
+    }
+  ]
+}

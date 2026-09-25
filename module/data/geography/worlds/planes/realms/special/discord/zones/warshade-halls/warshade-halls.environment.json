@@ -1,0 +1,44 @@
+{
+  "zone": "warshade-halls",
+
+  "terrain": [
+    "shadow-training-chambers",
+    "discord-attunement-conduits",
+    "warshade-barracks",
+    "command-sanctum"
+  ],
+
+  "lighting": "shadow-hall-glow",
+
+  "hazards": [
+    {
+      "id": "attunement-surge",
+      "dc": 32,
+      "effect": "forced_movement_and_damage"
+    },
+    {
+      "id": "shadow-collapse",
+      "dc": 33,
+      "effect": "fear_and_dot"
+    },
+    {
+      "id": "discord-overload",
+      "dc": 34,
+      "effect": "stun_and_knockback"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "low",
+    "notes": "Shadow conduits pulse unpredictably; training chambers shift during drills."
+  },
+
+  "environmentTags": [
+    "discord",
+    "shadow",
+    "training",
+    "military",
+    "corruption"
+  ]
+}

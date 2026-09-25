@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-hollows-north",
+  "nodes": [
+    {
+      "id": "ridge-path",
+      "type": "ridge",
+      "label": "Ridge Path"
+    },
+    {
+      "id": "frost-pocket",
+      "type": "arcane-node",
+      "label": "Frost Pocket"
+    },
+    {
+      "id": "overwatch-ledge",
+      "type": "ledge",
+      "label": "Overwatch Ledge"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ridge-path",
+      "to": "overwatch-ledge",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A narrow ascent used by Muramite overwatch squads."
+    },
+    {
+      "from": "ridge-path",
+      "to": "frost-pocket",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous descent into Discord frost zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-hollows-east",
+      "type": "back",
+      "description": "North connects back to East Hollows."
+    },
+    {
+      "to": "dranik-hollows-west",
+      "type": "side",
+      "description": "North links laterally to West Hollows."
+    }
+  ]
+}

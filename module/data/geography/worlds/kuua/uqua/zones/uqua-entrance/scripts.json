@@ -1,0 +1,17 @@
+{
+  "zone": "uqua-entrance",
+  "scripts": [
+    {
+      "id": "entrance-cycle",
+      "name": "Entrance Cycle",
+      "trigger": "time",
+      "description": "Cycles entrance activity between calm, flooded, and breach states."
+    },
+    {
+      "id": "seal-backlash-check",
+      "name": "Seal Backlash Check",
+      "trigger": "proximity-to-broken-seal",
+      "description": "Triggers seal backlash hazard."
+    }
+  ]
+}

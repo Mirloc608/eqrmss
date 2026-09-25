@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-hollows-south",
+  "nodes": [
+    {
+      "id": "warfront-cavern",
+      "type": "cavern",
+      "label": "Warfront Cavern"
+    },
+    {
+      "id": "rupture-field",
+      "type": "arcane-node",
+      "label": "Rupture Field"
+    },
+    {
+      "id": "fallback-alcove",
+      "type": "alcove",
+      "label": "Fallback Alcove"
+    }
+  ],
+  "edges": [
+    {
+      "from": "warfront-cavern",
+      "to": "rupture-field",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord rupture zones."
+    },
+    {
+      "from": "warfront-cavern",
+      "to": "fallback-alcove",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Dragorn defenders."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-hollows-west",
+      "type": "back",
+      "description": "South connects back to West Hollows."
+    },
+    {
+      "to": "dranik-catacombs",
+      "type": "forward",
+      "description": "South leads deeper into the Dranik Catacombs."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "time-phase-3-travel",
+  "zone": "time-phase-3",
+
+  "nodes": [
+    "phase-3-entry",
+    "phase-3-probability-field",
+    "phase-3-core"
+  ],
+
+  "edges": [
+    {
+      "from": "phase-3-entry",
+      "to": "phase-3-probability-field",
+      "type": "temporal-shift"
+    },
+    {
+      "from": "phase-3-probability-field",
+      "to": "phase-3-core",
+      "type": "probability-collapse",
+      "requirements": {
+        "chronomanticAttunement": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "zone": "bloodfields-camps",
+  "hazards": [
+    {
+      "id": "supply-explosion",
+      "name": "Supply Explosion",
+      "severity": "high",
+      "trigger": "combat-near-supply-yard",
+      "effects": [
+        "explosive-damage",
+        "knockback"
+      ]
+    },
+    {
+      "id": "beast-rampage",
+      "name": "Beast Rampage",
+      "severity": "extreme",
+      "trigger": "disturbance-in-beast-pens",
+      "effects": [
+        "heavy-damage",
+        "fear"
+      ]
+    }
+  ]
+}

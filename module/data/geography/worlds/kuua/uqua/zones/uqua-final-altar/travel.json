@@ -1,0 +1,43 @@
+{
+  "zone": "uqua-final-altar",
+  "nodes": [
+    {
+      "id": "shattered-altar",
+      "type": "altar",
+      "label": "Shattered Altar"
+    },
+    {
+      "id": "spiral-void",
+      "type": "void",
+      "label": "Spiral Void"
+    },
+    {
+      "id": "altar-pylon",
+      "type": "pylon",
+      "label": "Altar Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "shattered-altar",
+      "to": "spiral-void",
+      "difficulty": "extreme",
+      "type": "planar",
+      "description": "A dangerous path into catastrophic water void zones."
+    },
+    {
+      "from": "shattered-altar",
+      "to": "altar-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A hazardous route into divine and Discord amplification zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "uqua-inner-sanctum",
+      "type": "internal",
+      "description": "The Final Altar connects back to the Inner Sanctum."
+    }
+  ]
+}

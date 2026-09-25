@@ -1,0 +1,35 @@
+{
+  "id": "tidal-palace-travel",
+  "zone": "tidal-palace",
+
+  "nodes": [
+    "palace-gate",
+    "coral-hall",
+    "cascade-chamber",
+    "monarch-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "palace-gate",
+      "to": "coral-hall",
+      "type": "tidal-path"
+    },
+    {
+      "from": "coral-hall",
+      "to": "cascade-chamber",
+      "type": "coral-transition",
+      "requirements": {
+        "water-breathing": true
+      }
+    },
+    {
+      "from": "cascade-chamber",
+      "to": "monarch-sanctum",
+      "type": "abyssal-rise",
+      "requirements": {
+        "elemental-attunement-water": true
+      }
+    }
+  ]
+}

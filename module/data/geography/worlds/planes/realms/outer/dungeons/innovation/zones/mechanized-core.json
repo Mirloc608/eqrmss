@@ -1,0 +1,27 @@
+{
+  "id": "mechanized-core",
+  "key": "mechanized-core",
+  "name": "Mechanized Core",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "innovation",
+
+  "description": "The heart of Innovation, a divine engine where all constructs are powered. The Core pulses with endless mechanical energy.",
+
+  "hazards": [
+    { "id": "core-overload", "dc": 38, "effect": "stat_decay_and_massive_damage" }
+  ],
+
+  "encounters": [
+    { "creature": "Core Guardian", "level": 99 },
+    { "creature": "Divine Construct", "level": 100 }
+  ],
+
+  "boss": {
+    "name": "The Innovator Prime",
+    "level": 100,
+    "role": "boss"
+  },
+
+  "tags": ["innovation", "mechanized", "outer"]
+}

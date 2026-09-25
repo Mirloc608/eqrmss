@@ -1,0 +1,26 @@
+{
+  "zone": "sanctum-outer-ring",
+  "hazards": [
+    {
+      "id": "containment-breach",
+      "name": "Containment Breach",
+      "severity": "extreme",
+      "trigger": "proximity-to-containment-pylon",
+      "effects": [
+        "arcane-damage",
+        "knockback",
+        "stun"
+      ]
+    },
+    {
+      "id": "walkway-collapse",
+      "name": "Walkway Collapse",
+      "severity": "high",
+      "trigger": "movement-on-ring-walkway",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

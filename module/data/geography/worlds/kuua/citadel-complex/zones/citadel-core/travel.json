@@ -1,0 +1,48 @@
+{
+  "zone": "citadel-core",
+  "nodes": [
+    {
+      "id": "command-hall",
+      "type": "hall",
+      "label": "Command Hall"
+    },
+    {
+      "id": "reactor-chamber",
+      "type": "reactor",
+      "label": "Reactor Chamber"
+    },
+    {
+      "id": "warded-conduit",
+      "type": "conduit",
+      "label": "Warded Conduit"
+    }
+  ],
+  "edges": [
+    {
+      "from": "command-hall",
+      "to": "warded-conduit",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A guarded route into arcane conduits."
+    },
+    {
+      "from": "warded-conduit",
+      "to": "reactor-chamber",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous approach to the Discord reactor."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "citadel-sanctum",
+      "type": "back",
+      "description": "The Core connects back to the Citadel Sanctum."
+    },
+    {
+      "to": "anguish",
+      "type": "forward",
+      "description": "The Core leads toward Anguish, the final Muramite stronghold."
+    }
+  ]
+}

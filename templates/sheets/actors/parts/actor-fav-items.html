@@ -1,0 +1,82 @@
+<div class="equipable-grid-container">
+
+    <!-- Header -->
+    <div class="equipable-grid-heading equipable-name">
+        {{ localize "eqrmss.pc_sheet_items.item_name" }}
+    </div>
+
+    <div class="equipable-grid-heading">
+        {{ localize "eqrmss.armor.at" }}
+    </div>
+
+    <div class="equipable-grid-heading">
+        {{ localize "eqrmss.weapon.breakage_range" }}
+    </div>
+
+    <div class="equipable-grid-heading">
+        {{ localize "eqrmss.weapon.fumble_range" }}
+    </div>
+
+    <div class="equipable-grid-heading">
+        {{ localize "eqrmss.weapon.strength" }}
+    </div>
+
+    <!-- Equipped Armor -->
+    {{#each armor as |equipable id|}}
+
+        {{#if equipable.system.equipped}}
+
+            <div class="equipable-grid-cell equipable-name">
+                {{equipable.name}}
+            </div>
+
+            <div class="equipable-grid-cell">
+                {{equipable.system.at}}
+            </div>
+
+            <div class="equipable-grid-cell">
+                -
+            </div>
+
+            <div class="equipable-grid-cell">
+                -
+            </div>
+
+            <div class="equipable-grid-cell">
+                -
+            </div>
+
+        {{/if}}
+
+    {{/each}}
+
+    <!-- Equipped Weapons -->
+    {{#each weapons as |weapon id|}}
+
+        {{#if weapon.system.equipped}}
+
+            <div class="equipable-grid-cell equipable-name">
+                {{weapon.name}}
+            </div>
+
+            <div class="equipable-grid-cell">
+                -
+            </div>
+
+            <div class="equipable-grid-cell">
+                {{weapon.system.breakage_range}}
+            </div>
+
+            <div class="equipable-grid-cell">
+                {{weapon.system.fumble_range}}
+            </div>
+
+            <div class="equipable-grid-cell">
+                {{weapon.system.strength}}
+            </div>
+
+        {{/if}}
+
+    {{/each}}
+
+</div>

@@ -1,0 +1,48 @@
+{
+  "zone": "citadel-sanctum",
+  "nodes": [
+    {
+      "id": "sanctum-hall",
+      "type": "hall",
+      "label": "Sanctum Hall"
+    },
+    {
+      "id": "ritual-chamber",
+      "type": "chamber",
+      "label": "Ritual Chamber"
+    },
+    {
+      "id": "warded-altar",
+      "type": "altar",
+      "label": "Warded Altar"
+    }
+  ],
+  "edges": [
+    {
+      "from": "sanctum-hall",
+      "to": "ritual-chamber",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A guarded route into ritual chambers."
+    },
+    {
+      "from": "ritual-chamber",
+      "to": "warded-altar",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous approach to the Discord‑infused altar."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "citadel-barracks",
+      "type": "back",
+      "description": "The Sanctum connects back to the Barracks."
+    },
+    {
+      "to": "citadel-core",
+      "type": "forward",
+      "description": "The Sanctum leads deeper into the Citadel Core."
+    }
+  ]
+}

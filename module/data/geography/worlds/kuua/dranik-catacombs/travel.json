@@ -1,0 +1,39 @@
+{
+  "region": "dranik-catacombs",
+
+  "nodes": [
+    { "id": "dranik-catacombs-quarries", "type": "zone", "label": "Catacombs: Quarries" },
+    { "id": "dranik-catacombs-chambers", "type": "zone", "label": "Catacombs: Chambers" },
+    { "id": "dranik-catacombs-halls", "type": "zone", "label": "Catacombs: Halls" }
+  ],
+
+  "edges": [
+    {
+      "from": "dranik-catacombs-quarries",
+      "to": "dranik-catacombs-chambers",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A cracked passage leading deeper into the catacombs."
+    },
+    {
+      "from": "dranik-catacombs-chambers",
+      "to": "dranik-catacombs-halls",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A Discord‑warped corridor connecting chambers to the deepest halls."
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "draniks-scar",
+      "type": "back",
+      "description": "The Catacombs connect back to Dranik’s Scar."
+    },
+    {
+      "to": "catacombs-of-anguish",
+      "type": "forward",
+      "description": "The deepest halls lead toward the Catacombs of Anguish."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "region": "dranik-scar",
+
+  "factions": [
+    {
+      "id": "muramite-legion",
+      "name": "Muramite Legion",
+      "importance": "critical",
+      "description": "The primary Muramite army occupying Dranik’s Scar.",
+      "allies": ["muramite-inquisitors"],
+      "enemies": ["dragorn-resistance"]
+    },
+    {
+      "id": "muramite-inquisitors",
+      "name": "Muramite Inquisitors",
+      "importance": "major",
+      "description": "Inquisitors overseeing Discord rituals and warfront operations.",
+      "allies": ["muramite-legion"],
+      "enemies": ["dragorn-resistance"]
+    },
+    {
+      "id": "dragorn-resistance",
+      "name": "Dragorn Resistance",
+      "importance": "major",
+      "description": "Rebels launching raids from cliffside alcoves.",
+      "allies": null,
+      "enemies": ["muramite-legion", "muramite-inquisitors"]
+    },
+    {
+      "id": "discord-manifestations",
+      "name": "Discord Manifestations",
+      "importance": "critical",
+      "description": "Arcane anomalies spawned by Discord ruptures throughout the canyon.",
+      "allies": null,
+      "enemies": ["dragorn-resistance", "muramite-legion"]
+    }
+  ]
+}

@@ -1,0 +1,445 @@
+{
+    "id": "berserker",
+    "name": "Berserker",
+
+    "actions": [
+
+        {
+            "id": "frenzy",
+
+            "name": "Frenzy",
+
+            "level": 1,
+
+            "category": "attack",
+
+            "actionType": "melee",
+
+            "requirements": {
+                "weapon": "two_handed_or_dual_wield"
+            },
+
+            "cost": {
+                "resource": "rageMomentum",
+                "amount": 20
+            },
+
+            "effects": [
+
+                {
+                    "type": "extra_attack",
+                    "amount": 1
+                },
+
+                {
+                    "type": "damage_bonus",
+                    "amount": 15
+                }
+
+            ],
+
+            "description":
+                "The Berserker unleashes a rapid series of brutal attacks."
+        },
+
+
+        {
+            "id": "axe_throw",
+
+            "name": "Axe Throw",
+
+            "level": 5,
+
+            "category": "ranged_attack",
+
+            "actionType": "ranged",
+
+            "requirements": {
+                "weapon": "throwing_axe"
+            },
+
+            "range": {
+                "minimum": 5,
+                "maximum": 30
+            },
+
+            "effects": [
+
+                {
+                    "type": "damage",
+                    "formula": "1d10",
+                    "damageType": "slashing"
+                },
+
+                {
+                    "type": "bleed_chance",
+                    "amount": 25
+                }
+
+            ],
+
+            "description":
+                "The Berserker hurls a weapon with devastating force."
+        },
+
+
+        {
+            "id": "power_strike",
+
+            "name": "Power Strike",
+
+            "level": 10,
+
+            "category": "heavy_attack",
+
+            "actionType": "melee",
+
+            "requirements": {
+                "weaponWeight": "heavy"
+            },
+
+            "cost": {
+                "resource": "rageMomentum",
+                "amount": 25
+            },
+
+            "effects": [
+
+                {
+                    "type": "damage_multiplier",
+                    "amount": 2
+                },
+
+                {
+                    "type": "knockdown_chance",
+                    "amount": 20
+                }
+
+            ],
+
+            "description":
+                "The Berserker focuses all strength into a crushing blow."
+        },
+
+
+        {
+            "id": "battle_cry",
+
+            "name": "Battle Cry",
+
+            "level": 15,
+
+            "category": "war_cry",
+
+            "actionType": "area",
+
+            "range": 20,
+
+            "cost": {
+                "resource": "rageMomentum",
+                "amount": 30
+            },
+
+            "effects": [
+
+                {
+                    "type": "ally_attack_bonus",
+                    "amount": 10
+                },
+
+                {
+                    "type": "enemy_fear_chance",
+                    "amount": 20
+                }
+
+            ],
+
+            "description":
+                "The Berserker's roar inspires allies and shakes enemies."
+        },
+
+
+        {
+            "id": "rampage",
+
+            "name": "Rampage",
+
+            "level": 20,
+
+            "category": "area_attack",
+
+            "actionType": "melee",
+
+            "cost": {
+                "resource": "rageMomentum",
+                "amount": 50
+            },
+
+            "cooldown": 60,
+
+            "effects": [
+
+                {
+                    "type": "attack_all_adjacent",
+                    "radius": 5
+                },
+
+                {
+                    "type": "damage_bonus",
+                    "amount": 25
+                }
+
+            ],
+
+            "description":
+                "The Berserker becomes a whirlwind of destruction, striking everything nearby."
+        },
+
+
+        {
+            "id": "decapitate",
+
+            "name": "Decapitate",
+
+            "level": 25,
+
+            "category": "execution",
+
+            "actionType": "melee",
+
+            "requirements": {
+                "weapon": "axe"
+            },
+
+            "cost": {
+                "resource": "rageMomentum",
+                "amount": 75
+            },
+
+            "cooldown": 300,
+
+            "effects": [
+
+                {
+                    "type": "execute_chance",
+                    "amount": 15,
+                    "threshold": 25
+                },
+
+                {
+                    "type": "critical_damage",
+                    "amount": 50
+                }
+
+            ],
+
+            "description":
+                "The Berserker attempts a devastating finishing strike."
+        },
+
+
+        {
+            "id": "reckless_charge",
+
+            "name": "Reckless Charge",
+
+            "level": 30,
+
+            "category": "movement_attack",
+
+            "actionType": "melee",
+
+            "range": 20,
+
+            "cost": {
+                "resource": "rageMomentum",
+                "amount": 35
+            },
+
+            "effects": [
+
+                {
+                    "type": "move_to_target"
+                },
+
+                {
+                    "type": "impact_damage",
+                    "amount": 20
+                },
+
+                {
+                    "type": "stun",
+                    "duration": 1
+                }
+
+            ],
+
+            "description":
+                "The Berserker throws themselves into combat with unstoppable force."
+        },
+
+
+        {
+            "id": "bloodlust",
+
+            "name": "Bloodlust",
+
+            "level": 35,
+
+            "category": "rage_attack",
+
+            "actionType": "self",
+
+            "cost": {
+                "resource": "rageMomentum",
+                "amount": 40
+            },
+
+            "duration": 30,
+
+            "effects": [
+
+                {
+                    "type": "attack_speed",
+                    "amount": 25
+                },
+
+                {
+                    "type": "life_steal",
+                    "amount": 10
+                }
+
+            ],
+
+            "description":
+                "The Berserker feeds on the chaos of battle."
+        },
+
+
+        {
+            "id": "whirlwind_assault",
+
+            "name": "Whirlwind Assault",
+
+            "level": 40,
+
+            "category": "area_attack",
+
+            "actionType": "melee",
+
+            "cost": {
+                "resource": "rageMomentum",
+                "amount": 60
+            },
+
+            "cooldown": 120,
+
+            "effects": [
+
+                {
+                    "type": "multi_attack",
+                    "targets": "all_adjacent"
+                },
+
+                {
+                    "type": "damage_multiplier",
+                    "amount": 1.5
+                }
+
+            ],
+
+            "description":
+                "The Berserker spins through enemies in a devastating assault."
+        },
+
+
+        {
+            "id": "berserker_fury",
+
+            "name": "Berserker Fury",
+
+            "level": 50,
+
+            "category": "ultimate_attack",
+
+            "actionType": "self",
+
+            "cost": {
+                "resource": "rageMomentum",
+                "amount": 100
+            },
+
+            "cooldown": 600,
+
+            "duration": 60,
+
+            "effects": [
+
+                {
+                    "type": "damage_bonus",
+                    "amount": 100
+                },
+
+                {
+                    "type": "attack_speed",
+                    "amount": 50
+                },
+
+                {
+                    "type": "fear_immunity"
+                }
+
+            ],
+
+            "description":
+                "The Berserker releases every ounce of fury in a final destructive frenzy."
+        },
+
+
+        {
+            "id": "cataclysmic_strike",
+
+            "name": "Cataclysmic Strike",
+
+            "level": 60,
+
+            "category": "legendary",
+
+            "actionType": "melee",
+
+            "requirements": {
+                "weapon": "two_handed_axe"
+            },
+
+            "cost": {
+                "resource": "rageMomentum",
+                "amount": 100
+            },
+
+            "cooldown": 900,
+
+            "effects": [
+
+                {
+                    "type": "damage_multiplier",
+                    "amount": 5
+                },
+
+                {
+                    "type": "armor_break",
+                    "amount": 50
+                },
+
+                {
+                    "type": "stagger",
+                    "duration": 3
+                }
+
+            ],
+
+            "description":
+                "The Berserker delivers a legendary blow capable of breaking even the strongest defenses."
+        }
+
+    ]
+}

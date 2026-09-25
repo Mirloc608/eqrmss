@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-heartlands-plains",
+  "nodes": [
+    {
+      "id": "scorched-field",
+      "type": "field",
+      "label": "Scorched Field"
+    },
+    {
+      "id": "resistance-shelter",
+      "type": "shelter",
+      "label": "Resistance Shelter"
+    },
+    {
+      "id": "discord-crack",
+      "type": "fissure",
+      "label": "Discord Crack"
+    }
+  ],
+  "edges": [
+    {
+      "from": "scorched-field",
+      "to": "resistance-shelter",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Dragorn resistance fighters."
+    },
+    {
+      "from": "resistance-shelter",
+      "to": "discord-crack",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord‑corrupted territory."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-heartlands-encampments",
+      "type": "forward",
+      "description": "The Plains lead toward the Encampments."
+    },
+    {
+      "to": "draniks-scar",
+      "type": "back",
+      "description": "The Plains connect back to Dranik’s Scar."
+    }
+  ]
+}

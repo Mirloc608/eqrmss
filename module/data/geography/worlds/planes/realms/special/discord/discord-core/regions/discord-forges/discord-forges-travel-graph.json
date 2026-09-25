@@ -1,0 +1,38 @@
+{
+  "id": "discord-forges-travel-graph",
+  "region": "discord-forges",
+
+  "nodes": [
+    "furnace-of-ruin",
+    "muramite-armory",
+    "slagstorm-works",
+    "core-anvil"
+  ],
+
+  "edges": [
+    {
+      "from": "furnace-of-ruin",
+      "to": "muramite-armory",
+      "type": "forge-path",
+      "requirements": {
+        "heat-resistance": true
+      }
+    },
+    {
+      "from": "muramite-armory",
+      "to": "slagstorm-works",
+      "type": "industrial-transition",
+      "requirements": {
+        "anti-corruption-ward": true
+      }
+    },
+    {
+      "from": "slagstorm-works",
+      "to": "core-anvil",
+      "type": "core-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

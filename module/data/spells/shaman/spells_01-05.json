@@ -1,0 +1,390 @@
+[
+  {
+    "_id": "shm-minor-healing-1-r1",
+    "name": "Minor Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 1,
+      "school": "alteration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 10,
+      "effects": [
+        { "type": "heal", "amount": 10, "max": 20 }
+      ],
+      "description": "Restores a small amount of hitpoints to a single target."
+    }
+  },
+  {
+    "_id": "shm-flash-of-light-1-r1",
+    "name": "Flash of Light",
+    "type": "spell",
+    "img": "icons/magic/light/explosion-beam-blind.webp",
+    "system": {
+      "class": "shaman",
+      "level": 1,
+      "school": "divination",
+      "target": "single",
+      "range": 800,
+      "castTime": 2,
+      "manaCost": 12,
+      "effects": [
+        { "type": "control", "effect": "blindness", "amount": -1 },
+        { "type": "debuff", "stat": "atk", "amount": -5 }
+      ],
+      "description": "Blinds the target and reduces their attack power."
+    }
+  },
+  {
+    "_id": "shm-true-north-1-r1",
+    "name": "True North",
+    "type": "spell",
+    "img": "icons/magic/arcane/compass-north.webp",
+    "system": {
+      "class": "shaman",
+      "level": 1,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 1,
+      "manaCost": 5,
+      "effects": [
+        { "type": "utility", "effect": "true-north" }
+      ],
+      "description": "Aligns the caster with true north."
+    }
+  },
+  {
+    "_id": "shm-cure-disease-1-r1",
+    "name": "Cure Disease",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 1,
+      "school": "alteration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 20,
+      "effects": [
+        { "type": "cure", "effect": "disease", "min": 1, "max": 5 }
+      ],
+      "description": "Cures disease counters from the target."
+    }
+  },
+  {
+    "_id": "shm-endure-cold-1-r1",
+    "name": "Endure Cold",
+    "type": "spell",
+    "img": "icons/magic/water/ice-shield-blue.webp",
+    "system": {
+      "class": "shaman",
+      "level": 1,
+      "school": "abjuration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 20,
+      "effects": [
+        { "type": "buff", "stat": "resist-cold", "min": 11, "max": 30 }
+      ],
+      "description": "Increases the target’s resistance to cold."
+    }
+  },
+  {
+    "_id": "shm-dexterous-aura-1-r1",
+    "name": "Dexterous Aura",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 1,
+      "school": "alteration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 10,
+      "effects": [
+        { "type": "buff", "stat": "dex", "min": 5, "max": 14 }
+      ],
+      "description": "Increases the target’s dexterity."
+    }
+  },
+  {
+    "_id": "shm-inner-fire-1-r1",
+    "name": "Inner Fire",
+    "type": "spell",
+    "img": "icons/magic/life/heart-flame-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 1,
+      "school": "abjuration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 10,
+      "effects": [
+        { "type": "buff", "stat": "ac", "min": 1, "max": 4 },
+        { "type": "buff", "stat": "hp-max", "min": 11, "max": 30 },
+        { "type": "heal", "amount": 11, "max": 30 }
+      ],
+      "description": "Increases AC, max hitpoints, and heals the target."
+    }
+  },
+  {
+    "_id": "shm-strengthen-1-r1",
+    "name": "Strengthen",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 1,
+      "school": "alteration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 10,
+      "effects": [
+        { "type": "buff", "stat": "str", "min": 5, "max": 14 }
+      ],
+      "description": "Increases the target’s strength."
+    }
+  },
+  {
+    "_id": "shm-burst-of-flame-1-r1",
+    "name": "Burst of Flame",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "shaman",
+      "level": 1,
+      "school": "evocation",
+      "target": "single",
+      "range": 800,
+      "castTime": 2,
+      "manaCost": 4,
+      "effects": [
+        { "type": "damage", "element": "fire", "min": 3, "max": 5 }
+      ],
+      "description": "Deals a small burst of fire damage to a single target."
+    }
+  },
+  {
+    "_id": "shm-cure-poison-2-r1",
+    "name": "Cure Poison",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 2,
+      "school": "alteration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 20,
+      "effects": [
+        { "type": "cure", "effect": "poison", "min": 1, "max": 5 }
+      ],
+      "description": "Cures poison counters from the target."
+    }
+  },
+  {
+    "_id": "shm-summon-drink-2-r1",
+    "name": "Summon Drink",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "shaman",
+      "level": 2,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 10,
+      "effects": [
+        { "type": "utility", "effect": "summon-item", "item": "globe-of-water" }
+      ],
+      "description": "Summons a drinkable globe of water."
+    }
+  },
+  {
+    "_id": "shm-spirit-pouch-2-r1",
+    "name": "Spirit Pouch",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "shaman",
+      "level": 2,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 40,
+      "effects": [
+        { "type": "utility", "effect": "summon-item", "item": "spirit-pouch" }
+      ],
+      "description": "Summons a spirit pouch container."
+    }
+  },
+  {
+    "_id": "shm-feet-like-cat-3-r1",
+    "name": "Feet like Cat",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 3,
+      "school": "alteration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 40,
+      "effects": [
+        { "type": "buff", "stat": "agi", "min": 10, "max": 27 }
+      ],
+      "description": "Increases the target’s agility."
+    }
+  },
+  {
+    "_id": "shm-scale-skin-3-r1",
+    "name": "Scale Skin",
+    "type": "spell",
+    "img": "icons/magic/defense/armor-scale-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 3,
+      "school": "abjuration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 25,
+      "effects": [
+        { "type": "buff", "stat": "ac", "min": 3, "max": 9 }
+      ],
+      "description": "Increases the target’s armor class."
+    }
+  },
+  {
+    "_id": "shm-fleeting-fury-4-r1",
+    "name": "Fleeting Fury",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 4,
+      "school": "abjuration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 10,
+      "effects": [
+        { "type": "buff", "stat": "str", "amount": 15 },
+        { "type": "buff", "stat": "ac", "amount": 6 },
+        { "type": "buff", "stat": "dex", "amount": 20 }
+      ],
+      "description": "Increases strength, AC, and dexterity."
+    }
+  },
+  {
+    "_id": "shm-frost-rift-4-r1",
+    "name": "Frost Rift",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear-small.webp",
+    "system": {
+      "class": "shaman",
+      "level": 4,
+      "school": "evocation",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 19,
+      "effects": [
+        { "type": "damage", "element": "cold", "min": 24, "max": 29 }
+      ],
+      "description": "Deals cold damage to a single target."
+    }
+  },
+  {
+    "_id": "shm-sicken-4-r1",
+    "name": "Sicken",
+    "type": "spell",
+    "img": "icons/magic/debuff/disease-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 4,
+      "school": "conjuration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 11,
+      "effects": [
+        { "type": "debuff", "effect": "disease", "amount": 1 },
+        { "type": "dot", "element": "disease", "min": 1, "max": 11 },
+        { "type": "damage", "element": "disease", "amount": 8 }
+      ],
+      "description": "Inflicts disease on the target, causing damage over time."
+    }
+  },
+  {
+    "_id": "shm-endure-fire-5-r1",
+    "name": "Endure Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/shield-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 5,
+      "school": "abjuration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 20,
+      "effects": [
+        { "type": "buff", "stat": "resist-fire", "min": 11, "max": 30 }
+      ],
+      "description": "Increases the target’s resistance to fire."
+    }
+  },
+  {
+    "_id": "shm-drowsy-5-r1",
+    "name": "Drowsy",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 5,
+      "school": "alteration",
+      "target": "single",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 20,
+      "effects": [
+        { "type": "debuff", "stat": "attack-speed", "min": -10, "max": -35 },
+        { "type": "debuff", "effect": "disease", "amount": 3 }
+      ],
+      "description": "Slows the target’s attack speed and increases disease counters."
+    }
+  },
+  {
+    "_id": "shm-gate-5-r1",
+    "name": "Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-home-blue.webp",
+    "system": {
+      "class": "shaman",
+      "level": 5,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 70,
+      "effects": [
+        { "type": "utility", "effect": "gate" }
+      ],
+      "description": "Teleports the caster to their bind point."
+    }
+  }
+]

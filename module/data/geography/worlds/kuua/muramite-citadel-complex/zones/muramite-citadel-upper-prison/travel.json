@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-upper-prison",
+  "nodes": [
+    {
+      "id": "reinforced-cells",
+      "type": "cells",
+      "label": "Reinforced Cells"
+    },
+    {
+      "id": "containment-chamber",
+      "type": "chamber",
+      "label": "Containment Chamber"
+    },
+    {
+      "id": "elite-guard-station",
+      "type": "station",
+      "label": "Elite Guard Station"
+    }
+  ],
+  "edges": [
+    {
+      "from": "reinforced-cells",
+      "to": "containment-chamber",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord containment zones."
+    },
+    {
+      "from": "reinforced-cells",
+      "to": "elite-guard-station",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by elite jailers moving between cells and checkpoints."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-lower-prison",
+      "type": "down",
+      "description": "Upper Prison descends into the Lower Prison."
+    },
+    {
+      "to": "muramite-citadel-ascension",
+      "type": "forward",
+      "description": "Upper Prison connects to Ascension platforms."
+    }
+  ]
+}

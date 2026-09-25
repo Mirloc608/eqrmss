@@ -1,0 +1,35 @@
+{
+  "id": "magma-rivers-travel",
+  "zone": "magma-rivers",
+
+  "nodes": [
+    "magma-entry",
+    "magma-channel",
+    "obsidian-bridge",
+    "magma-core"
+  ],
+
+  "edges": [
+    {
+      "from": "magma-entry",
+      "to": "magma-channel",
+      "type": "heat-flow"
+    },
+    {
+      "from": "magma-channel",
+      "to": "obsidian-bridge",
+      "type": "forge-current",
+      "requirements": {
+        "heat-resonance": true
+      }
+    },
+    {
+      "from": "obsidian-bridge",
+      "to": "magma-core",
+      "type": "divine-path",
+      "requirements": {
+        "fire-attunement": true
+      }
+    }
+  ]
+}

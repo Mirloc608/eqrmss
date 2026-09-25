@@ -1,0 +1,44 @@
+{
+  "zone": "tectonic-forge",
+
+  "terrain": [
+    "molten-stone-furnaces",
+    "pressure-vent-chambers",
+    "ore-flow-canals",
+    "forge-heart-platforms"
+  ],
+
+  "lighting": "molten-glow",
+
+  "hazards": [
+    {
+      "id": "pressure-vent-eruption",
+      "dc": 28,
+      "effect": "fire_damage_and_knockback"
+    },
+    {
+      "id": "ore-flow-surge",
+      "dc": 27,
+      "effect": "molten_damage_and_burn"
+    },
+    {
+      "id": "tectonic-rumble",
+      "dc": 29,
+      "effect": "forced_movement_and_stun"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "Molten ore flows shift constantly; forge platforms may rise or fall with tectonic pressure."
+  },
+
+  "environmentTags": [
+    "earth",
+    "forge",
+    "molten",
+    "tectonic",
+    "elemental"
+  ]
+}

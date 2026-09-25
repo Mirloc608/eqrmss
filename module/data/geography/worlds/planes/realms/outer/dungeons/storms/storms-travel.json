@@ -1,0 +1,24 @@
+{
+  "id": "storms-region-travel",
+  "plane": "storms",
+
+  "nodes": [
+    "region-entry",
+    "stormfront",
+    "lightning-fields",
+    "thunder-citadel",
+    "storm-sovereign-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "stormfront", "type": "tempest-entry" },
+    { "from": "stormfront", "to": "lightning-fields", "type": "bolt-transition" },
+    { "from": "lightning-fields", "to": "thunder-citadel", "type": "citadel-ascent" },
+    {
+      "from": "thunder-citadel",
+      "to": "storm-sovereign-throne",
+      "type": "throne-access",
+      "requirements": { "outer-attunement": true }
+    }
+  ]
+}

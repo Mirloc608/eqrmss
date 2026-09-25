@@ -1,0 +1,17 @@
+{
+  "zone": "citadel-outer-ring",
+  "scripts": [
+    {
+      "id": "outer-alert-cycle",
+      "name": "Outer Alert Cycle",
+      "trigger": "time",
+      "description": "Cycles outer ring activity between calm, active, and high alert."
+    },
+    {
+      "id": "siege-misfire-check",
+      "name": "Siege Misfire Check",
+      "trigger": "combat-near-siege-platform",
+      "description": "Triggers siege misfire hazard."
+    }
+  ]
+}

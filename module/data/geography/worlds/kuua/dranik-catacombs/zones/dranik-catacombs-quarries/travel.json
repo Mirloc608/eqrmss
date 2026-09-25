@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-catacombs-quarries",
+  "nodes": [
+    {
+      "id": "collapsed-tunnel",
+      "type": "tunnel",
+      "label": "Collapsed Tunnel"
+    },
+    {
+      "id": "excavation-pit",
+      "type": "pit",
+      "label": "Excavation Pit"
+    },
+    {
+      "id": "discord-fissure",
+      "type": "fissure",
+      "label": "Discord Fissure"
+    }
+  ],
+  "edges": [
+    {
+      "from": "collapsed-tunnel",
+      "to": "excavation-pit",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A hazardous route through unstable tunnels."
+    },
+    {
+      "from": "excavation-pit",
+      "to": "discord-fissure",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord fissure territory."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-catacombs-chambers",
+      "type": "forward",
+      "description": "The Quarries lead deeper into the Chambers."
+    },
+    {
+      "to": "draniks-scar",
+      "type": "back",
+      "description": "The Quarries connect back to Dranik’s Scar."
+    }
+  ]
+}

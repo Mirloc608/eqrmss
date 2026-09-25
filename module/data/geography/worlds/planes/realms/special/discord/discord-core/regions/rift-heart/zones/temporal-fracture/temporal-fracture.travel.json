@@ -1,0 +1,10 @@
+{
+  "id": "temporal-fracture-travel",
+  "zone": "temporal-fracture",
+
+  "nodes": ["entry", "echo-crack", "time-shear"],
+  "edges": [
+    { "from": "entry", "to": "echo-crack", "type": "time-path" },
+    { "from": "echo-crack", "to": "time-shear", "type": "shear-ascent" }
+  ]
+}

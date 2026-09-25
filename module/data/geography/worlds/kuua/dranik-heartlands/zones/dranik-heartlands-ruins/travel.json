@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-heartlands-ruins",
+  "nodes": [
+    {
+      "id": "collapsed-hall",
+      "type": "hall",
+      "label": "Collapsed Hall"
+    },
+    {
+      "id": "ruined-village",
+      "type": "village",
+      "label": "Ruined Village"
+    },
+    {
+      "id": "discord-rubble-field",
+      "type": "field",
+      "label": "Discord Rubble Field"
+    }
+  ],
+  "edges": [
+    {
+      "from": "collapsed-hall",
+      "to": "ruined-village",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route through shattered Dragorn structures."
+    },
+    {
+      "from": "ruined-village",
+      "to": "discord-rubble-field",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord‑warped rubble."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-heartlands-encampments",
+      "type": "back",
+      "description": "The Ruins connect back to the Encampments."
+    },
+    {
+      "to": "bloodfields-front",
+      "type": "forward",
+      "description": "The Ruins lead toward the Bloodfields warfront."
+    }
+  ]
+}

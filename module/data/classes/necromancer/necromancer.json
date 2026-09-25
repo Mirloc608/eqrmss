@@ -1,0 +1,222 @@
+{
+  "id": "necromancer",
+  "name": "Necromancer",
+  "type": "class",
+
+  "description": {
+    "summary": "Necromancers command death, decay, and the undead through shadow magic.",
+    "lore": "Necromancers are masters of forbidden arts—wielding decay, corruption, disease, fear, and lifetap magic. They drain life, raise undead servants, and spread rot across the battlefield. Their power comes from embracing the darkest forces of Norrath."
+  },
+
+  "role": {
+    "primary": "Damage-over-Time Caster",
+    "secondary": [
+      "Pet Damage",
+      "Control",
+      "Utility",
+      "Lifetap Healing"
+    ]
+  },
+
+  "profession": {
+    "category": "Decay / Corruption / Fear / Disease / Lifetap / Undead",
+    "realm": "Shadow",
+    "powerSource": "Dark Essence"
+  },
+
+  "stats": {
+    "primeRequisites": ["Memory", "Presence"],
+    "secondaryStats": ["Intuition", "Empathy", "Constitution"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth"],
+    "restricted": ["Leather", "Chain", "Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Staves",
+      "Daggers",
+      "Wands"
+    ],
+    "restricted": ["Martial Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 4,
+      "Weapon Skills": 5,
+      "Combat Maneuvers": 5,
+      "Athletics": 4,
+      "Perception": 2,
+      "Shadow Spell Lists": 1,
+      "Lore": 2
+    },
+    "bonusCategories": [
+      "Decay Magic",
+      "Corruption Magic",
+      "Disease Magic",
+      "Fear Magic",
+      "Lifetap Magic",
+      "Undead Magic"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Shadow": {
+        "Decay": ["Decay"],
+        "Corruption": ["Corruption"],
+        "Fear": ["Fear"],
+        "Disease": ["Disease"],
+        "Lifetap": ["Lifetap Arts"],
+        "Undead": ["Undead Binding"]
+      }
+    },
+    "specialization": [
+      "Damage-over-Time",
+      "Lifetap",
+      "Undead Summoning",
+      "Fear & Control"
+    ]
+  },
+
+  "pet": {
+    "type": "Undead Minion",
+    "description": "A summoned undead servant bound by necromantic magic.",
+    "startingTypes": [
+      "Skeleton",
+      "Zombie",
+      "Ghoul"
+    ],
+    "features": [
+      "Undead Resistances",
+      "Pet Buffs",
+      "Shadow Empowerment"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "necromancer_summon_minion",
+        "name": "Summon Minion",
+        "description": "The necromancer summons a minor undead servant."
+      },
+      {
+        "id": "necromancer_lifetap",
+        "name": "Minor Lifetap",
+        "description": "The necromancer drains life from an enemy to heal themselves."
+      }
+    ],
+    "level5": [
+      {
+        "id": "necromancer_fear",
+        "name": "Fear",
+        "description": "The necromancer terrifies an enemy, causing them to flee."
+      }
+    ],
+    "level10": [
+      {
+        "id": "necromancer_dot",
+        "name": "Corruption DoT",
+        "description": "The necromancer inflicts a powerful damage-over-time effect."
+      }
+    ],
+    "level20": [
+      {
+        "id": "necromancer_unholy_power",
+        "name": "Unholy Power",
+        "description": "The necromancer greatly enhances all shadow abilities."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Decay",
+    "Corruption",
+    "Disease",
+    "Fear",
+    "Lifetap",
+    "Undead Binding",
+    "Summon Minion"
+  ],
+
+  "combatActions": [
+    { "id": "lifetap", "name": "Lifetap" },
+    { "id": "fear", "name": "Fear" },
+    { "id": "corruption_dot", "name": "Corruption DoT" }
+  ],
+
+  "disciplines": [
+    "Decay Discipline",
+    "Corruption Discipline",
+    "Undead Discipline"
+  ],
+
+  "startingEquipment": [
+    { "name": "Necromancer’s Staff", "type": "weapon" },
+    { "name": "Shadow Robes", "type": "armor" },
+    { "name": "Book of Decay", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "pure-channeling"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/necromancer.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "damage-over-time caster",
+      "primaryRole": "damage",
+      "secondaryRoles": ["control", "utility"]
+    },
+
+    "identity": {
+      "strengths": [
+        "DoTs",
+        "lifetaps",
+        "undead pets",
+        "fear magic",
+        "disease",
+        "decay"
+      ]
+    },
+
+    "weaknesses": [
+      "low durability",
+      "pet dependency"
+    ],
+
+    "signatureMechanics": [
+      "summon minion",
+      "lifetap",
+      "fear",
+      "corruption dot",
+      "unholy power"
+    ],
+
+    "tags": [
+      "shadow",
+      "decay",
+      "corruption",
+      "fear",
+      "disease",
+      "lifetap",
+      "undead",
+      "pet-class"
+    ],
+
+    "pending": [
+      "attack table IDs",
+      "spell list mapping",
+      "pet stat block integration"
+    ]
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "id": "shadowknight",
+  "name": "Shadowknight",
+  "type": "class",
+
+  "description": {
+    "summary": "Shadowknights are dark crusaders who blend martial prowess with shadow magic.",
+    "lore": "Shadowknights wield the corruptive powers of decay, fear, and disease. They channel dark pacts to drain life, weaken foes, and command undead. As armored spellcasters, they stand as the martial counterpart to necromancers—fearsome, relentless, and empowered by shadow."
+  },
+
+  "role": {
+    "primary": "Hybrid Tank",
+    "secondary": [
+      "Shadow Magic",
+      "Lifetap Damage",
+      "Fear & Control",
+      "Undead Manipulation"
+    ]
+  },
+
+  "profession": {
+    "category": "Decay / Corruption / Fear / Disease / Lifetap / Undead",
+    "realm": "Shadow",
+    "powerSource": "Dark Pact"
+  },
+
+  "stats": {
+    "primeRequisites": ["Empathy", "Intuition"],
+    "secondaryStats": ["Strength", "Constitution", "Presence"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth", "Leather", "Chain", "Plate"],
+    "restricted": []
+  },
+
+  "weapons": {
+    "allowed": [
+      "Swords",
+      "Maces",
+      "Hammers",
+      "Polearms",
+      "Shields"
+    ],
+    "restricted": ["Daggers", "Thrown Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 2,
+      "Weapon Skills": 2,
+      "Combat Maneuvers": 2,
+      "Athletics": 2,
+      "Perception": 3,
+      "Shadow Spell Lists": 3,
+      "Lore": 3
+    },
+    "bonusCategories": [
+      "Shadow Magic",
+      "Lifetaps",
+      "Fear Magic",
+      "Undead Manipulation"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Shadow": {
+        "Decay": ["Decay"],
+        "Corruption": ["Corruption"],
+        "Fear": ["Fear"],
+        "Disease": ["Disease"],
+        "Lifetap": ["Lifetap Arts"],
+        "Undead": ["Undead Binding"]
+      }
+    },
+    "specialization": [
+      "Lifetap Mastery",
+      "Fear & Control",
+      "Corruption Magic"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "shadowknight_lifetap",
+        "name": "Minor Lifetap",
+        "description": "The Shadow Knight drains life from an enemy to heal themselves."
+      },
+      {
+        "id": "shadowknight_dark_pact",
+        "name": "Dark Pact",
+        "description": "The Shadow Knight gains increased damage through a corruptive blessing."
+      }
+    ],
+    "level5": [
+      {
+        "id": "shadowknight_fear",
+        "name": "Fear",
+        "description": "The Shadow Knight terrifies an enemy, causing them to flee."
+      }
+    ],
+    "level10": [
+      {
+        "id": "shadowknight_harm_touch",
+        "name": "Harm Touch",
+        "description": "The Shadow Knight unleashes a devastating burst of shadow energy."
+      }
+    ],
+    "level20": [
+      {
+        "id": "shadowknight_unholy_aura",
+        "name": "Unholy Aura",
+        "description": "The Shadow Knight becomes shrouded in darkness, enhancing all shadow abilities."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Lifetaps",
+    "Fear",
+    "Disease",
+    "Decay",
+    "Corruption",
+    "Undead Binding",
+    "Harm Touch",
+    "Dark Pact"
+  ],
+
+  "combatActions": [
+    { "id": "bash", "name": "Bash" },
+    { "id": "dark_strike", "name": "Dark Strike" },
+    { "id": "fear", "name": "Fear" }
+  ],
+
+  "disciplines": [
+    "Shadow Discipline",
+    "Corruptive Discipline",
+    "Unholy Discipline"
+  ],
+
+  "startingEquipment": [
+    { "name": "Corrupted Longsword", "type": "weapon" },
+    { "name": "Dark Shield", "type": "armor" },
+    { "name": "Blackened Plate Armor", "type": "armor" },
+    { "name": "Symbol of Shadow", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "hybrid-martial-channeling"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/shadowknight.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "hybrid tank",
+      "primaryRole": "defense",
+      "secondaryRoles": ["damage", "control"]
+    },
+
+    "identity": {
+      "strengths": [
+        "lifetaps",
+        "fear magic",
+        "disease",
+        "decay",
+        "corruption",
+        "undead manipulation"
+      ]
+    },
+
+    "weaknesses": [
+      "lower healing than paladins",
+      "shadow spells have high mana cost"
+    ],
+
+    "signatureMechanics": [
+      "harm touch",
+      "fear",
+      "lifetap",
+      "dark pact"
+    ],
+
+    "tags": [
+      "shadow",
+      "decay",
+      "corruption",
+      "fear",
+      "disease",
+      "lifetap",
+      "undead",
+      "martial"
+    ],
+
+    "pending": [
+      "attack table IDs",
+      "spell list mapping"
+    ]
+  }
+}

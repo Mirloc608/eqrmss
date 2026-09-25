@@ -1,0 +1,214 @@
+[
+  {
+  "_id": "shm-endure-poison-11",
+  "name": "Endure Poison",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 11,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 20,
+    "effects": [
+      { "type": "buff", "stat": "resist-poison", "min": 11, "max": 30 }
+    ],
+    "description": "Increases the target’s resistance to poison."
+  }
+},
+{
+  "_id": "shm-enduring-breath-12",
+  "name": "Enduring Breath",
+  "type": "spell",
+  "img": "icons/magic/water/breathing-bubble-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 12,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 35,
+    "effects": [
+      { "type": "utility", "effect": "water-breathing" }
+    ],
+    "description": "Allows the target to breathe underwater."
+  }
+},
+{
+  "_id": "shm-reebos-lesser-augury-13",
+  "name": "Reebo's Lesser Augury",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 13,
+    "school": "divination",
+    "target": "object",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 70,
+    "effects": [
+      { "type": "utility", "effect": "appraise-ldon-chest", "rank": 1 }
+    ],
+    "description": "Appraises a Lost Dungeons of Norrath chest."
+  }
+},
+{
+  "_id": "shm-walking-sleep-13",
+  "name": "Walking Sleep",
+  "type": "spell",
+  "img": "icons/magic/debuff/sleep-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 13,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "debuff", "stat": "attack-speed", "min": -20, "max": -55 },
+      { "type": "debuff", "effect": "disease", "amount": 6 }
+    ],
+    "description": "Slows the target’s attack speed and increases disease counters."
+  }
+},
+{
+  "_id": "shm-spirit-strike-14",
+  "name": "Spirit Strike",
+  "type": "spell",
+  "img": "icons/magic/spirit/wolf-spirit-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 14,
+    "school": "evocation",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 44,
+    "effects": [
+      { "type": "damage", "element": "magic", "min": 58, "max": 78 }
+    ],
+    "description": "Strikes the target with spiritual force."
+  }
+},
+{
+  "_id": "shm-bind-affinity-14",
+  "name": "Bind Affinity",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-home-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 14,
+    "school": "alteration",
+    "target": "pc-group",
+    "range": 800,
+    "castTime": 10,
+    "manaCost": 100,
+    "effects": [
+      { "type": "utility", "effect": "bind-affinity" }
+    ],
+    "description": "Binds the target to a new home point."
+  }
+},
+{
+  "_id": "shm-reebos-lesser-exorcism-14",
+  "name": "Reebo's Lesser Exorcism",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 14,
+    "school": "divination",
+    "target": "object",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 70,
+    "effects": [
+      { "type": "utility", "effect": "disarm-ldon-trap", "rank": 1 }
+    ],
+    "description": "Disarms a Lost Dungeons of Norrath trap."
+  }
+},
+{
+  "_id": "shm-reebos-lesser-exorcism-14",
+  "name": "Reebo's Lesser Exorcism",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 14,
+    "school": "divination",
+    "target": "object",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 70,
+    "effects": [
+      { "type": "utility", "effect": "disarm-ldon-trap", "rank": 1 }
+    ],
+    "description": "Disarms a Lost Dungeons of Norrath trap."
+  }
+},
+{
+  "_id": "shm-reebos-lesser-cleansing-14",
+  "name": "Reebo's Lesser Cleansing",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-gold.webp",
+  "system": {
+    "class": "shaman",
+    "level": 14,
+    "school": "divination",
+    "target": "object",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 70,
+    "effects": [
+      { "type": "utility", "effect": "unlock-ldon-chest", "rank": 1 }
+    ],
+    "description": "Unlocks a Lost Dungeons of Norrath chest."
+  }
+},
+{
+  "_id": "shm-shrink-15",
+  "name": "Shrink",
+  "type": "spell",
+  "img": "icons/magic/air/wind-mini-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 15,
+    "school": "alteration",
+    "target": "pc-group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "utility", "effect": "shrink", "amount": -34 }
+    ],
+    "description": "Reduces the target’s size."
+  }
+},
+{
+  "_id": "shm-infectious-cloud-15",
+  "name": "Infectious Cloud",
+  "type": "spell",
+  "img": "icons/magic/debuff/disease-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 15,
+    "school": "conjuration",
+    "target": "area",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 78,
+    "effects": [
+      { "type": "debuff", "effect": "disease", "amount": 1 },
+      { "type": "dot", "element": "disease", "min": 5, "max": 5 },
+      { "type": "damage", "element": "disease", "amount": 20 }
+    ],
+    "description": "Creates a diseased cloud that damages and infects enemies."
+  }
+}
+]

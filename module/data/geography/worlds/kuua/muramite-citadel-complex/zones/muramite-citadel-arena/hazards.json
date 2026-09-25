@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-citadel-arena",
+  "hazards": [
+    {
+      "id": "arcane-surge",
+      "name": "Arcane Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-ritual-platform",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "arena-collapse",
+      "name": "Arena Collapse",
+      "severity": "high",
+      "trigger": "movement-on-arena-floor",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+[
+  {
+  "_id": "sk-siphon-strength-06",
+  "name": "Siphon Strength",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/006.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 6,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 5,
+    "effects": [
+      { "type": "debuff", "stat": "str", "min": -5, "max": -15 }
+    ],
+    "description": "Saps the target’s strength, weakening their melee capability."
+  }
+},
+{
+  "_id": "sk-leering-corpse-07",
+  "name": "Leering Corpse",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/007.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 7,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 40,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetNecS01L004Skel2Ice" }
+    ],
+    "description": "Summons a skeletal servant to fight for the Shadowknight."
+  }
+},
+{
+  "_id": "sk-lifetap-08",
+  "name": "Lifetap",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/008.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 8,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 8,
+    "effects": [
+      { "type": "lifetap", "min": 4, "max": 6 }
+    ],
+    "description": "Drains life from the target and transfers it to the caster."
+  }
+},
+{
+  "_id": "sk-despair-09",
+  "name": "Despair",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/009.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 9,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 12,
+    "effects": [
+      { "type": "debuff", "stat": "atk", "amount": -5 }
+    ],
+    "description": "Weakens the target’s attack power."
+  }
+},
+{
+  "_id": "sk-numb-the-dead-09",
+  "name": "Numb the Dead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/009b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 9,
+    "school": "abjuration",
+    "target": "undead",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 20,
+    "effects": [
+      { "type": "control", "effect": "frenzy-radius", "amount": 15 },
+      { "type": "control", "effect": "reaction-radius", "amount": 25 },
+      { "type": "control", "effect": "pacify" }
+    ],
+    "description": "Pacifies undead, reducing their reaction and aggression radius."
+  }
+},
+{
+  "_id": "sk-endure-cold-10",
+  "name": "Endure Cold",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/010.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 10,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 20,
+    "effects": [
+      { "type": "buff", "stat": "resist-cold", "min": 11, "max": 30 }
+    ],
+    "description": "Increases the target’s resistance to cold."
+  }
+}
+]

@@ -1,0 +1,51 @@
+{
+  "id": "wall-of-slaughter-region-travel",
+  "region": "wall-of-slaughter-region",
+
+  "nodes": [
+    "wall-of-slaughter-frontlines",
+    "wall-of-slaughter-battlefield",
+    "wall-of-slaughter-barricades",
+    "wall-of-slaughter-rift-breach",
+    "wall-of-slaughter-war-gate"
+  ],
+
+  "edges": [
+    {
+      "from": "wall-of-slaughter-frontlines",
+      "to": "wall-of-slaughter-battlefield",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "Movement from the assault lines into the central battlefield."
+    },
+    {
+      "from": "wall-of-slaughter-battlefield",
+      "to": "wall-of-slaughter-barricades",
+      "difficulty": "high",
+      "type": "fortified",
+      "description": "Advancing toward Muramite defensive positions."
+    },
+    {
+      "from": "wall-of-slaughter-barricades",
+      "to": "wall-of-slaughter-rift-breach",
+      "difficulty": "extreme",
+      "type": "planar",
+      "description": "Crossing into areas destabilized by Discord rifts."
+    },
+    {
+      "from": "wall-of-slaughter-rift-breach",
+      "to": "wall-of-slaughter-war-gate",
+      "difficulty": "catastrophic",
+      "type": "siege",
+      "description": "Final push toward the War Gate and Muramite stronghold."
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "bloodfields-region",
+      "type": "back",
+      "description": "The Wall of Slaughter connects to Bloodfields via fortified passes."
+    }
+  ]
+}

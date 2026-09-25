@@ -1,0 +1,221 @@
+{
+  "id": "magician",
+  "name": "Magician",
+  "type": "class",
+
+  "description": {
+    "summary": "Magicians command elemental forces and summon powerful pets to fight for them.",
+    "lore": "Magicians are elementalists who channel the primal arcane forces of fire, earth, air, and water. Their mastery of summoning magic allows them to conjure elemental servants, weapons, armor, and destructive spells. They stand as the premier pet‑summoning casters of Norrath."
+  },
+
+  "role": {
+    "primary": "Pet Damage Caster",
+    "secondary": [
+      "Elemental Magic",
+      "Summoning",
+      "Utility"
+    ]
+  },
+
+  "profession": {
+    "category": "Fire / Earth / Air / Water / Summoning",
+    "realm": "Arcane",
+    "powerSource": "Elemental Essence"
+  },
+
+  "stats": {
+    "primeRequisites": ["Memory", "Intuition"],
+    "secondaryStats": ["Presence", "Empathy", "Constitution"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth"],
+    "restricted": ["Leather", "Chain", "Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Staves",
+      "Daggers",
+      "Wands"
+    ],
+    "restricted": ["Martial Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 4,
+      "Weapon Skills": 5,
+      "Combat Maneuvers": 5,
+      "Athletics": 4,
+      "Perception": 2,
+      "Arcane Spell Lists": 1,
+      "Lore": 2
+    },
+    "bonusCategories": [
+      "Elemental Magic",
+      "Summoning",
+      "Pet Enhancement",
+      "Utility Conjuration"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Arcane": {
+        "Fire": ["Fire Mastery"],
+        "Earth": ["Earth Mastery"],
+        "Air": ["Air Mastery"],
+        "Water": ["Water Mastery"],
+        "Summoning": ["Summoning Arts"]
+      }
+    },
+    "specialization": [
+      "Elemental Pets",
+      "Fire Magic",
+      "Earth Magic",
+      "Air Magic",
+      "Water Magic",
+      "Summoning Magic"
+    ]
+  },
+
+  "pet": {
+    "type": "Elemental",
+    "description": "A conjured elemental servant bound by arcane magic.",
+    "startingTypes": [
+      "Fire Elemental",
+      "Earth Elemental",
+      "Air Elemental",
+      "Water Elemental"
+    ],
+    "features": [
+      "Elemental Resistances",
+      "Pet Buffs",
+      "Summoned Armor",
+      "Summoned Weapons"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "magician_summon_elemental",
+        "name": "Summon Elemental",
+        "description": "The magician conjures a minor elemental servant."
+      },
+      {
+        "id": "magician_fire_bolt",
+        "name": "Fire Bolt",
+        "description": "The magician hurls a bolt of elemental fire."
+      }
+    ],
+    "level5": [
+      {
+        "id": "magician_summon_weapon",
+        "name": "Summon Weapon",
+        "description": "The magician conjures a magical weapon for an ally or pet."
+      }
+    ],
+    "level10": [
+      {
+        "id": "magician_summon_armor",
+        "name": "Summon Armor",
+        "description": "The magician conjures protective magical armor."
+      }
+    ],
+    "level20": [
+      {
+        "id": "magician_elemental_fury",
+        "name": "Elemental Fury",
+        "description": "The magician unleashes overwhelming elemental power through their pet."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Summon Elemental",
+    "Summon Weapon",
+    "Summon Armor",
+    "Fire Magic",
+    "Earth Magic",
+    "Air Magic",
+    "Water Magic",
+    "Summoning Arts"
+  ],
+
+  "combatActions": [
+    { "id": "fire_bolt", "name": "Fire Bolt" },
+    { "id": "earth_spike", "name": "Earth Spike" },
+    { "id": "air_blast", "name": "Air Blast" }
+  ],
+
+  "disciplines": [
+    "Elemental Discipline",
+    "Summoning Discipline",
+    "Arcane Discipline"
+  ],
+
+  "startingEquipment": [
+    { "name": "Summoner’s Staff", "type": "weapon" },
+    { "name": "Magician Robes", "type": "armor" },
+    { "name": "Elemental Grimoire", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "pure-channeling"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/magician.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "pet damage caster",
+      "primaryRole": "damage",
+      "secondaryRoles": ["utility", "support"]
+    },
+
+    "identity": {
+      "strengths": [
+        "elemental pets",
+        "summoning",
+        "fire magic",
+        "earth magic",
+        "air magic",
+        "water magic"
+      ]
+    },
+
+    "weaknesses": [
+      "low durability",
+      "pet dependency"
+    ],
+
+    "signatureMechanics": [
+      "summon elemental",
+      "summon weapon",
+      "summon armor",
+      "elemental fury"
+    ],
+
+    "tags": [
+      "arcane",
+      "fire",
+      "earth",
+      "air",
+      "water",
+      "summoning",
+      "pet-class"
+    ],
+
+    "pending": [
+      "attack table IDs",
+      "spell list mapping",
+      "pet stat block integration"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "justice-region-travel",
+  "plane": "justice",
+
+  "nodes": [
+    "region-entry",
+    "tribunal-court",
+    "trial-chambers",
+    "penitence-depths",
+    "tribunal-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "tribunal-court", "type": "court-entry" },
+    { "from": "tribunal-court", "to": "trial-chambers", "type": "trial-transition" },
+    { "from": "trial-chambers", "to": "penitence-depths", "type": "penitence-descent" },
+    {
+      "from": "penitence-depths",
+      "to": "tribunal-throne",
+      "type": "throne-access",
+      "requirements": { "outer-attunement": true }
+    }
+  ]
+}

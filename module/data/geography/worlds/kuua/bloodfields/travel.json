@@ -1,0 +1,47 @@
+{
+  "region": "bloodfields",
+
+  "nodes": [
+    { "id": "bloodfields-front", "type": "zone", "label": "Bloodfields Front" },
+    { "id": "bloodfields-camps", "type": "zone", "label": "Bloodfields Camps" },
+    { "id": "bloodfields-command", "type": "zone", "label": "Bloodfields Command" },
+    { "id": "bloodfields-rifts", "type": "zone", "label": "Bloodfields Rifts" }
+  ],
+
+  "edges": [
+    {
+      "from": "bloodfields-front",
+      "to": "bloodfields-camps",
+      "difficulty": "moderate",
+      "type": "warfront",
+      "description": "A contested route between the frontlines and Muramite camps."
+    },
+    {
+      "from": "bloodfields-camps",
+      "to": "bloodfields-command",
+      "difficulty": "high",
+      "type": "military",
+      "description": "A fortified passage leading to command posts."
+    },
+    {
+      "from": "bloodfields-command",
+      "to": "bloodfields-rifts",
+      "difficulty": "extreme",
+      "type": "arcane",
+      "description": "A hazardous route into Discord‑ruptured terrain."
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "draniks-scar",
+      "type": "back",
+      "description": "The Bloodfields connect back to Dranik’s Scar."
+    },
+    {
+      "to": "muramite-citadel-complex",
+      "type": "forward",
+      "description": "The Bloodfields lead toward the Muramite Citadel."
+    }
+  ]
+}

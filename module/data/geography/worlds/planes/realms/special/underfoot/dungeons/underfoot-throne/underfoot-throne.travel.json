@@ -1,0 +1,24 @@
+{
+  "id": "underfoot-throne-travel",
+  "dungeon": "underfoot-throne",
+
+  "nodes": [
+    "dungeon-entry",
+    "throne-approach",
+    "brells-sanctum",
+    "throne-of-underfoot",
+    "throne-prime-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "throne-approach", "type": "divine-path" },
+    { "from": "throne-approach", "to": "brells-sanctum", "type": "sanctum-transition" },
+    { "from": "brells-sanctum", "to": "throne-of-underfoot", "type": "throne-descent" },
+    {
+      "from": "throne-of-underfoot",
+      "to": "throne-prime-lair",
+      "type": "prime-ascent",
+      "requirements": { "underfoot-attunement": true }
+    }
+  ]
+}

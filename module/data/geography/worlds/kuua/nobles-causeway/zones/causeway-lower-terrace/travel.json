@@ -1,0 +1,48 @@
+{
+  "zone": "causeway-lower-terrace",
+  "nodes": [
+    {
+      "id": "broken-pillars",
+      "type": "pillars",
+      "label": "Broken Pillars"
+    },
+    {
+      "id": "terrace-ledge",
+      "type": "ledge",
+      "label": "Terrace Ledge"
+    },
+    {
+      "id": "discord-crack",
+      "type": "fissure",
+      "label": "Discord Crack"
+    }
+  ],
+  "edges": [
+    {
+      "from": "broken-pillars",
+      "to": "terrace-ledge",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols and resistance ambushers."
+    },
+    {
+      "from": "broken-pillars",
+      "to": "discord-crack",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord crack zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "nobles-causeway",
+      "type": "back",
+      "description": "Lower Terrace connects back to Nobles’ Causeway."
+    },
+    {
+      "to": "causeway-upper-terrace",
+      "type": "forward",
+      "description": "Lower Terrace ascends into the Upper Terrace."
+    }
+  ]
+}

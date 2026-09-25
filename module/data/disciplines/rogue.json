@@ -1,0 +1,150 @@
+{
+  "id": "rogue",
+  "key": "rogue",
+  "name": "Rogue",
+  "type": "discipline-catalog",
+  "disciplines": [
+    {
+      "id": "focused-will",
+      "name": "Focused Will Discipline",
+      "level": 10,
+      "family": "utility",
+      "durationRounds": 10,
+      "reuseRounds": 50,
+      "effects": [
+        {
+          "type": "REGENERATION",
+          "value": 3
+        }
+      ]
+    },
+
+    {
+      "id": "resistant",
+      "name": "Resistant Discipline",
+      "level": 30,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 40,
+      "effects": [
+        {
+          "type": "RESIST_ALL",
+          "value": 20
+        }
+      ]
+    },
+
+    {
+      "id": "fearless",
+      "name": "Fearless Discipline",
+      "level": 40,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 50,
+      "effects": [
+        {
+          "type": "FEAR_IMMUNITY",
+          "value": true
+        }
+      ]
+    },
+
+    {
+      "id": "counterattack",
+      "name": "Counterattack Discipline",
+      "level": 53,
+      "family": "counterattack",
+      "durationRounds": 5,
+      "reuseRounds": 75,
+      "effects": [
+        {
+          "type": "RIPOSTE_BONUS",
+          "value": 100
+        }
+      ]
+    },
+
+    {
+      "id": "deadeye",
+      "name": "Deadeye Discipline",
+      "level": 54,
+      "family": "offensive",
+      "durationRounds": 3,
+      "reuseRounds": 50,
+      "effects": [
+        {
+          "type": "HIT_CHANCE_BONUS",
+          "value": 100
+        }
+      ]
+    },
+
+    {
+      "id": "nimble",
+      "name": "Nimble Discipline",
+      "level": 55,
+      "family": "defensive",
+      "durationRounds": 5,
+      "reuseRounds": 75,
+      "effects": [
+        {
+          "type": "DODGE_BONUS",
+          "value": 100
+        }
+      ]
+    },
+
+    {
+      "id": "kinesthetics",
+      "name": "Kinesthetics Discipline",
+      "level": 57,
+      "family": "offensive",
+      "durationRounds": 5,
+      "reuseRounds": 75,
+      "effects": [
+        {
+          "type": "DUAL_WIELD_BONUS",
+          "value": 100
+        },
+        {
+          "type": "DOUBLE_ATTACK_BONUS",
+          "value": 100
+        }
+      ]
+    },
+
+    {
+      "id": "blinding-speed",
+      "name": "Blinding Speed Discipline",
+      "level": 58,
+      "family": "offensive",
+      "durationRounds": 3,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "HASTE_BONUS",
+          "value": 100
+        }
+      ]
+    },
+
+    {
+      "id": "duelist",
+      "name": "Duelist Discipline",
+      "level": 59,
+      "family": "offensive",
+      "durationRounds": 3,
+      "reuseRounds": 150,
+      "effects": [
+        {
+          "type": "SKILL_DAMAGE_BONUS",
+          "value": 50
+        },
+        {
+          "type": "MINIMUM_DAMAGE_BONUS",
+          "value": 400
+        }
+      ]
+    }
+  ]
+}

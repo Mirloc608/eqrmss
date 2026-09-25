@@ -1,0 +1,43 @@
+{
+  "zone": "proving-grounds-fear",
+  "nodes": [
+    {
+      "id": "isolation-chamber",
+      "type": "chamber",
+      "label": "Isolation Chamber"
+    },
+    {
+      "id": "shadow-corridor",
+      "type": "corridor",
+      "label": "Shadow Corridor"
+    },
+    {
+      "id": "terror-pylon",
+      "type": "pylon",
+      "label": "Terror Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "isolation-chamber",
+      "to": "shadow-corridor",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols and resistance fighters."
+    },
+    {
+      "from": "isolation-chamber",
+      "to": "terror-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord amplification zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "proving-grounds",
+      "type": "back",
+      "description": "Trial of Fear connects back to the central Proving Grounds arena."
+    }
+  ]
+}

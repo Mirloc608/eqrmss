@@ -1,0 +1,26 @@
+{
+  "id": "water-region-travel",
+  "plane": "water",
+
+  "nodes": [
+    "region-entry",
+    "abyssal-trench",
+    "coral-depths",
+    "leviathan-lair",
+    "tidal-palace",
+    "water-sovereign-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "abyssal-trench", "type": "trench-entry" },
+    { "from": "abyssal-trench", "to": "coral-depths", "type": "coral-transition" },
+    { "from": "coral-depths", "to": "leviathan-lair", "type": "abyssal-ascent" },
+    { "from": "leviathan-lair", "to": "tidal-palace", "type": "palace-descent" },
+    {
+      "from": "tidal-palace",
+      "to": "water-sovereign-throne",
+      "type": "throne-access",
+      "requirements": { "elemental-attunement": true }
+    }
+  ]
+}

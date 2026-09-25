@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-halls",
+  "nodes": [
+    {
+      "id": "grand-hall",
+      "type": "hall",
+      "label": "Grand Hall"
+    },
+    {
+      "id": "warded-corridor",
+      "type": "corridor",
+      "label": "Warded Corridor"
+    },
+    {
+      "id": "supply-archway",
+      "type": "archway",
+      "label": "Supply Archway"
+    }
+  ],
+  "edges": [
+    {
+      "from": "grand-hall",
+      "to": "warded-corridor",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord ward zones."
+    },
+    {
+      "from": "grand-hall",
+      "to": "supply-archway",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used for troop and supply movement."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-barracks",
+      "type": "back",
+      "description": "Halls connect back to the Barracks."
+    },
+    {
+      "to": "muramite-citadel-sanctum",
+      "type": "forward",
+      "description": "Halls lead deeper into the Sanctum."
+    }
+  ]
+}

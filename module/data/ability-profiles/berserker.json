@@ -1,0 +1,384 @@
+{
+    "id": "berserker",
+    "name": "Berserker",
+
+    "abilities": [
+
+        {
+            "id": "rage_momentum",
+
+            "name": "Rage Momentum",
+
+            "type": "class_resource",
+
+            "level": 1,
+
+            "system": {
+
+                "resource": "rageMomentum",
+
+                "maximum": 100,
+
+                "generation": [
+
+                    {
+                        "trigger": "damage_taken",
+                        "amount": 5
+                    },
+
+                    {
+                        "trigger": "melee_hit",
+                        "amount": 10
+                    },
+
+                    {
+                        "trigger": "critical_hit",
+                        "amount": 15
+                    }
+                ]
+
+            },
+
+            "description":
+                "The Berserker builds fury through violence and pain. Rage Momentum fuels powerful combat abilities."
+        },
+
+
+        {
+            "id": "berserker_weapon_training",
+
+            "name": "Berserker Weapon Training",
+
+            "type": "passive",
+
+            "level": 1,
+
+            "effects": [
+
+                {
+                    "type": "weapon_skill",
+
+                    "weapons": [
+
+                        "axe",
+                        "great_axe",
+                        "two_handed_blunt",
+                        "two_handed_sword"
+
+                    ],
+
+                    "bonus": 10
+                }
+
+            ],
+
+            "description":
+                "The Berserker specializes in heavy weapons designed for overwhelming force."
+        },
+
+
+        {
+            "id": "reckless_attack",
+
+            "name": "Reckless Attack",
+
+            "type": "combat_modifier",
+
+            "level": 5,
+
+            "effects": [
+
+                {
+                    "type": "damage_bonus",
+
+                    "amount": 15
+                },
+
+                {
+                    "type": "defense_penalty",
+
+                    "amount": -10
+                }
+
+            ],
+
+            "description":
+                "The Berserker sacrifices caution for devastating offensive power."
+        },
+
+
+        {
+            "id": "battle_hardened",
+
+            "name": "Battle Hardened",
+
+            "type": "passive",
+
+            "level": 10,
+
+            "effects": [
+
+                {
+                    "type": "physical_resistance",
+
+                    "amount": 10
+                },
+
+                {
+                    "type": "stun_resistance",
+
+                    "amount": 20
+                }
+
+            ],
+
+            "description":
+                "Years of brutal combat make the Berserker difficult to disable."
+        },
+
+
+        {
+            "id": "fury_mastery",
+
+            "name": "Fury Mastery",
+
+            "type": "passive",
+
+            "level": 15,
+
+            "effects": [
+
+                {
+                    "type": "rage_decay_reduction",
+
+                    "amount": 50
+                },
+
+                {
+                    "type": "rage_generation",
+
+                    "amount": 20
+                }
+
+            ],
+
+            "description":
+                "The Berserker learns to maintain their fury longer during combat."
+        },
+
+
+        {
+            "id": "weapon_specialization",
+
+            "name": "Weapon Specialization",
+
+            "type": "passive",
+
+            "level": 20,
+
+            "effects": [
+
+                {
+                    "type": "critical_chance",
+
+                    "weapon_group": "heavy_weapons",
+
+                    "amount": 5
+                },
+
+                {
+                    "type": "critical_damage",
+
+                    "weapon_group": "heavy_weapons",
+
+                    "amount": 10
+                }
+
+            ],
+
+            "description":
+                "The Berserker becomes exceptionally deadly with massive weapons."
+        },
+
+
+        {
+            "id": "blood_fury",
+
+            "name": "Blood Fury",
+
+            "type": "passive",
+
+            "level": 25,
+
+            "effects": [
+
+                {
+                    "type": "healing_received_bonus",
+
+                    "amount": 10
+                },
+
+                {
+                    "type": "rage_generation",
+
+                    "amount": 25
+                }
+
+            ],
+
+            "description":
+                "The Berserker converts pain and injury into renewed fury."
+        },
+
+
+        {
+            "id": "unstoppable",
+
+            "name": "Unstoppable",
+
+            "type": "defensive",
+
+            "level": 30,
+
+            "effects": [
+
+                {
+                    "type": "movement_control_resistance",
+
+                    "amount": 50
+                },
+
+                {
+                    "type": "fear_resistance",
+
+                    "amount": 100
+                }
+
+            ],
+
+            "description":
+                "The Berserker refuses to be controlled while consumed by rage."
+        },
+
+
+        {
+            "id": "improved_dual_wield",
+
+            "name": "Improved Dual Wield",
+
+            "type": "combat_training",
+
+            "level": 35,
+
+            "effects": [
+
+                {
+                    "type": "dual_wield_bonus",
+
+                    "amount": 20
+                }
+
+            ],
+
+            "description":
+                "The Berserker learns to unleash rapid attacks with two weapons."
+        },
+
+
+        {
+            "id": "deathless_rage",
+
+            "name": "Deathless Rage",
+
+            "type": "legendary",
+
+            "level": 40,
+
+            "effects": [
+
+                {
+                    "type": "death_threshold",
+
+                    "amount": 10
+                },
+
+                {
+                    "type": "damage_bonus_when_wounded",
+
+                    "amount": 50
+                }
+
+            ],
+
+            "description":
+                "Near death only strengthens the Berserker's fury."
+        },
+
+
+        {
+            "id": "master_of_violence",
+
+            "name": "Master of Violence",
+
+            "type": "passive",
+
+            "level": 50,
+
+            "effects": [
+
+                {
+                    "type": "melee_damage_bonus",
+
+                    "amount": 25
+                },
+
+                {
+                    "type": "critical_chance",
+
+                    "amount": 10
+                }
+
+            ],
+
+            "description":
+                "The Berserker has perfected the art of destruction."
+        },
+
+
+        {
+            "id": "avatar_of_destruction",
+
+            "name": "Avatar of Destruction",
+
+            "type": "ultimate_passive",
+
+            "level": 60,
+
+            "effects": [
+
+                {
+                    "type": "rage_maximum",
+
+                    "amount": 50
+                },
+
+                {
+                    "type": "damage_bonus",
+
+                    "amount": 50
+                },
+
+                {
+                    "type": "critical_damage",
+
+                    "amount": 50
+                }
+
+            ],
+
+            "description":
+                "The Berserker becomes a living weapon of unstoppable destruction."
+        }
+
+    ]
+}

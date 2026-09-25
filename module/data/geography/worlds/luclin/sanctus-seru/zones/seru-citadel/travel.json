@@ -1,0 +1,46 @@
+{
+  "id": "seru-citadel-travel",
+  "world": "luclin",
+  "region": "sanctus-seru",
+  "zone": "seru-citadel",
+
+  "nodes": [
+    "citadel-entry",
+    "grand-hall",
+    "elite-quarters",
+    "command-sanctum",
+    "seru-throne"
+  ],
+
+  "edges": [
+    {
+      "from": "citadel-entry",
+      "to": "grand-hall",
+      "type": "fortress-gate"
+    },
+    {
+      "from": "grand-hall",
+      "to": "elite-quarters",
+      "type": "restricted-corridor",
+      "requirements": {
+        "seru-clearance": true
+      }
+    },
+    {
+      "from": "grand-hall",
+      "to": "command-sanctum",
+      "type": "command-access",
+      "requirements": {
+        "command-signet": true
+      }
+    },
+    {
+      "from": "command-sanctum",
+      "to": "seru-throne",
+      "type": "throne-approach",
+      "requirements": {
+        "high-command-writ": true
+      }
+    }
+  ]
+}

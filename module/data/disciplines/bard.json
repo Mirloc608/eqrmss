@@ -1,0 +1,71 @@
+{
+  "id": "bard",
+  "key": "bard",
+  "name": "Bard",
+  "type": "discipline-catalog",
+  "disciplines": [
+    {
+      "id": "resistant",
+      "name": "Resistant Discipline",
+      "level": 51,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 40,
+      "effects": [
+        {
+          "type": "RESIST_ALL",
+          "value": 20
+        }
+      ]
+    },
+
+    {
+      "id": "fearless",
+      "name": "Fearless Discipline",
+      "level": 54,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 50,
+      "effects": [
+        {
+          "type": "FEAR_IMMUNITY",
+          "value": true
+        }
+      ]
+    },
+
+    {
+      "id": "deftdance",
+      "name": "Deftdance Discipline",
+      "level": 55,
+      "family": "defensive",
+      "durationRounds": 5,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "DODGE_BONUS",
+          "value": 100
+        },
+        {
+          "type": "DUAL_WIELD_BONUS",
+          "value": 100
+        }
+      ]
+    },
+
+    {
+      "id": "puretone",
+      "name": "Puretone Discipline",
+      "level": 60,
+      "family": "song",
+      "durationRounds": 10,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "INSTRUMENT_MODIFIER",
+          "value": 28
+        }
+      ]
+    }
+  ]
+}

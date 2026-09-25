@@ -1,0 +1,184 @@
+{
+    "id": "eqrmss-human",
+    "key": "human",
+    "name": "Human",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/human.png",
+
+    "description": "Humans are the most adaptable and widespread race in Norrath. Their cultures vary widely—from the disciplined knights of Qeynos to the rugged settlers of Freeport and the mystics of Erudin. Humans possess balanced physical and mental traits, making them capable of excelling in nearly any profession.",
+
+    "lore": {
+        "homeland": [
+            "Qeynos",
+            "Freeport",
+            "Erudin",
+            "Various frontier settlements"
+        ],
+        "culture": "Human culture is diverse, ranging from scholarly to martial, spiritual to mercantile. Their adaptability allows them to thrive in nearly any environment or discipline.",
+        "alignment": "Highly varied; Humans span the full spectrum of moral and ethical alignments.",
+        "languages": [
+            "Common"
+        ]
+    },
+
+    "stats": {
+        "Ag": 0,
+        "Co": 0,
+        "Me": 0,
+        "Re": 0,
+        "SD": 0,
+        "Em": 0,
+        "In": 0,
+        "Pr": 0,
+        "Qu": 0,
+        "St": 0
+    },
+
+    "racialTalents": [
+        {
+            "id": "versatile",
+            "name": "Versatile",
+            "description": "Humans excel in diverse disciplines, gaining bonuses to multiple skill categories.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "combat",
+                    "value": 5
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "social",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "adaptable",
+            "name": "Adaptable",
+            "description": "Humans can quickly learn new skills and adjust to new environments.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "physical",
+                    "value": 5
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "lore",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "determination",
+            "name": "Determination",
+            "description": "Humans possess strong willpower and emotional resilience.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "SD",
+                    "value": 5
+                },
+                {
+                    "type": "stat",
+                    "target": "Em",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "broad_training",
+            "name": "Broad Training",
+            "description": "Humans receive diverse cultural training, granting minor bonuses across multiple disciplines.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "subterfuge",
+                    "value": 5
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 25,
+        "pace": "Normal",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "5'6\" - 6'4\"",
+        "female": "5'4\" - 6'2\""
+    },
+
+    "weight": {
+        "male": "140 - 220 lbs",
+        "female": "120 - 180 lbs"
+    },
+
+    "lifespan": {
+        "average": "80-100 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "swords": 5,
+            "unarmedCombat": 5
+        },
+        "physical": {
+            "climbing": 5,
+            "swimming": 5
+        },
+        "subterfuge": {
+            "stealth": 5
+        },
+        "magical": {},
+        "lore": {
+            "history": 5
+        },
+        "social": {
+            "diplomacy": 5,
+            "persuasion": 5
+        }
+    },
+
+    "skillCosts": {
+        "combat": "B",
+        "physical": "B",
+        "subterfuge": "B",
+        "magical": "B",
+        "lore": "B",
+        "social": "B"
+    },
+
+    "favoredProfessions": [
+        "warrior",
+        "paladin",
+        "shadowknight",
+        "cleric",
+        "wizard",
+        "ranger",
+        "bard",
+        "rogue",
+        "monk"
+    ],
+
+    "restrictedProfessions": [],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "traveler's clothing",
+        "iron weapon",
+        "camp gear",
+        "basic provisions"
+    ]
+}

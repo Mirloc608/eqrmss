@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-scar-east",
+  "nodes": [
+    {
+      "id": "ridge-line",
+      "type": "ridge",
+      "label": "Ridge Line"
+    },
+    {
+      "id": "wind-pocket",
+      "type": "arcane-node",
+      "label": "Wind Pocket"
+    },
+    {
+      "id": "cliff-runner-path",
+      "type": "path",
+      "label": "Cliff Runner Path"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ridge-line",
+      "to": "wind-pocket",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord wind zones."
+    },
+    {
+      "from": "ridge-line",
+      "to": "cliff-runner-path",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A narrow ledge used by Dragorn runners."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-scar-north",
+      "type": "forward",
+      "description": "East connects upward to North Scar."
+    },
+    {
+      "to": "dranik-hollows-east",
+      "type": "down",
+      "description": "East descends into the Dranik Hollows."
+    }
+  ]
+}

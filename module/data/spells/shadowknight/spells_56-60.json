@@ -1,0 +1,414 @@
+[
+  {
+    "_id": "shd-torrent-of-pain-56-r1",
+    "name": "Torrent of Pain",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 56,
+      "school": "alteration",
+      "target": "single",
+      "manaCost": 75,
+      "effects": [
+        { "type": "debuff", "stat": "ac", "amount": -12 }
+      ],
+      "description": "Inflicts supernatural agony, reducing the target's armor class."
+    }
+  },
+  {
+    "_id": "shd-steelskin-56-r1",
+    "name": "Steelskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-grey.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 56,
+      "school": "abjuration",
+      "target": "self",
+      "manaCost": 149,
+      "effects": [
+        { "type": "buff", "stat": "absorb-damage", "amount": 398 }
+      ],
+      "description": "Encases the Shadowknight in a layer of protective energy that absorbs incoming damage."
+    }
+  },
+  {
+    "_id": "shd-soulless-fear-56-r1",
+    "name": "Soulless Fear",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 56,
+      "school": "alteration",
+      "target": "undead",
+      "manaCost": 75,
+      "effects": [
+        { "type": "control", "effect": "fear", "maxLevel": 55 }
+      ],
+      "description": "Instills supernatural terror in an undead creature."
+    }
+  },
+  {
+    "_id": "shd-ichor-guard-56-r1",
+    "name": "Ichor Guard",
+    "type": "spell",
+    "img": "icons/magic/defense/blood-shield.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 56,
+      "school": "alteration",
+      "target": "self",
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mitigate-melee-damage",
+          "amount": 25,
+          "cap": 2500
+        }
+      ],
+      "description": "Forms a protective barrier of dark ichor that absorbs melee damage."
+    }
+  },
+  {
+    "_id": "shd-conjure-corpse-57-r1",
+    "name": "Conjure Corpse",
+    "type": "spell",
+    "img": "icons/magic/death/summon-corpse.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 57,
+      "school": "conjuration",
+      "target": "self",
+      "manaCost": 700,
+      "effects": [
+        { "type": "utility", "effect": "summon-corpse", "maxLevel": 70 }
+      ],
+      "description": "Summons a corpse to the caster's location."
+    }
+  },
+  {
+    "_id": "shd-vampiric-curse-57-r1",
+    "name": "Vampiric Curse",
+    "type": "spell",
+    "img": "icons/magic/death/drain-life-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "manaCost": 144,
+      "effects": [
+        { "type": "damage-over-time", "amount": 21 },
+        { "type": "lifetap-over-time", "amount": 21 }
+      ],
+      "description": "Curses the target with a life-draining affliction."
+    }
+  },
+  {
+    "_id": "shd-drain-spirit-57-r1",
+    "name": "Drain Spirit",
+    "type": "spell",
+    "img": "icons/magic/death/drain-life-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "manaCost": 213,
+      "effects": [
+        { "type": "damage", "amount": 200 },
+        { "type": "heal", "amount": 200 }
+      ],
+      "description": "Drains spiritual energy from the victim and transfers it to the caster."
+    }
+  },
+  {
+    "_id": "shd-shadow-voice-57-r1",
+    "name": "Shadow Voice",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "manaCost": 150,
+      "effects": [
+        { "type": "control", "effect": "fear", "maxLevel": 55 }
+      ],
+      "description": "A terrifying voice from the void causes the target to flee."
+    }
+  },
+  {
+    "_id": "shd-torrent-of-fatigue-58-r1",
+    "name": "Torrent of Fatigue",
+    "type": "spell",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "manaCost": 120,
+      "effects": [
+        { "type": "debuff", "stat": "strength", "amount": -15 },
+        { "type": "debuff", "stat": "stamina", "amount": -15 }
+      ],
+      "description": "Saps the vitality and strength of the target."
+    }
+  },
+  {
+    "_id": "shd-deathly-temptation-58-r1",
+    "name": "Deathly Temptation",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-transform.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 58,
+      "school": "alteration",
+      "target": "self",
+      "manaCost": 5,
+      "effects": [
+        { "type": "utility", "effect": "skeletal-form" },
+        { "type": "buff", "stat": "mana-regen", "amount": 6 },
+        { "type": "utility", "effect": "ultravision" },
+        { "type": "damage-over-time", "amount": 11 }
+      ],
+      "description": "Transforms the caster into an undead form that enhances mana regeneration at the cost of health."
+    }
+  },
+  {
+    "_id": "shd-nullify-magic-58-r1",
+    "name": "Nullify Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 58,
+      "school": "abjuration",
+      "target": "single",
+      "manaCost": 50,
+      "effects": [
+        { "type": "utility", "effect": "dispel", "strength": 4 }
+      ],
+      "description": "Dispels magical effects from the target."
+    }
+  },
+  {
+    "_id": "shd-cackling-bones-58-r1",
+    "name": "Cackling Bones",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 58,
+      "school": "conjuration",
+      "target": "self",
+      "manaCost": 450,
+      "effects": [
+        { "type": "summon-pet", "pet": "skeletal-servant" }
+      ],
+      "description": "Summons an animated skeletal servant."
+    }
+  },
+  {
+    "_id": "shd-terror-of-terris-59-r1",
+    "name": "Terror of Terris",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 59,
+      "school": "alteration",
+      "target": "single",
+      "manaCost": 51,
+      "effects": [
+        { "type": "hate", "amount": 1 }
+      ],
+      "description": "Forces the target's attention onto the Shadowknight."
+    }
+  },
+  {
+    "_id": "shd-diamondskin-59-r1",
+    "name": "Diamondskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-diamond.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 59,
+      "school": "abjuration",
+      "target": "self",
+      "manaCost": 236,
+      "effects": [
+        { "type": "buff", "stat": "absorb-damage", "amount": 699 }
+      ],
+      "description": "Creates a powerful diamond-like barrier that absorbs damage."
+    }
+  },
+  {
+    "_id": "shd-cascading-darkness-59-r1",
+    "name": "Cascading Darkness",
+    "type": "spell",
+    "img": "icons/magic/death/shadow-snare.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 59,
+      "school": "conjuration",
+      "target": "single",
+      "manaCost": 300,
+      "effects": [
+        { "type": "damage-over-time", "amount": 72 },
+        { "type": "control", "effect": "snare", "amount": 37 }
+      ],
+      "description": "Envelops the target in darkness, slowing movement and causing continual harm."
+    }
+  },
+  {
+    "_id": "shd-deflection-discipline-59-r1",
+    "name": "Deflection Discipline",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-reflect.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 59,
+      "school": "discipline",
+      "target": "self",
+      "manaCost": 0,
+      "effects": [
+        { "type": "buff", "stat": "shield-block", "amount": 100 }
+      ],
+      "description": "Allows the Shadowknight to deflect nearly all incoming melee attacks."
+    }
+  },
+  {
+    "_id": "shd-voice-of-terris-60-r1",
+    "name": "Voice of Terris",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 60,
+      "school": "conjuration",
+      "target": "single",
+      "manaCost": 200,
+      "effects": [
+        { "type": "hate-modifier", "amount": 10 }
+      ],
+      "description": "Amplifies the target's hatred toward the Shadowknight."
+    }
+  },
+  {
+    "_id": "shd-death-peace-60-r1",
+    "name": "Death Peace",
+    "type": "spell",
+    "img": "icons/magic/death/feign-death.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 60,
+      "school": "abjuration",
+      "target": "self",
+      "manaCost": 120,
+      "effects": [
+        { "type": "utility", "effect": "feign-death", "successRate": 98 }
+      ],
+      "description": "Allows the Shadowknight to convincingly mimic death."
+    }
+  },
+  {
+    "_id": "shd-asystole-60-r1",
+    "name": "Asystole",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "manaCost": 98,
+      "effects": [
+        { "type": "debuff", "stat": "strength", "amount": -40 },
+        { "type": "debuff", "stat": "ac", "amount": -18 },
+        { "type": "damage-over-time", "amount": 62 },
+        { "type": "disease", "counters": 4 }
+      ],
+      "description": "Inflicts a crippling disease that weakens and slowly kills the victim."
+    }
+  },
+  {
+    "_id": "shd-cloak-of-the-akheva-60-r1",
+    "name": "Cloak of the Akheva",
+    "type": "spell",
+    "img": "icons/magic/defense/cloak-shadow.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 60,
+      "school": "conjuration",
+      "target": "self",
+      "manaCost": 250,
+      "effects": [
+        { "type": "buff", "stat": "ac", "amount": 10 },
+        { "type": "buff", "stat": "damage-shield", "amount": 5 },
+        { "type": "buff", "stat": "hp", "amount": 150 }
+      ],
+      "description": "Wraps the Shadowknight in Akhevan shadows, increasing durability and retaliatory defenses."
+    }
+  },
+  {
+    "_id": "shd-drain-soul-60-r1",
+    "name": "Drain Soul",
+    "type": "spell",
+    "img": "icons/magic/death/drain-life-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "manaCost": 248,
+      "effects": [
+        { "type": "damage", "amount": 250 },
+        { "type": "heal", "amount": 250 }
+      ],
+      "description": "Tears life energy from the target and restores it to the Shadowknight."
+    }
+  },
+  {
+    "_id": "shd-leechcurse-discipline-60-r1",
+    "name": "Leechcurse Discipline",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 60,
+      "school": "discipline",
+      "target": "self",
+      "manaCost": 0,
+      "effects": [
+        { "type": "buff", "effect": "weapon-lifetap" },
+        { "type": "buff", "stat": "hit-chance", "amount": 200 }
+      ],
+      "description": "Empowers melee attacks to siphon life while dramatically increasing accuracy."
+    }
+  },
+  {
+    "_id": "shd-augment-death-60-r1",
+    "name": "Augment Death",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 60,
+      "school": "alteration",
+      "target": "pet",
+      "manaCost": 200,
+      "effects": [
+        { "type": "buff", "stat": "strength", "amount": 20 },
+        { "type": "buff", "stat": "haste", "amount": 11 },
+        { "type": "buff", "stat": "ac", "amount": 4 }
+      ],
+      "description": "Empowers an undead minion with strength, speed, and resilience."
+    }
+  }
+]

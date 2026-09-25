@@ -1,0 +1,25 @@
+{
+  "graph": {
+    "nodes": [
+      "basilica-of-adumbration",
+      "sanctum-of-echoes",
+      "pylon-galleries",
+      "resonance-core-chamber",
+      "geometric-halls"
+    ],
+    "edges": [
+      { "from": "basilica-of-adumbration", "to": "sanctum-of-echoes", "method": "sanctum ascent" },
+      { "from": "basilica-of-adumbration", "to": "pylon-galleries", "method": "pylon corridor" },
+
+      { "from": "sanctum-of-echoes", "to": "resonance-core-chamber", "method": "echo conduit" },
+      { "from": "pylon-galleries", "to": "geometric-halls", "method": "geometry breach" },
+
+      { "from": "geometric-halls", "to": "resonance-core-chamber", "method": "core descent" }
+    ]
+  },
+
+  "externalConnections": [
+    { "to": "shadow-valley", "method": "void resonance corridor" },
+    { "to": "akheva-ruins", "method": "ancient Luclinite passage" }
+  ]
+}

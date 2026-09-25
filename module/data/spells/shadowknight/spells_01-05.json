@@ -1,0 +1,99 @@
+[
+    {
+  "_id": "sk-spike-of-disease-01",
+  "name": "Spike of Disease",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/001.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 1,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 9,
+    "effects": [
+      { "type": "damage", "element": "disease", "amount": 15 }
+    ],
+    "description": "A minor disease spike that harms the target."
+  }
+},
+{
+  "_id": "sk-sense-the-dead-02",
+  "name": "Sense the Dead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/002.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 2,
+    "school": "divination",
+    "target": "self",
+    "range": 0,
+    "castTime": 2,
+    "manaCost": 5,
+    "effects": [
+      { "type": "utility", "effect": "sense-undead" }
+    ],
+    "description": "Reveals the presence and direction of undead nearby."
+  }
+},
+{
+  "_id": "sk-locate-corpse-03",
+  "name": "Locate Corpse",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/003.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 3,
+    "school": "divination",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 5,
+    "effects": [
+      { "type": "utility", "effect": "locate-corpse" }
+    ],
+    "description": "Reveals the direction of the nearest corpse belonging to the caster."
+  }
+},
+{
+  "_id": "sk-invis-vs-undead-04",
+  "name": "Invisibility vs Undead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/004.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 4,
+    "school": "divination",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 40,
+    "effects": [
+      { "type": "utility", "effect": "invis-undead" }
+    ],
+    "description": "Shrouds the target from the sight of undead creatures."
+  }
+},
+{
+  "_id": "sk-disease-cloud-05",
+  "name": "Disease Cloud",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/005.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 5,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 10,
+    "effects": [
+      { "type": "debuff", "effect": "disease", "amount": 1 },
+      { "type": "damage", "element": "disease", "amount": 5 },
+      { "type": "dot", "element": "disease", "min": 1, "max": 1 }
+    ],
+    "description": "Inflicts a minor disease on the target, dealing small initial and periodic damage."
+  }
+}
+]

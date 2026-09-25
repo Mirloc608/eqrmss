@@ -1,0 +1,136 @@
+[
+  {
+  "_id": "sk-clinging-darkness-11",
+  "name": "Clinging Darkness",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/011.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 11,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 20,
+    "effects": [
+      { "type": "dot", "element": "disease", "min": 8, "max": 8 },
+      { "type": "debuff", "stat": "movement", "min": -21, "max": -50 }
+    ],
+    "description": "Inflicts disease damage over time and slows the target’s movement."
+  }
+},
+{
+  "_id": "sk-lesser-summon-corpse-12",
+  "name": "Lesser Summon Corpse",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/012.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 12,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 10,
+    "manaCost": 100,
+    "effects": [
+      { "type": "utility", "effect": "summon-corpse", "maxLevel": 35 }
+    ],
+    "description": "Summons the corpse of a fallen ally up to level 35."
+  }
+},
+{
+  "_id": "sk-fear-12",
+  "name": "Fear",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/012b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 12,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 40,
+    "effects": [
+      { "type": "control", "effect": "fear", "maxLevel": 52 }
+    ],
+    "description": "Instills terror in the target, causing it to flee."
+  }
+},
+{
+  "_id": "sk-shadow-step-13",
+  "name": "Shadow Step",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/013.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 13,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 1,
+    "manaCost": 10,
+    "effects": [
+      { "type": "utility", "effect": "shadowstep" }
+    ],
+    "description": "Teleports the caster a short distance in a random direction."
+  }
+},
+{
+  "_id": "sk-bone-walk-14",
+  "name": "Bone Walk",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/014.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 14,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 80,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetNecS02L008Skel2Ice" }
+    ],
+    "description": "Summons a stronger skeletal servant to fight for the Shadowknight."
+  }
+},
+{
+  "_id": "sk-scream-of-hate-15",
+  "name": "Scream of Hate",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/015.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 15,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 85,
+    "effects": [
+      { "type": "debuff", "stat": "atk", "amount": -8 }
+    ],
+    "description": "A hateful scream that weakens the target’s attack power."
+  }
+},
+{
+  "_id": "sk-lifespike-15",
+  "name": "Lifespike",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/015b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 15,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 13,
+    "effects": [
+      { "type": "lifetap", "min": 7, "max": 12 }
+    ],
+    "description": "A minor lifetap that drains health from the target."
+  }
+}
+]

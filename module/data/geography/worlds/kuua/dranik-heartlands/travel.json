@@ -1,0 +1,39 @@
+{
+  "region": "dranik-heartlands",
+
+  "nodes": [
+    { "id": "dranik-heartlands-plains", "type": "zone", "label": "Heartlands Plains" },
+    { "id": "dranik-heartlands-encampments", "type": "zone", "label": "Heartlands Encampments" },
+    { "id": "dranik-heartlands-ruins", "type": "zone", "label": "Heartlands Ruins" }
+  ],
+
+  "edges": [
+    {
+      "from": "dranik-heartlands-plains",
+      "to": "dranik-heartlands-encampments",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A patrol‑heavy route leading toward Muramite encampments."
+    },
+    {
+      "from": "dranik-heartlands-encampments",
+      "to": "dranik-heartlands-ruins",
+      "difficulty": "high",
+      "type": "warfront",
+      "description": "A dangerous path through contested territory and ruined Dragorn settlements."
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "draniks-scar",
+      "type": "back",
+      "description": "The Heartlands connect back to Dranik’s Scar."
+    },
+    {
+      "to": "bloodfields-front",
+      "type": "forward",
+      "description": "The Heartlands lead toward the Bloodfields warfront."
+    }
+  ]
+}

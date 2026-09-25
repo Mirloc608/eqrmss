@@ -1,0 +1,27 @@
+{
+  "zone": "wall-of-slaughter-battlefield",
+  "hazards": [
+    {
+      "id": "siege-collapse",
+      "name": "Siege Collapse",
+      "severity": "high",
+      "trigger": "proximity-to-siege-debris",
+      "effects": [
+        "knockdown",
+        "physical-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "discord-eruption",
+      "name": "Discord Eruption",
+      "severity": "extreme",
+      "trigger": "proximity-to-discord-crater",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "random-teleport"
+      ]
+    }
+  ]
+}

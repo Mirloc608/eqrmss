@@ -1,0 +1,56 @@
+<h2>
+    Inventory
+</h2>
+
+<div class="inventory-dropzone"
+     data-drop-type="inventory">
+
+{{#each items}}
+
+<div class="inventory-item"
+     draggable="true"
+     data-item-id="{{id}}">
+
+    <div class="inventory-name">
+
+        {{name}}
+
+    </div>
+
+    <div class="inventory-type">
+
+        {{type}}
+
+    </div>
+
+    <div class="inventory-actions">
+
+        <button class="item-edit"
+                data-item-id="{{id}}">
+
+            Edit
+
+        </button>
+
+        <button class="item-delete"
+                data-item-id="{{id}}">
+
+            Delete
+
+        </button>
+
+    </div>
+
+</div>
+
+{{else}}
+
+<div class="empty-state">
+
+Inventory empty.
+
+</div>
+
+{{/each}}
+
+</div>

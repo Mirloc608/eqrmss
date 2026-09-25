@@ -1,0 +1,25 @@
+{
+  "zone": "bloodfields-front",
+  "hazards": [
+    {
+      "id": "siege-explosion",
+      "name": "Siege Explosion",
+      "severity": "high",
+      "trigger": "combat-near-siege-platform",
+      "effects": [
+        "explosive-damage",
+        "knockback"
+      ]
+    },
+    {
+      "id": "rift-surge",
+      "name": "Rift Surge",
+      "severity": "extreme",
+      "trigger": "movement-near-discord-rift",
+      "effects": [
+        "arcane-damage",
+        "random-displacement"
+      ]
+    }
+  ]
+}

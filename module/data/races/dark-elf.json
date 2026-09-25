@@ -1,0 +1,192 @@
+{
+    "id": "eqrmss-dark-elf",
+    "key": "dark-elf",
+    "name": "Dark Elf",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/dark-elf.png",
+
+    "description": "Dark Elves, known as Teir'Dal, are an ancient and powerful race descended from the followers of Innoruuk. They are known for their intelligence, mastery of magic, cruelty, and political intrigue. Their society thrives in the shadowed city of Neriak, where arcane study and manipulation are central to their culture.",
+
+    "lore": {
+        "homeland": [
+            "Neriak",
+            "Nektulos Forest"
+        ],
+        "culture": "Teir'Dal society is built upon cunning, ambition, and devotion to Innoruuk. They value magical prowess, political manipulation, and ruthless efficiency.",
+        "alignment": "Often Evil or Neutral, with strong cultural ties to Innoruuk.",
+        "languages": [
+            "Common",
+            "Dark Elvish"
+        ]
+    },
+
+    "stats": {
+        "Ag": 0,
+        "Co": -5,
+        "Me": 10,
+        "Re": 10,
+        "SD": 5,
+        "Em": -5,
+        "In": 5,
+        "Pr": 0,
+        "Qu": 0,
+        "St": -5
+    },
+
+    "racialTalents": [
+        {
+            "id": "innoruuks_gift",
+            "name": "Innoruuk's Gift",
+            "description": "Dark Elves possess an innate affinity for arcane and shadow magic, granting increased magical potency.",
+            "effects": [
+                {
+                    "type": "affinity",
+                    "target": "magical",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "arcane_insight",
+            "name": "Arcane Insight",
+            "description": "Teir'Dal are naturally gifted in arcane theory and magical reasoning.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Re",
+                    "value": 5
+                },
+                {
+                    "type": "stat",
+                    "target": "Me",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "shadow_resistance",
+            "name": "Shadow Resistance",
+            "description": "Dark Elves possess resistance to magical and shadow-based effects.",
+            "effects": [
+                {
+                    "type": "resistance",
+                    "target": "magic",
+                    "value": 15
+                }
+            ]
+        },
+        {
+            "id": "darkvision",
+            "name": "Darkvision",
+            "description": "Dark Elves can see in complete darkness, allowing them to navigate shadowed environments with ease.",
+            "effects": [
+                {
+                    "type": "sense",
+                    "target": "darkvision",
+                    "value": 60
+                }
+            ]
+        },
+        {
+            "id": "political_intrigue",
+            "name": "Political Intrigue",
+            "description": "Teir'Dal are masters of manipulation, deception, and courtly intrigue.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "social",
+                    "value": 10
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "subterfuge",
+                    "value": 10
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 25,
+        "pace": "Normal",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "5'8\" - 6'4\"",
+        "female": "5'6\" - 6'2\""
+    },
+
+    "weight": {
+        "male": "140 - 190 lbs",
+        "female": "120 - 170 lbs"
+    },
+
+    "lifespan": {
+        "average": "300-400 years"
+    },
+
+    "skillBonuses": {
+        "combat": {},
+        "physical": {},
+        "subterfuge": {
+            "deception": 10,
+            "stealth": 5
+        },
+        "magical": {
+            "arcaneLore": 10,
+            "spellcasting": 5
+        },
+        "lore": {
+            "history": 5,
+            "magicTheory": 10
+        },
+        "social": {
+            "diplomacy": 5,
+            "intimidation": 10
+        }
+    },
+
+    "skillCosts": {
+        "combat": "C",
+        "physical": "C",
+        "subterfuge": "B",
+        "magical": "A",
+        "lore": "A",
+        "social": "B"
+    },
+
+    "favoredProfessions": [
+        "wizard",
+        "enchanter",
+        "shadowknight",
+        "necromancer"
+    ],
+
+    "restrictedProfessions": [
+        "paladin",
+        "ranger",
+        "druid"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Dark Elvish",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "dark silk robes",
+        "arcane focus crystal",
+        "shadow‑ink quill",
+        "spell primer"
+    ]
+}

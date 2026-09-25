@@ -1,0 +1,52 @@
+{
+  "region": "dranik-hollows",
+
+  "nodes": [
+    { "id": "dranik-hollows-east", "type": "zone", "label": "Hollows East" },
+    { "id": "dranik-hollows-west", "type": "zone", "label": "Hollows West" },
+    { "id": "dranik-hollows-north", "type": "zone", "label": "Hollows North" },
+    { "id": "dranik-hollows-south", "type": "zone", "label": "Hollows South" }
+  ],
+
+  "edges": [
+    {
+      "from": "dranik-hollows-east",
+      "to": "dranik-hollows-north",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A collapsed tunnel connecting East and North Hollows."
+    },
+    {
+      "from": "dranik-hollows-west",
+      "to": "dranik-hollows-south",
+      "difficulty": "high",
+      "type": "hazard",
+      "description": "A Discord‑warped passage linking West and South Hollows."
+    },
+    {
+      "from": "dranik-hollows-north",
+      "to": "dranik-hollows-west",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A narrow cavern route used by Muramite patrols."
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "draniks-scar",
+      "type": "back",
+      "description": "The Hollows connect upward to Dranik’s Scar."
+    },
+    {
+      "to": "dranik-sewers",
+      "type": "down",
+      "description": "The Hollows descend into the Dranik Sewers."
+    },
+    {
+      "to": "dranik-catacombs",
+      "type": "forward",
+      "description": "The Hollows lead deeper into the Dranik Catacombs."
+    }
+  ]
+}

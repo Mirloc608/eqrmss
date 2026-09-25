@@ -1,0 +1,22 @@
+{
+  "id": "stormfront",
+  "key": "stormfront",
+  "name": "Stormfront",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "storms",
+
+  "description": "The Stormfront is the outer edge of the Plane of Storms, where endless thunderclouds gather and mortals first face elemental fury.",
+
+  "hazards": [
+    { "id": "wind-surge", "dc": 36, "effect": "knockback_and_fall_damage" },
+    { "id": "hailstorm", "dc": 37, "effect": "damage_and_dot" }
+  ],
+
+  "encounters": [
+    { "creature": "Storm Elemental", "level": 95 },
+    { "creature": "Cloud Sentinel", "level": 96 }
+  ],
+
+  "tags": ["storms", "wind", "outer"]
+}

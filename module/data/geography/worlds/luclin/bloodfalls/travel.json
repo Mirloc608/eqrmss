@@ -1,0 +1,28 @@
+{
+  "graph": {
+    "nodes": [
+      "crimson-falls",
+      "coterie-encampment",
+      "blood-river-run",
+      "sanguine-caves",
+      "vampyre-watch"
+    ],
+    "edges": [
+      { "from": "crimson-falls", "to": "coterie-encampment", "method": "crimson trail" },
+      { "from": "crimson-falls", "to": "blood-river-run", "method": "riverbank descent" },
+
+      { "from": "coterie-encampment", "to": "blood-river-run", "method": "encampment bypass" },
+      { "from": "coterie-encampment", "to": "vampyre-watch", "method": "command ascent" },
+
+      { "from": "blood-river-run", "to": "sanguine-caves", "method": "sanguine tunnel mouth" },
+      { "from": "blood-river-run", "to": "vampyre-watch", "method": "cliffside climb" },
+
+      { "from": "sanguine-caves", "to": "vampyre-watch", "method": "upper cavern breach" }
+    ]
+  },
+
+  "externalConnections": [
+    { "to": "shadow-valley", "method": "fracture‑tainted canyon pass" },
+    { "to": "other-luclin-regions", "method": "crimson river routes" }
+  ]
+}

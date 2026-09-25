@@ -1,0 +1,24 @@
+{
+  "id": "torment-region-travel",
+  "plane": "torment",
+
+  "nodes": [
+    "region-entry",
+    "agony-pits",
+    "suffering-halls",
+    "torment-throne",
+    "torment-sovereign-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "agony-pits", "type": "agony-entry" },
+    { "from": "agony-pits", "to": "suffering-halls", "type": "suffering-transition" },
+    { "from": "suffering-halls", "to": "torment-throne", "type": "throne-ascent" },
+    {
+      "from": "torment-throne",
+      "to": "torment-sovereign-throne",
+      "type": "throne-access",
+      "requirements": { "outer-attunement": true }
+    }
+  ]
+}

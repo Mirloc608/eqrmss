@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-sewers-pool-of-sludge",
+  "hazards": [
+    {
+      "id": "toxic-surge",
+      "name": "Toxic Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-sludge-reservoir",
+      "effects": [
+        "poison-damage",
+        "stun",
+        "arcane-damage"
+      ]
+    },
+    {
+      "id": "sludge-collapse",
+      "name": "Sludge Collapse",
+      "severity": "high",
+      "trigger": "movement-in-sludge-tunnels",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

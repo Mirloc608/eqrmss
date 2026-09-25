@@ -1,0 +1,61 @@
+{
+  "influenceMap": [
+    {
+      "faction": "combine-remnants",
+      "zones": {
+        "combine-isle": "strong",
+        "sunken-observatory": "moderate",
+        "twilight-sea-main": "minor"
+      }
+    },
+    {
+      "faction": "siren-courts",
+      "zones": {
+        "siren-dominion": "dominant",
+        "twilight-reef": "strong",
+        "deepwater-trench": "moderate"
+      }
+    },
+    {
+      "faction": "elemental-convergence",
+      "zones": {
+        "elemental-convergence": "dominant",
+        "stormbreaker-isles": "strong",
+        "twilight-sea-main": "minor"
+      }
+    },
+    {
+      "faction": "deepwater-aberrations",
+      "zones": {
+        "deepwater-trench": "dominant",
+        "twilight-reef": "moderate"
+      }
+    },
+    {
+      "faction": "twilight-mariner-clans",
+      "zones": {
+        "twilight-sea-main": "strong",
+        "combine-isle": "moderate",
+        "stormbreaker-isles": "minor"
+      }
+    }
+  ],
+
+  "dynamicEffects": [
+    {
+      "event": "siren-tidal-surge",
+      "description": "Siren Courts increase influence across reefs and trenches during tidal surges.",
+      "affectedFactions": ["siren-courts"]
+    },
+    {
+      "event": "elemental-node-flare",
+      "description": "Elemental anomalies flare, increasing elemental influence and destabilizing mariner routes.",
+      "affectedFactions": ["elemental-convergence", "twilight-mariner-clans"]
+    },
+    {
+      "event": "combine-reactivation",
+      "description": "A Combine observatory reactivates, increasing Combine influence across nearby islands.",
+      "affectedFactions": ["combine-remnants"]
+    }
+  ]
+}

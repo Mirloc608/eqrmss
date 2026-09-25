@@ -1,0 +1,446 @@
+[
+  {
+  "_id": "shm-quickness-26",
+  "name": "Quickness",
+  "type": "spell",
+  "img": "icons/magic/air/wind-gust-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 26,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 80,
+    "effects": [
+      { "type": "buff", "stat": "attack-speed", "min": 20, "max": 50 }
+    ],
+    "description": "Increases the target’s attack speed."
+  }
+},
+{
+  "_id": "shm-ultravision-26",
+  "name": "Ultravision",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 26,
+    "school": "divination",
+    "target": "single",
+    "range": 800,
+    "castTime": 2,
+    "manaCost": 55,
+    "effects": [
+      { "type": "vision", "effect": "ultravision" }
+    ],
+    "description": "Grants the target ultravision."
+  }
+},
+{
+  "_id": "shm-counteract-poison-26",
+  "name": "Counteract Poison",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 26,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "cure", "effect": "poison", "amount": 8 }
+    ],
+    "description": "Removes poison counters from the target."
+  }
+},
+{
+  "_id": "shm-invisibility-27",
+  "name": "Invisibility",
+  "type": "spell",
+  "img": "icons/magic/arcane/invisibility-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 27,
+    "school": "divination",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 30,
+    "effects": [
+      { "type": "invisibility", "effect": "standard" }
+    ],
+    "description": "Makes the target invisible."
+  }
+},
+{
+  "_id": "shm-tagars-insects-27",
+  "name": "Tagar's Insects",
+  "type": "spell",
+  "img": "icons/magic/nature/insects-swarm-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 27,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 125,
+    "effects": [
+      { "type": "debuff", "stat": "attack-speed", "min": -20, "max": -70 },
+      { "type": "debuff", "effect": "disease", "amount": 9 }
+    ],
+    "description": "Slows the target’s attack speed and inflicts disease."
+  }
+},
+{
+  "_id": "shm-resist-fire-27",
+  "name": "Resist Fire",
+  "type": "spell",
+  "img": "icons/magic/fire/shield-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 27,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "buff", "stat": "resist-fire", "min": 11, "max": 50 }
+    ],
+    "description": "Increases the target’s resistance to fire."
+  }
+},
+{
+  "_id": "shm-alluring-aura-28",
+  "name": "Alluring Aura",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+    "class": "shaman",
+    "level": 28,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "buff", "stat": "cha", "min": 6, "max": 29 }
+    ],
+    "description": "Increases the target’s charisma."
+  }
+},
+{
+  "_id": "shm-raging-strength-28",
+  "name": "Raging Strength",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 28,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "buff", "stat": "str", "min": 9, "max": 35 }
+    ],
+    "description": "Increases the target’s strength."
+  }
+},
+{
+  "_id": "shm-greater-healing-29",
+  "name": "Greater Healing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 115,
+    "effects": [
+      { "type": "heal", "min": 140, "max": 350 }
+    ],
+    "description": "Restores a large amount of hitpoints."
+  }
+},
+{
+  "_id": "shm-listless-power-29",
+  "name": "Listless Power",
+  "type": "spell",
+  "img": "icons/magic/debuff/hand-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 90,
+    "effects": [
+      { "type": "debuff", "stat": "agi", "min": -10, "max": -45 },
+      { "type": "debuff", "stat": "str", "min": -10, "max": -45 },
+      { "type": "debuff", "stat": "ac", "min": -3, "max": -21 }
+    ],
+    "description": "Reduces agility, strength, and armor class."
+  }
+},
+{
+  "_id": "shm-imbue-ivory-29",
+  "name": "Imbue Ivory",
+  "type": "spell",
+  "img": "icons/commodities/materials/bone-white.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 225,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-ivory" }
+    ],
+    "description": "Imbues a piece of ivory with magical energy."
+  }
+},
+{
+  "_id": "shm-imbue-amber-29",
+  "name": "Imbue Amber",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-yellow.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 200,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-amber" }
+    ],
+    "description": "Imbues amber with magical energy."
+  }
+},
+{
+  "_id": "shm-imbue-sapphire-29",
+  "name": "Imbue Sapphire",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 200,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-sapphire" }
+    ],
+    "description": "Imbues sapphire with magical energy."
+  }
+},
+{
+  "_id": "shm-imbue-jade-29",
+  "name": "Imbue Jade",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 200,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-jade" }
+    ],
+    "description": "Imbues jade with magical energy."
+  }
+},
+{
+  "_id": "shm-imbue-diamond-29",
+  "name": "Imbue Diamond",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-white.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 200,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-diamond" }
+    ],
+    "description": "Imbues diamond with magical energy."
+  }
+},
+{
+  "_id": "shm-mass-imbue-amber-29",
+  "name": "Mass Imbue Amber",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-yellow.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 600,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-amber", "quantity": "mass" }
+    ],
+    "description": "Imbues multiple pieces of amber."
+  }
+},
+{
+  "_id": "shm-mass-imbue-diamond-29",
+  "name": "Mass Imbue Diamond",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-white.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 600,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-diamond", "quantity": "mass" }
+    ],
+    "description": "Imbues multiple diamonds."
+  }
+},
+{
+  "_id": "shm-mass-imbue-jade-29",
+  "name": "Mass Imbue Jade",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 600,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-jade", "quantity": "mass" }
+    ],
+    "description": "Imbues multiple pieces of jade."
+  }
+},
+{
+  "_id": "shm-mass-imbue-sapphire-29",
+  "name": "Mass Imbue Sapphire",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 600,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-sapphire", "quantity": "mass" }
+    ],
+    "description": "Imbues multiple sapphires."
+  }
+},
+{
+  "_id": "shm-spirit-of-the-shrew-29",
+  "name": "Spirit of the Shrew",
+  "type": "spell",
+  "img": "icons/magic/nature/shrew-spirit-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 29,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 80,
+    "effects": [
+      { "type": "vision", "effect": "ultravision" },
+      { "type": "movement", "amount": 30 }
+    ],
+    "description": "Grants ultravision and increased movement speed."
+  }
+},
+{
+  "_id": "shm-health-30",
+  "name": "Health",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 30,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 80,
+    "effects": [
+      { "type": "buff", "stat": "sta", "min": 12, "max": 43 }
+    ],
+    "description": "Increases the target’s stamina."
+  }
+},
+{
+  "_id": "shm-fury-30",
+  "name": "Fury",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 30,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "buff", "stat": "ac", "min": 7, "max": 22 },
+      { "type": "buff", "stat": "agi", "min": 3, "max": 37 },
+      { "type": "buff", "stat": "str", "min": 10, "max": 45 },
+      { "type": "buff", "stat": "dex", "min": 6, "max": 40 }
+    ],
+    "description": "Increases armor class, agility, strength, and dexterity."
+  }
+},
+{
+  "_id": "shm-resist-disease-30",
+  "name": "Resist Disease",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 30,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "buff", "stat": "resist-disease", "min": 11, "max": 50 }
+    ],
+    "description": "Increases the target’s resistance to disease."
+  }
+}
+]

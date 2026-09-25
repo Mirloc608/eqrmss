@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-laboratory",
+  "nodes": [
+    {
+      "id": "experiment-table",
+      "type": "table",
+      "label": "Experiment Table"
+    },
+    {
+      "id": "containment-vat",
+      "type": "vat",
+      "label": "Containment Vat"
+    },
+    {
+      "id": "discord-fissure",
+      "type": "fissure",
+      "label": "Discord Fissure"
+    }
+  ],
+  "edges": [
+    {
+      "from": "experiment-table",
+      "to": "containment-vat",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path between experiment tables and vats."
+    },
+    {
+      "from": "experiment-table",
+      "to": "discord-fissure",
+      "difficulty": "extreme",
+      "type": "arcane",
+      "description": "A perilous route into raw Discord fissures."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-ritual-chamber",
+      "type": "forward",
+      "description": "Laboratory leads deeper into the Ritual Chamber."
+    },
+    {
+      "to": "muramite-citadel-heart-of-discord",
+      "type": "down",
+      "description": "Laboratory descends into the Heart of Discord."
+    }
+  ]
+}

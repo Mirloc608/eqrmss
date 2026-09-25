@@ -1,0 +1,204 @@
+{
+    "id": "eqrmss-froglok",
+    "key": "froglok",
+    "name": "Froglok",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/froglok.png",
+
+    "description": "Frogloks are an ancient amphibious race of Norrath known for their devotion, discipline, and connection to the natural and spiritual worlds. Once divided between noble followers of Mithaniel Marr and the swamp‑dwelling tribes of Guk, modern Frogloks are courageous, honorable, and resilient.",
+
+    "lore": {
+        "homeland": [
+            "Guk",
+            "Innothule Swamp",
+            "Katta Castellum (Marr‑blessed Frogloks)"
+        ],
+        "culture": "Froglok culture emphasizes honor, devotion, discipline, and spiritual purity. They are deeply religious and maintain strong traditions of martial training and ritual practice.",
+        "alignment": "Often Lawful Good or Neutral, especially among Marr‑blessed Frogloks.",
+        "languages": [
+            "Common",
+            "Froglok"
+        ]
+    },
+
+    "stats": {
+        "Ag": 5,
+        "Co": 10,
+        "Me": 0,
+        "Re": 0,
+        "SD": 5,
+        "Em": 5,
+        "In": 5,
+        "Pr": 0,
+        "Qu": 5,
+        "St": 0
+    },
+
+    "racialTalents": [
+        {
+            "id": "amphibious",
+            "name": "Amphibious",
+            "description": "Frogloks can breathe underwater and move easily through aquatic environments.",
+            "effects": [
+                {
+                    "type": "movement",
+                    "target": "swimSpeed",
+                    "value": 30
+                },
+                {
+                    "type": "sense",
+                    "target": "underwaterBreathing",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": "blessed_resilience",
+            "name": "Blessed Resilience",
+            "description": "Frogloks possess strong resistance to disease and poison due to their amphibious physiology and divine heritage.",
+            "effects": [
+                {
+                    "type": "resistance",
+                    "target": "disease",
+                    "value": 20
+                },
+                {
+                    "type": "resistance",
+                    "target": "poison",
+                    "value": 15
+                }
+            ]
+        },
+        {
+            "id": "holy_devotion",
+            "name": "Holy Devotion",
+            "description": "Frogloks are deeply spiritual, gaining bonuses to divine magic and religious lore.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "magical",
+                    "value": 5
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "lore",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "keen_reflexes",
+            "name": "Keen Reflexes",
+            "description": "Frogloks possess quick reflexes and strong agility, aiding in both combat and physical tasks.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Qu",
+                    "value": 5
+                },
+                {
+                    "type": "stat",
+                    "target": "Ag",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "leaping_stride",
+            "name": "Leaping Stride",
+            "description": "Frogloks are capable of powerful leaps, granting enhanced jumping ability.",
+            "effects": [
+                {
+                    "type": "movement",
+                    "target": "jumpBonus",
+                    "value": 15
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 25,
+        "pace": "Normal",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "5'6\" - 6'2\"",
+        "female": "5'4\" - 6'0\""
+    },
+
+    "weight": {
+        "male": "140 - 200 lbs",
+        "female": "120 - 180 lbs"
+    },
+
+    "lifespan": {
+        "average": "80-100 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "unarmedCombat": 5,
+            "spears": 5
+        },
+        "physical": {
+            "swimming": 15,
+            "jumping": 10
+        },
+        "subterfuge": {},
+        "magical": {
+            "divineMagic": 5
+        },
+        "lore": {
+            "religion": 10,
+            "nature": 5
+        },
+        "social": {
+            "diplomacy": 5
+        }
+    },
+
+    "skillCosts": {
+        "combat": "B",
+        "physical": "A",
+        "subterfuge": "C",
+        "magical": "B",
+        "lore": "B",
+        "social": "C"
+    },
+
+    "favoredProfessions": [
+        "paladin",
+        "cleric",
+        "shaman",
+        "monk"
+    ],
+
+    "restrictedProfessions": [
+        "shadowknight",
+        "necromancer",
+        "rogue"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Froglok",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "blessed leather armor",
+        "wooden spear",
+        "holy symbol of Marr",
+        "swamp rations"
+    ]
+}

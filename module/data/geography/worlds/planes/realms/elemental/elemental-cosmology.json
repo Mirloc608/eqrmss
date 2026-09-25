@@ -1,0 +1,43 @@
+{
+  "id": "elemental-cosmology",
+  "realm": "elemental",
+
+  "structure": {
+    "planes": [
+      "fire",
+      "water",
+      "earth",
+      "air"
+    ]
+  },
+
+  "portals": [
+    {
+      "name": "Elemental Anchors",
+      "locations": [
+        "fire",
+        "water",
+        "earth",
+        "air"
+      ],
+      "connects": ["planes"]
+    },
+    {
+      "name": "Planar Breaches",
+      "locations": [
+        "fire",
+        "water",
+        "earth",
+        "air"
+      ],
+      "connects": ["norrath"]
+    }
+  ],
+
+  "cosmicRules": {
+    "magic": "All magic originates from elemental forces.",
+    "balance": "Disruption in one plane affects all others.",
+    "travel": "Elemental travel requires attunement or divine sanction.",
+    "time": "Time flows normally but reacts to elemental imbalance."
+  }
+}

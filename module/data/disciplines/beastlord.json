@@ -1,0 +1,71 @@
+{
+  "id": "beastlord",
+  "key": "beastlord",
+  "name": "Beastlord",
+  "type": "discipline-catalog",
+  "disciplines": [
+    {
+      "id": "resistant",
+      "name": "Resistant Discipline",
+      "level": 51,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 40,
+      "effects": [
+        {
+          "type": "RESIST_ALL",
+          "value": 20
+        }
+      ]
+    },
+
+    {
+      "id": "fearless",
+      "name": "Fearless Discipline",
+      "level": 54,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 50,
+      "effects": [
+        {
+          "type": "FEAR_IMMUNITY",
+          "value": true
+        }
+      ]
+    },
+
+    {
+      "id": "protective-spirit",
+      "name": "Protective Spirit Discipline",
+      "level": 55,
+      "family": "defensive",
+      "durationRounds": 3,
+      "reuseRounds": 150,
+      "effects": [
+        {
+          "type": "MELEE_MITIGATION",
+          "value": 90
+        }
+      ]
+    },
+
+    {
+      "id": "bestial-fury",
+      "name": "Bestial Fury Discipline",
+      "level": 60,
+      "family": "offensive",
+      "durationRounds": 3,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "SKILL_DAMAGE_BONUS",
+          "value": 50
+        },
+        {
+          "type": "MINIMUM_DAMAGE_BONUS",
+          "value": 400
+        }
+      ]
+    }
+  ]
+}

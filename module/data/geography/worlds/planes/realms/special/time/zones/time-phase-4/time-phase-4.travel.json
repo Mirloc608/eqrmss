@@ -1,0 +1,26 @@
+{
+  "id": "time-phase-4-travel",
+  "zone": "time-phase-4",
+
+  "nodes": [
+    "phase-4-entry",
+    "phase-4-maelstrom",
+    "phase-4-core"
+  ],
+
+  "edges": [
+    {
+      "from": "phase-4-entry",
+      "to": "phase-4-maelstrom",
+      "type": "temporal-collapse"
+    },
+    {
+      "from": "phase-4-maelstrom",
+      "to": "phase-4-core",
+      "type": "paradox-shift",
+      "requirements": {
+        "chronomanticAttunement": true
+      }
+    }
+  ]
+}

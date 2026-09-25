@@ -1,0 +1,10 @@
+{
+  "id": "discordian-maelstrom-travel",
+  "zone": "discordian-maelstrom",
+
+  "nodes": ["entry", "storm-pillar", "maelstrom-core"],
+  "edges": [
+    { "from": "entry", "to": "storm-pillar", "type": "storm-path" },
+    { "from": "storm-pillar", "to": "maelstrom-core", "type": "core-ascent" }
+  ]
+}

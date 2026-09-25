@@ -1,0 +1,60 @@
+{
+  "zone": "dranik-hollows-west",
+  "nodes": [
+    {
+      "id": "staging-cavern",
+      "type": "cavern",
+      "label": "Staging Cavern"
+    },
+    {
+      "id": "supply-tunnel",
+      "type": "tunnel",
+      "label": "Supply Tunnel"
+    },
+    {
+      "id": "resistance-side-passages",
+      "type": "passages",
+      "label": "Resistance Side Passages"
+    },
+    {
+      "id": "discord-pocket",
+      "type": "arcane-node",
+      "label": "Discord Pocket"
+    }
+  ],
+  "edges": [
+    {
+      "from": "staging-cavern",
+      "to": "supply-tunnel",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A main route used by Muramite patrols and convoys."
+    },
+    {
+      "from": "staging-cavern",
+      "to": "resistance-side-passages",
+      "difficulty": "high",
+      "type": "stealth",
+      "description": "A hidden path used by Dragorn rebels."
+    },
+    {
+      "from": "supply-tunnel",
+      "to": "discord-pocket",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into a localized Discord pocket."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-hollows-south",
+      "type": "forward",
+      "description": "West leads toward South Hollows."
+    },
+    {
+      "to": "dranik-hollows-north",
+      "type": "side",
+      "description": "West connects laterally to North Hollows via narrow caverns."
+    }
+  ]
+}

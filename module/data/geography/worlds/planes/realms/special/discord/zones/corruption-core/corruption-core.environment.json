@@ -1,0 +1,43 @@
+{
+  "zone": "corruption-core",
+
+  "terrain": [
+    "corruption-vats",
+    "discord-siphon-pillars",
+    "essence-reservoirs",
+    "blight-channels"
+  ],
+
+  "lighting": "corruption-glow",
+
+  "hazards": [
+    {
+      "id": "corruption-surge",
+      "dc": 32,
+      "effect": "stat_decay_and_damage"
+    },
+    {
+      "id": "essence-overflow",
+      "dc": 31,
+      "effect": "knockback_and_dot"
+    },
+    {
+      "id": "siphon-collapse",
+      "dc": 33,
+      "effect": "forced_movement_and_stun"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "Corruption flows unpredictably; siphon pillars destabilize without warning."
+  },
+
+  "environmentTags": [
+    "corruption",
+    "discord",
+    "industrial",
+    "volatile"
+  ]
+}

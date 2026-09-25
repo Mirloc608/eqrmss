@@ -1,0 +1,30 @@
+{
+  "region": "discord-wastes",
+
+  "factions": [
+    {
+      "id": "discord-entities",
+      "name": "Discord Entities",
+      "importance": "critical",
+      "description": "Manifestations of raw Discord energy, hostile to all life.",
+      "allies": null,
+      "enemies": ["muramite-legion", "dranik-resistance"]
+    },
+    {
+      "id": "muramite-observers",
+      "name": "Muramite Observers",
+      "importance": "minor",
+      "description": "Specialized Muramite units stationed at fortified outposts.",
+      "allies": ["muramite-legion"],
+      "enemies": ["discord-entities"]
+    },
+    {
+      "id": "dranik-resistance",
+      "name": "Dranik Resistance",
+      "importance": "minor",
+      "description": "Rare infiltration teams attempting reconnaissance.",
+      "allies": null,
+      "enemies": ["discord-entities", "muramite-legion"]
+    }
+  ]
+}

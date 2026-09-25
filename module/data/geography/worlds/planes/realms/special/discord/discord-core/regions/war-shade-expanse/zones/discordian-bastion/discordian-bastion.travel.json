@@ -1,0 +1,35 @@
+{
+  "id": "discordian-bastion-travel",
+  "zone": "discordian-bastion",
+
+  "nodes": [
+    "bastion-entry",
+    "command-yard",
+    "forge-hall",
+    "warlord-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "bastion-entry",
+      "to": "command-yard",
+      "type": "fortress-path"
+    },
+    {
+      "from": "command-yard",
+      "to": "forge-hall",
+      "type": "discord-transition",
+      "requirements": {
+        "anti-corruption-ward": true
+      }
+    },
+    {
+      "from": "forge-hall",
+      "to": "warlord-sanctum",
+      "type": "discord-core-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

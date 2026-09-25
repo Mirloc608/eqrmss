@@ -1,0 +1,161 @@
+<form class="eqrmss sheet actor npc-sheet" autocomplete="off">
+
+    <header class="sheet-header">
+
+        <img
+            src="{{actor.img}}"
+            data-edit="img"
+            title="{{actor.name}}"
+            height="64"
+            width="64"
+        />
+
+        <h1>
+            <input
+                name="name"
+                type="text"
+                value="{{actor.name}}"
+            />
+        </h1>
+
+    </header>
+
+    <section class="npc-info">
+
+        <h2>NPC Information</h2>
+
+        <div class="form-group">
+            <label>Race</label>
+            <input
+                name="system.fixed_info.race"
+                type="text"
+                value="{{system.fixed_info.race}}"
+            />
+        </div>
+
+        <div class="form-group">
+            <label>Profession</label>
+            <input
+                name="system.fixed_info.profession"
+                type="text"
+                value="{{system.fixed_info.profession}}"
+            />
+        </div>
+
+        <div class="form-group">
+            <label>Realm</label>
+            <input
+                name="system.fixed_info.realm"
+                type="text"
+                value="{{system.fixed_info.realm}}"
+                readonly
+            />
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+
+            {{editor
+                enrichedDescription
+                target="system.description"
+                button=true
+                editable=editable
+            }}
+
+        </div>
+
+    </section>
+
+    <section class="npc-stats">
+
+        <h2>Stats</h2>
+
+        <table>
+
+            <tr>
+                <th>Stat</th>
+                <th>Total</th>
+                <th>Bonus</th>
+            </tr>
+
+            {{#each system.stats}}
+
+            <tr>
+
+                <td>
+                    {{@key}}
+                </td>
+
+                <td>
+                    <input
+                        name="system.stats.{{@key}}.total"
+                        type="number"
+                        value="{{total}}"
+                    />
+                </td>
+
+                <td>
+                    {{stat_bonus}}
+                </td>
+
+            </tr>
+
+            {{/each}}
+
+        </table>
+
+    </section>
+
+    <section class="npc-items">
+
+        <h2>Equipment</h2>
+
+        {{#each inventory}}
+
+            <div class="item-row">
+
+                <span>
+                    {{name}}
+                </span>
+
+                <button
+                    type="button"
+                    class="item-edit"
+                    data-item-id="{{id}}"
+                >
+                    Edit
+                </button>
+
+            </div>
+
+        {{/each}}
+
+    </section>
+
+    <section class="npc-skills">
+
+        <h2>Skills</h2>
+
+        {{#each skills}}
+
+            <div class="item-row">
+
+                <span>
+                    {{name}}
+                </span>
+
+                <button
+                    type="button"
+                    class="item-edit"
+                    data-item-id="{{id}}"
+                >
+                    Edit
+                </button>
+
+            </div>
+
+        {{/each}}
+
+    </section>
+
+</form>

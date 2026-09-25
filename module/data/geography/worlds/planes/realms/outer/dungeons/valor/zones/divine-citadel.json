@@ -1,0 +1,27 @@
+{
+  "id": "divine-citadel",
+  "key": "divine-citadel",
+  "name": "Divine Citadel",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "valor",
+
+  "description": "The Divine Citadel is the heart of the Plane of Valor, a fortress of courage where the Sovereign of Valor resides.",
+
+  "hazards": [
+    { "id": "valor-collapse", "dc": 38, "effect": "stat_decay_and_massive_damage" }
+  ],
+
+  "encounters": [
+    { "creature": "Citadel Guardian", "level": 99 },
+    { "creature": "Valor Titan", "level": 100 }
+  ],
+
+  "boss": {
+    "name": "The Valor Sovereign",
+    "level": 100,
+    "role": "boss"
+  },
+
+  "tags": ["valor", "citadel", "outer"]
+}

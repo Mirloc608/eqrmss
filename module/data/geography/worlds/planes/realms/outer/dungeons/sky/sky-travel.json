@@ -1,0 +1,24 @@
+{
+  "id": "sky-region-travel",
+  "plane": "sky",
+
+  "nodes": [
+    "region-entry",
+    "sky-island-1",
+    "sky-island-2",
+    "sky-island-3",
+    "sky-sovereign-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "sky-island-1", "type": "island-entry" },
+    { "from": "sky-island-1", "to": "sky-island-2", "type": "storm-ascent" },
+    { "from": "sky-island-2", "to": "sky-island-3", "type": "ascension-path" },
+    {
+      "from": "sky-island-3",
+      "to": "sky-sovereign-throne",
+      "type": "throne-access",
+      "requirements": { "outer-attunement": true }
+    }
+  ]
+}

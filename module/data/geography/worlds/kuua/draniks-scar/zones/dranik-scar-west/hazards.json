@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-scar-west",
+  "hazards": [
+    {
+      "id": "wall-break",
+      "name": "Wall Break",
+      "severity": "extreme",
+      "trigger": "proximity-to-rupture-cracks",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "barricade-collapse",
+      "name": "Barricade Collapse",
+      "severity": "high",
+      "trigger": "movement-near-staging-wall",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

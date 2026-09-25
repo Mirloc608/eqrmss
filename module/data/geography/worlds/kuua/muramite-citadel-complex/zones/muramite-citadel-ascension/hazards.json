@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-citadel-ascension",
+  "hazards": [
+    {
+      "id": "lift-surge",
+      "name": "Lift Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-discord-lift",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "platform-collapse",
+      "name": "Platform Collapse",
+      "severity": "high",
+      "trigger": "movement-on-ascension-platform",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

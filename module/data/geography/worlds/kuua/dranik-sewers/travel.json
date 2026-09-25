@@ -1,0 +1,47 @@
+{
+  "region": "dranik-sewers",
+
+  "nodes": [
+    { "id": "dranik-sewers-purifying-plant", "type": "zone", "label": "Purifying Plant" },
+    { "id": "dranik-sewers-pool-of-sludge", "type": "zone", "label": "Pool of Sludge" },
+    { "id": "dranik-sewers-lair-of-trapped-ones", "type": "zone", "label": "Lair of Trapped Ones" },
+    { "id": "dranik-sewers-caverns-of-exile", "type": "zone", "label": "Caverns of Exile" }
+  ],
+
+  "edges": [
+    {
+      "from": "dranik-sewers-purifying-plant",
+      "to": "dranik-sewers-pool-of-sludge",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A cracked waterway leading deeper into the corrupted tunnels."
+    },
+    {
+      "from": "dranik-sewers-pool-of-sludge",
+      "to": "dranik-sewers-lair-of-trapped-ones",
+      "difficulty": "high",
+      "type": "hazard",
+      "description": "A sludge‑filled passage infested with Discord anomalies."
+    },
+    {
+      "from": "dranik-sewers-lair-of-trapped-ones",
+      "to": "dranik-sewers-caverns-of-exile",
+      "difficulty": "extreme",
+      "type": "arcane",
+      "description": "A dangerous descent into the exile caverns."
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "dranik-catacombs",
+      "type": "forward",
+      "description": "The Sewers connect directly to the Dranik Catacombs."
+    },
+    {
+      "to": "draniks-scar",
+      "type": "back",
+      "description": "The Sewers connect back to Dranik’s Scar."
+    }
+  ]
+}

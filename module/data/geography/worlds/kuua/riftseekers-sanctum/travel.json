@@ -1,0 +1,36 @@
+{
+  "id": "riftseekers-sanctum-region-travel",
+  "region": "riftseekers-sanctum-region",
+
+  "nodes": [
+    "sanctum-core",
+    "sanctum-flame",
+    "sanctum-frost",
+    "sanctum-storms",
+    "sanctum-rift-heart",
+    "sanctum-outer-ring",
+    "sanctum-ritual-chambers"
+  ],
+
+  "edges": [
+    { "from": "sanctum-core", "to": "sanctum-flame", "difficulty": "high", "type": "elemental" },
+    { "from": "sanctum-core", "to": "sanctum-frost", "difficulty": "high", "type": "elemental" },
+    { "from": "sanctum-core", "to": "sanctum-storms", "difficulty": "high", "type": "elemental" },
+    { "from": "sanctum-core", "to": "sanctum-rift-heart", "difficulty": "extreme", "type": "rift" },
+    { "from": "sanctum-core", "to": "sanctum-outer-ring", "difficulty": "moderate", "type": "internal" },
+    { "from": "sanctum-core", "to": "sanctum-ritual-chambers", "difficulty": "high", "type": "arcane" }
+  ],
+
+  "region_links": [
+    {
+      "to": "muramite-citadel-region",
+      "type": "forward",
+      "description": "The Sanctum connects deeper into the Muramite Citadel through planar fractures."
+    },
+    {
+      "to": "wall-of-slaughter-region",
+      "type": "back",
+      "description": "The Sanctum can be reached from the Wall of Slaughter through stabilized rift corridors."
+    }
+  ]
+}

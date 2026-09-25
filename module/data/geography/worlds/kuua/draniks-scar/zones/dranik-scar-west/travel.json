@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-scar-west",
+  "nodes": [
+    {
+      "id": "staging-wall",
+      "type": "fortification",
+      "label": "Staging Wall"
+    },
+    {
+      "id": "rupture-cracks",
+      "type": "arcane-node",
+      "label": "Rupture Cracks"
+    },
+    {
+      "id": "infiltration-pass",
+      "type": "passage",
+      "label": "Infiltration Pass"
+    }
+  ],
+  "edges": [
+    {
+      "from": "staging-wall",
+      "to": "rupture-cracks",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord rupture zones."
+    },
+    {
+      "from": "staging-wall",
+      "to": "infiltration-pass",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A narrow route used by Dragorn infiltrators."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-scar-south",
+      "type": "forward",
+      "description": "West connects downward to South Scar."
+    },
+    {
+      "to": "wall-of-slaughter",
+      "type": "warfront",
+      "description": "West leads directly into the Wall of Slaughter."
+    }
+  ]
+}

@@ -1,0 +1,565 @@
+[
+  {
+    "_id": "wiz-atols-spectral-shackles-51-r1",
+    "name": "Atol's Spectral Shackles",
+    "type": "spell",
+    "img": "icons/magic/arcane/bind.webp",
+    "system": {
+      "class": "wizard",
+      "level": 51,
+      "school": "alteration",
+      "target": "area",
+      "range": 1000,
+      "castTime": 3,
+      "manaCost": 125,
+      "effects": [
+        { "type": "control", "effect": "slow", "amount": 36 }
+      ],
+      "description": "Spectral shackles bind enemies, slowing their movement."
+    }
+  },
+  {
+    "_id": "wiz-tishans-discord-51-r1",
+    "name": "Tishan's Discord",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "wizard",
+      "level": 51,
+      "school": "evocation",
+      "target": "single",
+      "range": 1400,
+      "castTime": 4,
+      "manaCost": 130,
+      "effects": [
+        { "type": "control", "effect": "stun", "duration": 5 },
+        { "type": "damage", "element": "arcane", "amount": 260 }
+      ],
+      "description": "Discordant energy stuns the target and deals damage."
+    }
+  },
+  {
+    "_id": "wiz-draught-of-fire-51-r1",
+    "name": "Draught of Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "wizard",
+      "level": 51,
+      "school": "evocation",
+      "target": "single",
+      "range": 1400,
+      "castTime": 3,
+      "manaCost": 176,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 622 }
+      ],
+      "description": "A quick fiery draught that deals heavy single‑target damage."
+    }
+  },
+  {
+    "_id": "wiz-pillar-of-frost-51-r1",
+    "name": "Pillar of Frost",
+    "type": "spell",
+    "img": "icons/magic/water/aoe-frost.webp",
+    "system": {
+      "class": "wizard",
+      "level": 51,
+      "school": "evocation",
+      "target": "area",
+      "range": 1400,
+      "castTime": 5,
+      "manaCost": 325,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 500, "radius": 20 }
+      ],
+      "description": "Summons a pillar of frost that damages multiple enemies."
+    }
+  },
+  {
+    "_id": "wiz-tranquility-gate-51-r1",
+    "name": "Tranquility Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-city.webp",
+    "system": {
+      "class": "wizard",
+      "level": 51,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "plane-of-tranquility" }
+      ],
+      "description": "Teleports the caster to the Plane of Tranquility."
+    }
+  },
+  {
+    "_id": "wiz-undershore-portal-51-r1",
+    "name": "Undershore Portal",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-cavern.webp",
+    "system": {
+      "class": "wizard",
+      "level": 51,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-group", "destination": "undershore" }
+      ],
+      "description": "Teleports the entire group to the Undershore."
+    }
+  },
+  {
+    "_id": "wiz-arcstone-gate-51-r1",
+    "name": "Arcstone Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-stone.webp",
+    "system": {
+      "class": "wizard",
+      "level": 51,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 150,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "arcstone" }
+      ],
+      "description": "Teleports the caster to Arcstone."
+    }
+  },
+  {
+    "_id": "wiz-translocate-group-52-r1",
+    "name": "Translocate Group",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "wizard",
+      "level": 52,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 600,
+      "effects": [
+        { "type": "utility", "effect": "translocate-bind-group" }
+      ],
+      "description": "Translocates the entire group to their bind points."
+    }
+  },
+  {
+    "_id": "wiz-manaskin-52-r1",
+    "name": "Manaskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "wizard",
+      "level": 52,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 330,
+      "effects": [
+        { "type": "buff", "stat": "absorb-damage", "amount": 592 },
+        { "type": "buff", "stat": "mana-regen", "amount": 1 }
+      ],
+      "description": "Creates a protective manaskin that absorbs damage and regenerates mana."
+    }
+  },
+  {
+    "_id": "wiz-abscond-52-r1",
+    "name": "Abscond",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-self.webp",
+    "system": {
+      "class": "wizard",
+      "level": 52,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 2,
+      "manaCost": 100,
+      "effects": [
+        { "type": "utility", "effect": "evacuate-self" }
+      ],
+      "description": "Quickly evacuates the caster to a safe point in the zone."
+    }
+  },
+  {
+    "_id": "wiz-lure-of-frost-52-r1",
+    "name": "Lure of Frost",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear.webp",
+    "system": {
+      "class": "wizard",
+      "level": 52,
+      "school": "evocation",
+      "target": "single",
+      "range": 1400,
+      "castTime": 4,
+      "manaCost": 252,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 692 }
+      ],
+      "description": "A lure of frost that deals heavy single‑target damage."
+    }
+  },
+  {
+    "_id": "wiz-tears-of-druzzil-52-r1",
+    "name": "Tears of Druzzil",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "wizard",
+      "level": 52,
+      "school": "evocation",
+      "target": "area",
+      "range": 1400,
+      "castTime": 5,
+      "manaCost": 338,
+      "effects": [
+        { "type": "damage", "element": "arcane", "amount": 698, "radius": 20 }
+      ],
+      "description": "Summons tears of Druzzil that damage multiple enemies."
+    }
+  },
+  {
+    "_id": "wiz-annul-magic-53-r1",
+    "name": "Annul Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "wizard",
+      "level": 53,
+      "school": "abjuration",
+      "target": "single",
+      "range": 800,
+      "castTime": 2,
+      "manaCost": 75,
+      "effects": [
+        { "type": "utility", "effect": "dispel", "strength": 9 }
+      ],
+      "description": "Dispels up to nine magical effects from the target."
+    }
+  },
+  {
+    "_id": "wiz-inferno-of-alkabor-53-r1",
+    "name": "Inferno of Al'Kabor",
+    "type": "spell",
+    "img": "icons/magic/fire/aoe-flame.webp",
+    "system": {
+      "class": "wizard",
+      "level": 53,
+      "school": "evocation",
+      "target": "area",
+      "range": 1400,
+      "castTime": 6,
+      "manaCost": 625,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 220, "radius": 30 }
+      ],
+      "description": "Summons Al'Kabor’s inferno, damaging multiple enemies with fire."
+    }
+  },
+  {
+    "_id": "wiz-jylls-static-pulse-53-r1",
+    "name": "Jyll's Static Pulse",
+    "type": "spell",
+    "img": "icons/magic/lightning/aoe-lightning.webp",
+    "system": {
+      "class": "wizard",
+      "level": 53,
+      "school": "evocation",
+      "target": "area",
+      "range": 1000,
+      "castTime": 5,
+      "manaCost": 285,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 495, "radius": 20 },
+        { "type": "control", "effect": "stun", "duration": 1 }
+      ],
+      "description": "Unleashes a static pulse that damages and briefly stuns nearby enemies."
+    }
+  },
+  {
+    "_id": "wiz-shield-of-the-magi-54-r1",
+    "name": "Shield of the Magi",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "wizard",
+      "level": 54,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 300,
+      "effects": [
+        { "type": "buff", "stat": "hp", "amount": 73 },
+        { "type": "buff", "stat": "ac", "amount": 13 },
+        { "type": "buff", "stat": "resist-magic", "amount": 4 }
+      ],
+      "description": "Provides a protective shield that increases HP, AC, and magic resistance."
+    }
+  },
+  {
+    "_id": "wiz-voltaic-draught-54-r1",
+    "name": "Voltaic Draught",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt-large.webp",
+    "system": {
+      "class": "wizard",
+      "level": 54,
+      "school": "evocation",
+      "target": "single",
+      "range": 1400,
+      "castTime": 3,
+      "manaCost": 176,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 688 }
+      ],
+      "description": "A quick lightning draught that deals heavy single‑target damage."
+    }
+  },
+  {
+    "_id": "wiz-familiar-54-r1",
+    "name": "Familiar",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "wizard",
+      "level": 54,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 525,
+      "effects": [
+        { "type": "utility", "effect": "summon-familiar", "familiar": "standard" },
+        { "type": "buff", "stat": "resist-all", "amount": 20 },
+        { "type": "buff", "stat": "effective-casting-level", "amount": 4 },
+        { "type": "utility", "effect": "see-invisible" },
+        { "type": "buff", "stat": "mana-pool", "amount": 75 },
+        { "type": "buff", "stat": "mana-regen", "amount": 2 }
+      ],
+      "description": "Summons a familiar that increases resistances, enhances spellcasting, grants see invisibility, and regenerates mana."
+    }
+  },
+  {
+    "_id": "wiz-improved-invisibility-55-r1",
+    "name": "Improved Invisibility",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 75,
+      "effects": [
+        { "type": "utility", "effect": "invisibility-improved", "duration": 1200 }
+      ],
+      "description": "Grants improved invisibility, making the caster harder to detect."
+    }
+  },
+  {
+    "_id": "wiz-plainsight-55-r1",
+    "name": "Plainsight",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 100,
+      "effects": [
+        { "type": "utility", "effect": "see-invisible" },
+        { "type": "utility", "effect": "ultravision", "duration": 1200 }
+      ],
+      "description": "Enhances vision, granting see invisibility and ultravision."
+    }
+  },
+  {
+    "_id": "wiz-lure-of-flame-55-r1",
+    "name": "Lure of Flame",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "evocation",
+      "target": "single",
+      "range": 1400,
+      "castTime": 4,
+      "manaCost": 320,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 692 }
+      ],
+      "description": "A lure of flame that deals heavy single‑target damage."
+    }
+  },
+  {
+    "_id": "wiz-draught-of-jiva-55-r1",
+    "name": "Draught of Jiva",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "evocation",
+      "target": "single",
+      "range": 1400,
+      "castTime": 3,
+      "manaCost": 176,
+      "effects": [
+        { "type": "damage", "element": "arcane", "amount": 622 },
+        { "type": "control", "effect": "stun", "duration": 1 }
+      ],
+      "description": "A quick arcane draught that deals damage and briefly stuns the target."
+    }
+  },
+  {
+    "_id": "wiz-tears-of-solusek-55-r1",
+    "name": "Tears of Solusek",
+    "type": "spell",
+    "img": "icons/magic/fire/aoe-flame.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "evocation",
+      "target": "area",
+      "range": 1400,
+      "castTime": 6,
+      "manaCost": 421,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 896, "radius": 30 }
+      ],
+      "description": "Summons tears of Solusek that damage multiple enemies with fire."
+    }
+  },
+  {
+    "_id": "wiz-barindu-portal-55-r1",
+    "name": "Barindu Portal",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-city.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 600,
+      "effects": [
+        { "type": "utility", "effect": "teleport-group", "destination": "barindu" }
+      ],
+      "description": "Teleports the entire group to Barindu."
+    }
+  },
+  {
+    "_id": "wiz-bloodfields-portal-55-r1",
+    "name": "Bloodfields Portal",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-desert.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-group", "destination": "bloodfields" }
+      ],
+      "description": "Teleports the entire group to the Bloodfields."
+    }
+  },
+  {
+    "_id": "wiz-focus-essence-55-r1",
+    "name": "Focus Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 350,
+      "effects": [
+        { "type": "utility", "effect": "summon-item", "item": "spellcaster-essence" }
+      ],
+      "description": "Summons a spellcaster’s empowering essence to enhance magical capabilities."
+    }
+  },
+  {
+    "_id": "wiz-translocate-undershore-55-r1",
+    "name": "Translocate Undershore",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-cavern.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "alteration",
+      "target": "single",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 225,
+      "effects": [
+        { "type": "utility", "effect": "translocate", "destination": "undershore" }
+      ],
+      "description": "Translocates a single target to the Undershore."
+    }
+  },
+  {
+    "_id": "wiz-fire-mark-55-r1",
+    "name": "Fire Mark",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 125,
+      "effects": [
+        { "type": "buff", "stat": "persistent-effect", "effect": "fire-mark" }
+      ],
+      "description": "Applies a persistent fire mark effect to the caster."
+    }
+  },
+  {
+    "_id": "wiz-translocate-arcstone-55-r1",
+    "name": "Translocate Arcstone",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-stone.webp",
+    "system": {
+      "class": "wizard",
+      "level": 55,
+      "school": "alteration",
+      "target": "single",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 225,
+      "effects": [
+        { "type": "utility", "effect": "translocate", "destination": "arcstone" }
+      ],
+      "description": "Translocates a single target to Arcstone."
+    }
+  }
+]

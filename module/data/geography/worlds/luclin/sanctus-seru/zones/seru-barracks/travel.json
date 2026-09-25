@@ -1,0 +1,28 @@
+{
+  "id": "seru-barracks-travel",
+
+  "nodes": [
+    "barracks-entry",
+    "training-hall",
+    "armament-wing",
+    "command-hall",
+    "inner-barracks"
+  ],
+
+  "edges": [
+    { "from": "barracks-entry", "to": "training-hall", "type": "hallway" },
+    { "from": "training-hall", "to": "armament-wing", "type": "equipment-corridor" },
+    {
+      "from": "training-hall",
+      "to": "command-hall",
+      "type": "command-access",
+      "requirements": { "seru-clearance": true }
+    },
+    {
+      "from": "command-hall",
+      "to": "inner-barracks",
+      "type": "restricted-passage",
+      "requirements": { "command-signet": true }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-catacombs-halls",
+  "hazards": [
+    {
+      "id": "sanctum-rift",
+      "name": "Sanctum Rift",
+      "severity": "extreme",
+      "trigger": "proximity-to-discord-sanctum",
+      "effects": [
+        "arcane-damage",
+        "random-teleport",
+        "stun"
+      ]
+    },
+    {
+      "id": "executioner-strike",
+      "name": "Executioner Strike",
+      "severity": "high",
+      "trigger": "combat-in-execution-chamber",
+      "effects": [
+        "heavy-damage",
+        "bleed"
+      ]
+    }
+  ]
+}

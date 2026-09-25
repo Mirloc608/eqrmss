@@ -1,0 +1,27 @@
+{
+  "id": "sky-island-3",
+  "key": "sky-island-3",
+  "name": "Sky Island III",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "sky",
+
+  "description": "The highest floating island, closest to divine ascension. Here mortals face the final trial before reaching the Sky Throne.",
+
+  "hazards": [
+    { "id": "ascension-collapse", "dc": 38, "effect": "stat_decay_and_massive_damage" }
+  ],
+
+  "encounters": [
+    { "creature": "Ascendant Guardian", "level": 99 },
+    { "creature": "Divine Warden", "level": 100 }
+  ],
+
+  "boss": {
+    "name": "The Sky Sovereign",
+    "level": 100,
+    "role": "boss"
+  },
+
+  "tags": ["sky", "ascension", "outer"]
+}

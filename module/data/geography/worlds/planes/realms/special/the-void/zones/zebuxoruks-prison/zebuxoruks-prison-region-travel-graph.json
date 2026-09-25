@@ -1,0 +1,29 @@
+{
+  "id": "zebuxoruks-prison-region-travel-graph",
+  "region": "zebuxoruks-prison",
+
+  "nodes": [
+    "chains-of-eternity",
+    "void-sanctum",
+    "zebuxoruks-cell"
+  ],
+
+  "edges": [
+    {
+      "from": "chains-of-eternity",
+      "to": "void-sanctum",
+      "type": "eternity-transition",
+      "requirements": {
+        "temporal-anchor": true
+      }
+    },
+    {
+      "from": "void-sanctum",
+      "to": "zebuxoruks-cell",
+      "type": "void-binding",
+      "requirements": {
+        "void-attunement": true
+      }
+    }
+  ]
+}

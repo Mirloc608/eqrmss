@@ -1,0 +1,191 @@
+{
+    "id": "eqrmss-half-elf",
+    "key": "half-elf",
+    "name": "Half-Elf",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/half-elf.png",
+
+    "description": "Half-Elves are born between the worlds of Humans and Elves. They inherit the adaptability and ambition of humanity while carrying the grace, longevity, and keen senses of their Elven ancestry. In Norrath, Half-Elves often serve as diplomats, scouts, wanderers, and adventurers who thrive in both civilization and wilderness.",
+
+    "lore": {
+        "homeland": [
+            "Kelethin",
+            "Qeynos",
+            "Freeport",
+            "Various frontier settlements"
+        ],
+        "culture": "Half-Elves blend human versatility with elven tradition. Many become travelers, diplomats, scouts, or artists, comfortable in both urban and natural environments.",
+        "alignment": "Highly varied; Half-Elves often lean Neutral or Good but are shaped strongly by upbringing.",
+        "languages": [
+            "Common",
+            "Elvish"
+        ]
+    },
+
+    "stats": {
+        "Ag": 5,
+        "Co": 0,
+        "Me": 0,
+        "Re": 0,
+        "SD": 0,
+        "Em": 5,
+        "In": 5,
+        "Pr": 5,
+        "Qu": 5,
+        "St": 0
+    },
+
+    "racialTalents": [
+        {
+            "id": "keen_senses",
+            "name": "Keen Senses",
+            "description": "Half-Elves inherit heightened perception from their elven lineage.",
+            "effects": [
+                {
+                    "type": "sense",
+                    "target": "lowLightVision",
+                    "value": 60
+                },
+                {
+                    "type": "stat",
+                    "target": "In",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "adaptable",
+            "name": "Adaptable",
+            "description": "Half-Elves excel in diverse environments and disciplines, gaining bonuses to social and physical skills.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "social",
+                    "value": 10
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "physical",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "wanderers_instinct",
+            "name": "Wanderer's Instinct",
+            "description": "Half-Elves are natural explorers, comfortable navigating wilderness and unfamiliar terrain.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "lore",
+                    "value": 5
+                },
+                {
+                    "type": "movement",
+                    "target": "travelBonus",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "diplomatic_grace",
+            "name": "Diplomatic Grace",
+            "description": "Half-Elves are skilled negotiators and mediators, able to bridge cultural divides.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Pr",
+                    "value": 5
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "social",
+                    "value": 5
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 25,
+        "pace": "Normal",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "5'8\" - 6'2\"",
+        "female": "5'6\" - 6'0\""
+    },
+
+    "weight": {
+        "male": "140 - 190 lbs",
+        "female": "120 - 170 lbs"
+    },
+
+    "lifespan": {
+        "average": "120-160 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "bows": 5
+        },
+        "physical": {
+            "climbing": 5,
+            "swimming": 5
+        },
+        "subterfuge": {
+            "stealth": 5
+        },
+        "magical": {},
+        "lore": {
+            "nature": 5
+        },
+        "social": {
+            "diplomacy": 10,
+            "persuasion": 5
+        }
+    },
+
+    "skillCosts": {
+        "combat": "B",
+        "physical": "B",
+        "subterfuge": "B",
+        "magical": "C",
+        "lore": "B",
+        "social": "A"
+    },
+
+    "favoredProfessions": [
+        "ranger",
+        "bard",
+        "druid",
+        "rogue"
+    ],
+
+    "restrictedProfessions": [
+        "shadowknight",
+        "berserker"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Elvish",
+            "rank": 3
+        }
+    ],
+
+    "startingEquipment": [
+        "traveler's cloak",
+        "light bow",
+        "camp gear",
+        "leather armor"
+    ]
+}

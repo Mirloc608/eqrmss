@@ -1,0 +1,35 @@
+{
+  "id": "earthen-throne-travel",
+  "zone": "earthen-throne",
+
+  "nodes": [
+    "throne-entry",
+    "stone-hall",
+    "crystal-terrace",
+    "king-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "throne-entry",
+      "to": "stone-hall",
+      "type": "stone-path"
+    },
+    {
+      "from": "stone-hall",
+      "to": "crystal-terrace",
+      "type": "crystal-rise",
+      "requirements": {
+        "earth-attunement": true
+      }
+    },
+    {
+      "from": "crystal-terrace",
+      "to": "king-sanctum",
+      "type": "tectonic-core-path",
+      "requirements": {
+        "elemental-attunement-earth": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "region": "citadel-complex",
+
+  "factions": [
+    {
+      "id": "muramite-command",
+      "name": "Muramite Command",
+      "importance": "critical",
+      "description": "High‑ranking officers and strategists directing operations from the Citadel.",
+      "allies": ["muramite-legion", "citadel-arcane-order"],
+      "enemies": ["dranik-resistance"]
+    },
+    {
+      "id": "muramite-legion",
+      "name": "Muramite Legion",
+      "importance": "major",
+      "description": "Elite soldiers stationed throughout the Citadel Complex.",
+      "allies": ["muramite-command"],
+      "enemies": ["dranik-resistance"]
+    },
+    {
+      "id": "citadel-arcane-order",
+      "name": "Citadel Arcane Order",
+      "importance": "major",
+      "description": "Arcane specialists maintaining Discord wards and Citadel defenses.",
+      "allies": ["muramite-command"],
+      "enemies": ["dranik-resistance"]
+    },
+    {
+      "id": "dranik-resistance",
+      "name": "Dranik Resistance",
+      "importance": "minor",
+      "description": "Rare infiltrators attempting high‑risk operations within the complex.",
+      "allies": null,
+      "enemies": ["muramite-command", "muramite-legion", "citadel-arcane-order"]
+    }
+  ]
+}

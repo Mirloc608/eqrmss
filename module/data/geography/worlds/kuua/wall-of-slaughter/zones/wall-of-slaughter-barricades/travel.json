@@ -1,0 +1,43 @@
+{
+  "zone": "wall-of-slaughter-barricades",
+  "nodes": [
+    {
+      "id": "fortified-barricade",
+      "type": "barricade",
+      "label": "Fortified Barricade"
+    },
+    {
+      "id": "siege-platform",
+      "type": "platform",
+      "label": "Siege Platform"
+    },
+    {
+      "id": "discord-wall-fracture",
+      "type": "fracture",
+      "label": "Discord Wall Fracture"
+    }
+  ],
+  "edges": [
+    {
+      "from": "fortified-barricade",
+      "to": "siege-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite and resistance forces."
+    },
+    {
+      "from": "fortified-barricade",
+      "to": "discord-wall-fracture",
+      "difficulty": "high",
+      "type": "planar",
+      "description": "A dangerous path into Discord‑warped terrain."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "wall-of-slaughter-rift-breach",
+      "type": "internal",
+      "description": "The Barricades lead deeper into the Rift Breach."
+    }
+  ]
+}

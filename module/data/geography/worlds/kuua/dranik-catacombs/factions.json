@@ -1,0 +1,30 @@
+{
+  "region": "dranik-catacombs",
+
+  "factions": [
+    {
+      "id": "dragorn-resistance",
+      "name": "Dragorn Resistance",
+      "importance": "major",
+      "description": "Dragorn rebels attempting to reclaim their ancestral burial tunnels.",
+      "allies": null,
+      "enemies": ["muramite-inquisitors", "discord-manifestations"]
+    },
+    {
+      "id": "muramite-inquisitors",
+      "name": "Muramite Inquisitors",
+      "importance": "critical",
+      "description": "Muramite officers overseeing experiments and patrols within the catacombs.",
+      "allies": ["muramite-legion"],
+      "enemies": ["dragorn-resistance"]
+    },
+    {
+      "id": "discord-manifestations",
+      "name": "Discord Manifestations",
+      "importance": "critical",
+      "description": "Arcane anomalies and undead animated by Discord corruption.",
+      "allies": null,
+      "enemies": ["dragorn-resistance", "muramite-inquisitors"]
+    }
+  ]
+}

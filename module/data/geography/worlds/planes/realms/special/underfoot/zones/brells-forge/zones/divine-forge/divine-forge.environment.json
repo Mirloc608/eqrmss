@@ -1,0 +1,44 @@
+{
+  "zone": "divine-forge",
+
+  "terrain": [
+    "magma-forge-rivers",
+    "colossal-anvil-platforms",
+    "stonework-halls",
+    "crystal-infused-furnaces"
+  ],
+
+  "lighting": "molten-glow",
+
+  "hazards": [
+    {
+      "id": "forge-overheat",
+      "dc": 20,
+      "effect": "fire_damage"
+    },
+    {
+      "id": "magma-surge",
+      "dc": 21,
+      "effect": "knockback_and_burn"
+    },
+    {
+      "id": "crystal-flare",
+      "dc": 19,
+      "effect": "radiant_damage"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "low",
+    "notes": "Divine heat saturates the air; forge surges may alter terrain mid‑combat."
+  },
+
+  "environmentTags": [
+    "magma",
+    "forge",
+    "stone",
+    "crystal",
+    "raid"
+  ]
+}

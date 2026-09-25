@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-arena",
+  "nodes": [
+    {
+      "id": "arena-floor",
+      "type": "pit",
+      "label": "Arena Floor"
+    },
+    {
+      "id": "ritual-platform",
+      "type": "platform",
+      "label": "Ritual Platform"
+    },
+    {
+      "id": "execution-gate",
+      "type": "gate",
+      "label": "Execution Gate"
+    }
+  ],
+  "edges": [
+    {
+      "from": "arena-floor",
+      "to": "ritual-platform",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord ritual zones."
+    },
+    {
+      "from": "arena-floor",
+      "to": "execution-gate",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used for prisoner transfers."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-command",
+      "type": "back",
+      "description": "Arena connects back to the Command Center."
+    },
+    {
+      "to": "muramite-citadel-lower-prison",
+      "type": "down",
+      "description": "Arena descends into the Lower Prison."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-scar-south",
+  "nodes": [
+    {
+      "id": "warfront-canyon",
+      "type": "canyon",
+      "label": "Warfront Canyon"
+    },
+    {
+      "id": "rupture-field",
+      "type": "arcane-node",
+      "label": "Rupture Field"
+    },
+    {
+      "id": "fallback-trench",
+      "type": "trench",
+      "label": "Fallback Trench"
+    }
+  ],
+  "edges": [
+    {
+      "from": "warfront-canyon",
+      "to": "rupture-field",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord rupture zones."
+    },
+    {
+      "from": "warfront-canyon",
+      "to": "fallback-trench",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Dragorn defenders."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-scar-west",
+      "type": "back",
+      "description": "South connects back to West Scar."
+    },
+    {
+      "to": "dranik-catacombs",
+      "type": "forward",
+      "description": "South leads deeper into the Dranik Catacombs."
+    }
+  ]
+}

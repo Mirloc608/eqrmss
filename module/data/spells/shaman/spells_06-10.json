@@ -1,0 +1,290 @@
+[
+  {
+  "_id": "shm-serpent-sight-06",
+  "name": "Serpent Sight",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 6,
+    "school": "divination",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 30,
+    "effects": [
+      { "type": "vision", "effect": "infravision" }
+    ],
+    "description": "Grants infravision, allowing the target to see heat signatures."
+  }
+},
+{
+  "_id": "shm-spirit-of-bear-06",
+  "name": "Spirit of Bear",
+  "type": "spell",
+  "img": "icons/magic/nature/bear-spirit.webp",
+  "system": {
+    "class": "shaman",
+    "level": 6,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 40,
+    "effects": [
+      { "type": "buff", "stat": "sta", "min": 8, "max": 23 }
+    ],
+    "description": "Increases stamina, improving endurance and survivability."
+  }
+},
+{
+  "_id": "shm-summon-food-06",
+  "name": "Summon Food",
+  "type": "spell",
+  "img": "icons/consumables/food/bread-loaf.webp",
+  "system": {
+    "class": "shaman",
+    "level": 6,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 10,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "summoned-black-bread" }
+    ],
+    "description": "Summons a loaf of black bread."
+  }
+},
+{
+  "_id": "shm-cure-blindness-07",
+  "name": "Cure Blindness",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 7,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 20,
+    "effects": [
+      { "type": "cure", "effect": "blindness", "amount": 1 }
+    ],
+    "description": "Removes magical blindness from the target."
+  }
+},
+{
+  "_id": "shm-sense-animals-07",
+  "name": "Sense Animals",
+  "type": "spell",
+  "img": "icons/magic/nature/wolf-head-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 7,
+    "school": "divination",
+    "target": "self",
+    "range": 0,
+    "castTime": 2,
+    "manaCost": 5,
+    "effects": [
+      { "type": "sense", "effect": "animals" }
+    ],
+    "description": "Allows the caster to sense nearby animals."
+  }
+},
+{
+  "_id": "shm-spirit-sight-07",
+  "name": "Spirit Sight",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 7,
+    "school": "divination",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 20,
+    "effects": [
+      { "type": "vision", "effect": "see-invisible", "amount": 1 }
+    ],
+    "description": "Allows the target to see invisible creatures."
+  }
+},
+{
+  "_id": "shm-endure-disease-08",
+  "name": "Endure Disease",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 8,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 20,
+    "effects": [
+      { "type": "buff", "stat": "resist-disease", "min": 11, "max": 30 }
+    ],
+    "description": "Increases the target’s resistance to disease."
+  }
+},
+{
+  "_id": "shm-talisman-of-the-beast-08",
+  "name": "Talisman of the Beast",
+  "type": "spell",
+  "img": "icons/magic/nature/totem-bear.webp",
+  "system": {
+    "class": "shaman",
+    "level": 8,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 25,
+    "effects": [
+      { "type": "buff", "stat": "str", "min": 5, "max": 14 }
+    ],
+    "description": "Increases strength for all group members."
+  }
+},
+{
+  "_id": "shm-tainted-breath-08",
+  "name": "Tainted Breath",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-gas-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 8,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 58,
+    "effects": [
+      { "type": "dot", "element": "poison", "counter": 5 },
+      { "type": "damage", "element": "poison", "amount": 10 },
+      { "type": "dot", "element": "poison", "min": 10, "max": 22 }
+    ],
+    "description": "Inflicts poison, dealing damage over time."
+  }
+},
+{
+  "_id": "shm-light-healing-09",
+  "name": "Light Healing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 9,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 28,
+    "effects": [
+      { "type": "heal", "min": 35, "max": 65 }
+    ],
+    "description": "Restores a moderate amount of hitpoints."
+  }
+},
+{
+  "_id": "shm-spirit-of-wolf-09",
+  "name": "Spirit of Wolf",
+  "type": "spell",
+  "img": "icons/magic/nature/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 9,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 40,
+    "effects": [
+      { "type": "movement", "min": 30, "max": 85 }
+    ],
+    "description": "Increases movement speed."
+  }
+},
+{
+  "_id": "shm-remove-minor-curse-09",
+  "name": "Remove Minor Curse",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 9,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 25,
+    "effects": [
+      { "type": "cure", "effect": "curse", "amount": 2 }
+    ],
+    "description": "Removes minor curse effects."
+  }
+},
+{
+  "_id": "shm-invis-vs-animals-10",
+  "name": "Invisibility Versus Animals",
+  "type": "spell",
+  "img": "icons/magic/arcane/invisibility-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 10,
+    "school": "divination",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 30,
+    "effects": [
+      { "type": "invisibility", "vs": "animals" }
+    ],
+    "description": "Makes the target invisible to animals."
+  }
+},
+{
+  "_id": "shm-levitate-10",
+  "name": "Levitate",
+  "type": "spell",
+  "img": "icons/magic/air/feather-fall-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 10,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 30,
+    "effects": [
+      { "type": "levitate", "rank": 1 }
+    ],
+    "description": "Allows the target to float above the ground."
+  }
+},
+{
+  "_id": "shm-spirit-of-snake-10",
+  "name": "Spirit of Snake",
+  "type": "spell",
+  "img": "icons/magic/nature/snake-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 10,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 40,
+    "effects": [
+      { "type": "buff", "stat": "cha", "min": 6, "max": 21 }
+    ],
+    "description": "Increases the target’s charisma."
+  }
+}
+
+]

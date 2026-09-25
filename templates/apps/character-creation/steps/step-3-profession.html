@@ -1,0 +1,81 @@
+<section class="eqrmss-cc-step eqrmss-cc-step-class">
+
+  <header class="eqrmss-cc-step-header">
+    <h2>Select Class</h2>
+    <p>Your class determines your combat role, spellcasting abilities, and skill progression.</p>
+  </header>
+
+  {{!-- ========================================================= --}}
+  {{!-- GM Override Indicator                                      --}}
+  {{!-- ========================================================= --}}
+  {{#if gmOverrideActive}}
+    <div class="eqrmss-gm-override-banner">
+      <i class="fas fa-exclamation-triangle"></i>
+      GM Override Active — Class restrictions for this race have been modified.
+    </div>
+  {{/if}}
+
+  <div class="eqrmss-cc-class-grid">
+
+    {{#each availableClasses}}
+      <div class="eqrmss-cc-class-card {{#if (eq ../wizard.selection.classId _id)}}selected{{/if}}"
+           data-class-id="{{_id}}">
+
+        <div class="eqrmss-cc-class-header">
+          <h3>{{name}}</h3>
+        </div>
+
+        {{#if description}}
+          <p class="eqrmss-cc-class-desc">{{description}}</p>
+        {{/if}}
+
+        {{#if system.realm}}
+          <div class="eqrmss-cc-class-realm">
+            <strong>Realm:</strong> {{system.realm}}
+          </div>
+        {{/if}}
+
+        {{#if system.primary_stats}}
+          <div class="eqrmss-cc-class-stats">
+            <h4>Primary Stats</h4>
+            <ul>
+              {{#each system.primary_stats}}
+                <li>{{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        {{/if}}
+
+        <footer class="eqrmss-cc-class-footer">
+          <button
+            type="button"
+            class="eqrmss-cc-select"
+            data-action="set-class"
+            data-class-id="{{_id}}"
+          >
+            Select {{name}}
+          </button>
+        </footer>
+
+      </div>
+    {{/each}}
+
+  </div>
+
+  <figure class="eqrmss-cc-class-preview">
+    <img
+      src="{{eqrmssClassImage wizard.selection.classId availableClasses}}"
+      alt="Selected class"
+      class="eqrmss-cc-class-preview-image"
+    />
+    <figcaption>
+      {{#if wizard.selection.classId}}Selected Class{{else}}Choose a class{{/if}}
+    </figcaption>
+  </figure>
+
+  <footer class="eqrmss-cc-step-footer">
+    <button type="button" class="eqrmss-cc-prev" data-action="previous">← Back</button>
+    <button type="button" class="eqrmss-cc-next" data-action="next">Next →</button>
+  </footer>
+
+</section>

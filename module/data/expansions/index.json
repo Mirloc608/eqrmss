@@ -1,0 +1,787 @@
+{
+  "schemaVersion": "2.0",
+
+  "id": "expansion-index",
+
+  "name": "EQRMSS Expansion Registry",
+
+  "minimumSupportedExpansion": "classic",
+
+  "maximumSupportedExpansion": "ls",
+
+  "currentExpansion": "ls",
+
+  "defaultExpansion": "ls",
+
+  "latestExpansion": "ls",
+
+  "latestLevelCap": 130,
+
+  "totalExpansions": 33,
+
+  "totalPlayableRaces": 16,
+
+  "totalPlayableClasses": 16,
+
+  "milestones": {
+    "firstPlayableRaceExpansion": "kunark",
+    "firstExpansionClassUnlock": "luclin",
+    "secondExpansionClassUnlock": "oow"
+  },
+
+  "unlocks": {
+    "aas": "luclin",
+
+    "advancedAas": "pop",
+
+    "races": {
+      "iksar": "kunark",
+      "vah-shir": "luclin",
+      "froglok": "ykesha",
+      "drakkin": "tss"
+    },
+
+    "classes": {
+      "beastlord": "luclin",
+      "berserker": "oow"
+    }
+  },
+
+  "levelCapsByExpansion": true,
+
+  "levelCaps": {
+    "classic": 50,
+    "kunark": 60,
+    "velious": 60,
+    "luclin": 60,
+    "pop": 65,
+    "ldon": 65,
+    "ykesha": 65,
+    "gates": 65,
+    "oow": 70,
+    "don": 70,
+    "dodh": 70,
+    "por": 70,
+    "sor": 70,
+    "tbs": 75,
+    "tss": 75,
+    "sof": 80,
+    "sod": 85,
+    "underfoot": 90,
+    "hot": 95,
+    "voa": 100,
+    "rof": 100,
+    "cotf": 100,
+    "tds": 105,
+    "tbm": 105,
+    "eok": 105,
+    "ros": 110,
+    "tbl": 110,
+    "tov": 115,
+    "cov": 120,
+    "tol": 120,
+    "nos": 125,
+    "tob": 125,
+    "ls": 130
+  },
+
+  "expansions": [
+    "classic",
+    "kunark",
+    "velious",
+    "luclin",
+    "pop",
+    "ldon",
+    "ykesha",
+    "gates",
+    "oow",
+    "don",
+    "dodh",
+    "por",
+    "sor",
+    "tbs",
+    "tss",
+    "sof",
+    "sod",
+    "underfoot",
+    "hot",
+    "voa",
+    "rof",
+    "cotf",
+    "tds",
+    "tbm",
+    "eok",
+    "ros",
+    "tbl",
+    "tov",
+    "cov",
+    "tol",
+    "nos",
+    "tob",
+    "ls"
+  ],
+
+  "metadata": {
+
+    "classic": {
+      "name": "EverQuest",
+      "id": "classic",
+      "shortName": "Classic",
+      "theme": "classic",
+      "releaseYear": 1999,
+      "order": 0,
+      "levelCap": 50,
+      "hasAAs": false,
+      "hasAdvancedAAs": false,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "classic",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/classic.jpg"
+    },
+
+    "kunark": {
+      "name": "Ruins of Kunark",
+      "id": "kunark",
+      "shortName": "Kunark",
+      "theme": "kunark",
+      "releaseYear": 2000,
+      "order": 1,
+      "levelCap": 60,
+      "hasAAs": false,
+      "hasAdvancedAAs": false,
+      "unlocksRace": "iksar",
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "classic",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/kunark.jpg"
+    },
+
+    "velious": {
+      "name": "Scars of Velious",
+      "id": "velious",
+      "shortName": "Velious",
+      "theme": "velious",
+      "releaseYear": 2000,
+      "order": 2,
+      "levelCap": 60,
+      "hasAAs": false,
+      "hasAdvancedAAs": false,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "classic",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/velious.jpg"
+    },
+
+    "luclin": {
+      "name": "Shadows of Luclin",
+      "id": "luclin",
+      "shortName": "Luclin",
+      "theme": "luclin",
+      "releaseYear": 2001,
+      "order": 3,
+      "levelCap": 60,
+      "hasAAs": true,
+      "hasAdvancedAAs": false,
+      "unlocksRace": "vah-shir",
+      "unlocksClass": "beastlord",
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "planes",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/luclin.jpg"
+    },
+
+    "pop": {
+      "name": "Planes of Power",
+      "id": "pop",
+      "shortName": "PoP",
+      "theme": "pop",
+      "releaseYear": 2002,
+      "order": 4,
+      "levelCap": 65,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "planes",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/pop.jpg"
+    },
+
+    "ldon": {
+      "name": "Lost Dungeons of Norrath",
+      "id": "ldon",
+      "shortName": "LDoN",
+      "theme": "ldon",
+      "releaseYear": 2003,
+      "order": 5,
+      "levelCap": 65,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "planes",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/ldon.jpg"
+    },
+
+    "ykesha": {
+      "name": "Legacy of Ykesha",
+      "id": "ykesha",
+      "shortName": "LoY",
+      "theme": "ykesha",
+      "releaseYear": 2003,
+      "order": 6,
+      "levelCap": 65,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": "froglok",
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "planes",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/ykesha.jpg"
+    },
+
+    "gates": {
+      "name": "Gates of Discord",
+      "id": "gates",
+      "shortName": "GoD",
+      "theme": "gates",
+      "releaseYear": 2004,
+      "order": 7,
+      "levelCap": 65,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "discord",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/gates.jpg"
+    },
+
+    "oow": {
+      "name": "Omens of War",
+      "id": "oow",
+      "shortName": "OoW",
+      "theme": "oow",
+      "releaseYear": 2004,
+      "order": 8,
+      "levelCap": 70,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": "berserker",
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "discord",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/oow.jpg"
+    },
+        "don": {
+      "name": "Dragons of Norrath",
+      "id": "don",
+      "shortName": "DoN",
+      "theme": "don",
+      "releaseYear": 2005,
+      "order": 9,
+      "levelCap": 70,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "discord",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/don.jpg"
+    },
+
+    "dodh": {
+      "name": "Depths of Darkhollow",
+      "id": "dodh",
+      "shortName": "DoDH",
+      "theme": "dodh",
+      "releaseYear": 2005,
+      "order": 10,
+      "levelCap": 70,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "discord",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/dodh.jpg"
+    },
+
+    "por": {
+      "name": "Prophecy of Ro",
+      "id": "por",
+      "shortName": "PoR",
+      "theme": "por",
+      "releaseYear": 2006,
+      "order": 11,
+      "levelCap": 70,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "modern",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/por.jpg"
+    },
+
+    "sor": {
+      "name": "Shattering of Ro",
+      "id": "sor",
+      "shortName": "SoR",
+      "theme": "sor",
+      "releaseYear": 2006,
+      "order": 12,
+      "levelCap": 70,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "modern",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/sor.jpg"
+    },
+
+    "tbs": {
+      "name": "The Buried Sea",
+      "id": "tbs",
+      "shortName": "TBS",
+      "theme": "tbs",
+      "releaseYear": 2007,
+      "order": 13,
+      "levelCap": 75,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "modern",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/tbs.jpg"
+    },
+
+    "tss": {
+      "name": "The Serpent's Spine",
+      "id": "tss",
+      "shortName": "TSS",
+      
+      "releaseYear": 2006,
+      "order": 14,
+      "levelCap": 75,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": "drakkin",
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "modern",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/tss.jpg"
+    },
+
+    "sof": {
+      "name": "Secrets of Faydwer",
+      "id": "sof",
+      "shortName": "SoF",
+      
+      "releaseYear": 2007,
+      "order": 15,
+      "levelCap": 80,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "heroic",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/sof.jpg"
+    },
+
+    "sod": {
+      "name": "Seeds of Destruction",
+      "id": "sod",
+      "shortName": "SoD",
+      
+      "releaseYear": 2008,
+      "order": 16,
+      "levelCap": 85,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "heroic",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/sod.jpg"
+    },
+
+    "underfoot": {
+      "name": "Underfoot",
+      "id": "underfoot",
+      "shortName": "UF",
+      
+      "releaseYear": 2009,
+      "order": 17,
+      "levelCap": 90,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "heroic",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/underfoot.jpg"
+    },
+
+    "hot": {
+      "name": "House of Thule",
+      "id": "hot",
+      "shortName": "HoT",
+      
+      "releaseYear": 2010,
+      "order": 18,
+      "levelCap": 95,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "heroic",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/hot.jpg"
+    },
+
+    "voa": {
+      "name": "Veil of Alaris",
+      "id": "voa",
+      "shortName": "VoA",
+      
+      "releaseYear": 2011,
+      "order": 19,
+      "levelCap": 100,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/voa.jpg"
+    },
+        "rof": {
+      "name": "Rain of Fear",
+      "id": "rof",
+      "shortName": "RoF",
+      
+      "releaseYear": 2012,
+      "order": 20,
+      "levelCap": 100,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/rof.jpg"
+    },
+
+    "cotf": {
+      "name": "Call of the Forsaken",
+      "id": "cotf",
+      "shortName": "CotF",
+      
+      "releaseYear": 2013,
+      "order": 21,
+      "levelCap": 100,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/cotf.jpg"
+    },
+
+    "tds": {
+      "name": "The Darkened Sea",
+      "id": "tds",
+      "shortName": "TDS",
+      
+      "releaseYear": 2014,
+      "order": 22,
+      "levelCap": 105,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/tds.jpg"
+    },
+
+    "tbm": {
+      "name": "The Broken Mirror",
+      "id": "tbm",
+      "shortName": "TBM",
+      
+      "releaseYear": 2015,
+      "order": 23,
+      "levelCap": 105,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/tbm.jpg"
+    },
+
+    "eok": {
+      "name": "Empires of Kunark",
+      "id": "eok",
+      "shortName": "EoK",
+      
+      "releaseYear": 2016,
+      "order": 24,
+      "levelCap": 105,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/eok.jpg"
+    },
+
+    "ros": {
+      "name": "Ring of Scale",
+      "id": "ros",
+      "shortName": "RoS",
+      
+      "releaseYear": 2017,
+      "order": 25,
+      "levelCap": 110,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/ros.jpg"
+    },
+
+    "tbl": {
+      "name": "The Burning Lands",
+      "id": "tbl",
+      "shortName": "TBL",
+      
+      "releaseYear": 2018,
+      "order": 26,
+      "levelCap": 110,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/tbl.jpg"
+    },
+
+    "tov": {
+      "name": "Torment of Velious",
+      "id": "tov",
+      "shortName": "ToV",
+      
+      "releaseYear": 2019,
+      "order": 27,
+      "levelCap": 115,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/tov.jpg"
+    },
+
+    "cov": {
+      "name": "Claws of Veeshan",
+      "id": "cov",
+      "shortName": "CoV",
+      
+      "releaseYear": 2020,
+      "order": 28,
+      "levelCap": 120,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/cov.jpg"
+    },
+
+    "tol": {
+      "name": "Terror of Luclin",
+      "id": "tol",
+      "shortName": "ToL",
+      
+      "releaseYear": 2021,
+      "order": 29,
+      "levelCap": 120,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": false,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/tol.jpg"
+    },
+    "nos": {
+      "name": "Night of Shadows",
+      "id": "nos",
+      "shortName": "NoS",
+      
+      "releaseYear": 2022,
+      "order": 30,
+      "levelCap": 125,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/nos.jpg"
+    },
+
+    "tob": {
+      "name": "The Outer Brood",
+      "id": "tob",
+      "shortName": "ToB",
+      
+      "releaseYear": 2024,
+      "order": 31,
+      "levelCap": 125,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/tob.jpg"
+    },
+
+    "ls": {
+      "name": "Laurion's Song",
+      "id": "ls",
+      "shortName": "LS",
+      
+      "releaseYear": 2023,
+      "order": 32,
+      "levelCap": 130,
+      "hasAAs": true,
+      "hasAdvancedAAs": true,
+      "unlocksRace": null,
+      "unlocksClass": null,
+      "placeholderRegions": true,
+      "selectable": true,
+      "hasLoadingScreen": true,
+      "era": "contemporary",
+      "loadingScreen": "systems/eqrmss/assets/loading-screens/ls.jpg"
+    }
+
+  },
+
+  "progression": [
+    { "id": "classic", "order": 0 },
+    { "id": "kunark", "order": 1 },
+    { "id": "velious", "order": 2 },
+    { "id": "luclin", "order": 3 },
+    { "id": "pop", "order": 4 },
+    { "id": "ldon", "order": 5 },
+    { "id": "ykesha", "order": 6 },
+    { "id": "gates", "order": 7 },
+    { "id": "oow", "order": 8 },
+    { "id": "don", "order": 9 },
+    { "id": "dodh", "order": 10 },
+    { "id": "por", "order": 11 },
+    { "id": "sor", "order": 12 },
+    { "id": "tbs", "order": 13 },
+    { "id": "tss", "order": 14 },
+    { "id": "sof", "order": 15 },
+    { "id": "sod", "order": 16 },
+    { "id": "underfoot", "order": 17 },
+    { "id": "hot", "order": 18 },
+    { "id": "voa", "order": 19 },
+    { "id": "rof", "order": 20 },
+    { "id": "cotf", "order": 21 },
+    { "id": "tds", "order": 22 },
+    { "id": "tbm", "order": 23 },
+    { "id": "eok", "order": 24 },
+    { "id": "ros", "order": 25 },
+    { "id": "tbl", "order": 26 },
+    { "id": "tov", "order": 27 },
+    { "id": "cov", "order": 28 },
+    { "id": "tol", "order": 29 },
+    { "id": "nos", "order": 30 },
+    { "id": "tob", "order": 31 },
+    { "id": "ls", "order": 32 }
+  ]
+}

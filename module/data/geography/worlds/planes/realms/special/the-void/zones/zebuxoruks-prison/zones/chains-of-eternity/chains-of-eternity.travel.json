@@ -1,0 +1,35 @@
+{
+  "id": "chains-of-eternity-travel",
+  "zone": "chains-of-eternity",
+
+  "nodes": [
+    "chain-bridge",
+    "anchor-pillar",
+    "eternity-lock",
+    "binder-core"
+  ],
+
+  "edges": [
+    {
+      "from": "chain-bridge",
+      "to": "anchor-pillar",
+      "type": "chain-path"
+    },
+    {
+      "from": "anchor-pillar",
+      "to": "eternity-lock",
+      "type": "temporal-transition",
+      "requirements": {
+        "temporal-anchor": true
+      }
+    },
+    {
+      "from": "eternity-lock",
+      "to": "binder-core",
+      "type": "void-binding",
+      "requirements": {
+        "void-attunement": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "zone": "memory-resonance",
+
+  "terrain": [
+    "resonance-lakes",
+    "echo-crystal-fields",
+    "identity-fracture-basins",
+    "timeline-reflection-hollows"
+  ],
+
+  "lighting": "memory-glow",
+
+  "hazards": [
+    {
+      "id": "identity-fracture",
+      "dc": 25,
+      "effect": "void_damage_and_identity-distortion"
+    },
+    {
+      "id": "echo-crystal-resonance",
+      "dc": 24,
+      "effect": "force_damage_and_memory-feedback"
+    },
+    {
+      "id": "timeline-reflection",
+      "dc": 26,
+      "effect": "stat_decay_and_temporal-echo"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "none",
+    "notes": "Memories manifest as physical obstacles; movement may trigger resonance feedback loops."
+  },
+
+  "environmentTags": [
+    "memory",
+    "echo",
+    "identity",
+    "void",
+    "cosmic"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "outer-fracture-belt-travel",
+  "region": "outer-fracture-belt",
+
+  "nodes": [
+    "shattered-riftline",
+    "voidwind-steppe",
+    "discord-crackfields",
+    "anchorpoint-outpost"
+  ],
+
+  "edges": [
+    {
+      "from": "shattered-riftline",
+      "to": "voidwind-steppe",
+      "type": "rift-path",
+      "requirements": {
+        "rift-stability-anchor": true
+      }
+    },
+    {
+      "from": "voidwind-steppe",
+      "to": "discord-crackfields",
+      "type": "voidwind-transition",
+      "requirements": {
+        "anti-void-ward": true
+      }
+    },
+    {
+      "from": "discord-crackfields",
+      "to": "anchorpoint-outpost",
+      "type": "anchorpoint-ascent",
+      "requirements": {
+        "rift-attunement": true
+      }
+    }
+  ]
+}

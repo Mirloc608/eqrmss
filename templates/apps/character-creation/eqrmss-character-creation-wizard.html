@@ -1,0 +1,392 @@
+<div class="eqrmss-character-creation-wizard">
+
+  <!-- ========================================================= -->
+  <!-- HEADER -->
+  <!-- ========================================================= -->
+  <header class="eqrmss-cc-header">
+    <h1>EverQuest — Rolemaster Standard System</h1>
+    <h2>Character Creation Wizard</h2>
+    <span class="eqrmss-cc-version">System Version: {{version}}</span>
+  </header>
+
+  <!-- ========================================================= -->
+  <!-- STEP NAVIGATION -->
+  <!-- ========================================================= -->
+  <nav class="eqrmss-cc-steps">
+    {{#each wizard.steps}}
+      <button
+        type="button"
+        class="eqrmss-cc-step-button {{#if (eq ../wizard.step @index)}}active{{/if}}"
+        data-action="goto-step"
+        data-step="{{@index}}"
+      >
+        {{@index}}. {{label}}
+      </button>
+    {{/each}}
+  </nav>
+
+  <!-- ========================================================= -->
+  <!-- MAIN CONTENT AREA -->
+  <!-- ========================================================= -->
+  <section class="eqrmss-cc-content">
+
+    {{!-- ======================================================= --}}
+    {{!-- STEP 0: PREVIEW --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 0)}}
+    <div class="eqrmss-step eqrmss-step-preview">
+
+      <h3>Character Creation Overview</h3>
+
+      <p>
+        EQRMSS character creation follows the Rolemaster Standard System rules
+        adapted for EverQuest. You will proceed through basic info, race,
+        class, origin, stats, and final review.
+      </p>
+
+      <ul>
+        <li>Enter name and gender.</li>
+        <li>Select race and class.</li>
+        <li>Choose origin city and deity.</li>
+        <li>Assign RMSS stats.</li>
+        <li>Review and finalize your character.</li>
+      </ul>
+
+    </div>
+    {{/if}}
+
+    {{!-- ======================================================= --}}
+    {{!-- STEP 1: BASIC INFO --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 1)}}
+    <div class="eqrmss-step eqrmss-step-basic">
+
+      <h3>Basic Information</h3>
+
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text"
+               value="{{wizard.selection.name}}"
+               data-field="name" />
+      </div>
+
+      <div class="form-group">
+        <label>Gender</label>
+        <select data-field="gender">
+          <option value="">Select Gender</option>
+          <option value="Male"   {{#if (eq wizard.selection.gender "Male")}}selected{{/if}}>Male</option>
+          <option value="Female" {{#if (eq wizard.selection.gender "Female")}}selected{{/if}}>Female</option>
+          <option value="Other"  {{#if (eq wizard.selection.gender "Other")}}selected{{/if}}>Other</option>
+        </select>
+      </div>
+
+      {{!-- Nationality: persisted to system.fixed_info/background on the actor --}}
+      <div class="form-group">
+        <label>Nationality</label>
+        <input type="text"
+               placeholder="e.g. Antonican, Erudite, Felwithean"
+               value="{{wizard.selection.nationality}}"
+               data-field="nationality" />
+      </div>
+
+    </div>
+    {{/if}}
+
+    {{!-- ======================================================= --}}
+    {{!-- STEP 2: RACE --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 2)}}
+    <div class="eqrmss-step eqrmss-step-race">
+
+      <h3>Select Race</h3>
+
+      <div class="form-group">
+        <label>Race</label>
+        <select data-field="raceId">
+          <option value="">Select Race</option>
+          {{#each races}}
+            <option value="{{id}}" {{#if (eq ../wizard.selection.raceId id)}}selected{{/if}}>
+              {{name}}
+            </option>
+          {{/each}}
+        </select>
+      </div>
+        <div class="eqrmss-cc-race-selection">
+          <figure class="eqrmss-cc-race-preview">
+            <img
+              src="{{eqrmssRaceImage wizard.selection.raceId races}}"
+              alt="Selected race"
+              class="eqrmss-cc-race-preview-image"
+            />
+            <figcaption>
+              {{#if wizard.selection.raceId}}Selected Race{{else}}Choose a race{{/if}}
+            </figcaption>
+          </figure>
+
+          <section class="eqrmss-cc-race-details">
+            {{#if selectedRace}}
+              <h4>{{selectedRace.name}}</h4>
+              <p>{{selectedRace.description}}</p>
+              <dl>
+                <dt>Homeland</dt><dd>{{join selectedRace.lore.homeland ", "}}</dd>
+                <dt>Culture</dt><dd>{{selectedRace.lore.culture}}</dd>
+                <dt>Size</dt><dd>{{selectedRace.size}}</dd>
+                <dt>Movement</dt><dd>{{selectedRace.movement.base}}</dd>
+                <dt>Languages</dt><dd>{{join selectedRace.startingLanguages ", "}}</dd>
+              </dl>
+              <h5>Stat Modifiers</h5>
+              <div class="eqrmss-cc-race-stat-list">
+                {{#each selectedRace.stats}}<span>{{@key}} {{this}}</span>{{/each}}
+              </div>
+              <h5>Racial Abilities</h5>
+              <ul>{{#each selectedRace.racialAbilities}}<li><strong>{{name}}</strong>: {{description}}</li>{{/each}}</ul>
+            {{else}}
+              <p class="eqrmss-cc-race-empty">Select a race to view its RMSS definition.</p>
+            {{/if}}
+          </section>
+        </div>
+
+    </div>
+    {{/if}}
+
+    {{!-- ======================================================= --}}
+    {{!-- STEP 3: CLASS --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 3)}}
+    <div class="eqrmss-step eqrmss-step-class">
+
+      <h3>Select Class</h3>
+
+      <div class="form-group">
+        <label>Class</label>
+        <select data-field="classId">
+          <option value="">Select Class</option>
+          {{#each classChoices}}
+            <option value="{{id}}" {{#if (eq ../wizard.selection.classId id)}}selected{{/if}} {{#if isRestricted}}disabled{{/if}}>
+              {{name}}{{#if isRestricted}} (Restricted){{else}}{{#if isFavored}} (Favored){{/if}}{{/if}}
+            </option>
+          {{/each}}
+        </select>
+      </div>
+
+      <figure class="eqrmss-cc-race-preview">
+        <img
+          src="{{eqrmssClassImage wizard.selection.classId classes}}"
+          alt="Selected class"
+          class="eqrmss-cc-race-preview-image"
+        />
+        <figcaption>
+          {{#if wizard.selection.classId}}Selected Class{{else}}Choose a class{{/if}}
+        </figcaption>
+      </figure>
+
+      <section class="eqrmss-cc-class-details">
+        {{#if selectedClass}}
+          <h4>{{selectedClass.name}}</h4>
+          <p>{{selectedClass.description}}</p>
+          <dl>
+            <dt>Archetype</dt><dd>{{selectedClass.archetype}}</dd>
+            <dt>Roles</dt><dd>{{join selectedClass.roles ", "}}</dd>
+            <dt>Prime Stats</dt><dd>{{join selectedClass.stats ", "}}</dd>
+            <dt>Armor</dt><dd>{{join selectedClass.armor ", "}}</dd>
+            <dt>Weapons</dt><dd>{{join selectedClass.weapons ", "}}</dd>
+            <dt>Spell Access</dt><dd>{{join selectedClass.magic ", "}}</dd>
+            <dt>Resources</dt><dd>{{join selectedClass.resources ", "}}</dd>
+          </dl>
+          <div class="eqrmss-cc-class-columns">
+            <div><h5>Strengths</h5><ul>{{#each selectedClass.strengths}}<li>{{this}}</li>{{else}}<li>Defined by class data</li>{{/each}}</ul></div>
+            <div><h5>Weaknesses</h5><ul>{{#each selectedClass.weaknesses}}<li>{{this}}</li>{{/each}}</ul></div>
+            <div><h5>Signature Mechanics</h5><ul>{{#each selectedClass.mechanics}}<li>{{this}}</li>{{/each}}</ul></div>
+            <div><h5>Tags</h5><p>{{join selectedClass.tags ", "}}</p></div>
+            <div><h5>Features</h5><ul>{{#each selectedClass.features}}<li>{{this}}</li>{{/each}}</ul></div>
+            <div><h5>Combat Actions</h5><ul>{{#each selectedClass.extensions}}<li>{{this}}</li>{{/each}}{{#unless selectedClass.extensions.length}}<li>None defined</li>{{/unless}}</ul></div>
+            <div><h5>Progression</h5><ul>{{#each selectedClass.progression}}<li>{{this}}</li>{{/each}}</ul></div>
+            <div><h5>Pending Rules</h5><ul>{{#each selectedClass.pending}}<li>{{this}}</li>{{/each}}</ul></div>
+            <div><h5>Abilities</h5><ul>{{#each selectedClass.abilities}}<li>{{this}}</li>{{/each}}</ul></div>
+            <div><h5>Skill Costs</h5><ul>{{#each selectedClass.skillCosts}}<li>{{this}}</li>{{/each}}</ul></div>
+            <div><h5>Spell Lists</h5><ul>{{#each selectedClass.spellLists}}<li>{{this}}</li>{{/each}}</ul></div>
+            <div><h5>Starting Equipment</h5><ul>{{#each selectedClass.equipment}}<li>{{this}}</li>{{/each}}</ul></div>
+          </div>
+        {{else}}
+          <p class="eqrmss-cc-class-empty">Select a class to view its EQ-RMSS definition.</p>
+        {{/if}}
+      </section>
+
+    </div>
+    {{/if}}
+
+    {{!-- ======================================================= --}}
+    {{!-- STEP 4: ORIGIN --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 4)}}
+    <div class="eqrmss-step eqrmss-step-origin">
+
+      <h3>Origin</h3>
+
+      <div class="form-group">
+        <label>Starting City</label>
+        <select data-field="cityId">
+          <option value="">Select City</option>
+          {{#each cities}}
+            <option value="{{id}}" {{#if (eq ../wizard.selection.cityId id)}}selected{{/if}}>
+              {{name}}
+            </option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Deity</label>
+        <select data-field="deityId">
+          <option value="">Select Deity</option>
+          {{#each deities}}
+            <option value="{{id}}" {{#if (eq ../wizard.selection.deityId id)}}selected{{/if}}>
+              {{name}}
+            </option>
+          {{/each}}
+        </select>
+      </div>
+
+      {{#if physical}}
+      <fieldset class="eqrmss-cc-physical">
+        <legend>Physical Characteristics</legend>
+        {{#if physical.height}}
+        <div class="form-group">
+          <label>Height (inches; {{physical.height.min}}–{{physical.height.max}})</label>
+          <input type="number" data-field="height" min="{{physical.height.min}}" max="{{physical.height.max}}"
+                 value="{{#if wizard.selection.height}}{{wizard.selection.height}}{{else}}{{physical.height.min}}{{/if}}" />
+        </div>
+        {{/if}}
+        {{#if physical.weight}}
+        <div class="form-group">
+          <label>Weight (lbs; {{physical.weight.min}}–{{physical.weight.max}})</label>
+          <input type="number" data-field="weight" min="{{physical.weight.min}}" max="{{physical.weight.max}}"
+                 value="{{#if wizard.selection.weight}}{{wizard.selection.weight}}{{else}}{{physical.weight.min}}{{/if}}" />
+        </div>
+        {{/if}}
+      </fieldset>
+      {{else}}
+      <p class="hint">Select a race and gender to set height and weight.</p>
+      {{/if}}
+
+    </div>
+    {{/if}}
+    {{!-- ======================================================= --}}
+    {{!-- STEP 5: STATS --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 5)}}
+    <div class="step-content step-stats">
+      <h3>Step 5: Character Statistics</h3>
+  
+      <div class="stats-layout-container" style="display: flex; gap: 20px;">
+        <!-- Left: Stats Assignment Table -->
+        <div class="stats-table-wrapper" style="flex: 3;">
+          <div class="pool-controls" style="margin-bottom: 10px;">
+            <button type="button" data-action="rollTempPool">Roll Temp Pool (600 + 10d10)</button>
+            <button type="button" data-action="rollAllStats">Roll All Stats</button>
+            <label style="margin-left: 15px;">
+              <input type="checkbox" data-action="toggleFixedPotentials" {{#if characterData.useFixedPotentials}}checked{{/if}}>
+              Fixed Potentials (†)
+            </label>
+        </div>
+
+          <table class="eqrmss-table stats-table">
+            <thead>
+              <tr>
+                <th>Stat</th>
+                <th>Temp</th>
+                <th>Bonus</th>
+                <th>Potential</th>
+                <th>Adjustment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each enrichedStats}}
+              <tr>
+                <td><strong>{{@key}}</strong> {{#if this.isPrime}}<span class="prime-badge">(Prime)</span>{{/if}}</td>
+                <td>  
+                  <input type="number" name="stats.{{@key}}" value="{{this.value}}" min="{{this.minRequired}}" max="101" data-field="{{@key}}" data-action="setStat" style="width: 60px;" />
+                </td>
+                <td><span class="stat-bonus">{{numberFormat this.bonus sign=true}}</span></td>
+                <td>{{this.potential}}</td>
+                <td>
+                  <button type="button" data-action="decrementStat" data-stat="{{@key}}">-</button>
+                  <button type="button" data-action="incrementStat" data-stat="{{@key}}">+</button>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div> 
+
+        <!-- Right: Remaining Points Sidebar -->
+        <div class="stats-sidebar" style="flex: 1; background: rgba(0,0,0,0.05); padding: 15px; border-radius: 6px; height: fit-content;">
+          <h4>Point Budget</h4>
+          <p><strong>Total Pool:</strong> {{characterData.tempPointPool}}</p>
+          <p><strong>Remaining:</strong> <span class="{{#if (lt remainingPoints 0)}}text-error{{/if}}">{{remainingPoints}}</span></p>
+          <hr>
+          <small>Prime stats require min 90 pts. Non-prime stats require min 20 pts.</small>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ======================================================= --}}
+    {{!-- STEP 6: REVIEW --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 6)}}
+    <div class="eqrmss-step eqrmss-step-review">
+
+      <h3>Review & Finalize</h3>
+
+      <h4>Stats (Temporary / Potential)</h4>
+      <ul style="list-style-type: none; padding: 0;">
+        {{#each characterData.stats as |tempVal key|}}
+          <li><strong>{{key}}</strong>: Temp {{tempVal}} / Potential {{lookup ../characterData.potentials key}}</li>
+        {{/each}}
+      </ul>
+
+      <h4>Development Points</h4>
+      <p>{{preview.devPoints}}</p>
+
+      <h4>Derived Values</h4>
+      <ul>
+        <li>HP: {{preview.derived.HP}}</li>
+        <li>Mana: {{preview.derived.Mana}}</li>
+        <li>Initiative: {{preview.derived.Initiative}}</li>
+        <li>Attack: {{preview.derived.Attack}}</li>
+        <li>Defense: {{preview.derived.Defense}}</li>
+      </ul>
+
+      {{#if ownerOptions.length}}
+      <div class="form-group" style="margin-top: 15px;">
+        <label>Character Owner</label>
+        <select data-field="ownerUserId">
+          {{#each ownerOptions}}
+            <option value="{{id}}" {{#if (eq ../wizard.selection.ownerUserId id)}}selected{{/if}}>
+              {{name}}{{#if isCurrent}} (you){{/if}}{{#if active}} ●{{else}} (offline){{/if}}
+            </option>
+          {{/each}}
+        </select>
+        <p class="hint">The selected player will own this character and can edit its sheet.</p>
+      </div>
+      {{/if}}
+
+      <button class="eqrmss-finalize" data-action="finish" style="margin-top: 20px; padding: 10px 20px; font-weight: bold;">
+        Create Character
+      </button>
+
+    </div>
+    {{/if}}
+
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- FOOTER NAVIGATION -->
+  <!-- ========================================================= -->
+  <footer class="eqrmss-cc-footer">
+    <button type="button" data-action="previous">Previous</button>
+    <button type="button" data-action="next">Next</button>
+  </footer>
+
+</div>

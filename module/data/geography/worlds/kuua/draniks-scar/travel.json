@@ -1,0 +1,57 @@
+{
+  "region": "dranik-scar",
+
+  "nodes": [
+    { "id": "dranik-scar-east", "type": "zone", "label": "Scar East" },
+    { "id": "dranik-scar-west", "type": "zone", "label": "Scar West" },
+    { "id": "dranik-scar-north", "type": "zone", "label": "Scar North" },
+    { "id": "dranik-scar-south", "type": "zone", "label": "Scar South" }
+  ],
+
+  "edges": [
+    {
+      "from": "dranik-scar-east",
+      "to": "dranik-scar-north",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A ridge path connecting East and North Scar."
+    },
+    {
+      "from": "dranik-scar-west",
+      "to": "dranik-scar-south",
+      "difficulty": "high",
+      "type": "hazard",
+      "description": "A Discord‑scarred canyon linking West and South Scar."
+    },
+    {
+      "from": "dranik-scar-north",
+      "to": "dranik-scar-west",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A cliffside route used by Muramite patrols."
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "dranik-hollows",
+      "type": "down",
+      "description": "The Scar descends into the Dranik Hollows."
+    },
+    {
+      "to": "dranik-sewers",
+      "type": "deep",
+      "description": "Collapsed fissures lead into the Dranik Sewers."
+    },
+    {
+      "to": "dranik-catacombs",
+      "type": "forward",
+      "description": "Southern routes lead toward the Dranik Catacombs."
+    },
+    {
+      "to": "wall-of-slaughter",
+      "type": "warfront",
+      "description": "Western passages connect to the Wall of Slaughter."
+    }
+  ]
+}

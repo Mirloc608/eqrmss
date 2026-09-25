@@ -1,0 +1,56 @@
+{
+  "influenceMap": [
+    {
+      "faction": "umbral-vanguard",
+      "zones": {
+        "vanguard-fortification-line": "dominant",
+        "umbral-plains-main": "strong",
+        "umbral-storm-reaches": "moderate"
+      }
+    },
+
+    {
+      "faction": "akhevan-dominion",
+      "zones": {
+        "akhevan-dominion-front": "dominant",
+        "void-resonance-basin": "strong",
+        "shadow-anomaly-expanse": "moderate"
+      }
+    },
+
+    {
+      "faction": "shadow-anomalies",
+      "zones": {
+        "shadow-anomaly-expanse": "dominant",
+        "umbral-storm-reaches": "strong",
+        "void-resonance-basin": "moderate"
+      }
+    },
+
+    {
+      "faction": "voidborn-entities",
+      "zones": {
+        "void-resonance-basin": "dominant",
+        "umbral-storm-reaches": "strong"
+      }
+    }
+  ],
+
+  "dynamicEffects": [
+    {
+      "event": "void-resonance-surge",
+      "description": "A surge of void resonance increases Voidborn influence and destabilizes Vanguard fortifications.",
+      "affectedFactions": ["voidborn-entities", "umbral-vanguard"]
+    },
+    {
+      "event": "akhevan-ascension-ritual",
+      "description": "Akhevan ritualists temporarily increase dominion influence across the Plains.",
+      "affectedFactions": ["akhevan-dominion"]
+    },
+    {
+      "event": "shadow-anomaly-fusion",
+      "description": "Multiple anomalies merge, creating a mega-anomaly that reduces all faction control.",
+      "affectedFactions": ["umbral-vanguard", "akhevan-dominion", "voidborn-entities"]
+    }
+  ]
+}

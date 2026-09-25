@@ -1,0 +1,82 @@
+{
+  "id": "shadowknight",
+  "key": "shadowknight",
+  "name": "Shadowknight",
+  "type": "discipline-catalog",
+  "disciplines": [
+    {
+      "id": "resistant",
+      "name": "Resistant Discipline",
+      "level": 51,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 40,
+      "effects": [
+        {
+          "type": "RESIST_ALL",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "fearless",
+      "name": "Fearless Discipline",
+      "level": 54,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 50,
+      "effects": [
+        {
+          "type": "FEAR_IMMUNITY",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "unholy-aura",
+      "name": "Unholy Aura Discipline",
+      "level": 55,
+      "family": "offensive",
+      "durationRounds": 3,
+      "reuseRounds": 75,
+      "effects": [
+        {
+          "type": "LIFETAP_DAMAGE_BONUS",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": "deflection",
+      "name": "Deflection Discipline",
+      "level": 59,
+      "family": "stand",
+      "durationRounds": 3,
+      "reuseRounds": 150,
+      "effects": [
+        {
+          "type": "BLOCK_CHANCE",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": "leechcurse",
+      "name": "Leechcurse Discipline",
+      "level": 60,
+      "family": "offensive",
+      "durationRounds": 5,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "LIFESTEAL",
+          "value": 100
+        },
+        {
+          "type": "HIT_CHANCE_BONUS",
+          "value": 200
+        }
+      ]
+    }
+  ]
+}

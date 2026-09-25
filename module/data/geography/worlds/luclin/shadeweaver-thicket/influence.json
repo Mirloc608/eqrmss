@@ -1,0 +1,56 @@
+{
+  "influenceMap": [
+    {
+      "faction": "vah-shir-clans",
+      "zones": {
+        "savanna-borderlands": "dominant",
+        "vah-shir-outskirts": "strong"
+      }
+    },
+    {
+      "faction": "grimling-tribes",
+      "zones": {
+        "grimling-raider-paths": "dominant",
+        "inner-thicket": "moderate"
+      }
+    },
+    {
+      "faction": "netherbian-burrowers",
+      "zones": {
+        "netherbian-faultline": "dominant",
+        "thicket-cavern-mouths": "strong"
+      }
+    },
+    {
+      "faction": "thicket-wildlife",
+      "zones": {
+        "inner-thicket": "dominant",
+        "thicket-cavern-mouths": "moderate"
+      }
+    },
+    {
+      "faction": "seru-scouts",
+      "zones": {
+        "savanna-borderlands": "minor"
+      }
+    }
+  ],
+
+  "dynamicEffects": [
+    {
+      "event": "grimling-raid",
+      "description": "Grimling raiders push deeper into the thicket.",
+      "affectedFactions": ["grimling-tribes"]
+    },
+    {
+      "event": "netherbian-eruption",
+      "description": "Burrowers erupt from new faultlines.",
+      "affectedFactions": ["netherbian-burrowers"]
+    },
+    {
+      "event": "nightfall-corruption",
+      "description": "Shadow corruption spreads through the inner thicket.",
+      "affectedFactions": ["thicket-wildlife"]
+    }
+  ]
+}

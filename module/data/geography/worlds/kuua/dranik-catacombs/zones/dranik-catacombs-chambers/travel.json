@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-catacombs-chambers",
+  "nodes": [
+    {
+      "id": "interrogation-hall",
+      "type": "hall",
+      "label": "Interrogation Hall"
+    },
+    {
+      "id": "ritual-vault",
+      "type": "vault",
+      "label": "Ritual Vault"
+    },
+    {
+      "id": "burial-chamber",
+      "type": "chamber",
+      "label": "Burial Chamber"
+    }
+  ],
+  "edges": [
+    {
+      "from": "interrogation-hall",
+      "to": "ritual-vault",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A guarded route connecting interrogation halls to ritual vaults."
+    },
+    {
+      "from": "ritual-vault",
+      "to": "burial-chamber",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into corrupted burial chambers."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-catacombs-quarries",
+      "type": "back",
+      "description": "The Chambers connect back to the Quarries."
+    },
+    {
+      "to": "dranik-catacombs-halls",
+      "type": "forward",
+      "description": "The Chambers lead deeper into the Halls."
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+[
+  {
+  "_id": "sk-dark-empathy-21",
+  "name": "Dark Empathy",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/021.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 21,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 20,
+    "effects": [
+      { "type": "heal", "amount": 30 }
+    ],
+    "description": "Transfers a small amount of life energy to heal the target."
+  }
+},
+{
+  "_id": "sk-vampiric-embrace-22",
+  "name": "Vampiric Embrace",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/022.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 22,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 30,
+    "effects": [
+      { "type": "proc", "name": "Vampiric Embrace" }
+    ],
+    "description": "Grants the caster a melee proc that steals life from enemies."
+  }
+},
+{
+  "_id": "sk-convoke-shadow-22",
+  "name": "Convoke Shadow",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/022b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 22,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 120,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetNecS03L012Skel2Ice" }
+    ],
+    "description": "Summons a more powerful skeletal servant to fight for the Shadowknight."
+  }
+},
+{
+  "_id": "sk-scream-of-pain-23",
+  "name": "Scream of Pain",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/023.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 23,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "debuff", "stat": "ac", "min": -3, "max": -9 }
+    ],
+    "description": "A painful scream that weakens the target’s armor."
+  }
+},
+{
+  "_id": "sk-feign-death-24",
+  "name": "Feign Death",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/024.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 24,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "utility", "effect": "feign-death", "successRate": 87 }
+    ],
+    "description": "Allows the caster to feign death with an 87% success rate."
+  }
+}
+]

@@ -1,0 +1,24 @@
+{
+  "id": "brells-forge-travel",
+  "dungeon": "brells-forge",
+
+  "nodes": [
+    "dungeon-entry",
+    "magma-rivers",
+    "divine-forge",
+    "hammer-sanctum",
+    "forge-titan-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "magma-rivers", "type": "magma-path" },
+    { "from": "magma-rivers", "to": "divine-forge", "type": "forge-transition" },
+    { "from": "divine-forge", "to": "hammer-sanctum", "type": "sanctum-descent" },
+    {
+      "from": "hammer-sanctum",
+      "to": "forge-titan-lair",
+      "type": "titan-ascent",
+      "requirements": { "underfoot-attunement": true }
+    }
+  ]
+}

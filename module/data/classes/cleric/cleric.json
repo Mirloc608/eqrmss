@@ -1,0 +1,199 @@
+{
+  "id": "cleric",
+  "name": "Cleric",
+  "type": "class",
+
+  "description": {
+    "summary": "Clerics wield divine magic to heal allies, protect the faithful, and smite undead.",
+    "lore": "Clerics serve the gods of Norrath as conduits of holy power. Their magic mends wounds, shields allies, and unleashes righteous wrath upon the forces of darkness. As the premier healers of Norrath, Clerics stand at the heart of every great crusade against evil."
+  },
+
+  "role": {
+    "primary": "Primary Healer",
+    "secondary": [
+      "Protection",
+      "Anti‑Undead",
+      "Support",
+      "Divine Damage"
+    ]
+  },
+
+  "profession": {
+    "category": "Holy / Light / Protection / Righteousness / Anti‑Undead",
+    "realm": "Divine",
+    "powerSource": "Divine Favor"
+  },
+
+  "stats": {
+    "primeRequisites": ["Empathy", "Memory"],
+    "secondaryStats": ["Intuition", "Presence", "Constitution"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth", "Leather", "Chain", "Plate"],
+    "restricted": []
+  },
+
+  "weapons": {
+    "allowed": [
+      "Maces",
+      "Hammers",
+      "Staves",
+      "Flails",
+      "One‑Handed Blunt Weapons"
+    ],
+    "restricted": ["Daggers", "Swords", "Thrown Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 3,
+      "Weapon Skills": 4,
+      "Combat Maneuvers": 4,
+      "Athletics": 3,
+      "Perception": 2,
+      "Divine Spell Lists": 2,
+      "Lore": 2
+    },
+    "bonusCategories": [
+      "Healing",
+      "Protection Magic",
+      "Anti‑Undead",
+      "Holy Magic"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Divine": {
+        "Holy": ["Holy Light"],
+        "Light": ["Radiant Blessings"],
+        "Protection": ["Divine Shielding"],
+        "Righteousness": ["Righteous Wrath"],
+        "Anti‑Undead": ["Turn Undead"]
+      }
+    },
+    "specialization": [
+      "Healing Mastery",
+      "Protection Magic",
+      "Anti‑Undead Magic"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "cleric_heal",
+        "name": "Heal",
+        "description": "The cleric restores health to an ally using divine energy."
+      },
+      {
+        "id": "cleric_minor_blessing",
+        "name": "Minor Blessing",
+        "description": "The cleric grants a small protective blessing to an ally."
+      }
+    ],
+    "level5": [
+      {
+        "id": "cleric_stun",
+        "name": "Holy Stun",
+        "description": "The cleric delivers a stunning blow infused with divine light."
+      }
+    ],
+    "level10": [
+      {
+        "id": "cleric_turn_undead",
+        "name": "Turn Undead",
+        "description": "The cleric repels undead with overwhelming divine radiance."
+      }
+    ],
+    "level20": [
+      {
+        "id": "cleric_divine_intervention",
+        "name": "Divine Intervention",
+        "description": "The cleric calls upon their deity to save an ally from death."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Healing",
+    "Protection Magic",
+    "Holy Magic",
+    "Turn Undead",
+    "Blessings",
+    "Divine Shielding"
+  ],
+
+  "combatActions": [
+    { "id": "bash", "name": "Bash" },
+    { "id": "holy_strike", "name": "Holy Strike" },
+    { "id": "stun", "name": "Holy Stun" }
+  ],
+
+  "disciplines": [
+    "Holy Discipline",
+    "Righteous Discipline",
+    "Light Discipline"
+  ],
+
+  "startingEquipment": [
+    { "name": "Blessed Mace", "type": "weapon" },
+    { "name": "Chain Armor", "type": "armor" },
+    { "name": "Holy Symbol", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "pure-channeling"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/cleric.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "pure healer",
+      "primaryRole": "healing",
+      "secondaryRoles": ["support", "anti‑undead"]
+    },
+
+    "identity": {
+      "strengths": [
+        "healing",
+        "protection magic",
+        "anti‑undead",
+        "holy magic",
+        "divine shielding"
+      ]
+    },
+
+    "weaknesses": [
+      "limited offensive spells",
+      "low mobility"
+    ],
+
+    "signatureMechanics": [
+      "heal",
+      "turn undead",
+      "divine intervention",
+      "holy stun"
+    ],
+
+    "tags": [
+      "divine",
+      "holy",
+      "light",
+      "protection",
+      "righteousness",
+      "anti-undead"
+    ],
+
+    "pending": [
+      "attack table IDs",
+      "spell list mapping"
+    ]
+  }
+}

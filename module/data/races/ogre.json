@@ -1,0 +1,190 @@
+{
+    "id": "eqrmss-ogre",
+    "key": "ogre",
+    "name": "Ogre",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/ogre.png",
+
+    "description": "Ogres are massive, brutal, and physically dominant warriors forged in the harsh lands of Oggok. Once the favored creations of Rallos Zek, Ogres possess unmatched strength, endurance, and resilience. Though often underestimated intellectually, their raw physical might makes them fearsome combatants.",
+
+    "lore": {
+        "homeland": [
+            "Oggok",
+            "The Feerrott"
+        ],
+        "culture": "Ogre culture is tribal, martial, and heavily influenced by the legacy of Rallos Zek. They value strength, dominance, and physical prowess above all else.",
+        "alignment": "Often Neutral or Evil, shaped by harsh environments and martial tradition.",
+        "languages": [
+            "Common",
+            "Ogre"
+        ]
+    },
+
+    "stats": {
+        "Ag": -10,
+        "Co": 15,
+        "Me": -10,
+        "Re": -10,
+        "SD": 0,
+        "Em": -5,
+        "In": -5,
+        "Pr": -5,
+        "Qu": -5,
+        "St": 20
+    },
+
+    "racialTalents": [
+        {
+            "id": "giant_strength",
+            "name": "Giant Strength",
+            "description": "Ogres possess immense physical strength, far surpassing most races.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "St",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "thick_hide",
+            "name": "Thick Hide",
+            "description": "Ogres have extremely tough skin that provides natural protection.",
+            "effects": [
+                {
+                    "type": "armor",
+                    "target": "naturalArmor",
+                    "value": 3
+                }
+            ]
+        },
+        {
+            "id": "brutal_resilience",
+            "name": "Brutal Resilience",
+            "description": "Ogres possess powerful endurance and resistance to physical harm.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Co",
+                    "value": 5
+                },
+                {
+                    "type": "resistance",
+                    "target": "stun",
+                    "value": 20
+                }
+            ]
+        },
+        {
+            "id": "battle_instinct",
+            "name": "Battle Instinct",
+            "description": "Ogres are naturally gifted in martial combat and brute force tactics.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "combat",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "slow_witted",
+            "name": "Slow-Witted",
+            "description": "Ogres struggle with complex reasoning and magical study.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Re",
+                    "value": -5
+                },
+                {
+                    "type": "stat",
+                    "target": "Me",
+                    "value": -5
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 30,
+        "pace": "Fast",
+        "encumbranceMultiplier": 1.5
+    },
+
+    "size": "Large",
+
+    "height": {
+        "male": "7'6\" - 9'0\"",
+        "female": "7'2\" - 8'6\""
+    },
+
+    "weight": {
+        "male": "350 - 550 lbs",
+        "female": "300 - 450 lbs"
+    },
+
+    "lifespan": {
+        "average": "70-90 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "twoHandedWeapons": 15,
+            "hammers": 10,
+            "unarmedCombat": 10
+        },
+        "physical": {
+            "endurance": 10
+        },
+        "subterfuge": {},
+        "magical": {},
+        "lore": {},
+        "social": {
+            "intimidation": 10
+        }
+    },
+
+    "skillCosts": {
+        "combat": "A",
+        "physical": "A",
+        "subterfuge": "D",
+        "magical": "D",
+        "lore": "C",
+        "social": "C"
+    },
+
+    "favoredProfessions": [
+        "warrior",
+        "shadowknight",
+        "shaman"
+    ],
+
+    "restrictedProfessions": [
+        "paladin",
+        "wizard",
+        "enchanter",
+        "magician",
+        "bard",
+        "rogue"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Ogre",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "massive iron maul",
+        "reinforced hide armor",
+        "tribal markings",
+        "heavy travel rations"
+    ]
+}

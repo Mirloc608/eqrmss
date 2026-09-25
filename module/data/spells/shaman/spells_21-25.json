@@ -1,0 +1,331 @@
+[
+{
+  "_id": "shm-spirit-of-ox-21",
+  "name": "Spirit of Ox",
+  "type": "spell",
+  "img": "icons/magic/nature/ox-spirit-brown.webp",
+  "system": {
+    "class": "shaman",
+    "level": 21,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "buff", "stat": "sta", "min": 9, "max": 32 }
+    ],
+    "description": "Increases the target’s stamina."
+  }
+},
+{
+  "_id": "shm-spirit-of-monkey-21",
+  "name": "Spirit of Monkey",
+  "type": "spell",
+  "img": "icons/magic/nature/monkey-spirit-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 21,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 40,
+    "effects": [
+      { "type": "buff", "stat": "dex", "min": 9, "max": 29 }
+    ],
+    "description": "Increases the target’s dexterity."
+  }
+},
+{
+  "_id": "shm-spirit-of-cheetah-21",
+  "name": "Spirit of Cheetah",
+  "type": "spell",
+  "img": "icons/magic/nature/cheetah-spirit-yellow.webp",
+  "system": {
+    "class": "shaman",
+    "level": 21,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 2,
+    "manaCost": 20,
+    "effects": [
+      { "type": "movement", "min": 76, "max": 190 }
+    ],
+    "description": "Greatly increases the caster’s movement speed."
+  }
+},
+{
+  "_id": "shm-scale-of-wolf-22",
+  "name": "Scale of Wolf",
+  "type": "spell",
+  "img": "icons/magic/nature/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 22,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "utility", "effect": "fragile" },
+      { "type": "movement", "min": 45, "max": 115 }
+    ],
+    "description": "Increases movement speed and makes the target fragile."
+  }
+},
+{
+  "_id": "shm-poison-storm-22",
+  "name": "Poison Storm",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 22,
+    "school": "evocation",
+    "target": "area",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 125,
+    "effects": [
+      { "type": "damage", "element": "poison", "amount": 60 }
+    ],
+    "description": "Deals poison damage to enemies in an area."
+  }
+},{
+  "_id": "shm-counteract-disease-22",
+  "name": "Counteract Disease",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 22,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "cure", "effect": "disease", "amount": 8 }
+    ],
+    "description": "Removes disease counters from the target."
+  }
+},
+{
+  "_id": "shm-regeneration-23",
+  "name": "Regeneration",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 23,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "regen", "stat": "hp", "min": 0, "max": 9 }
+    ],
+    "description": "Grants slow health regeneration over time."
+  }
+},
+{
+  "_id": "shm-cannibalize-23",
+  "name": "Cannibalize",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 23,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 1,
+    "manaCost": 0,
+    "effects": [
+      { "type": "damage", "element": "health", "amount": 50 },
+      { "type": "restore", "stat": "mana", "min": 16, "max": 37 }
+    ],
+    "description": "Converts health into mana."
+  }
+},
+{
+  "_id": "shm-reebos-augury-23",
+  "name": "Reebo's Augury",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 23,
+    "school": "divination",
+    "target": "object",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 145,
+    "effects": [
+      { "type": "utility", "effect": "appraise-ldon-chest", "rank": 1 }
+    ],
+    "description": "Appraises a Lost Dungeons of Norrath chest."
+  }
+},
+{
+  "_id": "shm-frost-strike-23",
+  "name": "Frost Strike",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-spear-small.webp",
+  "system": {
+    "class": "shaman",
+    "level": 23,
+    "school": "evocation",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 78,
+    "effects": [
+      { "type": "damage", "element": "cold", "min": 96, "max": 156 }
+    ],
+    "description": "Deals cold damage to a single target."
+  }
+},
+{
+  "_id": "shm-reebos-exorcism-24",
+  "name": "Reebo's Exorcism",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 24,
+    "school": "divination",
+    "target": "object",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 145,
+    "effects": [
+      { "type": "utility", "effect": "disarm-ldon-trap", "rank": 1 }
+    ],
+    "description": "Disarms a Lost Dungeons of Norrath trap."
+  }
+},
+{
+  "_id": "shm-reebos-cleansing-24",
+  "name": "Reebo's Cleansing",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-gold.webp",
+  "system": {
+    "class": "shaman",
+    "level": 24,
+    "school": "divination",
+    "target": "object",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 145,
+    "effects": [
+      { "type": "utility", "effect": "unlock-ldon-chest", "rank": 1 }
+    ],
+    "description": "Unlocks a Lost Dungeons of Norrath chest."
+  }
+},
+{
+  "_id": "shm-envenomed-breath-24",
+  "name": "Envenomed Breath",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 24,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 173,
+    "effects": [
+      { "type": "debuff", "effect": "poison", "amount": 3 },
+      { "type": "damage", "element": "poison", "amount": 21 },
+      { "type": "dot", "element": "poison", "min": 53, "max": 90 }
+    ],
+    "description": "Inflicts poison, dealing damage over time."
+  }
+},
+{
+  "_id": "shm-resist-cold-24",
+  "name": "Resist Cold",
+  "type": "spell",
+  "img": "icons/magic/water/ice-shield-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 24,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "buff", "stat": "resist-cold", "min": 16, "max": 55 }
+    ],
+    "description": "Increases the target’s resistance to cold."
+  }
+},
+{
+  "_id": "shm-befriend-animal-25",
+  "name": "Befriend Animal",
+  "type": "spell",
+  "img": "icons/magic/nature/wolf-spirit-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 25,
+    "school": "alteration",
+    "target": "animal",
+    "range": 800,
+    "castTime": 5,
+    "manaCost": 70,
+    "effects": [
+      { "type": "control", "effect": "charm", "maxLevel": 24 }
+    ],
+    "description": "Charms an animal up to level 24."
+  }
+},
+{
+  "_id": "shm-form-of-the-bear-25",
+  "name": "Form of the Bear",
+  "type": "spell",
+  "img": "icons/magic/nature/bear-spirit-brown.webp",
+  "system": {
+    "class": "shaman",
+    "level": 25,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 100,
+    "effects": [
+      { "type": "illusion", "form": "bear" },
+      { "type": "regen", "stat": "hp", "amount": 1 },
+      { "type": "buff", "stat": "wis", "amount": 5 }
+    ],
+    "description": "Transforms the caster into a bear, granting regeneration and wisdom."
+  }
+},
+{
+  "_id": "shm-rising-dexterity-25",
+  "name": "Rising Dexterity",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 25,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "buff", "stat": "dex", "min": 2, "max": 31 }
+    ],
+    "description": "Increases the target’s dexterity."
+  }
+}
+
+]

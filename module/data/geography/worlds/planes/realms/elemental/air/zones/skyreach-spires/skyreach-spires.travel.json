@@ -1,0 +1,35 @@
+{
+  "id": "skyreach-spires-travel",
+  "zone": "skyreach-spires",
+
+  "nodes": [
+    "spire-entry",
+    "windwell",
+    "skybridge",
+    "sovereign-platform"
+  ],
+
+  "edges": [
+    {
+      "from": "spire-entry",
+      "to": "windwell",
+      "type": "wind-path"
+    },
+    {
+      "from": "windwell",
+      "to": "skybridge",
+      "type": "current-transition",
+      "requirements": {
+        "featherfall": true
+      }
+    },
+    {
+      "from": "skybridge",
+      "to": "sovereign-platform",
+      "type": "sky-ascent",
+      "requirements": {
+        "elemental-attunement-air": true
+      }
+    }
+  ]
+}

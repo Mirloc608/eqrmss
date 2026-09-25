@@ -1,0 +1,48 @@
+{
+  "zone": "discord-wastes-rifts",
+  "nodes": [
+    {
+      "id": "rift-chasm",
+      "type": "chasm",
+      "label": "Rift Chasm"
+    },
+    {
+      "id": "gravity-warp-zone",
+      "type": "terrain",
+      "label": "Gravity Warp Zone"
+    },
+    {
+      "id": "storm-crater",
+      "type": "crater",
+      "label": "Storm Crater"
+    }
+  ],
+  "edges": [
+    {
+      "from": "rift-chasm",
+      "to": "gravity-warp-zone",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A hazardous route through unstable gravity."
+    },
+    {
+      "from": "gravity-warp-zone",
+      "to": "storm-crater",
+      "difficulty": "extreme",
+      "type": "chaotic",
+      "description": "A volatile path through arcane storm territory."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "discord-wastes-expanse",
+      "type": "back",
+      "description": "The Rifts connect back to the Expanse."
+    },
+    {
+      "to": "discord-wastes-warfront",
+      "type": "forward",
+      "description": "The Rifts lead toward the Discord Wastes Warfront."
+    }
+  ]
+}

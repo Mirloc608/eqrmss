@@ -1,0 +1,229 @@
+{
+  "id": "druid",
+  "name": "Druid",
+  "type": "pet-profile",
+
+  "description": "Druid summoned and charmed companions represent the natural forces of Norrath. Druids primarily call upon creatures of the wild, spirits of nature, and elemental allies to assist them in combat, exploration, and protection.",
+
+  "class": "Druid",
+
+  "petTypes": [
+    "wolf",
+    "spirit_wolf",
+    "treant",
+    "nature_spirit"
+  ],
+
+  "summonAbilities": {
+    "enabled": true,
+
+    "primaryPet": {
+      "name": "Spirit Wolf",
+      "type": "beast",
+      "levelRange": "1-20",
+
+      "stats": {
+        "strength": 45,
+        "constitution": 55,
+        "agility": 75,
+        "quickness": 70,
+        "presence": 40,
+        "intuition": 65
+      },
+
+      "combat": {
+        "attackType": "natural",
+        "attackBonus": 25,
+        "defensiveBonus": 20,
+
+        "attacks": [
+          {
+            "name": "Bite",
+            "type": "natural",
+            "damage": "1d8",
+            "special": "Bleeding wound"
+          }
+        ]
+      },
+
+      "abilities": [
+        {
+          "name": "Pack Instinct",
+          "description": "The spirit wolf gains bonuses when fighting near allies."
+        },
+        {
+          "name": "Tracking",
+          "description": "The spirit wolf can assist with wilderness tracking."
+        }
+      ]
+    }
+  },
+
+
+  "progression": {
+
+    "levels": {
+
+      "1": {
+        "pet": "Spirit Wolf",
+        "abilities": [
+          "Bite"
+        ]
+      },
+
+      "10": {
+        "petUpgrade": "Greater Spirit Wolf",
+        "abilities": [
+          "Improved Bite",
+          "Howl of Courage"
+        ]
+      },
+
+      "20": {
+        "petUpgrade": "Ancient Spirit Wolf",
+        "abilities": [
+          "Spirit Howl",
+          "Pack Defense"
+        ]
+      },
+
+      "30": {
+        "petUpgrade": "Nature Guardian",
+        "abilities": [
+          "Regeneration",
+          "Rooting Strike"
+        ]
+      },
+
+      "40": {
+        "petUpgrade": "Greater Nature Guardian",
+        "abilities": [
+          "Thorn Barrier",
+          "Healing Spirit"
+        ]
+      },
+
+      "50": {
+        "petUpgrade": "Ancient Treant Guardian",
+        "abilities": [
+          "Entangling Roots",
+          "Nature's Wrath"
+        ]
+      },
+
+      "60": {
+        "petUpgrade": "Avatar of Nature",
+        "abilities": [
+          "Call of the Wild",
+          "Regrowth Aura",
+          "Elemental Fury"
+        ]
+      }
+
+    }
+
+  },
+
+
+  "role": {
+    "primary": "support",
+    "secondary": "tank",
+    "combatStyle": "natural companion"
+  },
+
+
+  "scaling": {
+
+    "health": {
+      "formula": "owner.level * 8 + constitution"
+    },
+
+    "attack": {
+      "formula": "owner.level + pet.training_bonus"
+    },
+
+    "defense": {
+      "formula": "owner.level + agility_bonus"
+    },
+
+    "damage": {
+      "formula": "base_damage + owner.level / 5"
+    }
+
+  },
+
+
+  "skills": {
+
+    "natural_combat": {
+      "cost": 2,
+      "linkedCategory": "combat"
+    },
+
+    "tracking": {
+      "cost": 1,
+      "linkedCategory": "outdoor"
+    },
+
+    "spirit_control": {
+      "cost": 2,
+      "linkedCategory": "power"
+    }
+
+  },
+
+
+  "equipment": {
+
+    "allowed": [
+      "none"
+    ],
+
+    "naturalBonuses": [
+      "claws",
+      "fangs",
+      "spirit_energy"
+    ]
+
+  },
+
+
+  "restrictions": {
+
+    "maximumPets": 1,
+
+    "requiresClass": [
+      "Druid"
+    ],
+
+    "dismissOnRest": false,
+
+    "dismissOnDeath": true
+
+  },
+
+
+  "ai": {
+
+    "behavior": "guardian",
+
+    "priorities": [
+      "protect_owner",
+      "attack_hostile_targets",
+      "assist_group_members"
+    ]
+
+  },
+
+
+  "foundry": {
+
+    "documentType": "pet",
+
+    "itemType": "pet-profile",
+
+    "compendium": "eqrmss.pets"
+
+  }
+
+}

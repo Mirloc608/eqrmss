@@ -1,0 +1,83 @@
+{
+  "id": "eqrmss-world-luclin-travel",
+  "key": "luclin-travel",
+  "name": "Luclin Travel",
+  "type": "world-travel",
+
+  "summary": "Travel across Luclin relies on teleportation, astral pathways, shadow rifts, and lunar anchors.",
+
+  "nodes": [
+    { "id": "shadow_haven", "name": "Shadow Haven", "type": "region" },
+    { "id": "paludal", "name": "Paludal Caverns", "type": "region" },
+    { "id": "grimling", "name": "Grimling Forest", "type": "region" },
+    { "id": "tenebrous", "name": "Tenebrous Mountains", "type": "region" },
+    { "id": "umbral", "name": "Umbral Plains", "type": "region" },
+    { "id": "maidens_eye", "name": "Maiden’s Eye", "type": "region" },
+    { "id": "akheva", "name": "Akheva Ruins", "type": "region" }
+  ],
+
+  "edges": [
+    {
+      "from": "shadow_haven",
+      "to": "paludal",
+      "mode": "teleportation",
+      "difficulty": "low",
+      "description": "Stable teleport anchors connect Shadow Haven to Paludal Caverns."
+    },
+    {
+      "from": "paludal",
+      "to": "grimling",
+      "mode": "lunar-anchor",
+      "difficulty": "moderate",
+      "description": "Natural lunar anchors allow traversal into Grimling Forest."
+    },
+    {
+      "from": "grimling",
+      "to": "tenebrous",
+      "mode": "shadow-rift",
+      "difficulty": "high",
+      "description": "Shadow rifts open pathways into the Tenebrous Mountains."
+    },
+    {
+      "from": "tenebrous",
+      "to": "umbral",
+      "mode": "shadow-rift",
+      "difficulty": "extreme",
+      "description": "Shadow pressure creates unstable rifts into the Umbral Plains."
+    },
+    {
+      "from": "umbral",
+      "to": "maidens_eye",
+      "mode": "astral-translation",
+      "difficulty": "high",
+      "description": "Astral pathways connect the Umbral Plains to Maiden’s Eye."
+    },
+    {
+      "from": "maidens_eye",
+      "to": "akheva",
+      "mode": "astral-translation",
+      "difficulty": "catastrophic",
+      "description": "Only powerful astral translation allows entry into the Akheva Ruins."
+    }
+  ],
+
+  "external_links": [
+    {
+      "to": "eqrmss-world-norrath",
+      "mode": "teleportation",
+      "description": "Teleportation spells and Nexus portals connect Luclin to Norrath."
+    },
+    {
+      "to": "eqrmss-world-kuua",
+      "mode": "astral-translation",
+      "description": "High-order astral translation can bridge Luclin and Kuua."
+    }
+  ],
+
+  "travel_modes": [
+    "teleportation",
+    "astral-translation",
+    "shadow-rift",
+    "lunar-anchor"
+  ]
+}

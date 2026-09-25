@@ -1,0 +1,26 @@
+{
+  "zone": "citadel-core",
+  "hazards": [
+    {
+      "id": "reactor-overload",
+      "name": "Reactor Overload",
+      "severity": "extreme",
+      "trigger": "proximity-to-reactor-chamber",
+      "effects": [
+        "arcane-damage",
+        "random-teleport",
+        "spell-disruption"
+      ]
+    },
+    {
+      "id": "ward-backlash",
+      "name": "Ward Backlash",
+      "severity": "high",
+      "trigger": "interaction-with-warded-conduit",
+      "effects": [
+        "arcane-burn",
+        "stun"
+      ]
+    }
+  ]
+}

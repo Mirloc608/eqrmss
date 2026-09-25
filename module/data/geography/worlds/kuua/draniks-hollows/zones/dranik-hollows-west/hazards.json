@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-hollows-west",
+  "hazards": [
+    {
+      "id": "supply-tunnel-collapse",
+      "name": "Supply Tunnel Collapse",
+      "severity": "high",
+      "trigger": "movement-in-supply-tunnel",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "discord-pocket-surge",
+      "name": "Discord Pocket Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-discord-pocket",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    }
+  ]
+}

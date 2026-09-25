@@ -1,0 +1,448 @@
+{
+  "schemaVersion": "1.0.0",
+  "documentType": "EQRMSS_PLAN_STATE_TRANSITION_RULES",
+  "description": "Authoritative declarative rules for validating EQRMSS planner plan-state transitions. This file defines legal state transitions and authorization boundaries; it does not itself mutate current-plan.json.",
+
+  "authority": {
+    "canonicalStateFile": ".agents/state/current-plan.json",
+    "rulesFile": ".agents/state/state-transition-rules.json",
+    "stateOwner": "Plan State Manager",
+    "planOwner": "Lead Agent",
+    "plannerRole": "Planner",
+    "implementationOwner": "Worker",
+    "validationOwner": "Validator"
+  },
+
+  "principles": {
+    "explicitAuthorizationRequired": true,
+    "readyDoesNotAuthorize": true,
+    "authorizationIsPersistedState": true,
+    "conversationDoesNotConstitutePersistence": true,
+    "plannerCannotMutatePlanState": true,
+    "plannerCannotImplementTasks": true,
+    "repositorySearchCannotDefineTaskIdentity": true,
+    "taskIdentityMustComeFromCurrentPlan": true,
+    "taskDefinitionsAreImmutableAfterReady": true,
+    "authorizationDoesNotReplan": true,
+    "authorizationDoesNotExpandScope": true,
+    "workerHandoffRequiresPersistedAuthorization": true,
+    "workerHandoffRequiresExactTaskIdentity": true,
+    "completionRequiresValidation": true,
+    "failedValidationReturnsTaskToAuthorized": true,
+    "materialPlanChangesRequireNewAuthorization": true
+  },
+
+  "states": {
+    "DRAFT": {
+      "description": "A plan is being constructed or revised and is not yet eligible for execution.",
+      "mayAuthorize": false,
+      "mayExecute": false,
+      "mayValidate": false,
+      "mayComplete": false
+    },
+
+    "READY": {
+      "description": "A frozen plan has passed planning gates but has not been authorized for execution.",
+      "mayAuthorize": true,
+      "mayExecute": false,
+      "mayValidate": false,
+      "mayComplete": false
+    },
+
+    "AUTHORIZED": {
+      "description": "One or more explicitly authorized tasks may proceed, subject to exact task identity, dependencies, scope, and validation requirements.",
+      "mayAuthorize": false,
+      "mayExecute": true,
+      "mayValidate": false,
+      "mayComplete": false
+    },
+
+    "EXECUTING": {
+      "description": "An explicitly authorized task is currently being implemented.",
+      "mayAuthorize": false,
+      "mayExecute": true,
+      "mayValidate": false,
+      "mayComplete": false
+    },
+
+    "VALIDATING": {
+      "description": "Implementation has been handed off for validation and completion has not yet been established.",
+      "mayAuthorize": false,
+      "mayExecute": false,
+      "mayValidate": true,
+      "mayComplete": false
+    },
+
+    "COMPLETE": {
+      "description": "The authorized task has been implemented and all required validation conditions have passed.",
+      "mayAuthorize": false,
+      "mayExecute": false,
+      "mayValidate": false,
+      "mayComplete": true
+    },
+
+    "SUPERSEDED": {
+      "description": "The plan is no longer authoritative because a materially changed plan has replaced it.",
+      "mayAuthorize": false,
+      "mayExecute": false,
+      "mayValidate": false,
+      "mayComplete": false
+    }
+  },
+
+  "transitions": {
+    "authorize": {
+      "from": [
+        "READY"
+      ],
+      "to": "AUTHORIZED",
+      "actor": "Plan State Manager",
+      "requires": [
+        "plan.status == READY",
+        "authorization.status == NOT_AUTHORIZED",
+        "authorization.scope contains at least one task ID",
+        "every authorized task ID exists in plan.tasks",
+        "authorized task definitions match the current plan revision",
+        "authorized scope does not include tasks outside the requested scope",
+        "no task definition is modified as part of authorization"
+      ],
+      "forbids": [
+        "creating a missing task",
+        "changing a task objective",
+        "changing a task worker",
+        "changing task scope",
+        "changing task dependencies",
+        "expanding authorization beyond the requested scope",
+        "executing any task"
+      ]
+    },
+
+    "beginExecution": {
+      "from": [
+        "AUTHORIZED"
+      ],
+      "to": "EXECUTING",
+      "actor": "Plan State Manager",
+      "requires": [
+        "authorization.status == AUTHORIZED",
+        "execution task ID exists in authorization.scope",
+        "execution task ID exists in plan.tasks",
+        "task identity matches exactly",
+        "task definition matches the frozen plan",
+        "all task dependencies are satisfied",
+        "no material plan change has occurred",
+        "worker handoff contains the exact plan ID",
+        "worker handoff contains the exact plan version",
+        "worker handoff contains the exact task ID"
+      ],
+      "forbids": [
+        "substituting another task",
+        "inferring a task from repository search",
+        "executing an unauthorized task",
+        "expanding authorization implicitly"
+      ]
+    },
+
+    "beginValidation": {
+      "from": [
+        "EXECUTING"
+      ],
+      "to": "VALIDATING",
+      "actor": "Plan State Manager",
+      "requires": [
+        "the executing task ID is recorded",
+        "implementation output exists",
+        "implementation remained within authorized scope",
+        "no material plan change occurred during execution"
+      ],
+      "forbids": [
+        "marking the task COMPLETE",
+        "treating implementation as validation",
+        "expanding task scope during validation"
+      ]
+    },
+
+    "completeTask": {
+      "from": [
+        "VALIDATING"
+      ],
+      "to": "COMPLETE",
+      "actor": "Plan State Manager",
+      "requires": [
+        "validation has completed",
+        "every required validation check for the task has passed",
+        "implementation matches the authorized task objective",
+        "implementation remained within task scope",
+        "no non-scope requirement was violated",
+        "the validated task ID exactly matches the executing task ID",
+        "the plan has not been superseded"
+      ],
+      "forbids": [
+        "completion based solely on worker claims",
+        "completion based solely on file existence",
+        "completion when any required validation check failed",
+        "completion of an unauthorized task"
+      ]
+    },
+
+    "failValidation": {
+      "from": [
+        "VALIDATING"
+      ],
+      "to": "AUTHORIZED",
+      "actor": "Plan State Manager",
+      "requires": [
+        "at least one required validation check failed",
+        "the task remains authorized",
+        "the task identity remains unchanged"
+      ],
+      "forbids": [
+        "silently changing the task objective",
+        "silently expanding task scope",
+        "marking the task COMPLETE"
+      ]
+    },
+
+    "revokeAuthorization": {
+      "from": [
+        "AUTHORIZED"
+      ],
+      "to": "READY",
+      "actor": "Plan State Manager",
+      "requires": [
+        "an explicit authorization revocation request exists",
+        "no task is currently executing"
+      ],
+      "forbids": [
+        "revoking an executing task through this transition",
+        "changing the frozen plan definition"
+      ]
+    },
+
+    "supersede": {
+      "from": [
+        "DRAFT",
+        "READY",
+        "AUTHORIZED",
+        "EXECUTING",
+        "VALIDATING"
+      ],
+      "to": "SUPERSEDED",
+      "actor": "Lead Agent",
+      "requires": [
+        "a materially changed plan exists",
+        "the replacement plan has a new plan version or plan ID",
+        "the replacement plan records the reason for supersession"
+      ],
+      "forbids": [
+        "continuing execution under the superseded plan",
+        "transferring authorization automatically to the replacement plan",
+        "assuming previous authorization remains valid"
+      ]
+    }
+  },
+
+  "materialChangeRules": {
+    "description": "Any change affecting these properties invalidates existing execution authorization and requires replanning followed by new authorization.",
+    "changesRequireReauthorization": [
+      "planId",
+      "planVersion",
+      "plan objective",
+      "task identity",
+      "task title",
+      "task objective",
+      "task worker",
+      "task scope",
+      "task nonScope",
+      "task inputs",
+      "task outputs",
+      "task dependencies",
+      "validation requirements",
+      "authorized task set"
+    ],
+    "nonMaterialChanges": [
+      "audit metadata",
+      "transition timestamps",
+      "transition actor metadata",
+      "validation timestamps"
+    ]
+  },
+
+  "authorizationRules": {
+    "authorizationStatuses": [
+      "NOT_AUTHORIZED",
+      "AUTHORIZED"
+    ],
+    "defaultStatus": "NOT_AUTHORIZED",
+    "defaultScope": [],
+    "rules": [
+      {
+        "id": "AUTH-001",
+        "rule": "User intent to authorize is not itself persisted authorization."
+      },
+      {
+        "id": "AUTH-002",
+        "rule": "Authorization is valid only after current-plan.json contains the requested authorized scope."
+      },
+      {
+        "id": "AUTH-003",
+        "rule": "Planner must reread current-plan.json after authorization persistence before worker handoff."
+      },
+      {
+        "id": "AUTH-004",
+        "rule": "A task may execute only if its exact task ID is present in authorization.scope."
+      },
+      {
+        "id": "AUTH-005",
+        "rule": "Authorization cannot implicitly include dependencies unless those dependencies are explicitly authorized."
+      },
+      {
+        "id": "AUTH-006",
+        "rule": "Authorization cannot alter the task definition."
+      },
+      {
+        "id": "AUTH-007",
+        "rule": "Authorization cannot be inferred from a previous conversation turn when authoritative state disagrees."
+      },
+      {
+        "id": "AUTH-008",
+        "rule": "If authoritative state cannot be read or validated, execution is blocked."
+      }
+    ]
+  },
+
+  "taskIdentityRules": {
+    "requiredFields": [
+      "planId",
+      "planVersion",
+      "taskId",
+      "taskTitle",
+      "taskObjective",
+      "worker"
+    ],
+    "resolutionSource": ".agents/state/current-plan.json",
+    "repositorySearchMayResolveIdentity": false,
+    "conversationMayResolveIdentity": false,
+    "memoryMayResolveIdentity": false,
+    "identityMismatchAction": "BLOCK",
+    "missingTaskAction": "BLOCK"
+  },
+
+  "workerHandoffRules": {
+    "required": true,
+    "authorizationRequired": true,
+    "exactTaskRequired": true,
+    "requiredFields": [
+      "planId",
+      "planVersion",
+      "taskId",
+      "taskTitle",
+      "taskObjective",
+      "worker",
+      "scope",
+      "nonScope",
+      "inputs",
+      "output",
+      "validation",
+      "dependencies"
+    ],
+    "plannerMayHandOff": true,
+    "plannerMayImplement": false,
+    "workerMayChangePlanState": false,
+    "workerMayExpandScope": false
+  },
+
+  "completionRules": {
+    "requiredValidation": true,
+    "workerClaimSufficient": false,
+    "fileExistenceSufficient": false,
+    "successfulExecutionSufficient": false,
+    "allValidationChecksRequired": true,
+    "completionAuthority": "Plan State Manager",
+    "completionEvidenceMustReferenceExactTask": true
+  },
+
+  "failureRules": {
+    "cannotReadCanonicalState": "BLOCK",
+    "invalidJson": "BLOCK",
+    "unknownPlanStatus": "BLOCK",
+    "unknownTaskId": "BLOCK",
+    "missingAuthorization": "BLOCK",
+    "authorizationScopeMismatch": "BLOCK",
+    "taskIdentityMismatch": "BLOCK",
+    "dependencyUnsatisfied": "BLOCK",
+    "materialPlanChange": "RETURN_TO_PLANNING",
+    "validationFailure": "RETURN_TO_AUTHORIZED",
+    "unauthorizedImplementation": "BLOCK_AND_REPORT"
+  },
+
+  "audit": {
+    "enabled": true,
+    "requiredFields": [
+      "timestamp",
+      "actor",
+      "action",
+      "planId",
+      "planVersion",
+      "previousState",
+      "newState",
+      "taskScope"
+    ],
+    "authorizationHistoryRequired": true,
+    "implementationHistoryRequired": true,
+    "validationHistoryRequired": true
+  },
+
+  "invariants": [
+    {
+      "id": "INV-001",
+      "name": "Authorization Persistence Invariant",
+      "rule": "No authorization is considered successful until current-plan.json has been persisted and reread with the requested authorized scope."
+    },
+    {
+      "id": "INV-002",
+      "name": "Ready Does Not Authorize",
+      "rule": "READY plans cannot execute tasks."
+    },
+    {
+      "id": "INV-003",
+      "name": "Exact Task Identity",
+      "rule": "A task may execute only when its exact identity matches the authoritative plan."
+    },
+    {
+      "id": "INV-004",
+      "name": "No Context Substitution",
+      "rule": "Repository contents, conversation history, search results, or model inference may not replace an authoritative task definition."
+    },
+    {
+      "id": "INV-005",
+      "name": "No Implicit Scope Expansion",
+      "rule": "Authorization for one task does not authorize another task, dependency, or related implementation."
+    },
+    {
+      "id": "INV-006",
+      "name": "Planner Non-Implementation",
+      "rule": "The Planner may plan and hand off authorized work but may not directly implement repository changes."
+    },
+    {
+      "id": "INV-007",
+      "name": "Validation Before Completion",
+      "rule": "A task cannot become COMPLETE until every required validation check passes."
+    },
+    {
+      "id": "INV-008",
+      "name": "Material Change Invalidates Authorization",
+      "rule": "A material change to the frozen plan invalidates existing execution authorization and requires a new authorization."
+    },
+    {
+      "id": "INV-009",
+      "name": "Superseded Plans Cannot Execute",
+      "rule": "A SUPERSEDED plan has no execution authority."
+    },
+    {
+      "id": "INV-010",
+      "name": "Canonical State Wins",
+      "rule": "When conversational state, agent memory, repository inference, and current-plan.json disagree, current-plan.json is authoritative."
+    }
+  ]
+}

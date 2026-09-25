@@ -1,0 +1,28 @@
+{
+  "region": "umbral-plains",
+
+  "nodes": [
+    { "id": "umbral-plains-main", "name": "Umbral Plains (Main Zone)" },
+    { "id": "vanguard-fortification-line", "name": "Vanguard Fortification Line" },
+    { "id": "akhevan-dominion-front", "name": "Akhevan Dominion Front" },
+    { "id": "void-resonance-basin", "name": "Void Resonance Basin" },
+    { "id": "shadow-anomaly-expanse", "name": "Shadow Anomaly Expanse" },
+    { "id": "umbral-storm-reaches", "name": "Umbral Storm Reaches" }
+  ],
+
+  "edges": [
+    { "from": "umbral-plains-main", "to": "vanguard-fortification-line", "method": "fortified trail" },
+    { "from": "umbral-plains-main", "to": "akhevan-dominion-front", "method": "shadow path" },
+    { "from": "umbral-plains-main", "to": "void-resonance-basin", "method": "resonance descent" },
+
+    { "from": "vanguard-fortification-line", "to": "shadow-anomaly-expanse", "method": "containment breach" },
+    { "from": "akhevan-dominion-front", "to": "void-resonance-basin", "method": "ritual corridor" },
+    { "from": "void-resonance-basin", "to": "umbral-storm-reaches", "method": "storm threshold" }
+  ],
+
+  "externalConnections": [
+    { "to": "tenebrous-borderlands", "method": "borderlands threshold" },
+    { "to": "maidens-eye", "method": "eastern ridge pass" },
+    { "to": "akheva-ruins", "method": "shadow breach" }
+  ]
+}

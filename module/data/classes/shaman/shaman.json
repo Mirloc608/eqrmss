@@ -1,0 +1,204 @@
+{
+  "id": "shaman",
+  "name": "Shaman",
+  "type": "class",
+
+  "description": {
+    "summary": "Shamans wield spirit magic to heal, enhance allies, weaken foes, and commune with ancestral powers.",
+    "lore": "Shamans are tribal mystics who channel the primal and ancestral spirits of Norrath. Their magic enhances physical strength, restores vitality, slows enemies, and binds animal spirits. Through totems and rituals, they serve as spiritual leaders and powerful battlefield casters."
+  },
+
+  "role": {
+    "primary": "Hybrid Support Caster",
+    "secondary": [
+      "Healing",
+      "Buffing",
+      "Debuffing",
+      "Damage",
+      "Control"
+    ]
+  },
+
+  "profession": {
+    "category": "Totem / Ancestral / Primal / Animal / Tribal",
+    "realm": "Spirit",
+    "powerSource": "Ancestral Essence"
+  },
+
+  "stats": {
+    "primeRequisites": ["Empathy", "Intuition"],
+    "secondaryStats": ["Memory", "Presence", "Constitution"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth", "Leather", "Chain"],
+    "restricted": ["Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Spears",
+      "Staves",
+      "Clubs",
+      "Daggers"
+    ],
+    "restricted": ["Heavy Martial Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 3,
+      "Weapon Skills": 4,
+      "Combat Maneuvers": 4,
+      "Athletics": 3,
+      "Perception": 2,
+      "Spirit Spell Lists": 2,
+      "Lore": 2
+    },
+    "bonusCategories": [
+      "Healing",
+      "Buffing",
+      "Debuffing",
+      "Totem Magic",
+      "Animal Spirit Magic"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Spirit": {
+        "Totem": ["Totem Magic"],
+        "Ancestral": ["Ancestral Magic"],
+        "Primal": ["Primal Magic"],
+        "Animal": ["Animal Spirit Magic"],
+        "Tribal": ["Tribal Magic"]
+      }
+    },
+    "specialization": [
+      "Buffing",
+      "Debuffing",
+      "Healing",
+      "Primal Damage"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "shaman_heal",
+        "name": "Spirit Heal",
+        "description": "The shaman restores health using ancestral spirit energy."
+      },
+      {
+        "id": "shaman_slow",
+        "name": "Spirit Slow",
+        "description": "The shaman weakens an enemy’s movement and attack speed."
+      }
+    ],
+    "level5": [
+      {
+        "id": "shaman_buff",
+        "name": "Primal Strength",
+        "description": "The shaman enhances an ally’s physical power with primal magic."
+      }
+    ],
+    "level10": [
+      {
+        "id": "shaman_totem",
+        "name": "Totem of the Ancestors",
+        "description": "The shaman summons a totem that grants powerful buffs to allies."
+      }
+    ],
+    "level20": [
+      {
+        "id": "shaman_spirit_fury",
+        "name": "Spirit Fury",
+        "description": "The shaman unleashes overwhelming primal and ancestral energy."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Spirit Heal",
+    "Spirit Slow",
+    "Primal Strength",
+    "Totem Magic",
+    "Animal Spirit Magic",
+    "Ancestral Magic",
+    "Debuffing",
+    "Buffing"
+  ],
+
+  "combatActions": [
+    { "id": "staff_strike", "name": "Staff Strike" },
+    { "id": "spirit_slow", "name": "Spirit Slow" },
+    { "id": "primal_strike", "name": "Primal Strike" }
+  ],
+
+  "disciplines": [
+    "Totemic Discipline",
+    "Ancestral Discipline",
+    "Primal Discipline"
+  ],
+
+  "startingEquipment": [
+    { "name": "Tribal Staff", "type": "weapon" },
+    { "name": "Leather Armor", "type": "armor" },
+    { "name": "Spirit Totem", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "pure-channeling"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/shaman.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "hybrid support caster",
+      "primaryRole": "support",
+      "secondaryRoles": ["healing", "control", "damage"]
+    },
+
+    "identity": {
+      "strengths": [
+        "buffing",
+        "debuffing",
+        "healing",
+        "totem magic",
+        "animal spirit magic",
+        "ancestral magic"
+      ]
+    },
+
+    "weaknesses": [
+      "limited armor",
+      "lower burst damage than pure casters"
+    ],
+
+    "signatureMechanics": [
+      "spirit slow",
+      "primal strength",
+      "totem magic",
+      "animal spirit magic"
+    ],
+
+    "tags": [
+      "spirit",
+      "totem",
+      "ancestral",
+      "primal",
+      "animal",
+      "tribal"
+    ],
+
+    "pending": [
+      "attack table IDs",
+      "spell list mapping"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "zone": "uqua-chantry",
+  "hazards": [
+    {
+      "id": "spiral-surge",
+      "name": "Spiral Surge",
+      "severity": "high",
+      "trigger": "proximity-to-spiral-channel",
+      "effects": [
+        "knockdown",
+        "cold-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "ritual-backlash",
+      "name": "Ritual Backlash",
+      "severity": "extreme",
+      "trigger": "proximity-to-chantry-pylon",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "spell-interruption"
+      ]
+    }
+  ]
+}

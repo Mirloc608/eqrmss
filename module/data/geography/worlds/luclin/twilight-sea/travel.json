@@ -1,0 +1,32 @@
+{
+  "region": "twilight-sea",
+
+  "nodes": [
+    { "id": "twilight-sea-main", "name": "Twilight Sea (Main Zone)" },
+    { "id": "combine-isle", "name": "Combine Isle" },
+    { "id": "siren-dominion", "name": "Siren Dominion" },
+    { "id": "elemental-convergence", "name": "Elemental Convergence" },
+    { "id": "deepwater-trench", "name": "Deepwater Trench" },
+    { "id": "twilight-reef", "name": "Twilight Reef" },
+    { "id": "sunken-observatory", "name": "Sunken Observatory" },
+    { "id": "stormbreaker-isles", "name": "Stormbreaker Isles" }
+  ],
+
+  "edges": [
+    { "from": "twilight-sea-main", "to": "combine-isle", "method": "mariner route" },
+    { "from": "twilight-sea-main", "to": "siren-dominion", "method": "reef passage" },
+    { "from": "twilight-sea-main", "to": "elemental-convergence", "method": "anomaly drift" },
+
+    { "from": "combine-isle", "to": "sunken-observatory", "method": "arcane descent" },
+    { "from": "siren-dominion", "to": "twilight-reef", "method": "siren channel" },
+    { "from": "twilight-reef", "to": "deepwater-trench", "method": "abyssal drop" },
+
+    { "from": "elemental-convergence", "to": "stormbreaker-isles", "method": "storm path" }
+  ],
+
+  "externalConnections": [
+    { "to": "tenebrous-mountains", "method": "mountain ferry route" },
+    { "to": "sanctus-seru", "method": "seru trade lane" },
+    { "to": "kattacastellum", "method": "western mariner passage" }
+  ]
+}

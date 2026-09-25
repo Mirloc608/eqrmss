@@ -1,0 +1,200 @@
+{
+  "id": "enchanter",
+  "name": "Enchanter",
+  "type": "class",
+
+  "description": {
+    "summary": "Enchanters manipulate the mind, bend perception, and control the flow of battle.",
+    "lore": "Enchanters are masters of arcane mentalism. Their spells charm enemies, create illusions, manipulate mana, and exert powerful crowd control. Through subtlety and brilliance, they shape reality itself—turning foes into allies and chaos into order."
+  },
+
+  "role": {
+    "primary": "Crowd Control Caster",
+    "secondary": [
+      "Utility",
+      "Support",
+      "Charm",
+      "Mana Control"
+    ]
+  },
+
+  "profession": {
+    "category": "Charm / Illusion / Mind / Control / Mana",
+    "realm": "Arcane",
+    "powerSource": "Mental Arcana"
+  },
+
+  "stats": {
+    "primeRequisites": ["Presence", "Memory"],
+    "secondaryStats": ["Intuition", "Empathy", "Constitution"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth"],
+    "restricted": ["Leather", "Chain", "Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Staves",
+      "Daggers",
+      "Wands"
+    ],
+    "restricted": ["Martial Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 4,
+      "Weapon Skills": 5,
+      "Combat Maneuvers": 5,
+      "Athletics": 4,
+      "Perception": 2,
+      "Arcane Spell Lists": 1,
+      "Lore": 2
+    },
+    "bonusCategories": [
+      "Charm Magic",
+      "Illusion Magic",
+      "Mind Magic",
+      "Control Magic",
+      "Mana Manipulation"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Arcane": {
+        "Charm": ["Charm Magic"],
+        "Illusion": ["Illusion Magic"],
+        "Mind": ["Mind Mastery"],
+        "Control": ["Control Magic"],
+        "Mana": ["Mana Manipulation"]
+      }
+    },
+    "specialization": [
+      "Charm",
+      "Illusion",
+      "Control",
+      "Mana Magic"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "enchanter_mesmerize",
+        "name": "Mesmerize",
+        "description": "The enchanter pacifies an enemy with arcane mental energy."
+      },
+      {
+        "id": "enchanter_minor_illusion",
+        "name": "Minor Illusion",
+        "description": "The enchanter creates a small illusion to distract or deceive."
+      }
+    ],
+    "level5": [
+      {
+        "id": "enchanter_charm",
+        "name": "Charm",
+        "description": "The enchanter bends an enemy’s will, turning them into a temporary ally."
+      }
+    ],
+    "level10": [
+      {
+        "id": "enchanter_mana_tap",
+        "name": "Mana Tap",
+        "description": "The enchanter drains mana from an enemy to replenish their own reserves."
+      }
+    ],
+    "level20": [
+      {
+        "id": "enchanter_arcane_domination",
+        "name": "Arcane Domination",
+        "description": "The enchanter exerts overwhelming mental force, enhancing all charm and control spells."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Mesmerize",
+    "Charm",
+    "Illusion Magic",
+    "Mind Magic",
+    "Control Magic",
+    "Mana Manipulation"
+  ],
+
+  "combatActions": [
+    { "id": "mesmerize", "name": "Mesmerize" },
+    { "id": "illusionary_strike", "name": "Illusionary Strike" },
+    { "id": "mana_tap", "name": "Mana Tap" }
+  ],
+
+  "disciplines": [
+    "Charm Discipline",
+    "Illusion Discipline",
+    "Control Discipline"
+  ],
+
+  "startingEquipment": [
+    { "name": "Enchanter’s Staff", "type": "weapon" },
+    { "name": "Silken Robes", "type": "armor" },
+    { "name": "Mentalist’s Tome", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "pure-channeling"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/enchanter.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "crowd control caster",
+      "primaryRole": "control",
+      "secondaryRoles": ["utility", "support"]
+    },
+
+    "identity": {
+      "strengths": [
+        "charm",
+        "mesmerize",
+        "illusion",
+        "control",
+        "mana manipulation"
+      ]
+    },
+
+    "weaknesses": [
+      "low durability",
+      "limited armor",
+      "high risk with charm"
+    ],
+
+    "signatureMechanics": [
+      "mesmerize",
+      "charm",
+      "mana tap",
+      "arcane domination"
+    ],
+
+    "tags": [
+      "arcane",
+      "charm",
+      "illusion",
+      "mind",
+      "control",
+      "mana"
+    ],
+
+    "pending": [
+      "attack table IDs",
+      "spell list mapping"
+    ]
+  }
+}

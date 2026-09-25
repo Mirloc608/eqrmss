@@ -1,0 +1,351 @@
+[
+  {
+    "_id": "wiz-stonebrunt-gate-21-r1",
+    "name": "Stonebrunt Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-mountain.webp",
+    "system": {
+      "class": "wizard",
+      "level": 21,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 150,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "stonebrunt" }
+      ],
+      "description": "Teleports the caster to Stonebrunt Mountains."
+    }
+  },
+  {
+    "_id": "wiz-leatherskin-21-r1",
+    "name": "Leatherskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-brown.webp",
+    "system": {
+      "class": "wizard",
+      "level": 21,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 83,
+      "effects": [
+        { "type": "buff", "stat": "absorb-damage", "amount": 189 }
+      ],
+      "description": "Creates a protective shield that absorbs incoming damage."
+    }
+  },
+  {
+    "_id": "wiz-common-gate-21-r1",
+    "name": "Common Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-desert.webp",
+    "system": {
+      "class": "wizard",
+      "level": 21,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 150,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "commonlands" }
+      ],
+      "description": "Teleports the caster to the Commonlands."
+    }
+  },
+  {
+    "_id": "wiz-twilight-gate-22-r1",
+    "name": "Twilight Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-twilight.webp",
+    "system": {
+      "class": "wizard",
+      "level": 22,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "twilight" }
+      ],
+      "description": "Teleports the caster to the Twilight Sea."
+    }
+  },
+  {
+    "_id": "wiz-levitate-22-r1",
+    "name": "Levitate",
+    "type": "spell",
+    "img": "icons/magic/arcane/levitate.webp",
+    "system": {
+      "class": "wizard",
+      "level": 22,
+      "school": "alteration",
+      "target": "single",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 30,
+      "effects": [
+        { "type": "utility", "effect": "levitate", "duration": 1200 }
+      ],
+      "description": "Allows the target to float above the ground, avoiding terrain obstacles."
+    }
+  },
+  {
+    "_id": "wiz-nek-gate-22-r1",
+    "name": "Nek Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "wizard",
+      "level": 22,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 150,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "nektulos" }
+      ],
+      "description": "Teleports the caster to Nektulos Forest."
+    }
+  },
+  {
+    "_id": "wiz-ro-gate-22-r1",
+    "name": "Ro Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-desert.webp",
+    "system": {
+      "class": "wizard",
+      "level": 22,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 150,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "north-ro" }
+      ],
+      "description": "Teleports the caster to North Ro."
+    }
+  },
+  {
+    "_id": "wiz-xalirilan-appraisal-23-r1",
+    "name": "Xalirilan's Appraisal",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "wizard",
+      "level": 23,
+      "school": "divination",
+      "target": "single",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 145,
+      "effects": [
+        { "type": "utility", "effect": "appraise-ldon-chest" }
+      ],
+      "description": "Appraises a Lost Dungeons of Norrath chest."
+    }
+  },
+  {
+    "_id": "wiz-lightning-storm-23-r1",
+    "name": "Lightning Storm",
+    "type": "spell",
+    "img": "icons/magic/lightning/aoe-lightning.webp",
+    "system": {
+      "class": "wizard",
+      "level": 23,
+      "school": "evocation",
+      "target": "area",
+      "range": 1200,
+      "castTime": 5,
+      "manaCost": 80,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 115, "radius": 20 }
+      ],
+      "description": "Summons a storm of lightning that damages multiple enemies in a radius."
+    }
+  },
+  {
+    "_id": "wiz-major-shielding-23-r1",
+    "name": "Major Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "wizard",
+      "level": 23,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 80,
+      "effects": [
+        { "type": "buff", "stat": "hp", "amount": 46 },
+        { "type": "buff", "stat": "ac", "amount": 9 },
+        { "type": "buff", "stat": "resist-magic", "amount": 3 }
+      ],
+      "description": "Provides a stronger protective barrier, increasing HP, AC, and magic resistance."
+    }
+  },
+  {
+    "_id": "wiz-combine-gate-24-r1",
+    "name": "Combine Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-mountain.webp",
+    "system": {
+      "class": "wizard",
+      "level": 24,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 150,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "dreadlands" }
+      ],
+      "description": "Teleports the caster to the Combine spires in the Dreadlands."
+    }
+  },
+  {
+    "_id": "wiz-cast-force-24-r1",
+    "name": "Cast Force",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "wizard",
+      "level": 24,
+      "school": "evocation",
+      "target": "area",
+      "range": 1000,
+      "castTime": 4,
+      "manaCost": 123,
+      "effects": [
+        { "type": "damage", "element": "arcane", "amount": 42, "radius": 20 }
+      ],
+      "description": "Unleashes a wave of arcane force, damaging all nearby enemies."
+    }
+  },
+  {
+    "_id": "wiz-column-of-lightning-24-r1",
+    "name": "Column of Lightning",
+    "type": "spell",
+    "img": "icons/magic/lightning/aoe-lightning.webp",
+    "system": {
+      "class": "wizard",
+      "level": 24,
+      "school": "evocation",
+      "target": "area",
+      "range": 1200,
+      "castTime": 5,
+      "manaCost": 130,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 80, "radius": 20 }
+      ],
+      "description": "Summons a column of lightning that damages multiple enemies in a radius."
+    }
+  },
+  {
+    "_id": "wiz-frost-shock-24-r1",
+    "name": "Frost Shock",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "wizard",
+      "level": 24,
+      "school": "evocation",
+      "target": "single",
+      "range": 1200,
+      "castTime": 3,
+      "manaCost": 93,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 180 }
+      ],
+      "description": "A devastating cold nuke that deals massive single‑target damage."
+    }
+  },
+  {
+    "_id": "wiz-minor-familiar-25-r1",
+    "name": "Minor Familiar",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "wizard",
+      "level": 25,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 290,
+      "effects": [
+        { "type": "utility", "effect": "summon-familiar", "familiar": "minor" },
+        { "type": "buff", "stat": "resist-all", "amount": 10 },
+        { "type": "buff", "stat": "effective-casting-level", "amount": 2 }
+      ],
+      "description": "Summons a minor familiar that increases resistances and enhances spellcasting."
+    }
+  },
+  {
+    "_id": "wiz-okeils-levity-25-r1",
+    "name": "O'Keil's Levity",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "wizard",
+      "level": 25,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 150,
+      "effects": [
+        { "type": "buff", "stat": "damage-shield", "element": "fire", "amount": 5 },
+        { "type": "buff", "stat": "resist-fire", "amount": 21 },
+        { "type": "utility", "effect": "levitate", "duration": 1200 },
+        { "type": "utility", "effect": "infravision", "duration": 1200 }
+      ],
+      "description": "Surrounds the caster with fiery levity, granting a damage shield, fire resistance, levitation, and infravision."
+    }
+  },
+  {
+    "_id": "wiz-yonder-25-r1",
+    "name": "Yonder",
+    "type": "spell",
+    "img": "icons/magic/arcane/shadowstep.webp",
+    "system": {
+      "class": "wizard",
+      "level": 25,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1,
+      "manaCost": 15,
+      "effects": [
+        { "type": "utility", "effect": "shadowstep" }
+      ],
+      "description": "Instantly shifts the caster a short distance away."
+    }
+  },
+  {
+    "_id": "wiz-north-portal-25-r1",
+    "name": "North Portal",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-north.webp",
+    "system": {
+      "class": "wizard",
+      "level": 25,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-group", "destination": "north-karana" }
+      ],
+      "description": "Teleports the entire group to North Karana."
+    }
+  }
+]

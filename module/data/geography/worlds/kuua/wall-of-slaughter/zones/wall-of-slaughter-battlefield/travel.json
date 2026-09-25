@@ -1,0 +1,43 @@
+{
+  "zone": "wall-of-slaughter-battlefield",
+  "nodes": [
+    {
+      "id": "scorched-earth",
+      "type": "terrain",
+      "label": "Scorched Earth"
+    },
+    {
+      "id": "siege-debris",
+      "type": "debris",
+      "label": "Siege Debris"
+    },
+    {
+      "id": "discord-crater",
+      "type": "crater",
+      "label": "Discord Crater"
+    }
+  ],
+  "edges": [
+    {
+      "from": "scorched-earth",
+      "to": "siege-debris",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite and resistance forces."
+    },
+    {
+      "from": "scorched-earth",
+      "to": "discord-crater",
+      "difficulty": "high",
+      "type": "planar",
+      "description": "A dangerous path into Discord‑warped terrain."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "wall-of-slaughter-barricades",
+      "type": "internal",
+      "description": "The Battlefield leads deeper into Muramite defensive positions."
+    }
+  ]
+}

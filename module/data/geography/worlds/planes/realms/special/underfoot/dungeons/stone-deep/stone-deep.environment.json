@@ -1,0 +1,37 @@
+{
+  "dungeon": "stone-deep",
+
+  "levels": [
+    {
+      "id": "guardian-halls",
+      "name": "Guardian Halls",
+      "description": "Massive stone corridors patrolled by ancient guardians.",
+      "hazards": [
+        { "id": "stone-collapse", "dc": 34, "effect": "damage_and_knockback" }
+      ]
+    },
+    {
+      "id": "crystal-veins",
+      "name": "Crystal Veins",
+      "description": "Glittering caverns infused with divine resonance.",
+      "hazards": [
+        { "id": "resonance-feedback", "dc": 35, "effect": "fear_and_dot" }
+      ]
+    },
+    {
+      "id": "prime-sanctum",
+      "name": "Prime Sanctum",
+      "description": "The deepest sanctum where the Stone Prime resides.",
+      "hazards": [
+        { "id": "collapse-pressure", "dc": 36, "effect": "stat_decay_and_stun" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "stone",
+    "guardian",
+    "labyrinth",
+    "underfoot"
+  ]
+}

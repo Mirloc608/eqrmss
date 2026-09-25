@@ -1,0 +1,71 @@
+{
+  "id": "ranger",
+  "key": "ranger",
+  "name": "Ranger",
+  "type": "discipline-catalog",
+  "disciplines": [
+    {
+      "id": "resistant",
+      "name": "Resistant Discipline",
+      "level": 51,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 40,
+      "effects": [
+        {
+          "type": "RESIST_ALL",
+          "value": 20
+        }
+      ]
+    },
+
+    {
+      "id": "fearless",
+      "name": "Fearless Discipline",
+      "level": 54,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 50,
+      "effects": [
+        {
+          "type": "FEAR_IMMUNITY",
+          "value": true
+        }
+      ]
+    },
+
+    {
+      "id": "trueshot",
+      "name": "Trueshot Discipline",
+      "level": 55,
+      "family": "archery",
+      "durationRounds": 3,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "ARCHERY_HIT_BONUS",
+          "value": 12
+        },
+        {
+          "type": "ARCHERY_DAMAGE_BONUS",
+          "value": 105
+        }
+      ]
+    },
+
+    {
+      "id": "weapon-shield",
+      "name": "Weapon Shield Discipline",
+      "level": 60,
+      "family": "stand",
+      "durationRounds": 3,
+      "reuseRounds": 150,
+      "effects": [
+        {
+          "type": "PARRY_BONUS",
+          "value": 100
+        }
+      ]
+    }
+  ]
+}

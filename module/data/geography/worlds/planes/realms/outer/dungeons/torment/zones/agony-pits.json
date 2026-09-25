@@ -1,0 +1,22 @@
+{
+  "id": "agony-pits",
+  "key": "agony-pits",
+  "name": "Agony Pits",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "torment",
+
+  "description": "The Agony Pits are caverns of eternal suffering, where mortals are broken by divine punishment. Screams echo endlessly through the halls.",
+
+  "hazards": [
+    { "id": "pain-surge", "dc": 36, "effect": "fear_and_dot" },
+    { "id": "pit-collapse", "dc": 37, "effect": "damage_and_knockback" }
+  ],
+
+  "encounters": [
+    { "creature": "Agony Wraith", "level": 95 },
+    { "creature": "Torment Horror", "level": 96 }
+  ],
+
+  "tags": ["torment", "agony", "outer"]
+}

@@ -1,0 +1,34 @@
+{
+  "zone": "bloodfields-command",
+  "patrols": [
+    {
+      "id": "command-tent-patrol",
+      "name": "Command Tent Patrol",
+      "faction": "muramite-command",
+      "route": [
+        "command-tents",
+        "tactical-platform"
+      ],
+      "frequency": "high"
+    },
+    {
+      "id": "node-watch",
+      "name": "Node Watch",
+      "faction": "muramite-command",
+      "route": [
+        "command-node"
+      ],
+      "frequency": "medium"
+    },
+    {
+      "id": "resistance-intel-route",
+      "name": "Resistance Intel Route",
+      "faction": "dranik-resistance",
+      "route": [
+        "command-tents",
+        "command-node"
+      ],
+      "frequency": "low"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "earth-region-travel",
+  "plane": "earth",
+
+  "nodes": [
+    "region-entry",
+    "crystal-caverns",
+    "stone-halls",
+    "tectonic-forge",
+    "earthen-throne",
+    "earth-sovereign-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "crystal-caverns", "type": "cavern-entry" },
+    { "from": "crystal-caverns", "to": "stone-halls", "type": "hall-transition" },
+    { "from": "stone-halls", "to": "tectonic-forge", "type": "forge-ascent" },
+    { "from": "tectonic-forge", "to": "earthen-throne", "type": "throne-descent" },
+    {
+      "from": "earthen-throne",
+      "to": "earth-sovereign-throne",
+      "type": "throne-access",
+      "requirements": { "elemental-attunement": true }
+    }
+  ]
+}

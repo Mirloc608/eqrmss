@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-industrial-refinery",
+  "hazards": [
+    {
+      "id": "vat-surge",
+      "name": "Vat Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-purification-vat",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "furnace-backdraft",
+      "name": "Furnace Backdraft",
+      "severity": "high",
+      "trigger": "interaction-with-refining-furnace",
+      "effects": [
+        "burn-damage",
+        "knockback"
+      ]
+    }
+  ]
+}

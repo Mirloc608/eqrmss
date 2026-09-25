@@ -1,0 +1,43 @@
+{
+  "zone": "bloodfields-front",
+  "nodes": [
+    {
+      "id": "front-trenches",
+      "type": "trenches",
+      "label": "Front Trenches"
+    },
+    {
+      "id": "siege-platform",
+      "type": "platform",
+      "label": "Siege Platform"
+    },
+    {
+      "id": "discord-rift",
+      "type": "rift",
+      "label": "Discord Rift"
+    }
+  ],
+  "edges": [
+    {
+      "from": "front-trenches",
+      "to": "siege-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A contested route between trenches and siege positions."
+    },
+    {
+      "from": "siege-platform",
+      "to": "discord-rift",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A hazardous route into Discord‑ruptured terrain."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "bloodfields-camps",
+      "type": "forward",
+      "description": "The Front leads deeper into Muramite camps."
+    }
+  ]
+}

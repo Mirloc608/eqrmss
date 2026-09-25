@@ -1,0 +1,17 @@
+{
+  "zone": "bloodfields-command",
+  "scripts": [
+    {
+      "id": "command-lockdown-cycle",
+      "name": "Command Lockdown Cycle",
+      "trigger": "time",
+      "description": "Cycles command activity between normal, restricted, and full lockdown."
+    },
+    {
+      "id": "node-overload-check",
+      "name": "Node Overload Check",
+      "trigger": "interaction-with-command-node",
+      "description": "Checks for overload hazard and applies arcane damage."
+    }
+  ]
+}

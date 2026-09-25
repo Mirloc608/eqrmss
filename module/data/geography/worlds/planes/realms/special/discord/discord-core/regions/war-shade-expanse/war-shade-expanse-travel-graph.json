@@ -1,0 +1,38 @@
+{
+  "id": "war-shade-expanse-travel-graph",
+  "region": "war-shade-expanse",
+
+  "nodes": [
+    "shadefall-battlefield",
+    "echoing-march",
+    "discordian-bastion",
+    "the-shade-crucible"
+  ],
+
+  "edges": [
+    {
+      "from": "shadefall-battlefield",
+      "to": "echoing-march",
+      "type": "shadow-path",
+      "requirements": {
+        "anti-corruption-ward": true
+      }
+    },
+    {
+      "from": "echoing-march",
+      "to": "discordian-bastion",
+      "type": "temporal-transition",
+      "requirements": {
+        "temporal-stabilizer": true
+      }
+    },
+    {
+      "from": "discordian-bastion",
+      "to": "the-shade-crucible",
+      "type": "discord-core-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

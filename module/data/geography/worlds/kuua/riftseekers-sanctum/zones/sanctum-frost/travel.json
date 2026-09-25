@@ -1,0 +1,53 @@
+{
+  "zone": "sanctum-frost",
+  "nodes": [
+    {
+      "id": "ice-bridge",
+      "type": "bridge",
+      "label": "Ice Bridge"
+    },
+    {
+      "id": "frost-platform",
+      "type": "platform",
+      "label": "Frost Platform"
+    },
+    {
+      "id": "frost-pylon",
+      "type": "pylon",
+      "label": "Frost Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ice-bridge",
+      "to": "frost-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Riftseeker cryomancers and guardians."
+    },
+    {
+      "from": "ice-bridge",
+      "to": "frost-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord‑amplified frost zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "sanctum-core",
+      "type": "elemental",
+      "description": "Chamber of Frost connects back to the Sanctum Core via planar conduits."
+    },
+    {
+      "to": "sanctum-flame",
+      "type": "elemental",
+      "description": "Elemental pathways link Frost and Flame chambers through balanced planar flows."
+    },
+    {
+      "to": "sanctum-storms",
+      "type": "elemental",
+      "description": "Frost and Storm chambers share atmospheric and temporal conduits."
+    }
+  ]
+}

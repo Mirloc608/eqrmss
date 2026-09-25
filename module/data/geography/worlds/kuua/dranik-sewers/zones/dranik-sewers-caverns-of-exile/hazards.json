@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-sewers-caverns-of-exile",
+  "hazards": [
+    {
+      "id": "arcane-collapse",
+      "name": "Arcane Collapse",
+      "severity": "extreme",
+      "trigger": "movement-in-collapsed-cavern",
+      "effects": [
+        "arcane-damage",
+        "knockback",
+        "random-teleport"
+      ]
+    },
+    {
+      "id": "exile-scream",
+      "name": "Exile Scream",
+      "severity": "high",
+      "trigger": "proximity-to-exile-chamber",
+      "effects": [
+        "fear",
+        "stun"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "zone": "muramite-citadel-heart-of-discord",
+  "nodes": [
+    {
+      "id": "heart-chamber",
+      "type": "chamber",
+      "label": "Heart Chamber"
+    },
+    {
+      "id": "ritual-anchor",
+      "type": "anchor",
+      "label": "Ritual Anchor"
+    },
+    {
+      "id": "discord-fissure",
+      "type": "fissure",
+      "label": "Discord Fissure"
+    }
+  ],
+  "edges": [
+    {
+      "from": "heart-chamber",
+      "to": "ritual-anchor",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into ritual zones."
+    },
+    {
+      "from": "heart-chamber",
+      "to": "discord-fissure",
+      "difficulty": "catastrophic",
+      "type": "arcane",
+      "description": "A perilous route into raw Discord fissures."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-ritual-chamber",
+      "type": "back",
+      "description": "Heart connects back to the Ritual Chamber."
+    }
+  ]
+}

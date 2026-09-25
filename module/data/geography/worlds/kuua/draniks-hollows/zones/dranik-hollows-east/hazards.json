@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-hollows-east",
+  "hazards": [
+    {
+      "id": "fissure-surge",
+      "name": "Fissure Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-fissure-chamber",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "tunnel-collapse",
+      "name": "Tunnel Collapse",
+      "severity": "high",
+      "trigger": "movement-in-collapsed-tunnel",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

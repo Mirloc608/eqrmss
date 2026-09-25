@@ -1,0 +1,212 @@
+{
+    "id": "cleric",
+    "name": "Cleric",
+    "type": "pet-profile",
+
+    "description": {
+        "short": "Divine servants and summoned guardians associated with clerical magic.",
+        "long": "Clerical companions are manifestations of divine power, summoned guardians, blessed constructs, or spiritual allies called upon through faith and devotion. These beings are primarily defensive, protective, and supportive, reflecting the Cleric's role as a healer and champion of divine forces."
+    },
+
+    "class": "Cleric",
+
+    "petTypes": [
+        "Divine Guardian",
+        "Holy Servitor",
+        "Spiritual Companion",
+        "Undead Ward"
+    ],
+
+    "summoning": {
+        "available": true,
+
+        "method": [
+            "Divine Invocation",
+            "Prayer",
+            "Sacred Ritual"
+        ],
+
+        "realm": "Channeling"
+    },
+
+    "progression": {
+        "enabled": true,
+
+        "levels": {
+            "1": {
+                "name": "Minor Divine Servant",
+                "type": "spiritual_companion",
+
+                "stats": {
+                    "level": 1,
+                    "hitPoints": 20,
+                    "defense": 35,
+                    "attack": 25
+                },
+
+                "abilities": [
+                    "Minor Heal",
+                    "Protective Presence"
+                ]
+            },
+
+            "5": {
+                "name": "Lesser Holy Guardian",
+                "type": "divine_guardian",
+
+                "stats": {
+                    "level": 5,
+                    "hitPoints": 45,
+                    "defense": 50,
+                    "attack": 40
+                },
+
+                "abilities": [
+                    "Healing Aura",
+                    "Shield Ally",
+                    "Smite Undead"
+                ]
+            },
+
+            "10": {
+                "name": "Greater Divine Guardian",
+                "type": "holy_servitor",
+
+                "stats": {
+                    "level": 10,
+                    "hitPoints": 90,
+                    "defense": 70,
+                    "attack": 65
+                },
+
+                "abilities": [
+                    "Greater Heal",
+                    "Divine Shield",
+                    "Turn Undead"
+                ]
+            },
+
+            "15": {
+                "name": "Avatar of Faith",
+                "type": "celestial_avatar",
+
+                "stats": {
+                    "level": 15,
+                    "hitPoints": 150,
+                    "defense": 90,
+                    "attack": 80
+                },
+
+                "abilities": [
+                    "Mass Healing",
+                    "Divine Intervention",
+                    "Holy Judgment"
+                ]
+            },
+
+            "20": {
+                "name": "Champion of the Divine",
+                "type": "divine_champion",
+
+                "stats": {
+                    "level": 20,
+                    "hitPoints": 250,
+                    "defense": 110,
+                    "attack": 100
+                },
+
+                "abilities": [
+                    "Resurrection",
+                    "Divine Wrath",
+                    "Guardian Aura"
+                ]
+            }
+        }
+    },
+
+    "combat": {
+        "role": "Support Tank",
+
+        "behavior": {
+            "primary": [
+                "Protect Summoner",
+                "Absorb Damage",
+                "Heal Allies"
+            ],
+
+            "secondary": [
+                "Attack Undead",
+                "Draw Threat",
+                "Remove Harmful Effects"
+            ]
+        }
+    },
+
+    "abilities": {
+        "passive": [
+            {
+                "id": "holy_resistance",
+                "name": "Holy Resistance",
+                "description": "Reduces incoming divine and shadow-based damage."
+            },
+
+            {
+                "id": "faithful_presence",
+                "name": "Faithful Presence",
+                "description": "Provides a morale bonus to nearby allies."
+            }
+        ],
+
+        "active": [
+            {
+                "id": "heal_master",
+                "name": "Heal Master",
+                "description": "Restore health to the summoner or an allied target."
+            },
+
+            {
+                "id": "protective_barrier",
+                "name": "Protective Barrier",
+                "description": "Creates a divine shield around allies."
+            }
+        ]
+    },
+
+    "ai": {
+        "behavior": "support",
+
+        "priority": [
+            "Protect Summoner",
+            "Heal Allies",
+            "Attack Hostile Undead",
+            "Defend Position"
+        ]
+    },
+
+    "equipment": {
+        "allowed": [
+            "Divine Weapon",
+            "Holy Symbol",
+            "Blessed Armor"
+        ]
+    },
+
+    "eq": {
+        "everquest": {
+            "class": "Cleric",
+
+            "inspiration": [
+                "Avatar",
+                "Divine Companion",
+                "Summoned Guardian"
+            ],
+
+            "abilities": [
+                "Complete Heal",
+                "Symbol Buffs",
+                "Divine Aura",
+                "Turn Undead"
+            ]
+        }
+    }
+}

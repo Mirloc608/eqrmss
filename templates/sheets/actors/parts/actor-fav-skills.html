@@ -1,0 +1,84 @@
+<div class="tab active" data-group="primary" data-tab="skills" style="display: flex; flex-direction: column; gap: 15px; padding: 4px;">
+
+  <!-- Section 1: Favorite Skills Quick View -->
+  <div class="panel">
+    <h3>Favorite Skills</h3>
+    <div class="skill-favorite-grid-container" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4px; align-items: center; font-size: 0.9em;">
+
+      <div class="skill-grid-heading skill-name" style="font-weight: bold; border-bottom: 1px solid #444; padding-bottom: 2px;">Skill Name</div>
+      <div class="skill-grid-heading" style="font-weight: bold; border-bottom: 1px solid #444; padding-bottom: 2px; text-align: center;">Ranks</div>
+      <div class="skill-grid-heading" style="font-weight: bold; border-bottom: 1px solid #444; padding-bottom: 2px; text-align: center;">Total Bonus</div>
+      <div class="skill-grid-heading" style="font-weight: bold; border-bottom: 1px solid #444; padding-bottom: 2px; text-align: center;">Action</div>
+
+      {{#each playerskill as |skill key|}}
+        {{#if skill.favorite}}
+          <div class="skill-grid-cell skill-name" data-item-id="{{skill.id}}">
+            <i class="fas fa-star" style="color: #c9b037; font-size: 0.8em; margin-right: 4px;"></i> {{skill.name}}
+          </div>
+          <div class="skill-grid-cell item-prop" style="text-align: center;" data-item-id="{{skill.id}}">
+            <input type="text" name="system.skills.{{key}}.ranks" value="{{skill.ranks}}" data-dtype="Number" class="inline-edit" style="width: 40px; text-align: center; background: #222; border: 1px solid #444; color: #fff;" />
+          </div>
+          <div class="skill-grid-cell item-prop" style="text-align: center;" data-item-id="{{skill.id}}">
+            <strong>{{skill.bonus}}</strong>
+          </div>
+          <div style="text-align: center;">
+            <button type="button" data-action="rollSkill" data-skill-id="{{skill.id}}" style="padding: 2px 6px; font-size: 0.8em; cursor: pointer;">Roll</button>
+          </div>
+        {{/if}}
+      {{/each}}
+
+    </div>
+  </div>
+
+  <!-- Section 2: Master Skill List with Scrollbar -->
+  <div class="panel">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+      <h3 style="margin: 0;">Skill Categories &amp; Skills</h3>
+      <button type="button" data-action="createSkill" style="padding: 2px 8px; font-size: 0.8em; cursor: pointer;"><i class="fas fa-plus"></i> Add Skill</button>
+    </div>
+
+    <!-- Scrollable Wrapper Box -->
+    <div class="skill-scroll-wrapper" style="max-height: 420px; overflow-y: auto; padding-right: 4px; border: 1px solid #333; background: rgba(0,0,0,0.1);">
+      <div class="skill-master-grid-container" style="display: grid; grid-template-columns: 28px 2fr 1.2fr 0.8fr 0.8fr 0.8fr 0.8fr 0.8fr 0.8fr 0.8fr 0.8fr; gap: 4px; align-items: center; font-size: 0.8em;">
+        
+        <!-- Sticky Headers so they stay visible when scrolling -->
+        <div class="skill-grid-heading" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444; text-align: center;">Fav</div>
+        <div class="skill-grid-heading skill-name" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444;">Skill Category / Name</div>
+        <div class="skill-grid-heading" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444; text-align: center;">Applicable Stats</div>
+        <div class="skill-grid-heading" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444; text-align: center;">Dev. Cost</div>
+        <div class="skill-grid-heading" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444; text-align: center;"># Ranks</div>
+        <div class="skill-grid-heading" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444; text-align: center;">New</div>
+        <div class="skill-grid-heading" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444; text-align: center;">Rank</div>
+        <div class="skill-grid-heading" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444; text-align: center;">Stat</div>
+        <div class="skill-grid-heading" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444; text-align: center;">Prof.</div>
+        <div class="skill-grid-heading" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444; text-align: center;">Special</div>
+        <div class="skill-grid-heading" style="font-weight: bold; background: #1a1a1a; position: sticky; top: 0; z-index: 2; padding: 4px 0; border-bottom: 1px solid #444; text-align: center;">Total</div>
+
+        <!-- Loop through full derived playerskill dictionary -->
+        {{#each playerskill as |skill key|}}
+          <div style="text-align: center; padding: 2px 0;">
+            <a class="skill-control" data-action="toggleFavorite" data-item-id="{{skill.id}}" title="Toggle Favorite">
+              <i class="{{#if skill.favorite}}fas fa-star{{else}}far fa-star{{/if}}" style="color: {{#if skill.favorite}}#c9b037{{else}}#666{{/if}};"></i>
+            </a>
+          </div>
+          <div class="skill-grid-cell skill-name" data-item-id="{{skill.id}}" style="padding: 2px 0;">
+            {{skill.name}}
+          </div>
+          <div style="text-align: center; color: #aaa; padding: 2px 0;">{{skill.statsString}}</div>
+          <div style="text-align: center; color: #aaa; padding: 2px 0;">{{skill.cost}}</div>
+          <div style="text-align: center; padding: 2px 0;">{{skill.ranks}}</div>
+          <div style="text-align: center; padding: 2px 0;">
+            <input type="text" name="system.skills.{{key}}.ranks" value="{{skill.ranks}}" data-dtype="Number" class="inline-edit" style="width: 30px; text-align: center; background: #222; border: 1px solid #444; color: #fff;" />
+          </div>
+          <div style="text-align: center; padding: 2px 0;">{{skill.rankBonus}}</div>
+          <div style="text-align: center; padding: 2px 0;">{{skill.statBonus}}</div>
+          <div style="text-align: center; padding: 2px 0;">{{skill.profBonus}}</div>
+          <div style="text-align: center; padding: 2px 0;">{{skill.specialBonus}}</div>
+          <div style="text-align: center; padding: 2px 0;"><strong>{{skill.bonus}}</strong></div>
+        {{/each}}
+
+      </div>
+    </div>
+  </div>
+
+</div>

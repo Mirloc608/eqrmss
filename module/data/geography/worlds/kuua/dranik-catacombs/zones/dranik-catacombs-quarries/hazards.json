@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-catacombs-quarries",
+  "hazards": [
+    {
+      "id": "fissure-surge",
+      "name": "Fissure Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-discord-fissure",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "spell-disruption"
+      ]
+    },
+    {
+      "id": "tunnel-collapse",
+      "name": "Tunnel Collapse",
+      "severity": "high",
+      "trigger": "movement-in-collapsed-tunnel",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

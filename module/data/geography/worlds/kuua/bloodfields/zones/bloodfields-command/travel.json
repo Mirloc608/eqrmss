@@ -1,0 +1,48 @@
+{
+  "zone": "bloodfields-command",
+  "nodes": [
+    {
+      "id": "command-tents",
+      "type": "tents",
+      "label": "Command Tents"
+    },
+    {
+      "id": "tactical-platform",
+      "type": "platform",
+      "label": "Tactical Platform"
+    },
+    {
+      "id": "command-node",
+      "type": "node",
+      "label": "Command Node"
+    }
+  ],
+  "edges": [
+    {
+      "from": "command-tents",
+      "to": "tactical-platform",
+      "difficulty": "low",
+      "type": "internal",
+      "description": "A direct route used by officers and tacticians."
+    },
+    {
+      "from": "tactical-platform",
+      "to": "command-node",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A hazardous route into Discord‑infused command infrastructure."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "bloodfields-camps",
+      "type": "back",
+      "description": "Bloodfields Command connects back to the Camps."
+    },
+    {
+      "to": "bloodfields-rifts",
+      "type": "forward",
+      "description": "Bloodfields Command leads into the Discord‑ruptured Rifts."
+    }
+  ]
+}

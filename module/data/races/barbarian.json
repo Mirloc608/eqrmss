@@ -1,0 +1,173 @@
+{
+    "id": "eqrmss-barbarian",
+    "key": "barbarian",
+    "name": "Barbarian",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/barbarian.png",
+
+    "description": "Barbarians are hardy northern peoples of Norrath, adapted to harsh climates and brutal wilderness. Known for their strength, endurance, and warrior traditions, they commonly inhabit the frozen lands of Everfrost and the surrounding regions.",
+
+    "lore": {
+        "homeland": [
+            "Everfrost Peaks",
+            "Halas"
+        ],
+        "culture": "Barbarian clans value honor, strength, survival, and loyalty to family and tribe.",
+        "alignment": "Often Neutral, Good, or Chaotic depending on clan traditions.",
+        "languages": [
+            "Common",
+            "Barbarian"
+        ]
+    },
+
+    "stats": {
+        "Ag": 0,
+        "Co": 10,
+        "Me": -5,
+        "Re": -5,
+        "SD": 0,
+        "Em": 0,
+        "In": 0,
+        "Pr": 0,
+        "Qu": 0,
+        "St": 10
+    },
+
+    "racialTalents": [
+        {
+            "id": "cold_resistance",
+            "name": "Cold Resistance",
+            "description": "Barbarians are naturally adapted to freezing environments, granting significant resistance to cold-based attacks and environmental hazards.",
+            "effects": [
+                {
+                    "type": "resistance",
+                    "target": "cold",
+                    "value": 25
+                }
+            ]
+        },
+        {
+            "id": "endurance_training",
+            "name": "Endurance Training",
+            "description": "Barbarians are conditioned for survival in harsh climates, granting increased stamina and physical resilience.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Co",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "wilderness_mastery",
+            "name": "Wilderness Mastery",
+            "description": "Barbarians excel in natural environments, gaining bonuses to physical and outdoor skills.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "physical",
+                    "value": 10
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "lore",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "sure_footed",
+            "name": "Sure-Footed",
+            "description": "Years of traversing icy terrain grant Barbarians improved balance and stability.",
+            "effects": [
+                {
+                    "type": "movement",
+                    "target": "balance",
+                    "value": 10
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 25,
+        "pace": "Normal",
+        "encumbranceMultiplier": 1.10
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "6'4\" - 7'2\"",
+        "female": "5'10\" - 6'8\""
+    },
+
+    "weight": {
+        "male": "220 - 320 lbs",
+        "female": "160 - 260 lbs"
+    },
+
+    "lifespan": {
+        "average": "70-90 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "axes": 10,
+            "twoHandedWeapons": 5,
+            "swords": 5
+        },
+        "physical": {
+            "survival": 10,
+            "tracking": 10,
+            "climbing": 5
+        },
+        "subterfuge": {},
+        "magical": {},
+        "lore": {
+            "nature": 5
+        },
+        "social": {}
+    },
+
+    "skillCosts": {
+        "combat": "A",
+        "physical": "B",
+        "subterfuge": "C",
+        "magical": "D",
+        "lore": "C",
+        "social": "B"
+    },
+
+    "favoredProfessions": [
+        "warrior",
+        "berserker",
+        "ranger",
+        "shaman"
+    ],
+
+    "restrictedProfessions": [
+        "wizard",
+        "magician",
+        "enchanter"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Barbarian",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "cloth armor",
+        "iron weapon",
+        "survival knife",
+        "camp supplies"
+    ]
+}

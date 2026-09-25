@@ -1,0 +1,10 @@
+{
+  "id": "void-breach-travel",
+  "zone": "void-breach",
+
+  "nodes": ["entry", "void-rift", "breach-core"],
+  "edges": [
+    { "from": "entry", "to": "void-rift", "type": "void-path" },
+    { "from": "void-rift", "to": "breach-core", "type": "breach-ascent" }
+  ]
+}

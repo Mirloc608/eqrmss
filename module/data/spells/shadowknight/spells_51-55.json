@@ -1,0 +1,459 @@
+[
+  {
+  "_id": "sk-siphon-life-51",
+  "name": "Siphon Life",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/051.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 51,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 115,
+    "effects": [
+      { "type": "lifetap", "min": 100, "max": 150 }
+    ],
+    "description": "Drains life from the target and transfers it to the caster."
+  }
+},
+{
+  "_id": "sk-summon-companion-52",
+  "name": "Summon Companion",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/052.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 52,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "utility", "effect": "call-pet" }
+    ],
+    "description": "Calls the caster’s pet to their side."
+  }
+},
+{
+  "_id": "sk-abduction-of-strength-52",
+  "name": "Abduction of Strength",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/052b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 52,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 5,
+    "effects": [
+      { "type": "debuff", "stat": "str", "amount": -25 }
+    ],
+    "description": "Steals strength from the target."
+  }
+},
+{
+  "_id": "sk-mental-corruption-52",
+  "name": "Mental Corruption",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/052c.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 52,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "proc", "name": "Mental Corruption Strike" }
+    ],
+    "description": "Grants a melee proc that corrupts the target’s mind."
+  }
+},
+{
+  "_id": "sk-comatose-52",
+  "name": "Comatose",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/052d.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 52,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 80,
+    "effects": [
+      { "type": "utility", "effect": "feign-death", "successRate": 87 }
+    ],
+    "description": "Feigns death with an 87% success rate."
+  }
+},
+{
+  "_id": "sk-malignant-dead-52",
+  "name": "Malignant Dead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/052e.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 52,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 390,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetNecS08L039Skel2" }
+    ],
+    "description": "Summons a malignant undead servant."
+  }
+},
+{
+  "_id": "sk-rest-the-dead-52",
+  "name": "Rest the Dead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/052f.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 52,
+    "school": "abjuration",
+    "target": "undead",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 75,
+    "effects": [
+      { "type": "control", "effect": "frenzy-radius", "amount": 1 },
+      { "type": "control", "effect": "reaction-radius", "amount": 1 },
+      { "type": "control", "effect": "pacify" },
+      { "type": "utility", "effect": "memblur", "chance": 1 }
+    ],
+    "description": "Pacifies undead and slightly reduces their awareness."
+  }
+},
+{
+  "_id": "sk-terror-of-death-53",
+  "name": "Terror of Death",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/053.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 53,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 1,
+    "manaCost": 45,
+    "effects": [
+      { "type": "hate", "amount": 1 }
+    ],
+    "description": "A burst of terror that increases hate toward the caster."
+  }
+},
+{
+  "_id": "sk-boil-blood-53",
+  "name": "Boil Blood",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/053b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 53,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 136,
+    "effects": [
+      { "type": "dot", "element": "fire", "min": 40, "max": 67 }
+    ],
+    "description": "Boils the target’s blood, dealing fire damage over time."
+  }
+},
+{
+  "_id": "sk-torrent-of-hate-54",
+  "name": "Torrent of Hate",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/054.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 54,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "debuff", "stat": "atk", "amount": -35 }
+    ],
+    "description": "A torrent of hate that weakens the target’s attack power."
+  }
+},
+{
+  "_id": "sk-spear-of-plague-54",
+  "name": "Spear of Plague",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/054b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 54,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 172,
+    "effects": [
+      { "type": "damage", "element": "disease", "amount": 444 }
+    ],
+    "description": "Launches a plague‑ridden spear at the target."
+  }
+},
+{
+  "_id": "sk-banshee-aura-54",
+  "name": "Banshee Aura",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/054c.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 54,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "buff", "stat": "damage-shield", "min": 6, "max": 18 }
+    ],
+    "description": "Surrounds the caster with a banshee aura that damages attackers."
+  }
+},
+{
+  "_id": "sk-call-of-darkness-54",
+  "name": "Call of Darkness",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/054d.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 54,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 200,
+    "effects": [
+      { "type": "buff", "stat": "atk", "amount": 50 },
+      { "type": "dot", "element": "health", "min": 6, "max": 6 }
+    ],
+    "description": "Increases attack power while draining a small amount of the caster’s life."
+  }
+},
+{
+  "_id": "sk-scythe-of-death-54",
+  "name": "Scythe of Death",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/054e.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 54,
+    "school": "conjuration",
+    "target": "undead",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 140,
+    "effects": [
+      { "type": "damage", "element": "shadow", "amount": 473 }
+    ],
+    "description": "Deals massive shadow damage to undead enemies."
+  }
+},
+{
+  "_id": "sk-fearless-discipline-54",
+  "name": "Fearless Discipline",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/054f.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 54,
+    "school": "defense",
+    "target": "self",
+    "range": 0,
+    "castTime": 0,
+    "manaCost": 0,
+    "effects": [
+      { "type": "buff", "stat": "fear-resist", "amount": 10000 }
+    ],
+    "description": "Grants immunity to fear spells."
+  }
+},
+{
+  "_id": "sk-panic-the-dead-54",
+  "name": "Panic the Dead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/054g.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 54,
+    "school": "alteration",
+    "target": "undead",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "control", "effect": "fear", "maxLevel": 52 }
+    ],
+    "description": "Instills terror in undead, causing them to flee."
+  }
+},
+{
+  "_id": "sk-voice-of-death-55",
+  "name": "Voice of Death",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/055.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 55,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 1,
+    "manaCost": 150,
+    "effects": [
+      { "type": "hate-mod", "amount": 6 }
+    ],
+    "description": "Greatly increases the caster’s hate generation against the target."
+  }
+},
+{
+  "_id": "sk-shroud-of-undeath-55",
+  "name": "Shroud of Undeath",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/055b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 55,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "proc", "name": "Shroud of Death Strike" },
+      { "type": "form", "effect": "icebone-skeletal" }
+    ],
+    "description": "Grants a melee proc and transforms the caster into an icebone skeletal form."
+  }
+},
+{
+  "_id": "sk-shroud-of-death-55",
+  "name": "Shroud of Death",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/055c.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 55,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "proc", "name": "Shroud of Death Strike" }
+    ],
+    "description": "Grants a melee proc that deals additional damage."
+  }
+},
+{
+  "_id": "sk-bobbing-corpse-55",
+  "name": "Bobbing Corpse",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/055d.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 55,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "utility", "effect": "water-breathing" },
+      { "type": "utility", "effect": "levitate" },
+      { "type": "buff", "stat": "resist-poison", "min": 21, "max": 60 }
+    ],
+    "description": "Allows the caster to breathe underwater, levitate, and increases poison resistance."
+  }
+},
+  {
+    "_id": "shd-unholy-aura-55-r1",
+    "name": "Unholy Aura",
+    "type": "spell",
+    "img": "icons/magic/death/skull-aura-purple.webp",
+    "system": {
+    "class": "shadowknight",
+    "level": 55,
+    "school": "discipline",
+    "target": "self",
+    "range": 0,
+    "castTime": 0,
+    "manaCost": 0,
+    "effects": [
+      { "type": "buff", "stat": "lifetap-damage","amount": 100,"mode": "percent"}
+    ],
+    "description": "Empowers the Shadowknight's lifetap spells, increasing their damage and healing potential by 100%."
+    }
+  },
+  {
+  "_id": "shd-spirit-tap-55-r1",
+  "name": "Spirit Tap",
+  "type": "spell",
+  "img": "icons/magic/death/drain-life-purple.webp",
+  "system": {
+    "class": "shadowknight",
+    "level": 55,
+    "school": "alteration",
+    "target": "single",
+    "range": 200,
+    "castTime": 3,
+    "manaCost": 152,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "negative",
+        "amount": 150
+      },
+      {
+        "type": "heal",
+        "stat": "hp",
+        "amount": 150
+      }
+    ],
+    "description": "Drains life energy from the target and transfers it to the Shadowknight."
+  }
+},
+{
+  "_id": "shd-expel-undead-55-r1",
+  "name": "Expel Undead",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+    "class": "shadowknight",
+    "level": 55,
+    "school": "evocation",
+    "target": "undead",
+    "range": 200,
+    "castTime": 3,
+    "manaCost": 93,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "holy",
+        "amount": 200
+      }
+    ],
+    "description": "Channels destructive energy specifically against undead foes."
+  }
+}
+]

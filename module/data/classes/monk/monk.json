@@ -1,0 +1,212 @@
+{
+  "id": "monk",
+  "name": "Monk",
+  "type": "class",
+
+  "description": {
+    "summary": "Monks are masters of unarmed combat, discipline, and inner energy.",
+    "lore": "Monks follow ancient traditions of physical and spiritual discipline, unlocking extraordinary agility, speed, and precision. Through meditation and mastery of body and mind, they channel inner energy into powerful martial techniques."
+  },
+
+  "role": {
+    "primary": "Martial Specialist",
+    "secondary": [
+      "Unarmed Combat",
+      "Mobile Fighter",
+      "Discipline User",
+      "Damage Dealer"
+    ]
+  },
+
+  "profession": {
+    "category": "Body / Mind / Movement / Inner Energy",
+    "realm": "Discipline",
+    "powerSource": "Internal Energy"
+  },
+
+  "stats": {
+    "primeRequisites": ["Agility", "Constitution"],
+    "secondaryStats": ["Intuition", "Empathy", "Strength"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth", "Monk Robes"],
+    "restricted": ["Leather", "Chain", "Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Staff",
+      "Fist Weapons",
+      "Claw Weapons",
+      "Short Sword",
+      "Dagger"
+    ],
+    "restricted": ["Heavy Weapons", "Two-Handed Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 2,
+      "Martial Arts Strikes": 1,
+      "Martial Arts Sweeps": 1,
+      "Weapon Skills": 3,
+      "Acrobatics": 2,
+      "Athletics": 2,
+      "Perception": 2,
+      "Stalk/Hide": 3,
+      "Spell Lists": 8,
+      "Lore": 4
+    },
+    "bonusCategories": [
+      "Martial Arts",
+      "Meditation",
+      "Acrobatics",
+      "Body Control",
+      "Discipline Lore"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Discipline": {
+        "Body": ["Body Mastery"],
+        "Mind": ["Mind Mastery"],
+        "Movement": ["Movement Mastery"],
+        "Inner Energy": ["Inner Energy Techniques"]
+      }
+    },
+    "specialization": [
+      "Combat Disciplines",
+      "Self Enhancement",
+      "Movement Techniques"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "monk_unarmed_mastery",
+        "name": "Unarmed Mastery",
+        "description": "The monk treats their body as a weapon, gaining increased damage and precision with unarmed strikes."
+      },
+      {
+        "id": "monk_meditation",
+        "name": "Meditation",
+        "description": "The monk restores inner energy through focused meditation."
+      }
+    ],
+    "level5": [
+      {
+        "id": "monk_feign_death",
+        "name": "Feign Death",
+        "description": "The monk slows bodily functions to appear dead, avoiding enemy aggression."
+      }
+    ],
+    "level10": [
+      {
+        "id": "monk_disciplines",
+        "name": "Combat Disciplines",
+        "description": "The monk gains advanced offensive and defensive techniques fueled by inner energy."
+      }
+    ],
+    "level20": [
+      {
+        "id": "monk_mastery_of_body",
+        "name": "Mastery of Body and Spirit",
+        "description": "The monk reaches the pinnacle of discipline, enhancing all movement, body, and mind techniques."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Martial Arts",
+    "Dual Wield",
+    "Flying Kick",
+    "Feign Death",
+    "Mend",
+    "Combat Disciplines",
+    "Weightless Movement",
+    "Inner Energy Techniques"
+  ],
+
+  "combatActions": [
+    { "id": "kick", "name": "Kick" },
+    { "id": "tiger_claw", "name": "Tiger Claw" },
+    { "id": "flying_kick", "name": "Flying Kick" },
+    { "id": "roundhouse_kick", "name": "Roundhouse Kick" },
+    { "id": "dragon_punch", "name": "Dragon Punch" }
+  ],
+
+  "disciplines": [
+    "Wholeness of Body",
+    "Inner Flame",
+    "Earthforce",
+    "Speed Focus",
+    "Stone Stance",
+    "Hundred Fists",
+    "Mend Body and Soul"
+  ],
+
+  "startingEquipment": [
+    { "name": "Monk Wraps", "type": "weapon" },
+    { "name": "Simple Monk Robes", "type": "armor" },
+    { "name": "Meditation Beads", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "martial-specialist"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/monk.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "martial specialist",
+      "primaryRole": "damage",
+      "secondaryRoles": ["mobility", "control"]
+    },
+
+    "identity": {
+      "strengths": [
+        "unarmed combat",
+        "mobility",
+        "meditation",
+        "inner energy",
+        "combat disciplines"
+      ]
+    },
+
+    "weaknesses": [
+      "light armor only",
+      "limited weapon options"
+    ],
+
+    "signatureMechanics": [
+      "unarmed mastery",
+      "mend",
+      "feign death",
+      "combat disciplines"
+    ],
+
+    "tags": [
+      "discipline",
+      "body",
+      "mind",
+      "movement",
+      "inner-energy",
+      "martial"
+    ],
+
+    "pending": [
+      "exact resource formula",
+      "attack table IDs",
+      "discipline progression",
+      "level progression"
+    ]
+  }
+}

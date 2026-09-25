@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-citadel-barracks",
+  "hazards": [
+    {
+      "id": "training-collapse",
+      "name": "Training Pit Collapse",
+      "severity": "high",
+      "trigger": "movement-in-training-pit",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "beast-rage",
+      "name": "Beast Rage",
+      "severity": "extreme",
+      "trigger": "proximity-to-beast-pens",
+      "effects": [
+        "heavy-damage",
+        "knockback",
+        "stun"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "zone": "uqua-inner-sanctum",
+  "nodes": [
+    {
+      "id": "sanctum-hall",
+      "type": "hall",
+      "label": "Sanctum Hall"
+    },
+    {
+      "id": "planar-conduit",
+      "type": "conduit",
+      "label": "Planar Conduit"
+    },
+    {
+      "id": "sanctum-pylon",
+      "type": "pylon",
+      "label": "Sanctum Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "sanctum-hall",
+      "to": "planar-conduit",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Ocean Cult guardians."
+    },
+    {
+      "from": "sanctum-hall",
+      "to": "sanctum-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into planar water amplification zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "uqua-final-altar",
+      "type": "internal",
+      "description": "The Inner Sanctum leads directly to the Final Altar."
+    }
+  ]
+}

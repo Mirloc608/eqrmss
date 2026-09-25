@@ -1,0 +1,356 @@
+[
+  {
+    "_id": "eqrmss-berserker-ability-001",
+    "name": "Berserker Training",
+    "type": "ability",
+    "img": "icons/weapons/axes/axe-battle-red.webp",
+    "system": {
+      "class": "berserker",
+      "level": 1,
+      "category": "Passive",
+      "effects": [
+        {
+          "type": "weaponTraining",
+          "weapon": "two_handed_axes",
+          "bonus": 15
+        },
+        {
+          "type": "damageBonus",
+          "amount": 10
+        }
+      ],
+      "description": "The Berserker learns the fundamentals of heavy weapon combat and brutal strikes."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-002",
+    "name": "Battle Rage",
+    "type": "ability",
+    "img": "icons/magic/fire/flame-burning-red.webp",
+    "system": {
+      "class": "berserker",
+      "level": 3,
+      "category": "Rage",
+      "resource": "rage",
+      "duration": 60,
+      "effects": [
+        {
+          "type": "attributeBonus",
+          "attribute": "strength",
+          "amount": 15
+        },
+        {
+          "type": "damageBonus",
+          "amount": 15
+        },
+        {
+          "type": "defensePenalty",
+          "amount": -5
+        }
+      ],
+      "description": "The Berserker enters a furious state, sacrificing caution for power."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-003",
+    "name": "Axe Mastery",
+    "type": "ability",
+    "img": "icons/weapons/axes/axe-double.webp",
+    "system": {
+      "class": "berserker",
+      "level": 5,
+      "category": "Passive",
+      "effects": [
+        {
+          "type": "criticalChance",
+          "weapon": "axe",
+          "amount": 10
+        },
+        {
+          "type": "damageBonus",
+          "weapon": "axe",
+          "amount": 15
+        }
+      ],
+      "description": "The Berserker becomes exceptionally skilled with axes."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-004",
+    "name": "Savage Blow",
+    "type": "ability",
+    "img": "icons/skills/melee/strike-sword-slashing.webp",
+    "system": {
+      "class": "berserker",
+      "level": 8,
+      "category": "Combat",
+      "cooldown": 5,
+      "effects": [
+        {
+          "type": "attackModifier",
+          "bonus": 20
+        },
+        {
+          "type": "damageMultiplier",
+          "amount": 1.5
+        }
+      ],
+      "description": "A devastating strike fueled by raw physical power."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-005",
+    "name": "Endless Fury",
+    "type": "ability",
+    "img": "icons/magic/fire/flame-burning-orange.webp",
+    "system": {
+      "class": "berserker",
+      "level": 10,
+      "category": "Rage",
+      "effects": [
+        {
+          "type": "rageGeneration",
+          "amount": 25
+        },
+        {
+          "type": "attackSpeed",
+          "amount": 10
+        }
+      ],
+      "description": "Every successful attack increases the Berserker's fury."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-006",
+    "name": "Fearless",
+    "type": "ability",
+    "img": "icons/magic/control/fear-fright-white.webp",
+    "system": {
+      "class": "berserker",
+      "level": 15,
+      "category": "Passive",
+      "effects": [
+        {
+          "type": "immunity",
+          "effect": "fear"
+        },
+        {
+          "type": "resistance",
+          "effect": "intimidation",
+          "amount": 50
+        }
+      ],
+      "description": "The Berserker's rage prevents them from fleeing combat."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-007",
+    "name": "Whirling Axes",
+    "type": "ability",
+    "img": "icons/weapons/axes/axe-double-red.webp",
+    "system": {
+      "class": "berserker",
+      "level": 20,
+      "category": "Area Combat",
+      "cooldown": 10,
+      "effects": [
+        {
+          "type": "areaAttack",
+          "radius": 10
+        },
+        {
+          "type": "damage",
+          "amount": "6d10"
+        }
+      ],
+      "description": "The Berserker spins through enemies with devastating momentum."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-008",
+    "name": "Blood Frenzy",
+    "type": "ability",
+    "img": "icons/skills/wounds/injury-pain-body-red.webp",
+    "system": {
+      "class": "berserker",
+      "level": 25,
+      "category": "Rage",
+      "effects": [
+        {
+          "type": "damageBonus",
+          "amount": 25
+        },
+        {
+          "type": "lifesteal",
+          "amount": 10
+        }
+      ],
+      "description": "The Berserker converts pain and injury into increased violence."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-009",
+    "name": "Relentless Assault",
+    "type": "ability",
+    "img": "icons/skills/melee/strike-axe-blood-red.webp",
+    "system": {
+      "class": "berserker",
+      "level": 30,
+      "category": "Combat",
+      "effects": [
+        {
+          "type": "extraAttack",
+          "amount": 1
+        },
+        {
+          "type": "criticalChance",
+          "amount": 15
+        }
+      ],
+      "description": "The Berserker continues attacking without mercy."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-010",
+    "name": "War Cry",
+    "type": "ability",
+    "img": "icons/skills/social/intimidation-pictogram.webp",
+    "system": {
+      "class": "berserker",
+      "level": 35,
+      "category": "Group",
+      "target": "group",
+      "effects": [
+        {
+          "type": "attackBonus",
+          "amount": 20
+        },
+        {
+          "type": "strengthBonus",
+          "amount": 10
+        }
+      ],
+      "description": "A terrifying battle cry inspires allies and shakes enemies."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-011",
+    "name": "Greater Rage",
+    "type": "ability",
+    "img": "icons/magic/fire/flame-burning-red.webp",
+    "system": {
+      "class": "berserker",
+      "level": 40,
+      "category": "Rage",
+      "effects": [
+        {
+          "type": "strengthBonus",
+          "amount": 35
+        },
+        {
+          "type": "damageBonus",
+          "amount": 40
+        },
+        {
+          "type": "defensePenalty",
+          "amount": -15
+        }
+      ],
+      "description": "A legendary rage state that pushes the Berserker beyond normal limits."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-012",
+    "name": "Executioner's Strike",
+    "type": "ability",
+    "img": "icons/weapons/axes/axe-battle-red.webp",
+    "system": {
+      "class": "berserker",
+      "level": 50,
+      "category": "Finisher",
+      "cooldown": 15,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": "20d10"
+        },
+        {
+          "type": "execute",
+          "threshold": 20
+        }
+      ],
+      "description": "A killing blow designed to finish weakened opponents."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-013",
+    "name": "Avatar of Rage",
+    "type": "ability",
+    "img": "icons/magic/fire/flame-embers-orange.webp",
+    "system": {
+      "class": "berserker",
+      "level": 55,
+      "category": "Legendary",
+      "duration": 300,
+      "effects": [
+        {
+          "type": "damageBonus",
+          "amount": 50
+        },
+        {
+          "type": "attackSpeed",
+          "amount": 30
+        },
+        {
+          "type": "criticalChance",
+          "amount": 25
+        }
+      ],
+      "description": "The Berserker becomes a living embodiment of fury."
+    }
+  },
+
+  {
+    "_id": "eqrmss-berserker-ability-014",
+    "name": "Wrath of the Berserker",
+    "type": "ability",
+    "img": "icons/skills/melee/strike-axe-red.webp",
+    "system": {
+      "class": "berserker",
+      "level": 60,
+      "category": "Ultimate",
+      "duration": 600,
+      "effects": [
+        {
+          "type": "damageMultiplier",
+          "amount": 2
+        },
+        {
+          "type": "criticalChance",
+          "amount": 50
+        },
+        {
+          "type": "fearImmunity",
+          "enabled": true
+        },
+        {
+          "type": "rageGeneration",
+          "amount": 100
+        }
+      ],
+      "description": "The Berserker unleashes absolute fury, becoming an unstoppable force of destruction."
+    }
+  }
+]

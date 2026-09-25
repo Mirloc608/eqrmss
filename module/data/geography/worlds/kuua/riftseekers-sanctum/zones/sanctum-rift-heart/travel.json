@@ -1,0 +1,48 @@
+{
+  "zone": "sanctum-rift-heart",
+  "nodes": [
+    {
+      "id": "rift-chasm",
+      "type": "chasm",
+      "label": "Rift Chasm"
+    },
+    {
+      "id": "unstable-platform",
+      "type": "platform",
+      "label": "Unstable Platform"
+    },
+    {
+      "id": "rift-pylon",
+      "type": "pylon",
+      "label": "Rift Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "rift-chasm",
+      "to": "unstable-platform",
+      "difficulty": "high",
+      "type": "planar",
+      "description": "A dangerous route across unstable rift energy."
+    },
+    {
+      "from": "rift-chasm",
+      "to": "rift-pylon",
+      "difficulty": "extreme",
+      "type": "arcane",
+      "description": "A hazardous path into planar stabilization zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "sanctum-core",
+      "type": "rift",
+      "description": "The Rift Heart connects directly to the Sanctum Core via planar fractures."
+    },
+    {
+      "to": "sanctum-ritual-chambers",
+      "type": "arcane",
+      "description": "Ritual Chambers draw energy from the Rift Heart’s instability."
+    }
+  ]
+}

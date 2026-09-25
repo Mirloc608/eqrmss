@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-hollows-east",
+  "nodes": [
+    {
+      "id": "collapsed-tunnel",
+      "type": "tunnel",
+      "label": "Collapsed Tunnel"
+    },
+    {
+      "id": "fissure-chamber",
+      "type": "chamber",
+      "label": "Fissure Chamber"
+    },
+    {
+      "id": "resistance-alcove",
+      "type": "alcove",
+      "label": "Resistance Alcove"
+    }
+  ],
+  "edges": [
+    {
+      "from": "collapsed-tunnel",
+      "to": "fissure-chamber",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route through unstable collapsed stone."
+    },
+    {
+      "from": "fissure-chamber",
+      "to": "resistance-alcove",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord‑warped alcoves."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-hollows-north",
+      "type": "forward",
+      "description": "East leads toward North Hollows."
+    },
+    {
+      "to": "draniks-scar",
+      "type": "back",
+      "description": "East connects upward to Dranik’s Scar."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-scar-south",
+  "hazards": [
+    {
+      "id": "rupture-break",
+      "name": "Rupture Break",
+      "severity": "extreme",
+      "trigger": "proximity-to-rupture-field",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "canyon-collapse",
+      "name": "Canyon Collapse",
+      "severity": "high",
+      "trigger": "movement-in-warfront-canyon",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

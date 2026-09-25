@@ -1,0 +1,49 @@
+<section class="resistance-panel">
+
+<h2>
+    Resistances
+</h2>
+
+<div class="resistance-grid">
+
+{{#if system.resistances}}
+
+{{#each system.resistances}}
+
+<div class="resistance-card">
+
+    <label>
+        {{@key}}
+    </label>
+
+    <input
+        type="number"
+        name="system.resistances.{{@key}}.value"
+        value="{{value}}">
+
+    {{#if bonus}}
+
+    <span class="bonus">
+        +{{bonus}}
+    </span>
+
+    {{/if}}
+
+</div>
+
+{{/each}}
+
+{{else}}
+
+<div class="empty-panel">
+
+    Resistances are calculated from level,
+    race, equipment, and effects.
+
+</div>
+
+{{/if}}
+
+</div>
+
+</section>

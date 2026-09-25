@@ -1,0 +1,43 @@
+{
+  "zone": "muramite-industrial-yard",
+  "nodes": [
+    {
+      "id": "ore-intake-platform",
+      "type": "platform",
+      "label": "Ore Intake Platform"
+    },
+    {
+      "id": "slag-dump",
+      "type": "dump",
+      "label": "Slag Dump"
+    },
+    {
+      "id": "labor-line",
+      "type": "line",
+      "label": "Labor Line"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ore-intake-platform",
+      "to": "labor-line",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by overseers moving between intake and labor assignment."
+    },
+    {
+      "from": "ore-intake-platform",
+      "to": "slag-dump",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into slag contamination zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-industrial-refinery",
+      "type": "forward",
+      "description": "Yard connects forward to the Refinery."
+    }
+  ]
+}

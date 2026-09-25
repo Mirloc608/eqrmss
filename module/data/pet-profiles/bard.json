@@ -1,0 +1,194 @@
+{
+    "id": "bard",
+    "name": "Bard Companion Profile",
+
+    "type": "support",
+
+    "class": "Bard",
+
+    "description":
+        "Bard companions are not permanent summoned pets. This profile defines bard interactions with charmed creatures, temporary allies, familiars, and song-enhanced companions.",
+
+
+    "pet_rules":
+    {
+        "has_native_pet": false,
+
+        "can_charm":
+        true,
+
+        "charm_type":
+        [
+            "creature",
+            "humanoid",
+            "animal"
+        ],
+
+        "temporary_duration":
+        {
+            "enabled": true,
+
+            "default_rounds": 10,
+
+            "scales_with_level": true
+        },
+
+
+        "max_active_companions":
+        {
+            "base": 1,
+
+            "increased_by":
+            [
+                "alternate_advancement",
+                "items",
+                "special_features"
+            ]
+        }
+    },
+
+
+    "bond_rules":
+    {
+        "bond_type":
+        "performance",
+
+        "requires_control_skill":
+        true,
+
+        "control_skill":
+        "performance_bardic",
+
+
+        "failure_effects":
+        [
+            "companion_breaks_control",
+            "hostile_reaction",
+            "song_interruption"
+        ]
+    },
+
+
+    "stats":
+    {
+        "inherit_target_stats":
+        true,
+
+        "modify":
+        {
+            "defensive_bonus":
+            {
+                "source":
+                "active_song_effects"
+            },
+
+            "morale":
+            {
+                "bonus":
+                20
+            }
+        }
+    },
+
+
+    "abilities":
+    [
+        {
+            "id":
+            "song_empowerment",
+
+            "name":
+            "Song Empowerment",
+
+            "type":
+            "passive",
+
+            "effect":
+            {
+                "applies_to":
+                "allies_and_controlled_creatures",
+
+                "modifiers":
+                [
+                    {
+                        "stat":
+                        "attack",
+
+                        "bonus":
+                        "bard_level_scaling"
+                    },
+
+                    {
+                        "stat":
+                        "defense",
+
+                        "bonus":
+                        "bard_level_scaling"
+                    }
+                ]
+            }
+        },
+
+
+        {
+            "id":
+            "controlled_companion",
+
+            "name":
+            "Controlled Companion",
+
+            "type":
+            "special",
+
+            "effect":
+            {
+                "requires_active_song":
+                true,
+
+                "break_conditions":
+                [
+                    "bard_unconscious",
+                    "song_cancelled",
+                    "distance_exceeded"
+                ]
+            }
+        }
+    ],
+
+
+    "supported_effects":
+    [
+        "haste",
+        "attack_bonus",
+        "defense_bonus",
+        "resist_bonus",
+        "movement_bonus",
+        "mana_regeneration",
+        "health_regeneration",
+        "fear_resistance"
+    ],
+
+
+    "excluded_features":
+    [
+        "pet_level_scaling",
+        "pet_equipment",
+        "pet_focus_items"
+    ],
+
+
+    "future_hooks":
+    {
+        "mercenary_support":
+        true,
+
+        "charm_engine":
+        true,
+
+        "illusion_engine":
+        true,
+
+        "companion_ai":
+        true
+    }
+}

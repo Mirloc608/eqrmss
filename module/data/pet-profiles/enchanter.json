@@ -1,0 +1,272 @@
+{
+  "id": "enchanter",
+  "name": "Enchanter",
+  "type": "pet-profile",
+
+  "description": "Enchanter summoned companions are magical constructs and charmed creatures controlled through mental domination. Enchanters specialize in control, illusion, and manipulation, using pets as temporary allies, distractions, and sources of additional combat power.",
+
+  "class": "Enchanter",
+
+  "petTypes": [
+    "animation",
+    "charmed_creature",
+    "illusionary_guardian",
+    "crystalline_construct"
+  ],
+
+  "summonAbilities": {
+    "enabled": true,
+
+    "primaryPet": {
+      "name": "Minor Animation",
+      "type": "construct",
+      "levelRange": "1-20",
+
+      "stats": {
+        "strength": 55,
+        "constitution": 65,
+        "agility": 45,
+        "quickness": 40,
+        "presence": 20,
+        "intuition": 70
+      },
+
+      "combat": {
+        "attackType": "melee",
+        "attackBonus": 20,
+        "defensiveBonus": 25,
+
+        "attacks": [
+          {
+            "name": "Animated Strike",
+            "type": "construct",
+            "damage": "1d8",
+            "special": "Magical force damage"
+          }
+        ]
+      },
+
+      "abilities": [
+        {
+          "name": "Construct Immunities",
+          "description": "The animation is resistant to poison, disease, and mind-affecting effects."
+        },
+        {
+          "name": "Arcane Bond",
+          "description": "The animation gains strength from the Enchanter's magical control."
+        }
+      ]
+    }
+  },
+
+
+  "progression": {
+
+    "levels": {
+
+      "1": {
+        "pet": "Minor Animation",
+        "abilities": [
+          "Animated Strike"
+        ]
+      },
+
+      "10": {
+        "petUpgrade": "Lesser Animation",
+        "abilities": [
+          "Improved Strike",
+          "Arcane Defense"
+        ]
+      },
+
+      "20": {
+        "petUpgrade": "Greater Animation",
+        "abilities": [
+          "Force Slam",
+          "Magic Resistance"
+        ]
+      },
+
+      "30": {
+        "petUpgrade": "Guardian Animation",
+        "abilities": [
+          "Protective Ward",
+          "Stunning Blow"
+        ]
+      },
+
+      "40": {
+        "petUpgrade": "Greater Guardian Animation",
+        "abilities": [
+          "Arcane Shield",
+          "Disrupt Spell"
+        ]
+      },
+
+      "50": {
+        "petUpgrade": "Rune Guardian",
+        "abilities": [
+          "Runic Barrier",
+          "Mana Drain Strike"
+        ]
+      },
+
+      "60": {
+        "petUpgrade": "Ancient Arcane Construct",
+        "abilities": [
+          "Arcane Overload",
+          "Spell Reflection",
+          "Master's Command"
+        ]
+      }
+
+    }
+
+  },
+
+
+  "charmSystem": {
+
+    "enabled": true,
+
+    "description": "Enchanters may temporarily dominate living creatures through charm magic.",
+
+    "allowedTargets": [
+      "humanoid",
+      "beast",
+      "magical_creature"
+    ],
+
+    "duration": {
+      "formula": "level + presence_bonus rounds"
+    },
+
+    "breakConditions": [
+      "damage_taken",
+      "failed_control_check",
+      "distance_exceeded",
+      "owner_dismisses"
+    ],
+
+    "controlCheck": {
+      "skill": "spirit_control",
+      "resistance": "target_willpower"
+    }
+
+  },
+
+
+  "role": {
+    "primary": "control",
+    "secondary": "support",
+    "combatStyle": "magical companion and charmed allies"
+  },
+
+
+  "scaling": {
+
+    "health": {
+      "formula": "owner.level * 6 + constitution"
+    },
+
+    "attack": {
+      "formula": "owner.level + magic_skill_bonus"
+    },
+
+    "defense": {
+      "formula": "owner.level + arcane_defense_bonus"
+    },
+
+    "damage": {
+      "formula": "base_damage + owner.level / 6"
+    },
+
+    "spellPower": {
+      "formula": "owner.power_bonus / 2"
+    }
+
+  },
+
+
+  "skills": {
+
+    "summoning": {
+      "cost": 2,
+      "linkedCategory": "power"
+    },
+
+    "spirit_control": {
+      "cost": 1,
+      "linkedCategory": "power"
+    },
+
+    "illusion_magic": {
+      "cost": 1,
+      "linkedCategory": "magic"
+    },
+
+    "enchantment": {
+      "cost": 1,
+      "linkedCategory": "magic"
+    }
+
+  },
+
+
+  "equipment": {
+
+    "allowed": [
+      "none"
+    ],
+
+    "naturalBonuses": [
+      "arcane_core",
+      "rune_armor",
+      "magical_force"
+    ]
+
+  },
+
+
+  "restrictions": {
+
+    "maximumPets": 1,
+
+    "maximumCharmedCreatures": 1,
+
+    "requiresClass": [
+      "Enchanter"
+    ],
+
+    "dismissOnRest": false,
+
+    "dismissOnDeath": true
+
+  },
+
+
+  "ai": {
+
+    "behavior": "controlled",
+
+    "priorities": [
+      "protect_owner",
+      "disable_enemy",
+      "attack_commanded_target",
+      "maintain_distance"
+    ]
+
+  },
+
+
+  "foundry": {
+
+    "documentType": "pet",
+
+    "itemType": "pet-profile",
+
+    "compendium": "eqrmss.pets"
+
+  }
+
+}

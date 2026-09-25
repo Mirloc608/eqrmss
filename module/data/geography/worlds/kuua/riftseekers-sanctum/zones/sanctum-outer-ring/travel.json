@@ -1,0 +1,48 @@
+{
+  "zone": "sanctum-outer-ring",
+  "nodes": [
+    {
+      "id": "ring-walkway",
+      "type": "walkway",
+      "label": "Ring Walkway"
+    },
+    {
+      "id": "containment-pylon",
+      "type": "pylon",
+      "label": "Containment Pylon"
+    },
+    {
+      "id": "outer-buttress",
+      "type": "buttress",
+      "label": "Outer Buttress"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ring-walkway",
+      "to": "outer-buttress",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Riftseeker wardens."
+    },
+    {
+      "from": "ring-walkway",
+      "to": "containment-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into planar containment zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "sanctum-core",
+      "type": "internal",
+      "description": "The Outer Ring connects directly to the Sanctum Core."
+    },
+    {
+      "to": "sanctum-ritual-chambers",
+      "type": "arcane",
+      "description": "Ritual Chambers draw stabilized energy from the Outer Ring."
+    }
+  ]
+}

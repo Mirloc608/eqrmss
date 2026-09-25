@@ -1,0 +1,32 @@
+{
+  "region": "tenebrous-mountains",
+
+  "nodes": [
+    { "id": "tenebrous-mountains-main", "name": "Tenebrous Mountains (Main Zone)" },
+    { "id": "tenebrous-cliffs", "name": "Tenebrous Cliffs" },
+    { "id": "tenebrous-ridge", "name": "Tenebrous Ridge" },
+    { "id": "tenebrous-caverns", "name": "Tenebrous Caverns" },
+    { "id": "razorfiend-territories", "name": "Razorfiend Territories" },
+    { "id": "tenebrous-borderlands", "name": "Tenebrous Borderlands" },
+    { "id": "lightcrawler-pits", "name": "Lightcrawler Pits" },
+    { "id": "tenebrous-depths", "name": "Tenebrous Depths (Mega-Dungeon)" }
+  ],
+
+  "edges": [
+    { "from": "tenebrous-mountains-main", "to": "tenebrous-cliffs", "method": "ridge ascent" },
+    { "from": "tenebrous-mountains-main", "to": "tenebrous-ridge", "method": "highland trail" },
+    { "from": "tenebrous-mountains-main", "to": "tenebrous-caverns", "method": "cavern descent" },
+    { "from": "tenebrous-mountains-main", "to": "tenebrous-borderlands", "method": "frontier trail" },
+
+    { "from": "tenebrous-cliffs", "to": "razorfiend-territories", "method": "cliff trail" },
+    { "from": "tenebrous-ridge", "to": "lightcrawler-pits", "method": "pit ascent/descent" },
+    { "from": "tenebrous-caverns", "to": "tenebrous-depths", "method": "deep descent" },
+    { "from": "tenebrous-borderlands", "to": "umbral-plains", "method": "umbral threshold crossing" }
+  ],
+
+  "externalConnections": [
+    { "to": "umbral-plains", "method": "borderlands threshold" },
+    { "to": "maidens-eye", "method": "mountain pass" },
+    { "to": "sanctus-seru", "method": "Seru transit route (long-range)" }
+  ]
+}

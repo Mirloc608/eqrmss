@@ -1,0 +1,202 @@
+{
+  "id": "ranger",
+  "name": "Ranger",
+  "type": "class",
+
+  "description": {
+    "summary": "Rangers are versatile hunters who blend martial skill, nature magic, and ranged combat.",
+    "lore": "Rangers walk the wild places of Norrath, mastering bowcraft, dual‑wielding, tracking, and primal nature magic. They serve as scouts, guardians of the wilderness, and deadly skirmishers who strike with speed and precision."
+  },
+
+  "role": {
+    "primary": "Hybrid Skirmisher",
+    "secondary": [
+      "Ranged Damage",
+      "Nature Magic",
+      "Tracking",
+      "Dual‑Wield Melee"
+    ]
+  },
+
+  "profession": {
+    "category": "Earth / Storm / Beast / Growth / Weather",
+    "realm": "Nature",
+    "powerSource": "Primal Essence"
+  },
+
+  "stats": {
+    "primeRequisites": ["Agility", "Intuition"],
+    "secondaryStats": ["Strength", "Empathy", "Constitution"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth", "Leather", "Chain"],
+    "restricted": ["Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Bows",
+      "Dual‑Wield Weapons",
+      "Swords",
+      "Axes",
+      "Daggers"
+    ],
+    "restricted": ["Heavy Two‑Handed Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 2,
+      "Weapon Skills": 2,
+      "Combat Maneuvers": 2,
+      "Acrobatics": 2,
+      "Athletics": 2,
+      "Perception": 1,
+      "Stalk/Hide": 2,
+      "Nature Spell Lists": 4,
+      "Lore": 3
+    },
+    "bonusCategories": [
+      "Archery",
+      "Dual‑Wield",
+      "Nature Lore",
+      "Tracking"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Nature": {
+        "Earth": ["Earthcall"],
+        "Storm": ["Stormcalling"],
+        "Beast": ["Beastbond"],
+        "Growth": ["Growth Magic"],
+        "Weather": ["Weathercraft"]
+      }
+    },
+    "specialization": [
+      "Archery Enhancement",
+      "Nature Strikes",
+      "Movement Magic"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "ranger_dual_wield",
+        "name": "Dual Wield",
+        "description": "The ranger can fight effectively with two weapons."
+      },
+      {
+        "id": "ranger_tracking",
+        "name": "Tracking",
+        "description": "The ranger can follow tracks and locate creatures over distance."
+      }
+    ],
+    "level5": [
+      {
+        "id": "ranger_precision_shot",
+        "name": "Precision Shot",
+        "description": "The ranger gains improved accuracy and critical potential with bows."
+      }
+    ],
+    "level10": [
+      {
+        "id": "ranger_earth_bind",
+        "name": "Earth Bind",
+        "description": "The ranger can hinder enemy movement using nature magic."
+      }
+    ],
+    "level20": [
+      {
+        "id": "ranger_master_hunter",
+        "name": "Master Hunter",
+        "description": "The ranger becomes a master of archery, dual‑wielding, and nature magic."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Dual Wield",
+    "Tracking",
+    "Archery Mastery",
+    "Nature Magic",
+    "Weathercraft"
+  ],
+
+  "combatActions": [
+    { "id": "bow_shot", "name": "Bow Shot" },
+    { "id": "dual_strike", "name": "Dual Strike" },
+    { "id": "kick", "name": "Kick" }
+  ],
+
+  "disciplines": [
+    "Hunter’s Focus",
+    "Nature’s Grace",
+    "Rapid Shot"
+  ],
+
+  "startingEquipment": [
+    { "name": "Training Bow", "type": "weapon" },
+    { "name": "Dual Training Blades", "type": "weapon" },
+    { "name": "Leather Armor", "type": "armor" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "hybrid-martial-channeling"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/ranger.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "hybrid skirmisher",
+      "primaryRole": "damage",
+      "secondaryRoles": ["utility", "control"]
+    },
+
+    "identity": {
+      "strengths": [
+        "archery",
+        "dual‑wield",
+        "tracking",
+        "nature magic",
+        "weathercraft"
+      ]
+    },
+
+    "weaknesses": [
+      "lower durability than tanks",
+      "limited heavy armor"
+    ],
+
+    "signatureMechanics": [
+      "tracking",
+      "dual wield",
+      "archery mastery",
+      "earthcall",
+      "stormcalling"
+    ],
+
+    "tags": [
+      "nature",
+      "earth",
+      "storm",
+      "beast",
+      "growth",
+      "weather",
+      "martial"
+    ],
+
+    "pending": [
+      "attack table IDs",
+      "spell list mapping"
+    ]
+  }
+}

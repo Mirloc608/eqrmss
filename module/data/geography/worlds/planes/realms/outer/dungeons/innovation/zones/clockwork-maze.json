@@ -1,0 +1,22 @@
+{
+  "id": "clockwork-maze",
+  "key": "clockwork-maze",
+  "name": "Clockwork Maze",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "innovation",
+
+  "description": "A labyrinth of gears, pistons, and divine machinery. The maze shifts constantly, reshaping paths and confounding mortals.",
+
+  "hazards": [
+    { "id": "gear-crush", "dc": 36, "effect": "damage_and_knockback" },
+    { "id": "steam-surge", "dc": 37, "effect": "burn_and_dot" }
+  ],
+
+  "encounters": [
+    { "creature": "Clockwork Sentinel", "level": 95 },
+    { "creature": "Gearbound Horror", "level": 96 }
+  ],
+
+  "tags": ["innovation", "clockwork", "outer"]
+}

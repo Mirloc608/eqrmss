@@ -1,0 +1,213 @@
+[
+  {
+    "_id": "wiz-cancel-magic-11-r1",
+    "name": "Cancel Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "wizard",
+      "level": 11,
+      "school": "abjuration",
+      "target": "single",
+      "range": 800,
+      "castTime": 2,
+      "manaCost": 30,
+      "effects": [
+        { "type": "utility", "effect": "dispel", "strength": 1 }
+      ],
+      "description": "Dispels one magical effect from the target."
+    }
+  },
+  {
+    "_id": "wiz-gaze-11-r1",
+    "name": "Gaze",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "wizard",
+      "level": 11,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 1,
+      "manaCost": 15,
+      "effects": [
+        { "type": "utility", "effect": "magnification", "amount": 50 }
+      ],
+      "description": "Enhances the caster’s vision, magnifying distant objects."
+    }
+  },
+  {
+    "_id": "wiz-bind-affinity-12-r1",
+    "name": "Bind Affinity",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-bind.webp",
+    "system": {
+      "class": "wizard",
+      "level": 12,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 100,
+      "effects": [
+        { "type": "utility", "effect": "bind-affinity" }
+      ],
+      "description": "Binds the caster’s soul to their current location, setting a new bind point."
+    }
+  },
+  {
+    "_id": "wiz-frost-spiral-12-r1",
+    "name": "Frost Spiral of Al'Kabor",
+    "type": "spell",
+    "img": "icons/magic/water/aoe-frost.webp",
+    "system": {
+      "class": "wizard",
+      "level": 12,
+      "school": "evocation",
+      "target": "area",
+      "range": 1000,
+      "castTime": 5,
+      "manaCost": 100,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 36, "radius": 20 }
+      ],
+      "description": "Summons a spiral of frost that damages multiple enemies in a wide radius."
+    }
+  },
+  {
+    "_id": "wiz-firestorm-12-r1",
+    "name": "Firestorm",
+    "type": "spell",
+    "img": "icons/magic/fire/aoe-flame.webp",
+    "system": {
+      "class": "wizard",
+      "level": 12,
+      "school": "evocation",
+      "target": "area",
+      "range": 1000,
+      "castTime": 5,
+      "manaCost": 34,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 41, "radius": 20 }
+      ],
+      "description": "Calls down a storm of fire, damaging multiple enemies in a radius."
+    }
+  },
+  {
+    "_id": "wiz-shieldskin-13-r1",
+    "name": "Shieldskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "wizard",
+      "level": 13,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 41,
+      "effects": [
+        { "type": "buff", "stat": "absorb-damage", "amount": 82 }
+      ],
+      "description": "Creates a protective shield that absorbs incoming damage."
+    }
+  },
+  {
+    "_id": "wiz-identify-14-r1",
+    "name": "Identify",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "wizard",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 50,
+      "effects": [
+        { "type": "utility", "effect": "identify" }
+      ],
+      "description": "Reveals the magical properties of an item."
+    }
+  },
+  {
+    "_id": "wiz-project-lightning-14-r1",
+    "name": "Project Lightning",
+    "type": "spell",
+    "img": "icons/magic/lightning/aoe-lightning.webp",
+    "system": {
+      "class": "wizard",
+      "level": 14,
+      "school": "evocation",
+      "target": "area",
+      "range": 1000,
+      "castTime": 4,
+      "manaCost": 85,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 41, "radius": 20 }
+      ],
+      "description": "Projects a surge of lightning outward, damaging all nearby enemies."
+    }
+  },
+  {
+    "_id": "wiz-shielding-15-r1",
+    "name": "Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "wizard",
+      "level": 15,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 50,
+      "effects": [
+        { "type": "buff", "stat": "hp", "amount": 31 },
+        { "type": "buff", "stat": "ac", "amount": 7 },
+        { "type": "buff", "stat": "resist-magic", "amount": 4 }
+      ],
+      "description": "Provides a protective barrier, increasing HP, AC, and magic resistance."
+    }
+  },
+  {
+    "_id": "wiz-pillar-of-fire-15-r1",
+    "name": "Pillar of Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/aoe-flame.webp",
+    "system": {
+      "class": "wizard",
+      "level": 15,
+      "school": "evocation",
+      "target": "area",
+      "range": 1200,
+      "castTime": 5,
+      "manaCost": 84,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 36, "radius": 20 }
+      ],
+      "description": "Summons a pillar of fire that damages multiple enemies in a radius."
+    }
+  },
+  {
+    "_id": "wiz-flame-shock-15-r1",
+    "name": "Flame Shock",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "wizard",
+      "level": 15,
+      "school": "evocation",
+      "target": "single",
+      "range": 1200,
+      "castTime": 4,
+      "manaCost": 65,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 100 }
+      ],
+      "description": "A devastating fire nuke that deals massive single‑target damage."
+    }
+  }
+]

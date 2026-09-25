@@ -1,0 +1,22 @@
+{
+  "id": "tribunal-court",
+  "key": "tribunal-court",
+  "name": "Tribunal Court",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "justice",
+
+  "description": "The Tribunal Court is the seat of cosmic law, where mortals are judged by the divine Tribunal. Echoes of justice resound through the halls.",
+
+  "hazards": [
+    { "id": "judgment-surge", "dc": 36, "effect": "fear_and_confusion" },
+    { "id": "law-overload", "dc": 37, "effect": "stat_decay_and_dot" }
+  ],
+
+  "encounters": [
+    { "creature": "Justice Warden", "level": 95 },
+    { "creature": "Law Sentinel", "level": 96 }
+  ],
+
+  "tags": ["justice", "tribunal", "outer"]
+}

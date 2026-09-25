@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-scar-north",
+  "hazards": [
+    {
+      "id": "frost-surge",
+      "name": "Frost Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-frost-pocket",
+      "effects": [
+        "freeze",
+        "arcane-damage",
+        "slow"
+      ]
+    },
+    {
+      "id": "ridge-slip",
+      "name": "Ridge Slip",
+      "severity": "high",
+      "trigger": "movement-on-ridge-path",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

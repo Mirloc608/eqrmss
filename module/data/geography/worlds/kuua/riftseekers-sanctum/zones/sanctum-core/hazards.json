@@ -1,0 +1,26 @@
+{
+  "zone": "sanctum-core",
+  "hazards": [
+    {
+      "id": "rift-snap",
+      "name": "Rift Snap",
+      "severity": "extreme",
+      "trigger": "proximity-to-crystal-conduit",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "platform-collapse",
+      "name": "Platform Collapse",
+      "severity": "high",
+      "trigger": "movement-on-rift-platform",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

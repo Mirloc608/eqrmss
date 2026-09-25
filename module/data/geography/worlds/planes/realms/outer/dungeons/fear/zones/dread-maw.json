@@ -1,0 +1,22 @@
+{
+  "id": "dread-maw",
+  "key": "dread-maw",
+  "name": "Dread Maw",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "fear",
+
+  "description": "A labyrinth of living stone shaped into monstrous jaws. The Maw consumes mortals with dread and collapse pressure.",
+
+  "hazards": [
+    { "id": "maw-collapse", "dc": 37, "effect": "damage_and_knockback" },
+    { "id": "terror-echo", "dc": 36, "effect": "fear_and_dot" }
+  ],
+
+  "encounters": [
+    { "creature": "Dread Beast", "level": 97 },
+    { "creature": "Labyrinth Sentinel", "level": 98 }
+  ],
+
+  "tags": ["fear", "labyrinth", "outer"]
+}

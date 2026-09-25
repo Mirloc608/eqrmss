@@ -1,0 +1,74 @@
+{
+  "id": "planes-cosmology",
+  "world": "planes",
+
+  "structure": {
+    "elemental": [
+      "fire",
+      "water",
+      "earth",
+      "air"
+    ],
+    "outer": [
+      "fear",
+      "hate",
+      "sky",
+      "valor",
+      "storms",
+      "justice",
+      "innovation",
+      "torment"
+    ],
+    "special": [
+      "time",
+      "underfoot",
+      "discord",
+      "the-void"
+    ]
+  },
+
+  "portals": [
+    {
+      "name": "Planar Tears",
+      "locations": [
+        "fear",
+        "hate",
+        "sky",
+        "valor",
+        "storms",
+        "justice",
+        "innovation",
+        "torment"
+      ],
+      "connects": ["planes", "norrath"]
+    },
+    {
+      "name": "Elemental Anchors",
+      "locations": [
+        "fire",
+        "water",
+        "earth",
+        "air"
+      ],
+      "connects": ["planes"]
+    },
+    {
+      "name": "Temporal Fractures",
+      "locations": ["time"],
+      "connects": ["time", "norrath", "kuua"]
+    },
+    {
+      "name": "Discord Rifts",
+      "locations": ["discord"],
+      "connects": ["discord", "kuua", "planes"]
+    }
+  ],
+
+  "cosmicRules": {
+    "magic": "Originates from the Elemental Planes and flows outward.",
+    "souls": "Pass through Outer Planes after death.",
+    "time": "Nonlinear; Time is a realm, not a dimension.",
+    "discord": "Corrupts planar boundaries and destabilizes reality.",
+    "void": "Nullifies magic and consumes planar energy."
+  }
+}

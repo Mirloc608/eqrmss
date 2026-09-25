@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-citadel-outer",
+  "hazards": [
+    {
+      "id": "rampart-collapse",
+      "name": "Rampart Collapse",
+      "severity": "high",
+      "trigger": "movement-on-outer-wall",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "siege-flare",
+      "name": "Siege Flare",
+      "severity": "extreme",
+      "trigger": "proximity-to-siege-platform",
+      "effects": [
+        "arcane-damage",
+        "knockback",
+        "stun"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+<div class="eqrmss-sheet eqrmss-dark">
+  {{> "systems/eqrmss/templates/sheets/actors/parts/actor-header.html"}}
+  {{> "systems/eqrmss/templates/sheets/actors/parts/actor-tabs.html"}}
+
+  <section class="sheet-body">
+    
+    <!-- Tab 1: Main / Statistics & Defense -->
+    <div class="tab" data-group="primary" data-tab="main">
+      <div class="combat-defense-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+        <div class="panel">
+          <h3>Armor &amp; Defense</h3>
+          <div class="field-row"><label>Armor Type:</label> <span>{{system.defense.armorType}}</span></div>
+          <div class="field-row"><label>MMP / Penalties:</label> <span>{{system.defense.mmp}}</span></div>
+          <div class="field-row"><label>Quickness Bonus:</label> <span>{{system.defense.quBonus}}</span></div>
+          <div class="field-row"><label>Adrenal Defense:</label> <span>{{system.defense.adrenal}}</span></div>
+          <div class="field-row"><label>Total DB:</label> <span>{{system.defense.totalDB}}</span></div>
+        </div>
+
+        <div class="panel">
+          <h3>Resistance Rolls</h3>
+          <div class="field-row"><label>Essence:</label> <span>{{derived.resistance.essence}}</span></div>
+          <div class="field-row"><label>Channeling:</label> <span>{{derived.resistance.channeling}}</span></div>
+          <div class="field-row"><label>Mentalism:</label> <span>{{derived.resistance.mentalism}}</span></div>
+          <div class="field-row"><label>Poison:</label> <span>{{derived.resistance.poison}}</span></div>
+          <div class="field-row"><label>Disease:</label> <span>{{derived.resistance.disease}}</span></div>
+        </div>
+      </div>
+
+      <div class="panel stats-panel">
+        <h3>Statistics</h3>
+        <table class="rmss-table">
+          <thead>
+            <tr><th>Stat</th><th>Temp</th><th>Pot</th><th>Basic Bonus</th><th>Racial</th><th>Special</th><th>Total</th></tr>
+          </thead>
+          <tbody>
+            {{#each derived.stats}}
+            <tr>
+              <td><strong>{{@key}}</strong></td>
+              <td>{{this.temp}}</td>
+              <td>{{this.pot}}</td>
+              <td>{{this.basicBonus}}</td>
+              <td>{{this.racial}}</td>
+              <td>{{this.special}}</td>
+              <td><strong>{{this.total}}</strong></td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 2: Skills -->
+    <div class="tab" data-group="primary" data-tab="skills">
+      <h3>Skill Categories &amp; Skills</h3>
+      <table class="rmss-table skill-matrix">
+        <thead>
+          <tr>
+            <th>Skill Category / Skill Name</th><th>Stats</th><th>Cost</th><th>Ranks</th><th>Rank Bonus</th><th>Cat. Bonus</th><th>Item</th><th>Special</th><th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each derived.skills}}
+          <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.stats}}</td>
+            <td>{{this.cost}}</td>
+            <td>{{this.ranks}}</td>
+            <td>{{this.rankBonus}}</td>
+            <td>{{this.catBonus}}</td>
+            <td>{{this.item}}</td>
+            <td>{{this.special}}</td>
+            <td><strong>{{this.total}}</strong></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tab 3: Status & Hits -->
+    <div class="tab" data-group="primary" data-tab="status">
+      <div class="panel">
+        <h3>Concussion Hits</h3>
+        <div class="hit-track-header">
+          <span>Total Hits: {{system.hits.max}}</span>
+          <span>Rounds of Stun: {{system.hits.stun}}</span>
+          <span>Bleeding/Round: {{system.hits.bleeding}}</span>
+        </div>
+        <div class="hit-boxes-grid">
+          <div class="hit-box-row"><span>Current Damage: {{system.hits.value}}</span></div>
+        </div>
+      </div>
+
+      <div class="status-split-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+        <div class="panel">
+          <h3>Exhaustion Points</h3>
+          <p>Total: {{system.exhaustion.value}} / {{system.exhaustion.max}}</p>
+        </div>
+        <div class="panel">
+          <h3>Encumbrance &amp; Movement</h3>
+          <div class="field-row"><label>BWA:</label> <span>{{system.encumbrance.bwa}} lbs</span></div>
+          <div class="field-row"><label>Base Move Rate:</label> <span>{{system.encumbrance.moveRate}} ft/rnd</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Equipment & Wealth -->
+    <div class="tab" data-group="primary" data-tab="equipment">
+      <div class="equipment-split" style="display: flex; gap: 10px;">
+        <div class="panel" style="flex: 2;">
+          <h3>Equipment and Gear</h3>
+          <table class="rmss-table">
+            <thead><tr><th>Item (Description)</th><th>Location</th><th>Weight</th></tr></thead>
+            <tbody>
+              {{#each actor.items}}
+                {{#if (eq this.type "equipment")}}
+                <tr><td>{{this.name}}</td><td>{{this.system.location}}</td><td>{{this.system.weight}}</td></tr>
+                {{/if}}
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+        <div class="panel" style="flex: 1;">
+          <h3>Coins and Wealth</h3>
+          <div class="field-row"><label>Platinum:</label> <span>{{derived.wealth.pp}}</span></div>
+          <div class="field-row"><label>Gold:</label> <span>{{derived.wealth.gp}}</span></div>
+          <div class="field-row"><label>Silver:</label> <span>{{derived.wealth.sp}}</span></div>
+          <div class="field-row"><label>Copper:</label> <span>{{derived.wealth.cp}}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 5: Spells & Magic -->
+    <div class="tab" data-group="primary" data-tab="spells">
+      <h3>Spell Lists &amp; Magic Items</h3>
+      <div class="panel">
+        <table class="rmss-table">
+          <thead><tr><th>Spell List Name</th><th>Realm</th><th>Type</th><th>Ranks</th><th>Bonus</th></tr></thead>
+          <tbody>
+            {{#each actor.items}}
+              {{#if (eq this.type "spellList")}}
+              <tr><td>{{this.name}}</td><td>{{this.system.realm}}</td><td>{{this.system.type}}</td><td>{{this.system.ranks}}</td><td>{{this.system.bonus}}</td></tr>
+              {{/if}}
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 6: Logs -->
+    <div class="tab" data-group="primary" data-tab="logs">
+      <div class="panel">
+        <h3>Experience Point &amp; Session Log</h3>
+        <div class="field-row"><label>Current Session:</label> <span>{{system.logs.session}}</span></div>
+        <div class="field-row"><label>Adventure Notes / Locale:</label></div>
+        <textarea class="log-textarea" name="system.logs.notes" style="width: 100%; min-height: 120px; background: #222; color: #fff;">{{system.logs.notes}}</textarea>
+      </div>
+    </div>
+
+  </section>
+</div>

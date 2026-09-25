@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-ascension",
+  "nodes": [
+    {
+      "id": "ascension-platform",
+      "type": "platform",
+      "label": "Ascension Platform"
+    },
+    {
+      "id": "discord-lift",
+      "type": "lift",
+      "label": "Discord Lift"
+    },
+    {
+      "id": "cliffside-ladder",
+      "type": "ladder",
+      "label": "Cliffside Ladder"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ascension-platform",
+      "to": "discord-lift",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord lift zones."
+    },
+    {
+      "from": "ascension-platform",
+      "to": "cliffside-ladder",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A narrow route used by Dragorn infiltrators."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-command",
+      "type": "back",
+      "description": "Ascension connects back to the Command Center."
+    },
+    {
+      "to": "muramite-citadel-upper-prison",
+      "type": "up",
+      "description": "Ascension leads upward into the Upper Prison."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "zone": "sanctum-storms",
+  "hazards": [
+    {
+      "id": "lightning-arc",
+      "name": "Lightning Arc",
+      "severity": "extreme",
+      "trigger": "proximity-to-storm-pylon",
+      "effects": [
+        "lightning-damage",
+        "stun",
+        "knockback"
+      ]
+    },
+    {
+      "id": "tempest-fall",
+      "name": "Tempest Fall",
+      "severity": "high",
+      "trigger": "movement-on-tempest-platform",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

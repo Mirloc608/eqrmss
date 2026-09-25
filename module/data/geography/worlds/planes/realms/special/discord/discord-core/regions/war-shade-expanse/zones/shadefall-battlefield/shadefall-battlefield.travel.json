@@ -1,0 +1,35 @@
+{
+  "id": "shadefall-battlefield-travel",
+  "zone": "shadefall-battlefield",
+
+  "nodes": [
+    "battlefront-entry",
+    "shadow-rift",
+    "corruption-field",
+    "general-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "battlefront-entry",
+      "to": "shadow-rift",
+      "type": "shadow-path"
+    },
+    {
+      "from": "shadow-rift",
+      "to": "corruption-field",
+      "type": "corruption-transition",
+      "requirements": {
+        "anti-corruption-ward": true
+      }
+    },
+    {
+      "from": "corruption-field",
+      "to": "general-sanctum",
+      "type": "discord-core-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

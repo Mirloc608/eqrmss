@@ -1,0 +1,21 @@
+{
+  "id": "suffering-halls",
+  "key": "suffering-halls",
+  "name": "Suffering Halls",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "torment",
+
+  "description": "The Suffering Halls are corridors of divine punishment, where mortals endure endless trials of pain and despair.",
+
+  "hazards": [
+    { "id": "despair-wave", "dc": 37, "effect": "stat_decay_and_confusion" }
+  ],
+
+  "encounters": [
+    { "creature": "Suffering Guardian", "level": 97 },
+    { "creature": "Painbound Sentinel", "level": 98 }
+  ],
+
+  "tags": ["torment", "suffering", "outer"]
+}

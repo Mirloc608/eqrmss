@@ -1,0 +1,44 @@
+{
+  "zone": "stone-halls",
+
+  "terrain": [
+    "mountain-heart-corridors",
+    "ancient-stone-pillars",
+    "deep-echo-chambers",
+    "tectonic-archways"
+  ],
+
+  "lighting": "earth-glow",
+
+  "hazards": [
+    {
+      "id": "stonefall-collapse",
+      "dc": 26,
+      "effect": "crushing_damage_and_knockdown"
+    },
+    {
+      "id": "echo-resonance",
+      "dc": 25,
+      "effect": "sonic_damage_and_disorientation"
+    },
+    {
+      "id": "tectonic-shift",
+      "dc": 27,
+      "effect": "forced_movement_and_stat_decay"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "medium",
+    "notes": "The halls shift subtly with tectonic force; echo chambers may reveal or hide pathways."
+  },
+
+  "environmentTags": [
+    "earth",
+    "stone",
+    "mountain-heart",
+    "tectonic",
+    "elemental"
+  ]
+}

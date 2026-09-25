@@ -1,0 +1,27 @@
+{
+  "zone": "wall-of-slaughter-war-gate",
+  "hazards": [
+    {
+      "id": "gate-collapse",
+      "name": "Gate Collapse",
+      "severity": "catastrophic",
+      "trigger": "proximity-to-gatehouse",
+      "effects": [
+        "knockdown",
+        "immobilization",
+        "physical-damage"
+      ]
+    },
+    {
+      "id": "discord-pylon-surge",
+      "name": "Discord Pylon Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-discord-pylon",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "random-teleport"
+      ]
+    }
+  ]
+}

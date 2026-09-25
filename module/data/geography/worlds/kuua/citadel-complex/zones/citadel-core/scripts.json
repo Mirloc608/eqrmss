@@ -1,0 +1,17 @@
+{
+  "zone": "citadel-core",
+  "scripts": [
+    {
+      "id": "core-alert-cycle",
+      "name": "Core Alert Cycle",
+      "trigger": "time",
+      "description": "Cycles core activity between normal, restricted, and full lockdown."
+    },
+    {
+      "id": "reactor-overload-check",
+      "name": "Reactor Overload Check",
+      "trigger": "proximity-to-reactor-chamber",
+      "description": "Triggers reactor overload hazard."
+    }
+  ]
+}

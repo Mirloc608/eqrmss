@@ -1,0 +1,32 @@
+{
+  "zone": "shattered-expanse",
+  "description": "The Shattered Expanse is a broken tableland of floating stone rifts, black-grass flats, and unstable shelves of cracked obsidian. It looks like a frontier that was torn apart and never fully stitched back together. The ground shifts underfoot in long, grinding steps, and every ridge seems to have been lifted by a different violent force. Stone plates balance on edge, split by chasms that glow with violet light, while low clouds of ash and spectral dust drift through the air like battlefield smoke.",
+  "landscape": {
+    "summary": "A wild, fragmented plain where stone islands, blackwater channels, and spectral ravines dominate the horizon.",
+    "mountains": [
+      "The jagged shard-ridges that rise from the plain like broken mountain teeth.",
+      "Low basalt escarpments that shiver at the edges of deep fracture cuts."
+    ],
+    "rivers": [
+      "The Sable Vein threads through the expanse in narrow black channels that swallow light.",
+      "A dozen intermittent runnels of runoff crack across the ground and vanish into rift mouths."
+    ],
+    "forests": [
+      "Dark thorn-briar groves struggle to survive in the cracks between shards.",
+      "Glass-root thickets grow in the lee of the larger stone terraces and glow faintly at night."
+    ],
+    "notableFeatures": [
+      "Floating shard terraces that drift in slow arcs above the plain.",
+      "Fracture trenches that spit up ghostfire and echo with distant shouts.",
+      "Collapsed cairns and ruined waymarkers left by earlier forays into Discord-Core."
+    ]
+  },
+  "terrain": ["floating-shards", "broken-plains", "rift-cracks"],
+  "lighting": "discord-gloom",
+  "hazards": [
+    { "id": "shard-fall", "dc": 27, "effect": "damage_and_knockdown" },
+    { "id": "rift-snap", "dc": 28, "effect": "forced_movement" }
+  ],
+  "travel": { "encounterDensity": "high", "restSafety": "low" },
+  "environmentTags": ["discord", "fracture", "chaos"]
+}

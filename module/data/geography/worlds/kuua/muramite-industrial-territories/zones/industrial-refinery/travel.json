@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-industrial-refinery",
+  "nodes": [
+    {
+      "id": "refining-furnace",
+      "type": "furnace",
+      "label": "Refining Furnace"
+    },
+    {
+      "id": "purification-vat",
+      "type": "vat",
+      "label": "Purification Vat"
+    },
+    {
+      "id": "discord-fissure",
+      "type": "fissure",
+      "label": "Discord Fissure"
+    }
+  ],
+  "edges": [
+    {
+      "from": "refining-furnace",
+      "to": "purification-vat",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path between furnace and purification vats."
+    },
+    {
+      "from": "refining-furnace",
+      "to": "discord-fissure",
+      "difficulty": "extreme",
+      "type": "arcane",
+      "description": "A perilous route into raw Discord fissures."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-industrial-foundry",
+      "type": "forward",
+      "description": "Refinery connects forward to the Foundry."
+    },
+    {
+      "to": "muramite-industrial-discord-reactor",
+      "type": "back",
+      "description": "Refinery links back to the Discord Reactor."
+    }
+  ]
+}

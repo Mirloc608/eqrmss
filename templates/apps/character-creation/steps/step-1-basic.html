@@ -1,0 +1,51 @@
+<section class="eqrmss-cc-step eqrmss-cc-step-basic">
+
+  <header class="eqrmss-cc-step-header">
+    <h2>Basic Information</h2>
+    <p>Enter your character’s name and select a gender.</p>
+  </header>
+
+  {{!-- ========================================================= --}}
+  {{!-- GM Override Indicator                                      --}}
+  {{!-- ========================================================= --}}
+  {{#if gmOverrideActive}}
+    <div class="eqrmss-gm-override-note">
+      <i class="fas fa-exclamation-triangle"></i>
+      GM Override Active — Class restrictions may be modified later.
+    </div>
+  {{/if}}
+
+  <div class="eqrmss-cc-basic-grid">
+
+    {{!-- Character Name --}}
+    <div class="eqrmss-cc-field">
+      <label for="cc-name">Character Name</label>
+      <input
+        id="cc-name"
+        type="text"
+        value="{{wizard.selection.name}}"
+        placeholder="Enter a name"
+        data-action="set-name"
+      />
+    </div>
+
+    {{!-- Gender --}}
+    <div class="eqrmss-cc-field">
+      <label for="cc-gender">Gender</label>
+      <select id="cc-gender" data-action="set-gender">
+        <option value="">Select Gender</option>
+        <option value="male"   {{#if (eq wizard.selection.gender "male")}}selected{{/if}}>Male</option>
+        <option value="female" {{#if (eq wizard.selection.gender "female")}}selected{{/if}}>Female</option>
+        <option value="other"  {{#if (eq wizard.selection.gender "other")}}selected{{/if}}>Other</option>
+      </select>
+    </div>
+
+  </div>
+
+  <footer class="eqrmss-cc-step-footer">
+    <button type="button" class="eqrmss-cc-next" data-action="next">
+      Next →
+    </button>
+  </footer>
+
+</section>

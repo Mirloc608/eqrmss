@@ -1,0 +1,37 @@
+{
+  "dungeon": "chains-of-eternity",
+
+  "levels": [
+    {
+      "id": "chain-bridges",
+      "name": "Chain Bridges",
+      "description": "Suspended void‑chains form precarious pathways.",
+      "hazards": [
+        { "id": "chain-snap", "dc": 36, "effect": "void_damage_and_knockback" }
+      ]
+    },
+    {
+      "id": "anchor-pillars",
+      "name": "Anchor Pillars",
+      "description": "Temporal anchors pulse with unstable energy.",
+      "hazards": [
+        { "id": "temporal-feedback", "dc": 37, "effect": "initiative_loss_and_stagger" }
+      ]
+    },
+    {
+      "id": "eternity-locks",
+      "name": "Eternity Locks",
+      "description": "Massive locks bind the prison’s core.",
+      "hazards": [
+        { "id": "lock-collapse", "dc": 38, "effect": "stat_decay_and_force_damage" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "chains",
+    "eternity",
+    "temporal",
+    "void"
+  ]
+}

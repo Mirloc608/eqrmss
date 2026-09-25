@@ -1,0 +1,27 @@
+{
+  "zone": "uqua-ocean-god-halls",
+  "hazards": [
+    {
+      "id": "tidal-surge",
+      "name": "Tidal Surge",
+      "severity": "high",
+      "trigger": "proximity-to-elevated-channel",
+      "effects": [
+        "knockdown",
+        "cold-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "pylon-backlash",
+      "name": "Pylon Backlash",
+      "severity": "extreme",
+      "trigger": "proximity-to-tidal-pylon",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "spell-interruption"
+      ]
+    }
+  ]
+}

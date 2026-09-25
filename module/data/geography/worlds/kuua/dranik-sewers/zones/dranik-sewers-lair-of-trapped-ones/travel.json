@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-sewers-lair-of-trapped-ones",
+  "nodes": [
+    {
+      "id": "prison-chamber",
+      "type": "chamber",
+      "label": "Prison Chamber"
+    },
+    {
+      "id": "twisted-hall",
+      "type": "hall",
+      "label": "Twisted Hall"
+    },
+    {
+      "id": "scream-pit",
+      "type": "pit",
+      "label": "Scream Pit"
+    }
+  ],
+  "edges": [
+    {
+      "from": "prison-chamber",
+      "to": "twisted-hall",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route through corrupted prison chambers."
+    },
+    {
+      "from": "twisted-hall",
+      "to": "scream-pit",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord‑warped pits."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-sewers-pool-of-sludge",
+      "type": "back",
+      "description": "The Lair connects back to the Pool of Sludge."
+    },
+    {
+      "to": "dranik-sewers-caverns-of-exile",
+      "type": "forward",
+      "description": "The Lair leads toward the Caverns of Exile."
+    }
+  ]
+}

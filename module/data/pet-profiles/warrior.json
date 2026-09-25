@@ -1,0 +1,67 @@
+{
+    "id": "warrior",
+
+    "name": "Warrior Pet Profile",
+
+    "class": "Warrior",
+
+    "type": "pet-profile",
+
+
+    "enabled": false,
+
+
+    "description":
+        "Warriors do not have native pet abilities. This profile exists to support future companion, mercenary, charm, or special encounter systems.",
+
+
+    "pet_rules":
+    {
+        "has_native_pet": false,
+
+        "pet_type": null,
+
+        "scaling": false,
+
+        "summoning": false,
+
+        "charm_support": false
+    },
+
+
+    "abilities":
+    [],
+
+
+    "progression":
+    {
+        "levels":
+        {}
+    },
+
+
+    "effects":
+    [],
+
+
+    "engine_hooks":
+    {
+        "pet_engine": false,
+
+        "companion_engine": true,
+
+        "mercenary_engine": true,
+
+        "charm_engine": false
+    },
+
+
+    "future_hooks":
+    {
+        "special_quest_companions": true,
+
+        "npc_allies": true,
+
+        "item_granted_companions": true
+    }
+}

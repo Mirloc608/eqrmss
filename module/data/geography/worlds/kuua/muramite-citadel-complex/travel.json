@@ -1,0 +1,34 @@
+{
+  "region": "citadel-outer",
+
+  "nodes": [
+    { "id": "muramite-citadel-outer", "type": "zone", "label": "Outer Wall" },
+    { "id": "muramite-citadel-barracks", "type": "zone", "label": "Citadel Barracks" },
+    { "id": "muramite-citadel-halls", "type": "zone", "label": "Citadel Halls" }
+  ],
+
+  "edges": [
+    {
+      "from": "muramite-citadel-outer",
+      "to": "muramite-citadel-barracks",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A fortified passage connecting the outer wall to the barracks."
+    },
+    {
+      "from": "muramite-citadel-barracks",
+      "to": "muramite-citadel-halls",
+      "difficulty": "high",
+      "type": "internal",
+      "description": "A guarded route leading deeper into the Citadel halls."
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "citadel-interior",
+      "type": "forward",
+      "description": "The Outer Citadel leads inward to the Interior Citadel."
+    }
+  ]
+}

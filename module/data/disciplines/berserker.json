@@ -1,0 +1,152 @@
+{
+  "id": "berserker",
+  "key": "berserker",
+  "name": "Berserker",
+  "type": "discipline-catalog",
+  "disciplines": [
+    {
+      "id": "focused-will",
+      "name": "Focused Will Discipline",
+      "level": 10,
+      "family": "utility",
+      "durationRounds": 10,
+      "reuseRounds": 50,
+      "effects": [
+        {
+          "type": "REGENERATION",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": "resistant",
+      "name": "Resistant Discipline",
+      "level": 30,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 40,
+      "effects": [
+        {
+          "type": "RESIST_ALL",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "fearless",
+      "name": "Fearless Discipline",
+      "level": 40,
+      "family": "defensive",
+      "durationRounds": 10,
+      "reuseRounds": 50,
+      "effects": [
+        {
+          "type": "FEAR_IMMUNITY",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "inspired-anger",
+      "name": "Inspired Anger Discipline",
+      "level": 53,
+      "family": "offensive",
+      "durationRounds": 3,
+      "reuseRounds": 75,
+      "effects": [
+        {
+          "type": "HIT_CHANCE_BONUS",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": "cleaving-rage",
+      "name": "Cleaving Rage Discipline",
+      "level": 54,
+      "family": "offensive",
+      "durationRounds": 3,
+      "reuseRounds": 75,
+      "effects": [
+        {
+          "type": "CRITICAL_HIT_BONUS",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": "reckless",
+      "name": "Reckless Discipline",
+      "level": 56,
+      "family": "counterattack",
+      "durationRounds": 5,
+      "reuseRounds": 75,
+      "effects": [
+        {
+          "type": "RIPOSTE_BONUS",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": "focused-fury",
+      "name": "Focused Fury Discipline",
+      "level": 57,
+      "family": "offensive",
+      "durationRounds": 5,
+      "reuseRounds": 75,
+      "effects": [
+        {
+          "type": "SKILL_CHECK_BONUS",
+          "value": 50
+        }
+      ]
+    },
+    {
+      "id": "blind-rage",
+      "name": "Blind Rage Discipline",
+      "level": 58,
+      "family": "offensive",
+      "durationRounds": 3,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "SKILL_DAMAGE_BONUS",
+          "value": 50
+        },
+        {
+          "type": "MINIMUM_DAMAGE_BONUS",
+          "value": 400
+        }
+      ]
+    },
+    {
+      "id": "battle-focus",
+      "name": "Battle Focus Discipline",
+      "level": 59,
+      "family": "defensive",
+      "durationRounds": 3,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "MELEE_AVOIDANCE",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": "burning-rage",
+      "name": "Burning Rage Discipline",
+      "level": 60,
+      "family": "offensive",
+      "durationRounds": 5,
+      "reuseRounds": 100,
+      "effects": [
+        {
+          "type": "DAMAGE_BONUS",
+          "value": 30
+        }
+      ]
+    }
+  ]
+}

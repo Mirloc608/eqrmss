@@ -1,0 +1,48 @@
+{
+  "zone": "sanctum-ritual-chambers",
+  "nodes": [
+    {
+      "id": "ritual-circle",
+      "type": "circle",
+      "label": "Ritual Circle"
+    },
+    {
+      "id": "conduit-platform",
+      "type": "platform",
+      "label": "Conduit Platform"
+    },
+    {
+      "id": "ritual-pylon",
+      "type": "pylon",
+      "label": "Ritual Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ritual-circle",
+      "to": "conduit-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Riftseeker ritualists."
+    },
+    {
+      "from": "ritual-circle",
+      "to": "ritual-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into ritual amplification zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "sanctum-core",
+      "type": "internal",
+      "description": "Ritual Chambers connect directly to the Sanctum Core."
+    },
+    {
+      "to": "sanctum-rift-heart",
+      "type": "arcane",
+      "description": "Ritual Chambers draw unstable energy from the Rift Heart."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "stone-deep-travel",
+  "dungeon": "stone-deep",
+
+  "nodes": [
+    "dungeon-entry",
+    "guardian-halls",
+    "crystal-veins",
+    "prime-sanctum",
+    "stone-prime-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "guardian-halls", "type": "guardian-path" },
+    { "from": "guardian-halls", "to": "crystal-veins", "type": "crystal-transition" },
+    { "from": "crystal-veins", "to": "prime-sanctum", "type": "sanctum-descent" },
+    {
+      "from": "prime-sanctum",
+      "to": "stone-prime-lair",
+      "type": "prime-ascent",
+      "requirements": { "underfoot-attunement": true }
+    }
+  ]
+}

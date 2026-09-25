@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-citadel-laboratory",
+  "hazards": [
+    {
+      "id": "vat-surge",
+      "name": "Vat Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-containment-vat",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "experiment-flare",
+      "name": "Experiment Flare",
+      "severity": "high",
+      "trigger": "interaction-with-experiment-table",
+      "effects": [
+        "arcane-burn",
+        "vision-distortion"
+      ]
+    }
+  ]
+}

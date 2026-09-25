@@ -1,0 +1,56 @@
+{
+  "influenceMap": [
+    {
+      "faction": "vah-shir-clans",
+      "zones": {
+        "hunter’s-quarter": "dominant",
+        "royal-district": "strong"
+      }
+    },
+    {
+      "faction": "shar-vahl-royal-guard",
+      "zones": {
+        "royal-district": "dominant",
+        "outer-ramparts": "strong"
+      }
+    },
+    {
+      "faction": "civic-guilds",
+      "zones": {
+        "artisan-ward": "dominant",
+        "market-terraces": "strong"
+      }
+    },
+    {
+      "faction": "arcane-council",
+      "zones": {
+        "arcane-sanctum": "dominant"
+      }
+    },
+    {
+      "faction": "shadow-threat-watch",
+      "zones": {
+        "outer-ramparts": "dominant",
+        "hunter’s-quarter": "moderate"
+      }
+    }
+  ],
+
+  "dynamicEffects": [
+    {
+      "event": "royal-decree",
+      "description": "Royal leadership shifts priorities across the city.",
+      "affectedFactions": ["vah-shir-clans", "royal-guard"]
+    },
+    {
+      "event": "arcane-surge",
+      "description": "Planar anomalies affect the Arcane Sanctum.",
+      "affectedFactions": ["arcane-council"]
+    },
+    {
+      "event": "shadow-creep",
+      "description": "Shadow corruption spreads toward outer districts.",
+      "affectedFactions": ["shadow-threat-watch"]
+    }
+  ]
+}

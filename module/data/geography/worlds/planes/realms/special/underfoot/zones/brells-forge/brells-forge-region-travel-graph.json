@@ -1,0 +1,35 @@
+{
+  "id": "brells-forge-region-travel-graph",
+  "region": "brells-forge",
+
+  "nodes": [
+    "forge-entry",
+    "magma-rivers",
+    "divine-forge",
+    "hammer-of-brell"
+  ],
+
+  "edges": [
+    {
+      "from": "forge-entry",
+      "to": "magma-rivers",
+      "type": "heat-shift"
+    },
+    {
+      "from": "magma-rivers",
+      "to": "divine-forge",
+      "type": "forge-channel",
+      "requirements": {
+        "heat-resonance": true
+      }
+    },
+    {
+      "from": "divine-forge",
+      "to": "hammer-of-brell",
+      "type": "divine-path",
+      "requirements": {
+        "brell-attunement": true
+      }
+    }
+  ]
+}

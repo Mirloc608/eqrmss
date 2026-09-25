@@ -1,0 +1,48 @@
+{
+  "zone": "discord-wastes-expanse",
+  "nodes": [
+    {
+      "id": "fractured-plains",
+      "type": "terrain",
+      "label": "Fractured Plains"
+    },
+    {
+      "id": "arcane-wind-fields",
+      "type": "terrain",
+      "label": "Arcane Wind Fields"
+    },
+    {
+      "id": "discord-fissure",
+      "type": "fissure",
+      "label": "Discord Fissure"
+    }
+  ],
+  "edges": [
+    {
+      "from": "fractured-plains",
+      "to": "arcane-wind-fields",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A hazardous route across unstable plains."
+    },
+    {
+      "from": "arcane-wind-fields",
+      "to": "discord-fissure",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous approach to a Discord fissure."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "bloodfields-rifts",
+      "type": "back",
+      "description": "The Expanse connects back to the Bloodfields Rifts."
+    },
+    {
+      "to": "discord-wastes-rifts",
+      "type": "forward",
+      "description": "The Expanse leads deeper into the Discord Wastes Rifts."
+    }
+  ]
+}

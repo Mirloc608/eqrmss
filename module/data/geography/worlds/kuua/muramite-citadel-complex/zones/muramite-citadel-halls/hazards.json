@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-citadel-halls",
+  "hazards": [
+    {
+      "id": "ward-flare",
+      "name": "Ward Flare",
+      "severity": "extreme",
+      "trigger": "proximity-to-warded-corridor",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "random-displacement"
+      ]
+    },
+    {
+      "id": "archway-collapse",
+      "name": "Archway Collapse",
+      "severity": "high",
+      "trigger": "movement-near-supply-archway",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

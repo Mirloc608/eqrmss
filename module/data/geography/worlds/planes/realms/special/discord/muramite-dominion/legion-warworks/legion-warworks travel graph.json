@@ -1,0 +1,38 @@
+{
+  "id": "legion-warworks-travel",
+  "region": "legion-warworks",
+
+  "nodes": [
+    "warforge-foundry",
+    "discord-engine-yards",
+    "armament-halls",
+    "legion-gateworks"
+  ],
+
+  "edges": [
+    {
+      "from": "warforge-foundry",
+      "to": "discord-engine-yards",
+      "type": "forge-path",
+      "requirements": {
+        "industrial-clearance": true
+      }
+    },
+    {
+      "from": "discord-engine-yards",
+      "to": "armament-halls",
+      "type": "engine-transition",
+      "requirements": {
+        "discord-stability-anchor": true
+      }
+    },
+    {
+      "from": "armament-halls",
+      "to": "legion-gateworks",
+      "type": "gateworks-ascent",
+      "requirements": {
+        "gate-attunement": true
+      }
+    }
+  ]
+}

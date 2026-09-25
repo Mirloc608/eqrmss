@@ -1,0 +1,222 @@
+{
+  "id": "beastlord",
+  "name": "Beastlord",
+  "type": "class",
+
+  "description": {
+    "summary": "Beastlords are primal warriors who fight alongside powerful animal companions.",
+    "lore": "Beastlords channel the ancestral and primal spirits of Norrath. Through deep bonds with their animal companions, they blend martial skill with spirit magic. Their totems empower allies, weaken foes, and enhance their bonded beast. Beastlords stand as tribal champions, guided by instinct and ancestral wisdom."
+  },
+
+  "role": {
+    "primary": "Hybrid Pet Specialist",
+    "secondary": [
+      "Spirit Magic",
+      "Support",
+      "Damage",
+      "Control"
+    ]
+  },
+
+  "profession": {
+    "category": "Totem / Ancestral / Primal / Animal / Tribal",
+    "realm": "Spirit",
+    "powerSource": "Ancestral Essence"
+  },
+
+  "stats": {
+    "primeRequisites": ["Empathy", "Agility"],
+    "secondaryStats": ["Strength", "Intuition", "Constitution"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth", "Leather", "Chain"],
+    "restricted": ["Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Fist Weapons",
+      "Claw Weapons",
+      "Spears",
+      "Daggers",
+      "Short Swords"
+    ],
+    "restricted": ["Heavy Two‑Handed Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 2,
+      "Weapon Skills": 2,
+      "Combat Maneuvers": 2,
+      "Athletics": 2,
+      "Perception": 2,
+      "Spirit Spell Lists": 3,
+      "Animal Handling": 1,
+      "Lore": 3
+    },
+    "bonusCategories": [
+      "Animal Handling",
+      "Spirit Magic",
+      "Totem Magic",
+      "Pet Enhancement"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Spirit": {
+        "Totem": ["Totem Magic"],
+        "Ancestral": ["Ancestral Magic"],
+        "Primal": ["Primal Magic"],
+        "Animal": ["Animal Spirit Magic"],
+        "Tribal": ["Tribal Magic"]
+      }
+    },
+    "specialization": [
+      "Pet Enhancement",
+      "Primal Strikes",
+      "Totem Empowerment"
+    ]
+  },
+
+  "pet": {
+    "type": "Warder",
+    "description": "A bonded animal companion empowered by primal spirit magic.",
+    "startingTypes": [
+      "Wolf",
+      "Bear",
+      "Tiger",
+      "Snow Leopard",
+      "Gorilla"
+    ],
+    "features": [
+      "Shared Spirit Link",
+      "Pet Buffs",
+      "Pet Commands",
+      "Primal Empowerment"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "beastlord_summon_warder",
+        "name": "Summon Warder",
+        "description": "The Beastlord summons their bonded animal companion."
+      },
+      {
+        "id": "beastlord_spirit_claw",
+        "name": "Spirit Claw",
+        "description": "The Beastlord strikes with primal energy, enhancing melee damage."
+      }
+    ],
+    "level5": [
+      {
+        "id": "beastlord_pet_heal",
+        "name": "Warder Heal",
+        "description": "The Beastlord heals their warder using ancestral magic."
+      }
+    ],
+    "level10": [
+      {
+        "id": "beastlord_totem_blessing",
+        "name": "Totem Blessing",
+        "description": "The Beastlord empowers allies with a tribal totem effect."
+      }
+    ],
+    "level20": [
+      {
+        "id": "beastlord_primal_fury",
+        "name": "Primal Fury",
+        "description": "The Beastlord and their warder enter a state of heightened primal power."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Summon Warder",
+    "Pet Commands",
+    "Spirit Magic",
+    "Totem Magic",
+    "Primal Magic",
+    "Animal Handling",
+    "Shared Spirit Link"
+  ],
+
+  "combatActions": [
+    { "id": "spirit_claw", "name": "Spirit Claw" },
+    { "id": "kick", "name": "Kick" },
+    { "id": "warder_attack", "name": "Warder Attack" }
+  ],
+
+  "disciplines": [
+    "Primal Discipline",
+    "Totemic Discipline",
+    "Ancestral Discipline"
+  ],
+
+  "startingEquipment": [
+    { "name": "Claw Weapons", "type": "weapon" },
+    { "name": "Leather Armor", "type": "armor" },
+    { "name": "Tribal Totem", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "hybrid-martial-channeling"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/beastlord.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "hybrid pet specialist",
+      "primaryRole": "damage",
+      "secondaryRoles": ["support", "control"]
+    },
+
+    "identity": {
+      "strengths": [
+        "pet synergy",
+        "spirit magic",
+        "totem magic",
+        "primal strikes",
+        "animal handling"
+      ]
+    },
+
+    "weaknesses": [
+      "pet dependency",
+      "limited heavy armor"
+    ],
+
+    "signatureMechanics": [
+      "summon warder",
+      "primal fury",
+      "totem magic",
+      "animal spirit magic"
+    ],
+
+    "tags": [
+      "spirit",
+      "totem",
+      "ancestral",
+      "primal",
+      "animal",
+      "tribal",
+      "martial",
+      "pet-class"
+    ],
+
+    "pending": [
+      "attack table IDs",
+      "pet stat block integration",
+      "spell list mapping"
+    ]
+  }
+}

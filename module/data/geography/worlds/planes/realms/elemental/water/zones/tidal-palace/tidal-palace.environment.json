@@ -1,0 +1,44 @@
+{
+  "zone": "tidal-palace",
+
+  "terrain": [
+    "coral-throne-halls",
+    "tidal-cascade-chambers",
+    "waterglass-corridors",
+    "abyssal-crown-sanctum"
+  ],
+
+  "lighting": "tidal-glow",
+
+  "hazards": [
+    {
+      "id": "tidal-crash",
+      "dc": 26,
+      "effect": "water_damage_and_knockback"
+    },
+    {
+      "id": "waterglass-fracture",
+      "dc": 27,
+      "effect": "piercing_damage_and_bleed"
+    },
+    {
+      "id": "abyssal-crown-pressure",
+      "dc": 28,
+      "effect": "stat_decay_and_stun"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "low",
+    "notes": "Tidal flows shift palace corridors; waterglass walls may open or close with royal tides."
+  },
+
+  "environmentTags": [
+    "water",
+    "tidal",
+    "coral",
+    "royal",
+    "elemental"
+  ]
+}

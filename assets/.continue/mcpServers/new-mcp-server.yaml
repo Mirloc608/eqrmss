@@ -1,0 +1,11 @@
+name: Foundry System MCP
+version: 0.0.1
+schema: v1
+mcpServers:
+  - name: Foundry system filesystem
+    command: npx
+    args:
+      - -y
+      - "@modelcontextprotocol/server-filesystem"
+      - "x:/FoundryVTT/Data/systems/eqrmss"
+    env: {}

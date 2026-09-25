@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-ritual-chamber",
+  "nodes": [
+    {
+      "id": "ritual-circle",
+      "type": "circle",
+      "label": "Ritual Circle"
+    },
+    {
+      "id": "anchor-pylon",
+      "type": "pylon",
+      "label": "Anchor Pylon"
+    },
+    {
+      "id": "discord-fissure",
+      "type": "fissure",
+      "label": "Discord Fissure"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ritual-circle",
+      "to": "anchor-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path between ritual circles and anchor pylons."
+    },
+    {
+      "from": "ritual-circle",
+      "to": "discord-fissure",
+      "difficulty": "extreme",
+      "type": "arcane",
+      "description": "A perilous route into raw Discord fissures."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-laboratory",
+      "type": "back",
+      "description": "Ritual Chamber connects back to the Laboratory."
+    },
+    {
+      "to": "muramite-citadel-heart-of-discord",
+      "type": "forward",
+      "description": "Ritual Chamber leads deeper into the Heart of Discord."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "zone": "muramite-industrial-foundry",
+  "nodes": [
+    {
+      "id": "crucible-floor",
+      "type": "floor",
+      "label": "Crucible Floor"
+    },
+    {
+      "id": "arcane-press",
+      "type": "press",
+      "label": "Arcane Press"
+    },
+    {
+      "id": "assembly-line",
+      "type": "line",
+      "label": "Assembly Line"
+    }
+  ],
+  "edges": [
+    {
+      "from": "crucible-floor",
+      "to": "arcane-press",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path between crucibles and arcane presses."
+    },
+    {
+      "from": "crucible-floor",
+      "to": "assembly-line",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by overseers moving between crucibles and assembly lines."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-industrial-refinery",
+      "type": "back",
+      "description": "Foundry connects back to the Refinery."
+    }
+  ]
+}

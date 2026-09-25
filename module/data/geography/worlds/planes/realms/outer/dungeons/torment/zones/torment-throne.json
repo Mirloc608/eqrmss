@@ -1,0 +1,27 @@
+{
+  "id": "torment-throne",
+  "key": "torment-throne",
+  "name": "Torment Throne",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "torment",
+
+  "description": "The Torment Throne is the heart of the Plane of Torment, where divine agony manifests fully. The Torment Sovereign rules from this seat.",
+
+  "hazards": [
+    { "id": "torment-collapse", "dc": 38, "effect": "stat_decay_and_massive_damage" }
+  ],
+
+  "encounters": [
+    { "creature": "Throne Guardian", "level": 99 },
+    { "creature": "Agony Titan", "level": 100 }
+  ],
+
+  "boss": {
+    "name": "The Torment Sovereign",
+    "level": 100,
+    "role": "boss"
+  },
+
+  "tags": ["torment", "throne", "outer"]
+}

@@ -1,0 +1,80 @@
+{
+    "id": "lullaby",
+
+    "name": "Lullaby",
+
+    "type": "song",
+
+    "class": "Bard",
+
+    "level_required": 1,
+
+
+    "description":
+        "A soothing melody that causes enemies to become drowsy and easier to control.",
+
+
+    "performance":
+    {
+        "activation":
+        "standard",
+
+        "maintained":
+        true,
+
+        "pulse_interval":
+        "round"
+    },
+
+
+    "targeting":
+    {
+        "type":
+        "single",
+
+        "range":
+        30,
+
+        "targets":
+        "enemy"
+    },
+
+
+    "effects":
+    [
+        {
+            "type":
+            "control",
+
+            "condition":
+            "drowsy",
+
+            "save":
+            {
+                "stat":
+                "willpower",
+
+                "difficulty":
+                "bard_charisma_dc"
+            }
+        }
+    ],
+
+
+    "stacking":
+    {
+        "group":
+        "bard_control",
+
+        "same_effect":
+        "refresh"
+    },
+
+
+    "tags":
+    [
+        "bard",
+        "song",
+        "crowd_control"
+    ]
+}

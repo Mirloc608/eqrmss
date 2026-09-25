@@ -1,0 +1,184 @@
+{
+  "id": "berserker",
+  "name": "Berserker",
+  "type": "class",
+
+  "description": {
+    "summary": "Berserkers unleash primal fury to deliver overwhelming physical damage.",
+    "lore": "Berserkers channel raw aggression into devastating attacks. Their rage fuels their strength, allowing them to break enemy lines and deliver crushing blows with reckless abandon. They are feared for their explosive power and relentless momentum."
+  },
+
+  "role": {
+    "primary": "Burst Damage",
+    "secondary": [
+      "Crowd Pressure",
+      "Physical Control"
+    ]
+  },
+
+  "profession": {
+    "category": "Arms / Fury / Two-Handed Mastery / Physical Domination",
+    "realm": "Martial",
+    "powerSource": "Primal Fury"
+  },
+
+  "stats": {
+    "primeRequisites": ["Strength", "Constitution"],
+    "secondaryStats": ["Agility", "Intuition"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth", "Leather", "Chain"],
+    "restricted": ["Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Two-Handed Weapons",
+      "Axes",
+      "Greatswords",
+      "Throwing Weapons"
+    ],
+    "restricted": ["Complex Spell Foci"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 1,
+      "Weapon Skills": 1,
+      "Combat Maneuvers": 1,
+      "Athletics": 2,
+      "Acrobatics": 3,
+      "Perception": 3,
+      "Lore": 4,
+      "Spell Lists": 9
+    },
+    "bonusCategories": [
+      "Two-Handed Weapons",
+      "Burst Damage",
+      "Physical Control"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Martial": {
+        "Fury": ["Rage Techniques"],
+        "Two-Handed": ["Great Weapon Mastery"],
+        "Momentum": ["Charge & Impact"],
+        "Control": ["Disruption Techniques"]
+      }
+    },
+    "specialization": [
+      "Rage Mastery",
+      "Two-Handed Mastery",
+      "Momentum Attacks"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "berserker_frenzy",
+        "name": "Frenzy",
+        "description": "The berserker enters a state of heightened aggression, increasing attack speed."
+      }
+    ],
+    "level5": [
+      {
+        "id": "berserker_throw",
+        "name": "Axe Throw",
+        "description": "The berserker throws heavy weapons with deadly force."
+      }
+    ],
+    "level10": [
+      {
+        "id": "berserker_rampage",
+        "name": "Rampage",
+        "description": "The berserker unleashes sweeping attacks against multiple foes."
+      }
+    ],
+    "level20": [
+      {
+        "id": "berserker_unstoppable",
+        "name": "Unstoppable Rage",
+        "description": "The berserker becomes a force of destruction, greatly enhancing offensive power."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Frenzy",
+    "Rampage",
+    "Axe Throw",
+    "Two-Handed Mastery",
+    "Momentum Attacks"
+  ],
+
+  "combatActions": [
+    { "id": "frenzy", "name": "Frenzy" },
+    { "id": "kick", "name": "Kick" },
+    { "id": "rampage", "name": "Rampage" }
+  ],
+
+  "disciplines": [
+    "Primal Focus",
+    "Raging Strength",
+    "Unstoppable Fury"
+  ],
+
+  "startingEquipment": [
+    { "name": "Training Great Axe", "type": "weapon" },
+    { "name": "Chain Vest", "type": "armor" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "martial-specialist"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/berserker.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "martial specialist",
+      "primaryRole": "damage",
+      "secondaryRoles": ["control"]
+    },
+
+    "identity": {
+      "strengths": [
+        "burst damage",
+        "two-handed mastery",
+        "crowd pressure",
+        "momentum attacks"
+      ]
+    },
+
+    "weaknesses": [
+      "low defense",
+      "limited utility"
+    ],
+
+    "signatureMechanics": [
+      "frenzy",
+      "rampage",
+      "axe throw"
+    ],
+
+    "tags": [
+      "martial",
+      "arms",
+      "fury",
+      "two-handed",
+      "physical-domination"
+    ],
+
+    "pending": [
+      "attack table IDs"
+    ]
+  }
+}

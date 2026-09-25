@@ -1,0 +1,37 @@
+<section class="pet-manager">
+    <h2>{{actor.name}} — Pets</h2>
+
+    {{#if pets.length}}
+    <table class="rmss-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>HP</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each pets}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.system.role}}</td>
+                <td>{{this.system.hp}}</td>
+                <td>{{#if this.system.active}}Active{{else}}Inactive{{/if}}</td>
+                <td>
+                    {{#if this.system.active}}
+                    <button class="pet-dismiss" data-pet-id="{{this.id}}">Dismiss</button>
+                    {{else}}
+                    <button class="pet-summon" data-pet-id="{{this.id}}">Summon</button>
+                    {{/if}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>No pets linked to this character.</p>
+    {{/if}}
+</section>

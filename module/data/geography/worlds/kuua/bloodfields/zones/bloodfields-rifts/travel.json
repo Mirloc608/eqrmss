@@ -1,0 +1,48 @@
+{
+  "zone": "bloodfields-rifts",
+  "nodes": [
+    {
+      "id": "shattered-ground",
+      "type": "terrain",
+      "label": "Shattered Ground"
+    },
+    {
+      "id": "rift-field",
+      "type": "field",
+      "label": "Rift Field"
+    },
+    {
+      "id": "rift-core",
+      "type": "core",
+      "label": "Rift Core"
+    }
+  ],
+  "edges": [
+    {
+      "from": "shattered-ground",
+      "to": "rift-field",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A hazardous route across unstable terrain into the rift field."
+    },
+    {
+      "from": "rift-field",
+      "to": "rift-core",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous approach to the central rift core."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "bloodfields-command",
+      "type": "back",
+      "description": "The Rifts connect back to Bloodfields Command."
+    },
+    {
+      "to": "discord-wastes",
+      "type": "forward",
+      "description": "The Rifts lead toward the deeper Discord Wastes."
+    }
+  ]
+}

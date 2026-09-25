@@ -1,0 +1,39 @@
+{{#if (eq wizard.mode "pointbuy")}}
+<div class="eqrmss-cc-dp-spend-box">
+  <h3>Spend Development Points</h3>
+
+  <table class="eqrmss-cc-dp-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Cost</th>
+        <th>Ranks</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each (lookup RMSS_SKILL_COSTS wizard.selection.classId)}}
+        <tr>
+          <td>{{@key}}</td>
+          <td>{{this}}</td>
+
+          <td>
+            <input type="number"
+                   min="0"
+                   value="{{lookup ../wizard.selection.dpSpent @key}}"
+                   data-action="dp-spend"
+                   data-field="{{@key}}" />
+          </td>
+
+          <td>{{multiply this (lookup ../wizard.selection.dpSpent @key)}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <div class="eqrmss-cc-dp-remaining">
+    Remaining DP: <strong>{{wizard.selection.dpRemaining}}</strong>
+  </div>
+</div>
+{{/if}}

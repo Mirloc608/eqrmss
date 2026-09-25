@@ -1,0 +1,44 @@
+{
+  "zone": "prism-chambers",
+
+  "terrain": [
+    "prismatic-halls",
+    "crystal-refraction-chambers",
+    "resonance-prism-cores",
+    "shattered-spectrum-fields"
+  ],
+
+  "lighting": "prismatic-radiance",
+
+  "hazards": [
+    {
+      "id": "prism-flare",
+      "dc": 22,
+      "effect": "radiant_damage_and_blindness"
+    },
+    {
+      "id": "spectrum-overload",
+      "dc": 23,
+      "effect": "random_damage_type_shift"
+    },
+    {
+      "id": "crystal-shatterwave",
+      "dc": 21,
+      "effect": "knockback_and_bleed"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "mythic",
+    "restSafety": "none",
+    "notes": "Prismatic refraction alters pathways; chambers may rotate or realign mid‑combat."
+  },
+
+  "environmentTags": [
+    "crystal",
+    "prism",
+    "radiance",
+    "resonance",
+    "raid-final"
+  ]
+}

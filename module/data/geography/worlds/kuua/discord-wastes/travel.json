@@ -1,0 +1,39 @@
+{
+  "region": "discord-wastes",
+
+  "nodes": [
+    { "id": "discord-wastes-expanse", "type": "zone", "label": "Wastes Expanse" },
+    { "id": "discord-wastes-rifts", "type": "zone", "label": "Wastes Rifts" },
+    { "id": "discord-wastes-warfront", "type": "zone", "label": "Wastes Warfront" }
+  ],
+
+  "edges": [
+    {
+      "from": "discord-wastes-expanse",
+      "to": "discord-wastes-rifts",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A hazardous route into deeper Discord ruptures."
+    },
+    {
+      "from": "discord-wastes-rifts",
+      "to": "discord-wastes-warfront",
+      "difficulty": "extreme",
+      "type": "chaotic",
+      "description": "A volatile path through unstable terrain and arcane storms."
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "bloodfields-rifts",
+      "type": "back",
+      "description": "The Wastes connect back to the Bloodfields Rifts."
+    },
+    {
+      "to": "riftseekers-sanctum",
+      "type": "forward",
+      "description": "The Wastes lead toward Riftseekers’ Sanctum."
+    }
+  ]
+}

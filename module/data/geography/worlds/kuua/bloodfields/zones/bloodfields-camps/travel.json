@@ -1,0 +1,48 @@
+{
+  "zone": "bloodfields-camps",
+  "nodes": [
+    {
+      "id": "barracks-row",
+      "type": "barracks",
+      "label": "Barracks Row"
+    },
+    {
+      "id": "supply-yard",
+      "type": "yard",
+      "label": "Supply Yard"
+    },
+    {
+      "id": "beast-pens",
+      "type": "pens",
+      "label": "Beast Pens"
+    }
+  ],
+  "edges": [
+    {
+      "from": "barracks-row",
+      "to": "supply-yard",
+      "difficulty": "low",
+      "type": "internal",
+      "description": "A direct route between barracks and supply operations."
+    },
+    {
+      "from": "supply-yard",
+      "to": "beast-pens",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route connecting supply operations to beast handling."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "bloodfields-front",
+      "type": "back",
+      "description": "The Camps connect back to the Front."
+    },
+    {
+      "to": "bloodfields-command",
+      "type": "forward",
+      "description": "The Camps lead deeper into Muramite command territory."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<section class="eq-tab eq-tab-songs" data-tab="songs">
+  <h2>Bard Songs</h2>
+
+  <div class="eq-song-controls">
+    <button type="button" data-action="bard-twist-start">Start Twist</button>
+    <button type="button" data-action="bard-twist-stop">Stop Twist</button>
+  </div>
+
+  <div class="eq-song-list">
+    {{#each songs}}
+      <div class="eq-song-entry" data-item-id="{{_id}}">
+        <img src="{{img}}" class="eq-song-icon" />
+        <div class="eq-song-main">
+          <span class="eq-song-name">{{name}}</span>
+          <span class="eq-song-meta">
+            Tier {{system.tier}} · {{system.category}} · Lv {{system.level}}
+          </span>
+        </div>
+
+        <button type="button" class="eq-song-toggle" data-action="bard-song-toggle">
+          {{#if system.active}}Active{{else}}Inactive{{/if}}
+        </button>
+
+        <button type="button" class="eq-song-tier-up" data-action="bard-song-tier-up">▲</button>
+        <button type="button" class="eq-song-tier-down" data-action="bard-song-tier-down">▼</button>
+      </div>
+    {{/each}}
+  </div>
+</section>

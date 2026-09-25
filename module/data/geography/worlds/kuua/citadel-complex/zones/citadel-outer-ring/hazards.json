@@ -1,0 +1,25 @@
+{
+  "zone": "citadel-outer-ring",
+  "hazards": [
+    {
+      "id": "siege-misfire",
+      "name": "Siege Misfire",
+      "severity": "high",
+      "trigger": "combat-near-siege-platform",
+      "effects": [
+        "explosive-damage",
+        "knockback"
+      ]
+    },
+    {
+      "id": "rampart-collapse",
+      "name": "Rampart Collapse",
+      "severity": "moderate",
+      "trigger": "heavy-combat-on-ramparts",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

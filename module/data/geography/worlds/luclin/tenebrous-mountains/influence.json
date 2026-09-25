@@ -1,0 +1,67 @@
+{
+  "influenceMap": [
+    {
+      "faction": "umbral-vanguard",
+      "zones": {
+        "tenebrous-borderlands": "strong",
+        "tenebrous-caverns": "moderate",
+        "tenebrous-depths": "contested"
+      }
+    },
+    {
+      "faction": "shadowed-akheva",
+      "zones": {
+        "tenebrous-caverns": "strong",
+        "tenebrous-depths": "strong",
+        "tenebrous-borderlands": "moderate",
+        "lightcrawler-pits": "minor",
+        "tenebrous-ridge": "minor",
+        "tenebrous-cliffs": "minor"
+      }
+    },
+    {
+      "faction": "vampyric-courts-of-tenebrous",
+      "zones": {
+        "tenebrous-depths": "strong",
+        "tenebrous-caverns": "moderate",
+        "tenebrous-ridge": "minor",
+        "tenebrous-borderlands": "minor"
+      }
+    },
+    {
+      "faction": "razorfiend-broods",
+      "zones": {
+        "razorfiend-territories": "dominant",
+        "tenebrous-cliffs": "strong",
+        "tenebrous-caverns": "moderate",
+        "tenebrous-depths": "minor"
+      }
+    },
+    {
+      "faction": "lightcrawler-swarms",
+      "zones": {
+        "tenebrous-ridge": "strong",
+        "lightcrawler-pits": "dominant",
+        "tenebrous-caverns": "moderate"
+      }
+    }
+  ],
+
+  "dynamicEffects": [
+    {
+      "event": "resonance-storm-depths",
+      "description": "Resonance storms in the Depths temporarily increase Umbral Vanguard and Akhevan influence while destabilizing Vampyric control.",
+      "affectedFactions": ["umbral-vanguard", "shadowed-akheva", "vampyric-courts-of-tenebrous"]
+    },
+    {
+      "event": "razorfiend-brood-expansion",
+      "description": "Brood expansion from Razorfiend Territories increases predator pressure on Cliffs and Caverns, reducing safe travel.",
+      "affectedFactions": ["razorfiend-broods", "umbral-vanguard", "shadowed-akheva"]
+    },
+    {
+      "event": "lightcrawler-holy-mutation",
+      "description": "Holy resonance mutations in the Pits increase Lightcrawler aggression and reduce Akhevan ritual success.",
+      "affectedFactions": ["lightcrawler-swarms", "shadowed-akheva"]
+    }
+  ]
+}

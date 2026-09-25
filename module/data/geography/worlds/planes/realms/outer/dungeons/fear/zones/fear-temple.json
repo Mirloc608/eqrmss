@@ -1,0 +1,27 @@
+{
+  "id": "fear-temple",
+  "key": "fear-temple",
+  "name": "Fear Temple",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "fear",
+
+  "description": "The Temple of Dread is Cazic‑Thule’s sanctum, where terror manifests fully. Mortals who enter face the embodiment of fear itself.",
+
+  "hazards": [
+    { "id": "terror-overload", "dc": 38, "effect": "stat_decay_and_massive_damage" }
+  ],
+
+  "encounters": [
+    { "creature": "Fear Wraith", "level": 96 },
+    { "creature": "Nightmare Horror", "level": 95 }
+  ],
+
+  "boss": {
+    "name": "Cazic‑Thule, the Dread Lord",
+    "level": 100,
+    "role": "boss"
+  },
+
+  "tags": ["fear", "temple", "outer"]
+}

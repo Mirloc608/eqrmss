@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0.0",
+  "registryId": "EQRMSS-WORKER-EXECUTION-REGISTRY",
+  "workers": {
+    "code": {
+      "agent": "EQRMSS Code Worker",
+      "execution": {
+        "provider": "openrouter",
+        "model": "google/gemma-4-31b-it:free",
+        "credentialRef": "env:OPENROUTER_API_KEY",
+        "endpoint": "https://openrouter.ai/api/v1"
+      }
+    },
+
+    "data": {
+      "agent": "EQRMSS JSON Worker",
+      "execution": {
+        "provider": "openrouter",
+        "model": "dots-studio/dots-3-note-preview:free",
+        "credentialRef": "env:OPENROUTER_API_KEY",
+        "endpoint": "https://openrouter.ai/api/v1"
+      }
+    },
+
+    "schema": {
+      "agent": "EQRMSS Schema Worker",
+      "execution": {
+        "provider": "openrouter",
+        "model": "dots-studio/dots-3-note-preview:free",
+        "credentialRef": "env:OPENROUTER_API_KEY",
+        "endpoint": "https://openrouter.ai/api/v1"
+      }
+    },
+
+    "reasoning": {
+      "agent": "EQRMSS Reasoning Worker",
+      "execution": {
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "credentialRef": "env:OPENROUTER_API_KEY",
+        "endpoint": "https://openrouter.ai/api/v1"
+      }
+    },
+
+    "spellbook": {
+      "agent": "EQRMSS Spellbook Worker",
+      "execution": {
+        "provider": "openrouter",
+        "model": "google/gemma-4-26b-a4b-it:free",
+        "credentialRef": "env:OPENROUTER_API_KEY",
+        "endpoint": "https://openrouter.ai/api/v1"
+      }
+    },
+
+    "fast": {
+      "agent": "EQRMSS Fast Worker",
+      "execution": {
+        "provider": "openrouter",
+        "model": "thinkingmachines/inkling-small:free",
+        "credentialRef": "env:OPENROUTER_API_KEY",
+        "endpoint": "https://openrouter.ai/api/v1"
+      }
+    }
+  }
+}

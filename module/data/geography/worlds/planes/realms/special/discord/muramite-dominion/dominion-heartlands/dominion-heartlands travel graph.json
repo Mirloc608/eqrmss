@@ -1,0 +1,38 @@
+{
+  "id": "dominion-heartlands-travel",
+  "region": "dominion-heartlands",
+
+  "nodes": [
+    "legion-barracks",
+    "dominion-lowlands",
+    "warlord-court",
+    "heartforge-complex"
+  ],
+
+  "edges": [
+    {
+      "from": "legion-barracks",
+      "to": "dominion-lowlands",
+      "type": "barracks-path",
+      "requirements": {
+        "dominion-clearance": true
+      }
+    },
+    {
+      "from": "dominion-lowlands",
+      "to": "warlord-court",
+      "type": "lowland-transition",
+      "requirements": {
+        "warlord-sigil": true
+      }
+    },
+    {
+      "from": "warlord-court",
+      "to": "heartforge-complex",
+      "type": "forge-ascent",
+      "requirements": {
+        "forge-attunement": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "zone": "bloodfields-command",
+  "hazards": [
+    {
+      "id": "node-overload",
+      "name": "Node Overload",
+      "severity": "extreme",
+      "trigger": "interaction-with-command-node",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "random-displacement"
+      ]
+    },
+    {
+      "id": "tactical-collapse",
+      "name": "Tactical Collapse",
+      "severity": "high",
+      "trigger": "combat-on-tactical-platform",
+      "effects": [
+        "fall-damage",
+        "knockdown"
+      ]
+    }
+  ]
+}

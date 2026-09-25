@@ -1,0 +1,35 @@
+{
+  "id": "memory-resonance-travel",
+  "zone": "memory-resonance",
+
+  "nodes": [
+    "resonance-lake",
+    "echo-crystal-field",
+    "identity-basin",
+    "reflection-hollow"
+  ],
+
+  "edges": [
+    {
+      "from": "resonance-lake",
+      "to": "echo-crystal-field",
+      "type": "memory-flow"
+    },
+    {
+      "from": "echo-crystal-field",
+      "to": "identity-basin",
+      "type": "echo-transition",
+      "requirements": {
+        "memory-stability": true
+      }
+    },
+    {
+      "from": "identity-basin",
+      "to": "reflection-hollow",
+      "type": "identity-path",
+      "requirements": {
+        "existence-anchor": true
+      }
+    }
+  ]
+}

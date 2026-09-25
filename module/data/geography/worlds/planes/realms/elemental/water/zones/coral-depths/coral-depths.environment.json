@@ -1,0 +1,44 @@
+{
+  "zone": "coral-depths",
+
+  "terrain": [
+    "bioluminescent-coral-forests",
+    "tidal-caverns",
+    "reef-spire-bridges",
+    "abyssal-light-wells"
+  ],
+
+  "lighting": "bioluminescent-glow",
+
+  "hazards": [
+    {
+      "id": "tidal-surge",
+      "dc": 25,
+      "effect": "water_damage_and_knockback"
+    },
+    {
+      "id": "reef-spine-burst",
+      "dc": 26,
+      "effect": "piercing_damage_and_bleed"
+    },
+    {
+      "id": "abyssal-pressure-wave",
+      "dc": 27,
+      "effect": "stat_decay_and_stun"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "low",
+    "notes": "Coral formations shift subtly; pathways may open or close with tidal cycles."
+  },
+
+  "environmentTags": [
+    "water",
+    "coral",
+    "reef",
+    "bioluminescent",
+    "elemental"
+  ]
+}

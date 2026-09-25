@@ -1,0 +1,428 @@
+{
+    "id": "bard",
+
+    "name": "Bard Ability Profile",
+
+    "class": "Bard",
+
+    "description":
+        "Defines Bard-specific abilities, performance mechanics, song interactions, and combat techniques.",
+
+
+    "resources":
+    {
+        "primary":
+        {
+            "id": "performance_points",
+
+            "name": "Performance Points",
+
+            "type": "resource",
+
+            "formula":
+            {
+                "base":
+                "charisma_bonus",
+
+                "scaling":
+                "bard_level"
+            }
+        },
+
+
+        "secondary":
+        {
+            "id": "active_song_slots",
+
+            "name": "Active Song Slots",
+
+            "base": 1,
+
+            "scaling":
+            {
+                "levels":
+                {
+                    "10": 2,
+                    "25": 3,
+                    "50": 4
+                }
+            }
+        }
+    },
+
+
+    "ability_categories":
+    [
+        {
+            "id":
+            "bardic_performance",
+
+            "name":
+            "Bardic Performance",
+
+            "type":
+            "core"
+        },
+
+        {
+            "id":
+            "songs",
+
+            "name":
+            "Songs",
+
+            "type":
+            "spellcasting"
+        },
+
+        {
+            "id":
+            "combat_actions",
+
+            "name":
+            "Combat Actions",
+
+            "type":
+            "martial"
+        },
+
+        {
+            "id":
+            "utility",
+
+            "name":
+            "Bard Utility",
+
+            "type":
+            "support"
+        }
+    ],
+
+
+    "abilities":
+    [
+
+        {
+            "id":
+            "bardic_performance",
+
+            "name":
+            "Bardic Performance",
+
+            "category":
+            "bardic_performance",
+
+            "level":
+            1,
+
+            "type":
+            "passive",
+
+            "description":
+            "The Bard channels magic through music, instruments, and voice.",
+
+            "effects":
+            [
+                {
+                    "type":
+                    "unlock",
+
+                    "target":
+                    "songs"
+                },
+
+                {
+                    "type":
+                    "modify",
+
+                    "target":
+                    "song_power",
+
+                    "formula":
+                    "charisma_bonus"
+                }
+            ]
+        },
+
+
+        {
+            "id":
+            "instrument_mastery",
+
+            "name":
+            "Instrument Mastery",
+
+            "category":
+            "bardic_performance",
+
+            "level":
+            1,
+
+            "type":
+            "passive",
+
+            "effects":
+            [
+                {
+                    "type":
+                    "reduce_song_failure",
+
+                    "value":
+                    "bard_level_scaling"
+                }
+            ]
+        },
+
+
+        {
+            "id":
+            "song_twisting",
+
+            "name":
+            "Song Twisting",
+
+            "category":
+            "songs",
+
+            "level":
+            5,
+
+            "type":
+            "active",
+
+            "description":
+            "Allows a Bard to weave multiple songs together.",
+
+            "effects":
+            [
+                {
+                    "type":
+                    "increase_active_song_slots",
+
+                    "value":
+                    1
+                }
+            ]
+        },
+
+
+        {
+            "id":
+            "lullaby",
+
+            "name":
+            "Lullaby",
+
+            "category":
+            "songs",
+
+            "level":
+            1,
+
+            "type":
+            "song",
+
+            "reference":
+            "songs.lullaby"
+        },
+
+
+        {
+            "id":
+            "anthem_of_battle",
+
+            "name":
+            "Anthem of Battle",
+
+            "category":
+            "songs",
+
+            "level":
+            1,
+
+            "type":
+            "song",
+
+            "reference":
+            "songs.anthem_of_battle"
+        },
+
+
+        {
+            "id":
+            "selo_accelerando",
+
+            "name":
+            "Selo's Accelerando",
+
+            "category":
+            "songs",
+
+            "level":
+            5,
+
+            "type":
+            "song",
+
+            "reference":
+            "songs.selos_accelerando"
+        },
+
+
+        {
+            "id":
+            "disdainful_dirge",
+
+            "name":
+            "Disdainful Dirge",
+
+            "category":
+            "songs",
+
+            "level":
+            8,
+
+            "type":
+            "song",
+
+            "reference":
+            "songs.disdainful_dirge"
+        },
+
+
+        {
+            "id":
+            "charm",
+
+            "name":
+            "Charm",
+
+            "category":
+            "utility",
+
+            "level":
+            18,
+
+            "type":
+            "active",
+
+            "description":
+            "Allows the Bard to temporarily influence a creature through magical performance.",
+
+            "effects":
+            [
+                {
+                    "type":
+                    "control",
+
+                    "target":
+                    "creature",
+
+                    "duration":
+                    "charisma_scaling"
+                }
+            ]
+        },
+
+
+        {
+            "id":
+            "fear_song",
+
+            "name":
+            "Fear Song",
+
+            "category":
+            "songs",
+
+            "level":
+            20,
+
+            "type":
+            "song",
+
+            "effects":
+            [
+                {
+                    "type":
+                    "fear",
+
+                    "resistance":
+                    "willpower"
+                }
+            ]
+        },
+
+
+        {
+            "id":
+            "bard_critical",
+
+            "name":
+            "Bardic Critical Performance",
+
+            "category":
+            "bardic_performance",
+
+            "level":
+            30,
+
+            "type":
+            "passive",
+
+            "effects":
+            [
+                {
+                    "type":
+                    "increase_effect_strength",
+
+                    "scaling":
+                    "charisma"
+                }
+            ]
+        }
+    ],
+
+
+    "combat_actions":
+    [
+        "weapon_flourish",
+        "distracting_strike",
+        "battle_cry",
+        "counter_song"
+    ],
+
+
+    "discipline_links":
+    [
+        "dance_of_blades",
+        "echo_of_taelos"
+    ],
+
+
+    "effect_tags":
+    [
+        "song",
+        "performance",
+        "charisma",
+        "support",
+        "control",
+        "crowd_control"
+    ],
+
+
+    "engine_hooks":
+    {
+        "song_engine":
+        true,
+
+        "active_effect_manager":
+        true,
+
+        "combat_action_engine":
+        true,
+
+        "progression_manager":
+        true
+    }
+}

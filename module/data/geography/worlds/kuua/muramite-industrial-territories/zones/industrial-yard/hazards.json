@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-industrial-yard",
+  "hazards": [
+    {
+      "id": "slag-eruption",
+      "name": "Slag Eruption",
+      "severity": "extreme",
+      "trigger": "proximity-to-slag-dump",
+      "effects": [
+        "arcane-damage",
+        "knockback",
+        "random-displacement"
+      ]
+    },
+    {
+      "id": "cart-derailment",
+      "name": "Cart Derailment",
+      "severity": "high",
+      "trigger": "movement-on-ore-intake-platform",
+      "effects": [
+        "crush-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

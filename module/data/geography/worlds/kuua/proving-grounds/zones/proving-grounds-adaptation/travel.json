@@ -1,0 +1,43 @@
+{
+  "zone": "proving-grounds-adaptation",
+  "nodes": [
+    {
+      "id": "modular-platform",
+      "type": "platform",
+      "label": "Modular Platform"
+    },
+    {
+      "id": "unstable-bridge",
+      "type": "bridge",
+      "label": "Unstable Bridge"
+    },
+    {
+      "id": "flux-pylon",
+      "type": "pylon",
+      "label": "Flux Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "modular-platform",
+      "to": "unstable-bridge",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols and resistance fighters."
+    },
+    {
+      "from": "modular-platform",
+      "to": "flux-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord flux zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "proving-grounds",
+      "type": "back",
+      "description": "Trial of Adaptation connects back to the central Proving Grounds arena."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-barracks",
+  "nodes": [
+    {
+      "id": "training-pit",
+      "type": "pit",
+      "label": "Training Pit"
+    },
+    {
+      "id": "dormitory-row",
+      "type": "dormitory",
+      "label": "Dormitory Row"
+    },
+    {
+      "id": "beast-pens",
+      "type": "pens",
+      "label": "Beast Pens"
+    }
+  ],
+  "edges": [
+    {
+      "from": "training-pit",
+      "to": "dormitory-row",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by legionnaires moving between drills and rest."
+    },
+    {
+      "from": "training-pit",
+      "to": "beast-pens",
+      "difficulty": "high",
+      "type": "hazard",
+      "description": "A dangerous path near war beast pens."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-outer",
+      "type": "back",
+      "description": "Barracks connect back to the Outer Wall."
+    },
+    {
+      "to": "muramite-citadel-halls",
+      "type": "forward",
+      "description": "Barracks lead deeper into the Citadel Halls."
+    }
+  ]
+}

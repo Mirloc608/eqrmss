@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-sewers-caverns-of-exile",
+  "nodes": [
+    {
+      "id": "exile-chamber",
+      "type": "chamber",
+      "label": "Exile Chamber"
+    },
+    {
+      "id": "collapsed-cavern",
+      "type": "cavern",
+      "label": "Collapsed Cavern"
+    },
+    {
+      "id": "discord-waterway",
+      "type": "waterway",
+      "label": "Discord Waterway"
+    }
+  ],
+  "edges": [
+    {
+      "from": "exile-chamber",
+      "to": "collapsed-cavern",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route through unstable exile chambers."
+    },
+    {
+      "from": "collapsed-cavern",
+      "to": "discord-waterway",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous descent into Discord‑corrupted waterways."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-sewers-lair-of-trapped-ones",
+      "type": "back",
+      "description": "The Caverns connect back to the Lair of Trapped Ones."
+    },
+    {
+      "to": "dranik-catacombs-halls",
+      "type": "forward",
+      "description": "The Caverns lead toward the deepest Dranik Catacombs."
+    }
+  ]
+}

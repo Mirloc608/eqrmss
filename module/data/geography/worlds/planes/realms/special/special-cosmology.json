@@ -1,0 +1,43 @@
+{
+  "id": "special-cosmology",
+  "realm": "special",
+
+  "structure": {
+    "planes": [
+      "time",
+      "underfoot",
+      "discord",
+      "the-void"
+    ]
+  },
+
+  "portals": [
+    {
+      "name": "Temporal Fractures",
+      "locations": ["time"],
+      "connects": ["time", "norrath", "kuua"]
+    },
+    {
+      "name": "Underfoot Fissures",
+      "locations": ["underfoot"],
+      "connects": ["underfoot", "planes"]
+    },
+    {
+      "name": "Discord Rifts",
+      "locations": ["discord"],
+      "connects": ["discord", "kuua", "planes"]
+    },
+    {
+      "name": "Void Breaches",
+      "locations": ["the-void"],
+      "connects": ["the-void", "planes"]
+    }
+  ],
+
+  "cosmicRules": {
+    "time": "Nonlinear; past, present, and future coexist.",
+    "underfoot": "Subterranean metaphysics dominate; stone and earth magic amplified.",
+    "discord": "Corruptive force destabilizes planar boundaries.",
+    "void": "Null-space consumes magic and matter; entropy reigns."
+  }
+}

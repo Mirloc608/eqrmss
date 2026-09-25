@@ -1,0 +1,195 @@
+{
+    "id": "eqrmss-troll",
+    "key": "troll",
+    "name": "Troll",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/troll.png",
+
+    "description": "Trolls are massive, brutal, and fearsome swamp‑dwellers known for their incredible regenerative abilities, physical strength, and savage resilience. Originating from the fetid marshes of Innothule and the city of Grobb, Trolls are feared across Norrath for their ferocity, durability, and insatiable hunger.",
+
+    "lore": {
+        "homeland": [
+            "Grobb",
+            "Innothule Swamp"
+        ],
+        "culture": "Troll culture is tribal, violent, and primal. They value strength, brutality, and appetite. Their society is shaped by swamp survival, shamanistic tradition, and constant conflict.",
+        "alignment": "Often Evil or Chaotic, driven by instinct and appetite.",
+        "languages": [
+            "Common",
+            "Troll"
+        ]
+    },
+
+    "stats": {
+        "Ag": -5,
+        "Co": 15,
+        "Me": -10,
+        "Re": -10,
+        "SD": -5,
+        "Em": -10,
+        "In": -5,
+        "Pr": -5,
+        "Qu": -5,
+        "St": 15
+    },
+
+    "racialTalents": [
+        {
+            "id": "regeneration",
+            "name": "Regeneration",
+            "description": "Trolls regenerate health rapidly, even during combat.",
+            "effects": [
+                {
+                    "type": "regeneration",
+                    "target": "hpPerRound",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "id": "thick_skin",
+            "name": "Thick Skin",
+            "description": "Trolls possess tough, leathery skin that provides natural protection.",
+            "effects": [
+                {
+                    "type": "armor",
+                    "target": "naturalArmor",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "id": "swampborn_resistance",
+            "name": "Swampborn Resistance",
+            "description": "Trolls are highly resistant to disease and poison due to their swamp environment.",
+            "effects": [
+                {
+                    "type": "resistance",
+                    "target": "disease",
+                    "value": 20
+                },
+                {
+                    "type": "resistance",
+                    "target": "poison",
+                    "value": 20
+                }
+            ]
+        },
+        {
+            "id": "brutal_strength",
+            "name": "Brutal Strength",
+            "description": "Trolls possess immense physical strength and ferocity.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "St",
+                    "value": 10
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "combat",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "feral_instinct",
+            "name": "Feral Instinct",
+            "description": "Trolls have predatory instincts that enhance their awareness in dangerous environments.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "In",
+                    "value": 5
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 30,
+        "pace": "Fast",
+        "encumbranceMultiplier": 1.25
+    },
+
+    "size": "Large",
+
+    "height": {
+        "male": "7'0\" - 8'0\"",
+        "female": "6'8\" - 7'8\""
+    },
+
+    "weight": {
+        "male": "300 - 450 lbs",
+        "female": "260 - 400 lbs"
+    },
+
+    "lifespan": {
+        "average": "70-90 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "unarmedCombat": 10,
+            "twoHandedWeapons": 10,
+            "axes": 5
+        },
+        "physical": {
+            "endurance": 10,
+            "swimming": 5
+        },
+        "subterfuge": {},
+        "magical": {
+            "shamanism": 5
+        },
+        "lore": {
+            "survival": 10
+        },
+        "social": {
+            "intimidation": 10
+        }
+    },
+
+    "skillCosts": {
+        "combat": "A",
+        "physical": "A",
+        "subterfuge": "D",
+        "magical": "C",
+        "lore": "C",
+        "social": "C"
+    },
+
+    "favoredProfessions": [
+        "shadowknight",
+        "shaman",
+        "warrior"
+    ],
+
+    "restrictedProfessions": [
+        "paladin",
+        "bard",
+        "wizard",
+        "enchanter",
+        "magician",
+        "ranger"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Troll",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "crude iron club",
+        "reinforced hide armor",
+        "swamp survival kit",
+        "raw meat rations"
+    ]
+}

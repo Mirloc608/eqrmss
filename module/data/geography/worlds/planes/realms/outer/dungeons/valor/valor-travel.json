@@ -1,0 +1,24 @@
+{
+  "id": "valor-region-travel",
+  "plane": "valor",
+
+  "nodes": [
+    "region-entry",
+    "halls-of-honor",
+    "valor-battlegrounds",
+    "divine-citadel",
+    "valor-sovereign-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "halls-of-honor", "type": "honor-entry" },
+    { "from": "halls-of-honor", "to": "valor-battlegrounds", "type": "battle-transition" },
+    { "from": "valor-battlegrounds", "to": "divine-citadel", "type": "citadel-ascent" },
+    {
+      "from": "divine-citadel",
+      "to": "valor-sovereign-throne",
+      "type": "throne-access",
+      "requirements": { "outer-attunement": true }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-heartlands-ruins",
+  "hazards": [
+    {
+      "id": "rubble-collapse",
+      "name": "Rubble Collapse",
+      "severity": "high",
+      "trigger": "movement-in-collapsed-hall",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "discord-rubble-surge",
+      "name": "Discord Rubble Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-discord-rubble-field",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    }
+  ]
+}

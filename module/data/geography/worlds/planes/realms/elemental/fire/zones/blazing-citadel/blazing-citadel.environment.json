@@ -1,0 +1,44 @@
+{
+  "zone": "blazing-citadel",
+
+  "terrain": [
+    "flame-forged-halls",
+    "ember-king-courtyard",
+    "pyre-guard-battlements",
+    "molten-throne-chamber"
+  ],
+
+  "lighting": "citadel-flare",
+
+  "hazards": [
+    {
+      "id": "flame-wall-surge",
+      "dc": 27,
+      "effect": "fire_damage_and_knockback"
+    },
+    {
+      "id": "emberstorm-collapse",
+      "dc": 28,
+      "effect": "burning_and_area_damage"
+    },
+    {
+      "id": "molten-throne-pressure",
+      "dc": 29,
+      "effect": "stat_decay_and_heat_exhaustion"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "Citadel corridors shift as flame pressure rises; battlements may ignite mid‑combat."
+  },
+
+  "environmentTags": [
+    "fire",
+    "citadel",
+    "flame",
+    "elemental",
+    "raid"
+  ]
+}

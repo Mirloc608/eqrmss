@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-citadel-command",
+  "hazards": [
+    {
+      "id": "ward-break",
+      "name": "Ward Break",
+      "severity": "extreme",
+      "trigger": "proximity-to-warded-chamber",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "table-surge",
+      "name": "Strategy Table Surge",
+      "severity": "high",
+      "trigger": "interaction-with-strategy-table",
+      "effects": [
+        "arcane-burn",
+        "vision-distortion"
+      ]
+    }
+  ]
+}

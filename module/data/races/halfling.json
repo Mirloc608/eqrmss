@@ -1,0 +1,193 @@
+{
+    "id": "eqrmss-halfling",
+    "key": "halfling",
+    "name": "Halfling",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/halfling.png",
+
+    "description": "Halflings are small, resilient, and resourceful folk known throughout Norrath for their courage, curiosity, and love of comfort. Despite their size, Halflings possess remarkable determination and often surprise larger races with their agility, stealth, and good‑natured charm. Their home of Rivervale is a peaceful village surrounded by lush hills and farmland.",
+
+    "lore": {
+        "homeland": [
+            "Rivervale",
+            "Misty Thicket"
+        ],
+        "culture": "Halflings value community, comfort, good food, and simple joys. They are cheerful, brave, and surprisingly capable adventurers, often serving as scouts, rogues, and rangers.",
+        "alignment": "Often Good or Neutral, with strong community values.",
+        "languages": [
+            "Common",
+            "Halfling"
+        ]
+    },
+
+    "stats": {
+        "Ag": 10,
+        "Co": 5,
+        "Me": 0,
+        "Re": 0,
+        "SD": 5,
+        "Em": 5,
+        "In": 5,
+        "Pr": 5,
+        "Qu": 10,
+        "St": -5
+    },
+
+    "racialTalents": [
+        {
+            "id": "nimble",
+            "name": "Nimble",
+            "description": "Halflings are exceptionally agile and quick, granting bonuses to agility and quickness.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Ag",
+                    "value": 5
+                },
+                {
+                    "type": "stat",
+                    "target": "Qu",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "small_stature",
+            "name": "Small Stature",
+            "description": "Halflings are small and light, making them harder to detect and improving stealth.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "subterfuge",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "brave_heart",
+            "name": "Brave Heart",
+            "description": "Halflings possess surprising courage and emotional resilience.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Em",
+                    "value": 5
+                },
+                {
+                    "type": "resistance",
+                    "target": "fear",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "keen_senses",
+            "name": "Keen Senses",
+            "description": "Halflings have sharp intuition and perceptive ability.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "In",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "sure_footed",
+            "name": "Sure-Footed",
+            "description": "Halflings excel at moving through uneven terrain and tight spaces.",
+            "effects": [
+                {
+                    "type": "movement",
+                    "target": "balance",
+                    "value": 10
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 20,
+        "pace": "Slow",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Small",
+
+    "height": {
+        "male": "3'2\" - 3'8\"",
+        "female": "3'0\" - 3'6\""
+    },
+
+    "weight": {
+        "male": "60 - 80 lbs",
+        "female": "50 - 70 lbs"
+    },
+
+    "lifespan": {
+        "average": "100-120 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "daggers": 10,
+            "slings": 10
+        },
+        "physical": {
+            "climbing": 5,
+            "jumping": 5
+        },
+        "subterfuge": {
+            "stealth": 10,
+            "pickpocket": 5
+        },
+        "magical": {},
+        "lore": {
+            "nature": 5
+        },
+        "social": {
+            "persuasion": 5
+        }
+    },
+
+    "skillCosts": {
+        "combat": "B",
+        "physical": "A",
+        "subterfuge": "A",
+        "magical": "C",
+        "lore": "B",
+        "social": "B"
+    },
+
+    "favoredProfessions": [
+        "rogue",
+        "ranger",
+        "druid",
+        "bard"
+    ],
+
+    "restrictedProfessions": [
+        "shadowknight",
+        "berserker",
+        "monk"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Halfling",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "light leather armor",
+        "small dagger",
+        "traveler's pack",
+        "hearty rations"
+    ]
+}

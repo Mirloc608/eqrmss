@@ -1,0 +1,24 @@
+{
+  "id": "heart-of-the-rift-travel",
+  "dungeon": "heart-of-the-rift",
+
+  "nodes": [
+    "dungeon-entry",
+    "rift-chasms",
+    "void-storms",
+    "temporal-collapse",
+    "rift-prime-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "rift-chasms", "type": "rift-path" },
+    { "from": "rift-chasms", "to": "void-storms", "type": "void-transition" },
+    { "from": "void-storms", "to": "temporal-collapse", "type": "temporal-descent" },
+    {
+      "from": "temporal-collapse",
+      "to": "rift-prime-lair",
+      "type": "prime-ascent",
+      "requirements": { "discord-attunement": true }
+    }
+  ]
+}

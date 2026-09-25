@@ -1,0 +1,26 @@
+{
+  "zone": "dranik-sewers-purifying-plant",
+  "hazards": [
+    {
+      "id": "pressure-burst",
+      "name": "Pressure Burst",
+      "severity": "extreme",
+      "trigger": "movement-in-pressure-valve-hall",
+      "effects": [
+        "explosive-damage",
+        "knockback",
+        "stun"
+      ]
+    },
+    {
+      "id": "filtration-overload",
+      "name": "Filtration Overload",
+      "severity": "high",
+      "trigger": "proximity-to-filtration-chamber",
+      "effects": [
+        "arcane-damage",
+        "random-displacement"
+      ]
+    }
+  ]
+}

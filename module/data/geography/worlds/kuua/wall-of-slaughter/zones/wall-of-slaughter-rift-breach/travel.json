@@ -1,0 +1,43 @@
+{
+  "zone": "wall-of-slaughter-rift-breach",
+  "nodes": [
+    {
+      "id": "planar-tear",
+      "type": "tear",
+      "label": "Planar Tear"
+    },
+    {
+      "id": "void-pocket",
+      "type": "void",
+      "label": "Void Pocket"
+    },
+    {
+      "id": "rift-cracked-ground",
+      "type": "terrain",
+      "label": "Rift-Cracked Ground"
+    }
+  ],
+  "edges": [
+    {
+      "from": "rift-cracked-ground",
+      "to": "planar-tear",
+      "difficulty": "extreme",
+      "type": "planar",
+      "description": "A dangerous route into the heart of the rift."
+    },
+    {
+      "from": "rift-cracked-ground",
+      "to": "void-pocket",
+      "difficulty": "high",
+      "type": "planar",
+      "description": "A hazardous path into void instability zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "wall-of-slaughter-war-gate",
+      "type": "internal",
+      "description": "The Rift Breach leads directly to the War Gate."
+    }
+  ]
+}

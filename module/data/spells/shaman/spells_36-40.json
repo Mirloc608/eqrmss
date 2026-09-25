@@ -1,0 +1,336 @@
+[
+  {
+  "_id": "shm-spirit-of-bihli-36",
+  "name": "Spirit of Bih'Li",
+  "type": "spell",
+  "img": "icons/magic/nature/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 36,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 120,
+    "effects": [
+      { "type": "movement", "min": 30, "max": 85 },
+      { "type": "buff", "stat": "atk", "amount": 15 }
+    ],
+    "description": "Increases group movement speed and attack power."
+  }
+},
+{
+  "_id": "shm-assiduous-vision-36",
+  "name": "Assiduous Vision",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 36,
+    "school": "divination",
+    "target": "single",
+    "range": 800,
+    "castTime": 2,
+    "manaCost": 50,
+    "effects": [
+      { "type": "utility", "effect": "bind-sight" },
+      { "type": "vision", "effect": "magnification", "amount": 130 },
+      { "type": "vision", "effect": "ultravision" }
+    ],
+    "description": "Allows the caster to see through another creature’s eyes and grants ultravision."
+  }
+},
+{
+  "_id": "shm-gale-of-poison-36",
+  "name": "Gale of Poison",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 36,
+    "school": "evocation",
+    "target": "area",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 200,
+    "effects": [
+      { "type": "damage", "element": "poison", "amount": 122 }
+    ],
+    "description": "Deals poison damage to enemies in an area."
+  }
+},
+{
+  "_id": "shm-glamour-37",
+  "name": "Glamour",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+    "class": "shaman",
+    "level": 37,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 80,
+    "effects": [
+      { "type": "buff", "stat": "cha", "min": 10, "max": 42 }
+    ],
+    "description": "Increases the target’s charisma."
+  }
+},
+{
+  "_id": "shm-venom-of-the-snake-37",
+  "name": "Venom of the Snake",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-bolt-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 37,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 203,
+    "effects": [
+      { "type": "debuff", "effect": "poison", "amount": 7 },
+      { "type": "damage", "element": "poison", "amount": 33 },
+      { "type": "dot", "element": "poison", "min": 171, "max": 220 }
+    ],
+    "description": "Inflicts poison, dealing damage over time."
+  }
+},
+{
+  "_id": "shm-vigilant-spirit-37",
+  "name": "Vigilant Spirit",
+  "type": "spell",
+  "img": "icons/magic/spirit/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 37,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 400,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetShmS08L037WolfGho" }
+    ],
+    "description": "Summons a vigilant ghost wolf companion."
+  }
+},
+{
+  "_id": "shm-remove-curse-38",
+  "name": "Remove Curse",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 38,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 75,
+    "effects": [
+      { "type": "cure", "effect": "curse", "amount": 4 },
+      { "type": "cure", "effect": "curse", "amount": 4 }
+    ],
+    "description": "Removes curse effects from the target."
+  }
+},
+{
+  "_id": "shm-togors-insects-38",
+  "name": "Togor's Insects",
+  "type": "spell",
+  "img": "icons/magic/nature/insects-swarm-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 38,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 175,
+    "effects": [
+      { "type": "debuff", "stat": "attack-speed", "min": -11, "max": -80 },
+      { "type": "debuff", "effect": "disease", "amount": 12 }
+    ],
+    "description": "Slows the target’s attack speed and inflicts disease."
+  }
+},
+{
+  "_id": "shm-insidious-malady-38",
+  "name": "Insidious Malady",
+  "type": "spell",
+  "img": "icons/magic/debuff/disease-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 38,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "debuff", "effect": "disease", "amount": 9 },
+      { "type": "debuff", "stat": "resist-disease", "min": -11, "max": -70 }
+    ],
+    "description": "Inflicts disease and reduces disease resistance."
+  }
+},
+{
+  "_id": "shm-cannibalize-ii-38",
+  "name": "Cannibalize II",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 38,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 1,
+    "manaCost": 0,
+    "effects": [
+      { "type": "damage", "element": "health", "amount": 67 },
+      { "type": "restore", "stat": "mana", "min": 21, "max": 53 }
+    ],
+    "description": "Converts health into mana."
+  }
+},
+{
+  "_id": "shm-blinding-luminance-39",
+  "name": "Blinding Luminance",
+  "type": "spell",
+  "img": "icons/magic/light/explosion-beam-blind.webp",
+  "system": {
+    "class": "shaman",
+    "level": 39,
+    "school": "divination",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "control", "effect": "blindness", "amount": -1 },
+      { "type": "debuff", "stat": "atk", "amount": -5 }
+    ],
+    "description": "Blinds the target and reduces attack power."
+  }
+},
+{
+  "_id": "shm-chloroplast-39",
+  "name": "Chloroplast",
+  "type": "spell",
+  "img": "icons/magic/nature/leaf-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 39,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 200,
+    "effects": [
+      { "type": "regen", "stat": "hp", "min": 6, "max": 19 }
+    ],
+    "description": "Grants moderate health regeneration."
+  }
+},
+{
+  "_id": "shm-deftness-39",
+  "name": "Deftness",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 39,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 80,
+    "effects": [
+      { "type": "buff", "stat": "dex", "min": 2, "max": 41 }
+    ],
+    "description": "Increases the target’s dexterity."
+  }
+},
+{
+  "_id": "shm-furious-strength-39",
+  "name": "Furious Strength",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 39,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 80,
+    "effects": [
+      { "type": "buff", "stat": "str", "min": 12, "max": 46 }
+    ],
+    "description": "Increases the target’s strength."
+  }
+},
+{
+  "_id": "shm-summon-companion-40",
+  "name": "Summon Companion",
+  "type": "spell",
+  "img": "icons/magic/spirit/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 40,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "utility", "effect": "call-pet" }
+    ],
+    "description": "Calls the caster’s pet to their location."
+  }
+},
+{
+  "_id": "shm-talisman-of-altuna-40",
+  "name": "Talisman of Altuna",
+  "type": "spell",
+  "img": "icons/magic/nature/totem-bear.webp",
+  "system": {
+    "class": "shaman",
+    "level": 40,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 250,
+    "effects": [
+      { "type": "buff", "stat": "hp-max", "min": 152, "max": 400 },
+      { "type": "heal", "min": 152, "max": 400 }
+    ],
+    "description": "Increases maximum hitpoints and heals the target."
+  }
+},
+{
+  "_id": "shm-spirit-salve-40",
+  "name": "Spirit Salve",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 40,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 181,
+    "effects": [
+      { "type": "heal", "min": 326, "max": 456 }
+    ],
+    "description": "Restores a large amount of hitpoints."
+  }
+}
+]

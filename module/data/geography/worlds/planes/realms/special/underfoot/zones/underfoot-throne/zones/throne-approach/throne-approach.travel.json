@@ -1,0 +1,36 @@
+{
+  "id": "throne-approach-travel",
+  "zone": "throne-approach",
+
+  "nodes": [
+    "approach-entry",
+    "ascension-path",
+    "crystal-arch",
+    "approach-core"
+  ],
+
+  "edges": [
+    {
+      "from": "approach-entry",
+      "to": "ascension-path",
+      "type": "divine-path"
+    },
+    {
+      "from": "ascension-path",
+      "to": "crystal-arch",
+      "type": "stone-resonance",
+      "requirements": {
+        "brell-attunement": true
+      }
+    },
+    {
+      "from": "crystal-arch",
+      "to": "approach-core",
+      "type": "divine-summoning",
+      "requirements": {
+        "forgeCompletion": true,
+        "crystalRootCompletion": true
+      }
+    }
+  ]
+}

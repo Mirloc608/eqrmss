@@ -1,0 +1,195 @@
+{
+  "id": "rogue",
+  "name": "Rogue",
+  "type": "class",
+
+  "description": {
+    "summary": "Rogues are masters of stealth, precision strikes, and subterfuge.",
+    "lore": "Rogues operate from the shadows of Norrath, striking with deadly accuracy and vanishing before enemies can react. They excel at infiltration, ambush, disabling traps, and exploiting weaknesses through cunning and agility."
+  },
+
+  "role": {
+    "primary": "Precision Damage",
+    "secondary": [
+      "Stealth",
+      "Utility",
+      "Debuff"
+    ]
+  },
+
+  "profession": {
+    "category": "Arms / Subterfuge / Precision / Maneuvering",
+    "realm": "Martial",
+    "powerSource": "Skill & Precision"
+  },
+
+  "stats": {
+    "primeRequisites": ["Agility", "Intuition"],
+    "secondaryStats": ["Strength", "Memory", "Presence"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth", "Leather"],
+    "restricted": ["Chain", "Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Daggers",
+      "Short Swords",
+      "Thrown Weapons",
+      "Fist Weapons"
+    ],
+    "restricted": ["Heavy Weapons", "Two-Handed Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 3,
+      "Weapon Skills": 2,
+      "Combat Maneuvers": 2,
+      "Acrobatics": 1,
+      "Athletics": 2,
+      "Perception": 1,
+      "Stalk/Hide": 1,
+      "Subterfuge": 1,
+      "Lore": 3,
+      "Spell Lists": 9
+    },
+    "bonusCategories": [
+      "Stealth",
+      "Backstab",
+      "Subterfuge",
+      "Precision Attacks"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Martial": {
+        "Stealth": ["Shadowstep"],
+        "Precision": ["Backstab Techniques"],
+        "Subterfuge": ["Trap Handling"],
+        "Maneuvering": ["Evasion Techniques"]
+      }
+    },
+    "specialization": [
+      "Stealth Mastery",
+      "Precision Strikes",
+      "Subterfuge Techniques"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "rogue_backstab",
+        "name": "Backstab",
+        "description": "The rogue deals devastating damage when striking from behind."
+      },
+      {
+        "id": "rogue_sneak",
+        "name": "Sneak",
+        "description": "The rogue moves quietly, reducing detection."
+      }
+    ],
+    "level5": [
+      {
+        "id": "rogue_evade",
+        "name": "Evade",
+        "description": "The rogue avoids incoming attacks through agility and misdirection."
+      }
+    ],
+    "level10": [
+      {
+        "id": "rogue_crippling_strike",
+        "name": "Crippling Strike",
+        "description": "The rogue weakens an enemy with a precise disabling attack."
+      }
+    ],
+    "level20": [
+      {
+        "id": "rogue_master_assassin",
+        "name": "Master Assassin",
+        "description": "The rogue becomes a master of stealth, precision, and lethal strikes."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Backstab",
+    "Sneak",
+    "Hide",
+    "Evade",
+    "Precision Strikes",
+    "Trap Handling"
+  ],
+
+  "combatActions": [
+    { "id": "backstab", "name": "Backstab" },
+    { "id": "kick", "name": "Kick" },
+    { "id": "crippling_strike", "name": "Crippling Strike" }
+  ],
+
+  "disciplines": [
+    "Shadow Focus",
+    "Silent Step",
+    "Assassin’s Precision"
+  ],
+
+  "startingEquipment": [
+    { "name": "Pair of Daggers", "type": "weapon" },
+    { "name": "Leather Armor", "type": "armor" },
+    { "name": "Lockpick Set", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "martial-specialist"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/rogue.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "martial specialist",
+      "primaryRole": "damage",
+      "secondaryRoles": ["utility", "control"]
+    },
+
+    "identity": {
+      "strengths": [
+        "stealth",
+        "precision damage",
+        "utility",
+        "trap handling"
+      ]
+    },
+
+    "weaknesses": [
+      "low durability",
+      "limited ranged options"
+    ],
+
+    "signatureMechanics": [
+      "backstab",
+      "evade",
+      "crippling strike"
+    ],
+
+    "tags": [
+      "martial",
+      "arms",
+      "subterfuge",
+      "precision",
+      "stealth"
+    ],
+
+    "pending": [
+      "attack table IDs"
+    ]
+  }
+}

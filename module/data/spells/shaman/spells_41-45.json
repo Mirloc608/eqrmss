@@ -1,0 +1,372 @@
+[
+  {
+  "_id": "shm-agility-41",
+  "name": "Agility",
+  "type": "spell",
+  "img": "icons/magic/life/boot-speed-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 41,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "buff", "stat": "agi", "min": 21, "max": 66 }
+    ],
+    "description": "Increases the target’s agility."
+  }
+},
+{
+  "_id": "shm-incapacitate-41",
+  "name": "Incapacitate",
+  "type": "spell",
+  "img": "icons/magic/debuff/hand-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 41,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "debuff", "stat": "agi", "min": -6, "max": -60 },
+      { "type": "debuff", "stat": "str", "min": -6, "max": -60 },
+      { "type": "debuff", "stat": "ac", "min": -9, "max": -33 }
+    ],
+    "description": "Reduces agility, strength, and armor class."
+  }
+},
+{
+  "_id": "shm-guardian-spirit-41",
+  "name": "Guardian Spirit",
+  "type": "spell",
+  "img": "icons/magic/spirit/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 41,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 450,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetShmS09L041WolfGho" }
+    ],
+    "description": "Summons a guardian wolf spirit companion."
+  }
+},
+{
+  "_id": "shm-blast-of-poison-42",
+  "name": "Blast of Poison",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-bolt-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 42,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 167,
+    "effects": [
+      { "type": "damage", "element": "poison", "min": 220, "max": 360 }
+    ],
+    "description": "Deals poison damage to a single target."
+  }
+},
+{
+  "_id": "shm-alacrity-42",
+  "name": "Alacrity",
+  "type": "spell",
+  "img": "icons/magic/air/wind-gust-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 42,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 115,
+    "effects": [
+      { "type": "buff", "stat": "attack-speed", "min": 22, "max": 62 }
+    ],
+    "description": "Increases the target’s attack speed."
+  }
+},
+{
+  "_id": "shm-guardian-42",
+  "name": "Guardian",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 42,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "buff", "stat": "ac", "min": 10, "max": 34 }
+    ],
+    "description": "Increases the target’s armor class."
+  }
+},
+{
+  "_id": "shm-stamina-43",
+  "name": "Stamina",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 43,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "buff", "stat": "sta", "min": 15, "max": 55 }
+    ],
+    "description": "Increases the target’s stamina."
+  }
+},
+{
+  "_id": "shm-odium-43",
+  "name": "Odium",
+  "type": "spell",
+  "img": "icons/magic/debuff/curse-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 43,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 409,
+    "effects": [
+      { "type": "debuff", "effect": "curse", "amount": 8 },
+      { "type": "dot", "element": "curse", "min": 217, "max": 325 }
+    ],
+    "description": "Inflicts a powerful curse, dealing damage over time."
+  }
+},
+{
+  "_id": "shm-stoicism-44",
+  "name": "Stoicism",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 44,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 180,
+    "effects": [
+      { "type": "regen", "stat": "hp", "amount": 160 },
+      { "type": "movement", "amount": -100 },
+      { "type": "debuff", "stat": "attack-speed", "amount": -30 }
+    ],
+    "description": "Grants powerful regeneration but slows movement and attack speed."
+  }
+},
+{
+  "_id": "shm-nullify-magic-44",
+  "name": "Nullify Magic",
+  "type": "spell",
+  "img": "icons/magic/arcane/banish-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 44,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "utility", "effect": "cancel-magic", "rank": 4 },
+      { "type": "utility", "effect": "cancel-magic", "rank": 4 }
+    ],
+    "description": "Removes magical effects from the target."
+  }
+},
+{
+  "_id": "shm-blizzard-blast-44",
+  "name": "Blizzard Blast",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-spear-large.webp",
+  "system": {
+    "class": "shaman",
+    "level": 44,
+    "school": "evocation",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 147,
+    "effects": [
+      { "type": "damage", "element": "cold", "min": 200, "max": 346 }
+    ],
+    "description": "Deals cold damage to a single target."
+  }
+},
+{
+  "_id": "shm-greater-mass-imbue-amber-44",
+  "name": "Greater Mass Imbue Amber",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-yellow.webp",
+  "system": {
+    "class": "shaman",
+    "level": 44,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 2400,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-amber", "quantity": "mass" }
+    ],
+    "description": "Imbues multiple pieces of amber."
+  }
+},
+{
+  "_id": "shm-greater-mass-imbue-diamond-44",
+  "name": "Greater Mass Imbue Diamond",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-white.webp",
+  "system": {
+    "class": "shaman",
+    "level": 44,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 2400,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-diamond", "quantity": "mass" }
+    ],
+    "description": "Imbues multiple diamonds."
+  }
+},
+{
+  "_id": "shm-greater-mass-imbue-ivory-44",
+  "name": "Greater Mass Imbue Ivory",
+  "type": "spell",
+  "img": "icons/commodities/materials/bone-white.webp",
+  "system": {
+    "class": "shaman",
+    "level": 44,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 2700,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-ivory", "quantity": "mass" }
+    ],
+    "description": "Imbues multiple pieces of ivory."
+  }
+},
+{
+  "_id": "shm-greater-mass-imbue-jade-44",
+  "name": "Greater Mass Imbue Jade",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 44,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 2400,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-jade", "quantity": "mass" }
+    ],
+    "description": "Imbues multiple pieces of jade."
+  }
+},
+{
+  "_id": "shm-greater-mass-imbue-sapphire-44",
+  "name": "Greater Mass Imbue Sapphire",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 44,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 2400,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "imbued-sapphire", "quantity": "mass" }
+    ],
+    "description": "Imbues multiple sapphires."
+  }
+},
+{
+  "_id": "shm-frenzied-spirit-45",
+  "name": "Frenzied Spirit",
+  "type": "spell",
+  "img": "icons/magic/spirit/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 45,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 500,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetShmS09L045WolfGho" }
+    ],
+    "description": "Summons a frenzied wolf spirit companion."
+  }
+},
+{
+  "_id": "shm-rage-45",
+  "name": "Rage",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 45,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "buff", "stat": "ac", "min": 10, "max": 28 },
+      { "type": "buff", "stat": "agi", "min": 3, "max": 57 },
+      { "type": "buff", "stat": "str", "min": 3, "max": 53 },
+      { "type": "buff", "stat": "dex", "min": 3, "max": 62 }
+    ],
+    "description": "Increases AC, agility, strength, and dexterity."
+  }
+},
+{
+  "_id": "shm-superior-healing-45",
+  "name": "Superior Healing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 45,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 185,
+    "effects": [
+      { "type": "heal", "min": 200, "max": 600 }
+    ],
+    "description": "Restores a large amount of hitpoints."
+  }
+}
+]

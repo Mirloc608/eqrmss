@@ -1,0 +1,48 @@
+{
+  "zone": "discord-wastes-warfront",
+  "nodes": [
+    {
+      "id": "warfront-barricade",
+      "type": "structure",
+      "label": "Warfront Barricade"
+    },
+    {
+      "id": "discord-crater",
+      "type": "crater",
+      "label": "Discord Crater"
+    },
+    {
+      "id": "stormfront-field",
+      "type": "field",
+      "label": "Stormfront Field"
+    }
+  ],
+  "edges": [
+    {
+      "from": "warfront-barricade",
+      "to": "stormfront-field",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route connecting Muramite defenses to stormfront territory."
+    },
+    {
+      "from": "stormfront-field",
+      "to": "discord-crater",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord crater territory."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "discord-wastes-rifts",
+      "type": "back",
+      "description": "The Warfront connects back to the Rifts."
+    },
+    {
+      "to": "riftseekers-sanctum",
+      "type": "forward",
+      "description": "The Warfront leads toward Riftseekers’ Sanctum."
+    }
+  ]
+}

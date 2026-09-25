@@ -1,0 +1,44 @@
+{
+  "zone": "stormvault",
+
+  "terrain": [
+    "lightning-fused-chambers",
+    "cyclone-corridors",
+    "stormforged-platforms",
+    "tempest-core-arches"
+  ],
+
+  "lighting": "storm-glow",
+
+  "hazards": [
+    {
+      "id": "lightning-strike",
+      "dc": 28,
+      "effect": "shock_damage_and_stun"
+    },
+    {
+      "id": "cyclone-pull",
+      "dc": 27,
+      "effect": "forced_movement_and_knockback"
+    },
+    {
+      "id": "pressure-burst",
+      "dc": 29,
+      "effect": "air_damage_and_stat_decay"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "Storm currents shift violently; cyclone corridors may redirect or collapse without warning."
+  },
+
+  "environmentTags": [
+    "air",
+    "storm",
+    "lightning",
+    "cyclone",
+    "elemental"
+  ]
+}

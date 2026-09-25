@@ -1,0 +1,27 @@
+{
+  "zone": "discord-wastes-rifts",
+  "hazards": [
+    {
+      "id": "rift-collapse",
+      "name": "Rift Collapse",
+      "severity": "extreme",
+      "trigger": "movement-near-rift-chasm",
+      "effects": [
+        "fall-damage",
+        "random-teleport",
+        "arcane-damage"
+      ]
+    },
+    {
+      "id": "gravity-flip",
+      "name": "Gravity Flip",
+      "severity": "high",
+      "trigger": "movement-in-gravity-warp-zone",
+      "effects": [
+        "knockback",
+        "stun",
+        "disorientation"
+      ]
+    }
+  ]
+}

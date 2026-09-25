@@ -1,0 +1,44 @@
+{
+  "zone": "abyssal-trench",
+
+  "terrain": [
+    "pressure-fissure-canyons",
+    "bioluminescent-chasm-walls",
+    "abyssal-silt-plains",
+    "trench-core-pits"
+  ],
+
+  "lighting": "abyssal-darkness",
+
+  "hazards": [
+    {
+      "id": "pressure-crush",
+      "dc": 29,
+      "effect": "stat_decay_and_stun"
+    },
+    {
+      "id": "abyssal-current-pull",
+      "dc": 27,
+      "effect": "forced_movement_and_damage"
+    },
+    {
+      "id": "silt-choke",
+      "dc": 26,
+      "effect": "blindness_and_breath_loss"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "The trench shifts with abyssal pressure; pathways may collapse or open unexpectedly."
+  },
+
+  "environmentTags": [
+    "water",
+    "abyss",
+    "pressure",
+    "darkness",
+    "elemental"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "time-throne-travel",
+  "zone": "time-throne",
+
+  "nodes": [
+    "throne-entry",
+    "eternal-convergence",
+    "throne-core"
+  ],
+
+  "edges": [
+    {
+      "from": "throne-entry",
+      "to": "eternal-convergence",
+      "type": "eternal-shift"
+    },
+    {
+      "from": "eternal-convergence",
+      "to": "throne-core",
+      "type": "chronarch-summoning",
+      "requirements": {
+        "chronomanticAttunement": true,
+        "phaseCompletion": 5
+      }
+    }
+  ]
+}

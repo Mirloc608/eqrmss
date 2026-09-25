@@ -1,0 +1,85 @@
+<section class="tab skills-tab" data-group="primary" data-tab="skills">
+    <div class="skills-container">
+
+        <h3>{{localize "eqrmss.pc_sheet.skills.header"}}</h3>
+
+        <table class="eqrmss-table skills-table">
+            <thead>
+                <tr>
+                    <th>{{localize "eqrmss.pc_sheet.skills.name"}}</th>
+                    <th>{{localize "eqrmss.pc_sheet.skills.category"}}</th>
+                    <th>{{localize "eqrmss.pc_sheet.skills.stat"}}</th>
+                    <th>{{localize "eqrmss.pc_sheet.skills.cost"}}</th>
+                    <th>{{localize "eqrmss.pc_sheet.skills.ranks"}}</th>
+                    <th>{{localize "eqrmss.pc_sheet.skills.total_bonus"}}</th>
+                    <th>{{localize "eqrmss.pc_sheet.skills.actions"}}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each skills as |skill id|}}
+                <tr class="skill-row" data-skill-id="{{skill.id}}">
+
+                    <!-- Skill Name -->
+                    <td class="skill-name">
+                        <strong>{{skill.name}}</strong>
+                    </td>
+
+                    <!-- Category -->
+                    <td class="skill-category">
+                        {{skill.category}}
+                    </td>
+
+                    <!-- Primary Stat -->
+                    <td class="skill-stat">
+                        {{skill.statShort}}
+                    </td>
+
+                    <!-- Cost Per Rank -->
+                    <td class="skill-cost">
+                        {{skill.costPerRank}}
+                    </td>
+
+                    <!-- Ranks -->
+                    <td class="skill-ranks">
+                        <input type="number"
+                               name="system.skills.{{skill.id}}.ranks"
+                               value="{{skill.ranks}}"
+                               min="0"
+                               max="50"
+                               style="width: 50px;" />
+                    </td>
+
+                    <!-- Total Bonus -->
+                    <td class="skill-total">
+                        {{skill.totalBonus}}
+                    </td>
+
+                    <!-- Actions -->
+                    <td class="skill-actions">
+
+                        <!-- Roll Button -->
+                        <button type="button"
+                                class="skill-roll"
+                                data-skill-id="{{skill.id}}">
+                            <i class="fas fa-dice-d20"></i>
+                            {{localize "eqrmss.pc_sheet.skills.roll"}}
+                        </button>
+
+                        <!-- Advance Button -->
+                        <button type="button"
+                                class="skill-advance"
+                                data-skill-id="{{skill.id}}">
+                            <i class="fas fa-plus"></i>
+                            {{localize "eqrmss.pc_sheet.skills.rank_up"}}
+                        </button>
+
+                    </td>
+
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+    </div>
+</section>

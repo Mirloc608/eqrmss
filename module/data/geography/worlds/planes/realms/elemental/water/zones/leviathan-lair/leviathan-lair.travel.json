@@ -1,0 +1,35 @@
+{
+  "id": "leviathan-lair-travel",
+  "zone": "leviathan-lair",
+
+  "nodes": [
+    "abyssal-gate",
+    "tidal-maw",
+    "pressure-ridge",
+    "leviathan-throne"
+  ],
+
+  "edges": [
+    {
+      "from": "abyssal-gate",
+      "to": "tidal-maw",
+      "type": "abyssal-descent"
+    },
+    {
+      "from": "tidal-maw",
+      "to": "pressure-ridge",
+      "type": "tidal-transition",
+      "requirements": {
+        "water-breathing": true
+      }
+    },
+    {
+      "from": "pressure-ridge",
+      "to": "leviathan-throne",
+      "type": "abyssal-core-path",
+      "requirements": {
+        "elemental-attunement-water": true
+      }
+    }
+  ]
+}

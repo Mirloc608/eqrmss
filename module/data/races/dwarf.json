@@ -1,0 +1,185 @@
+{
+    "id": "eqrmss-dwarf",
+    "key": "dwarf",
+    "name": "Dwarf",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/dwarf.png",
+
+    "description": "Dwarves are a proud and resilient race of master craftsmen, warriors, and miners. Descended from the ancient halls of Norrath, they are renowned for their endurance, loyalty, engineering skill, and unmatched fortitude. Their society thrives in the stone‑carved city of Kaladim, where tradition and craftsmanship define their culture.",
+
+    "lore": {
+        "homeland": [
+            "Kaladim",
+            "Butcherblock Mountains"
+        ],
+        "culture": "Dwarves value honor, craftsmanship, clan loyalty, and martial discipline. Their culture is deeply tied to stonework, mining, and devotion to Brell Serilis.",
+        "alignment": "Often Lawful Good or Neutral, with strong clan traditions.",
+        "languages": [
+            "Common",
+            "Dwarvish"
+        ]
+    },
+
+    "stats": {
+        "Ag": -5,
+        "Co": 15,
+        "Me": 0,
+        "Re": 0,
+        "SD": 5,
+        "Em": 0,
+        "In": 0,
+        "Pr": 0,
+        "Qu": -5,
+        "St": 5
+    },
+
+    "racialTalents": [
+        {
+            "id": "stoneborn_resilience",
+            "name": "Stoneborn Resilience",
+            "description": "Dwarves possess exceptional toughness and resistance to toxins and disease.",
+            "effects": [
+                {
+                    "type": "resistance",
+                    "target": "poison",
+                    "value": 15
+                },
+                {
+                    "type": "resistance",
+                    "target": "disease",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "enduring_fortitude",
+            "name": "Enduring Fortitude",
+            "description": "Dwarves are naturally hardy, gaining increased constitution and stamina.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Co",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "stonecunning",
+            "name": "Stonecunning",
+            "description": "Dwarves have an innate understanding of stonework, underground environments, and structural engineering.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "lore",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "darkvision",
+            "name": "Darkvision",
+            "description": "Dwarves can see in complete darkness, a trait developed from generations living underground.",
+            "effects": [
+                {
+                    "type": "sense",
+                    "target": "darkvision",
+                    "value": 60
+                }
+            ]
+        },
+        {
+            "id": "stout_frame",
+            "name": "Stout Frame",
+            "description": "Dwarves possess a compact, muscular build that provides natural defensive bonuses.",
+            "effects": [
+                {
+                    "type": "armor",
+                    "target": "naturalArmor",
+                    "value": 2
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 20,
+        "pace": "Slow",
+        "encumbranceMultiplier": 1.25
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "4'4\" - 4'10\"",
+        "female": "4'2\" - 4'8\""
+    },
+
+    "weight": {
+        "male": "160 - 220 lbs",
+        "female": "140 - 200 lbs"
+    },
+
+    "lifespan": {
+        "average": "250-300 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "axes": 10,
+            "hammers": 10,
+            "shieldUse": 5
+        },
+        "physical": {
+            "endurance": 10
+        },
+        "subterfuge": {},
+        "magical": {},
+        "lore": {
+            "mining": 10,
+            "engineering": 10
+        },
+        "social": {
+            "intimidation": 5
+        }
+    },
+
+    "skillCosts": {
+        "combat": "A",
+        "physical": "B",
+        "subterfuge": "C",
+        "magical": "D",
+        "lore": "B",
+        "social": "C"
+    },
+
+    "favoredProfessions": [
+        "warrior",
+        "paladin",
+        "cleric"
+    ],
+
+    "restrictedProfessions": [
+        "wizard",
+        "enchanter",
+        "magician"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Dwarvish",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "stout chainmail",
+        "iron hammer",
+        "miner's pick",
+        "stonecraft toolkit"
+    ]
+}

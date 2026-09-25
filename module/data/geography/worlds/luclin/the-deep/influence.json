@@ -1,0 +1,63 @@
+{
+  "influenceMap": [
+    {
+      "faction": "thought-horror-hive",
+      "zones": {
+        "thought-horror-hive": "dominant",
+        "the-deep": "strong",
+        "abyssal-drop": "moderate"
+      }
+    },
+    {
+      "faction": "shissar-remnants",
+      "zones": {
+        "shissar-bio-labs": "dominant",
+        "the-deep": "minor"
+      }
+    },
+    {
+      "faction": "fungal-broods",
+      "zones": {
+        "fungal-forest": "dominant",
+        "the-deep": "moderate"
+      }
+    },
+    {
+      "faction": "abyssal-aberrations",
+      "zones": {
+        "abyssal-drop": "dominant",
+        "the-deep": "moderate"
+      }
+    },
+    {
+      "faction": "vex-thal-resonance",
+      "zones": {
+        "vex-thal-approach": "dominant",
+        "abyssal-drop": "strong"
+      }
+    }
+  ],
+
+  "dynamicEffects": [
+    {
+      "event": "psychic-surge",
+      "description": "Thought Horror hive expands influence during psychic surges.",
+      "affectedFactions": ["thought-horror-hive"]
+    },
+    {
+      "event": "fungal-bloom",
+      "description": "Fungal forests expand rapidly during nutrient blooms.",
+      "affectedFactions": ["fungal-broods"]
+    },
+    {
+      "event": "void-fracture",
+      "description": "Void fractures increase aberration influence across the Deep.",
+      "affectedFactions": ["abyssal-aberrations"]
+    },
+    {
+      "event": "vex-thal-resonance-pulse",
+      "description": "Resonance pulses alter faction balance near the abyssal drop.",
+      "affectedFactions": ["vex-thal-resonance", "thought-horror-hive"]
+    }
+  ]
+}

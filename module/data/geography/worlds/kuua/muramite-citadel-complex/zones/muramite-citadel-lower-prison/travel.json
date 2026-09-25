@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-lower-prison",
+  "nodes": [
+    {
+      "id": "holding-cells",
+      "type": "cells",
+      "label": "Holding Cells"
+    },
+    {
+      "id": "interrogation-chamber",
+      "type": "chamber",
+      "label": "Interrogation Chamber"
+    },
+    {
+      "id": "guard-station",
+      "type": "station",
+      "label": "Guard Station"
+    }
+  ],
+  "edges": [
+    {
+      "from": "holding-cells",
+      "to": "interrogation-chamber",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord interrogation zones."
+    },
+    {
+      "from": "holding-cells",
+      "to": "guard-station",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by jailers moving between cells and checkpoints."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-arena",
+      "type": "down",
+      "description": "Lower Prison descends into the Arena."
+    },
+    {
+      "to": "muramite-citadel-upper-prison",
+      "type": "up",
+      "description": "Lower Prison ascends into the Upper Prison."
+    }
+  ]
+}

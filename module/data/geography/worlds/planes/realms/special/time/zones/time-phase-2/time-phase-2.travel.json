@@ -1,0 +1,26 @@
+{
+  "id": "time-phase-2-travel",
+  "zone": "time-phase-2",
+
+  "nodes": [
+    "phase-2-entry",
+    "phase-2-battlefield",
+    "phase-2-core"
+  ],
+
+  "edges": [
+    {
+      "from": "phase-2-entry",
+      "to": "phase-2-battlefield",
+      "type": "temporal-shift"
+    },
+    {
+      "from": "phase-2-battlefield",
+      "to": "phase-2-core",
+      "type": "memory-convergence",
+      "requirements": {
+        "chronomanticAttunement": true
+      }
+    }
+  ]
+}

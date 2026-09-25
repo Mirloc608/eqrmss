@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-sewers-pool-of-sludge",
+  "nodes": [
+    {
+      "id": "sludge-reservoir",
+      "type": "reservoir",
+      "label": "Sludge Reservoir"
+    },
+    {
+      "id": "disposal-platform",
+      "type": "platform",
+      "label": "Disposal Platform"
+    },
+    {
+      "id": "sludge-tunnels",
+      "type": "tunnels",
+      "label": "Sludge Tunnels"
+    }
+  ],
+  "edges": [
+    {
+      "from": "sludge-reservoir",
+      "to": "disposal-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route through toxic sludge runoff."
+    },
+    {
+      "from": "disposal-platform",
+      "to": "sludge-tunnels",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord‑corrupted tunnels."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-sewers-purifying-plant",
+      "type": "back",
+      "description": "The Pool connects back to the Purifying Plant."
+    },
+    {
+      "to": "dranik-sewers-lair-of-trapped-ones",
+      "type": "forward",
+      "description": "The Pool leads toward the Lair of Trapped Ones."
+    }
+  ]
+}

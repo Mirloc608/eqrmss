@@ -1,0 +1,159 @@
+{
+    "id": "anthem_of_battle_1",
+
+    "name": "Anthem of Battle I",
+
+    "type": "song",
+
+    "class": "Bard",
+
+    "tier": 1,
+
+    "level_required": 1,
+
+
+    "description":
+        "A powerful battle melody that inspires allies with increased combat ability.",
+
+
+    "performance":
+    {
+        "activation":
+        "standard",
+
+        "maintained":
+        true,
+
+        "pulse_interval":
+        "round",
+
+        "break_conditions":
+        [
+            "bard_unconscious",
+            "silenced",
+            "song_cancelled"
+        ]
+    },
+
+
+    "requirements":
+    {
+        "instrument_required":
+        false,
+
+        "allowed_instruments":
+        [
+            "voice",
+            "lute",
+            "horn",
+            "drum"
+        ]
+    },
+
+
+    "targeting":
+    {
+        "type":
+        "area",
+
+        "range":
+        30,
+
+        "targets":
+        "allies"
+    },
+
+
+    "effects":
+    [
+        {
+            "id":
+            "attack_bonus",
+
+            "type":
+            "modifier",
+
+            "stat":
+            "attack",
+
+            "value":
+            {
+                "base": 5,
+
+                "scaling":
+                {
+                    "attribute":
+                    "charisma_bonus"
+                }
+            }
+        },
+
+
+        {
+            "id":
+            "damage_bonus",
+
+            "type":
+            "modifier",
+
+            "stat":
+            "weapon_damage",
+
+            "value":
+            {
+                "base": 2,
+
+                "scaling":
+                {
+                    "attribute":
+                    "bard_level"
+                }
+            }
+        }
+    ],
+
+
+    "stacking":
+    {
+        "group":
+        "bard_song",
+
+        "rules":
+        {
+            "same_song":
+            "refresh",
+
+            "different_song":
+            "combine"
+        }
+    },
+
+
+    "progression":
+    {
+        "upgrades_to":
+        [
+            "anthem_of_battle_2",
+            "anthem_of_battle_3"
+        ]
+    },
+
+
+    "engine":
+    {
+        "song_engine":
+        true,
+
+        "active_effect_manager":
+        true
+    },
+
+
+    "tags":
+    [
+        "bard",
+        "song",
+        "combat",
+        "buff"
+    ]
+}

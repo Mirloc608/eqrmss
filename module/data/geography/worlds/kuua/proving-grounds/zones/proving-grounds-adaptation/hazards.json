@@ -1,0 +1,26 @@
+{
+  "zone": "proving-grounds-adaptation",
+  "hazards": [
+    {
+      "id": "flux-surge",
+      "name": "Flux Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-flux-pylon",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "terrain-change"
+      ]
+    },
+    {
+      "id": "bridge-collapse",
+      "name": "Bridge Collapse",
+      "severity": "high",
+      "trigger": "movement-on-unstable-bridge",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

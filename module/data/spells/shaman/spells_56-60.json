@@ -1,0 +1,717 @@
+[
+  {
+  "_id": "shm-paralyzing-earth-56",
+  "name": "Paralyzing Earth",
+  "type": "spell",
+  "img": "icons/magic/nature/root-bind-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 56,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "control", "effect": "root" }
+    ],
+    "description": "Roots the target in place."
+  }
+},
+{
+  "_id": "shm-acumen-56",
+  "name": "Acumen",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 56,
+    "school": "divination",
+    "target": "single",
+    "range": 800,
+    "castTime": 2,
+    "manaCost": 75,
+    "effects": [
+      { "type": "vision", "effect": "see-invisible" },
+      { "type": "vision", "effect": "ultravision" }
+    ],
+    "description": "Grants see invisible and ultravision."
+  }
+},
+{
+  "_id": "shm-bane-of-nife-56",
+  "name": "Bane of Nife",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 56,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 860,
+    "effects": [
+      { "type": "debuff", "effect": "poison", "amount": 10 },
+      { "type": "damage", "element": "poison", "amount": 61 },
+      { "type": "dot", "element": "poison", "min": 425, "max": 485 }
+    ],
+    "description": "Inflicts poison, dealing heavy damage over time."
+  }
+},
+{
+  "_id": "shm-celerity-56",
+  "name": "Celerity",
+  "type": "spell",
+  "img": "icons/magic/air/wind-gust-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 56,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 185,
+    "effects": [
+      { "type": "buff", "stat": "attack-speed", "min": 28, "max": 78 }
+    ],
+    "description": "Increases the target’s attack speed."
+  }
+},
+{
+  "_id": "shm-eradicate-poison-56",
+  "name": "Eradicate Poison",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 56,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 250,
+    "effects": [
+      { "type": "cure", "effect": "poison", "amount": 30 },
+      { "type": "cure", "effect": "poison", "amount": 30 }
+    ],
+    "description": "Removes a large number of poison counters."
+  }
+},
+{
+  "_id": "shm-regrowth-of-dar-khura-56",
+  "name": "Regrowth of Dar Khura",
+  "type": "spell",
+  "img": "icons/magic/nature/leaf-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 56,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 600,
+    "effects": [
+      { "type": "regen", "stat": "hp", "min": 16, "max": 38 }
+    ],
+    "description": "Grants strong health regeneration to the group."
+  }
+},
+{
+  "_id": "shm-malosini-57",
+  "name": "Malosini",
+  "type": "spell",
+  "img": "icons/magic/debuff/hand-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 57,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 200,
+    "effects": [
+      { "type": "buff", "stat": "resist-fire", "amount": 0 },
+      { "type": "debuff", "stat": "resist-cold", "min": -11, "max": -70 },
+      { "type": "debuff", "stat": "resist-magic", "min": -11, "max": -70 },
+      { "type": "debuff", "stat": "resist-poison", "min": -11, "max": -70 },
+      { "type": "debuff", "stat": "resist-fire", "min": -11, "max": -70 }
+    ],
+    "description": "Reduces all elemental and magical resistances."
+  }
+},
+{
+  "_id": "shm-talisman-of-the-cat-57",
+  "name": "Talisman of the Cat",
+  "type": "spell",
+  "img": "icons/magic/nature/cat-spirit-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 57,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 350,
+    "effects": [
+      { "type": "buff", "stat": "agi", "amount": 52 }
+    ],
+    "description": "Increases group agility."
+  }
+},
+{
+  "_id": "shm-talisman-of-the-brute-57",
+  "name": "Talisman of the Brute",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 57,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 350,
+    "effects": [
+      { "type": "buff", "stat": "sta", "amount": 50 }
+    ],
+    "description": "Increases group stamina."
+  }
+},
+{
+  "_id": "shm-maniacal-strength-57",
+  "name": "Maniacal Strength",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 57,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "buff", "stat": "str", "amount": 68 }
+    ],
+    "description": "Greatly increases strength."
+  }
+},
+{
+  "_id": "shm-imbue-justice-57",
+  "name": "Imbue Justice",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-white.webp",
+  "system": {
+    "class": "shaman",
+    "level": 57,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 1000,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "white-diamond-of-justice" }
+    ],
+    "description": "Imbues a white diamond with the essence of justice."
+  }
+},
+{
+  "_id": "shm-spirit-of-the-jaguar-57",
+  "name": "Spirit of the Jaguar",
+  "type": "spell",
+  "img": "icons/magic/nature/cat-spirit-yellow.webp",
+  "system": {
+    "class": "shaman",
+    "level": 57,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 291,
+    "effects": [
+      { "type": "proc", "name": "Jaguar Maw", "rateMod": 400 }
+    ],
+    "description": "Grants the target a powerful melee proc: Jaguar Maw."
+  }
+},
+{
+  "_id": "shm-cannibalize-iv-58",
+  "name": "Cannibalize IV",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 58,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 1,
+    "manaCost": 0,
+    "effects": [
+      { "type": "damage", "element": "health", "amount": 148 },
+      { "type": "restore", "stat": "mana", "min": 52, "max": 134 }
+    ],
+    "description": "Converts health into mana."
+  }
+},
+{
+  "_id": "shm-talisman-of-the-rhino-58",
+  "name": "Talisman of the Rhino",
+  "type": "spell",
+  "img": "icons/magic/nature/ox-spirit-brown.webp",
+  "system": {
+    "class": "shaman",
+    "level": 58,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 350,
+    "effects": [
+      { "type": "buff", "stat": "str", "amount": 68 }
+    ],
+    "description": "Increases group strength."
+  }
+},
+{
+  "_id": "shm-talisman-of-the-serpent-58",
+  "name": "Talisman of the Serpent",
+  "type": "spell",
+  "img": "icons/magic/nature/snake-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 58,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 350,
+    "effects": [
+      { "type": "buff", "stat": "cha", "amount": 40 }
+    ],
+    "description": "Increases group charisma."
+  }
+},
+{
+  "_id": "shm-tigirs-insects-58",
+  "name": "Tigir's Insects",
+  "type": "spell",
+  "img": "icons/magic/nature/insects-swarm-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 58,
+    "school": "alteration",
+    "target": "area",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 350,
+    "effects": [
+      { "type": "debuff", "stat": "attack-speed", "min": -20, "max": -70 },
+      { "type": "debuff", "effect": "disease", "amount": 16 },
+      { "type": "debuff", "stat": "hate", "amount": -200 }
+    ],
+    "description": "Slows enemies, inflicts disease, and reduces hate."
+  }
+},
+{
+  "_id": "shm-mortal-deftness-58",
+  "name": "Mortal Deftness",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 58,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "buff", "stat": "dex", "amount": 60 }
+    ],
+    "description": "Greatly increases dexterity."
+  }
+},
+{
+  "_id": "shm-kraggs-mending-58",
+  "name": "Kragg's Mending",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 58,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 400,
+    "effects": [
+      { "type": "heal", "amount": 1950 }
+    ],
+    "description": "Restores a massive amount of hitpoints."
+  }
+},
+{
+  "_id": "shm-talisman-of-epuration-58",
+  "name": "Talisman of Epuration",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 58,
+    "school": "abjuration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 400,
+    "effects": [
+      { "type": "buff", "stat": "resist-disease", "amount": 55 },
+      { "type": "buff", "stat": "resist-poison", "amount": 55 }
+    ],
+    "description": "Increases group disease and poison resistance."
+  }
+},
+{
+  "_id": "shm-acumen-of-dar-khura-58",
+  "name": "Acumen of Dar Khura",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 58,
+    "school": "divination",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 210,
+    "effects": [
+      { "type": "vision", "effect": "see-invisible" },
+      { "type": "vision", "effect": "ultravision" }
+    ],
+    "description": "Grants see invisible and ultravision to the group."
+  }
+},
+{
+  "_id": "shm-imbue-disease-58",
+  "name": "Imbue Disease",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 58,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 1000,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "green-diamond-of-disease" }
+    ],
+    "description": "Imbues a green diamond with the essence of disease."
+  }
+},
+{
+  "_id": "shm-talisman-of-the-raptor-59",
+  "name": "Talisman of the Raptor",
+  "type": "spell",
+  "img": "icons/magic/nature/bird-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 59,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 350,
+    "effects": [
+      { "type": "buff", "stat": "dex", "amount": 60 }
+    ],
+    "description": "Increases group dexterity."
+  }
+},
+{
+  "_id": "shm-pox-of-bertoxxulous-59",
+  "name": "Pox of Bertoxxulous",
+  "type": "spell",
+  "img": "icons/magic/debuff/disease-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 59,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 579,
+    "effects": [
+      { "type": "debuff", "effect": "disease", "amount": 9 },
+      { "type": "dot", "element": "disease", "min": 157, "max": 285 },
+      { "type": "damage", "element": "disease", "amount": 254 }
+    ],
+    "description": "Inflicts a deadly disease, dealing heavy damage over time."
+  }
+},
+{
+  "_id": "shm-unfailing-reverence-59",
+  "name": "Unfailing Reverence",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+    "class": "shaman",
+    "level": 59,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "buff", "stat": "cha", "amount": 55 }
+    ],
+    "description": "Greatly increases charisma."
+  }
+},
+{
+  "_id": "shm-voice-of-the-berserker-59",
+  "name": "Voice of the Berserker",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 59,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 1,
+    "effects": [
+      { "type": "buff", "stat": "ac", "min": 13, "max": 37 },
+      { "type": "buff", "stat": "agi", "min": 16, "max": 145 },
+      { "type": "buff", "stat": "str", "min": 26, "max": 155 },
+      { "type": "buff", "stat": "dex", "min": 16, "max": 145 }
+    ],
+    "description": "Increases armor class, agility, strength, and dexterity."
+  }
+},
+{
+  "_id": "shm-imbue-war-59",
+  "name": "Imbue War",
+  "type": "spell",
+  "img": "icons/commodities/materials/gem-orange.webp",
+  "system": {
+    "class": "shaman",
+    "level": 59,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 1000,
+    "effects": [
+      { "type": "utility", "effect": "summon-item", "item": "orange-diamond-of-war" }
+    ],
+    "description": "Imbues an orange diamond with the essence of war."
+  }
+},
+{
+  "_id": "shm-incarnate-anew-59",
+  "name": "Incarnate Anew",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 59,
+    "school": "alteration",
+    "target": "corpse",
+    "range": 800,
+    "castTime": 10,
+    "manaCost": 700,
+    "effects": [
+      { "type": "utility", "effect": "resurrect", "xpRestore": 90 }
+    ],
+    "description": "Resurrects a fallen ally, restoring 90% experience."
+  }
+},
+{
+  "_id": "shm-primal-avatar-60",
+  "name": "Primal Avatar",
+  "type": "spell",
+  "img": "icons/magic/nature/wolf-spirit-yellow.webp",
+  "system": {
+    "class": "shaman",
+    "level": 60,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 325,
+    "effects": [
+      { "type": "buff", "stat": "atk", "amount": 100 },
+      { "type": "buff", "stat": "agi", "amount": 100 },
+      { "type": "buff", "stat": "str", "amount": 100 },
+      { "type": "buff", "stat": "dex", "amount": 100 }
+    ],
+    "description": "Greatly increases attack, agility, strength, and dexterity."
+  }
+},
+{
+  "_id": "shm-focus-of-spirit-60",
+  "name": "Focus of Spirit",
+  "type": "spell",
+  "img": "icons/magic/nature/totem-bear.webp",
+  "system": {
+    "class": "shaman",
+    "level": 60,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 5,
+    "manaCost": 500,
+    "effects": [
+      { "type": "buff", "stat": "hp-max", "min": 228, "max": 615 },
+      { "type": "heal", "min": 228, "max": 615 },
+      { "type": "buff", "stat": "str", "amount": 67 },
+      { "type": "buff", "stat": "dex", "amount": 60 },
+      { "type": "stacking", "slot": 4, "value": 67 },
+      { "type": "stacking", "slot": 5, "value": 60 },
+      { "type": "stack-block", "stat": "str", "threshold": 1067 },
+      { "type": "stack-block", "stat": "dex", "threshold": 1060 },
+      { "type": "stacking", "slot": 69, "value": 1100 }
+    ],
+    "description": "Increases max HP, heals, and boosts strength and dexterity with stacking rules."
+  }
+},
+{
+  "_id": "shm-torpor-60",
+  "name": "Torpor",
+  "type": "spell",
+  "img": "icons/magic/nature/root-vines-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 60,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 5,
+    "manaCost": 200,
+    "effects": [
+      { "type": "regen", "stat": "hp", "amount": 300 },
+      { "type": "debuff", "stat": "movement", "amount": -100 },
+      { "type": "debuff", "stat": "attack-speed", "amount": -30 }
+    ],
+    "description": "Grants powerful regeneration but roots the target and slows attack speed."
+  }
+},
+{
+  "_id": "shm-malo-60",
+  "name": "Malo",
+  "type": "spell",
+  "img": "icons/magic/debuff/hand-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 60,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 350,
+    "effects": [
+      { "type": "debuff", "stat": "resist-cold", "min": -11, "max": -55 },
+      { "type": "debuff", "stat": "resist-magic", "min": -11, "max": -55 },
+      { "type": "debuff", "stat": "resist-poison", "min": -11, "max": -55 },
+      { "type": "debuff", "stat": "resist-fire", "min": -11, "max": -55 }
+    ],
+    "description": "Reduces all elemental and magical resistances."
+  }
+},
+{
+  "_id": "shm-avatar-60",
+  "name": "Avatar",
+  "type": "spell",
+  "img": "icons/magic/nature/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 60,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 325,
+    "effects": [
+      { "type": "buff", "stat": "atk", "amount": 100 },
+      { "type": "buff", "stat": "agi", "amount": 100 },
+      { "type": "buff", "stat": "str", "amount": 100 },
+      { "type": "buff", "stat": "dex", "amount": 100 }
+    ],
+    "description": "Increases attack, agility, strength, and dexterity."
+  }
+},
+{
+  "_id": "shm-ancient-feral-avatar-60",
+  "name": "Ancient Feral Avatar",
+  "type": "spell",
+  "img": "icons/magic/nature/wolf-spirit-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 60,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 5,
+    "manaCost": 325,
+    "effects": [
+      { "type": "buff", "stat": "atk", "amount": 120 },
+      { "type": "buff", "stat": "agi", "amount": 120 },
+      { "type": "buff", "stat": "str", "amount": 120 },
+      { "type": "buff", "stat": "dex", "amount": 120 }
+    ],
+    "description": "Greatly increases attack, agility, strength, and dexterity."
+  }
+},
+{
+  "_id": "shm-ancient-scourge-of-nife-60",
+  "name": "Ancient Scourge of Nife",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 60,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 5,
+    "manaCost": 758,
+    "effects": [
+      { "type": "debuff", "effect": "poison", "amount": 10 },
+      { "type": "damage", "element": "poison", "amount": 108 },
+      { "type": "dot", "element": "poison", "min": 623, "max": 688 }
+    ],
+    "description": "Inflicts a devastating poison, dealing massive damage over time."
+  }
+},
+{
+  "_id": "shm-khuras-focusing-60",
+  "name": "Khura's Focusing",
+  "type": "spell",
+  "img": "icons/magic/nature/totem-bear.webp",
+  "system": {
+    "class": "shaman",
+    "level": 60,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 5,
+    "manaCost": 1250,
+    "effects": [
+      { "type": "buff", "stat": "hp-max", "min": 253, "max": 640 },
+      { "type": "heal", "min": 253, "max": 640 },
+      { "type": "buff", "stat": "str", "amount": 67 },
+      { "type": "buff", "stat": "dex", "amount": 60 },
+      { "type": "stacking", "slot": 4, "value": 67 },
+      { "type": "stacking", "slot": 5, "value": 60 },
+      { "type": "stack-block", "stat": "str", "threshold": 1067 },
+      { "type": "stack-block", "stat": "dex", "threshold": 1060 },
+      { "type": "stacking", "slot": 69, "value": 1100 }
+    ],
+    "description": "Increases group max HP, heals, and boosts strength and dexterity with stacking rules."
+  }
+}
+]

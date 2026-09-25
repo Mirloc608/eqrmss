@@ -1,0 +1,26 @@
+{
+  "zone": "citadel-barracks",
+  "hazards": [
+    {
+      "id": "training-overexertion",
+      "name": "Training Overexertion",
+      "severity": "moderate",
+      "trigger": "combat-in-training-yard",
+      "effects": [
+        "stamina-drain",
+        "accuracy-penalty"
+      ]
+    },
+    {
+      "id": "beast-rage",
+      "name": "Beast Rage",
+      "severity": "extreme",
+      "trigger": "disturbance-in-beast-pits",
+      "effects": [
+        "heavy-damage",
+        "fear",
+        "knockback"
+      ]
+    }
+  ]
+}

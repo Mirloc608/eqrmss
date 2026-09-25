@@ -1,0 +1,48 @@
+{
+  "zone": "dranik-heartlands-encampments",
+  "nodes": [
+    {
+      "id": "command-tent",
+      "type": "structure",
+      "label": "Command Tent"
+    },
+    {
+      "id": "supply-yard",
+      "type": "yard",
+      "label": "Supply Yard"
+    },
+    {
+      "id": "beast-pens",
+      "type": "pens",
+      "label": "Beast Pens"
+    }
+  ],
+  "edges": [
+    {
+      "from": "command-tent",
+      "to": "supply-yard",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A patrol‑heavy route connecting command and logistics."
+    },
+    {
+      "from": "supply-yard",
+      "to": "beast-pens",
+      "difficulty": "high",
+      "type": "creature",
+      "description": "A dangerous path into warbeast territory."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "dranik-heartlands-plains",
+      "type": "back",
+      "description": "The Encampments connect back to the Plains."
+    },
+    {
+      "to": "dranik-heartlands-ruins",
+      "type": "forward",
+      "description": "The Encampments lead toward the Ruins."
+    }
+  ]
+}

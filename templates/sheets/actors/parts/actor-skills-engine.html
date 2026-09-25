@@ -1,0 +1,67 @@
+<section class="skills-engine-section">
+    <h3>{{localize "eqrmss.pc_sheet.skills_engine.header"}}</h3>
+
+    <table class="rmss-table skills-engine-table">
+        <thead>
+            <tr>
+                <th>{{localize "eqrmss.pc_sheet.skills_engine.name"}}</th>
+                <th>{{localize "eqrmss.pc_sheet.skills_engine.category"}}</th>
+                <th>{{localize "eqrmss.pc_sheet.skills_engine.stat"}}</th>
+                <th>{{localize "eqrmss.pc_sheet.skills_engine.cost"}}</th>
+                <th>{{localize "eqrmss.pc_sheet.skills_engine.ranks"}}</th>
+                <th>{{localize "eqrmss.pc_sheet.skills_engine.total_bonus"}}</th>
+                <th>{{localize "eqrmss.pc_sheet.skills_engine.actions"}}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each skills as |skill id|}}
+            <tr class="skill-engine-row" data-skill-id="{{skill.id}}">
+
+                <!-- Name -->
+                <td><strong>{{skill.name}}</strong></td>
+
+                <!-- Category -->
+                <td>{{skill.category}}</td>
+
+                <!-- Stat -->
+                <td>{{skill.statShort}}</td>
+
+                <!-- Cost -->
+                <td>{{skill.costPerRank}}</td>
+
+                <!-- Ranks -->
+                <td>
+                    <input type="number"
+                           name="system.skills.{{skill.id}}.ranks"
+                           value="{{skill.ranks}}"
+                           min="0"
+                           max="50"
+                           class="skill-rank-input" />
+                </td>
+
+                <!-- Total Bonus -->
+                <td><strong>{{skill.totalBonus}}</strong></td>
+
+                <!-- Actions -->
+                <td>
+                    <button type="button"
+                            class="skill-roll"
+                            data-skill-id="{{skill.id}}">
+                        <i class="fas fa-dice-d20"></i>
+                        {{localize "eqrmss.pc_sheet.skills_engine.roll"}}
+                    </button>
+
+                    <button type="button"
+                            class="skill-advance"
+                            data-skill-id="{{skill.id}}">
+                        <i class="fas fa-plus"></i>
+                        {{localize "eqrmss.pc_sheet.skills_engine.rank_up"}}
+                    </button>
+                </td>
+
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</section>

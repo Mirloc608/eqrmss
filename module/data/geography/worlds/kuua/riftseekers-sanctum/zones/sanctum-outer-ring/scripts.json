@@ -1,0 +1,17 @@
+{
+  "zone": "sanctum-outer-ring",
+  "scripts": [
+    {
+      "id": "outer-ring-cycle",
+      "name": "Outer Ring Cycle",
+      "trigger": "time",
+      "description": "Cycles ring activity between calm, patrol-heavy, and breach states."
+    },
+    {
+      "id": "containment-breach-check",
+      "name": "Containment Breach Check",
+      "trigger": "proximity-to-containment-pylon",
+      "description": "Triggers containment breach hazard."
+    }
+  ]
+}

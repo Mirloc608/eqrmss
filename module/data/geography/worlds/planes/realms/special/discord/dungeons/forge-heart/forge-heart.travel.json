@@ -1,0 +1,24 @@
+{
+  "id": "forge-heart-travel",
+  "dungeon": "forge-heart",
+
+  "nodes": [
+    "dungeon-entry",
+    "outer-furnaces",
+    "assembly-lines",
+    "forge-core",
+    "forge-core-titan-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "outer-furnaces", "type": "furnace-path" },
+    { "from": "outer-furnaces", "to": "assembly-lines", "type": "assembly-transition" },
+    { "from": "assembly-lines", "to": "forge-core", "type": "core-descent" },
+    {
+      "from": "forge-core",
+      "to": "forge-core-titan-lair",
+      "type": "titan-ascent",
+      "requirements": { "discord-attunement": true }
+    }
+  ]
+}

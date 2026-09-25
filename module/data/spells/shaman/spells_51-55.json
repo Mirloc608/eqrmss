@@ -1,0 +1,600 @@
+[
+  {
+  "_id": "shm-immobilize-51",
+  "name": "Immobilize",
+  "type": "spell",
+  "img": "icons/magic/nature/root-bind-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 51,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 80,
+    "effects": [
+      { "type": "control", "effect": "root" }
+    ],
+    "description": "Roots the target in place."
+  }
+},
+{
+  "_id": "shm-turgurs-insects-51",
+  "name": "Turgur's Insects",
+  "type": "spell",
+  "img": "icons/magic/nature/insects-swarm-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 51,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 250,
+    "effects": [
+      { "type": "debuff", "stat": "attack-speed", "min": -16, "max": -90 },
+      { "type": "debuff", "effect": "disease", "amount": 16 }
+    ],
+    "description": "Severely slows the target’s attack speed and inflicts disease."
+  }
+},
+{
+  "_id": "shm-everlasting-breath-51",
+  "name": "Everlasting Breath",
+  "type": "spell",
+  "img": "icons/magic/water/breathing-bubble-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 51,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 55,
+    "effects": [
+      { "type": "utility", "effect": "water-breathing" }
+    ],
+    "description": "Allows the target to breathe underwater indefinitely."
+  }
+},
+{
+  "_id": "shm-levitation-51",
+  "name": "Levitation",
+  "type": "spell",
+  "img": "icons/magic/air/feather-fall-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 51,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "levitate", "rank": 1 }
+    ],
+    "description": "Allows the target to float above the ground."
+  }
+},
+{
+  "_id": "shm-spirit-of-scale-52",
+  "name": "Spirit of Scale",
+  "type": "spell",
+  "img": "icons/magic/nature/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 52,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "utility", "effect": "fragile" },
+      { "type": "movement", "min": 45, "max": 115 }
+    ],
+    "description": "Increases group movement speed and makes targets fragile."
+  }
+},
+{
+  "_id": "shm-regrowth-52",
+  "name": "Regrowth",
+  "type": "spell",
+  "img": "icons/magic/nature/leaf-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 52,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 300,
+    "effects": [
+      { "type": "regen", "stat": "hp", "min": 16, "max": 38 }
+    ],
+    "description": "Grants strong health regeneration."
+  }
+},
+{
+  "_id": "shm-insidious-decay-52",
+  "name": "Insidious Decay",
+  "type": "spell",
+  "img": "icons/magic/debuff/disease-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 52,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "debuff", "effect": "disease", "amount": 9 },
+      { "type": "debuff", "stat": "resist-disease", "min": -10, "max": -75 }
+    ],
+    "description": "Inflicts disease and reduces disease resistance."
+  }
+},
+{
+  "_id": "shm-primal-essence-52",
+  "name": "Primal Essence",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 52,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "buff", "stat": "sta", "amount": 20 },
+      { "type": "buff", "stat": "agi", "amount": 20 },
+      { "type": "buff", "stat": "str", "amount": 20 },
+      { "type": "buff", "stat": "dex", "amount": 20 }
+    ],
+    "description": "Increases stamina, agility, strength, and dexterity."
+  }
+},
+{
+  "_id": "shm-eradicate-disease-52",
+  "name": "Eradicate Disease",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 52,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 250,
+    "effects": [
+      { "type": "cure", "effect": "disease", "amount": 30 },
+      { "type": "cure", "effect": "disease", "amount": 30 }
+    ],
+    "description": "Removes a large number of disease counters."
+  }
+},
+{
+  "_id": "shm-disinfecting-aura-52",
+  "name": "Disinfecting Aura",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 52,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "cure", "effect": "poison", "amount": 10 },
+      { "type": "cure", "effect": "poison", "amount": 10 },
+      { "type": "cure", "effect": "disease", "amount": 10 },
+      { "type": "cure", "effect": "disease", "amount": 10 }
+    ],
+    "description": "Removes poison and disease counters."
+  }
+},
+{
+  "_id": "shm-blood-of-nadox-52",
+  "name": "Blood of Nadox",
+  "type": "spell",
+  "img": "icons/magic/debuff/blood-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 52,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 300,
+    "effects": [
+      { "type": "cure", "effect": "poison", "amount": 9 },
+      { "type": "cure", "effect": "poison", "amount": 9 },
+      { "type": "cure", "effect": "disease", "amount": 9 },
+      { "type": "cure", "effect": "disease", "amount": 9 }
+    ],
+    "description": "Removes poison and disease counters from the group."
+  }
+},
+{
+  "_id": "shm-talisman-of-shadoo-53",
+  "name": "Talisman of Shadoo",
+  "type": "spell",
+  "img": "icons/magic/nature/totem-bear.webp",
+  "system": {
+    "class": "shaman",
+    "level": 53,
+    "school": "abjuration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "buff", "stat": "resist-poison", "min": 16, "max": 60 }
+    ],
+    "description": "Increases the group’s resistance to poison."
+  }
+},
+{
+  "_id": "shm-cripple-53",
+  "name": "Cripple",
+  "type": "spell",
+  "img": "icons/magic/debuff/hand-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 53,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 225,
+    "effects": [
+      { "type": "debuff", "stat": "dex", "min": -6, "max": -110 },
+      { "type": "debuff", "stat": "agi", "min": -16, "max": -130 },
+      { "type": "debuff", "stat": "str", "min": -16, "max": -130 },
+      { "type": "debuff", "stat": "ac", "min": -15, "max": -60 }
+    ],
+    "description": "Severely reduces the target’s stats."
+  }
+},
+{
+  "_id": "shm-deliriously-nimble-53",
+  "name": "Deliriously Nimble",
+  "type": "spell",
+  "img": "icons/magic/life/boot-speed-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 53,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "buff", "stat": "agi", "amount": 52 }
+    ],
+    "description": "Greatly increases the target’s agility."
+  }
+},
+{
+  "_id": "shm-cannibalize-iii-54",
+  "name": "Cannibalize III",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 54,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 1,
+    "manaCost": 0,
+    "effects": [
+      { "type": "damage", "element": "health", "amount": 74 },
+      { "type": "restore", "stat": "mana", "min": 26, "max": 58 }
+    ],
+    "description": "Converts health into mana."
+  }
+},
+{
+  "_id": "shm-shroud-of-the-spirits-54",
+  "name": "Shroud of the Spirits",
+  "type": "spell",
+  "img": "icons/magic/spirit/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 54,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 200,
+    "effects": [
+      { "type": "buff", "stat": "ac", "min": 10, "max": 40 }
+    ],
+    "description": "Increases the target’s armor class."
+  }
+},
+{
+  "_id": "shm-ice-strike-54",
+  "name": "Ice Strike",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-spear-large.webp",
+  "system": {
+    "class": "shaman",
+    "level": 54,
+    "school": "evocation",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 198,
+    "effects": [
+      { "type": "damage", "element": "cold", "amount": 511 }
+    ],
+    "description": "Deals cold damage to a single target."
+  }
+},
+{
+  "_id": "shm-riotous-health-54",
+  "name": "Riotous Health",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 54,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "buff", "stat": "sta", "amount": 50 }
+    ],
+    "description": "Increases the target’s stamina."
+  }
+},
+{
+  "_id": "shm-eradicate-curse-54",
+  "name": "Eradicate Curse",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 54,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 400,
+    "effects": [
+      { "type": "cure", "effect": "curse", "amount": 30 },
+      { "type": "cure", "effect": "curse", "amount": 30 }
+    ],
+    "description": "Removes powerful curse effects."
+  }
+},
+{
+  "_id": "shm-plague-of-insects-54",
+  "name": "Plague of Insects",
+  "type": "spell",
+  "img": "icons/magic/nature/insects-swarm-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 54,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 250,
+    "effects": [
+      { "type": "debuff", "effect": "disease", "amount": 23 },
+      { "type": "debuff", "stat": "attack-speed", "amount": -25 }
+    ],
+    "description": "Inflicts disease and slows the target’s attack speed."
+  }
+},
+{
+  "_id": "shm-remove-greater-curse-54",
+  "name": "Remove Greater Curse",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 54,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "cure", "effect": "curse", "amount": 9 },
+      { "type": "cure", "effect": "curse", "amount": 9 },
+      { "type": "cure", "effect": "curse", "amount": 9 },
+      { "type": "cure", "effect": "curse", "amount": 9 },
+      { "type": "cure", "effect": "curse", "amount": 9 }
+    ],
+    "description": "Removes multiple curse counters from the target."
+  }
+},
+{
+  "_id": "shm-blast-of-venom-54",
+  "name": "Blast of Venom",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-bolt-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 54,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 289,
+    "effects": [
+      { "type": "damage", "element": "poison", "amount": 704 }
+    ],
+    "description": "Deals a large amount of poison damage to a single target."
+  }
+},
+{
+  "_id": "shm-anathema-54",
+  "name": "Anathema",
+  "type": "spell",
+  "img": "icons/magic/debuff/curse-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 54,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 659,
+    "effects": [
+      { "type": "debuff", "effect": "curse", "amount": 16 },
+      { "type": "dot", "element": "curse", "min": 385, "max": 577 }
+    ],
+    "description": "Inflicts a powerful curse, dealing heavy damage over time."
+  }
+},
+{
+  "_id": "shm-chloroblast-55",
+  "name": "Chloroblast",
+  "type": "spell",
+  "img": "icons/magic/nature/leaf-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 55,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 331,
+    "effects": [
+      { "type": "heal", "min": 444, "max": 1044 }
+    ],
+    "description": "Restores a very large amount of hitpoints."
+  }
+},
+{
+  "_id": "shm-form-of-the-great-bear-55",
+  "name": "Form of the Great Bear",
+  "type": "spell",
+  "img": "icons/magic/nature/bear-spirit-brown.webp",
+  "system": {
+    "class": "shaman",
+    "level": 55,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 135,
+    "effects": [
+      { "type": "illusion", "form": "bear" },
+      { "type": "regen", "stat": "hp", "amount": 2 },
+      { "type": "buff", "stat": "wis", "amount": 10 }
+    ],
+    "description": "Transforms the caster into a great bear, granting regeneration and wisdom."
+  }
+},
+{
+  "_id": "shm-annul-magic-55",
+  "name": "Annul Magic",
+  "type": "spell",
+  "img": "icons/magic/arcane/banish-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 55,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 75,
+    "effects": [
+      { "type": "utility", "effect": "cancel-magic", "rank": 9 },
+      { "type": "utility", "effect": "cancel-magic", "rank": 9 }
+    ],
+    "description": "Removes powerful magical effects from the target."
+  }
+},
+{
+  "_id": "shm-spirit-of-the-howler-55",
+  "name": "Spirit of the Howler",
+  "type": "spell",
+  "img": "icons/magic/spirit/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 55,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 650,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetShmS11L055WolfGho" }
+    ],
+    "description": "Summons a powerful howling wolf spirit companion."
+  }
+},
+{
+  "_id": "shm-talisman-of-kragg-55",
+  "name": "Talisman of Kragg",
+  "type": "spell",
+  "img": "icons/magic/nature/totem-bear.webp",
+  "system": {
+    "class": "shaman",
+    "level": 55,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 375,
+    "effects": [
+      { "type": "buff", "stat": "hp-max", "min": 203, "max": 590 },
+      { "type": "heal", "min": 203, "max": 590 }
+    ],
+    "description": "Increases maximum hitpoints and heals the target."
+  }
+},
+{
+  "_id": "shm-torrent-of-poison-55",
+  "name": "Torrent of Poison",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 55,
+    "school": "evocation",
+    "target": "area",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 380,
+    "effects": [
+      { "type": "damage", "element": "poison", "amount": 540 }
+    ],
+    "description": "Deals poison damage to enemies in an area."
+  }
+},
+{
+  "_id": "shm-idol-of-malo-55",
+  "name": "Idol of Malo",
+  "type": "spell",
+  "img": "icons/magic/symbols/rune-stone-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 55,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 140,
+    "effects": [
+      { "type": "persistent", "effect": "idol-of-malo", "id": 8945 }
+    ],
+    "description": "Applies the persistent Idol of Malo effect."
+  }
+}
+]

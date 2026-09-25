@@ -1,0 +1,201 @@
+{
+  "id": "druid",
+  "name": "Druid",
+  "type": "class",
+
+  "description": {
+    "summary": "Druids wield the primal forces of nature—earth, storm, beast, and growth.",
+    "lore": "Druids are guardians of Norrath’s wild places, channeling the primal essence of nature. They command storms, shape earth, heal allies, and call upon beasts and growth magic. Their connection to the natural world grants them powerful offensive, defensive, and utility spells."
+  },
+
+  "role": {
+    "primary": "Hybrid Caster",
+    "secondary": [
+      "Healing",
+      "Damage",
+      "Control",
+      "Travel Magic"
+    ]
+  },
+
+  "profession": {
+    "category": "Earth / Storm / Beast / Growth / Weather",
+    "realm": "Nature",
+    "powerSource": "Primal Essence"
+  },
+
+  "stats": {
+    "primeRequisites": ["Empathy", "Intuition"],
+    "secondaryStats": ["Memory", "Presence", "Constitution"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth", "Leather"],
+    "restricted": ["Chain", "Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Staves",
+      "Clubs",
+      "Spears",
+      "Daggers"
+    ],
+    "restricted": ["Heavy Martial Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 3,
+      "Weapon Skills": 4,
+      "Combat Maneuvers": 4,
+      "Athletics": 3,
+      "Perception": 2,
+      "Nature Spell Lists": 2,
+      "Lore": 2
+    },
+    "bonusCategories": [
+      "Nature Magic",
+      "Healing",
+      "Weathercraft",
+      "Beast Magic"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Nature": {
+        "Earth": ["Earthcall"],
+        "Storm": ["Stormcalling"],
+        "Beast": ["Beastbond"],
+        "Growth": ["Growth Magic"],
+        "Weather": ["Weathercraft"]
+      }
+    },
+    "specialization": [
+      "Storm Magic",
+      "Earth Magic",
+      "Healing",
+      "Travel Magic"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "druid_heal",
+        "name": "Nature’s Heal",
+        "description": "The druid restores health using primal nature energy."
+      },
+      {
+        "id": "druid_snare",
+        "name": "Snare",
+        "description": "The druid slows an enemy using growth or earth magic."
+      }
+    ],
+    "level5": [
+      {
+        "id": "druid_lightning",
+        "name": "Lightning Strike",
+        "description": "The druid calls down a bolt of lightning from the sky."
+      }
+    ],
+    "level10": [
+      {
+        "id": "druid_portal",
+        "name": "Circle of Travel",
+        "description": "The druid opens a nature‑aligned travel portal."
+      }
+    ],
+    "level20": [
+      {
+        "id": "druid_natures_wrath",
+        "name": "Nature’s Wrath",
+        "description": "The druid unleashes overwhelming primal energy from earth, storm, and beast magic."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Nature Magic",
+    "Earthcall",
+    "Stormcalling",
+    "Beastbond",
+    "Growth Magic",
+    "Weathercraft",
+    "Travel Magic"
+  ],
+
+  "combatActions": [
+    { "id": "staff_strike", "name": "Staff Strike" },
+    { "id": "lightning_strike", "name": "Lightning Strike" },
+    { "id": "snare", "name": "Snare" }
+  ],
+
+  "disciplines": [
+    "Earth Discipline",
+    "Storm Discipline",
+    "Growth Discipline"
+  ],
+
+  "startingEquipment": [
+    { "name": "Wooden Staff", "type": "weapon" },
+    { "name": "Leather Armor", "type": "armor" },
+    { "name": "Nature Totem", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "pure-channeling"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/druid.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "hybrid caster",
+      "primaryRole": "support",
+      "secondaryRoles": ["damage", "control"]
+    },
+
+    "identity": {
+      "strengths": [
+        "healing",
+        "storm magic",
+        "earth magic",
+        "travel magic",
+        "weathercraft"
+      ]
+    },
+
+    "weaknesses": [
+      "limited armor",
+      "lower burst damage than wizards"
+    ],
+
+    "signatureMechanics": [
+      "earthcall",
+      "stormcalling",
+      "beastbond",
+      "growth magic",
+      "weathercraft"
+    ],
+
+    "tags": [
+      "nature",
+      "earth",
+      "storm",
+      "beast",
+      "growth",
+      "weather"
+    ],
+
+    "pending": [
+      "attack table IDs",
+      "spell list mapping"
+    ]
+  }
+}

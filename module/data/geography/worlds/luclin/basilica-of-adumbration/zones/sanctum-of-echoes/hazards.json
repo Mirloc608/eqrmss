@@ -1,0 +1,25 @@
+{
+  "hazards": [
+    {
+      "id": "echo-conduit-overload",
+      "severity": "high",
+      "dc": 125,
+      "description": "An echo conduit discharges unstable arcane energy.",
+      "effects": ["arcane_damage", "damage_over_time"]
+    },
+    {
+      "id": "vault-seal-failure",
+      "severity": "critical",
+      "dc": 126,
+      "description": "A resonance vault seal fails, releasing void energy.",
+      "effects": ["void_damage", "knockback"]
+    },
+    {
+      "id": "resonance-feedback",
+      "severity": "medium",
+      "dc": 124,
+      "description": "Resonance feedback weakens and disorients those nearby.",
+      "effects": ["stat_debuff", "disorientation"]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "dungeon": "warshade-halls",
+
+  "levels": [
+    {
+      "id": "command-chambers",
+      "name": "Command Chambers",
+      "description": "War‑Shade commanders gather here to plot campaigns.",
+      "hazards": [
+        { "id": "shadow-command-feedback", "dc": 34, "effect": "fear_and_dot" }
+      ]
+    },
+    {
+      "id": "crucible-forges",
+      "name": "Crucible Forges",
+      "description": "Shadow Crucibles empower War‑Shade armies.",
+      "hazards": [
+        { "id": "crucible-overload", "dc": 36, "effect": "massive_damage" }
+      ]
+    },
+    {
+      "id": "shadow-prime-lair",
+      "name": "Shadow Prime Lair",
+      "description": "The lair of the Shadow Prime, embodiment of War‑Shade command.",
+      "hazards": [
+        { "id": "shadow-collapse", "dc": 37, "effect": "stat_decay_and_fear" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "shadow",
+    "war",
+    "discord",
+    "command"
+  ]
+}

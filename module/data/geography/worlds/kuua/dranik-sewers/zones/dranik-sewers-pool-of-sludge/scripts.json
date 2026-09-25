@@ -1,0 +1,17 @@
+{
+  "zone": "dranik-sewers-pool-of-sludge",
+  "scripts": [
+    {
+      "id": "sludge-instability-cycle",
+      "name": "Sludge Instability Cycle",
+      "trigger": "time",
+      "description": "Cycles sludge activity between calm, unstable, and surge states."
+    },
+    {
+      "id": "toxic-surge-check",
+      "name": "Toxic Surge Check",
+      "trigger": "proximity-to-sludge-reservoir",
+      "description": "Triggers toxic surge hazard."
+    }
+  ]
+}

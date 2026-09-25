@@ -1,0 +1,48 @@
+{
+  "zone": "citadel-outer-ring",
+  "nodes": [
+    {
+      "id": "ramparts",
+      "type": "structure",
+      "label": "Ramparts"
+    },
+    {
+      "id": "gatehouse",
+      "type": "structure",
+      "label": "Gatehouse"
+    },
+    {
+      "id": "siege-platform",
+      "type": "platform",
+      "label": "Siege Platform"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ramparts",
+      "to": "gatehouse",
+      "difficulty": "low",
+      "type": "internal",
+      "description": "A direct patrol route between ramparts and the gatehouse."
+    },
+    {
+      "from": "gatehouse",
+      "to": "siege-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A guarded route connecting the gatehouse to siege operations."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "wall-of-slaughter",
+      "type": "back",
+      "description": "The Outer Ring connects back to the Wall of Slaughter."
+    },
+    {
+      "to": "citadel-barracks",
+      "type": "forward",
+      "description": "The Outer Ring leads deeper into the Citadel Barracks."
+    }
+  ]
+}

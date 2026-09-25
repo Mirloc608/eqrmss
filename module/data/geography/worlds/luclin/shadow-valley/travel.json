@@ -1,0 +1,36 @@
+{
+  "graph": {
+    "nodes": [
+      "shadow-front",
+      "corrupted-grove",
+      "void-scar-pass",
+      "akhevan-forward-camp",
+      "shadow-rift-basin",
+      "shadow-tainted-lowlands",
+      "void-fracture-sanctum"
+    ],
+    "edges": [
+      { "from": "shadow-front", "to": "corrupted-grove", "method": "tainted trail" },
+      { "from": "shadow-front", "to": "void-scar-pass", "method": "fracture-rim path" },
+
+      { "from": "corrupted-grove", "to": "void-scar-pass", "method": "void-scar corridor" },
+      { "from": "corrupted-grove", "to": "shadow-tainted-lowlands", "method": "corruption descent" },
+
+      { "from": "void-scar-pass", "to": "akhevan-forward-camp", "method": "escort route" },
+      { "from": "void-scar-pass", "to": "shadow-rift-basin", "method": "deep fracture descent" },
+
+      { "from": "akhevan-forward-camp", "to": "shadow-rift-basin", "method": "fracture descent" },
+      { "from": "akhevan-forward-camp", "to": "shadow-tainted-lowlands", "method": "tainted trail" },
+
+      { "from": "shadow-rift-basin", "to": "shadow-tainted-lowlands", "method": "corruption falloff trail" },
+      { "from": "shadow-rift-basin", "to": "void-fracture-sanctum", "method": "inner rift ascent" },
+
+      { "from": "shadow-tainted-lowlands", "to": "void-fracture-sanctum", "method": "inner corruption ascent" }
+    ]
+  },
+
+  "externalConnections": [
+    { "to": "shadeweaver-thicket", "method": "old-world border route" },
+    { "to": "other-luclin-zones", "method": "shadow transit routes" }
+  ]
+}

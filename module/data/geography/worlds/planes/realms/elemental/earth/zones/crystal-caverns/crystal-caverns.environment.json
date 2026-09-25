@@ -1,0 +1,44 @@
+{
+  "zone": "crystal-caverns",
+
+  "terrain": [
+    "geode-chambers",
+    "resonant-crystal-passages",
+    "mineral-bridge-spans",
+    "pressure-grown-crystal-fields"
+  ],
+
+  "lighting": "crystal-luminescence",
+
+  "hazards": [
+    {
+      "id": "crystal-resonance-burst",
+      "dc": 27,
+      "effect": "sonic_damage_and_stun"
+    },
+    {
+      "id": "geode-fracture",
+      "dc": 26,
+      "effect": "piercing_damage_and_bleed"
+    },
+    {
+      "id": "pressure-crystal-growth",
+      "dc": 28,
+      "effect": "immobilization_and_stat_decay"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "low",
+    "notes": "Crystal formations shift with resonance; pathways may open or collapse unexpectedly."
+  },
+
+  "environmentTags": [
+    "earth",
+    "crystal",
+    "geode",
+    "resonance",
+    "elemental"
+  ]
+}

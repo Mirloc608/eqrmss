@@ -1,0 +1,200 @@
+{
+  "id": "wizard",
+  "name": "Wizard",
+  "type": "class",
+
+  "description": {
+    "summary": "Wizards command the raw destructive forces of arcane magic.",
+    "lore": "Wizards are masters of elemental devastation. Through intense study and arcane discipline, they channel fire, ice, lightning, and pure arcane force. Their spells unleash catastrophic damage, making them the most feared offensive casters in Norrath."
+  },
+
+  "role": {
+    "primary": "Pure Damage Caster",
+    "secondary": [
+      "Control",
+      "Teleportation",
+      "Utility"
+    ]
+  },
+
+  "profession": {
+    "category": "Fire / Ice / Lightning / Force / Arcane",
+    "realm": "Arcane",
+    "powerSource": "Arcane Essence"
+  },
+
+  "stats": {
+    "primeRequisites": ["Memory", "Intuition"],
+    "secondaryStats": ["Presence", "Empathy", "Constitution"]
+  },
+
+  "armor": {
+    "allowed": ["Cloth"],
+    "restricted": ["Leather", "Chain", "Plate"]
+  },
+
+  "weapons": {
+    "allowed": [
+      "Staves",
+      "Daggers",
+      "Wands"
+    ],
+    "restricted": ["Martial Weapons"]
+  },
+
+  "skills": {
+    "categoryCosts": {
+      "Body Development": 4,
+      "Weapon Skills": 5,
+      "Combat Maneuvers": 5,
+      "Athletics": 4,
+      "Perception": 2,
+      "Arcane Spell Lists": 1,
+      "Lore": 2
+    },
+    "bonusCategories": [
+      "Elemental Magic",
+      "Arcane Force",
+      "Teleportation",
+      "Control"
+    ]
+  },
+
+  "spellLists": {
+    "baseLists": {
+      "Arcane": {
+        "Fire": ["Fire Mastery"],
+        "Ice": ["Ice Mastery"],
+        "Lightning": ["Lightning Mastery"],
+        "Force": ["Arcane Force"],
+        "Arcane": ["Mana Manipulation"]
+      }
+    },
+    "specialization": [
+      "Fire Magic",
+      "Ice Magic",
+      "Lightning Magic",
+      "Force Magic",
+      "Teleportation"
+    ]
+  },
+
+  "abilities": {
+    "level1": [
+      {
+        "id": "wizard_fire_bolt",
+        "name": "Fire Bolt",
+        "description": "The wizard hurls a bolt of fire at an enemy."
+      },
+      {
+        "id": "wizard_arcane_focus",
+        "name": "Arcane Focus",
+        "description": "The wizard increases spell accuracy and reduces fizzle chance."
+      }
+    ],
+    "level5": [
+      {
+        "id": "wizard_lightning_blast",
+        "name": "Lightning Blast",
+        "description": "The wizard unleashes a powerful lightning strike."
+      }
+    ],
+    "level10": [
+      {
+        "id": "wizard_teleport",
+        "name": "Teleport",
+        "description": "The wizard teleports themselves and allies to a distant location."
+      }
+    ],
+    "level20": [
+      {
+        "id": "wizard_elemental_cataclysm",
+        "name": "Elemental Cataclysm",
+        "description": "The wizard unleashes overwhelming elemental devastation."
+      }
+    ]
+  },
+
+  "classFeatures": [
+    "Fire Magic",
+    "Ice Magic",
+    "Lightning Magic",
+    "Force Magic",
+    "Arcane Magic",
+    "Teleportation",
+    "Mana Manipulation"
+  ],
+
+  "combatActions": [
+    { "id": "fire_bolt", "name": "Fire Bolt" },
+    { "id": "ice_shard", "name": "Ice Shard" },
+    { "id": "lightning_blast", "name": "Lightning Blast" }
+  ],
+
+  "disciplines": [
+    "Elemental Discipline",
+    "Force Discipline",
+    "Arcane Discipline"
+  ],
+
+  "startingEquipment": [
+    { "name": "Arcane Staff", "type": "weapon" },
+    { "name": "Wizard Robes", "type": "armor" },
+    { "name": "Spellbook", "type": "tool" }
+  ],
+
+  "startingLanguages": ["Common"],
+
+  "experienceProgression": {
+    "table": "pure-channeling"
+  },
+
+  "icon": "systems/eqrmss/assets/Icons/class/wizard.png",
+
+  "eqrmss": {
+    "schemaVersion": 1,
+
+    "classification": {
+      "archetype": "pure damage caster",
+      "primaryRole": "damage",
+      "secondaryRoles": ["control", "utility"]
+    },
+
+    "identity": {
+      "strengths": [
+        "fire magic",
+        "ice magic",
+        "lightning magic",
+        "force magic",
+        "teleportation"
+      ]
+    },
+
+    "weaknesses": [
+      "low durability",
+      "limited armor",
+      "high mana consumption"
+    ],
+
+    "signatureMechanics": [
+      "fire bolt",
+      "lightning blast",
+      "teleport",
+      "elemental cataclysm"
+    ],
+
+    "tags": [
+      "arcane",
+      "fire",
+      "ice",
+      "lightning",
+      "force",
+      "magic"
+    ],
+
+    "pending": [
+      "attack table IDs",
+      "spell list mapping"
+    ]
+  }
+}

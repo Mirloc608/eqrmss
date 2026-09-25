@@ -1,0 +1,38 @@
+{
+  "region": "dranik-heartlands",
+
+  "factions": [
+    {
+      "id": "dragorn-resistance",
+      "name": "Dragorn Resistance",
+      "importance": "major",
+      "description": "Dragorn rebels fighting to reclaim their homeland.",
+      "allies": null,
+      "enemies": ["muramite-legion", "muramite-command"]
+    },
+    {
+      "id": "muramite-legion",
+      "name": "Muramite Legion",
+      "importance": "critical",
+      "description": "Muramite soldiers occupying the Heartlands and enforcing control.",
+      "allies": ["muramite-command"],
+      "enemies": ["dragorn-resistance"]
+    },
+    {
+      "id": "muramite-command",
+      "name": "Muramite Command",
+      "importance": "major",
+      "description": "Muramite officers directing operations from fortified encampments.",
+      "allies": ["muramite-legion"],
+      "enemies": ["dragorn-resistance"]
+    },
+    {
+      "id": "discord-manifestations",
+      "name": "Discord Manifestations",
+      "importance": "minor",
+      "description": "Arcane anomalies and corrupted wildlife roaming the plains.",
+      "allies": null,
+      "enemies": ["dragorn-resistance", "muramite-legion"]
+    }
+  ]
+}

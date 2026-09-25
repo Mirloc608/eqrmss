@@ -1,0 +1,27 @@
+{
+  "region": "the-deep",
+
+  "nodes": [
+    { "id": "the-deep", "name": "The Deep (Main Zone)" },
+    { "id": "fungal-forest", "name": "Fungal Forest" },
+    { "id": "thought-horror-hive", "name": "Thought Horror Hive" },
+    { "id": "shissar-bio-labs", "name": "Shissar Bio-Labs" },
+    { "id": "abyssal-drop", "name": "Abyssal Drop" },
+    { "id": "vex-thal-approach", "name": "Vex Thal Approach" }
+  ],
+
+  "edges": [
+    { "from": "the-deep", "to": "fungal-forest", "method": "biolume tunnel" },
+    { "from": "the-deep", "to": "thought-horror-hive", "method": "psychic corridor" },
+    { "from": "the-deep", "to": "shissar-bio-labs", "method": "bio-arcana passage" },
+
+    { "from": "fungal-forest", "to": "abyssal-drop", "method": "collapsed cavern" },
+    { "from": "thought-horror-hive", "to": "abyssal-drop", "method": "hive descent" },
+    { "from": "abyssal-drop", "to": "vex-thal-approach", "method": "resonance fall" }
+  ],
+
+  "externalConnections": [
+    { "to": "scarlet-desert", "method": "subterranean breach" },
+    { "to": "mons-letalis", "method": "cavern fissure" }
+  ]
+}
