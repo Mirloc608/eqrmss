@@ -115,32 +115,52 @@ export class EQRMSSExpansionManager {
 
   static hasAAs() {
 
-    const unlockExpansion =
-      this.getUnlocks()
-        ?.aas;
-
-    if (!unlockExpansion) {
-      return false;
-    }
-
-    return this.isExpansionUnlocked(
-      unlockExpansion
+    return this.#isContentFlagUnlocked(
+      "aas"
     );
   }
 
   static hasAdvancedAAs() {
 
-    const unlockExpansion =
-      this.getUnlocks()
-        ?.advancedAas;
+    return this.#isContentFlagUnlocked(
+      "advancedAas"
+    );
+  }
 
-    if (!unlockExpansion) {
-      return false;
+  /**
+   * Walk expansions in release order and unlock when the first
+   * expansion whose content sets the given flag is unlocked.
+   */
+
+  static #isContentFlagUnlocked(
+    flag
+  ) {
+
+    for (
+      const expansionId of
+      EQRMSSExpansionRegistry
+        .getExpansionIds()
+    ) {
+
+      const expansion =
+        EQRMSSExpansionRegistry
+          .getExpansion(
+            expansionId
+          );
+
+      if (
+        expansion
+          ?.content
+          ?.[flag] === true
+      ) {
+
+        return this.isExpansionUnlocked(
+          expansionId
+        );
+      }
     }
 
-    return this.isExpansionUnlocked(
-      unlockExpansion
-    );
+    return false;
   }
 
   static isRaceUnlocked(
@@ -148,8 +168,10 @@ export class EQRMSSExpansionManager {
   ) {
 
     const unlockExpansion =
-      this.getUnlocks()
-        ?.races?.[raceId];
+      this.#findContentExpansion(
+        "getExpansionRaces",
+        raceId
+      );
 
     if (!unlockExpansion) {
       return true;
@@ -165,8 +187,10 @@ export class EQRMSSExpansionManager {
   ) {
 
     const unlockExpansion =
-      this.getUnlocks()
-        ?.classes?.[classId];
+      this.#findContentExpansion(
+        "getExpansionClasses",
+        classId
+      );
 
     if (!unlockExpansion) {
       return true;
@@ -222,6 +246,32 @@ export class EQRMSSExpansionManager {
     targetId
   ) {
 
+    const expansionId =
+      this.#findContentExpansion(
+        accessor,
+        targetId
+      );
+
+    if (!expansionId) {
+      return false;
+    }
+
+    return this.isExpansionUnlocked(
+      expansionId
+    );
+  }
+
+  /**
+   * Return the id of the first expansion (in release order)
+   * whose content list contains targetId, or null when no
+   * expansion lists it.
+   */
+
+  static #findContentExpansion(
+    accessor,
+    targetId
+  ) {
+
     for (
       const expansionId of
       EQRMSSExpansionRegistry
@@ -230,20 +280,20 @@ export class EQRMSSExpansionManager {
 
       const values =
         EQRMSSExpansionRegistry
-          expansionId;
+          [accessor](
+            expansionId
+          );
 
       if (
         Array.isArray(values) &&
         values.includes(targetId)
       ) {
 
-        return this.isExpansionUnlocked(
-          expansionId
-        );
+        return expansionId;
       }
     }
 
-    return false;
+    return null;
   }
 
   static getUnlockedRegions() {

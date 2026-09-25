@@ -20,10 +20,34 @@ module/data/aas/
   <class>/                    # class-specific AAs (warrior, cleric, ... 16 total)
     <aa-slug>.json
     index.json
+  mercenary/                  # mercenary AAs (tank/healer/melee/caster/general)
+    <aa-slug>.json
+    index.json
 ```
 
 One JSON object per file. The directory a file lives in is organizational;
-the `classes` field inside the file is authoritative.
+the `classes` field inside the file is authoritative. Class-table rows that
+list several classes are filed under the first listed class's directory;
+the full class list is preserved in `system.classes`.
+
+## Data provenance (tables-only pass, 2026-09-25)
+
+Seeded from the Allakhazam AA list tables
+(`EQ:General_AAs`, `EQ:Archetype_AAs`, `EQ:Class_AAs`, `EQ:Mercenary_AAs`);
+no per-AA detail pages were fetched. Consequences:
+
+- `system.description` and per-rank descriptions/effects are blank.
+- `system.aaNumber` preserves the wiki's `Num.` column for traceability.
+- `system.sourceCategory` preserves the wiki's raw `Cate` column.
+- The wiki's archetype table has no melee/caster/priest/hybrid grouping, so
+  `system.archetype` is `null` for archetype AAs until detail pages are mined.
+- The mercenary table only lists name/cost/category: those rows use
+  `maxRanks: 1` + `rankCountUncertain: true`, `levelRequired: 1`,
+  `expansion: "luclin"`, `activation: "passive"`, and no `aaNumber`.
+- A wiki row with `Rks` of `00` means the rank count is unknown from the
+  table: stored as `maxRanks: 1` with `rankCountUncertain: true`.
+- Duplicate AA names across rows are kept as separate files; the slug and
+  id take a `-2`, `-3`, ... suffix.
 
 ## Per-AA file schema
 
@@ -64,7 +88,7 @@ the `classes` field inside the file is authoritative.
 | `type` | string | yes | Always `"aa"` |
 | `img` | string | no | Icon path |
 | `system.slug` | string | yes | URL-safe id without prefix |
-| `system.category` | string | yes | `general` \| `archetype` \| `class` |
+| `system.category` | string | yes | `general` \| `archetype` \| `class` \| `mercenary` |
 | `system.archetype` | string \| null | when archetype | `melee` \| `caster` \| `priest` \| `hybrid` |
 | `system.classes` | string[] | yes | Class IDs; empty = all classes |
 | `system.expansion` | string | no | Min expansion ID from `EXPANSION_CHOICES`; defaults to `luclin` |
@@ -76,6 +100,10 @@ the `classes` field inside the file is authoritative.
 | `system.prerequisites` | object[] | no | `{ "aa": "<id>", "rank": <n> }`; every id must exist in `signature-dependencies.json` |
 | `system.ranks` | object[] | yes | Per-rank `{ rank, cost, description, effects }`; `effects` freeform until the effect engine hooks in |
 | `system.description` | string | yes | Full description |
+| `system.aaNumber` | number | no | Wiki `Num.` column; traceability only |
+| `system.sourceCategory` | string | no | Raw wiki `Cate` value (e.g. `SoL`, `Trad`) |
+| `system.rankCountUncertain` | boolean | no | `true` when the wiki `Rks` was `00`/unknown |
+| `system.mercType` | string \| null | when mercenary | `tank` \| `healer` \| `melee` \| `caster` \| `null` (general) |
 
 ### Cost model
 
@@ -110,7 +138,7 @@ already distinguishes the two tiers, so the data mirrors the system.
 ```json
 {
   "schemaVersion": "1.0",
-  "categories": ["general", "archetype", "class"],
+  "categories": ["general", "archetype", "class", "mercenary"],
   "classes": ["warrior", "cleric", "paladin", "ranger", "shadowknight",
               "druid", "monk", "bard", "rogue", "shaman", "necromancer",
               "wizard", "magician", "enchanter", "beastlord", "berserker"]
@@ -126,7 +154,8 @@ Sheet UI tab definitions:
   "general":   { "label": "General",   "order": 1 },
   "archetype": { "label": "Archetype", "order": 2,
                  "subtypes": ["melee", "caster", "priest", "hybrid"] },
-  "class":     { "label": "Class",     "order": 3 }
+  "class":     { "label": "Class",     "order": 3 },
+  "mercenary": { "label": "Mercenary", "order": 4 }
 }
 ```
 
@@ -137,17 +166,25 @@ Every `system.prerequisites[].aa` in every AA file must appear here and
 must reference an existing AA `id`. Validated by the loader; a future
 script can regenerate this file from the data.
 
-## Loader (planned)
+## Loader
 
 `module/data/loaders/aa-loader.js` exporting `EQRMSSAALoader`:
 
-- Browse `systems/eqrmss/module/data/aas` via FilePicker (same pattern as
-  the skill loader in `initialize-data-loaders.js`), fetch each JSON.
-- Validate required fields (`id`, `name`, `system.category`,
-  `system.maxRanks`, `costPerRank.length === maxRanks`).
-- Apply the expansion gating rules above.
-- Populate `game.eqrmss.aas = { byId, byClass, byCategory }`.
-- Wire into `module/initialization/initialize-data-loaders.js`.
+- Browses `systems/eqrmss/module/data/aas` via FilePicker (same pattern as
+  the skill loader in `initialize-data-loaders.js`), fetches each JSON.
+- Validates required fields (`id`, `name`, `type === "aa"`, `system.category`,
+  `system.maxRanks >= 1`, `costPerRank.length === maxRanks`,
+  `system.levelRequired` numeric). Manifest files (`index.json`,
+  `aa-categories.json`, `signature-dependencies.json`) are skipped.
+- Applies the expansion gating rules above. If the expansion manager is
+  unavailable, AAs load ungated with a console warning (fail-open, loud).
+- Populates `game.eqrmss.aas = { byId, byClass, byCategory }`, where
+  `byClass` holds explicitly-listed classes per AA plus an `"all"` bucket
+  for AAs with empty `classes`; `getForClass(classId)` merges both.
+- Wired into `module/initialization/initialize-data-loaders.js`, which also
+  initializes `EQRMSSExpansionManager` first (required for gating).
+- Re-filters on the `eqrmssExpansionChanged` hook, then fires
+  `eqrmss:aasChanged`.
 
 The `aa` compendium pack (`packs/abilities/aa.db`) is separate; like skills,
 these JSON files are the runtime source of truth.

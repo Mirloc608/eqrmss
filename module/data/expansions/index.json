@@ -11,7 +11,7 @@
 
   "currentExpansion": "ls",
 
-  "defaultExpansion": "ls",
+  "defaultExpansion": "classic",
 
   "latestExpansion": "ls",
 
@@ -65,7 +65,7 @@
     "sor": 70,
     "tbs": 75,
     "tss": 75,
-    "sof": 80,
+    "tsof": 80,
     "sod": 85,
     "underfoot": 90,
     "hot": 95,
@@ -91,17 +91,16 @@
     "velious",
     "luclin",
     "pop",
-    "ldon",
     "ykesha",
+    "ldon",
     "gates",
     "oow",
     "don",
     "dodh",
     "por",
-    "sor",
-    "tbs",
     "tss",
-    "sof",
+    "tbs",
+    "tsof",
     "sod",
     "underfoot",
     "hot",
@@ -117,8 +116,9 @@
     "cov",
     "tol",
     "nos",
+    "ls",
     "tob",
-    "ls"
+    "sor"
   ],
 
   "metadata": {
@@ -224,7 +224,7 @@
       "shortName": "LDoN",
       "theme": "ldon",
       "releaseYear": 2003,
-      "order": 5,
+      "order": 6,
       "levelCap": 65,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -243,7 +243,7 @@
       "shortName": "LoY",
       "theme": "ykesha",
       "releaseYear": 2003,
-      "order": 6,
+      "order": 5,
       "levelCap": 65,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -355,8 +355,8 @@
       "id": "sor",
       "shortName": "SoR",
       "theme": "sor",
-      "releaseYear": 2006,
-      "order": 12,
+      "releaseYear": 2025,
+      "order": 32,
       "levelCap": 70,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -394,7 +394,7 @@
       "shortName": "TSS",
       
       "releaseYear": 2006,
-      "order": 14,
+      "order": 12,
       "levelCap": 75,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -407,13 +407,13 @@
       "loadingScreen": "systems/eqrmss/assets/loading-screens/tss.jpg"
     },
 
-    "sof": {
+    "tsof": {
       "name": "Secrets of Faydwer",
-      "id": "sof",
+      "id": "tsof",
       "shortName": "SoF",
       
       "releaseYear": 2007,
-      "order": 15,
+      "order": 14,
       "levelCap": 80,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -432,7 +432,7 @@
       "shortName": "SoD",
       
       "releaseYear": 2008,
-      "order": 16,
+      "order": 15,
       "levelCap": 85,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -451,7 +451,7 @@
       "shortName": "UF",
       
       "releaseYear": 2009,
-      "order": 17,
+      "order": 16,
       "levelCap": 90,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -470,7 +470,7 @@
       "shortName": "HoT",
       
       "releaseYear": 2010,
-      "order": 18,
+      "order": 17,
       "levelCap": 95,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -489,7 +489,7 @@
       "shortName": "VoA",
       
       "releaseYear": 2011,
-      "order": 19,
+      "order": 18,
       "levelCap": 100,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -507,7 +507,7 @@
       "shortName": "RoF",
       
       "releaseYear": 2012,
-      "order": 20,
+      "order": 19,
       "levelCap": 100,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -526,7 +526,7 @@
       "shortName": "CotF",
       
       "releaseYear": 2013,
-      "order": 21,
+      "order": 20,
       "levelCap": 100,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -545,7 +545,7 @@
       "shortName": "TDS",
       
       "releaseYear": 2014,
-      "order": 22,
+      "order": 21,
       "levelCap": 105,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -564,7 +564,7 @@
       "shortName": "TBM",
       
       "releaseYear": 2015,
-      "order": 23,
+      "order": 22,
       "levelCap": 105,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -583,7 +583,7 @@
       "shortName": "EoK",
       
       "releaseYear": 2016,
-      "order": 24,
+      "order": 23,
       "levelCap": 105,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -602,7 +602,7 @@
       "shortName": "RoS",
       
       "releaseYear": 2017,
-      "order": 25,
+      "order": 24,
       "levelCap": 110,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -621,7 +621,7 @@
       "shortName": "TBL",
       
       "releaseYear": 2018,
-      "order": 26,
+      "order": 25,
       "levelCap": 110,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -640,7 +640,7 @@
       "shortName": "ToV",
       
       "releaseYear": 2019,
-      "order": 27,
+      "order": 26,
       "levelCap": 115,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -659,7 +659,7 @@
       "shortName": "CoV",
       
       "releaseYear": 2020,
-      "order": 28,
+      "order": 27,
       "levelCap": 120,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -678,7 +678,7 @@
       "shortName": "ToL",
       
       "releaseYear": 2021,
-      "order": 29,
+      "order": 28,
       "levelCap": 120,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -696,7 +696,7 @@
       "shortName": "NoS",
       
       "releaseYear": 2022,
-      "order": 30,
+      "order": 29,
       "levelCap": 125,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -734,7 +734,7 @@
       "shortName": "LS",
       
       "releaseYear": 2023,
-      "order": 32,
+      "order": 30,
       "levelCap": 130,
       "hasAAs": true,
       "hasAdvancedAAs": true,
@@ -755,33 +755,33 @@
     { "id": "velious", "order": 2 },
     { "id": "luclin", "order": 3 },
     { "id": "pop", "order": 4 },
-    { "id": "ldon", "order": 5 },
-    { "id": "ykesha", "order": 6 },
+    { "id": "ykesha", "order": 5 },
+    { "id": "ldon", "order": 6 },
     { "id": "gates", "order": 7 },
     { "id": "oow", "order": 8 },
     { "id": "don", "order": 9 },
     { "id": "dodh", "order": 10 },
     { "id": "por", "order": 11 },
-    { "id": "sor", "order": 12 },
+    { "id": "tss", "order": 12 },
     { "id": "tbs", "order": 13 },
-    { "id": "tss", "order": 14 },
-    { "id": "sof", "order": 15 },
-    { "id": "sod", "order": 16 },
-    { "id": "underfoot", "order": 17 },
-    { "id": "hot", "order": 18 },
-    { "id": "voa", "order": 19 },
-    { "id": "rof", "order": 20 },
-    { "id": "cotf", "order": 21 },
-    { "id": "tds", "order": 22 },
-    { "id": "tbm", "order": 23 },
-    { "id": "eok", "order": 24 },
-    { "id": "ros", "order": 25 },
-    { "id": "tbl", "order": 26 },
-    { "id": "tov", "order": 27 },
-    { "id": "cov", "order": 28 },
-    { "id": "tol", "order": 29 },
-    { "id": "nos", "order": 30 },
+    { "id": "tsof", "order": 14 },
+    { "id": "sod", "order": 15 },
+    { "id": "underfoot", "order": 16 },
+    { "id": "hot", "order": 17 },
+    { "id": "voa", "order": 18 },
+    { "id": "rof", "order": 19 },
+    { "id": "cotf", "order": 20 },
+    { "id": "tds", "order": 21 },
+    { "id": "tbm", "order": 22 },
+    { "id": "eok", "order": 23 },
+    { "id": "ros", "order": 24 },
+    { "id": "tbl", "order": 25 },
+    { "id": "tov", "order": 26 },
+    { "id": "cov", "order": 27 },
+    { "id": "tol", "order": 28 },
+    { "id": "nos", "order": 29 },
+    { "id": "ls", "order": 30 },
     { "id": "tob", "order": 31 },
-    { "id": "ls", "order": 32 }
+    { "id": "sor", "order": 32 }
   ]
 }

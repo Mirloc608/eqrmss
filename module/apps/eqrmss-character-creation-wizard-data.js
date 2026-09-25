@@ -15,6 +15,30 @@ import {
     getLoadedProgression
 } from "../progression/progression-loader.js";
 
+/**
+ * Expansion gating for the wizard. Mirrors the AA loader's
+ * getExpansionManager() helper: fail open (unfiltered) when the
+ * expansion manager is unavailable.
+ */
+
+function getExpansionManager() {
+    return game?.eqrmss?.expansions || null;
+}
+
+function filterByExpansionGate(items, gateName) {
+    const manager = getExpansionManager();
+    if (!manager || typeof manager[gateName] !== "function") return items;
+    try {
+        return items.filter(item => manager[gateName](item.id ?? item._id));
+    } catch (err) {
+        console.warn(
+            "EQRMSS | Character Creation | expansion gate failed, showing all",
+            err
+        );
+        return items;
+    }
+}
+
 export class EQRMSSCharacterCreationData {
 
   static #instance = null;
@@ -324,8 +348,8 @@ export class EQRMSSCharacterCreationData {
 
   getContext() {
     return {
-      races: this.races,
-      classes: this.classes,
+      races: filterByExpansionGate(this.races, "isRaceUnlocked"),
+      classes: filterByExpansionGate(this.classes, "isClassUnlocked"),
       cities: this.cities,
       deities: this.deities,
       raceDefinitions: this.raceDefinitions,

@@ -137,7 +137,17 @@ async function manualLoadSkills() {
 export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.0 | Starting");
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, aas:false };
+
+    // Expansion manager first - AA gating (and future race/class gating) depends on it
+    try {
+        const { EQRMSSExpansionManager } = await import('../expansions/expansion-manager.js');
+        await EQRMSSExpansionManager.initialize();
+        game.eqrmss.expansions = EQRMSSExpansionManager;
+        console.log(`EQRMSS | Expansion manager ready: active=${EQRMSSExpansionManager.getActiveExpansion()}`);
+    } catch (e) {
+        console.warn("EQRMSS | Expansion manager failed, expansion-gated content loads ungated", e);
+    }
 
     if (ClassLoader) {
         try {
@@ -198,12 +208,27 @@ export async function initializeDataLoaders() {
     if (!game.eqrmss.abilities) game.eqrmss.abilities = {};
     if (!game.eqrmss.skills) game.eqrmss.skills = {};
 
+    // Alternate Advancements - expansion-gated
+    try {
+        const { EQRMSSAALoader } = await import('../data/loaders/aa-loader.js');
+        await EQRMSSAALoader.load();
+        game.eqrmss._loadStatus.aas = true;
+        const count = Object.keys(game.eqrmss.aas?.byId || {}).length;
+        console.log(`EQRMSS | AAs ready: ${count} unlocked under active expansion`);
+    } catch (e) {
+        console.error("EQRMSS | AA loader failed", e);
+        game.eqrmss.aas = { byId:{}, byClass:{}, byCategory:{} };
+    }
+
+    if (!game.eqrmss.aas) game.eqrmss.aas = { byId:{}, byClass:{}, byCategory:{} };
+
     game.eqrmss.data = game.eqrmss.data || {};
     game.eqrmss.data.races = game.eqrmss.races;
     game.eqrmss.data.classes = game.eqrmss.classes;
     game.eqrmss.data.spells = game.eqrmss.spells;
     game.eqrmss.data.abilities = game.eqrmss.abilities;
     game.eqrmss.data.skills = game.eqrmss.skills;
+    game.eqrmss.data.aas = game.eqrmss.aas;
 
     console.log("EQRMSS | initializeDataLoaders() v4.0 complete", game.eqrmss._loadStatus);
     Hooks.callAll("eqrmss:dataLoadersReady", game.eqrmss);

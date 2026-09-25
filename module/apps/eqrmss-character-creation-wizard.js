@@ -37,6 +37,57 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       trainingPackages: []
     };
     this._initializeDefaultPotentials();
+
+    // Re-gate race/class selections when the active expansion changes.
+    this._expansionHookId = null;
+    if (typeof Hooks !== "undefined" && typeof Hooks.on === "function") {
+      this._expansionHookId = Hooks.on(
+        "eqrmssExpansionChanged",
+        () => this._onExpansionChanged()
+      );
+    }
+  }
+
+  /**
+   * Drop race/class selections that are no longer unlocked under the
+   * new active expansion, then re-render so the option lists update.
+   * Fail-open: the wizard keeps working when the manager is absent.
+   */
+  _onExpansionChanged() {
+    const manager = game?.eqrmss?.expansions;
+    if (manager) {
+      try {
+        if (
+          this.characterData.raceId &&
+          typeof manager.isRaceUnlocked === "function" &&
+          !manager.isRaceUnlocked(this.characterData.raceId)
+        ) {
+          this.characterData.raceId = "";
+        }
+        if (
+          this.characterData.classId &&
+          typeof manager.isClassUnlocked === "function" &&
+          !manager.isClassUnlocked(this.characterData.classId)
+        ) {
+          this.characterData.classId = "";
+        }
+      } catch (err) {
+        console.warn("EQRMSS | Wizard | expansion change gate failed", err);
+      }
+    }
+    this.render();
+  }
+
+  async close(options = {}) {
+    if (
+      this._expansionHookId != null &&
+      typeof Hooks !== "undefined" &&
+      typeof Hooks.off === "function"
+    ) {
+      Hooks.off("eqrmssExpansionChanged", this._expansionHookId);
+      this._expansionHookId = null;
+    }
+    return super.close(options);
   }
 
   async _initializeDefaultPotentials() {

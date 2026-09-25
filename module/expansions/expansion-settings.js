@@ -4,8 +4,6 @@
  * ============================================================
  */
 
-const MODULE_ID = "eqrmss";
-
 export const EXPANSION_CHOICES = {
 
     classic: "EverQuest",
@@ -20,6 +18,8 @@ export const EXPANSION_CHOICES = {
 
     ldon: "Lost Dungeons of Norrath",
 
+    ykesha: "Legacy of Ykesha",
+
     gates: "Gates of Discord",
 
     oow: "Omens of War",
@@ -29,6 +29,8 @@ export const EXPANSION_CHOICES = {
     dodh: "Depths of Darkhollow",
 
     por: "Prophecy of Ro",
+
+    tbs: "The Buried Sea",
 
     tss: "The Serpent's Spine",
 
@@ -62,27 +64,3 @@ export const EXPANSION_CHOICES = {
 
     ls: "Laurion's Song"
 };
-
-export function registerExpansionSettings() {
-
-    game.settings.register(
-        MODULE_ID,
-        "activeExpansion",
-        {
-            name: "Active Expansion",
-
-            hint:
-                "All content beyond the selected expansion is disabled.",
-
-            scope: "world",
-
-            config: true,
-
-            type: String,
-
-            default: "classic",
-
-            choices: EXPANSION_CHOICES
-        }
-    );
-}
