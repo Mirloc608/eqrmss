@@ -96,6 +96,11 @@ export const EQRMSSExpansionLoader = {
         return orderOf(index, id);
     },
 
+    getExpansionLevelCap(index, id) {
+        const cap = index?.metadata?.[id]?.levelCap;
+        return (typeof cap === "number" && cap > 0) ? cap : null;
+    },
+
     getExpansionWorlds(expansions, id) {
         return expansions?.[id]?.content?.worlds || [];
     },

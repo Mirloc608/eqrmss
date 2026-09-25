@@ -11,6 +11,9 @@
 //
 // ============================================================================
 
+import { EQRMSSExpansionManager }
+  from "../../../expansions/expansion-manager.js";
+
 export class EQRMSSActorProgressionHelper {
 
     constructor(sheet) {
@@ -33,6 +36,17 @@ export class EQRMSSActorProgressionHelper {
         }
 
         const pm = game.eqrmss.progressionManager;
+
+        // ------------------------------------------------------------
+        // Expansion level cap
+        // ------------------------------------------------------------
+        const levelCap = EQRMSSExpansionManager.getLevelCap();
+        if (level + 1 > levelCap) {
+            ui.notifications.warn(
+                `Maximum level reached (${levelCap}, ${EQRMSSExpansionManager.getActiveExpansionName()}).`
+            );
+            return;
+        }
 
         // ------------------------------------------------------------
         // Get next-level rewards

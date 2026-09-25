@@ -4,6 +4,7 @@
 
 import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
 import { progressionManager } from "../../progression/progression-manager.js";
+import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 
 // Skill Engine Imports
 import {
@@ -319,8 +320,12 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         const currentLevel = actor.system?.attributes?.level?.value ?? 1;
         const nextLevel = currentLevel + 1;
 
-        if (nextLevel > 60) {
-            ui.notifications.warn("EQRMSS | Maximum level reached");
+        const levelCap = EQRMSSExpansionManager.getLevelCap();
+
+        if (nextLevel > levelCap) {
+            ui.notifications.warn(
+                `EQRMSS | Maximum level reached (${levelCap}, ${EQRMSSExpansionManager.getActiveExpansionName()})`
+            );
             return;
         }
 

@@ -16,6 +16,12 @@ import { EQRMSSExpansionRegistry }
 
 const MODULE_ID = "eqrmss";
 
+/**
+ * Fallback level cap when expansion metadata is unavailable.
+ * Classic era.
+ */
+const CLASSIC_LEVEL_CAP = 50;
+
 export class EQRMSSExpansionManager {
 
   static #activeExpansion = null;
@@ -51,6 +57,36 @@ export class EQRMSSExpansionManager {
 
   static getActiveExpansion() {
     return this.#activeExpansion;
+  }
+
+  /**
+   * Level cap for an expansion (defaults to the active one).
+   * Falls back to the classic-era cap when metadata is missing.
+   */
+
+  static getLevelCap(
+    expansionId = this.#activeExpansion
+  ) {
+
+    const cap =
+      EQRMSSExpansionRegistry
+        .getExpansionLevelCap(
+          expansionId
+        );
+
+    return cap ?? CLASSIC_LEVEL_CAP;
+  }
+
+  static getActiveExpansionName() {
+
+    return (
+      EQRMSSExpansionRegistry
+        .getExpansion(
+          this.#activeExpansion
+        )
+        ?.name ??
+      this.#activeExpansion
+    );
   }
 
   static async setActiveExpansion(
@@ -90,6 +126,95 @@ export class EQRMSSExpansionManager {
       "eqrmssExpansionChanged",
       expansionId
     );
+
+    this.#warnOverCapActors(
+      expansionId
+    );
+  }
+
+  /**
+   * Warn (never silently clamp) when switching to an expansion
+   * whose level cap sits below an existing character's level.
+   * GM-only; players just see the level-up block.
+   */
+
+  static #warnOverCapActors(
+    expansionId
+  ) {
+
+    try {
+
+      if (
+        !game?.user?.isGM ||
+        !game?.actors
+      ) {
+
+        return;
+      }
+
+      const cap =
+        this.getLevelCap(
+          expansionId
+        );
+
+      const over = [];
+
+      for (
+        const actor of
+        game.actors
+      ) {
+
+        if (
+          actor.type !==
+          "character"
+        ) {
+
+          continue;
+        }
+
+        const level =
+          Number(
+            actor.system
+              ?.attributes
+              ?.level
+              ?.value ??
+            actor.system
+              ?.level ??
+            actor.system
+              ?.character
+              ?.level ??
+            1
+          );
+
+        if (
+          level > cap
+        ) {
+
+          over.push(
+            `${actor.name} (${level})`
+          );
+        }
+      }
+
+      if (
+        over.length
+      ) {
+
+        const name =
+          this.getActiveExpansionName();
+
+        ui.notifications.warn(
+          `EQRMSS | ${over.length} character(s) exceed the ${name} level cap of ${cap}: ${over.join(", ")}`
+        );
+      }
+
+    } catch (err) {
+
+      console.warn(
+        `${MODULE_ID} | over-cap actor scan failed`,
+        err
+      );
+    }
   }
 
   static getUnlocks() {

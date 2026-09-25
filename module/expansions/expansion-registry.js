@@ -177,6 +177,17 @@ export class EQRMSSExpansionRegistry {
       );
   }
 
+  static getExpansionLevelCap(
+    id
+  ) {
+
+    return EQRMSSExpansionLoader
+      .getExpansionLevelCap(
+        this.#index,
+        id
+      );
+  }
+
   /**
    * ==========================================================
    * Milestones
