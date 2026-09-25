@@ -3,7 +3,7 @@
 // Foundry VTT V13 / V14 Compatible
 //
 // EverQuest Classes
-// Levels 1-60
+// Levels 1-125
 //
 // Profession keys normalized to EQ class names.
 //
@@ -14,7 +14,7 @@
 
 const LEVELS =
     Array.from(
-        {length:60},
+        {length:125},
         (_,i)=>i+1
     );
 
@@ -34,7 +34,24 @@ export const EQRMSS_SPELL_PROGRESSION =
     45:12,
     49:13,
     53:14,
-    57:15
+    57:15,
+    61:16,
+    65:17,
+    69:18,
+    73:19,
+    77:20,
+    81:21,
+    85:22,
+    89:23,
+    93:24,
+    97:25,
+    101:26,
+    105:27,
+    109:28,
+    113:29,
+    117:30,
+    121:31,
+    125:32
 };
 
 function createBaseProgression()
@@ -122,7 +139,7 @@ function createClass(
 
         realm,
 
-        maxLevel:60,
+        maxLevel:125,
 
         levels,
 
