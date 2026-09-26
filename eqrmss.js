@@ -1,5 +1,6 @@
 // ============================================================
 // EQRMSS System Bootstrap v4.9 - DIRECT MODULE PATCH
+// Fixed to ensure master-fix-v49.js exists
 // ============================================================
 
 import "./module/initialization/v13-compat-shim.js";
