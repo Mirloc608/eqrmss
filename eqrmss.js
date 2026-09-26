@@ -103,17 +103,11 @@ function resolveLoader(mod, ...names) {
 async function loadModules() {
     if (modulesLoaded) return;
     console.log("EQRMSS | Data Loaders | Loading loader modules...");
-    AbilityModule = await tryImport(['../data/loaders/ability-loader.js','../data/abilities/ability-loader.js']);
-    ClassModule = await tryImport(['../data/loaders/class-loader.js','../data/classes/class-loader.js']);
-    SpellModule = await tryImport(['../data/loaders/spell-loader.js','../data/spells/spell-loader.js']);
-    RaceModule = await tryImport(['../data/loaders/race-loader.js','../data/races/race-loader.js','../data/loaders/races-loader.js']);
-    SkillModule = await tryImport([
-        '../data/loaders/skill-loader.js',
-        '../data/skills/skill-loader.js',
-        '../../module/data/loaders/skill-loader.js',
-        '../data/loaders/skills-loader.js',
-        './skill-loader.js'
-    ]);
+    AbilityModule = await tryImport(['./module/data/loaders/ability-loader.js']);
+    ClassModule = await tryImport(['./module/data/loaders/class-loader.js']);
+    SpellModule = await tryImport(['./module/data/loaders/spell-loader.js']);
+    RaceModule = await tryImport(['./module/data/loaders/race-loader.js']);
+    SkillModule = await tryImport(['./module/data/loaders/skill-loader.js']);
     AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
     ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
     SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
