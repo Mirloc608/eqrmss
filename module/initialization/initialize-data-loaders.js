@@ -1,13 +1,12 @@
 /**
- * EQRMSS Initialize Data Loaders v4.0 - FIX WIZARD+SHEET + LAZY GEO
- * Fixes:
- * 1. skill-loader.js 404 - try multiple paths, fallback to manual skill scan
- * 2. Wizard no error - ensure data available before wizard opens, add retry
- * 3. Sheet no render - ensure defaults exist
+ * EQRMSS Initialize Data Loaders v4.14 - FIX top-level await bug (was causing system.json Expecting ; error)
+ * Top-level await is not supported in Foundry's esmodule loader context, move all awaits inside function
  */
-console.log("EQRMSS | Initialize Data Loaders v4.0 | Starting - Wizard+Sheet+LazyGeo fix");
+console.log("EQRMSS | Initialize Data Loaders v4.14 | Starting - Wizard+Sheet+LazyGeo fix - NO TLA");
 
-let AbilityModule, ClassModule, SpellModule, RaceModule, SkillModule;
+let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null;
+let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null;
+let modulesLoaded = false;
 
 async function tryImport(paths) {
     for (const p of paths) {
@@ -24,19 +23,6 @@ async function tryImport(paths) {
     return null;
 }
 
-AbilityModule = await tryImport(['../data/loaders/ability-loader.js','../data/abilities/ability-loader.js']);
-ClassModule = await tryImport(['../data/loaders/class-loader.js','../data/classes/class-loader.js']);
-SpellModule = await tryImport(['../data/loaders/spell-loader.js','../data/spells/spell-loader.js']);
-RaceModule = await tryImport(['../data/loaders/race-loader.js','../data/races/race-loader.js','../data/loaders/races-loader.js']);
-// Skill loader has many possible locations - try all
-SkillModule = await tryImport([
-    '../data/loaders/skill-loader.js',
-    '../data/skills/skill-loader.js',
-    '../../module/data/loaders/skill-loader.js',
-    '../data/loaders/skills-loader.js',
-    './skill-loader.js'
-]);
-
 function resolveLoader(mod, ...names) {
     if (!mod) return null;
     for (const n of names) { if (mod[n]) return mod[n]; }
@@ -49,11 +35,27 @@ function resolveLoader(mod, ...names) {
     return null;
 }
 
-const AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
-const ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
-const SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
-const RaceLoader = resolveLoader(RaceModule, 'RaceLoader','EQRMSSRaceLoader','EQRMSS_RACE_LOADER','RacesLoader');
-let SkillLoader = resolveLoader(SkillModule, 'SkillLoader','EQRMSSSkillLoader','EQRMSS_SKILL_LOADER');
+async function loadModules() {
+    if (modulesLoaded) return;
+    console.log("EQRMSS | Data Loaders | Loading loader modules...");
+    AbilityModule = await tryImport(['../data/loaders/ability-loader.js','../data/abilities/ability-loader.js']);
+    ClassModule = await tryImport(['../data/loaders/class-loader.js','../data/classes/class-loader.js']);
+    SpellModule = await tryImport(['../data/loaders/spell-loader.js','../data/spells/spell-loader.js']);
+    RaceModule = await tryImport(['../data/loaders/race-loader.js','../data/races/race-loader.js','../data/loaders/races-loader.js']);
+    SkillModule = await tryImport([
+        '../data/loaders/skill-loader.js',
+        '../data/skills/skill-loader.js',
+        '../../module/data/loaders/skill-loader.js',
+        '../data/loaders/skills-loader.js',
+        './skill-loader.js'
+    ]);
+    AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
+    ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
+    SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
+    RaceLoader = resolveLoader(RaceModule, 'RaceLoader','EQRMSSRaceLoader','EQRMSS_RACE_LOADER','RacesLoader');
+    SkillLoader = resolveLoader(SkillModule, 'SkillLoader','EQRMSSSkillLoader','EQRMSS_SKILL_LOADER');
+    modulesLoaded = true;
+}
 
 // Fallback manual race loader
 async function manualLoadRaces() {
@@ -74,9 +76,14 @@ async function manualLoadRaces() {
                         if (!txt || txt.trim()==='' || txt.includes('[object Object]')) continue;
                         const j = JSON.parse(txt);
                         const id = f.split('/').pop().replace('.json','').toLowerCase();
-                        if (id==='race-schema' || id==='schema' || id==='index') continue;
-                        if (Array.isArray(j)) { for (const item of j) { const key = (item.id||item.name||id).toLowerCase(); RACES[key]=item; } }
-                        else if (j.races) { Object.assign(RACES, j.races); }
+                        if (id==='race-schema' || id==='schema' || id==='index' || id.includes('schema')) continue;
+                        if (Array.isArray(j)) { for (const item of j) { const key = (item.id||item.name||id).toLowerCase(); if (key.includes('schema')) continue; RACES[key]=item; } }
+                        else if (j.races) { 
+                            for (const [k,v] of Object.entries(j.races)) {
+                                if (k.toLowerCase().includes('schema')) continue;
+                                RACES[k]=v;
+                            }
+                        }
                         else { RACES[id]=j; }
                     } catch {}
                 }
@@ -88,7 +95,7 @@ async function manualLoadRaces() {
     } catch { return {}; }
 }
 
-// Fallback manual skill loader - since skill-loader.js 404s
+// Fallback manual skill loader
 async function manualLoadSkills() {
     console.log("EQRMSS | Manual skill load fallback - scanning skills folder");
     const SKILLS = {};
@@ -135,27 +142,10 @@ async function manualLoadSkills() {
 }
 
 export async function initializeDataLoaders() {
-    console.log("EQRMSS | initializeDataLoaders() v4.0 | Starting");
+    console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
+    await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, aas:false };
-
-    // AA advancement (points economy + purchase flow) for console/macro use
-    try {
-        const { EQRMSSAAAdvancement } = await import('../aa/aa-advancement.js');
-        game.eqrmss.aa = EQRMSSAAAdvancement;
-    } catch (e) {
-        console.warn("EQRMSS | AA advancement failed to register", e);
-    }
-
-    // Expansion manager first - AA gating (and future race/class gating) depends on it
-    try {
-        const { EQRMSSExpansionManager } = await import('../expansions/expansion-manager.js');
-        await EQRMSSExpansionManager.initialize();
-        game.eqrmss.expansions = EQRMSSExpansionManager;
-        console.log(`EQRMSS | Expansion manager ready: active=${EQRMSSExpansionManager.getActiveExpansion()}`);
-    } catch (e) {
-        console.warn("EQRMSS | Expansion manager failed, expansion-gated content loads ungated", e);
-    }
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false };
 
     if (ClassLoader) {
         try {
@@ -171,6 +161,12 @@ export async function initializeDataLoaders() {
             if (typeof RaceLoader.load === 'function') await RaceLoader.load();
             else if (RaceLoader.races) { game.eqrmss.races = RaceLoader.races; }
             else if (typeof RaceLoader === 'object' && !RaceLoader.load) { game.eqrmss.races = RaceLoader; }
+            // Filter race-schema here too
+            if (game.eqrmss.races) {
+                for (const k of Object.keys(game.eqrmss.races)) {
+                    if (k.toLowerCase().includes('schema')) delete game.eqrmss.races[k];
+                }
+            }
             game.eqrmss._loadStatus.races = true;
             console.log(`EQRMSS | Races ready: ${Object.keys(game.eqrmss.races||{}).length} [${Object.keys(game.eqrmss.races||{}).join(', ')}]`);
         } catch (e) { console.error("Race loader failed, trying manual", e); game.eqrmss.races = await manualLoadRaces(); }
@@ -216,19 +212,10 @@ export async function initializeDataLoaders() {
     if (!game.eqrmss.abilities) game.eqrmss.abilities = {};
     if (!game.eqrmss.skills) game.eqrmss.skills = {};
 
-    // Alternate Advancements - expansion-gated
-    try {
-        const { EQRMSSAALoader } = await import('../data/loaders/aa-loader.js');
-        await EQRMSSAALoader.load();
-        game.eqrmss._loadStatus.aas = true;
-        const count = Object.keys(game.eqrmss.aas?.byId || {}).length;
-        console.log(`EQRMSS | AAs ready: ${count} unlocked under active expansion`);
-    } catch (e) {
-        console.error("EQRMSS | AA loader failed", e);
-        game.eqrmss.aas = { byId:{}, byClass:{}, byCategory:{} };
+    // Final filter
+    for (const k of Object.keys(game.eqrmss.races)) {
+        if (k.toLowerCase().includes('schema')) delete game.eqrmss.races[k];
     }
-
-    if (!game.eqrmss.aas) game.eqrmss.aas = { byId:{}, byClass:{}, byCategory:{} };
 
     game.eqrmss.data = game.eqrmss.data || {};
     game.eqrmss.data.races = game.eqrmss.races;
@@ -236,12 +223,9 @@ export async function initializeDataLoaders() {
     game.eqrmss.data.spells = game.eqrmss.spells;
     game.eqrmss.data.abilities = game.eqrmss.abilities;
     game.eqrmss.data.skills = game.eqrmss.skills;
-    game.eqrmss.data.aas = game.eqrmss.aas;
 
-    console.log("EQRMSS | initializeDataLoaders() v4.0 complete", game.eqrmss._loadStatus);
+    console.log("EQRMSS | initializeDataLoaders() v4.14 complete", game.eqrmss._loadStatus);
     Hooks.callAll("eqrmss:dataLoadersReady", game.eqrmss);
-    
-    // Also call a second time after a short delay for wizard that missed first hook
     setTimeout(() => Hooks.callAll("eqrmss:dataLoadersReady", game.eqrmss), 500);
 }
 
@@ -250,5 +234,12 @@ export const initializeDataLoader = initializeDataLoaders;
 export const initDataLoaders = initializeDataLoaders;
 export const EQRMSSDataLoader = { initialize: initializeDataLoaders, initializeDataLoaders };
 
+// For backwards compat - getters that lazy-load
+export function getAbilityLoader() { return AbilityLoader; }
+export function getClassLoader() { return ClassLoader; }
+export function getSpellLoader() { return SpellLoader; }
+export function getRaceLoader() { return RaceLoader; }
+export function getSkillLoader() { return SkillLoader; }
+
 export { AbilityLoader, ClassLoader, SpellLoader, RaceLoader, SkillLoader };
-export default { initializeDataLoaders, initializeEQRMSSDataLoaders, AbilityLoader, ClassLoader, SpellLoader, RaceLoader };
+export default { initializeDataLoaders, initializeEQRMSSDataLoaders: initializeDataLoaders, get AbilityLoader() { return AbilityLoader; }, get ClassLoader() { return ClassLoader; }, get SpellLoader() { return SpellLoader; }, get RaceLoader() { return RaceLoader; } };

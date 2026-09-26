@@ -1,97 +1,351 @@
-// ============================================================
-// EQRMSS System Bootstrap v4.12 - FIXED 404 - uses master-fix-v46.js
-// ============================================================
-
-import "./module/initialization/v13-compat-shim.js";
-import "./module/initialization/master-fix-v46.js";
-import "./module/initialization/pet-manager-fix.js";
-import "./module/initialization/sheet-v13-final-fix.js";
-import "./module/initialization/sheet-wizard-fix.js";
-import "./module/initialization/wizard-fix.js";
-
-import {
-    registerEQRMSSSettings,
-    registerEQRMSSDocuments,
-    registerEQRMSSDataLoaders,
-    loadEQRMSSTemplates,
-    registerEQRMSSHooks,
-    initializeEQRMSSSubsystems,
-    initializeEQRMSSDataLoaders
-} from "./module/initialization/index.js";
-
-import "./module/config.js";
-import { registerEQRMSSSheets } from "./module/initialization/register-sheets.js";
-
-import * as WizardModule from "./module/apps/eqrmss-character-creation-wizard.js";
-console.log("EQRMSS v4.12 | Wizard module imported:", Object.keys(WizardModule));
-
-(function exportWizardGlobal() {
-    let wizardClass = null;
-    for (const key of Object.keys(WizardModule)) {
-        const val = WizardModule[key];
-        if (typeof val === 'function' && key.toLowerCase().includes('wizard')) wizardClass = val;
+{
+  "id": "eqrmss",
+  "title": "EverQuest - Rolemaster Standard System",
+  "description": "v4.14 FIX system.json Expecting ; error - removed top-level await from initialize-data-loaders.js, filtered race-schema, pet manager aggressive patch, wizard 17 ARRAY",
+  "version": "1.0.20",
+  "url": "https://github.com/Mirloc608/eqrmss",
+  "authors": [
+    {
+      "name": "Mirloc608",
+      "url": "https://github.com/Mirloc608"
     }
-    if (!wizardClass && WizardModule.default && typeof WizardModule.default === 'function') wizardClass = WizardModule.default;
-    if (wizardClass) {
-        globalThis.EQRMSSCharacterCreationWizard = wizardClass;
-        globalThis.CharacterCreationWizard = wizardClass;
-        globalThis.EQRMSS = globalThis.EQRMSS || {};
-        globalThis.EQRMSS.CharacterCreationWizard = wizardClass;
-        console.log(`EQRMSS v4.12 | Wizard exported: ${wizardClass.name}`);
-        Hooks.once("init", () => { game.eqrmss = game.eqrmss || {}; game.eqrmss.CharacterCreationWizard = wizardClass; });
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+  "scripts": [],
+  "esmodules": [
+    "eqrmss.js",
+    "module/apps/eqrmss-character-creation-wizard.js",
+    "module/apps/eqrmss-character-creation-wizard-data.js",
+    "module/apps/eqrmss-character-creation-wizard-rules.js",
+    "module/apps/eqrmss-character-creation-wizard-finalizer.js"
+  ],
+  "styles": [
+    "styles/eqrmss.css",
+    "styles/eqrmss-character-creation-wizard.css"
+  ],
+  "packs": [
+    {
+      "name": "skills",
+      "label": "EQ Skills",
+      "system": "eqrmss",
+      "path": "./packs/abilities/skills.db",
+      "type": "Item"
+    },
+    {
+      "name": "skill_categories",
+      "label": "EQ Skill Categories",
+      "system": "eqrmss",
+      "path": "./packs/abilities/skill_categories.db",
+      "type": "Item"
+    },
+    {
+      "name": "aa",
+      "label": "EQ Alternate Advancement",
+      "system": "eqrmss",
+      "path": "./packs/abilities/aa.db",
+      "type": "Item"
+    },
+    {
+      "name": "spells",
+      "label": "EQ Spells",
+      "system": "eqrmss",
+      "path": "./packs/abilities/spells.db",
+      "type": "Item"
+    },
+    {
+      "name": "songs",
+      "label": "EQ Bard Songs",
+      "system": "eqrmss",
+      "path": "./packs/abilities/songs.db",
+      "type": "Item"
+    },
+    {
+      "name": "eqrmss-abilities",
+      "label": "EQRMSS Abilities",
+      "system": "eqrmss",
+      "path": "./packs/abilities/eqrmss-abilities.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_bard",
+      "label": "EQ Bard Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/bard-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_beastlord",
+      "label": "EQ Beastlord Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/beastlord-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_berserker",
+      "label": "EQ Berserker Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/berserker-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_cleric",
+      "label": "EQ Cleric Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/cleric-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_druid",
+      "label": "EQ Druid Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/druid-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_enchanter",
+      "label": "EQ Enchanter Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/enchanter-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_magician",
+      "label": "EQ Magician Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/magician-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_monk",
+      "label": "EQ Monk Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/monk-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_necromancer",
+      "label": "EQ Necromancer Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/necromancer-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_paladin",
+      "label": "EQ Paladin Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/paladin-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_ranger",
+      "label": "EQ Ranger Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/ranger-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_rogue",
+      "label": "EQ Rogue Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/rogue-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_shadowknight",
+      "label": "EQ Shadowknight Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/shadowknight-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_shaman",
+      "label": "EQ Shaman Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/shaman-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_warrior",
+      "label": "EQ Warrior Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/warrior-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_wizard",
+      "label": "EQ Wizard Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/wizard-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "weapons",
+      "label": "EQ Weapons",
+      "system": "eqrmss",
+      "path": "./packs/items/weapons.db",
+      "type": "Item"
+    },
+    {
+      "name": "armor",
+      "label": "EQ Armor",
+      "system": "eqrmss",
+      "path": "./packs/items/armor.db",
+      "type": "Item"
+    },
+    {
+      "name": "shields",
+      "label": "EQ Shields",
+      "system": "eqrmss",
+      "path": "./packs/items/shields.db",
+      "type": "Item"
+    },
+    {
+      "name": "jewelry",
+      "label": "EQ Jewelry",
+      "system": "eqrmss",
+      "path": "./packs/items/jewelry.db",
+      "type": "Item"
+    },
+    {
+      "name": "consumables",
+      "label": "EQ Consumables",
+      "system": "eqrmss",
+      "path": "./packs/items/consumables.db",
+      "type": "Item"
+    },
+    {
+      "name": "instruments",
+      "label": "EQ Bard Instruments",
+      "system": "eqrmss",
+      "path": "./packs/items/instruments.db",
+      "type": "Item"
+    },
+    {
+      "name": "actor_classes",
+      "label": "EQ Classes",
+      "system": "eqrmss",
+      "path": "./packs/actors/classes.db",
+      "type": "Item"
+    },
+    {
+      "name": "actor_races",
+      "label": "EQ Races",
+      "system": "eqrmss",
+      "path": "./packs/actors/races.db",
+      "type": "Item"
+    },
+    {
+      "name": "cities",
+      "label": "Cities",
+      "system": "eqrmss",
+      "path": "./packs/world/cities.db",
+      "type": "Item"
+    },
+    {
+      "name": "actor_npcs",
+      "label": "EQ NPCs",
+      "system": "eqrmss",
+      "path": "./packs/actors/npcs.db",
+      "type": "Actor"
+    },
+    {
+      "name": "actor_pets",
+      "label": "EQ Pets",
+      "system": "eqrmss",
+      "path": "./packs/actors/pets.db",
+      "type": "Actor"
+    },
+    {
+      "name": "templates",
+      "label": "EQRMSS Templates",
+      "system": "eqrmss",
+      "path": "./packs/templates.db",
+      "type": "Item"
+    },
+    {
+      "name": "languages",
+      "label": "EQ Languages",
+      "system": "eqrmss",
+      "path": "./packs/world/languages.db",
+      "type": "Item"
+    },
+    {
+      "name": "factions",
+      "label": "EQ Factions",
+      "system": "eqrmss",
+      "path": "./packs/world/factions.db",
+      "type": "Item"
+    },
+    {
+      "name": "deities",
+      "label": "EQ Deities",
+      "system": "eqrmss",
+      "path": "./packs/world/deities.db",
+      "type": "Item"
+    },
+    {
+      "name": "training_packages",
+      "label": "EQ Training Packages",
+      "system": "eqrmss",
+      "path": "./packs/world/training_packages.db",
+      "type": "Item"
     }
-})();
-
-import { EQRMSSGeography } from "./module/data/geography/geography-loader.js";
-import { EQRMSSSceneRegistry } from "./module/data/geography/scene-registry.js";
-
-import "./module/data/stats/rmss-stat-rolling.js";
-import "./module/data/stats/rmss-point-buy.js";
-import "./module/data/stats/rmss-derived-values.js";
-import "./module/data/stats/rmss-skill-categories.js";
-import "./module/data/stats/rmss-skill-costs.js";
-import "./module/data/stats/rmss-stat-bonus.js";
-import "./module/data/stats/rmss-combat-round-engine.js";
-import "./module/data/stats/rmss-spell-resolution-engine.js";
-import "./module/data/stats/rmss-skill-check-engine.js";
-import "./module/data/stats/rmss-weapon-damage-engine.js";
-import "./module/data/stats/rmss-progression-engine.js";
-
-import { initializeSkillEngine } from "./module/utils/skills/index.js";
-
-Hooks.once("init", async function () {
-    console.log("EQRMSS v4.12 | Initializing");
-    try {
-        registerEQRMSSSettings();
-        registerEQRMSSDocuments();
-        await loadEQRMSSTemplates();
-        registerEQRMSSDataLoaders();
-        registerEQRMSSHooks();
-        console.log("EQRMSS v4.12 | Init complete");
-    } catch (error) { console.error("EQRMSS | Initialization failed", error); }
-});
-
-Hooks.once("ready", async function () {
-    console.log("EQRMSS v4.12 | Starting ready pipeline");
-    try {
-        await initializeEQRMSSDataLoaders();
-        console.log("EQRMSS v4.12 | Data loaders ready");
-        await initializeEQRMSSSubsystems();
-        try {
-            const skillsPack = game.packs.get("eqrmss.skills");
-            const categoriesPack = game.packs.get("eqrmss.skill-categories");
-            const metadataPack = game.packs.get("eqrmss.skill-metadata");
-            const professionCostsPack = game.packs.get("eqrmss.profession-skill-costs");
-            const skills = skillsPack ? await skillsPack.getDocuments() : [];
-            const categories = categoriesPack ? await categoriesPack.getDocuments() : [];
-            const metadata = metadataPack ? await metadataPack.getDocuments() : [];
-            const professionCosts = professionCostsPack ? await professionCostsPack.getDocuments() : [];
-            const roller = { roll: (formula) => new Roll(formula).roll({ async: false }) };
-            initializeSkillEngine({ skills, categories, metadata, professionCosts, roller });
-        } catch {}
-        try { await EQRMSSGeography.loadAll(); await EQRMSSSceneRegistry.registerAllScenes(); } catch {}
-        registerEQRMSSSheets();
-        console.log("EQRMSS | Sheets registered v4.12");
-        console.log("EQRMSS v4.12 | Ready - Wizard:", !!globalThis.EQRMSSCharacterCreationWizard, "Races:", Object.keys(game.eqrmss?.races||{}).length);
-    } catch (error) { console.error("EQRMSS | Ready failed", error); }
-});
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "npc": {},
+      "companion": {},
+      "pet": {},
+      "mercenary": {},
+      "*": {}
+    },
+    "Item": {
+      "weapon": {},
+      "armor": {},
+      "shield": {},
+      "jewelry": {},
+      "consumable": {},
+      "instrument": {},
+      "skill": {},
+      "skill_category": {},
+      "spell": {},
+      "song": {},
+      "aa": {},
+      "class": {},
+      "race": {},
+      "language": {},
+      "deity": {},
+      "faction": {},
+      "training_package": {},
+      "herb_or_poison": {},
+      "transport": {},
+      "combat_action": {},
+      "*": {}
+    }
+  },
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "license": "LICENSE",
+  "flags": {
+    "eqrmss": {
+      "schemaVersion": 2
+    }
+  },
+  "manifest": "https://raw.githubusercontent.com/Mirloc608/eqrmss/main/system.json",
+  "download": "https://github.com/Mirloc608/eqrmss/archive/refs/heads/main.zip",
+  "readme": "https://github.com/Mirloc608/eqrmss/blob/main/README.md",
+  "changelog": "https://github.com/Mirloc608/eqrmss/blob/main/CHANGELOG.md"
+}

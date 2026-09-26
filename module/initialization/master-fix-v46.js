@@ -7,10 +7,16 @@
 console.log("EQRMSS | Master Fix v4.12 | Loading");
 
 function toArray(obj) {
-    if (Array.isArray(obj)) return obj;
+    if (Array.isArray(obj)) return obj.filter(i => {
+        const id = (i?.id||i?.key||'').toLowerCase();
+        return !['race-schema','schema','index'].includes(id) && !id.includes('schema');
+    });
     if (!obj) return [];
     if (typeof obj === 'object') {
-        return Object.entries(obj).map(([key, val]) => {
+        return Object.entries(obj).filter(([k,v]) => {
+            const kl = k.toLowerCase();
+            return !['race-schema','schema','index','manifest','races'].includes(kl) && !kl.includes('schema');
+        }).map(([key, val]) => {
             if (typeof val === 'object' && val !== null) {
                 const c = { ...val };
                 if (!c.id) c.id = key;
@@ -23,6 +29,7 @@ function toArray(obj) {
     }
     return [];
 }
+
 
 function needsV13Patch(cls) {
     if (!cls?.prototype) return false;
@@ -174,9 +181,89 @@ function patchAllSheets() {
     return count;
 }
 
+
+// === PET MANAGER AGGRESSIVE PATCH v4.13 ===
+function patchRenderableAggressive(cls, label) {
+    if (!cls?.prototype) return false;
+    const proto = cls.prototype;
+    let patched = false;
+    const renderStr = proto._renderHTML?.toString() || '';
+    if (!proto._renderHTML || renderStr.includes('not renderable') || renderStr.includes('not implemented')) {
+        console.log(`EQRMSS | Master Fix v4.13 | Aggressive patching ${label || cls.name} _renderHTML`);
+        proto._renderHTML = async function(context, options) {
+            let templatePath = this.template || this.constructor?.template || this.constructor?.DEFAULT_OPTIONS?.template;
+            if (typeof templatePath === 'function') { try { templatePath = templatePath.call(this); } catch {} }
+            if (templatePath) {
+                try { return await foundry.applications.handlebars.renderTemplate(templatePath, context||{}); }
+                catch (e) { console.warn(e); }
+            }
+            return this.element?.innerHTML || `<div>${cls.name}</div>`;
+        };
+        patched = true;
+    }
+    if (!proto._replaceHTML) {
+        proto._replaceHTML = function(result) {
+            if (!this.element) return;
+            if (typeof result === 'string') this.element.innerHTML = result;
+            else if (result instanceof HTMLElement) { this.element.innerHTML = ''; this.element.appendChild(result); }
+            else if (result?.innerHTML) this.element.innerHTML = result.innerHTML;
+        };
+        patched = true;
+    }
+    if (patched) {
+        proto._eqrmssRenderPatched = true;
+        proto._eqrmssV12Patched = true;
+    }
+    return patched;
+}
+
+// Watch for EQRMSSPetManager being defined late
+(function watchPetManager(){
+    let _EQRMSSPetManager = globalThis.EQRMSSPetManager;
+    let _PetManager = globalThis.PetManager;
+    try {
+        Object.defineProperty(globalThis, 'EQRMSSPetManager', {
+            get() { return _EQRMSSPetManager; },
+            set(v) {
+                _EQRMSSPetManager = v;
+                if (v) {
+                    console.log(`EQRMSS | Master Fix v4.13 | EQRMSSPetManager defined, patching immediately`);
+                    patchRenderableAggressive(v, 'EQRMSSPetManager');
+                }
+            },
+            configurable: true
+        });
+    } catch {}
+    try {
+        Object.defineProperty(globalThis, 'PetManager', {
+            get() { return _PetManager; },
+            set(v) {
+                _PetManager = v;
+                if (v) {
+                    console.log(`EQRMSS | Master Fix v4.13 | PetManager defined, patching immediately`);
+                    patchRenderableAggressive(v, 'PetManager');
+                }
+            },
+            configurable: true
+        });
+    } catch {}
+    // Polling fallback
+    const interval = setInterval(() => {
+        const cls = globalThis.EQRMSSPetManager || globalThis.PetManager;
+        if (cls && cls.prototype && !cls.prototype._eqrmssRenderPatched) {
+            if (patchRenderableAggressive(cls, cls.name)) {
+                console.log(`EQRMSS | Master Fix v4.13 | Poll patched ${cls.name}`);
+            }
+        }
+        // Stop after 30 seconds
+        // Keep running though for late loads
+    }, 500);
+    setTimeout(() => clearInterval(interval), 30000);
+})();
+
 function patchPetManagers() {
     let count = 0;
-    for (const name of ['EQRMSSPetManager', 'PetManager', 'EQRMSSPetManagerV2', 'EQRMSSCompanionManager']) {
+    for (const name of ['EQRMSSPetManager', 'PetManager', 'EQRMSSPetManagerV2', 'EQRMSSCompanionManager', 'EQRMSSPetManagerV2']) {
         const cls = globalThis[name];
         if (cls && patchRenderable(cls, name)) { count++; console.log(`EQRMSS | Master Fix v4.12 | Patched ${name}`); }
     }

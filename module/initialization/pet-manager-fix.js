@@ -1,19 +1,21 @@
+
 /**
- * EQRMSS Pet Manager Fix v4.7 - DISABLED old openWizard override
- * Now handled by master-fix-v47.js which injects ARRAYS not objects
+ * EQRMSS Pet Manager Fix v4.13 - AGGRESSIVE polling + watcher
  */
-console.log("EQRMSS | Pet Manager Fix v4.7 | Loading - openWizard disabled, handled by master fix");
+console.log("EQRMSS | Pet Manager Fix v4.13 | Loading - aggressive watcher");
 
 function patchRenderable(cls) {
     if (!cls?.prototype) return false;
-    if (cls.prototype._eqrmssRenderPatched) return true;
     const proto = cls.prototype;
     let patched = false;
-    if (!proto._renderHTML || proto._renderHTML.toString().includes('not renderable')) {
+    const renderStr = proto._renderHTML?.toString() || '';
+    if (!proto._renderHTML || renderStr.includes('not renderable') || renderStr.includes('not implemented') || renderStr.includes('abstract')) {
         proto._renderHTML = async function(context) {
-            if (this.template) {
-                try { return await foundry.applications.handlebars.renderTemplate(this.template, context); }
-                catch (e) { return `<div>Error: ${e.message}</div>`; }
+            let templatePath = this.template || this.constructor?.template || this.constructor?.DEFAULT_OPTIONS?.template;
+            if (typeof templatePath === 'function') { try { templatePath = templatePath.call(this); } catch {} }
+            if (templatePath) {
+                try { return await foundry.applications.handlebars.renderTemplate(templatePath, context||{}); }
+                catch (e) { console.warn(e); }
             }
             return this.element?.innerHTML || `<div>${cls.name}</div>`;
         };
@@ -30,24 +32,48 @@ function patchRenderable(cls) {
     }
     if (patched) {
         proto._eqrmssRenderPatched = true;
-        console.log(`EQRMSS | Pet Fix v4.7 | Patched ${cls.name}`);
+        proto._eqrmssV12Patched = true;
+        console.log(`EQRMSS | Pet Fix v4.13 | Patched ${cls.name} to be renderable`);
     }
     return patched;
 }
 
-Hooks.once("init", () => {
-    ['EQRMSSPetManager', 'PetManager'].forEach(name => {
+function tryPatchAll() {
+    let count=0;
+    for (const name of ['EQRMSSPetManager','PetManager','EQRMSSPetManagerV2','EQRMSSCompanionManager']) {
         const cls = globalThis[name];
-        if (cls) patchRenderable(cls);
-    });
-});
+        if (cls && patchRenderable(cls)) count++;
+    }
+    return count;
+}
+
+Hooks.once("init", () => { tryPatchAll(); });
 
 Hooks.once("ready", () => {
-    ['EQRMSSPetManager', 'PetManager'].forEach(name => {
-        const cls = globalThis[name];
-        if (cls) patchRenderable(cls);
+    tryPatchAll();
+    console.log("EQRMSS | Pet Fix v4.13 | Ready - polling for late definition");
+    // Aggressive polling + watcher
+    let _EQRMSSPetManager = globalThis.EQRMSSPetManager;
+    try {
+        Object.defineProperty(globalThis, 'EQRMSSPetManager', {
+            get() { return _EQRMSSPetManager; },
+            set(v) {
+                _EQRMSSPetManager = v;
+                if (v) { console.log(`EQRMSS | Pet Fix v4.13 | EQRMSSPetManager set, patching`); patchRenderable(v); }
+            },
+            configurable: true
+        });
+    } catch {}
+    const interval = setInterval(() => {
+        if (tryPatchAll()>0) console.log("EQRMSS | Pet Fix v4.13 | Poll patched pet manager");
+    }, 300);
+    setTimeout(() => clearInterval(interval), 20000);
+    // Also hook render to patch just-in-time
+    Hooks.on("renderApplication", (app) => {
+        if (app.constructor.name?.includes('PetManager')) {
+            patchRenderable(app.constructor);
+        }
     });
-    console.log("EQRMSS | Pet Fix v4.7 | Ready - openWizard handled by master-fix-v47");
 });
 
-export const PetManagerFixV47 = { version: "4.7" };
+export const PetManagerFixV413 = { version: "4.13" };
