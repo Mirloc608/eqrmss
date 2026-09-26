@@ -1,0 +1,47 @@
+{
+  "id": "zlexaks_chant_of_disease_1",
+  "name": "Zlexak's Chant of Disease",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 111,
+  "description": "A plagued chant that causes up to 3826 disease damage every six seconds to an enemy and applies Chant of Plague, which lowers their disease resistance by 29.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "disease",
+      "value": {
+        "base": 1580
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 12
+      }
+    },
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "chant-of-plague"
+    }
+  ],
+  "stacking": {
+    "group": "damage-chant",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "damage-chant",
+    "drum"
+  ]
+}

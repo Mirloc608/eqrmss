@@ -1,0 +1,45 @@
+{
+  "id": "aria_of_asceticism_1",
+  "name": "Aria of Asceticism",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 45,
+  "description": "A long forgotten aria that cleanses the target's body of poison and disease.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 30,
+    "targets": "ally"
+  },
+  "effects": [
+    {
+      "type": "cure",
+      "effect": "poison",
+      "value": {
+        "base": 6
+      }
+    },
+    {
+      "type": "cure",
+      "effect": "disease",
+      "value": {
+        "base": 6
+      }
+    }
+  ],
+  "stacking": {
+    "group": "cure-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "heal",
+    "cure-song",
+    "flute"
+  ]
+}

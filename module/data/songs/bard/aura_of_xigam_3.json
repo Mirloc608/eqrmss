@@ -1,0 +1,36 @@
+{
+  "id": "aura_of_xigam_3",
+  "name": "Aura of Xigam",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 107,
+  "description": "Calls forth a blessing of renewal to add 805 health, 202 mana, and 21 endurance every six seconds to your group, as long as they stay inside the area of the aura.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "aura",
+      "aura": "aura-of-xigam-effect"
+    }
+  ],
+  "stacking": {
+    "group": "aura",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "aura",
+    "voice"
+  ]
+}

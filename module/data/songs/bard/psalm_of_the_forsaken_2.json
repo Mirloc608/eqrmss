@@ -1,0 +1,55 @@
+{
+  "id": "psalm_of_the_forsaken_2",
+  "name": "Psalm of the Forsaken",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 98,
+  "description": "Calls the power of the Forsaken to surround your group, granting them resistance to most types of magic and damaging any creature that attacks them.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "damage-shield",
+      "value": {
+        "base": 55
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-all",
+      "value": {
+        "base": 104
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 6
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "damage-shield",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "damage-shield",
+    "voice"
+  ]
+}

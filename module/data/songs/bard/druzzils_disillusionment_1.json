@@ -1,0 +1,41 @@
+{
+  "id": "druzzils_disillusionment_1",
+  "name": "Druzzil's Disillusionment",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 62,
+  "description": "The voice of the mistress of magic can strip away magical effects from your target.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "dispel",
+      "amount": 9
+    },
+    {
+      "type": "utility",
+      "effect": "dispel",
+      "amount": 9
+    }
+  ],
+  "stacking": {
+    "group": "dispel-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "debuff",
+    "dispel-song",
+    "voice"
+  ]
+}

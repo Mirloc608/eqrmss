@@ -1,0 +1,43 @@
+{
+  "id": "arcane_ballad_3",
+  "name": "Arcane Ballad",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 110,
+  "description": "Fuels the destructive power of your group members, allowing them to strike with Arcane Ballad Effect III, which deals 13167 damage when they cast a damaging spell up to level 110, or a chance to strike with Arcane Ballad Strike III, which deals 12114 damage, when making melee attacks. Lasts for 12 seconds or until you have enhanced 4 spells.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-on-spell-use",
+      "spell": "arcane-ballad-effect",
+      "amount": 100
+    },
+    {
+      "type": "utility",
+      "effect": "melee-proc",
+      "proc": "arcane-ballad-strike",
+      "amount": 200
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "flute"
+  ]
+}

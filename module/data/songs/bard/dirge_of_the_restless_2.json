@@ -1,0 +1,55 @@
+{
+  "id": "dirge_of_the_restless_2",
+  "name": "Dirge of the Restless",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 112,
+  "description": "Covers your group in wisps of ether, absorbing 10% of incoming melee and spell damage and increasing all stats by up to 26. This effect will fade after absorbing 14533 melee damage, 16273 spell damage, or after 60 seconds has passed.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "melee-rune",
+      "value": {
+        "base": 14671
+      },
+      "duration": 60
+    },
+    {
+      "type": "modifier",
+      "stat": "spell-rune",
+      "value": {
+        "base": 16428
+      },
+      "duration": 60
+    },
+    {
+      "type": "modifier",
+      "stat": "all-stats",
+      "value": {
+        "base": 18
+      },
+      "duration": 60
+    }
+  ],
+  "stacking": {
+    "group": "rune-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "rune-song",
+    "flute"
+  ]
+}

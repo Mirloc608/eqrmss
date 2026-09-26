@@ -1,0 +1,43 @@
+{
+  "id": "arcane_rhythm_1",
+  "name": "Arcane Rhythm",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 124,
+  "description": "Fuels the destructive power of your group members, allowing them to strike with Arcane Rhythm Effect, which deals 24833 damage when they cast a damaging spell up to level 125, or a chance to strike with Arcane Rhythm Strike, which deals 22846 damage, when making melee attacks. Lasts for 12 seconds or until you have enhanced 4 spells.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-on-spell-use",
+      "spell": "arcane-rhythm-effect",
+      "amount": 100
+    },
+    {
+      "type": "utility",
+      "effect": "melee-proc",
+      "proc": "arcane-rhythm-strike",
+      "amount": 200
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "flute"
+  ]
+}

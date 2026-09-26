@@ -1,0 +1,37 @@
+{
+  "id": "arcane_aria_1",
+  "name": "Arcane Aria",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 70,
+  "description": "Conjures the power of your voice into arcane orbs of power that will fuel the destructive power of group members who use direct damage spells.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-on-spell-use",
+      "spell": "arcane-aria-effect",
+      "amount": 100
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "flute"
+  ]
+}

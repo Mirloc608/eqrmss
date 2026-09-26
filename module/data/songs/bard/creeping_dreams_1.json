@@ -1,0 +1,40 @@
+{
+  "id": "creeping_dreams_1",
+  "name": "Creeping Dreams",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 68,
+  "description": "Fills your target's mind with creeping dreams, causing them to cease actions for up to 18 seconds. The dreams take on a sentience of their own and will try to spread to nearby enemies periodically.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 9,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "mez",
+      "duration": 18,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    }
+  ],
+  "stacking": {
+    "group": "mez-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "mez-song",
+    "flute"
+  ]
+}

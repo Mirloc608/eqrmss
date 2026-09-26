@@ -1,0 +1,48 @@
+{
+  "id": "sionachies_dreams_1",
+  "name": "Sionachie's Dreams",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 40,
+  "description": "A quiet lullaby that causes your target to fall into an enchanted sleep. Affects creatures up to level 53.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 30,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "mez",
+      "duration": 18,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-magic",
+      "value": {
+        "base": -22
+      },
+      "duration": 18
+    }
+  ],
+  "stacking": {
+    "group": "mez-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "mez-song",
+    "flute"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "selos_accelerating_chorus_1",
+  "name": "Selo's Accelerating Chorus",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 49,
+  "description": "The rapid pace of this song fills your feet with speed, increasing the movement rate of your group for 2.5 minutes.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "movement",
+      "value": {
+        "base": 65
+      },
+      "duration": 150
+    }
+  ],
+  "stacking": {
+    "group": "movement-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "movement-song",
+    "drum"
+  ]
+}

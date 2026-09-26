@@ -1,0 +1,79 @@
+{
+  "id": "war_march_of_nokk_1",
+  "name": "War March of Nokk",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 124,
+  "description": "The war march inspires your companions, increasing attack speed by 60%, strength by up to 397, attack rating by up to 305, damaging attackers by up to 1712, and adding 5% damage to their attacks.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 60
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "str",
+      "value": {
+        "base": 397
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "atk",
+      "value": {
+        "base": 305
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "damage-shield",
+      "value": {
+        "base": 1712
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "min-hit-damage",
+      "value": {
+        "base": 47
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "hit-damage",
+      "value": {
+        "base": 5
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "horn"
+  ]
+}

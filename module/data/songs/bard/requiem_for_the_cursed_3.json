@@ -1,0 +1,37 @@
+{
+  "id": "requiem_for_the_cursed_3",
+  "name": "Requiem for the Cursed",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 111,
+  "description": "If any member of your group dies with this song active, they will provide Requiem for the Cursed Effect III to the remainder of the group, absorbing incoming melee and magical damage.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-on-death",
+      "spell": "requiem-for-the-cursed-effect",
+      "amount": 100
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "lute"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "aria_of_absolution_1",
+  "name": "Aria of Absolution",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 96,
+  "description": "A long forgotten aria that cleanses the target's body of poison, disease, curses, and corruption.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 30,
+    "targets": "ally"
+  },
+  "effects": [
+    {
+      "type": "cure",
+      "effect": "poison",
+      "value": {
+        "base": 8
+      }
+    },
+    {
+      "type": "cure",
+      "effect": "disease",
+      "value": {
+        "base": 8
+      }
+    },
+    {
+      "type": "cure",
+      "effect": "curse",
+      "value": {
+        "base": 8
+      }
+    },
+    {
+      "type": "cure",
+      "effect": "corruption",
+      "value": {
+        "base": 7
+      }
+    }
+  ],
+  "stacking": {
+    "group": "cure-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "heal",
+    "cure-song",
+    "flute"
+  ]
+}

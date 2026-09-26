@@ -1,0 +1,44 @@
+{
+  "id": "hykasts_spiteful_lyric_3",
+  "name": "Hykast's Spiteful Lyric",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 95,
+  "description": "This song will increase your companions' armor class and give their attacks the chance to strike an infuriating magical blow.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 60,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 38
+      },
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "melee-proc",
+      "proc": "hykasts-spite"
+    }
+  ],
+  "stacking": {
+    "group": "ac-buff",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "ac-buff",
+    "horn"
+  ]
+}

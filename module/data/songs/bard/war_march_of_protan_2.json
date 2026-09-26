@@ -1,0 +1,79 @@
+{
+  "id": "war_march_of_protan_2",
+  "name": "War March of Protan",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 99,
+  "description": "The song of the warlord inspires your companions, increasing attack speed to 60%, strength by up to 238, attack rating by up to 141, damaging attackers by up to 101, and adding damage to their attacks.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 64
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "str",
+      "value": {
+        "base": 241
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "atk",
+      "value": {
+        "base": 142
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "damage-shield",
+      "value": {
+        "base": 102
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "min-hit-damage",
+      "value": {
+        "base": 37
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "hit-damage",
+      "value": {
+        "base": 4
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "horn"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "call_of_the_banshee_1",
+  "name": "Call of the Banshee",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 64,
+  "description": "A bewitching melody that charms the target, allowing you to command it.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "charm",
+      "duration": 60,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    }
+  ],
+  "stacking": {
+    "group": "charm-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "charm-song",
+    "flute"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "travenros_song_of_suffering_3",
+  "name": "Travenro's Song of Suffering",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 109,
+  "description": "Grants your companions the ability to deal 26356 magical damage to those they strike in melee combat. These strikes will lower the recipient's hatred for the attacker by 2119.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "skill-proc",
+      "proc": "travenros-strike",
+      "amount": 200
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "voice"
+  ]
+}

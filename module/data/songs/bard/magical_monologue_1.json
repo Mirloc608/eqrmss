@@ -1,0 +1,35 @@
+{
+  "id": "magical_monologue_1",
+  "name": "Magical Monologue",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 9,
+  "description": "A simple tune that adds a magical quality to your group's weapons, allowing them to harm creatures that would otherwise be invulnerable.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "magic-weapon"
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "voice"
+  ]
+}

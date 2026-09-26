@@ -1,0 +1,65 @@
+{
+  "id": "aria_of_begalru_3",
+  "name": "Aria of Begalru",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 106,
+  "description": "Increases the damage of your companions' spells by up to 45%. This bonus will decay on spells over level 110.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-damage",
+      "value": {
+        "base": 50
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 28
+      },
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-triple-attack",
+      "amount": 40,
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-flurry",
+      "amount": 6,
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-pet-flurry",
+      "amount": 35,
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "spell-focus",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "spell-focus",
+    "voice"
+  ]
+}

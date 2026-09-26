@@ -1,0 +1,59 @@
+{
+  "id": "xethegs_spry_sonata_3",
+  "name": "Xetheg's Spry Sonata",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 118,
+  "description": "Those that hear the spry sonata move with a serpentine precision and fluidity that increases their armor class by 489, gives them 17 more resistance to detrimental spells, and reduces the damage taken from offhand attacks that strike damage shields by 305.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-rune",
+      "value": {
+        "base": 11
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 38
+      },
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "reduce-damageshield-taken",
+      "amount": 276,
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-resist-spell",
+      "amount": 15,
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "rune-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "rune-song",
+    "voice"
+  ]
+}

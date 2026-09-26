@@ -1,0 +1,38 @@
+{
+  "id": "song_of_dawn_1",
+  "name": "Song of Dawn",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 53,
+  "description": "The sounds of the dawn confuse your enemy and make them more likely to attack a different target.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 30,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "hate",
+      "value": {
+        "base": -220
+      }
+    }
+  ],
+  "stacking": {
+    "group": "hate-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "hate-song",
+    "flute"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "ervajs_defensive_refrain_2",
+  "name": "Ervaj's Defensive Refrain",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 72,
+  "description": "Shields your group, converting incoming damage taken into mana loss.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "mana-shield",
+      "amount": 3,
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "rune-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "rune-song",
+    "lute"
+  ]
+}

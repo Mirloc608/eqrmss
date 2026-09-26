@@ -1,0 +1,47 @@
+{
+  "id": "tjudawos_chant_of_flame_2",
+  "name": "Tjudawos' Chant of Flame",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 80,
+  "description": "A fiery chant that causes up to 515 fire damage every six seconds to an enemy and applies Chant of Flame, which lowers their fire resistance by 29.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "fire",
+      "value": {
+        "base": 227
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 12
+      }
+    },
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "chant-of-flame"
+    }
+  ],
+  "stacking": {
+    "group": "damage-chant",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "damage-chant",
+    "drum"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "chorus_of_lunanyn_2",
+  "name": "Chorus of Lunanyn",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 93,
+  "description": "Calls forth a renewing blessing to regenerate the health and mana of nearby allies.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 0,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "heal",
+      "value": {
+        "base": 1425
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "mana",
+      "value": {
+        "base": 42
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "endurance",
+      "value": {
+        "base": 4
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "heal-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "heal",
+    "heal-song",
+    "lute"
+  ]
+}

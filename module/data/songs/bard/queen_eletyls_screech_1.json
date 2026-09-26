@@ -1,0 +1,48 @@
+{
+  "id": "queen_eletyls_screech_1",
+  "name": "Queen Eletyl's Screech",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 74,
+  "description": "Despite its discordant nature, this song causes your target to fall into an enchanted sleep. Affects creatures up to level 78.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "mez",
+      "duration": 18,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-magic",
+      "value": {
+        "base": -10
+      },
+      "duration": 18
+    }
+  ],
+  "stacking": {
+    "group": "mez-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "mez-song",
+    "voice"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "lyssas_veracious_concord_1",
+  "name": "Lyssa's Veracious Concord",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 24,
+  "description": "This song grants your group the ability to see invisible beings, as well as greatly enhancing night vision.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "see-invisible"
+    },
+    {
+      "type": "utility",
+      "effect": "ultravision"
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "flute"
+  ]
+}

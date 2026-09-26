@@ -1,0 +1,43 @@
+{
+  "id": "ruaabris_reckless_renewal_1",
+  "name": "Ruaabri's Reckless Renewal",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 98,
+  "description": "Increases your group's chance to have critical heals and heals over time by 21%. This effectiveness will decay on spells above level 100.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "crit-heal-chance",
+      "amount": 21,
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "crit-hot-chance",
+      "amount": 21,
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "heal-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "heal-song",
+    "lute"
+  ]
+}

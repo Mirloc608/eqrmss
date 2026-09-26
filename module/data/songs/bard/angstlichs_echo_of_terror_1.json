@@ -1,0 +1,40 @@
+{
+  "id": "angstlichs_echo_of_terror_1",
+  "name": "Angstlich's Echo of Terror",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 62,
+  "description": "A terrifying screech that causes up to 30 nearby enemies to run in terror.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 0,
+    "targets": "enemies"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "fear",
+      "duration": 12,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    }
+  ],
+  "stacking": {
+    "group": "fear-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "fear-song",
+    "horn"
+  ]
+}

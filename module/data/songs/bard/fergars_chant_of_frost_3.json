@@ -1,0 +1,47 @@
+{
+  "id": "fergars_chant_of_frost_3",
+  "name": "Fergar's Chant of Frost",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 87,
+  "description": "An icy chant that causes up to 1056 cold damage every six seconds to an enemy and applies Chant of Frost, which lowers their cold resistance by 29.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "cold",
+      "value": {
+        "base": 474
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 12
+      }
+    },
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "chant-of-frost"
+    }
+  ],
+  "stacking": {
+    "group": "damage-chant",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "damage-chant",
+    "drum"
+  ]
+}

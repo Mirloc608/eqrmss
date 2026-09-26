@@ -1,0 +1,47 @@
+{
+  "id": "tuyens_chant_of_flame_1",
+  "name": "Tuyen's Chant of Flame",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 38,
+  "description": "A fiery chant that causes between 1 and 40 damage to your target every 6 seconds and makes them more vulnerable to fire.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "fire",
+      "value": {
+        "base": 6
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 12
+      }
+    },
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "chant-of-flame"
+    }
+  ],
+  "stacking": {
+    "group": "damage-chant",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "damage-chant",
+    "drum"
+  ]
+}

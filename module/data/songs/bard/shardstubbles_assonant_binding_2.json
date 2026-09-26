@@ -1,0 +1,44 @@
+{
+  "id": "shardstubbles_assonant_binding_2",
+  "name": "Shardstubble's Assonant Binding",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 109,
+  "description": "A binding melody that adds 152 damage to incoming direct damage spells between levels 65 and 125 that takes at least 100 mana and 1 seconds to cast. If your target is susceptible, they will be placed under the effects of Largo's Assonant Binding as well.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 45,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-damage-taken",
+      "value": {
+        "base": 157
+      },
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "largos-assonant-binding"
+    }
+  ],
+  "stacking": {
+    "group": "spell-vulnerability",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "debuff",
+    "spell-vulnerability",
+    "voice"
+  ]
+}

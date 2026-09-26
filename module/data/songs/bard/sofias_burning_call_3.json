@@ -1,0 +1,38 @@
+{
+  "id": "sofias_burning_call_3",
+  "name": "Sofia's Burning Call",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 115,
+  "description": "A long-distance call deals up to 1443 damage to your target. This damage will decline at extreme distances.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 90,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "fire",
+      "value": {
+        "base": 1359
+      }
+    }
+  ],
+  "stacking": {
+    "group": "direct-damage",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "direct-damage",
+    "horn"
+  ]
+}

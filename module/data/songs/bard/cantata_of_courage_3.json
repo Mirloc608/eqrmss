@@ -1,0 +1,35 @@
+{
+  "id": "cantata_of_courage_3",
+  "name": "Cantata of Courage",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 85,
+  "description": "Grants your companions immunity to fear. Fades on use.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "spell-block"
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "voice"
+  ]
+}

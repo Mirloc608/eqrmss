@@ -1,0 +1,56 @@
+{
+  "id": "slumber_of_zburator_2",
+  "name": "Slumber of Zburator",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 114,
+  "description": "This song causes your target to fall into an enchanted sleep for 18 seconds and has a 51% chance to cause them to forget their enemies. Affects creatures up to level 118.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "mez",
+      "duration": 18,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    },
+    {
+      "type": "control",
+      "condition": "memory-blur",
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-magic",
+      "value": {
+        "base": -29
+      },
+      "duration": 18
+    }
+  ],
+  "stacking": {
+    "group": "mez-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "mez-song",
+    "voice"
+  ]
+}

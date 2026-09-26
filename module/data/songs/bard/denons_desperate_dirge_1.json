@@ -1,0 +1,38 @@
+{
+  "id": "denons_desperate_dirge_1",
+  "name": "Denon's Desperate Dirge",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 43,
+  "description": "A dark dirge that causes between 315 and 635 damage to 5 enemies in an area around your target.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 45,
+    "targets": "enemies"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 168
+      }
+    }
+  ],
+  "stacking": {
+    "group": "direct-damage",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "direct-damage",
+    "voice"
+  ]
+}

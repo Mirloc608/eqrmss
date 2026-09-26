@@ -1,0 +1,46 @@
+{
+  "id": "cantata_of_rodcet_1",
+  "name": "Cantata of Rodcet",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 81,
+  "description": "Calls forth the blessing of Rodcet Nife to regenerate the health and mana of your group.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "heal",
+      "value": {
+        "base": 760
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "mana",
+      "value": {
+        "base": 26
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "heal-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "heal",
+    "heal-song",
+    "lute"
+  ]
+}

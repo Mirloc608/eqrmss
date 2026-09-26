@@ -1,0 +1,36 @@
+{
+  "id": "alenias_disenchanting_melody_1",
+  "name": "Alenia's Disenchanting Melody",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 22,
+  "description": "A melody that strips the magical effects from everyone in your group.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "dispel",
+      "amount": 1
+    }
+  ],
+  "stacking": {
+    "group": "dispel-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "debuff",
+    "dispel-song",
+    "lute"
+  ]
+}

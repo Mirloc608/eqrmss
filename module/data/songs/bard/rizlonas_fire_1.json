@@ -1,0 +1,39 @@
+{
+  "id": "rizlonas_fire_1",
+  "name": "Rizlona's Fire",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 53,
+  "description": "Increases the damage of your companions' direct damage spells by up to 15%. This bonus will decay on spells over level 60.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-damage",
+      "value": {
+        "base": 8
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "spell-focus",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "spell-focus",
+    "voice"
+  ]
+}

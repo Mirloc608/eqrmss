@@ -1,0 +1,42 @@
+{
+  "id": "pests_of_the_piper_1",
+  "name": "Pests of the Piper",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 83,
+  "description": "Summons a horde of vermin to attack your target. Type 39.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 45,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "summon",
+      "pet": "rat-swarm"
+    },
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 1
+      }
+    }
+  ],
+  "stacking": {
+    "group": "swarm-pet",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "swarm-pet",
+    "flute"
+  ]
+}

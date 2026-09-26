@@ -1,0 +1,47 @@
+{
+  "id": "rizlonas_call_of_flame_1",
+  "name": "Rizlona's Call of Flame",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 64,
+  "description": "Increases the damage of your companions' direct damage spells by up to 15%. This bonus will decay on spells over level 65.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-damage",
+      "value": {
+        "base": 8
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 25
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "spell-focus",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "spell-focus",
+    "voice"
+  ]
+}

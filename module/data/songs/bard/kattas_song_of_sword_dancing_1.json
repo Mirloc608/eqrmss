@@ -1,0 +1,44 @@
+{
+  "id": "kattas_song_of_sword_dancing_1",
+  "name": "Katta's Song of Sword Dancing",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 39,
+  "description": "Katta's song increases the dexterity of your group, and gives your group members a chance to lower the dexterity of their opponent.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "melee-proc",
+      "proc": "blade-dance"
+    },
+    {
+      "type": "modifier",
+      "stat": "dex",
+      "value": {
+        "base": 40
+      },
+      "duration": 18
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "utility-song",
+    "drum"
+  ]
+}

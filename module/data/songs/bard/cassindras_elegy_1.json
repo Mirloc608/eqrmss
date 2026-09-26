@@ -1,0 +1,47 @@
+{
+  "id": "cassindras_elegy_1",
+  "name": "Cassindra's Elegy",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 44,
+  "description": "A quiet elegy that bolsters the intelligence and wisdom of your group.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "int",
+      "value": {
+        "base": 33
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "wis",
+      "value": {
+        "base": 33
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "stat-buff",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "stat-buff",
+    "voice"
+  ]
+}

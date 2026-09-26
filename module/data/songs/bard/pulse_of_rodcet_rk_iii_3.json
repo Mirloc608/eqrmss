@@ -1,0 +1,39 @@
+{
+  "id": "pulse_of_rodcet_rk_iii_3",
+  "name": "Pulse of Rodcet Rk.III",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 82,
+  "description": "Increases the yield of your companions' healing spells by 10%. This bonus will decay on spells over level 85.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "healing",
+      "value": {
+        "base": 10
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "heal-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "heal-song",
+    "voice"
+  ]
+}

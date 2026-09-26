@@ -1,0 +1,39 @@
+{
+  "id": "fyrthek_fiors_psalm_of_potency_2",
+  "name": "Fyrthek Fior's Psalm of Potency",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 118,
+  "description": "This psalm increases the effectiveness of fire and magic damage over time spells cast by members of your group by 8185. The song improves spells that are between level 111 and level 120.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-damage",
+      "value": {
+        "base": 8263
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "spell-focus",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "spell-focus",
+    "voice"
+  ]
+}

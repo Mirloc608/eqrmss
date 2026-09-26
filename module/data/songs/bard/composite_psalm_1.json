@@ -1,0 +1,41 @@
+{
+  "id": "composite_psalm_1",
+  "name": "Composite Psalm",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 111,
+  "description": "Triggers the highest ranks you know of Composite Psalm of Potential 1 and Composite Psalm of Empowerment 1 to assist your group.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "composite-psalm-of-potential"
+    },
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "composite-psalm-of-empowerment"
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "voice"
+  ]
+}

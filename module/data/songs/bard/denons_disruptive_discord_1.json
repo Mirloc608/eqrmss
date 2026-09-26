@@ -1,0 +1,51 @@
+{
+  "id": "denons_disruptive_discord_1",
+  "name": "Denon's Disruptive Discord",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 18,
+  "description": "A screeching dissonance that causes 4 damage to up to 30 nearby creatures and lowers their armor class by 131.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 0,
+    "targets": "enemies"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 6
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 12
+      },
+      "condition": "target-not-moving"
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 0
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "damage-chant",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "damage-chant",
+    "horn"
+  ]
+}

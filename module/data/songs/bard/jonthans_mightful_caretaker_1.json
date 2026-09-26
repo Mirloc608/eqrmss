@@ -1,0 +1,69 @@
+{
+  "id": "jonthans_mightful_caretaker_1",
+  "name": "Jonthan's Mightful Caretaker",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 71,
+  "description": "An ancient war song that increases your attack speed, melee damage, proc chance, and attack rating.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 70
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "hit-damage",
+      "value": {
+        "base": 6
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "atk",
+      "value": {
+        "base": 26
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "min-hit-damage",
+      "value": {
+        "base": 204
+      },
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "proc-rate",
+      "amount": 102,
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "voice"
+  ]
+}

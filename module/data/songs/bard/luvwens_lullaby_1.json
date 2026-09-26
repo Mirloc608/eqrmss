@@ -1,0 +1,40 @@
+{
+  "id": "luvwens_lullaby_1",
+  "name": "Luvwen's Lullaby",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 67,
+  "description": "A quiet lullaby that causes your target to fall into an enchanted sleep. Affects creatures up to level 70.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "mez",
+      "duration": 18,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    }
+  ],
+  "stacking": {
+    "group": "mez-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "mez-song",
+    "flute"
+  ]
+}

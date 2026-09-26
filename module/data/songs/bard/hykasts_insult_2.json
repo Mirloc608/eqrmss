@@ -1,0 +1,38 @@
+{
+  "id": "hykasts_insult_2",
+  "name": "Hykast's Insult",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 95,
+  "description": "Words can hurt. These words will do up to 3358 damage to your target.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 45,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 2650
+      }
+    }
+  ],
+  "stacking": {
+    "group": "insult",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "insult",
+    "horn"
+  ]
+}

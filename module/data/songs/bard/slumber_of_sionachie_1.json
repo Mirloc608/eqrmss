@@ -1,0 +1,56 @@
+{
+  "id": "slumber_of_sionachie_1",
+  "name": "Slumber of Sionachie",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 89,
+  "description": "This song causes your target to fall into an enchanted sleep and has a 45% chance to cause them to forget their enemies. Affects creatures up to level 93.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "mez",
+      "duration": 18,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    },
+    {
+      "type": "control",
+      "condition": "memory-blur",
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-magic",
+      "value": {
+        "base": -12
+      },
+      "duration": 18
+    }
+  ],
+  "stacking": {
+    "group": "mez-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "mez-song",
+    "voice"
+  ]
+}

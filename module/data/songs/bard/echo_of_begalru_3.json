@@ -1,0 +1,36 @@
+{
+  "id": "echo_of_begalru_3",
+  "name": "Echo of Begalru",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 110,
+  "description": "Creates an echo at your current location that applies Echo of Begalru Effect III to your companions, which increases their attack speed by 25%, spell damage by 31%, triple attack rate by 25%, their chance to flurry by 24%, and their companions' chance to flurry by 30% as long as they stay within earshot of your echo.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "aura",
+      "aura": "echo-of-begalru-effect"
+    }
+  ],
+  "stacking": {
+    "group": "aura",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "aura",
+    "voice"
+  ]
+}

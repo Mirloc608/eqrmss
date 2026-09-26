@@ -1,0 +1,37 @@
+{
+  "id": "thunderous_barrier_2",
+  "name": "Thunderous Barrier",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 91,
+  "description": "Adds a defensive barrier that can stun attacking creatures.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "defensive-proc",
+      "proc": "thunderstun",
+      "amount": 400
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "drum"
+  ]
+}

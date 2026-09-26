@@ -1,0 +1,55 @@
+{
+  "id": "jonthans_inspiration_1",
+  "name": "Jonthan's Inspiration",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 58,
+  "description": "An ancient war song that increases your attack speed, strength, and attack rating.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 66
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "str",
+      "value": {
+        "base": 35
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "atk",
+      "value": {
+        "base": 24
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "voice"
+  ]
+}

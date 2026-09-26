@@ -1,0 +1,62 @@
+{
+  "id": "pulse_of_august_1",
+  "name": "Pulse of August",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 121,
+  "description": "Increases your companions' health regeneration by 361, mana regeneration by 262, and endurance regeneration by 23 and increases the yield of their healing spells by 15%. This bonus will decay on spells over level 125.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "healing",
+      "value": {
+        "base": 14
+      },
+      "duration": 12
+    },
+    {
+      "type": "heal",
+      "value": {
+        "base": 3520
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "mana",
+      "value": {
+        "base": 132
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "endurance",
+      "value": {
+        "base": 12
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "heal-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "heal-song",
+    "voice"
+  ]
+}

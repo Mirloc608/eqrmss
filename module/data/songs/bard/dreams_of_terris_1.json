@@ -1,0 +1,40 @@
+{
+  "id": "dreams_of_terris_1",
+  "name": "Dreams of Terris",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 64,
+  "description": "A quiet lullaby that causes your target to fall into an enchanted sleep.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 30,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "mez",
+      "duration": 18,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    }
+  ],
+  "stacking": {
+    "group": "mez-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "mez-song",
+    "flute"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "reflexive_retort_1",
+  "name": "Reflexive Retort",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 100,
+  "description": "You steel your reflexes, delivering four slashing attacks to your target and restoring a large amount of mana to your group.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 15,
+    "targets": "ally"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "physical",
+      "value": {
+        "base": 186
+      }
+    },
+    {
+      "type": "damage",
+      "element": "physical",
+      "value": {
+        "base": 126
+      }
+    },
+    {
+      "type": "damage",
+      "element": "physical",
+      "value": {
+        "base": 93
+      }
+    },
+    {
+      "type": "damage",
+      "element": "physical",
+      "value": {
+        "base": 219
+      }
+    }
+  ],
+  "stacking": {
+    "group": "discipline",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "discipline"
+  ]
+}

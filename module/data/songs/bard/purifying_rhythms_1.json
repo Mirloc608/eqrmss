@@ -1,0 +1,63 @@
+{
+  "id": "purifying_rhythms_1",
+  "name": "Purifying Rhythms",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 13,
+  "description": "A mystic tune that offers your group protection from poison, disease, and magic.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "resist-magic",
+      "value": {
+        "base": 60
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-poison",
+      "value": {
+        "base": 60
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-disease",
+      "value": {
+        "base": 60
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 2
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "resist-buff",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "resist-buff",
+    "drum"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "lullaby_of_nightfall_1",
+  "name": "Lullaby of Nightfall",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 116,
+  "description": "A quiet lullaby that casuses your target to lose 27 resistance to magic and fall into an enchanted sleep. Those put to sleep in this manner have an additional 45% chance to forget their enemies.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "mez",
+      "duration": 18,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    },
+    {
+      "type": "control",
+      "condition": "memory-blur",
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-magic",
+      "value": {
+        "base": -27
+      },
+      "duration": 18
+    }
+  ],
+  "stacking": {
+    "group": "mez-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "mez-song",
+    "flute"
+  ]
+}

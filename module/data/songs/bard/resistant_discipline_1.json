@@ -1,0 +1,38 @@
+{
+  "id": "resistant_discipline_1",
+  "name": "Resistant Discipline",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 51,
+  "description": "Focuses your will, increasing your resistances for a short time.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "resist-all",
+      "value": {
+        "base": 20
+      },
+      "duration": 300
+    }
+  ],
+  "stacking": {
+    "group": "discipline",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "discipline"
+  ]
+}

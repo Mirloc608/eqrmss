@@ -1,0 +1,39 @@
+{
+  "id": "chant_of_plague_1",
+  "name": "Chant of Plague",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 1,
+  "description": "Reduces resistance to disease spells by 1 points for 12 seconds.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "resist-disease",
+      "value": {
+        "base": -29
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "resist-debuff",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "debuff",
+    "resist-debuff",
+    "drum"
+  ]
+}

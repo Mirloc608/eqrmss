@@ -1,0 +1,36 @@
+{
+  "id": "aura_of_renewal_2",
+  "name": "Aura of Renewal",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 87,
+  "description": "Calls forth a blessing of renewal to regenerate the health and mana of your group, as long as they stay inside the area of the aura.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "aura",
+      "aura": "aura-of-renewal-effect"
+    }
+  ],
+  "stacking": {
+    "group": "aura",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "aura",
+    "voice"
+  ]
+}

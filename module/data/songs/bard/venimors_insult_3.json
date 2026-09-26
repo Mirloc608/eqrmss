@@ -1,0 +1,38 @@
+{
+  "id": "venimors_insult_3",
+  "name": "Venimor's Insult",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 85,
+  "description": "Words can hurt. These words hurt for 2198 damage to the targeted creature.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 45,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 1820
+      }
+    }
+  ],
+  "stacking": {
+    "group": "insult",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "insult",
+    "horn"
+  ]
+}

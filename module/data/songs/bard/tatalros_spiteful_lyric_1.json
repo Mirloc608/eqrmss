@@ -1,0 +1,44 @@
+{
+  "id": "tatalros_spiteful_lyric_1",
+  "name": "Tatalros' Spiteful Lyric",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 125,
+  "description": "This song will increase your companions' armor class by 1624 and give their attacks the chance to strike an infuriating magical blow that deals 850 damage and incites 3857 hatred in their target. It will fade after 12 seconds or after 3 magical blows.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 60,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 125
+      },
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "melee-proc",
+      "proc": "tatalros-spite"
+    }
+  ],
+  "stacking": {
+    "group": "ac-buff",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "ac-buff",
+    "horn"
+  ]
+}

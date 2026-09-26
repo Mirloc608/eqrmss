@@ -1,0 +1,54 @@
+{
+  "id": "chorus_of_vhalsera_2",
+  "name": "Chorus of Vhal`Sera",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 113,
+  "description": "Calls forth a renewing blessing that increases your nearby allies' health by 231, mana by 179, and endurance by 15 every six seconds.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 0,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "heal",
+      "value": {
+        "base": 2798
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "mana",
+      "value": {
+        "base": 94
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "endurance",
+      "value": {
+        "base": 8
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "heal-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "heal",
+    "heal-song",
+    "lute"
+  ]
+}

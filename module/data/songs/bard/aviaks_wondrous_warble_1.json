@@ -1,0 +1,59 @@
+{
+  "id": "aviaks_wondrous_warble_1",
+  "name": "Aviak's Wondrous Warble",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 73,
+  "description": "Those that hear the wondrous warble move with a bird-like precision and fluidity that grants them increased armor class, resistance to detrimental spells, and reduced damage shield taken from offhand attacks.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-rune",
+      "value": {
+        "base": 10
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 7
+      },
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "reduce-damageshield-taken",
+      "amount": 32,
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-resist-spell",
+      "amount": 4,
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "rune-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "rune-song",
+    "voice"
+  ]
+}

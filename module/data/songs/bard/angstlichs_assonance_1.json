@@ -1,0 +1,50 @@
+{
+  "id": "angstlichs_assonance_1",
+  "name": "Angstlich's Assonance",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 60,
+  "description": "Envenomed notes attack your target's system, causing damage and slowing their attack rate for 60 seconds.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 45,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "debuff",
+      "effect": "slow",
+      "value": {
+        "base": 40
+      },
+      "duration": 60
+    },
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 77
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 60
+      }
+    }
+  ],
+  "stacking": {
+    "group": "slow-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "slow-song",
+    "horn"
+  ]
+}
