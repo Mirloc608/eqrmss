@@ -1,0 +1,308 @@
+[
+  {
+    "_id": "mag-lesser-conjuration-water-36-r1",
+    "name": "Lesser Conjuration: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 36,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "lesser-conjuration-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-companion-36-r1",
+    "name": "Summon Companion",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 36,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "summon-companion"
+        }
+      ],
+      "description": "Summons your pet to your current location."
+    }
+  },
+  {
+    "_id": "mag-lesser-conjuration-fire-37-r1",
+    "name": "Lesser Conjuration: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 37,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "lesser-conjuration-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-ring-of-flight-37-r1",
+    "name": "Summon Ring of Flight",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 37,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "ring-of-flight"
+        }
+      ],
+      "description": "Focuses mana into the form of a ring of flight, providing the user with the benefits of levitation."
+    }
+  },
+  {
+    "_id": "mag-summon-twisted-ring-37-r1",
+    "name": "Summon Twisted Ring",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 37,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "nakis-twisted-ring"
+        }
+      ],
+      "description": "Focuses mana into the form of a twisted ring allows you to cast many spells faster. This item works on spells up to level fifty."
+    }
+  },
+  {
+    "_id": "mag-barrier-of-combustion-38-r1",
+    "name": "Barrier of Combustion",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 38,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 11,
+          "duration": 900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 22,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a barrier of combustion, damaging any creature that attacks them."
+    }
+  },
+  {
+    "_id": "mag-lesser-conjuration-air-38-r1",
+    "name": "Lesser Conjuration: Air",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 38,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "lesser-conjuration-air"
+        }
+      ],
+      "description": "Summons an air elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-phantom-plate-38-r1",
+    "name": "Summon Phantom Plate",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 38,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-satchel"
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-plate-helm",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-breastplate",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-plate-vambraces",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-plate-bracers",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-plate-bracers",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-plate-gauntlets",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-plate-greaves",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-plate-boots",
+          "intoBag": true
+        }
+      ],
+      "description": "Focuses mana into the form of a pack of phantom plate armor."
+    }
+  },
+  {
+    "_id": "mag-flame-arc-39-r1",
+    "name": "Flame Arc",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 39,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 5.25,
+      "manaCost": 199,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 105,
+          "radius": 20
+        }
+      ],
+      "description": "Creates a circle of fire around you, causing 105 damage to up to 30 nearby creatures.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-lesser-conjuration-earth-39-r1",
+    "name": "Lesser Conjuration: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 39,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "lesser-conjuration-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-focus-modest-spellcasters-empowering-essence-40-r1",
+    "name": "Focus Modest Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 40,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "modest-spellcasters-empowering-essence"
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  }
+]

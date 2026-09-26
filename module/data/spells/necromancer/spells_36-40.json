@@ -1,0 +1,379 @@
+[
+  {
+    "_id": "nec-chilling-embrace-36-r1",
+    "name": "Chilling Embrace",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 36,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 172,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 3,
+          "duration": 36
+        },
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 46,
+          "max": 46,
+          "duration": 36,
+          "resist": "poison"
+        }
+      ],
+      "description": "Fills your target's blood with poison, causing between 64 and 114 damage every six seconds for 36 seconds."
+    }
+  },
+  {
+    "_id": "nec-counteract-disease-36-r1",
+    "name": "Counteract Disease",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 36,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 8
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing them of moderate diseases."
+    }
+  },
+  {
+    "_id": "nec-word-of-souls-36-r1",
+    "name": "Word of Souls",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 36,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 4.5,
+      "manaCost": 171,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 183,
+          "resist": "magic"
+        }
+      ],
+      "description": "A forbidden word that causes between 30 and 155 damage to up to 30 nearby enemies.",
+      "radius": 20
+    }
+  },
+  {
+    "_id": "nec-nullify-magic-37-r1",
+    "name": "Nullify Magic",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 37,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel-magic",
+          "amount": 4
+        },
+        {
+          "type": "utility",
+          "effect": "dispel-magic",
+          "amount": 4
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "nec-scent-of-darkness-37-r1",
+    "name": "Scent of Darkness",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 37,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 9,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 27,
+          "duration": 840,
+          "resist": "poison"
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 27,
+          "duration": 840,
+          "resist": "poison"
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 27,
+          "duration": 840,
+          "resist": "poison"
+        }
+      ],
+      "description": "Surrounds your target in the scent of darkness, causing them to be more susceptible to fire, poison, and disease."
+    }
+  },
+  {
+    "_id": "nec-expel-undead-38-r1",
+    "name": "Expel Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 38,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 93,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 232,
+          "resist": "magic",
+          "resistMod": -50
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 200 and 333 damage to an undead target."
+    }
+  },
+  {
+    "_id": "nec-shackle-of-spirit-38-r1",
+    "name": "Shackle of Spirit",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 38,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 175,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "haste",
+          "amount": -70,
+          "duration": 210,
+          "resist": "magic"
+        }
+      ],
+      "description": "Surrounds an undead target in a shackle of spirits, slowing their attack speed."
+    }
+  },
+  {
+    "_id": "nec-dark-soul-39-r1",
+    "name": "Dark Soul",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 39,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "curse",
+          "amount": 8,
+          "duration": 30
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 72,
+          "max": 72,
+          "duration": 30,
+          "resist": "magic",
+          "resistMod": -10
+        }
+      ],
+      "description": "Inflicts a dark curse upon your target, addingg 8 curse counters and causing between 95 and 140 damage every six seconds for 30 seconds."
+    }
+  },
+  {
+    "_id": "nec-drain-spirit-39-r1",
+    "name": "Drain Spirit",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 39,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 213,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 163,
+          "max": 256,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 200 and 314 hit points."
+    }
+  },
+  {
+    "_id": "nec-malignant-dead-39-r1",
+    "name": "Malignant Dead",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 39,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 14.0,
+      "manaCost": 390,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "malignant-dead"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-asystole-40-r1",
+    "name": "Asystole",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 40,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 98,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 4,
+          "duration": 42
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -5,
+          "max": -4,
+          "duration": 42,
+          "resist": "disease"
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 28,
+          "max": 28,
+          "duration": 42,
+          "resist": "disease"
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -40,
+          "duration": 42,
+          "resist": "disease"
+        }
+      ],
+      "description": "Causes your target's heartbeat to become irregular, adding 4 disease counters, lowering their strength by 40, armor class by 60, and doing 62 disease damage every 6 seconds for 42 seconds."
+    }
+  },
+  {
+    "_id": "nec-focus-modest-spellcasters-empowering-essence-40-r1",
+    "name": "Focus Modest Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 40,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Modest Spellcaster's Empowering Essence",
+          "amount": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-summon-companion-40-r1",
+    "name": "Summon Companion",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 40,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "summon-companion"
+        }
+      ],
+      "description": "Summons your pet to your current location."
+    }
+  }
+]

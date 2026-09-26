@@ -1,0 +1,524 @@
+[
+  {
+    "_id": "nec-endure-disease-11-r1",
+    "name": "Endure Disease",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 11,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away disease for 27 minutes."
+    }
+  },
+  {
+    "_id": "nec-engulfing-darkness-11-r1",
+    "name": "Engulfing Darkness",
+    "type": "spell",
+    "img": "icons/magic/death/shadow-snare.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 11,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 5,
+          "max": 5,
+          "duration": 60,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "movement",
+          "amount": -40,
+          "duration": 60,
+          "resist": "magic"
+        }
+      ],
+      "description": "Summons an engulfing darkness that binds your target's feet decreasing their movement rate, and doing 11 damage every 6 seconds for 60 seconds."
+    }
+  },
+  {
+    "_id": "nec-focus-death-11-r1",
+    "name": "Focus Death",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 11,
+      "school": "enchantment",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 20,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 15,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 2,
+          "duration": 3600
+        }
+      ],
+      "description": "Intensifies the power of your undead servant, increasing their strength, armor class, and attack speed."
+    }
+  },
+  {
+    "_id": "nec-bind-affinity-12-r1",
+    "name": "Bind Affinity",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 12,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "bind"
+        }
+      ],
+      "description": "Binds the soul of your target to their current location. Use of this spell is often limited to towns and cities."
+    }
+  },
+  {
+    "_id": "nec-convoke-shadow-12-r1",
+    "name": "Convoke Shadow",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 12,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 8.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "convoke-shadow"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-lesser-summon-corpse-12-r1",
+    "name": "Lesser Summon Corpse",
+    "type": "spell",
+    "img": "icons/magic/death/summon-corpse.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 12,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-corpse",
+          "amount": 35
+        }
+      ],
+      "description": "Summons your target's corpse to you. This spell works on characters up to level 35."
+    }
+  },
+  {
+    "_id": "nec-lifedraw-12-r1",
+    "name": "Lifedraw",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 12,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 86,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 43,
+          "max": 51,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 90 and 105 hit points."
+    }
+  },
+  {
+    "_id": "nec-cure-disease-13-r1",
+    "name": "Cure Disease",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 13,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 4
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing minor diseases."
+    }
+  },
+  {
+    "_id": "nec-heart-flutter-13-r1",
+    "name": "Heart Flutter",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 13,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 41,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -2,
+          "max": -2,
+          "duration": 36,
+          "resist": "disease"
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 7,
+          "max": 7,
+          "duration": 36,
+          "resist": "disease"
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -20,
+          "duration": 36,
+          "resist": "disease"
+        }
+      ],
+      "description": "Causes your target's heart beat to become irregular, lowering their strength by 20, armor class by 30, and doing 24 disease damage every 6 seconds for 36 seconds."
+    }
+  },
+  {
+    "_id": "nec-reebos-lesser-exorcism-13-r1",
+    "name": "Reebo's Lesser Exorcism",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 13,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 69
+        }
+      ],
+      "description": "Attempts to disarm a cursed trap on the targeted object. Consumes a lesser scrying stone when cast."
+    }
+  },
+  {
+    "_id": "nec-wuggans-lesser-appraisal-13-r1",
+    "name": "Wuggan's Lesser Appraisal",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 13,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 69
+        }
+      ],
+      "description": "Attempts to sense the presence of a trap on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-reebos-lesser-augury-14-r1",
+    "name": "Reebo's Lesser Augury",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 69
+        }
+      ],
+      "description": "Attempts to sense the presence of a cursed trap on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-reebos-lesser-cleansing-14-r1",
+    "name": "Reebo's Lesser Cleansing",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 87
+        }
+      ],
+      "description": "Attempts to destroy any cursed lock present on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-shieldskin-14-r1",
+    "name": "Shieldskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 14,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 41,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "rune-shield",
+          "percent": 100,
+          "amount": 55,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your skin in a protective aura that absorbs between 27 and 55 damage. Consumes a cat's eye agate when cast."
+    }
+  },
+  {
+    "_id": "nec-wuggans-lesser-discombobulation-14-r1",
+    "name": "Wuggan's Lesser Discombobulation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 69
+        }
+      ],
+      "description": "Attempts to disarm a trap on the targeted object. Consumes a lesser scrying stone when cast."
+    }
+  },
+  {
+    "_id": "nec-wuggans-lesser-extrication-14-r1",
+    "name": "Wuggan's Lesser Extrication",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 87
+        }
+      ],
+      "description": "Attempts to destroy any lock present on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-banshee-aura-15-r1",
+    "name": "Banshee Aura",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 15,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 12,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your body with an aura of vengeful spirits, causing damage to anyone who strikes you for 15 minutes. Requires, but does not consume, a pearl when cast."
+    }
+  },
+  {
+    "_id": "nec-cancel-magic-15-r1",
+    "name": "Cancel Magic",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 15,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel-magic",
+          "amount": 1
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "nec-infectious-cloud-15-r1",
+    "name": "Infectious Cloud",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 15,
+      "school": "necromancy",
+      "target": "area",
+      "range": 200,
+      "castTime": 2.75,
+      "manaCost": 78,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 1,
+          "duration": 126
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 5,
+          "max": 5,
+          "duration": 126,
+          "resist": "disease"
+        },
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 70,
+          "resist": "disease"
+        }
+      ],
+      "description": "Creates an infectious cloud, causing 20 damage initially and 5 damage every six seconds for 2.1 minutes to up to 4 beings in a small area around your target.",
+      "radius": 15
+    }
+  },
+  {
+    "_id": "nec-voice-graft-15-r1",
+    "name": "Voice Graft",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 15,
+      "school": "divination",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "project-voice"
+        }
+      ],
+      "description": "Allows you to speak through your undead servant."
+    }
+  }
+]

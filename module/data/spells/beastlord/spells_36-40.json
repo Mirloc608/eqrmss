@@ -1,0 +1,268 @@
+[
+  {
+    "_id": "bst-yekans-recovery-36-r1",
+    "name": "Yekan's Recovery",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 36,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 159,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 167
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 10
+        }
+      ],
+      "description": "Restores your warder's health, healing between 201 and 467 hit points, as well as curing them of diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-ox-37-r1",
+    "name": "Spirit of Ox",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 37,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "sta",
+          "amount": 23,
+          "duration": 2700
+        }
+      ],
+      "description": "Fills your target with the sprit of the ox, increasing their stamina for 45 minutes."
+    }
+  },
+  {
+    "_id": "bst-yekans-quickening-37-r1",
+    "name": "Yekan's Quickening",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 37,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 45,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 60,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 20,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 3600
+        }
+      ],
+      "description": "Fills your warder with the quickening of Yekan, increasing their attack speed, strength, armor class, and attack rating."
+    }
+  },
+  {
+    "_id": "bst-greater-healing-38-r1",
+    "name": "Greater Healing",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 38,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 115,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 175
+        }
+      ],
+      "description": "Mends major wounds, healing between 140 and 350 hit points."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-monkey-38-r1",
+    "name": "Spirit of Monkey",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 38,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 20,
+          "duration": 2160
+        }
+      ],
+      "description": "Fills your target with the spirit of the monkey, increasing their dexterity for 36 minutes."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-the-scorpion-38-r1",
+    "name": "Spirit of the Scorpion",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 38,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "name": "spirit-of-scorpion-strike",
+          "chance": 150
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 75,
+          "duration": 2760
+        }
+      ],
+      "description": "Fills your warder with the power of a great spirit, increasing their dexterity by 75 and giving them a chance to perform Spirit of Scorpion Strike, a [Item 4] attack."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-yekan-39-r1",
+    "name": "Spirit of Yekan",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 39,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s08-l039-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-the-shrew-39-r1",
+    "name": "Spirit of the Shrew",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 39,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 30,
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your target with the spirit of the shrew, granting greatly improved night vision and increased movement speed for 36 minutes. This spell also functions indoors."
+    }
+  },
+  {
+    "_id": "bst-malaria-40-r1",
+    "name": "Malaria",
+    "type": "spell",
+    "img": "icons/magic/debuff/disease-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 40,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 0,
+      "manaCost": 173,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 3,
+          "resist": "disease"
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 313,
+          "max": 313,
+          "duration": 72,
+          "resist": "disease"
+        }
+      ],
+      "description": "Infects your target with a deadly plague of malaria, causing between 23 and 93 damage every six seconds for 72 seconds."
+    }
+  }
+]

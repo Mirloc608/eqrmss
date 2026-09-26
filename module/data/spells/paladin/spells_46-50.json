@@ -1,0 +1,305 @@
+[
+  {
+    "_id": "pal-dismiss-undead-46-r1",
+    "name": "Dismiss Undead",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "paladin",
+      "level": 46,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 63,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 288,
+          "resist": "magic",
+          "resistMod": -50
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 150 and 211 damage to an undead target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "pal-symbol-of-pinzarn-46-r1",
+    "name": "Symbol of Pinzarn",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 46,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 307,
+          "duration": 2700
+        },
+        {
+          "type": "heal",
+          "amount": 322
+        }
+      ],
+      "description": "Covers your target in a shimmer of holy runes, increasing their hit points for 45 minutes."
+    }
+  },
+  {
+    "_id": "pal-thunder-of-karana-47-r1",
+    "name": "Thunder of Karana",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 47,
+      "school": "evocation",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 100,
+          "max": 100
+        }
+      ],
+      "description": "Summons the booming thunder of Karana, causing severe trauma to your target's mind and draining 100 mana.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-valor-47-r1",
+    "name": "Valor",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 47,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 3240
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 200,
+          "duration": 3240
+        },
+        {
+          "type": "heal",
+          "amount": 344
+        }
+      ],
+      "description": "Provides your target with a sense of valor, increasing their hit points and armor class for 54 minutes."
+    }
+  },
+  {
+    "_id": "pal-armor-of-faith-48-r1",
+    "name": "Armor of Faith",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 48,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 6,
+          "max": 7,
+          "duration": 3780
+        }
+      ],
+      "description": "Covers your target in the armor of faith, increasing their armor class for 63 minutes."
+    }
+  },
+  {
+    "_id": "pal-divine-aura-48-r1",
+    "name": "Divine Aura",
+    "type": "spell",
+    "img": "icons/magic/life/angel-wings-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 48,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "invulnerability",
+          "duration": 18
+        }
+      ],
+      "description": "Encases the caster in a divine aura, rendering them invulnerable to all attacks for 18 seconds."
+    }
+  },
+  {
+    "_id": "pal-superior-healing-48-r1",
+    "name": "Superior Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 48,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 185,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 367
+        }
+      ],
+      "description": "Mends severe wounds, healing between 200 and 600 hit points."
+    }
+  },
+  {
+    "_id": "pal-brells-steadfast-aegis-49-r1",
+    "name": "Brell's Steadfast Aegis",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 49,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 8.0,
+      "manaCost": 175,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 145,
+          "duration": 9000
+        }
+      ],
+      "description": "Surrounds your group with the aegis of the Underfoot, increasing their hit points for 2.5 hours."
+    }
+  },
+  {
+    "_id": "pal-pacify-49-r1",
+    "name": "Pacify",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 49,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "lull",
+          "maxLevel": 55
+        }
+      ],
+      "description": "Pacifies your target, lowering its aggressiveness for 42 seconds. Affects creatures up to level 55."
+    }
+  },
+  {
+    "_id": "pal-renewal-49-r1",
+    "name": "Renewal",
+    "type": "spell",
+    "img": "icons/magic/life/angel-wings-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 49,
+      "school": "alteration",
+      "target": "corpse",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "resurrection"
+        }
+      ],
+      "description": "Revives a slain ally, restoring 50% of their lost experience. It takes some time for the recently revived to fully recover."
+    }
+  },
+  {
+    "_id": "pal-flame-of-light-50-r1",
+    "name": "Flame of Light",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "paladin",
+      "level": 50,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 245,
+          "resist": "magic"
+        }
+      ],
+      "description": "Strikes your target with a burning flame of light, causing 125 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-resist-disease-50-r1",
+    "name": "Resist Disease",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 50,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away disease for 36 minutes."
+    }
+  }
+]

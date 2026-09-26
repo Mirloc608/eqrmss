@@ -1,0 +1,122 @@
+[
+  {
+    "_id": "pal-endure-poison-21-r1",
+    "name": "Endure Poison",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 21,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-poison",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away poison for 27 minutes."
+    }
+  },
+  {
+    "_id": "pal-reanimation-22-r1",
+    "name": "Reanimation",
+    "type": "spell",
+    "img": "icons/magic/life/angel-wings-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 22,
+      "school": "alteration",
+      "target": "corpse",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "resurrection"
+        }
+      ],
+      "description": "Revives a slain ally. It takes some time for the recently revived to fully recover."
+    }
+  },
+  {
+    "_id": "pal-hammer-of-striking-23-r1",
+    "name": "Hammer of Striking",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "paladin",
+      "level": 23,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "hammer-of-striking"
+        }
+      ],
+      "description": "Summons a magical hammer that is particularly adept at smiting undead."
+    }
+  },
+  {
+    "_id": "pal-symbol-of-transal-24-r1",
+    "name": "Symbol of Transal",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 24,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 55,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 73,
+          "duration": 1620
+        },
+        {
+          "type": "heal",
+          "amount": 131
+        }
+      ],
+      "description": "Covers your target in a shimmer of holy runes, increasing their hit points for 27 minutes."
+    }
+  },
+  {
+    "_id": "pal-soothe-25-r1",
+    "name": "Soothe",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 25,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "lull",
+          "maxLevel": 40
+        }
+      ],
+      "description": "Soothes the mind of your target, lowering its aggressiveness for 2.5 minutes. Affects creatures up to level 40."
+    }
+  }
+]

@@ -1,0 +1,392 @@
+[
+ {
+  "_id": "clr-endure-disease-11-r1",
+  "name": "Endure Disease",
+  "type": "spell",
+  "img": "icons/magic/defense/armor-scale-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 11,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 2.5,
+   "manaCost": 20,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "resist-disease",
+     "amount": 20,
+     "duration": 1620
+    }
+   ],
+   "description": "Surrounds your target with an aura of protection, warding away disease for 27 minutes."
+  }
+ },
+ {
+  "_id": "clr-invisibility-versus-undead-11-r1",
+  "name": "Invisibility Versus Undead",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 11,
+   "school": "divination",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 40,
+   "effects": [
+    {
+     "type": "invisibility",
+     "vs": "undead",
+     "duration": 1620
+    }
+   ],
+   "description": "Cloaks your target in a light aura, rendering them invisible to most undead creatures for up to 27 minutes."
+  }
+ },
+ {
+  "_id": "clr-symbol-of-transal-11-r1",
+  "name": "Symbol of Transal",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 11,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.5,
+   "manaCost": 55,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 73,
+     "duration": 1620
+    },
+    {
+     "type": "heal",
+     "amount": 73
+    }
+   ],
+   "description": "Covers your target in a shimmer of holy runes, increasing their hit points for 27 minutes."
+  }
+ },
+ {
+  "_id": "clr-halo-of-light-12-r1",
+  "name": "Halo of Light",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 12,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 5.0,
+   "manaCost": 40,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Halo of Light"
+    }
+   ],
+   "description": "Focuses magical energy into a halo that provides an aura of light when worn."
+  }
+ },
+ {
+  "_id": "clr-reanimation-12-r1",
+  "name": "Reanimation",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 12,
+   "school": "alteration",
+   "target": "corpse",
+   "range": 200,
+   "castTime": 6.0,
+   "manaCost": 150,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "resurrect",
+     "xp": 0
+    }
+   ],
+   "description": "Revives a slain ally. It takes some time for the recently revived to fully recover."
+  }
+ },
+ {
+  "_id": "clr-sense-summoned-12-r1",
+  "name": "Sense Summoned",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 12,
+   "school": "divination",
+   "target": "self",
+   "range": 0,
+   "castTime": 2.0,
+   "manaCost": 5,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "sense-summoned"
+    }
+   ],
+   "description": "Provides you with a mystical awareness, pointing you towards the nearest summoned creature."
+  }
+ },
+ {
+  "_id": "clr-cancel-magic-13-r1",
+  "name": "Cancel Magic",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 13,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.5,
+   "manaCost": 30,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "dispel",
+     "amount": 1
+    }
+   ],
+   "description": "Cancels magical enchantments affecting your target."
+  }
+ },
+ {
+  "_id": "clr-endure-cold-13-r1",
+  "name": "Endure Cold",
+  "type": "spell",
+  "img": "icons/magic/symbols/rune-stone-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 13,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 2.5,
+   "manaCost": 20,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "resist-cold",
+     "amount": 20,
+     "duration": 1620
+    }
+   ],
+   "description": "Surrounds your target with an aura of protection, warding away cold for 27 minutes."
+  }
+ },
+ {
+  "_id": "clr-expulse-undead-13-r1",
+  "name": "Expulse Undead",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 13,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.0,
+   "manaCost": 36,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 30,
+     "resist": "magic",
+     "resistMod": -50
+    }
+   ],
+   "description": "A burst of holy power that inflicts between 24 and 30 damage to an undead target."
+  }
+ },
+ {
+  "_id": "clr-ionys-lesser-cleansing-14-r1",
+  "name": "Iony's Lesser Cleansing",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 14,
+   "school": "divination",
+   "target": "single",
+   "range": 40,
+   "castTime": 4.0,
+   "manaCost": 70,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "unlock-chest"
+    }
+   ],
+   "description": "Attempts to destroy any cursed lock present on the targeted object."
+  }
+ },
+ {
+  "_id": "clr-ionys-lesser-exorcism-14-r1",
+  "name": "Iony's Lesser Exorcism",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 14,
+   "school": "divination",
+   "target": "single",
+   "range": 40,
+   "castTime": 4.0,
+   "manaCost": 70,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "disarm-chest"
+    }
+   ],
+   "description": "Attempts to disarm a cursed trap on the targeted object. Consumes a lesser scrying stone when cast."
+  }
+ },
+ {
+  "_id": "clr-smite-14-r1",
+  "name": "Smite",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 14,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.5,
+   "manaCost": 43,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 25,
+     "resist": "magic"
+    }
+   ],
+   "description": "Calls upon the power of the gods to smite your target, causing between 17 and 25 damage."
+  }
+ },
+ {
+  "_id": "clr-blessing-of-piety-15-r1",
+  "name": "Blessing of Piety",
+  "type": "spell",
+  "img": "icons/magic/symbols/rune-stone-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 15,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "spell-haste",
+     "amount": 10,
+     "duration": 2400
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Level: 39 (lose 5% per level)"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Spell: Exclude Complete Heal"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Casting Time: 3s"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Exclude Current HP Percent"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Exclude Combat Skills"
+    }
+   ],
+   "description": "Bestows your target with a divine blessing, allowing them to cast spells faster for 40 minutes. This blessing works on spells up to level 39."
+  }
+ },
+ {
+  "_id": "clr-calm-15-r1",
+  "name": "Calm",
+  "type": "spell",
+  "img": "icons/magic/debuff/sleep-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 15,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.5,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 42
+    },
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 42
+    },
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 42
+    }
+   ],
+   "description": "Calms the mind of your target, lowering its aggressiveness for 42 seconds. Affects creatures up to level 50."
+  }
+ },
+ {
+  "_id": "clr-spirit-armor-15-r1",
+  "name": "Spirit Armor",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 15,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 75,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 3,
+     "max": 4,
+     "duration": 2160
+    }
+   ],
+   "description": "Covers your target in spiritual armor, increasing their armor class for 36 minutes."
+  }
+ }
+]

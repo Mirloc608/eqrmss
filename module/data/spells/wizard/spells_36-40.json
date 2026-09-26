@@ -437,5 +437,143 @@
       ],
       "description": "Summons a modest empowering essence for spellcasters, enhancing their magical capabilities."
     }
+  },
+{
+  "_id": "wiz-west-portal-37-r1",
+  "name": "West Portal",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-group.webp",
+  "system": {
+    "class": "wizard",
+    "level": 37,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 16,
+    "manaCost": 300,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "qey2hh1"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your entire group to the Western Plains of Karana."
   }
+},
+{
+  "_id": "wiz-primary-anchor-push-40-r1",
+  "name": "Primary Anchor Push",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-anchor.webp",
+  "system": {
+    "class": "wizard",
+    "level": 40,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-anchor",
+        "destination": "primary-anchor"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to your Primary Anchor."
+  }
+},
+{
+  "_id": "wiz-secondary-anchor-push-40-r1",
+  "name": "Secondary Anchor Push",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-anchor.webp",
+  "system": {
+    "class": "wizard",
+    "level": 40,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-anchor",
+        "destination": "secondary-anchor"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to your Secondary Anchor."
+  }
+},
+{
+  "_id": "wiz-translocate-common-40-r1",
+  "name": "Translocate: Common",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 40,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 10,
+    "manaCost": 225,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "translocate",
+        "destination": "commonlands"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to the Western Commonlands."
+  }
+},
+{
+  "_id": "wiz-translocate-primary-anchor-40-r1",
+  "name": "Translocate: Primary Anchor",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-anchor.webp",
+  "system": {
+    "class": "wizard",
+    "level": 40,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 10,
+    "manaCost": 225,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-anchor",
+        "destination": "primary-anchor"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to their Primary Anchor."
+  }
+},
+{
+  "_id": "wiz-translocate-secondary-anchor-40-r1",
+  "name": "Translocate: Secondary Anchor",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-anchor.webp",
+  "system": {
+    "class": "wizard",
+    "level": 40,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 10,
+    "manaCost": 225,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-anchor",
+        "destination": "secondary-anchor"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to their Secondary Anchor."
+  }
+}
 ]

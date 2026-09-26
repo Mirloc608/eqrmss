@@ -1,0 +1,433 @@
+[
+  {
+    "_id": "mag-blaze-31-r1",
+    "name": "Blaze",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 31,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 136,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 135
+        }
+      ],
+      "description": "Burns your target's skin with blazing flame, causing 135 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-minor-conjuration-water-31-r1",
+    "name": "Minor Conjuration: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 31,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "minor-conjuration-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-shard-of-the-core-31-r1",
+    "name": "Summon Shard of the Core",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 31,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "shard-of-the-core"
+        }
+      ],
+      "description": "Focuses mana into the form of a shard of the core of Norrath."
+    }
+  },
+  {
+    "_id": "mag-greater-shielding-32-r1",
+    "name": "Greater Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 32,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 100,
+          "duration": 3240
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 6,
+          "duration": 3240
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 16,
+          "duration": 3240
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "mag-minor-conjuration-fire-32-r1",
+    "name": "Minor Conjuration: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 32,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "minor-conjuration-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-nullify-magic-32-r1",
+    "name": "Nullify Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "magician",
+      "level": 32,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 4
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 4
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "mag-cinder-bolt-33-r1",
+    "name": "Cinder Bolt",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 33,
+      "school": "evocation",
+      "target": "single",
+      "range": 300,
+      "castTime": 4.0,
+      "manaCost": 165,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 166
+        }
+      ],
+      "description": "Burns your target's skin with a cinder bolt, causing 166 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-minor-conjuration-air-33-r1",
+    "name": "Minor Conjuration: Air",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 33,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "minor-conjuration-air"
+        }
+      ],
+      "description": "Summons an air elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-staff-of-symbols-33-r1",
+    "name": "Staff of Symbols",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 33,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "staff-of-symbols"
+        }
+      ],
+      "description": "Focuses mana into the form of a staff of symbols."
+    }
+  },
+  {
+    "_id": "mag-wuggans-greater-appraisal-33-r1",
+    "name": "Wuggan's Greater Appraisal",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 33,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 120
+        }
+      ],
+      "description": "Attempts to sense the presence of a trap on the targeted object.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-focus-mass-elementary-spellcasters-empowering-essence-34-r1",
+    "name": "Focus Mass Elementary Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 34,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 800,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "elementary-spellcasters-empowering-essence",
+          "quantity": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-minor-conjuration-earth-34-r1",
+    "name": "Minor Conjuration: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 34,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "minor-conjuration-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-refresh-summoning-34-r1",
+    "name": "Refresh Summoning",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 34,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.75,
+      "manaCost": 93,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 62
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "amount": 10
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "amount": 10
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "amount": 10
+        }
+      ],
+      "description": "Renews the health of your elemental pet, healing 62 damage, and curing their diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "mag-wuggans-greater-discombobulation-34-r1",
+    "name": "Wuggan's Greater Discombobulation",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 34,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 120
+        }
+      ],
+      "description": "Attempts to disarm a trap on the targeted object. Consumes a greater scrying stone when cast.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-wuggans-greater-extrication-34-r1",
+    "name": "Wuggan's Greater Extrication",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 34,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 125
+        }
+      ],
+      "description": "Attempts to destroy any lock present on the targeted object.",
+      "resist": "fire",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-dagger-of-symbols-35-r1",
+    "name": "Dagger of Symbols",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 35,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "dagger-of-symbols"
+        }
+      ],
+      "description": "Focuses mana into the form of a dagger of symbols."
+    }
+  },
+  {
+    "_id": "mag-rain-of-lava-35-r1",
+    "name": "Rain of Lava",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 35,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 5.5,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 67,
+          "radius": 20
+        }
+      ],
+      "description": "Conjures a rain of lava over your target, causing 67 damage every 3 seconds to creatures in the area. The rain will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "fire"
+    }
+  }
+]

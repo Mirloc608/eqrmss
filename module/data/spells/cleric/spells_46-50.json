@@ -1,0 +1,234 @@
+[
+ {
+  "_id": "clr-immobilize-46-r1",
+  "name": "Immobilize",
+  "type": "spell",
+  "img": "icons/magic/nature/root-vines-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 46,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.75,
+   "manaCost": 80,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "root",
+     "duration": 60,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 60 seconds."
+  }
+ },
+ {
+  "_id": "clr-sound-of-force-46-r1",
+  "name": "Sound of Force",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 46,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 120,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 8.0,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 120,
+     "resist": "magic"
+    }
+   ],
+   "description": "Strikes an enemy with holy might, briefly stunning them and causing 120 hit points of damage. This spell works on creatures up to level 55."
+  }
+ },
+ {
+  "_id": "clr-expel-summoned-47-r1",
+  "name": "Expel Summoned",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 47,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.5,
+   "manaCost": 108,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 210,
+     "resist": "magic",
+     "resistMod": -50
+    }
+   ],
+   "description": "A burst of holy power that inflicts between 87 and 210 damage to a summoned target."
+  }
+ },
+ {
+  "_id": "clr-resurrection-47-r1",
+  "name": "Resurrection",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 47,
+   "school": "alteration",
+   "target": "corpse",
+   "range": 200,
+   "castTime": 6.0,
+   "manaCost": 700,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "resurrect",
+     "xp": 90
+    }
+   ],
+   "description": "Revives a slain ally, restoring 90% of their lost experience. It takes some time for the recently revived to fully recover."
+  }
+ },
+ {
+  "_id": "clr-abolish-poison-48-r1",
+  "name": "Abolish Poison",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 48,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 36
+    }
+   ],
+   "description": "Removes toxin from your target's system, curing them of major poisons."
+  }
+ },
+ {
+  "_id": "clr-improved-invisibility-to-undead-48-r1",
+  "name": "Improved Invisibility to Undead",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 48,
+   "school": "divination",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 75,
+   "effects": [
+    {
+     "type": "invisibility",
+     "vs": "undead",
+     "duration": 600
+    }
+   ],
+   "description": "Cloaks your body in a light aura, rendering you invisible to most undead creatures for 10 minutes."
+  }
+ },
+ {
+  "_id": "clr-armor-of-the-faithful-49-r1",
+  "name": "Armor of the Faithful",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 49,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 275,
+     "duration": 8640
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 5,
+     "max": 6,
+     "duration": 8640
+    },
+    {
+     "type": "heal",
+     "amount": 275
+    }
+   ],
+   "description": "Places mystic armor of protection around you, increasing your hit points and armor class for 2.4 hours."
+  }
+ },
+ {
+  "_id": "clr-word-divine-49-r1",
+  "name": "Word Divine",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 49,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 304,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 185,
+     "radius": 20,
+     "resist": "magic"
+    }
+   ],
+   "description": "A forbidden word that causes between 185 and 185 damage to up to 30 nearby enemies.",
+   "radius": 20
+  }
+ },
+ {
+  "_id": "clr-ward-of-the-divine-50-r1",
+  "name": "Ward of the Divine",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 50,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 277,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "defensive-proc-ward-of-the-divine-parry"
+    }
+   ],
+   "description": "Places the Ward of Retribution around your body. This ward will periodically strike out at any creature that attacks you; This effect will fade after 120 strikes."
+  }
+ }
+]

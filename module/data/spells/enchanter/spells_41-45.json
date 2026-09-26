@@ -1,0 +1,629 @@
+[
+  {
+    "_id": "enc-brilliance-41-r1",
+    "name": "Brilliance",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 41,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.25,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "wis",
+          "amount": 12,
+          "duration": 2400
+        },
+        {
+          "type": "buff",
+          "stat": "int",
+          "amount": 14,
+          "duration": 2400
+        }
+      ],
+      "description": "Expands your target's mind, increasing their intelligence and wisdom."
+    }
+  },
+  {
+    "_id": "enc-shiftless-deeds-41-r1",
+    "name": "Shiftless Deeds",
+    "type": "spell",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 41,
+      "school": "enchantment",
+      "target": "single",
+      "range": 250,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "slow",
+          "amount": 65,
+          "duration": 210,
+          "resist": "magic"
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 12
+        }
+      ],
+      "description": "Constricts your target's muscles, causing their attack speed to slow for 3.5 minutes."
+    }
+  },
+  {
+    "_id": "enc-tashania-41-r1",
+    "name": "Tashania",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 41,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 1
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 33,
+          "resist": "magic",
+          "duration": 840
+        }
+      ],
+      "description": "Causes your target's ears to echo with the barking of Tashan, lowering their magic resistance."
+    }
+  },
+  {
+    "_id": "enc-yegoreffs-animation-41-r1",
+    "name": "Yegoreff's Animation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 41,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 11.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "yegoreffs-animation-pet"
+        }
+      ],
+      "description": "Animates a weapon and shield to attack your enemies. Consumes a tiny dagger when cast."
+    }
+  },
+  {
+    "_id": "enc-boon-of-the-clear-mind-42-r1",
+    "name": "Boon of the Clear Mind",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 42,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 175,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 10,
+          "max": 10,
+          "duration": 1620
+        }
+      ],
+      "description": "Calms your group's thoughts, allowing them to regenerate mana more quickly."
+    }
+  },
+  {
+    "_id": "enc-illusion-werewolf-42-r1",
+    "name": "Illusion: Werewolf",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 42,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "werewolf",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Werewolf."
+    }
+  },
+  {
+    "_id": "enc-pillage-enchantment-42-r1",
+    "name": "Pillage Enchantment",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 42,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 4
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 4
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 4
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 4
+        }
+      ],
+      "description": "Tears the magic from your target, causing their enchantments to fade."
+    }
+  },
+  {
+    "_id": "enc-weakness-42-r1",
+    "name": "Weakness",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 42,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -65,
+          "duration": 234,
+          "resist": "magic"
+        }
+      ],
+      "description": "Weakens your opponent, lowering their strength."
+    }
+  },
+  {
+    "_id": "enc-bounce-43-r1",
+    "name": "Bounce",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 43,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "reflect-spell",
+          "amount": 40,
+          "maxAmount": 40,
+          "duration": 12
+        }
+      ],
+      "description": "Surrounds your body in a reflective aura, providing a chance for all incoming spells to rebound back against the caster."
+    }
+  },
+  {
+    "_id": "enc-color-skew-43-r1",
+    "name": "Color Skew",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 43,
+      "school": "divination",
+      "target": "area",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 60,
+      "radius": 30,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 8.0,
+          "resist": "magic"
+        }
+      ],
+      "description": "Creates a wave of intense color around you that assaults your opponent's senses, briefly stunning up to 30 nearby creatures up to level 55 for 8 seconds."
+    }
+  },
+  {
+    "_id": "enc-discordant-mind-43-r1",
+    "name": "Discordant Mind",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 43,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 126,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 336
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 1.0,
+          "resist": "magic"
+        }
+      ],
+      "description": "Strikes your target with a chaotic burst of mental energy, causing between 288 and 336 damage and stunning them up to level 55 for 1 second."
+    }
+  },
+  {
+    "_id": "enc-enchant-velium-43-r1",
+    "name": "Enchant Velium",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 43,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-velium-bar",
+          "count": 1
+        }
+      ],
+      "description": "Enchants a bar of velium with magical energy. Consumes a bar of velium when cast."
+    }
+  },
+  {
+    "_id": "enc-summon-companion-43-r1",
+    "name": "Summon Companion",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 43,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "companion"
+        }
+      ],
+      "description": "Summons your pet to your current location."
+    }
+  },
+  {
+    "_id": "enc-greater-mass-clarify-mana-44-r1",
+    "name": "Greater Mass Clarify Mana",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 44,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 3600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "vial-of-clear-mana",
+          "count": 20
+        }
+      ],
+      "description": "Crystallizes mana into a physical form, creating twenty vials of clear mana. Consumes twenty poison vials and twenty emeralds when cast."
+    }
+  },
+  {
+    "_id": "enc-greater-mass-enchant-velium-44-r1",
+    "name": "Greater Mass Enchant Velium",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 44,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 20.0,
+      "manaCost": 2400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-velium-bar",
+          "count": 20
+        }
+      ],
+      "description": "Enchants twenty bars of velium with magical energy. Consumes twenty bars of velium when cast."
+    }
+  },
+  {
+    "_id": "enc-guard-of-alendar-44-r1",
+    "name": "Guard of Alendar",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 44,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 175,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "spell-absorb",
+          "amount": 20,
+          "total": 666,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Guard of Alendar on your target, absorbing a portion of incoming spell damage. This spell absorbs a set amount of damage before dissipating."
+    }
+  },
+  {
+    "_id": "enc-illusion-scaled-wolf-44-r1",
+    "name": "Illusion: Scaled Wolf",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 44,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "scaled-wolf",
+          "duration": 4320
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Scaled Wolf."
+    }
+  },
+  {
+    "_id": "enc-leviathan-eyes-44-r1",
+    "name": "Leviathan Eyes",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 44,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 2160
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 2160
+        },
+        {
+          "type": "utility",
+          "effect": "enduring-breath",
+          "duration": 2160
+        }
+      ],
+      "description": "Fills your target's eyes with the spirit of the deep, granting them water breathing, greatly improved night vision, and the ability to see otherwise invisible creatures."
+    }
+  },
+  {
+    "_id": "enc-mass-enchant-velium-44-r1",
+    "name": "Mass Enchant Velium",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 44,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-velium-bar",
+          "count": 5
+        }
+      ],
+      "description": "Enchants five bars of velium with magical energy. Consumes five bars of velium when cast."
+    }
+  },
+  {
+    "_id": "enc-focus-simple-spellcasters-empowering-essence-45-r1",
+    "name": "Focus Simple Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 45,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "simple-spellcasters-empowering-essence",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-illusion-imp-45-r1",
+    "name": "Illusion: Imp",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 45,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 110,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "imp",
+          "duration": 2160
+        },
+        {
+          "type": "utility",
+          "effect": "cast-illusion-benefit-levitation"
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be an Imp. This spell also grants you levitation."
+    }
+  },
+  {
+    "_id": "enc-paralyzing-earth-45-r1",
+    "name": "Paralyzing Earth",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 45,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 180,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 3 minutes."
+    }
+  },
+  {
+    "_id": "enc-purify-mana-45-r1",
+    "name": "Purify Mana",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 45,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 500,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "vial-of-purified-mana",
+          "count": 1
+        }
+      ],
+      "description": "Distills mana into a physical form. Consumes a poison vial and four rubies when cast."
+    }
+  },
+  {
+    "_id": "enc-reoccurring-amnesia-45-r1",
+    "name": "Reoccurring Amnesia",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 45,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 65
+        }
+      ],
+      "description": "Attacks your target's mind, providing a chance to forget those that have done them harm."
+    }
+  }
+]

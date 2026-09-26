@@ -713,5 +713,48 @@
     ],
     "description": "Increases group max HP, heals, and boosts strength and dexterity with stacking rules."
   }
-}
+},
+  {
+    "_id": "shm-ancient-feral-avatar-60-r1",
+    "name": "Ancient: Feral Avatar",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 325,
+      "effects": [
+        { "type": "buff", "stat": "atk", "amount": 120 },
+        { "type": "buff", "stat": "agi", "amount": 120 },
+        { "type": "buff", "stat": "str", "amount": 120 },
+        { "type": "buff", "stat": "dex", "amount": 120 }
+      ],
+      "description": "Infuses your target with the power of an avatar, increasing their strength, dexterity, agility, and attack rating for 6.5 minutes."
+    }
+  },
+  {
+    "_id": "shm-ancient-scourge-of-nife-60-r1",
+    "name": "Ancient: Scourge of Nife",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 60,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 758,
+      "effects": [
+        { "type": "debuff", "effect": "poison", "amount": 10 },
+        { "type": "damage", "element": "poison", "amount": 108 },
+        { "type": "dot", "element": "poison", "min": 447, "max": 688 }
+      ],
+      "description": "Fills your target's blood with poison, causing 108 damage initially and between 623 and 688 damage every six seconds for 42 seconds."
+    }
+  }
 ]

@@ -1,0 +1,438 @@
+[
+  {
+    "_id": "mag-dimensional-pocket-6-r1",
+    "name": "Dimensional Pocket",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 6,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "dimensional-pocket"
+        }
+      ],
+      "description": "Conjures a dimensional pocket that allows you to carry heavy loads unhindered. The pouch, and all of its contents, will be lost if you leave the world of Norrath for a significant period of time."
+    }
+  },
+  {
+    "_id": "mag-elementaling-water-6-r1",
+    "name": "Elementaling: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 6,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elementaling-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-eye-of-zomm-6-r1",
+    "name": "Eye of Zomm",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-floating.webp",
+    "system": {
+      "class": "magician",
+      "level": 6,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "eye-of-zomm"
+        }
+      ],
+      "description": "Conjures a magical eye that allows you to scout dangerous areas."
+    }
+  },
+  {
+    "_id": "mag-elementaling-fire-7-r1",
+    "name": "Elementaling: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 7,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elementaling-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-renew-elements-7-r1",
+    "name": "Renew Elements",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 7,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 29
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "amount": 10
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "amount": 10
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "amount": 10
+        }
+      ],
+      "description": "Renews the health of your elemental pet, healing 29 damage, and curing their diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "mag-shield-of-fire-7-r1",
+    "name": "Shield of Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 7,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 5,
+          "duration": 900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 10,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of fire, damaging any creature that attacks them."
+    }
+  },
+  {
+    "_id": "mag-shock-of-blades-7-r1",
+    "name": "Shock of Blades",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 7,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 18,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 38
+        }
+      ],
+      "description": "Conjures a shock of blades that assaults your target, causing 38 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-elementaling-air-8-r1",
+    "name": "Elementaling: Air",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 8,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elementaling-air"
+        }
+      ],
+      "description": "Summons an air elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-invisibility-8-r1",
+    "name": "Invisibility",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "magician",
+      "level": 8,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "unstable",
+          "duration": 1200
+        }
+      ],
+      "description": "Cloaks your target in a mystic veil, making them invisible to many creatures."
+    }
+  },
+  {
+    "_id": "mag-staff-of-tracing-8-r1",
+    "name": "Staff of Tracing",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 8,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "staff-of-tracing"
+        }
+      ],
+      "description": "Focuses mana into the form of a magical staff."
+    }
+  },
+  {
+    "_id": "mag-summon-linen-mantle-8-r1",
+    "name": "Summon Linen Mantle",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 8,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "tavees-linen-mantle"
+        }
+      ],
+      "description": "Focuses mana into the form of a linen mantle that allows many of your beneficial spells to last a longer period of time. This item works on spells up to level sixteen."
+    }
+  },
+  {
+    "_id": "mag-elementaling-earth-9-r1",
+    "name": "Elementaling: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 9,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elementaling-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-fang-9-r1",
+    "name": "Summon Fang",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 9,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "snake-fang"
+        }
+      ],
+      "description": "Focuses mana into the form of snake fang."
+    }
+  },
+  {
+    "_id": "mag-ward-summoned-9-r1",
+    "name": "Ward Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 9,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 6,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 12,
+          "bane": "summoned"
+        }
+      ],
+      "description": "A burst of holy power that inflicts 12 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "mag-cancel-magic-10-r1",
+    "name": "Cancel Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "magician",
+      "level": 10,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 1
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "mag-elemental-water-10-r1",
+    "name": "Elemental: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 10,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 8.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elemental-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-rain-of-blades-10-r1",
+    "name": "Rain of Blades",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 10,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 2.75,
+      "manaCost": 62,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 20,
+          "radius": 20
+        }
+      ],
+      "description": "Conjures a rain of blades over your target, causing 20 damage every 3 seconds to creatures in the area. The rain will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-summon-tarnished-bauble-10-r1",
+    "name": "Summon Tarnished Bauble",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 10,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "jolums-tarnished-bauble"
+        }
+      ],
+      "description": "Focuses mana into the form of a tarnished bauble that sometimes allows you to cast a spell for a reduced mana cost. This item works on spells up to level twenty-four."
+    }
+  }
+]

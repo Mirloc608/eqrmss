@@ -364,5 +364,239 @@
       ],
       "description": "Teleports the caster to Greater Faydark."
     }
+  },
+{
+  "_id": "wiz-blightfire-moors-gate-20-r1",
+  "name": "Blightfire Moors Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 20,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "moors"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports you to Blightfire Moors."
   }
+},
+{
+  "_id": "wiz-blightfire-moors-portal-20-r1",
+  "name": "Blightfire Moors Portal",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-group.webp",
+  "system": {
+    "class": "wizard",
+    "level": 20,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 16,
+    "manaCost": 300,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "moors"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your entire group to Blightfire Moors."
+  }
+},
+{
+  "_id": "wiz-focus-makeshift-spellcasters-empowering-essence-20-r1",
+  "name": "Focus Makeshift Spellcaster's Empowering Essence",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-orb.webp",
+  "system": {
+    "class": "wizard",
+    "level": 20,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "summon-item",
+        "item": "Makeshift Spellcaster's Empowering Essence",
+        "amount": 1
+      }
+    ],
+    "description": "Focuses the casters mana into a form that can be physically handled."
+  }
+},
+{
+  "_id": "wiz-focus-mass-crude-spellcasters-empowering-essence-20-r1",
+  "name": "Focus Mass Crude Spellcaster's Empowering Essence",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-orb.webp",
+  "system": {
+    "class": "wizard",
+    "level": 20,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 400,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "summon-item",
+        "item": "Crude Spellcaster's Empowering Essence",
+        "amount": 5
+      }
+    ],
+    "description": "Focuses the casters mana into a form that can be physically handled."
+  }
+},
+{
+  "_id": "wiz-focus-mass-primitive-spellcasters-empowering-essence-20-r1",
+  "name": "Focus Mass Primitive Spellcaster's Empowering Essence",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-orb.webp",
+  "system": {
+    "class": "wizard",
+    "level": 20,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 200,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "summon-item",
+        "item": "Primitive Spellcaster's Empowering Essence",
+        "amount": 5
+      }
+    ],
+    "description": "Focuses the casters mana into a form that can be physically handled."
+  }
+},
+{
+  "_id": "wiz-focus-mass-rudimentary-spellcasters-empowering-essence-20-r1",
+  "name": "Focus Mass Rudimentary Spellcaster's Empowering Essence",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-orb.webp",
+  "system": {
+    "class": "wizard",
+    "level": 20,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 300,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "summon-item",
+        "item": "Rudimentary Spellcaster's Empowering Essence",
+        "amount": 5
+      }
+    ],
+    "description": "Focuses the casters mana into a form that can be physically handled."
+  }
+},
+{
+  "_id": "wiz-grimling-gate-20-r1",
+  "name": "Grimling Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 20,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 10,
+    "manaCost": 300,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "grimling"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports you to the Grimling forest."
+  }
+},
+{
+  "_id": "wiz-primary-anchor-gate-20-r1",
+  "name": "Primary Anchor Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-anchor.webp",
+  "system": {
+    "class": "wizard",
+    "level": 20,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-anchor",
+        "destination": "primary-anchor"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports you to your Primary Anchor."
+  }
+},
+{
+  "_id": "wiz-secondary-anchor-gate-20-r1",
+  "name": "Secondary Anchor Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-anchor.webp",
+  "system": {
+    "class": "wizard",
+    "level": 20,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-anchor",
+        "destination": "secondary-anchor"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports you to your Secondary Anchor."
+  }
+},
+{
+  "_id": "wiz-translocate-blightfire-moors-20-r1",
+  "name": "Translocate: Blightfire Moors",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 20,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 10,
+    "manaCost": 225,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "translocate",
+        "destination": "moors"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to Blightfire Moors."
+  }
+}
 ]

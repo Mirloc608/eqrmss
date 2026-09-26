@@ -1,0 +1,237 @@
+[
+  {
+    "_id": "brd-cindas-charismatic-carillon-11-r1",
+    "name": "Cinda's Charismatic Carillon",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 11,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "faction",
+            "amount": 1310
+          }
+        ]
+      },
+      "description": "A quiet tune that improves your faction standing with all creatures associated with your target."
+    }
+  },
+  {
+    "_id": "brd-bruscos-boastful-bellow-12-r1",
+    "name": "Brusco's Boastful Bellow",
+    "type": "song",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "song": {
+        "level": 12,
+        "category": "damage",
+        "songGroup": "direct-damage",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "damage",
+            "element": "magic",
+            "amount": 18
+          }
+        ]
+      },
+      "description": "A great bellow that causes 1 damage to your opponent."
+    }
+  },
+  {
+    "_id": "brd-purifying-rhythms-13-r1",
+    "name": "Purifying Rhythms",
+    "type": "song",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "song": {
+        "level": 13,
+        "category": "buff",
+        "songGroup": "resist-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "resist-magic",
+            "amount": 60,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-poison",
+            "amount": 60,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-disease",
+            "amount": 60,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 2,
+            "max": 3,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A mystic tune that offers your group protection from poison, disease, and magic."
+    }
+  },
+  {
+    "_id": "brd-lyssas-cataloging-libretto-14-r1",
+    "name": "Lyssa's Cataloging Libretto",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 14,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "identify-item"
+          }
+        ]
+      },
+      "description": "An ancient tune that provides arcane information about the item that your target is holding."
+    }
+  },
+  {
+    "_id": "brd-kelins-lucid-lullaby-15-r1",
+    "name": "Kelin's Lucid Lullaby",
+    "type": "song",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "song": {
+        "level": 15,
+        "category": "control",
+        "songGroup": "mez-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "mez",
+            "amount": 30,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "A quiet lullaby that causes your target to fall into an enchanted sleep. Affects creatures up to level 30."
+    }
+  },
+  {
+    "_id": "brd-song-of-sustenance-15-r1",
+    "name": "Song of Sustenance",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 15,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 90,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "satiate"
+          }
+        ]
+      },
+      "description": "An energetic song that fills your group with energy, eliminating their need for food and water."
+    }
+  }
+]

@@ -1,0 +1,1154 @@
+[
+  {
+    "_id": "mag-gift-of-xev-51-r1",
+    "name": "Gift of Xev",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 51,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "glowing-backpack"
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "black-bread",
+          "quantity": 20,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "globe-of-water",
+          "quantity": 20,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "bandages",
+          "quantity": 20,
+          "intoBag": true
+        }
+      ],
+      "description": "Focuses mana into the form of a meal pack filled with food and drink."
+    }
+  },
+  {
+    "_id": "mag-malosi-51-r1",
+    "name": "Malosi",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 51,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 175,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "cold",
+          "amount": 60,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "magic",
+          "amount": 60,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "poison",
+          "amount": 60,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "fire",
+          "amount": 60,
+          "duration": 840
+        }
+      ],
+      "description": "Decreases your target's resistance to cold, fire, magic, and poison.",
+      "resist": "magic",
+      "resistMod": -10
+    }
+  },
+  {
+    "_id": "mag-scintillation-51-r1",
+    "name": "Scintillation",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 51,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 361,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 497,
+          "radius": 25
+        }
+      ],
+      "description": "Creates a circle of fire around you, causing 497 damage to up to 30 nearby creatures.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-summon-silken-mantle-51-r1",
+    "name": "Summon Silken Mantle",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 51,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 160,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "tavees-silken-mantle"
+        }
+      ],
+      "description": "Focuses mana into the form of a silken mantle that allows many of your beneficial spells to last a longer period of time. This item works on spells up to level sixty."
+    }
+  },
+  {
+    "_id": "mag-vocarate-earth-51-r1",
+    "name": "Vocarate: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 51,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "vocarate-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-bristlebanes-bundle-52-r1",
+    "name": "Bristlebane's Bundle",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 52,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "ale",
+          "quantity": 20
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "cake",
+          "quantity": 20
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "spinning-bottle"
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "a-firework"
+        }
+      ],
+      "description": "Focuses mana into the form of a bundle of party favors."
+    }
+  },
+  {
+    "_id": "mag-char-52-r1",
+    "name": "Char",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 52,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 291,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 769
+        }
+      ],
+      "description": "Burns your target's skin with a charring flame, causing 769 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-elemental-empathy-52-r1",
+    "name": "Elemental Empathy",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 52,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 60,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 60,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 4,
+          "max": 5,
+          "duration": 3600
+        }
+      ],
+      "description": "Creates a magical bond with your elemental companion, increasing your hit points, armor class, and magic resistance, while also increasing your pet's attack speed, armor class and strength."
+    }
+  },
+  {
+    "_id": "mag-phantom-armor-52-r1",
+    "name": "Phantom Armor",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 52,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 4,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 6,
+          "duration": 5400
+        }
+      ],
+      "description": "Covers you in phantom armor, increasing your hit point regeneration and armor class. Consumes four cat's eye agates when cast."
+    }
+  },
+  {
+    "_id": "mag-summon-brilliant-bauble-52-r1",
+    "name": "Summon Brilliant Bauble",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 52,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 160,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "jolums-brilliant-bauble"
+        }
+      ],
+      "description": "Focuses mana into the form of a brilliant bauble that sometimes allows you to cast a spell for a reduced mana cost. This item works on spells up to level sixty."
+    }
+  },
+  {
+    "_id": "mag-transons-elemental-infusion-52-r1",
+    "name": "Transon's Elemental Infusion",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 52,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.75,
+      "manaCost": 172,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 482
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "amount": 16
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "amount": 16
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "amount": 16
+        }
+      ],
+      "description": "Renews the health of your elemental pet, healing 482 damage, and curing their diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "mag-vocarate-fire-52-r1",
+    "name": "Vocarate: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 52,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "vocarate-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-annul-magic-53-r1",
+    "name": "Annul Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "magician",
+      "level": 53,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 9
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 9
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "mag-boon-of-immolation-53-r1",
+    "name": "Boon of Immolation",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 53,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 360,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 25,
+          "duration": 900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 25,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your group in a shield of immolation, damaging any creature that attacks them."
+    }
+  },
+  {
+    "_id": "mag-quiver-of-marr-53-r1",
+    "name": "Quiver of Marr",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 53,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "quiver-of-marr"
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "arrow-of-marr",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "arrow-of-marr",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "arrow-of-marr",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "arrow-of-marr",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "arrow-of-marr",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "arrow-of-marr",
+          "quantity": 100,
+          "intoBag": true
+        }
+      ],
+      "description": "Focuses mana into the form of the quiver of Marr filled with magical arrows."
+    }
+  },
+  {
+    "_id": "mag-summon-studded-ring-53-r1",
+    "name": "Summon Studded Ring",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 53,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 160,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "nakis-studded-ring"
+        }
+      ],
+      "description": "Focuses mana into the form of a studded ring that allows you to cast many spells faster. This item works on spells up to level sixty."
+    }
+  },
+  {
+    "_id": "mag-vocarate-air-53-r1",
+    "name": "Vocarate: Air",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 53,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "vocarate-air"
+        }
+      ],
+      "description": "Summons an air elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-bandolier-of-luclin-54-r1",
+    "name": "Bandolier of Luclin",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "bandoleer-of-luclin"
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "knife-of-luclin",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "knife-of-luclin",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "knife-of-luclin",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "knife-of-luclin",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "knife-of-luclin",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "knife-of-luclin",
+          "quantity": 100,
+          "intoBag": true
+        }
+      ],
+      "description": "Focuses mana into the form of a bandolier of daggers."
+    }
+  },
+  {
+    "_id": "mag-elemental-cloak-54-r1",
+    "name": "Elemental Cloak",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 45,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 45,
+          "duration": 4320
+        }
+      ],
+      "description": "Covers your skin in an elemental cloak, protecting you from fire and cold."
+    }
+  },
+  {
+    "_id": "mag-elemental-draw-54-r1",
+    "name": "Elemental Draw",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 992
+        }
+      ],
+      "description": "Siphons a portion of your pet's energy, dealing 992 damage and placing an aura of energy around you that causes your mana to regenerate faster."
+    }
+  },
+  {
+    "_id": "mag-focus-mass-simple-spellcasters-empowering-essence-54-r1",
+    "name": "Focus Mass Simple Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "simple-spellcasters-empowering-essence",
+          "quantity": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-kindle-54-r1",
+    "name": "Kindle",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "alteration",
+      "target": "pet",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana-shield",
+          "amount": 50,
+          "duration": 1500
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 1500
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 12,
+          "duration": 1500
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 12,
+          "max": 12,
+          "duration": 1500
+        }
+      ],
+      "description": "Places your pet into a stance that prevents movement, but bestows a damage shield, a mana shield that will protect it from harm, and allows the pet to regenerate mana more quickly. This enhancement will only work on fire-based pets summoned between levels 52 and 73."
+    }
+  },
+  {
+    "_id": "mag-phantasmal-armor-54-r1",
+    "name": "Phantasmal Armor",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 7,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 9,
+          "duration": 5400
+        }
+      ],
+      "description": "Covers you in phantasmal armor, increasing your hit point regeneration and armor class. Consumes a pearl when cast."
+    }
+  },
+  {
+    "_id": "mag-scars-of-sigil-54-r1",
+    "name": "Scars of Sigil",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "evocation",
+      "target": "single",
+      "range": 300,
+      "castTime": 3.0,
+      "manaCost": 186,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 771
+        }
+      ],
+      "description": "Burns your target's skin with the scars of Sigil, causing 771 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-shield-of-the-magi-54-r1",
+    "name": "Shield of the Magi",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 250,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 9,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 24,
+          "duration": 5400
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "mag-summon-iron-bracelet-54-r1",
+    "name": "Summon Iron Bracelet",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 160,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "rallicans-iron-bracelet"
+        }
+      ],
+      "description": "Focuses mana into the form of an iron bracelet that increases the damage of many affliction spells. This item works on spells up to level sixty."
+    }
+  },
+  {
+    "_id": "mag-summon-ruby-bracelet-54-r1",
+    "name": "Summon Ruby Bracelet",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 160,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "gallenites-ruby-bracelet"
+        }
+      ],
+      "description": "Focuses mana into the form of a ruby bracelet that increases the damage of many spells. This item works on spells up to level sixty."
+    }
+  },
+  {
+    "_id": "mag-veil-of-elements-54-r1",
+    "name": "Veil of Elements",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard",
+          "duration": 600
+        }
+      ],
+      "description": "Covers you in a veil of elements, rendering you invisible to many creatures for 10 minutes."
+    }
+  },
+  {
+    "_id": "mag-vocarate-water-54-r1",
+    "name": "Vocarate: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 54,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "vocarate-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-burnout-iv-55-r1",
+    "name": "Burnout IV",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 55,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 60,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 65,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 5,
+          "duration": 3600
+        }
+      ],
+      "description": "Infuses your elemental companion with energy, increasing their attack speed, armor class, and strength."
+    }
+  },
+  {
+    "_id": "mag-call-of-the-hero-55-r1",
+    "name": "Call of the Hero",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "magician",
+      "level": 55,
+      "school": "conjuration",
+      "target": "single",
+      "range": 20000,
+      "castTime": 12.0,
+      "manaCost": 500,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport-to-caster"
+        }
+      ],
+      "description": "Conjures a mystical portal that summons one of your allies to your side. The target must be in your group to be summoned."
+    }
+  },
+  {
+    "_id": "mag-earthen-strength-55-r1",
+    "name": "Earthen Strength",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 55,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "aura",
+          "aura": "earthen-strength-effect"
+        }
+      ],
+      "description": "Augments your pet with the earthen strength which will increase their melee damage by 5%. The effect will also augment all nearby pets by the same amount."
+    }
+  },
+  {
+    "_id": "mag-focus-spellcasters-empowering-essence-55-r1",
+    "name": "Focus Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 55,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "spellcasters-empowering-essence"
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-pouch-of-quellious-55-r1",
+    "name": "Pouch of Quellious",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 55,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "pouch-of-quellious"
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "shuriken-of-quellious",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "shuriken-of-quellious",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "shuriken-of-quellious",
+          "quantity": 100,
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "shuriken-of-quellious",
+          "quantity": 100,
+          "intoBag": true
+        }
+      ],
+      "description": "Focuses mana into the form of a pouch of Quellious, filled with magical shurikens."
+    }
+  },
+  {
+    "_id": "mag-rage-of-zomm-55-r1",
+    "name": "Rage of Zomm",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 55,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 3.0,
+      "manaCost": 725,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "rage-of-zomm",
+          "count": 1,
+          "duration": 18
+        },
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1
+        }
+      ],
+      "description": "Summons an elemental that attacks your target for 18 seconds."
+    }
+  },
+  {
+    "_id": "mag-sirocco-55-r1",
+    "name": "Sirocco",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 55,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 5.5,
+      "manaCost": 399,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 657,
+          "radius": 25
+        }
+      ],
+      "description": "Conjures a blistering wind around your target, causing 657 damage every 3 seconds to creatures in the area. The wind will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-wrath-of-the-elements-55-r1",
+    "name": "Wrath of the Elements",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 55,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 365
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 138,
+          "max": 138,
+          "duration": 30
+        }
+      ],
+      "description": "Surrounds your target in an elemental maelstrom, causing 365 damage initially, and 138 damage every 6 seconds for 30 seconds.",
+      "resist": "magic"
+    }
+  }
+]

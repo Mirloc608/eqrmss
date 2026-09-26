@@ -1,0 +1,191 @@
+[
+  {
+    "_id": "rng-panic-animal-16-r1",
+    "name": "Panic Animal",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "ranger",
+      "level": 16,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52
+        }
+      ],
+      "description": "Incites fear in most animals, causing them to flee.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "rng-ward-summoned-16-r1",
+    "name": "Ward Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 16,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 6,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 35
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 5 and 14 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "rng-bind-sight-17-r1",
+    "name": "Bind Sight",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 17,
+      "school": "divination",
+      "target": "single",
+      "range": 10000,
+      "castTime": 4.0,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "bind-sight",
+          "duration": 840
+        }
+      ],
+      "description": "Covers your face in magical strands, allowing you to see through your target's eyes."
+    }
+  },
+  {
+    "_id": "rng-firefist-17-r1",
+    "name": "Firefist",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 17,
+      "school": "evocation",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 10,
+          "duration": 720
+        }
+      ],
+      "description": "Fills your hands with the force of flame, increasing your attack rating for 12 minutes."
+    }
+  },
+  {
+    "_id": "rng-endure-cold-18-r1",
+    "name": "Endure Cold",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 18,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away cold for 27 minutes."
+    }
+  },
+  {
+    "_id": "rng-ignite-19-r1",
+    "name": "Ignite",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "ranger",
+      "level": 19,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 21,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 35
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 30 and 46 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-enduring-breath-20-r1",
+    "name": "Enduring Breath",
+    "type": "spell",
+    "img": "icons/magic/water/breathing-bubble-blue.webp",
+    "system": {
+      "class": "ranger",
+      "level": 20,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "water-breathing",
+          "duration": 1620
+        }
+      ],
+      "description": "Magically fills your lungs with air, removing your need to breathe for 27 minutes. Consumes a handful of fish scales to cast."
+    }
+  },
+  {
+    "_id": "rng-light-healing-20-r1",
+    "name": "Light Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 20,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 28,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 77
+        }
+      ],
+      "description": "Mends light wounds, healing between 35 and 65 hit points."
+    }
+  }
+]

@@ -403,5 +403,120 @@
       ],
       "description": "Teleports the entire group to the Commonlands."
     }
+  },
+{
+  "_id": "wiz-xalirilans-greater-discombobulation-34-r1",
+  "name": "Xalirilan's Greater Discombobulation",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-red.webp",
+  "system": {
+    "class": "wizard",
+    "level": 34,
+    "school": "divination",
+    "target": "single",
+    "range": 40,
+    "castTime": 4,
+    "manaCost": 240,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "disarm-chest",
+        "amount": 200
+      }
+    ],
+    "description": "Attempts to disarm a trap on the targeted object. Consumes a greater scrying stone when cast."
   }
+},
+{
+  "_id": "wiz-xalirilans-greater-extrication-34-r1",
+  "name": "Xalirilan's Greater Extrication",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-green.webp",
+  "system": {
+    "class": "wizard",
+    "level": 34,
+    "school": "divination",
+    "target": "single",
+    "range": 40,
+    "castTime": 4,
+    "manaCost": 240,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "unlock-chest",
+        "amount": 210
+      }
+    ],
+    "description": "Attempts to destroy any lock present on the targeted object."
+  }
+},
+{
+  "_id": "wiz-primary-anchor-portal-35-r1",
+  "name": "Primary Anchor Portal",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-anchor.webp",
+  "system": {
+    "class": "wizard",
+    "level": 35,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 24,
+    "manaCost": 600,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-anchor",
+        "destination": "primary-anchor"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your entire group to your Primary Anchor."
+  }
+},
+{
+  "_id": "wiz-secondary-anchor-portal-35-r1",
+  "name": "Secondary Anchor Portal",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-anchor.webp",
+  "system": {
+    "class": "wizard",
+    "level": 35,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 24,
+    "manaCost": 600,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-anchor",
+        "destination": "secondary-anchor"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your entire group to your Secondary Anchor."
+  }
+},
+{
+  "_id": "wiz-translocate-stonebrunt-35-r1",
+  "name": "Translocate: Stonebrunt",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-stone.webp",
+  "system": {
+    "class": "wizard",
+    "level": 35,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 10,
+    "manaCost": 225,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "translocate",
+        "destination": "stonebrunt"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to the Stonebrunt Mountains."
+  }
+}
 ]

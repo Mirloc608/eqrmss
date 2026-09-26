@@ -1,0 +1,205 @@
+[
+  {
+    "_id": "rng-hawk-eye-11-r1",
+    "name": "Hawk Eye",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 11,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "archery-accuracy",
+          "amount": 10,
+          "duration": 4200
+        }
+      ],
+      "description": "Focuses your vision, considerably improving your aim with a bow for 70 minutes."
+    }
+  },
+  {
+    "_id": "rng-feet-like-cat-12-r1",
+    "name": "Feet like Cat",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 12,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "agi",
+          "amount": 18,
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your target with a feline spirit, increasing their agility for 36 minutes."
+    }
+  },
+  {
+    "_id": "rng-cure-poison-13-r1",
+    "name": "Cure Poison",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 13,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "amount": 4.0
+        }
+      ],
+      "description": "Removes toxin from your target's system, curing them of minor poisons."
+    }
+  },
+  {
+    "_id": "rng-thistlecoat-13-r1",
+    "name": "Thistlecoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 13,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1.0,
+          "max": 2.0,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 1.0,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of thistles that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "rng-burst-of-fire-14-r1",
+    "name": "Burst of Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "ranger",
+      "level": 14,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 7,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 32
+        }
+      ],
+      "description": "Creates a ball of fire that burns your target, doing between 10 and 14 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-camouflage-14-r1",
+    "name": "Camouflage",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "ranger",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard",
+          "duration": 1200
+        }
+      ],
+      "description": "Covers your body in a mystic shield, allowing you to blend in with your outdoor surroundings."
+    }
+  },
+  {
+    "_id": "rng-grasping-roots-15-r1",
+    "name": "Grasping Roots",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 15,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 14
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 48
+        }
+      ],
+      "description": "Commands roots to take hold of your target, doing 10 damage and preventing their movement for 48 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "rng-invoke-lightning-15-r1",
+    "name": "Invoke Lightning",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "ranger",
+      "level": 15,
+      "school": "evocation",
+      "target": "area",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 32,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 35
+        }
+      ],
+      "description": "Calls down lightning from the sky over your target, causing between 16 and 25 damage to up to 4 creatures in the area. This spell can only be cast outdoors.",
+      "radius": 10,
+      "resist": "magic"
+    }
+  }
+]

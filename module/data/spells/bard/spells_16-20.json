@@ -1,0 +1,250 @@
+[
+  {
+    "_id": "brd-tarews-aquatic-ayre-16-r1",
+    "name": "Tarew's Aquatic Ayre",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 16,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 24,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "enduring-breath"
+          }
+        ]
+      },
+      "description": "A song that surrounds your head with a cloud of air bubbles, allowing you to breathe underwater indefinitely."
+    }
+  },
+  {
+    "_id": "brd-guardian-rhythms-17-r1",
+    "name": "Guardian Rhythms",
+    "type": "song",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "song": {
+        "level": 17,
+        "category": "buff",
+        "songGroup": "ac-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 5,
+            "max": 6,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-magic",
+            "amount": 60,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A mystic tune that offers your group protection from magic and increases their armor class."
+    }
+  },
+  {
+    "_id": "brd-denons-disruptive-discord-18-r1",
+    "name": "Denon's Disruptive Discord",
+    "type": "song",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "song": {
+        "level": 18,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "magic",
+            "min": 1,
+            "max": 10,
+            "condition": "target-not-moving",
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "stat": "ac",
+            "min": -8,
+            "max": -11,
+            "duration": 12
+          }
+        ],
+        "radius": 35
+      },
+      "description": "A screeching dissonance that causes 4 damage to up to 30 nearby creatures and lowers their armor class by 131."
+    }
+  },
+  {
+    "_id": "brd-shauris-sonorous-clouding-19-r1",
+    "name": "Shauri's Sonorous Clouding",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 19,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "invisibility",
+            "effect": "unstable"
+          },
+          {
+            "type": "utility",
+            "effect": "see-invisible"
+          }
+        ]
+      },
+      "description": "This sonnet surrounds your body with a light fog, allowing you to slip by many creatures undetected. This song also allows you to see invisible creatures."
+    }
+  },
+  {
+    "_id": "brd-cassindras-chant-of-clarity-20-r1",
+    "name": "Cassindra's Chant of Clarity",
+    "type": "song",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "song": {
+        "level": 20,
+        "category": "buff",
+        "songGroup": "mana-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "regen",
+            "stat": "mana",
+            "min": 1,
+            "max": 2,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A light melody that restores the mana of your group."
+    }
+  },
+  {
+    "_id": "brd-largos-melodic-binding-20-r1",
+    "name": "Largo's Melodic Binding",
+    "type": "song",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "song": {
+        "level": 20,
+        "category": "debuff",
+        "songGroup": "slow-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "effect": "slow",
+            "amount": 35,
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "stat": "ac",
+            "min": -5,
+            "max": -6,
+            "duration": 12
+          }
+        ],
+        "radius": 30
+      },
+      "description": "This melody encompasses up to 30 nearby creatures in magical bonds, slowing their attack speed."
+    }
+  }
+]

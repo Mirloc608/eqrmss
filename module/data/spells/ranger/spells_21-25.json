@@ -1,0 +1,140 @@
+[
+  {
+    "_id": "rng-skin-like-rock-21-r1",
+    "name": "Skin like Rock",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 21,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2.0,
+          "max": 2.0,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 170,
+          "duration": 1620
+        },
+        {
+          "type": "heal",
+          "amount": 197
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points and armor class for 27 minutes."
+    }
+  },
+  {
+    "_id": "rng-cure-disease-22-r1",
+    "name": "Cure Disease",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 22,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "amount": 4.0
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing minor diseases."
+    }
+  },
+  {
+    "_id": "rng-harmony-22-r1",
+    "name": "Harmony",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 22,
+      "school": "abjuration",
+      "target": "area",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 15
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 15
+        }
+      ],
+      "description": "Calms the savage spirit of almost any creature in an area around your target, making them less likely to attack. This spell works on creatures up to level 40, and only works outdoors.",
+      "radius": 40
+    }
+  },
+  {
+    "_id": "rng-shield-of-thistles-24-r1",
+    "name": "Shield of Thistles",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "ranger",
+      "level": 24,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 6.0,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of thistles that cause damage to anything that strikes them for up to 15 minutes."
+    }
+  },
+  {
+    "_id": "rng-stinging-swarm-25-r1",
+    "name": "Stinging Swarm",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 25,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 71,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 24,
+          "max": 24,
+          "duration": 54
+        }
+      ],
+      "description": "Commands a swarm of insects to attack your target relentlessly, causing between 17 and 42 damage every six seconds for 54 seconds.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  }
+]

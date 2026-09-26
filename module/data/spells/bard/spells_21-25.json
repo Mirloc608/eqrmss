@@ -1,0 +1,246 @@
+[
+  {
+    "_id": "brd-melanies-mellifluous-motion-21-r1",
+    "name": "Melanie's Mellifluous Motion",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 21,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 600,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "shadowstep"
+          }
+        ]
+      },
+      "description": "A chaotic chorus that causes your group to randomly teleport short distances."
+    }
+  },
+  {
+    "_id": "brd-alenias-disenchanting-melody-22-r1",
+    "name": "Alenia's Disenchanting Melody",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 22,
+        "category": "debuff",
+        "songGroup": "dispel-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "dispel",
+            "amount": 1
+          }
+        ]
+      },
+      "description": "A melody that strips the magical effects from everyone in your group."
+    }
+  },
+  {
+    "_id": "brd-selos-consonant-chain-23-r1",
+    "name": "Selo's Consonant Chain",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 23,
+        "category": "debuff",
+        "songGroup": "snare-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 150,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "effect": "snare",
+            "amount": 160,
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "effect": "slow",
+            "amount": 40,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "This song engulfs your target in magical bonds, slowing their movement and attack speed."
+    }
+  },
+  {
+    "_id": "brd-lyssas-veracious-concord-24-r1",
+    "name": "Lyssa's Veracious Concord",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 24,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "see-invisible"
+          },
+          {
+            "type": "utility",
+            "effect": "ultravision"
+          }
+        ]
+      },
+      "description": "This song grants your group the ability to see invisible beings, as well as greatly enhancing night vision."
+    }
+  },
+  {
+    "_id": "brd-psalm-of-warmth-25-r1",
+    "name": "Psalm of Warmth",
+    "type": "song",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "song": {
+        "level": 25,
+        "category": "buff",
+        "songGroup": "damage-shield",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "damage-shield",
+            "amount": 22,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-cold",
+            "amount": 140,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "infravision"
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 2,
+            "max": 3,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "This psalm surrounds your group in an aura of fire, granting them protection from cold, as well as harming anything that attacks them."
+    }
+  },
+  {
+    "_id": "brd-selos-rhythm-of-speed-25-r1",
+    "name": "Selo's Rhythm of Speed",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 25,
+        "category": "buff",
+        "songGroup": "movement-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "movement",
+            "amount": 10,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "The quick pace of this song fills your feet with speed, increasing the movement rate of your group. This song also functions indoors."
+    }
+  }
+]

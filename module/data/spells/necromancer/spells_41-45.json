@@ -1,0 +1,401 @@
+[
+  {
+    "_id": "nec-arch-shielding-41-r1",
+    "name": "Arch Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 41,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 150,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 6,
+          "max": 8,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 20,
+          "duration": 4320
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "nec-dead-man-floating-41-r1",
+    "name": "Dead Man Floating",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 41,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "enduring-breath",
+          "duration": 4320
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 4320
+        },
+        {
+          "type": "utility",
+          "effect": "levitate",
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "resist-poison",
+          "amount": 70,
+          "duration": 4320
+        }
+      ],
+      "description": "Grants your target the power of the dead, including levitation, increased poison resistance, water breathing, and the ability to see invisible creatures."
+    }
+  },
+  {
+    "_id": "nec-ignite-bones-42-r1",
+    "name": "Ignite Bones",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-transform.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 42,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 210,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 407,
+          "resist": "fire"
+        },
+        {
+          "type": "illusion",
+          "form": "drybone-skeleton",
+          "duration": 12
+        },
+        {
+          "type": "utility",
+          "effect": "interrupt"
+        }
+      ],
+      "description": "Burns the flesh from your target's bones and causes between 450 and 500 damage, temporarily turns them into a skeleton, and stuns targets up to level 55 for 0.5 second."
+    }
+  },
+  {
+    "_id": "nec-incinerate-bones-42-r1",
+    "name": "Incinerate Bones",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 42,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 210,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 407,
+          "resist": "fire"
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "duration": 1,
+          "amount": 55,
+          "resist": "fire"
+        }
+      ],
+      "description": "Burns the flesh from your target's bones causing between 450 and 500 damage and stunning them for 1 seconds up to level 55."
+    }
+  },
+  {
+    "_id": "nec-corporeal-empathy-43-r1",
+    "name": "Corporeal Empathy",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 43,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 193
+        }
+      ],
+      "description": "Restores your target's hit points at the expense of your own."
+    }
+  },
+  {
+    "_id": "nec-covetous-subversion-43-r1",
+    "name": "Covetous Subversion",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 43,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana",
+          "amount": 100
+        }
+      ],
+      "description": "Restores your target's mana at the expense of your own."
+    }
+  },
+  {
+    "_id": "nec-diamondskin-43-r1",
+    "name": "Diamondskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 43,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 236,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "rune-shield",
+          "percent": 100,
+          "amount": 394,
+          "duration": 5400
+        }
+      ],
+      "description": "Surrounds your skin in a protective aura that absorbs between 305 and 394 damage. Consumes a peridot when cast."
+    }
+  },
+  {
+    "_id": "nec-bounce-44-r1",
+    "name": "Bounce",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 44,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "spell-reflect",
+          "percent": 40,
+          "duration": 12
+        }
+      ],
+      "description": "Surrounds your body in a reflective aura, providing a chance for all incoming spells to rebound back against the caster."
+    }
+  },
+  {
+    "_id": "nec-cackling-bones-44-r1",
+    "name": "Cackling Bones",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 44,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 15.0,
+      "manaCost": 450,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "cackling-bones"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-focus-mass-modest-spellcasters-empowering-essence-44-r1",
+    "name": "Focus Mass Modest Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 44,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Modest Spellcaster's Empowering Essence",
+          "amount": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-form-of-bleached-bone-44-r1",
+    "name": "Form of Bleached Bone",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-transform.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 44,
+      "school": "divination",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "skeleton",
+          "duration": 7200
+        }
+      ],
+      "description": "Bestows upon your pet the form of a bleached skeleton. This effect lasts for 2 hours."
+    }
+  },
+  {
+    "_id": "nec-pact-of-shadow-44-r1",
+    "name": "Pact of Shadow",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 44,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 78,
+          "duration": 24
+        }
+      ],
+      "description": "Transfers your own health to your target at a rate of 80 hit points every six seconds for 24 seconds."
+    }
+  },
+  {
+    "_id": "nec-auspice-45-r1",
+    "name": "Auspice",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 45,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 8.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 142,
+          "max": 142,
+          "duration": 54,
+          "resist": "disease",
+          "resistMod": -200
+        },
+        {
+          "type": "utility",
+          "effect": "spell-damage-leech",
+          "percent": 100.0,
+          "maxPerHit": 105,
+          "duration": 54
+        }
+      ],
+      "description": "Drains the life from your target, doing 30 damage every six seconds for 54 seconds. 100% of the life-force taken is used to heal your wounds."
+    }
+  },
+  {
+    "_id": "nec-dead-men-floating-45-r1",
+    "name": "Dead Men Floating",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 45,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 375,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "enduring-breath",
+          "duration": 4320
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 4320
+        },
+        {
+          "type": "utility",
+          "effect": "levitate",
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "resist-poison",
+          "amount": 70,
+          "duration": 4320
+        }
+      ],
+      "description": "Grants your group the power of the dead, including levitation, increased poison resistance, water breathing, and the ability to see invisible creatures."
+    }
+  }
+]

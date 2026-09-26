@@ -1,0 +1,162 @@
+[
+  {
+    "_id": "pal-minor-healing-6-r1",
+    "name": "Minor Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 6,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 22
+        }
+      ],
+      "description": "Mends minor wounds, healing 10 hit points."
+    }
+  },
+  {
+    "_id": "pal-cease-7-r1",
+    "name": "Cease",
+    "type": "spell",
+    "img": "icons/magic/light/explosion-beam-blind.webp",
+    "system": {
+      "class": "paladin",
+      "level": 7,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "duration": 1.0,
+          "maxLevel": 55
+        }
+      ],
+      "description": "Invokes the will of the gods, stunning your opponent. This spell works on creatures up to level 55.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-courage-8-r1",
+    "name": "Courage",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 8,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 12,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 1,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 20,
+          "duration": 1620
+        },
+        {
+          "type": "heal",
+          "amount": 29
+        }
+      ],
+      "description": "Provides your target with a sense of courage, increasing their hit points and armor class for 27 minutes."
+    }
+  },
+  {
+    "_id": "pal-spook-the-dead-9-r1",
+    "name": "Spook the Dead",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "paladin",
+      "level": 9,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "maxLevel": 52
+        }
+      ],
+      "description": "Inspires fear in an undead opponent, causing them to flee.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-yaulp-9-r1",
+    "name": "Yaulp",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 9,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.5,
+      "manaCost": 1,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 10,
+          "duration": 24
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 2,
+          "duration": 24
+        }
+      ],
+      "description": "Focuses your spiritual energy into a great battle cry, increasing your strength and armor class for 24 seconds."
+    }
+  },
+  {
+    "_id": "pal-lull-10-r1",
+    "name": "Lull",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 10,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "lull",
+          "maxLevel": 30
+        }
+      ],
+      "description": "Lulls the mind of your target, lowering its aggressiveness for 2 minutes. Affects creatures up to level 30."
+    }
+  }
+]

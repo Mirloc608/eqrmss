@@ -1,0 +1,1325 @@
+[
+  {
+    "_id": "dru-catastrophe-61-r1",
+    "name": "Catastrophe",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 1285,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1680,
+          "radius": 35
+        }
+      ],
+      "description": "Causes the earth to tremble around you, causing 850 damage to up to 30 nearby enemies.",
+      "resist": "magic",
+      "radius": 35
+    }
+  },
+  {
+    "_id": "dru-cure-corruption-61-r1",
+    "name": "Cure Corruption",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 148,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "corruption",
+          "min": 1,
+          "max": 4
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing minor corruption."
+    }
+  },
+  {
+    "_id": "dru-cure-corruption-61-r2",
+    "name": "Cure Corruption",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 157,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "corruption",
+          "min": 1,
+          "max": 4
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing minor corruption."
+    }
+  },
+  {
+    "_id": "dru-cure-corruption-61-r3",
+    "name": "Cure Corruption",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 166,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "corruption",
+          "min": 1,
+          "max": 4
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing minor corruption."
+    }
+  },
+  {
+    "_id": "dru-earthen-roots-61-r1",
+    "name": "Earthen Roots",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 296,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 60
+        }
+      ],
+      "description": "Commands roots to take hold of your target, preventing their movement for 60 seconds.",
+      "resist": "magic",
+      "resistMod": -30
+    }
+  },
+  {
+    "_id": "dru-entangle-61-r1",
+    "name": "Entangle",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 198,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 56,
+          "duration": 840
+        }
+      ],
+      "description": "Entangles your target's feet with magical roots, slowing their movement speed for up to 14 minutes.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-hand-of-ro-61-r1",
+    "name": "Hand of Ro",
+    "type": "spell",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 326,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "resist-fire",
+          "min": -72,
+          "max": -72,
+          "duration": 198
+        },
+        {
+          "type": "debuff",
+          "stat": "atk",
+          "min": -100,
+          "max": -100,
+          "duration": 198
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -4,
+          "max": -3,
+          "duration": 198
+        }
+      ],
+      "description": "Surrounds your target in dancing flames for 3.3 minutes, lowering their attack value, as well as their fire resistance, and armor class.",
+      "resist": "fire",
+      "resistMod": -200
+    }
+  },
+  {
+    "_id": "dru-instinctual-panic-61-r1",
+    "name": "Instinctual Panic",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 198,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 60,
+          "duration": 42
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-mire-thorns-61-r1",
+    "name": "Mire Thorns",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 148,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 55,
+          "duration": 180
+        }
+      ],
+      "description": "Entraps your target in mire thorns, slowing their movement rate for up to 3 minutes. This spell is difficult to resist.",
+      "resist": "lowest",
+      "resistMod": -20
+    }
+  },
+  {
+    "_id": "dru-replenishment-61-r1",
+    "name": "Replenishment",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 275,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 58,
+          "duration": 1260
+        }
+      ],
+      "description": "Hastens your target's natural healing, regenerating up to 58 hit points every 6 seconds for 21 minutes."
+    }
+  },
+  {
+    "_id": "dru-storms-fury-61-r1",
+    "name": "Storm's Fury",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 455,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 810
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 65,
+          "duration": 2.5
+        }
+      ],
+      "description": "Summons a whirling wind to stun your target, also doing between 410 and 410 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-winters-storm-61-r1",
+    "name": "Winter's Storm",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 61,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 3.5,
+      "manaCost": 988,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 1680,
+          "radius": 20
+        }
+      ],
+      "description": "Calls down a hailstorm over your target, causing 850 damage every 3 seconds to creatures in the area. The storm will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "cold",
+      "resistMod": -50,
+      "radius": 20
+    }
+  },
+  {
+    "_id": "dru-flight-of-eagles-62-r1",
+    "name": "Flight of Eagles",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 62,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 7.0,
+      "manaCost": 777,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "see-invisible"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 70,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "levitate"
+        },
+        {
+          "type": "utility",
+          "effect": "infravision"
+        }
+      ],
+      "description": "Fills your group with the spirit of the eagle for 60 minutes, allowing them increased movement, levitation and superior vision."
+    }
+  },
+  {
+    "_id": "dru-immolation-of-ro-62-r1",
+    "name": "Immolation of Ro",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "druid",
+      "level": 62,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 469,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 265,
+          "max": 265,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-fire",
+          "min": -35,
+          "max": -35,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -8,
+          "max": -6,
+          "duration": 60
+        }
+      ],
+      "description": "Surrounds your target in dancing flames for 60 seconds, causing between 31 and 175 damage every six seconds as well as lowering their fire resistance, and armor class.",
+      "resist": "fire",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "dru-karanas-rage-62-r1",
+    "name": "Karana's Rage",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 62,
+      "school": "evocation",
+      "target": "area",
+      "range": 200,
+      "castTime": 7.0,
+      "manaCost": 720,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1760,
+          "radius": 10
+        }
+      ],
+      "description": "Calls down lightning from the sky over your target, causing between 1100 and 1100 damage to up to 4 creatures in the area. This spell can only be cast outdoors.",
+      "resist": "magic",
+      "radius": 10
+    }
+  },
+  {
+    "_id": "dru-natures-might-62-r1",
+    "name": "Nature's Might",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 62,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 194,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 55,
+          "duration": 4320
+        }
+      ],
+      "description": "Fills your target with the power of the stone, increasing their strength for 72 minutes."
+    }
+  },
+  {
+    "_id": "dru-ring-of-slaughter-62-r1",
+    "name": "Ring of Slaughter",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 62,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 311,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "wallofslaughter"
+        }
+      ],
+      "description": "Opens a mystic portal that teleports you to the walls of slaughter."
+    }
+  },
+  {
+    "_id": "dru-ros-illumination-62-r1",
+    "name": "Ro's Illumination",
+    "type": "spell",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "class": "druid",
+      "level": 62,
+      "school": "alteration",
+      "target": "single",
+      "range": 150,
+      "castTime": 2.5,
+      "manaCost": 233,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "atk",
+          "min": -80,
+          "max": -80,
+          "duration": 600
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -4,
+          "max": -3,
+          "duration": 600
+        }
+      ],
+      "description": "Surrounds your target in dancing flames for 10 minutes, lowering their attack value and armor class.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-blessing-of-replenishment-63-r1",
+    "name": "Blessing of Replenishment",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 63,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 648,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 58,
+          "duration": 1230
+        }
+      ],
+      "description": "Hastens your group's natural healing, regenerating up to 58 hit points every 6 seconds for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "dru-command-of-tunare-63-r1",
+    "name": "Command of Tunare",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "druid",
+      "level": 63,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 8.0,
+      "manaCost": 356,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 60,
+          "duration": 1230
+        }
+      ],
+      "description": "Beckons to the animals of the wild, allowing you to control them.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-ecis-frosty-breath-63-r1",
+    "name": "E`ci's Frosty Breath",
+    "type": "spell",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "class": "druid",
+      "level": 63,
+      "school": "alteration",
+      "target": "single",
+      "range": 150,
+      "castTime": 2.5,
+      "manaCost": 212,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "resist-cold",
+          "min": -55,
+          "max": -55,
+          "duration": 600
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -10,
+          "max": -7,
+          "duration": 600
+        }
+      ],
+      "description": "Covers your target in a layer of glistening ice, lowering their cold resistance and armor class.",
+      "resist": "cold",
+      "resistMod": -200
+    }
+  },
+  {
+    "_id": "dru-natures-infusion-63-r1",
+    "name": "Nature's Infusion",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 63,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 558,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 2040,
+          "max": 2040
+        }
+      ],
+      "description": "Mends severe wounds, healing up to 2050 damage."
+    }
+  },
+  {
+    "_id": "dru-protection-of-the-nine-63-r1",
+    "name": "Protection of the Nine",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 63,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 723,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 9,
+          "duration": 6000
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 620,
+          "duration": 6000
+        },
+        {
+          "type": "heal",
+          "amount": 615,
+          "max": 615
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 8,
+          "max": 8,
+          "duration": 6000
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points, mana regeneration, and armor class for 100 minutes."
+    }
+  },
+  {
+    "_id": "dru-resist-corruption-63-r1",
+    "name": "Resist Corruption",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 63,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 42,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-corruption",
+          "amount": 10,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away corruption for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-resist-corruption-63-r2",
+    "name": "Resist Corruption",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 63,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 45,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-corruption",
+          "amount": 11,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away corruption for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-resist-corruption-63-r3",
+    "name": "Resist Corruption",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 63,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 48,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-corruption",
+          "amount": 11,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away corruption for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-shield-of-bracken-63-r1",
+    "name": "Shield of Bracken",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 63,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 153,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 40,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of spikes that causes damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-swarming-death-63-r1",
+    "name": "Swarming Death",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 63,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 438,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 305,
+          "max": 305,
+          "duration": 54
+        }
+      ],
+      "description": "Commands a swarm of insects to attack your target relentlessly, causing between 302 and 438 damage every six seconds for 54 seconds.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-brackencoat-64-r1",
+    "name": "Brackencoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 354,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 11,
+          "max": 14,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 13,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of bracken that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "dru-chant-of-the-napaea-64-r1",
+    "name": "Chant of the Napaea",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 24,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "corruption",
+          "min": 1,
+          "max": 2
+        }
+      ],
+      "description": "Cleanses your group of 2 corruption counters."
+    }
+  },
+  {
+    "_id": "dru-chant-of-the-napaea-64-r2",
+    "name": "Chant of the Napaea",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "corruption",
+          "min": 1,
+          "max": 2
+        }
+      ],
+      "description": "Cleanses your group of 2 corruption counters."
+    }
+  },
+  {
+    "_id": "dru-chant-of-the-napaea-64-r3",
+    "name": "Chant of the Napaea",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 27,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "corruption",
+          "min": 1,
+          "max": 2
+        }
+      ],
+      "description": "Cleanses your group of 2 corruption counters."
+    }
+  },
+  {
+    "_id": "dru-circle-of-slaughter-64-r1",
+    "name": "Circle of Slaughter",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 480,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "wallofslaughter"
+        }
+      ],
+      "description": "Opens a mystic portal that teleports your group to the walls of slaughter."
+    }
+  },
+  {
+    "_id": "dru-karanas-renewal-64-r1",
+    "name": "Karana's Renewal",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 720,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "increase-current-hp-by-75-up-to-4680"
+        }
+      ],
+      "description": "Blesses your target with a healing touch, healing up to 4680 damage."
+    }
+  },
+  {
+    "_id": "dru-protection-of-seasons-64-r1",
+    "name": "Protection of Seasons",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 540,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 72,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 72,
+          "duration": 9000
+        }
+      ],
+      "description": "Surrounds your group in a protection of seasons, increasing their fire and cold resistance for 2.5 hours."
+    }
+  },
+  {
+    "_id": "dru-savage-roots-64-r1",
+    "name": "Savage Roots",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 270
+        }
+      ],
+      "description": "Commands roots to take hold of your target, preventing their movement for 4.5 minutes.",
+      "resist": "magic",
+      "resistMod": -30
+    }
+  },
+  {
+    "_id": "dru-summers-flame-64-r1",
+    "name": "Summer's Flame",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 474,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1920
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 1600 and 1600 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-vengeance-of-tunare-64-r1",
+    "name": "Vengeance of Tunare",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 577,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "curse",
+          "amount": 8,
+          "duration": 30
+        },
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 575,
+          "max": 575,
+          "duration": 30
+        }
+      ],
+      "description": "Inflicts the vengeance of the wild on your target, causing between 470 and 608 damage every six seconds for 30 seconds.",
+      "resist": "fire",
+      "resistMod": -30
+    }
+  },
+  {
+    "_id": "dru-zephyr-buried-sea-64-r1",
+    "name": "Zephyr: Buried Sea",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 64,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 270,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "buriedsea"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Buried Sea."
+    }
+  },
+  {
+    "_id": "dru-ancient-chaos-frost-65-r1",
+    "name": "Ancient: Chaos Frost",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 65,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 329,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 1650
+        }
+      ],
+      "description": "Commands the frost of chaos to strike your target for 1450 damage.",
+      "resist": "cold"
+    }
+  },
+  {
+    "_id": "dru-blessing-of-the-nine-65-r1",
+    "name": "Blessing of the Nine",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 65,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 1504,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 9,
+          "duration": 6000
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 620,
+          "duration": 6000
+        },
+        {
+          "type": "heal",
+          "amount": 545,
+          "max": 545
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 7,
+          "max": 7,
+          "duration": 6000
+        }
+      ],
+      "description": "Hardens the skin of your group, increasing their hit points, mana regeneration, and armor class for 100 minutes."
+    }
+  },
+  {
+    "_id": "dru-destroy-summoned-65-r1",
+    "name": "Destroy Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 65,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 325,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1530
+        }
+      ],
+      "description": "A burst of holy light that causes between 1350 and 1350 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-legacy-of-bracken-65-r1",
+    "name": "Legacy of Bracken",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 65,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 432,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 40,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your group in a shield of spikes that causes damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-mask-of-the-forest-65-r1",
+    "name": "Mask of the Forest",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 65,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 227,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "magnification",
+          "amount": 120
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 4,
+          "max": 4,
+          "duration": 11700
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible"
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision"
+        }
+      ],
+      "description": "Covers your face in the mask of the forest for 3.3 hours, allowing you improved vision, increased mana regeneration, and the ability to see invisible creatures."
+    }
+  },
+  {
+    "_id": "dru-sylvan-embers-65-r1",
+    "name": "Sylvan Embers",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "druid",
+      "level": 65,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 559,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 300,
+          "max": 300,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-fire",
+          "min": -40,
+          "max": -40,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -9,
+          "max": -7,
+          "duration": 60
+        }
+      ],
+      "description": "Surrounds your target in dancing flames for 60 seconds. causing between 64 and 214 damage every six seconds as well as lowering their fire resistance and armor class.",
+      "resist": "fire",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "dru-sylvan-fire-65-r1",
+    "name": "Sylvan Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 65,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 494,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 2000
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 1761 and 1761 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-sylvan-infusion-65-r1",
+    "name": "Sylvan Infusion",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 65,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 537,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 2160,
+          "max": 2160
+        }
+      ],
+      "description": "Mends severe wounds, healing up to 2441 damage."
+    }
+  },
+  {
+    "_id": "dru-winters-frost-65-r1",
+    "name": "Winter's Frost",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 65,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 346,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 1560
+        }
+      ],
+      "description": "Summons the raging blizzard of winter, causing 1375 damage to your target.",
+      "resist": "cold"
+    }
+  }
+]

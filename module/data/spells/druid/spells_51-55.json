@@ -1,0 +1,1129 @@
+[
+  {
+    "_id": "dru-circle-of-winter-51-r1",
+    "name": "Circle of Winter",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 51,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 4.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 45,
+          "duration": 2160
+        }
+      ],
+      "description": "Calls upon the spirit of winter to protect your group from fire for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-repulse-animal-51-r1",
+    "name": "Repulse Animal",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "druid",
+      "level": 51,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52,
+          "duration": 48
+        }
+      ],
+      "description": "Incites fear in an animal target, causing them to flee.",
+      "resist": "magic",
+      "resistMod": -25
+    }
+  },
+  {
+    "_id": "dru-ring-of-tranquility-51-r1",
+    "name": "Ring of Tranquility",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 51,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.5,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "potranquility"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Plane of Knowledge book, in the Plane of Tranquility."
+    }
+  },
+  {
+    "_id": "dru-breath-of-ro-52-r1",
+    "name": "Breath of Ro",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 157,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 105,
+          "max": 105,
+          "duration": 54
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-fire",
+          "min": -32,
+          "max": -32,
+          "duration": 54
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -6,
+          "max": -5,
+          "duration": 54
+        }
+      ],
+      "description": "Surrounds your target in dancing flames for 54 seconds, causing between 27 and 94 damage every six seconds as well as lowering their fire resistance and armor class.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-call-of-karana-52-r1",
+    "name": "Call of Karana",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 220,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 53,
+          "duration": 1230
+        }
+      ],
+      "description": "Beckons to the animals of the wild, allowing you to control them.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-circle-of-arcstone-52-r1",
+    "name": "Circle of Arcstone",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "arcstone"
+        }
+      ],
+      "description": "Transports your group to Arcstone in the Plane of Magic."
+    }
+  },
+  {
+    "_id": "dru-circle-of-summer-52-r1",
+    "name": "Circle of Summer",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 4.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 45,
+          "duration": 2160
+        }
+      ],
+      "description": "Calls upon the spirit of summer to protect your group from cold for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-circle-of-undershore-52-r1",
+    "name": "Circle of Undershore",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "eastkorlach"
+        }
+      ],
+      "description": "Transports your group to the undershore."
+    }
+  },
+  {
+    "_id": "dru-egress-i-52-r1",
+    "name": "Egress I",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "evac"
+        }
+      ],
+      "description": "This ability, when activated, teleports you to a relatively safe location in your current zone with a 3 second cast time."
+    }
+  },
+  {
+    "_id": "dru-feral-pack-52-r1",
+    "name": "Feral Pack",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "single",
+      "range": 0,
+      "castTime": 8.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "old-wolf"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 30,
+          "duration": 8640
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 65,
+          "duration": 8640
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision"
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible"
+        }
+      ],
+      "description": "Fills your group with the spirit of the wild, allowing them to take on the form of a feral beast. This spell also functions indoors."
+    }
+  },
+  {
+    "_id": "dru-foliage-shield-52-r1",
+    "name": "Foliage Shield",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "divination",
+      "target": "group",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard"
+        }
+      ],
+      "description": "Surrounds your group in a veil of foliage, causing them to become invisible to most creatures."
+    }
+  },
+  {
+    "_id": "dru-pure-blood-52-r1",
+    "name": "Pure Blood",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 9
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 9
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 9
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 9
+        }
+      ],
+      "description": "Cleanses the body of your target, curing severe diseases and poisons."
+    }
+  },
+  {
+    "_id": "dru-ring-of-arcstone-52-r1",
+    "name": "Ring of Arcstone",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "arcstone"
+        }
+      ],
+      "description": "Transports you to Arcstone in the Plane of Magic."
+    }
+  },
+  {
+    "_id": "dru-ring-of-barindu-52-r1",
+    "name": "Ring of Barindu",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "Barindu"
+        }
+      ],
+      "description": "Opens a mystic portal that teleports you to Barindu."
+    }
+  },
+  {
+    "_id": "dru-ring-of-natimbi-52-r1",
+    "name": "Ring of Natimbi",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "Natimbi"
+        }
+      ],
+      "description": "Opens a mystic portal that teleports you to the broken shores of Natimbi."
+    }
+  },
+  {
+    "_id": "dru-ring-of-undershore-52-r1",
+    "name": "Ring of Undershore",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "eastkorlach"
+        }
+      ],
+      "description": "Teleports you to the undershore."
+    }
+  },
+  {
+    "_id": "dru-zephyr-undershore-52-r1",
+    "name": "Zephyr: Undershore",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 52,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "eastkorlach"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Undershore."
+    }
+  },
+  {
+    "_id": "dru-glamour-of-tunare-53-r1",
+    "name": "Glamour of Tunare",
+    "type": "spell",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "class": "druid",
+      "level": 53,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "increase-poison-counter"
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-magic",
+          "min": -20,
+          "max": -20,
+          "duration": 1230
+        }
+      ],
+      "description": "Dazzles your targeted animal with the glamour of Tunare, making them more vulnerable to magic."
+    }
+  },
+  {
+    "_id": "dru-ring-of-bloodfields-53-r1",
+    "name": "Ring of Bloodfields",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 53,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "bloodfields"
+        }
+      ],
+      "description": "Opens a mystic portal that teleports you to the Bloodfields."
+    }
+  },
+  {
+    "_id": "dru-spirit-of-scale-53-r1",
+    "name": "Spirit of Scale",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 53,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "cancel-if-combat-initiated"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 70,
+          "duration": 4320
+        }
+      ],
+      "description": "Imbues your group with the spirit of a scaled wolf, increasing their movement speed for 72 minutes. Any attack, or spell cast will break the enchantment."
+    }
+  },
+  {
+    "_id": "dru-winged-death-53-r1",
+    "name": "Winged Death",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 53,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 468,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 110,
+          "max": 110,
+          "duration": 54
+        }
+      ],
+      "description": "Commands a swarm of insects to attack your target relentlessly, causing between 214 and 277 damage every six seconds for 54 seconds.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-blizzard-54-r1",
+    "name": "Blizzard",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 54,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 3.5,
+      "manaCost": 332,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 340,
+          "radius": 20
+        }
+      ],
+      "description": "Calls down a hailstorm over your target, causing 490 damage every 3 seconds to creatures in the area. The storm will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "cold",
+      "radius": 20
+    }
+  },
+  {
+    "_id": "dru-circle-of-natimbi-54-r1",
+    "name": "Circle of Natimbi",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 54,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "Natimbi"
+        }
+      ],
+      "description": "Opens a mystic portal that teleports your group to the broken shores of Natimbi."
+    }
+  },
+  {
+    "_id": "dru-circle-of-tranquility-54-r1",
+    "name": "Circle of Tranquility",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 54,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 24.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "potranquility"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Plane of Knowledge book in the Plane of Tranquility."
+    }
+  },
+  {
+    "_id": "dru-eradicate-curse-54-r1",
+    "name": "Eradicate Curse",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 54,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.25,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 30
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 30
+        }
+      ],
+      "description": "Cleanses your target's soul, removing strong curses."
+    }
+  },
+  {
+    "_id": "dru-form-of-the-howler-54-r1",
+    "name": "Form of the Howler",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 54,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "black-spirit-wolf"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 100,
+          "duration": 8640
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 2,
+          "max": 2,
+          "duration": 8640
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision"
+        }
+      ],
+      "description": "Fills you with the spirit of the wild, allowing you to take the form a wolf for 2.4 hours."
+    }
+  },
+  {
+    "_id": "dru-regrowth-54-r1",
+    "name": "Regrowth",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 54,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 38,
+          "duration": 1230
+        }
+      ],
+      "description": "Hastens your target's natural healing, regenerating up to 38 hit points every 6 seconds for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "dru-remove-greater-curse-54-r1",
+    "name": "Remove Greater Curse",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 54,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 9
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 9
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 9
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 9
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 9
+        }
+      ],
+      "description": "Cleanses your target's soul, removing major curses."
+    }
+  },
+  {
+    "_id": "dru-ring-of-buried-sea-54-r1",
+    "name": "Ring of Buried Sea",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 54,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "buriedsea"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports you to the Buried Sea."
+    }
+  },
+  {
+    "_id": "dru-scoriae-54-r1",
+    "name": "Scoriae",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 54,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 264,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 685
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 986 and 986 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-spirit-of-eagle-54-r1",
+    "name": "Spirit of Eagle",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 54,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "see-invisible"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 70,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "levitate"
+        },
+        {
+          "type": "utility",
+          "effect": "infravision"
+        }
+      ],
+      "description": "Fills your target with the spirit of the eagle, allowing them increased movement, levitation, and superior vision for 60 minutes."
+    }
+  },
+  {
+    "_id": "dru-annul-magic-55-r1",
+    "name": "Annul Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel"
+        },
+        {
+          "type": "utility",
+          "effect": "dispel"
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "dru-aura-of-the-grove-55-r1",
+    "name": "Aura of the Grove",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "aura-effect-aura-of-the-grove-effect"
+        }
+      ],
+      "description": "Increases your companions' health regeneration and also removes their disease effects, as long as they stay inside the area of the aura."
+    }
+  },
+  {
+    "_id": "dru-chloroblast-55-r1",
+    "name": "Chloroblast",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 331,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 400,
+          "max": 940
+        }
+      ],
+      "description": "Mends severe wounds, healing between 444 and 1044 hit points."
+    }
+  },
+  {
+    "_id": "dru-circle-of-barindu-55-r1",
+    "name": "Circle of Barindu",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "Barindu"
+        }
+      ],
+      "description": "Opens a mystic portal that teleports your group to Barindu."
+    }
+  },
+  {
+    "_id": "dru-circle-of-bloodfields-55-r1",
+    "name": "Circle of Bloodfields",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "bloodfields"
+        }
+      ],
+      "description": "Opens a mystic portal that teleports your group to the Bloodfields."
+    }
+  },
+  {
+    "_id": "dru-exile-summoned-55-r1",
+    "name": "Exile Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 185,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 685
+        }
+      ],
+      "description": "A burst of holy light that causes between 798 and 798 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "dru-frost-55-r1",
+    "name": "Frost",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 202,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 715
+        }
+      ],
+      "description": "Covers your target in glistening ice, causing 837 damage, and lowering their fire resistance.",
+      "resist": "cold"
+    }
+  },
+  {
+    "_id": "dru-girdle-of-karana-55-r1",
+    "name": "Girdle of Karana",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 105,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 42,
+          "duration": 4320
+        }
+      ],
+      "description": "Fills your target with the power of the stone, increasing their strength for 72 minutes."
+    }
+  },
+  {
+    "_id": "dru-nature-walkers-behest-55-r1",
+    "name": "Nature Walker's Behest",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 220,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "bear"
+        }
+      ],
+      "description": "Summons the spirit of a wild bear to obey your commands."
+    }
+  },
+  {
+    "_id": "dru-tunares-request-55-r1",
+    "name": "Tunare's Request",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 8.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 35,
+          "duration": 11700
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur"
+        }
+      ],
+      "description": "Beckons to the animals of the wild, allowing you to control them.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-vengeance-of-nature-55-r1",
+    "name": "Vengeance of Nature",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "druid",
+      "level": 55,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 487,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "curse",
+          "amount": 8,
+          "duration": 30
+        },
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 215,
+          "max": 215,
+          "duration": 30
+        }
+      ],
+      "description": "Inflicts the vengeance of the wild on your target, causing between 170 and 298 damage every six seconds for 30 seconds.",
+      "resist": "fire",
+      "resistMod": -30
+    }
+  }
+]

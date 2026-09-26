@@ -1,0 +1,593 @@
+[
+  {
+    "_id": "dru-savage-spirit-41-r1",
+    "name": "Savage Spirit",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 41,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 45,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "increase-melee-haste"
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 5,
+          "duration": 3600
+        }
+      ],
+      "description": "Fills your pet with a savage spirit, increasing their attack speed, strength, and armor class."
+    }
+  },
+  {
+    "_id": "dru-succor-lavastorm-41-r1",
+    "name": "Succor: Lavastorm",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 41,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "evac"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Lavastorm Mountains."
+    }
+  },
+  {
+    "_id": "dru-summon-companion-41-r1",
+    "name": "Summon Companion",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 41,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-pet"
+        }
+      ],
+      "description": "Summons your pet to your current location."
+    }
+  },
+  {
+    "_id": "dru-zephyr-twilight-41-r1",
+    "name": "Zephyr: Twilight",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 41,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "twilight"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Twilight Sea."
+    }
+  },
+  {
+    "_id": "dru-chloroplast-42-r1",
+    "name": "Chloroplast",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 42,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 19,
+          "duration": 1230
+        }
+      ],
+      "description": "Hastens your target's natural healing, regenerating up to 19 hit points every 6 seconds for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "dru-circle-of-cobalt-scar-42-r1",
+    "name": "Circle of Cobalt Scar",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 42,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "cobaltscar"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Cobalt Scar."
+    }
+  },
+  {
+    "_id": "dru-fixation-of-ro-42-r1",
+    "name": "Fixation of Ro",
+    "type": "spell",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "class": "druid",
+      "level": 42,
+      "school": "alteration",
+      "target": "single",
+      "range": 150,
+      "castTime": 2.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "atk",
+          "min": -95,
+          "max": -95,
+          "duration": 600
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -8,
+          "max": -6,
+          "duration": 600
+        }
+      ],
+      "description": "Surrounds your target in dancing flames, lowering their attack and armor class.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-zephyr-great-divide-42-r1",
+    "name": "Zephyr: Great Divide",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 42,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "greatdivide"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Great Divide."
+    }
+  },
+  {
+    "_id": "dru-allure-of-the-wild-43-r1",
+    "name": "Allure of the Wild",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "druid",
+      "level": 43,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 9.0,
+      "manaCost": 220,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 49,
+          "duration": 1230
+        }
+      ],
+      "description": "Beckons to the animals of the wild, allowing you to control them.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-banish-summoned-43-r1",
+    "name": "Banish Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 43,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 136,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 500
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 400 and 540 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "dru-dustdevil-43-r1",
+    "name": "Dustdevil",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 43,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 162,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 540
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 582 and 582 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-nullify-magic-43-r1",
+    "name": "Nullify Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 43,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel"
+        },
+        {
+          "type": "utility",
+          "effect": "dispel"
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "dru-zephyr-wakening-lands-43-r1",
+    "name": "Zephyr: Wakening Lands",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 43,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "wakening"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Wakening Lands."
+    }
+  },
+  {
+    "_id": "dru-greater-mass-imbue-emerald-44-r1",
+    "name": "Greater Mass Imbue Emerald",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 44,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 2400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-imbued-emerald-x-20"
+        }
+      ],
+      "description": "Focuses the power of Tunare into twenty emeralds. Consumes twenty emeralds when cast."
+    }
+  },
+  {
+    "_id": "dru-greater-mass-imbue-plains-pebble-44-r1",
+    "name": "Greater Mass Imbue Plains Pebble",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 44,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 2400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-imbued-plains-pebble-x-20"
+        }
+      ],
+      "description": "Focuses the power of Karana into twenty plains pebbles. Consumes twenty plains pebbles when cast."
+    }
+  },
+  {
+    "_id": "dru-resist-disease-44-r1",
+    "name": "Resist Disease",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 44,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away disease for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-resist-poison-44-r1",
+    "name": "Resist Poison",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 44,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-poison",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away poison for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-storm-strength-44-r1",
+    "name": "Storm Strength",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 44,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 35,
+          "duration": 3240
+        }
+      ],
+      "description": "Fills your target with the power of the storm, increasing their strength for 54 minutes."
+    }
+  },
+  {
+    "_id": "dru-superior-healing-44-r1",
+    "name": "Superior Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 44,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 185,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 170,
+          "max": 515
+        }
+      ],
+      "description": "Mends severe wounds, healing between 200 and 600 hit points."
+    }
+  },
+  {
+    "_id": "dru-zephyr-cobalt-scar-44-r1",
+    "name": "Zephyr: Cobalt Scar",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 44,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "cobaltscar"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Cobalt Scar."
+    }
+  },
+  {
+    "_id": "dru-engulfing-roots-45-r1",
+    "name": "Engulfing Roots",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 45,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 685
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 180
+        }
+      ],
+      "description": "Commands roots to take hold of your target, doing between 10 and 160 damage, and preventing their movement for 3 minutes.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-pack-chloroplast-45-r1",
+    "name": "Pack Chloroplast",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 45,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 9.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 19,
+          "duration": 840
+        }
+      ],
+      "description": "Hastens your group's natural healing, regenerating up to 19 hit points every 6 seconds for 14 minutes."
+    }
+  },
+  {
+    "_id": "dru-share-form-of-the-great-wolf-45-r1",
+    "name": "Share Form of the Great Wolf",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 45,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "old-wolf"
+        },
+        {
+          "type": "utility",
+          "effect": "trigger-spell",
+          "spell": "illusion-benefit-dena-if-not-cast-by-item-click"
+        }
+      ],
+      "description": "Fills your group with the spirit of the wild, allowing them to take the form a wolf for 6 hours and granting Illusion Benefit Dena."
+    }
+  },
+  {
+    "_id": "dru-zephyr-misty-45-r1",
+    "name": "Zephyr: Misty",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 45,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "mistythicket"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Misty Thicket."
+    }
+  }
+]

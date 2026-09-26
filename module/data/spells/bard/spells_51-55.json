@@ -1,0 +1,778 @@
+[
+  {
+    "_id": "brd-largos-assonant-binding-51-r1",
+    "name": "Largo's Assonant Binding",
+    "type": "song",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "song": {
+        "level": 51,
+        "category": "debuff",
+        "songGroup": "slow-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 150,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "effect": "slow",
+            "amount": 35,
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "effect": "snare",
+            "amount": 131,
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "stat": "agi",
+            "amount": -85,
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "stat": "ac",
+            "min": -8,
+            "max": -11,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A binding melody that surrounds your target in magical bonds, slowing their movement and attack speed, as well as lowering their agility."
+    }
+  },
+  {
+    "_id": "brd-resistant-discipline-51-r1",
+    "name": "Resistant Discipline",
+    "type": "song",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "song": {
+        "level": 51,
+        "category": "utility",
+        "songGroup": "discipline",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": null,
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 300,
+          "unit": "seconds"
+        },
+        "target": "self",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "resist-all",
+            "amount": 20,
+            "duration": 300
+          }
+        ]
+      },
+      "description": "Focuses your will, increasing your resistances for a short time."
+    }
+  },
+  {
+    "_id": "brd-selos-song-of-travel-51-r1",
+    "name": "Selo's Song of Travel",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 51,
+        "category": "buff",
+        "songGroup": "movement-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "movement",
+            "amount": 65,
+            "duration": 12
+          },
+          {
+            "type": "invisibility",
+            "effect": "unstable"
+          },
+          {
+            "type": "utility",
+            "effect": "see-invisible"
+          },
+          {
+            "type": "utility",
+            "effect": "levitate"
+          }
+        ]
+      },
+      "description": "This song allows greatly increased freedom of movement. It provides levitation, increased movement speed, the ability to see invisible creatures, and invisibility for your group."
+    }
+  },
+  {
+    "_id": "brd-aria-of-innocence-52-r1",
+    "name": "Aria of Innocence",
+    "type": "song",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "song": {
+        "level": 52,
+        "category": "heal",
+        "songGroup": "cure-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "cure",
+            "effect": "curse",
+            "min": 1,
+            "max": 2
+          },
+          {
+            "type": "cure",
+            "effect": "curse",
+            "min": 1,
+            "max": 2
+          }
+        ]
+      },
+      "description": "A long forgotten aria that cleanses the target's body of harmful curses."
+    }
+  },
+  {
+    "_id": "brd-battlecry-of-the-vah-shir-52-r1",
+    "name": "Battlecry of the Vah Shir",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 52,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 15,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "A powerful battle cry that causes your group to attack with enhanced speed. This increase is cumulative with most other effects that increase attack speed."
+    }
+  },
+  {
+    "_id": "brd-nillipus-march-of-the-wee-52-r1",
+    "name": "Nillipus' March of the Wee",
+    "type": "song",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "song": {
+        "level": 52,
+        "category": "buff",
+        "songGroup": "ac-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 2,
+            "max": 3,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "agi",
+            "amount": 18,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "rune",
+            "amount": 12,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A marching tune that surrounds your group with an aura of protection that absorbs some damage, as well as increasing armor class and agility."
+    }
+  },
+  {
+    "_id": "brd-rizlonas-fire-53-r1",
+    "name": "Rizlona's Fire",
+    "type": "song",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "song": {
+        "level": 53,
+        "category": "buff",
+        "songGroup": "spell-focus",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "spell-damage",
+            "min": 1,
+            "max": 15,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Increases the damage of your companions' direct damage spells by up to 15%. This bonus will decay on spells over level 60."
+    }
+  },
+  {
+    "_id": "brd-song-of-dawn-53-r1",
+    "name": "Song of Dawn",
+    "type": "song",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "song": {
+        "level": 53,
+        "category": "control",
+        "songGroup": "hate-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "stat": "hate",
+            "amount": -220
+          }
+        ]
+      },
+      "description": "The sounds of the dawn confuse your enemy and make them more likely to attack a different target."
+    }
+  },
+  {
+    "_id": "brd-song-of-twilight-53-r1",
+    "name": "Song of Twilight",
+    "type": "song",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "song": {
+        "level": 53,
+        "category": "control",
+        "songGroup": "mez-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "mez",
+            "amount": 55,
+            "duration": 18
+          },
+          {
+            "type": "debuff",
+            "stat": "resist-magic",
+            "amount": -33,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "A quiet lullaby that causes your target to fall into an enchanted sleep. Affects creatures up to level 55."
+    }
+  },
+  {
+    "_id": "brd-elemental-chorus-54-r1",
+    "name": "Elemental Chorus",
+    "type": "song",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "song": {
+        "level": 54,
+        "category": "buff",
+        "songGroup": "resist-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "resist-magic",
+            "amount": 50,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-cold",
+            "amount": 50,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-fire",
+            "amount": 50,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 0,
+            "max": 0,
+            "duration": 12
+          }
+        ],
+        "radius": 50
+      },
+      "description": "A mystic tune that offers protection from fire, ice and magic to all nearby allies."
+    }
+  },
+  {
+    "_id": "brd-fearless-discipline-54-r1",
+    "name": "Fearless Discipline",
+    "type": "song",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "song": {
+        "level": 54,
+        "category": "utility",
+        "songGroup": "discipline",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": null,
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 60,
+          "unit": "seconds"
+        },
+        "target": "self",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "chance-to-resist-fear-spell",
+            "amount": 10000,
+            "duration": 60
+          }
+        ]
+      },
+      "description": "Strengthens your resolve, rendering you immune to fear."
+    }
+  },
+  {
+    "_id": "brd-selos-assonant-strain-54-r1",
+    "name": "Selo's Assonant Strain",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 54,
+        "category": "debuff",
+        "songGroup": "snare-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "effect": "snare",
+            "amount": 62,
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "effect": "slow",
+            "amount": 40,
+            "duration": 12
+          }
+        ],
+        "radius": 35
+      },
+      "description": "A compelling song that surrounds up to 30 nearby creatures in magical bonds, slowing their attack speed and movement rate."
+    }
+  },
+  {
+    "_id": "brd-vilias-chorus-of-celerity-54-r1",
+    "name": "Vilia's Chorus of Celerity",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 54,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 45,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A energetic verse that heightens the attack speed of your group."
+    }
+  },
+  {
+    "_id": "brd-aura-of-insight-55-r1",
+    "name": "Aura of Insight",
+    "type": "song",
+    "img": "icons/magic/arcane/aoe-energy-blue.webp",
+    "system": {
+      "song": {
+        "level": 55,
+        "category": "buff",
+        "songGroup": "aura",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "self",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "aura",
+            "aura": "aura-of-insight"
+          }
+        ]
+      },
+      "description": "Increases your companions' attack speed and spell damage, as long as they stay inside the area of the aura."
+    }
+  },
+  {
+    "_id": "brd-bruscos-bombastic-bellow-55-r1",
+    "name": "Brusco's Bombastic Bellow",
+    "type": "song",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "song": {
+        "level": 55,
+        "category": "damage",
+        "songGroup": "stun-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "stun",
+            "duration": 8
+          },
+          {
+            "type": "damage",
+            "element": "magic",
+            "amount": 224
+          }
+        ]
+      },
+      "description": "A powerful bellow that causes 222 damage and stuns your enemy for 8 seconds up to level 55 ."
+    }
+  },
+  {
+    "_id": "brd-cantata-of-replenishment-55-r1",
+    "name": "Cantata of Replenishment",
+    "type": "song",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "song": {
+        "level": 55,
+        "category": "heal",
+        "songGroup": "heal-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "heal",
+            "amount": 209,
+            "duration": 12
+          },
+          {
+            "type": "regen",
+            "stat": "mana",
+            "min": 1,
+            "max": 22,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A light cantata that regenerates the health, mana, and stamina of your group."
+    }
+  },
+  {
+    "_id": "brd-deftdance-discipline-55-r1",
+    "name": "Deftdance Discipline",
+    "type": "song",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "song": {
+        "level": 55,
+        "category": "utility",
+        "songGroup": "discipline",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": null,
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "self",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "chance-to-dodge",
+            "amount": 10000,
+            "duration": 18
+          },
+          {
+            "type": "utility",
+            "effect": "chance-to-dual-wield",
+            "amount": 10000,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "Increases your combat reflexes, allowing you to avoid most attacks and allowing you to dual wield every round."
+    }
+  },
+  {
+    "_id": "brd-occlusion-of-sound-55-r1",
+    "name": "Occlusion of Sound",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 55,
+        "category": "debuff",
+        "songGroup": "resist-debuff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "stat": "resist-cold",
+            "amount": -10,
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "stat": "resist-fire",
+            "amount": -10,
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "stat": "resist-magic",
+            "amount": -10,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "An aura of silence envelops your enemy, causing them to become more susceptible to fire, ice, and magic."
+    }
+  }
+]

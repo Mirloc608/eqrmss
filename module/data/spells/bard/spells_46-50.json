@@ -1,0 +1,362 @@
+[
+  {
+    "_id": "brd-tuyens-chant-of-frost-46-r1",
+    "name": "Tuyen's Chant of Frost",
+    "type": "song",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "song": {
+        "level": 46,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "cold",
+            "min": 1,
+            "max": 15,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "cast-spell",
+            "spell": "chant-of-frost"
+          }
+        ]
+      },
+      "description": "A frozen chant that causes between 1 and 40 damage to an enemy and makes them more vulnerable to cold."
+    }
+  },
+  {
+    "_id": "brd-nivs-melody-of-preservation-47-r1",
+    "name": "Niv's Melody of Preservation",
+    "type": "song",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "song": {
+        "level": 47,
+        "category": "buff",
+        "songGroup": "stat-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "str",
+            "amount": 10,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "spell-rune",
+            "amount": 10,
+            "duration": 12
+          },
+          {
+            "type": "heal",
+            "amount": 138,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A melody that offers your group protection from spell damage as well as increasing their strength and health regeneration."
+    }
+  },
+  {
+    "_id": "brd-selos-chords-of-cessation-48-r1",
+    "name": "Selo's Chords of Cessation",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 48,
+        "category": "debuff",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "magic",
+            "min": 1,
+            "max": 31,
+            "condition": "target-not-moving",
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "effect": "slow",
+            "amount": 25,
+            "duration": 12
+          }
+        ],
+        "radius": 30
+      },
+      "description": "A collection of chords that binds up to 30 nearby enemies in magical cords, slowing their attacks and causing them damage."
+    }
+  },
+  {
+    "_id": "brd-selos-accelerating-chorus-49-r1",
+    "name": "Selo's Accelerating Chorus",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 49,
+        "category": "buff",
+        "songGroup": "movement-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 150,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "movement",
+            "amount": 65,
+            "duration": 150
+          }
+        ]
+      },
+      "description": "The rapid pace of this song fills your feet with speed, increasing the movement rate of your group for 2.5 minutes."
+    }
+  },
+  {
+    "_id": "brd-shield-of-songs-49-r1",
+    "name": "Shield of Songs",
+    "type": "song",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "song": {
+        "level": 49,
+        "category": "buff",
+        "songGroup": "rune-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "rune",
+            "amount": 20,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "spell-rune",
+            "amount": 20,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "This song wraps an aura of protection around your group that absorbs damage ."
+    }
+  },
+  {
+    "_id": "brd-melody-of-ervaj-50-r1",
+    "name": "Melody of Ervaj",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 50,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 5,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 3,
+            "max": 4,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "An archaic song that increases the attack speed of your group. This increase is cumulative with most other effects that increase attack speed."
+    }
+  },
+  {
+    "_id": "brd-tuyens-chant-of-poison-50-r1",
+    "name": "Tuyen's Chant of Poison",
+    "type": "song",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "song": {
+        "level": 50,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "poison",
+            "min": 1,
+            "max": 23,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "cast-spell",
+            "spell": "chant-of-venom"
+          }
+        ]
+      },
+      "description": "A poisoned chant that causes between 1 and 40 damage every six seconds to an enemy and makes them more vulnerable to poison."
+    }
+  },
+  {
+    "_id": "brd-verses-of-victory-50-r1",
+    "name": "Verses of Victory",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 50,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 30,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "agi",
+            "amount": 30,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 3,
+            "max": 4,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "str",
+            "amount": 30,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A victorious verse that fills the arms of your group with energy, increasing their attack rate, strength, and agility."
+    }
+  }
+]

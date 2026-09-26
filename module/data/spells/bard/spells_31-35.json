@@ -1,0 +1,244 @@
+[
+  {
+    "_id": "brd-agilmentes-aria-of-eagles-31-r1",
+    "name": "Agilmente's Aria of Eagles",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 31,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "levitate"
+          }
+        ]
+      },
+      "description": "An aria that allows your group to levitate for a short time."
+    }
+  },
+  {
+    "_id": "brd-cassindras-chorus-of-clarity-32-r1",
+    "name": "Cassindra's Chorus of Clarity",
+    "type": "song",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "song": {
+        "level": 32,
+        "category": "buff",
+        "songGroup": "mana-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "regen",
+            "stat": "mana",
+            "min": 1,
+            "max": 7,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A quiet chorus that clears the minds of your group, allowing them to regenerate their mana faster."
+    }
+  },
+  {
+    "_id": "brd-psalm-of-cooling-33-r1",
+    "name": "Psalm of Cooling",
+    "type": "song",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "song": {
+        "level": 33,
+        "category": "buff",
+        "songGroup": "damage-shield",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "damage-shield",
+            "amount": 22,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-fire",
+            "amount": 140,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "ultravision"
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 2,
+            "max": 3,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "This psalm surrounds your group in an aura of cold, affording them protection from fire, as well as harming anything that attacks them."
+    }
+  },
+  {
+    "_id": "brd-cantata-of-soothing-34-r1",
+    "name": "Cantata of Soothing",
+    "type": "song",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "song": {
+        "level": 34,
+        "category": "heal",
+        "songGroup": "heal-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "heal",
+            "amount": 80,
+            "duration": 12
+          },
+          {
+            "type": "regen",
+            "stat": "mana",
+            "min": 1,
+            "max": 5,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A light cantata that regenerates the health, mana, and stamina of your entire group."
+    }
+  },
+  {
+    "_id": "brd-lyssas-solidarity-of-vision-34-r1",
+    "name": "Lyssa's Solidarity of Vision",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 34,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 24,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 10000,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "bind-sight"
+          }
+        ]
+      },
+      "description": "This song weaves a magical mesh around your eyes, allowing you to see what your target sees."
+    }
+  },
+  {
+    "_id": "brd-denons-dissension-35-r1",
+    "name": "Denon's Dissension",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 35,
+        "category": "debuff",
+        "songGroup": "mana-drain",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "drain-mana",
+            "amount": 70
+          }
+        ],
+        "radius": 30
+      },
+      "description": "A harsh dissonance that assails the minds of up to 30 nearby creatures, draining their mana."
+    }
+  }
+]

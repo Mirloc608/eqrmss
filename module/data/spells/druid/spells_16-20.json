@@ -1,0 +1,675 @@
+[
+  {
+    "_id": "dru-careless-lightning-16-r1",
+    "name": "Careless Lightning",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 16,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 37,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 75
+        }
+      ],
+      "description": "Calls down lightning from the sky, causing between 80 and 105 damage to your target.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-dizzying-wind-16-r1",
+    "name": "Dizzying Wind",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 16,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 68
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 1.0
+        }
+      ],
+      "description": "Summons a whirling wind to stun your target while also doing between 65 and 95 damage. This spell can only be cast outdoors and stuns targets up to level 55 for 1 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-ring-of-butcher-16-r1",
+    "name": "Ring of Butcher",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 16,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "butcher"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Butcherblock Mountains."
+    }
+  },
+  {
+    "_id": "dru-barbcoat-17-r1",
+    "name": "Barbcoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 17,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 2,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of barbs that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "dru-ring-of-commons-17-r1",
+    "name": "Ring of Commons",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 17,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "commonlands"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Western Commonlands."
+    }
+  },
+  {
+    "_id": "dru-ring-of-toxxulia-17-r1",
+    "name": "Ring of Toxxulia",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 17,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "toxxulia"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Toxxulia Forest."
+    }
+  },
+  {
+    "_id": "dru-shield-of-barbs-17-r1",
+    "name": "Shield of Barbs",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 17,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 9,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of barbs that causes damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-tiny-companion-17-r1",
+    "name": "Tiny Companion",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 17,
+      "school": "alteration",
+      "target": "pet",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "decrease-pet-size"
+        }
+      ],
+      "description": "Shrinks your pet, allowing it better mobility in tight quarters."
+    }
+  },
+  {
+    "_id": "dru-cancel-magic-18-r1",
+    "name": "Cancel Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 18,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel"
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "dru-feral-spirit-18-r1",
+    "name": "Feral Spirit",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 18,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 20,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "increase-melee-haste"
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 7,
+          "duration": 3600
+        }
+      ],
+      "description": "Fills your pet with a feral spirit, increasing their attack speed, strength, and armor class."
+    }
+  },
+  {
+    "_id": "dru-lesser-succor-18-r1",
+    "name": "Lesser Succor",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 18,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 10.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "evac"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to a relatively safe location in the current zone. The chaotic nature of the portal drains mana from anyone who passes through it."
+    }
+  },
+  {
+    "_id": "dru-ring-of-grimling-18-r1",
+    "name": "Ring of Grimling",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 18,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.5,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "grimling"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Grimling Forest."
+    }
+  },
+  {
+    "_id": "dru-superior-camouflage-18-r1",
+    "name": "Superior Camouflage",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 18,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard"
+        }
+      ],
+      "description": "Covers your target's body in a mystic cloak, allowing them to blend in with their surroundings."
+    }
+  },
+  {
+    "_id": "dru-endure-disease-19-r1",
+    "name": "Endure Disease",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 19,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away disease for 27 minutes."
+    }
+  },
+  {
+    "_id": "dru-endure-poison-19-r1",
+    "name": "Endure Poison",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 19,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-poison",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away poison for 27 minutes."
+    }
+  },
+  {
+    "_id": "dru-healing-19-r1",
+    "name": "Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 19,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 65,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 86,
+          "max": 160
+        }
+      ],
+      "description": "Mends moderate wounds, healing between 95 and 175 hit points."
+    }
+  },
+  {
+    "_id": "dru-protection-of-rock-19-r1",
+    "name": "Protection of Rock",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 19,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 170,
+          "duration": 1620
+        },
+        {
+          "type": "heal",
+          "amount": 155,
+          "max": 155
+        }
+      ],
+      "description": "Hardens the skin of your group, increasing their hit points and armor class for 27 minutes."
+    }
+  },
+  {
+    "_id": "dru-ring-of-the-nexus-19-r1",
+    "name": "Ring of the Nexus",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 19,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "nexus"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Nexus."
+    }
+  },
+  {
+    "_id": "dru-circle-of-blightfire-moors-20-r1",
+    "name": "Circle of Blightfire Moors",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 20,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "moors"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your entire group to Blightfire Moors."
+    }
+  },
+  {
+    "_id": "dru-primary-anchor-ring-20-r1",
+    "name": "Primary Anchor Ring",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 20,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "your"
+        }
+      ],
+      "description": "Opens an arcane portal that teleports you to your Primary Anchor."
+    }
+  },
+  {
+    "_id": "dru-resist-fire-20-r1",
+    "name": "Resist Fire",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 20,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away fire for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-ring-of-blightfire-moors-20-r1",
+    "name": "Ring of Blightfire Moors",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 20,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "moors"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports you to Blightfire Moors."
+    }
+  },
+  {
+    "_id": "dru-ring-of-ro-20-r1",
+    "name": "Ring of Ro",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 20,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "southro"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Southern Desert of Ro."
+    }
+  },
+  {
+    "_id": "dru-ring-of-stonebrunt-20-r1",
+    "name": "Ring of Stonebrunt",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 20,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "stonebrunt"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Stonebrunt Mountains."
+    }
+  },
+  {
+    "_id": "dru-secondary-anchor-ring-20-r1",
+    "name": "Secondary Anchor Ring",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 20,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "your"
+        }
+      ],
+      "description": "Opens an arcane portal that teleports you to your Secondary Anchor."
+    }
+  },
+  {
+    "_id": "dru-wolf-form-20-r1",
+    "name": "Wolf Form",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 20,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "old-wolf"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 55,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 30,
+          "duration": 4320
+        }
+      ],
+      "description": "Fills you with the spirit of the wild, allowing you to take the form of a wolf for 72 minutes, increasing your movement speed, and attack rating."
+    }
+  },
+  {
+    "_id": "dru-zephyr-blightfire-moors-20-r1",
+    "name": "Zephyr: Blightfire Moors",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 20,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "moors"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Blightfire Moors."
+    }
+  }
+]

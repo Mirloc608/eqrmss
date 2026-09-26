@@ -1,0 +1,743 @@
+[
+ {
+  "_id": "clr-death-pact-51-r1",
+  "name": "Death Pact",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 51,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "divine-intervention",
+     "duration": 3600
+    }
+   ],
+   "description": "Bestows the favor of the gods upon your target, granting them a second chance at life should they fall in battle. Consumes a pearl when cast."
+  }
+ },
+ {
+  "_id": "clr-dread-of-night-51-r1",
+  "name": "Dread of Night",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 51,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.75,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 48,
+     "resist": "magic",
+     "resistMod": -25
+    }
+   ],
+   "description": "Inspires fear in an undead opponent, causing them to flee."
+  }
+ },
+ {
+  "_id": "clr-pure-blood-51-r1",
+  "name": "Pure Blood",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 51,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 2.5,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 9
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 9
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 9
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 9
+    }
+   ],
+   "description": "Cleanses the body of your target, curing severe diseases and poisons."
+  }
+ },
+ {
+  "_id": "clr-remedy-51-r1",
+  "name": "Remedy",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 51,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.75,
+   "manaCost": 167,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 202,
+     "max": 468
+    }
+   ],
+   "description": "Mends major wounds, healing between 202 and 468 hit points."
+  }
+ },
+ {
+  "_id": "clr-sunskin-51-r1",
+  "name": "Sunskin",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 51,
+   "school": "divination",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 120,
+   "effects": [
+    {
+     "type": "invisibility",
+     "vs": "undead",
+     "duration": 1620
+    }
+   ],
+   "description": "Cloaks your group in a light aura, rendering them invisible to most undead creatures for up to 27 minutes."
+  }
+ },
+ {
+  "_id": "clr-epitaph-of-life-52-r1",
+  "name": "Epitaph of Life",
+  "type": "spell",
+  "img": "icons/magic/death/skull-debuff-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 52,
+   "school": "evocation",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 202,
+   "effects": [
+    {
+     "type": "dot",
+     "element": "magic",
+     "min": 69,
+     "max": 69,
+     "duration": 30,
+     "resist": "magic",
+     "resistMod": -100
+    }
+   ],
+   "description": "Strikes your target with holy light, causing between 128 and 69 damage to undead every 6 seconds for 30 seconds."
+  }
+ },
+ {
+  "_id": "clr-eradicate-poison-52-r1",
+  "name": "Eradicate Poison",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 52,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 1.25,
+   "manaCost": 250,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 30
+    }
+   ],
+   "description": "Removes toxin from your target's system, curing them of strong poisons."
+  }
+ },
+ {
+  "_id": "clr-heroic-bond-52-r1",
+  "name": "Heroic Bond",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 52,
+   "school": "abjuration",
+   "target": "group",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 420,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 4,
+     "max": 6,
+     "duration": 4320
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 436,
+     "duration": 4320
+    },
+    {
+     "type": "heal",
+     "amount": 436
+    }
+   ],
+   "description": "Provides your group with heroic valor, increasing their hit points and armor class for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-heroism-52-r1",
+  "name": "Heroism",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 52,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.5,
+   "manaCost": 140,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 4,
+     "max": 6,
+     "duration": 4320
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 436,
+     "duration": 4320
+    },
+    {
+     "type": "heal",
+     "amount": 436
+    }
+   ],
+   "description": "Provides your target with heroic valor, increasing their hit points and armor class for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-upheaval-52-r1",
+  "name": "Upheaval",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 52,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 5.0,
+   "manaCost": 625,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 206,
+     "radius": 35,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to tremble around you, causing between 39 and 206 damage to up to 30 nearby enemies.",
+   "radius": 35
+  }
+ },
+ {
+  "_id": "clr-word-of-vigor-52-r1",
+  "name": "Word of Vigor",
+  "type": "spell",
+  "img": "icons/magic/life/heart-cross-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 52,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 651,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 792,
+     "max": 1234
+    }
+   ],
+   "description": "Mends the major wounds of everyone in your group, healing between 792 and 1,234 hit points."
+  }
+ },
+ {
+  "_id": "clr-annul-magic-53-r1",
+  "name": "Annul Magic",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 53,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.0,
+   "manaCost": 75,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "dispel",
+     "amount": 9
+    },
+    {
+     "type": "utility",
+     "effect": "dispel",
+     "amount": 9
+    }
+   ],
+   "description": "Cancels magical enchantments affecting your target."
+  }
+ },
+ {
+  "_id": "clr-divine-light-53-r1",
+  "name": "Divine Light",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 53,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.75,
+   "manaCost": 355,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 805,
+     "max": 1357
+    }
+   ],
+   "description": "Bathes your target in divine light, healing between 805 and 1,357 hit points."
+  }
+ },
+ {
+  "_id": "clr-yaulp-iv-53-r1",
+  "name": "Yaulp IV",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 53,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.5,
+   "manaCost": 1,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "atk",
+     "amount": 17,
+     "duration": 24
+    },
+    {
+     "type": "buff",
+     "stat": "str",
+     "amount": 40,
+     "duration": 24
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 3,
+     "max": 4,
+     "duration": 24
+    }
+   ],
+   "description": "Focuses your spiritual energy into a great battle cry, increasing your strength, armor class, and attack rating for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-eradicate-curse-54-r1",
+  "name": "Eradicate Curse",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 54,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 1.25,
+   "manaCost": 400,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 30
+    }
+   ],
+   "description": "Cleanses your target's soul, removing strong curses."
+  }
+ },
+ {
+  "_id": "clr-mark-of-retribution-54-r1",
+  "name": "Mark of Retribution",
+  "type": "spell",
+  "img": "icons/magic/symbols/rune-stone-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 54,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 115,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "damage-shield",
+     "amount": 15,
+     "duration": 900
+    }
+   ],
+   "description": "Places the mark of retribution on your target, dealing damage each time the target strikes another creature."
+  }
+ },
+ {
+  "_id": "clr-protection-of-vie-54-r1",
+  "name": "Protection of Vie",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 54,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 250,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 1200,
+     "duration": 2160
+    }
+   ],
+   "description": "Places the Protection of Vie on your target, absorbing a portion of incoming melee damage. This spell absorbs a set amount of damage before dissipating."
+  }
+ },
+ {
+  "_id": "clr-reckoning-54-r1",
+  "name": "Reckoning",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 54,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.5,
+   "manaCost": 206,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 162,
+     "resist": "magic"
+    }
+   ],
+   "description": "Calls upon the reckoning of the gods to strike your target, causing between 162 and 162 damage."
+  }
+ },
+ {
+  "_id": "clr-remove-greater-curse-54-r1",
+  "name": "Remove Greater Curse",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 54,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 9
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 9
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 9
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 9
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 9
+    }
+   ],
+   "description": "Cleanses your target's soul, removing major curses."
+  }
+ },
+ {
+  "_id": "clr-symbol-of-marzin-54-r1",
+  "name": "Symbol of Marzin",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 54,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 350,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 679,
+     "duration": 3780
+    },
+    {
+     "type": "heal",
+     "amount": 679
+    }
+   ],
+   "description": "Covers your target in a shimmer of holy runes, increasing their hit points for 63 minutes."
+  }
+ },
+ {
+  "_id": "clr-unswerving-hammer-of-faith-54-r1",
+  "name": "Unswerving Hammer of Faith",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+   "class": "cleric",
+   "level": 54,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.5,
+   "manaCost": 175,
+   "effects": [
+    {
+     "type": "summon-pet",
+     "pet": "hammer-of-wrath"
+    }
+   ],
+   "description": "Summons a magical hammer that attacks your target relentlessly until either the hammer or the target dies."
+  }
+ },
+ {
+  "_id": "clr-aura-of-the-zealot-55-r1",
+  "name": "Aura of the Zealot",
+  "type": "spell",
+  "img": "icons/magic/light/sphere-glow.webp",
+  "system": {
+   "class": "cleric",
+   "level": 55,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 416,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "aura-aura-of-the-zealot-effect"
+    }
+   ],
+   "description": "Allows your companions' to absorb a portion of incoming melee damage, as long as they stay inside the area of the aura."
+  }
+ },
+ {
+  "_id": "clr-exile-undead-55-r1",
+  "name": "Exile Undead",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 55,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.5,
+   "manaCost": 210,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 269,
+     "resist": "magic",
+     "resistMod": -50
+    }
+   ],
+   "description": "A burst of holy power that inflicts between 269 and 269 damage to an undead target."
+  }
+ },
+ {
+  "_id": "clr-fortitude-55-r1",
+  "name": "Fortitude",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 55,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 7.0,
+   "manaCost": 175,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 4,
+     "max": 5,
+     "duration": 8640
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 368,
+     "duration": 8640
+    },
+    {
+     "type": "heal",
+     "amount": 368
+    }
+   ],
+   "description": "Provides your target with mystic fortitude, increasing their hit points and armor class for 2.4 hours."
+  }
+ },
+ {
+  "_id": "clr-stun-command-55-r1",
+  "name": "Stun Command",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 55,
+   "school": "evocation",
+   "target": "area",
+   "range": 200,
+   "castTime": 1.0,
+   "manaCost": 150,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 9.0,
+     "resist": "magic"
+    }
+   ],
+   "description": "Strikes 5 creatures around your target with holy might and briefly stuns them up to level 55 for 9 seconds.",
+   "radius": 20
+  }
+ },
+ {
+  "_id": "clr-wake-of-tranquility-55-r1",
+  "name": "Wake of Tranquility",
+  "type": "spell",
+  "img": "icons/magic/debuff/sleep-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 55,
+   "school": "alteration",
+   "target": "area",
+   "range": 200,
+   "castTime": 4.5,
+   "manaCost": 300,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 42
+    },
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 42
+    },
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 42
+    }
+   ],
+   "description": "Covers all creatures near your target in tranquility, lowering their aggressiveness for 42 seconds. Affects creatures up to level 60.",
+   "radius": 35
+  }
+ }
+]

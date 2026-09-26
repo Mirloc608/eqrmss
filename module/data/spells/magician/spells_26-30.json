@@ -1,0 +1,393 @@
+[
+  {
+    "_id": "mag-greater-summoning-water-26-r1",
+    "name": "Greater Summoning: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 26,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-summoning-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-rain-of-spikes-26-r1",
+    "name": "Rain of Spikes",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 26,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 4.5,
+      "manaCost": 162,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 43,
+          "radius": 20
+        }
+      ],
+      "description": "Conjures a rain of spikes over your target, causing 43 damage every 3 seconds to creatures in the area. The rain will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-sword-of-runes-26-r1",
+    "name": "Sword of Runes",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 26,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "sword-of-runes"
+        }
+      ],
+      "description": "Focuses mana into the form of a runed sword."
+    }
+  },
+  {
+    "_id": "mag-expedience-27-r1",
+    "name": "Expedience",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 27,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 45,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 20,
+          "duration": 720
+        }
+      ],
+      "description": "Fills your elemental pet with speed, increasing their movement rate."
+    }
+  },
+  {
+    "_id": "mag-greater-summoning-fire-27-r1",
+    "name": "Greater Summoning: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 27,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-summoning-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-leather-mantle-27-r1",
+    "name": "Summon Leather Mantle",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 27,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "tavees-leather-mantle"
+        }
+      ],
+      "description": "Focuses mana into the form of a leather mantle that allows many of your beneficial spells to last a longer period of time."
+    }
+  },
+  {
+    "_id": "mag-expel-summoned-28-r1",
+    "name": "Expel Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 28,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 108,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 156,
+          "bane": "summoned"
+        }
+      ],
+      "description": "A burst of holy power that inflicts 156 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "mag-greater-summoning-air-28-r1",
+    "name": "Greater Summoning: Air",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 28,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-summoning-air"
+        }
+      ],
+      "description": "Summons an air elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-inferno-shield-28-r1",
+    "name": "Inferno Shield",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 28,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 7,
+          "duration": 900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 20,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in an inferno shield, damaging any creature that attacks them."
+    }
+  },
+  {
+    "_id": "mag-burnout-ii-29-r1",
+    "name": "Burnout II",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 29,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 45,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 35,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 3600
+        }
+      ],
+      "description": "Infuses your elemental companion with energy, increasing their attack speed, armor class, and strength."
+    }
+  },
+  {
+    "_id": "mag-greater-summoning-earth-29-r1",
+    "name": "Greater Summoning: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 29,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-summoning-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-coldstone-29-r1",
+    "name": "Summon Coldstone",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 29,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "coldstone"
+        }
+      ],
+      "description": "Focuses mana into the form of a cold stone that provides greatly improved night vision to the wielder."
+    }
+  },
+  {
+    "_id": "mag-dimensional-hole-30-r1",
+    "name": "Dimensional Hole",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 30,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "dimensional-hole"
+        }
+      ],
+      "description": "Conjures a dimensional pocket that allows you to carry heavy loads unhindered. The pouch, and all of its contents, will be lost if you leave the world of Norrath for a significant period of time."
+    }
+  },
+  {
+    "_id": "mag-focus-elementary-spellcasters-empowering-essence-30-r1",
+    "name": "Focus Elementary Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 30,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "elementary-spellcasters-empowering-essence"
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-monster-summoning-i-30-r1",
+    "name": "Monster Summoning I",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "magician",
+      "level": 30,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "monster-summoning-i"
+        }
+      ],
+      "description": "Conjures a pet in the form of a local monster to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-shiny-bauble-30-r1",
+    "name": "Summon Shiny Bauble",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 30,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "jolums-shiny-bauble"
+        }
+      ],
+      "description": "Focuses mana into the form of a shiny bauble that sometimes allows you to cast a spell for a reduced mana cost. This item works on spells up to level fifty."
+    }
+  }
+]

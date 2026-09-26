@@ -1,0 +1,318 @@
+[
+  {
+    "_id": "mag-greater-conjuration-earth-46-r1",
+    "name": "Greater Conjuration: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 46,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-conjuration-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-ward-of-calliav-46-r1",
+    "name": "Ward of Calliav",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 46,
+      "school": "abjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb-hits",
+          "amount": 1,
+          "cap": 11747,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Ward of Calliav on your pet, absorbing up to 11747 damage from the next 1 melee strikes or direct damage spells that hit it."
+    }
+  },
+  {
+    "_id": "mag-burnout-iii-47-r1",
+    "name": "Burnout III",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 47,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 50,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 60,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 3600
+        }
+      ],
+      "description": "Infuses your elemental companion with energy, increasing their attack speed, armor class, and strength."
+    }
+  },
+  {
+    "_id": "mag-greater-conjuration-fire-47-r1",
+    "name": "Greater Conjuration: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 47,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-conjuration-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-lava-bolt-47-r1",
+    "name": "Lava Bolt",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 47,
+      "school": "evocation",
+      "target": "single",
+      "range": 300,
+      "castTime": 5.5,
+      "manaCost": 238,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 769
+        }
+      ],
+      "description": "Burns your target's skin with a bolt of lava, causing 769 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-banish-summoned-48-r1",
+    "name": "Banish Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 48,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 136,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 490,
+          "bane": "summoned"
+        }
+      ],
+      "description": "A burst of holy power that inflicts 490 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "mag-greater-conjuration-air-48-r1",
+    "name": "Greater Conjuration: Air",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 48,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-conjuration-air"
+        }
+      ],
+      "description": "Summons an air elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-elemental-blanket-48-r1",
+    "name": "Summon Elemental Blanket",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 48,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 8.0,
+      "manaCost": 220,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "elemental-blanket"
+        }
+      ],
+      "description": "Focuses mana into the form of an elemental blanket."
+    }
+  },
+  {
+    "_id": "mag-greater-conjuration-water-49-r1",
+    "name": "Greater Conjuration: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 49,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-conjuration-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-rain-of-swords-49-r1",
+    "name": "Rain of Swords",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 49,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 7.5,
+      "manaCost": 375,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 284,
+          "radius": 20
+        }
+      ],
+      "description": "Conjures a rain of swords over your target, causing 284 damage every 3 seconds to creatures in the area. The rain will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-focus-simple-spellcasters-empowering-essence-50-r1",
+    "name": "Focus Simple Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 50,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "simple-spellcasters-empowering-essence"
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-monster-summoning-ii-50-r1",
+    "name": "Monster Summoning II",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "magician",
+      "level": 50,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "monster-summoning-ii"
+        }
+      ],
+      "description": "Conjures a pet in the form of a local monster to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-golden-choker-50-r1",
+    "name": "Summon Golden Choker",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 50,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 160,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "jedahs-golden-choker"
+        }
+      ],
+      "description": "Focuses mana into the form of a gold choker that sometimes allows you to cast a spell without consuming any reagents. This item works on spells up to level sixty."
+    }
+  }
+]

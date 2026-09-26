@@ -1,0 +1,565 @@
+[
+  {
+    "_id": "mag-cornucopia-21-r1",
+    "name": "Cornucopia",
+    "type": "spell",
+    "img": "icons/consumables/food/bread-loaf.webp",
+    "system": {
+      "class": "magician",
+      "level": 21,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "black-bread",
+          "quantity": 20
+        }
+      ],
+      "description": "Focuses mana into the form of loaves of bread suitable for eating."
+    }
+  },
+  {
+    "_id": "mag-lesser-summoning-earth-21-r1",
+    "name": "Lesser Summoning: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 21,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "lesser-summoning-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-silver-choker-21-r1",
+    "name": "Summon Silver Choker",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 21,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "jedahs-silver-choker"
+        }
+      ],
+      "description": "Focuses mana into the form of a silver choker that sometimes allows you to cast a spell without consuming any reagents. This item works on spells up to level twenty-four."
+    }
+  },
+  {
+    "_id": "mag-everfount-22-r1",
+    "name": "Everfount",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 22,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "globe-of-water",
+          "quantity": 20
+        }
+      ],
+      "description": "Focuses mana into the form of watery globes suitable for drinking."
+    }
+  },
+  {
+    "_id": "mag-flame-flux-22-r1",
+    "name": "Flame Flux",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 22,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 123,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 37,
+          "radius": 20
+        }
+      ],
+      "description": "Creates a circle of fire around you, causing 37 damage to up to 30 nearby creatures.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-malaise-22-r1",
+    "name": "Malaise",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 22,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "cold",
+          "amount": 20,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "magic",
+          "amount": 20,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "poison",
+          "amount": 20,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "fire",
+          "amount": 20,
+          "duration": 840
+        }
+      ],
+      "description": "Decreases your target's resistance to cold, fire, magic, and poison.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-summoning-water-22-r1",
+    "name": "Summoning: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 22,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "summoning-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-shock-of-spikes-23-r1",
+    "name": "Shock of Spikes",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 23,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 106
+        }
+      ],
+      "description": "Conjures a shock of spikes that assaults your target, causing 106 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-summoning-fire-23-r1",
+    "name": "Summoning: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 23,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "summoning-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-wuggans-appraisal-23-r1",
+    "name": "Wuggan's Appraisal",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 23,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 72
+        }
+      ],
+      "description": "Attempts to sense the presence of a trap on the targeted object.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-focus-mass-makeshift-spellcasters-empowering-essence-24-r1",
+    "name": "Focus Mass Makeshift Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 24,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "makeshift-spellcasters-empowering-essence",
+          "quantity": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-major-shielding-24-r1",
+    "name": "Major Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 24,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 75,
+          "duration": 2700
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 4,
+          "max": 5,
+          "duration": 2700
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 14,
+          "duration": 2700
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "mag-staff-of-runes-24-r1",
+    "name": "Staff of Runes",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 24,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "staff-of-runes"
+        }
+      ],
+      "description": "Focuses mana into the form of a runed staff."
+    }
+  },
+  {
+    "_id": "mag-summoning-air-24-r1",
+    "name": "Summoning: Air",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 24,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "summoning-air"
+        }
+      ],
+      "description": "Summons an air elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-wuggans-discombobulation-24-r1",
+    "name": "Wuggan's Discombobulation",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 24,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 72
+        }
+      ],
+      "description": "Attempts to disarm a trap on the targeted object. Consumes a scrying stone when cast.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-wuggans-extrication-24-r1",
+    "name": "Wuggan's Extrication",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 24,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 114
+        }
+      ],
+      "description": "Attempts to destroy any lock present on the targeted object.",
+      "resist": "fire",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-dismiss-summoned-25-r1",
+    "name": "Dismiss Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 25,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 73,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 125,
+          "bane": "summoned"
+        }
+      ],
+      "description": "A burst of holy power that inflicts 125 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "mag-phantom-chain-25-r1",
+    "name": "Phantom Chain",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 25,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 2,
+          "duration": 3300
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 3300
+        }
+      ],
+      "description": "Covers you in phantom chain armor, increasing your hit point regeneration and armor class. Consumes two cat's eye agates when cast."
+    }
+  },
+  {
+    "_id": "mag-summon-phantom-chain-25-r1",
+    "name": "Summon Phantom Chain",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 25,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 8.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-satchel"
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-chain-coif",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-chain-coat",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-chain-sleeves",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-chain-bracer",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-chain-bracer",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-chain-gloves",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-chain-greaves",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-chain-boots",
+          "intoBag": true
+        }
+      ],
+      "description": "Focuses mana into the form of a pack of phantom chain mail."
+    }
+  },
+  {
+    "_id": "mag-summoning-earth-25-r1",
+    "name": "Summoning: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 25,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "summoning-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  }
+]

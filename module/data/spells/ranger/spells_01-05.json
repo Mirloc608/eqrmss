@@ -1,0 +1,138 @@
+[
+  {
+    "_id": "rng-salve-1-r1",
+    "name": "Salve",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 1,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 8,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 4.4
+        }
+      ],
+      "description": "Mends minor wounds, healing 5 hit points."
+    }
+  },
+  {
+    "_id": "rng-glimpse-2-r1",
+    "name": "Glimpse",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 2,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "magnification",
+          "amount": 55,
+          "duration": 12
+        }
+      ],
+      "description": "Grants your eyes magical acuteness, allowing you to see clearly over long distances for 12 seconds."
+    }
+  },
+  {
+    "_id": "rng-flame-lick-3-r1",
+    "name": "Flame Lick",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "ranger",
+      "level": 3,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 12,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 6.8,
+          "max": 6.8,
+          "duration": 36
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -1.0,
+          "max": -1.0,
+          "duration": 36
+        }
+      ],
+      "description": "Surrounds your target in flickering flames, lowering their armor class, and doing between 1 and 17 damage every 6 seconds for 36 seconds. Requires, but does not consume, a fire beetle eye when cast.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-lull-animal-4-r1",
+    "name": "Lull Animal",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 4,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 15
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 25
+        },
+        {
+          "type": "utility",
+          "effect": "pacify"
+        }
+      ],
+      "description": "Lulls the ferocity of many animals, making them less likely to attack. This spell works on creatures up to level 30."
+    }
+  },
+  {
+    "_id": "rng-tangling-weeds-5-r1",
+    "name": "Tangling Weeds",
+    "type": "spell",
+    "img": "icons/magic/nature/root-entangle.webp",
+    "system": {
+      "class": "ranger",
+      "level": 5,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 25,
+          "duration": 18
+        }
+      ],
+      "description": "Entangles your target's feet with magical roots, slowing their movement speed for up to 18 seconds.",
+      "resist": "magic"
+    }
+  }
+]

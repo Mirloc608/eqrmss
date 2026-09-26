@@ -1,0 +1,869 @@
+[
+  {
+    "_id": "enc-everlasting-breath-51-r1",
+    "name": "Everlasting Breath",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 51,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 55,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "enduring-breath",
+          "duration": 1620
+        }
+      ],
+      "description": "Fills your lungs with magical breath, removing your necessity for air for 27 minutes."
+    }
+  },
+  {
+    "_id": "enc-levitation-51-r1",
+    "name": "Levitation",
+    "type": "spell",
+    "img": "icons/magic/air/feather-fall-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 51,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "levitate",
+          "duration": 1230
+        }
+      ],
+      "description": "Forms a cloud of dense air around your feet, allowing you to float slightly off the ground for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "enc-wake-of-tranquility-51-r1",
+    "name": "Wake of Tranquility",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 51,
+      "school": "alteration",
+      "target": "area",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 300,
+      "radius": 35,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 1
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 1
+        },
+        {
+          "type": "control",
+          "effect": "pacify",
+          "duration": 42
+        }
+      ],
+      "description": "Covers all creatures near your target in tranquility, lowering their aggressiveness for 42 seconds. Affects creatures up to level 60."
+    }
+  },
+  {
+    "_id": "enc-clarity-ii-52-r1",
+    "name": "Clarity II",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 52,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 115,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 11,
+          "max": 11,
+          "duration": 2100
+        }
+      ],
+      "description": "Calms your target's thoughts, allowing them to regenerate mana more quickly."
+    }
+  },
+  {
+    "_id": "enc-color-slant-52-r1",
+    "name": "Color Slant",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 52,
+      "school": "divination",
+      "target": "area",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 125,
+      "radius": 35,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 8.0,
+          "resist": "magic"
+        },
+        {
+          "type": "utility",
+          "effect": "drain-mana",
+          "amount": 73,
+          "resist": "magic"
+        }
+      ],
+      "description": "Creates a wave of intense color around you that assaults your opponent's senses, briefly stunning up to 30 nearby creatures up to level 55 for 8 seconds, as well as draining their mana."
+    }
+  },
+  {
+    "_id": "enc-fascination-52-r1",
+    "name": "Fascination",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 52,
+      "school": "enchantment",
+      "target": "area",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 200,
+      "radius": 35,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 55,
+          "duration": 36,
+          "resist": "magic",
+          "resistMod": -10
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 41
+        }
+      ],
+      "description": "Causes up to 30 enemies in the vicinity of your target to fall into an enchanted sleep for up to 36 seconds. This spell works on creatures up to level 55."
+    }
+  },
+  {
+    "_id": "enc-illusion-guktan-52-r1",
+    "name": "Illusion: Guktan",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 52,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "guktan",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Guktan Froglok."
+    }
+  },
+  {
+    "_id": "enc-ordinance-52-r1",
+    "name": "Ordinance",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 52,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 52,
+          "duration": 48,
+          "resist": "magic",
+          "resistMod": -1000
+        }
+      ],
+      "description": "Dominates your target's mind, allowing you to control them for a short time. This spell works on creatures up to level 52."
+    }
+  },
+  {
+    "_id": "enc-rune-v-52-r1",
+    "name": "Rune V",
+    "type": "spell",
+    "img": "icons/magic/symbols/rune-stone-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 52,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 512,
+          "duration": 6600
+        }
+      ],
+      "description": "Covers your target in a shimmer of runes that absorb damage. Consumes a peridot when cast."
+    }
+  },
+  {
+    "_id": "enc-scryers-trespass-52-r1",
+    "name": "Scryer's Trespass",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 52,
+      "school": "conjuration",
+      "target": "single",
+      "range": 125,
+      "castTime": 4.5,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "mana",
+          "min": 37,
+          "max": 37,
+          "duration": 60,
+          "resist": "magic",
+          "resistMod": -500
+        }
+      ],
+      "description": "Draws the energy from your target's mind, draining their mana and giving it to you."
+    }
+  },
+  {
+    "_id": "enc-tricksters-augmentation-52-r1",
+    "name": "Trickster's Augmentation",
+    "type": "spell",
+    "img": "icons/magic/air/feather-fall-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 52,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "proc",
+          "name": "tricksters-torment",
+          "duration": 390
+        },
+        {
+          "type": "illusion",
+          "form": "imp",
+          "duration": 390
+        },
+        {
+          "type": "levitate",
+          "duration": 390
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 30,
+          "duration": 390
+        }
+      ],
+      "description": "Cloaks your target in the image of an imp, allowing them levitation, increased fire resistance, and a chance to perform an enraging attack."
+    }
+  },
+  {
+    "_id": "enc-aanyas-quickening-53-r1",
+    "name": "Aanya's Quickening",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 53,
+      "school": "enchantment",
+      "target": "single",
+      "range": 125,
+      "castTime": 4.0,
+      "manaCost": 275,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 64,
+          "duration": 1440
+        }
+      ],
+      "description": "Grants your target quickened movement, increasing their attack speed for 24 minutes."
+    }
+  },
+  {
+    "_id": "enc-boltrans-agacerie-53-r1",
+    "name": "Boltran's Agacerie",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 53,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 53,
+          "duration": 450,
+          "resist": "magic",
+          "resistMod": -10
+        }
+      ],
+      "description": "Dominates your target's mind, allowing you to control them for a short time. This spell works on creatures up to level 53."
+    }
+  },
+  {
+    "_id": "enc-cripple-53-r1",
+    "name": "Cripple",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 53,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "dex",
+          "amount": -105,
+          "duration": 450,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -115,
+          "duration": 450,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -115,
+          "duration": 450,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -13,
+          "max": -10,
+          "duration": 450,
+          "resist": "magic"
+        }
+      ],
+      "description": "Saps your target's power, decreasing their agility, dexterity, strength, and armor class for 7.5 minutes."
+    }
+  },
+  {
+    "_id": "enc-recant-magic-53-r1",
+    "name": "Recant Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 53,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 9
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 9
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 9
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 9
+        }
+      ],
+      "description": "Tears the magic from your target, causing their enchantments to fade."
+    }
+  },
+  {
+    "_id": "enc-beguiling-visage-54-r1",
+    "name": "Beguiling Visage",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 54,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "decrease-hate-generated",
+          "amount": 50,
+          "duration": 24
+        }
+      ],
+      "description": "Cloaks you in a calming visage, diverting attention from any action you take."
+    }
+  },
+  {
+    "_id": "enc-dementia-54-r1",
+    "name": "Dementia",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 54,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 169,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 428
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 1.0,
+          "resist": "magic"
+        }
+      ],
+      "description": "Strikes your target with a chaotic burst of mental energy, causing 428 damage and stunning them up to level 55 for 1 second."
+    }
+  },
+  {
+    "_id": "enc-focus-mass-spellcasters-empowering-essence-54-r1",
+    "name": "Focus Mass Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 54,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "spellcasters-empowering-essence",
+          "count": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-glamour-of-kintaz-54-r1",
+    "name": "Glamour of Kintaz",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 54,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 57,
+          "duration": 54,
+          "resist": "magic",
+          "resistMod": -10
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 70
+        }
+      ],
+      "description": "Causes your opponent to fall into an enchanted sleep for up to 54 seconds. This spell works on creatures up to level 57."
+    }
+  },
+  {
+    "_id": "enc-illusion-orc-54-r1",
+    "name": "Illusion: Orc",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 54,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "orc",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in the guise of an orc. Roar."
+    }
+  },
+  {
+    "_id": "enc-illusion-vah-shir-54-r1",
+    "name": "Illusion: Vah Shir",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 54,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "vah-shir",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Vah Shir."
+    }
+  },
+  {
+    "_id": "enc-shield-of-the-magi-54-r1",
+    "name": "Shield of the Magi",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 54,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 250,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 9,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 24,
+          "duration": 5400
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "enc-beguilers-aura-55-r1",
+    "name": "Beguiler's Aura",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 55,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 415,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "aura-beguilers-aura-effect"
+        }
+      ],
+      "description": "Increases your companions' mana regeneration, as long as they stay inside the area of the aura."
+    }
+  },
+  {
+    "_id": "enc-focus-refined-spellcasters-empowering-essence-55-r1",
+    "name": "Focus Refined Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 55,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "refined-spellcasters-empowering-essence",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-gift-of-insight-55-r1",
+    "name": "Gift of Insight",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 55,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana",
+          "amount": 100,
+          "duration": 4500
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 1,
+          "max": 1,
+          "duration": 4500
+        }
+      ],
+      "description": "Grants your target increased mental capacities, increasing their mana pool and mana regeneration."
+    }
+  },
+  {
+    "_id": "enc-illusion-frost-bone-55-r1",
+    "name": "Illusion: Frost Bone",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 55,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "frostbone-skeleton",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in the illusion of a frost bone skeleton."
+    }
+  },
+  {
+    "_id": "enc-largarns-lamentation-55-r1",
+    "name": "Largarn's Lamentation",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 55,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 8.0,
+          "resist": "magic"
+        },
+        {
+          "type": "utility",
+          "effect": "drain-mana",
+          "amount": 53,
+          "resist": "magic"
+        }
+      ],
+      "description": "Strikes your target's mind, draining their mana and stunning them up to level 55 for 8 seconds."
+    }
+  },
+  {
+    "_id": "enc-memory-flux-55-r1",
+    "name": "Memory Flux",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 55,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 70
+        }
+      ],
+      "description": "Attacks your target's mind, providing a chance to forget those that have done them harm."
+    }
+  },
+  {
+    "_id": "enc-protection-of-alendar-55-r1",
+    "name": "Protection of Alendar",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 55,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "spell-absorb",
+          "amount": 20,
+          "total": 856,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Protection of Alendar on your target, absorbing a portion of incoming spell damage. This spell absorbs a set amount of damage before dissipating."
+    }
+  },
+  {
+    "_id": "enc-wind-of-tashani-55-r1",
+    "name": "Wind of Tashani",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 55,
+      "school": "abjuration",
+      "target": "area",
+      "range": 200,
+      "castTime": 1.0,
+      "manaCost": 45,
+      "radius": 35,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 1
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 23,
+          "resist": "magic",
+          "duration": 840
+        }
+      ],
+      "description": "Causes up to 30 of your enemies' ears to echo with the barking of Tashan, lowering the magic resistance of all creatures in the vicinity of your target."
+    }
+  },
+  {
+    "_id": "enc-zumaiks-animation-55-r1",
+    "name": "Zumaik's Animation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 55,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "zumaiks-animation-pet"
+        }
+      ],
+      "description": "Animates a pair of swords to attack your enemies. Consumes a tiny dagger when cast."
+    }
+  }
+]

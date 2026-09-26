@@ -1,0 +1,386 @@
+[
+  {
+    "_id": "brd-chant-of-battle-1-r1",
+    "name": "Chant of Battle",
+    "type": "song",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "song": {
+        "level": 1,
+        "category": "buff",
+        "songGroup": "ac-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 2,
+            "max": 3,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "str",
+            "amount": 37,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "dex",
+            "amount": 37,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A simple tune that increases the strength, dexterity, and armor class of group members."
+    }
+  },
+  {
+    "_id": "brd-chant-of-chaos-1-r1",
+    "name": "Chant of Chaos",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 1,
+        "category": "debuff",
+        "songGroup": "resist-debuff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "stat": "resist-all",
+            "amount": -10,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A chant of chaos lowers your target's resistances to magical attacks."
+    }
+  },
+  {
+    "_id": "brd-chant-of-flame-1-r1",
+    "name": "Chant of Flame",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 1,
+        "category": "debuff",
+        "songGroup": "resist-debuff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "stat": "resist-fire",
+            "amount": -29,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Reduces resistance to fire spells by 2 points for 12 seconds."
+    }
+  },
+  {
+    "_id": "brd-chant-of-frost-1-r1",
+    "name": "Chant of Frost",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 1,
+        "category": "debuff",
+        "songGroup": "resist-debuff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "stat": "resist-cold",
+            "amount": -29,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Reduces resistance to cold spells by 2 points for 12 seconds."
+    }
+  },
+  {
+    "_id": "brd-chant-of-magic-1-r1",
+    "name": "Chant of Magic",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 1,
+        "category": "debuff",
+        "songGroup": "resist-debuff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "stat": "resist-magic",
+            "amount": -29,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Decreases magic resistance of the target by 2 to 29 points for 12 seconds."
+    }
+  },
+  {
+    "_id": "brd-chant-of-plague-1-r1",
+    "name": "Chant of Plague",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 1,
+        "category": "debuff",
+        "songGroup": "resist-debuff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "stat": "resist-disease",
+            "amount": -29,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Reduces resistance to disease spells by 1 points for 12 seconds."
+    }
+  },
+  {
+    "_id": "brd-chant-of-venom-1-r1",
+    "name": "Chant of Venom",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 1,
+        "category": "debuff",
+        "songGroup": "resist-debuff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "stat": "resist-poison",
+            "amount": -29,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Reduces resistance to poison spells by 1 points for 12 seconds."
+    }
+  },
+  {
+    "_id": "brd-chords-of-dissonance-2-r1",
+    "name": "Chords of Dissonance",
+    "type": "song",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "song": {
+        "level": 2,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "magic",
+            "min": 1,
+            "max": 9,
+            "condition": "target-not-moving",
+            "duration": 12
+          }
+        ],
+        "radius": 30
+      },
+      "description": "Clashing notes that cause 2 damage to up to 30 nearby creatures that are not moving."
+    }
+  },
+  {
+    "_id": "brd-lyssas-locating-lyric-4-r1",
+    "name": "Lyssa's Locating Lyric",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 4,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "self",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "locate-corpse"
+          }
+        ]
+      },
+      "description": "A clairvoyant chorus which points you towards your target's nearest corpse. If nothing is targeted then it will point you to the closest corpse of any kind."
+    }
+  },
+  {
+    "_id": "brd-selos-accelerando-5-r1",
+    "name": "Selo's Accelerando",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 5,
+        "category": "buff",
+        "songGroup": "movement-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "movement",
+            "amount": 65,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "The quick pace of this song fills your feet with speed, increasing the movement rate of your group."
+    }
+  }
+]

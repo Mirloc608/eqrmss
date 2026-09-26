@@ -712,5 +712,147 @@
       ],
       "description": "Translocates a single target to Barindu."
     }
+  },
+{
+  "_id": "wiz-evacuate-57-r1",
+  "name": "Evacuate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-group.webp",
+  "system": {
+    "class": "wizard",
+    "level": 57,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 9,
+    "manaCost": 100,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "evacuate-group",
+        "destination": "current-zone"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your entire group to a relatively safe location in the current zone."
   }
+},
+{
+  "_id": "wiz-guard-of-calrena-57-r1",
+  "name": "Guard of Calrena",
+  "type": "spell",
+  "img": "icons/magic/arcane/shield-energy-green.webp",
+  "system": {
+    "class": "wizard",
+    "level": 57,
+    "school": "abjuration",
+    "target": "single",
+    "range": 100,
+    "castTime": 4,
+    "manaCost": 250,
+    "effects": [
+      {
+        "type": "buff",
+        "stat": "absorb-magic-damage",
+        "percent": 25,
+        "cap": 960,
+        "duration": 2160
+      }
+    ],
+    "description": "Places the guard of Calrena on your target, absorbing a portion of incoming spell damage. This spell absorbs a set amount of damage before dissipating."
+  }
+},
+{
+  "_id": "wiz-translocate-natimbi-57-r1",
+  "name": "Translocate: Natimbi",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 57,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 10,
+    "manaCost": 225,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "translocate",
+        "destination": "natimbi"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to the broken shores of Natimbi."
+  }
+},
+{
+  "_id": "wiz-translocate-tranquility-57-r1",
+  "name": "Translocate: Tranquility",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 57,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 15,
+    "manaCost": 450,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "translocate",
+        "destination": "potranquility"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to the Plane of Tranquility."
+  }
+},
+{
+  "_id": "wiz-focus-mass-spellcasters-empowering-essence-59-r1",
+  "name": "Focus Mass Spellcaster's Empowering Essence",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-orb.webp",
+  "system": {
+    "class": "wizard",
+    "level": 59,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 1400,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "summon-item",
+        "item": "Spellcaster's Empowering Essence",
+        "amount": 5
+      }
+    ],
+    "description": "Focuses the casters mana into a form that can be physically handled."
+  }
+},
+{
+  "_id": "wiz-jylls-wave-of-heat-59-r1",
+  "name": "Jyll's Wave of Heat",
+  "type": "spell",
+  "img": "icons/magic/fire/aoe-flame.webp",
+  "system": {
+    "class": "wizard",
+    "level": 59,
+    "school": "evocation",
+    "target": "area",
+    "range": 0,
+    "castTime": 2,
+    "manaCost": 342,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "amount": 48,
+        "radius": 25
+      }
+    ],
+    "description": "Creates a circle of intense heat around you, causing between 48 and 648 damage to up to 30 nearby creatures."
+  }
+}
 ]

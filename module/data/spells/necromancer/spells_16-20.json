@@ -1,0 +1,653 @@
+[
+  {
+    "_id": "nec-feign-death-16-r1",
+    "name": "Feign Death",
+    "type": "spell",
+    "img": "icons/magic/death/feign-death.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 16,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "feign-death",
+          "amount": 87
+        }
+      ],
+      "description": "Causes you to stop breathing and appear dead to most creatures."
+    }
+  },
+  {
+    "_id": "nec-focus-crude-spellcasters-empowering-essence-16-r1",
+    "name": "Focus Crude Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 16,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Crude Spellcaster's Empowering Essence",
+          "amount": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-focus-primitive-spellcasters-empowering-essence-16-r1",
+    "name": "Focus Primitive Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 16,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Primitive Spellcaster's Empowering Essence",
+          "amount": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-focus-rudimentary-spellcasters-empowering-essence-16-r1",
+    "name": "Focus Rudimentary Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 16,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Rudimentary Spellcaster's Empowering Essence",
+          "amount": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-form-of-chilled-bone-16-r1",
+    "name": "Form of Chilled Bone",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-transform.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 16,
+      "school": "divination",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "frostbone-skeleton",
+          "duration": 7200
+        }
+      ],
+      "description": "Bestows upon your pet the form of a chilled skeleton. This effect lasts for 2 hours."
+    }
+  },
+  {
+    "_id": "nec-hungry-earth-16-r1",
+    "name": "Hungry Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 16,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 66,
+          "resist": "magic"
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 48,
+          "resist": "magic"
+        }
+      ],
+      "description": "Roots an undead creature to the ground, preventing them from moving."
+    }
+  },
+  {
+    "_id": "nec-restless-bones-16-r1",
+    "name": "Restless Bones",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 16,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 160,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "restless-bones"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-shielding-16-r1",
+    "name": "Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 16,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 50,
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 12,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "nec-spirit-armor-16-r1",
+    "name": "Spirit Armor",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 16,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 2160
+        }
+      ],
+      "description": "Covers your target in spiritual armor, increasing their armor class for 36 minutes."
+    }
+  },
+  {
+    "_id": "nec-identify-17-r1",
+    "name": "Identify",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 17,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "identify-item"
+        }
+      ],
+      "description": "Provides magical information about the item that your target is holding."
+    }
+  },
+  {
+    "_id": "nec-shackle-of-bone-17-r1",
+    "name": "Shackle of Bone",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 17,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "haste",
+          "amount": -35,
+          "duration": 210,
+          "resist": "magic"
+        }
+      ],
+      "description": "Surrounds an undead target in a shackle of bone, slowing their attack speed."
+    }
+  },
+  {
+    "_id": "nec-shadow-compact-17-r1",
+    "name": "Shadow Compact",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 17,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 10,
+          "duration": 24
+        }
+      ],
+      "description": "Transfers your own health to your target at a rate of 20 hit points every six seconds for 24 seconds."
+    }
+  },
+  {
+    "_id": "nec-allure-of-death-18-r1",
+    "name": "Allure of Death",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 18,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 4,
+          "max": 4,
+          "duration": 840
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 1,
+          "max": 1,
+          "duration": 840
+        }
+      ],
+      "description": "Grips your body in an unholy darkness, slowly draining your hit points while regenerating your mana."
+    }
+  },
+  {
+    "_id": "nec-dominate-undead-18-r1",
+    "name": "Dominate Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 18,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 32,
+          "duration": 1230,
+          "resist": "magic"
+        }
+      ],
+      "description": "Commands an undead creature to do your bidding, temporarily bending them to your will."
+    }
+  },
+  {
+    "_id": "nec-track-corpse-18-r1",
+    "name": "Track Corpse",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 18,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "locate-corpse"
+        }
+      ],
+      "description": "Provides a mystical sense that points you towards your target's nearest corpse. If no target is chosen the spell points you toward the nearest non-specific corpse."
+    }
+  },
+  {
+    "_id": "nec-expulse-undead-19-r1",
+    "name": "Expulse Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 19,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 36,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 53,
+          "resist": "magic",
+          "resistMod": -50
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 86 and 106 damage to an undead target."
+    }
+  },
+  {
+    "_id": "nec-shadow-vortex-19-r1",
+    "name": "Shadow Vortex",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 19,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -4,
+          "max": -3,
+          "duration": 450,
+          "resist": "magic"
+        }
+      ],
+      "description": "Covers your target in a mass of darkness that steals their armor class and gives it to you for 7.5 minutes."
+    }
+  },
+  {
+    "_id": "nec-tiny-companion-19-r1",
+    "name": "Tiny Companion",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 19,
+      "school": "alteration",
+      "target": "pet",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "shrink-pet",
+          "percent": 50
+        }
+      ],
+      "description": "Shrinks your pet, allowing it better mobility in tight quarters."
+    }
+  },
+  {
+    "_id": "nec-animate-dead-20-r1",
+    "name": "Animate Dead",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 20,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "animate-dead"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-focus-makeshift-spellcasters-empowering-essence-20-r1",
+    "name": "Focus Makeshift Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 20,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Makeshift Spellcaster's Empowering Essence",
+          "amount": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-focus-mass-crude-spellcasters-empowering-essence-20-r1",
+    "name": "Focus Mass Crude Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 20,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Crude Spellcaster's Empowering Essence",
+          "amount": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-focus-mass-primitive-spellcasters-empowering-essence-20-r1",
+    "name": "Focus Mass Primitive Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 20,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Primitive Spellcaster's Empowering Essence",
+          "amount": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-focus-mass-rudimentary-spellcasters-empowering-essence-20-r1",
+    "name": "Focus Mass Rudimentary Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 20,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Rudimentary Spellcaster's Empowering Essence",
+          "amount": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-harmshield-20-r1",
+    "name": "Harmshield",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 20,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.0,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 7
+        },
+        {
+          "type": "utility",
+          "effect": "invulnerability",
+          "duration": 18
+        }
+      ],
+      "description": "Completely removes your reaction to pain for 18 seconds, rendering you invulnerable to damage."
+    }
+  },
+  {
+    "_id": "nec-siphon-life-20-r1",
+    "name": "Siphon Life",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 20,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.75,
+      "manaCost": 115,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 33,
+          "max": 49,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 100 and 150 hit points."
+    }
+  },
+  {
+    "_id": "nec-word-of-shadow-20-r1",
+    "name": "Word of Shadow",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 20,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 2.75,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 19,
+          "resist": "magic"
+        }
+      ],
+      "description": "A forbidden word that causes between 33 and 58 damage to up to 30 nearby enemies.",
+      "radius": 20
+    }
+  }
+]

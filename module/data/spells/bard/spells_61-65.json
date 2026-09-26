@@ -1,0 +1,1335 @@
+[
+  {
+    "_id": "brd-saryrns-scream-of-pain-61-r1",
+    "name": "Saryrn's Scream of Pain",
+    "type": "song",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "song": {
+        "level": 61,
+        "category": "damage",
+        "songGroup": "direct-damage",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "damage",
+            "element": "magic",
+            "amount": 525
+          }
+        ]
+      },
+      "description": "A great scream of torment that does 1 damage to your opponent and pushes them away from you."
+    }
+  },
+  {
+    "_id": "brd-silent-song-of-quellious-61-r1",
+    "name": "Silent Song of Quellious",
+    "type": "song",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "song": {
+        "level": 61,
+        "category": "control",
+        "songGroup": "calm-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 30,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "reduce-aggro-radius",
+            "amount": 5,
+            "duration": 30
+          },
+          {
+            "type": "utility",
+            "effect": "reduce-social-radius",
+            "amount": 10,
+            "duration": 30
+          },
+          {
+            "type": "control",
+            "effect": "pacify",
+            "duration": 30
+          }
+        ]
+      },
+      "description": "A calming song that calms the aggressive nature of many monsters."
+    }
+  },
+  {
+    "_id": "brd-song-of-the-storm-61-r1",
+    "name": "Song of the Storm",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 61,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 10,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "melee-proc",
+            "proc": "song-of-the-storm-strike",
+            "amount": 400
+          }
+        ]
+      },
+      "description": "Infuses your group's weapons with the power of the storm, allowing them a chance to strike their target with electrical energy."
+    }
+  },
+  {
+    "_id": "brd-tuyens-chant-of-the-plague-61-r1",
+    "name": "Tuyen's Chant of the Plague",
+    "type": "song",
+    "img": "icons/magic/debuff/disease-green.webp",
+    "system": {
+      "song": {
+        "level": 61,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "disease",
+            "min": 1,
+            "max": 196,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "cast-spell",
+            "spell": "chant-of-plague"
+          }
+        ]
+      },
+      "description": "A plagued chant that causes between 10 and 49 damage every six seconds to an enemy and makes them more vulnerable to disease."
+    }
+  },
+  {
+    "_id": "brd-angstlichs-echo-of-terror-62-r1",
+    "name": "Angstlich's Echo of Terror",
+    "type": "song",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "song": {
+        "level": 62,
+        "category": "control",
+        "songGroup": "fear-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "fear",
+            "amount": 60,
+            "duration": 12
+          }
+        ],
+        "radius": 25
+      },
+      "description": "A terrifying screech that causes up to 30 nearby enemies to run in terror."
+    }
+  },
+  {
+    "_id": "brd-dreams-of-thule-62-r1",
+    "name": "Dreams of Thule",
+    "type": "song",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "song": {
+        "level": 62,
+        "category": "control",
+        "songGroup": "mez-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "mez",
+            "amount": 62,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "A quiet lullaby that causes your target to fall into an enchanted sleep. Affects creatures up to level 62."
+    }
+  },
+  {
+    "_id": "brd-druzzils-disillusionment-62-r1",
+    "name": "Druzzil's Disillusionment",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 62,
+        "category": "debuff",
+        "songGroup": "dispel-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "dispel",
+            "amount": 9
+          },
+          {
+            "type": "utility",
+            "effect": "dispel",
+            "amount": 9
+          }
+        ]
+      },
+      "description": "The voice of the mistress of magic can strip away magical effects from your target."
+    }
+  },
+  {
+    "_id": "brd-melody-of-mischief-62-r1",
+    "name": "Melody of Mischief",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 62,
+        "category": "debuff",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "magic",
+            "min": 1,
+            "max": 160,
+            "condition": "target-not-moving",
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "effect": "slow",
+            "amount": 45,
+            "duration": 12
+          }
+        ],
+        "radius": 30
+      },
+      "description": "A melody that summons a horde of ethereal halflings to attack your opponents, causing up to 30 of them damage and slowing their attack speed."
+    }
+  },
+  {
+    "_id": "brd-warsong-of-zek-62-r1",
+    "name": "Warsong of Zek",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 62,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 60,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "str",
+            "amount": 70,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "atk",
+            "amount": 34,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "damage-shield",
+            "amount": 15,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "The song of the warlord fills your group's arms with strength, granting them increased attack speed, strength, attack rating. It also adds an aura that damages opponents that strike them."
+    }
+  },
+  {
+    "_id": "brd-wind-of-marr-62-r1",
+    "name": "Wind of Marr",
+    "type": "song",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "song": {
+        "level": 62,
+        "category": "heal",
+        "songGroup": "heal-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "heal",
+            "amount": 441,
+            "duration": 12
+          },
+          {
+            "type": "regen",
+            "stat": "mana",
+            "min": 1,
+            "max": 22,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Calls forth the wind of Marr to regenerate the health, mana, and stamina of your group."
+    }
+  },
+  {
+    "_id": "brd-psalm-of-veeshan-63-r1",
+    "name": "Psalm of Veeshan",
+    "type": "song",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "song": {
+        "level": 63,
+        "category": "buff",
+        "songGroup": "damage-shield",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "damage-shield",
+            "amount": 15,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-all",
+            "amount": 80,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 2,
+            "max": 2,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Calls the crystalline scales of Veeshan around your group, granting them protection from all types of magic. Any creature that strikes these scales is damaged."
+    }
+  },
+  {
+    "_id": "brd-tuyens-chant-of-ice-63-r1",
+    "name": "Tuyen's Chant of Ice",
+    "type": "song",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "song": {
+        "level": 63,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "cold",
+            "min": 1,
+            "max": 205,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "cast-spell",
+            "spell": "chant-of-frost"
+          }
+        ]
+      },
+      "description": "An icy chant that causes between 10 and 49 damage every six seconds to an enemy and makes them more vulnerable to cold."
+    }
+  },
+  {
+    "_id": "brd-tuyens-chant-of-venom-63-r1",
+    "name": "Tuyen's Chant of Venom",
+    "type": "song",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "song": {
+        "level": 63,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "poison",
+            "min": 1,
+            "max": 205,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "cast-spell",
+            "spell": "chant-of-venom"
+          }
+        ]
+      },
+      "description": "An envenomed chant that causes between 10 and 49 damage every six seconds to an enemy and makes them more vulnerable to poison."
+    }
+  },
+  {
+    "_id": "brd-call-of-the-banshee-64-r1",
+    "name": "Call of the Banshee",
+    "type": "song",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "song": {
+        "level": 64,
+        "category": "control",
+        "songGroup": "charm-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 60,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 255,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "charm",
+            "amount": 57,
+            "duration": 60
+          }
+        ]
+      },
+      "description": "A bewitching melody that charms the target, allowing you to command it."
+    }
+  },
+  {
+    "_id": "brd-chorus-of-marr-64-r1",
+    "name": "Chorus of Marr",
+    "type": "song",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "song": {
+        "level": 64,
+        "category": "heal",
+        "songGroup": "heal-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "heal",
+            "amount": 467,
+            "duration": 12
+          },
+          {
+            "type": "regen",
+            "stat": "mana",
+            "min": 1,
+            "max": 22,
+            "duration": 12
+          }
+        ],
+        "radius": 60
+      },
+      "description": "Calls forth the wind of Marr to regenerate the health and mana of nearby allies."
+    }
+  },
+  {
+    "_id": "brd-dreams-of-terris-64-r1",
+    "name": "Dreams of Terris",
+    "type": "song",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "song": {
+        "level": 64,
+        "category": "control",
+        "songGroup": "mez-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "mez",
+            "amount": 65,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "A quiet lullaby that causes your target to fall into an enchanted sleep."
+    }
+  },
+  {
+    "_id": "brd-minohtens-purifying-panpipes-64-r1",
+    "name": "Minohten's Purifying Panpipes",
+    "type": "song",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "song": {
+        "level": 64,
+        "category": "heal",
+        "songGroup": "cure-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "cure",
+            "effect": "corruption",
+            "min": 1,
+            "max": 1
+          }
+        ]
+      },
+      "description": "This purifying tune slowly removes the corruption from your target's system."
+    }
+  },
+  {
+    "_id": "brd-minohtens-purifying-panpipes-64-r2",
+    "name": "Minohten's Purifying Panpipes",
+    "type": "song",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "song": {
+        "level": 64,
+        "category": "heal",
+        "songGroup": "cure-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "cure",
+            "effect": "corruption",
+            "min": 1,
+            "max": 1
+          }
+        ]
+      },
+      "description": "This purifying tune slowly removes the corruption from your target's system."
+    }
+  },
+  {
+    "_id": "brd-minohtens-purifying-panpipes-64-r3",
+    "name": "Minohten's Purifying Panpipes",
+    "type": "song",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "song": {
+        "level": 64,
+        "category": "heal",
+        "songGroup": "cure-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "cure",
+            "effect": "corruption",
+            "min": 1,
+            "max": 1
+          }
+        ]
+      },
+      "description": "This purifying tune slowly removes the corruption from your target's system."
+    }
+  },
+  {
+    "_id": "brd-requiem-of-time-64-r1",
+    "name": "Requiem of Time",
+    "type": "song",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "song": {
+        "level": 64,
+        "category": "debuff",
+        "songGroup": "slow-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 60,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 150,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "effect": "slow",
+            "amount": 55,
+            "duration": 60
+          }
+        ]
+      },
+      "description": "A slow rhythm that lowers the attack speed of an opponent for 60 seconds."
+    }
+  },
+  {
+    "_id": "brd-rizlonas-call-of-flame-64-r1",
+    "name": "Rizlona's Call of Flame",
+    "type": "song",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "song": {
+        "level": 64,
+        "category": "buff",
+        "songGroup": "spell-focus",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "spell-damage",
+            "min": 1,
+            "max": 15,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 25,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Increases the damage of your companions' direct damage spells by up to 15%. This bonus will decay on spells over level 65."
+    }
+  },
+  {
+    "_id": "brd-ancient-chaos-chant-65-r1",
+    "name": "Ancient: Chaos Chant",
+    "type": "song",
+    "img": "icons/magic/debuff/disease-green.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "disease",
+            "min": 1,
+            "max": 223,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "cast-spell",
+            "spell": "chant-of-chaos"
+          }
+        ]
+      },
+      "description": "A chant of chaos that causes 51 damage to your target every six seconds and lowers their protection against magical attacks."
+    }
+  },
+  {
+    "_id": "brd-call-of-the-muse-65-r1",
+    "name": "Call of the Muse",
+    "type": "song",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "buff",
+        "songGroup": "spell-focus",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "spell-damage",
+            "min": 1,
+            "max": 15,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 25,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Increases the damage of your companions' spells by up to 15%. This bonus will decay on spells over level 65."
+    }
+  },
+  {
+    "_id": "brd-dark-echo-65-r1",
+    "name": "Dark Echo",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "chance-to-reflect-spell",
+            "amount": 50,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Surrounds your group in a reflective aura that has a chance of reflecting spells cast against you back at the caster."
+    }
+  },
+  {
+    "_id": "brd-echo-of-the-trusik-65-r1",
+    "name": "Echo of the Trusik",
+    "type": "song",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "buff",
+        "songGroup": "spell-focus",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "spell-damage",
+            "min": 1,
+            "max": 25,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 25,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Increases the damage of your companions' spells by up to 25%. This bonus will decay on spells over level 65."
+    }
+  },
+  {
+    "_id": "brd-harmony-of-sound-65-r1",
+    "name": "Harmony of Sound",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "debuff",
+        "songGroup": "resist-debuff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "debuff",
+            "stat": "resist-cold",
+            "amount": -15,
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "stat": "resist-fire",
+            "amount": -15,
+            "duration": 12
+          },
+          {
+            "type": "debuff",
+            "stat": "resist-magic",
+            "amount": -15,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A perfect harmony envelops your enemy, causing them to become more susceptible to fire, ice, and magic."
+    }
+  },
+  {
+    "_id": "brd-lullaby-of-morell-65-r1",
+    "name": "Lullaby of Morell",
+    "type": "song",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "control",
+        "songGroup": "mez-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "mez",
+            "amount": 68,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "A quiet lullaby that causes your target to fall into an enchanted sleep."
+    }
+  },
+  {
+    "_id": "brd-staccato-rhythms-65-r1",
+    "name": "Staccato Rhythms",
+    "type": "song",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "buff",
+        "songGroup": "resist-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "resist-corruption",
+            "amount": 7,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "The staccato rhythms of this beat help shield your group from the effects of corruption."
+    }
+  },
+  {
+    "_id": "brd-staccato-rhythms-65-r2",
+    "name": "Staccato Rhythms",
+    "type": "song",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "buff",
+        "songGroup": "resist-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "resist-corruption",
+            "amount": 7,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "The staccato rhythms of this beat help shield your group from the effects of corruption."
+    }
+  },
+  {
+    "_id": "brd-staccato-rhythms-65-r3",
+    "name": "Staccato Rhythms",
+    "type": "song",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "buff",
+        "songGroup": "resist-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "resist-corruption",
+            "amount": 8,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "The staccato rhythms of this beat help shield your group from the effects of corruption."
+    }
+  },
+  {
+    "_id": "brd-tuyens-chant-of-fire-65-r1",
+    "name": "Tuyen's Chant of Fire",
+    "type": "song",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "fire",
+            "min": 1,
+            "max": 214,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "cast-spell",
+            "spell": "chant-of-flame"
+          }
+        ]
+      },
+      "description": "A fiery chant that causes 49 damage every six seconds to an enemy and makes them more vulnerable to fire."
+    }
+  },
+  {
+    "_id": "brd-war-march-of-the-mastruq-65-r1",
+    "name": "War March of the Mastruq",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 65,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 60,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "str",
+            "amount": 50,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "atk",
+            "amount": 30,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "damage-shield",
+            "amount": 20,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "The drums of the Mastruq fill your group's arms with energy, granting them increased attack speed, strength, and attack rating. It also adds an aura that damages opponents that strike them."
+    }
+  }
+]

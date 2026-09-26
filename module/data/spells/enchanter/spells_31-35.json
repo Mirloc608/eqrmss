@@ -1,0 +1,470 @@
+[
+  {
+    "_id": "enc-boltrans-animation-31-r1",
+    "name": "Boltran's Animation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 31,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 175,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "boltrans-animation-pet"
+        }
+      ],
+      "description": "Animates a weapon and shield to attack your enemies. Consumes a tiny dagger when cast."
+    }
+  },
+  {
+    "_id": "enc-greater-shielding-31-r1",
+    "name": "Greater Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 31,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 100,
+          "duration": 3240
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 6,
+          "duration": 3240
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 16,
+          "duration": 3240
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "enc-radiant-visage-31-r1",
+    "name": "Radiant Visage",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 31,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 65,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "cha",
+          "amount": 30,
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a radiant visage, increasing your charisma."
+    }
+  },
+  {
+    "_id": "enc-anarchy-32-r1",
+    "name": "Anarchy",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 32,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 99,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 81
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 1.0,
+          "resist": "magic"
+        }
+      ],
+      "description": "Strikes your target with a chaotic burst of mental energy, causing between 200 and 81 damage. Stuns targets up to level 55 for 1 second."
+    }
+  },
+  {
+    "_id": "enc-cast-sight-32-r1",
+    "name": "Cast Sight",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 32,
+      "school": "divination",
+      "target": "single",
+      "range": 12000,
+      "castTime": 4.0,
+      "manaCost": 45,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "bind-sight",
+          "duration": 11700
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 11700
+        }
+      ],
+      "description": "Allows you to see through your target's eyes with greatly increased night vision."
+    }
+  },
+  {
+    "_id": "enc-enchant-platinum-32-r1",
+    "name": "Enchant Platinum",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 32,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-platinum-bar",
+          "count": 1
+        }
+      ],
+      "description": "Enchants a bar of platinum with magical energy. Consumes a bar of platinum when cast."
+    }
+  },
+  {
+    "_id": "enc-mass-enchant-platinum-32-r1",
+    "name": "Mass Enchant Platinum",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 32,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 675,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-platinum-bar",
+          "count": 5
+        }
+      ],
+      "description": "Enchants five bars of platinum with magical energy. Consumes five bars of platinum when cast."
+    }
+  },
+  {
+    "_id": "enc-illusion-fire-elemental-33-r1",
+    "name": "Illusion: Fire Elemental",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 33,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "fire-elemental",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Fire Elemental. This spell also provides you with a shield of flame that harms those who attack you."
+    }
+  },
+  {
+    "_id": "enc-rune-iii-33-r1",
+    "name": "Rune III",
+    "type": "spell",
+    "img": "icons/magic/symbols/rune-stone-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 33,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 149,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 73,
+          "duration": 4320
+        }
+      ],
+      "description": "Covers your target in a shimmer of runes that absorb damage. Consumes a jasper when cast."
+    }
+  },
+  {
+    "_id": "enc-wuggans-greater-appraisal-33-r1",
+    "name": "Wuggan's Greater Appraisal",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 33,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 120
+        }
+      ],
+      "description": "Attempts to sense the presence of a trap on the targeted object."
+    }
+  },
+  {
+    "_id": "enc-gift-of-magic-34-r1",
+    "name": "Gift of Magic",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 34,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana",
+          "amount": 50,
+          "duration": 3600
+        }
+      ],
+      "description": "Grants your target increased mental capacities, increasing their mana pool."
+    }
+  },
+  {
+    "_id": "enc-insipid-weakness-34-r1",
+    "name": "Insipid Weakness",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 34,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -51,
+          "duration": 234,
+          "resist": "magic"
+        }
+      ],
+      "description": "Weakens your opponent, lowering their strength."
+    }
+  },
+  {
+    "_id": "enc-wuggans-greater-discombobulation-34-r1",
+    "name": "Wuggan's Greater Discombobulation",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 34,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 120
+        }
+      ],
+      "description": "Attempts to disarm a trap on the targeted object. Consumes a greater scrying stone when cast."
+    }
+  },
+  {
+    "_id": "enc-wuggans-greater-extrication-34-r1",
+    "name": "Wuggan's Greater Extrication",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 34,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 125
+        }
+      ],
+      "description": "Attempts to destroy any lock present on the targeted object."
+    }
+  },
+  {
+    "_id": "enc-focus-modest-spellcasters-empowering-essence-35-r1",
+    "name": "Focus Modest Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 35,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "modest-spellcasters-empowering-essence",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-insight-35-r1",
+    "name": "Insight",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 35,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.25,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "wis",
+          "amount": 14,
+          "duration": 2400
+        },
+        {
+          "type": "buff",
+          "stat": "int",
+          "amount": 12,
+          "duration": 2400
+        }
+      ],
+      "description": "Expands your target's mind, increasing their intelligence and wisdom."
+    }
+  },
+  {
+    "_id": "enc-invoke-fear-35-r1",
+    "name": "Invoke Fear",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 35,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52,
+          "duration": 42,
+          "resist": "magic",
+          "resistMod": -20
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  },
+  {
+    "_id": "enc-pacify-35-r1",
+    "name": "Pacify",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 35,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 1
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 1
+        },
+        {
+          "type": "control",
+          "effect": "pacify",
+          "duration": 42
+        }
+      ],
+      "description": "Pacifies your target, lowering its aggressiveness for 42 seconds. Affects creatures up to level 55."
+    }
+  }
+]

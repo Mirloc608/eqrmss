@@ -1,0 +1,213 @@
+[
+  {
+    "_id": "pal-greater-healing-36-r1",
+    "name": "Greater Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 36,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 115,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 209
+        }
+      ],
+      "description": "Mends major wounds, healing between 140 and 350 hit points."
+    }
+  },
+  {
+    "_id": "pal-daring-37-r1",
+    "name": "Daring",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 37,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 135,
+          "duration": 2160
+        },
+        {
+          "type": "heal",
+          "amount": 214
+        }
+      ],
+      "description": "Provides your target with a sense of daring, increasing their hit points and armor class for 36 minutes."
+    }
+  },
+  {
+    "_id": "pal-divine-purpose-37-r1",
+    "name": "Divine Purpose",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 37,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.5,
+      "manaCost": 1,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 3,
+          "max": 3,
+          "duration": 900
+        },
+        {
+          "type": "heal",
+          "amount": 1,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds you with divine purpose, regenerating your hit points while slowly draining your mana for 15 minutes."
+    }
+  },
+  {
+    "_id": "pal-endure-disease-38-r1",
+    "name": "Endure Disease",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 38,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away disease for 27 minutes."
+    }
+  },
+  {
+    "_id": "pal-yaulp-ii-38-r1",
+    "name": "Yaulp II",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 38,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.5,
+      "manaCost": 1,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 20,
+          "duration": 24
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 24
+        }
+      ],
+      "description": "Focuses your spiritual energy into a great battle cry, increasing your strength and armor class for 24 seconds."
+    }
+  },
+  {
+    "_id": "pal-guard-39-r1",
+    "name": "Guard",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 39,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 4,
+          "max": 6,
+          "duration": 2700
+        }
+      ],
+      "description": "Covers your target in a holy guard, increasing their armor class for 45 minutes."
+    }
+  },
+  {
+    "_id": "pal-revive-39-r1",
+    "name": "Revive",
+    "type": "spell",
+    "img": "icons/magic/life/angel-wings-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 39,
+      "school": "alteration",
+      "target": "corpse",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "resurrection"
+        }
+      ],
+      "description": "Revives a slain ally, restoring 35% of their lost experience. It takes some time for the recently revived to fully recover."
+    }
+  },
+  {
+    "_id": "pal-wave-of-life-39-r1",
+    "name": "Wave of Life",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 39,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 274,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 145
+        }
+      ],
+      "description": "Emanates a wave of life from the caster, healing 219 hit points for everyone in your group."
+    }
+  }
+]

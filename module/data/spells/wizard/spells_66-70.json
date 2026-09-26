@@ -1,0 +1,921 @@
+[
+{
+  "_id": "wiz-ether-shield-66-r1",
+  "name": "Ether Shield",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-green.webp",
+  "system": {
+    "class": "wizard",
+    "level": 66,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 12,
+    "manaCost": 616,
+    "effects": [
+      {
+        "type": "buff",
+        "stat": "hp",
+        "amount": 390,
+        "duration": 5400
+      },
+      {
+        "type": "buff",
+        "stat": "ac",
+        "amount": 10,
+        "duration": 5400
+      },
+      {
+        "type": "buff",
+        "stat": "resist-magic",
+        "amount": 40,
+        "duration": 5400
+      }
+    ],
+    "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+  }
+},
+{
+  "_id": "wiz-icebane-66-r1",
+  "name": "Icebane",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-shard.webp",
+  "system": {
+    "class": "wizard",
+    "level": 66,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 4,
+    "manaCost": 803,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "cold",
+        "amount": 2640
+      }
+    ],
+    "description": "Covers your target in crystals of ice, causing 2640 damage. This damage is much more difficult to resist than most spells."
+  }
+},
+{
+  "_id": "wiz-spark-of-fire-66-r1",
+  "name": "Spark of Fire",
+  "type": "spell",
+  "img": "icons/magic/fire/projectile-fireball-large.webp",
+  "system": {
+    "class": "wizard",
+    "level": 66,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 3,
+    "manaCost": 561,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "amount": 2372
+      }
+    ],
+    "description": "Consumes your target in a sudden torrent of fire, causing between 2372 and 2372 damage."
+  }
+},
+{
+  "_id": "wiz-tears-of-the-sun-66-r1",
+  "name": "Tears of the Sun",
+  "type": "spell",
+  "img": "icons/magic/fire/aoe-flame-dragon.webp",
+  "system": {
+    "class": "wizard",
+    "level": 66,
+    "school": "evocation",
+    "target": "area",
+    "range": 150,
+    "castTime": 5,
+    "manaCost": 931,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "amount": 2056,
+        "radius": 25
+      }
+    ],
+    "description": "Tears of searing flame fall around your target, causing waves of 2056 damage to creatures in the vicinity of your target every 3 seconds. The tears will fade after damaging 4 creatures or after 3 seconds."
+  }
+},
+{
+  "_id": "wiz-circle-of-fire-67-r1",
+  "name": "Circle of Fire",
+  "type": "spell",
+  "img": "icons/magic/fire/aoe-flame.webp",
+  "system": {
+    "class": "wizard",
+    "level": 67,
+    "school": "evocation",
+    "target": "area",
+    "range": 0,
+    "castTime": 2,
+    "manaCost": 797,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "amount": 1566,
+        "radius": 35
+      }
+    ],
+    "description": "Creates a circle of fire around you, causing between 1566 and 1566 damage to up to 30 nearby creatures."
+  }
+},
+{
+  "_id": "wiz-lightningbane-67-r1",
+  "name": "Lightningbane",
+  "type": "spell",
+  "img": "icons/magic/lightning/projectile-bolt.webp",
+  "system": {
+    "class": "wizard",
+    "level": 67,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 4,
+    "manaCost": 845,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "electric",
+        "amount": 2780
+      }
+    ],
+    "description": "Bolts of thunder consume your target, causing 2780 damage. This damage is much more difficult to resist than most spells."
+  }
+},
+{
+  "_id": "wiz-phase-walk-67-r1",
+  "name": "Phase Walk",
+  "type": "spell",
+  "img": "icons/magic/arcane/invisibility.webp",
+  "system": {
+    "class": "wizard",
+    "level": 67,
+    "school": "divination",
+    "target": "single",
+    "range": 100,
+    "castTime": 6,
+    "manaCost": 278,
+    "effects": [
+      {
+        "type": "invisibility",
+        "effect": "standard",
+        "duration": 600
+      }
+    ],
+    "description": "Cloaks you in a mystic veil, rendering you invisible to many creatures for 10 minutes."
+  }
+},
+{
+  "_id": "wiz-translocate-slaughter-67-r1",
+  "name": "Translocate: Slaughter",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 67,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 10,
+    "manaCost": 556,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "translocate",
+        "destination": "wallofslaughter"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to the walls of slaughter."
+  }
+},
+{
+  "_id": "wiz-clinging-frost-68-r1",
+  "name": "Clinging Frost",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-shard.webp",
+  "system": {
+    "class": "wizard",
+    "level": 68,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 4,
+    "manaCost": 316,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "cold",
+        "amount": 1653
+      },
+      {
+        "type": "utility",
+        "effect": "cast-clinging-frost-trigger"
+      }
+    ],
+    "description": "Strikes your target with a clinging bolt of frost causing 1653 damage. The frost will slow your target's movements for a short time."
+  }
+},
+{
+  "_id": "wiz-ether-skin-68-r1",
+  "name": "Ether Skin",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+    "class": "wizard",
+    "level": 68,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 423,
+    "effects": [
+      {
+        "type": "buff",
+        "stat": "absorb-damage",
+        "percent": 100,
+        "cap": 881,
+        "duration": 7200
+      },
+      {
+        "type": "buff",
+        "stat": "mana-regen",
+        "amount": 3,
+        "duration": 7200
+      }
+    ],
+    "description": "Covers you in a magical skin that absorbs 881 damage before dissipating. This spell also increases your mana regeneration rate."
+  }
+},
+{
+  "_id": "wiz-firebane-68-r1",
+  "name": "Firebane",
+  "type": "spell",
+  "img": "icons/magic/fire/projectile-fireball-large.webp",
+  "system": {
+    "class": "wizard",
+    "level": 68,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 4,
+    "manaCost": 412,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "amount": 1355
+      }
+    ],
+    "description": "Searing flames consume your target, causing between 1355 and 1355 damage. This damage is much more difficult to resist than most spells."
+  }
+},
+{
+  "_id": "wiz-spark-of-lightning-68-r1",
+  "name": "Spark of Lightning",
+  "type": "spell",
+  "img": "icons/magic/lightning/projectile-bolt.webp",
+  "system": {
+    "class": "wizard",
+    "level": 68,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 3,
+    "manaCost": 288,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "electric",
+        "amount": 1217
+      }
+    ],
+    "description": "Consumes your target in a sudden torrent of lightning, causing between 1217 and 1217 damage."
+  }
+},
+{
+  "_id": "wiz-spark-of-thunder-68-r1",
+  "name": "Spark of Thunder",
+  "type": "spell",
+  "img": "icons/magic/lightning/projectile-bolt.webp",
+  "system": {
+    "class": "wizard",
+    "level": 68,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 3,
+    "manaCost": 288,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "electric",
+        "amount": 1217
+      },
+      {
+        "type": "control",
+        "effect": "stun",
+        "duration": 1
+      }
+    ],
+    "description": "Consumes your target in a sudden torrent of thunder, causing between 1217 and 1217 damage and briefly stunning your target."
+  }
+},
+{
+  "_id": "wiz-thundaka-68-r1",
+  "name": "Thundaka",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+    "class": "wizard",
+    "level": 68,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 7,
+    "manaCost": 592,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "arcane",
+        "amount": 2920
+      }
+    ],
+    "description": "Assaults your target's body with arcing bolts of thunderous energy, causing 2920 damage."
+  }
+},
+{
+  "_id": "wiz-claw-of-vox-69-r1",
+  "name": "Claw of Vox",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-shard.webp",
+  "system": {
+    "class": "wizard",
+    "level": 69,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 5,
+    "manaCost": 188,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "cold",
+        "amount": 1243
+      }
+    ],
+    "description": "Encases your target with frost, doing 1243 damage."
+  }
+},
+{
+  "_id": "wiz-ether-ward-69-r1",
+  "name": "Ether Ward",
+  "type": "spell",
+  "img": "icons/magic/arcane/shield-energy-green.webp",
+  "system": {
+    "class": "wizard",
+    "level": 69,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 2,
+    "manaCost": 45,
+    "effects": [
+      {
+        "type": "buff",
+        "stat": "absorb-magic-damage",
+        "percent": 40,
+        "cap": 1175,
+        "duration": 1620
+      }
+    ],
+    "description": "Envelops you in a magical ward, absorbing a portion of incoming spell damage. This spell absorbs a set amount of damage before dissipating."
+  }
+},
+{
+  "_id": "wiz-focus-mass-intricate-spellcasters-empowering-essence-69-r1",
+  "name": "Focus Mass Intricate Spellcaster's Empowering Essence",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-orb.webp",
+  "system": {
+    "class": "wizard",
+    "level": 69,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 1627,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "summon-item",
+        "item": "Intricate Spellcaster's Empowering Essence",
+        "amount": 5
+      }
+    ],
+    "description": "Focuses the casters mana into a form that can be physically handled."
+  }
+},
+{
+  "_id": "wiz-gelidin-comet-69-r1",
+  "name": "Gelidin Comet",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-shard.webp",
+  "system": {
+    "class": "wizard",
+    "level": 69,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 8,
+    "manaCost": 588,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "cold",
+        "amount": 3060
+      }
+    ],
+    "description": "Summons a cosmic ice meteor from the heavens, causing 3060 damage to your target."
+  }
+},
+{
+  "_id": "wiz-katta-castrum-portal-69-r1",
+  "name": "Katta Castrum Portal",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-group.webp",
+  "system": {
+    "class": "wizard",
+    "level": 69,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 16,
+    "manaCost": 271,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "kattacastrum"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your entire group to Katta Castrum."
+  }
+},
+{
+  "_id": "wiz-mana-weave-69-r1",
+  "name": "Mana Weave",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+    "class": "wizard",
+    "level": 69,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 7,
+    "manaCost": 606,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "arcane",
+        "amount": 2893
+      }
+    ],
+    "description": "Weaves mana into a bolt of burning energy that will cause 2893 damage to your target. The energy of this weave can sometimes be harnessed to greatly increase the power of your next direct damage spell."
+  }
+},
+{
+  "_id": "wiz-meteor-storm-69-r1",
+  "name": "Meteor Storm",
+  "type": "spell",
+  "img": "icons/magic/fire/aoe-flame-dragon.webp",
+  "system": {
+    "class": "wizard",
+    "level": 69,
+    "school": "evocation",
+    "target": "area",
+    "range": 150,
+    "castTime": 5,
+    "manaCost": 473,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "amount": 801,
+        "radius": 25
+      }
+    ],
+    "description": "Calls down a storm of meteors around your target, causing waves of 801 damage to creatures in the vicinity of your target every 3 seconds. The storm will fade after damaging 4 creatures or after 3 seconds."
+  }
+},
+{
+  "_id": "wiz-solists-frozen-sword-69-r1",
+  "name": "Solist's Frozen Sword",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+    "class": "wizard",
+    "level": 69,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 0,
+    "manaCost": 226,
+    "effects": [
+      {
+        "type": "summon-pet",
+        "pet": "solists-frozen-sword"
+      }
+    ],
+    "description": "Conjures a frozen sword that attacks your target until either it, or the target, is dead."
+  }
+},
+{
+  "_id": "wiz-spark-of-ice-69-r1",
+  "name": "Spark of Ice",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-shard.webp",
+  "system": {
+    "class": "wizard",
+    "level": 69,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 3,
+    "manaCost": 288,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "cold",
+        "amount": 1219
+      }
+    ],
+    "description": "Consumes your target in a sudden torrent of frost, causing 1219 damage."
+  }
+},
+{
+  "_id": "wiz-ancient-core-fire-70-r1",
+  "name": "Ancient: Core Fire",
+  "type": "spell",
+  "img": "icons/magic/fire/projectile-fireball-large.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 8,
+    "manaCost": 465,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "amount": 2227
+      }
+    ],
+    "description": "Consumes your target in the power of chaos causing 2227 damage."
+  }
+},
+{
+  "_id": "wiz-ancient-spear-of-gelaqua-70-r1",
+  "name": "Ancient: Spear of Gelaqua",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-spear.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "evocation",
+    "target": "single",
+    "range": 150,
+    "castTime": 3,
+    "manaCost": 189,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "cold",
+        "amount": 1081
+      }
+    ],
+    "description": "Creates a fierce spear of ice to strike your target, causing between 1081 and 1081 damage."
+  }
+},
+{
+  "_id": "wiz-bulwark-of-calrena-70-r1",
+  "name": "Bulwark of Calrena",
+  "type": "spell",
+  "img": "icons/magic/arcane/shield-energy-green.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "abjuration",
+    "target": "single",
+    "range": 100,
+    "castTime": 4,
+    "manaCost": 213,
+    "effects": [
+      {
+        "type": "buff",
+        "stat": "absorb-magic-damage",
+        "percent": 25,
+        "cap": 911,
+        "duration": 2160
+      }
+    ],
+    "description": "Places the protection of Calrena on your target, absorbing a portion of incoming spell damage. This spell absorbs a set amount of damage before dissipating."
+  }
+},
+{
+  "_id": "wiz-chaos-flame-70-r1",
+  "name": "Chaos Flame",
+  "type": "spell",
+  "img": "icons/magic/fire/projectile-fireball-large.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "amount": 547,
+        "max": 1094
+      }
+    ],
+    "description": "Evokes a potent magical flame to strike your target, causing between 547 and 1094 damage."
+  }
+},
+{
+  "_id": "wiz-circle-of-thunder-70-r1",
+  "name": "Circle of Thunder",
+  "type": "spell",
+  "img": "icons/magic/lightning/aoe-lightning.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "evocation",
+    "target": "area",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 542,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "electric",
+        "amount": 793,
+        "radius": 35
+      }
+    ],
+    "description": "Creates a circle of lightning around you, causing between 793 and 793 damage to up to 30 nearby creatures."
+  }
+},
+{
+  "_id": "wiz-corona-flare-70-r1",
+  "name": "Corona Flare",
+  "type": "spell",
+  "img": "icons/magic/fire/projectile-fireball-large.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 8,
+    "manaCost": 438,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "amount": 2063
+      }
+    ],
+    "description": "Consumes your target in the inferno of Solusek Ro, causing 2063 damage."
+  }
+},
+{
+  "_id": "wiz-ether-flame-70-r1",
+  "name": "Ether Flame",
+  "type": "spell",
+  "img": "icons/magic/fire/projectile-fireball-large.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 8,
+    "manaCost": 848,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "amount": 3200
+      }
+    ],
+    "description": "Summons the pure energy of ethereal fire to strike your target, causing 3200 damage."
+  }
+},
+{
+  "_id": "wiz-fire-rune-70-r1",
+  "name": "Fire Rune",
+  "type": "spell",
+  "img": "icons/magic/fire/symbol-flame.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 55,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "aura-fire-rune-effect-effect"
+      }
+    ],
+    "description": "Scribes a fiery rune on the ground that will explode and damage any enemy that wanders too close."
+  }
+},
+{
+  "_id": "wiz-focus-elaborate-spellcasters-empowering-essence-70-r1",
+  "name": "Focus Elaborate Spellcaster's Empowering Essence",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-orb.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 274,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "summon-item",
+        "item": "Elaborate Spellcaster's Empowering Essence",
+        "amount": 1
+      }
+    ],
+    "description": "Focuses the casters mana into a form that can be physically handled."
+  }
+},
+{
+  "_id": "wiz-gelid-rains-70-r1",
+  "name": "Gelid Rains",
+  "type": "spell",
+  "img": "icons/magic/water/aoe-frost.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "evocation",
+    "target": "area",
+    "range": 150,
+    "castTime": 5,
+    "manaCost": 289,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "cold",
+        "amount": 639,
+        "radius": 25
+      }
+    ],
+    "description": "Tears of searing ice fall around your target, causing waves of 639 damage to creatures in the vicinity of your target every 3 seconds. The tears will fade after damaging 4 creatures or after 3 seconds."
+  }
+},
+{
+  "_id": "wiz-ice-block-70-r1",
+  "name": "Ice Block",
+  "type": "spell",
+  "img": "icons/magic/nature/root-entangle.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "alteration",
+    "target": "single",
+    "range": 200,
+    "castTime": 1,
+    "manaCost": 98,
+    "effects": [
+      {
+        "type": "control",
+        "effect": "root",
+        "duration": 180
+      }
+    ],
+    "description": "Encases your target's feet in solid ice preventing them from moving for a short time."
+  }
+},
+{
+  "_id": "wiz-icefall-glacier-gate-70-r1",
+  "name": "Icefall Glacier Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-ice.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 82,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "icefall"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports you to Icefall Glacier."
+  }
+},
+{
+  "_id": "wiz-icefall-glacier-portal-70-r1",
+  "name": "Icefall Glacier Portal",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-group.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 16,
+    "manaCost": 164,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "icefall"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your entire group to Icefall Glacier."
+  }
+},
+{
+  "_id": "wiz-telekara-70-r1",
+  "name": "Telekara",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "evocation",
+    "target": "single",
+    "range": 200,
+    "castTime": 3,
+    "manaCost": 213,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "arcane",
+        "amount": 640
+      },
+      {
+        "type": "control",
+        "effect": "stun",
+        "duration": 8
+      }
+    ],
+    "description": "Strikes your target with energy, stunning them briefly, and causing 640 damage."
+  }
+},
+{
+  "_id": "wiz-translocate-icefall-glacier-70-r1",
+  "name": "Translocate: Icefall Glacier",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-ice.webp",
+  "system": {
+    "class": "wizard",
+    "level": 70,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 10,
+    "manaCost": 123,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "translocate",
+        "destination": "icefall"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to Icefall Glacier."
+  }
+}
+]

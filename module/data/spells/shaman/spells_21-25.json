@@ -326,6 +326,24 @@
     ],
     "description": "Increases the target’s dexterity."
   }
-}
-
+},
+  {
+    "_id": "shm-remove-lesser-curse-24-r1",
+    "name": "Remove Lesser Curse",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "shaman",
+      "level": 24,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 75,
+      "effects": [
+        { "type": "cure", "effect": "curse", "amount": 4 }
+      ],
+      "description": "Cleanses your target's soul, removing lesser curses."
+    }
+  }
 ]

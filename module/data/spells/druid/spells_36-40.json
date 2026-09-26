@@ -1,0 +1,845 @@
+[
+  {
+    "_id": "dru-circle-of-misty-36-r1",
+    "name": "Circle of Misty",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 36,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "mistythicket"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Misty Thicket."
+    }
+  },
+  {
+    "_id": "dru-enveloping-roots-36-r1",
+    "name": "Enveloping Roots",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 36,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 210
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 60
+        }
+      ],
+      "description": "Commands roots to take hold of your target, doing 110 damage and preventing their movement for 60 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-ring-of-wakening-lands-36-r1",
+    "name": "Ring of Wakening Lands",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 36,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "wakening"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Wakening Lands."
+    }
+  },
+  {
+    "_id": "dru-skin-like-diamond-36-r1",
+    "name": "Skin like Diamond",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 36,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 3240
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 200,
+          "duration": 3240
+        },
+        {
+          "type": "heal",
+          "amount": 375,
+          "max": 375
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points and armor class for 54 minutes."
+    }
+  },
+  {
+    "_id": "dru-spirit-of-ash-36-r1",
+    "name": "Spirit of Ash",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 36,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "tree"
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 2160
+        },
+        {
+          "type": "heal",
+          "amount": 41,
+          "duration": 2160
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 4,
+          "max": 4,
+          "duration": 2160
+        }
+      ],
+      "description": "Transforms you into a stout tree, preventing movement, but increasing your regeneration. This spell can only be cast outdoors."
+    }
+  },
+  {
+    "_id": "dru-avalanche-37-r1",
+    "name": "Avalanche",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 37,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 5.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 235,
+          "radius": 20
+        }
+      ],
+      "description": "Calls down a hailstorm over your target, causing 125 damage every 3 seconds to creatures in the area. This storm will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "cold",
+      "radius": 20
+    }
+  },
+  {
+    "_id": "dru-circle-of-dawnshroud-37-r1",
+    "name": "Circle of Dawnshroud",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 37,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 24.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "dawnshroud"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Dawnshroud Peaks."
+    }
+  },
+  {
+    "_id": "dru-ros-fiery-sundering-37-r1",
+    "name": "Ro's Fiery Sundering",
+    "type": "spell",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "class": "druid",
+      "level": 37,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "resist-fire",
+          "min": -51,
+          "max": -51,
+          "duration": 300
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -4,
+          "max": -3,
+          "duration": 300
+        }
+      ],
+      "description": "Surrounds your target in dancing flames, lowering their fire resistance and armor class.",
+      "resist": "fire",
+      "resistMod": -200
+    }
+  },
+  {
+    "_id": "dru-shield-of-spikes-37-r1",
+    "name": "Shield of Spikes",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 37,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 17,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of spikes that cause damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-spikecoat-37-r1",
+    "name": "Spikecoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 37,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 110,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 6,
+          "max": 7,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 4,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of spikes that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "dru-wind-of-the-south-37-r1",
+    "name": "Wind of the South",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 37,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "evac"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Emerald Jungle."
+    }
+  },
+  {
+    "_id": "dru-circle-of-great-divide-38-r1",
+    "name": "Circle of Great Divide",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 38,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "greatdivide"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Great Divide."
+    }
+  },
+  {
+    "_id": "dru-circle-of-knowledge-38-r1",
+    "name": "Circle of Knowledge",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 38,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 24.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "poknowledge"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to New Tanaan in the Plane of Knowledge."
+    }
+  },
+  {
+    "_id": "dru-firestrike-38-r1",
+    "name": "Firestrike",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 38,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 138,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 265
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 250 and 422 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-remove-curse-38-r1",
+    "name": "Remove Curse",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 38,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 4
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 4
+        }
+      ],
+      "description": "Cleanses your target's soul, removing minor curses."
+    }
+  },
+  {
+    "_id": "dru-succor-ro-38-r1",
+    "name": "Succor: Ro",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 38,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "evac"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Southern Desert of Ro."
+    }
+  },
+  {
+    "_id": "dru-zephyr-grimling-38-r1",
+    "name": "Zephyr: Grimling",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 38,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "grimling"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Grimling Forest."
+    }
+  },
+  {
+    "_id": "dru-natures-renewal-39-r1",
+    "name": "Nature's Renewal",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 39,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 173,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 285,
+          "max": 400
+        }
+      ],
+      "description": "Mends your target's wounds, healing between 317 and 447 hit points."
+    }
+  },
+  {
+    "_id": "dru-pack-regeneration-39-r1",
+    "name": "Pack Regeneration",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 39,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 8,
+          "duration": 840
+        }
+      ],
+      "description": "Hastens your group's natural healing, regenerating up to 9 hit points every 6 seconds for 14 minutes."
+    }
+  },
+  {
+    "_id": "dru-protection-of-diamond-39-r1",
+    "name": "Protection of Diamond",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 39,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 8.0,
+      "manaCost": 450,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 3240
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 200,
+          "duration": 3240
+        },
+        {
+          "type": "heal",
+          "amount": 180,
+          "max": 180
+        }
+      ],
+      "description": "Hardens the skin of your group, increasing their hit points and armor class for 54 minutes."
+    }
+  },
+  {
+    "_id": "dru-ring-of-cobalt-scar-39-r1",
+    "name": "Ring of Cobalt Scar",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 39,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "cobaltscar"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Cobalt Scar."
+    }
+  },
+  {
+    "_id": "dru-wind-of-the-north-39-r1",
+    "name": "Wind of the North",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 39,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "evac"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Skyfire Mountains."
+    }
+  },
+  {
+    "_id": "dru-zephyr-feerrott-39-r1",
+    "name": "Zephyr: Feerrott",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 39,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "feerrott"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Feerrott."
+    }
+  },
+  {
+    "_id": "dru-zephyr-steamfont-39-r1",
+    "name": "Zephyr: Steamfont",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 39,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "steamfontmts"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Steamfont Mountains."
+    }
+  },
+  {
+    "_id": "dru-circle-of-wakening-lands-40-r1",
+    "name": "Circle of Wakening Lands",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 40,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "wakening"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Wakening Lands."
+    }
+  },
+  {
+    "_id": "dru-drifting-death-40-r1",
+    "name": "Drifting Death",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 40,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 370,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 53,
+          "max": 53,
+          "duration": 54
+        }
+      ],
+      "description": "Commands a swarm of insects to attack your target relentlessly, causing between 145 and 198 damage every 6 seconds for 54 seconds.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-form-of-the-great-wolf-40-r1",
+    "name": "Form of the Great Wolf",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 40,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 135,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "white-spirit-wolf"
+        },
+        {
+          "type": "utility",
+          "effect": "trigger-spell",
+          "spell": "illusion-benefit-dena-if-not-cast-by-item-click"
+        }
+      ],
+      "description": "Fills you with the spirit of the wild, allowing you to take the form a wolf for 6 hours and granting Illusion Benefit Dena."
+    }
+  },
+  {
+    "_id": "dru-primary-anchor-push-40-r1",
+    "name": "Primary Anchor Push",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 40,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "your"
+        }
+      ],
+      "description": "Opens an arcane portal that teleports your target to your Primary Anchor."
+    }
+  },
+  {
+    "_id": "dru-secondary-anchor-push-40-r1",
+    "name": "Secondary Anchor Push",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 40,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "your"
+        }
+      ],
+      "description": "Opens an arcane portal that teleports your target to your Secondary Anchor."
+    }
+  },
+  {
+    "_id": "dru-zephyr-combines-40-r1",
+    "name": "Zephyr: Combines",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 40,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "dreadlands"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Dreadlands."
+    }
+  },
+  {
+    "_id": "dru-zephyr-primary-anchor-40-r1",
+    "name": "Zephyr: Primary Anchor",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 40,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "their"
+        }
+      ],
+      "description": "Opens an arcane portal that teleports your target to their Primary Anchor."
+    }
+  },
+  {
+    "_id": "dru-zephyr-ro-40-r1",
+    "name": "Zephyr: Ro",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 40,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "southro"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the South Desert of Ro."
+    }
+  },
+  {
+    "_id": "dru-zephyr-secondary-anchor-40-r1",
+    "name": "Zephyr: Secondary Anchor",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 40,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "their"
+        }
+      ],
+      "description": "Opens an arcane portal that teleports your target to their Secondary Anchor."
+    }
+  }
+]

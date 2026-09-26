@@ -1,0 +1,1080 @@
+[
+  {
+    "_id": "dru-earth-shiver-66-r1",
+    "name": "Earth Shiver",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 66,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 1468,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 2000,
+          "radius": 35
+        }
+      ],
+      "description": "Causes the earth to tremble around you, causing between 1105 and 1105 damage to up to 30 nearby enemies.",
+      "resist": "magic",
+      "radius": 35
+    }
+  },
+  {
+    "_id": "dru-instinctual-terror-66-r1",
+    "name": "Instinctual Terror",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "druid",
+      "level": 66,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 226,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 65,
+          "duration": 42
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-oaken-vigor-66-r1",
+    "name": "Oaken Vigor",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 66,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 343,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 70,
+          "duration": 1260
+        }
+      ],
+      "description": "Hastens your target's natural healing, regenerating up to 70 hit points every 6 seconds for 21 minutes."
+    }
+  },
+  {
+    "_id": "dru-stormwatch-66-r1",
+    "name": "Stormwatch",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 66,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 519,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 965
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 70,
+          "duration": 2.5
+        }
+      ],
+      "description": "Summons a whirling wind to stun your target, also doing between 535 and 535 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-tempest-wind-66-r1",
+    "name": "Tempest Wind",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 66,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 3.5,
+      "manaCost": 1127,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 2110,
+          "radius": 20
+        }
+      ],
+      "description": "Calls down a hailstorm over your target, causing 1168 damage every 3 seconds to creatures in the area. The storm will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "cold",
+      "resistMod": -50,
+      "radius": 20
+    }
+  },
+  {
+    "_id": "dru-glacier-breath-67-r1",
+    "name": "Glacier Breath",
+    "type": "spell",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "class": "druid",
+      "level": 67,
+      "school": "alteration",
+      "target": "single",
+      "range": 150,
+      "castTime": 2.5,
+      "manaCost": 274,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "resist-cold",
+          "min": -55,
+          "max": -55,
+          "duration": 600
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -12,
+          "max": -9,
+          "duration": 600
+        }
+      ],
+      "description": "Covers your target in a layer of glistening ice, lowering their cold resistance and armor class.",
+      "resist": "cold",
+      "resistMod": -200
+    }
+  },
+  {
+    "_id": "dru-immolation-of-the-sun-67-r1",
+    "name": "Immolation of the Sun",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "druid",
+      "level": 67,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 557,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 335,
+          "max": 335,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-fire",
+          "min": -40,
+          "max": -40,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -10,
+          "max": -8,
+          "duration": 60
+        }
+      ],
+      "description": "Surrounds your target in dancing flames for 60 seconds, causing between 150 and 304 damage every six seconds as well as lowering their fire resistance, and armor class.",
+      "resist": "fire",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "dru-lions-strength-67-r1",
+    "name": "Lion's Strength",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 67,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 181,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hit-damage",
+          "amount": 5,
+          "duration": 4320
+        }
+      ],
+      "description": "Fills your target with the power of the lion, increasing the damage they are capable of for 72 minutes."
+    }
+  },
+  {
+    "_id": "dru-natures-serenity-67-r1",
+    "name": "Nature's Serenity",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 67,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 219,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 15,
+          "maxLevel": 70
+        }
+      ],
+      "description": "Calms the savage spirit of almost any creature in an area around your target, making them less likely to attack. This spell works on creatures up to level 70."
+    }
+  },
+  {
+    "_id": "dru-nettle-shield-67-r1",
+    "name": "Nettle Shield",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 67,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 247,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 55,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of spikes that causes damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-suns-corona-67-r1",
+    "name": "Sun's Corona",
+    "type": "spell",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "class": "druid",
+      "level": 67,
+      "school": "alteration",
+      "target": "single",
+      "range": 150,
+      "castTime": 2.5,
+      "manaCost": 205,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "atk",
+          "min": -90,
+          "max": -90,
+          "duration": 600
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -6,
+          "max": -4,
+          "duration": 600
+        }
+      ],
+      "description": "Surrounds your target in dancing flames, lowering their attack value and armor class for 10 minutes.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-zephyr-slaughter-67-r1",
+    "name": "Zephyr: Slaughter",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 67,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 247,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "wallofslaughter"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Wall of Slaughter."
+    }
+  },
+  {
+    "_id": "dru-chlorotrope-68-r1",
+    "name": "Chlorotrope",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 68,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 598,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 1820,
+          "max": 2430
+        }
+      ],
+      "description": "Mends severe wounds, healing between 2110 and 2810 damage."
+    }
+  },
+  {
+    "_id": "dru-cloak-of-nature-68-r1",
+    "name": "Cloak of Nature",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 68,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 111,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard"
+        }
+      ],
+      "description": "Cloaks you in a mystic veil, rendering you invisible to many creatures for 10 minutes."
+    }
+  },
+  {
+    "_id": "dru-desolate-summoned-68-r1",
+    "name": "Desolate Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 68,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 449,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 2340
+        }
+      ],
+      "description": "A burst of holy light that causes between 1857 and 1857 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-nettlecoat-68-r1",
+    "name": "Nettlecoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 68,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 272,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 14,
+          "max": 19,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 17,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of bracken that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "dru-skin-of-the-reptile-68-r1",
+    "name": "Skin of the Reptile",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 68,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 378,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "defensive-proc",
+          "amount": 400,
+          "proc": "skin-of-the-reptile-trigger"
+        }
+      ],
+      "description": "Causes your target's skin to take on a reptilian appearance. When the target is struck by melee combat the skin will often attempt to heal its wounds."
+    }
+  },
+  {
+    "_id": "dru-steeloak-skin-68-r1",
+    "name": "Steeloak Skin",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 68,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 783,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 10,
+          "max": 13,
+          "duration": 6000
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 770,
+          "duration": 6000
+        },
+        {
+          "type": "heal",
+          "amount": 670,
+          "max": 670
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 8,
+          "max": 8,
+          "duration": 6000
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points, mana regeneration, and armor class for 100 minutes."
+    }
+  },
+  {
+    "_id": "dru-wasp-swarm-68-r1",
+    "name": "Wasp Swarm",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 68,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 563,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 390,
+          "max": 390,
+          "duration": 54
+        }
+      ],
+      "description": "Commands a swarm of insects to attack your target relentlessly, causing between 417 and 636 damage every six seconds for 54 seconds.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-blessing-of-oak-69-r1",
+    "name": "Blessing of Oak",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 69,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 845,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 70,
+          "duration": 1260
+        }
+      ],
+      "description": "Hastens your group's natural healing, regenerating up to 70 hit points every 6 seconds for 21 minutes."
+    }
+  },
+  {
+    "_id": "dru-oaken-guard-69-r1",
+    "name": "Oaken Guard",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 69,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.0,
+      "manaCost": 278,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "absorb-melee-damage-75-total-5000"
+        },
+        {
+          "type": "utility",
+          "effect": "defensive-proc",
+          "amount": 400,
+          "proc": "oaken-guard-parry"
+        }
+      ],
+      "description": "Covers you in a shield of oak, greatly reducing the damage you take from melee attacks for up to 12 seconds."
+    }
+  },
+  {
+    "_id": "dru-serpent-vines-69-r1",
+    "name": "Serpent Vines",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 69,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 139,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 55,
+          "duration": 180
+        }
+      ],
+      "description": "Entraps your target in serpent vines, slowing their movement rate for up to 3 minutes. This spell is difficult to resist.",
+      "resist": "lowest",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "dru-solstice-strike-69-r1",
+    "name": "Solstice Strike",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 69,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 549,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 2450
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 2201 and 2201 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-spore-spiral-69-r1",
+    "name": "Spore Spiral",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 69,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 222,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 60
+        }
+      ],
+      "description": "Fires a cluster of spores at your target that will fling them backwards and root them to the ground for a short time.",
+      "resist": "lowest",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "dru-vengeance-of-the-sun-69-r1",
+    "name": "Vengeance of the Sun",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "druid",
+      "level": 69,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 729,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "curse",
+          "amount": 16,
+          "duration": 30
+        },
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 735,
+          "max": 735,
+          "duration": 30
+        }
+      ],
+      "description": "Inflicts the vengeance of the wild on your target, causing between 620 and 896 damage every six seconds for 30 seconds.",
+      "resist": "fire",
+      "resistMod": -30
+    }
+  },
+  {
+    "_id": "dru-ancient-chlorobon-70-r1",
+    "name": "Ancient: Chlorobon",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 610,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 2020,
+          "max": 2610
+        }
+      ],
+      "description": "Mends severe wounds, healing between 2394 and 3094 damage."
+    }
+  },
+  {
+    "_id": "dru-ancient-glacier-frost-70-r1",
+    "name": "Ancient: Glacier Frost",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 488,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 2460
+        }
+      ],
+      "description": "Commands the frost of chaos to strike your target for 2042 damage.",
+      "resist": "cold"
+    }
+  },
+  {
+    "_id": "dru-aura-of-life-70-r1",
+    "name": "Aura of Life",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 482,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "aura-effect-aura-of-life-effect"
+        }
+      ],
+      "description": "Increases your companions' health regeneration and also removes their disease effects, as long as they stay inside the area of the aura."
+    }
+  },
+  {
+    "_id": "dru-barkspur-70-r1",
+    "name": "Barkspur",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 0.0,
+      "manaCost": 361,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 210,
+          "duration": 24
+        }
+      ],
+      "description": "Causes your target's skin to sprout large spikes and hardened skin. This effect will cause heavy damage to any creatures that strike them."
+    }
+  },
+  {
+    "_id": "dru-blessing-of-steeloak-70-r1",
+    "name": "Blessing of Steeloak",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 1864,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 10,
+          "max": 13,
+          "duration": 6000
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 770,
+          "duration": 6000
+        },
+        {
+          "type": "heal",
+          "amount": 650,
+          "max": 650
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 8,
+          "max": 8,
+          "duration": 6000
+        }
+      ],
+      "description": "Hardens the skin of your group, increasing their hit points, mana regeneration, and armor class for 100 minutes."
+    }
+  },
+  {
+    "_id": "dru-circle-of-direwind-70-r1",
+    "name": "Circle of Direwind",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 361,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "direwind"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your entire group to Direwind Cliffs."
+    }
+  },
+  {
+    "_id": "dru-dawnstrike-70-r1",
+    "name": "Dawnstrike",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 7.0,
+      "manaCost": 581,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 2560
+        }
+      ],
+      "description": "Channels the power of the dawn to strike your target for 2125 damage. While channeling this power you will sometimes gain the blessing of the dawn, which will greatly increase your next direct damage spell.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-glitterfrost-70-r1",
+    "name": "Glitterfrost",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 459,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 2280
+        }
+      ],
+      "description": "Summons the raging blizzard of winter, causing 1892 damage to your target.",
+      "resist": "cold"
+    }
+  },
+  {
+    "_id": "dru-hungry-vines-70-r1",
+    "name": "Hungry Vines",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "alteration",
+      "target": "area",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 602,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 50,
+          "duration": 12
+        }
+      ],
+      "description": "Entangles up to 30 of your targets' feet with magical roots, slowing their movement speed for up to 12 seconds. The vines also protect the caster's group by absorbing 20% of incoming melee damage up to 1600.",
+      "resist": "magic",
+      "resistMod": -100,
+      "radius": 50
+    }
+  },
+  {
+    "_id": "dru-legacy-of-nettles-70-r1",
+    "name": "Legacy of Nettles",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 572,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 55,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your group in a shield of spikes that causes damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-mask-of-the-wild-70-r1",
+    "name": "Mask of the Wild",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 301,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "magnification",
+          "amount": 120
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 4,
+          "max": 4,
+          "duration": 11700
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible"
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision"
+        }
+      ],
+      "description": "Covers your face in the mask of the forest for 3.3 hours, allowing you improved vision, increased mana regeneration, and the ability to see invisible creatures."
+    }
+  },
+  {
+    "_id": "dru-moonshadow-70-r1",
+    "name": "Moonshadow",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "alteration",
+      "target": "group",
+      "range": 150,
+      "castTime": 4.5,
+      "manaCost": 928,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 1270,
+          "max": 1270
+        }
+      ],
+      "description": "Bathes your group in the light of the moon, healing their wounds."
+    }
+  },
+  {
+    "_id": "dru-natures-beckon-70-r1",
+    "name": "Nature's Beckon",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 964,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 65,
+          "duration": 450
+        }
+      ],
+      "description": "Beckons to the animals of the wild, allowing you to control them.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-ring-of-direwind-70-r1",
+    "name": "Ring of Direwind",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 181,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "direwind"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports you to Direwind Cliffs."
+    }
+  },
+  {
+    "_id": "dru-zephyr-direwind-70-r1",
+    "name": "Zephyr: Direwind",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 271,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "direwind"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Direwind Cliffs."
+    }
+  }
+]

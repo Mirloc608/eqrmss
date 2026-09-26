@@ -1,0 +1,409 @@
+[
+  {
+    "_id": "rng-chill-sight-56-r1",
+    "name": "Chill Sight",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 56,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your eyes with magical vision, allowing you to see clearly in the dark for 36 minutes."
+    }
+  },
+  {
+    "_id": "rng-greater-wolf-form-56-r1",
+    "name": "Greater Wolf Form",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 56,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "old-wolf",
+          "duration": 6600
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 60,
+          "duration": 6600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 40,
+          "duration": 6600
+        }
+      ],
+      "description": "Fills you with the spirit of the wild, allowing you to take the form a wolf for 110 minutes, increasing your movement rate, and attack rating."
+    }
+  },
+  {
+    "_id": "rng-mark-of-the-predator-56-r1",
+    "name": "Mark of the Predator",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 56,
+      "school": "abjuration",
+      "target": "group",
+      "range": 150,
+      "castTime": 3.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 20,
+          "duration": 4500
+        }
+      ],
+      "description": "Places the mark of the predator upon your group, increasing their attack rating for 75 minutes."
+    }
+  },
+  {
+    "_id": "rng-call-of-ice-58-r1",
+    "name": "Call of Ice",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "ranger",
+      "level": 58,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "proc": "call-of-ice-strike",
+          "duration": 600
+        }
+      ],
+      "description": "Imparts your weapons with ice magic for 10 minutes, allowing them a chance to strike with the fury of winter."
+    }
+  },
+  {
+    "_id": "rng-eagle-eye-58-r1",
+    "name": "Eagle Eye",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 58,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 500,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "archery-accuracy",
+          "amount": 40,
+          "duration": 4200
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 4200
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 4200
+        }
+      ],
+      "description": "Focuses your vision, considerably improving your aim with a bow for 70 minutes."
+    }
+  },
+  {
+    "_id": "rng-nullify-magic-58-r1",
+    "name": "Nullify Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "ranger",
+      "level": 58,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 4.0
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 4.0
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "rng-shield-of-spikes-58-r1",
+    "name": "Shield of Spikes",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "ranger",
+      "level": 58,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 17,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of spikes that cause damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "rng-dustdevil-59-r1",
+    "name": "Dustdevil",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 59,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 162,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 623
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 582 and 582 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "rng-skin-like-nature-59-r1",
+    "name": "Skin like Nature",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 59,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3.0,
+          "max": 5.0,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 250,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 203
+        },
+        {
+          "type": "heal",
+          "amount": 1.6,
+          "duration": 4320
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points and armor class for 72 minutes."
+    }
+  },
+  {
+    "_id": "rng-call-of-the-predator-60-r1",
+    "name": "Call of the Predator",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 60,
+      "school": "abjuration",
+      "target": "group",
+      "range": 150,
+      "castTime": 5.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 40,
+          "duration": 4500
+        }
+      ],
+      "description": "Summons the spirit of the predator to impart your group with an increased attack rating for 75 minutes."
+    }
+  },
+  {
+    "_id": "rng-enveloping-roots-60-r1",
+    "name": "Enveloping Roots",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 700
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 60
+        }
+      ],
+      "description": "Commands roots to take hold of your target, doing 110 damage and preventing their movement for 60 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "rng-thorncoat-60-r1",
+    "name": "Thorncoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 60,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 175,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7.0,
+          "max": 9.0,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 5.0,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of thorns that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "rng-warders-protection-60-r1",
+    "name": "Warder's Protection",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "ranger",
+      "level": 60,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 21,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 70,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3.0,
+          "max": 4.0,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 75,
+          "duration": 9000
+        }
+      ],
+      "description": "Covers your skin in a coat of hardened thorns, increasing your armor class, as well as causing damage to anyone who strikes you for 2.5 hours."
+    }
+  },
+  {
+    "_id": "rng-weapon-shield-discipline-60-r1",
+    "name": "Weapon Shield Discipline",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "ranger",
+      "level": 60,
+      "school": "discipline",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "parry",
+          "amount": 10000,
+          "duration": 24
+        }
+      ],
+      "description": "Focuses your combat reflexes, allowing you to parry most melee attacks."
+    }
+  }
+]

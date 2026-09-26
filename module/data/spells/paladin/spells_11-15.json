@@ -1,0 +1,146 @@
+[
+  {
+    "_id": "pal-cure-disease-11-r1",
+    "name": "Cure Disease",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 11,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 5
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing minor diseases."
+    }
+  },
+  {
+    "_id": "pal-light-healing-12-r1",
+    "name": "Light Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 12,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 28,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 49
+        }
+      ],
+      "description": "Mends light wounds, healing between 35 and 65 hit points."
+    }
+  },
+  {
+    "_id": "pal-desist-13-r1",
+    "name": "Desist",
+    "type": "spell",
+    "img": "icons/magic/light/explosion-beam-blind.webp",
+    "system": {
+      "class": "paladin",
+      "level": 13,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "duration": 2.5,
+          "maxLevel": 55
+        }
+      ],
+      "description": "Invokes the will of the gods, briefly stunning your opponent. This spell works on creatures up to level 55.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-hammer-of-wrath-14-r1",
+    "name": "Hammer of Wrath",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "paladin",
+      "level": 14,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "hammer-of-wrath"
+        }
+      ],
+      "description": "Summons a magical hammer that is particularly adept at smiting undead."
+    }
+  },
+  {
+    "_id": "pal-ward-undead-14-r1",
+    "name": "Ward Undead",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "paladin",
+      "level": 14,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 32,
+          "resist": "magic"
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 7 and 12 damage to an undead target.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-holy-armor-15-r1",
+    "name": "Holy Armor",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 15,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 2,
+          "duration": 1620
+        }
+      ],
+      "description": "Covers your target in holy armor, increasing their armor class for 27 minutes."
+    }
+  }
+]

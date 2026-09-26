@@ -347,5 +347,121 @@
       ],
       "description": "Teleports the entire group to North Karana."
     }
+  },
+{
+  "_id": "wiz-cazic-gate-23-r1",
+  "name": "Cazic Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 23,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "cazicthule"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports you to the Temple of Cazic-Thule."
   }
+},
+{
+  "_id": "wiz-west-gate-23-r1",
+  "name": "West Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 23,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "qey2hh1"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports you to the Western Plains of Karana."
+  }
+},
+{
+  "_id": "wiz-focus-mass-makeshift-spellcasters-empowering-essence-24-r1",
+  "name": "Focus Mass Makeshift Spellcaster's Empowering Essence",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-orb.webp",
+  "system": {
+    "class": "wizard",
+    "level": 24,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 600,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "summon-item",
+        "item": "Makeshift Spellcaster's Empowering Essence",
+        "amount": 5
+      }
+    ],
+    "description": "Focuses the casters mana into a form that can be physically handled."
+  }
+},
+{
+  "_id": "wiz-xalirilans-discombobulation-24-r1",
+  "name": "Xalirilan's Discombobulation",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-red.webp",
+  "system": {
+    "class": "wizard",
+    "level": 24,
+    "school": "divination",
+    "target": "single",
+    "range": 40,
+    "castTime": 4,
+    "manaCost": 145,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "disarm-chest",
+        "amount": 165
+      }
+    ],
+    "description": "Attempts to disarm a trap on the targeted object. Consumes a scrying stone when cast."
+  }
+},
+{
+  "_id": "wiz-xalirilans-extrication-24-r1",
+  "name": "Xalirilan's Extrication",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-green.webp",
+  "system": {
+    "class": "wizard",
+    "level": 24,
+    "school": "divination",
+    "target": "single",
+    "range": 40,
+    "castTime": 4,
+    "manaCost": 145,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "unlock-chest",
+        "amount": 190
+      }
+    ],
+    "description": "Attempts to destroy any lock present on the targeted object."
+  }
+}
 ]

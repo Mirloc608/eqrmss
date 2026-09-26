@@ -1,0 +1,547 @@
+[
+  {
+    "_id": "nec-breath-of-the-dead-21-r1",
+    "name": "Breath of the Dead",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 21,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.5,
+      "manaCost": 45,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "enduring-breath",
+          "duration": 1620
+        }
+      ],
+      "description": "Allows your metabolism to function without oxygen, allowing you to survive without air for 27 minutes. Consumes a handful of fish scales to cast."
+    }
+  },
+  {
+    "_id": "nec-rapacious-subvention-21-r1",
+    "name": "Rapacious Subvention",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 21,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana",
+          "amount": 60
+        }
+      ],
+      "description": "Restores your target's mana at the expense of your own."
+    }
+  },
+  {
+    "_id": "nec-scent-of-shadow-21-r1",
+    "name": "Scent of Shadow",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 21,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 4,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 18,
+          "duration": 840,
+          "resist": "poison"
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 18,
+          "duration": 840,
+          "resist": "poison"
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 18,
+          "duration": 840,
+          "resist": "poison"
+        }
+      ],
+      "description": "Surrounds your target in the scent of shadow, causing them to be more susceptible to fire, poison, and disease."
+    }
+  },
+  {
+    "_id": "nec-shock-of-poison-21-r1",
+    "name": "Shock of Poison",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 21,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 99,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 60,
+          "resist": "poison"
+        }
+      ],
+      "description": "Strikes your target with a jet of poison, causing between 150 and 210 damage."
+    }
+  },
+  {
+    "_id": "nec-leatherskin-22-r1",
+    "name": "Leatherskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 22,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 83,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "rune-shield",
+          "percent": 100,
+          "amount": 118,
+          "duration": 3240
+        }
+      ],
+      "description": "Covers you in a magical skin that absorbs 71 damage before dissipating. Consumes a bloodstone when cast."
+    }
+  },
+  {
+    "_id": "nec-screaming-terror-22-r1",
+    "name": "Screaming Terror",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 22,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "mez",
+          "amount": 55,
+          "duration": 18,
+          "resist": "magic"
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 41
+        }
+      ],
+      "description": "Fills your target with unholy terror, preventing them from moving, and possibly causing them to forget about their enemies. This spell works on opponents up to level 55."
+    }
+  },
+  {
+    "_id": "nec-shadow-sight-22-r1",
+    "name": "Shadow Sight",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 22,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 1620
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 1620
+        }
+      ],
+      "description": "Allows your eyes the vision of shadows, providing night vision and the ability to see invisible creatures for 27 minutes."
+    }
+  },
+  {
+    "_id": "nec-intensify-death-23-r1",
+    "name": "Intensify Death",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 23,
+      "school": "enchantment",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 33,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 30,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 3600
+        }
+      ],
+      "description": "Intensifies the power of your undead servant, increasing their strength, armor class, and attack speed."
+    }
+  },
+  {
+    "_id": "nec-reebos-exorcism-23-r1",
+    "name": "Reebo's Exorcism",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 23,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 72
+        }
+      ],
+      "description": "Attempts to disarm a cursed trap on the targeted object. Consumes a scrying stone when cast."
+    }
+  },
+  {
+    "_id": "nec-rest-the-dead-23-r1",
+    "name": "Rest the Dead",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 23,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 1,
+          "duration": 180
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 1,
+          "duration": 180
+        },
+        {
+          "type": "utility",
+          "effect": "pacify",
+          "duration": 180
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 41
+        }
+      ],
+      "description": "Numbs the awareness of the undead, making them less likely to attack. This spell works on creatures up to level 45."
+    }
+  },
+  {
+    "_id": "nec-wuggans-appraisal-23-r1",
+    "name": "Wuggan's Appraisal",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 23,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 72
+        }
+      ],
+      "description": "Attempts to sense the presence of a trap on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-focus-mass-makeshift-spellcasters-empowering-essence-24-r1",
+    "name": "Focus Mass Makeshift Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 24,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Makeshift Spellcaster's Empowering Essence",
+          "amount": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-haunting-corpse-24-r1",
+    "name": "Haunting Corpse",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 24,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 11.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "haunting-corpse"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-major-shielding-24-r1",
+    "name": "Major Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 24,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 75,
+          "duration": 2700
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 4,
+          "max": 5,
+          "duration": 2700
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 14,
+          "duration": 2700
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "nec-reebos-augury-24-r1",
+    "name": "Reebo's Augury",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 24,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 72
+        }
+      ],
+      "description": "Attempts to sense the presence of a cursed trap on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-reebos-cleansing-24-r1",
+    "name": "Reebo's Cleansing",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 24,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 114
+        }
+      ],
+      "description": "Attempts to destroy any cursed lock present on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-resist-cold-24-r1",
+    "name": "Resist Cold",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 24,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away cold for 36 minutes."
+    }
+  },
+  {
+    "_id": "nec-wuggans-discombobulation-24-r1",
+    "name": "Wuggan's Discombobulation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 24,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 72
+        }
+      ],
+      "description": "Attempts to disarm a trap on the targeted object. Consumes a scrying stone when cast."
+    }
+  },
+  {
+    "_id": "nec-wuggans-extrication-24-r1",
+    "name": "Wuggan's Extrication",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 24,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 114
+        }
+      ],
+      "description": "Attempts to destroy any lock present on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-panic-the-dead-25-r1",
+    "name": "Panic the Dead",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 25,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52,
+          "duration": 54,
+          "resist": "magic"
+        }
+      ],
+      "description": "Inspires fear in an undead opponent, causing them to flee."
+    }
+  }
+]

@@ -1,0 +1,328 @@
+[
+ {
+  "_id": "clr-inspire-fear-21-r1",
+  "name": "Inspire Fear",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 21,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.0,
+   "manaCost": 80,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 30,
+     "resist": "magic"
+    }
+   ],
+   "description": "A booming voice fills your target's ears, causing them to flee in terror."
+  }
+ },
+ {
+  "_id": "clr-symbol-of-ryltan-21-r1",
+  "name": "Symbol of Ryltan",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 21,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 111,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 158,
+     "duration": 2160
+    },
+    {
+     "type": "heal",
+     "amount": 158
+    }
+   ],
+   "description": "Covers your target in a shimmer of holy runes, increasing their hit points for 36 minutes."
+  }
+ },
+ {
+  "_id": "clr-wave-of-fear-21-r1",
+  "name": "Wave of Fear",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 21,
+   "school": "alteration",
+   "target": "area",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 90,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 18,
+     "resist": "magic"
+    }
+   ],
+   "description": "A booming voice fills the ears of up to 30 nearby enemies, causing them to flee in terror.",
+   "radius": 15
+  }
+ },
+ {
+  "_id": "clr-bravery-22-r1",
+  "name": "Bravery",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 22,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 2.75,
+   "manaCost": 70,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 2,
+     "max": 3,
+     "duration": 2700
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 140,
+     "duration": 2700
+    },
+    {
+     "type": "heal",
+     "amount": 140
+    }
+   ],
+   "description": "Provides your target with a sense of bravery, increasing their hit points and armor class for 45 minutes."
+  }
+ },
+ {
+  "_id": "clr-counteract-poison-22-r1",
+  "name": "Counteract Poison",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 22,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 8
+    }
+   ],
+   "description": "Removes toxin from your target's system, curing them of moderate poisons."
+  }
+ },
+ {
+  "_id": "clr-reparation-22-r1",
+  "name": "Reparation",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 22,
+   "school": "alteration",
+   "target": "corpse",
+   "range": 200,
+   "castTime": 6.0,
+   "manaCost": 250,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "resurrect",
+     "xp": 20
+    }
+   ],
+   "description": "Revives a slain ally, restoring 20% of their lost experience. It takes some time for the recently revived to fully recover."
+  }
+ },
+ {
+  "_id": "clr-dismiss-undead-23-r1",
+  "name": "Dismiss Undead",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 23,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.5,
+   "manaCost": 63,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 45,
+     "resist": "magic",
+     "resistMod": -50
+    }
+   ],
+   "description": "A burst of holy power that inflicts between 32 and 45 damage to an undead target."
+  }
+ },
+ {
+  "_id": "clr-ionys-augury-23-r1",
+  "name": "Iony's Augury",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 23,
+   "school": "divination",
+   "target": "single",
+   "range": 40,
+   "castTime": 4.0,
+   "manaCost": 145,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "appraise-chest"
+    }
+   ],
+   "description": "Attempts to sense the presence of a cursed trap on the targeted object."
+  }
+ },
+ {
+  "_id": "clr-remove-lesser-curse-23-r1",
+  "name": "Remove Lesser Curse",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 23,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 75,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 4
+    }
+   ],
+   "description": "Cleanses your target's soul, removing lesser curses."
+  }
+ },
+ {
+  "_id": "clr-ionys-cleansing-24-r1",
+  "name": "Iony's Cleansing",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 24,
+   "school": "divination",
+   "target": "single",
+   "range": 40,
+   "castTime": 4.0,
+   "manaCost": 145,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "unlock-chest"
+    }
+   ],
+   "description": "Attempts to destroy any cursed lock present on the targeted object."
+  }
+ },
+ {
+  "_id": "clr-ionys-exorcism-24-r1",
+  "name": "Iony's Exorcism",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 24,
+   "school": "divination",
+   "target": "single",
+   "range": 40,
+   "castTime": 4.0,
+   "manaCost": 145,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "disarm-chest"
+    }
+   ],
+   "description": "Attempts to disarm a cursed trap on the targeted object. Consumes a scrying stone when cast."
+  }
+ },
+ {
+  "_id": "clr-guard-25-r1",
+  "name": "Guard",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 25,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 80,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 4,
+     "max": 6,
+     "duration": 2700
+    }
+   ],
+   "description": "Covers your target in a holy guard, increasing their armor class for 45 minutes."
+  }
+ },
+ {
+  "_id": "clr-sermon-of-the-righteous-25-r1",
+  "name": "Sermon of the Righteous",
+  "type": "spell",
+  "img": "icons/magic/death/disease-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 25,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 78,
+   "effects": [
+    {
+     "type": "dot",
+     "element": "magic",
+     "min": 17,
+     "max": 17,
+     "duration": 30,
+     "resist": "magic",
+     "resistMod": -100
+    }
+   ],
+   "description": "Bathes your target with holy light, causing between 44 and 17 damage to undead every 6 seconds for 30 seconds."
+  }
+ }
+]

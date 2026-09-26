@@ -210,5 +210,85 @@
     ],
     "description": "Creates a diseased cloud that damages and infects enemies."
   }
-}
+},
+  {
+    "_id": "shm-burst-of-strength-11-r1",
+    "name": "Burst of Strength",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 11,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 0.5,
+      "manaCost": 15,
+      "effects": [
+        { "type": "buff", "stat": "str", "amount": 20 },
+        { "type": "buff", "stat": "ac", "min": 2, "max": 2 },
+        { "type": "buff", "stat": "dex", "amount": 20 }
+      ],
+      "description": "Fills your target with a burst of power, increasing their strength, dexterity, and armor class for 18 seconds."
+    }
+  },
+  {
+    "_id": "shm-turtle-skin-11-r1",
+    "name": "Turtle Skin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "shaman",
+      "level": 11,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 50,
+      "effects": [
+        { "type": "buff", "stat": "ac", "min": 2, "max": 3 }
+      ],
+      "description": "Causes your target's skin to grow as hard as a turtle's shell, increasing their armor class for 36 minutes."
+    }
+  },
+  {
+    "_id": "shm-disempower-12-r1",
+    "name": "Disempower",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "shaman",
+      "level": 12,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.25,
+      "manaCost": 45,
+      "effects": [
+        { "type": "debuff", "stat": "sta", "amount": -20 },
+        { "type": "debuff", "stat": "str", "amount": -15 },
+        { "type": "debuff", "stat": "ac", "min": -2, "max": -2 }
+      ],
+      "description": "Strips the willpower from your target, decreasing their strength, stamina, and armor class for 2 minutes."
+    }
+  },
+  {
+    "_id": "shm-root-12-r1",
+    "name": "Root",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 12,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2,
+      "manaCost": 30,
+      "effects": [
+        { "type": "control", "effect": "root" }
+      ],
+      "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 48 seconds."
+    }
+  }
 ]

@@ -1,0 +1,255 @@
+[
+  {
+    "_id": "brd-angstlichs-appalling-screech-26-r1",
+    "name": "Angstlich's Appalling Screech",
+    "type": "song",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "song": {
+        "level": 26,
+        "category": "control",
+        "songGroup": "fear-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "fear",
+            "amount": 52,
+            "duration": 12
+          }
+        ],
+        "radius": 25
+      },
+      "description": "A terrifying screech that causes up to 30 nearby enemies to run in terror."
+    }
+  },
+  {
+    "_id": "brd-solons-song-of-the-sirens-27-r1",
+    "name": "Solon's Song of the Sirens",
+    "type": "song",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "song": {
+        "level": 27,
+        "category": "control",
+        "songGroup": "charm-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "charm",
+            "amount": 37,
+            "duration": 18
+          },
+          {
+            "type": "debuff",
+            "stat": "resist-magic",
+            "amount": -17,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "An enticing melody that charms the target, allowing you to command it."
+    }
+  },
+  {
+    "_id": "brd-crissions-pixie-strike-28-r1",
+    "name": "Crission's Pixie Strike",
+    "type": "song",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "song": {
+        "level": 28,
+        "category": "control",
+        "songGroup": "mez-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "mez",
+            "amount": 45,
+            "duration": 18
+          },
+          {
+            "type": "debuff",
+            "stat": "resist-magic",
+            "amount": -22,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "A quiet lullaby that causes your target to fall into a magical sleep. Affects creatures up to level 45."
+    }
+  },
+  {
+    "_id": "brd-psalm-of-vitality-29-r1",
+    "name": "Psalm of Vitality",
+    "type": "song",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "song": {
+        "level": 29,
+        "category": "buff",
+        "songGroup": "damage-shield",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "damage-shield",
+            "amount": 22,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-disease",
+            "amount": 140,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 2,
+            "max": 3,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "This psalm surrounds your group in an aura of vitality, affording them protection from disease, as well as harming anything that attacks them."
+    }
+  },
+  {
+    "_id": "brd-amplification-30-r1",
+    "name": "Amplification",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 30,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 30,
+          "unit": "seconds"
+        },
+        "target": "self",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "singing-amplification",
+            "amount": 180
+          }
+        ]
+      },
+      "description": "Focuses the power of your voice, causing all songs that use the singing skill to increase in power by 20%."
+    }
+  },
+  {
+    "_id": "brd-fufils-curtailing-chant-30-r1",
+    "name": "Fufil's Curtailing Chant",
+    "type": "song",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "song": {
+        "level": 30,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "magic",
+            "min": 1,
+            "max": 11,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "cast-spell",
+            "spell": "chant-of-magic"
+          }
+        ]
+      },
+      "description": "A magical chant that causes damage to an enemy and makes them more vulnerable to magic."
+    }
+  }
+]

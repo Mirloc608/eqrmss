@@ -1,0 +1,270 @@
+[
+  {
+    "_id": "brd-hymn-of-restoration-6-r1",
+    "name": "Hymn of Restoration",
+    "type": "song",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "song": {
+        "level": 6,
+        "category": "heal",
+        "songGroup": "heal-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "heal",
+            "amount": 9,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A gentle melody that encourages your group's wounds to heal faster."
+    }
+  },
+  {
+    "_id": "brd-jonthans-whistling-warsong-7-r1",
+    "name": "Jonthan's Whistling Warsong",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 7,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "self",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 25,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 5,
+            "max": 6,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "str",
+            "amount": 70,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "An ancient war song that speeds your attacks and raises your armor class and strength."
+    }
+  },
+  {
+    "_id": "brd-kelins-lugubrious-lament-8-r1",
+    "name": "Kelin's Lugubrious Lament",
+    "type": "song",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "song": {
+        "level": 8,
+        "category": "control",
+        "songGroup": "calm-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "lute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 30,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "reduce-aggro-radius",
+            "amount": 5,
+            "duration": 30
+          },
+          {
+            "type": "utility",
+            "effect": "reduce-social-radius",
+            "amount": 10,
+            "duration": 30
+          },
+          {
+            "type": "control",
+            "effect": "pacify",
+            "duration": 30
+          }
+        ]
+      },
+      "description": "A sad song that calms the aggressive nature of many creatures. Affects creatures up to level 60."
+    }
+  },
+  {
+    "_id": "brd-elemental-rhythms-9-r1",
+    "name": "Elemental Rhythms",
+    "type": "song",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "song": {
+        "level": 9,
+        "category": "buff",
+        "songGroup": "resist-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "resist-magic",
+            "amount": 50,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-cold",
+            "amount": 50,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-fire",
+            "amount": 50,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 2,
+            "max": 3,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A mystic tune that offers your group protection from fire, ice, and magic."
+    }
+  },
+  {
+    "_id": "brd-magical-monologue-9-r1",
+    "name": "Magical Monologue",
+    "type": "song",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "song": {
+        "level": 9,
+        "category": "utility",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "self",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "magic-weapon"
+          }
+        ]
+      },
+      "description": "A simple tune that adds a magical quality to your group's weapons, allowing them to harm creatures that would otherwise be invulnerable."
+    }
+  },
+  {
+    "_id": "brd-anthem-de-arms-10-r1",
+    "name": "Anthem de Arms",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 10,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 10,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "str",
+            "amount": 70,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "An ancient anthem that increases the strength and attack rate of your group."
+    }
+  }
+]

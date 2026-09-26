@@ -1,0 +1,202 @@
+[
+  {
+    "_id": "bst-raging-strength-41-r1",
+    "name": "Raging Strength",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 41,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 26,
+          "duration": 2700
+        }
+      ],
+      "description": "Fills your target's body with raging power, increasing their strength for 45 minutes."
+    }
+  },
+  {
+    "_id": "bst-spiritual-light-41-r1",
+    "name": "Spiritual Light",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 41,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 5,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 194,
+          "max": 194,
+          "duration": 2700
+        },
+        {
+          "type": "heal",
+          "amount": 194,
+          "duration": 2700
+        }
+      ],
+      "description": "Envelops your target in an aura of spiritual light, increasing their mana and hit point regeneration."
+    }
+  },
+  {
+    "_id": "bst-spiritual-brawn-42-r1",
+    "name": "Spiritual Brawn",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 42,
+      "school": "alteration",
+      "target": "single",
+      "range": 75,
+      "castTime": 10,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 10,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 75,
+          "duration": 4320
+        }
+      ],
+      "description": "Fills your target with spiritual brawn, increasing their hit points and attack rating for 72 minutes."
+    }
+  },
+  {
+    "_id": "bst-invisibility-43-r1",
+    "name": "Invisibility",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 43,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard",
+          "duration": 1200
+        }
+      ],
+      "description": "Cloaks your target in a mystic veil, making them invisible to many creatures."
+    }
+  },
+  {
+    "_id": "bst-listless-power-44-r1",
+    "name": "Listless Power",
+    "type": "spell",
+    "img": "icons/magic/debuff/blood-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 44,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.75,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -35,
+          "resist": "magic",
+          "duration": 390
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -35,
+          "resist": "magic",
+          "duration": 390
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -5,
+          "max": -4,
+          "resist": "magic",
+          "duration": 390
+        }
+      ],
+      "description": "Saps your target's power, decreasing their agility, strength, and armor class for 6.5 minutes."
+    }
+  },
+  {
+    "_id": "bst-pack-shrew-44-r1",
+    "name": "Pack Shrew",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 44,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 320,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 30,
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your group with the spirit of the shrew, granting greatly improved night vision and increased movement speed for 36 minutes. This spell also functions indoors."
+    }
+  },
+  {
+    "_id": "bst-counteract-disease-45-r1",
+    "name": "Counteract Disease",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 45,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 8
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing them of moderate diseases."
+    }
+  }
+]

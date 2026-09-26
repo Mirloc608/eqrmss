@@ -1,0 +1,1214 @@
+[
+  {
+    "_id": "dru-bladecoat-56-r1",
+    "name": "Bladecoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 56,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 235,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 8,
+          "max": 11,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 6,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of blades that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "dru-breath-of-karana-56-r1",
+    "name": "Breath of Karana",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 56,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 180,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 670
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 1.0
+        }
+      ],
+      "description": "Summons a whirling wind to stun your target for 1 second up to level 55 and causes between 300 and 300 damage. This spell can only be cast outdoors.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-engorging-roots-56-r1",
+    "name": "Engorging Roots",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 56,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 895
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 180
+        }
+      ],
+      "description": "Commands roots to take hold of your target, doing 10 damage, and preventing their movement for 3 minutes.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-ros-smoldering-disjunction-56-r1",
+    "name": "Ro's Smoldering Disjunction",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 56,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 335
+        },
+        {
+          "type": "debuff",
+          "stat": "atk",
+          "min": -95,
+          "max": -95,
+          "duration": 600
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -11,
+          "max": -8,
+          "duration": 600
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-fire",
+          "min": -76,
+          "max": -76,
+          "duration": 600
+        }
+      ],
+      "description": "Surrounds your target in dancing flames for 10 minutes, causing 150 damage initially as well as lowering their fire resistance and armor class.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-wake-of-karana-56-r1",
+    "name": "Wake of Karana",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 56,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "stop-rain"
+        }
+      ],
+      "description": "Channels the will of the Rainkeeper to change the weather in the current zone. Consumes an opal when cast."
+    }
+  },
+  {
+    "_id": "dru-zephyr-arcstone-56-r1",
+    "name": "Zephyr: Arcstone",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 56,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "arcstone"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Arcstone in the Plane of Magic."
+    }
+  },
+  {
+    "_id": "dru-zephyr-natimbi-56-r1",
+    "name": "Zephyr: Natimbi",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 56,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "Natimbi"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Natimbi, the Broken Shores."
+    }
+  },
+  {
+    "_id": "dru-bonds-of-tunare-57-r1",
+    "name": "Bonds of Tunare",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 57,
+      "school": "alteration",
+      "target": "area",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 115,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 65,
+          "duration": 108
+        }
+      ],
+      "description": "Ensnares up to 30 of those near your target in a tangle of dark vines that decreases their movement rate.",
+      "resist": "magic",
+      "radius": 30
+    }
+  },
+  {
+    "_id": "dru-imbue-storm-57-r1",
+    "name": "Imbue Storm",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 57,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-gray-diamond-of-storms-x-1"
+        }
+      ],
+      "description": "Imbues a diamond with the power of the storm. Consumes a raw diamond and storm rider blood when cast."
+    }
+  },
+  {
+    "_id": "dru-instinctual-fear-57-r1",
+    "name": "Instinctual Fear",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "druid",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 55,
+          "duration": 42
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-natureskin-57-r1",
+    "name": "Natureskin",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 57,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 4,
+          "max": 6,
+          "duration": 4860
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 610,
+          "duration": 4860
+        },
+        {
+          "type": "heal",
+          "amount": 1480,
+          "max": 1480
+        },
+        {
+          "type": "heal",
+          "amount": 10,
+          "duration": 4860
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points, regeneration rate, and armor class for 81 minutes."
+    }
+  },
+  {
+    "_id": "dru-succor-57-r1",
+    "name": "Succor",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 57,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "evac"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to a relatively safe location in the current zone. The chaotic nature of the portal drains mana from anyone who passes through it."
+    }
+  },
+  {
+    "_id": "dru-zephyr-barindu-57-r1",
+    "name": "Zephyr: Barindu",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "Barindu"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Barindu."
+    }
+  },
+  {
+    "_id": "dru-zephyr-bloodfields-57-r1",
+    "name": "Zephyr: Bloodfields",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "bloodfields"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Bloodfields."
+    }
+  },
+  {
+    "_id": "dru-zephyr-dawnshroud-57-r1",
+    "name": "Zephyr: Dawnshroud",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "dawnshroud"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Dawnshroud Peaks."
+    }
+  },
+  {
+    "_id": "dru-zephyr-tranquility-57-r1",
+    "name": "Zephyr: Tranquility",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "potranquility"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Plane of Tranquility."
+    }
+  },
+  {
+    "_id": "dru-circle-of-seasons-58-r1",
+    "name": "Circle of Seasons",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 58,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 55,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 55,
+          "duration": 9000
+        }
+      ],
+      "description": "Surrounds your group in a circle of seasons, increasing their fire and cold resistance for 2.5 hours."
+    }
+  },
+  {
+    "_id": "dru-eradicate-disease-58-r1",
+    "name": "Eradicate Disease",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.25,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 30
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 30
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing them of strong diseases."
+    }
+  },
+  {
+    "_id": "dru-eradicate-poison-58-r1",
+    "name": "Eradicate Poison",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.25,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 30
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 30
+        }
+      ],
+      "description": "Removes toxin from your target's system, curing them of strong poisons."
+    }
+  },
+  {
+    "_id": "dru-fist-of-karana-58-r1",
+    "name": "Fist of Karana",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 58,
+      "school": "evocation",
+      "target": "area",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 357,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1250,
+          "radius": 10
+        }
+      ],
+      "description": "Calls down lightning from the sky over your target, causing between 812 and 812 damage to up to 4 creatures in the area. This spell can only be cast outdoors.",
+      "resist": "magic",
+      "radius": 10
+    }
+  },
+  {
+    "_id": "dru-regrowth-of-the-grove-58-r1",
+    "name": "Regrowth of the Grove",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 58,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 38,
+          "duration": 1230
+        }
+      ],
+      "description": "Hastens your group's natural healing, regenerating up to 38 hit points every 6 seconds for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "dru-shield-of-blades-58-r1",
+    "name": "Shield of Blades",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 58,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 32,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of spikes that causes damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-tunares-renewal-58-r1",
+    "name": "Tunare's Renewal",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "increase-current-hp-by-75-up-to-2925"
+        }
+      ],
+      "description": "Blesses your target with a healing touch, healing up to 2925 damage."
+    }
+  },
+  {
+    "_id": "dru-circle-of-buried-sea-59-r1",
+    "name": "Circle of Buried Sea",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 59,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "buriedsea"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your entire group to the Buried Sea."
+    }
+  },
+  {
+    "_id": "dru-incarnate-anew-59-r1",
+    "name": "Incarnate Anew",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 59,
+      "school": "alteration",
+      "target": "corpse",
+      "range": 200,
+      "castTime": 20.0,
+      "manaCost": 700,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "resurrect-with-90-xp"
+        }
+      ],
+      "description": "Incarnates a slain ally, restoring 90% of their lost experience. It takes some time for the recently revived to fully recover."
+    }
+  },
+  {
+    "_id": "dru-legacy-of-thorn-59-r1",
+    "name": "Legacy of Thorn",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 59,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 32,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your group in a shield of spikes that causes damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-protection-of-the-cabbage-59-r1",
+    "name": "Protection of the Cabbage",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 59,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 500,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 7,
+          "duration": 6000
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 485,
+          "duration": 6000
+        },
+        {
+          "type": "heal",
+          "amount": 1810,
+          "max": 1810
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 22,
+          "max": 22,
+          "duration": 6000
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points, mana regeneration, and armor class for 100 minutes."
+    }
+  },
+  {
+    "_id": "dru-spirit-of-oak-59-r1",
+    "name": "Spirit of Oak",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 59,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "tree"
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 2160
+        },
+        {
+          "type": "heal",
+          "amount": 82,
+          "duration": 2160
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 15,
+          "max": 15,
+          "duration": 2160
+        }
+      ],
+      "description": "Transforms you into a stout tree, preventing movement, but increasing your regeneration. This spell can only be cast outdoors."
+    }
+  },
+  {
+    "_id": "dru-wildfire-59-r1",
+    "name": "Wildfire",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 59,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 335,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1420
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 1294 and 1294 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-ancient-legacy-of-blades-60-r1",
+    "name": "Ancient: Legacy of Blades",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 36,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your group in a shield of spikes that causes damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-ancient-starfire-of-ro-60-r1",
+    "name": "Ancient: Starfire of Ro",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1600
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 1350 and 1350 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-banishment-60-r1",
+    "name": "Banishment",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 500,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "destroy"
+        }
+      ],
+      "description": "Banishes your target to the nether realm, completely removing them from this plane of existence. Consumes a star ruby when cast.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-circle-of-the-steppes-60-r1",
+    "name": "Circle of The Steppes",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "steppes"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your entire group to The Steppes."
+    }
+  },
+  {
+    "_id": "dru-entrapping-roots-60-r1",
+    "name": "Entrapping Roots",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "alteration",
+      "target": "area",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 475,
+          "radius": 30
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 180
+        }
+      ],
+      "description": "Commands roots to take hold of up to 30 targets, doing 10 damage, and preventing their movement for 3 minutes.",
+      "resist": "magic",
+      "radius": 30
+    }
+  },
+  {
+    "_id": "dru-form-of-the-hunter-60-r1",
+    "name": "Form of the Hunter",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "black-spirit-wolf"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 105,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 130,
+          "duration": 11700
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision"
+        }
+      ],
+      "description": "Fills you with the spirit of the wild, allowing you to take the form a wolf for 3.3 hours."
+    }
+  },
+  {
+    "_id": "dru-mask-of-the-hunter-60-r1",
+    "name": "Mask of the Hunter",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "increase-player-size"
+        },
+        {
+          "type": "utility",
+          "effect": "magnification",
+          "amount": 115
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 4,
+          "max": 4,
+          "duration": 11700
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible"
+        }
+      ],
+      "description": "Covers your face in the mask of the hunter for 3.3 hours, allowing you improved vision, increased mana regeneration, and the ability to see invisible creatures. This spell can only be cast outdoors."
+    }
+  },
+  {
+    "_id": "dru-mask-of-the-stalker-60-r1",
+    "name": "Mask of the Stalker",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "increase-player-size"
+        },
+        {
+          "type": "utility",
+          "effect": "magnification",
+          "amount": 115
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 4,
+          "max": 4,
+          "duration": 11700
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible"
+        }
+      ],
+      "description": "Covers your face in the mask of the stalker for 3.3 hours, giving you improved vision, increased mana regeneration, and the ability to see invisible creatures."
+    }
+  },
+  {
+    "_id": "dru-moonfire-60-r1",
+    "name": "Moonfire",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 263,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 1340
+        }
+      ],
+      "description": "Calls down the cold flame of the moon, causing 1132 damage to your target.",
+      "resist": "cold"
+    }
+  },
+  {
+    "_id": "dru-natures-recovery-60-r1",
+    "name": "Nature's Recovery",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 38,
+          "duration": 180
+        }
+      ],
+      "description": "Rapidly regenerates your target's wounds, healing 30 damage every six seconds for 3 minutes."
+    }
+  },
+  {
+    "_id": "dru-natures-touch-60-r1",
+    "name": "Nature's Touch",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 457,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 1870,
+          "max": 1870
+        }
+      ],
+      "description": "Mends severe wounds, healing up to 1491 damage."
+    }
+  },
+  {
+    "_id": "dru-protection-of-the-glades-60-r1",
+    "name": "Protection of the Glades",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 1200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 7,
+          "duration": 6000
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 485,
+          "duration": 6000
+        },
+        {
+          "type": "heal",
+          "amount": 610,
+          "max": 610
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 8,
+          "max": 8,
+          "duration": 6000
+        }
+      ],
+      "description": "Hardens the skin of your group, increasing their hit points, mana regeneration, and armor class for 100 minutes."
+    }
+  },
+  {
+    "_id": "dru-ring-of-the-steppes-60-r1",
+    "name": "Ring of The Steppes",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "steppes"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports you to The Steppes."
+    }
+  },
+  {
+    "_id": "dru-teleport-guild-hall-anchor-60-r1",
+    "name": "Teleport Guild Hall Anchor",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 150,
+      "castTime": 20.0,
+      "manaCost": 750,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "your"
+        }
+      ],
+      "description": "Opens an arcane portal that teleports all nearby allies to a Guild Hall Anchor owned by the caster."
+    }
+  },
+  {
+    "_id": "dru-zephyr-the-steppes-60-r1",
+    "name": "Zephyr: The Steppes",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "steppes"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to The Steppes."
+    }
+  }
+]

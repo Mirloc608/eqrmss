@@ -561,5 +561,321 @@
       ],
       "description": "Translocates a single target to Arcstone."
     }
+  },
+{
+  "_id": "wiz-arcstone-portal-51-r1",
+  "name": "Arcstone Portal",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-group.webp",
+  "system": {
+    "class": "wizard",
+    "level": 51,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 16,
+    "manaCost": 300,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "arcstone"
+      }
+    ],
+    "description": "Transports your group to Arcstone in the Plane of Magic."
   }
+},
+{
+  "_id": "wiz-undershore-gate-51-r1",
+  "name": "Undershore Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 51,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "eastkorlach"
+      }
+    ],
+    "description": "Teleports you to the undershore."
+  }
+},
+{
+  "_id": "wiz-barindu-gate-52-r1",
+  "name": "Barindu Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 52,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 300,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "barindu"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports you to Barindu."
+  }
+},
+{
+  "_id": "wiz-frozen-harpoon-52-r1",
+  "name": "Frozen Harpoon",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-spear.webp",
+  "system": {
+    "class": "wizard",
+    "level": 52,
+    "school": "evocation",
+    "target": "single",
+    "range": 150,
+    "castTime": 4,
+    "manaCost": 160,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "cold",
+        "amount": 680
+      }
+    ],
+    "description": "Creates a fierce spear of ice to strike your target, causing between 680 and 680 damage."
+  }
+},
+{
+  "_id": "wiz-natimbi-gate-52-r1",
+  "name": "Natimbi Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 52,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "natimbi"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports you to the broken shores of Natimbi."
+  }
+},
+{
+  "_id": "wiz-bloodfields-gate-53-r1",
+  "name": "Bloodfields Gate",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-self.webp",
+  "system": {
+    "class": "wizard",
+    "level": 53,
+    "school": "alteration",
+    "target": "self",
+    "range": "zone",
+    "castTime": 7,
+    "manaCost": 150,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "bloodfields"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports you to the Bloodfields."
+  }
+},
+{
+  "_id": "wiz-elemental-cloak-54-r1",
+  "name": "Elemental Cloak",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-green.webp",
+  "system": {
+    "class": "wizard",
+    "level": 54,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 125,
+    "effects": [
+      {
+        "type": "buff",
+        "stat": "resist-cold",
+        "amount": 45,
+        "duration": 4320
+      },
+      {
+        "type": "buff",
+        "stat": "resist-fire",
+        "amount": 45,
+        "duration": 4320
+      }
+    ],
+    "description": "Covers your skin in an elemental cloak, protecting you from fire and cold."
+  }
+},
+{
+  "_id": "wiz-focus-mass-simple-spellcasters-empowering-essence-54-r1",
+  "name": "Focus Mass Simple Spellcaster's Empowering Essence",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-orb.webp",
+  "system": {
+    "class": "wizard",
+    "level": 54,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 6,
+    "manaCost": 1200,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "summon-item",
+        "item": "Simple Spellcaster's Empowering Essence",
+        "amount": 5
+      }
+    ],
+    "description": "Focuses the casters mana into a form that can be physically handled."
+  }
+},
+{
+  "_id": "wiz-magi-ward-54-r1",
+  "name": "Magi Ward",
+  "type": "spell",
+  "img": "icons/magic/arcane/shield-energy-green.webp",
+  "system": {
+    "class": "wizard",
+    "level": 54,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 2,
+    "manaCost": 30,
+    "effects": [
+      {
+        "type": "buff",
+        "stat": "absorb-magic-damage",
+        "percent": 40,
+        "cap": 750,
+        "duration": 1620
+      }
+    ],
+    "description": "Envelops you in a magical ward, absorbing a portion of incoming spell damage. This spell absorbs a set amount of damage before dissipating."
+  }
+},
+{
+  "_id": "wiz-natimbi-portal-54-r1",
+  "name": "Natimbi Portal",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-group.webp",
+  "system": {
+    "class": "wizard",
+    "level": 54,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 16,
+    "manaCost": 300,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "natimbi"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your group to the broken shores of Natimbi."
+  }
+},
+{
+  "_id": "wiz-pillar-of-lightning-54-r1",
+  "name": "Pillar of Lightning",
+  "type": "spell",
+  "img": "icons/magic/lightning/aoe-lightning.webp",
+  "system": {
+    "class": "wizard",
+    "level": 54,
+    "school": "evocation",
+    "target": "area",
+    "range": 200,
+    "castTime": 4,
+    "manaCost": 344,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "electric",
+        "amount": 558,
+        "radius": 15
+      }
+    ],
+    "description": "Creates a pillar of lightning that causes between 558 and 848 damage to up to 4 creatures in a small area around your target."
+  }
+},
+{
+  "_id": "wiz-thunderbolt-54-r1",
+  "name": "Thunderbolt",
+  "type": "spell",
+  "img": "icons/magic/lightning/aoe-lightning.webp",
+  "system": {
+    "class": "wizard",
+    "level": 54,
+    "school": "evocation",
+    "target": "area",
+    "range": 200,
+    "castTime": 3,
+    "manaCost": 300,
+    "effects": [
+      {
+        "type": "damage",
+        "element": "electric",
+        "amount": 600,
+        "radius": 20
+      },
+      {
+        "type": "control",
+        "effect": "stun",
+        "duration": 3
+      }
+    ],
+    "description": "Calls down a bolt of thunderous energy, causing 600 damage, and briefly stunning 5 creatures up to level 55 in the vicinity of your target for 3 seconds."
+  }
+},
+{
+  "_id": "wiz-tranquility-portal-54-r1",
+  "name": "Tranquility Portal",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-group.webp",
+  "system": {
+    "class": "wizard",
+    "level": 54,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 24,
+    "manaCost": 600,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "potranquility"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your entire group to the Plane of Tranquility."
+  }
+}
 ]

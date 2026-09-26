@@ -368,5 +368,75 @@
       ],
       "description": "Unleashes a devastating supernova, dealing massive fire damage to all nearby enemies."
     }
+  },
+{
+  "_id": "wiz-greater-mass-imbue-fire-opal-42-r1",
+  "name": "Greater Mass Imbue Fire Opal",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-orb.webp",
+  "system": {
+    "class": "wizard",
+    "level": 42,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 10,
+    "manaCost": 2400,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "summon-item",
+        "item": "Imbued Fire Opal",
+        "amount": 20
+      }
+    ],
+    "description": "Focuses the power of Solusek Ro into twenty fire opals. Consumes twenty fire opals when cast."
   }
+},
+{
+  "_id": "wiz-cobalt-scar-portal-43-r1",
+  "name": "Cobalt Scar Portal",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-group.webp",
+  "system": {
+    "class": "wizard",
+    "level": 43,
+    "school": "alteration",
+    "target": "group",
+    "range": "zone",
+    "castTime": 16,
+    "manaCost": 300,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "teleport-self",
+        "destination": "cobaltscar"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your entire group to the Cobalt Scar."
+  }
+},
+{
+  "_id": "wiz-translocate-ro-43-r1",
+  "name": "Translocate: Ro",
+  "type": "spell",
+  "img": "icons/magic/arcane/teleport-north.webp",
+  "system": {
+    "class": "wizard",
+    "level": 43,
+    "school": "alteration",
+    "target": "single",
+    "range": "zone",
+    "castTime": 10,
+    "manaCost": 225,
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "translocate",
+        "destination": "northro"
+      }
+    ],
+    "description": "Opens an arcane portal that teleports your target to the Northern Desert of Ro."
+  }
+}
 ]

@@ -1,0 +1,683 @@
+[
+  {
+    "_id": "dru-circle-of-surefall-glade-26-r1",
+    "name": "Circle of Surefall Glade",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 26,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "qrg"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to Surefall Glade."
+    }
+  },
+  {
+    "_id": "dru-circle-of-the-nexus-26-r1",
+    "name": "Circle of the Nexus",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 26,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "nexus"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Nexus."
+    }
+  },
+  {
+    "_id": "dru-ensnare-26-r1",
+    "name": "Ensnare",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 26,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 56,
+          "duration": 840
+        }
+      ],
+      "description": "Entangles your target's feet with magical roots, slowing their movement speed for up to 14 minutes.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-scale-of-wolf-26-r1",
+    "name": "Scale of Wolf",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 26,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "cancel-if-combat-initiated"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 70,
+          "duration": 2700
+        }
+      ],
+      "description": "Imbues your target with the spirit of a scaled wolf, increasing their movement speed for 45 minutes. Any attack, or spell cast by your target will break the enchantment."
+    }
+  },
+  {
+    "_id": "dru-succor-east-26-r1",
+    "name": "Succor: East",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 26,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "evac"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Eastern Plains of Karana."
+    }
+  },
+  {
+    "_id": "dru-bramblecoat-27-r1",
+    "name": "Bramblecoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 27,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 4,
+          "max": 5,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 3,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of brambles that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "dru-circle-of-commons-27-r1",
+    "name": "Circle of Commons",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 27,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "commonlands"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Western Commonlands."
+    }
+  },
+  {
+    "_id": "dru-protection-of-steel-27-r1",
+    "name": "Protection of Steel",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 27,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 7.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 3,
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 100,
+          "duration": 2160
+        },
+        {
+          "type": "heal",
+          "amount": 285,
+          "max": 285
+        }
+      ],
+      "description": "Hardens the skin of your group, increasing their hit points and armor class for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-shield-of-brambles-27-r1",
+    "name": "Shield of Brambles",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 27,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 12,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of brambles that cause damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-beguile-plants-28-r1",
+    "name": "Beguile Plants",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "druid",
+      "level": 28,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 170,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 25,
+          "duration": 1230
+        }
+      ],
+      "description": "Beckons to the plants of the wild, allowing you to control them.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-circle-of-stonebrunt-28-r1",
+    "name": "Circle of Stonebrunt",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 28,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "stonebrunt"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Stonebrunt Mountains."
+    }
+  },
+  {
+    "_id": "dru-combust-28-r1",
+    "name": "Combust",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 28,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 105
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 100 and 182 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-counteract-disease-28-r1",
+    "name": "Counteract Disease",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 28,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 8
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing them of moderate diseases."
+    }
+  },
+  {
+    "_id": "dru-counteract-poison-28-r1",
+    "name": "Counteract Poison",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 28,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 8
+        }
+      ],
+      "description": "Removes toxin from your target's system, curing them of moderate poisons."
+    }
+  },
+  {
+    "_id": "dru-circle-of-grimling-29-r1",
+    "name": "Circle of Grimling",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 29,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 24.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "grimling"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Grimling Forest."
+    }
+  },
+  {
+    "_id": "dru-greater-healing-29-r1",
+    "name": "Greater Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 29,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 115,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 125,
+          "max": 315
+        }
+      ],
+      "description": "Mends major wounds, healing between 140 and 350 hit points."
+    }
+  },
+  {
+    "_id": "dru-harmony-of-nature-29-r1",
+    "name": "Harmony of Nature",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 29,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 15,
+          "maxLevel": 65
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 15,
+          "maxLevel": 65
+        }
+      ],
+      "description": "Calms the savage spirit of almost any creature, making them less likely to attack. This spell works on creatures up to level 65, and only works outdoors."
+    }
+  },
+  {
+    "_id": "dru-imbue-emerald-29-r1",
+    "name": "Imbue Emerald",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 29,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-imbued-emerald-x-1"
+        }
+      ],
+      "description": "Focuses the power of Tunare into an emerald. Consumes an emerald when cast."
+    }
+  },
+  {
+    "_id": "dru-imbue-plains-pebble-29-r1",
+    "name": "Imbue Plains Pebble",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 29,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-imbued-plains-pebble-x-1"
+        }
+      ],
+      "description": "Focuses the power of Karana into a plains pebble. Consumes a plains pebble when cast."
+    }
+  },
+  {
+    "_id": "dru-mass-imbue-emerald-29-r1",
+    "name": "Mass Imbue Emerald",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 29,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-imbued-emerald-x-5"
+        }
+      ],
+      "description": "Focuses the power of Tunare into five emeralds. Consumes five emeralds when cast."
+    }
+  },
+  {
+    "_id": "dru-mass-imbue-plains-pebble-29-r1",
+    "name": "Mass Imbue Plains Pebble",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 29,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-imbued-plains-pebble-x-5"
+        }
+      ],
+      "description": "Focuses the power of Karana into five plains pebbles. Consumes five plains pebbles when cast."
+    }
+  },
+  {
+    "_id": "dru-ring-of-dawnshroud-29-r1",
+    "name": "Ring of Dawnshroud",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 29,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.5,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "dawnshroud"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Dawnshroud Peaks."
+    }
+  },
+  {
+    "_id": "dru-circle-of-lavastorm-30-r1",
+    "name": "Circle of Lavastorm",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 30,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "lavastorm"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Lavastorm Mountains."
+    }
+  },
+  {
+    "_id": "dru-fury-of-air-30-r1",
+    "name": "Fury of Air",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 30,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 96
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 2.5
+        }
+      ],
+      "description": "Summons a whirling wind between 170 and 170 damage and stuns the target up to level 55 for 2.5 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-greater-wolf-form-30-r1",
+    "name": "Greater Wolf Form",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 30,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "old-wolf"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 60,
+          "duration": 6600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 40,
+          "duration": 6600
+        }
+      ],
+      "description": "Fills you with the spirit of the wild, allowing you to take the form a wolf for 110 minutes, increasing your movement rate, and attack rating."
+    }
+  },
+  {
+    "_id": "dru-resist-cold-30-r1",
+    "name": "Resist Cold",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 30,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away cold for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-spirit-of-the-shrew-30-r1",
+    "name": "Spirit of the Shrew",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 30,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "ultravision"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 30,
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your target with the spirit of the shrew, granting greatly improved night vision and increased movement speed for 36 minutes. This spell also functions indoors."
+    }
+  }
+]

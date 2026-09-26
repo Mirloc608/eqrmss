@@ -456,4 +456,72 @@
     "description": "Channels destructive energy specifically against undead foes."
   }
 }
+,
+  {
+    "_id": "shk-resistant-discipline-51-r1",
+    "name": "Resistant Discipline",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 51,
+      "school": "defense",
+      "target": "self",
+      "range": 0,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 20
+        },
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 20
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 20
+        },
+        {
+          "type": "buff",
+          "stat": "resist-poison",
+          "amount": 20
+        },
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 20
+        }
+      ],
+      "description": "Hardens the Shadowknight against hostile magic, increasing all resistances."
+    }
+  },
+  {
+    "_id": "shk-unholy-aura-discipline-55-r1",
+    "name": "Unholy Aura Discipline",
+    "type": "spell",
+    "img": "icons/magic/death/skull-aura-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 55,
+      "school": "discipline",
+      "target": "self",
+      "range": 0,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "lifetap-damage",
+          "amount": 100,
+          "mode": "percent"
+        }
+      ],
+      "description": "Surrounds the Shadowknight with an unholy aura, increasing lifetap spell damage by 100%."
+    }
+  }
 ]

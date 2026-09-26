@@ -1,0 +1,309 @@
+[
+  {
+    "_id": "brd-vilias-verses-of-celerity-36-r1",
+    "name": "Vilia's Verses of Celerity",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 36,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 20,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "agi",
+            "amount": 70,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 4,
+            "max": 6,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "An energetic verse which hastens the attack speed of your group."
+    }
+  },
+  {
+    "_id": "brd-psalm-of-purity-37-r1",
+    "name": "Psalm of Purity",
+    "type": "song",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "song": {
+        "level": 37,
+        "category": "buff",
+        "songGroup": "damage-shield",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "damage-shield",
+            "amount": 22,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "resist-poison",
+            "amount": 140,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 2,
+            "max": 3,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "This psalm surrounds your group in an aura of purity, affording them protection from poison, as well as harming anything that attacks them."
+    }
+  },
+  {
+    "_id": "brd-tuyens-chant-of-flame-38-r1",
+    "name": "Tuyen's Chant of Flame",
+    "type": "song",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "song": {
+        "level": 38,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "fire",
+            "min": 1,
+            "max": 11,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "cast-spell",
+            "spell": "chant-of-flame"
+          }
+        ]
+      },
+      "description": "A fiery chant that causes between 1 and 40 damage to your target every 6 seconds and makes them more vulnerable to fire."
+    }
+  },
+  {
+    "_id": "brd-kattas-song-of-sword-dancing-39-r1",
+    "name": "Katta's Song of Sword Dancing",
+    "type": "song",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "song": {
+        "level": 39,
+        "category": "buff",
+        "songGroup": "utility-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "melee-proc",
+            "proc": "blade-dance"
+          },
+          {
+            "type": "buff",
+            "stat": "dex",
+            "amount": 40,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "Katta's song increases the dexterity of your group, and gives your group members a chance to lower the dexterity of their opponent."
+    }
+  },
+  {
+    "_id": "brd-solons-bewitching-bravura-39-r1",
+    "name": "Solon's Bewitching Bravura",
+    "type": "song",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "song": {
+        "level": 39,
+        "category": "control",
+        "songGroup": "charm-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 60,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 60,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "charm",
+            "amount": 51,
+            "duration": 60
+          },
+          {
+            "type": "debuff",
+            "stat": "resist-magic",
+            "amount": -17,
+            "duration": 60
+          }
+        ]
+      },
+      "description": "A bewitching melody that charms the target, allowing you to command it."
+    }
+  },
+  {
+    "_id": "brd-sionachies-dreams-40-r1",
+    "name": "Sionachie's Dreams",
+    "type": "song",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "song": {
+        "level": 40,
+        "category": "control",
+        "songGroup": "mez-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 18,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "control",
+            "effect": "mez",
+            "amount": 53,
+            "duration": 18
+          },
+          {
+            "type": "debuff",
+            "stat": "resist-magic",
+            "amount": -22,
+            "duration": 18
+          }
+        ]
+      },
+      "description": "A quiet lullaby that causes your target to fall into an enchanted sleep. Affects creatures up to level 53."
+    }
+  },
+  {
+    "_id": "brd-syvelians-anti-magic-aria-40-r1",
+    "name": "Syvelian's Anti-Magic Aria",
+    "type": "song",
+    "img": "icons/magic/death/debuff-black.webp",
+    "system": {
+      "song": {
+        "level": 40,
+        "category": "debuff",
+        "songGroup": "dispel-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "utility",
+            "effect": "dispel",
+            "amount": 4
+          }
+        ]
+      },
+      "description": "An aria that can strip away magical effects from your target."
+    }
+  }
+]

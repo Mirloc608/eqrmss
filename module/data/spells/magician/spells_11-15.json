@@ -1,0 +1,440 @@
+[
+  {
+    "_id": "mag-burnout-11-r1",
+    "name": "Burnout",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 11,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 15,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 15,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 3600
+        }
+      ],
+      "description": "Infuses your elemental companion with energy, increasing their attack speed, armor class, and strength."
+    }
+  },
+  {
+    "_id": "mag-elemental-fire-11-r1",
+    "name": "Elemental: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 11,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 8.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elemental-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-elemental-defender-11-r1",
+    "name": "Summon Elemental Defender",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 11,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "elemental-defender"
+        }
+      ],
+      "description": "Focuses mana into the form of an elemental defender."
+    }
+  },
+  {
+    "_id": "mag-bind-affinity-12-r1",
+    "name": "Bind Affinity",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 12,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "bind-affinity"
+        }
+      ],
+      "description": "Binds the soul of your target to their current location. Use of this spell is often limited to towns and cities."
+    }
+  },
+  {
+    "_id": "mag-column-of-fire-12-r1",
+    "name": "Column of Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 12,
+      "school": "evocation",
+      "target": "area",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 65,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 41,
+          "radius": 10
+        }
+      ],
+      "description": "Conjures a column of fire that burns up to 4 creatures in the vicinity of your target, causing 41 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-elemental-air-12-r1",
+    "name": "Elemental: Air",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 12,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 8.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elemental-air"
+        }
+      ],
+      "description": "Summons an air elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-elemental-earth-13-r1",
+    "name": "Elemental: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 13,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 8.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elemental-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-identify-13-r1",
+    "name": "Identify",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 13,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "identify-item"
+        }
+      ],
+      "description": "Provides magical information about the item that your target is holding."
+    }
+  },
+  {
+    "_id": "mag-phantom-leather-13-r1",
+    "name": "Phantom Leather",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 13,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 1,
+          "duration": 2700
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 2700
+        }
+      ],
+      "description": "Covers you in phantom leather armor, increasing your hit point regeneration and armor class. Consumes a cat's eye agate when cast."
+    }
+  },
+  {
+    "_id": "mag-wuggans-lesser-appraisal-13-r1",
+    "name": "Wuggan's Lesser Appraisal",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 13,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 69
+        }
+      ],
+      "description": "Attempts to sense the presence of a trap on the targeted object.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-minor-summoning-water-14-r1",
+    "name": "Minor Summoning: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 14,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 160,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "minor-summoning-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-staff-of-warding-14-r1",
+    "name": "Staff of Warding",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 14,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "staff-of-warding"
+        }
+      ],
+      "description": "Focuses mana into the form of a magical staff."
+    }
+  },
+  {
+    "_id": "mag-wuggans-lesser-discombobulation-14-r1",
+    "name": "Wuggan's Lesser Discombobulation",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 69
+        }
+      ],
+      "description": "Attempts to disarm a trap on the targeted object. Consumes a lesser scrying stone when cast.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-wuggans-lesser-extrication-14-r1",
+    "name": "Wuggan's Lesser Extrication",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 87
+        }
+      ],
+      "description": "Attempts to destroy any lock present on the targeted object.",
+      "resist": "fire",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-minor-summoning-fire-15-r1",
+    "name": "Minor Summoning: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 15,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 160,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "minor-summoning-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-shock-of-flame-15-r1",
+    "name": "Shock of Flame",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 15,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 48,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 90
+        }
+      ],
+      "description": "Burns your target's skin with flames, causing 90 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-summon-heatstone-15-r1",
+    "name": "Summon Heatstone",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 15,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "heatstone"
+        }
+      ],
+      "description": "Focuses mana into the form of heatstone that provides improved night vision."
+    }
+  },
+  {
+    "_id": "mag-summon-throwing-dagger-15-r1",
+    "name": "Summon Throwing Dagger",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 15,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "throwing-dagger",
+          "quantity": 100
+        }
+      ],
+      "description": "Focuses mana into the form of a bundle of throwing daggers."
+    }
+  }
+]

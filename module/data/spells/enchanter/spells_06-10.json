@@ -1,0 +1,660 @@
+[
+  {
+    "_id": "enc-lesser-shielding-6-r1",
+    "name": "Lesser Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 6,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 30,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 10,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "enc-root-6-r1",
+    "name": "Root",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 6,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 48,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 48 seconds."
+    }
+  },
+  {
+    "_id": "enc-see-invisible-6-r1",
+    "name": "See Invisible",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 6,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 1620
+        }
+      ],
+      "description": "Places a magical enchantment upon your target's eyes, allowing them to see otherwise invisible creatures for 27 minutes."
+    }
+  },
+  {
+    "_id": "enc-soothe-6-r1",
+    "name": "Soothe",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 6,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 10
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 10
+        },
+        {
+          "type": "control",
+          "effect": "pacify",
+          "duration": 150
+        }
+      ],
+      "description": "Soothes the mind of your target, lowering its aggressiveness for 2.5 minutes. Affects creatures up to level 40."
+    }
+  },
+  {
+    "_id": "enc-cancel-magic-7-r1",
+    "name": "Cancel Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 7,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 1
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "enc-chaotic-feedback-7-r1",
+    "name": "Chaotic Feedback",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 7,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 16,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 21
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 1.0,
+          "resist": "magic"
+        }
+      ],
+      "description": "Strikes your target with a chaotic burst of mental energy, causing between 25 and 21 damage and stunning targets below 55 for 1 seconds."
+    }
+  },
+  {
+    "_id": "enc-enchant-silver-7-r1",
+    "name": "Enchant Silver",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 7,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-silver-bar",
+          "count": 1
+        }
+      ],
+      "description": "Enchants a bar of silver with magical energy. Consumes a bar of silver when cast."
+    }
+  },
+  {
+    "_id": "enc-mass-enchant-silver-7-r1",
+    "name": "Mass Enchant Silver",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 7,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 180,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-silver-bar",
+          "count": 5
+        }
+      ],
+      "description": "Enchants five bars of silver with magical energy. Consumes five bars of silver when cast."
+    }
+  },
+  {
+    "_id": "enc-mircyls-animation-7-r1",
+    "name": "Mircyl's Animation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 7,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 45,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "mircyls-animation-pet"
+        }
+      ],
+      "description": "Animates a weapon and shield to attack your enemies. Consumes a tiny dagger when cast."
+    }
+  },
+  {
+    "_id": "enc-alliance-8-r1",
+    "name": "Alliance",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 8,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "increase-faction",
+          "amount": 100
+        }
+      ],
+      "description": "Cloaks you in an amiable aura, causing creatures of your target's faction to view you more favorably."
+    }
+  },
+  {
+    "_id": "enc-bind-sight-8-r1",
+    "name": "Bind Sight",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 8,
+      "school": "divination",
+      "target": "single",
+      "range": 10000,
+      "castTime": 4.0,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "bind-sight",
+          "duration": 840
+        }
+      ],
+      "description": "Covers your face in magical strands, allowing you to see through your target's eyes."
+    }
+  },
+  {
+    "_id": "enc-enchant-clay-8-r1",
+    "name": "Enchant Clay",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 8,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "large-block-of-magic-clay",
+          "count": 1
+        }
+      ],
+      "description": "Enchants a large block of clay with magical energy. Consumes a large block of clay when cast."
+    }
+  },
+  {
+    "_id": "enc-illusion-gnome-8-r1",
+    "name": "Illusion: Gnome",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 8,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "gnome",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Gnome."
+    }
+  },
+  {
+    "_id": "enc-mass-enchant-clay-8-r1",
+    "name": "Mass Enchant Clay",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 8,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 180,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "large-block-of-magic-clay",
+          "count": 5
+        }
+      ],
+      "description": "Enchants five large blocks of clay with magical energy. Consumes five large blocks of clay when cast."
+    }
+  },
+  {
+    "_id": "enc-ebbing-strength-9-r1",
+    "name": "Ebbing Strength",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 9,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -25,
+          "duration": 450,
+          "resist": "magic"
+        }
+      ],
+      "description": "Weakens your opponent, lowering their strength."
+    }
+  },
+  {
+    "_id": "enc-kilans-animation-9-r1",
+    "name": "Kilan's Animation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 9,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 65,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "kilans-animation-pet"
+        }
+      ],
+      "description": "Animates a weapon and shield to attack your enemies. Consumes a tiny dagger when cast."
+    }
+  },
+  {
+    "_id": "enc-languid-pace-9-r1",
+    "name": "Languid Pace",
+    "type": "spell",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 9,
+      "school": "enchantment",
+      "target": "single",
+      "range": 250,
+      "castTime": 2.25,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "slow",
+          "amount": 30,
+          "duration": 210,
+          "resist": "magic"
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 6
+        }
+      ],
+      "description": "Constricts your target's muscles, causing their attack speed to slow for 3.5 minutes."
+    }
+  },
+  {
+    "_id": "enc-whirl-till-you-hurl-9-r1",
+    "name": "Whirl Till You Hurl",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 9,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 55,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 7.5,
+          "resist": "magic"
+        },
+        {
+          "type": "utility",
+          "effect": "spin-target"
+        }
+      ],
+      "description": "Spins a targeted creature up to level 55 in a circle, preventing them from taking any action for 7.5 seconds."
+    }
+  },
+  {
+    "_id": "enc-illusion-burning-nekhon-10-r1",
+    "name": "Illusion: Burning Nekhon",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 10,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "burning-nekhon",
+          "duration": 2160
+        },
+        {
+          "type": "utility",
+          "effect": "cast-illusion-benefit-levitation"
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a flaming nekhon. Grants levitation."
+    }
+  },
+  {
+    "_id": "enc-illusion-dark-elf-10-r1",
+    "name": "Illusion: Dark Elf",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 10,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "dark-elf",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Dark Elf. This spell also grants you greatly improved night vision."
+    }
+  },
+  {
+    "_id": "enc-illusion-kedge-10-r1",
+    "name": "Illusion: Kedge",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 10,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "kedge",
+          "duration": 2160
+        },
+        {
+          "type": "utility",
+          "effect": "cast-illusion-benefit-levitation"
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Kedge. Grants levitation."
+    }
+  },
+  {
+    "_id": "enc-illusion-simple-gnoll-10-r1",
+    "name": "Illusion: Simple Gnoll",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 10,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "gnoll",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a simple gnoll."
+    }
+  },
+  {
+    "_id": "enc-illusion-steam-suit-10-r1",
+    "name": "Illusion: Steam Suit",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 10,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "steam-suit",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a gnome piloting a steam suit."
+    }
+  },
+  {
+    "_id": "enc-memory-blur-10-r1",
+    "name": "Memory Blur",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 10,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 50
+        }
+      ],
+      "description": "Attacks your target's mind, providing a chance to forget those that have done them harm."
+    }
+  },
+  {
+    "_id": "enc-mist-10-r1",
+    "name": "Mist",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 10,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 1620
+        }
+      ],
+      "description": "Causes your target's image to blur, making it harder for your opponents to hit you by increasing your armor class."
+    }
+  },
+  {
+    "_id": "enc-serpent-sight-10-r1",
+    "name": "Serpent Sight",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 10,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "infravision",
+          "duration": 1620
+        }
+      ],
+      "description": "Fills your target's eyes with the sight of the serpent, granting them improved night vision."
+    }
+  }
+]

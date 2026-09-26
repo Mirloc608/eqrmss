@@ -274,5 +274,44 @@
     ],
     "description": "Greatly increases the caster’s movement speed."
   }
-}
+},
+  {
+    "_id": "shm-tiny-companion-16-r1",
+    "name": "Tiny Companion",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "shaman",
+      "level": 16,
+      "school": "alteration",
+      "target": "pet",
+      "range": 200,
+      "castTime": 4,
+      "manaCost": 50,
+      "effects": [
+        { "type": "utility", "effect": "shrink-pet", "percent": 50 }
+      ],
+      "description": "Shrinks your pet, allowing it better mobility in tight quarters."
+    }
+  },
+  {
+    "_id": "shm-insidious-fever-17-r1",
+    "name": "Insidious Fever",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 17,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1,
+      "manaCost": 30,
+      "effects": [
+        { "type": "debuff", "effect": "disease", "amount": 4 },
+        { "type": "debuff", "stat": "resist-disease", "min": -20, "max": -35 }
+      ],
+      "description": "Infects your target with a fever, causing them to become more susceptible to other diseases."
+    }
+  }
 ]

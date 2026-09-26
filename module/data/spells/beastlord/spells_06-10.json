@@ -1,0 +1,170 @@
+[
+  {
+    "_id": "bst-minor-healing-6-r1",
+    "name": "Minor Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 6,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 18
+        }
+      ],
+      "description": "Mends minor wounds, healing 10 hit points."
+    }
+  },
+  {
+    "_id": "bst-inner-fire-7-r1",
+    "name": "Inner Fire",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 7,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 1,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 20,
+          "duration": 1620
+        },
+        {
+          "type": "heal",
+          "amount": 21
+        }
+      ],
+      "description": "Increases your target's inner strength, providing increased hit points and armor class for 27 minutes."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-sharik-8-r1",
+    "name": "Spirit of Sharik",
+    "type": "spell",
+    "img": "icons/magic/nature/bear-spirit.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 8,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s02-l008-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-endure-fire-9-r1",
+    "name": "Endure Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/shield-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 9,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away fire for 27 minutes."
+    }
+  },
+  {
+    "_id": "bst-shariks-replenishing-9-r1",
+    "name": "Sharik's Replenishing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 9,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 2,
+      "manaCost": 26,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 26
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 10
+        }
+      ],
+      "description": "Restores your warder's health, healing between 41 and 55 hit points, as well as curing them of diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "bst-scale-skin-10-r1",
+    "name": "Scale Skin",
+    "type": "spell",
+    "img": "icons/magic/defense/armor-scale-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 10,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 2,
+          "duration": 1620
+        }
+      ],
+      "description": "Causes your target to grow hard scales around their body, increasing their armor class for 27 minutes. Consumes snake scales when cast."
+    }
+  }
+]

@@ -1,0 +1,156 @@
+[
+  {
+    "_id": "bst-summon-companion-31-r1",
+    "name": "Summon Companion",
+    "type": "spell",
+    "img": "icons/magic/arcane/levitate.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 31,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "call-pet"
+        }
+      ],
+      "description": "Summons your pet to your current location."
+    }
+  },
+  {
+    "_id": "bst-levitate-32-r1",
+    "name": "Levitate",
+    "type": "spell",
+    "img": "icons/magic/arcane/levitate.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 32,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "levitate",
+          "duration": 1230
+        }
+      ],
+      "description": "Forms a cloud of dense air around your feet, allowing you to float slightly off the ground for up to 20.5 minutes. Consumes a bat wing when cast."
+    }
+  },
+  {
+    "_id": "bst-ice-spear-33-r1",
+    "name": "Ice Spear",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 33,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 97,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 83,
+          "resist": "cold"
+        }
+      ],
+      "description": "Strikes your target with an ice spear, causing between 207 and 207 damage."
+    }
+  },
+  {
+    "_id": "bst-endure-magic-34-r1",
+    "name": "Endure Magic",
+    "type": "spell",
+    "img": "icons/magic/fire/shield-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 34,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away magic for 27 minutes."
+    }
+  },
+  {
+    "_id": "bst-cancel-magic-35-r1",
+    "name": "Cancel Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/compass.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 35,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 1
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "bst-envenomed-breath-35-r1",
+    "name": "Envenomed Breath",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-gas-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 35,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 173,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 3,
+          "resist": "poison"
+        },
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 102,
+          "resist": "poison"
+        },
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 438,
+          "max": 438,
+          "duration": 42,
+          "resist": "poison"
+        }
+      ],
+      "description": "Fills your target's blood with poison, causing 21 damage initially and between 53 and 90 damage every six seconds for 42 seconds."
+    }
+  }
+]

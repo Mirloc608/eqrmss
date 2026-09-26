@@ -1,0 +1,361 @@
+[
+  {
+    "_id": "brd-psalm-of-mystic-shielding-41-r1",
+    "name": "Psalm of Mystic Shielding",
+    "type": "song",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "song": {
+        "level": 41,
+        "category": "buff",
+        "songGroup": "resist-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "resist-magic",
+            "amount": 140,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "spell-rune",
+            "amount": 15,
+            "duration": 12
+          },
+          {
+            "type": "heal",
+            "amount": 97,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 2,
+            "max": 3,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A mystic psalm enfolds your group, protecting them from magic as well as regenerating their health."
+    }
+  },
+  {
+    "_id": "brd-mcvaxius-berserker-crescendo-42-r1",
+    "name": "McVaxius' Berserker Crescendo",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 42,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "horn",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 33,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "str",
+            "amount": 44,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "ac",
+            "min": 4,
+            "max": 6,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A crescendo that increases your group's attack speed, as well as increasing their strength and armor class."
+    }
+  },
+  {
+    "_id": "brd-tuyens-chant-of-disease-42-r1",
+    "name": "Tuyen's Chant of Disease",
+    "type": "song",
+    "img": "icons/magic/debuff/disease-green.webp",
+    "system": {
+      "song": {
+        "level": 42,
+        "category": "damage",
+        "songGroup": "damage-chant",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "drum",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 200,
+        "manaCost": 0,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "dot",
+            "element": "disease",
+            "min": 1,
+            "max": 11,
+            "duration": 12
+          },
+          {
+            "type": "utility",
+            "effect": "cast-spell",
+            "spell": "chant-of-plague"
+          }
+        ]
+      },
+      "description": "A diseased chant that causes between 1 and 40 damage every six seconds to an enemy and makes them more vulnerable to disease."
+    }
+  },
+  {
+    "_id": "brd-denons-desperate-dirge-43-r1",
+    "name": "Denon's Desperate Dirge",
+    "type": "song",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "song": {
+        "level": 43,
+        "category": "damage",
+        "songGroup": "direct-damage",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "area",
+        "range": 150,
+        "manaCost": 800,
+        "songType": "detrimental",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "damage",
+            "element": "magic",
+            "amount": 168,
+            "radius": 20
+          }
+        ],
+        "radius": 20
+      },
+      "description": "A dark dirge that causes between 315 and 635 damage to 5 enemies in an area around your target."
+    }
+  },
+  {
+    "_id": "brd-cassindras-elegy-44-r1",
+    "name": "Cassindra's Elegy",
+    "type": "song",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "song": {
+        "level": 44,
+        "category": "buff",
+        "songGroup": "stat-buff",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "int",
+            "amount": 33,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "wis",
+            "amount": 33,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "A quiet elegy that bolsters the intelligence and wisdom of your group."
+    }
+  },
+  {
+    "_id": "brd-aria-of-asceticism-45-r1",
+    "name": "Aria of Asceticism",
+    "type": "song",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "song": {
+        "level": 45,
+        "category": "heal",
+        "songGroup": "cure-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "flute",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 0,
+          "unit": "seconds"
+        },
+        "target": "single",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "cure",
+            "effect": "poison",
+            "min": 1,
+            "max": 10
+          },
+          {
+            "type": "cure",
+            "effect": "disease",
+            "min": 1,
+            "max": 10
+          }
+        ]
+      },
+      "description": "A long forgotten aria that cleanses the target's body of poison and disease."
+    }
+  },
+  {
+    "_id": "brd-jonthans-provocation-45-r1",
+    "name": "Jonthan's Provocation",
+    "type": "song",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "song": {
+        "level": 45,
+        "category": "buff",
+        "songGroup": "haste-song",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "self",
+        "range": 0,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "haste",
+            "amount": 50,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "str",
+            "amount": 20,
+            "duration": 12
+          },
+          {
+            "type": "buff",
+            "stat": "atk",
+            "amount": 20,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "An ancient war song that increases your attack speed, strength, and attack rating."
+    }
+  },
+  {
+    "_id": "brd-rizlonas-embers-45-r1",
+    "name": "Rizlona's Embers",
+    "type": "song",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "song": {
+        "level": 45,
+        "category": "buff",
+        "songGroup": "spell-focus",
+        "bardLine": "",
+        "performanceSkill": "bard_performance",
+        "instrument": "voice",
+        "instrumentRequired": false,
+        "pulse": 6,
+        "duration": {
+          "value": 12,
+          "unit": "seconds"
+        },
+        "target": "group",
+        "range": 100,
+        "manaCost": 0,
+        "songType": "beneficial",
+        "twistPriority": 0,
+        "stackGroup": null,
+        "effects": [
+          {
+            "type": "buff",
+            "stat": "spell-damage",
+            "min": 1,
+            "max": 15,
+            "duration": 12
+          }
+        ]
+      },
+      "description": "Increases the damage of your companions' direct damage spells by up to 15%. This bonus will decay on spells over level 52."
+    }
+  }
+]

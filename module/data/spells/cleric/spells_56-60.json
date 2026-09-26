@@ -1,0 +1,1024 @@
+[
+ {
+  "_id": "clr-banish-summoned-56-r1",
+  "name": "Banish Summoned",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 56,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.0,
+   "manaCost": 136,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 385,
+     "resist": "magic",
+     "resistMod": -50
+    }
+   ],
+   "description": "A burst of holy power that inflicts between 285 and 385 damage to a summoned target."
+  }
+ },
+ {
+  "_id": "clr-cower-the-dead-56-r1",
+  "name": "Cower the Dead",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 56,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 125,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 42,
+     "resist": "magic"
+    }
+   ],
+   "description": "A booming voice fills your target's ears, causing them to flee in terror."
+  }
+ },
+ {
+  "_id": "clr-hammer-of-judgment-56-r1",
+  "name": "Hammer of Judgment",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 56,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 250,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Hammer of Judgment"
+    }
+   ],
+   "description": "Summons a magical hammer that is particularly adept at smiting undead."
+  }
+ },
+ {
+  "_id": "clr-judgment-56-r1",
+  "name": "Judgment",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 56,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 5.5,
+   "manaCost": 274,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 600,
+     "resist": "magic"
+    }
+   ],
+   "description": "Calls upon the judgment of the gods to strike your target, causing between 600 and 600 damage."
+  }
+ },
+ {
+  "_id": "clr-mark-of-karn-56-r1",
+  "name": "Mark of Karn",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 56,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 125,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "damage-shield",
+     "amount": -20,
+     "duration": 210
+    }
+   ],
+   "description": "Covers your target in a glowing aura that heals anyone who strikes them."
+  }
+ },
+ {
+  "_id": "clr-paralyzing-earth-56-r1",
+  "name": "Paralyzing Earth",
+  "type": "spell",
+  "img": "icons/magic/nature/root-vines-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 56,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.5,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "root",
+     "duration": 180,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 3 minutes."
+  }
+ },
+ {
+  "_id": "clr-reviviscence-56-r1",
+  "name": "Reviviscence",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 56,
+   "school": "alteration",
+   "target": "corpse",
+   "range": 200,
+   "castTime": 7.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "resurrect",
+     "xp": 96
+    }
+   ],
+   "description": "Revives a slain ally, restoring 96% of their lost experience. It takes some time for the recently revived to fully recover."
+  }
+ },
+ {
+  "_id": "clr-yaulp-v-56-r1",
+  "name": "Yaulp V",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 56,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.5,
+   "manaCost": 10,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "atk",
+     "amount": 50,
+     "duration": 24
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 10,
+     "max": 10,
+     "duration": 24
+    },
+    {
+     "type": "buff",
+     "stat": "dex",
+     "amount": 75,
+     "duration": 24
+    },
+    {
+     "type": "buff",
+     "stat": "haste",
+     "amount": 25,
+     "duration": 24
+    }
+   ],
+   "description": "Focuses your spiritual energy into a great battle cry, increasing your attack rating, dexterity, attack speed, and mana regeneration for 24 seconds. The effects of this spell will fade if you sit down."
+  }
+ },
+ {
+  "_id": "clr-aegis-57-r1",
+  "name": "Aegis",
+  "type": "spell",
+  "img": "icons/magic/defense/armor-scale-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 57,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 7.0,
+   "manaCost": 450,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 7,
+     "max": 10,
+     "duration": 8640
+    }
+   ],
+   "description": "Covers your target in a holy guard, increasing their armor class for 2.4 hours."
+  }
+ },
+ {
+  "_id": "clr-bulwark-of-faith-57-r1",
+  "name": "Bulwark of Faith",
+  "type": "spell",
+  "img": "icons/magic/defense/armor-scale-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 57,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 7.0,
+   "manaCost": 350,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 8,
+     "max": 11,
+     "duration": 4860
+    }
+   ],
+   "description": "Covers your target in a holy guard, increasing their armor class for 81 minutes."
+  }
+ },
+ {
+  "_id": "clr-trepidation-57-r1",
+  "name": "Trepidation",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 57,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.5,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 36,
+     "resist": "magic",
+     "resistMod": -25
+    }
+   ],
+   "description": "A booming voice fills your target's ears, causing them to flee in terror."
+  }
+ },
+ {
+  "_id": "clr-ward-of-rebuke-57-r1",
+  "name": "Ward of Rebuke",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 57,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 383,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "defensive-proc-ward-of-rebuke-parry"
+    }
+   ],
+   "description": "Places the Ward of Retribution around your body. This ward will periodically strike out at any creature that attacks you; This effect will fade after 120 strikes."
+  }
+ },
+ {
+  "_id": "clr-word-of-restoration-57-r1",
+  "name": "Word of Restoration",
+  "type": "spell",
+  "img": "icons/magic/life/heart-cross-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 57,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 898,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 1218,
+     "max": 1818
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 9
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 9
+    }
+   ],
+   "description": "Mends the wounds of everyone in your group, healing between 1218 and 1818 hit points as well as curing minor diseases and poisons."
+  }
+ },
+ {
+  "_id": "clr-antidote-58-r1",
+  "name": "Antidote",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 58,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 16
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 16
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 16
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 16
+    }
+   ],
+   "description": "Removes toxin from your target's system, curing them of severe poisons."
+  }
+ },
+ {
+  "_id": "clr-blessed-armor-of-the-risen-58-r1",
+  "name": "Blessed Armor of the Risen",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 58,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 275,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 300,
+     "duration": 8640
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 7,
+     "max": 9,
+     "duration": 8640
+    },
+    {
+     "type": "heal",
+     "amount": 300
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 6,
+     "max": 6,
+     "duration": 8640
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 1 is 'HP Buff' and < 1300"
+    }
+   ],
+   "description": "Places mystic armor of protection around you, increasing your hit points, armor class, and mana regeneration for 2.4 hours."
+  }
+ },
+ {
+  "_id": "clr-enforced-reverence-58-r1",
+  "name": "Enforced Reverence",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 58,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 8.0,
+     "resist": "magic",
+     "resistMod": -10
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 214,
+     "resist": "magic",
+     "resistMod": -10
+    }
+   ],
+   "description": "Strikes an enemy with holy might, briefly stunning them and causing between 214 and 214 damage. This spell works on creatures up to level 55."
+  }
+ },
+ {
+  "_id": "clr-eradicate-disease-58-r1",
+  "name": "Eradicate Disease",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 58,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 1.25,
+   "manaCost": 250,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 30
+    }
+   ],
+   "description": "Cleanses your target's immune system, curing them of strong diseases."
+  }
+ },
+ {
+  "_id": "clr-ethereal-light-58-r1",
+  "name": "Ethereal Light",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 58,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.75,
+   "manaCost": 490,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 1400,
+     "max": 2000
+    }
+   ],
+   "description": "Bathes your target in ethereal light, healing between 1400 and 2000 hit points."
+  }
+ },
+ {
+  "_id": "clr-hammer-of-divinity-58-r1",
+  "name": "Hammer of Divinity",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 58,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 250,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Hammer of Divinity"
+    }
+   ],
+   "description": "Summons a magical hammer that is particularly adept at smiting undead."
+  }
+ },
+ {
+  "_id": "clr-naltrons-mark-58-r1",
+  "name": "Naltron's Mark",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 58,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 500,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 525,
+     "duration": 4320
+    },
+    {
+     "type": "heal",
+     "amount": 525
+    }
+   ],
+   "description": "Covers your group in a shimmer of holy runes, increasing their hit points for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-celestial-elixir-59-r1",
+  "name": "Celestial Elixir",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 59,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 300,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 300,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your target's body with celestial elixir, healing between 10 and 300 hit points every 6 seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-deistic-voice-59-r1",
+  "name": "Deistic Voice",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 59,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 250,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 42,
+     "resist": "magic"
+    }
+   ],
+   "description": "A booming voice fills your target's ears, causing them to flee in terror."
+  }
+ },
+ {
+  "_id": "clr-ethereal-remedy-59-r1",
+  "name": "Ethereal Remedy",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 59,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.75,
+   "manaCost": 400,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 975,
+     "max": 975
+    }
+   ],
+   "description": "Mends severe wounds, healing between 975 and 975 hit points."
+  }
+ },
+ {
+  "_id": "clr-imbue-valor-59-r1",
+  "name": "Imbue Valor",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 59,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 1000,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Yellow Diamond of Valor"
+    }
+   ],
+   "description": "Focuses the essence of Valor into a raw diamond. Consumes a diamond and Blood of Valor when cast."
+  }
+ },
+ {
+  "_id": "clr-the-unspoken-word-59-r1",
+  "name": "The Unspoken Word",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 59,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 1.0,
+   "manaCost": 427,
+   "effects": [
+    {
+     "type": "debuff",
+     "effect": "blind",
+     "amount": 1,
+     "duration": 6,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 431,
+     "radius": 20,
+     "resist": "magic"
+    }
+   ],
+   "description": "A forbidden word that causes between 431 and 431 damage to up to 30 nearby enemies.",
+   "radius": 20
+  }
+ },
+ {
+  "_id": "clr-aegolism-60-r1",
+  "name": "Aegolism",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 60,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 14.0,
+   "manaCost": 750,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 2100"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 1100,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 1100
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 12,
+     "max": 16,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 2100"
+    }
+   ],
+   "description": "Cloaks your target in an aura of protection, granting them increased hit points and armor class for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-ancient-gift-of-aegolism-60-r1",
+  "name": "Ancient: Gift of Aegolism",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 60,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 24.0,
+   "manaCost": 2000,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 2300"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 1300,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 1300
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 15,
+     "max": 20,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 2300"
+    }
+   ],
+   "description": "Cloaks your group in an aura of protection, granting them increased hit points and armor class for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-ancient-high-priests-bulwark-60-r1",
+  "name": "Ancient: High Priest's Bulwark",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 60,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 275,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 350,
+     "duration": 8640
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 7,
+     "max": 9,
+     "duration": 8640
+    },
+    {
+     "type": "heal",
+     "amount": 350
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 7,
+     "max": 7,
+     "duration": 8640
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 1 is 'HP Buff' and < 1350"
+    }
+   ],
+   "description": "Places mystic armor of protection around you, increasing your hit points, armor class, and mana regeneration for 2.4 hours."
+  }
+ },
+ {
+  "_id": "clr-banishment-of-shadows-60-r1",
+  "name": "Banishment of Shadows",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 60,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.0,
+   "manaCost": 750,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "banish-undead",
+     "resist": "magic"
+    }
+   ],
+   "description": "Banishes an undead creature to the shadow realm. Consumes a star ruby to cast; Works on creatures up to level 51."
+  }
+ },
+ {
+  "_id": "clr-blessing-of-aegolism-60-r1",
+  "name": "Blessing of Aegolism",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 60,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 24.0,
+   "manaCost": 2000,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 2150"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 1150,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 1301
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 13,
+     "max": 18,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 2150"
+    }
+   ],
+   "description": "Cloaks your group in an aura of protection, granting them increased hit points and armor class for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-divine-intervention-60-r1",
+  "name": "Divine Intervention",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 60,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 500,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "divine-intervention",
+     "duration": 600
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Delayed Heal Marker (1)"
+    }
+   ],
+   "description": "Bestows the favor of the gods upon your target, granting them a second chance at life should they fall in battle. Consumes a pair of emeralds when cast."
+  }
+ },
+ {
+  "_id": "clr-ethereal-elixir-60-r1",
+  "name": "Ethereal Elixir",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 60,
+   "school": "alteration",
+   "target": "group",
+   "range": 150,
+   "castTime": 5.0,
+   "manaCost": 975,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 300,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your group with ethereal power, healing between 10 and 300 hit points every 6 seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-hammer-of-souls-60-r1",
+  "name": "Hammer of Souls",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 60,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 250,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Hammer of Souls"
+    }
+   ],
+   "description": "Summons a magical hammer that is particularly adept at smiting undead."
+  }
+ },
+ {
+  "_id": "clr-marzins-mark-60-r1",
+  "name": "Marzin's Mark",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 60,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 575,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 725,
+     "duration": 4320
+    },
+    {
+     "type": "heal",
+     "amount": 725
+    }
+   ],
+   "description": "Covers your group in a shimmer of holy runes, increasing their hit points for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-word-of-redemption-60-r1",
+  "name": "Word of Redemption",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 60,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 12.0,
+   "manaCost": 1100,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 2925
+    }
+   ],
+   "description": "Mends the wounds of everyone in your group, healing between 2,925 and 2,925 hit points."
+  }
+ }
+]

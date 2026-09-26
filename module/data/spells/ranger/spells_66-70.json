@@ -1,0 +1,666 @@
+[
+  {
+    "_id": "rng-displace-summoned-66-r1",
+    "name": "Displace Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 66,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 290,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 924
+        }
+      ],
+      "description": "A burst of holy light that causes between 956 and 956 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "rng-nature-veil-66-r1",
+    "name": "Nature Veil",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "ranger",
+      "level": 66,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 242,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "defensive-proc",
+          "proc": "natures-veil-parry-with-300-rate-mod",
+          "duration": 900
+        }
+      ],
+      "description": "Cloaks you in a veil of nature, providing a chance for creatures attacking you to be less hateful towards you."
+    }
+  },
+  {
+    "_id": "rng-shield-of-briar-66-r1",
+    "name": "Shield of Briar",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "ranger",
+      "level": 66,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 32,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of thorns that cause damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "rng-guard-of-the-earth-67-r1",
+    "name": "Guard of the Earth",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "ranger",
+      "level": 67,
+      "school": "abjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 3.5,
+      "manaCost": 198,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 13,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 11,
+          "max": 14,
+          "duration": 3600
+        }
+      ],
+      "description": "Focuses your target with the call of the Rathe, increasing their armor class, and causing damage to anything that strikes them for 60 minutes."
+    }
+  },
+  {
+    "_id": "rng-locust-swarm-67-r1",
+    "name": "Locust Swarm",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 67,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 513,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 419,
+          "max": 419,
+          "duration": 60
+        }
+      ],
+      "description": "Commands a swarm of insects to attack your target relentlessly, causing between 268 and 412 damage every 6 seconds for 60 seconds.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "rng-strength-of-the-hunter-67-r1",
+    "name": "Strength of the Hunter",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 67,
+      "school": "abjuration",
+      "target": "group",
+      "range": 150,
+      "castTime": 5.0,
+      "manaCost": 331,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 75,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 155,
+          "duration": 3600
+        }
+      ],
+      "description": "Blesses your target with the strength of the hunter, increasing their maximum hit points by 155 and attack rating by 75 for 60 minutes."
+    }
+  },
+  {
+    "_id": "rng-sylvan-water-67-r1",
+    "name": "Sylvan Water",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 67,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 407,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 1040
+        }
+      ],
+      "description": "Mends severe wounds, healing between 465 and 1165 hit points. If your target is an enemy, you will heal that enemy's current target instead."
+    }
+  },
+  {
+    "_id": "rng-briarcoat-68-r1",
+    "name": "Briarcoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 68,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 326,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 11,
+          "max": 14,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 8.0,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of blades that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "rng-frost-wind-68-r1",
+    "name": "Frost Wind",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "ranger",
+      "level": 68,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 394,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 1022
+        }
+      ],
+      "description": "Calls forth a frozen wind to encase your target in ice, doing 956 damage.",
+      "resist": "cold"
+    }
+  },
+  {
+    "_id": "rng-hail-of-arrows-68-r1",
+    "name": "Hail of Arrows",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "ranger",
+      "level": 68,
+      "school": "discipline",
+      "target": "area",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 374,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "physical",
+          "amount": 64
+        },
+        {
+          "type": "damage",
+          "element": "physical",
+          "amount": 64
+        },
+        {
+          "type": "damage",
+          "element": "physical",
+          "amount": 64
+        },
+        {
+          "type": "damage",
+          "element": "physical",
+          "amount": 64
+        }
+      ],
+      "description": "Conjures a hail of ethereal arrows to fly out in front of you, causing damage to any creatures caught in the arc.",
+      "radius": 100
+    }
+  },
+  {
+    "_id": "rng-hunters-vigor-68-r1",
+    "name": "Hunter's Vigor",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 68,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 401,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "hp",
+          "min": 30,
+          "max": 30,
+          "duration": 1230
+        }
+      ],
+      "description": "Hastens your target's natural healing, regenerating 30 hit points every 6 seconds."
+    }
+  },
+  {
+    "_id": "rng-tranquility-of-the-glade-68-r1",
+    "name": "Tranquility of the Glade",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 68,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 214,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 15
+        }
+      ],
+      "description": "Cloaks your target in an aura of tranquility, making it much less likely for them to assist their friends in battle. This spell works on creatures up to level 70. This spell only works outdoors."
+    }
+  },
+  {
+    "_id": "rng-earthen-shackles-69-r1",
+    "name": "Earthen Shackles",
+    "type": "spell",
+    "img": "icons/magic/nature/root-entangle.webp",
+    "system": {
+      "class": "ranger",
+      "level": 69,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 159,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 55,
+          "duration": 180
+        }
+      ],
+      "description": "Entraps your opponent in Earthen Shackles, slowing their movement rate for up to 3 minutes. This effect is difficult to resist."
+    }
+  },
+  {
+    "_id": "rng-hearth-embers-69-r1",
+    "name": "Hearth Embers",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "ranger",
+      "level": 69,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1071
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 842 and 842 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-howl-of-the-predator-69-r1",
+    "name": "Howl of the Predator",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 69,
+      "school": "abjuration",
+      "target": "group",
+      "range": 150,
+      "castTime": 5.0,
+      "manaCost": 477,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 90,
+          "duration": 4800
+        },
+        {
+          "type": "utility",
+          "effect": "double-attack",
+          "amount": 3.0,
+          "duration": 4800
+        }
+      ],
+      "description": "Summons the spirit of the predator to impart your group with an increased attack rating as well as increasing your chance to double attack for up to 80 minutes."
+    }
+  },
+  {
+    "_id": "rng-natures-balance-69-r1",
+    "name": "Nature's Balance",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "ranger",
+      "level": 69,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 127,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel-beneficial",
+          "amount": 95
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "rng-natures-denial-69-r1",
+    "name": "Nature's Denial",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "ranger",
+      "level": 69,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 636,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "proc": "natures-denial-strike",
+          "duration": 3600
+        }
+      ],
+      "description": "Imparts your weapons with the power of nature for 60 minutes, allowing them a chance to strike summoned creatures for greater damage."
+    }
+  },
+  {
+    "_id": "rng-warders-wrath-69-r1",
+    "name": "Warder's Wrath",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "ranger",
+      "level": 69,
+      "school": "discipline",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "critical-hit",
+          "amount": 200,
+          "duration": 60
+        },
+        {
+          "type": "utility",
+          "effect": "hit-chance",
+          "amount": 100,
+          "duration": 60
+        }
+      ],
+      "description": "Brings your weapons into perfect harmony, causing your melee attacks to have a much greater chance of hitting and greatly increasing your critical hit rate for up to 60 seconds."
+    }
+  },
+  {
+    "_id": "rng-ancient-north-wind-70-r1",
+    "name": "Ancient: North Wind",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "ranger",
+      "level": 70,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 382,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 1005
+        }
+      ],
+      "description": "Calls the wind of the north to freeze your target, causing 1032 damage.",
+      "resist": "cold"
+    }
+  },
+  {
+    "_id": "rng-call-of-lightning-70-r1",
+    "name": "Call of Lightning",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "ranger",
+      "level": 70,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 292,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "proc": "call-of-lightning-strike",
+          "duration": 3600
+        }
+      ],
+      "description": "Imparts your weapons with the power of the storm for 60 minutes, allowing them a chance to strike with the fury of thunder."
+    }
+  },
+  {
+    "_id": "rng-elddars-grasp-70-r1",
+    "name": "Elddar's Grasp",
+    "type": "spell",
+    "img": "icons/magic/nature/root-bind-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 175,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 60
+        }
+      ],
+      "description": "Entangles your target's feet in the vines of the Elddar, preventing them from moving up for up to 60 seconds. This spell is very difficult to resist."
+    }
+  },
+  {
+    "_id": "rng-onyx-skin-70-r1",
+    "name": "Onyx Skin",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 70,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 462,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7.0,
+          "max": 9.0,
+          "duration": 4860
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 540,
+          "duration": 4860
+        },
+        {
+          "type": "heal",
+          "amount": 479
+        },
+        {
+          "type": "heal",
+          "amount": 5.3,
+          "duration": 4860
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points, regeneration rate, and armor class for 81 minutes."
+    }
+  },
+  {
+    "_id": "rng-scorched-earth-70-r1",
+    "name": "Scorched Earth",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "ranger",
+      "level": 70,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 355,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1120
+        }
+      ],
+      "description": "Calls down fire to consume your target, causing 1150 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-ward-of-the-hunter-70-r1",
+    "name": "Ward of the Hunter",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "ranger",
+      "level": 70,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 438,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 45,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 170,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 11,
+          "max": 14,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 165,
+          "duration": 9000
+        },
+        {
+          "type": "utility",
+          "effect": "double-attack",
+          "amount": 3.0,
+          "duration": 9000
+        }
+      ],
+      "description": "Covers your skin in a coat of hardened thorns, increasing your armor class, as well as causing damage to anyone who strikes you for 2.5 hours."
+    }
+  }
+]

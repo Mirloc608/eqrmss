@@ -1,0 +1,122 @@
+[
+  {
+    "_id": "pal-salve-1-r1",
+    "name": "Salve",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 1,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 8,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 6
+        }
+      ],
+      "description": "Mends minor wounds, healing 5 hit points."
+    }
+  },
+  {
+    "_id": "pal-flash-of-light-2-r1",
+    "name": "Flash of Light",
+    "type": "spell",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "class": "paladin",
+      "level": 2,
+      "school": "divination",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 12,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "blindness",
+          "duration": 12
+        },
+        {
+          "type": "debuff",
+          "stat": "atk",
+          "amount": -5,
+          "duration": 12
+        }
+      ],
+      "description": "Creates a bright flash of light, temporarily blinding your target.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-true-north-3-r1",
+    "name": "True North",
+    "type": "spell",
+    "img": "icons/magic/arcane/compass.webp",
+    "system": {
+      "class": "paladin",
+      "level": 3,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "true-north"
+        }
+      ],
+      "description": "Provides a magical sense of direction, changing your heading to point directly North."
+    }
+  },
+  {
+    "_id": "pal-sense-the-dead-4-r1",
+    "name": "Sense the Dead",
+    "type": "spell",
+    "img": "icons/magic/death/skull-aura-purple.webp",
+    "system": {
+      "class": "paladin",
+      "level": 4,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "sense-undead"
+        }
+      ],
+      "description": "Provides you with a mystical undead awareness, pointing you towards the nearest undead creature."
+    }
+  },
+  {
+    "_id": "pal-cure-poison-5-r1",
+    "name": "Cure Poison",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 5,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 5
+        }
+      ],
+      "description": "Removes toxin from your target's system, curing them of minor poisons."
+    }
+  }
+]

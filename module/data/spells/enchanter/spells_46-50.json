@@ -1,0 +1,620 @@
+[
+  {
+    "_id": "enc-adorning-grace-46-r1",
+    "name": "Adorning Grace",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 46,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 110,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "cha",
+          "amount": 40,
+          "duration": 4320
+        }
+      ],
+      "description": "Cloaks you in adorning grace, increasing your charisma."
+    }
+  },
+  {
+    "_id": "enc-allure-46-r1",
+    "name": "Allure",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 46,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 245,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 51,
+          "duration": 1230,
+          "resist": "magic"
+        }
+      ],
+      "description": "Dominates your target's mind, allowing you to control them for a short time. This spell works on creatures up to level 51."
+    }
+  },
+  {
+    "_id": "enc-blanket-of-forgetfulness-46-r1",
+    "name": "Blanket of Forgetfulness",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 46,
+      "school": "enchantment",
+      "target": "area",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 175,
+      "radius": 60,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 60
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 60
+        }
+      ],
+      "description": "Attacks the minds of all enemies in the vicinity of your target, providing a chance to forget those that have done them harm."
+    }
+  },
+  {
+    "_id": "enc-enchant-steel-46-r1",
+    "name": "Enchant Steel",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 46,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 325,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "large-brick-of-enchanted-ore",
+          "count": 1
+        }
+      ],
+      "description": "Enchants a large brick of Steel with magical energy. Consumes a large brick of high quality ore when cast."
+    }
+  },
+  {
+    "_id": "enc-berserker-spirit-47-r1",
+    "name": "Berserker Spirit",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 47,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 40,
+          "duration": 300
+        },
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 178,
+          "duration": 300
+        },
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -20,
+          "duration": 300
+        }
+      ],
+      "description": "Hardens your skin and fills your arms with energy, increasing strength and absorbing damage, while also decreasing your agility."
+    }
+  },
+  {
+    "_id": "enc-dazzle-47-r1",
+    "name": "Dazzle",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 47,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 55,
+          "duration": 96,
+          "resist": "magic"
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 41
+        }
+      ],
+      "description": "Causes your opponent to fall into an enchanted sleep for up to 96 seconds. This spell works on creatures up to level 55."
+    }
+  },
+  {
+    "_id": "enc-gasping-embrace-47-r1",
+    "name": "Gasping Embrace",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 47,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 100
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -30,
+          "duration": 48,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -30,
+          "duration": 48,
+          "resist": "magic"
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 81,
+          "max": 81,
+          "duration": 48
+        }
+      ],
+      "description": "Constricts your target's throat, causing 100 damage initially and between 39 and 81 damage every six seconds for 48 seconds, as well as lowering their strength and agility."
+    }
+  },
+  {
+    "_id": "enc-mass-purify-mana-47-r1",
+    "name": "Mass Purify Mana",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 47,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 1500,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "vial-of-purified-mana",
+          "count": 5
+        }
+      ],
+      "description": "Purify's mana into a physical form, creating five vials of purified mana. Consumes five poison vials and twenty rubies when cast."
+    }
+  },
+  {
+    "_id": "enc-swift-like-the-wind-47-r1",
+    "name": "Swift Like the Wind",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 47,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 8.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 60,
+          "duration": 960
+        }
+      ],
+      "description": "Grants your target quickened movement, increasing their attack speed for 16 minutes."
+    }
+  },
+  {
+    "_id": "enc-enchant-adamantite-48-r1",
+    "name": "Enchant Adamantite",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 48,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 325,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-lrg-brick-of-adamantite",
+          "count": 1
+        }
+      ],
+      "description": "Enchants a large brick of Adamantite with magical energy. Consumes a large brick of Adamantite when cast."
+    }
+  },
+  {
+    "_id": "enc-enchant-mithril-48-r1",
+    "name": "Enchant Mithril",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 48,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 325,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-lrg-brick-of-mithril",
+          "count": 1
+        }
+      ],
+      "description": "Enchants a large brick of Mithril with magical energy. Consumes a large brick of Mithril when cast."
+    }
+  },
+  {
+    "_id": "enc-group-resist-magic-48-r1",
+    "name": "Group Resist Magic",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 48,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 55,
+          "duration": 2160
+        }
+      ],
+      "description": "Covers your group in a protective shield, increasing their magic resistance."
+    }
+  },
+  {
+    "_id": "enc-kintazs-animation-48-r1",
+    "name": "Kintaz's Animation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 48,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "kintazs-animation-pet"
+        }
+      ],
+      "description": "Animates a weapon and shield to attack your enemies. Consumes a tiny dagger when cast."
+    }
+  },
+  {
+    "_id": "enc-shadow-48-r1",
+    "name": "Shadow",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 48,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 7.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 4,
+          "max": 6,
+          "duration": 5400
+        }
+      ],
+      "description": "Causes your target's image to blur, making it harder for your opponents to hit you by increasing your armor class."
+    }
+  },
+  {
+    "_id": "enc-enchant-brellium-49-r1",
+    "name": "Enchant Brellium",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 49,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 325,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-lrg-brick-of-brellium",
+          "count": 1
+        }
+      ],
+      "description": "Enchants a large brick of Brellium with magical energy. Consumes a large brick of Brellium when cast."
+    }
+  },
+  {
+    "_id": "enc-focus-mass-simple-spellcasters-empowering-essence-49-r1",
+    "name": "Focus Mass Simple Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 49,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "simple-spellcasters-empowering-essence",
+          "count": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-mass-enchant-adamantite-49-r1",
+    "name": "Mass Enchant Adamantite",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 49,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 975,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-lrg-brick-of-adamantite",
+          "count": 5
+        }
+      ],
+      "description": "Enchants five large bricks of Adamantite with magical energy. Consumes five large bricks of Adamantite when cast."
+    }
+  },
+  {
+    "_id": "enc-mass-enchant-brellium-49-r1",
+    "name": "Mass Enchant Brellium",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 49,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 975,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-lrg-brick-of-brellium",
+          "count": 5
+        }
+      ],
+      "description": "Enchants five large bricks of Brellium with magical energy. Consumes five large bricks of Brellium when cast."
+    }
+  },
+  {
+    "_id": "enc-mass-enchant-mithril-49-r1",
+    "name": "Mass Enchant Mithril",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 49,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 975,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-lrg-brick-of-mithril",
+          "count": 5
+        }
+      ],
+      "description": "Enchants five large bricks of Mithril with magical energy. Consumes five large bricks of Mithril when cast."
+    }
+  },
+  {
+    "_id": "enc-mass-enchant-steel-49-r1",
+    "name": "Mass Enchant Steel",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 49,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 975,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "large-brick-of-enchanted-ore",
+          "count": 5
+        }
+      ],
+      "description": "Enchants five large bricks of Steel with magical energy. Consumes five large bricks of high quality ore when cast."
+    }
+  },
+  {
+    "_id": "enc-collaboration-50-r1",
+    "name": "Collaboration",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 50,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "increase-faction",
+          "amount": 300
+        }
+      ],
+      "description": "Cloaks you in an amiable aura, causing creatures of your target's faction to view you more favorably."
+    }
+  },
+  {
+    "_id": "enc-focus-spellcasters-empowering-essence-50-r1",
+    "name": "Focus Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 50,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "spellcasters-empowering-essence",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-improved-invisibility-50-r1",
+    "name": "Improved Invisibility",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 50,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard"
+        }
+      ],
+      "description": "Cloaks you in a mystic veil, rendering you invisible to many creatures for 10 minutes."
+    }
+  },
+  {
+    "_id": "enc-theft-of-thought-50-r1",
+    "name": "Theft of Thought",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 50,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "drain-mana",
+          "amount": 282,
+          "resist": "magic",
+          "resistMod": -1000
+        }
+      ],
+      "description": "Tears the energy from your target's mind, draining their mana and adding it to yours."
+    }
+  }
+]

@@ -1,0 +1,470 @@
+[
+ {
+  "_id": "clr-force-31-r1",
+  "name": "Force",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 31,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.5,
+   "manaCost": 90,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 6.0,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 18,
+     "resist": "magic"
+    }
+   ],
+   "description": "Strikes an enemy with holy might, briefly stunning them and causing between 8. 2 and 18 damage; This spell works on creatures up to level 58."
+  }
+ },
+ {
+  "_id": "clr-frenzied-strength-31-r1",
+  "name": "Frenzied Strength",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 31,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 90,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "str",
+     "amount": 38,
+     "duration": 180
+    }
+   ],
+   "description": "Focuses your target's strength into an intense burst, increasing it for a short time, but then gradually decaying over the next 3 minutes."
+  }
+ },
+ {
+  "_id": "clr-symbol-of-pinzarn-31-r1",
+  "name": "Symbol of Pinzarn",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 31,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.5,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 307,
+     "duration": 2700
+    },
+    {
+     "type": "heal",
+     "amount": 307
+    }
+   ],
+   "description": "Covers your target in a shimmer of holy runes, increasing their hit points for 45 minutes."
+  }
+ },
+ {
+  "_id": "clr-atone-32-r1",
+  "name": "Atone",
+  "type": "spell",
+  "img": "icons/magic/perception/eye-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 32,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.5,
+   "manaCost": 60,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "memory-blur",
+     "amount": 41
+    }
+   ],
+   "description": "Calls upon the judgment of the gods, allowing a chance for the target to forget those that have harmed them."
+  }
+ },
+ {
+  "_id": "clr-renewal-32-r1",
+  "name": "Renewal",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 32,
+   "school": "alteration",
+   "target": "corpse",
+   "range": 200,
+   "castTime": 6.0,
+   "manaCost": 400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "resurrect",
+     "xp": 50
+    }
+   ],
+   "description": "Revives a slain ally, restoring 50% of their lost experience. It takes some time for the recently revived to fully recover."
+  }
+ },
+ {
+  "_id": "clr-valor-32-r1",
+  "name": "Valor",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 32,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 90,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 3,
+     "max": 4,
+     "duration": 3240
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 200,
+     "duration": 3240
+    },
+    {
+     "type": "heal",
+     "amount": 200
+    }
+   ],
+   "description": "Provides your target with a sense of valor, increasing their hit points and armor class for 54 minutes."
+  }
+ },
+ {
+  "_id": "clr-abundant-food-33-r1",
+  "name": "Abundant Food",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 33,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 25,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Black Bread"
+    }
+   ],
+   "description": "Focuses mana into edible loaves of black bread."
+  }
+ },
+ {
+  "_id": "clr-expel-undead-33-r1",
+  "name": "Expel Undead",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 33,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 93,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 68,
+     "resist": "magic",
+     "resistMod": -50
+    }
+   ],
+   "description": "A burst of holy power that inflicts between 41 and 68 damage to an undead target."
+  }
+ },
+ {
+  "_id": "clr-ionys-greater-augury-33-r1",
+  "name": "Iony's Greater Augury",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 33,
+   "school": "divination",
+   "target": "single",
+   "range": 40,
+   "castTime": 4.0,
+   "manaCost": 240,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "appraise-chest"
+    }
+   ],
+   "description": "Attempts to sense the presence of a cursed trap on the targeted object."
+  }
+ },
+ {
+  "_id": "clr-resist-fire-33-r1",
+  "name": "Resist Fire",
+  "type": "spell",
+  "img": "icons/magic/defense/armor-scale-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 33,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.5,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "resist-fire",
+     "amount": 40,
+     "duration": 2160
+    }
+   ],
+   "description": "Surrounds your target with an aura of protection, warding away fire for 36 minutes."
+  }
+ },
+ {
+  "_id": "clr-armor-of-protection-34-r1",
+  "name": "Armor of Protection",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 34,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 110,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 225,
+     "duration": 8640
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 3,
+     "max": 4,
+     "duration": 8640
+    },
+    {
+     "type": "heal",
+     "amount": 225
+    }
+   ],
+   "description": "Places mystic armor of protection around you, increasing your hit points and armor class for 2.4 hours."
+  }
+ },
+ {
+  "_id": "clr-blinding-luminance-34-r1",
+  "name": "Blinding Luminance",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 34,
+   "school": "divination",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "debuff",
+     "effect": "blind",
+     "amount": 1,
+     "duration": 24,
+     "resist": "magic"
+    },
+    {
+     "type": "debuff",
+     "stat": "atk",
+     "amount": -5,
+     "duration": 24,
+     "resist": "magic"
+    }
+   ],
+   "description": "Creates a bright flash of light, temporarily blinding your target."
+  }
+ },
+ {
+  "_id": "clr-ionys-greater-cleansing-34-r1",
+  "name": "Iony's Greater Cleansing",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 34,
+   "school": "divination",
+   "target": "single",
+   "range": 40,
+   "castTime": 4.0,
+   "manaCost": 240,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "unlock-chest"
+    }
+   ],
+   "description": "Attempts to destroy any cursed lock present on the targeted object."
+  }
+ },
+ {
+  "_id": "clr-ionys-greater-exorcism-34-r1",
+  "name": "Iony's Greater Exorcism",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 34,
+   "school": "divination",
+   "target": "single",
+   "range": 40,
+   "castTime": 4.0,
+   "manaCost": 240,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "disarm-chest"
+    }
+   ],
+   "description": "Attempts to disarm a cursed trap on the targeted object. Consumes a greater scrying stone when cast."
+  }
+ },
+ {
+  "_id": "clr-tremor-34-r1",
+  "name": "Tremor",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 34,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 25,
+     "radius": 30,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to tremble around you, causing between 13 and 25 damage to up to 30 nearby enemies.",
+   "radius": 30
+  }
+ },
+ {
+  "_id": "clr-armor-of-faith-35-r1",
+  "name": "Armor of Faith",
+  "type": "spell",
+  "img": "icons/magic/defense/armor-scale-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 35,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 150,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 6,
+     "max": 7,
+     "duration": 3780
+    }
+   ],
+   "description": "Covers your target in the armor of faith, increasing their armor class for 63 minutes."
+  }
+ },
+ {
+  "_id": "clr-blessing-of-faith-35-r1",
+  "name": "Blessing of Faith",
+  "type": "spell",
+  "img": "icons/magic/defense/armor-scale-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 35,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "spell-haste",
+     "amount": 10,
+     "duration": 2400
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Level: 61 (lose 5% per level)"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Spell: Exclude Complete Heal"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Casting Time: 3s"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Exclude Current HP Percent"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Exclude Combat Skills"
+    }
+   ],
+   "description": "Bestows your target with a divine blessing, allowing them to cast spells faster for 40 minutes. This blessing works on spells up to level 61."
+  }
+ }
+]

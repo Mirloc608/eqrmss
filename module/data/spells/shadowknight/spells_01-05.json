@@ -96,4 +96,27 @@
     "description": "Inflicts a minor disease on the target, dealing small initial and periodic damage."
   }
 }
+,
+  {
+    "_id": "shk-invisibility-versus-undead-4-r1",
+    "name": "Invisibility Versus Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 4,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 4,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "invis-undead"
+        }
+      ],
+      "description": "Veils the target from the sight of undead creatures."
+    }
+  }
 ]

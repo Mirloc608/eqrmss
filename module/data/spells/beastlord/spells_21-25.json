@@ -1,0 +1,118 @@
+[
+  {
+    "_id": "bst-spirit-of-keshuval-21-r1",
+    "name": "Spirit of Keshuval",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 21,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s05-l021-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-endure-disease-22-r1",
+    "name": "Endure Disease",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 22,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away disease for 27 minutes."
+    }
+  },
+  {
+    "_id": "bst-shrink-23-r1",
+    "name": "Shrink",
+    "type": "spell",
+    "img": "icons/magic/arcane/compass.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 23,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "shrink",
+          "amount": 34
+        }
+      ],
+      "description": "This ability, when activated, shrinks a targeted group member's height by 34%, allowing them greater mobility in tight quarters."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-wolf-24-r1",
+    "name": "Spirit of Wolf",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 24,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 55,
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your target with the spirit of the wolf, increasing their movement speed for 36 minutes."
+    }
+  },
+  {
+    "_id": "bst-enduring-breath-25-r1",
+    "name": "Enduring Breath",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 25,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "enduring-breath",
+          "duration": 1620
+        }
+      ],
+      "description": "Magically fills your lungs with air, removing your need to breathe for 27 minutes. Consumes a handful of fish scales to cast."
+    }
+  }
+]

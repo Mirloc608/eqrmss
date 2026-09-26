@@ -1,0 +1,569 @@
+[
+  {
+    "_id": "nec-cavorting-bones-1-r1",
+    "name": "Cavorting Bones",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 1,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "cavorting-bones"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-coldlight-1-r1",
+    "name": "Coldlight",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 1,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Summoned: Coldlight",
+          "amount": 1
+        }
+      ],
+      "description": "Conjures a magical coldstone that provides light in the immediate area."
+    }
+  },
+  {
+    "_id": "nec-disease-cloud-1-r1",
+    "name": "Disease Cloud",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 1,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 1,
+          "duration": 360
+        },
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 8,
+          "resist": "disease"
+        }
+      ],
+      "description": "Conjures a cloud of disease, causing 5 damage initially and 1 damage every 6 seconds for 6 minutes."
+    }
+  },
+  {
+    "_id": "nec-invisibility-versus-undead-1-r1",
+    "name": "Invisibility Versus Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 1,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "invisibility",
+          "vs": "undead",
+          "duration": 1620
+        }
+      ],
+      "description": "Cloaks your target in a light aura, rendering them invisible to most undead creatures for up to 27 minutes."
+    }
+  },
+  {
+    "_id": "nec-lifetap-1-r1",
+    "name": "Lifetap",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 1,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 8,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 7,
+          "max": 10,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 4 and 6 hit points."
+    }
+  },
+  {
+    "_id": "nec-locate-corpse-1-r1",
+    "name": "Locate Corpse",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 1,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "locate-corpse"
+        }
+      ],
+      "description": "Senses the recently deceased, pointing you in the direction of your target's nearest corpse. If no target is selected it will point you in the direction of the nearest corpse."
+    }
+  },
+  {
+    "_id": "nec-minor-shielding-1-r1",
+    "name": "Minor Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 1,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.5,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 10,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 1,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points and armor class."
+    }
+  },
+  {
+    "_id": "nec-reclaim-energy-1-r1",
+    "name": "Reclaim Energy",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 1,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reclaim-pet-mana"
+        }
+      ],
+      "description": "Reclaims the energy needed to maintain your pet, causing the pet to dissipate and restore 75% of the mana cost spent to summon it."
+    }
+  },
+  {
+    "_id": "nec-sense-the-dead-1-r1",
+    "name": "Sense the Dead",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 1,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "sense-undead"
+        }
+      ],
+      "description": "Provides you with a mystical undead awareness, pointing you towards the nearest undead creature."
+    }
+  },
+  {
+    "_id": "nec-siphon-strength-1-r1",
+    "name": "Siphon Strength",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 1,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -10,
+          "duration": 360,
+          "resist": "magic"
+        }
+      ],
+      "description": "Tears strength from your target and infuses your muscles for 6 minutes."
+    }
+  },
+  {
+    "_id": "nec-fear-2-r1",
+    "name": "Fear",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 2,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52,
+          "duration": 18,
+          "resist": "magic"
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  },
+  {
+    "_id": "nec-numb-the-dead-2-r1",
+    "name": "Numb the Dead",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 2,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 15,
+          "duration": 120
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 25,
+          "duration": 120
+        },
+        {
+          "type": "utility",
+          "effect": "pacify",
+          "duration": 120
+        }
+      ],
+      "description": "Numbs the awareness of the undead, making them less likely to attack. This spell works on creatures up to level 30."
+    }
+  },
+  {
+    "_id": "nec-true-north-2-r1",
+    "name": "True North",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 2,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "true-north"
+        }
+      ],
+      "description": "Provides a magical sense of direction, changing your heading to point directly North."
+    }
+  },
+  {
+    "_id": "nec-endure-cold-3-r1",
+    "name": "Endure Cold",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 3,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away cold for 27 minutes."
+    }
+  },
+  {
+    "_id": "nec-grim-aura-3-r1",
+    "name": "Grim Aura",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 3,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 10,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds you in a dark aura, increasing your attack rating for 27 minutes."
+    }
+  },
+  {
+    "_id": "nec-lifespike-3-r1",
+    "name": "Lifespike",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 3,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 13,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 10,
+          "max": 17,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 7 and 12 hit points."
+    }
+  },
+  {
+    "_id": "nec-clinging-darkness-4-r1",
+    "name": "Clinging Darkness",
+    "type": "spell",
+    "img": "icons/magic/death/shadow-snare.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 4,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 4,
+          "max": 4,
+          "duration": 48,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "movement",
+          "amount": -30,
+          "duration": 48,
+          "resist": "magic"
+        }
+      ],
+      "description": "Summons a clinging darkness that binds your target's feet, decreasing their movement rate, and does 8 damage every 6 seconds for 48 seconds."
+    }
+  },
+  {
+    "_id": "nec-gate-4-r1",
+    "name": "Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-self.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 4,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "gate",
+          "amount": 98
+        }
+      ],
+      "description": "Opens a magical portal that returns you to your bind point."
+    }
+  },
+  {
+    "_id": "nec-leering-corpse-4-r1",
+    "name": "Leering Corpse",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 4,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "leering-corpse"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-poison-bolt-4-r1",
+    "name": "Poison Bolt",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 4,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 18,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 1,
+          "duration": 24
+        },
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 21,
+          "resist": "poison"
+        },
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 8,
+          "max": 8,
+          "duration": 24,
+          "resist": "poison"
+        }
+      ],
+      "description": "Fills your target's blood with poison, causing 6 damage initially and 10 damage every six seconds for 24 seconds."
+    }
+  },
+  {
+    "_id": "nec-deadeye-5-r1",
+    "name": "Deadeye",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 5,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 1620
+        },
+        {
+          "type": "utility",
+          "effect": "infravision",
+          "duration": 1620
+        }
+      ],
+      "description": "Allows your eyes the vision of the dead, providing night vision and the ability to see invisible creatures for 27 minutes."
+    }
+  },
+  {
+    "_id": "nec-shadow-step-5-r1",
+    "name": "Shadow Step",
+    "type": "spell",
+    "img": "icons/magic/arcane/shadowstep.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 5,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "shadowstep"
+        }
+      ],
+      "description": "Causes you to momentarily step into the realm of shadow, reentering reality a short distance away."
+    }
+  }
+]

@@ -1,0 +1,1036 @@
+[
+  {
+    "_id": "enc-ethereal-rune-66-r1",
+    "name": "Ethereal Rune",
+    "type": "spell",
+    "img": "icons/magic/symbols/rune-stone-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 66,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 478,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 1863,
+          "duration": 2160
+        }
+      ],
+      "description": "Covers you in a shimmer of runes that absorb damage."
+    }
+  },
+  {
+    "_id": "enc-mystic-shield-66-r1",
+    "name": "Mystic Shield",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 66,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 435,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 390,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 10,
+          "max": 14,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 40,
+          "duration": 5400
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "enc-saliks-animation-66-r1",
+    "name": "Salik's Animation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 66,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 334,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "saliks-animation-pet"
+        }
+      ],
+      "description": "Animates a set of weapons to attack your enemies. Consumes a tiny dagger when cast."
+    }
+  },
+  {
+    "_id": "enc-suppression-field-66-r1",
+    "name": "Suppression Field",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 66,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 143,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard"
+        }
+      ],
+      "description": "Cloaks you in a mystic veil, rendering you invisible to many creatures for 10 minutes."
+    }
+  },
+  {
+    "_id": "enc-synapsis-spasm-66-r1",
+    "name": "Synapsis Spasm",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 66,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 215,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "dex",
+          "amount": -100,
+          "duration": 450,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -100,
+          "duration": 450,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -100,
+          "duration": 450,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -11,
+          "max": -8,
+          "duration": 450,
+          "resist": "magic"
+        }
+      ],
+      "description": "Saps your target's power, decreasing their agility, dexterity, strength, and armor class for 7.5 minutes."
+    }
+  },
+  {
+    "_id": "enc-anxiety-attack-67-r1",
+    "name": "Anxiety Attack",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 67,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 337,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 65,
+          "duration": 42,
+          "resist": "magic"
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  },
+  {
+    "_id": "enc-felicity-67-r1",
+    "name": "Felicity",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 67,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 327,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 70,
+          "duration": 54,
+          "resist": "magic",
+          "resistMod": -10
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 70
+        }
+      ],
+      "description": "Causes your opponent to fall into an enchanted sleep for up to 54 seconds. This spell works on creatures up to level 70."
+    }
+  },
+  {
+    "_id": "enc-placate-67-r1",
+    "name": "Placate",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 67,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 437,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 10
+        }
+      ],
+      "description": "Pacifies your target, lowering its aggressiveness for 42 seconds. Affects creatures up to level 70."
+    }
+  },
+  {
+    "_id": "enc-rune-of-salik-67-r1",
+    "name": "Rune of Salik",
+    "type": "spell",
+    "img": "icons/magic/symbols/rune-stone-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 67,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 481,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 1073,
+          "duration": 6600
+        }
+      ],
+      "description": "Covers your target in a shimmer of runes that absorb damage. Consumes a peridot when cast."
+    }
+  },
+  {
+    "_id": "enc-speed-of-salik-67-r1",
+    "name": "Speed of Salik",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 67,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 420,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "agi",
+          "amount": 60,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 50,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 53,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 73,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "crit-chance",
+          "amount": 20,
+          "duration": 2520
+        }
+      ],
+      "description": "Fills your target with energy, increasing their attack speed, agility, dexterity, and attack rating."
+    }
+  },
+  {
+    "_id": "enc-circle-of-dreams-68-r1",
+    "name": "Circle of Dreams",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 68,
+      "school": "enchantment",
+      "target": "area",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 362,
+      "radius": 30,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 70,
+          "duration": 6,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes up to 30 nearby creatures to fall into an enchanted sleep for up to 6 seconds. This spell works on creatures up to level 70."
+    }
+  },
+  {
+    "_id": "enc-clairvoyance-68-r1",
+    "name": "Clairvoyance",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 68,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 386,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana",
+          "amount": 400,
+          "duration": 4800
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 20,
+          "max": 20,
+          "duration": 4800
+        },
+        {
+          "type": "buff",
+          "stat": "int",
+          "amount": 32,
+          "duration": 4800
+        },
+        {
+          "type": "buff",
+          "stat": "wis",
+          "amount": 32,
+          "duration": 4800
+        }
+      ],
+      "description": "Calms your target's thoughts, allowing them to regenerate mana more quickly, as well as increasing their wisdom, intelligence, and mana pool."
+    }
+  },
+  {
+    "_id": "enc-compel-68-r1",
+    "name": "Compel",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 68,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 772,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 67,
+          "duration": 450,
+          "resist": "magic"
+        }
+      ],
+      "description": "Dominates your target's mind, allowing you to control them for a short time. This spell works on creatures up to level 67."
+    }
+  },
+  {
+    "_id": "enc-echoing-madness-68-r1",
+    "name": "Echoing Madness",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 68,
+      "school": "enchantment",
+      "target": "single",
+      "range": 30,
+      "castTime": 3.0,
+      "manaCost": 675,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 73,
+          "duration": 30,
+          "resist": "magic"
+        }
+      ],
+      "description": "Seeds an echo of madness in your target, causing them to cease their actions for up to 30 seconds. The madness will frequently echo in the ears of nearby creatures as well."
+    }
+  },
+  {
+    "_id": "enc-psychosis-68-r1",
+    "name": "Psychosis",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 68,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 362,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1460
+        }
+      ],
+      "description": "Strikes your target with a chaotic burst of mental energy, causing 1460 damage."
+    }
+  },
+  {
+    "_id": "enc-wall-of-alendar-68-r1",
+    "name": "Wall of Alendar",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 68,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 376,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "spell-absorb",
+          "amount": 20,
+          "total": 2007,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Wall of Alendar on your target, absorbing a portion of incoming spell damage. This spell absorbs a set amount of damage before dissipating."
+    }
+  },
+  {
+    "_id": "enc-arcane-noose-69-r1",
+    "name": "Arcane Noose",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 69,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 540,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 439
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 397,
+          "max": 397,
+          "duration": 48
+        }
+      ],
+      "description": "Constricts your target's throat, causing 439 damage initially and between 196 and 397 damage every six seconds for 48 seconds."
+    }
+  },
+  {
+    "_id": "enc-color-snap-69-r1",
+    "name": "Color Snap",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 69,
+      "school": "divination",
+      "target": "area",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 418,
+      "radius": 30,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 70,
+          "duration": 6.0,
+          "resist": "magic"
+        }
+      ],
+      "description": "Creates a wave of intense color around you that assaults your opponent's senses, briefly stunning up to 30 nearby creatures. This spell works on creatures up to level 70."
+    }
+  },
+  {
+    "_id": "enc-colored-chaos-69-r1",
+    "name": "Colored Chaos",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 69,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 406,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1530
+        }
+      ],
+      "description": "Coalesces mana into a spectrum of destructive light, causing 1530 damage to your target. The light will attempt to breach the weakest of your target's defenses and is therefore much harder to resist."
+    }
+  },
+  {
+    "_id": "enc-desolate-deeds-69-r1",
+    "name": "Desolate Deeds",
+    "type": "spell",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 69,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 287,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "slow",
+          "amount": 72,
+          "duration": 90,
+          "resist": "magic",
+          "resistMod": -30
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 24
+        }
+      ],
+      "description": "Constricts your target's muscles, causing their attack speed to slow for 90 seconds."
+    }
+  },
+  {
+    "_id": "enc-euphoria-69-r1",
+    "name": "Euphoria",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 69,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 359,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 73,
+          "duration": 54,
+          "resist": "magic",
+          "resistMod": -10
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 70
+        }
+      ],
+      "description": "Causes your opponent to fall into an enchanted sleep for up to 54 seconds. This spell works on creatures up to level 73."
+    }
+  },
+  {
+    "_id": "enc-focus-mass-elaborate-spellcasters-empowering-essence-69-r1",
+    "name": "Focus Mass Elaborate Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 69,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1913,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "elaborate-spellcasters-empowering-essence",
+          "count": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-mayhem-69-r1",
+    "name": "Mayhem",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 69,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 298,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 528,
+          "duration": 450
+        }
+      ],
+      "description": "Fills your arms with energy and hardens your skin, absorbing damage."
+    }
+  },
+  {
+    "_id": "enc-rune-of-rikkukin-69-r1",
+    "name": "Rune of Rikkukin",
+    "type": "spell",
+    "img": "icons/magic/symbols/rune-stone-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 69,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 1721,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 1434,
+          "duration": 6600
+        }
+      ],
+      "description": "Cloaks your group in the protection of scale, which will absorb 1434 incoming damage. Consumes a pair of peridots when cast."
+    }
+  },
+  {
+    "_id": "enc-wake-of-felicity-69-r1",
+    "name": "Wake of Felicity",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 69,
+      "school": "enchantment",
+      "target": "area",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 956,
+      "radius": 25,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 70,
+          "duration": 54,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes up to 30 creatures around your target to fall into an enchanted sleep for up to 54 seconds. The spell works on creatures up to level 70."
+    }
+  },
+  {
+    "_id": "enc-ancient-neurosis-70-r1",
+    "name": "Ancient: Neurosis",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 390,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1600
+        }
+      ],
+      "description": "Commands the madness of chaos to strike your target for 1600 damage."
+    }
+  },
+  {
+    "_id": "enc-ancient-voice-of-muram-70-r1",
+    "name": "Ancient: Voice of Muram",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 1077,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 70,
+          "duration": 48,
+          "resist": "magic",
+          "resistMod": -1000
+        }
+      ],
+      "description": "Dominates your target's mind, allowing you to control them for a short time. This spell works on creatures up to level 70 ."
+    }
+  },
+  {
+    "_id": "enc-circle-of-alendar-70-r1",
+    "name": "Circle of Alendar",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 382,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "spell-absorb",
+          "amount": 20,
+          "total": 2037,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the circle of Alendar on your group, absorbing a portion of incoming spell damage. This spell absorbs a set amount of damage before dissipating."
+    }
+  },
+  {
+    "_id": "enc-focus-ornate-spellcasters-empowering-essence-70-r1",
+    "name": "Focus Ornate Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 588,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "ornate-spellcasters-empowering-essence",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-hastening-of-salik-70-r1",
+    "name": "Hastening of Salik",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "enchantment",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 1234,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "agi",
+          "amount": 60,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 50,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 53,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 69,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "crit-chance",
+          "amount": 20,
+          "duration": 2520
+        }
+      ],
+      "description": "Fills your group with energy, increasing their attack speed, agility, dexterity, attack rating, and chance to make critical hits."
+    }
+  },
+  {
+    "_id": "enc-illusionists-aura-70-r1",
+    "name": "Illusionist's Aura",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 490,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "aura-illusionists-aura-effect"
+        }
+      ],
+      "description": "Increases your companions' mana regeneration, as long as they stay inside the area of the aura."
+    }
+  },
+  {
+    "_id": "enc-mana-flare-70-r1",
+    "name": "Mana Flare",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 685,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "cast-mana-flare-strike-on-spell-use"
+        }
+      ],
+      "description": "Places an aura of mana upon your target. The mana will entwine with the energy of a damaging spell, allowing your target to inflict additional damage via a mana flare strike."
+    }
+  },
+  {
+    "_id": "enc-mind-shatter-70-r1",
+    "name": "Mind Shatter",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 255,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "mana",
+          "min": 49,
+          "max": 49,
+          "duration": 30,
+          "resist": "magic",
+          "resistMod": -30
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 426,
+          "max": 426,
+          "duration": 30
+        }
+      ],
+      "description": "Strangles your target's brain, causing them 426 damage every 6 seconds as well as draining their mana. The mana drained will help restore your own."
+    }
+  },
+  {
+    "_id": "enc-true-name-70-r1",
+    "name": "True Name",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 891,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 69,
+          "duration": 450,
+          "resist": "magic"
+        }
+      ],
+      "description": "Dominates your target's mind, allowing you to control them for a short time. This spell works on creatures up to level 69."
+    }
+  },
+  {
+    "_id": "enc-voice-of-clairvoyance-70-r1",
+    "name": "Voice of Clairvoyance",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 1273,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana",
+          "amount": 400,
+          "duration": 4800
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 21,
+          "max": 21,
+          "duration": 4800
+        },
+        {
+          "type": "buff",
+          "stat": "int",
+          "amount": 32,
+          "duration": 4800
+        },
+        {
+          "type": "buff",
+          "stat": "wis",
+          "amount": 32,
+          "duration": 4800
+        }
+      ],
+      "description": "Calms your group's thoughts, allowing them to regenerate mana more quickly, as well as increasing their wisdom, intelligence, and mana pool."
+    }
+  },
+  {
+    "_id": "enc-ward-of-bedazzlement-70-r1",
+    "name": "Ward of Bedazzlement",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 70,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 490,
+      "effects": [
+        {
+          "type": "proc",
+          "name": "bedazzlement-effect",
+          "rateMod": 400,
+          "duration": 600
+        },
+        {
+          "type": "utility",
+          "effect": "inhibit-damage-shield"
+        }
+      ],
+      "description": "Adds a chance for creatures that strike you to be mesmerized for a brief period."
+    }
+  }
+]

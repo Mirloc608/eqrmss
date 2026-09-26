@@ -1,0 +1,264 @@
+[
+  {
+    "_id": "bst-spirit-of-kashek-46-r1",
+    "name": "Spirit of Kashek",
+    "type": "spell",
+    "img": "icons/magic/nature/cat-spirit-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 46,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s10-l046-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-vermin-46-r1",
+    "name": "Spirit of Vermin",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 46,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "name": "spirit-of-vermin-strike",
+          "chance": 150
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 75,
+          "duration": 2880
+        }
+      ],
+      "description": "Fills your warder with the power of a great spirit, increasing their dexterity by 75 and giving them a chance to perform Spirit of Vermin Strike, a [Item 5] attack."
+    }
+  },
+  {
+    "_id": "bst-frenzy-47-r1",
+    "name": "Frenzy",
+    "type": "spell",
+    "img": "icons/magic/defense/armor-scale-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 47,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 3,
+          "duration": 1230
+        },
+        {
+          "type": "buff",
+          "stat": "agi",
+          "amount": 25,
+          "duration": 1230
+        },
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 28,
+          "duration": 1230
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 25,
+          "duration": 1230
+        }
+      ],
+      "description": "Sends you into a frenzy, increasing your strength, dexterity, and armor class for up to 20.5 minutes."
+    }
+  },
+  {
+    "_id": "bst-frost-shard-47-r1",
+    "name": "Frost Shard",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 47,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 119,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 357,
+          "resist": "cold"
+        }
+      ],
+      "description": "Strikes your target with a frost shard, causing between 281 and 281 damage."
+    }
+  },
+  {
+    "_id": "bst-protect-48-r1",
+    "name": "Protect",
+    "type": "spell",
+    "img": "icons/magic/defense/armor-scale-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 48,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 2160
+        }
+      ],
+      "description": "Places a spiritual protection on your target, increasing their armor class for 36 minutes."
+    }
+  },
+  {
+    "_id": "bst-spirit-salve-48-r1",
+    "name": "Spirit Salve",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 48,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 181,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 293
+        }
+      ],
+      "description": "Mends your target's wounds, healing between 326 and 456 hit points."
+    }
+  },
+  {
+    "_id": "bst-vigor-of-zehkes-49-r1",
+    "name": "Vigor of Zehkes",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 49,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.75,
+      "manaCost": 206,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 311
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 10
+        }
+      ],
+      "description": "Restores your warder's health, healing between 431 and 671 hit points, as well as curing them of diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "bst-ward-of-calliav-49-r1",
+    "name": "Ward of Calliav",
+    "type": "spell",
+    "img": "icons/magic/light/sphere-glow.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 49,
+      "school": "abjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 4,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "rune",
+          "amount": 1,
+          "maxPerHit": 11747,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Ward of Calliav on your pet, absorbing up to 11747 damage from the next 1 melee strikes or direct damage spells that hit it."
+    }
+  },
+  {
+    "_id": "bst-shas-lethargy-50-r1",
+    "name": "Sha's Lethargy",
+    "type": "spell",
+    "img": "icons/magic/debuff/blood-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 50,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 45,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "slow",
+          "amount": 30,
+          "resist": "magic",
+          "duration": 210
+        },
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 12,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes your target to fall into a lethargic state, slowing their attack speed for 3.5 minutes."
+    }
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "_id": "bst-annul-magic-61-r1",
+    "name": "Annul Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 61,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4,
+      "manaCost": 293,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 9
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 9
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "bst-counteract-poison-61-r1",
+    "name": "Counteract Poison",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4,
+      "manaCost": 195,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 8
+        }
+      ],
+      "description": "Removes toxin from your target's system, curing them of moderate poisons."
+    }
+  },
+  {
+    "_id": "bst-growl-of-the-leopard-61-r1",
+    "name": "Growl of the Leopard",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 61,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 209,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hit-damage",
+          "amount": 15,
+          "duration": 60
+        },
+        {
+          "type": "heal",
+          "amount": 33,
+          "duration": 60
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 850,
+          "duration": 60
+        }
+      ],
+      "description": "Infuses you and your pet with the power of a leopard, increasing the damage you do by 15%, healing 80 health every six seconds and increasing your maximum hit points by 850 for up to 60 seconds."
+    }
+  },
+  {
+    "_id": "bst-growl-of-the-leopard-recourse-61-r1",
+    "name": "Growl of the Leopard (Recourse)",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 61,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hit-damage",
+          "amount": 15,
+          "duration": 60
+        },
+        {
+          "type": "heal",
+          "amount": 33,
+          "duration": 60
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 850,
+          "duration": 60
+        }
+      ],
+      "description": "Increases your hit damage by 15; restores 33 health to you over time; increases your maximum HP by 850."
+    }
+  },
+  {
+    "_id": "bst-healing-of-sorsha-61-r1",
+    "name": "Healing of Sorsha",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 61,
+      "school": "alteration",
+      "target": "pet",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 207,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 857
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 24
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 24
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 24
+        }
+      ],
+      "description": "Restores your warder's health, healing between 1530 and 2050 hit points, as well as curing them of diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "bst-infusion-of-spirit-61-r1",
+    "name": "Infusion of Spirit",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10,
+      "manaCost": 781,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 50,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 55,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "sta",
+          "amount": 45,
+          "duration": 4320
+        }
+      ],
+      "description": "Focuses your target's spiritual energy, granting increased stamina, strength, and dexterity for 72 minutes."
+    }
+  },
+  {
+    "_id": "bst-scorpion-venom-61-r1",
+    "name": "Scorpion Venom",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 61,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 0,
+      "manaCost": 2003,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 10,
+          "resist": "poison"
+        },
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 945,
+          "resist": "poison"
+        },
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 1265,
+          "max": 1265,
+          "duration": 42,
+          "resist": "poison"
+        }
+      ],
+      "description": "Fills your target's veins with deadly scorpion venom, causing 242 damage initially and between 192 and 324 damage every six seconds for 42 seconds."
+    }
+  },
+  {
+    "_id": "bst-talisman-of-shadoo-61-r1",
+    "name": "Talisman of Shadoo",
+    "type": "spell",
+    "img": "icons/magic/fire/shield-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 61,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 4.5,
+      "manaCost": 586,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-poison",
+          "amount": 45,
+          "duration": 2160
+        }
+      ],
+      "description": "Protects your group with the talisman of Shadoo, shielding them from poison for 36 minutes."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-arag-62-r1",
+    "name": "Spirit of Arag",
+    "type": "spell",
+    "img": "icons/magic/nature/totem-bear.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 62,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10,
+      "manaCost": 1095,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s13-l062-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-spiritual-vigor-62-r1",
+    "name": "Spiritual Vigor",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 62,
+      "school": "alteration",
+      "target": "group",
+      "range": 250,
+      "castTime": 5,
+      "manaCost": 684,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 40,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 225,
+          "duration": 4320
+        }
+      ],
+      "description": "Fills your group with spiritual brawn, increasing their hit points and attack rating for 72 minutes."
+    }
+  },
+  {
+    "_id": "bst-talisman-of-kragg-62-r1",
+    "name": "Talisman of Kragg",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 62,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 8,
+      "manaCost": 561,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 590,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 883
+        }
+      ],
+      "description": "Imbues your target with the talisman of Kragg, providing increased hit points for 72 minutes."
+    }
+  },
+  {
+    "_id": "bst-abolish-disease-63-r1",
+    "name": "Abolish Disease",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 63,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 157,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 36
+        }
+      ],
+      "description": "Destroys infection in your target's system, potentially curing many diseases."
+    }
+  },
+  {
+    "_id": "bst-arags-celerity-63-r1",
+    "name": "Arag's Celerity",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 63,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 706,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 115,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 85,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 75,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 16,
+          "max": 21,
+          "duration": 3600
+        }
+      ],
+      "description": "Fills your warder with the celerity of Arag, increasing their attack speed, strength, armor class, and attack rating."
+    }
+  },
+  {
+    "_id": "bst-celerity-63-r1",
+    "name": "Celerity",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 63,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 8,
+      "manaCost": 290,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 50,
+          "duration": 960
+        }
+      ],
+      "description": "Grants your target quickened movement, increasing their attack speed for 16 minutes."
+    }
+  },
+  {
+    "_id": "bst-frost-spear-63-r1",
+    "name": "Frost Spear",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 63,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 369,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 1035,
+          "resist": "cold"
+        }
+      ],
+      "description": "Strikes your target with a frost spear, causing between 660 and 660 damage."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-rellic-63-r1",
+    "name": "Spirit of Rellic",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 63,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 220,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "name": "spirit-of-rellic-strike",
+          "chance": 150
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 75,
+          "duration": 2880
+        }
+      ],
+      "description": "Fills your warder with the power of a great spirit, increasing their dexterity by 75 and giving them a chance to perform Spirit of Rellic Strike, a [Item 1] attack that can stun targets up to level 61."
+    }
+  },
+  {
+    "_id": "bst-talisman-of-jasinth-63-r1",
+    "name": "Talisman of Jasinth",
+    "type": "spell",
+    "img": "icons/magic/fire/shield-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 63,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 4.5,
+      "manaCost": 235,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 45,
+          "duration": 2160
+        }
+      ],
+      "description": "Protects your group with the talisman of Jasinth, shielding them from disease for 36 minutes."
+    }
+  },
+  {
+    "_id": "bst-protection-of-calliav-64-r1",
+    "name": "Protection of Calliav",
+    "type": "spell",
+    "img": "icons/magic/light/sphere-glow.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 64,
+      "school": "abjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 728,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "rune",
+          "amount": 3,
+          "maxPerHit": 14214,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Protection of Calliav on your pet, absorbing up to 14214 damage from the next 3 melee strikes or direct damage spells that hit it."
+    }
+  },
+  {
+    "_id": "bst-regrowth-64-r1",
+    "name": "Regrowth",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 64,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 7376,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 934,
+          "duration": 1230
+        }
+      ],
+      "description": "Hastens your target's natural healing, regenerating up to 38 hit points every 6 seconds for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-sorsha-64-r1",
+    "name": "Spirit of Sorsha",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 64,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10,
+      "manaCost": 583,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s13-l064-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-spiritual-dominion-64-r1",
+    "name": "Spiritual Dominion",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 64,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 5,
+      "manaCost": 19669,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 221,
+          "max": 221,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 221,
+          "duration": 4320
+        }
+      ],
+      "description": "Envelops your target in an aura of spiritual dominion, increasing their mana and hit point regeneration."
+    }
+  },
+  {
+    "_id": "bst-acumen-65-r1",
+    "name": "Acumen",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 65,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 2,
+      "manaCost": 101,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 3780
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 3780
+        }
+      ],
+      "description": "Grants your target a quickness of mind and body, allowing them improved night vision, the ability to see invisible creatures, and greatly increased stamina regeneration."
+    }
+  },
+  {
+    "_id": "bst-ancient-frozen-chaos-65-r1",
+    "name": "Ancient: Frozen Chaos",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 65,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 401,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 1125,
+          "resist": "cold"
+        }
+      ],
+      "description": "Strikes your target with chaotic ice, doing 836 damage."
+    }
+  },
+  {
+    "_id": "bst-ferocity-65-r1",
+    "name": "Ferocity",
+    "type": "spell",
+    "img": "icons/magic/light/sphere-glow.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 65,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 807,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "sta",
+          "amount": 40,
+          "duration": 390
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 150,
+          "duration": 390
+        },
+        {
+          "type": "buff",
+          "stat": "resist-all",
+          "amount": 65,
+          "duration": 390
+        }
+      ],
+      "description": "Consumes your target in a spirit of savagery, increasing their resistances, attack rating, and stamina."
+    }
+  },
+  {
+    "_id": "bst-plague-65-r1",
+    "name": "Plague",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 65,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 414,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 9,
+          "resist": "disease"
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 210,
+          "max": 210,
+          "duration": 78,
+          "resist": "disease"
+        },
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 194,
+          "resist": "disease"
+        }
+      ],
+      "description": "Sickens your target with a fever, causing 144 damage initially and between 97 and 156 damage every six seconds for 78 seconds."
+    }
+  },
+  {
+    "_id": "bst-shas-revenge-65-r1",
+    "name": "Sha's Revenge",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 65,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 202,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "slow",
+          "amount": 65,
+          "resist": "magic",
+          "duration": 210
+        },
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 16,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes your target to fall into a lethargic state, slowing their attack speed for 3.5 minutes."
+    }
+  },
+  {
+    "_id": "bst-trushars-frost-65-r1",
+    "name": "Trushar's Frost",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear-large.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 65,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 369,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 999,
+          "resist": "cold"
+        }
+      ],
+      "description": "Strikes your target with a rift of frost, causing 742 damage."
+    }
+  },
+  {
+    "_id": "bst-trushars-mending-65-r1",
+    "name": "Trushar's Mending",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 65,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 302,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 960
+        }
+      ],
+      "description": "Mends severe wounds, healing between 593 and 1048 hit points. If your target is an enemy, you will heal that enemy's current target instead."
+    }
+  },
+  {
+    "_id": "bst-turepta-blood-65-r1",
+    "name": "Turepta Blood",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-gas-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 65,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 0,
+      "manaCost": 744,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 10,
+          "resist": "poison"
+        },
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 497,
+          "resist": "poison"
+        },
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 575,
+          "max": 575,
+          "duration": 42,
+          "resist": "poison"
+        }
+      ],
+      "description": "Fills your target's vein with deadly turepta blood, causing 369 damage initially and between 287 and 427 damage every six seconds for 42 seconds."
+    }
+  }
+]
