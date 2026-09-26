@@ -7,6 +7,40 @@
   "disciplines": [
 
     {
+      "id": "throw-stone",
+      "name": "Throw Stone",
+      "level": 1,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 2,
+
+      "effects": [
+        {
+          "type": "STRIKE_DAMAGE",
+          "value": 1
+        }
+      ]
+    },
+
+    {
+      "id": "elbow-strike",
+      "name": "Elbow Strike",
+      "level": 5,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 3,
+
+      "effects": [
+        {
+          "type": "STRIKE_DAMAGE",
+          "value": 5
+        }
+      ]
+    },
+
+    {
       "id": "focused-will",
       "name": "Focused Will Discipline",
       "level": 10,
@@ -22,6 +56,27 @@
         },
         {
           "type": "MENTAL_RESISTANCE",
+          "value": 25
+        }
+      ]
+    },
+
+    {
+      "id": "provoke",
+      "name": "Provoke",
+      "level": 20,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 85
+        },
+        {
+          "type": "HATE_PER_TICK",
           "value": 25
         }
       ]
@@ -57,6 +112,27 @@
         {
           "type": "FEAR_IMMUNITY",
           "value": true
+        }
+      ]
+    },
+
+    {
+      "id": "bellow",
+      "name": "Bellow",
+      "level": 52,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 200
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 50
         }
       ]
     },
@@ -133,6 +209,27 @@
         {
           "type": "OB_BONUS",
           "value": -50
+        }
+      ]
+    },
+
+    {
+      "id": "berate",
+      "name": "Berate",
+      "level": 56,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 300
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 60
         }
       ]
     },
@@ -230,6 +327,1924 @@
         {
           "type": "OB_BONUS",
           "value": 20
+        }
+      ]
+    },
+
+    {
+      "id": "spirit-of-rage",
+      "name": "Spirit of Rage Discipline",
+      "level": 61,
+      "family": "offensive",
+
+      "durationRounds": 2,
+      "reuseRounds": 300,
+
+      "effects": [
+        {
+          "type": "HATE_GENERATION_BONUS",
+          "value": 50
+        }
+      ]
+    },
+
+    {
+      "id": "healing-will",
+      "name": "Healing Will Discipline",
+      "level": 63,
+      "family": "utility",
+
+      "durationRounds": 10,
+      "reuseRounds": 50,
+
+      "effects": [
+        {
+          "type": "REGENERATION",
+          "value": 100
+        }
+      ]
+    },
+
+    {
+      "id": "incite",
+      "name": "Incite",
+      "level": 63,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 400
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 70
+        }
+      ]
+    },
+
+    {
+      "id": "ancient-chaos-cry",
+      "name": "Ancient: Chaos Cry",
+      "level": 65,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 480
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 84
+        }
+      ]
+    },
+
+    {
+      "id": "bellow-of-the-mastruq",
+      "name": "Bellow of the Mastruq",
+      "level": 65,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 440
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 77
+        }
+      ]
+    },
+
+    {
+      "id": "stonewall",
+      "name": "Stonewall Discipline",
+      "level": 65,
+      "family": "stand",
+
+      "durationRounds": 30,
+      "reuseRounds": 105,
+
+      "effects": [
+        {
+          "type": "MELEE_MITIGATION",
+          "value": 45
+        },
+        {
+          "type": "MOVEMENT_PENALTY",
+          "value": 70
+        }
+      ]
+    },
+
+    {
+      "id": "aura-of-runes",
+      "name": "Aura of Runes Discipline",
+      "level": 66,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 48
+        }
+      ]
+    },
+
+    {
+      "id": "savage-onslaught",
+      "name": "Savage Onslaught Discipline",
+      "level": 68,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "CRITICAL_BONUS",
+          "value": 27
+        },
+        {
+          "type": "CRIPPLING_BLOW_BONUS",
+          "value": 10
+        },
+        {
+          "type": "CRITICAL_DAMAGE_BONUS",
+          "value": 100
+        }
+      ]
+    },
+
+    {
+      "id": "bazu-bellow",
+      "name": "Bazu Bellow",
+      "level": 69,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 800
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 200
+        }
+      ]
+    },
+
+    {
+      "id": "mock",
+      "name": "Mock",
+      "level": 70,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 1200
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 30
+        }
+      ]
+    },
+
+    {
+      "id": "shocking-defense",
+      "name": "Shocking Defense Discipline",
+      "level": 70,
+      "family": "counterattack",
+
+      "durationRounds": 10,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "STUN_PROC",
+          "rateMod": 150,
+          "stunRounds": 1,
+          "maxLevel": 72
+        }
+      ]
+    },
+
+    {
+      "id": "aura-of-draconic-runes",
+      "name": "Aura of Draconic Runes",
+      "level": 71,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 108
+        }
+      ]
+    },
+
+    {
+      "id": "final-stand",
+      "name": "Final Stand Discipline",
+      "level": 72,
+      "family": "stand",
+
+      "durationRounds": 30,
+      "reuseRounds": 105,
+
+      "effects": [
+        {
+          "type": "MELEE_MITIGATION",
+          "value": 45
+        }
+      ]
+    },
+
+    {
+      "id": "second-wind",
+      "name": "Second Wind",
+      "level": 72,
+      "family": "utility",
+
+      "durationRounds": 20,
+      "reuseRounds": 360,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 144
+        }
+      ]
+    },
+
+    {
+      "id": "throat-jab",
+      "name": "Throat Jab",
+      "level": 73,
+      "family": "offensive",
+
+      "durationRounds": 2,
+      "reuseRounds": 3,
+
+      "effects": [
+        {
+          "type": "ENEMY_SPELL_HASTE_REDUCTION",
+          "value": 20
+        }
+      ]
+    },
+
+    {
+      "id": "brutal-onslaught",
+      "name": "Brutal Onslaught Discipline",
+      "level": 74,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "CRITICAL_BONUS",
+          "value": 27
+        },
+        {
+          "type": "CRIPPLING_BLOW_BONUS",
+          "value": 10
+        },
+        {
+          "type": "CRITICAL_DAMAGE_BONUS",
+          "value": 140
+        }
+      ]
+    },
+
+    {
+      "id": "scowl",
+      "name": "Scowl",
+      "level": 75,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 1440
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 72
+        }
+      ]
+    },
+
+    {
+      "id": "armor-of-draconic-runes",
+      "name": "Armor of Draconic Runes",
+      "level": 76,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 132
+        }
+      ]
+    },
+
+    {
+      "id": "third-wind",
+      "name": "Third Wind",
+      "level": 77,
+      "family": "utility",
+
+      "durationRounds": 20,
+      "reuseRounds": 360,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 161
+        }
+      ]
+    },
+
+    {
+      "id": "sneer",
+      "name": "Sneer",
+      "level": 80,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 1605
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 83
+        }
+      ]
+    },
+
+    {
+      "id": "armor-of-timeworn-runes",
+      "name": "Armor of Timeworn Runes",
+      "level": 81,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 172
+        }
+      ]
+    },
+
+    {
+      "id": "bazu-bluster",
+      "name": "Bazu Bluster",
+      "level": 81,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 1274
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 319
+        }
+      ]
+    },
+
+    {
+      "id": "fourth-wind",
+      "name": "Fourth Wind",
+      "level": 82,
+      "family": "utility",
+
+      "durationRounds": 20,
+      "reuseRounds": 360,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 196
+        }
+      ]
+    },
+
+    {
+      "id": "jeer",
+      "name": "Jeer",
+      "level": 85,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 1958
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 107
+        }
+      ]
+    },
+
+    {
+      "id": "armor-of-phantasmic-runes",
+      "name": "Armor of Phantasmic Runes",
+      "level": 86,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 273
+        }
+      ]
+    },
+
+    {
+      "id": "bazu-roar",
+      "name": "Bazu Roar",
+      "level": 86,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 2098
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 364
+        }
+      ]
+    },
+
+    {
+      "id": "respite",
+      "name": "Respite",
+      "level": 86,
+      "family": "utility",
+
+      "durationRounds": 9,
+      "reuseRounds": 15,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 845
+        },
+        {
+          "type": "ENDURANCE_CAP",
+          "percent": 21
+        }
+      ]
+    },
+
+    {
+      "id": "fifth-wind",
+      "name": "Fifth Wind",
+      "level": 87,
+      "family": "utility",
+
+      "durationRounds": 20,
+      "reuseRounds": 360,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 268
+        }
+      ]
+    },
+
+    {
+      "id": "flash-of-anger",
+      "name": "Flash of Anger",
+      "level": 87,
+      "family": "defensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 40,
+
+      "effects": [
+        {
+          "type": "PARRY_BONUS",
+          "value": 200
+        }
+      ]
+    },
+
+    {
+      "id": "weapon-affiliation",
+      "name": "Weapon Affiliation",
+      "level": 87,
+      "family": "offensive",
+
+      "durationRounds": 3,
+      "reuseRounds": 300,
+
+      "effects": [
+        {
+          "type": "PROC_RATE_BONUS",
+          "value": 230
+        }
+      ]
+    },
+
+    {
+      "id": "rallying-roar",
+      "name": "Rallying Roar",
+      "level": 88,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 10,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 1430
+        },
+        {
+          "type": "ENEMY_ACCURACY_REDUCTION",
+          "value": 286
+        }
+      ]
+    },
+
+    {
+      "id": "scoff",
+      "name": "Scoff",
+      "level": 90,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 1314
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 363
+        }
+      ]
+    },
+
+    {
+      "id": "armor-of-mystical-runes",
+      "name": "Armor of Mystical Runes",
+      "level": 91,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 410
+        }
+      ]
+    },
+
+    {
+      "id": "grendlaen-roar",
+      "name": "Grendlaen Roar",
+      "level": 91,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 3245
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 496
+        }
+      ]
+    },
+
+    {
+      "id": "reprieve",
+      "name": "Reprieve",
+      "level": 91,
+      "family": "utility",
+
+      "durationRounds": 9,
+      "reuseRounds": 15,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 1274
+        },
+        {
+          "type": "ENDURANCE_CAP",
+          "percent": 21
+        }
+      ]
+    },
+
+    {
+      "id": "sixth-wind",
+      "name": "Sixth Wind",
+      "level": 92,
+      "family": "utility",
+
+      "durationRounds": 20,
+      "reuseRounds": 360,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 410
+        }
+      ]
+    },
+
+    {
+      "id": "undivided-attention",
+      "name": "Undivided Attention",
+      "level": 92,
+      "family": "defensive",
+
+      "durationRounds": 3,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "AGGRO_LOCK",
+          "value": true
+        },
+        {
+          "type": "AC_BONUS",
+          "value": 147
+        },
+        {
+          "type": "HATE_GENERATION_BONUS",
+          "value": 55
+        }
+      ]
+    },
+
+    {
+      "id": "weapon-bond",
+      "name": "Weapon Bond",
+      "level": 92,
+      "family": "offensive",
+
+      "durationRounds": 3,
+      "reuseRounds": 300,
+
+      "effects": [
+        {
+          "type": "PROC_RATE_BONUS",
+          "value": 310
+        }
+      ]
+    },
+
+    {
+      "id": "inner-rejuvenation",
+      "name": "Inner Rejuvenation",
+      "level": 93,
+      "family": "utility",
+
+      "durationRounds": 1,
+      "reuseRounds": 250,
+
+      "effects": [
+        {
+          "type": "PERCENT_HEAL",
+          "percent": 35,
+          "maxPoints": 29000
+        }
+      ]
+    },
+
+    {
+      "id": "roar-of-challenge",
+      "name": "Roar of Challenge",
+      "level": 93,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 10,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 1946
+        },
+        {
+          "type": "ENEMY_ACCURACY_REDUCTION",
+          "value": 390
+        }
+      ]
+    },
+
+    {
+      "id": "barbed-tongue",
+      "name": "Barbed Tongue Discipline",
+      "level": 94,
+      "family": "offensive",
+
+      "durationRounds": 30,
+      "reuseRounds": 250,
+
+      "effects": [
+        {
+          "type": "TAUNT_STRIKE_PROC",
+          "trigger": "taunt",
+          "damage": 286
+        }
+      ]
+    },
+
+    {
+      "id": "scorn",
+      "name": "Scorn",
+      "level": 95,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 3651
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 617
+        }
+      ]
+    },
+
+    {
+      "id": "armor-of-stalwart-runes",
+      "name": "Armor of Stalwart Runes",
+      "level": 96,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 650
+        }
+      ]
+    },
+
+    {
+      "id": "krondals-roar",
+      "name": "Krondal's Roar",
+      "level": 96,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_PER_TICK",
+          "value": 3047
+        }
+      ]
+    },
+
+    {
+      "id": "rest",
+      "name": "Rest",
+      "level": 96,
+      "family": "utility",
+
+      "durationRounds": 9,
+      "reuseRounds": 15,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 1546
+        },
+        {
+          "type": "ENDURANCE_CAP",
+          "percent": 21
+        }
+      ]
+    },
+
+    {
+      "id": "offensive",
+      "name": "Offensive Discipline",
+      "level": 97,
+      "family": "offensive",
+
+      "durationRounds": 30,
+      "reuseRounds": 40,
+
+      "effects": [
+        {
+          "type": "DAMAGE_BONUS",
+          "value": 45
+        },
+        {
+          "type": "MIN_DAMAGE_BONUS",
+          "value": 160
+        },
+        {
+          "type": "FLAT_DAMAGE_BONUS",
+          "value": 287
+        }
+      ]
+    },
+
+    {
+      "id": "seventh-wind",
+      "name": "Seventh Wind",
+      "level": 97,
+      "family": "utility",
+
+      "durationRounds": 20,
+      "reuseRounds": 360,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 498
+        }
+      ]
+    },
+
+    {
+      "id": "unbroken-attention",
+      "name": "Unbroken Attention",
+      "level": 97,
+      "family": "defensive",
+
+      "durationRounds": 3,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "AGGRO_LOCK",
+          "value": true
+        },
+        {
+          "type": "AC_BONUS",
+          "value": 187
+        },
+        {
+          "type": "HATE_GENERATION_BONUS",
+          "value": 55
+        }
+      ]
+    },
+
+    {
+      "id": "weapon-covenant",
+      "name": "Weapon Covenant",
+      "level": 97,
+      "family": "offensive",
+
+      "durationRounds": 3,
+      "reuseRounds": 300,
+
+      "effects": [
+        {
+          "type": "PROC_RATE_BONUS",
+          "value": 376
+        }
+      ]
+    },
+
+    {
+      "id": "harassing-shout",
+      "name": "Harassing Shout",
+      "level": 98,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 20,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 9370
+        },
+        {
+          "type": "ENEMY_DODGE_REDUCTION",
+          "value": 25
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 1290
+        }
+      ]
+    },
+
+    {
+      "id": "last-stand",
+      "name": "Last Stand Discipline",
+      "level": 98,
+      "family": "stand",
+
+      "durationRounds": 30,
+      "reuseRounds": 105,
+
+      "effects": [
+        {
+          "type": "MELEE_MITIGATION",
+          "value": 45
+        },
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 100,
+          "absorbPct": 100,
+          "maxPoints": 787
+        }
+      ]
+    },
+
+    {
+      "id": "ridicule",
+      "name": "Ridicule",
+      "level": 98,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 8757
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 850
+        }
+      ]
+    },
+
+    {
+      "id": "tempestuous-defense",
+      "name": "Tempestuous Defense Discipline",
+      "level": 100,
+      "family": "counterattack",
+
+      "durationRounds": 10,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "STUN_PROC",
+          "rateMod": 200,
+          "stunRounds": 1,
+          "maxLevel": 103
+        }
+      ]
+    },
+
+    {
+      "id": "armor-of-darkened-runes",
+      "name": "Armor of Darkened Runes",
+      "level": 101,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 845
+        }
+      ]
+    },
+
+    {
+      "id": "breather",
+      "name": "Breather",
+      "level": 101,
+      "family": "utility",
+
+      "durationRounds": 7,
+      "reuseRounds": 15,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 3812
+        },
+        {
+          "type": "ENDURANCE_CAP",
+          "percent": 21
+        }
+      ]
+    },
+
+    {
+      "id": "cyclone-roar",
+      "name": "Cyclone Roar",
+      "level": 101,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_PER_TICK",
+          "value": 3527
+        }
+      ]
+    },
+
+    {
+      "id": "unflinching-attention",
+      "name": "Unflinching Attention",
+      "level": 102,
+      "family": "defensive",
+
+      "durationRounds": 3,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "AGGRO_LOCK",
+          "value": true
+        },
+        {
+          "type": "AC_BONUS",
+          "value": 216
+        },
+        {
+          "type": "HATE_GENERATION_BONUS",
+          "value": 55
+        }
+      ]
+    },
+
+    {
+      "id": "insult",
+      "name": "Insult",
+      "level": 103,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 10379
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 1008
+        }
+      ]
+    },
+
+    {
+      "id": "tormenting-shout",
+      "name": "Tormenting Shout",
+      "level": 103,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 20,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 11106
+        },
+        {
+          "type": "ENEMY_DODGE_REDUCTION",
+          "value": 27
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 1601
+        }
+      ]
+    },
+
+    {
+      "id": "armor-of-tenacious-runes",
+      "name": "Armor of Tenacious Runes",
+      "level": 106,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 2198
+        }
+      ]
+    },
+
+    {
+      "id": "hiatus",
+      "name": "Hiatus",
+      "level": 106,
+      "family": "utility",
+
+      "durationRounds": 8,
+      "reuseRounds": 60,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 8640
+        },
+        {
+          "type": "ENDURANCE_CAP",
+          "percent": 30,
+          "maxPoints": 92500
+        },
+        {
+          "type": "WEAPON_DELAY_PENALTY",
+          "value": 1000
+        }
+      ]
+    },
+
+    {
+      "id": "kluzens-roar",
+      "name": "Kluzen's Roar",
+      "level": 106,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_PER_TICK",
+          "value": 4277
+        }
+      ]
+    },
+
+    {
+      "id": "biting-tongue",
+      "name": "Biting Tongue Discipline",
+      "level": 107,
+      "family": "offensive",
+
+      "durationRounds": 30,
+      "reuseRounds": 250,
+
+      "effects": [
+        {
+          "type": "TAUNT_STRIKE_PROC",
+          "trigger": "taunt",
+          "damage": 552
+        }
+      ]
+    },
+
+    {
+      "id": "unyielding-attention",
+      "name": "Unyielding Attention",
+      "level": 107,
+      "family": "defensive",
+
+      "durationRounds": 3,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "AGGRO_LOCK",
+          "value": true
+        },
+        {
+          "type": "AC_BONUS",
+          "value": 286
+        },
+        {
+          "type": "HATE_GENERATION_BONUS",
+          "value": 55
+        }
+      ]
+    },
+
+    {
+      "id": "burning-shout",
+      "name": "Burning Shout",
+      "level": 108,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 20,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 14693
+        },
+        {
+          "type": "ENEMY_DODGE_REDUCTION",
+          "value": 29
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 4854
+        }
+      ]
+    },
+
+    {
+      "id": "culminating-stand",
+      "name": "Culminating Stand Discipline",
+      "level": 108,
+      "family": "stand",
+
+      "durationRounds": 30,
+      "reuseRounds": 105,
+
+      "effects": [
+        {
+          "type": "MELEE_MITIGATION",
+          "value": 45
+        },
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 100,
+          "absorbPct": 100,
+          "maxPoints": 2647
+        }
+      ]
+    },
+
+    {
+      "id": "slander",
+      "name": "Slander",
+      "level": 108,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 13732
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 2620
+        }
+      ]
+    },
+
+    {
+      "id": "stormstrike-defense",
+      "name": "Stormstrike Defense Discipline",
+      "level": 110,
+      "family": "counterattack",
+
+      "durationRounds": 10,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "STUN_PROC",
+          "rateMod": 200,
+          "stunRounds": 1,
+          "maxLevel": 113
+        }
+      ]
+    },
+
+    {
+      "id": "armor-of-relentless-runes",
+      "name": "Armor of Relentless Runes",
+      "level": 111,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 3029
+        }
+      ]
+    },
+
+    {
+      "id": "krageks-roar",
+      "name": "Kragek's Roar",
+      "level": 111,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_PER_TICK",
+          "value": 5895
+        }
+      ]
+    },
+
+    {
+      "id": "relax",
+      "name": "Relax",
+      "level": 111,
+      "family": "utility",
+
+      "durationRounds": 8,
+      "reuseRounds": 60,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 9621
+        },
+        {
+          "type": "ENDURANCE_CAP",
+          "percent": 30,
+          "maxPoints": 118000
+        },
+        {
+          "type": "WEAPON_DELAY_PENALTY",
+          "value": 1000
+        }
+      ]
+    },
+
+    {
+      "id": "unending-attention",
+      "name": "Unending Attention",
+      "level": 112,
+      "family": "defensive",
+
+      "durationRounds": 3,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "AGGRO_LOCK",
+          "value": true
+        },
+        {
+          "type": "AC_BONUS",
+          "value": 378
+        },
+        {
+          "type": "HATE_GENERATION_BONUS",
+          "value": 55
+        }
+      ]
+    },
+
+    {
+      "id": "aggravate",
+      "name": "Aggravate",
+      "level": 113,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 17456
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 3611
+        }
+      ]
+    },
+
+    {
+      "id": "oppressing-shout",
+      "name": "Oppressing Shout",
+      "level": 113,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 20,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 18678
+        },
+        {
+          "type": "ENEMY_DODGE_REDUCTION",
+          "value": 31
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 6690
+        }
+      ]
+    },
+
+    {
+      "id": "ultimate-stand",
+      "name": "Ultimate Stand Discipline",
+      "level": 113,
+      "family": "stand",
+
+      "durationRounds": 30,
+      "reuseRounds": 105,
+
+      "effects": [
+        {
+          "type": "MELEE_MITIGATION",
+          "value": 45
+        },
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 100,
+          "absorbPct": 100,
+          "maxPoints": 3648
+        }
+      ]
+    },
+
+    {
+      "id": "armor-of-akhevan-runes",
+      "name": "Armor of Akhevan Runes",
+      "level": 116,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 4214
+        }
+      ]
+    },
+
+    {
+      "id": "namdrows-roar",
+      "name": "Namdrows' Roar",
+      "level": 116,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_PER_TICK",
+          "value": 7475
+        }
+      ]
+    },
+
+    {
+      "id": "nights-calming",
+      "name": "Night's Calming",
+      "level": 116,
+      "family": "utility",
+
+      "durationRounds": 8,
+      "reuseRounds": 60,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 11137
+        },
+        {
+          "type": "ENDURANCE_CAP",
+          "percent": 30,
+          "maxPoints": 163000
+        },
+        {
+          "type": "WEAPON_DELAY_PENALTY",
+          "value": 1000
+        }
+      ]
+    },
+
+    {
+      "id": "brightfelds-onslaught",
+      "name": "Brightfeld's Onslaught Discipline",
+      "level": 117,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "CRITICAL_BONUS",
+          "value": 27
+        },
+        {
+          "type": "CRIPPLING_BLOW_BONUS",
+          "value": 10
+        },
+        {
+          "type": "CRITICAL_DAMAGE_BONUS",
+          "value": 160
+        }
+      ]
+    },
+
+    {
+      "id": "unrelenting-attention",
+      "name": "Unrelenting Attention",
+      "level": 117,
+      "family": "defensive",
+
+      "durationRounds": 3,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "AGGRO_LOCK",
+          "value": true
+        },
+        {
+          "type": "AC_BONUS",
+          "value": 459
+        },
+        {
+          "type": "HATE_GENERATION_BONUS",
+          "value": 55
+        }
+      ]
+    },
+
+    {
+      "id": "bristle",
+      "name": "Bristle",
+      "level": 118,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 21170
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 4579
+        }
+      ]
+    },
+
+    {
+      "id": "resolute-stand",
+      "name": "Resolute Stand",
+      "level": 118,
+      "family": "stand",
+
+      "durationRounds": 30,
+      "reuseRounds": 105,
+
+      "effects": [
+        {
+          "type": "MELEE_MITIGATION",
+          "value": 45
+        },
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 100,
+          "absorbPct": 100,
+          "maxPoints": 5076
+        }
+      ]
+    },
+
+    {
+      "id": "twilight-shout",
+      "name": "Twilight Shout",
+      "level": 118,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 20,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 22652
+        },
+        {
+          "type": "ENEMY_DODGE_REDUCTION",
+          "value": 33
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 8482
+        }
+      ]
+    },
+
+    {
+      "id": "levincrash-defense",
+      "name": "Levincrash Defense Discipline",
+      "level": 120,
+      "family": "counterattack",
+
+      "durationRounds": 10,
+      "reuseRounds": 150,
+
+      "effects": [
+        {
+          "type": "STUN_PROC",
+          "rateMod": 200,
+          "stunRounds": 1,
+          "maxLevel": 118
+        }
+      ]
+    },
+
+    {
+      "id": "armor-of-rallosian-runes",
+      "name": "Armor of Rallosian Runes",
+      "level": 121,
+      "family": "defensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 200,
+          "absorbPct": 100,
+          "maxPoints": 5111
+        }
+      ]
+    },
+
+    {
+      "id": "convalesce",
+      "name": "Convalesce",
+      "level": 121,
+      "family": "utility",
+
+      "durationRounds": 8,
+      "reuseRounds": 60,
+
+      "effects": [
+        {
+          "type": "ENDURANCE_REGENERATION",
+          "value": 12893
+        },
+        {
+          "type": "ENDURANCE_CAP",
+          "percent": 30,
+          "maxPoints": 270000
+        },
+        {
+          "type": "WEAPON_DELAY_PENALTY",
+          "value": 1000
+        }
+      ]
+    },
+
+    {
+      "id": "mortimus-roar",
+      "name": "Mortimus' Roar",
+      "level": 121,
+      "family": "offensive",
+
+      "durationRounds": 5,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_PER_TICK",
+          "value": 9065
+        }
+      ]
+    },
+
+    {
+      "id": "razor-tongue",
+      "name": "Razor Tongue Discipline",
+      "level": 122,
+      "family": "offensive",
+
+      "durationRounds": 30,
+      "reuseRounds": 250,
+
+      "effects": [
+        {
+          "type": "TAUNT_STRIKE_PROC",
+          "trigger": "taunt",
+          "damage": 3433
+        }
+      ]
+    },
+
+    {
+      "id": "unconditional-attention",
+      "name": "Unconditional Attention",
+      "level": 122,
+      "family": "defensive",
+
+      "durationRounds": 3,
+      "reuseRounds": 100,
+
+      "effects": [
+        {
+          "type": "AGGRO_LOCK",
+          "value": true
+        },
+        {
+          "type": "AC_BONUS",
+          "value": 556
+        },
+        {
+          "type": "HATE_GENERATION_BONUS",
+          "value": 55
+        }
+      ]
+    },
+
+    {
+      "id": "climactic-stand",
+      "name": "Climactic Stand",
+      "level": 123,
+      "family": "stand",
+
+      "durationRounds": 30,
+      "reuseRounds": 105,
+
+      "effects": [
+        {
+          "type": "MELEE_MITIGATION",
+          "value": 45
+        },
+        {
+          "type": "RUNE_PROC",
+          "rateMod": 100,
+          "absorbPct": 100,
+          "maxPoints": 6156
+        }
+      ]
+    },
+
+    {
+      "id": "distressing-shout",
+      "name": "Distressing Shout",
+      "level": 123,
+      "family": "offensive",
+
+      "durationRounds": 10,
+      "reuseRounds": 20,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 27471
+        },
+        {
+          "type": "ENEMY_DODGE_REDUCTION",
+          "value": 33
+        },
+        {
+          "type": "HATE_PER_TICK",
+          "value": 10286
+        }
+      ]
+    },
+
+    {
+      "id": "infuriate",
+      "name": "Infuriate",
+      "level": 123,
+      "family": "offensive",
+
+      "durationRounds": 1,
+      "reuseRounds": 5,
+
+      "effects": [
+        {
+          "type": "HATE_BONUS",
+          "value": 25674
+        },
+        {
+          "type": "SHIELDING",
+          "absorbPct": 50,
+          "maxPoints": 6310
         }
       ]
     }

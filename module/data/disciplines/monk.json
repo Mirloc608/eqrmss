@@ -4,6 +4,34 @@
   "name": "Monk",
   "type": "discipline-catalog",
   "disciplines": [
+   {
+     "id": "throw-stone",
+     "name": "Throw Stone",
+     "level": 1,
+     "family": "offensive",
+     "durationRounds": 1,
+     "reuseRounds": 2,
+     "effects": [
+       {
+         "type": "STRIKE_DAMAGE",
+         "value": 1
+       }
+     ]
+   },
+   {
+     "id": "elbow-strike",
+     "name": "Elbow Strike",
+     "level": 5,
+     "family": "offensive",
+     "durationRounds": 1,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "STRIKE_DAMAGE",
+         "value": 5
+       }
+     ]
+   },
     {
       "id": "focused-will",
       "name": "Focused Will Discipline",
@@ -33,6 +61,30 @@
      ]
    },
    {
+     "id": "phantom-zephyr",
+     "name": "Phantom Zephyr",
+     "level": 35,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "AGGRO_RADIUS_REDUCTION",
+         "value": 5,
+         "maxLevel": 50
+       },
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 10,
+         "maxLevel": 50
+       },
+       {
+         "type": "PACIFY",
+         "value": true
+       }
+     ]
+   },
+   {
      "id": "fearless",
      "name": "Fearless Discipline",
      "level": 40,
@@ -42,6 +94,30 @@
      "effects": [
        {
          "type": "FEAR_IMMUNITY",
+         "value": true
+       }
+     ]
+   },
+   {
+     "id": "phantom-wind",
+     "name": "Phantom Wind",
+     "level": 50,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "AGGRO_RADIUS_REDUCTION",
+         "value": 5,
+         "maxLevel": 58
+       },
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 10,
+         "maxLevel": 58
+       },
+       {
+         "type": "PACIFY",
          "value": true
        }
      ]
@@ -139,6 +215,30 @@
      ]
    },
    {
+     "id": "phantom-echo",
+     "name": "Phantom Echo",
+     "level": 57,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "AGGRO_RADIUS_REDUCTION",
+         "value": 5,
+         "maxLevel": 61
+       },
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 10,
+         "maxLevel": 61
+       },
+       {
+         "type": "PACIFY",
+         "value": true
+       }
+     ]
+   },
+   {
      "id": "silentfist",
      "name": "Silentfist Discipline",
      "level": 59,
@@ -171,6 +271,1363 @@
        {
          "type": "SPECIAL_ATTACK_DAMAGE_BONUS",
          "value": 150
+       }
+     ]
+   },
+   {
+     "id": "planeswalk-discipline",
+     "name": "Planeswalk Discipline",
+     "level": 61,
+     "family": "utility",
+     "durationRounds": 3,
+     "reuseRounds": 300,
+     "effects": [
+       {
+         "type": "MOVEMENT_BONUS",
+         "value": 125
+       }
+     ]
+   },
+   {
+     "id": "healing-will-discipline",
+     "name": "Healing Will Discipline",
+     "level": 63,
+     "family": "utility",
+     "durationRounds": 10,
+     "reuseRounds": 50,
+     "effects": [
+       {
+         "type": "REGENERATION",
+         "value": 100
+       }
+     ]
+   },
+   {
+     "id": "speed-focus-discipline",
+     "name": "Speed Focus Discipline",
+     "level": 63,
+     "family": "offensive",
+     "durationRounds": 5,
+     "reuseRounds": 220,
+     "effects": [
+       {
+         "type": "HASTE_BONUS",
+         "value": 56
+       }
+     ]
+   },
+   {
+     "id": "phantom-call",
+     "name": "Phantom Call",
+     "level": 64,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "AGGRO_RADIUS_REDUCTION",
+         "value": 5,
+         "maxLevel": 65
+       },
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 10,
+         "maxLevel": 65
+       },
+       {
+         "type": "PACIFY",
+         "value": true
+       }
+     ]
+   },
+   {
+     "id": "ancient-phantom-chaos",
+     "name": "Ancient: Phantom Chaos",
+     "level": 65,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "AGGRO_RADIUS_REDUCTION",
+         "value": 5,
+         "maxLevel": 65
+       },
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 10,
+         "maxLevel": 65
+       },
+       {
+         "type": "PACIFY",
+         "value": true
+       }
+     ]
+   },
+   {
+     "id": "earthwalk-discipline",
+     "name": "Earthwalk Discipline",
+     "level": 65,
+     "family": "defensive",
+     "durationRounds": 2,
+     "reuseRounds": 39,
+     "effects": [
+       {
+         "type": "MELEE_MITIGATION",
+         "value": 90
+       },
+       {
+         "type": "STUN_IMMUNITY",
+         "value": true
+       }
+     ]
+   },
+   {
+     "id": "phantom-shadow",
+     "name": "Phantom Shadow",
+     "level": 65,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "AGGRO_RADIUS_REDUCTION",
+         "value": 5,
+         "maxLevel": 65
+       },
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 10,
+         "maxLevel": 65
+       },
+       {
+         "type": "PACIFY",
+         "value": true
+       }
+     ]
+   },
+   {
+     "id": "dreamwalk-discipline",
+     "name": "Dreamwalk Discipline",
+     "level": 66,
+     "family": "utility",
+     "durationRounds": 3,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "MOVEMENT_BONUS",
+         "value": 125
+       },
+       {
+         "type": "RESIST_ALL",
+         "value": 100
+       }
+     ]
+   },
+   {
+     "id": "counterforce-discipline",
+     "name": "Counterforce Discipline",
+     "level": 68,
+     "family": "counterattack",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SLOW_PROC",
+         "rateMod": 150
+       }
+     ]
+   },
+   {
+     "id": "phantom-cry",
+     "name": "Phantom Cry",
+     "level": 69,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 10,
+         "maxLevel": 70
+       }
+     ]
+   },
+   {
+     "id": "heel-of-kanji",
+     "name": "Heel of Kanji",
+     "level": 70,
+     "family": "offensive",
+     "durationRounds": 5,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "FLYING_KICK_DAMAGE_BONUS",
+         "value": 30
+       },
+       {
+         "type": "FLYING_KICK_HIT_BONUS",
+         "value": 50
+       },
+       {
+         "type": "FLYING_KICK_TIMER_REDUCTION",
+         "value": 7
+       }
+     ]
+   },
+   {
+     "id": "rapid-kick-discipline",
+     "name": "Rapid Kick Discipline",
+     "level": 70,
+     "family": "offensive",
+     "durationRounds": 5,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "FLYING_KICK_TIMER_REDUCTION",
+         "value": 7
+       }
+     ]
+   },
+   {
+     "id": "phantom-silhouette",
+     "name": "Phantom Silhouette",
+     "level": 71,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 75
+       }
+     ]
+   },
+   {
+     "id": "impenetrable-discipline",
+     "name": "Impenetrable Discipline",
+     "level": 72,
+     "family": "defensive",
+     "durationRounds": 2,
+     "reuseRounds": 39,
+     "effects": [
+       {
+         "type": "MELEE_MITIGATION",
+         "value": 90
+       },
+       {
+         "type": "STUN_IMMUNITY",
+         "value": true
+       },
+       {
+         "type": "HIT_ABSORB",
+         "value": 3
+       }
+     ]
+   },
+   {
+     "id": "second-wind",
+     "name": "Second Wind",
+     "level": 72,
+     "family": "utility",
+     "durationRounds": 20,
+     "reuseRounds": 360,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 144
+       }
+     ]
+   },
+   {
+     "id": "scaledfist-discipline",
+     "name": "Scaledfist Discipline",
+     "level": 74,
+     "family": "offensive",
+     "durationRounds": 10,
+     "reuseRounds": 300,
+     "effects": [
+       {
+         "type": "SPECIAL_ATTACK_DAMAGE_BONUS",
+         "value": 180
+       }
+     ]
+   },
+   {
+     "id": "moment-of-calm",
+     "name": "Moment of Calm",
+     "level": 75,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 3600
+       },
+       {
+         "type": "MOVEMENT_PENALTY",
+         "value": 100
+       }
+     ]
+   },
+   {
+     "id": "shimmering-silhouette",
+     "name": "Shimmering Silhouette",
+     "level": 76,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 80
+       }
+     ]
+   },
+   {
+     "id": "third-wind",
+     "name": "Third Wind",
+     "level": 77,
+     "family": "utility",
+     "durationRounds": 20,
+     "reuseRounds": 360,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 161
+       }
+     ]
+   },
+   {
+     "id": "crystalpalm-discipline",
+     "name": "Crystalpalm Discipline",
+     "level": 79,
+     "family": "offensive",
+     "durationRounds": 5,
+     "reuseRounds": 220,
+     "effects": [
+       {
+         "type": "DAMAGE_BONUS",
+         "value": 67
+       },
+       {
+         "type": "MIN_DAMAGE_BONUS",
+         "value": 468
+       }
+     ]
+   },
+   {
+     "id": "delay-death",
+     "name": "Delay Death",
+     "level": 80,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEATH_THRESHOLD_BONUS",
+         "value": 10700
+       },
+       {
+         "type": "REGENERATION",
+         "value": 856
+       }
+     ]
+   },
+   {
+     "id": "moment-of-tranquility",
+     "name": "Moment of Tranquility",
+     "level": 80,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 4013
+       },
+       {
+         "type": "MOVEMENT_PENALTY",
+         "value": 100
+       }
+     ]
+   },
+   {
+     "id": "phantom-apparition",
+     "name": "Phantom Apparition",
+     "level": 81,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 85
+       }
+     ]
+   },
+   {
+     "id": "fourth-wind",
+     "name": "Fourth Wind",
+     "level": 82,
+     "family": "utility",
+     "durationRounds": 20,
+     "reuseRounds": 360,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 196
+       }
+     ]
+   },
+   {
+     "id": "defer-death",
+     "name": "Defer Death",
+     "level": 85,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEATH_THRESHOLD_BONUS",
+         "value": 11449
+       },
+       {
+         "type": "REGENERATION",
+         "value": 916
+       }
+     ]
+   },
+   {
+     "id": "flinch",
+     "name": "Flinch",
+     "level": 85,
+     "family": "defensive",
+     "durationRounds": 2,
+     "reuseRounds": 5,
+     "effects": [
+       {
+         "type": "BLOCK_BONUS",
+         "value": 45
+       },
+       {
+         "type": "MELEE_MITIGATION",
+         "value": -45
+       }
+     ]
+   },
+   {
+     "id": "moment-of-placidity",
+     "name": "Moment of Placidity",
+     "level": 85,
+     "family": "utility",
+     "durationRounds": 1,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 4895
+       }
+     ]
+   },
+   {
+     "id": "phantasmal-apparition",
+     "name": "Phantasmal Apparition",
+     "level": 86,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 90
+       }
+     ]
+   },
+   {
+     "id": "respite",
+     "name": "Respite",
+     "level": 86,
+     "family": "utility",
+     "durationRounds": 9,
+     "reuseRounds": 15,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 845
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 21
+       }
+     ]
+   },
+   {
+     "id": "fifth-wind",
+     "name": "Fifth Wind",
+     "level": 87,
+     "family": "utility",
+     "durationRounds": 20,
+     "reuseRounds": 360,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 268
+       }
+     ]
+   },
+   {
+     "id": "ironfist-discipline",
+     "name": "Ironfist Discipline",
+     "level": 88,
+     "family": "offensive",
+     "durationRounds": 10,
+     "reuseRounds": 300,
+     "effects": [
+       {
+         "type": "SPECIAL_ATTACK_DAMAGE_BONUS",
+         "value": 215
+       }
+     ]
+   },
+   {
+     "id": "deny-death",
+     "name": "Deny Death",
+     "level": 90,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEATH_THRESHOLD_BONUS",
+         "value": 12594
+       },
+       {
+         "type": "REGENERATION",
+         "value": 1260
+       }
+     ]
+   },
+   {
+     "id": "five-breaths",
+     "name": "Five Breaths",
+     "level": 90,
+     "family": "utility",
+     "durationRounds": 1,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 6193
+       }
+     ]
+   },
+   {
+     "id": "heel-of-kai",
+     "name": "Heel of Kai",
+     "level": 90,
+     "family": "offensive",
+     "durationRounds": 5,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "FLYING_KICK_DAMAGE_BONUS",
+         "value": 35
+       },
+       {
+         "type": "FLYING_KICK_HIT_BONUS",
+         "value": 78
+       },
+       {
+         "type": "FLYING_KICK_TIMER_REDUCTION",
+         "value": 7
+       }
+     ]
+   },
+   {
+     "id": "intercepting-fist",
+     "name": "Intercepting Fist",
+     "level": 90,
+     "family": "defensive",
+     "durationRounds": 3,
+     "reuseRounds": 5,
+     "effects": [
+       {
+         "type": "RIPOSTE_BONUS",
+         "value": 75
+       },
+       {
+         "type": "MELEE_MITIGATION",
+         "value": -30
+       }
+     ]
+   },
+   {
+     "id": "reprieve",
+     "name": "Reprieve",
+     "level": 91,
+     "family": "utility",
+     "durationRounds": 9,
+     "reuseRounds": 15,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 1274
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 21
+       }
+     ]
+   },
+   {
+     "id": "veiled-apparition",
+     "name": "Veiled Apparition",
+     "level": 91,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 95
+       }
+     ]
+   },
+   {
+     "id": "sixth-wind",
+     "name": "Sixth Wind",
+     "level": 92,
+     "family": "utility",
+     "durationRounds": 20,
+     "reuseRounds": 360,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 410
+       }
+     ]
+   },
+   {
+     "id": "void-step",
+     "name": "Void Step",
+     "level": 92,
+     "family": "defensive",
+     "durationRounds": 3,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "DODGE_BONUS",
+         "value": 524
+       }
+     ]
+   },
+   {
+     "id": "inner-rejuvenation",
+     "name": "Inner Rejuvenation",
+     "level": 93,
+     "family": "utility",
+     "durationRounds": 1,
+     "reuseRounds": 250,
+     "effects": [
+       {
+         "type": "PERCENT_HEAL",
+         "percent": 35,
+         "maxPoints": 29000
+       }
+     ]
+   },
+   {
+     "id": "diamondpalm-discipline",
+     "name": "Diamondpalm Discipline",
+     "level": 94,
+     "family": "offensive",
+     "durationRounds": 5,
+     "reuseRounds": 220,
+     "effects": [
+       {
+         "type": "DAMAGE_BONUS",
+         "value": 105
+       },
+       {
+         "type": "MIN_DAMAGE_BONUS",
+         "value": 593
+       }
+     ]
+   },
+   {
+     "id": "decry-death",
+     "name": "Decry Death",
+     "level": 95,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEATH_THRESHOLD_BONUS",
+         "value": 19520
+       },
+       {
+         "type": "REGENERATION",
+         "value": 1998
+       }
+     ]
+   },
+   {
+     "id": "heel-of-kojai",
+     "name": "Heel of Kojai",
+     "level": 95,
+     "family": "offensive",
+     "durationRounds": 5,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "FLYING_KICK_DAMAGE_BONUS",
+         "value": 54
+       },
+       {
+         "type": "FLYING_KICK_HIT_BONUS",
+         "value": 103
+       },
+       {
+         "type": "FLYING_KICK_TIMER_REDUCTION",
+         "value": 7
+       }
+     ]
+   },
+   {
+     "id": "six-breaths",
+     "name": "Six Breaths",
+     "level": 95,
+     "family": "utility",
+     "durationRounds": 1,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 8547
+       }
+     ]
+   },
+   {
+     "id": "earthforce-discipline",
+     "name": "Earthforce Discipline",
+     "level": 96,
+     "family": "defensive",
+     "durationRounds": 4,
+     "reuseRounds": 30,
+     "effects": [
+       {
+         "type": "MELEE_MITIGATION",
+         "value": 90
+       },
+       {
+         "type": "STUN_IMMUNITY",
+         "value": true
+       },
+       {
+         "type": "HIT_ABSORB",
+         "value": 5
+       },
+       {
+         "type": "FLAT_DAMAGE_BONUS",
+         "value": 132
+       }
+     ]
+   },
+   {
+     "id": "rest",
+     "name": "Rest",
+     "level": 96,
+     "family": "utility",
+     "durationRounds": 9,
+     "reuseRounds": 15,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 1546
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 21
+       }
+     ]
+   },
+   {
+     "id": "shaded-apparition",
+     "name": "Shaded Apparition",
+     "level": 96,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 100
+       }
+     ]
+   },
+   {
+     "id": "seventh-wind",
+     "name": "Seventh Wind",
+     "level": 97,
+     "family": "utility",
+     "durationRounds": 20,
+     "reuseRounds": 360,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 498
+       }
+     ]
+   },
+   {
+     "id": "shaded-step",
+     "name": "Shaded Step",
+     "level": 97,
+     "family": "defensive",
+     "durationRounds": 3,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "DODGE_BONUS",
+         "value": 636
+       }
+     ]
+   },
+   {
+     "id": "eye-of-the-storm",
+     "name": "Eye of the Storm",
+     "level": 98,
+     "family": "offensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "DAMAGE_BONUS",
+         "value": 45
+       },
+       {
+         "type": "MIN_DAMAGE_BONUS",
+         "value": 160
+       },
+       {
+         "type": "FLAT_DAMAGE_BONUS",
+         "value": 300
+       }
+     ]
+   },
+   {
+     "id": "reflex",
+     "name": "Reflex",
+     "level": 98,
+     "family": "defensive",
+     "durationRounds": 2,
+     "reuseRounds": 5,
+     "effects": [
+       {
+         "type": "BLOCK_BONUS",
+         "value": 60
+       },
+       {
+         "type": "MELEE_MITIGATION",
+         "value": -22
+       }
+     ]
+   },
+   {
+     "id": "contraforce-discipline",
+     "name": "Contraforce Discipline",
+     "level": 99,
+     "family": "counterattack",
+     "durationRounds": 12,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEFENSIVE_DAMAGE_PROC",
+         "rateMod": 300
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 316700,
+         "absorbPct": 15
+       }
+     ]
+   },
+   {
+     "id": "terrorpalm-discipline",
+     "name": "Terrorpalm Discipline",
+     "level": 99,
+     "family": "offensive",
+     "durationRounds": 5,
+     "reuseRounds": 220,
+     "effects": [
+       {
+         "type": "DAMAGE_BONUS",
+         "value": 138
+       },
+       {
+         "type": "MIN_DAMAGE_BONUS",
+         "value": 736
+       }
+     ]
+   },
+   {
+     "id": "forestall-death",
+     "name": "Forestall Death",
+     "level": 100,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEATH_THRESHOLD_BONUS",
+         "value": 25942
+       },
+       {
+         "type": "REGENERATION",
+         "value": 2540
+       }
+     ]
+   },
+   {
+     "id": "heel-of-zagali",
+     "name": "Heel of Zagali",
+     "level": 100,
+     "family": "offensive",
+     "durationRounds": 5,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "FLYING_KICK_DAMAGE_BONUS",
+         "value": 67
+       },
+       {
+         "type": "FLYING_KICK_HIT_BONUS",
+         "value": 131
+       },
+       {
+         "type": "FLYING_KICK_TIMER_REDUCTION",
+         "value": 7
+       }
+     ]
+   },
+   {
+     "id": "protection-of-the-shadewalker",
+     "name": "Protection of the Shadewalker",
+     "level": 100,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 50,
+     "effects": [
+       {
+         "type": "HEAL_PROC",
+         "value": 3492,
+         "rateMod": 400
+       }
+     ]
+   },
+   {
+     "id": "seven-breaths",
+     "name": "Seven Breaths",
+     "level": 100,
+     "family": "utility",
+     "durationRounds": 1,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 10865
+       }
+     ]
+   },
+   {
+     "id": "breather",
+     "name": "Breather",
+     "level": 101,
+     "family": "utility",
+     "durationRounds": 7,
+     "reuseRounds": 15,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 3812
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 21
+       }
+     ]
+   },
+   {
+     "id": "darkened-apparition",
+     "name": "Darkened Apparition",
+     "level": 101,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 105
+       }
+     ]
+   },
+   {
+     "id": "eight-breaths",
+     "name": "Eight Breaths",
+     "level": 105,
+     "family": "utility",
+     "durationRounds": 1,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 12277
+       }
+     ]
+   },
+   {
+     "id": "refuse-death",
+     "name": "Refuse Death",
+     "level": 105,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEATH_THRESHOLD_BONUS",
+         "value": 30746
+       },
+       {
+         "type": "REGENERATION",
+         "value": 3010
+       }
+     ]
+   },
+   {
+     "id": "ash-clouded-apparition",
+     "name": "Ash-Clouded Apparition",
+     "level": 106,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 110
+       }
+     ]
+   },
+   {
+     "id": "hiatus",
+     "name": "Hiatus",
+     "level": 106,
+     "family": "utility",
+     "durationRounds": 8,
+     "reuseRounds": 60,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 8640
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 30,
+         "maxPoints": 92500
+       },
+       {
+         "type": "WEAPON_DELAY_PENALTY",
+         "value": 1000
+       }
+     ]
+   },
+   {
+     "id": "nine-breaths",
+     "name": "Nine Breaths",
+     "level": 108,
+     "family": "utility",
+     "durationRounds": 1,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 14189
+       }
+     ]
+   },
+   {
+     "id": "counterstrike-discipline",
+     "name": "Counterstrike Discipline",
+     "level": 109,
+     "family": "counterattack",
+     "durationRounds": 12,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEFENSIVE_DAMAGE_PROC",
+         "rateMod": 300
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 436375,
+         "absorbPct": 15
+       }
+     ]
+   },
+   {
+     "id": "reject-death",
+     "name": "Reject Death",
+     "level": 110,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEATH_THRESHOLD_BONUS",
+         "value": 37287
+       },
+       {
+         "type": "REGENERATION",
+         "value": 3983
+       }
+     ]
+   },
+   {
+     "id": "frostblurred-apparition",
+     "name": "Frostblurred Apparition",
+     "level": 111,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 115
+       }
+     ]
+   },
+   {
+     "id": "relax",
+     "name": "Relax",
+     "level": 111,
+     "family": "utility",
+     "durationRounds": 8,
+     "reuseRounds": 60,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 9621
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 30,
+         "maxPoints": 118000
+       },
+       {
+         "type": "WEAPON_DELAY_PENALTY",
+         "value": 1000
+       }
+     ]
+   },
+   {
+     "id": "breath-of-tranquility",
+     "name": "Breath of Tranquility",
+     "level": 113,
+     "family": "utility",
+     "durationRounds": 1,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 15799
+       }
+     ]
+   },
+   {
+     "id": "rescind-death",
+     "name": "Rescind Death",
+     "level": 115,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEATH_THRESHOLD_BONUS",
+         "value": 45220
+       },
+       {
+         "type": "REGENERATION",
+         "value": 5050
+       }
+     ]
+   },
+   {
+     "id": "dreamwhisper-apparition",
+     "name": "Dreamwhisper Apparition",
+     "level": 116,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 120
+       }
+     ]
+   },
+   {
+     "id": "night-s-calming",
+     "name": "Night's Calming",
+     "level": 116,
+     "family": "utility",
+     "durationRounds": 8,
+     "reuseRounds": 60,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 11137
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 30,
+         "maxPoints": 163000
+       },
+       {
+         "type": "WEAPON_DELAY_PENALTY",
+         "value": 1000
+       }
+     ]
+   },
+   {
+     "id": "breath-of-stillness",
+     "name": "Breath of Stillness",
+     "level": 118,
+     "family": "utility",
+     "durationRounds": 1,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 19160
+       }
+     ]
+   },
+   {
+     "id": "counterblow-discipline",
+     "name": "Counterblow Discipline",
+     "level": 119,
+     "family": "counterattack",
+     "durationRounds": 12,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEFENSIVE_DAMAGE_PROC",
+         "rateMod": 300
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 621000,
+         "absorbPct": 15
+       }
+     ]
+   },
+   {
+     "id": "repeal-death",
+     "name": "Repeal Death",
+     "level": 120,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEATH_THRESHOLD_BONUS",
+         "value": 62319
+       },
+       {
+         "type": "REGENERATION",
+         "value": 6125
+       }
+     ]
+   },
+   {
+     "id": "convalesce",
+     "name": "Convalesce",
+     "level": 121,
+     "family": "utility",
+     "durationRounds": 8,
+     "reuseRounds": 60,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 12893
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 30,
+         "maxPoints": 270000
+       },
+       {
+         "type": "WEAPON_DELAY_PENALTY",
+         "value": 1000
+       }
+     ]
+   },
+   {
+     "id": "phantom-whisper",
+     "name": "Phantom Whisper",
+     "level": 121,
+     "family": "utility",
+     "durationRounds": 2,
+     "reuseRounds": 3,
+     "effects": [
+       {
+         "type": "SOCIAL_RADIUS_REDUCTION",
+         "value": 15,
+         "maxLevel": 125
+       }
+     ]
+   },
+   {
+     "id": "moment-of-stillness",
+     "name": "Moment of Stillness",
+     "level": 123,
+     "family": "utility",
+     "durationRounds": 1,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "ENDURANCE_RESTORE",
+         "value": 23236
+       }
+     ]
+   },
+   {
+     "id": "defy-death",
+     "name": "Defy Death",
+     "level": 125,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "DEATH_THRESHOLD_BONUS",
+         "value": 75578
+       },
+       {
+         "type": "REGENERATION",
+         "value": 7428
        }
      ]
    }

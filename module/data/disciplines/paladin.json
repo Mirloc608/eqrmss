@@ -18,7 +18,6 @@
         }
       ]
     },
-
     {
       "id": "fearless",
       "name": "Fearless Discipline",
@@ -33,7 +32,6 @@
         }
       ]
     },
-
     {
       "id": "holyforge",
       "name": "Holyforge Discipline",
@@ -56,7 +54,21 @@
         }
       ]
     },
-
+   {
+     "id": "guard-of-piety",
+     "name": "Guard of Piety",
+     "level": 56,
+     "family": "defensive",
+     "durationRounds": 5,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 2500,
+         "absorbPct": 25
+       }
+     ]
+   },
     {
       "id": "deflection",
       "name": "Deflection Discipline",
@@ -71,7 +83,6 @@
         }
       ]
     },
-
     {
       "id": "sanctification",
       "name": "Sanctification Discipline",
@@ -85,6 +96,1225 @@
           "value": true
         }
       ]
-    }
+    },
+   {
+     "id": "guard-of-humility",
+     "name": "Guard of Humility",
+     "level": 61,
+     "family": "defensive",
+     "durationRounds": 5,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 6000,
+         "absorbPct": 25
+       }
+     ]
+   },
+   {
+     "id": "guard-of-righteousness",
+     "name": "Guard of Righteousness",
+     "level": 69,
+     "family": "defensive",
+     "durationRounds": 5,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 10000,
+         "absorbPct": 25
+       }
+     ]
+   },
+   {
+     "id": "armor-of-righteousness",
+     "name": "Armor of Righteousness",
+     "level": 73,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 16800,
+         "absorbPct": 25
+       }
+     ]
+   },
+   {
+     "id": "armor-of-decorum",
+     "name": "Armor of Decorum",
+     "level": 78,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 19250,
+         "absorbPct": 25
+       }
+     ]
+   },
+   {
+     "id": "armor-of-endless-honor",
+     "name": "Armor of Endless Honor",
+     "level": 83,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 25025,
+         "absorbPct": 25
+       }
+     ]
+   },
+   {
+     "id": "honorific-mantle",
+     "name": "Honorific Mantle",
+     "level": 83,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 260901,
+         "absorbPct": 25
+       }
+     ]
+   },
+   {
+     "id": "withstand",
+     "name": "Withstand",
+     "level": 83,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 2,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 825,
+         "absorbPct": 85
+       },
+       {
+         "type": "HIT_LIMIT",
+         "value": 2
+       }
+     ]
+   },
+   {
+     "id": "respite",
+     "name": "Respite",
+     "level": 86,
+     "family": "utility",
+     "durationRounds": 9,
+     "reuseRounds": 15,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 845
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 21
+       }
+     ]
+   },
+   {
+     "id": "armor-of-courage",
+     "name": "Armor of Courage",
+     "level": 88,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 926
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 151200,
+         "absorbPct": 20
+       },
+       {
+         "type": "DEFENSIVE_PROC",
+         "rateMod": 360,
+         "maxLevel": 93,
+         "damage": 826,
+         "stunRounds": 1
+       }
+     ]
+   },
+   {
+     "id": "defy",
+     "name": "Defy",
+     "level": 88,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 2,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 9075,
+         "absorbPct": 90
+       },
+       {
+         "type": "HIT_LIMIT",
+         "value": 2
+       }
+     ]
+   },
+   {
+     "id": "exalted-mantle",
+     "name": "Exalted Mantle",
+     "level": 88,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 300300,
+         "absorbPct": 35
+       },
+       {
+         "type": "HEAL_ON_FADE",
+         "value": 9856
+       }
+     ]
+   },
+   {
+     "id": "pureforge-discipline",
+     "name": "Pureforge Discipline",
+     "level": 90,
+     "family": "offensive",
+     "durationRounds": 20,
+     "reuseRounds": 200,
+     "effects": [
+       {
+         "type": "CRITICAL_HIT_BONUS",
+         "value": 290
+       },
+       {
+         "type": "CRIPPLING_BLOW_BONUS",
+         "value": 25
+       },
+       {
+         "type": "TRIPLE_ATTACK_BONUS",
+         "value": 30
+       }
+     ]
+   },
+   {
+     "id": "reprieve",
+     "name": "Reprieve",
+     "level": 91,
+     "family": "utility",
+     "durationRounds": 9,
+     "reuseRounds": 15,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 1274
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 21
+       }
+     ]
+   },
+   {
+     "id": "armor-of-zeal",
+     "name": "Armor of Zeal",
+     "level": 93,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 1292
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 249500,
+         "absorbPct": 20
+       },
+       {
+         "type": "DEFENSIVE_PROC",
+         "rateMod": 360,
+         "maxLevel": 98,
+         "damage": 1422,
+         "stunRounds": 1
+       }
+     ]
+   },
+   {
+     "id": "prominent-mantle",
+     "name": "Prominent Mantle",
+     "level": 93,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 488600,
+         "absorbPct": 35
+       },
+       {
+         "type": "HEAL_ON_FADE",
+         "value": 15311
+       }
+     ]
+   },
+   {
+     "id": "renounce",
+     "name": "Renounce",
+     "level": 93,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 2,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 18113,
+         "absorbPct": 90
+       },
+       {
+         "type": "HIT_LIMIT",
+         "value": 2
+       }
+     ]
+   },
+   {
+     "id": "undivided-affirmation",
+     "name": "Undivided Affirmation",
+     "level": 94,
+     "family": "defensive",
+     "durationRounds": 3,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "AGGRO_LOCK",
+         "value": true
+       },
+       {
+         "type": "ALLY_HATE_REDUCTION",
+         "value": 5
+       },
+       {
+         "type": "HATE_GENERATION_BONUS",
+         "value": 55
+       },
+       {
+         "type": "REGENERATION",
+         "value": 1993
+       }
+     ]
+   },
+   {
+     "id": "rest",
+     "name": "Rest",
+     "level": 96,
+     "family": "utility",
+     "durationRounds": 9,
+     "reuseRounds": 15,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 1546
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 21
+       }
+     ]
+   },
+   {
+     "id": "holy-guardian-discipline",
+     "name": "Holy Guardian Discipline",
+     "level": 97,
+     "family": "stand",
+     "durationRounds": 20,
+     "reuseRounds": 120,
+     "effects": [
+       {
+         "type": "MELEE_MITIGATION",
+         "value": 36
+       },
+       {
+         "type": "OUTGOING_DAMAGE_REDUCTION",
+         "value": 60
+       },
+       {
+         "type": "CRITICAL_BONUS",
+         "value": -10
+       },
+       {
+         "type": "HEAL_ON_DEFENSIVE_SKILL",
+         "value": 5154
+       }
+     ]
+   },
+   {
+     "id": "reverent-penitence",
+     "name": "Reverent Penitence",
+     "level": 97,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 1578
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 420600,
+         "absorbPct": 20
+       },
+       {
+         "type": "HEAL_PROC",
+         "value": 3901,
+         "rateMod": 250
+       }
+     ]
+   },
+   {
+     "id": "armor-of-reverence",
+     "name": "Armor of Reverence",
+     "level": 98,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 1578
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 420600,
+         "absorbPct": 20
+       },
+       {
+         "type": "DEFENSIVE_PROC",
+         "rateMod": 360,
+         "maxLevel": 103,
+         "damage": 1725,
+         "stunRounds": 1
+       }
+     ]
+   },
+   {
+     "id": "brightwing-mantle",
+     "name": "Brightwing Mantle",
+     "level": 98,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 888500,
+         "absorbPct": 35
+       },
+       {
+         "type": "HEAL_ON_FADE",
+         "value": 20257
+       }
+     ]
+   },
+   {
+     "id": "reprove",
+     "name": "Reprove",
+     "level": 98,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 2,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 25462,
+         "absorbPct": 90
+       },
+       {
+         "type": "HIT_LIMIT",
+         "value": 2
+       }
+     ]
+   },
+   {
+     "id": "unbroken-affirmation",
+     "name": "Unbroken Affirmation",
+     "level": 99,
+     "family": "defensive",
+     "durationRounds": 3,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "AGGRO_LOCK",
+         "value": true
+       },
+       {
+         "type": "ALLY_HATE_REDUCTION",
+         "value": 5
+       },
+       {
+         "type": "HATE_GENERATION_BONUS",
+         "value": 55
+       },
+       {
+         "type": "REGENERATION",
+         "value": 2433
+       }
+     ]
+   },
+   {
+     "id": "breather",
+     "name": "Breather",
+     "level": 101,
+     "family": "utility",
+     "durationRounds": 7,
+     "reuseRounds": 15,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 3812
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 21
+       }
+     ]
+   },
+   {
+     "id": "devout-penitence",
+     "name": "Devout Penitence",
+     "level": 102,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 1806
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 482248,
+         "absorbPct": 20
+       },
+       {
+         "type": "HEAL_PROC",
+         "value": 3901,
+         "rateMod": 250
+       }
+     ]
+   },
+   {
+     "id": "armor-of-ardency",
+     "name": "Armor of Ardency",
+     "level": 103,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 1817
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 521700,
+         "absorbPct": 20
+       },
+       {
+         "type": "DEFENSIVE_PROC",
+         "rateMod": 360,
+         "maxLevel": 110,
+         "damage": 1997,
+         "stunRounds": 1
+       }
+     ]
+   },
+   {
+     "id": "repel",
+     "name": "Repel",
+     "level": 103,
+     "family": "defensive",
+     "durationRounds": 1,
+     "reuseRounds": 2,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 32283,
+         "absorbPct": 90
+       },
+       {
+         "type": "HIT_LIMIT",
+         "value": 2
+       }
+     ]
+   },
+   {
+     "id": "skalber-mantle",
+     "name": "Skalber Mantle",
+     "level": 103,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 1101938,
+         "absorbPct": 35
+       },
+       {
+         "type": "HEAL_ON_FADE",
+         "value": 23674
+       }
+     ]
+   },
+   {
+     "id": "unflinching-affirmation",
+     "name": "Unflinching Affirmation",
+     "level": 104,
+     "family": "defensive",
+     "durationRounds": 3,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "AGGRO_LOCK",
+         "value": true
+       },
+       {
+         "type": "ALLY_HATE_REDUCTION",
+         "value": 5
+       },
+       {
+         "type": "HATE_GENERATION_BONUS",
+         "value": 55
+       },
+       {
+         "type": "REGENERATION",
+         "value": 2911
+       }
+     ]
+   },
+   {
+     "id": "hiatus",
+     "name": "Hiatus",
+     "level": 106,
+     "family": "utility",
+     "durationRounds": 8,
+     "reuseRounds": 60,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 8640
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 30,
+         "maxPoints": 92500
+       },
+       {
+         "type": "WEAPON_DELAY_PENALTY",
+         "value": 1000
+       }
+     ]
+   },
+   {
+     "id": "blessed-guardian-discipline",
+     "name": "Blessed Guardian Discipline",
+     "level": 107,
+     "family": "stand",
+     "durationRounds": 20,
+     "reuseRounds": 120,
+     "effects": [
+       {
+         "type": "MELEE_MITIGATION",
+         "value": 36
+       },
+       {
+         "type": "OUTGOING_DAMAGE_REDUCTION",
+         "value": 60
+       },
+       {
+         "type": "CRITICAL_BONUS",
+         "value": -10
+       },
+       {
+         "type": "HEAL_ON_DEFENSIVE_SKILL",
+         "value": 6251
+       }
+     ]
+   },
+   {
+     "id": "merciful-penitence",
+     "name": "Merciful Penitence",
+     "level": 107,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 2485
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 664598,
+         "absorbPct": 20
+       },
+       {
+         "type": "HEAL_PROC",
+         "value": 4731,
+         "rateMod": 250
+       }
+     ]
+   },
+   {
+     "id": "armor-of-mercy",
+     "name": "Armor of Mercy",
+     "level": 108,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 2510
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 719000,
+         "absorbPct": 20
+       },
+       {
+         "type": "DEFENSIVE_PROC",
+         "rateMod": 360,
+         "maxLevel": 115,
+         "damage": 2422,
+         "hate": 2137,
+         "heal": 3497,
+         "stunRounds": 1
+       }
+     ]
+   },
+   {
+     "id": "kar-zok-mantle",
+     "name": "Kar`Zok Mantle",
+     "level": 108,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 1518600,
+         "absorbPct": 35
+       },
+       {
+         "type": "HEAL_ON_FADE",
+         "value": 28711
+       }
+     ]
+   },
+   {
+     "id": "spurn",
+     "name": "Spurn",
+     "level": 108,
+     "family": "defensive",
+     "durationRounds": 2,
+     "reuseRounds": 2,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 44490,
+         "absorbPct": 90
+       },
+       {
+         "type": "HIT_LIMIT",
+         "value": 2
+       }
+     ]
+   },
+   {
+     "id": "unyielding-affirmation",
+     "name": "Unyielding Affirmation",
+     "level": 109,
+     "family": "defensive",
+     "durationRounds": 3,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "AGGRO_LOCK",
+         "value": true
+       },
+       {
+         "type": "ALLY_HATE_REDUCTION",
+         "value": 5
+       },
+       {
+         "type": "HATE_GENERATION_BONUS",
+         "value": 55
+       },
+       {
+         "type": "REGENERATION",
+         "value": 3531
+       }
+     ]
+   },
+   {
+     "id": "relax",
+     "name": "Relax",
+     "level": 111,
+     "family": "utility",
+     "durationRounds": 8,
+     "reuseRounds": 60,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 9621
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 30,
+         "maxPoints": 118000
+       },
+       {
+         "type": "WEAPON_DELAY_PENALTY",
+         "value": 1000
+       }
+     ]
+   },
+   {
+     "id": "sincere-penitence",
+     "name": "Sincere Penitence",
+     "level": 112,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 3013
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 915899,
+         "absorbPct": 20
+       },
+       {
+         "type": "HEAL_PROC",
+         "value": 5738,
+         "rateMod": 250
+       }
+     ]
+   },
+   {
+     "id": "armor-of-sincerity",
+     "name": "Armor of Sincerity",
+     "level": 113,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 3183
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 1038600,
+         "absorbPct": 20
+       },
+       {
+         "type": "DEFENSIVE_PROC",
+         "rateMod": 360,
+         "maxLevel": 120,
+         "damage": 2937,
+         "hate": 2564,
+         "heal": 4242,
+         "stunRounds": 1
+       }
+     ]
+   },
+   {
+     "id": "mantle-of-the-sapphire-cohort",
+     "name": "Mantle of the Sapphire Cohort",
+     "level": 113,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 2193600,
+         "absorbPct": 35
+       },
+       {
+         "type": "HEAL_ON_FADE",
+         "value": 34819
+       }
+     ]
+   },
+   {
+     "id": "thwart",
+     "name": "Thwart",
+     "level": 113,
+     "family": "defensive",
+     "durationRounds": 2,
+     "reuseRounds": 2,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 61314,
+         "absorbPct": 90
+       },
+       {
+         "type": "HIT_LIMIT",
+         "value": 2
+       }
+     ]
+   },
+   {
+     "id": "unending-affirmation",
+     "name": "Unending Affirmation",
+     "level": 114,
+     "family": "defensive",
+     "durationRounds": 3,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "AGGRO_LOCK",
+         "value": true
+       },
+       {
+         "type": "ALLY_HATE_REDUCTION",
+         "value": 5
+       },
+       {
+         "type": "HATE_GENERATION_BONUS",
+         "value": 55
+       },
+       {
+         "type": "REGENERATION",
+         "value": 4282
+       }
+     ]
+   },
+   {
+     "id": "night-s-calming",
+     "name": "Night's Calming",
+     "level": 116,
+     "family": "utility",
+     "durationRounds": 8,
+     "reuseRounds": 60,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 11137
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 30,
+         "maxPoints": 163000
+       },
+       {
+         "type": "WEAPON_DELAY_PENALTY",
+         "value": 1000
+       }
+     ]
+   },
+   {
+     "id": "fervent-penitence",
+     "name": "Fervent Penitence",
+     "level": 117,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 3654
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 1110757,
+         "absorbPct": 20
+       },
+       {
+         "type": "HEAL_PROC",
+         "value": 6959,
+         "rateMod": 250
+       }
+     ]
+   },
+   {
+     "id": "revered-guardian-discipline",
+     "name": "Revered Guardian Discipline",
+     "level": 117,
+     "family": "stand",
+     "durationRounds": 20,
+     "reuseRounds": 120,
+     "effects": [
+       {
+         "type": "MELEE_MITIGATION",
+         "value": 36
+       },
+       {
+         "type": "OUTGOING_DAMAGE_REDUCTION",
+         "value": 60
+       },
+       {
+         "type": "CRITICAL_BONUS",
+         "value": -10
+       },
+       {
+         "type": "HEAL_ON_DEFENSIVE_SKILL",
+         "value": 7581
+       }
+     ]
+   },
+   {
+     "id": "armor-of-the-forthright",
+     "name": "Armor of the Forthright",
+     "level": 118,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 3860
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 1500300,
+         "absorbPct": 20
+       },
+       {
+         "type": "DEFENSIVE_PROC",
+         "rateMod": 360,
+         "maxLevel": 125,
+         "damage": 3562,
+         "hate": 3251,
+         "heal": 5145,
+         "stunRounds": 1
+       }
+     ]
+   },
+   {
+     "id": "repudiate",
+     "name": "Repudiate",
+     "level": 118,
+     "family": "defensive",
+     "durationRounds": 2,
+     "reuseRounds": 2,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 84499,
+         "absorbPct": 90
+       },
+       {
+         "type": "HIT_LIMIT",
+         "value": 2
+       }
+     ]
+   },
+   {
+     "id": "supernal-mantle",
+     "name": "Supernal Mantle",
+     "level": 118,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 3168800,
+         "absorbPct": 35
+       },
+       {
+         "type": "HEAL_ON_FADE",
+         "value": 42227
+       }
+     ]
+   },
+   {
+     "id": "unrelenting-affirmation",
+     "name": "Unrelenting Affirmation",
+     "level": 119,
+     "family": "defensive",
+     "durationRounds": 3,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "AGGRO_LOCK",
+         "value": true
+       },
+       {
+         "type": "ALLY_HATE_REDUCTION",
+         "value": 5
+       },
+       {
+         "type": "HATE_GENERATION_BONUS",
+         "value": 55
+       },
+       {
+         "type": "REGENERATION",
+         "value": 5193
+       }
+     ]
+   },
+   {
+     "id": "convalesce",
+     "name": "Convalesce",
+     "level": 121,
+     "family": "utility",
+     "durationRounds": 8,
+     "reuseRounds": 60,
+     "effects": [
+       {
+         "type": "ENDURANCE_REGENERATION",
+         "value": 12893
+       },
+       {
+         "type": "ENDURANCE_CAP",
+         "percent": 30,
+         "maxPoints": 270000
+       },
+       {
+         "type": "WEAPON_DELAY_PENALTY",
+         "value": 1000
+       }
+     ]
+   },
+   {
+     "id": "avowed-penitence",
+     "name": "Avowed Penitence",
+     "level": 122,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 4432
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 1347000,
+         "absorbPct": 20
+       },
+       {
+         "type": "HEAL_PROC",
+         "value": 8439,
+         "rateMod": 250
+       }
+     ]
+   },
+   {
+     "id": "armor-of-avowal",
+     "name": "Armor of Avowal",
+     "level": 123,
+     "family": "defensive",
+     "durationRounds": 20,
+     "reuseRounds": 75,
+     "effects": [
+       {
+         "type": "AC_BONUS",
+         "value": 4682
+       },
+       {
+         "type": "SHIELDING",
+         "maxPoints": 1819500,
+         "absorbPct": 20
+       },
+       {
+         "type": "DEFENSIVE_PROC",
+         "rateMod": 360,
+         "maxLevel": 130,
+         "damage": 4320,
+         "hate": 4227,
+         "heal": 6239,
+         "stunRounds": 1
+       }
+     ]
+   },
+   {
+     "id": "gird",
+     "name": "Gird",
+     "level": 123,
+     "family": "defensive",
+     "durationRounds": 2,
+     "reuseRounds": 2,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 102500,
+         "absorbPct": 90
+       },
+       {
+         "type": "HIT_LIMIT",
+         "value": 2
+       }
+     ]
+   },
+   {
+     "id": "mantle-of-the-remembered",
+     "name": "Mantle of the Remembered",
+     "level": 123,
+     "family": "defensive",
+     "durationRounds": 10,
+     "reuseRounds": 150,
+     "effects": [
+       {
+         "type": "SHIELDING",
+         "maxPoints": 3843000,
+         "absorbPct": 35
+       },
+       {
+         "type": "HEAL_ON_FADE",
+         "value": 51211
+       }
+     ]
+   },
+   {
+     "id": "unconditional-affirmation",
+     "name": "Unconditional Affirmation",
+     "level": 124,
+     "family": "defensive",
+     "durationRounds": 3,
+     "reuseRounds": 100,
+     "effects": [
+       {
+         "type": "AGGRO_LOCK",
+         "value": true
+       },
+       {
+         "type": "ALLY_HATE_REDUCTION",
+         "value": 5
+       },
+       {
+         "type": "HATE_GENERATION_BONUS",
+         "value": 55
+       },
+       {
+         "type": "REGENERATION",
+         "value": 6299
+       }
+     ]
+   }
   ]
 }
