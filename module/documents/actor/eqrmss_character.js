@@ -73,6 +73,13 @@ export class EQRMSSCharacter extends EQRMSSActor
             totalDB: 0,
             magic: ""
         };
+
+        this.system.aa ??=
+        {
+            points: 0,
+            spent: 0,
+            abilities: []
+        };
     }
 
     // ========================================================

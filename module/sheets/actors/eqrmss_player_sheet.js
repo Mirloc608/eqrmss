@@ -5,6 +5,7 @@
 import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
 import { progressionManager } from "../../progression/progression-manager.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
+import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
 
 // Skill Engine Imports
 import {
@@ -32,7 +33,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         actions: {
             levelUp: EQRMSSPlayerSheet.prototype.levelUp,
             rollResistance: EQRMSSPlayerSheet.prototype.rollResistance,
-            rollStat: EQRMSSPlayerSheet.prototype.rollStat
+            rollStat: EQRMSSPlayerSheet.prototype.rollStat,
+            purchaseAA: EQRMSSPlayerSheet.prototype.purchaseAA,
+            grantAAPoints: EQRMSSPlayerSheet.prototype.grantAAPoints
         }
     };
 
@@ -63,6 +66,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         },
         spells: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-spells.html"
+        },
+        aa: {
+            template: "systems/eqrmss/templates/sheets/actors/parts/actor-aa.html"
         },
         logs: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-logs.html"
@@ -212,6 +218,23 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // Attach Skill Engine data
         context.skillsEngine = skillModels;
 
+        // ------------------------------------------------------------
+        // AA Advancement Context
+        // ------------------------------------------------------------
+        const aaState = EQRMSSAAAdvancement.getAAState(actor);
+        const aaContext = {
+            points: aaState.points,
+            spent: aaState.spent,
+            isGM: game?.user?.isGM ?? false,
+            purchased: EQRMSSAAAdvancement.getPurchasedAAs(actor),
+            available: []
+        };
+        try {
+            aaContext.available = EQRMSSAAAdvancement.getAvailableAAs(actor);
+        } catch (err) {
+            console.warn("EQRMSS | AA context build failed", err);
+        }
+
         return {
             ...context,
             actor,
@@ -224,7 +247,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             progression: {
                 ...(context.progression ?? {}),
                 ...progressionData
-            }
+            },
+            aa: aaContext
         };
     }
 
@@ -333,6 +357,46 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         await actor.update({ "system.attributes.level.value": nextLevel });
 
         ui.notifications.info(`${actor.name} advanced to level ${nextLevel}!`);
+        await this.render();
+    }
+
+    // ------------------------------------------------------------
+    // AA Advancement
+    // ------------------------------------------------------------
+    async purchaseAA(event, target) {
+        event.preventDefault();
+        const actor = this.document;
+        if (!actor) return;
+
+        const aaId = target?.dataset?.aaId;
+        if (!aaId) return;
+
+        await EQRMSSAAAdvancement.purchaseRank(actor, aaId);
+        await this.render();
+    }
+
+    async grantAAPoints(event, target) {
+        event.preventDefault();
+        const actor = this.document;
+        if (!actor) return;
+
+        if (!game?.user?.isGM) {
+            ui.notifications.warn("EQRMSS | Only the GM can grant AA points.");
+            return;
+        }
+
+        const input = this.element?.querySelector?.('[name="aaGrantAmount"]');
+        const amount = Math.floor(Number(input?.value));
+
+        const result = await EQRMSSAAAdvancement.grantPoints(actor, amount, {
+            reason: "GM grant"
+        });
+
+        if (!result.ok) {
+            ui.notifications.warn(`EQRMSS | ${result.reason}`);
+            return;
+        }
+
         await this.render();
     }
 

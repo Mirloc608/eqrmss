@@ -139,6 +139,14 @@ export async function initializeDataLoaders() {
     game.eqrmss = game.eqrmss || {};
     game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, aas:false };
 
+    // AA advancement (points economy + purchase flow) for console/macro use
+    try {
+        const { EQRMSSAAAdvancement } = await import('../aa/aa-advancement.js');
+        game.eqrmss.aa = EQRMSSAAAdvancement;
+    } catch (e) {
+        console.warn("EQRMSS | AA advancement failed to register", e);
+    }
+
     // Expansion manager first - AA gating (and future race/class gating) depends on it
     try {
         const { EQRMSSExpansionManager } = await import('../expansions/expansion-manager.js');
