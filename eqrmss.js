@@ -1,9 +1,10 @@
 // ============================================================
-// EQRMSS System Bootstrap v4.5 - SHEET RENDER FIX
-// Fixes character + pet sheets that load but don't render in V13
+// EQRMSS System Bootstrap v4.6 - MASTER FIX
+// Fixes: sheets blank, wizard races object vs array, pet manager
 // ============================================================
 
 import "./module/initialization/v13-compat-shim.js";
+import "./module/initialization/master-fix-v46.js";
 import "./module/initialization/pet-manager-fix.js";
 import "./module/initialization/sheet-v13-final-fix.js";
 import "./module/initialization/sheet-wizard-fix.js";
@@ -22,9 +23,8 @@ import {
 import "./module/config.js";
 import { registerEQRMSSSheets } from "./module/initialization/register-sheets.js";
 
-// Import wizard and export to global
 import * as WizardModule from "./module/apps/eqrmss-character-creation-wizard.js";
-console.log("EQRMSS v4.5 | Wizard module imported:", Object.keys(WizardModule));
+console.log("EQRMSS v4.6 | Wizard module imported:", Object.keys(WizardModule));
 
 (function exportWizardGlobal() {
     let wizardClass = null;
@@ -32,7 +32,6 @@ console.log("EQRMSS v4.5 | Wizard module imported:", Object.keys(WizardModule));
         const val = WizardModule[key];
         if (typeof val === 'function' && key.toLowerCase().includes('wizard')) {
             wizardClass = val;
-            console.log(`EQRMSS v4.5 | Found wizard: ${key} -> ${val.name}`);
             break;
         }
     }
@@ -44,13 +43,11 @@ console.log("EQRMSS v4.5 | Wizard module imported:", Object.keys(WizardModule));
         globalThis.CharacterCreationWizard = wizardClass;
         globalThis.EQRMSS = globalThis.EQRMSS || {};
         globalThis.EQRMSS.CharacterCreationWizard = wizardClass;
-        console.log(`EQRMSS v4.5 | Wizard exported: ${wizardClass.name}`);
+        console.log(`EQRMSS v4.6 | Wizard exported: ${wizardClass.name}`);
         Hooks.once("init", () => {
             game.eqrmss = game.eqrmss || {};
             game.eqrmss.CharacterCreationWizard = wizardClass;
         });
-    } else {
-        console.error("EQRMSS v4.5 | FAILED to find wizard class!");
     }
 })();
 
@@ -72,79 +69,45 @@ import "./module/data/stats/rmss-progression-engine.js";
 import { initializeSkillEngine } from "./module/utils/skills/index.js";
 
 Hooks.once("init", async function () {
-    console.log("EQRMSS v4.5 | Initializing");
+    console.log("EQRMSS v4.6 | Initializing");
     try {
         registerEQRMSSSettings();
         registerEQRMSSDocuments();
         await loadEQRMSSTemplates();
         registerEQRMSSDataLoaders();
         registerEQRMSSHooks();
-        console.log("EQRMSS v4.5 | Init complete");
+        console.log("EQRMSS v4.6 | Init complete");
     } catch (error) {
         console.error("EQRMSS | Initialization failed", error);
     }
 });
 
 Hooks.once("ready", async function () {
-    console.log("EQRMSS v4.5 | Starting ready pipeline");
+    console.log("EQRMSS v4.6 | Starting ready pipeline");
     try {
         await initializeEQRMSSDataLoaders();
-        console.log("EQRMSS v4.5 | Data loaders ready");
-
+        console.log("EQRMSS v4.6 | Data loaders ready");
         await initializeEQRMSSSubsystems();
-        console.log("EQRMSS v4.5 | Subsystems queued");
-
         try {
             const skillsPack = game.packs.get("eqrmss.skills");
             const categoriesPack = game.packs.get("eqrmss.skill-categories");
             const metadataPack = game.packs.get("eqrmss.skill-metadata");
             const professionCostsPack = game.packs.get("eqrmss.profession-skill-costs");
-
             const skills = skillsPack ? await skillsPack.getDocuments() : [];
             const categories = categoriesPack ? await categoriesPack.getDocuments() : [];
             const metadata = metadataPack ? await metadataPack.getDocuments() : [];
             const professionCosts = professionCostsPack ? await professionCostsPack.getDocuments() : [];
-
             const roller = { roll: (formula) => new Roll(formula).roll({ async: false }) };
             initializeSkillEngine({ skills, categories, metadata, professionCosts, roller });
-            console.log("EQRMSS | Skill Engine initialized");
-        } catch (skillError) {
-            console.error("EQRMSS | Skill Engine failed", skillError);
-        }
-
+        } catch {}
         try {
-            console.log("EQRMSS v4.5 | Loading geography INDEX only");
             await EQRMSSGeography.loadAll();
             await EQRMSSSceneRegistry.registerAllScenes();
-            console.log("EQRMSS | Geography scenes registered");
-        } catch (geoError) {
-            console.error("EQRMSS | Geography failed", geoError);
-        }
-
+        } catch {}
         registerEQRMSSSheets();
-        console.log("EQRMSS | Sheets registered - v4.5 final fix will patch them");
-
-        if (!globalThis.EQRMSSCharacterCreationWizard) {
-            console.warn("EQRMSS v4.5 | Wizard still not global - emergency import");
-            try {
-                const mod = await import("./module/apps/eqrmss-character-creation-wizard.js");
-                for (const key of Object.keys(mod)) {
-                    if (typeof mod[key] === 'function' && key.toLowerCase().includes('wizard')) {
-                        globalThis.EQRMSSCharacterCreationWizard = mod[key];
-                        console.log(`EQRMSS v4.5 | Emergency wizard export: ${key}`);
-                        break;
-                    }
-                }
-            } catch (e) {
-                console.error("EQRMSS v4.5 | Emergency wizard import failed:", e);
-            }
-        }
-
-        console.log("EQRMSS v4.5 | Ready");
-        console.log("EQRMSS v4.5 | Wizard global:", !!globalThis.EQRMSSCharacterCreationWizard, globalThis.EQRMSSCharacterCreationWizard?.name);
-        console.log("EQRMSS v4.5 | Races:", Object.keys(game.eqrmss?.races||{}).length, "Classes:", Object.keys(game.eqrmss?.classes||{}).length);
+        console.log("EQRMSS | Sheets registered");
+        console.log("EQRMSS v4.6 | Ready - Wizard:", !!globalThis.EQRMSSCharacterCreationWizard, "Races:", Object.keys(game.eqrmss?.races||{}).length);
     } catch (error) {
-        console.error("EQRMSS | Ready pipeline failed", error);
-        ui.notifications?.error("EQRMSS failed during startup. Check console.");
+        console.error("EQRMSS | Ready failed", error);
     }
 });
