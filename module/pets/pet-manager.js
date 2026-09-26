@@ -36,9 +36,9 @@
 // ApplicationV2 architecture.
 // ============================================================
 
-const { ApplicationV2 } = foundry.applications.api;
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
-export class EQRMSSPetManager extends ApplicationV2 {
+export class EQRMSSPetManager extends HandlebarsApplicationMixin(ApplicationV2) {
     static DEFAULT_OPTIONS = {
         id: "eqrmss-pet-manager",
         classes: ["eqrmss", "pet-manager"],
@@ -92,26 +92,27 @@ export class EQRMSSPetManager extends ApplicationV2 {
     /**
      * Summon / dismiss button handlers.
      *
-     * NOTE:
-     * This method is retained from the existing EQRMSS implementation.
-     * If the pet manager is subsequently migrated fully to the
-     * ApplicationV2 event-handling model, this should be converted
-     * alongside the corresponding template rather than independently.
+     * ApplicationV2 render hook (replaces the V1-style
+     * activateListeners, which the framework never calls on V2 apps).
      *
-     * @param {HTMLElement|jQuery} html Rendered application HTML.
+     * @param {object} context Render context.
+     * @param {object} options Render options.
      */
-    activateListeners(html) {
-        super.activateListeners(html);
+    _onRender(context, options) {
+        super._onRender(context, options);
 
-        html.find(".pet-summon").click(ev => {
+        const html = this.element;
+        if (!html) return;
+
+        html.querySelectorAll(".pet-summon").forEach(el => el.addEventListener("click", ev => {
             const petId = ev.currentTarget.dataset.petId;
             this._summonPet(petId);
-        });
+        }));
 
-        html.find(".pet-dismiss").click(ev => {
+        html.querySelectorAll(".pet-dismiss").forEach(el => el.addEventListener("click", ev => {
             const petId = ev.currentTarget.dataset.petId;
             this._dismissPet(petId);
-        });
+        }));
     }
 
     /**
