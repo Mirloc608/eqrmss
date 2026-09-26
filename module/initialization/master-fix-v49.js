@@ -1,12 +1,9 @@
-
 /**
- * EQRMSS Master Fix v4.10 FINAL - No dynamic import, uses Hooks + instance patch
- * Fixes 404 issue by living in master-fix-v46.js which already exists
- * - Patches wizard dataService.initialize at instance level (after construction)
- * - Converts object->array for races/classes/cities/deities
- * - Patches sheets on renderActorSheet hook
+ * EQRMSS Master Fix v4.11 - FIXES races:0 even after v4.10
+ * Root cause: wizard.dataService is null at openWizard time, created inside _prepareContext
+ * So instance injection in openWizard never runs. Fix: patch _prepareContext to inject AFTER initialize
  */
-console.log("EQRMSS | Master Fix v4.10 | Loading");
+console.log("EQRMSS | Master Fix v4.11 | Loading");
 
 function toArray(obj) {
     if (Array.isArray(obj)) return obj;
@@ -36,7 +33,7 @@ function patchSheetToV13(cls, name) {
     if (!cls?.prototype) return false;
     if (cls.prototype._eqrmssSheetV13Patched) return true;
     const proto = cls.prototype;
-    console.log(`EQRMSS | Master Fix v4.10 | Patching sheet ${name} (${cls.name})`);
+    console.log(`EQRMSS | Master Fix v4.11 | Patching sheet ${name} (${cls.name})`);
     const origGetData = proto.getData;
     const origPrepareContext = proto._prepareContext;
     const origOnRender = proto._onRender;
@@ -91,18 +88,17 @@ function patchAllSheets() {
             }
         }
     } catch (e) {}
-    if (count>0) console.log(`EQRMSS | Master Fix v4.10 | Patched ${count} sheets`);
+    if (count>0) console.log(`EQRMSS | Master Fix v4.11 | Patched ${count} sheets`);
     return count;
 }
 
 Hooks.once("init", () => {
-    console.log("EQRMSS | Master Fix v4.10 | init");
+    console.log("EQRMSS | Master Fix v4.11 | init");
 });
 
 Hooks.once("ready", () => {
-    console.log("EQRMSS | Master Fix v4.10 | ready");
+    console.log("EQRMSS | Master Fix v4.11 | ready");
 
-    // Sheet patching
     const doPatch = () => patchAllSheets();
     setTimeout(doPatch, 500);
     setTimeout(doPatch, 2000);
@@ -112,181 +108,144 @@ Hooks.once("ready", () => {
         if (app.element && app.element.innerHTML.length < 300) {
             const cls = app.constructor;
             if (isOldSheet(cls)) {
-                console.log(`EQRMSS | Fix v4.10 renderActorSheet blank -> patching ${cls.name}`);
+                console.log(`EQRMSS | Fix v4.11 renderActorSheet blank -> patching ${cls.name}`);
                 patchSheetToV13(cls, cls.name);
                 setTimeout(() => app.render(true, { force: true }).catch(()=>{}), 150);
             }
         }
     });
 
-    // Wizard fix - THE CRITICAL PART
-    // Patch the data service CLASS prototype if we can find it in globalThis or via wizard instance
-    const patchDataServiceClass = () => {
-        const names = ['EQRMSSCharacterCreationData', 'CharacterCreationDataService', 'EQRMSSCharacterCreationWizardData', 'CharacterCreationWizardData'];
-        for (const name of names) {
-            const cls = globalThis[name];
-            if (cls?.prototype?.initialize && !cls.prototype._eqrmssV410Patched) {
-                console.log(`EQRMSS | Master Fix v4.10 | Patching ${name}.initialize`);
-                const origInit = cls.prototype.initialize;
-                cls.prototype.initialize = async function(...args) {
-                    let res = null;
-                    try { res = await origInit.apply(this, args); } catch(e) { console.warn(e); }
-                    // Force arrays from game.eqrmss
-                    const rCount = Array.isArray(this.races) ? this.races.length : Object.keys(this.races||{}).length;
-                    const cCount = Array.isArray(this.classes) ? this.classes.length : Object.keys(this.classes||{}).length;
-                    if (rCount === 0) {
-                        const arr = toArray(game.eqrmss?.races||{});
-                        if (arr.length>0) { this.races = arr; console.log(`EQRMSS | ${name} injected races ${arr.length} ARRAY`); }
-                    } else if (!Array.isArray(this.races)) {
-                        this.races = toArray(this.races);
-                    }
-                    if (cCount === 0) {
-                        const arr = toArray(game.eqrmss?.classes||{});
-                        if (arr.length>0) { this.classes = arr; console.log(`EQRMSS | ${name} injected classes ${arr.length} ARRAY`); }
-                    } else if (!Array.isArray(this.classes)) {
-                        this.classes = toArray(this.classes);
-                    }
-                    if (this.cities && !Array.isArray(this.cities)) this.cities = toArray(this.cities);
-                    if (this.deities && !Array.isArray(this.deities)) this.deities = toArray(this.deities);
-                    return res;
-                };
-                cls.prototype._eqrmssV410Patched = true;
-
-                // Also patch filterByExpansionGate
-                if (cls.prototype.filterByExpansionGate && !cls.prototype._eqrmssFilterPatched) {
-                    const orig = cls.prototype.filterByExpansionGate;
-                    cls.prototype.filterByExpansionGate = function(items, ...rest) {
-                        const arr = toArray(items);
-                        try { return orig.call(this, arr, ...rest); } catch { return arr; }
-                    };
-                    cls.prototype._eqrmssFilterPatched = true;
-                }
-                // Patch getContext
-                if (cls.prototype.getContext && !cls.prototype._eqrmssContextPatched) {
-                    const orig = cls.prototype.getContext;
-                    cls.prototype.getContext = async function(...a) {
-                        if (this.races && !Array.isArray(this.races)) this.races = toArray(this.races);
-                        if (this.classes && !Array.isArray(this.classes)) this.classes = toArray(this.classes);
-                        const ctx = await orig.apply(this, a);
-                        if (ctx) {
-                            if (ctx.races && !Array.isArray(ctx.races)) ctx.races = toArray(ctx.races);
-                            if (ctx.classes && !Array.isArray(ctx.classes)) ctx.classes = toArray(ctx.classes);
-                        }
-                        return ctx;
-                    };
-                    cls.prototype._eqrmssContextPatched = true;
-                }
-            }
-        }
-        // Patch global function
-        if (typeof globalThis.filterByExpansionGate === 'function' && !globalThis._eqrmssFilterPatched) {
-            const orig = globalThis.filterByExpansionGate;
-            globalThis.filterByExpansionGate = function(items, ...rest) {
-                const arr = toArray(items);
-                try { return orig(arr, ...rest); } catch { return arr; }
-            };
-            globalThis._eqrmssFilterPatched = true;
-        }
-    };
-
-    patchDataServiceClass();
-    setTimeout(patchDataServiceClass, 1000);
-
-    // Also patch wizard _prepareContext
+    // CRITICAL: Patch wizard _prepareContext to inject ARRAYS after dataService.initialize()
     const patchWizard = () => {
         const wcs = [globalThis.EQRMSSCharacterCreationWizard, globalThis.CharacterCreationWizard].filter(Boolean);
         for (const wc of wcs) {
-            if (wc?.prototype?._prepareContext && !wc.prototype._eqrmssV410WizardPatched) {
-                console.log(`EQRMSS | Master Fix v4.10 | Patching ${wc.name}._prepareContext`);
-                const orig = wc.prototype._prepareContext;
-                wc.prototype._prepareContext = async function(...args) {
-                    try {
-                        if (this.dataService) {
-                            if (this.dataService.races && !Array.isArray(this.dataService.races)) this.dataService.races = toArray(this.dataService.races);
-                            if (this.dataService.classes && !Array.isArray(this.dataService.classes)) this.dataService.classes = toArray(this.dataService.classes);
+            if (!wc?.prototype?._prepareContext) continue;
+            if (wc.prototype._eqrmssV411Patched) continue;
+            console.log(`EQRMSS | Master Fix v4.11 | Patching ${wc.name}._prepareContext to inject ARRAYS`);
+            const orig = wc.prototype._prepareContext;
+            wc.prototype._prepareContext = async function(...args) {
+                // Call original first - it creates dataService and calls initialize() which results in races:0
+                let ctx;
+                try {
+                    ctx = await orig.apply(this, args);
+                } catch (e) {
+                    console.warn(`EQRMSS | Original _prepareContext failed:`, e);
+                    ctx = {};
+                }
+
+                // NOW dataService exists - force inject ARRAYS from game.eqrmss
+                try {
+                    if (this.dataService) {
+                        const rCount = Array.isArray(this.dataService.races) ? this.dataService.races.length : Object.keys(this.dataService.races||{}).length;
+                        const cCount = Array.isArray(this.dataService.classes) ? this.dataService.classes.length : Object.keys(this.dataService.classes||{}).length;
+                        
+                        console.log(`EQRMSS | Master Fix v4.11 | _prepareContext: dataService has races=${rCount} classes=${cCount}, game has races=${Object.keys(game.eqrmss?.races||{}).length}`);
+
+                        if (rCount === 0 || !Array.isArray(this.dataService.races)) {
+                            const racesArr = toArray(game.eqrmss?.races||{});
+                            if (racesArr.length > 0) {
+                                this.dataService.races = racesArr;
+                                console.log(`EQRMSS | Master Fix v4.11 | INJECTED races ${racesArr.length} ARRAY into dataService`);
+                            }
                         }
-                        const ctx = await orig.apply(this, args);
+                        if (cCount === 0 || !Array.isArray(this.dataService.classes)) {
+                            const classesArr = toArray(game.eqrmss?.classes||{});
+                            if (classesArr.length > 0) {
+                                this.dataService.classes = classesArr;
+                                console.log(`EQRMSS | Master Fix v4.11 | INJECTED classes ${classesArr.length} ARRAY into dataService`);
+                            }
+                        }
+                        if (this.dataService.cities && !Array.isArray(this.dataService.cities)) {
+                            this.dataService.cities = toArray(this.dataService.cities);
+                        }
+                        if (this.dataService.deities && !Array.isArray(this.dataService.deities)) {
+                            this.dataService.deities = toArray(this.dataService.deities);
+                        }
+
+                        // Also fix context
                         if (ctx) {
-                            if (ctx.races && !Array.isArray(ctx.races)) ctx.races = toArray(ctx.races);
-                            if (ctx.classes && !Array.isArray(ctx.classes)) ctx.classes = toArray(ctx.classes);
+                            if (ctx.races && (!Array.isArray(ctx.races) || ctx.races.length===0)) {
+                                ctx.races = toArray(game.eqrmss?.races||ctx.races||{});
+                            }
+                            if (ctx.classes && (!Array.isArray(ctx.classes) || ctx.classes.length===0)) {
+                                ctx.classes = toArray(game.eqrmss?.classes||ctx.classes||{});
+                            }
+                            if (ctx.data) {
+                                if (ctx.data.races && (!Array.isArray(ctx.data.races) || ctx.data.races.length===0)) {
+                                    ctx.data.races = this.dataService.races;
+                                }
+                                if (ctx.data.classes && (!Array.isArray(ctx.data.classes) || ctx.data.classes.length===0)) {
+                                    ctx.data.classes = this.dataService.classes;
+                                }
+                            }
                         }
-                        return ctx;
-                    } catch (e) {
-                        console.error(e);
-                        return { races: toArray(game.eqrmss?.races||{}), classes: toArray(game.eqrmss?.classes||{}), cities: [], deities: [], error: e.message };
                     }
-                };
-                wc.prototype._eqrmssV410WizardPatched = true;
-            }
+                    
+                    // Patch filterByExpansionGate on the fly if global
+                    if (typeof globalThis.filterByExpansionGate === 'function' && !globalThis._eqrmssFilterPatched411) {
+                        const origFilter = globalThis.filterByExpansionGate;
+                        globalThis.filterByExpansionGate = function(items, ...rest) {
+                            const arr = toArray(items);
+                            try { return origFilter(arr, ...rest); } catch { return arr; }
+                        };
+                        globalThis._eqrmssFilterPatched411 = true;
+                    }
+                    // Also patch dataService's own filter if exists
+                    if (this.dataService?.filterByExpansionGate && !this.dataService._eqrmssFilterPatched411) {
+                        const origF = this.dataService.filterByExpansionGate.bind(this.dataService);
+                        this.dataService.filterByExpansionGate = function(items, ...rest) {
+                            const arr = toArray(items);
+                            try { return origF(arr, ...rest); } catch { return arr; }
+                        };
+                        this.dataService._eqrmssFilterPatched411 = true;
+                    }
+
+                } catch (e) {
+                    console.error(`EQRMSS | Master Fix v4.11 injection failed:`, e);
+                }
+
+                return ctx;
+            };
+            wc.prototype._eqrmssV411Patched = true;
         }
     };
-    patchWizard();
-    setTimeout(patchWizard, 1000);
 
-    // FINAL openWizard - instance level injection
+    patchWizard();
+    setTimeout(patchWizard, 500);
+    setTimeout(patchWizard, 1500);
+
+    // FINAL openWizard - simple, just creates wizard, _prepareContext does injection
     game.eqrmss = game.eqrmss || {};
     game.eqrmss.openWizard = async (actor=null) => {
-        console.log("EQRMSS | Master Fix v4.10 openWizard called");
-        patchDataServiceClass();
+        console.log("EQRMSS | Master Fix v4.11 openWizard called - _prepareContext will inject ARRAYS");
         patchWizard();
         let wizardClass = globalThis.EQRMSSCharacterCreationWizard || game.eqrmss.CharacterCreationWizard;
         if (!wizardClass) { ui.notifications.error("Wizard class not found"); return null; }
         try {
             const wizard = actor ? new wizardClass(actor) : new wizardClass();
-            if (wizard.dataService) {
-                // CRITICAL: Inject ARRAYS directly into instance BEFORE initialize runs again
-                const racesArr = toArray(game.eqrmss.races||{});
-                const classesArr = toArray(game.eqrmss.classes||{});
-                console.log(`EQRMSS | Master Fix v4.10 injecting ARRAYS: races ${racesArr.length}, classes ${classesArr.length}`);
-                
-                // Patch instance initialize to ALWAYS return arrays
-                const origInstInit = wizard.dataService.initialize?.bind(wizard.dataService);
-                wizard.dataService.initialize = async function() {
-                    let result = null;
-                    if (origInstInit) { try { result = await origInstInit(); } catch(e) { console.warn(e); } }
-                    // Force our data regardless of what orig did
-                    this.races = racesArr;
-                    this.classes = classesArr;
-                    if (!Array.isArray(this.cities)) this.cities = toArray(this.cities||game.eqrmss?.cities||{});
-                    if (!Array.isArray(this.deities)) this.deities = toArray(this.deities||{});
-                    console.log(`EQRMSS | Wizard DS after patched init: races=${this.races.length} ARRAY, classes=${this.classes.length} ARRAY`);
-                    return result;
-                };
-                
-                // Pre-set
-                wizard.dataService.races = racesArr;
-                wizard.dataService.classes = classesArr;
-            }
             await wizard.render(true);
-            console.log("EQRMSS | Master Fix v4.10 | Wizard rendered!");
+            console.log("EQRMSS | Master Fix v4.11 | Wizard rendered! dataService races=", wizard.dataService?.races?.length, "classes=", wizard.dataService?.classes?.length);
             return wizard;
         } catch (e) {
-            console.error("EQRMSS | Wizard v4.10 failed:", e);
+            console.error("EQRMSS | Wizard v4.11 failed:", e);
             ui.notifications.error(`Wizard failed: ${e.message}`);
             throw e;
         }
     };
 
-    console.log("EQRMSS | Master Fix v4.10 | Ready - game.eqrmss.openWizard() = v4.10 ARRAY fix");
+    console.log("EQRMSS | Master Fix v4.11 | Ready - game.eqrmss.openWizard() = v4.11");
 
     game.eqrmss.fixSheetsV13 = () => {
         const count = patchAllSheets();
         for (const a of game.actors.contents) { try { a.sheet?.close({ animate:false }); } catch {} }
         setTimeout(async () => {
             for (const a of game.actors.contents) {
-                try { await a.sheet?.render(true,{force:true}); console.log(`  ${a.name}: ${a.sheet?.element?.innerHTML?.length||0} chars`); } catch(e){}
+                try { await a.sheet?.render(true,{force:true}); } catch(e){}
             }
         }, 500);
         return count;
     };
-    game.eqrmss.debugSheets = () => {
-        console.log("=== SHEET DEBUG v4.10 ===");
-        console.log(CONFIG.Actor.sheetClasses);
-        for (const a of game.actors.contents) {
-            console.log(`${a.name}: ${a.sheet?.constructor.name} ${a.sheet?.element?.innerHTML?.length||0} chars`);
-        }
-    };
 });
 
-export const MasterFixV410 = { version: "4.10" };
-console.log("EQRMSS | Master Fix v4.10 loaded");
+export const MasterFixV411 = { version: "4.11" };
+console.log("EQRMSS | Master Fix v4.11 loaded");
