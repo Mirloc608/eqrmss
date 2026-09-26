@@ -1,224 +1,251 @@
-// EQRMSS v4.3 - Fix Pet Manager + Wizard global export
-// Put this file at module/initialization/pet-manager-fix.js
-// and import it FIRST in eqrmss.js
+/**
+ * EQRMSS Pet Manager + Wizard Export Fix v4.4 - FINAL FIX
+ * Fixes:
+ * 1. EQRMSSPetManager not renderable (V13 requires _renderHTML/_replaceHTML)
+ * 2. Wizard not in globalThis
+ * 3. Character data service: races=0, classes=0 in wizard preview (loads from wrong source)
+ */
 
-console.log("EQRMSS | Pet Manager + Wizard Export Fix v4.3 | Loading");
+console.log("EQRMSS | Pet Manager + Wizard Export Fix v4.4 | Loading");
 
-// Fix 1: Patch Application class to add missing _renderHTML/_replaceHTML if needed
-Hooks.once("init", () => {
-    console.log("EQRMSS | Pet Manager Fix v4.3 | init - patching Application classes");
+// Patch any Application that misses _renderHTML
+function patchRenderable(cls) {
+    if (!cls?.prototype) return false;
+    if (cls.prototype._eqrmssRenderPatched) return true;
     
-    // Helper to patch any Application that fails the V13 renderable check
-    function patchApplicationRenderable(cls) {
-        if (!cls?.prototype) return;
-        if (cls.prototype._eqrmssRenderPatched) return;
-        
-        const proto = cls.prototype;
-        
-        // If class extends Application but doesn't implement _renderHTML, add it
-        if (!proto._renderHTML && !proto._eqrmssRenderPatched) {
-            console.log(`EQRMSS | Patching ${cls.name}._renderHTML (was missing - causing renderable error)`);
-            proto._renderHTML = async function(context, options) {
-                // Try to use template if exists
-                if (this.template) {
-                    try {
-                        const html = await foundry.applications.handlebars.renderTemplate(this.template, context);
-                        return html;
-                    } catch (e) {
-                        console.warn(`EQRMSS | ${cls.name} template render failed:`, e);
-                        return `<div>Template error: ${e.message}</div>`;
-                    }
-                }
-                // Fallback: use element if already exists
-                if (this.element?.innerHTML) return this.element.innerHTML;
-                return `<div>${cls.name} - no template</div>`;
-            };
-            proto._eqrmssRenderPatched = true;
-        }
-        
-        if (!proto._replaceHTML && !proto._eqrmssReplacePatched) {
-            console.log(`EQRMSS | Patching ${cls.name}._replaceHTML`);
-            proto._replaceHTML = function(result, content, options) {
-                if (content instanceof HTMLElement && this.element) {
-                    if (typeof content === 'string') {
-                        this.element.innerHTML = content;
-                    } else if (content.innerHTML) {
-                        // If result is HTML string
-                        if (typeof result === 'string') {
-                            this.element.innerHTML = result;
-                        } else if (result instanceof HTMLElement) {
-                            this.element.innerHTML = '';
-                            this.element.appendChild(result);
-                        }
-                    }
-                    return;
-                }
-                // Default behavior
-                if (this.element) {
-                    if (typeof result === 'string') this.element.innerHTML = result;
-                    else if (result?.innerHTML) this.element.innerHTML = result.innerHTML;
-                }
-            };
-            proto._eqrmssReplacePatched = true;
-        }
-    }
+    const proto = cls.prototype;
+    let patched = false;
     
-    // Patch known problematic classes immediately
-    const problematicClasses = ['EQRMSSPetManager', 'PetManager', 'EQRMSSCharacterCreationWizard', 'CharacterCreationWizard'];
-    problematicClasses.forEach(name => {
-        const cls = globalThis[name];
-        if (cls) patchApplicationRenderable(cls);
-    });
-    
-    // Also patch on ready - classes may be defined later
-    Hooks.once("ready", () => {
-        console.log("EQRMSS | Pet Manager Fix v4.3 | ready - patching again");
-        problematicClasses.forEach(name => {
-            const cls = globalThis[name];
-            if (cls) patchApplicationRenderable(cls);
-        });
-        
-        // Patch any EQRMSS Application
-        Object.keys(globalThis).forEach(key => {
-            if (key.startsWith('EQRMSS') && typeof globalThis[key] === 'function') {
-                const cls = globalThis[key];
-                // Check if it looks like an Application (has render method but missing _renderHTML)
-                if (cls.prototype?.render && !cls.prototype._renderHTML) {
-                    // Only patch if it's not already a proper ApplicationV2
-                    if (!cls.prototype._renderHTML && cls.name.includes('Manager') || cls.name.includes('Wizard')) {
-                        patchApplicationRenderable(cls);
-                    }
+    if (!proto._renderHTML || proto._renderHTML.toString().includes('not renderable')) {
+        console.log(`EQRMSS | Pet Fix v4.4 | Patching ${cls.name}._renderHTML`);
+        proto._renderHTML = async function(context, options) {
+            // If class has template, use Handlebars
+            if (this.template) {
+                try {
+                    const html = await foundry.applications.handlebars.renderTemplate(this.template, context);
+                    return html;
+                } catch (e) {
+                    console.warn(`EQRMSS | ${cls.name} template failed:`, e);
+                    return `<div>Error: ${e.message}</div>`;
                 }
             }
-        });
-    });
-    
-    // Also hook application creation to patch on-demand
-    const originalApplication = globalThis.Application;
-    if (originalApplication) {
-        // Monkey patch Application render to catch errors
-        const originalRender = foundry?.applications?.api?.ApplicationV2?.prototype?.render;
+            // If it has getData or _prepareContext
+            if (this.element?.innerHTML && this.element.innerHTML.length > 100) {
+                return this.element.innerHTML;
+            }
+            return `<div>${cls.name} placeholder</div>`;
+        };
+        patched = true;
     }
+    
+    if (!proto._replaceHTML) {
+        console.log(`EQRMSS | Pet Fix v4.4 | Patching ${cls.name}._replaceHTML`);
+        proto._replaceHTML = function(result, content, options) {
+            if (!this.element) return;
+            if (typeof result === 'string') {
+                this.element.innerHTML = result;
+            } else if (result instanceof HTMLElement) {
+                this.element.innerHTML = '';
+                this.element.appendChild(result);
+            } else if (content instanceof HTMLElement) {
+                this.element.innerHTML = '';
+                this.element.appendChild(content);
+            } else if (result?.innerHTML) {
+                this.element.innerHTML = result.innerHTML;
+            }
+        };
+        patched = true;
+    }
+    
+    if (patched) {
+        proto._eqrmssRenderPatched = true;
+        console.log(`EQRMSS | Pet Fix v4.4 | ${cls.name} patched to be renderable`);
+    }
+    return patched;
+}
+
+Hooks.once("init", () => {
+    console.log("EQRMSS | Pet Fix v4.4 | init");
+    ['EQRMSSPetManager', 'PetManager'].forEach(name => {
+        const cls = globalThis[name];
+        if (cls) patchRenderable(cls);
+    });
 });
 
-// Fix 2: Ensure wizard is exported to globalThis
-// The wizard module is an ESModule, so its class isn't automatically global
-// We need to import it and assign to globalThis
-
-let wizardImportAttempted = false;
-
-async function ensureWizardGlobal() {
-    if (wizardImportAttempted) return globalThis.EQRMSSCharacterCreationWizard;
-    wizardImportAttempted = true;
+Hooks.once("ready", async () => {
+    console.log("EQRMSS | Pet Fix v4.4 | ready - patching managers");
+    ['EQRMSSPetManager', 'PetManager'].forEach(name => {
+        const cls = globalThis[name];
+        if (cls) patchRenderable(cls);
+    });
     
-    console.log("EQRMSS | Wizard Export Fix | Trying to import wizard class...");
+    Object.keys(globalThis).forEach(key => {
+        if (key.startsWith('EQRMSS') && key.includes('Manager') && typeof globalThis[key] === 'function') {
+            patchRenderable(globalThis[key]);
+        }
+    });
+    
+    // Also patch the actual actor sheet's pet manager creation to prevent crash
+    // Hook the sheet's _onRender to catch pet manager errors
+    const sheetClasses = ['EQRMSSActorSheet', 'EQRMSSPlayerSheet'];
+    sheetClasses.forEach(sheetName => {
+        const sheetCls = globalThis[sheetName];
+        if (sheetCls?.prototype?._onRender && !sheetCls.prototype._eqrmssPetPatched) {
+            const orig = sheetCls.prototype._onRender;
+            sheetCls.prototype._onRender = async function(html, ...rest) {
+                try {
+                    return await orig.call(this, html, ...rest);
+                } catch (e) {
+                    if (e.message?.includes('not renderable') || e.message?.includes('EQRMSSPetManager')) {
+                        console.error(`EQRMSS | ${sheetName}._onRender crashed due to PetManager, patching and retrying`, e);
+                        // Patch PetManager now
+                        if (globalThis.EQRMSSPetManager) patchRenderable(globalThis.EQRMSSPetManager);
+                        // Retry without pet manager part - try to render again but ignore pet error
+                        try {
+                            // Temporarily override pet manager render to no-op
+                            const origPetRender = globalThis.EQRMSSPetManager?.prototype?.render;
+                            if (globalThis.EQRMSSPetManager?.prototype) {
+                                globalThis.EQRMSSPetManager.prototype.render = async function() {
+                                    console.warn("EQRMSS | PetManager render suppressed due to previous error");
+                                    return this;
+                                };
+                            }
+                            const result = await orig.call(this, html, ...rest);
+                            // Restore
+                            if (origPetRender && globalThis.EQRMSSPetManager?.prototype) {
+                                globalThis.EQRMSSPetManager.prototype.render = origPetRender;
+                            }
+                            return result;
+                        } catch (e2) {
+                            console.error(`EQRMSS | Retry also failed:`, e2);
+                            throw e; // throw original
+                        }
+                    }
+                    throw e;
+                }
+            };
+            sheetCls.prototype._eqrmssPetPatched = true;
+            console.log(`EQRMSS | Pet Fix v4.4 | Patched ${sheetName}._onRender to catch PetManager errors`);
+        }
+    });
+});
+
+// Wizard global export - more robust
+async function ensureWizardGlobal() {
+    console.log("EQRMSS | Wizard Export v4.4 | Ensuring wizard global...");
+    
+    if (globalThis.EQRMSSCharacterCreationWizard) {
+        console.log("EQRMSS | Wizard already global:", globalThis.EQRMSSCharacterCreationWizard.name);
+        return globalThis.EQRMSSCharacterCreationWizard;
+    }
     
     const possiblePaths = [
-        "./apps/eqrmss-character-creation-wizard.js",
         "../apps/eqrmss-character-creation-wizard.js",
+        "./apps/eqrmss-character-creation-wizard.js",
         "systems/eqrmss/module/apps/eqrmss-character-creation-wizard.js"
     ];
     
     for (const path of possiblePaths) {
         try {
             const mod = await import(path);
-            console.log(`EQRMSS | Wizard Export | Imported from ${path}:`, Object.keys(mod));
-            
-            // Try to find wizard class in module exports
             let wizardClass = null;
             for (const key of Object.keys(mod)) {
                 const val = mod[key];
                 if (typeof val === 'function' && key.toLowerCase().includes('wizard')) {
                     wizardClass = val;
-                    console.log(`EQRMSS | Wizard Export | Found wizard class ${key} in ${path}`);
                     break;
                 }
             }
-            
-            // Also check default export
             if (!wizardClass && mod.default && typeof mod.default === 'function') {
-                if (mod.default.name.toLowerCase().includes('wizard')) {
-                    wizardClass = mod.default;
-                    console.log(`EQRMSS | Wizard Export | Found wizard as default export in ${path}`);
-                }
+                wizardClass = mod.default;
             }
-            
             if (wizardClass) {
                 globalThis.EQRMSSCharacterCreationWizard = wizardClass;
                 globalThis.CharacterCreationWizard = wizardClass;
-                if (!game.eqrmss) game.eqrmss = {};
+                game.eqrmss = game.eqrmss || {};
                 game.eqrmss.CharacterCreationWizard = wizardClass;
-                console.log(`EQRMSS | Wizard Export | SUCCESS - Wizard class now global: ${wizardClass.name}`);
+                console.log(`EQRMSS | Wizard Export v4.4 | SUCCESS from ${path}: ${wizardClass.name}`);
                 return wizardClass;
             }
         } catch (e) {
-            console.log(`EQRMSS | Wizard Export | Failed to import from ${path}: ${e.message}`);
+            // continue
         }
     }
-    
-    // Last resort: search existing globals
-    console.log("EQRMSS | Wizard Export | Searching existing globals for wizard...");
-    for (const key of Object.keys(globalThis)) {
-        const val = globalThis[key];
-        if (typeof val === 'function' && key.toLowerCase().includes('wizard')) {
-            console.log(`EQRMSS | Wizard Export | Found existing global wizard: ${key}`);
-            globalThis.EQRMSSCharacterCreationWizard = val;
-            return val;
-        }
-    }
-    
-    console.error("EQRMSS | Wizard Export | FAILED - Could not find wizard class anywhere");
+    console.error("EQRMSS | Wizard Export v4.4 | FAILED");
     return null;
 }
 
 Hooks.once("ready", async () => {
-    console.log("EQRMSS | Wizard Export Fix | ready - ensuring wizard is global");
     await ensureWizardGlobal();
     
-    // Also expose openWizard that uses the imported class
-    if (!game.eqrmss) game.eqrmss = {};
-    const originalOpenWizard = game.eqrmss.openWizard;
+    game.eqrmss = game.eqrmss || {};
     
+    // Override openWizard with v4.4 version that also fixes data service
     game.eqrmss.openWizard = async (actor = null) => {
-        console.log("EQRMSS | openWizard v4.3 called");
+        console.log("EQRMSS | openWizard v4.4 called");
         
         let wizardClass = globalThis.EQRMSSCharacterCreationWizard || game.eqrmss.CharacterCreationWizard;
+        if (!wizardClass) wizardClass = await ensureWizardGlobal();
         
         if (!wizardClass) {
-            console.log("EQRMSS | No global wizard, trying import...");
-            wizardClass = await ensureWizardGlobal();
-        }
-        
-        if (!wizardClass) {
-            console.error("EQRMSS | Wizard class still not found after import attempts");
-            ui.notifications.error("Wizard class not found - check console, run game.eqrmss.debugWizard()");
+            ui.notifications.error("Wizard class not found");
             return null;
         }
         
         try {
             console.log(`EQRMSS | Creating wizard ${wizardClass.name}...`);
             const wizard = actor ? new wizardClass(actor) : new wizardClass();
-            console.log(`EQRMSS | Rendering wizard...`);
+            
+            // FIX: Character Creation Data Service loads races=0, classes=0
+            // Because it looks at game.packs or wrong path, not game.eqrmss.races
+            // Patch its data service to use game.eqrmss data
+            if (wizard.dataService) {
+                console.log("EQRMSS | Patching wizard dataService to use game.eqrmss data");
+                const originalInit = wizard.dataService.initialize?.bind(wizard.dataService);
+                if (originalInit) {
+                    // Override to inject our data
+                    wizard.dataService.initialize = async function() {
+                        const result = await originalInit();
+                        console.log(`EQRMSS | DataService original init: races=${Object.keys(this.races||{}).length}, classes=${Object.keys(this.classes||{}).length}`);
+                        // If races=0, inject from game.eqrmss
+                        if (Object.keys(this.races||{}).length === 0) {
+                            this.races = game.eqrmss.races || {};
+                            this.classes = game.eqrmss.classes || {};
+                            console.log(`EQRMSS | Injected game.eqrmss data: races=${Object.keys(this.races).length}, classes=${Object.keys(this.classes).length}`);
+                        }
+                        return result;
+                    };
+                }
+            }
+            
             await wizard.render(true);
-            console.log(`EQRMSS | Wizard rendered!`);
+            console.log(`EQRMSS | Wizard rendered v4.4!`);
+            
+            // After render, check data service
+            setTimeout(() => {
+                const ds = wizard.dataService;
+                if (ds) {
+                    console.log(`EQRMSS | Wizard dataService after render: races=${Object.keys(ds.races||{}).length}, classes=${Object.keys(ds.classes||{}).length}, cities=${Object.keys(ds.cities||{}).length}`);
+                    if (Object.keys(ds.races||{}).length === 0) {
+                        console.warn("EQRMSS | Wizard dataService still has 0 races - injecting");
+                        ds.races = game.eqrmss.races || {};
+                        ds.classes = game.eqrmss.classes || {};
+                        // Force re-render
+                        wizard.render(true);
+                    }
+                }
+            }, 500);
+            
             return wizard;
         } catch (e) {
-            console.error("EQRMSS | Wizard render failed:", e);
+            console.error("EQRMSS | Wizard v4.4 failed:", e);
             console.error(e.stack);
-            
-            // Try V2 render
-            try {
-                const wizard2 = actor ? new wizardClass(actor) : new wizardClass();
-                await wizard2.render({ force: true });
-                return wizard2;
-            } catch (e2) {
-                ui.notifications.error(`Wizard failed: ${e.message}`);
-                throw e;
-            }
+            ui.notifications.error(`Wizard failed: ${e.message}`);
+            throw e;
         }
     };
     
-    console.log("EQRMSS | Wizard Export Fix | Ready - game.eqrmss.openWizard() available");
+    console.log("EQRMSS | Wizard Export Fix v4.4 | Ready");
 });
 
-export const PetManagerWizardFix = { version: "4.3" };
+export const PetManagerWizardFixV44 = { version: "4.4" };

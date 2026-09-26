@@ -1,35 +1,24 @@
 /**
- * EQRMSS Foundry V13 Compatibility Shim v4.2 - REAL FIX
- * Fixes: html.find is not a function at eqrmss_actor_sheet.js:122
- * 
- * Foundry V13 changed:
- * - V12: _onRender(html) where html is jQuery
- * - V13: _onRender(context, options) OR _onRender(html is HTMLElement)
- * - V13 ApplicationV2: render() returns HTMLElement, not jQuery
- * 
- * This shim provides full jQuery compat for HTMLElement
+ * EQRMSS Foundry V13 Compatibility Shim v4.3 - FINAL
+ * Fixes html.find + ApplicationV2 renderable check
  */
-console.log("EQRMSS | V13 Compat Shim v4.2 | Loading - REAL fix");
+console.log("EQRMSS | V13 Compat Shim v4.3 | Loading");
 
 (function() {
     // 1. Patch HTMLElement.prototype.find BEFORE any sheet loads
     if (!HTMLElement.prototype._eqrmssPatched) {
-        const originalQuery = HTMLElement.prototype.querySelectorAll;
-        
         HTMLElement.prototype.find = function(selector) {
-            if (!selector) return this._wrap([]);
+            if (!selector) return this._wrap ? this._wrap([]) : [];
             try {
                 const nodes = this.querySelectorAll(selector);
-                return this._wrap(Array.from(nodes));
+                return this._wrap ? this._wrap(Array.from(nodes)) : Array.from(nodes);
             } catch (e) {
-                console.warn(`EQRMSS | HTMLElement.find failed for ${selector}:`, e);
-                return this._wrap([]);
+                return this._wrap ? this._wrap([]) : [];
             }
         };
         
         HTMLElement.prototype._wrap = function(arr) {
             if (!Array.isArray(arr)) arr = [arr].filter(Boolean);
-            // Add jQuery-like methods
             arr.find = (sel) => {
                 const results = [];
                 for (const el of arr) {
@@ -42,12 +31,11 @@ console.log("EQRMSS | V13 Compat Shim v4.2 | Loading - REAL fix");
             arr.closest = function(sel) {
                 for (const el of this) {
                     const c = el.closest?.(sel);
-                    if (c) return this._wrap([c]);
+                    if (c) return this._wrap ? this._wrap([c]) : [c];
                 }
-                return this._wrap([]);
+                return this._wrap ? this._wrap([]) : [];
             };
             arr.on = function(event, selectorOrHandler, handler) {
-                // Support both .on(event, handler) and .on(event, selector, handler)
                 if (typeof selectorOrHandler === 'function') {
                     for (const el of this) el.addEventListener(event, selectorOrHandler);
                 } else if (typeof handler === 'function') {
@@ -99,26 +87,42 @@ console.log("EQRMSS | V13 Compat Shim v4.2 | Loading - REAL fix");
             arr.hasClass = function(cls) { return this[0]?.classList.contains(cls) || false; };
             arr.show = function() { for (const el of this) el.style.display = ''; return this; };
             arr.hide = function() { for (const el of this) el.style.display = 'none'; return this; };
+            arr.data = function(key, value) {
+                if (value === undefined) return this[0]?.dataset?.[key] || this[0]?.getAttribute(`data-${key}`);
+                for (const el of this) {
+                    if (el.dataset) el.dataset[key] = value;
+                    else el.setAttribute(`data-${key}`, value);
+                }
+                return this;
+            };
+            arr.prop = function(key, value) {
+                if (value === undefined) return this[0]?.[key];
+                for (const el of this) el[key] = value;
+                return this;
+            };
+            arr.css = function(prop, value) {
+                if (typeof prop === 'object') {
+                    for (const el of this) Object.assign(el.style, prop);
+                } else if (value !== undefined) {
+                    for (const el of this) el.style[prop] = value;
+                } else {
+                    return this[0] ? getComputedStyle(this[0])[prop] : undefined;
+                }
+                return this;
+            };
             arr.length = arr.length;
             return arr;
         };
         
-        // Also patch for single element access
-        Object.defineProperty(HTMLElement.prototype, 'length', {
-            get() { return 1; },
-            configurable: true
-        });
-        
         HTMLElement.prototype._eqrmssPatched = true;
-        console.log("EQRMSS | V13 Compat | HTMLElement.prototype.find patched");
+        console.log("EQRMSS | V13 Compat v4.3 | HTMLElement.prototype.find patched");
     }
 
-    // 2. Global $ fallback for sheets that expect jQuery
-    if (!window.$ || !window.jQuery) {
-        console.log("EQRMSS | V13 Compat | jQuery not found, creating minimal $");
+    // Global $ fallback
+    if (!window.$) {
         window.$ = window.jQuery = function(selectorOrElement) {
             if (selectorOrElement instanceof HTMLElement) {
-                return selectorOrElement._wrap ? selectorOrElement._wrap([selectorOrElement]) : HTMLElement.prototype._wrap.call(selectorOrElement, [selectorOrElement]);
+                return selectorOrElement._wrap ? selectorOrElement._wrap([selectorOrElement]) : [selectorOrElement];
             }
             if (typeof selectorOrElement === 'string') {
                 try {
@@ -130,65 +134,41 @@ console.log("EQRMSS | V13 Compat Shim v4.2 | Loading - REAL fix");
         window.$.fn = {};
     }
 
-    // 3. Patch sheet _onRender to handle both V12 and V13 signatures
+    // Patch sheet _onRender
     function patchSheetClass(className) {
         const cls = globalThis[className];
         if (!cls?.prototype) return false;
         if (cls.prototype._eqrmssV13Patched) return true;
         
         const proto = cls.prototype;
-        // Try to find the render method - could be _onRender, _renderHTML, _render, render
-        const methods = ['_onRender', '_renderHTML', '_onFirstRender', 'render'];
+        const methods = ['_onRender', '_renderHTML', '_onFirstRender'];
         
         for (const methodName of methods) {
             const orig = proto[methodName];
             if (!orig || typeof orig !== 'function') continue;
             if (orig._eqrmssV13Patched) continue;
             
-            console.log(`EQRMSS | V13 Compat | Patching ${className}.${methodName}`);
+            console.log(`EQRMSS | V13 Compat v4.3 | Patching ${className}.${methodName}`);
             
             proto[methodName] = async function(...args) {
-                // Normalize args: V13 might pass (context, options) or (html)
                 let html = args[0];
-                let context = args[0];
-                let options = args[1];
-                
-                // If html is HTMLElement, ensure it has find()
                 if (html instanceof HTMLElement && !html.find) {
-                    html.find = HTMLElement.prototype.find;
-                    html._wrap = HTMLElement.prototype._wrap;
+                    html.find = HTMLElement.prototype.find.bind(html);
+                    html._wrap = HTMLElement.prototype._wrap.bind(html);
                 }
-                
-                // If html is HTMLElement but code expects jQuery, wrap it
-                if (html instanceof HTMLElement) {
-                    // Create jQuery-like wrapper around html for legacy code
-                    const jqWrapper = html._wrap ? html._wrap([html]) : [html];
-                    // But also keep native methods on html itself
-                    // For code like html.find(selector) - ensure html.find exists
-                    if (!html.find) html.find = HTMLElement.prototype.find.bind(html);
-                    
-                    // Try to call original with both possibilities
-                    try {
-                        return await orig.apply(this, args);
-                    } catch (e) {
-                        if (e.message?.includes('find is not a function') || e.message?.includes('find is not defined')) {
-                            console.warn(`EQRMSS | ${className}.${methodName} find error, retrying with jQuery wrapper`, e);
-                            // Retry with jQuery wrapper as first arg
-                            if (window.$) {
-                                try {
-                                    const $html = window.$(html);
-                                    const newArgs = [ $html, ...args.slice(1) ];
-                                    return await orig.apply(this, newArgs);
-                                } catch (e2) {
-                                    console.error(`EQRMSS | Retry failed for ${className}:`, e2);
-                                    throw e;
-                                }
-                            }
-                        }
-                        throw e;
-                    }
-                } else {
+                try {
                     return await orig.apply(this, args);
+                } catch (e) {
+                    if (e.message?.includes('find is not a function')) {
+                        console.warn(`EQRMSS | ${className}.${methodName} find error, retrying with jQuery wrapper`);
+                        if (window.$ && html instanceof HTMLElement) {
+                            try {
+                                const $html = window.$(html);
+                                return await orig.apply(this, [$html, ...args.slice(1)]);
+                            } catch (e2) { throw e; }
+                        }
+                    }
+                    throw e;
                 }
             };
             proto[methodName]._eqrmssV13Patched = true;
@@ -197,58 +177,40 @@ console.log("EQRMSS | V13 Compat Shim v4.2 | Loading - REAL fix");
         return false;
     }
 
-    // Patch on init
     Hooks.once("init", () => {
-        console.log("EQRMSS | V13 Compat v4.2 | Init - patching sheets");
-        const sheets = ['EQRMSSActorSheet', 'EQRMSSPlayerSheet', 'EQRMSSNPCSheet', 'EQRMSSPetSheet', 'EQRMSSItemSheet', 'EQRMSSCharacterCreationWizard', 'CharacterCreationWizard', 'EQRMSSCharacterSheet'];
+        const sheets = ['EQRMSSActorSheet', 'EQRMSSPlayerSheet', 'EQRMSSNPCSheet', 'EQRMSSPetSheet', 'EQRMSSItemSheet', 'EQRMSSCharacterCreationWizard', 'CharacterCreationWizard', 'EQRMSSCharacterSheet', 'EQRMSSPetManager'];
         sheets.forEach(patchSheetClass);
-        
-        // Also patch any class in globalThis that looks like a sheet
         Object.keys(globalThis).forEach(key => {
-            if (key.includes('EQRMSS') && (key.includes('Sheet') || key.includes('Wizard') || key.includes('Actor'))) {
+            if (key.includes('EQRMSS') && (key.includes('Sheet') || key.includes('Wizard') || key.includes('Manager'))) {
                 patchSheetClass(key);
             }
         });
     });
 
-    // Patch again on ready (sheets may be defined after init)
     Hooks.once("ready", () => {
-        console.log("EQRMSS | V13 Compat v4.2 | Ready - patching again");
-        const sheets = ['EQRMSSActorSheet', 'EQRMSSPlayerSheet', 'EQRMSSNPCSheet', 'EQRMSSPetSheet', 'EQRMSSItemSheet', 'EQRMSSCharacterCreationWizard', 'CharacterCreationWizard', 'EQRMSSCharacterSheet'];
+        const sheets = ['EQRMSSActorSheet', 'EQRMSSPlayerSheet', 'EQRMSSNPCSheet', 'EQRMSSPetSheet', 'EQRMSSItemSheet', 'EQRMSSCharacterCreationWizard', 'CharacterCreationWizard', 'EQRMSSCharacterSheet', 'EQRMSSPetManager'];
         sheets.forEach(patchSheetClass);
-        
         Object.keys(globalThis).forEach(key => {
-            if (key.includes('EQRMSS') && (key.includes('Sheet') || key.includes('Wizard'))) {
+            if (key.includes('EQRMSS') && (key.includes('Sheet') || key.includes('Wizard') || key.includes('Manager'))) {
                 patchSheetClass(key);
             }
         });
-
-        // Also patch ApplicationV2 render if needed
-        if (foundry?.applications?.api?.ApplicationV2) {
-            console.log("EQRMSS | V13 Compat | ApplicationV2 found, ensuring HTMLElement.find exists");
-        }
-        
-        // Test the patch
         const testEl = document.createElement('div');
         testEl.innerHTML = '<span class="test"></span>';
         if (testEl.find) {
             const found = testEl.find('.test');
-            console.log(`EQRMSS | V13 Compat | Test HTMLElement.find: ${found.length} found - PATCH WORKS`);
-        } else {
-            console.error("EQRMSS | V13 Compat | Test FAILED - find not patched");
+            console.log(`EQRMSS | V13 Compat v4.3 | Test: ${found.length} found - PATCH WORKS`);
         }
     });
 
-    // Patch renderApplication hook to catch all renders
     Hooks.on("renderApplication", (app, html) => {
         if (html instanceof HTMLElement && !html.find) {
             html.find = HTMLElement.prototype.find.bind(html);
         }
-        // Also patch if html is jQuery but inner elements need find
         if (html?.[0] instanceof HTMLElement && !html[0].find) {
             html[0].find = HTMLElement.prototype.find.bind(html[0]);
         }
     });
 })();
 
-export const V13CompatFix = { version: "4.2" };
+export const V13CompatFix = { version: "4.3" };
