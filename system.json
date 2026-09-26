@@ -1,241 +1,351 @@
-console.log("EQRMSS | Initialize Data Loaders v4.14 | Starting - Wizard+Sheet+LazyGeo fix - NO TLA");
-
-let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null;
-let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null;
-let modulesLoaded = false;
-
-async function tryImport(paths) {
-    for (const p of paths) {
-        try { 
-            const m = await import(p); 
-            if (m) {
-                console.log(`EQRMSS | Loaded module: ${p}`);
-                return m; 
-            }
-        } catch (e) {
-            // console.log(`Failed ${p}: ${e.message}`);
-        }
+{
+  "id": "eqrmss",
+  "title": "EverQuest - Rolemaster Standard System",
+  "description": "v4.14 FIX system.json Expecting ; error - removed top-level await from initialize-data-loaders.js, filtered race-schema, pet manager aggressive patch, wizard 17 ARRAY",
+  "version": "1.0.20",
+  "url": "https://github.com/Mirloc608/eqrmss",
+  "authors": [
+    {
+      "name": "Mirloc608",
+      "url": "https://github.com/Mirloc608"
     }
-    return null;
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+  "scripts": [],
+  "esmodules": [
+    "eqrmss.js",
+    "module/apps/eqrmss-character-creation-wizard.js",
+    "module/apps/eqrmss-character-creation-wizard-data.js",
+    "module/apps/eqrmss-character-creation-wizard-rules.js",
+    "module/apps/eqrmss-character-creation-wizard-finalizer.js"
+  ],
+  "styles": [
+    "styles/eqrmss.css",
+    "styles/eqrmss-character-creation-wizard.css"
+  ],
+  "packs": [
+    {
+      "name": "skills",
+      "label": "EQ Skills",
+      "system": "eqrmss",
+      "path": "./packs/abilities/skills.db",
+      "type": "Item"
+    },
+    {
+      "name": "skill_categories",
+      "label": "EQ Skill Categories",
+      "system": "eqrmss",
+      "path": "./packs/abilities/skill_categories.db",
+      "type": "Item"
+    },
+    {
+      "name": "aa",
+      "label": "EQ Alternate Advancement",
+      "system": "eqrmss",
+      "path": "./packs/abilities/aa.db",
+      "type": "Item"
+    },
+    {
+      "name": "spells",
+      "label": "EQ Spells",
+      "system": "eqrmss",
+      "path": "./packs/abilities/spells.db",
+      "type": "Item"
+    },
+    {
+      "name": "songs",
+      "label": "EQ Bard Songs",
+      "system": "eqrmss",
+      "path": "./packs/abilities/songs.db",
+      "type": "Item"
+    },
+    {
+      "name": "eqrmss-abilities",
+      "label": "EQRMSS Abilities",
+      "system": "eqrmss",
+      "path": "./packs/abilities/eqrmss-abilities.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_bard",
+      "label": "EQ Bard Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/bard-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_beastlord",
+      "label": "EQ Beastlord Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/beastlord-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_berserker",
+      "label": "EQ Berserker Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/berserker-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_cleric",
+      "label": "EQ Cleric Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/cleric-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_druid",
+      "label": "EQ Druid Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/druid-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_enchanter",
+      "label": "EQ Enchanter Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/enchanter-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_magician",
+      "label": "EQ Magician Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/magician-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_monk",
+      "label": "EQ Monk Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/monk-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_necromancer",
+      "label": "EQ Necromancer Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/necromancer-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_paladin",
+      "label": "EQ Paladin Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/paladin-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_ranger",
+      "label": "EQ Ranger Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/ranger-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_rogue",
+      "label": "EQ Rogue Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/rogue-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_shadowknight",
+      "label": "EQ Shadowknight Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/shadowknight-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_shaman",
+      "label": "EQ Shaman Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/shaman-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_warrior",
+      "label": "EQ Warrior Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/warrior-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "combat_actions_wizard",
+      "label": "EQ Wizard Combat Actions",
+      "system": "eqrmss",
+      "path": "./packs/abilities/combat-actions/wizard-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "weapons",
+      "label": "EQ Weapons",
+      "system": "eqrmss",
+      "path": "./packs/items/weapons.db",
+      "type": "Item"
+    },
+    {
+      "name": "armor",
+      "label": "EQ Armor",
+      "system": "eqrmss",
+      "path": "./packs/items/armor.db",
+      "type": "Item"
+    },
+    {
+      "name": "shields",
+      "label": "EQ Shields",
+      "system": "eqrmss",
+      "path": "./packs/items/shields.db",
+      "type": "Item"
+    },
+    {
+      "name": "jewelry",
+      "label": "EQ Jewelry",
+      "system": "eqrmss",
+      "path": "./packs/items/jewelry.db",
+      "type": "Item"
+    },
+    {
+      "name": "consumables",
+      "label": "EQ Consumables",
+      "system": "eqrmss",
+      "path": "./packs/items/consumables.db",
+      "type": "Item"
+    },
+    {
+      "name": "instruments",
+      "label": "EQ Bard Instruments",
+      "system": "eqrmss",
+      "path": "./packs/items/instruments.db",
+      "type": "Item"
+    },
+    {
+      "name": "actor_classes",
+      "label": "EQ Classes",
+      "system": "eqrmss",
+      "path": "./packs/actors/classes.db",
+      "type": "Item"
+    },
+    {
+      "name": "actor_races",
+      "label": "EQ Races",
+      "system": "eqrmss",
+      "path": "./packs/actors/races.db",
+      "type": "Item"
+    },
+    {
+      "name": "cities",
+      "label": "Cities",
+      "system": "eqrmss",
+      "path": "./packs/world/cities.db",
+      "type": "Item"
+    },
+    {
+      "name": "actor_npcs",
+      "label": "EQ NPCs",
+      "system": "eqrmss",
+      "path": "./packs/actors/npcs.db",
+      "type": "Actor"
+    },
+    {
+      "name": "actor_pets",
+      "label": "EQ Pets",
+      "system": "eqrmss",
+      "path": "./packs/actors/pets.db",
+      "type": "Actor"
+    },
+    {
+      "name": "templates",
+      "label": "EQRMSS Templates",
+      "system": "eqrmss",
+      "path": "./packs/templates.db",
+      "type": "Item"
+    },
+    {
+      "name": "languages",
+      "label": "EQ Languages",
+      "system": "eqrmss",
+      "path": "./packs/world/languages.db",
+      "type": "Item"
+    },
+    {
+      "name": "factions",
+      "label": "EQ Factions",
+      "system": "eqrmss",
+      "path": "./packs/world/factions.db",
+      "type": "Item"
+    },
+    {
+      "name": "deities",
+      "label": "EQ Deities",
+      "system": "eqrmss",
+      "path": "./packs/world/deities.db",
+      "type": "Item"
+    },
+    {
+      "name": "training_packages",
+      "label": "EQ Training Packages",
+      "system": "eqrmss",
+      "path": "./packs/world/training_packages.db",
+      "type": "Item"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "npc": {},
+      "companion": {},
+      "pet": {},
+      "mercenary": {},
+      "*": {}
+    },
+    "Item": {
+      "weapon": {},
+      "armor": {},
+      "shield": {},
+      "jewelry": {},
+      "consumable": {},
+      "instrument": {},
+      "skill": {},
+      "skill_category": {},
+      "spell": {},
+      "song": {},
+      "aa": {},
+      "class": {},
+      "race": {},
+      "language": {},
+      "deity": {},
+      "faction": {},
+      "training_package": {},
+      "herb_or_poison": {},
+      "transport": {},
+      "combat_action": {},
+      "*": {}
+    }
+  },
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "license": "LICENSE",
+  "flags": {
+    "eqrmss": {
+      "schemaVersion": 2
+    }
+  },
+  "manifest": "https://raw.githubusercontent.com/Mirloc608/eqrmss/main/system.json",
+  "download": "https://github.com/Mirloc608/eqrmss/archive/refs/heads/main.zip",
+  "readme": "https://github.com/Mirloc608/eqrmss/blob/main/README.md",
+  "changelog": "https://github.com/Mirloc608/eqrmss/blob/main/CHANGELOG.md"
 }
-
-function resolveLoader(mod, ...names) {
-    if (!mod) return null;
-    for (const n of names) { if (mod[n]) return mod[n]; }
-    if (mod.default && typeof mod.default.load === 'function') return mod.default;
-    if (mod.default && typeof mod.default === 'object' && (mod.default.classes || mod.default.races || mod.default.spells)) return mod.default;
-    for (const k of Object.keys(mod)) {
-        const v = mod[k];
-        if (v && typeof v.load === 'function') return v;
-    }
-    return null;
-}
-
-async function loadModules() {
-    if (modulesLoaded) return;
-    console.log("EQRMSS | Data Loaders | Loading loader modules...");
-    AbilityModule = await tryImport(['../data/loaders/ability-loader.js','../data/abilities/ability-loader.js']);
-    ClassModule = await tryImport(['../data/loaders/class-loader.js','../data/classes/class-loader.js']);
-    SpellModule = await tryImport(['../data/loaders/spell-loader.js','../data/spells/spell-loader.js']);
-    RaceModule = await tryImport(['../data/loaders/race-loader.js','../data/races/race-loader.js','../data/loaders/races-loader.js']);
-    SkillModule = await tryImport([
-        '../data/loaders/skill-loader.js',
-        '../data/skills/skill-loader.js',
-        '../../module/data/loaders/skill-loader.js',
-        '../data/loaders/skills-loader.js',
-        './skill-loader.js'
-    ]);
-    AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
-    ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
-    SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
-    RaceLoader = resolveLoader(RaceModule, 'RaceLoader','EQRMSSRaceLoader','EQRMSS_RACE_LOADER','RacesLoader');
-    SkillLoader = resolveLoader(SkillModule, 'SkillLoader','EQRMSSSkillLoader','EQRMSS_SKILL_LOADER');
-    modulesLoaded = true;
-}
-
-// Fallback manual race loader
-async function manualLoadRaces() {
-    console.log("EQRMSS | Manual race load fallback");
-    const RACES = {};
-    try {
-        const FilePickerImpl = foundry?.applications?.apps?.FilePicker?.implementation ?? globalThis.FilePicker;
-        if (!FilePickerImpl) return RACES;
-        const tryPaths = ["systems/eqrmss/module/data/races","systems/eqrmss/templates/data/races"];
-        for (const basePath of tryPaths) {
-            try {
-                const browse = await FilePickerImpl.browse("data", basePath);
-                for (const f of browse.files.filter(f=>f.endsWith('.json'))) {
-                    try {
-                        const r = await fetch(f);
-                        if (!r.ok) continue;
-                        const txt = await r.text();
-                        if (!txt || txt.trim()==='' || txt.includes('[object Object]')) continue;
-                        const j = JSON.parse(txt);
-                        const id = f.split('/').pop().replace('.json','').toLowerCase();
-                        if (id==='race-schema' || id==='schema' || id==='index' || id.includes('schema')) continue;
-                        if (Array.isArray(j)) { for (const item of j) { const key = (item.id||item.name||id).toLowerCase(); if (key.includes('schema')) continue; RACES[key]=item; } }
-                        else if (j.races) { 
-                            for (const [k,v] of Object.entries(j.races)) {
-                                if (k.toLowerCase().includes('schema')) continue;
-                                RACES[k]=v;
-                            }
-                        }
-                        else { RACES[id]=j; }
-                    } catch {}
-                }
-                if (Object.keys(RACES).length>0) break;
-            } catch {}
-        }
-        console.log(`EQRMSS | Manual races: ${Object.keys(RACES).length} [${Object.keys(RACES).join(', ')}]`);
-        return RACES;
-    } catch { return {}; }
-}
-
-// Fallback manual skill loader
-async function manualLoadSkills() {
-    console.log("EQRMSS | Manual skill load fallback - scanning skills folder");
-    const SKILLS = {};
-    try {
-        const FilePickerImpl = foundry?.applications?.apps?.FilePicker?.implementation ?? globalThis.FilePicker;
-        if (!FilePickerImpl) return SKILLS;
-        const tryPaths = ["systems/eqrmss/module/data/skills","systems/eqrmss/templates/data/skills"];
-        for (const basePath of tryPaths) {
-            try {
-                const browse = await FilePickerImpl.browse("data", basePath);
-                for (const f of browse.files.filter(f=>f.endsWith('.json'))) {
-                    try {
-                        const r = await fetch(f);
-                        if (!r.ok) continue;
-                        const txt = await r.text();
-                        if (!txt || txt.trim()==='') continue;
-                        const j = JSON.parse(txt);
-                        const id = f.split('/').pop().replace('.json','').toLowerCase();
-                        if (['index','manifest'].includes(id)) continue;
-                        SKILLS[id]=j;
-                    } catch {}
-                }
-                for (const dir of browse.dirs) {
-                    try {
-                        const sb = await FilePickerImpl.browse("data", dir);
-                        const catId = dir.split('/').pop().toLowerCase();
-                        for (const f of sb.files.filter(f=>f.endsWith('.json'))) {
-                            try {
-                                const r = await fetch(f);
-                                if (!r.ok) continue;
-                                const j = JSON.parse(await r.text());
-                                const id = f.split('/').pop().replace('.json','').toLowerCase();
-                                SKILLS[`${catId}.${id}`]=j;
-                            } catch {}
-                        }
-                    } catch {}
-                }
-                if (Object.keys(SKILLS).length>0) break;
-            } catch {}
-        }
-        console.log(`EQRMSS | Manual skills: ${Object.keys(SKILLS).length}`);
-        return SKILLS;
-    } catch { return {}; }
-}
-
-export async function initializeDataLoaders() {
-    console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
-    await loadModules();
-    game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false };
-
-    if (ClassLoader) {
-        try {
-            if (typeof ClassLoader.load === 'function') await ClassLoader.load();
-            else if (ClassLoader.classes) { game.eqrmss.classes = ClassLoader.classes; }
-            game.eqrmss._loadStatus.classes = true;
-            console.log(`EQRMSS | Classes ready: ${Object.keys(game.eqrmss.classes||{}).length}`);
-        } catch (e) { console.error("Class load failed", e); }
-    }
-
-    if (RaceLoader) {
-        try {
-            if (typeof RaceLoader.load === 'function') await RaceLoader.load();
-            else if (RaceLoader.races) { game.eqrmss.races = RaceLoader.races; }
-            else if (typeof RaceLoader === 'object' && !RaceLoader.load) { game.eqrmss.races = RaceLoader; }
-            // Filter race-schema here too
-            if (game.eqrmss.races) {
-                for (const k of Object.keys(game.eqrmss.races)) {
-                    if (k.toLowerCase().includes('schema')) delete game.eqrmss.races[k];
-                }
-            }
-            game.eqrmss._loadStatus.races = true;
-            console.log(`EQRMSS | Races ready: ${Object.keys(game.eqrmss.races||{}).length} [${Object.keys(game.eqrmss.races||{}).join(', ')}]`);
-        } catch (e) { console.error("Race loader failed, trying manual", e); game.eqrmss.races = await manualLoadRaces(); }
-    } else {
-        game.eqrmss.races = await manualLoadRaces();
-        game.eqrmss._loadStatus.races = true;
-        console.log(`EQRMSS | Races ready (manual): ${Object.keys(game.eqrmss.races||{}).length}`);
-    }
-
-    if (AbilityLoader) {
-        try {
-            if (typeof AbilityLoader.load === 'function') await AbilityLoader.load();
-            else if (AbilityLoader.abilities) { game.eqrmss.abilities = AbilityLoader.abilities; }
-            game.eqrmss._loadStatus.abilities = true;
-            console.log(`EQRMSS | Abilities ready: ${Object.keys(game.eqrmss.abilities||{}).length} classes`);
-        } catch (e) { console.error("Ability load failed", e); }
-    }
-
-    if (SpellLoader) {
-        try {
-            if (typeof SpellLoader.load === 'function') await SpellLoader.load();
-            game.eqrmss._loadStatus.spells = true;
-            console.log(`EQRMSS | Spells ready: ${game.eqrmss.spells ? Object.keys(game.eqrmss.spells).length : 0} classes, total ${Object.values(game.eqrmss.spells||{}).reduce((a,b)=>a+(b?.length||0),0)} spells`);
-        } catch (e) { console.error("Spell load failed", e); }
-    }
-
-    if (SkillLoader) {
-        try {
-            if (typeof SkillLoader.load === 'function') await SkillLoader.load();
-            game.eqrmss._loadStatus.skills = true;
-            console.log(`EQRMSS | Skills ready via loader`);
-        } catch (e) { console.warn("Skill loader failed, manual fallback", e); game.eqrmss.skills = await manualLoadSkills(); game.eqrmss._loadStatus.skills = true; }
-    } else {
-        console.log("EQRMSS | SkillLoader module not found - using manual scan (fixes 404)");
-        game.eqrmss.skills = await manualLoadSkills();
-        game.eqrmss._loadStatus.skills = true;
-        console.log(`EQRMSS | Skills ready (manual): ${Object.keys(game.eqrmss.skills||{}).length}`);
-    }
-
-    if (!game.eqrmss.races) game.eqrmss.races = {};
-    if (!game.eqrmss.classes) game.eqrmss.classes = {};
-    if (!game.eqrmss.spells) game.eqrmss.spells = {};
-    if (!game.eqrmss.abilities) game.eqrmss.abilities = {};
-    if (!game.eqrmss.skills) game.eqrmss.skills = {};
-
-    // Final filter
-    for (const k of Object.keys(game.eqrmss.races)) {
-        if (k.toLowerCase().includes('schema')) delete game.eqrmss.races[k];
-    }
-
-    game.eqrmss.data = game.eqrmss.data || {};
-    game.eqrmss.data.races = game.eqrmss.races;
-    game.eqrmss.data.classes = game.eqrmss.classes;
-    game.eqrmss.data.spells = game.eqrmss.spells;
-    game.eqrmss.data.abilities = game.eqrmss.abilities;
-    game.eqrmss.data.skills = game.eqrmss.skills;
-
-    console.log("EQRMSS | initializeDataLoaders() v4.14 complete", game.eqrmss._loadStatus);
-    Hooks.callAll("eqrmss:dataLoadersReady", game.eqrmss);
-    setTimeout(() => Hooks.callAll("eqrmss:dataLoadersReady", game.eqrmss), 500);
-}
-
-export const initializeEQRMSSDataLoaders = initializeDataLoaders;
-export const initializeDataLoader = initializeDataLoaders;
-export const initDataLoaders = initializeDataLoaders;
-export const EQRMSSDataLoader = { initialize: initializeDataLoaders, initializeDataLoaders };
-
-// For backwards compat - getters that lazy-load
-export function getAbilityLoader() { return AbilityLoader; }
-export function getClassLoader() { return ClassLoader; }
-export function getSpellLoader() { return SpellLoader; }
-export function getRaceLoader() { return RaceLoader; }
-export function getSkillLoader() { return SkillLoader; }
-
-export { AbilityLoader, ClassLoader, SpellLoader, RaceLoader, SkillLoader };
-export default { initializeDataLoaders, initializeEQRMSSDataLoaders: initializeDataLoaders, get AbilityLoader() { return AbilityLoader; }, get ClassLoader() { return ClassLoader; }, get SpellLoader() { return SpellLoader; }, get RaceLoader() { return RaceLoader; } };
