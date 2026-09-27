@@ -24,7 +24,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
     static DEFAULT_OPTIONS = {
         classes: ["eqrmss", "sheet", "actor", "player"],
         position: {
-            width: 1000,
+            width: 800,
             height: 850
         },
         window: {
