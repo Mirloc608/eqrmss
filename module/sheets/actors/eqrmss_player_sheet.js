@@ -55,9 +55,6 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         skills: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-skills.html"
         },
-        skillsEngine: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-skills-engine.html"
-        },
         status: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-status.html"
         },
@@ -216,7 +213,6 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }
 
         // Attach Skill Engine data
-        context.skillsEngine = skillModels;
         context.skills = skillModels;
 
         // ------------------------------------------------------------
