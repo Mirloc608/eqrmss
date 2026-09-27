@@ -12,8 +12,6 @@
 
 import "./module/initialization/v13-compat-shim.js";
 import "./module/initialization/master-fix-v46.js";
-import "./module/initialization/pet-manager-fix.js";
-import "./module/initialization/sheet-v13-final-fix.js";
 import "./module/initialization/sheet-wizard-fix.js";
 import "./module/initialization/wizard-fix.js";
 
