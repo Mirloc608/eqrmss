@@ -2,11 +2,13 @@
 // EQRMSS Actor Sheet — Tabs Helper
 // ============================================================================
 //
-// Responsibilities:
-// - Activate Foundry's tab controller
-// - Support right‑side vertical tab bar
-// - Ensure tab switching works after every render
-// - Provide safe DOM access under ApplicationV2
+// Single tab controller for the player sheet (Phase 4 consolidation).
+//
+// - ONE implementation: nav buttons toggle .active on the matching
+//   [data-tab] content panels. No hand-rolled switching elsewhere.
+// - Correct selectors for the PARTS-based sheet structure, where each
+//   tab panel is a part root (no .sheet-body wrapper).
+// - Persists the last active tab across re-renders via sheet._lastActiveTab.
 //
 // ============================================================================
 
@@ -21,41 +23,48 @@ export class EQRMSSActorTabsHelper {
     // ACTIVATE TABS
     // =========================================================================
     activate() {
-
         const html = this.sheet.element;
         if (!html) return;
 
-        // ------------------------------------------------------------
-        // Right‑side tab bar selector
-        // ------------------------------------------------------------
-        const navSelector     = ".eqrmss-tabs-right .tabs";
-        const contentSelector = ".sheet-body";
+        const nav = html.querySelector("nav.sheet-tabs[data-group]");
+        if (!nav) return;
 
-        // Use the simple Tabs API provided by Foundry
-        try {
-            const TabsCls = foundry?.applications?.ux?.Tabs || foundry?.applications?.Tabs || window?.Tabs || Tabs;
-            const tabs = new TabsCls({
-                navSelector,
-                contentSelector,
-                initial: "record"
+        // Content panels: .tab elements carrying data-tab, excluding anything
+        // nested inside the nav itself (defensive; nav should be buttons only).
+        const panels = [...html.querySelectorAll(".tab[data-tab]")]
+            .filter(el => !nav.contains(el));
+
+        const show = (name) => {
+            this.sheet._lastActiveTab = name;
+            nav.querySelectorAll("[data-tab]").forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.tab === name);
             });
+            panels.forEach(panel => {
+                panel.classList.toggle("active", panel.dataset.tab === name);
+            });
+        };
 
-            // Bind safely (support jQuery element or raw element)
-            tabs.bind((html && html[0]) || html);
-            this.sheet._tabs = tabs;
-        }
-        catch (err) {
-            console.warn("eqrmss | Tabs activation failed", err);
-        }
+        nav.querySelectorAll("[data-tab]").forEach(btn => {
+            // Avoid double-binding across re-renders.
+            if (btn.dataset.eqrmssTabBound) return;
+            btn.dataset.eqrmssTabBound = "true";
+            btn.addEventListener("click", ev => {
+                ev.preventDefault();
+                const name = btn.dataset.tab;
+                if (name) show(name);
+            });
+        });
 
+        show(this.sheet._lastActiveTab || "main");
     }
 
     // =========================================================================
-    // PROGRAMMATIC TAB SWITCHING (optional)
+    // PROGRAMMATIC TAB SWITCHING
     // =========================================================================
     switchTo(tabName) {
-        if (this.sheet._tabs) {
-            this.sheet._tabs.activate(tabName);
-        }
+        const html = this.sheet.element;
+        if (!html || !tabName) return;
+        const btn = html.querySelector(`nav.sheet-tabs [data-tab="${tabName}"]`);
+        if (btn) btn.click();
     }
 }

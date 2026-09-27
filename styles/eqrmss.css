@@ -77,6 +77,17 @@
   display: grid !important;
 }
 
+/* Phase 4: player sheet PARTS render tab panels as siblings (no .sheet-body
+   wrapper). Visibility is driven by the .active class from the tabs helper. */
+.eqrmss-sheet .tab[data-group="primary"] {
+  display: none !important;
+  box-sizing: border-box;
+}
+
+.eqrmss-sheet .tab[data-group="primary"].active {
+  display: grid !important;
+}
+
 /* Header & Portrait Constraints */
 .eqrmss-sheet .sheet-header {
   display: flex;
