@@ -217,6 +217,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
         // Attach Skill Engine data
         context.skillsEngine = skillModels;
+        context.skills = skillModels;
 
         // ------------------------------------------------------------
         // AA Advancement Context
