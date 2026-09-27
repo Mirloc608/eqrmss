@@ -141,7 +141,7 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
             const pet = pets[0];
             await pet.update({ "system.active": true });
             ui.notifications.info(`${pet.name} has been summoned.`);
-        });
+        }));
 
         html.querySelectorAll(".pet-dismiss-main").forEach(el => el.addEventListener("click", async () => {
             const pets = game.actors.filter(a =>
@@ -156,7 +156,7 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
             const pet = pets[0];
             await pet.update({ "system.active": false });
             ui.notifications.info(`${pet.name} has been dismissed.`);
-        });
+        }));
     }
 
     // ============================================================
