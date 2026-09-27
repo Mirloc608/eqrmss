@@ -1,482 +1,191 @@
 // ============================================================
-// EQRMSS Player Actor Sheet - Full Class & Context Implementation
+// EQRMSS Actor Sheet
+// Foundry VTT V13 / V14
+//
+// ApplicationV2 DocumentSheet
+//
+// Responsibilities:
+// - Sheet lifecycle
+// - Helper initialization
+// - Context pipeline
+// - Template rendering
+//
+// Gameplay logic delegated to helpers.
 // ============================================================
 
-import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
-import { progressionManager } from "../../progression/progression-manager.js";
-import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
-import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
+import { EQRMSSActorContextHelper } from "./helpers/actor-sheet-context.js";
+import { EQRMSSActorTabsHelper } from "./helpers/actor-sheet-tabs.js";
+import { EQRMSSActorInventoryHelper } from "./helpers/actor-sheet-inventory.js";
+import { EQRMSSActorSkillsHelper } from "./helpers/actor-sheet-skills.js";
+import { EQRMSSActorSpellsHelper } from "./helpers/actor-sheet-spells.js";
+import { EQRMSSActorBardHelper } from "./helpers/actor-sheet-bard.js";
+import { EQRMSSActorProgressionHelper } from "./helpers/actor-sheet-progression.js";
 
-// Skill Engine Imports
-import {
-    getSkillRegistry,
-    resolveActorSkillProfile,
-    resolveActorSkillCost,
-    getSkillCheckEngine,
-    getSkillAdvancementEngine
-} from "../../utils/skills/index.js";
+// PETS
+import { EQRMSSPetManager } from "../../pets/pet-manager.js";
 
-export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
+// Ensure required Handlebars helpers exist (fallback)
+if (typeof Handlebars !== "undefined") {
+  if (!Handlebars.helpers?.add) Handlebars.registerHelper("add", (a,b)=>(Number(a)||0)+(Number(b)||0));
+  if (!Handlebars.helpers?.keys) Handlebars.registerHelper("keys", (obj)=>Object.keys(obj||{}));
+}
 
-    // ------------------------------------------------------------
-    // Default Options
-    // ------------------------------------------------------------
-    static DEFAULT_OPTIONS = {
-        classes: ["eqrmss", "sheet", "actor", "player"],
-        position: {
-            width: 1000,
-            height: 850
-        },
-        window: {
-            title: "EQRMSS Character Sheet"
-        },
-        actions: {
-            levelUp: EQRMSSPlayerSheet.prototype.levelUp,
-            rollResistance: EQRMSSPlayerSheet.prototype.rollResistance,
-            rollStat: EQRMSSPlayerSheet.prototype.rollStat,
-            purchaseAA: EQRMSSPlayerSheet.prototype.purchaseAA,
-            grantAAPoints: EQRMSSPlayerSheet.prototype.grantAAPoints
-        }
-    };
+const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
-    // ------------------------------------------------------------
-    // Sheet Parts (includes new Skill Engine tab)
-    // ------------------------------------------------------------
-    static PARTS = {
-        header: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-header.html"
-        },
-        tabs: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-tabs.html"
-        },
-        main: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-main.html"
-        },
-        skills: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-skills.html"
-        },
-        skillsEngine: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-skills-engine.html"
-        },
-        status: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-status.html"
-        },
-        equipment: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-equipment.html"
-        },
-        spells: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-spells.html"
-        },
-        aa: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-aa.html"
-        },
-        logs: {
-            template: "systems/eqrmss/templates/sheets/actors/parts/actor-logs.html"
-        }
-    };
+// ============================================================
+// ACTOR SHEET
+// ============================================================
 
-    // ------------------------------------------------------------
-    // Context Preparation
-    // ------------------------------------------------------------
-    async _prepareContext(options) {
-        const context = await super._prepareContext(options);
-        const actor = this.document;
-        const system = actor.system ?? {};
+export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
 
-        // ------------------------------------------------------------
-        // Combat Context
-        // ------------------------------------------------------------
-        const combat = system.combat ?? {
-            armorType: "No Armor",
-            mmp: 0,
-            penalties: { quickness: 0, action: 0, weight: 0, missile: 0 },
-            quicknessBonus: 0,
-            adrenalDefense: 0,
-            shieldBonus: 0,
-            otherDB: 0,
-            armorDB: 0,
-            totalDB: 0,
-            magic: ""
-        };
+    constructor(...args) {
+        super(...args);
 
-        // ------------------------------------------------------------
-        // Progression Context
-        // ------------------------------------------------------------
-        const level = system.attributes?.level?.value ?? 1;
-        const profession = system.fixed_info?.profession ?? system.origin?.classId ?? null;
-
-        const progressionData = {
-            level,
-            profession,
-            maxLevel: 60,
-            currentRewards: {},
-            nextRewards: {}
-        };
-
-        if (profession) {
-            progressionData.maxLevel = progressionManager.getClassProgression(profession)?.maxLevel ?? 60;
-            progressionData.currentRewards = progressionManager.getLevelRewards(profession, level) ?? {};
-            progressionData.nextRewards = progressionManager.getLevelRewards(profession, level + 1) ?? {};
-        }
-
-        // ------------------------------------------------------------
-        // Stat Formatting
-        // ------------------------------------------------------------
-        const statNameMap = {
-            "ST": "Strength (ST)",
-            "AG": "Agility (AG)",
-            "CO": "Constitution (CO)",
-            "ME": "Memory (ME)",
-            "RE": "Reasoning (RE)",
-            "SD": "Self Discipline (SD)",
-            "QU": "Quickness (QU)",
-            "EM": "Empathy (EM)",
-            "IN": "Intuition (IN)",
-            "PR": "Presence (PR)"
-        };
-
-        const nameToKeyMap = {
-            "Strength": "ST", "Agility": "AG", "Constitution": "CO",
-            "Memory": "ME", "Reasoning": "RE", "Self Discipline": "SD",
-            "Quickness": "QU", "Empathy": "EM", "Intuition": "IN", "Presence": "PR"
-        };
-
-        const classData = progressionManager.getClassProgression?.(profession) || {};
-        let primeReqs = (classData.primeRequisites || classData.stats?.primeRequisites || classData.primeStats || [])
-            .map(name => nameToKeyMap[name] || name);
-
-        if (primeReqs.length === 0 && profession) {
-            const lowerProf = profession.toLowerCase();
-            if (lowerProf.includes("shadowknight")) primeReqs = ["ST", "CO"];
-            else if (lowerProf.includes("bard")) primeReqs = ["ME", "PR"];
-        }
-
-        const rawStats = system.stats || {};
-        const formattedStats = {};
-
-        for (const [key, statData] of Object.entries(rawStats)) {
-            if (key === "stats") continue;
-
-            const data = (typeof statData === "object" && statData !== null) ? statData : {};
-            const tempVal = data.temp ?? 0;
-
-            let isDeficient = primeReqs.includes(key) && tempVal < 90;
-
-            formattedStats[key] = {
-                label: statNameMap[key] || key,
-                temp: tempVal,
-                pot: data.potential ?? data.pot ?? 0,
-                basicBonus: data.basic_bonus ?? data.basicBonus ?? 0,
-                racial: data.racial_bonus ?? data.racial ?? 0,
-                special: data.special_bonus ?? data.special ?? 0,
-                total: data.total ?? 0,
-                isDeficient
-            };
-        }
-
-        // ------------------------------------------------------------
-        // Legacy RMSS Skill Preparation
-        // ------------------------------------------------------------
-        if (typeof actor._prepareSkills === "function") {
-            actor._prepareSkills();
-        }
-
-        // ------------------------------------------------------------
-        // Derived Context
-        // ------------------------------------------------------------
-        const derived = {
-            stats: formattedStats,
-            skills: actor.system?.derived?.skills || system.skills || {},
-            categories: system.categories || [],
-            initiative: system.attributes?.initiative?.value || 0,
-            proficiency: system.attributes?.proficiency?.value || 0,
-            resistance: system.resistance || {},
-            wealth: system.wealth || {}
-        };
-
-        // ------------------------------------------------------------
-        // Skill Engine View Models
-        // ------------------------------------------------------------
-        const registry = getSkillRegistry();
-        const skillModels = [];
-
-        for (const [id, skill] of registry.skillsById.entries()) {
-            const profile = resolveActorSkillProfile(actor, id);
-            const cost = resolveActorSkillCost(actor, id);
-
-            skillModels.push({
-                id,
-                name: skill.name,
-                category: skill.category,
-                statShort: skill.primary_stat_short ?? skill.primary_stat ?? "St",
-                ranks: profile.totalRanks,
-                costPerRank: cost,
-                totalBonus: profile.totalBonus
-            });
-        }
-
-        // Attach Skill Engine data
-        context.skillsEngine = skillModels;
-
-        // ------------------------------------------------------------
-        // AA Advancement Context
-        // ------------------------------------------------------------
-        const aaState = EQRMSSAAAdvancement.getAAState(actor);
-        const aaContext = {
-            points: aaState.points,
-            spent: aaState.spent,
-            isGM: game?.user?.isGM ?? false,
-            purchased: EQRMSSAAAdvancement.getPurchasedAAs(actor),
-            available: []
-        };
-        try {
-            aaContext.available = EQRMSSAAAdvancement.getAvailableAAs(actor);
-        } catch (err) {
-            console.warn("EQRMSS | AA context build failed", err);
-        }
-
-        return {
-            ...context,
-            actor,
-            system: {
-                ...system,
-                combat
-            },
-            derived,
-            playerskill: actor.system?.derived?.skills || system.skills || {},
-            progression: {
-                ...(context.progression ?? {}),
-                ...progressionData
-            },
-            aa: aaContext
-        };
+        // Helper modules
+        this.contextHelper      = new EQRMSSActorContextHelper(this);
+        this.tabsHelper         = new EQRMSSActorTabsHelper(this);
+        this.inventoryHelper    = new EQRMSSActorInventoryHelper(this);
+        this.skillsHelper       = new EQRMSSActorSkillsHelper(this);
+        this.spellsHelper       = new EQRMSSActorSpellsHelper(this);
+        this.bardHelper         = new EQRMSSActorBardHelper(this);
+        this.progressionHelper  = new EQRMSSActorProgressionHelper(this);
     }
 
-    // ------------------------------------------------------------
-    // Render + Tab Activation
-    // ------------------------------------------------------------
+    // ============================================================
+    // DOCUMENT
+    // ============================================================
+
+    get actor() {
+        return this.document;
+    }
+
+    // ============================================================
+    // APPLICATION OPTIONS
+    // ============================================================
+
+    static DEFAULT_OPTIONS = {
+        classes: ["eqrmss", "sheet", "actor", "player-sheet"],
+
+        position: {
+            width: 1200,
+            height: 950
+        },
+
+        form: {
+            closeOnSubmit: false,
+            submitOnChange: true
+        },
+
+        actions: {
+            levelUp: EQRMSSActorSheet.#onLevelUp,
+            syncProgression: EQRMSSActorSheet.#onSyncProgression
+        }
+    };
+
+    // ============================================================
+    // TEMPLATE PARTS
+    // ============================================================
+
+    static PARTS = {
+        form: {
+            template: "systems/eqrmss/templates/sheets/actors/eqrmss_player_sheet.html"
+        }
+    };
+
+    // ============================================================
+    // CONTEXT PIPELINE
+    // ============================================================
+
+    async _prepareContext(options) {
+        const context = await super._prepareContext(options);
+        return await this.contextHelper.prepare(context);
+    }
+
+    // ============================================================
+    // RENDER
+    // ============================================================
+
     async _onRender(context, options) {
         await super._onRender(context, options);
 
+        this.tabsHelper.activate();
+        this.inventoryHelper.activate();
+        this.skillsHelper.activate();
+        this.spellsHelper.activate();
+        this.bardHelper.activate();
+
+        // ------------------------------------------------------------
+        // PET MANAGER BUTTON (header)
+        // ------------------------------------------------------------
         const html = this.element;
 
-        const tabButtons = html.querySelectorAll(".sheet-tabs [data-tab], .sheet-tabs .item");
-        const tabContents = html.querySelectorAll(".sheet-body > section[data-tab], .sheet-body > div[data-tab], .tab");
-
-        let activeTabName = this._lastActiveTab || "main";
-
-        tabButtons.forEach(btn => {
-            btn.classList.toggle("active", btn.dataset.tab === activeTabName);
-        });
-
-        tabContents.forEach(content => {
-            const isMatch = content.dataset.tab === activeTabName;
-            content.classList.toggle("active", isMatch);
-            content.style.display = isMatch ? "grid" : "none";
-        });
-
-        tabButtons.forEach(btn => {
-            if (btn.dataset.tabBound) return;
-            btn.dataset.tabBound = "true";
-
-            btn.addEventListener("click", event => {
-                event.preventDefault();
-                const targetTab = btn.dataset.tab;
-                if (!targetTab) return;
-
-                this._lastActiveTab = targetTab;
-
-                tabButtons.forEach(b => {
-                    b.classList.toggle("active", b.dataset.tab === targetTab);
-                });
-
-                tabContents.forEach(c => {
-                    const isMatch = c.dataset.tab === targetTab;
-                    c.classList.toggle("active", isMatch);
-                    c.style.display = isMatch ? "grid" : "none";
-                });
-            });
-        });
-
-        // ------------------------------------------------------------
-        // Skill Engine Event Binding
-        // ------------------------------------------------------------
-        html.querySelectorAll(".skill-roll").forEach(el => el.addEventListener("click", ev => {
-            const skillId = ev.currentTarget.dataset.skillId;
-            this._onSkillRoll(skillId);
+        html.querySelectorAll(".pet-manager-open").forEach(el => el.addEventListener("click", ev => {
+            ev.preventDefault();
+            const mgr = new EQRMSSPetManager(this.actor);
+            mgr.render(true);
         }));
 
-        html.querySelectorAll(".skill-advance").forEach(el => el.addEventListener("click", ev => {
-            const skillId = ev.currentTarget.dataset.skillId;
-            this._onSkillAdvance(skillId);
+        // ------------------------------------------------------------
+        // PET SUMMON / DISMISS BUTTONS (main tab)
+        // ------------------------------------------------------------
+        html.querySelectorAll(".pet-summon-main").forEach(el => el.addEventListener("click", async () => {
+            const pets = game.actors.filter(a =>
+                a.type === "pet" &&
+                a.getFlag("eqrmss", "ownerId") === this.actor.id
+            );
+
+            if (!pets.length) {
+                return ui.notifications.warn("No pets linked to this character.");
+            }
+
+            const pet = pets[0];
+            await pet.update({ "system.active": true });
+            ui.notifications.info(`${pet.name} has been summoned.`);
+        }));
+
+        html.querySelectorAll(".pet-dismiss-main").forEach(el => el.addEventListener("click", async () => {
+            const pets = game.actors.filter(a =>
+                a.type === "pet" &&
+                a.getFlag("eqrmss", "ownerId") === this.actor.id
+            );
+
+            if (!pets.length) {
+                return ui.notifications.warn("No pets linked to this character.");
+            }
+
+            const pet = pets[0];
+            await pet.update({ "system.active": false });
+            ui.notifications.info(`${pet.name} has been dismissed.`);
         }));
     }
 
-    // ------------------------------------------------------------
-    // Legacy RMSS Skill Tab Activation
-    // ------------------------------------------------------------
-    _forceSkillsTabActive() {
-        setTimeout(() => {
-            const html = this.element;
-            if (!html) return;
-            
-            const tabButtons = html.querySelectorAll(".sheet-tabs [data-tab], .sheet-tabs .item");
-            tabButtons.forEach(btn => {
-                btn.classList.toggle("active", btn.dataset.tab === "skills");
-            });
+    // ============================================================
+    // FORM UPDATE
+    // ============================================================
 
-            const tabContents = html.querySelectorAll(".sheet-body > section[data-tab], .sheet-body > div[data-tab], .tab");
-            tabContents.forEach(content => {
-                const isSkills = content.dataset.tab === "skills";
-                content.classList.toggle("active", isSkills);
-                content.style.display = isSkills ? "grid" : "none";
-            });
-        }, 20);
+    async _onSubmitForm(formConfig, event) {
+        await super._onSubmitForm(formConfig, event);
     }
 
-    // ------------------------------------------------------------
-    // Level Up
-    // ------------------------------------------------------------
-    async levelUp() {
-        const actor = this.document;
-        if (!actor) return;
+    // ============================================================
+    // PROGRESSION ACTIONS (ApplicationV2 Static Handlers)
+    // ============================================================
 
-        const currentLevel = actor.system?.attributes?.level?.value ?? 1;
-        const nextLevel = currentLevel + 1;
-
-        const levelCap = EQRMSSExpansionManager.getLevelCap();
-
-        if (nextLevel > levelCap) {
-            ui.notifications.warn(
-                `EQRMSS | Maximum level reached (${levelCap}, ${EQRMSSExpansionManager.getActiveExpansionName()})`
-            );
-            return;
-        }
-
-        await progressionManager.processLevelUp(actor, nextLevel);
-        await actor.update({ "system.attributes.level.value": nextLevel });
-
-        ui.notifications.info(`${actor.name} advanced to level ${nextLevel}!`);
-        await this.render();
-    }
-
-    // ------------------------------------------------------------
-    // AA Advancement
-    // ------------------------------------------------------------
-    async purchaseAA(event, target) {
+    static async #onLevelUp(event, target) {
         event.preventDefault();
-        const actor = this.document;
-        if (!actor) return;
-
-        const aaId = target?.dataset?.aaId;
-        if (!aaId) return;
-
-        await EQRMSSAAAdvancement.purchaseRank(actor, aaId);
-        await this.render();
+        await this.progressionHelper.levelUp();
     }
 
-    async grantAAPoints(event, target) {
+    static async #onSyncProgression(event, target) {
         event.preventDefault();
-        const actor = this.document;
-        if (!actor) return;
-
-        if (!game?.user?.isGM) {
-            ui.notifications.warn("EQRMSS | Only the GM can grant AA points.");
-            return;
-        }
-
-        const input = this.element?.querySelector?.('[name="aaGrantAmount"]');
-        const amount = Math.floor(Number(input?.value));
-
-        const result = await EQRMSSAAAdvancement.grantPoints(actor, amount, {
-            reason: "GM grant"
-        });
-
-        if (!result.ok) {
-            ui.notifications.warn(`EQRMSS | ${result.reason}`);
-            return;
-        }
-
-        await this.render();
+        await this.progressionHelper.syncProgression();
     }
 
-    // ------------------------------------------------------------
-    // Resistance Roll
-    // ------------------------------------------------------------
-    async rollResistance(event, target) {
-        event.preventDefault();
+    // ============================================================
+    // CLOSE
+    // ============================================================
 
-        const resistType = target.dataset.resist;
-        const actor = this.document;
-        const resistValue = actor.system?.resistance?.[resistType] ?? 0;
-
-        let roll = new Roll(`1d100 + ${resistValue}`);
-        await roll.evaluate();
-
-        await roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor }),
-            flavor: `Resistance Roll (${resistType.toUpperCase()})`
-        });
-    }
-
-    // ------------------------------------------------------------
-    // Stat Roll
-    // ------------------------------------------------------------
-    async rollStat(event, target) {
-        event.preventDefault();
-
-        const statKey = target.dataset.stat;
-        const statLabel = target.dataset.label || statKey;
-        const actor = this.document;
-        const statTotal = actor.system?.stats?.[statKey]?.total ?? 0;
-
-        let roll = new Roll(`1d100 + ${statTotal}`);
-        await roll.evaluate();
-
-        await roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor }),
-            flavor: `Statistic Roll: ${statLabel}`
-        });
-    }
-
-    // ------------------------------------------------------------
-    // Skill Engine: Roll Skill Check
-    // ------------------------------------------------------------
-    async _onSkillRoll(skillId) {
-        const engine = getSkillCheckEngine();
-
-        const difficulty = { target: 75, label: "Standard" };
-
-        const result = await engine.rollSkillCheck(this.actor, skillId, difficulty);
-
-        ChatMessage.create({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: `
-                <h2>${result.profile.skill.name}</h2>
-                <p><strong>Roll:</strong> ${result.roll.total}</p>
-                <p><strong>Total:</strong> ${result.total}</p>
-                <p><strong>Success:</strong> ${result.success}</p>
-                <p><strong>Degree:</strong> ${result.degree}</p>
-            `
-        });
-    }
-
-    // ------------------------------------------------------------
-    // Skill Engine: Buy Ranks
-    // ------------------------------------------------------------
-    async _onSkillAdvance(skillId) {
-        const engine = getSkillAdvancementEngine();
-
-        try {
-            const result = engine.buySkillRanks(this.actor, skillId, { ranks: 1 });
-
-            ui.notifications.info(
-                `${this.actor.name} gained +1 rank in ${result.skillId}. Remaining DP: ${result.remainingDp}`
-            );
-
-            await this.actor.update({ "system.skills": this.actor.system.skills });
-        } catch (err) {
-            ui.notifications.error(err.message);
-        }
+    async _onClose(options) {
+        await super._onClose(options);
     }
 }
