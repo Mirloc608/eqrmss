@@ -10,7 +10,6 @@
 // EQRMSS System Bootstrap v4.12 - FIXED 404 - uses master-fix-v46.js
 // ============================================================
 
-import "./module/initialization/v13-compat-shim.js";
 
 import {
     registerEQRMSSSettings,
