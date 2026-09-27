@@ -25,17 +25,46 @@ function getExpansionManager() {
     return game?.eqrmss?.expansions || null;
 }
 
+// Coerce a races/classes source (array or key→entry dictionary) into a clean
+// array. Drops loader metadata keys (schemas, indexes, manifests) that are not
+// playable entries, and ensures every entry has id/key/name.
+function coerceToArray(obj) {
+    if (Array.isArray(obj)) {
+        return obj.filter(i => {
+            const id = String(i?.id ?? i?.key ?? "").toLowerCase();
+            return id && !["race-schema", "schema", "index"].includes(id) && !id.includes("schema");
+        });
+    }
+    if (!obj || typeof obj !== "object") return [];
+    return Object.entries(obj)
+        .filter(([k]) => {
+            const kl = k.toLowerCase();
+            return !["race-schema", "schema", "index", "manifest", "races", "classes"].includes(kl) && !kl.includes("schema");
+        })
+        .map(([key, val]) => {
+            if (val && typeof val === "object") {
+                const c = { ...val };
+                if (!c.id) c.id = key;
+                if (!c.key) c.key = key;
+                if (!c.name) c.name = c.label || key;
+                return c;
+            }
+            return { id: key, name: String(val), value: val };
+        });
+}
+
 function filterByExpansionGate(items, gateName) {
+    const list = coerceToArray(items);
     const manager = getExpansionManager();
-    if (!manager || typeof manager[gateName] !== "function") return items;
+    if (!manager || typeof manager[gateName] !== "function") return list;
     try {
-        return items.filter(item => manager[gateName](item.id ?? item._id));
+        return list.filter(item => manager[gateName](item.id ?? item._id));
     } catch (err) {
         console.warn(
             "EQRMSS | Character Creation | expansion gate failed, showing all",
             err
         );
-        return items;
+        return list;
     }
 }
 
@@ -75,17 +104,14 @@ export class EQRMSSCharacterCreationData {
     // Ensure global configuration exists
     CONFIG.EQRMSS ??= {};
 
-        // Pull races and classes directly from preloaded CONFIG dictionaries or arrays
+        // Races/classes: prefer CONFIG.EQRMSS, fall back to the data loaders'
+    // game.eqrmss dictionaries (populated by initializeDataLoaders at ready).
     this.races = this.#normalizeRaces(
-      Array.isArray(CONFIG.EQRMSS.races)
-        ? CONFIG.EQRMSS.races
-        : Object.values(CONFIG.EQRMSS.races || {})
+      this.#resolveList(CONFIG.EQRMSS.races, game?.eqrmss?.races)
     );
 
         this.classes = await this.#normalizeClasses(
-      Array.isArray(CONFIG.EQRMSS.classes)
-        ? CONFIG.EQRMSS.classes
-        : Object.values(CONFIG.EQRMSS.classes || {})
+      this.#resolveList(CONFIG.EQRMSS.classes, game?.eqrmss?.classes)
     );
 
     // Cities and Deities load from compendium packs
@@ -206,6 +232,14 @@ export class EQRMSSCharacterCreationData {
       return entry.rank != null ? `${name} (Rank ${entry.rank})` : name;
     }
     return String(entry);
+  }
+
+  // Prefer the CONFIG list when it has entries; otherwise coerce the
+  // game.eqrmss dictionary (or array) into a clean list.
+  #resolveList(configVal, gameVal) {
+    const fromConfig = coerceToArray(configVal);
+    if (fromConfig.length > 0) return fromConfig;
+    return coerceToArray(gameVal);
   }
 
   #normalizeRaces(raw) {
@@ -364,4 +398,3 @@ export async function loadCharacterCreationData() {
 }
 
 console.log("EQRMSS | Character Creation Data Service loaded");
-

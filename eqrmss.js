@@ -11,9 +11,6 @@
 // ============================================================
 
 import "./module/initialization/v13-compat-shim.js";
-import "./module/initialization/master-fix-v46.js";
-import "./module/initialization/sheet-wizard-fix.js";
-import "./module/initialization/wizard-fix.js";
 
 import {
     registerEQRMSSSettings,
@@ -336,6 +333,19 @@ Hooks.once("ready", async function () {
         try { await EQRMSSGeography.loadAll(); await EQRMSSSceneRegistry.registerAllScenes(); } catch {}
         registerEQRMSSSheets();
         console.log("EQRMSS | Sheets registered v4.15");
+
+        game.eqrmss.openWizard = async (actor = null) => {
+           const wizardClass = game.eqrmss.CharacterCreationWizard || globalThis.EQRMSSCharacterCreationWizard;
+            if (typeof wizardClass !== "function") {
+                ui.notifications.error("EQRMSS | Character creation wizard is not available.");
+                return null;
+            }
+            const wizard = actor ? new wizardClass(actor) : new wizardClass();
+            await wizard.render(true);
+            return wizard;
+        };
+        console.log("EQRMSS v4.15 | openWizard registered");
+
         console.log("EQRMSS v4.15 | Ready - Wizard:", !!globalThis.EQRMSSCharacterCreationWizard, "Races:", Object.keys(game.eqrmss?.races||{}).length);
     } catch (error) { console.error("EQRMSS | Ready failed", error); }
 });

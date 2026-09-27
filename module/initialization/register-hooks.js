@@ -20,7 +20,7 @@ export function registerEQRMSSHooks() {
     button.className = "eqrmss-character-wizard-launcher";
     button.innerHTML = '<i class="fas fa-hat-wizard"></i> Create Character';
     button.addEventListener("click", () => {
-      game.eqrmss?.subsystems?.characterWizard?.render(true);
+      game.eqrmss?.openWizard?.();
     });
     target.appendChild(button);
   });
