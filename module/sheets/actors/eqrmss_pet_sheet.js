@@ -44,19 +44,19 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
 
         const html = this.element;
 
-        html.find(".pet-command-attack").click(ev => {
+        html.querySelectorAll(".pet-command-attack").forEach(el => el.addEventListener("click", ev => {
             ev.preventDefault();
             ui.notifications.info(`${this.actor.name} commanded to attack.`);
-        });
+        }));
 
-        html.find(".pet-command-guard").click(ev => {
+        html.querySelectorAll(".pet-command-guard").forEach(el => el.addEventListener("click", ev => {
             ev.preventDefault();
             ui.notifications.info(`${this.actor.name} commanded to guard.`);
-        });
+        }));
 
-        html.find(".pet-command-follow").click(ev => {
+        html.querySelectorAll(".pet-command-follow").forEach(el => el.addEventListener("click", ev => {
             ev.preventDefault();
             ui.notifications.info(`${this.actor.name} commanded to follow.`);
-        });
+        }));
     }
 }

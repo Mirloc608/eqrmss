@@ -81,18 +81,20 @@ function wirePetHooks() {
             if (!enabled || !showButton) return;
             if (sheet.actor?.type !== "player") return;
 
-            const header = html.find(".window-header, .sheet-header").first();
-            if (!header.length) return;
+            const root = html instanceof HTMLElement ? html : html?.[0];
+            if (!(root instanceof HTMLElement)) return;
 
-            if (header.find(".eqrmss-pet-button").length) return;
+            const header = root.querySelector(".window-header, .sheet-header");
+            if (!header) return;
 
-            const btn = $(
-                `<a class="eqrmss-pet-button" title="Manage Pets">
-                    <i class="fas fa-paw"></i>
-                 </a>`
-            );
+            if (header.querySelector(".eqrmss-pet-button")) return;
 
-            btn.on("click", ev => {
+            const btn = document.createElement("a");
+            btn.className = "eqrmss-pet-button";
+            btn.title = "Manage Pets";
+            btn.innerHTML = '<i class="fas fa-paw"></i>';
+
+            btn.addEventListener("click", ev => {
                 ev.preventDefault();
                 console.log(`EQRMSS | Pets subsystem | Pet button clicked for ${sheet.actor.name}`);
                 const mgr = new EQRMSSPetManager(sheet.actor);

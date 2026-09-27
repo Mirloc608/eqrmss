@@ -301,15 +301,15 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // ------------------------------------------------------------
         // Skill Engine Event Binding
         // ------------------------------------------------------------
-        html.find(".skill-roll").click(ev => {
+        html.querySelectorAll(".skill-roll").forEach(el => el.addEventListener("click", ev => {
             const skillId = ev.currentTarget.dataset.skillId;
             this._onSkillRoll(skillId);
-        });
+        }));
 
-        html.find(".skill-advance").click(ev => {
+        html.querySelectorAll(".skill-advance").forEach(el => el.addEventListener("click", ev => {
             const skillId = ev.currentTarget.dataset.skillId;
             this._onSkillAdvance(skillId);
-        });
+        }));
     }
 
     // ------------------------------------------------------------

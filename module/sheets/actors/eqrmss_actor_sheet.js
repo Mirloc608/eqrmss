@@ -119,16 +119,16 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
         // ------------------------------------------------------------
         const html = this.element;
 
-        html.find(".pet-manager-open").click(ev => {
+        html.querySelectorAll(".pet-manager-open").forEach(el => el.addEventListener("click", ev => {
             ev.preventDefault();
             const mgr = new EQRMSSPetManager(this.actor);
             mgr.render(true);
-        });
+        }));
 
         // ------------------------------------------------------------
         // PET SUMMON / DISMISS BUTTONS (main tab)
         // ------------------------------------------------------------
-        html.find(".pet-summon-main").click(async () => {
+        html.querySelectorAll(".pet-summon-main").forEach(el => el.addEventListener("click", async () => {
             const pets = game.actors.filter(a =>
                 a.type === "pet" &&
                 a.getFlag("eqrmss", "ownerId") === this.actor.id
@@ -143,7 +143,7 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
             ui.notifications.info(`${pet.name} has been summoned.`);
         });
 
-        html.find(".pet-dismiss-main").click(async () => {
+        html.querySelectorAll(".pet-dismiss-main").forEach(el => el.addEventListener("click", async () => {
             const pets = game.actors.filter(a =>
                 a.type === "pet" &&
                 a.getFlag("eqrmss", "ownerId") === this.actor.id
