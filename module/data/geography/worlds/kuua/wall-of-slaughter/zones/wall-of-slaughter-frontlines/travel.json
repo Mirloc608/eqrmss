@@ -1,0 +1,43 @@
+{
+  "zone": "wall-of-slaughter-frontlines",
+  "nodes": [
+    {
+      "id": "frontline-trench",
+      "type": "trench",
+      "label": "Frontline Trench"
+    },
+    {
+      "id": "makeshift-barricade",
+      "type": "barricade",
+      "label": "Makeshift Barricade"
+    },
+    {
+      "id": "discord-fissure",
+      "type": "fissure",
+      "label": "Discord Fissure"
+    }
+  ],
+  "edges": [
+    {
+      "from": "frontline-trench",
+      "to": "makeshift-barricade",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite and resistance forces."
+    },
+    {
+      "from": "frontline-trench",
+      "to": "discord-fissure",
+      "difficulty": "high",
+      "type": "planar",
+      "description": "A dangerous path into Discord‑warped terrain."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "wall-of-slaughter-battlefield",
+      "type": "internal",
+      "description": "The Frontlines lead deeper into the main battlefield."
+    }
+  ]
+}

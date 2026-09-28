@@ -1,0 +1,25 @@
+{
+  "hazards": [
+    {
+      "id": "forge-overheat",
+      "severity": "high",
+      "dc": 30,
+      "description": "A forge overheats, releasing bursts of flame and destabilizing nearby magic.",
+      "effects": ["fire_damage", "disruption"]
+    },
+    {
+      "id": "smoke-choke",
+      "severity": "medium",
+      "dc": 28,
+      "description": "Thick smoke reduces visibility and drains stamina.",
+      "effects": ["movement_penalty", "stat_decay"]
+    },
+    {
+      "id": "arcane-forge-flux",
+      "severity": "high",
+      "dc": 32,
+      "description": "Arcane forge tools pulse irregularly, destabilizing nearby magic.",
+      "effects": ["arcane_damage", "disorientation"]
+    }
+  ]
+}

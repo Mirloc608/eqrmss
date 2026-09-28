@@ -1,0 +1,49 @@
+{
+  "graph": {
+    "nodes": [
+      "kv-outer-gates",
+      "kv-ascendant-causeway",
+      "kv-praesertum-forum",
+      "kv-ritual-academy",
+      "kv-echo-archives",
+      "kv-void-sanctum",
+      "kv-akhevan-barracks",
+      "kv-command-spire",
+      "kv-luclinite-observatory",
+      "kv-market-tier",
+      "kv-citizen-housing-tier",
+      "kv-ancestral-hall",
+      "kv-judicator-court",
+      "kv-ritual-conservatory",
+      "kv-void-convergence-chamber",
+      "kv-transport-hub",
+      "kv-arcane-waterworks",
+      "kv-outer-ramparts",
+      "kv-inner-ramparts",
+      "kv-sanctified-garden",
+      "kv-akhevan-dais",
+      "kv-grand-resonance-core"
+    ],
+
+    "edges": [
+      { "from": "kv-outer-gates", "to": "kv-ascendant-causeway", "method": "main ascent" },
+      { "from": "kv-ascendant-causeway", "to": "kv-praesertum-forum", "method": "processional walkway" },
+      { "from": "kv-praesertum-forum", "to": "kv-command-spire", "method": "spire approach" },
+      { "from": "kv-praesertum-forum", "to": "kv-ritual-academy", "method": "academy promenade" },
+      { "from": "kv-ritual-academy", "to": "kv-echo-archives", "method": "archive corridor" },
+      { "from": "kv-echo-archives", "to": "kv-void-sanctum", "method": "sanctum descent" },
+      { "from": "kv-command-spire", "to": "kv-akhevan-barracks", "method": "military tier" },
+      { "from": "kv-market-tier", "to": "kv-citizen-housing-tier", "method": "residential walkway" },
+      { "from": "kv-ancestral-hall", "to": "kv-judicator-court", "method": "court promenade" },
+      { "from": "kv-void-sanctum", "to": "kv-void-convergence-chamber", "method": "void conduit" },
+      { "from": "kv-transport-hub", "to": "kv-arcane-waterworks", "method": "utility corridor" },
+      { "from": "kv-inner-ramparts", "to": "kv-grand-resonance-core", "method": "core approach" }
+    ]
+  },
+
+  "externalConnections": [
+    { "to": "shadow-valley", "method": "akhevan transit route" },
+    { "to": "basilica-of-adumbration", "method": "void resonance corridor" },
+    { "to": "umbral-plains", "method": "outer rampart passage" }
+  ]
+}

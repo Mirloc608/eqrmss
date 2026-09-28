@@ -1,0 +1,72 @@
+{
+  "id": "eqrmss-world-kuua-travel",
+  "key": "kuua-travel",
+  "name": "Kuua Travel",
+  "type": "world-travel",
+
+  "summary": "Travel across Kuua is dominated by planar rifts, Muramite gate networks, temporal fractures, and arcane translation routes maintained by Riftseekers.",
+
+  "nodes": [
+    { "id": "dranik_hollows", "name": "Dranik Hollows", "type": "region" },
+    { "id": "dranik_scar", "name": "Dranik Scar", "type": "region" },
+    { "id": "bloodfields", "name": "Bloodfields", "type": "region" },
+    { "id": "riftseekers_sanctum", "name": "Riftseekers’ Sanctum", "type": "region" },
+    { "id": "muramite_citadel_complex", "name": "Muramite Citadel Complex", "type": "region" }
+  ],
+
+  "edges": [
+    {
+      "from": "dranik_hollows",
+      "to": "dranik_scar",
+      "mode": "planar_rift",
+      "difficulty": "high",
+      "description": "Discord fissures connect the Hollows to the Scar, though the path is unstable and patrolled by Muramite scouts."
+    },
+    {
+      "from": "dranik_scar",
+      "to": "bloodfields",
+      "mode": "muramite_gate",
+      "difficulty": "moderate",
+      "description": "Muramite gate networks stabilize travel between the Scar and the Bloodfields."
+    },
+    {
+      "from": "bloodfields",
+      "to": "riftseekers_sanctum",
+      "mode": "arcane_translation",
+      "difficulty": "extreme",
+      "description": "Riftseekers maintain arcane anchors that allow controlled translation into their sanctum."
+    },
+    {
+      "from": "riftseekers_sanctum",
+      "to": "muramite_citadel_complex",
+      "mode": "temporal_fracture",
+      "difficulty": "catastrophic",
+      "description": "Temporal fractures create unstable corridors leading toward the Muramite citadels."
+    }
+  ],
+
+  "external_links": [
+    {
+      "to": "eqrmss-world-norrath",
+      "mode": "planar_rift",
+      "description": "Unstable Discord rifts occasionally open into Norrath, usually near Dranik Scar."
+    },
+    {
+      "to": "eqrmss-world-luclin",
+      "mode": "arcane_translation",
+      "description": "High-order arcane translation can bridge Kuua and Luclin."
+    },
+    {
+      "to": "eqrmss-plane-discord",
+      "mode": "planar_rift",
+      "description": "Deep rifts in Dranik Scar lead directly into the Plane of Discord."
+    }
+  ],
+
+  "travel_modes": [
+    "planar_rift",
+    "muramite_gate",
+    "arcane_translation",
+    "temporal_fracture"
+  ]
+}

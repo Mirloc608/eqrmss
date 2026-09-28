@@ -1,0 +1,27 @@
+{
+  "zone": "wall-of-slaughter-frontlines",
+  "hazards": [
+    {
+      "id": "trench-collapse",
+      "name": "Trench Collapse",
+      "severity": "high",
+      "trigger": "movement-in-frontline-trench",
+      "effects": [
+        "knockdown",
+        "immobilization",
+        "physical-damage"
+      ]
+    },
+    {
+      "id": "discord-flare",
+      "name": "Discord Flare",
+      "severity": "extreme",
+      "trigger": "proximity-to-discord-fissure",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "random-teleport"
+      ]
+    }
+  ]
+}

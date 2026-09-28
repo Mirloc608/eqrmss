@@ -1,0 +1,29 @@
+{
+  "id": "uqua-region-travel",
+  "region": "uqua-region",
+
+  "nodes": [
+    "uqua-entrance",
+    "uqua-chantry",
+    "uqua-ocean-god-halls",
+    "uqua-ritual-chambers",
+    "uqua-inner-sanctum",
+    "uqua-final-altar"
+  ],
+
+  "edges": [
+    { "from": "uqua-entrance", "to": "uqua-chantry", "difficulty": "moderate", "type": "internal" },
+    { "from": "uqua-chantry", "to": "uqua-ocean-god-halls", "difficulty": "high", "type": "elemental" },
+    { "from": "uqua-ocean-god-halls", "to": "uqua-ritual-chambers", "difficulty": "high", "type": "arcane" },
+    { "from": "uqua-ritual-chambers", "to": "uqua-inner-sanctum", "difficulty": "extreme", "type": "planar" },
+    { "from": "uqua-inner-sanctum", "to": "uqua-final-altar", "difficulty": "catastrophic", "type": "discord" }
+  ],
+
+  "region_links": [
+    {
+      "to": "barindu-region",
+      "type": "back",
+      "description": "Uqua connects back to Barindu through ancient water tunnels."
+    }
+  ]
+}

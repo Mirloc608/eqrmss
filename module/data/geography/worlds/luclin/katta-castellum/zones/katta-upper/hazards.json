@@ -1,0 +1,25 @@
+{
+  "hazards": [
+    {
+      "id": "stabilizer-flux",
+      "severity": "medium",
+      "dc": 28,
+      "description": "Arcane stabilizers pulse unpredictably, disrupting magical equilibrium.",
+      "effects": ["arcane_damage", "disruption"]
+    },
+    {
+      "id": "terrace-slip",
+      "severity": "low",
+      "dc": 26,
+      "description": "Loose stonework on elevated terraces can cause sudden falls.",
+      "effects": ["fall_damage"]
+    },
+    {
+      "id": "civic-edict",
+      "severity": "high",
+      "dc": 30,
+      "description": "A sudden civic edict imposes magical suppression and fear.",
+      "effects": ["fear", "stat_decay"]
+    }
+  ]
+}

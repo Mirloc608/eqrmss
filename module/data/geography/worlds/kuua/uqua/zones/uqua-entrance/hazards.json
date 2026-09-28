@@ -1,0 +1,27 @@
+{
+  "zone": "uqua-entrance",
+  "hazards": [
+    {
+      "id": "water-surge",
+      "name": "Water Surge",
+      "severity": "high",
+      "trigger": "proximity-to-water-channel",
+      "effects": [
+        "knockdown",
+        "cold-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "seal-backlash",
+      "name": "Seal Backlash",
+      "severity": "extreme",
+      "trigger": "proximity-to-broken-seal",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "spell-interruption"
+      ]
+    }
+  ]
+}

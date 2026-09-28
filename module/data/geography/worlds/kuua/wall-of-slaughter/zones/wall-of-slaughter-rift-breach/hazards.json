@@ -1,0 +1,27 @@
+{
+  "zone": "wall-of-slaughter-rift-breach",
+  "hazards": [
+    {
+      "id": "rift-collapse",
+      "name": "Rift Collapse",
+      "severity": "catastrophic",
+      "trigger": "proximity-to-planar-tear",
+      "effects": [
+        "random-teleport",
+        "arcane-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "void-snap",
+      "name": "Void Snap",
+      "severity": "extreme",
+      "trigger": "proximity-to-void-pocket",
+      "effects": [
+        "knockback",
+        "stun",
+        "spell-interruption"
+      ]
+    }
+  ]
+}

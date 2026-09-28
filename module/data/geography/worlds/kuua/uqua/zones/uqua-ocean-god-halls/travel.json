@@ -1,0 +1,43 @@
+{
+  "zone": "uqua-ocean-god-halls",
+  "nodes": [
+    {
+      "id": "flooded-hall",
+      "type": "hall",
+      "label": "Flooded Hall"
+    },
+    {
+      "id": "elevated-channel",
+      "type": "channel",
+      "label": "Elevated Channel"
+    },
+    {
+      "id": "tidal-pylon",
+      "type": "pylon",
+      "label": "Tidal Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "flooded-hall",
+      "to": "elevated-channel",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Ocean Cult guardians."
+    },
+    {
+      "from": "flooded-hall",
+      "to": "tidal-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into planar water amplification zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "uqua-ritual-chambers",
+      "type": "internal",
+      "description": "The Halls lead deeper into the Ritual Chambers."
+    }
+  ]
+}

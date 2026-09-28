@@ -1,0 +1,43 @@
+{
+  "zone": "wall-of-slaughter-war-gate",
+  "nodes": [
+    {
+      "id": "gatehouse",
+      "type": "gate",
+      "label": "Gatehouse"
+    },
+    {
+      "id": "watchtower",
+      "type": "tower",
+      "label": "Watchtower"
+    },
+    {
+      "id": "discord-pylon",
+      "type": "pylon",
+      "label": "Discord Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "gatehouse",
+      "to": "watchtower",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite defenders."
+    },
+    {
+      "from": "gatehouse",
+      "to": "discord-pylon",
+      "difficulty": "high",
+      "type": "planar",
+      "description": "A hazardous path into Discord‑warped terrain."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-proving-grounds-region",
+      "type": "forward",
+      "description": "The War Gate leads directly into the Muramite Proving Grounds."
+    }
+  ]
+}

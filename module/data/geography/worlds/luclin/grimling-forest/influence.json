@@ -1,0 +1,64 @@
+{
+  "influenceMap": [
+    {
+      "faction": "grimling-tribes",
+      "zones": {
+        "grimling-warfront": "dominant",
+        "grimling-encampments": "strong",
+        "patrol-routes": "contested"
+      }
+    },
+    {
+      "faction": "acrylia-loyalists",
+      "zones": {
+        "acrylia-approach": "dominant",
+        "forest-heartlands": "strong",
+        "burrow-warrens": "strong"
+      }
+    },
+    {
+      "faction": "seru-expeditionary-forces",
+      "zones": {
+        "patrol-routes": "strong",
+        "grimling-warfront": "minor"
+      }
+    },
+    {
+      "faction": "forest-corruption",
+      "zones": {
+        "forest-heartlands": "dominant",
+        "burrow-warrens": "moderate"
+      }
+    },
+    {
+      "faction": "burrow-hive",
+      "zones": {
+        "burrow-warrens": "dominant",
+        "acrylia-approach": "moderate"
+      }
+    }
+  ],
+
+  "dynamicEffects": [
+    {
+      "event": "warfront-push",
+      "description": "Grimling tribes push deeper into the forest.",
+      "affectedFactions": ["grimling-tribes"]
+    },
+    {
+      "event": "acrylia-surge",
+      "description": "Acrylia corruption spreads rapidly.",
+      "affectedFactions": ["acrylia-loyalists", "forest-corruption"]
+    },
+    {
+      "event": "seru-counteroffensive",
+      "description": "Seru forces attempt to reclaim patrol routes.",
+      "affectedFactions": ["seru-expeditionary-forces"]
+    },
+    {
+      "event": "burrow-expansion",
+      "description": "Burrow hive tunnels expand into new zones.",
+      "affectedFactions": ["burrow-hive"]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "zone": "uqua-entrance",
+  "nodes": [
+    {
+      "id": "flooded-corridor",
+      "type": "corridor",
+      "label": "Flooded Corridor"
+    },
+    {
+      "id": "broken-seal",
+      "type": "seal",
+      "label": "Broken Seal"
+    },
+    {
+      "id": "water-channel",
+      "type": "channel",
+      "label": "Water Channel"
+    }
+  ],
+  "edges": [
+    {
+      "from": "flooded-corridor",
+      "to": "broken-seal",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite scouts and Ocean Cult guardians."
+    },
+    {
+      "from": "flooded-corridor",
+      "to": "water-channel",
+      "difficulty": "high",
+      "type": "elemental",
+      "description": "A dangerous path into Discord‑tainted water zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "uqua-chantry",
+      "type": "internal",
+      "description": "The entrance leads deeper into the Ocean God Chantry."
+    }
+  ]
+}

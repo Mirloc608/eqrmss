@@ -1,0 +1,43 @@
+{
+  "zone": "uqua-chantry",
+  "nodes": [
+    {
+      "id": "ceremonial-hall",
+      "type": "hall",
+      "label": "Ceremonial Hall"
+    },
+    {
+      "id": "spiral-channel",
+      "type": "channel",
+      "label": "Spiral Channel"
+    },
+    {
+      "id": "chantry-pylon",
+      "type": "pylon",
+      "label": "Chantry Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ceremonial-hall",
+      "to": "spiral-channel",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Ocean Cult ritualists."
+    },
+    {
+      "from": "ceremonial-hall",
+      "to": "chantry-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into ritual amplification zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "uqua-ocean-god-halls",
+      "type": "internal",
+      "description": "The Chantry leads deeper into the Ocean God’s sacred halls."
+    }
+  ]
+}

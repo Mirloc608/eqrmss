@@ -1,0 +1,19 @@
+{
+  "nodes": [
+    "warfront-basin",
+    "owlbear-uplands",
+    "sonic-wolf-denlands",
+    "grimling-encampment",
+    "hollowshade-supply-road",
+    "hollowshade-cliffside-watch",
+    "hollowshade-wetlands"
+  ],
+
+  "edges": [
+    { "from": "warfront-basin", "to": "owlbear-uplands", "method": "uplands ascent" },
+    { "from": "warfront-basin", "to": "sonic-wolf-denlands", "method": "ridge descent" },
+    { "from": "warfront-basin", "to": "grimling-encampment", "method": "war-path" },
+    { "from": "hollowshade-supply-road", "to": "hollowshade-cliffside-watch", "method": "cliff ascent" },
+    { "from": "grimling-encampment", "to": "hollowshade-wetlands", "method": "marsh descent" }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "zone": "uqua-ritual-chambers",
+  "nodes": [
+    {
+      "id": "ritual-circle",
+      "type": "circle",
+      "label": "Ritual Circle"
+    },
+    {
+      "id": "water-conduit",
+      "type": "conduit",
+      "label": "Water Conduit"
+    },
+    {
+      "id": "ritual-pylon",
+      "type": "pylon",
+      "label": "Ritual Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ritual-circle",
+      "to": "water-conduit",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Ocean Cult ritualists."
+    },
+    {
+      "from": "ritual-circle",
+      "to": "ritual-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into ritual amplification zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "uqua-inner-sanctum",
+      "type": "internal",
+      "description": "The Ritual Chambers lead deeper into the Inner Sanctum."
+    }
+  ]
+}

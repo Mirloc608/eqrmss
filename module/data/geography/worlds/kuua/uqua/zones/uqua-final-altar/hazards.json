@@ -1,0 +1,27 @@
+{
+  "zone": "uqua-final-altar",
+  "hazards": [
+    {
+      "id": "void-collapse",
+      "name": "Void Collapse",
+      "severity": "catastrophic",
+      "trigger": "proximity-to-spiral-void",
+      "effects": [
+        "random-teleport",
+        "arcane-damage",
+        "immobilization"
+      ]
+    },
+    {
+      "id": "altar-backlash",
+      "name": "Altar Backlash",
+      "severity": "extreme",
+      "trigger": "proximity-to-shattered-altar",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "spell-interruption"
+      ]
+    }
+  ]
+}
