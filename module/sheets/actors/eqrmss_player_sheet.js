@@ -357,7 +357,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         if (!actor) return;
 
         try {
-            const data = TextEditor.getDragEventData(event);
+            const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
             console.log("EQRMSS | Drop data:", data);
             
             // Handle Item drops
