@@ -1,8 +1,55 @@
 <div class="tab" data-group="primary" data-tab="logs">
   <div class="panel">
     <h3>Experience Point &amp; Session Log</h3>
+
+    <div class="field-row" style="display: flex; justify-content: space-between; align-items: center;">
+      <div><label>Total XP:</label> <strong>{{logs.xp}}</strong></div>
+      {{#if logs.isGM}}
+      <div>
+        <input type="number" name="xpAwardAmount" min="1" step="1" value="100" style="width: 6em;">
+        <button type="button" data-action="awardXP">Award XP</button>
+      </div>
+      {{/if}}
+    </div>
+
     <div class="field-row"><label>Current Session:</label> <span>{{system.logs.session}}</span></div>
     <div class="field-row"><label>Adventure Notes / Locale:</label></div>
     <textarea class="log-textarea" name="system.logs.notes" style="width: 100%; min-height: 120px; background: #222; color: #fff;">{{system.logs.notes}}</textarea>
+  </div>
+
+  <div class="panel">
+    <h4>Session Entries</h4>
+    {{#if logs.entries.length}}
+    <table class="rmss-table">
+      <thead><tr><th>Date</th><th>XP Awarded</th><th>Notes</th></tr></thead>
+      <tbody>
+        {{#each logs.entries}}
+        <tr>
+          <td>{{this.date}}</td>
+          <td>{{this.xp}}</td>
+          <td>{{this.notes}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{else}}
+    <p class="aa-empty">No session entries yet.</p>
+    {{/if}}
+
+    <div class="log-add-entry" style="margin-top: 10px; display: flex; gap: 8px; align-items: flex-end;">
+      <div>
+        <label>Date:</label><br>
+        <input type="date" name="logEntryDate" value="{{logs.today}}">
+      </div>
+      <div>
+        <label>XP:</label><br>
+        <input type="number" name="logEntryXP" min="0" step="1" value="0" style="width: 6em;">
+      </div>
+      <div style="flex: 1;">
+        <label>Notes:</label><br>
+        <input type="text" name="logEntryNotes" style="width: 100%;" placeholder="Session summary...">
+      </div>
+      <button type="button" data-action="addLogEntry">Add Entry</button>
+    </div>
   </div>
 </div>

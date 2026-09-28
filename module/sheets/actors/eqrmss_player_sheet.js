@@ -26,7 +26,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             rollResistance: EQRMSSPlayerSheet.prototype.rollResistance,
             rollStat: EQRMSSPlayerSheet.prototype.rollStat,
             purchaseAA: EQRMSSPlayerSheet.prototype.purchaseAA,
-            grantAAPoints: EQRMSSPlayerSheet.prototype.grantAAPoints
+            grantAAPoints: EQRMSSPlayerSheet.prototype.grantAAPoints,
+            awardXP: EQRMSSPlayerSheet.prototype.awardXP,
+            addLogEntry: EQRMSSPlayerSheet.prototype.addLogEntry
         }
     };
 
@@ -286,6 +288,17 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             console.warn("EQRMSS | AA context build failed", err);
         }
 
+        // ------------------------------------------------------------
+        // Logs / XP Context
+        // ------------------------------------------------------------
+        const logEntries = Array.isArray(system.logs?.entries) ? system.logs.entries : [];
+        const logsContext = {
+            xp: system.logs?.xp ?? 0,
+            entries: logEntries,
+            isGM: game?.user?.isGM ?? false,
+            today: new Date().toISOString().slice(0, 10)
+        };
+
         return {
             ...context,
             actor,
@@ -304,7 +317,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
                 ...(context.progression ?? {}),
                 ...progressionData
             },
-            aa: aaContext
+            aa: aaContext,
+            logs: logsContext
         };
     }
 
@@ -496,6 +510,76 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             return;
         }
 
+        await this.render();
+    }
+
+    // ------------------------------------------------------------
+    // Logs / XP
+    // ------------------------------------------------------------
+    async awardXP(event, target) {
+        event.preventDefault();
+        const actor = this.document;
+        if (!actor) return;
+
+        if (!game?.user?.isGM) {
+            ui.notifications.warn("EQRMSS | Only the GM can award XP.");
+            return;
+        }
+
+        const input = this.element?.querySelector?.('[name="xpAwardAmount"]');
+        const amount = Math.floor(Number(input?.value));
+        if (!amount || amount < 1) {
+            ui.notifications.warn("EQRMSS | Enter a positive XP amount.");
+            return;
+        }
+
+        const currentXP = actor.system?.logs?.xp ?? 0;
+        const entries = Array.isArray(actor.system?.logs?.entries)
+            ? [...actor.system.logs.entries]
+            : [];
+        entries.push({
+            date: new Date().toISOString().slice(0, 10),
+            xp: amount,
+            notes: "XP award"
+        });
+
+        await actor.update({
+            "system.logs.xp": currentXP + amount,
+            "system.logs.entries": entries
+        });
+        ui.notifications.info(`EQRMSS | Awarded ${amount} XP.`);
+        await this.render();
+    }
+
+    async addLogEntry(event, target) {
+        event.preventDefault();
+        const actor = this.document;
+        if (!actor) return;
+
+        const dateInput = this.element?.querySelector?.('[name="logEntryDate"]');
+        const xpInput = this.element?.querySelector?.('[name="logEntryXP"]');
+        const notesInput = this.element?.querySelector?.('[name="logEntryNotes"]');
+
+        const date = dateInput?.value || new Date().toISOString().slice(0, 10);
+        const xp = Math.max(0, Math.floor(Number(xpInput?.value) || 0));
+        const notes = notesInput?.value?.trim() || "";
+
+        if (!notes && xp === 0) {
+            ui.notifications.warn("EQRMSS | Entry needs notes or XP.");
+            return;
+        }
+
+        const entries = Array.isArray(actor.system?.logs?.entries)
+            ? [...actor.system.logs.entries]
+            : [];
+        entries.push({ date, xp, notes });
+
+        const updates = { "system.logs.entries": entries };
+        if (xp > 0) {
+            updates["system.logs.xp"] = (actor.system?.logs?.xp ?? 0) + xp;
+        }
+
+        await actor.update(updates);
         await this.render();
     }
 
