@@ -6,7 +6,7 @@
         <thead><tr><th>Item (Description)</th><th>Location</th><th>Weight</th></tr></thead>
         <tbody>
           {{#each actor.items}}
-            {{#if (eq this.type "equipment")}}
+            {{#if (or (eq this.type "equipment") (eq this.type "weapon") (eq this.type "armor"))}}
             <tr data-item-id="{{this._id}}">
               <td>{{this.name}}</td>
               <td>
