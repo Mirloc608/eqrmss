@@ -21,6 +21,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         window: {
             title: "EQRMSS Character Sheet"
         },
+        dragDrop: [{ dragSelector: ".item", dropSelector: null }],
         actions: {
             levelUp: EQRMSSPlayerSheet.prototype.levelUp,
             rollResistance: EQRMSSPlayerSheet.prototype.rollResistance,
@@ -338,6 +339,42 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             const newLocation = ev.currentTarget.value;
             this._onItemLocationChange(itemId, newLocation);
         }));
+    }
+
+    // ------------------------------------------------------------
+    // Drag & Drop - Handle dropped items
+    // ------------------------------------------------------------
+    async _onDrop(event) {
+        event.preventDefault();
+        const actor = this.document;
+        if (!actor) return;
+
+        try {
+            const data = TextEditor.getDragEventData(event);
+            
+            // Handle Item drops
+            if (data.type === "Item") {
+                const item = await fromUuid(data.uuid);
+                if (!item) return;
+
+                // If dropping from another actor, create a copy on this actor
+                if (item.parent !== actor) {
+                    const itemData = item.toObject();
+                    // Default location to pack for new items
+                    if (!itemData.system.location) {
+                        itemData.system.location = "pack";
+                    }
+                    await actor.createEmbeddedDocuments("Item", [itemData]);
+                    ui.notifications.info(`${item.name} added to inventory.`);
+                }
+                return;
+            }
+
+            // Fall back to default handling for other types
+            await super._onDrop?.(event);
+        } catch (err) {
+            console.warn("EQRMSS | Drop failed", err);
+        }
     }
 
     // ------------------------------------------------------------
