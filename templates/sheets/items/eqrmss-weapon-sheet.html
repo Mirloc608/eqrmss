@@ -5,6 +5,28 @@
     </header>
     <div class="sheet-content">
         <div>
+            <fieldset class="eqrmss-weapon-composer">
+                <legend>Weapon Composer</legend>
+                <div class="form-group">
+                    <label>Template</label>
+                    <select name="system.weaponTemplate" class="weapon-composer-select">
+                        {{selectOptions weaponOptions.templates selected=system.weaponTemplate valueAttr="id" labelAttr="name"}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Material</label>
+                    <select name="system.material" class="weapon-composer-select">
+                        {{selectOptions weaponOptions.materials selected=system.material valueAttr="id" labelAttr="name"}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Condition</label>
+                    <select name="system.condition" class="weapon-composer-select">
+                        {{selectOptions weaponOptions.conditions selected=system.condition valueAttr="id" labelAttr="name"}}
+                    </select>
+                </div>
+                <p class="hint">Changing any of these recomposes the weapon below (name and stats).</p>
+            </fieldset>
             <table>
                 <tr>
                     <th>{{localize "eqrmss.weapon.equipped"}}</th>
@@ -46,6 +68,30 @@
                     <input name="system.fumble_range" type="text" value="{{system.fumble_range}}" data-dtype="String"/>
                 </td>
 
+            </table>
+            <table>
+                <tr>
+                    <th>Attack Table</th>
+                    <th>Length</th>
+                    <th>Critical Type</th>
+                    <th>OB Mod</th>
+                    <th>Damage Mod</th>
+                </tr>
+                <td>
+                    <input name="system.attackTable" type="text" value="{{system.attackTable}}" data-dtype="Number"/>
+                </td>
+                <td>
+                    <input name="system.length" type="text" value="{{system.length}}" data-dtype="String"/>
+                </td>
+                <td>
+                    <input name="system.criticalType" type="text" value="{{system.criticalType}}" data-dtype="String"/>
+                </td>
+                <td>
+                    <input name="system.obMod" type="text" value="{{system.obMod}}" data-dtype="Number"/>
+                </td>
+                <td>
+                    <input name="system.damageMod" type="text" value="{{system.damageMod}}" data-dtype="Number"/>
+                </td>
             </table>
                 {{localize "eqrmss.item.description"}}
                 {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
