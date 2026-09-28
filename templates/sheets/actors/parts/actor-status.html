@@ -1,13 +1,11 @@
 <div class="tab" data-group="primary" data-tab="status">
   <div class="panel">
     <h3>Concussion Hits</h3>
-    <div class="hit-track-header">
-      <span>Total Hits: {{system.hits.max}}</span>
-      <span>Rounds of Stun: {{system.hits.stun}}</span>
-      <span>Bleeding/Round: {{system.hits.bleeding}}</span>
-    </div>
-    <div class="hit-boxes-grid">
-      <div class="hit-box-row"><span>Current Damage: {{system.hits.value}}</span></div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <div><strong>Total Hits:</strong> {{system.hits.max}}</div>
+      <div><strong>Rounds of Stun:</strong> {{system.hits.stun}}</div>
+      <div><strong>Bleeding/Round:</strong> {{system.hits.bleeding}}</div>
+      <div><strong>Current Damage:</strong> {{system.hits.value}}</div>
     </div>
   </div>
 
