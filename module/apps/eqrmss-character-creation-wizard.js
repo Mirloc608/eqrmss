@@ -34,7 +34,6 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       weight: null,
       tempPointPool: 655,
       statRolls: [],
-      useFixedPotentials: false,
       stats: { ST: 50, AG: 50, CO: 50, ME: 50, RE: 50, SD: 50, QU: 50, EM: 50, IN: 50, PR: 50 },
       potentials: {},
       trainingPackages: []
@@ -96,7 +95,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
   async _initializeDefaultPotentials() {
     for (const [key, val] of Object.entries(this.characterData.stats)) {
       if (this.characterData.potentials[key] === undefined) {
-        this.characterData.potentials[key] = await calculatePotentialStat(val, this.characterData.useFixedPotentials);
+        this.characterData.potentials[key] = await calculatePotentialStat(val);
       }
     }
   }
@@ -128,8 +127,6 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       "roll-pool": EQRMSSCharacterCreationWizard._onRollTempPool,
       rollAllStats: EQRMSSCharacterCreationWizard._onRollAllStats,
       "roll-all-stats": EQRMSSCharacterCreationWizard._onRollAllStats,
-      togglePotentials: EQRMSSCharacterCreationWizard._onToggleFixedPotentials,
-      "toggle-potentials": EQRMSSCharacterCreationWizard._onToggleFixedPotentials,
       finish: EQRMSSCharacterCreationWizard._onCreateActor,
       nextStep: EQRMSSCharacterCreationWizard._onNextStep,
       prevStep: EQRMSSCharacterCreationWizard._onPrevStep,
@@ -188,7 +185,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
 
       let potential = selection.potentials[key];
       if (potential === undefined || potential === null || Number.isNaN(Number(potential))) {
-        potential = await calculatePotentialStat(val, selection.useFixedPotentials);
+        potential = await calculatePotentialStat(val);
         selection.potentials[key] = potential;
       }
 
@@ -321,7 +318,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
           const rawValue = Number(input.value);
           const actualVal = getStatValueFromPoints(rawValue);
           this.characterData.stats[key] = actualVal;
-          this.characterData.potentials[key] = await calculatePotentialStat(actualVal, this.characterData.useFixedPotentials);
+          this.characterData.potentials[key] = await calculatePotentialStat(actualVal);
         } else {
           this.characterData[key] = input.value;
         }
@@ -363,7 +360,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
         const rawValue = Number(field.value);
         const actualVal = getStatValueFromPoints(rawValue);
         this.characterData.stats[key] = actualVal;
-        this.characterData.potentials[key] = await calculatePotentialStat(actualVal, this.characterData.useFixedPotentials);
+        this.characterData.potentials[key] = await calculatePotentialStat(actualVal);
       } else {
         this.characterData[key] = field.value;
       }
@@ -380,7 +377,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
     if (currentVal < 101) {
       const actualVal = getStatValueFromPoints(currentVal + 1);
       this.characterData.stats[statKey] = actualVal;
-      this.characterData.potentials[statKey] = await calculatePotentialStat(actualVal, this.characterData.useFixedPotentials);
+      this.characterData.potentials[statKey] = await calculatePotentialStat(actualVal);
       this.render();
     }
   }
@@ -405,7 +402,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
     if (currentVal > minAllowed) {
       const actualVal = getStatValueFromPoints(currentVal - 1);
       this.characterData.stats[statKey] = actualVal;
-      this.characterData.potentials[statKey] = await calculatePotentialStat(actualVal, this.characterData.useFixedPotentials);
+      this.characterData.potentials[statKey] = await calculatePotentialStat(actualVal);
       this.render();
     }
   }
@@ -468,22 +465,10 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
     for (const [key, rawVal] of Object.entries(allocated)) {
       const actualVal = getStatValueFromPoints(rawVal);
       this.characterData.stats[key] = actualVal;
-      this.characterData.potentials[key] = await calculatePotentialStat(actualVal, this.characterData.useFixedPotentials);
+      this.characterData.potentials[key] = await calculatePotentialStat(actualVal);
     }
 
     ui.notifications.info("EQRMSS | Rolled and distributed all stats automatically.");
-    this.render();
-  }
-
-  static async _onToggleFixedPotentials(event, target) {
-    const content = this.element?.querySelector('.window-content');
-    this._savedScrollTop = content ? content.scrollTop : 0;
-
-    const isChecked = target.checked;
-    this.characterData.useFixedPotentials = isChecked;
-    for (const [key, val] of Object.entries(this.characterData.stats)) {
-      this.characterData.potentials[key] = await calculatePotentialStat(val, isChecked);
-    }
     this.render();
   }
 
@@ -534,7 +519,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
     const rawVal = Number(target.value);
     const actualVal = getStatValueFromPoints(rawVal);
     this.characterData.stats[stat] = actualVal;
-    this.characterData.potentials[stat] = await calculatePotentialStat(actualVal, this.characterData.useFixedPotentials);
+    this.characterData.potentials[stat] = await calculatePotentialStat(actualVal);
     this.render();
   }
 

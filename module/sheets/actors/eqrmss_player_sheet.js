@@ -6,6 +6,7 @@ import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
 import { progressionManager } from "../../progression/progression-manager.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
+import { rmssRankBonus } from "../../data/skills/rmss-rank-bonus.js";
 
 export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
@@ -255,7 +256,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             const actorSkill = system.skills?.[id] || {};
             const ranks = actorSkill.ranks ?? sys.ranks ?? 0;
             const statBonus = sys.statBonus ?? 0;
-            const rankBonus = (sys.rankBonus ?? 0) + ranks * 5;
+            // Table 15.2.2 rank bonus; sys.rankBonus is a manual adjustment slot (0 on all shipped skills).
+            const rankBonus = (sys.rankBonus ?? 0) + rmssRankBonus(ranks);
             const totalBonus = rankBonus + statBonus + (sys.profBonus ?? 0) + (sys.specialBonus ?? 0);
 
             skillModels.push({
@@ -634,7 +636,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         const sys = skillData.system || {};
         const actorSkill = this.actor.system.skills?.[skillId] || {};
         const ranks = actorSkill.ranks ?? sys.ranks ?? 0;
-        const totalBonus = ranks * 5 + (sys.statBonus ?? 0) + (sys.profBonus ?? 0) + (sys.specialBonus ?? 0);
+        const totalBonus = rmssRankBonus(ranks) + (sys.statBonus ?? 0) + (sys.profBonus ?? 0) + (sys.specialBonus ?? 0);
 
         const roll = await new Roll("1d100").evaluate();
         const total = roll.total + totalBonus;
