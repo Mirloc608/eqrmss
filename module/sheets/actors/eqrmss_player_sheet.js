@@ -159,11 +159,12 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
             let isDeficient = primeReqs.includes(key) && tempVal < 90;
 
+            const basicBonus = data.basic_bonus ?? data.basicBonus ?? Math.floor((tempVal - 50) / 5);
             formattedStats[key] = {
                 label: statNameMap[key] || key,
                 temp: tempVal,
                 pot: data.potential ?? data.pot ?? 0,
-                basicBonus: data.basic_bonus ?? data.basicBonus ?? 0,
+                basicBonus,
                 racial: data.racial_bonus ?? data.racial ?? 0,
                 special: data.special_bonus ?? data.special ?? 0,
                 total: data.total ?? 0,
@@ -178,9 +179,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             actor._prepareSkills();
         }
 
-         // ------------------------------------------------------------
-         // Derived Context
-         // ------------------------------------------------------------
+        // ------------------------------------------------------------
+        // Derived Context
+        // ------------------------------------------------------------
         const getBonus = (k) => formattedStats[k]?.basicBonus ?? 0;
         const manualRes = system.resistance || {};
         const calcResistance = {
@@ -190,17 +191,15 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             poison: 3 * getBonus("CO") + (manualRes.poison ?? 0),
             disease: 3 * getBonus("CO") + (manualRes.disease ?? 0)
         };
-         const derived = {
-             stats: formattedStats,
-             skills: actor.system?.derived?.skills || system.skills || {},
-             categories: system.categories || [],
-             initiative: system.attributes?.initiative?.value || 0,
-             proficiency: system.attributes?.proficiency?.value || 0,
-            resistance: system.resistance || {},
+        const derived = {
+            stats: formattedStats,
+            skills: actor.system?.derived?.skills || system.skills || {},
+            categories: system.categories || [],
+            initiative: system.attributes?.initiative?.value || 0,
+            proficiency: system.attributes?.proficiency?.value || 0,
             resistance: calcResistance,
-             wealth: system.wealth || {}
-         };
-
+            wealth: system.wealth || {}
+        };
 
         // ------------------------------------------------------------
         // Skill Engine View Models
