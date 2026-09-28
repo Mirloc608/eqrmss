@@ -215,26 +215,29 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // ------------------------------------------------------------
         // Skill Engine View Models
         // ------------------------------------------------------------
-        const registry = getSkillRegistry();
         const skillModels = [];
+        const jsonSkills = CONFIG.EQRMSS?.skills || {};
 
-        for (const [id, skill] of registry.skillsById.entries()) {
-            const profile = resolveActorSkillProfile(actor, id);
-            const cost = resolveActorSkillCost(actor, id);
+        for (const [id, s] of Object.entries(jsonSkills)) {
+            const sys = s.system || {};
+            const actorSkill = system.skills?.[id] || {};
+            const ranks = actorSkill.ranks ?? sys.ranks ?? 0;
+            const statBonus = sys.statBonus ?? 0;
+            const rankBonus = (sys.rankBonus ?? 0) + ranks * 5;
+            const totalBonus = rankBonus + statBonus + (sys.profBonus ?? 0) + (sys.specialBonus ?? 0);
 
             skillModels.push({
                 id,
-                name: skill.name,
-                category: skill.category,
-                statShort: skill.primary_stat_short ?? skill.primary_stat ?? "St",
-                ranks: profile.totalRanks,
-                costPerRank: cost,
-                totalBonus: profile.totalBonus
+                name: s.name,
+                category: sys.category || "",
+                statShort: (sys.statsString || "").split("/")[0] || "—",
+                ranks,
+                costPerRank: sys.cost || "—",
+                totalBonus
             });
         }
 
-        // Attach Skill Engine data
-        context.skills = skillModels;
+        skillModels.sort((a, b) => a.name.localeCompare(b.name));
 
         // ------------------------------------------------------------
         // AA Advancement Context
