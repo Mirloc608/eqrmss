@@ -204,6 +204,40 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         };
 
         // ------------------------------------------------------------
+        // Status & Hits Calculations (RMSS formulas)
+        // ------------------------------------------------------------
+        const coBonus = getBonus("CO");
+        const sdBonus = getBonus("SD");
+        const quBonus = getBonus("QU");
+
+        // Concussion Hits = 10 + (2 × Co bonus) + SD bonus + prof/skill/special
+        const hitsMax = 10 + (2 * coBonus) + sdBonus;
+
+        // Exhaustion Points = 40 + (3 × Co bonus)
+        const exhaustionMax = 40 + (3 * coBonus);
+
+        // Base Movement Rate = 50 + (3 × Qu bonus)
+        // (Stride modification and weight penalty need height/weight data)
+        const baseMoveRate = 50 + (3 * quBonus);
+
+        const statusData = {
+            hits: {
+                max: hitsMax,
+                value: system.hits?.value ?? 0,
+                stun: system.hits?.stun ?? 0,
+                bleeding: system.hits?.bleeding ?? 0
+            },
+            exhaustion: {
+                max: exhaustionMax,
+                value: system.exhaustion?.value ?? exhaustionMax
+            },
+            encumbrance: {
+                bwa: system.encumbrance?.bwa ?? "—",
+                moveRate: baseMoveRate
+            }
+        };
+
+        // ------------------------------------------------------------
         // Skill Engine View Models
         // ------------------------------------------------------------
         const skillModels = [];
@@ -252,7 +286,10 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             actor,
             system: {
                 ...system,
-                combat
+                combat,
+                hits: statusData.hits,
+                exhaustion: statusData.exhaustion,
+                encumbrance: statusData.encumbrance
             },
             derived,
             skills: skillModels,
