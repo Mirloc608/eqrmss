@@ -27,70 +27,67 @@
                 </div>
                 <p class="hint">Changing any of these recomposes the weapon below (name and stats).</p>
             </fieldset>
-            <div class="form-group" style="margin: 8px 0;">
-                <label style="min-width: 110px; flex: 0 0 auto;">{{localize "eqrmss.weapon.type"}}</label>
-                <input name="system.type" type="text" value="{{system.type}}" data-dtype="String" style="flex: 1;"/>
-            </div>
-            <table>
-                <tr>
-                    <th>{{localize "eqrmss.weapon.equipped"}}</th>
-                    <th>{{localize "eqrmss.weapon.cost"}}</th>
-                    <th>{{localize "eqrmss.weapon.prod_time"}}</th>
-                    <th>{{localize "eqrmss.weapon.weight"}}</th>
-                    <th>{{localize "eqrmss.weapon.breakage_range"}}</th>
-                    <th>{{localize "eqrmss.weapon.strength"}}</th>
-                    <th>{{localize "eqrmss.weapon.fumble_range"}}</th>
-                </tr>
-                <td>
-                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
-                </td>
-                <td>
-                    <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
-                </td>
-                <td>
-                    <input name="system.prod_time" type="text" value="{{system.prod_time}}" data-dtype="String"/>
-                </td>
-                <td>
-                    <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"/>
-                </td>
-                <td>
-                    <input name="system.breakage_range" type="text" value="{{system.breakage_range}}" data-dtype="String"/>
-                </td>
-                <td>
-                    <input name="system.strength" type="text" value="{{system.strength}}" data-dtype="String"/>
-                </td>
-                <td>
-                    <input name="system.fumble_range" type="text" value="{{system.fumble_range}}" data-dtype="String"/>
-                </td>
-            </table>
-            <table>
-                <tr>
-                    <th>Attack Table</th>
-                    <th>Length</th>
-                    <th>Critical Type</th>
-                    <th>OB Mod</th>
-                    <th>Damage Mod</th>
-                </tr>
-                <td>
-                    <input name="system.attackTable" type="text" value="{{system.attackTable}}" data-dtype="Number"/>
-                </td>
-                <td>
-                    <input name="system.length" type="text" value="{{system.length}}" data-dtype="String"/>
-                </td>
-                <td>
-                    <input name="system.criticalType" type="text" value="{{system.criticalType}}" data-dtype="String"/>
-                </td>
-                <td>
-                    <input name="system.obMod" type="text" value="{{system.obMod}}" data-dtype="Number"/>
-                </td>
-                <td>
-                    <input name="system.damageMod" type="text" value="{{system.damageMod}}" data-dtype="Number"/>
-                </td>
-            </table>
-            <div class="form-group" style="margin: 8px 0;">
-                <label style="min-width: 110px; flex: 0 0 auto;">Notes</label>
-                <input name="system.notes" type="text" value="{{system.notes}}" data-dtype="String" style="flex: 1;" placeholder="Informational note"/>
-            </div>
+            <fieldset class="eqrmss-weapon-stats">
+                <legend>Weapon Data</legend>
+                <div class="form-group" style="margin-bottom: 6px;">
+                    <label style="min-width: 110px; flex: 0 0 auto;">{{localize "eqrmss.weapon.type"}}</label>
+                    <input name="system.type" type="text" value="{{system.type}}" data-dtype="String" style="flex: 1;"/>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px;">
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">{{localize "eqrmss.weapon.cost"}}</label>
+                        <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">{{localize "eqrmss.weapon.prod_time"}}</label>
+                        <input name="system.prod_time" type="text" value="{{system.prod_time}}" data-dtype="String" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">{{localize "eqrmss.weapon.weight"}}</label>
+                        <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;" title="Breakage numbers">B#s (Breakage)</label>
+                        <input name="system.breakage_range" type="text" value="{{system.breakage_range}}" data-dtype="String" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">{{localize "eqrmss.weapon.strength"}}</label>
+                        <input name="system.strength" type="text" value="{{system.strength}}" data-dtype="String" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">{{localize "eqrmss.weapon.fumble_range"}}</label>
+                        <input name="system.fumble_range" type="text" value="{{system.fumble_range}}" data-dtype="String" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">Attack Table</label>
+                        <input name="system.attackTable" type="text" value="{{system.attackTable}}" data-dtype="Number" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">Length</label>
+                        <input name="system.length" type="text" value="{{system.length}}" data-dtype="String" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">Critical Type</label>
+                        <input name="system.criticalType" type="text" value="{{system.criticalType}}" data-dtype="String" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">OB Mod</label>
+                        <input name="system.obMod" type="text" value="{{system.obMod}}" data-dtype="Number" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">Damage Mod</label>
+                        <input name="system.damageMod" type="text" value="{{system.damageMod}}" data-dtype="Number" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">{{localize "eqrmss.weapon.equipped"}}</label>
+                        <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 6px;">
+                    <label style="min-width: 110px; flex: 0 0 auto;">Notes</label>
+                    <input name="system.notes" type="text" value="{{system.notes}}" data-dtype="String" style="flex: 1;" placeholder="Informational note"/>
+                </div>
+            </fieldset>
                 {{localize "eqrmss.item.description"}}
                 {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
         </div>

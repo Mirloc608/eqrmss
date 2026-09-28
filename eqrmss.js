@@ -198,7 +198,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, weapons:false, armor:false, shields:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, weapons:false, armor:false, shields:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
 
     if (ClassLoader) {
         try {
@@ -332,6 +332,22 @@ export async function initializeDataLoaders() {
         }
     }
 
+    // Combat tables: weapon attack tables + critical tables (plain data, no composer)
+    try {
+        const [wtR, ctR] = await Promise.all([
+            fetch("systems/eqrmss/module/data/combat/weapon-tables.json"),
+            fetch("systems/eqrmss/module/data/combat/crit-tables.json")
+        ]);
+        game.eqrmss.combatTables = {
+            weapons: (await wtR.json()).tables,
+            crits: (await ctR.json()).tables
+        };
+        game.eqrmss._loadStatus.combatTables = true;
+        console.log(`EQRMSS | Combat tables ready: ${game.eqrmss.combatTables.weapons.length} weapon tables, ${game.eqrmss.combatTables.crits.length} crit tables`);
+    } catch (e) {
+        console.error("Combat tables load failed", e);
+        game.eqrmss.combatTables = null;
+    }
 
     // Final filter
     for (const k of Object.keys(game.eqrmss.races)) {
@@ -347,6 +363,11 @@ export async function initializeDataLoaders() {
     game.eqrmss.data.weapons = game.eqrmss.weapons;
     game.eqrmss.data.armor = game.eqrmss.armor;
     game.eqrmss.data.shields = game.eqrmss.shields;
+    game.eqrmss.data.accessories = game.eqrmss.accessories;
+    game.eqrmss.data.transports = game.eqrmss.transports;
+    game.eqrmss.data.herbs = game.eqrmss.herbs;
+    game.eqrmss.data.poisons = game.eqrmss.poisons;
+    game.eqrmss.data.combatTables = game.eqrmss.combatTables;
 
     console.log("EQRMSS | initializeDataLoaders() v4.14 complete", game.eqrmss._loadStatus);
     Hooks.callAll("eqrmss:dataLoadersReady", game.eqrmss);
