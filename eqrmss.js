@@ -198,7 +198,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, weapons:false };
 
     if (ClassLoader) {
         try {
@@ -265,6 +265,22 @@ export async function initializeDataLoaders() {
     if (!game.eqrmss.abilities) game.eqrmss.abilities = {};
     if (!game.eqrmss.skills) game.eqrmss.skills = {};
 
+    // Weapons (template + material + condition composer)
+    try {
+        const weaponMod = await import('./module/data/weapons/weapon-composer.js');
+        await weaponMod.loadWeaponData();
+        game.eqrmss.weapons = {
+            compose: weaponMod.composeWeapon,
+            options: weaponMod.getWeaponOptions
+        };
+        game.eqrmss._loadStatus.weapons = true;
+        const opts = weaponMod.getWeaponOptions();
+        console.log(`EQRMSS | Weapons ready: ${opts.templates.length} templates, ${opts.materials.length} materials, ${opts.conditions.length} conditions`);
+    } catch (e) {
+        console.error("Weapon data load failed", e);
+        game.eqrmss.weapons = null;
+    }
+
     // Final filter
     for (const k of Object.keys(game.eqrmss.races)) {
         if (k.toLowerCase().includes('schema')) delete game.eqrmss.races[k];
@@ -276,6 +292,7 @@ export async function initializeDataLoaders() {
     game.eqrmss.data.spells = game.eqrmss.spells;
     game.eqrmss.data.abilities = game.eqrmss.abilities;
     game.eqrmss.data.skills = game.eqrmss.skills;
+    game.eqrmss.data.weapons = game.eqrmss.weapons;
 
     console.log("EQRMSS | initializeDataLoaders() v4.14 complete", game.eqrmss._loadStatus);
     Hooks.callAll("eqrmss:dataLoadersReady", game.eqrmss);
