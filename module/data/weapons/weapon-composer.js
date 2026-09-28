@@ -87,6 +87,7 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
         typeCode: template.typeCode,
         cost: template.cost,
         prodTime: template.prodTime,
+        notes: template.notes ?? null,
         length: template.length,
         weight,
         fumble: template.fumble,

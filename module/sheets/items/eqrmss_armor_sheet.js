@@ -41,7 +41,7 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
       return;
     }
 
-    await this.document.update({
+    const updates = {
       name: composed.name,
       "system.armorTemplate": composed.templateId,
       "system.armorMaterial": composed.materialId,
@@ -51,7 +51,11 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
       "system.maneuverPenalty": composed.maneuverPenalty,
       "system.cost": composed.cost,
       "system.prod_time": composed.prodTime
-    });
+    };
+    // Notes come from the chart when present; a GM's manual entry is otherwise preserved.
+    if (composed.notes != null) updates["system.notes"] = composed.notes;
+
+    await this.document.update(updates);
   }
 
 }

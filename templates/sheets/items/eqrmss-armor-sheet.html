@@ -30,7 +30,6 @@
         <table>
           <tr>
             <th>{{localize "eqrmss.item.equipped"}}</th>
-            <th>{{localize "eqrmss.item.quantity"}}</th>
             <th>{{localize "eqrmss.armor.weight"}}</th>
             <th>{{localize "eqrmss.armor.cost"}}</th>
             <th>{{localize "eqrmss.armor.prod_time"}}</th>
@@ -39,9 +38,6 @@
           </tr>
           <td>
             <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
-          </td>
-          <td>
-            <input name="system.quantity" type="text" value="{{system.quantity}}" data-dtype="Number"/>
           </td>
           <td>
             <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"/>
@@ -58,6 +54,10 @@
             <input name="system.maneuverPenalty" type="text" value="{{system.maneuverPenalty}}" data-dtype="Number"/>
           </td>
         </table>
+        <div class="form-group" style="margin: 8px 0;">
+          <label style="min-width: 110px; flex: 0 0 auto;">Notes</label>
+          <input name="system.notes" type="text" value="{{system.notes}}" data-dtype="String" style="flex: 1;" placeholder="Informational note, e.g. chart notes"/>
+        </div>
           {{localize "eqrmss.item.description"}}
           {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
     </div>

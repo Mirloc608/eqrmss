@@ -60,7 +60,8 @@ export function composeArmor(templateId, materialId, conditionId) {
         maneuverPenalty,
         slot: t.slot,
         cost: t.cost ?? "",
-        prodTime: t.prodTime ?? ""
+        prodTime: t.prodTime ?? "",
+        notes: t.notes ?? null
     };
 }
 

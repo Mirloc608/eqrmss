@@ -66,6 +66,8 @@ export default class EQRMSSWeaponSheet extends EQRMSSItemSheet {
     if (composed.attackTable != null) updates["system.attackTable"] = composed.attackTable;
     if (composed.length != null) updates["system.length"] = composed.length;
     if (composed.criticalType != null) updates["system.criticalType"] = composed.criticalType;
+    // Notes come from the chart when present; a GM's manual entry is otherwise preserved.
+    if (composed.notes != null) updates["system.notes"] = composed.notes;
 
     await this.document.update(updates);
   }

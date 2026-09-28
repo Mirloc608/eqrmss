@@ -33,6 +33,10 @@
                     <input name="system.af" type="text" value="{{system.af}}" data-dtype="Number"/>
                 </td>
             </table>
+            <div class="form-group" style="margin: 8px 0;">
+                <label style="min-width: 110px; flex: 0 0 auto;">Notes</label>
+                <input name="system.notes" type="text" value="{{system.notes}}" data-dtype="String" style="flex: 1;" placeholder="Effect / informational note"/>
+            </div>
                 {{localize "eqrmss.item.description"}}
                 {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
         </div>

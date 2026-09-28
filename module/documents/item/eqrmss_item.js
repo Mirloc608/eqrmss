@@ -142,8 +142,11 @@ export class EQRMSSItem extends Item {
 
     _prepareWeight() {
 
+        // system.weight is the source of truth (composer / manual entry);
+        // only fall back to system.item.weight when nothing was set.
         this.system.weight =
             Number(
+                this.system.weight ??
                 this.system.item?.weight ?? 0
             );
 

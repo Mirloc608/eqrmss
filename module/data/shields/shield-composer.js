@@ -57,7 +57,8 @@ export function composeShield(templateId, materialId, conditionId) {
         missileDB,
         weight,
         cost: t.cost ?? "",
-        prodTime: t.prodTime ?? ""
+        prodTime: t.prodTime ?? "",
+        notes: t.notes ?? null
     };
 }
 
