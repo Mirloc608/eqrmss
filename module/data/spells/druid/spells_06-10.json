@@ -1,0 +1,404 @@
+[
+  {
+    "_id": "dru-enduring-breath-6-r1",
+    "name": "Enduring Breath",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 6,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "enduring-breath"
+        }
+      ],
+      "description": "Magically fills your lungs with air, removing your need to breathe for 27 minutes. Consumes a handful of fish scales to cast."
+    }
+  },
+  {
+    "_id": "dru-firefist-6-r1",
+    "name": "Firefist",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 6,
+      "school": "evocation",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 10,
+          "duration": 720
+        }
+      ],
+      "description": "Fills your hands with the force of flame, increasing your attack rating for 12 minutes."
+    }
+  },
+  {
+    "_id": "dru-treeform-6-r1",
+    "name": "Treeform",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 6,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "tree"
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 2160
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-fire",
+          "min": -10,
+          "max": -10,
+          "duration": 2160
+        }
+      ],
+      "description": "Transforms you into a stout tree, preventing movement, but increasing your regeneration. This spell can only be cast outdoors."
+    }
+  },
+  {
+    "_id": "dru-shield-of-thistles-7-r1",
+    "name": "Shield of Thistles",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 7,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 6,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of thistles that cause damage to anything that strikes them for up to 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-strength-of-earth-7-r1",
+    "name": "Strength of Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 7,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 15,
+          "duration": 1620
+        }
+      ],
+      "description": "Fills your target with the power of the earth, increasing their strength for 27 minutes."
+    }
+  },
+  {
+    "_id": "dru-thistlecoat-7-r1",
+    "name": "Thistlecoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 7,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 2,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 1,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of thistles that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "dru-ignite-8-r1",
+    "name": "Ignite",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 8,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 21,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 37
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 30 and 46 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-invisibility-versus-animals-8-r1",
+    "name": "Invisibility Versus Animals",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 8,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard"
+        }
+      ],
+      "description": "Covers your skin in a light veil that renders you invisible to most animals."
+    }
+  },
+  {
+    "_id": "dru-remove-minor-curse-8-r1",
+    "name": "Remove Minor Curse",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 8,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 2
+        }
+      ],
+      "description": "Cleanses your target's soul, removing minor curses."
+    }
+  },
+  {
+    "_id": "dru-endure-cold-9-r1",
+    "name": "Endure Cold",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 9,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away cold for 27 minutes."
+    }
+  },
+  {
+    "_id": "dru-light-healing-9-r1",
+    "name": "Light Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 9,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 28,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 32,
+          "max": 58
+        }
+      ],
+      "description": "Mends light wounds, healing between 35 and 65 hit points."
+    }
+  },
+  {
+    "_id": "dru-protection-of-wood-9-r1",
+    "name": "Protection of Wood",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 9,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 1,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Hardens the skin of your group, increasing their hit points and armor class for 27 minutes."
+    }
+  },
+  {
+    "_id": "dru-starshine-9-r1",
+    "name": "Starshine",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 9,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-summoned-globe-of-stars-x-1"
+        }
+      ],
+      "description": "Creates a stone that glows with the light of the heavens. This spell can only be cast outdoors."
+    }
+  },
+  {
+    "_id": "dru-spirit-of-wolf-10-r1",
+    "name": "Spirit of Wolf",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 10,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 55,
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your target with the spirit of the wolf, increasing their movement speed for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-stinging-swarm-10-r1",
+    "name": "Stinging Swarm",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 10,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 71,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 7,
+          "max": 7,
+          "duration": 54
+        }
+      ],
+      "description": "Commands a swarm of insects to attack your target relentlessly, causing between 17 and 42 damage every six seconds for 54 seconds.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-summon-drink-10-r1",
+    "name": "Summon Drink",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 10,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-summoned-globe-of-water-x-1"
+        }
+      ],
+      "description": "Focuses mana into a globe of pure drinking water."
+    }
+  }
+]

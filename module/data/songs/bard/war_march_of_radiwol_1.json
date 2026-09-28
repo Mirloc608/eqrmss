@@ -1,0 +1,79 @@
+{
+  "id": "war_march_of_radiwol_1",
+  "name": "War March of Radiwol",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 114,
+  "description": "The war march inspires your companions, increasing attack speed by 60%, strength by up to 311, attack rating by up to 207, damaging attackers by up to 931, and adding 5% damage to their attacks.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 60
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "str",
+      "value": {
+        "base": 311
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "atk",
+      "value": {
+        "base": 207
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "damage-shield",
+      "value": {
+        "base": 931
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "min-hit-damage",
+      "value": {
+        "base": 41
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "hit-damage",
+      "value": {
+        "base": 5
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "horn"
+  ]
+}

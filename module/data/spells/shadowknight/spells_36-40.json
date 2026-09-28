@@ -1,0 +1,157 @@
+[
+    {
+  "_id": "sk-heart-flutter-36",
+  "name": "Heart Flutter",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/036.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 36,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 41,
+    "effects": [
+      { "type": "debuff", "stat": "str", "amount": -20 },
+      { "type": "debuff", "stat": "ac", "amount": -9 },
+      { "type": "dot", "element": "disease", "min": 24, "max": 24 }
+    ],
+    "description": "Weakens the target’s strength and armor while inflicting disease damage over time."
+  }
+},
+{
+  "_id": "sk-cancel-magic-36",
+  "name": "Cancel Magic",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/036b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 36,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 30,
+    "effects": [
+      { "type": "utility", "effect": "cancel-magic", "rank": 1 }
+    ],
+    "description": "Dispels a minor magical effect from the target."
+  }
+},
+{
+  "_id": "sk-scream-of-death-37",
+  "name": "Scream of Death",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/037.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 37,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "proc", "name": "Scream of Death Strike" }
+    ],
+    "description": "Grants the caster a melee proc that deals additional damage."
+  }
+},
+{
+  "_id": "sk-shadow-vortex-37",
+  "name": "Shadow Vortex",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/037b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 37,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 40,
+    "effects": [
+      { "type": "debuff", "stat": "ac", "min": -3, "max": -15 }
+    ],
+    "description": "Weakens the target’s armor class."
+  }
+},
+{
+  "_id": "sk-animate-dead-38",
+  "name": "Animate Dead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/038.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 38,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 200,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetNecS04L020Skel2" }
+    ],
+    "description": "Animates a powerful undead servant to fight for the Shadowknight."
+  }
+},
+{
+  "_id": "sk-voice-of-darkness-39",
+  "name": "Voice of Darkness",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/039.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 39,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 1,
+    "manaCost": 50,
+    "effects": [
+      { "type": "hate-mod", "amount": 2 }
+    ],
+    "description": "Increases the caster’s hate generation against the target."
+  }
+},
+{
+  "_id": "sk-expulse-undead-39",
+  "name": "Expulse Undead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/039b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 39,
+    "school": "evocation",
+    "target": "undead",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 36,
+    "effects": [
+      { "type": "damage", "element": "magic", "min": 86, "max": 106 }
+    ],
+    "description": "Deals magic damage to undead enemies."
+  }
+},
+{
+  "_id": "sk-shadow-sight-40",
+  "name": "Shadow Sight",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/040.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 40,
+    "school": "divination",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "vision", "effect": "ultravision" },
+      { "type": "vision", "effect": "see-invisible" }
+    ],
+    "description": "Enhances the caster’s vision, granting ultravision and see invisible."
+  }
+}
+]

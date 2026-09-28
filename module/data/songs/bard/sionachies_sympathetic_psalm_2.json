@@ -1,0 +1,35 @@
+{
+  "id": "sionachies_sympathetic_psalm_2",
+  "name": "Sionachie's Sympathetic Psalm",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 87,
+  "description": "Your psalm allows your companions a chance to restore some of their expended mana when casting damaging spells. This chance works for spells that are at least level 75 and up to level 90.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "sympathetic-mana"
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "voice"
+  ]
+}

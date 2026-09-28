@@ -1,0 +1,47 @@
+{
+  "id": "melody_of_ervaj_1",
+  "name": "Melody of Ervaj",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 50,
+  "description": "An archaic song that increases the attack speed of your group. This increase is cumulative with most other effects that increase attack speed.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 5
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 4
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "horn"
+  ]
+}

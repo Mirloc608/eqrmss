@@ -1,0 +1,12 @@
+<section class="eq-tab eq-tab-songs" data-tab="songs">
+  <h2>Songs</h2>
+
+  <div class="eq-song-list">
+    {{#each songs}}
+      <div class="eq-song-entry" draggable="true" data-item-id="{{_id}}">
+        <img src="{{img}}" class="eq-song-icon" />
+        <span class="eq-song-name">{{name}}</span>
+      </div>
+    {{/each}}
+  </div>
+</section>

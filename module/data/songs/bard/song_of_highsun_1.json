@@ -1,0 +1,50 @@
+{
+  "id": "song_of_highsun_1",
+  "name": "Song of Highsun",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 56,
+  "description": "An odd tune that strips mystic enchantments from your target, stuns them up to level 55 for 1 second, and causes them to teleport to their home point.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 22,
+    "targets": "ally"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "dispel",
+      "amount": 9
+    },
+    {
+      "type": "utility",
+      "effect": "dispel",
+      "amount": 9
+    },
+    {
+      "type": "control",
+      "condition": "stun",
+      "duration": 1
+    },
+    {
+      "type": "utility",
+      "effect": "shadowstep"
+    }
+  ],
+  "stacking": {
+    "group": "dispel-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "dispel-song",
+    "flute"
+  ]
+}

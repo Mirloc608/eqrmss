@@ -1,0 +1,37 @@
+{
+  "id": "silence_of_the_forsaken_3",
+  "name": "Silence of the Forsaken",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 96,
+  "description": "A quiet song that calms the aggressive nature of many monsters. Affects creatures up to level 100.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "reduce-social-radius",
+      "amount": 15,
+      "duration": 30
+    }
+  ],
+  "stacking": {
+    "group": "calm-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "calm-song",
+    "voice"
+  ]
+}

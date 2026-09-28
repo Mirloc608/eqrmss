@@ -1,0 +1,428 @@
+[
+  {
+    "_id": "nec-dark-empathy-6-r1",
+    "name": "Dark Empathy",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 6,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 68
+        }
+      ],
+      "description": "Creates a dark pact that transfers 30 of your hit points to your target."
+    }
+  },
+  {
+    "_id": "nec-dark-pact-6-r1",
+    "name": "Dark Pact",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 6,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 2,
+          "max": 2,
+          "duration": 450
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 1,
+          "max": 1,
+          "duration": 450
+        }
+      ],
+      "description": "Grips your body in an unholy darkness, slowly draining your hit points while regenerating your mana."
+    }
+  },
+  {
+    "_id": "nec-ward-undead-6-r1",
+    "name": "Ward Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 6,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 27,
+          "resist": "magic"
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 7 and 12 damage to an undead target."
+    }
+  },
+  {
+    "_id": "nec-gather-shadows-7-r1",
+    "name": "Gather Shadows",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 7,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard",
+          "duration": 1200
+        }
+      ],
+      "description": "Calls shadows to conceal your body, allowing you to move undetected by many creatures for up to 20 minutes."
+    }
+  },
+  {
+    "_id": "nec-mend-bones-7-r1",
+    "name": "Mend Bones",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 7,
+      "school": "necromancy",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 35
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 10
+        }
+      ],
+      "description": "Restores an undead servant, healing between 15 and 32 hit points and curing them of diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "nec-vampiric-embrace-7-r1",
+    "name": "Vampiric Embrace",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 7,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc-vampiric-embrace",
+          "duration": 450
+        }
+      ],
+      "description": "Gives your attacks a vampiric property for 7.5 minutes, allowing a chance to steal life from your target."
+    }
+  },
+  {
+    "_id": "nec-bone-walk-8-r1",
+    "name": "Bone Walk",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 8,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "bone-walk"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-impart-strength-8-r1",
+    "name": "Impart Strength",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 8,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 10,
+          "duration": 360
+        }
+      ],
+      "description": "Imparts your target with a portion of your strength for 6 minutes."
+    }
+  },
+  {
+    "_id": "nec-lesser-shielding-8-r1",
+    "name": "Lesser Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 8,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 30,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 10,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "nec-leech-9-r1",
+    "name": "Leech",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 9,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 72,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 9,
+          "max": 9,
+          "duration": 54,
+          "resist": "magic",
+          "resistMod": -200
+        },
+        {
+          "type": "utility",
+          "effect": "spell-damage-leech",
+          "percent": 100.0,
+          "maxPerHit": 28,
+          "duration": 54
+        }
+      ],
+      "description": "Drains the life from your target, doing 8 damage every six seconds for 54 seconds. 100% of the life-force taken is used to heal your wounds."
+    }
+  },
+  {
+    "_id": "nec-sight-graft-9-r1",
+    "name": "Sight Graft",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 9,
+      "school": "divination",
+      "target": "pet",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "bind-sight"
+        }
+      ],
+      "description": "Allows you to see through your undead servant."
+    }
+  },
+  {
+    "_id": "nec-wave-of-enfeeblement-9-r1",
+    "name": "Wave of Enfeeblement",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 9,
+      "school": "alteration",
+      "target": "area",
+      "range": 0,
+      "castTime": 2.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -15,
+          "duration": 240,
+          "resist": "magic"
+        }
+      ],
+      "description": "Creates an unholy aura that drains strength from up to 30 of those nearby.",
+      "radius": 30
+    }
+  },
+  {
+    "_id": "nec-heat-blood-10-r1",
+    "name": "Heat Blood",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 10,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 88,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 14,
+          "max": 14,
+          "duration": 36,
+          "resist": "fire",
+          "resistMod": -100
+        }
+      ],
+      "description": "Heats the blood of your target, causing between 18 and 43 damage every six seconds for 36 seconds."
+    }
+  },
+  {
+    "_id": "nec-scent-of-dusk-10-r1",
+    "name": "Scent of Dusk",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 10,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 1,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 9,
+          "duration": 840,
+          "resist": "poison"
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 9,
+          "duration": 840,
+          "resist": "poison"
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 9,
+          "duration": 840,
+          "resist": "poison"
+        }
+      ],
+      "description": "Surrounds your target in the scent of dusk, causing them to be more susceptible to fire, poison, and disease."
+    }
+  },
+  {
+    "_id": "nec-spook-the-dead-10-r1",
+    "name": "Spook the Dead",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 10,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52,
+          "duration": 18,
+          "resist": "magic"
+        }
+      ],
+      "description": "Inspires fear in an undead opponent, causing them to flee."
+    }
+  }
+]

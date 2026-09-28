@@ -1,0 +1,143 @@
+<form class="eqrmss skill-category-sheet"
+      autocomplete="off">
+
+<header class="sheet-header">
+
+<img
+src="{{item.img}}"
+data-edit="img"
+title="{{item.name}}"
+height="64"
+width="64"
+/>
+
+<input
+name="name"
+type="text"
+value="{{item.name}}"
+/>
+
+</header>
+
+<section class="sheet-body">
+
+<div class="applicable-stats-grid">
+
+{{#each applicable_stat_slots}}
+
+<div class="form-group">
+
+<label>
+{{this.label}}
+</label>
+
+<select name="{{this.path}}">
+
+{{selectOptions
+../applicable_stat_list
+selected=this.value
+}}
+
+</select>
+
+</div>
+
+{{/each}}
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Ranks</th>
+<th>Rank Bonus</th>
+<th>Stat Bonus</th>
+<th>Profession Bonus</th>
+<th>Special 1</th>
+<th>Special 2</th>
+<th>Total</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+<input
+name="system.ranks"
+type="number"
+value="{{system.ranks}}"
+>
+</td>
+
+<td>
+<input
+name="system.rank_bonus"
+type="number"
+value="{{system.rank_bonus}}"
+>
+</td>
+
+<td>
+<input
+name="system.stat_bonus"
+type="number"
+value="{{system.stat_bonus}}"
+>
+</td>
+
+<td>
+<input
+name="system.prof_bonus"
+type="number"
+value="{{system.prof_bonus}}"
+>
+</td>
+
+<td>
+<input
+name="system.special_bonus_1"
+type="number"
+value="{{system.special_bonus_1}}"
+>
+</td>
+
+<td>
+<input
+name="system.special_bonus_2"
+type="number"
+value="{{system.special_bonus_2}}"
+>
+</td>
+
+<td>
+<input
+readonly
+type="number"
+value="{{system.total_bonus}}"
+>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+{{editor
+ enrichedDescription
+ target="system.description"
+ button=true
+ owner=owner
+ editable=editable
+}}
+
+</section>
+
+</form>

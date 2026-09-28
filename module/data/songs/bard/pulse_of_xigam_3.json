@@ -1,0 +1,62 @@
+{
+  "id": "pulse_of_xigam_3",
+  "name": "Pulse of Xigam",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 106,
+  "description": "Increases your companions' health regeneration by 223, mana regeneration by 148, and endurance regeneration by 19 and increases the yield of their healing spells by 15%. This bonus will decay on spells over level 110.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "healing",
+      "value": {
+        "base": 14
+      },
+      "duration": 12
+    },
+    {
+      "type": "heal",
+      "value": {
+        "base": 2330
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "mana",
+      "value": {
+        "base": 76
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "endurance",
+      "value": {
+        "base": 10
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "heal-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "heal-song",
+    "voice"
+  ]
+}

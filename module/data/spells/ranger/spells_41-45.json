@@ -1,0 +1,170 @@
+[
+  {
+    "_id": "rng-spirit-of-the-shrew-41-r1",
+    "name": "Spirit of the Shrew",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 41,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 30,
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your target with the spirit of the shrew, granting greatly improved night vision and increased movement speed for 36 minutes. This spell also functions indoors."
+    }
+  },
+  {
+    "_id": "rng-spikecoat-42-r1",
+    "name": "Spikecoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 42,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 110,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 6.0,
+          "max": 7.0,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 4.0,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of spikes that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "rng-shield-of-brambles-43-r1",
+    "name": "Shield of Brambles",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "ranger",
+      "level": 43,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 12,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of brambles that cause damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "rng-greater-healing-44-r1",
+    "name": "Greater Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 44,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 115,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 228
+        }
+      ],
+      "description": "Mends major wounds, healing between 140 and 350 hit points."
+    }
+  },
+  {
+    "_id": "rng-immolate-44-r1",
+    "name": "Immolate",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "ranger",
+      "level": 44,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 72,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 307,
+          "max": 307,
+          "duration": 48
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -3.0,
+          "max": -4.0,
+          "duration": 48
+        }
+      ],
+      "description": "Inflicts burns on your target, causing between 17 and 72 damage every 6 seconds for 48 seconds. Requires a fire beetle eye to cast.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-ensnaring-roots-45-r1",
+    "name": "Ensnaring Roots",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 45,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 299
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 96
+        }
+      ],
+      "description": "Commands roots to take hold of your target, doing between 10 and 60 damage, and preventing their movement for 96 seconds.",
+      "resist": "magic"
+    }
+  }
+]

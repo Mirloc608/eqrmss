@@ -1,0 +1,47 @@
+{
+  "id": "guardian_rhythms_1",
+  "name": "Guardian Rhythms",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 17,
+  "description": "A mystic tune that offers your group protection from magic and increases their armor class.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 6
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-magic",
+      "value": {
+        "base": 60
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "ac-buff",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "ac-buff",
+    "drum"
+  ]
+}

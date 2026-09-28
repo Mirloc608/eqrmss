@@ -1,0 +1,15 @@
+<section class="eq-spell-gems">
+  <h3>Spell Gems</h3>
+
+  <div class="eq-spell-gem-bar">
+    {{#each memorized}}
+      <div class="eq-spell-gem" data-index="{{@index}}">
+        {{#if icon}}
+          <img src="{{icon}}" class="eq-spell-gem-icon" />
+        {{else}}
+          <div class="eq-spell-gem-empty">Empty</div>
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
+</section>

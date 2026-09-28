@@ -1,0 +1,182 @@
+[
+  {
+    "_id": "rng-strength-of-earth-26-r1",
+    "name": "Strength of Earth",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 26,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 15,
+          "duration": 1620
+        }
+      ],
+      "description": "Fills your target with the power of the earth, increasing their strength for 27 minutes."
+    }
+  },
+  {
+    "_id": "rng-eyes-of-the-cat-27-r1",
+    "name": "Eyes of the Cat",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 27,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "infravision",
+          "duration": 1620
+        }
+      ],
+      "description": "Infuses your eyes with the vision of a cat, allowing you to see more clearly in the dark for 27 minutes."
+    }
+  },
+  {
+    "_id": "rng-spirit-of-wolf-28-r1",
+    "name": "Spirit of Wolf",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 28,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 55,
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your target with the spirit of the wolf, increasing their movement speed for 36 minutes."
+    }
+  },
+  {
+    "_id": "rng-flaming-arrow-29-r1",
+    "name": "Flaming Arrow",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "ranger",
+      "level": 29,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 57,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 52
+        }
+      ],
+      "description": "Hurls a magically burning arrow at your target, causing 113 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-riftwinds-protection-29-r1",
+    "name": "Riftwind's Protection",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "ranger",
+      "level": 29,
+      "school": "abjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 3.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 2.0,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3.0,
+          "max": 4.0,
+          "duration": 3600
+        }
+      ],
+      "description": "Covers your skin in a coat of hardened thorns, increasing your armor class, as well as causing damage to anyone who strikes you for 60 minutes."
+    }
+  },
+  {
+    "_id": "rng-barbcoat-30-r1",
+    "name": "Barbcoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 30,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3.0,
+          "max": 4.0,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 2.0,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of barbs that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "rng-cancel-magic-30-r1",
+    "name": "Cancel Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "ranger",
+      "level": 30,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 1.0
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  }
+]

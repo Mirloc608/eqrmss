@@ -1,0 +1,430 @@
+[
+  {
+    "_id": "pal-resistant-discipline-51-r1",
+    "name": "Resistant Discipline",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 51,
+      "school": "defense",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "discipline-resistant-discipline",
+          "duration": 300
+        }
+      ],
+      "description": "Focuses your will, increasing your resistances for a short time."
+    }
+  },
+  {
+    "_id": "pal-force-52-r1",
+    "name": "Force",
+    "type": "spell",
+    "img": "icons/magic/light/explosion-beam-blind.webp",
+    "system": {
+      "class": "paladin",
+      "level": 52,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "duration": 6.0
+        },
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 272,
+          "resist": "magic"
+        }
+      ],
+      "description": "Strikes an enemy with holy might, briefly stunning them and causing between 40 and 90 damage. This spell works on creatures up to level 58.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-frenzied-strength-52-r1",
+    "name": "Frenzied Strength",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 52,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 38,
+          "duration": 180
+        }
+      ],
+      "description": "Focuses your target's strength into an intense burst, increasing it for a short time, but then gradually decaying over the next 3 minutes."
+    }
+  },
+  {
+    "_id": "pal-light-of-life-52-r1",
+    "name": "Light of Life",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 52,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 215,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 455
+        }
+      ],
+      "description": "Bathes your target in light, healing 410 hit points. If your target is an enemy, you will heal that enemy's current target instead."
+    }
+  },
+  {
+    "_id": "pal-divine-glory-53-r1",
+    "name": "Divine Glory",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 53,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 150,
+          "duration": 3000
+        }
+      ],
+      "description": "Fills your target with a divine glory, increasing their hit points for 50 minutes."
+    }
+  },
+  {
+    "_id": "pal-force-of-akera-53-r1",
+    "name": "Force of Akera",
+    "type": "spell",
+    "img": "icons/magic/light/explosion-beam-blind.webp",
+    "system": {
+      "class": "paladin",
+      "level": 53,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "duration": 4.0,
+          "maxLevel": 63
+        }
+      ],
+      "description": "Channels the forces of ancient valor, stunning your target briefly. This spell works on creatures up to level 63.",
+      "resist": "magic",
+      "resistMod": -30
+    }
+  },
+  {
+    "_id": "pal-expel-undead-54-r1",
+    "name": "Expel Undead",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "paladin",
+      "level": 54,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 93,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 300,
+          "resist": "magic",
+          "resistMod": -50
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 200 and 333 damage to an undead target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "pal-fearless-discipline-54-r1",
+    "name": "Fearless Discipline",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 54,
+      "school": "defense",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "discipline-fearless-discipline",
+          "duration": 60
+        }
+      ],
+      "description": "Strengthens your resolve, rendering you immune to fear."
+    }
+  },
+  {
+    "_id": "pal-instill-54-r1",
+    "name": "Instill",
+    "type": "spell",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "class": "paladin",
+      "level": 54,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 96
+        }
+      ],
+      "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 96 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-quellious-word-of-tranquility-54-r1",
+    "name": "Quellious' Word of Tranquility",
+    "type": "spell",
+    "img": "icons/magic/light/explosion-beam-blind.webp",
+    "system": {
+      "class": "paladin",
+      "level": 54,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "duration": 10.0
+        },
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 97,
+          "resist": "magic",
+          "resistMod": -30
+        }
+      ],
+      "description": "Invokes the quiet power of Quellious, stunning your enemy and doing 108 damage. This spell works on creatures up to level 63.",
+      "resist": "magic",
+      "resistMod": -30
+    }
+  },
+  {
+    "_id": "pal-austerity-55-r1",
+    "name": "Austerity",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 55,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 9.0,
+      "manaCost": 550,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 800,
+          "duration": 3600
+        },
+        {
+          "type": "heal",
+          "amount": 522
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 11,
+          "max": 14,
+          "duration": 3600
+        }
+      ],
+      "description": "Cloaks your target in an aura of austerity, granting them increased hit points and armor class for 60 minutes."
+    }
+  },
+  {
+    "_id": "pal-divine-favor-55-r1",
+    "name": "Divine Favor",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 55,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb-damage",
+          "amount": 150,
+          "duration": 300
+        }
+      ],
+      "description": "Guards your target with a divine favor, absorbing some damage."
+    }
+  },
+  {
+    "_id": "pal-holy-aura-55-r1",
+    "name": "Holy Aura",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 55,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 340,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "aura",
+          "aura": "holy-aura-effect"
+        }
+      ],
+      "description": "Increases the potency of healing spells that land on your companions, as long as they stay inside the area of the aura."
+    }
+  },
+  {
+    "_id": "pal-holyforge-discipline-55-r1",
+    "name": "Holyforge Discipline",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "paladin",
+      "level": 55,
+      "school": "offense",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "discipline-holyforge-discipline",
+          "duration": 300
+        }
+      ],
+      "description": "Bathes your weapon in a holy light, providing a chance to do severe damage to undead targets."
+    }
+  },
+  {
+    "_id": "pal-resist-magic-55-r1",
+    "name": "Resist Magic",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 55,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away magic for 36 minutes."
+    }
+  },
+  {
+    "_id": "pal-restoration-55-r1",
+    "name": "Restoration",
+    "type": "spell",
+    "img": "icons/magic/life/angel-wings-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 55,
+      "school": "alteration",
+      "target": "corpse",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "resurrection"
+        }
+      ],
+      "description": "Revives a slain ally, restoring 75% of their lost experience. It takes some time for the recently revived to fully recover."
+    }
+  },
+  {
+    "_id": "pal-wave-of-healing-55-r1",
+    "name": "Wave of Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 55,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 503,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 339
+        }
+      ],
+      "description": "Emanates a wave of healing from the caster, healing 489 hit points for everyone in your group."
+    }
+  }
+]

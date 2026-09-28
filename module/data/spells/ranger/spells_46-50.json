@@ -1,0 +1,227 @@
+[
+  {
+    "_id": "rng-resist-fire-46-r1",
+    "name": "Resist Fire",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 46,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away fire for 36 minutes."
+    }
+  },
+  {
+    "_id": "rng-superior-camouflage-47-r1",
+    "name": "Superior Camouflage",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "ranger",
+      "level": 47,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard",
+          "duration": 1440
+        }
+      ],
+      "description": "Covers your target's body in a mystic cloak, allowing them to blend in with their surroundings."
+    }
+  },
+  {
+    "_id": "rng-force-of-nature-48-r1",
+    "name": "Force of Nature",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 48,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 3.5,
+          "duration": 1230
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 3.0,
+          "duration": 1230
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 15,
+          "duration": 1230
+        }
+      ],
+      "description": "Focuses your target with the force of nature, increasing their attack rating, and causing damage to anything that strikes them for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "rng-wolf-form-48-r1",
+    "name": "Wolf Form",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 48,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "old-wolf",
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 55,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 30,
+          "duration": 4320
+        }
+      ],
+      "description": "Fills you with the spirit of the wild, allowing you to take the form of a wolf for 72 minutes, increasing your movement speed, and attack rating."
+    }
+  },
+  {
+    "_id": "rng-call-of-flame-49-r1",
+    "name": "Call of Flame",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "ranger",
+      "level": 49,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 106,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 299
+        }
+      ],
+      "description": "Hurls a magically burning arrow at your target, causing 247 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-pack-shrew-49-r1",
+    "name": "Pack Shrew",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 49,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 320,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 30,
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your group with the spirit of the shrew, granting greatly improved night vision and increased movement speed for 36 minutes. This spell also functions indoors."
+    }
+  },
+  {
+    "_id": "rng-call-of-earth-50-r1",
+    "name": "Call of Earth",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "ranger",
+      "level": 50,
+      "school": "abjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 3.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 4.0,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 6.0,
+          "max": 7.0,
+          "duration": 3600
+        }
+      ],
+      "description": "Focuses your target with the call of earth, increasing their armor class, and causing damage to anything that strikes them for 60 minutes."
+    }
+  },
+  {
+    "_id": "rng-jolt-50-r1",
+    "name": "Jolt",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 50,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-hate",
+          "amount": 500
+        }
+      ],
+      "description": "Strikes your target's head, sometimes causing partial memory loss.",
+      "resist": "magic"
+    }
+  }
+]

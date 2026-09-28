@@ -1,0 +1,79 @@
+<section class="stats-panel">
+
+<h2>
+    Attributes
+</h2>
+
+<div class="stats-grid">
+
+{{#each stats}}
+
+<div class="stat-card">
+
+    <div class="stat-header">
+
+        <span class="stat-name">
+            {{label}}
+        </span>
+
+        <span class="stat-abbr">
+            {{abbr}}
+        </span>
+
+    </div>
+
+    <div class="stat-values">
+
+        <div>
+            <label>
+                Bonus
+            </label>
+
+            <input
+                type="number"
+                name="system.stats.{{@key}}.basic_bonus"
+                value="{{basic_bonus}}">
+        </div>
+
+        <div>
+            <label>
+                Potential
+            </label>
+
+            <input
+                type="number"
+                name="system.stats.{{@key}}.potential"
+                value="{{potential}}">
+        </div>
+
+        <div>
+            <label>
+                Race
+            </label>
+
+            <input
+                type="number"
+                name="system.stats.{{@key}}.racial_bonus"
+                value="{{racial_bonus}}">
+        </div>
+
+        <div>
+            <label>
+                Special
+            </label>
+
+            <input
+                type="number"
+                name="system.stats.{{@key}}.special_bonus"
+                value="{{special_bonus}}">
+        </div>
+
+    </div>
+
+</div>
+
+{{/each}}
+
+</div>
+
+</section>

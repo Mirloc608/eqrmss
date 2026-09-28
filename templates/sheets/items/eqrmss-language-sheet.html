@@ -1,0 +1,65 @@
+<form class="eqrmss item-sheet"
+      autocomplete="off">
+
+<header class="sheet-header">
+
+    <div class="header-image">
+
+        <img
+            src="{{item.img}}"
+            data-edit="img"
+            title="{{item.name}}"
+            height="64"
+            width="64"
+        />
+
+    </div>
+
+    <div class="header-name">
+
+        <input
+            name="name"
+            type="text"
+            value="{{item.name}}"
+            placeholder="{{localize 'Name'}}"
+        />
+
+    </div>
+
+</header>
+
+<section class="sheet-body">
+
+<div class="form-group">
+
+    <label>
+        {{localize "eqrmss.item.language_family"}}
+    </label>
+
+    <input
+        name="system.family"
+        type="text"
+        value="{{system.family}}"
+    />
+
+</div>
+
+<div class="form-group stacked">
+
+    <label>
+        {{localize "eqrmss.item.description"}}
+    </label>
+
+    {{editor
+        enrichedDescription
+        target="system.description"
+        button=true
+        owner=owner
+        editable=editable
+    }}
+
+</div>
+
+</section>
+
+</form>

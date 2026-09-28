@@ -1,0 +1,38 @@
+{
+  "id": "bruscos_boastful_bellow_1",
+  "name": "Brusco's Boastful Bellow",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 12,
+  "description": "A great bellow that causes 1 damage to your opponent.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 30,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 18
+      }
+    }
+  ],
+  "stacking": {
+    "group": "direct-damage",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "direct-damage",
+    "voice"
+  ]
+}

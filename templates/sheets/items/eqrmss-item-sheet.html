@@ -1,0 +1,121 @@
+<form class="eqrmss item-sheet"
+      autocomplete="off">
+
+<header class="sheet-header">
+
+    <div class="header-image">
+
+        <img
+            src="{{item.img}}"
+            data-edit="img"
+            title="{{item.name}}"
+            height="64"
+            width="64"
+        />
+
+    </div>
+
+    <div class="header-name">
+
+        <input
+            name="name"
+            type="text"
+            value="{{item.name}}"
+            placeholder="{{localize 'Name'}}"
+        />
+
+    </div>
+
+</header>
+
+<section class="sheet-body">
+
+<div class="form-group">
+
+    <label>
+        {{localize "eqrmss.item.worn"}}
+    </label>
+
+    <input
+        type="checkbox"
+        name="system.worn"
+        {{checked system.worn}}
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        {{localize "eqrmss.item.quantity"}}
+    </label>
+
+    <input
+        name="system.quantity"
+        type="number"
+        value="{{system.quantity}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        {{localize "eqrmss.item.weight"}}
+    </label>
+
+    <input
+        name="system.weight"
+        type="number"
+        value="{{system.weight}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        {{localize "eqrmss.item.cost"}}
+    </label>
+
+    <input
+        name="system.cost"
+        type="text"
+        value="{{system.cost}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        {{localize "eqrmss.item.prod_time"}}
+    </label>
+
+    <input
+        name="system.prod_time"
+        type="text"
+        value="{{system.prod_time}}"
+    />
+
+</div>
+
+<div class="form-group stacked">
+
+    <label>
+        {{localize "eqrmss.item.description"}}
+    </label>
+
+    {{editor
+        enrichedDescription
+        target="system.description"
+        button=true
+        owner=owner
+        editable=editable
+    }}
+
+</div>
+
+</section>
+
+</form>

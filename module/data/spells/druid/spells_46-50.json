@@ -1,0 +1,535 @@
+[
+  {
+    "_id": "dru-lightning-blast-46-r1",
+    "name": "Lightning Blast",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 46,
+      "school": "evocation",
+      "target": "area",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 234,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 660,
+          "radius": 10
+        }
+      ],
+      "description": "Calls down lightning from the sky over your target, causing between 477 and 477 damage to up to 4 creatures in the area. This spell can only be cast outdoors.",
+      "resist": "magic",
+      "radius": 10
+    }
+  },
+  {
+    "_id": "dru-skin-like-nature-46-r1",
+    "name": "Skin like Nature",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 46,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 5,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 250,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 580,
+          "max": 580
+        },
+        {
+          "type": "heal",
+          "amount": 5,
+          "duration": 4320
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points and armor class for 72 minutes."
+    }
+  },
+  {
+    "_id": "dru-succor-north-46-r1",
+    "name": "Succor: North",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 46,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "evac"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Northern Plains of Karana."
+    }
+  },
+  {
+    "_id": "dru-zephyr-knowledge-46-r1",
+    "name": "Zephyr: Knowledge",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 46,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "poknowledge"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Plane of Knowledge."
+    }
+  },
+  {
+    "_id": "dru-ice-47-r1",
+    "name": "Ice",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 47,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 142,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 635
+        }
+      ],
+      "description": "Covers your target in glistening ice, causing between 370 and 538 damage, and lowering their fire resistance.",
+      "resist": "cold"
+    }
+  },
+  {
+    "_id": "dru-shield-of-thorns-47-r1",
+    "name": "Shield of Thorns",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 47,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 24,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of thorns that cause damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-thorncoat-47-r1",
+    "name": "Thorncoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 47,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 175,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 9,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 5,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of thorns that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "dru-zephyr-lavastorm-47-r1",
+    "name": "Zephyr: Lavastorm",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 47,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "lavastorm"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Lavastorm Mountains."
+    }
+  },
+  {
+    "_id": "dru-fire-48-r1",
+    "name": "Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 48,
+      "school": "evocation",
+      "target": "area",
+      "range": 200,
+      "castTime": 6.5,
+      "manaCost": 260,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 330,
+          "radius": 10
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-cold",
+          "min": -50,
+          "max": -50,
+          "duration": 12
+        }
+      ],
+      "description": "Ignites the skin of up to 4 targets, doing 392 damage, and lowering their ice resistance for 12 seconds.",
+      "resist": "fire",
+      "radius": 10
+    }
+  },
+  {
+    "_id": "dru-improved-superior-camouflage-48-r1",
+    "name": "Improved Superior Camouflage",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 48,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard"
+        }
+      ],
+      "description": "Covers your body in a mystic cloak, allowing you to blend in with your surroundings."
+    }
+  },
+  {
+    "_id": "dru-starfire-48-r1",
+    "name": "Starfire",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "druid",
+      "level": 48,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 186,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 535
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 500 and 634 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-upheaval-48-r1",
+    "name": "Upheaval",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 48,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 625,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 610,
+          "radius": 35
+        }
+      ],
+      "description": "Causes the earth to tremble around you, causing between 138 and 725 damage to up to 30 nearby enemies.",
+      "resist": "magic",
+      "radius": 35
+    }
+  },
+  {
+    "_id": "dru-forests-renewal-49-r1",
+    "name": "Forest's Renewal",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 49,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.75,
+      "manaCost": 233,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 510,
+          "max": 700
+        }
+      ],
+      "description": "Mends your target's wounds, healing between 490 and 671 hit points."
+    }
+  },
+  {
+    "_id": "dru-legacy-of-spike-49-r1",
+    "name": "Legacy of Spike",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "druid",
+      "level": 49,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 24,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your group in a shield of spikes that causes damage to anything that strikes them for 15 minutes."
+    }
+  },
+  {
+    "_id": "dru-protection-of-nature-49-r1",
+    "name": "Protection of Nature",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 49,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 9.0,
+      "manaCost": 700,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 5,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 250,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 260,
+          "max": 260
+        },
+        {
+          "type": "heal",
+          "amount": 2,
+          "duration": 4320
+        }
+      ],
+      "description": "Hardens the skin of your group, increasing their hit points and armor class for 72 minutes."
+    }
+  },
+  {
+    "_id": "dru-resist-magic-49-r1",
+    "name": "Resist Magic",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 49,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away magic for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-vengeance-of-the-wild-49-r1",
+    "name": "Vengeance of the Wild",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "druid",
+      "level": 49,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 180,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "curse",
+          "amount": 8,
+          "duration": 30
+        },
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 175,
+          "max": 175,
+          "duration": 30
+        }
+      ],
+      "description": "Inflicts the vengeance of the wild on your target, causing between 72 and 131 damage every six seconds for 30 seconds.",
+      "resist": "fire",
+      "resistMod": -30
+    }
+  },
+  {
+    "_id": "dru-everlasting-breath-50-r1",
+    "name": "Everlasting Breath",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 50,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 55,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "enduring-breath"
+        }
+      ],
+      "description": "Fills your lungs with magical breath, removing your necessity for air for 27 minutes."
+    }
+  },
+  {
+    "_id": "dru-levitation-50-r1",
+    "name": "Levitation",
+    "type": "spell",
+    "img": "icons/magic/arcane/levitate.webp",
+    "system": {
+      "class": "druid",
+      "level": 50,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "levitate"
+        }
+      ],
+      "description": "Forms a cloud of dense air around your feet, allowing you to float slightly off the ground for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "dru-tangle-50-r1",
+    "name": "Tangle",
+    "type": "spell",
+    "img": "icons/magic/nature/root-vines-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 50,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 56,
+          "duration": 840
+        }
+      ],
+      "description": "Entangles your target's feet with magical roots, slowing their movement speed for up to 14 minutes.",
+      "resist": "magic"
+    }
+  }
+]

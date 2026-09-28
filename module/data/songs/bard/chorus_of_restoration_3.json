@@ -1,0 +1,46 @@
+{
+  "id": "chorus_of_restoration_3",
+  "name": "Chorus of Restoration",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 78,
+  "description": "Calls forth the blessing of the goddess Erollisi to regenerate the health and mana of nearby allies.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 0,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "heal",
+      "value": {
+        "base": 878
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "mana",
+      "value": {
+        "base": 18
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "heal-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "heal",
+    "heal-song",
+    "lute"
+  ]
+}

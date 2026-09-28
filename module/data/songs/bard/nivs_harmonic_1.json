@@ -1,0 +1,47 @@
+{
+  "id": "nivs_harmonic_1",
+  "name": "Niv's Harmonic",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 58,
+  "description": "Surrounds your group in a protective aura, granting them increased armor class.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-rune",
+      "value": {
+        "base": 10
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 6
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "rune-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "rune-song",
+    "voice"
+  ]
+}

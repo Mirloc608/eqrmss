@@ -1,0 +1,48 @@
+{
+  "id": "thousand_blades_1",
+  "name": "Thousand Blades",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 69,
+  "description": "Brings your blades and your steps into perfect alignment increasing your melee accuracy by 100%, the chance your melee attacks will deal critical damage by 5%, and grants a 200% non-cumulative increase to the damage of your critical melee attacks for 60 seconds.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "chance-to-hit",
+      "amount": 100,
+      "duration": 60
+    },
+    {
+      "type": "utility",
+      "effect": "crit-hit-damage",
+      "amount": 200,
+      "duration": 60
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-critical-hit",
+      "amount": 5,
+      "duration": 60
+    }
+  ],
+  "stacking": {
+    "group": "discipline",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "discipline"
+  ]
+}

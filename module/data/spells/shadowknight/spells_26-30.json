@@ -1,0 +1,138 @@
+[
+  {
+  "_id": "sk-endure-disease-26",
+  "name": "Endure Disease",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/026.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 26,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 20,
+    "effects": [
+      { "type": "buff", "stat": "resist-disease", "min": 11, "max": 30 }
+    ],
+    "description": "Increases the target’s resistance to disease."
+  }
+},
+{
+  "_id": "sk-wave-of-enfeeblement-27",
+  "name": "Wave of Enfeeblement",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/027.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 27,
+    "school": "alteration",
+    "target": "area",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 40,
+    "effects": [
+      { "type": "debuff", "stat": "str", "min": -5, "max": -20 }
+    ],
+    "description": "Weakens all nearby enemies, reducing their strength."
+  }
+},
+{
+  "_id": "sk-heat-blood-28",
+  "name": "Heat Blood",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/028.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 28,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 88,
+    "effects": [
+      { "type": "dot", "element": "fire", "min": 18, "max": 43 }
+    ],
+    "description": "Boils the target’s blood, dealing fire damage over time."
+  }
+},
+{
+  "_id": "sk-strengthen-death-29",
+  "name": "Strengthen Death",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/029.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 29,
+    "school": "alteration",
+    "target": "pet",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "buff", "stat": "str", "amount": 5 },
+      { "type": "buff", "stat": "attack-speed", "min": 10, "max": 30 },
+      { "type": "buff", "stat": "ac", "amount": 1 }
+    ],
+    "description": "Strengthens the caster’s undead pet, increasing strength, attack speed, and armor."
+  }
+},
+{
+  "_id": "sk-lifedraw-29",
+  "name": "Lifedraw",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/029b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 29,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 86,
+    "effects": [
+      { "type": "lifetap", "min": 90, "max": 105 }
+    ],
+    "description": "A powerful lifetap that drains health from the target."
+  }
+},
+{
+  "_id": "sk-restless-bones-30",
+  "name": "Restless Bones",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/030.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 30,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 160,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetNecS04L016Skel2Ice" }
+    ],
+    "description": "Summons a stronger undead servant to fight for the Shadowknight."
+  }
+},
+{
+  "_id": "sk-gather-shadows-30",
+  "name": "Gather Shadows",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/030b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 30,
+    "school": "divination",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 35,
+    "effects": [
+      { "type": "utility", "effect": "invisibility" }
+    ],
+    "description": "Shrouds the caster in shadows, granting invisibility."
+  }
+}
+
+]

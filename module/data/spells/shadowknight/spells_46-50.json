@@ -1,0 +1,156 @@
+[
+  {
+  "_id": "sk-voice-of-shadows-46",
+  "name": "Voice of Shadows",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/046.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 46,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 1,
+    "manaCost": 100,
+    "effects": [
+      { "type": "hate-mod", "amount": 4 }
+    ],
+    "description": "Increases the caster’s hate generation against the target."
+  }
+},
+{
+  "_id": "sk-summon-dead-46",
+  "name": "Summon Dead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/046b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 46,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 290,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetNecS06L029Skel2" }
+    ],
+    "description": "Summons a powerful undead servant to fight for the Shadowknight."
+  }
+},
+{
+  "_id": "sk-scythe-of-darkness-47",
+  "name": "Scythe of Darkness",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/047.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 47,
+    "school": "conjuration",
+    "target": "undead",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 112,
+    "effects": [
+      { "type": "damage", "element": "shadow", "amount": 346 }
+    ],
+    "description": "Deals heavy shadow damage to undead enemies."
+  }
+},
+{
+  "_id": "sk-life-leech-47",
+  "name": "Life Leech",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/047b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 47,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 181,
+    "effects": [
+      { "type": "lifetap", "min": 228, "max": 228 }
+    ],
+    "description": "Drains life from the target and transfers it to the caster."
+  }
+},
+{
+  "_id": "sk-spear-of-pain-48",
+  "name": "Spear of Pain",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/048.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 48,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 138,
+    "effects": [
+      { "type": "damage", "element": "shadow", "amount": 325 }
+    ],
+    "description": "Launches a spear of shadowy pain at the target."
+  }
+},
+{
+  "_id": "sk-dismiss-undead-49",
+  "name": "Dismiss Undead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/049.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 49,
+    "school": "evocation",
+    "target": "undead",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 63,
+    "effects": [
+      { "type": "damage", "element": "magic", "min": 150, "max": 211 }
+    ],
+    "description": "Deals magic damage to undead enemies."
+  }
+},
+{
+  "_id": "sk-shroud-of-pain-50",
+  "name": "Shroud of Pain",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/050.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 50,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 75,
+    "effects": [
+      { "type": "debuff", "stat": "ac", "min": 0, "max": 18 }
+    ],
+    "description": "Weakens the target’s armor class."
+  }
+},
+{
+  "_id": "sk-harmshield-50",
+  "name": "Harmshield",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/050b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 50,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 85,
+    "effects": [
+      { "type": "damage", "element": "health", "amount": 20 },
+      { "type": "utility", "effect": "invulnerability" }
+    ],
+    "description": "Sacrifices a small amount of health to grant temporary invulnerability."
+  }
+}
+
+]

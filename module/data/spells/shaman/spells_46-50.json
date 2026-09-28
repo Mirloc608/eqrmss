@@ -1,0 +1,286 @@
+[
+  {
+  "_id": "shm-strength-46",
+  "name": "Strength",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 46,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "buff", "stat": "str", "min": 42, "max": 109 }
+    ],
+    "description": "Increases the target’s strength."
+  }
+},
+{
+  "_id": "shm-harnessing-of-spirit-46",
+  "name": "Harnessing of Spirit",
+  "type": "spell",
+  "img": "icons/magic/nature/totem-bear.webp",
+  "system": {
+    "class": "shaman",
+    "level": 46,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 5,
+    "manaCost": 425,
+    "effects": [
+      { "type": "buff", "stat": "hp-max", "min": 153, "max": 402 },
+      { "type": "heal", "min": 153, "max": 402 },
+      { "type": "buff", "stat": "str", "min": 42, "max": 109 },
+      { "type": "buff", "stat": "dex", "min": 2, "max": 51 },
+      { "type": "stacking", "slot": 4, "value": 67 },
+      { "type": "stacking", "slot": 5, "value": 50 },
+      { "type": "stack-block", "stat": "str", "threshold": 1067 },
+      { "type": "stack-block", "stat": "dex", "threshold": 1050 }
+    ],
+    "description": "Increases max HP, heals, and boosts strength and dexterity with stacking rules."
+  }
+},
+{
+  "_id": "shm-charisma-47",
+  "name": "Charisma",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+    "class": "shaman",
+    "level": 47,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "buff", "stat": "cha", "amount": 40 }
+    ],
+    "description": "Increases the target’s charisma."
+  }
+},
+{
+  "_id": "shm-shock-of-venom-47",
+  "name": "Shock of Venom",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-bolt-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 47,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 227,
+    "effects": [
+      { "type": "damage", "element": "poison", "min": 400, "max": 535 }
+    ],
+    "description": "Deals poison damage to a single target."
+  }
+},
+{
+  "_id": "shm-malosi-48",
+  "name": "Malosi",
+  "type": "spell",
+  "img": "icons/magic/debuff/hand-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 48,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 175,
+    "effects": [
+      { "type": "debuff", "stat": "resist-cold", "min": -11, "max": -70 },
+      { "type": "debuff", "stat": "resist-magic", "min": -11, "max": -70 },
+      { "type": "debuff", "stat": "resist-poison", "min": -11, "max": -70 },
+      { "type": "debuff", "stat": "resist-fire", "min": -11, "max": -70 }
+    ],
+    "description": "Reduces all elemental and magical resistances."
+  }
+},
+{
+  "_id": "shm-dexterity-48",
+  "name": "Dexterity",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 48,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "buff", "stat": "dex", "min": 2, "max": 51 }
+    ],
+    "description": "Increases the target’s dexterity."
+  }
+},
+{
+  "_id": "shm-abolish-disease-48",
+  "name": "Abolish Disease",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 48,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "cure", "effect": "disease", "amount": 36 }
+    ],
+    "description": "Removes disease counters from the target."
+  }
+},
+{
+  "_id": "shm-plague-49",
+  "name": "Plague",
+  "type": "spell",
+  "img": "icons/magic/debuff/disease-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 49,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 308,
+    "effects": [
+      { "type": "debuff", "effect": "disease", "amount": 9 },
+      { "type": "dot", "element": "disease", "min": 97, "max": 156 },
+      { "type": "damage", "element": "disease", "amount": 144 }
+    ],
+    "description": "Inflicts disease, dealing damage over time."
+  }
+},
+{
+  "_id": "shm-infusion-of-spirit-49",
+  "name": "Infusion of Spirit",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 49,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 200,
+    "effects": [
+      { "type": "buff", "stat": "str", "amount": 50 },
+      { "type": "buff", "stat": "dex", "amount": 55 },
+      { "type": "buff", "stat": "sta", "amount": 45 }
+    ],
+    "description": "Greatly increases strength, dexterity, and stamina."
+  }
+},
+{
+  "_id": "shm-envenomed-bolt-49",
+  "name": "Envenomed Bolt",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-bolt-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 49,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 409,
+    "effects": [
+      { "type": "debuff", "effect": "poison", "amount": 10 },
+      { "type": "damage", "element": "poison", "amount": 41 },
+      { "type": "dot", "element": "poison", "min": 295, "max": 351 }
+    ],
+    "description": "Inflicts poison, dealing damage over time."
+  }
+},
+{
+  "_id": "shm-spirit-quickening-50",
+  "name": "Spirit Quickening",
+  "type": "spell",
+  "img": "icons/magic/spirit/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 50,
+    "school": "alteration",
+    "target": "pet",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "buff", "stat": "str", "min": 30, "max": 60 },
+      { "type": "buff", "stat": "attack-speed", "amount": 20 },
+      { "type": "buff", "stat": "ac", "min": 12, "max": 31 }
+    ],
+    "description": "Increases pet strength, attack speed, and armor class."
+  }
+},
+{
+  "_id": "shm-talisman-of-jasinth-50",
+  "name": "Talisman of Jasinth",
+  "type": "spell",
+  "img": "icons/magic/nature/totem-bear.webp",
+  "system": {
+    "class": "shaman",
+    "level": 50,
+    "school": "abjuration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "buff", "stat": "resist-disease", "min": 16, "max": 60 }
+    ],
+    "description": "Increases the group’s resistance to disease."
+  }
+},
+{
+  "_id": "shm-kraggs-salve-50",
+  "name": "Kragg's Salve",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 50,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 244,
+    "effects": [
+      { "type": "heal", "min": 507, "max": 688 }
+    ],
+    "description": "Restores a very large amount of hitpoints."
+  }
+},
+{
+  "_id": "shm-spirit-of-the-puma-50",
+  "name": "Spirit of the Puma",
+  "type": "spell",
+  "img": "icons/magic/nature/cat-spirit-yellow.webp",
+  "system": {
+    "class": "shaman",
+    "level": 50,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 212,
+    "effects": [
+      { "type": "proc", "name": "Puma Maw", "rateMod": 400 }
+    ],
+    "description": "Grants the target a powerful melee proc: Puma Maw."
+  }
+}
+]

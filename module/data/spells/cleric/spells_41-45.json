@@ -1,0 +1,633 @@
+[
+ {
+  "_id": "clr-symbol-of-naltron-41-r1",
+  "name": "Symbol of Naltron",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 41,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 315,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 511,
+     "duration": 3240
+    },
+    {
+     "type": "heal",
+     "amount": 511
+    }
+   ],
+   "description": "Covers your target in a shimmer of holy runes, increasing their hit points for 54 minutes."
+  }
+ },
+ {
+  "_id": "clr-yaulp-iii-41-r1",
+  "name": "Yaulp III",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 41,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.5,
+   "manaCost": 1,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "str",
+     "amount": 30,
+     "duration": 24
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 3,
+     "max": 4,
+     "duration": 24
+    }
+   ],
+   "description": "Focuses your spiritual energy into a great battle cry, increasing your strength and armor class for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-resolution-42-r1",
+  "name": "Resolution",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 42,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.5,
+   "manaCost": 110,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 3,
+     "max": 5,
+     "duration": 3780
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 243,
+     "duration": 3780
+    },
+    {
+     "type": "heal",
+     "amount": 243
+    }
+   ],
+   "description": "Provides your target with a sense of resolution, increasing their hit points and armor class for 63 minutes."
+  }
+ },
+ {
+  "_id": "clr-restoration-42-r1",
+  "name": "Restoration",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 42,
+   "school": "alteration",
+   "target": "corpse",
+   "range": 200,
+   "castTime": 6.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "resurrect",
+     "xp": 75
+    }
+   ],
+   "description": "Revives a slain ally, restoring 75% of their lost experience. It takes some time for the recently revived to fully recover."
+  }
+ },
+ {
+  "_id": "clr-banish-undead-43-r1",
+  "name": "Banish Undead",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 43,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.5,
+   "manaCost": 118,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 256,
+     "resist": "magic",
+     "resistMod": -50
+    }
+   ],
+   "description": "A burst of holy power that inflicts between 148 and 256 damage to an undead target."
+  }
+ },
+ {
+  "_id": "clr-resist-magic-43-r1",
+  "name": "Resist Magic",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 43,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.5,
+   "manaCost": 85,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "resist-magic",
+     "amount": 40,
+     "duration": 2160
+    }
+   ],
+   "description": "Surrounds your target with an aura of protection, warding away magic for 36 minutes."
+  }
+ },
+ {
+  "_id": "clr-celestial-healing-44-r1",
+  "name": "Celestial Healing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 225,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 175,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your target's body with celestial power, healing between 10 and 175 hit points every 6 seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-earthquake-44-r1",
+  "name": "Earthquake",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 375,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 135,
+     "radius": 30,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to tremble around you, causing between 49 and 135 damage to up to 30 nearby enemies.",
+   "radius": 30
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-amber-44-r1",
+  "name": "Greater Mass Imbue Amber",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Amber"
+    }
+   ],
+   "description": "Focuses the power of Cazic-Thule into twenty pieces of amber. Consumes twenty ambers when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-black-pearl-44-r1",
+  "name": "Greater Mass Imbue Black Pearl",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Black Pearl"
+    }
+   ],
+   "description": "Focuses the power of Prexus into twenty black pearls. Consumes twenty black pearls when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-black-sapphire-44-r1",
+  "name": "Greater Mass Imbue Black Sapphire",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Black Sapphire"
+    }
+   ],
+   "description": "Focuses the power of Bertoxxulous into twenty black sapphires. Consumes twenty black sapphires when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-diamond-44-r1",
+  "name": "Greater Mass Imbue Diamond",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Diamond"
+    }
+   ],
+   "description": "Focuses the power of Mithaniel Marr into twenty diamonds. Consumes twenty diamonds when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-emerald-44-r1",
+  "name": "Greater Mass Imbue Emerald",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Emerald"
+    }
+   ],
+   "description": "Focuses the power of Tunare into twenty emeralds. Consumes twenty emeralds when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-opal-44-r1",
+  "name": "Greater Mass Imbue Opal",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Opal"
+    }
+   ],
+   "description": "Focuses the power of Rodcet Nife into twenty opals. Consumes twenty opals when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-peridot-44-r1",
+  "name": "Greater Mass Imbue Peridot",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Peridot"
+    }
+   ],
+   "description": "Focuses the power of Bristlebane into twenty peridots. Consumes twenty peridots when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-plains-pebble-44-r1",
+  "name": "Greater Mass Imbue Plains Pebble",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Plains Pebble"
+    }
+   ],
+   "description": "Focuses the power of Karana into twenty plains pebbles. Consumes twenty plains pebbles when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-rose-quartz-44-r1",
+  "name": "Greater Mass Imbue Rose Quartz",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Rose Quartz"
+    }
+   ],
+   "description": "Focuses the power of Erollisi Marr into twenty pieces of star rose quartz. Consumes twenty star rose quartz when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-ruby-44-r1",
+  "name": "Greater Mass Imbue Ruby",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Ruby"
+    }
+   ],
+   "description": "Focuses the power of Brell Serilis into twenty rubies. Consumes twenty rubies when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-sapphire-44-r1",
+  "name": "Greater Mass Imbue Sapphire",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Sapphire"
+    }
+   ],
+   "description": "Focuses the power of Innoruuk into twenty sapphires. Consumes twenty sapphires when cast."
+  }
+ },
+ {
+  "_id": "clr-greater-mass-imbue-topaz-44-r1",
+  "name": "Greater Mass Imbue Topaz",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 2400,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Topaz"
+    }
+   ],
+   "description": "Focuses the power of Quellious into twenty topaz. Consumes twenty topaz when cast."
+  }
+ },
+ {
+  "_id": "clr-retribution-44-r1",
+  "name": "Retribution",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 44,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.0,
+   "manaCost": 144,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 213,
+     "resist": "magic"
+    }
+   ],
+   "description": "Calls upon the retribution of the gods to strike your target, causing between 131 and 213 damage."
+  }
+ },
+ {
+  "_id": "clr-blessing-of-temperance-45-r1",
+  "name": "Blessing of Temperance",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 45,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 12.0,
+   "manaCost": 1650,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 2800"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 779,
+     "duration": 6000
+    },
+    {
+     "type": "heal",
+     "amount": 779
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 11,
+     "max": 14,
+     "duration": 6000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 2800"
+    }
+   ],
+   "description": "Cloaks your group in an aura of temperance, granting them increased hit points and armor class for 100 minutes."
+  }
+ },
+ {
+  "_id": "clr-healing-light-45-r1",
+  "name": "Healing Light",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 45,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.75,
+   "manaCost": 238,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 604,
+     "max": 780
+    }
+   ],
+   "description": "Mends your target's wounds, healing between 604 and 780 hit points."
+  }
+ },
+ {
+  "_id": "clr-shield-of-words-45-r1",
+  "name": "Shield of Words",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 45,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 8.0,
+   "manaCost": 300,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 7,
+     "max": 9,
+     "duration": 4320
+    }
+   ],
+   "description": "Covers your target in a holy guard, increasing their armor class for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-word-of-healing-45-r1",
+  "name": "Word of Healing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-cross-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 45,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 425,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 203,
+     "max": 738
+    }
+   ],
+   "description": "Mends the wounds of everyone in your group, healing between 203 and 738 hit points."
+  }
+ }
+]

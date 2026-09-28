@@ -1,0 +1,57 @@
+{
+  "id": "selos_accelerating_canto_1",
+  "name": "Selo's Accelerating Canto",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 74,
+  "description": "The rapid pace of this song fills your feet with speed, increasing the movement rate of your group for 3 minutes.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "movement",
+      "value": {
+        "base": 100
+      },
+      "duration": 180
+    },
+    {
+      "type": "invisibility",
+      "variant": "standard"
+    },
+    {
+      "type": "utility",
+      "effect": "see-invisible"
+    },
+    {
+      "type": "utility",
+      "effect": "levitate"
+    },
+    {
+      "type": "utility",
+      "effect": "movement-speed-cap",
+      "amount": 4,
+      "duration": 180
+    }
+  ],
+  "stacking": {
+    "group": "movement-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "movement-song",
+    "drum"
+  ]
+}

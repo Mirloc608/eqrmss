@@ -1,0 +1,5393 @@
+[
+ {
+  "_id": "clr-aweflash-111-r1",
+  "name": "Aweflash",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.0,
+   "manaCost": 144,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 8.0,
+     "resist": "magic",
+     "resistMod": -15
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 396,
+     "resist": "magic",
+     "resistMod": -15
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-inspired-heal-vi-azia"
+    }
+   ],
+   "description": "Shocks your enemy, stunning them for up to 8 seconds, causing between 396 and 396 damage, and healing their target for up to 6673 hit points. This spell works on creatures up to level 115."
+  }
+ },
+ {
+  "_id": "clr-aweflash-111-r2",
+  "name": "Aweflash",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.0,
+   "manaCost": 153,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 8.0,
+     "resist": "magic",
+     "resistMod": -15
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 420,
+     "resist": "magic",
+     "resistMod": -15
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-inspired-heal-vi-azia"
+    }
+   ],
+   "description": "Shocks your enemy, stunning them for up to 8 seconds, causing between 420 and 420 damage, and healing their target for up to 6673 hit points. This spell works on creatures up to level 115."
+  }
+ },
+ {
+  "_id": "clr-aweflash-111-r3",
+  "name": "Aweflash",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.0,
+   "manaCost": 161,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 8.0,
+     "resist": "magic",
+     "resistMod": -15
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 444,
+     "resist": "magic",
+     "resistMod": -15
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-inspired-heal-vi-azia"
+    }
+   ],
+   "description": "Shocks your enemy, stunning them for up to 8 seconds, causing between 444 and 444 damage, and healing their target for up to 6673 hit points. This spell works on creatures up to level 115."
+  }
+ },
+ {
+  "_id": "clr-benediction-of-reverence-111-r1",
+  "name": "Benediction of Reverence",
+  "type": "spell",
+  "img": "icons/magic/defense/armor-scale-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.5,
+   "manaCost": 520,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "spell-haste",
+     "amount": 11,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Level: 115 (lose 5% per level)"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Spell: Exclude Complete Heal"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Casting Time: 3s"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Exclude Current HP Percent"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Exclude Combat Skills"
+    }
+   ],
+   "description": "Bestows your target with a blessing, allowing them to cast spells 11% faster for 72 minutes. This bonus affects spells up to level 115 that have a base casting time of at least 3 seconds."
+  }
+ },
+ {
+  "_id": "clr-composite-blessing-111-r1",
+  "name": "Composite Blessing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.75,
+   "manaCost": 19961,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-highest-rank-of-composite-lifespring"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-highest-rank-of-composite-blessing"
+    },
+    {
+     "type": "heal",
+     "amount": 1.7,
+     "duration": 6
+    }
+   ],
+   "description": "Grants the highest rank you know of Composite Blessing 1. 7 to your target, healing them and increasing their maximum HP briefly, while casting the highest rank you know of Composite Lifespring 1; 7 on your group to heal them."
+  }
+ },
+ {
+  "_id": "clr-infusion-of-sincerity-111-r1",
+  "name": "Infusion of Sincerity",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 0.5,
+   "manaCost": 1642,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "melee-proc-sincere-infusion"
+    }
+   ],
+   "description": "Adds Sincere Infusion as a melee proc to your weapons, which will heal your target's target for up to 3589 hit points. This effect will fade after it is triggered 8 times."
+  }
+ },
+ {
+  "_id": "clr-infusion-of-sincerity-111-r2",
+  "name": "Infusion of Sincerity",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 0.5,
+   "manaCost": 1741,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "melee-proc-sincere-infusion"
+    }
+   ],
+   "description": "Adds Sincere Infusion as a melee proc to your weapons, which will heal your target's target for up to 3589 hit points. This effect will fade after it is triggered 8 times."
+  }
+ },
+ {
+  "_id": "clr-infusion-of-sincerity-111-r3",
+  "name": "Infusion of Sincerity",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 0.5,
+   "manaCost": 1839,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "melee-proc-sincere-infusion"
+    }
+   ],
+   "description": "Adds Sincere Infusion as a melee proc to your weapons, which will heal your target's target for up to 3589 hit points. This effect will fade after it is triggered 8 times."
+  }
+ },
+ {
+  "_id": "clr-inspired-heal-vi-azia-111-r1",
+  "name": "Inspired Heal VI Azia",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 7,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 4628
+    }
+   ],
+   "description": "Heals your target's target for up to 4,628 hit points."
+  }
+ },
+ {
+  "_id": "clr-inspired-heal-vi-beza-111-r1",
+  "name": "Inspired Heal VI Beza",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 7,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 4860
+    }
+   ],
+   "description": "Heals your target's target for up to 4,860 hit points."
+  }
+ },
+ {
+  "_id": "clr-inspired-heal-vi-caza-111-r1",
+  "name": "Inspired Heal VI Caza",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 7,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 5103
+    }
+   ],
+   "description": "Heals your target's target for up to 5,103 hit points."
+  }
+ },
+ {
+  "_id": "clr-obliterate-the-undead-111-r1",
+  "name": "Obliterate the Undead",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 580,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 6600,
+     "resist": "magic",
+     "resistMod": -100
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-annihilate-weakness",
+     "chance": 24
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-obliterate-destruction",
+     "chance": 10
+    }
+   ],
+   "description": "Strikes an undead creature with holy power, inflicting 6,600 damage. The power has a 24% chance to inflict Annihilate Weakness, lowering your target's resistances, and a 10% chance to inflict Obliterate Destruction, dealing 121,411 additional damage; Vampire or Undead."
+  }
+ },
+ {
+  "_id": "clr-obliterate-the-undead-111-r2",
+  "name": "Obliterate the Undead",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 615,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 6996,
+     "resist": "magic",
+     "resistMod": -100
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-annihilate-weakness",
+     "chance": 24
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-obliterate-destruction",
+     "chance": 10
+    }
+   ],
+   "description": "Strikes an undead creature with holy power, inflicting 6,996 damage. The power has a 24% chance to inflict Annihilate Weakness, lowering your target's resistances, and a 10% chance to inflict Obliterate Destruction, dealing 121,411 additional damage; Vampire or Undead."
+  }
+ },
+ {
+  "_id": "clr-obliterate-the-undead-111-r3",
+  "name": "Obliterate the Undead",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 650,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 7392,
+     "resist": "magic",
+     "resistMod": -100
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-annihilate-weakness",
+     "chance": 24
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-obliterate-destruction",
+     "chance": 10
+    }
+   ],
+   "description": "Strikes an undead creature with holy power, inflicting 7,392 damage. The power has a 24% chance to inflict Annihilate Weakness, lowering your target's resistances, and a 10% chance to inflict Obliterate Destruction, dealing 121,411 additional damage; Vampire or Undead."
+  }
+ },
+ {
+  "_id": "clr-placating-glow-111-r1",
+  "name": "Placating Glow",
+  "type": "spell",
+  "img": "icons/magic/debuff/sleep-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.0,
+   "manaCost": 1318,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 30
+    }
+   ],
+   "description": "Pacifies your target, lowering its aggressiveness for 30 seconds. Affects creatures up to level 115."
+  }
+ },
+ {
+  "_id": "clr-placating-glow-111-r2",
+  "name": "Placating Glow",
+  "type": "spell",
+  "img": "icons/magic/debuff/sleep-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.0,
+   "manaCost": 1397,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 30
+    }
+   ],
+   "description": "Pacifies your target, lowering its aggressiveness for 30 seconds. Affects creatures up to level 115."
+  }
+ },
+ {
+  "_id": "clr-placating-glow-111-r3",
+  "name": "Placating Glow",
+  "type": "spell",
+  "img": "icons/magic/debuff/sleep-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.0,
+   "manaCost": 1476,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 30
+    }
+   ],
+   "description": "Pacifies your target, lowering its aggressiveness for 30 seconds. Affects creatures up to level 115."
+  }
+ },
+ {
+  "_id": "clr-sincere-coalition-111-r1",
+  "name": "Sincere Coalition",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.5,
+   "manaCost": 4675,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-rain-ii-azia"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Single"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Beneficial"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Level: 101"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Level: 120 (lose 100% per level)"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Duration: 0s"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Mana Cost: 10"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP greater than 6000"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Caster Class: CLR, DRU, SHM"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Caster: Exclude Self"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Delay Between Trigger: 1.5s"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-resolution-ii-azia"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-rain-ii-azia"
+    }
+   ],
+   "description": "Forms a divine alliance over your target, placing a healing rain over them that heals 15005 hit points to all nearby allies when other Cleric, Druid, or Shaman heals (levels 101 to 120 that heal at least 6000 HP) land on that target once every 1. 5 seconds; If 120 heals are received in that time, it will trigger Sincere Resolution II Azia which heals 146995 hit points to all nearby allies."
+  }
+ },
+ {
+  "_id": "clr-sincere-coalition-111-r2",
+  "name": "Sincere Coalition",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.5,
+   "manaCost": 4956,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-rain-ii-azia"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Single"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Beneficial"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Level: 101"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Level: 120 (lose 100% per level)"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Duration: 0s"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Mana Cost: 10"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP greater than 6000"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Caster Class: CLR, DRU, SHM"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Caster: Exclude Self"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Delay Between Trigger: 1.5s"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-resolution-ii-azia"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-rain-ii-azia"
+    }
+   ],
+   "description": "Forms a divine alliance over your target, placing a healing rain over them that heals 15005 hit points to all nearby allies when other Cleric, Druid, or Shaman heals (levels 101 to 120 that heal at least 6000 HP) land on that target once every 1. 5 seconds; If 120 heals are received in that time, it will trigger Sincere Resolution II Azia which heals 146995 hit points to all nearby allies."
+  }
+ },
+ {
+  "_id": "clr-sincere-coalition-111-r3",
+  "name": "Sincere Coalition",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.5,
+   "manaCost": 5236,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-rain-ii-azia"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Single"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Beneficial"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Level: 101"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Level: 120 (lose 100% per level)"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Duration: 0s"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Mana Cost: 10"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP greater than 6000"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Caster Class: CLR, DRU, SHM"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Caster: Exclude Self"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Delay Between Trigger: 1.5s"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-resolution-ii-azia"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-rain-ii-azia"
+    }
+   ],
+   "description": "Forms a divine alliance over your target, placing a healing rain over them that heals 15005 hit points to all nearby allies when other Cleric, Druid, or Shaman heals (levels 101 to 120 that heal at least 6000 HP) land on that target once every 1. 5 seconds; If 120 heals are received in that time, it will trigger Sincere Resolution II Azia which heals 146995 hit points to all nearby allies."
+  }
+ },
+ {
+  "_id": "clr-sincere-remedy-111-r1",
+  "name": "Sincere Remedy",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.5,
+   "manaCost": 1151,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 8989,
+     "condition": "HP Above 20 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 11237,
+     "condition": "HP Below 20 Percent"
+    }
+   ],
+   "description": "Mends severe wounds, healing up to 8,989 hit points, or up to 11,237 hit points if your target is at or below 20% health."
+  }
+ },
+ {
+  "_id": "clr-sincere-remedy-111-r2",
+  "name": "Sincere Remedy",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.5,
+   "manaCost": 1220,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 9528,
+     "condition": "HP Above 20 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 11911,
+     "condition": "HP Below 20 Percent"
+    }
+   ],
+   "description": "Mends severe wounds, healing up to 9,528 hit points, or up to 11,911 hit points if your target is at or below 20% health."
+  }
+ },
+ {
+  "_id": "clr-sincere-remedy-111-r3",
+  "name": "Sincere Remedy",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.5,
+   "manaCost": 1289,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 10068,
+     "condition": "HP Above 20 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 12585,
+     "condition": "HP Below 20 Percent"
+    }
+   ],
+   "description": "Mends severe wounds, healing up to 10,068 hit points, or up to 12,585 hit points if your target is at or below 20% health."
+  }
+ },
+ {
+  "_id": "clr-symbol-of-jorlleag-111-r1",
+  "name": "Symbol of Jorlleag",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 2239,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 8579,
+     "duration": 4320
+    },
+    {
+     "type": "heal",
+     "amount": 8579
+    }
+   ],
+   "description": "Covers your target in a shimmer of holy runes, increasing their maximum hit points by up to 8,579 for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-unity-of-jorlleag-111-r1",
+  "name": "Unity of Jorlleag",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 3982,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-benediction-of-reverence"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-symbol-of-jorlleag"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-ward-of-sincerity"
+    }
+   ],
+   "description": "Grants Benediction of Reverence, Symbol of Jorlleag, and Ward of Sincerity to your target."
+  }
+ },
+ {
+  "_id": "clr-vow-of-veracity-111-r1",
+  "name": "Vow of Veracity",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 520,
+   "effects": [
+    {
+     "type": "debuff",
+     "effect": "healing-reduction",
+     "amount": 25,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "melee-proc-truthful-strike"
+    }
+   ],
+   "description": "By taking a solemn vow you reduce your healing efficacy by 25% for 72 minutes for the chance to do 5291 damage via Truthful Strike. Each vital strike invigorates you, replenishing your health by up to 11429 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-vow-of-veracity-111-r2",
+  "name": "Vow of Veracity",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 551,
+   "effects": [
+    {
+     "type": "debuff",
+     "effect": "healing-reduction",
+     "amount": 26,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "melee-proc-truthful-strike"
+    }
+   ],
+   "description": "By taking a solemn vow you reduce your healing efficacy by 25% for 72 minutes for the chance to do 5291 damage via Truthful Strike. Each vital strike invigorates you, replenishing your health by up to 11429 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-vow-of-veracity-111-r3",
+  "name": "Vow of Veracity",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 582,
+   "effects": [
+    {
+     "type": "debuff",
+     "effect": "healing-reduction",
+     "amount": 28,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "melee-proc-truthful-strike"
+    }
+   ],
+   "description": "By taking a solemn vow you reduce your healing efficacy by 25% for 72 minutes for the chance to do 5291 damage via Truthful Strike. Each vital strike invigorates you, replenishing your health by up to 11429 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-ward-of-sincerity-111-r1",
+  "name": "Ward of Sincerity",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.25,
+   "manaCost": 1618,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 119,
+     "max": 157,
+     "duration": 4320
+    }
+   ],
+   "description": "Covers your target in a defensive ward, increasing their armor class by 1792 for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-word-of-soothing-111-r1",
+  "name": "Word of Soothing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-flame-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 2848,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 14060,
+     "max": 14060
+    }
+   ],
+   "description": "Mends the severe wounds of everyone in your group, healing between 14,060 and 14,060 hit points."
+  }
+ },
+ {
+  "_id": "clr-word-of-soothing-111-r2",
+  "name": "Word of Soothing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-flame-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 3019,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 14904,
+     "max": 14904
+    }
+   ],
+   "description": "Mends the severe wounds of everyone in your group, healing between 14,904 and 14,904 hit points."
+  }
+ },
+ {
+  "_id": "clr-word-of-soothing-111-r3",
+  "name": "Word of Soothing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-flame-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 3190,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 15747,
+     "max": 15747
+    }
+   ],
+   "description": "Mends the severe wounds of everyone in your group, healing between 15,747 and 15,747 hit points."
+  }
+ },
+ {
+  "_id": "clr-yaulp-xvi-111-r1",
+  "name": "Yaulp XVI",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.25,
+   "manaCost": 7,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "atk",
+     "amount": 444,
+     "duration": 36
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 217,
+     "max": 217,
+     "duration": 36
+    },
+    {
+     "type": "utility",
+     "effect": "worn-proc-rate",
+     "amount": 75
+    },
+    {
+     "type": "buff",
+     "stat": "haste",
+     "amount": 30,
+     "duration": 36
+    }
+   ],
+   "description": "Focuses your spiritual energy into a great battle cry, increasing your attack rating by 444, proc chance by 75%, mana regeneration by 217, and attack speed by 30% for 36 seconds. The effects of this spell will fade if you sit down."
+  }
+ },
+ {
+  "_id": "clr-yaulp-xvi-111-r2",
+  "name": "Yaulp XVI",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.25,
+   "manaCost": 7,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "atk",
+     "amount": 471,
+     "duration": 36
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 230,
+     "max": 230,
+     "duration": 36
+    },
+    {
+     "type": "utility",
+     "effect": "worn-proc-rate",
+     "amount": 80
+    },
+    {
+     "type": "buff",
+     "stat": "haste",
+     "amount": 32,
+     "duration": 36
+    }
+   ],
+   "description": "Focuses your spiritual energy into a great battle cry, increasing your attack rating by 471, proc chance by 75%, mana regeneration by 217, and attack speed by 30% for 36 seconds. The effects of this spell will fade if you sit down."
+  }
+ },
+ {
+  "_id": "clr-yaulp-xvi-111-r3",
+  "name": "Yaulp XVI",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 111,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.25,
+   "manaCost": 8,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "atk",
+     "amount": 497,
+     "duration": 36
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 243,
+     "max": 243,
+     "duration": 36
+    },
+    {
+     "type": "utility",
+     "effect": "worn-proc-rate",
+     "amount": 84
+    },
+    {
+     "type": "buff",
+     "stat": "haste",
+     "amount": 34,
+     "duration": 36
+    }
+   ],
+   "description": "Focuses your spiritual energy into a great battle cry, increasing your attack rating by 497, proc chance by 75%, mana regeneration by 217, and attack speed by 30% for 36 seconds. The effects of this spell will fade if you sit down."
+  }
+ },
+ {
+  "_id": "clr-anticipated-intercalation-112-r1",
+  "name": "Anticipated Intercalation",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 7.0,
+   "manaCost": 1280,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-anticipated-healing-iv-azia"
+    },
+    {
+     "type": "utility",
+     "effect": "buff-blocker",
+     "detail": "Buff Blocker A (100)"
+    }
+   ],
+   "description": "Places a ward upon your target that will cast Anticipated Healing IV Azia on them if they absorb a melee strike larger than 31000 hit points."
+  }
+ },
+ {
+  "_id": "clr-anticipated-intercalation-112-r2",
+  "name": "Anticipated Intercalation",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 7.0,
+   "manaCost": 1357,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-anticipated-healing-iv-azia"
+    },
+    {
+     "type": "utility",
+     "effect": "buff-blocker",
+     "detail": "Buff Blocker A (100)"
+    }
+   ],
+   "description": "Places a ward upon your target that will cast Anticipated Healing IV Azia on them if they absorb a melee strike larger than 31000 hit points."
+  }
+ },
+ {
+  "_id": "clr-anticipated-intercalation-112-r3",
+  "name": "Anticipated Intercalation",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 7.0,
+   "manaCost": 1434,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-anticipated-healing-iv-azia"
+    },
+    {
+     "type": "utility",
+     "effect": "buff-blocker",
+     "detail": "Buff Blocker A (100)"
+    }
+   ],
+   "description": "Places a ward upon your target that will cast Anticipated Healing IV Azia on them if they absorb a melee strike larger than 31000 hit points."
+  }
+ },
+ {
+  "_id": "clr-divine-intermediation-112-r1",
+  "name": "Divine Intermediation",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 2202,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "divine-intervention",
+     "duration": 600
+    },
+    {
+     "type": "heal",
+     "amount": 66264
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'Delayed Heal Marker' and < 17"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Delayed Heal Marker (17)"
+    }
+   ],
+   "description": "Bestows the favor of the gods upon your target, granting them a 90% chance to be healed for 66,264 hit points if they are struck when they are below 15% of their maximum health. This favor fades when it heals the target or after 10 minutes; Consumes a pair of emeralds when cast."
+  }
+ },
+ {
+  "_id": "clr-divine-intermediation-112-r2",
+  "name": "Divine Intermediation",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 2334,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "divine-intervention",
+     "duration": 600
+    },
+    {
+     "type": "heal",
+     "amount": 70240
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'Delayed Heal Marker' and < 17"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Delayed Heal Marker (17)"
+    }
+   ],
+   "description": "Bestows the favor of the gods upon your target, granting them a 90% chance to be healed for 70,240 hit points if they are struck when they are below 15% of their maximum health. This favor fades when it heals the target or after 10 minutes; Consumes a pair of emeralds when cast."
+  }
+ },
+ {
+  "_id": "clr-divine-intermediation-112-r3",
+  "name": "Divine Intermediation",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 2466,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "divine-intervention",
+     "duration": 600
+    },
+    {
+     "type": "heal",
+     "amount": 74216
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'Delayed Heal Marker' and < 17"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Delayed Heal Marker (17)"
+    }
+   ],
+   "description": "Bestows the favor of the gods upon your target, granting them a 90% chance to be healed for 74,216 hit points if they are struck when they are below 15% of their maximum health. This favor fades when it heals the target or after 10 minutes; Consumes a pair of emeralds when cast."
+  }
+ },
+ {
+  "_id": "clr-divine-keep-112-r1",
+  "name": "Divine Keep",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 1.0,
+   "manaCost": 69,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "invulnerability",
+     "duration": 18
+    },
+    {
+     "type": "heal",
+     "amount": 7724
+    },
+    {
+     "type": "heal",
+     "amount": 7724,
+     "duration": 18
+    }
+   ],
+   "description": "Encases you in a divine aura, rendering you invulnerable to all attacks for 18 seconds, healing 7,724 hit points immediately and 7,724 hit points every six seconds until the effect fades."
+  }
+ },
+ {
+  "_id": "clr-divine-keep-112-r2",
+  "name": "Divine Keep",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 1.0,
+   "manaCost": 73,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "invulnerability",
+     "duration": 18
+    },
+    {
+     "type": "heal",
+     "amount": 8187
+    },
+    {
+     "type": "heal",
+     "amount": 8187,
+     "duration": 18
+    }
+   ],
+   "description": "Encases you in a divine aura, rendering you invulnerable to all attacks for 18 seconds, healing 8,187 hit points immediately and 8,187 hit points every six seconds until the effect fades."
+  }
+ },
+ {
+  "_id": "clr-divine-keep-112-r3",
+  "name": "Divine Keep",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 1.0,
+   "manaCost": 77,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "invulnerability",
+     "duration": 18
+    },
+    {
+     "type": "heal",
+     "amount": 8651
+    },
+    {
+     "type": "heal",
+     "amount": 8651,
+     "duration": 18
+    }
+   ],
+   "description": "Encases you in a divine aura, rendering you invulnerable to all attacks for 18 seconds, healing 8,651 hit points immediately and 8,651 hit points every six seconds until the effect fades."
+  }
+ },
+ {
+  "_id": "clr-hammer-of-obliteration-112-r1",
+  "name": "Hammer of Obliteration",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 815,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Hammer of Obliteration"
+    }
+   ],
+   "description": "Summons [Item 150402], a magical hammer that will smite your foes with Obliteration Strike."
+  }
+ },
+ {
+  "_id": "clr-hammer-of-obliteration-112-r2",
+  "name": "Hammer of Obliteration",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 864,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Hammer of Obliteration"
+    }
+   ],
+   "description": "Summons [Item 150402], a magical hammer that will smite your foes with Obliteration Strike."
+  }
+ },
+ {
+  "_id": "clr-hammer-of-obliteration-112-r3",
+  "name": "Hammer of Obliteration",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 913,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Hammer of Obliteration"
+    }
+   ],
+   "description": "Summons [Item 150402], a magical hammer that will smite your foes with Obliteration Strike."
+  }
+ },
+ {
+  "_id": "clr-hand-of-reverence-112-r1",
+  "name": "Hand of Reverence",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "alteration",
+   "target": "group",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 1456,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "spell-haste",
+     "amount": 11,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Level: 115 (lose 5% per level)"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Spell: Exclude Complete Heal"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Casting Time: 3s"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Exclude Current HP Percent"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Exclude Combat Skills"
+    }
+   ],
+   "description": "Bestows your group with a blessing, allowing them to cast spells 11% faster for 72 minutes. This blessing affects spells up to level 115."
+  }
+ },
+ {
+  "_id": "clr-injunction-112-r1",
+  "name": "Injunction",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 250,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1454,
+     "condition": "Not Undead Or Summoned",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1962,
+     "condition": "Undead",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1744,
+     "condition": "Summoned",
+     "resist": "magic"
+    }
+   ],
+   "description": "Calls upon the gods to reprove your target, causing 1,454 damage to most targets, 1,962 damage to undead targets, or 1,744 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-injunction-112-r2",
+  "name": "Injunction",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 265,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1541,
+     "condition": "Not Undead Or Summoned",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2080,
+     "condition": "Undead",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1849,
+     "condition": "Summoned",
+     "resist": "magic"
+    }
+   ],
+   "description": "Calls upon the gods to reprove your target, causing 1,541 damage to most targets, 2,080 damage to undead targets, or 1,849 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-injunction-112-r3",
+  "name": "Injunction",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 280,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1628,
+     "condition": "Not Undead Or Summoned",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2197,
+     "condition": "Undead",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1953,
+     "condition": "Summoned",
+     "resist": "magic"
+    }
+   ],
+   "description": "Calls upon the gods to reprove your target, causing 1,628 damage to most targets, 2,197 damage to undead targets, or 1,953 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-righteousness-112-r1",
+  "name": "Righteousness",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 9.0,
+   "manaCost": 3208,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 18962"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 12111,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 12111
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 158,
+     "max": 209,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 18962"
+    }
+   ],
+   "description": "Fills your target with holy power, increasing their hit points by 12,111 and armor class by 2384 for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-seventeenth-rejuvenation-112-r1",
+  "name": "Seventeenth Rejuvenation",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.5,
+   "manaCost": 1935,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 7190,
+     "condition": "HP Between 35 and 45 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 11984,
+     "condition": "HP Between 25 and 35 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 16323,
+     "condition": "HP Between 1 and 25 Percent"
+    }
+   ],
+   "description": "Mends critical wounds, healing between 16,323 and 16,323 hit points. This spell will only heal its full amount on a target below 25% health; HP Below 45 Percent."
+  }
+ },
+ {
+  "_id": "clr-seventeenth-rejuvenation-112-r2",
+  "name": "Seventeenth Rejuvenation",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.5,
+   "manaCost": 2051,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 7621,
+     "condition": "HP Between 35 and 45 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 12703,
+     "condition": "HP Between 25 and 35 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 17302,
+     "condition": "HP Between 1 and 25 Percent"
+    }
+   ],
+   "description": "Mends critical wounds, healing between 17,302 and 17,302 hit points. This spell will only heal its full amount on a target below 25% health; HP Below 45 Percent."
+  }
+ },
+ {
+  "_id": "clr-seventeenth-rejuvenation-112-r3",
+  "name": "Seventeenth Rejuvenation",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.5,
+   "manaCost": 2167,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 8053,
+     "condition": "HP Between 35 and 45 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 13422,
+     "condition": "HP Between 25 and 35 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 18282,
+     "condition": "HP Between 1 and 25 Percent"
+    }
+   ],
+   "description": "Mends critical wounds, healing between 18,282 and 18,282 hit points. This spell will only heal its full amount on a target below 25% health; HP Below 45 Percent."
+  }
+ },
+ {
+  "_id": "clr-sincere-elixir-112-r1",
+  "name": "Sincere Elixir",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 2015,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 7630,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your target's body with healing elixir, healing 7,630 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-sincere-elixir-112-r2",
+  "name": "Sincere Elixir",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 2136,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 8088,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your target's body with healing elixir, healing 8,088 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-sincere-elixir-112-r3",
+  "name": "Sincere Elixir",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 2257,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 8546,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your target's body with healing elixir, healing 8,546 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-unified-righteousness-112-r1",
+  "name": "Unified Righteousness",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 8.0,
+   "manaCost": 3693,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-benediction-of-reverence"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-righteousness"
+    }
+   ],
+   "description": "Grants Benediction of Reverence and Righteousness to your target."
+  }
+ },
+ {
+  "_id": "clr-ward-of-injunction-112-r1",
+  "name": "Ward of Injunction",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 2301,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "defensive-proc-ward-of-injunction-parry"
+    }
+   ],
+   "description": "Places a defensive ward around your body. This ward will periodically strike out at any creature that attacks you, dealing 3971 magic damage to them; The ward will fade after 120 strikes or 2 minutes."
+  }
+ },
+ {
+  "_id": "clr-ward-of-injunction-112-r2",
+  "name": "Ward of Injunction",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 2439,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "defensive-proc-ward-of-injunction-parry"
+    }
+   ],
+   "description": "Places a defensive ward around your body. This ward will periodically strike out at any creature that attacks you, dealing 3971 magic damage to them; The ward will fade after 120 strikes or 2 minutes."
+  }
+ },
+ {
+  "_id": "clr-ward-of-injunction-112-r3",
+  "name": "Ward of Injunction",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 2577,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "defensive-proc-ward-of-injunction-parry"
+    }
+   ],
+   "description": "Places a defensive ward around your body. This ward will periodically strike out at any creature that attacks you, dealing 3971 magic damage to them; The ward will fade after 120 strikes or 2 minutes."
+  }
+ },
+ {
+  "_id": "clr-ward-of-righteousness-112-r1",
+  "name": "Ward of Righteousness",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 0.5,
+   "manaCost": 3666,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "buff-blocker",
+     "detail": "Buff Blocker D (80)"
+    },
+    {
+     "type": "utility",
+     "effect": "absorb-hits",
+     "hits": 8,
+     "max_per_hit": 25576
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-healing-ward-iv-azia"
+    }
+   ],
+   "description": "Covers your target in a ward that will absorb up to 25,576 damage of the next 8 hits that contact them. This ward will cast Healing Ward IV Azia, a 37987 point heal, on the bearer when it wears off."
+  }
+ },
+ {
+  "_id": "clr-ward-of-righteousness-112-r2",
+  "name": "Ward of Righteousness",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 0.5,
+   "manaCost": 3886,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "buff-blocker",
+     "detail": "Buff Blocker D (80)"
+    },
+    {
+     "type": "utility",
+     "effect": "absorb-hits",
+     "hits": 8,
+     "max_per_hit": 25576
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-healing-ward-iv-azia"
+    }
+   ],
+   "description": "Covers your target in a ward that will absorb up to 27,111 damage of the next 8 hits that contact them. This ward will cast Healing Ward IV Azia, a 37987 point heal, on the bearer when it wears off."
+  }
+ },
+ {
+  "_id": "clr-ward-of-righteousness-112-r3",
+  "name": "Ward of Righteousness",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 112,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 0.5,
+   "manaCost": 4106,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "buff-blocker",
+     "detail": "Buff Blocker D (80)"
+    },
+    {
+     "type": "utility",
+     "effect": "absorb-hits",
+     "hits": 8,
+     "max_per_hit": 25576
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-healing-ward-iv-azia"
+    }
+   ],
+   "description": "Covers your target in a ward that will absorb up to 28,645 damage of the next 8 hits that contact them. This ward will cast Healing Ward IV Azia, a 37987 point heal, on the bearer when it wears off."
+  }
+ },
+ {
+  "_id": "clr-divine-consequence-113-r1",
+  "name": "Divine Consequence",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.5,
+   "manaCost": 7126,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-consequential-light"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Caster PB"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Hatelist"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Hatelist2"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Caster PB Players"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Directional AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Frontal AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Caster AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Target AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Detrimental"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP less than -28500"
+    }
+   ],
+   "description": "Places a mantle of watchfulness on your shoulders, which will respond to area affect spells that deal more than 28500 damage with Consequential Light, which will heal your group."
+  }
+ },
+ {
+  "_id": "clr-divine-consequence-113-r2",
+  "name": "Divine Consequence",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.5,
+   "manaCost": 7554,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-consequential-light"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Caster PB"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Hatelist"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Hatelist2"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Caster PB Players"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Directional AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Frontal AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Caster AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Target AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Detrimental"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP less than -28500"
+    }
+   ],
+   "description": "Places a mantle of watchfulness on your shoulders, which will respond to area affect spells that deal more than 28500 damage with Consequential Light, which will heal your group."
+  }
+ },
+ {
+  "_id": "clr-divine-consequence-113-r3",
+  "name": "Divine Consequence",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.5,
+   "manaCost": 7981,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-consequential-light"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Caster PB"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Hatelist"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Hatelist2"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Caster PB Players"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Directional AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Frontal AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Caster AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Target: Target AE"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Detrimental"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Current HP less than -28500"
+    }
+   ],
+   "description": "Places a mantle of watchfulness on your shoulders, which will respond to area affect spells that deal more than 28500 damage with Consequential Light, which will heal your group."
+  }
+ },
+ {
+  "_id": "clr-greater-protection-of-vie-113-r1",
+  "name": "Greater Protection of Vie",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 1008,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 75235,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-light-of-vie-vi-azia"
+    }
+   ],
+   "description": "Places the protection of Vie on your target, absorbing 10% of incoming melee damage. This spell absorbs 75235 points of damage before dissipating, healing its bearer for 6937 hit points when it breaks; If the protection is not all used by 72 minutes, it will dissipate without healing the bearer."
+  }
+ },
+ {
+  "_id": "clr-greater-protection-of-vie-113-r2",
+  "name": "Greater Protection of Vie",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 1068,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 79749,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-light-of-vie-vi-azia"
+    }
+   ],
+   "description": "Places the protection of Vie on your target, absorbing 10% of incoming melee damage. This spell absorbs 75235 points of damage before dissipating, healing its bearer for 6937 hit points when it breaks; If the protection is not all used by 72 minutes, it will dissipate without healing the bearer."
+  }
+ },
+ {
+  "_id": "clr-greater-protection-of-vie-113-r3",
+  "name": "Greater Protection of Vie",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 1129,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 84263,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-light-of-vie-vi-azia"
+    }
+   ],
+   "description": "Places the protection of Vie on your target, absorbing 10% of incoming melee damage. This spell absorbs 75235 points of damage before dissipating, healing its bearer for 6937 hit points when it breaks; If the protection is not all used by 72 minutes, it will dissipate without healing the bearer."
+  }
+ },
+ {
+  "_id": "clr-issuance-of-sincerity-113-r1",
+  "name": "Issuance of Sincerity",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "area",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 1823,
+   "effects": [
+    {
+     "type": "summon-pet",
+     "pet": "healing-swarm"
+    }
+   ],
+   "description": "Places a healing ward at the location you choose, which will heal all allies near it for 4039 hit points every few seconds for 120 seconds total. You must have an enemy targeted to use this ability."
+  }
+ },
+ {
+  "_id": "clr-issuance-of-sincerity-113-r2",
+  "name": "Issuance of Sincerity",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "area",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 1932,
+   "effects": [
+    {
+     "type": "summon-pet",
+     "pet": "healing-swarm"
+    }
+   ],
+   "description": "Places a healing ward at the location you choose, which will heal all allies near it for 4039 hit points every few seconds for 120 seconds total. You must have an enemy targeted to use this ability."
+  }
+ },
+ {
+  "_id": "clr-issuance-of-sincerity-113-r3",
+  "name": "Issuance of Sincerity",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "area",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 2042,
+   "effects": [
+    {
+     "type": "summon-pet",
+     "pet": "healing-swarm"
+    }
+   ],
+   "description": "Places a healing ward at the location you choose, which will heal all allies near it for 4039 hit points every few seconds for 120 seconds total. You must have an enemy targeted to use this ability."
+  }
+ },
+ {
+  "_id": "clr-promised-redemption-113-r1",
+  "name": "Promised Redemption",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.25,
+   "manaCost": 1097,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-promised-redemption-trigger-i"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Delayed Heal Marker (48800)"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 2 is 'Delayed Heal Marker' and < 0"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 2 is 'Delayed Heal Marker' and < 0"
+    }
+   ],
+   "description": "Imbues your target with the promise of a 48800 point heal in 18 seconds. Will heal for 63440 hit points instead if the target is under 20% of its maximum at that time."
+  }
+ },
+ {
+  "_id": "clr-promised-redemption-113-r2",
+  "name": "Promised Redemption",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.25,
+   "manaCost": 1163,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-promised-redemption-trigger-i"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Delayed Heal Marker (48800)"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 2 is 'Delayed Heal Marker' and < 0"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 2 is 'Delayed Heal Marker' and < 0"
+    }
+   ],
+   "description": "Imbues your target with the promise of a 48800 point heal in 18 seconds. Will heal for 63440 hit points instead if the target is under 20% of its maximum at that time."
+  }
+ },
+ {
+  "_id": "clr-promised-redemption-113-r3",
+  "name": "Promised Redemption",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.25,
+   "manaCost": 1229,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-promised-redemption-trigger-i"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Delayed Heal Marker (48800)"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 2 is 'Delayed Heal Marker' and < 0"
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 2 is 'Delayed Heal Marker' and < 0"
+    }
+   ],
+   "description": "Imbues your target with the promise of a 48800 point heal in 18 seconds. Will heal for 63440 hit points instead if the target is under 20% of its maximum at that time."
+  }
+ },
+ {
+  "_id": "clr-purified-ground-113-r1",
+  "name": "Purified Ground",
+  "type": "spell",
+  "img": "icons/magic/light/sphere-glow.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 921,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "aura-purified-ground-effect"
+    }
+   ],
+   "description": "Blesses the land beneath your feet with Purified Ground Effect. The ground will deal between 5861 and 7033 damage to any undead that attempt to traverse that area, and also has a 20% chance to root them in place; This strike will not break mesmerization effects."
+  }
+ },
+ {
+  "_id": "clr-purified-ground-113-r2",
+  "name": "Purified Ground",
+  "type": "spell",
+  "img": "icons/magic/light/sphere-glow.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 976,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "aura-purified-ground-effect"
+    }
+   ],
+   "description": "Blesses the land beneath your feet with Purified Ground Effect. The ground will deal between 5861 and 7033 damage to any undead that attempt to traverse that area, and also has a 20% chance to root them in place; This strike will not break mesmerization effects."
+  }
+ },
+ {
+  "_id": "clr-purified-ground-113-r3",
+  "name": "Purified Ground",
+  "type": "spell",
+  "img": "icons/magic/light/sphere-glow.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 1032,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "aura-purified-ground-effect"
+    }
+   ],
+   "description": "Blesses the land beneath your feet with Purified Ground Effect. The ground will deal between 5861 and 7033 damage to any undead that attempt to traverse that area, and also has a 20% chance to root them in place; This strike will not break mesmerization effects."
+  }
+ },
+ {
+  "_id": "clr-sermon-of-injunction-113-r1",
+  "name": "Sermon of Injunction",
+  "type": "spell",
+  "img": "icons/magic/death/disease-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "evocation",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 1527,
+   "effects": [
+    {
+     "type": "dot",
+     "element": "magic",
+     "min": 4923,
+     "max": 4923,
+     "duration": 30,
+     "resist": "magic",
+     "resistMod": -100
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-aquifer-slow",
+     "chance": 20
+    }
+   ],
+   "description": "Strikes your target with holy light, causing between 4,923 and 4,923 damage to undead every six seconds for 30 seconds. This spell has a 20% chance to cast Aquifer Slow on the target, which will slow their attacks for 60 seconds."
+  }
+ },
+ {
+  "_id": "clr-sermon-of-injunction-113-r2",
+  "name": "Sermon of Injunction",
+  "type": "spell",
+  "img": "icons/magic/death/disease-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "evocation",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 1619,
+   "effects": [
+    {
+     "type": "dot",
+     "element": "magic",
+     "min": 5218,
+     "max": 5218,
+     "duration": 30,
+     "resist": "magic",
+     "resistMod": -100
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-aquifer-slow",
+     "chance": 20
+    }
+   ],
+   "description": "Strikes your target with holy light, causing between 5,218 and 5,218 damage to undead every six seconds for 30 seconds. This spell has a 20% chance to cast Aquifer Slow on the target, which will slow their attacks for 60 seconds."
+  }
+ },
+ {
+  "_id": "clr-sermon-of-injunction-113-r3",
+  "name": "Sermon of Injunction",
+  "type": "spell",
+  "img": "icons/magic/death/disease-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "evocation",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 1710,
+   "effects": [
+    {
+     "type": "dot",
+     "element": "magic",
+     "min": 5514,
+     "max": 5514,
+     "duration": 30,
+     "resist": "magic",
+     "resistMod": -100
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-aquifer-slow",
+     "chance": 20
+    }
+   ],
+   "description": "Strikes your target with holy light, causing between 5,514 and 5,514 damage to undead every six seconds for 30 seconds. This spell has a 20% chance to cast Aquifer Slow on the target, which will slow their attacks for 60 seconds."
+  }
+ },
+ {
+  "_id": "clr-sincere-intervention-113-r1",
+  "name": "Sincere Intervention",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 1845,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 16707
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-intervention-strike"
+    }
+   ],
+   "description": "A spell which heals the target for 16,707 hit points, smites the target's target for 13056 chromatic damage, 17625 damage if the target's target is undead, or 15666 damage if the target's target is summoned."
+  }
+ },
+ {
+  "_id": "clr-sincere-intervention-113-r2",
+  "name": "Sincere Intervention",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 1956,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 17709
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-intervention-strike"
+    }
+   ],
+   "description": "A spell which heals the target for 17,709 hit points, smites the target's target for 13056 chromatic damage, 17625 damage if the target's target is undead, or 15666 damage if the target's target is summoned."
+  }
+ },
+ {
+  "_id": "clr-sincere-intervention-113-r3",
+  "name": "Sincere Intervention",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 2066,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 18712
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-intervention-strike"
+    }
+   ],
+   "description": "A spell which heals the target for 18,712 hit points, smites the target's target for 13056 chromatic damage, 17625 damage if the target's target is undead, or 15666 damage if the target's target is summoned."
+  }
+ },
+ {
+  "_id": "clr-sincere-intervention-strike-113-r1",
+  "name": "Sincere Intervention Strike",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 1,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1844,
+     "condition": "Not Undead Or Summoned",
+     "resist": "lowest",
+     "resistMod": -10
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2489,
+     "condition": "Undead",
+     "resist": "lowest",
+     "resistMod": -10
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2213,
+     "condition": "Summoned",
+     "resist": "lowest",
+     "resistMod": -10
+    }
+   ],
+   "description": "Holy fire strikes your target, causing 1,844 chromatic damage to most targets, 2,489 damage to undead targets, or 2,213 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-sincere-intervention-strike-ii-113-r1",
+  "name": "Sincere Intervention Strike II",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 1,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1845,
+     "condition": "Not Undead Or Summoned",
+     "resist": "lowest",
+     "resistMod": -10
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2490,
+     "condition": "Undead",
+     "resist": "lowest",
+     "resistMod": -10
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2214,
+     "condition": "Summoned",
+     "resist": "lowest",
+     "resistMod": -10
+    }
+   ],
+   "description": "Holy fire strikes your target, causing 1,845 chromatic damage to most targets, 2,490 damage to undead targets, or 2,214 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-sincere-intervention-strike-iii-113-r1",
+  "name": "Sincere Intervention Strike III",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 1,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1846,
+     "condition": "Not Undead Or Summoned",
+     "resist": "lowest",
+     "resistMod": -10
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2491,
+     "condition": "Undead",
+     "resist": "lowest",
+     "resistMod": -10
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2214,
+     "condition": "Summoned",
+     "resist": "lowest",
+     "resistMod": -10
+    }
+   ],
+   "description": "Holy fire strikes your target, causing 1,846 chromatic damage to most targets, 2,491 damage to undead targets, or 2,214 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-sincere-light-113-r1",
+  "name": "Sincere Light",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.75,
+   "manaCost": 1485,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 12183,
+     "condition": "HP Above 20 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 15229,
+     "condition": "HP Below 20 Percent"
+    }
+   ],
+   "description": "Bathes your target in sacred light, healing up to 12,183 hit points, or up to 15,229 hit points if they are at or below 20% health."
+  }
+ },
+ {
+  "_id": "clr-sincere-light-113-r2",
+  "name": "Sincere Light",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.75,
+   "manaCost": 1574,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 12914,
+     "condition": "HP Above 20 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 16143,
+     "condition": "HP Below 20 Percent"
+    }
+   ],
+   "description": "Bathes your target in sacred light, healing up to 12,914 hit points, or up to 16,143 hit points if they are at or below 20% health."
+  }
+ },
+ {
+  "_id": "clr-sincere-light-113-r3",
+  "name": "Sincere Light",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.75,
+   "manaCost": 1663,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 13645,
+     "condition": "HP Above 20 Percent"
+    },
+    {
+     "type": "heal",
+     "amount": 17056,
+     "condition": "HP Below 20 Percent"
+    }
+   ],
+   "description": "Bathes your target in sacred light, healing up to 13,645 hit points, or up to 17,056 hit points if they are at or below 20% health."
+  }
+ },
+ {
+  "_id": "clr-sound-of-rebuke-113-r1",
+  "name": "Sound of Rebuke",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.25,
+   "manaCost": 139,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 5.0,
+     "resist": "magic",
+     "resistMod": -30
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-inspired-heal-vi-azia"
+    }
+   ],
+   "description": "Strikes an enemy with holy might, stunning them for up to 5 seconds and healing their target for 6673 hit points. This spell works on creatures up to level 115."
+  }
+ },
+ {
+  "_id": "clr-sound-of-rebuke-113-r2",
+  "name": "Sound of Rebuke",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.25,
+   "manaCost": 147,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 5.0,
+     "resist": "magic",
+     "resistMod": -30
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-inspired-heal-vi-azia"
+    }
+   ],
+   "description": "Strikes an enemy with holy might, stunning them for up to 5 seconds and healing their target for 6673 hit points. This spell works on creatures up to level 115."
+  }
+ },
+ {
+  "_id": "clr-sound-of-rebuke-113-r3",
+  "name": "Sound of Rebuke",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.25,
+   "manaCost": 156,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 5.0,
+     "resist": "magic",
+     "resistMod": -30
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-inspired-heal-vi-azia"
+    }
+   ],
+   "description": "Strikes an enemy with holy might, stunning them for up to 5 seconds and healing their target for 6673 hit points. This spell works on creatures up to level 115."
+  }
+ },
+ {
+  "_id": "clr-syllable-of-soothing-113-r1",
+  "name": "Syllable of Soothing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-cross-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 2884,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 11694
+    }
+   ],
+   "description": "Mends the severe wounds of everyone in your group, healing for up to 11,694 hit points."
+  }
+ },
+ {
+  "_id": "clr-syllable-of-soothing-113-r2",
+  "name": "Syllable of Soothing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-cross-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 3057,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 12396
+    }
+   ],
+   "description": "Mends the severe wounds of everyone in your group, healing for up to 12,396 hit points."
+  }
+ },
+ {
+  "_id": "clr-syllable-of-soothing-113-r3",
+  "name": "Syllable of Soothing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-cross-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 3230,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 13097
+    }
+   ],
+   "description": "Mends the severe wounds of everyone in your group, healing for up to 13,097 hit points."
+  }
+ },
+ {
+  "_id": "clr-vow-of-vituperation-113-r1",
+  "name": "Vow of Vituperation",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 832,
+   "effects": [
+    {
+     "type": "debuff",
+     "effect": "healing-reduction",
+     "amount": 25,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "melee-proc-vituperative-strike"
+    }
+   ],
+   "description": "You take a forceful vow that reduces your healing efficacy by 25% for 72 minutes and adds the chance for your melee strikes to trigger Vituperative Strike, which deals 6013 damage to your target, increases their hatred for you by 3576, and heals you for 11429 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-vow-of-vituperation-113-r2",
+  "name": "Vow of Vituperation",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 882,
+   "effects": [
+    {
+     "type": "debuff",
+     "effect": "healing-reduction",
+     "amount": 26,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "melee-proc-vituperative-strike"
+    }
+   ],
+   "description": "You take a forceful vow that reduces your healing efficacy by 25% for 72 minutes and adds the chance for your melee strikes to trigger Vituperative Strike, which deals 6013 damage to your target, increases their hatred for you by 3576, and heals you for 11429 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-vow-of-vituperation-113-r3",
+  "name": "Vow of Vituperation",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 113,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 932,
+   "effects": [
+    {
+     "type": "debuff",
+     "effect": "healing-reduction",
+     "amount": 28,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "melee-proc-vituperative-strike"
+    }
+   ],
+   "description": "You take a forceful vow that reduces your healing efficacy by 25% for 72 minutes and adds the chance for your melee strikes to trigger Vituperative Strike, which deals 6013 damage to your target, increases their hatred for you by 3576, and heals you for 11429 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-chromaflare-114-r1",
+  "name": "Chromaflare",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 186,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1164,
+     "condition": "Not Undead Or Summoned",
+     "resist": "lowest"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1571,
+     "condition": "Undead",
+     "resist": "lowest"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1397,
+     "condition": "Summoned",
+     "resist": "lowest"
+    }
+   ],
+   "description": "Channels holy power into a cohesive, difficult-to-resist bolt of energy, causing 1,164 damage to most targets, 1,571 damage to undead targets, or 1,397 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-chromaflare-114-r2",
+  "name": "Chromaflare",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 197,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1234,
+     "condition": "Not Undead Or Summoned",
+     "resist": "lowest"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1665,
+     "condition": "Undead",
+     "resist": "lowest"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1481,
+     "condition": "Summoned",
+     "resist": "lowest"
+    }
+   ],
+   "description": "Channels holy power into a cohesive, difficult-to-resist bolt of energy, causing 1,234 damage to most targets, 1,665 damage to undead targets, or 1,481 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-chromaflare-114-r3",
+  "name": "Chromaflare",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 208,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1304,
+     "condition": "Not Undead Or Summoned",
+     "resist": "lowest"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1760,
+     "condition": "Undead",
+     "resist": "lowest"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1565,
+     "condition": "Summoned",
+     "resist": "lowest"
+    }
+   ],
+   "description": "Channels holy power into a cohesive, difficult-to-resist bolt of energy, causing 1,304 damage to most targets, 1,760 damage to undead targets, or 1,565 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-hand-of-sincere-infusion-114-r1",
+  "name": "Hand of Sincere Infusion",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 4108,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "melee-proc-sincere-infusion"
+    }
+   ],
+   "description": "Infuses your group's weapons with the chance to trigger Sincere Infusion, which will heal their target's target for 3589 hit points. This effect will fade after 8 successful heals or 60 seconds."
+  }
+ },
+ {
+  "_id": "clr-hand-of-sincere-infusion-114-r2",
+  "name": "Hand of Sincere Infusion",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 4354,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "melee-proc-sincere-infusion"
+    }
+   ],
+   "description": "Infuses your group's weapons with the chance to trigger Sincere Infusion, which will heal their target's target for 3589 hit points. This effect will fade after 8 successful heals or 60 seconds."
+  }
+ },
+ {
+  "_id": "clr-hand-of-sincere-infusion-114-r3",
+  "name": "Hand of Sincere Infusion",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 4601,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "melee-proc-sincere-infusion"
+    }
+   ],
+   "description": "Infuses your group's weapons with the chance to trigger Sincere Infusion, which will heal their target's target for 3589 hit points. This effect will fade after 8 successful heals or 60 seconds."
+  }
+ },
+ {
+  "_id": "clr-mark-of-wenglawks-114-r1",
+  "name": "Mark of Wenglawks",
+  "type": "spell",
+  "img": "icons/magic/symbols/rune-stone-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 1327,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "damage-shield",
+     "amount": -2723,
+     "duration": 60
+    },
+    {
+     "type": "buff",
+     "stat": "damage-shield",
+     "amount": 1577,
+     "duration": 60
+    }
+   ],
+   "description": "Places a holy mark on your target, dealing 1577 damage each time the target strikes another creature and healing 2723 hit points for your allies each time they strike the target."
+  }
+ },
+ {
+  "_id": "clr-mark-of-wenglawks-114-r2",
+  "name": "Mark of Wenglawks",
+  "type": "spell",
+  "img": "icons/magic/symbols/rune-stone-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 1407,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "damage-shield",
+     "amount": -2886.4,
+     "duration": 60
+    },
+    {
+     "type": "buff",
+     "stat": "damage-shield",
+     "amount": 1672,
+     "duration": 60
+    }
+   ],
+   "description": "Places a holy mark on your target, dealing 1577 damage each time the target strikes another creature and healing 2723 hit points for your allies each time they strike the target."
+  }
+ },
+ {
+  "_id": "clr-mark-of-wenglawks-114-r3",
+  "name": "Mark of Wenglawks",
+  "type": "spell",
+  "img": "icons/magic/symbols/rune-stone-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 1486,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "damage-shield",
+     "amount": -3049.8,
+     "duration": 60
+    },
+    {
+     "type": "buff",
+     "stat": "damage-shield",
+     "amount": 1766,
+     "duration": 60
+    }
+   ],
+   "description": "Places a holy mark on your target, dealing 1577 damage each time the target strikes another creature and healing 2723 hit points for your allies each time they strike the target."
+  }
+ },
+ {
+  "_id": "clr-shining-aegis-114-r1",
+  "name": "Shining Aegis",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 898,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-shining-defense"
+    },
+    {
+     "type": "utility",
+     "effect": "defensive-proc-crippling-glare-vi-azia"
+    }
+   ],
+   "description": "Surrounds your target with Shining Defense, absorbing 10% of incoming melee damage for up to 4. 5 minutes, and shining armor which will periodically lash out at your target's attackers with Crippling Glare VI Azia, stunning them and healing their target; The armor will fade after 72 of these strikes."
+  }
+ },
+ {
+  "_id": "clr-shining-aegis-114-r2",
+  "name": "Shining Aegis",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 952,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-shining-defense"
+    },
+    {
+     "type": "utility",
+     "effect": "defensive-proc-crippling-glare-vi-azia"
+    }
+   ],
+   "description": "Surrounds your target with Shining Defense, absorbing 10% of incoming melee damage for up to 4. 5 minutes, and shining armor which will periodically lash out at your target's attackers with Crippling Glare VI Azia, stunning them and healing their target; The armor will fade after 72 of these strikes."
+  }
+ },
+ {
+  "_id": "clr-shining-aegis-114-r3",
+  "name": "Shining Aegis",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 1006,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-shining-defense"
+    },
+    {
+     "type": "utility",
+     "effect": "defensive-proc-crippling-glare-vi-azia"
+    }
+   ],
+   "description": "Surrounds your target with Shining Defense, absorbing 10% of incoming melee damage for up to 4. 5 minutes, and shining armor which will periodically lash out at your target's attackers with Crippling Glare VI Azia, stunning them and healing their target; The armor will fade after 72 of these strikes."
+  }
+ },
+ {
+  "_id": "clr-silent-writ-114-r1",
+  "name": "Silent Writ",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 1.0,
+   "manaCost": 304,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 3.0,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 830,
+     "condition": "Not Undead Or Summoned",
+     "radius": 20,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1121,
+     "condition": "Undead",
+     "radius": 20,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 997,
+     "condition": "Summoned",
+     "radius": 20,
+     "resist": "magic"
+    }
+   ],
+   "description": "Strikes up to 30 nearby creatures with a silent decree, inflicting 830 damage and stunning them (up to level 115) for up to 3 seconds. This spell will deal 1,121 damage to undead creatures or 997 damage to summoned creatures.",
+   "radius": 20
+  }
+ },
+ {
+  "_id": "clr-silent-writ-114-r2",
+  "name": "Silent Writ",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 1.0,
+   "manaCost": 322,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 3.0,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 880,
+     "condition": "Not Undead Or Summoned",
+     "radius": 20,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1188,
+     "condition": "Undead",
+     "radius": 20,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1057,
+     "condition": "Summoned",
+     "radius": 20,
+     "resist": "magic"
+    }
+   ],
+   "description": "Strikes up to 30 nearby creatures with a silent decree, inflicting 880 damage and stunning them (up to level 115) for up to 3 seconds. This spell will deal 1,188 damage to undead creatures or 1,057 damage to summoned creatures.",
+   "radius": 20
+  }
+ },
+ {
+  "_id": "clr-silent-writ-114-r3",
+  "name": "Silent Writ",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 1.0,
+   "manaCost": 340,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 3.0,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 930,
+     "condition": "Not Undead Or Summoned",
+     "radius": 20,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1256,
+     "condition": "Undead",
+     "radius": 20,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1117,
+     "condition": "Summoned",
+     "radius": 20,
+     "resist": "magic"
+    }
+   ],
+   "description": "Strikes up to 30 nearby creatures with a silent decree, inflicting 930 damage and stunning them (up to level 115) for up to 3 seconds. This spell will deal 1,256 damage to undead creatures or 1,117 damage to summoned creatures.",
+   "radius": 20
+  }
+ },
+ {
+  "_id": "clr-sincere-acquittal-114-r1",
+  "name": "Sincere Acquittal",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "alteration",
+   "target": "group",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 5236,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-elixir"
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 34
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 34
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "type": "cure",
+     "effect": "corruption",
+     "min": 1,
+     "max": 17
+    }
+   ],
+   "description": "Cures your group of 34 disease counters, 34 poison counters, 25 curse counters, and 17 corruption counters while granting them the benefits of Sincere Elixir, which will heal them for 11001 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-sincere-acquittal-114-r2",
+  "name": "Sincere Acquittal",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "alteration",
+   "target": "group",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 5550,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-elixir"
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1.1,
+     "max": 36
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1.1,
+     "max": 36
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1.1,
+     "max": 26
+    },
+    {
+     "type": "cure",
+     "effect": "corruption",
+     "min": 1.1,
+     "max": 18
+    }
+   ],
+   "description": "Cures your group of 34 disease counters, 34 poison counters, 25 curse counters, and 17 corruption counters while granting them the benefits of Sincere Elixir, which will heal them for 11001 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-sincere-acquittal-114-r3",
+  "name": "Sincere Acquittal",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "alteration",
+   "target": "group",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 5864,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-elixir"
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1.1,
+     "max": 38
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1.1,
+     "max": 38
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1.1,
+     "max": 28
+    },
+    {
+     "type": "cure",
+     "effect": "corruption",
+     "min": 1.1,
+     "max": 19
+    }
+   ],
+   "description": "Cures your group of 34 disease counters, 34 poison counters, 25 curse counters, and 17 corruption counters while granting them the benefits of Sincere Elixir, which will heal them for 11001 hit points every six seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-tectonic-frostheave-114-r1",
+  "name": "Tectonic Frostheave",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 426,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1260,
+     "condition": "Not Undead Or Summoned",
+     "radius": 35,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1701,
+     "condition": "Undead",
+     "radius": 35,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1512,
+     "condition": "Summoned",
+     "radius": 35,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to shift around you, causing between 1,260 and 1,260 damage to up to 30 nearby enemies. This spell will do up to 1,701 damage to undead or 1,512 damage to summoned creatures.",
+   "radius": 35
+  }
+ },
+ {
+  "_id": "clr-tectonic-frostheave-114-r2",
+  "name": "Tectonic Frostheave",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 452,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1336,
+     "condition": "Not Undead Or Summoned",
+     "radius": 35,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1803,
+     "condition": "Undead",
+     "radius": 35,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1603,
+     "condition": "Summoned",
+     "radius": 35,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to shift around you, causing between 1,336 and 1,336 damage to up to 30 nearby enemies. This spell will do up to 1,803 damage to undead or 1,603 damage to summoned creatures.",
+   "radius": 35
+  }
+ },
+ {
+  "_id": "clr-tectonic-frostheave-114-r3",
+  "name": "Tectonic Frostheave",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 477,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1411,
+     "condition": "Not Undead Or Summoned",
+     "radius": 35,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1905,
+     "condition": "Undead",
+     "radius": 35,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1693,
+     "condition": "Summoned",
+     "radius": 35,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to shift around you, causing between 1,411 and 1,411 damage to up to 30 nearby enemies. This spell will do up to 1,905 damage to undead or 1,693 damage to summoned creatures.",
+   "radius": 35
+  }
+ },
+ {
+  "_id": "clr-unyielding-censure-114-r1",
+  "name": "Unyielding Censure",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.0,
+   "manaCost": 319,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1640,
+     "condition": "Not Undead Or Summoned",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2214,
+     "condition": "Undead",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1968,
+     "condition": "Summoned",
+     "resist": "magic"
+    }
+   ],
+   "description": "A spell that gives a chance to twincast a heal while doing up to 1,640 damage to most targets. This spell deals 2,214 damage to undead targets or 1,968 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-unyielding-censure-114-r2",
+  "name": "Unyielding Censure",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.0,
+   "manaCost": 338,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1738,
+     "condition": "Not Undead Or Summoned",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2347,
+     "condition": "Undead",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2086,
+     "condition": "Summoned",
+     "resist": "magic"
+    }
+   ],
+   "description": "A spell that gives a chance to twincast a heal while doing up to 1,738 damage to most targets. This spell deals 2,347 damage to undead targets or 2,086 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-unyielding-censure-114-r3",
+  "name": "Unyielding Censure",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.0,
+   "manaCost": 357,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 1837,
+     "condition": "Not Undead Or Summoned",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2480,
+     "condition": "Undead",
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2204,
+     "condition": "Summoned",
+     "resist": "magic"
+    }
+   ],
+   "description": "A spell that gives a chance to twincast a heal while doing up to 1,837 damage to most targets. This spell deals 2,480 damage to undead targets or 2,204 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-unyielding-hammer-of-obliteration-114-r1",
+  "name": "Unyielding Hammer of Obliteration",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.5,
+   "manaCost": 832,
+   "effects": [
+    {
+     "type": "summon-pet",
+     "pet": "hammer-of-wrath"
+    }
+   ],
+   "description": "Summons a magical hammer that attacks your target relentlessly until either the hammer or the target dies."
+  }
+ },
+ {
+  "_id": "clr-unyielding-hammer-of-obliteration-114-r2",
+  "name": "Unyielding Hammer of Obliteration",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.5,
+   "manaCost": 882,
+   "effects": [
+    {
+     "type": "summon-pet",
+     "pet": "hammer-of-wrath"
+    }
+   ],
+   "description": "Summons a magical hammer that attacks your target relentlessly until either the hammer or the target dies."
+  }
+ },
+ {
+  "_id": "clr-unyielding-hammer-of-obliteration-114-r3",
+  "name": "Unyielding Hammer of Obliteration",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+   "class": "cleric",
+   "level": 114,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.5,
+   "manaCost": 932,
+   "effects": [
+    {
+     "type": "summon-pet",
+     "pet": "hammer-of-wrath"
+    }
+   ],
+   "description": "Summons a magical hammer that attacks your target relentlessly until either the hammer or the target dies."
+  }
+ },
+ {
+  "_id": "clr-armor-of-sincerity-115-r1",
+  "name": "Armor of Sincerity",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 1692,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 4149,
+     "duration": 9000
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 74,
+     "max": 98,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 4149
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 105,
+     "max": 105,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 1 is 'HP Buff' and < 5982"
+    }
+   ],
+   "description": "Places holy armor around you, increasing your hit points by 4,149, armor class by 1117, and mana regeneration by 105 for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-armor-of-sincerity-115-r2",
+  "name": "Armor of Sincerity",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 1794,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 4398,
+     "duration": 9000
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 78,
+     "max": 104,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 4398
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 111,
+     "max": 111,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 1 is 'HP Buff' and < 5982"
+    }
+   ],
+   "description": "Places holy armor around you, increasing your hit points by 4,398, armor class by 1117, and mana regeneration by 105 for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-armor-of-sincerity-115-r3",
+  "name": "Armor of Sincerity",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 1895,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 4647,
+     "duration": 9000
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 83,
+     "max": 110,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 4647
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 118,
+     "max": 118,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 1 is 'HP Buff' and < 5982"
+    }
+   ],
+   "description": "Places holy armor around you, increasing your hit points by 4,647, armor class by 1117, and mana regeneration by 105 for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-dire-renewal-115-r1",
+  "name": "Dire Renewal",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 2773,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 18200
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 40
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 40
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 43
+    }
+   ],
+   "description": "Channels holy power to heal your target for up to 18,200 hit points as well as removing 40 poison counters, 40 disease counters, and 43 curse counters."
+  }
+ },
+ {
+  "_id": "clr-dire-renewal-115-r2",
+  "name": "Dire Renewal",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 2939,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 19292
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1.1,
+     "max": 42
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1.1,
+     "max": 42
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1.1,
+     "max": 46
+    }
+   ],
+   "description": "Channels holy power to heal your target for up to 19,292 hit points as well as removing 40 poison counters, 40 disease counters, and 43 curse counters."
+  }
+ },
+ {
+  "_id": "clr-dire-renewal-115-r3",
+  "name": "Dire Renewal",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 3106,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 20384
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1.1,
+     "max": 45
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1.1,
+     "max": 45
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1.1,
+     "max": 48
+    }
+   ],
+   "description": "Channels holy power to heal your target for up to 20,384 hit points as well as removing 40 poison counters, 40 disease counters, and 43 curse counters."
+  }
+ },
+ {
+  "_id": "clr-elixir-of-transcendence-115-r1",
+  "name": "Elixir of Transcendence",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "group",
+   "range": 200,
+   "castTime": 4.5,
+   "manaCost": 3938,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 7630,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your group with healing elixir, continually healing their wounds for 7,630 hit points every six seconds for up to 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-elixir-of-transcendence-115-r2",
+  "name": "Elixir of Transcendence",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "group",
+   "range": 200,
+   "castTime": 4.5,
+   "manaCost": 4174,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 8088,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your group with healing elixir, continually healing their wounds for 8,088 hit points every six seconds for up to 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-elixir-of-transcendence-115-r3",
+  "name": "Elixir of Transcendence",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "group",
+   "range": 200,
+   "castTime": 4.5,
+   "manaCost": 4411,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 8546,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your group with healing elixir, continually healing their wounds for 8,546 hit points every six seconds for up to 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-hand-of-righteousness-115-r1",
+  "name": "Hand of Righteousness",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 12.0,
+   "manaCost": 6858,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 15446"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 9742,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 9742
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 128,
+     "max": 169,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 15446"
+    }
+   ],
+   "description": "Fills your group with holy power, increasing their hit points by 9,742 and armor class by 1935 for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-hand-of-righteousness-115-r2",
+  "name": "Hand of Righteousness",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 12.0,
+   "manaCost": 7269,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 15446"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 10327,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 10327
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 136,
+     "max": 179,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 15446"
+    }
+   ],
+   "description": "Fills your group with holy power, increasing their hit points by 10,327 and armor class by 1935 for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-hand-of-righteousness-115-r3",
+  "name": "Hand of Righteousness",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 12.0,
+   "manaCost": 7681,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 15446"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 10911,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 10911
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 143,
+     "max": 189,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 15446"
+    }
+   ],
+   "description": "Fills your group with holy power, increasing their hit points by 10,911 and armor class by 1935 for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-jorlleags-retort-115-r1",
+  "name": "Jorlleag's Retort",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 725,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-jorlleags-channeled-mark"
+    },
+    {
+     "type": "utility",
+     "effect": "melee-proc-jorlleags-retort-effect"
+    }
+   ],
+   "description": "Adds a chance for your target to cast Jorlleag's Retort Effect when striking enemies, and places Jorlleag's Channeled Mark on your target's target, a mark that will deal damage to it when it strikes another creature and heal your allies when they strike it."
+  }
+ },
+ {
+  "_id": "clr-jorlleags-retort-115-r2",
+  "name": "Jorlleag's Retort",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 768,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-jorlleags-channeled-mark"
+    },
+    {
+     "type": "utility",
+     "effect": "melee-proc-jorlleags-retort-effect"
+    }
+   ],
+   "description": "Adds a chance for your target to cast Jorlleag's Retort Effect when striking enemies, and places Jorlleag's Channeled Mark on your target's target, a mark that will deal damage to it when it strikes another creature and heal your allies when they strike it."
+  }
+ },
+ {
+  "_id": "clr-jorlleags-retort-115-r3",
+  "name": "Jorlleag's Retort",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 812,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-jorlleags-channeled-mark"
+    },
+    {
+     "type": "utility",
+     "effect": "melee-proc-jorlleags-retort-effect"
+    }
+   ],
+   "description": "Adds a chance for your target to cast Jorlleag's Retort Effect when striking enemies, and places Jorlleag's Channeled Mark on your target's target, a mark that will deal damage to it when it strikes another creature and heal your allies when they strike it."
+  }
+ },
+ {
+  "_id": "clr-rallied-greater-protection-of-vie-115-r1",
+  "name": "Rallied Greater Protection of Vie",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 5.5,
+   "manaCost": 1401,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 75235,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-light-of-vie-vi-azia"
+    }
+   ],
+   "description": "Places the protection of Vie on your group, absorbing 10% of incoming melee damage. This spell absorbs 75235 damage before dissipating, and will heal its bearer for 6937 hit points when it fades in that manner."
+  }
+ },
+ {
+  "_id": "clr-rallied-greater-protection-of-vie-115-r2",
+  "name": "Rallied Greater Protection of Vie",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 5.5,
+   "manaCost": 1485,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 79749,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-light-of-vie-vi-azia"
+    }
+   ],
+   "description": "Places the protection of Vie on your group, absorbing 10% of incoming melee damage. This spell absorbs 75235 damage before dissipating, and will heal its bearer for 6937 hit points when it fades in that manner."
+  }
+ },
+ {
+  "_id": "clr-rallied-greater-protection-of-vie-115-r3",
+  "name": "Rallied Greater Protection of Vie",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 5.5,
+   "manaCost": 1569,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 84263,
+     "duration": 4320
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-light-of-vie-vi-azia"
+    }
+   ],
+   "description": "Places the protection of Vie on your group, absorbing 10% of incoming melee damage. This spell absorbs 75235 damage before dissipating, and will heal its bearer for 6937 hit points when it fades in that manner."
+  }
+ },
+ {
+  "_id": "clr-restoring-splash-115-r1",
+  "name": "Restoring Splash",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "area",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 2332,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 5977
+    }
+   ],
+   "description": "Heals all allies surrounding a point you select for up to 5,977 hit points.",
+   "radius": 50
+  }
+ },
+ {
+  "_id": "clr-restoring-splash-115-r2",
+  "name": "Restoring Splash",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "area",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 2472,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 6336
+    }
+   ],
+   "description": "Heals all allies surrounding a point you select for up to 6,336 hit points.",
+   "radius": 50
+  }
+ },
+ {
+  "_id": "clr-restoring-splash-115-r3",
+  "name": "Restoring Splash",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "area",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 2612,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 6694
+    }
+   ],
+   "description": "Heals all allies surrounding a point you select for up to 6,694 hit points.",
+   "radius": 50
+  }
+ },
+ {
+  "_id": "clr-sincere-contravention-115-r1",
+  "name": "Sincere Contravention",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 2321,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-contravention-strike"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-contravention-heal"
+    }
+   ],
+   "description": "Smites your target for 17339 hit points (23407 points if undead, or 20808 if summoned) and heals your target's target for 17948 hit points."
+  }
+ },
+ {
+  "_id": "clr-sincere-contravention-115-r2",
+  "name": "Sincere Contravention",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 2460,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-contravention-strike"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-contravention-heal"
+    }
+   ],
+   "description": "Smites your target for 17339 hit points (23407 points if undead, or 20808 if summoned) and heals your target's target for 17948 hit points."
+  }
+ },
+ {
+  "_id": "clr-sincere-contravention-115-r3",
+  "name": "Sincere Contravention",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.5,
+   "manaCost": 2600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-contravention-strike"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-sincere-contravention-heal"
+    }
+   ],
+   "description": "Smites your target for 17339 hit points (23407 points if undead, or 20808 if summoned) and heals your target's target for 17948 hit points."
+  }
+ },
+ {
+  "_id": "clr-sincere-contravention-heal-115-r1",
+  "name": "Sincere Contravention Heal",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 7,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 12448
+    }
+   ],
+   "description": "Heals your target's target for up to 12,448 hit points."
+  }
+ },
+ {
+  "_id": "clr-sincere-contravention-heal-ii-115-r1",
+  "name": "Sincere Contravention Heal II",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 7,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 13070
+    }
+   ],
+   "description": "Heals your target's target for up to 13,070 hit points."
+  }
+ },
+ {
+  "_id": "clr-sincere-contravention-heal-iii-115-r1",
+  "name": "Sincere Contravention Heal III",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 7,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 13724
+    }
+   ],
+   "description": "Heals your target's target for up to 13,724 hit points."
+  }
+ },
+ {
+  "_id": "clr-sincere-contravention-strike-115-r1",
+  "name": "Sincere Contravention Strike",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "evocation",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 1,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2446,
+     "condition": "Not Undead Or Summoned",
+     "resist": "magic",
+     "resistMod": -10
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 3303,
+     "condition": "Undead",
+     "resist": "magic",
+     "resistMod": -10
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2935,
+     "condition": "Summoned",
+     "resist": "magic",
+     "resistMod": -10
+    }
+   ],
+   "description": "Holy power strikes your target, causing 2,446 magic damage to most targets, 3,303 damage to undead targets, or 2,935 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-sincere-contravention-strike-ii-115-r1",
+  "name": "Sincere Contravention Strike II",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "evocation",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 1,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2448,
+     "condition": "Not Undead Or Summoned",
+     "resist": "magic",
+     "resistMod": -15
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 3304,
+     "condition": "Undead",
+     "resist": "magic",
+     "resistMod": -15
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2938,
+     "condition": "Summoned",
+     "resist": "magic",
+     "resistMod": -15
+    }
+   ],
+   "description": "Holy power strikes your target, causing 2,448 magic damage to most targets, 3,304 damage to undead targets, or 2,938 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-sincere-contravention-strike-iii-115-r1",
+  "name": "Sincere Contravention Strike III",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "evocation",
+   "target": "single",
+   "range": 300,
+   "castTime": 0.0,
+   "manaCost": 1,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2449,
+     "condition": "Not Undead Or Summoned",
+     "resist": "magic",
+     "resistMod": -20
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 3305,
+     "condition": "Undead",
+     "resist": "magic",
+     "resistMod": -20
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 2938,
+     "condition": "Summoned",
+     "resist": "magic",
+     "resistMod": -20
+    }
+   ],
+   "description": "Holy power strikes your target, causing 2,449 magic damage to most targets, 3,305 damage to undead targets, or 2,938 damage to summoned targets."
+  }
+ },
+ {
+  "_id": "clr-unified-hand-of-jorlleag-115-r1",
+  "name": "Unified Hand of Jorlleag",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 8682,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-benediction-of-reverence"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-symbol-of-jorlleag"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-ward-of-sincerity"
+    }
+   ],
+   "description": "Grants Benediction of Reverence, Symbol of Jorlleag, and Ward of Sincerity to your group."
+  }
+ },
+ {
+  "_id": "clr-unified-hand-of-righteousness-115-r1",
+  "name": "Unified Hand of Righteousness",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 10.0,
+   "manaCost": 7386,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "trigger-benediction-of-reverence"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-righteousness"
+    }
+   ],
+   "description": "Grants Benediction of Reverence and Righteousness to your group."
+  }
+ },
+ {
+  "_id": "clr-word-of-greater-replenishment-115-r1",
+  "name": "Word of Greater Replenishment",
+  "type": "spell",
+  "img": "icons/magic/life/heart-flame-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 2776,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 13883
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 38
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 38
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 30
+    }
+   ],
+   "description": "Mends the severe wounds of everyone in your group, healing up to 13,883 hit points as well as curing 38 disease counters, 38 poison counters, and 30 curse counters."
+  }
+ },
+ {
+  "_id": "clr-word-of-greater-replenishment-115-r2",
+  "name": "Word of Greater Replenishment",
+  "type": "spell",
+  "img": "icons/magic/life/heart-flame-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 2943,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 14716
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1.1,
+     "max": 40
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1.1,
+     "max": 40
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1.1,
+     "max": 32
+    }
+   ],
+   "description": "Mends the severe wounds of everyone in your group, healing up to 14,716 hit points as well as curing 38 disease counters, 38 poison counters, and 30 curse counters."
+  }
+ },
+ {
+  "_id": "clr-word-of-greater-replenishment-115-r3",
+  "name": "Word of Greater Replenishment",
+  "type": "spell",
+  "img": "icons/magic/life/heart-flame-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 115,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 3109,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 15549
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1.1,
+     "max": 43
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1.1,
+     "max": 43
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1.1,
+     "max": 34
+    }
+   ],
+   "description": "Mends the severe wounds of everyone in your group, healing up to 15,549 hit points as well as curing 38 disease counters, 38 poison counters, and 30 curse counters."
+  }
+ }
+]

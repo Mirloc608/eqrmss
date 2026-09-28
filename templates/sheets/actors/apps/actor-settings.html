@@ -1,0 +1,20 @@
+<form>
+  <div>
+    <h3>Import Skill Categories</h3>
+
+    <div>
+      <strong>WARNING:</strong> This will erase your existing Skill Categories and import all Skill Categories from the selected Compendium.
+    </div>
+
+    <div>
+      <label>Select Compendium:</label>
+      <select name="selectOptions" class="compendium-selector">
+        {{selectOptions compendiums selected=selectedCompendium}}
+      </select>
+    </div>
+
+    <div>
+      <button type="button" class="import-skillcats" title="Import">Import</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,1092 @@
+[
+  {
+    "_id": "nec-acikin-66-r1",
+    "name": "Acikin",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 66,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 564,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 1848,
+          "resist": "poison"
+        }
+      ],
+      "description": "Strikes your target with a jet of poison, causing between 1823 and 1823 damage."
+    }
+  },
+  {
+    "_id": "nec-chaos-plague-66-r1",
+    "name": "Chaos Plague",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 66,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 449,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 18,
+          "duration": 72
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 184,
+          "max": 184,
+          "duration": 72,
+          "resist": "disease",
+          "resistMod": -50
+        }
+      ],
+      "description": "Sickens your target with a dark plague, adding 18 disease counters and causing 292 disease damage every six seconds for 72 seconds."
+    }
+  },
+  {
+    "_id": "nec-eidolon-howl-66-r1",
+    "name": "Eidolon Howl",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 66,
+      "school": "necromancy",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 177,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 65,
+          "duration": 42,
+          "resist": "magic"
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  },
+  {
+    "_id": "nec-eradicate-disease-66-r1",
+    "name": "Eradicate Disease",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 66,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.25,
+      "manaCost": 253,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 30
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 30
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing them of strong diseases."
+    }
+  },
+  {
+    "_id": "nec-shadow-guard-66-r1",
+    "name": "Shadow Guard",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 66,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 461,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 390,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 10,
+          "max": 14,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 40,
+          "duration": 5400
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "nec-dark-nightmare-67-r1",
+    "name": "Dark Nightmare",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 67,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 946,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "curse",
+          "amount": 30,
+          "duration": 30
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 607,
+          "max": 607,
+          "duration": 30,
+          "resist": "magic",
+          "resistMod": -30
+        }
+      ],
+      "description": "Inflicts a dark curse upon your target, adding 30 curse counters and causing 591 magical damage every six seconds for 30 seconds."
+    }
+  },
+  {
+    "_id": "nec-glyph-of-darkness-67-r1",
+    "name": "Glyph of Darkness",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 67,
+      "school": "enchantment",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 566,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "hit-damage-boost",
+          "percent": 5,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 84,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 70,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 7,
+          "duration": 3600
+        }
+      ],
+      "description": "Intensifies the power of your undead servant, increasing their strength, armor class, and attack speed."
+    }
+  },
+  {
+    "_id": "nec-grip-of-mori-67-r1",
+    "name": "Grip of Mori",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 67,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 525,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 18,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -11,
+          "max": -8,
+          "duration": 60,
+          "resist": "disease",
+          "resistMod": -50
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 168,
+          "max": 168,
+          "duration": 60,
+          "resist": "disease",
+          "resistMod": -50
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -70,
+          "duration": 60,
+          "resist": "disease",
+          "resistMod": -50
+        }
+      ],
+      "description": "Causes your target's heartbeat to become irregular, adding 18 disease counters, lowering their strength by 70, armor class by 130, and doing 207 disease damage every 6 seconds for 60 seconds."
+    }
+  },
+  {
+    "_id": "nec-lost-soul-67-r1",
+    "name": "Lost Soul",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 67,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 1293,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "lost-soul"
+        }
+      ],
+      "description": "Infuses a corpse with a spirit of torment that will do your bidding. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-soulspike-67-r1",
+    "name": "Soulspike",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 67,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 910,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 1946,
+          "max": 1946,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 1204 and 1204 hit points."
+    }
+  },
+  {
+    "_id": "nec-unholy-howl-67-r1",
+    "name": "Unholy Howl",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 67,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 566,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 65,
+          "duration": 42,
+          "resist": "magic"
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  },
+  {
+    "_id": "nec-call-for-blood-68-r1",
+    "name": "Call for Blood",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 68,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 656,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 2044,
+          "resist": "poison"
+        }
+      ],
+      "description": "Afflicts your target with a hungry toxin that will cause 1770 damage. The venom will attempt to absorb energy from the creatures that can sometimes be controlled to give a temporary increase to the power of your duration damage spells."
+    }
+  },
+  {
+    "_id": "nec-desecrating-darkness-68-r1",
+    "name": "Desecrating Darkness",
+    "type": "spell",
+    "img": "icons/magic/death/shadow-snare.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 68,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 286,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 67,
+          "max": 67,
+          "duration": 120,
+          "resist": "magic",
+          "resistMod": -20
+        },
+        {
+          "type": "debuff",
+          "stat": "movement",
+          "amount": -75,
+          "duration": 120,
+          "resist": "magic",
+          "resistMod": -20
+        }
+      ],
+      "description": "Summons an embracing darkness that binds your target's feet, decreasing their movement rate, and doing between 96 and 96 damage every six seconds for 2 minutes."
+    }
+  },
+  {
+    "_id": "nec-fang-of-death-68-r1",
+    "name": "Fang of Death",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 68,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 866,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 578,
+          "max": 578,
+          "duration": 42,
+          "resist": "magic",
+          "resistMod": -200
+        },
+        {
+          "type": "utility",
+          "effect": "spell-damage-leech",
+          "percent": 82.5,
+          "maxPerHit": 1068,
+          "duration": 42
+        }
+      ],
+      "description": "Drains the life from your target, doing 370 damage every six seconds for 42 seconds. 82.5% of the life-force taken is used to heal your wounds."
+    }
+  },
+  {
+    "_id": "nec-scent-of-midnight-68-r1",
+    "name": "Scent of Midnight",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 68,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 289,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 18,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 55,
+          "duration": 840,
+          "resist": "disease",
+          "resistMod": -200
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 55,
+          "duration": 840,
+          "resist": "disease",
+          "resistMod": -200
+        }
+      ],
+      "description": "Sickens your target, lowering their resistance to poison and disease for 14 minutes."
+    }
+  },
+  {
+    "_id": "nec-shadow-of-death-68-r1",
+    "name": "Shadow of Death",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 68,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 173,
+      "effects": [
+        {
+          "type": "invisibility",
+          "vs": "undead",
+          "duration": 600
+        }
+      ],
+      "description": "Cloaks you in a mystic veil, rendering you invisible to many undead creatures for 10 minutes."
+    }
+  },
+  {
+    "_id": "nec-bulwark-of-calliav-69-r1",
+    "name": "Bulwark of Calliav",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 69,
+      "school": "abjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 974,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "spell-rune",
+          "hits": 4,
+          "maxPerHit": 15635,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Bulwark of Calliav on your pet, absorbing up to 15635 damage from the next 4 melee strikes or direct damage spells that hit it."
+    }
+  },
+  {
+    "_id": "nec-corath-venom-69-r1",
+    "name": "Corath Venom",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 69,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 1275,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 18,
+          "duration": 42
+        },
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 501,
+          "max": 501,
+          "duration": 42,
+          "resist": "poison",
+          "resistMod": -50
+        }
+      ],
+      "description": "Fills your target's veins with venom, adding 18 poison counters and inflicting up to 695 damage every six seconds for 42 seconds."
+    }
+  },
+  {
+    "_id": "nec-dark-hold-69-r1",
+    "name": "Dark Hold",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 69,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 364,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "mez",
+          "amount": 70,
+          "duration": 30,
+          "resist": "magic",
+          "resistMod": -10
+        }
+      ],
+      "description": "Stops an undead creature in their tracks, denying any action for up to 30 seconds. This spell works on creatures up to 70."
+    }
+  },
+  {
+    "_id": "nec-dark-salve-69-r1",
+    "name": "Dark Salve",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 69,
+      "school": "necromancy",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.75,
+      "manaCost": 697,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 3203
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 28
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 28
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 28
+        }
+      ],
+      "description": "Restores an undead servant, healing between 945 and 1645 hit points and curing them of diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "nec-dull-pain-69-r1",
+    "name": "Dull Pain",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 69,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 876,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "rune-shield",
+          "percent": 100,
+          "amount": 975,
+          "duration": 7200
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 3,
+          "max": 3,
+          "duration": 7200
+        }
+      ],
+      "description": "Covers you in a magical skin that absorbs 975 damage before dissipating. This spell also increases your mana regeneration rate."
+    }
+  },
+  {
+    "_id": "nec-focus-mass-intricate-spellcasters-empowering-essence-69-r1",
+    "name": "Focus Mass Intricate Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 69,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 3505,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Intricate Spellcaster's Empowering Essence",
+          "amount": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-pyre-of-mori-69-r1",
+    "name": "Pyre of Mori",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 69,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 1090,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 333,
+          "max": 333,
+          "duration": 54,
+          "resist": "fire",
+          "resistMod": -100
+        }
+      ],
+      "description": "Fills your target's blood with fire, causing 419 damage every six seconds for 54 seconds."
+    }
+  },
+  {
+    "_id": "nec-shadow-orb-69-r1",
+    "name": "Shadow Orb",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 69,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 1168,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 2142,
+          "max": 2142,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Consumes the life energy of your target and creates a shadow orb. The energy in this orb can later be used to heal your companions."
+    }
+  },
+  {
+    "_id": "nec-ancient-curse-of-mori-70-r1",
+    "name": "Ancient: Curse of Mori",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 870,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "curse",
+          "amount": 30,
+          "duration": 30
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 1356,
+          "max": 1356,
+          "duration": 30,
+          "resist": "magic",
+          "resistMod": -30
+        }
+      ],
+      "description": "Inflicts a dark curse upon your target, adding 30 curse counters and causing 639 magical damage every six seconds for 30 seconds."
+    }
+  },
+  {
+    "_id": "nec-ancient-touch-of-orshilak-70-r1",
+    "name": "Ancient: Touch of Orshilak",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 832,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 1809,
+          "max": 1809,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 1300 and 1300 hit points."
+    }
+  },
+  {
+    "_id": "nec-chaos-venom-70-r1",
+    "name": "Chaos Venom",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 787,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 18,
+          "duration": 42
+        },
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 876,
+          "max": 876,
+          "duration": 42,
+          "resist": "poison",
+          "resistMod": -50
+        }
+      ],
+      "description": "Fills your target's blood with poison, adding 18 poison counters and causing 473 damage every six seconds for 42 seconds."
+    }
+  },
+  {
+    "_id": "nec-dark-assassin-70-r1",
+    "name": "Dark Assassin",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 1113,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "dark-assassin"
+        }
+      ],
+      "description": "Inspires a spirit of pestilence to inhabit a corpse to do your bidding. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-dark-possession-70-r1",
+    "name": "Dark Possession",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 7,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "cast-mottled-skeletal-form",
+          "duration": 3600
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 65,
+          "max": 65,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 3600
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 1,
+          "max": 1,
+          "duration": 3600
+        }
+      ],
+      "description": "Grips your body in an unholy darkness, slowly draining your hit points while regenerating your mana."
+    }
+  },
+  {
+    "_id": "nec-death-rune-70-r1",
+    "name": "Death Rune",
+    "type": "spell",
+    "img": "icons/magic/death/skull-aura-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 139,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "aura-death-rune-effect"
+        }
+      ],
+      "description": "Scribes a rune of death on the ground that will curse any creature that wanders too close to it. The curse will cause continual damage to the creature for a short time."
+    }
+  },
+  {
+    "_id": "nec-desolate-undead-70-r1",
+    "name": "Desolate Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 431,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 2240,
+          "resist": "magic",
+          "resistMod": -100
+        }
+      ],
+      "description": "A burst of holy power that inflicts 1610 damage to an undead target."
+    }
+  },
+  {
+    "_id": "nec-dread-pyre-70-r1",
+    "name": "Dread Pyre",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 1521,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 2371,
+          "max": 2371,
+          "duration": 30,
+          "resist": "fire",
+          "resistMod": -100
+        }
+      ],
+      "description": "Fills your target's blood with fire, causing 956 damage every six seconds for 30 seconds."
+    }
+  },
+  {
+    "_id": "nec-focus-elaborate-spellcasters-empowering-essence-70-r1",
+    "name": "Focus Elaborate Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 696,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Elaborate Spellcaster's Empowering Essence",
+          "amount": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-grave-pact-70-r1",
+    "name": "Grave Pact",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 7,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "cast-bloodbone-skeletal-form",
+          "duration": 3600
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 72,
+          "max": 72,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 3600
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 1,
+          "max": 1,
+          "duration": 3600
+        }
+      ],
+      "description": "Turns your body into that of the undead, increasing your mana regeneration, granting you ultravision, the ability to see invisible creatures and the form of a skeleton. You will continually take damage while in this form."
+    }
+  },
+  {
+    "_id": "nec-mind-flay-70-r1",
+    "name": "Mind Flay",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 974,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "mana-drain",
+          "amount": 360,
+          "resist": "disease",
+          "resistMod": -200
+        }
+      ],
+      "description": "Steals the mental energy of your target to regenerate the mana of your group mates."
+    }
+  },
+  {
+    "_id": "nec-word-of-chaos-70-r1",
+    "name": "Word of Chaos",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 70,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 1113,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 65,
+          "duration": 450,
+          "resist": "magic"
+        }
+      ],
+      "description": "Commands an undead creature to do your bidding, temporarily bending them to your will."
+    }
+  }
+]

@@ -1,0 +1,402 @@
+[
+  {
+    "_id": "dru-halo-of-light-11-r1",
+    "name": "Halo of Light",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 11,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-summoned-halo-of-light-x-1"
+        }
+      ],
+      "description": "Focuses magical energy into a halo that provides an aura of light when worn."
+    }
+  },
+  {
+    "_id": "dru-reebos-lesser-augury-11-r1",
+    "name": "Reebo's Lesser Augury",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 11,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest"
+        }
+      ],
+      "description": "Attempts to sense the presence of a cursed trap on the targeted object.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-summon-food-11-r1",
+    "name": "Summon Food",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 11,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-summoned-black-bread-x-1"
+        }
+      ],
+      "description": "Focuses mana into an edible loaf of black bread."
+    }
+  },
+  {
+    "_id": "dru-bind-affinity-12-r1",
+    "name": "Bind Affinity",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 12,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "bind"
+        }
+      ],
+      "description": "Binds the soul of your target to their current location. Use of this spell is often limited to towns and cities."
+    }
+  },
+  {
+    "_id": "dru-cascade-of-hail-12-r1",
+    "name": "Cascade of Hail",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 12,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 2.75,
+      "manaCost": 62,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 58,
+          "radius": 20
+        }
+      ],
+      "description": "Calls down a hailstorm over your target, causing 27 damage every 3 seconds to creatures in the area. This storm will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "cold",
+      "radius": 20
+    }
+  },
+  {
+    "_id": "dru-befriend-animal-13-r1",
+    "name": "Befriend Animal",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "druid",
+      "level": 13,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 24,
+          "duration": 1230
+        }
+      ],
+      "description": "Beckons to the animals of the wild, allowing you to control them.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-expulse-summoned-13-r1",
+    "name": "Expulse Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 13,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 41,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 65
+        }
+      ],
+      "description": "A burst of holy light that inflicts between 100 and 122 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "dru-see-invisible-13-r1",
+    "name": "See Invisible",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 13,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "see-invisible"
+        }
+      ],
+      "description": "Places a magical enchantment upon your target's eyes, allowing them to see otherwise invisible creatures for 27 minutes."
+    }
+  },
+  {
+    "_id": "dru-levitate-14-r1",
+    "name": "Levitate",
+    "type": "spell",
+    "img": "icons/magic/arcane/levitate.webp",
+    "system": {
+      "class": "druid",
+      "level": 14,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "levitate"
+        }
+      ],
+      "description": "Forms a cloud of dense air around your feet, allowing you to float slightly off the ground for up to 20.5 minutes. Consumes a bat wing when cast."
+    }
+  },
+  {
+    "_id": "dru-reebos-lesser-cleansing-14-r1",
+    "name": "Reebo's Lesser Cleansing",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest"
+        }
+      ],
+      "description": "Attempts to destroy any cursed lock present on the targeted object.",
+      "resist": "fire",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-reebos-lesser-exorcism-14-r1",
+    "name": "Reebo's Lesser Exorcism",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest"
+        }
+      ],
+      "description": "Attempts to disarm a cursed trap on the targeted object. Consumes a lesser scrying stone when cast.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-skin-like-rock-14-r1",
+    "name": "Skin like Rock",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 14,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 170,
+          "duration": 1620
+        },
+        {
+          "type": "heal",
+          "amount": 110,
+          "max": 110
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points and armor class for 27 minutes."
+    }
+  },
+  {
+    "_id": "dru-calm-animal-15-r1",
+    "name": "Calm Animal",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 15,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 45,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 5,
+          "maxLevel": 50
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 10,
+          "maxLevel": 50
+        },
+        {
+          "type": "utility",
+          "effect": "pacify"
+        }
+      ],
+      "description": "Calms the ferocity of many animals, making them less likely to attack. This spell works on creatures up to level 50."
+    }
+  },
+  {
+    "_id": "dru-ring-of-karana-15-r1",
+    "name": "Ring of Karana",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 15,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "northkarana"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Northern Plains of Karana."
+    }
+  },
+  {
+    "_id": "dru-ring-of-surefall-glade-15-r1",
+    "name": "Ring of Surefall Glade",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 15,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "qrg"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to Surefall Glade."
+    }
+  },
+  {
+    "_id": "dru-terrorize-animal-15-r1",
+    "name": "Terrorize Animal",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "druid",
+      "level": 15,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52,
+          "duration": 54
+        }
+      ],
+      "description": "Incites fear in an animal target, causing them to flee.",
+      "resist": "magic",
+      "resistMod": -20
+    }
+  }
+]

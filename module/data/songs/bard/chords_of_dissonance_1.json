@@ -1,0 +1,43 @@
+{
+  "id": "chords_of_dissonance_1",
+  "name": "Chords of Dissonance",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 2,
+  "description": "Clashing notes that cause 2 damage to up to 30 nearby creatures that are not moving.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 0,
+    "targets": "enemies"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 5
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 12
+      },
+      "condition": "target-not-moving"
+    }
+  ],
+  "stacking": {
+    "group": "damage-chant",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "damage-chant",
+    "lute"
+  ]
+}

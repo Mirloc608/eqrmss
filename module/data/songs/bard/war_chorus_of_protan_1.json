@@ -1,0 +1,79 @@
+{
+  "id": "war_chorus_of_protan_1",
+  "name": "War Chorus of Protan",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 96,
+  "description": "The chorus of the warlord inspires all of your companions, increasing attack speed to 59%, strength by up to 170, attack rating by up to 101, damaging attackers by up to 72, and adding damage to their attacks.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 59
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "str",
+      "value": {
+        "base": 170
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "atk",
+      "value": {
+        "base": 101
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "damage-shield",
+      "value": {
+        "base": 72
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "min-hit-damage",
+      "value": {
+        "base": 26
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "hit-damage",
+      "value": {
+        "base": 2
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "horn"
+  ]
+}

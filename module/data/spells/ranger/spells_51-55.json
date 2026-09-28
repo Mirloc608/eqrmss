@@ -1,0 +1,490 @@
+[
+  {
+    "_id": "rng-ensnare-51-r1",
+    "name": "Ensnare",
+    "type": "spell",
+    "img": "icons/magic/nature/root-entangle.webp",
+    "system": {
+      "class": "ranger",
+      "level": 51,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 56,
+          "duration": 840
+        }
+      ],
+      "description": "Entangles your target's feet with magical roots, slowing their movement speed for up to 14 minutes.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "rng-resistant-discipline-51-r1",
+    "name": "Resistant Discipline",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "ranger",
+      "level": 51,
+      "school": "discipline",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 20,
+          "duration": 300
+        },
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 20,
+          "duration": 300
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 20,
+          "duration": 300
+        },
+        {
+          "type": "buff",
+          "stat": "resist-poison",
+          "amount": 20,
+          "duration": 300
+        },
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 20,
+          "duration": 300
+        }
+      ],
+      "description": "Focuses your will, increasing your resistances for a short time."
+    }
+  },
+  {
+    "_id": "rng-strength-of-nature-51-r1",
+    "name": "Strength of Nature",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 51,
+      "school": "abjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 5.0,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 25,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 75,
+          "duration": 3600
+        }
+      ],
+      "description": "Blesses your target with the strength of nature, increasing their maximum hit points by 75 and attack rating by 25 for 60 minutes."
+    }
+  },
+  {
+    "_id": "rng-tangle-51-r1",
+    "name": "Tangle",
+    "type": "spell",
+    "img": "icons/magic/nature/root-entangle.webp",
+    "system": {
+      "class": "ranger",
+      "level": 51,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 56,
+          "duration": 840
+        }
+      ],
+      "description": "Entangles your target's feet with magical roots, slowing their movement speed for up to 14 minutes.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "rng-falcon-eye-52-r1",
+    "name": "Falcon Eye",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 52,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 375,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "archery-accuracy",
+          "amount": 20,
+          "duration": 4200
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 4200
+        }
+      ],
+      "description": "Focuses your vision, considerably improving your aim with a bow for 70 minutes."
+    }
+  },
+  {
+    "_id": "rng-firestrike-52-r1",
+    "name": "Firestrike",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "ranger",
+      "level": 52,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 138,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 305
+        }
+      ],
+      "description": "Ignites your target's skin, doing between 250 and 422 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-icewind-52-r1",
+    "name": "Icewind",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "ranger",
+      "level": 52,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 186,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 291
+        }
+      ],
+      "description": "Calls forth a frozen wind to encase your target in ice, doing 403 damage.",
+      "resist": "cold"
+    }
+  },
+  {
+    "_id": "rng-storm-strength-53-r1",
+    "name": "Storm Strength",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 53,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 35,
+          "duration": 3240
+        }
+      ],
+      "description": "Fills your target with the power of the storm, increasing their strength for 54 minutes."
+    }
+  },
+  {
+    "_id": "rng-drones-of-doom-54-r1",
+    "name": "Drones of Doom",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 54,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 287,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 128,
+          "max": 128,
+          "duration": 48
+        }
+      ],
+      "description": "Commands a swarm of insects to attack your target relentlessly, causing between 116 and 156 damage every six seconds for 48 seconds.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "rng-fearless-discipline-54-r1",
+    "name": "Fearless Discipline",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "ranger",
+      "level": 54,
+      "school": "discipline",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "fear-resist",
+          "amount": 10000,
+          "duration": 60
+        }
+      ],
+      "description": "Strengthens your resolve, rendering you immune to fear."
+    }
+  },
+  {
+    "_id": "rng-jolting-blades-54-r1",
+    "name": "Jolting Blades",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "ranger",
+      "level": 54,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "proc": "jolting-blades-strike",
+          "duration": 1200
+        }
+      ],
+      "description": "Imparts your weapons with jolting power, allowing them a chance to strike your target's head, sometimes causing partial memory loss."
+    }
+  },
+  {
+    "_id": "rng-skin-like-diamond-54-r1",
+    "name": "Skin like Diamond",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 54,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3.0,
+          "max": 4.0,
+          "duration": 3240
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 200,
+          "duration": 3240
+        },
+        {
+          "type": "heal",
+          "amount": 152
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points and armor class for 54 minutes."
+    }
+  },
+  {
+    "_id": "rng-call-of-fire-55-r1",
+    "name": "Call of Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "ranger",
+      "level": 55,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "proc": "call-of-fire-strike",
+          "duration": 600
+        }
+      ],
+      "description": "Imparts your weapons with the power of fire for 10 minutes, allowing them a chance to strike with the fury of the flame."
+    }
+  },
+  {
+    "_id": "rng-chloroplast-55-r1",
+    "name": "Chloroplast",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 55,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "hp",
+          "min": 19,
+          "max": 19,
+          "duration": 1230
+        }
+      ],
+      "description": "Hastens your target's natural healing, regenerating up to 19 hit points every 6 seconds for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "rng-cinder-jolt-55-r1",
+    "name": "Cinder Jolt",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 55,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-hate",
+          "amount": 500
+        }
+      ],
+      "description": "Strikes your target with jolting fire, sometimes causing partial memory loss.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-fire-swarm-55-r1",
+    "name": "Fire Swarm",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 55,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 203,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 65,
+          "max": 65,
+          "duration": 60
+        }
+      ],
+      "description": "Summons a swarm of insects with burning mandibles, causing 75 damage every six seconds for 60 seconds.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "rng-resist-cold-55-r1",
+    "name": "Resist Cold",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 55,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away cold for 36 minutes."
+    }
+  },
+  {
+    "_id": "rng-trueshot-discipline-55-r1",
+    "name": "Trueshot Discipline",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "ranger",
+      "level": 55,
+      "school": "discipline",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "archery-damage",
+          "amount": 105,
+          "mode": "percent",
+          "duration": 120
+        }
+      ],
+      "description": "Increases the accuracy and damage of archery attacks."
+    }
+  }
+]

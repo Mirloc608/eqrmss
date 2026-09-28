@@ -1,0 +1,158 @@
+[
+  {
+    "_id": "rng-calm-animal-31-r1",
+    "name": "Calm Animal",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 31,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 45,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 5.0
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 10
+        },
+        {
+          "type": "utility",
+          "effect": "pacify"
+        }
+      ],
+      "description": "Calms the ferocity of many animals, making them less likely to attack. This spell works on creatures up to level 50."
+    }
+  },
+  {
+    "_id": "rng-healing-32-r1",
+    "name": "Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 32,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 65,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 152
+        }
+      ],
+      "description": "Mends moderate wounds, healing between 95 and 175 hit points."
+    }
+  },
+  {
+    "_id": "rng-see-invisible-32-r1",
+    "name": "See Invisible",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 32,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 1620
+        }
+      ],
+      "description": "Places a magical enchantment upon your target's eyes, allowing them to see otherwise invisible creatures for 27 minutes."
+    }
+  },
+  {
+    "_id": "rng-dismiss-summoned-33-r1",
+    "name": "Dismiss Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 33,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 73,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 69
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 180 and 244 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "rng-bramblecoat-34-r1",
+    "name": "Bramblecoat",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 34,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 4.0,
+          "max": 5.0,
+          "duration": 11700
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 3.0,
+          "duration": 11700
+        }
+      ],
+      "description": "Surrounds your body in a coat of brambles that increases your armor class, as well as harming those that strike you for 3.3 hours."
+    }
+  },
+  {
+    "_id": "rng-levitate-35-r1",
+    "name": "Levitate",
+    "type": "spell",
+    "img": "icons/magic/arcane/levitate.webp",
+    "system": {
+      "class": "ranger",
+      "level": 35,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "levitate",
+          "duration": 1230
+        }
+      ],
+      "description": "Forms a cloud of dense air around your feet, allowing you to float slightly off the ground for up to 20.5 minutes. Consumes a bat wing when cast."
+    }
+  }
+]

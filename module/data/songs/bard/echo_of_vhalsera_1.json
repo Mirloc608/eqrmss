@@ -1,0 +1,36 @@
+{
+  "id": "echo_of_vhalsera_1",
+  "name": "Echo of Vhal`Sera",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 112,
+  "description": "Calls forth a blessing of renewal to add 886 health, 242 mana, and 21 endurance every six seconds to your group, as long as they stay within earshot of your echo.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "aura",
+      "aura": "echo-of-vhalsera-effect"
+    }
+  ],
+  "stacking": {
+    "group": "aura",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "aura",
+    "voice"
+  ]
+}

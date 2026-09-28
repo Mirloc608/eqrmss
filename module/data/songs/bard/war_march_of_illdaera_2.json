@@ -1,0 +1,79 @@
+{
+  "id": "war_march_of_illdaera_2",
+  "name": "War March of Illdaera",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 94,
+  "description": "The song of the warlord inspires your companions, increasing attack speed to 60%, strength by up to 196, attack rating by up to 116, damaging attackers by up to 81, and adding damage to their attacks.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 64
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "str",
+      "value": {
+        "base": 198
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "atk",
+      "value": {
+        "base": 117
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "damage-shield",
+      "value": {
+        "base": 82
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "min-hit-damage",
+      "value": {
+        "base": 32
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "hit-damage",
+      "value": {
+        "base": 3
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "horn"
+  ]
+}

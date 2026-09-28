@@ -1,0 +1,35 @@
+{
+  "id": "lyssas_cataloging_libretto_1",
+  "name": "Lyssa's Cataloging Libretto",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 14,
+  "description": "An ancient tune that provides arcane information about the item that your target is holding.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 30,
+    "targets": "ally"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "identify-item"
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "voice"
+  ]
+}

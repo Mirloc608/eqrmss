@@ -1,0 +1,39 @@
+{
+  "id": "requiem_of_time_1",
+  "name": "Requiem of Time",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 64,
+  "description": "A slow rhythm that lowers the attack speed of an opponent for 60 seconds.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 45,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "debuff",
+      "effect": "slow",
+      "value": {
+        "base": 55
+      },
+      "duration": 60
+    }
+  ],
+  "stacking": {
+    "group": "slow-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "debuff",
+    "slow-song",
+    "horn"
+  ]
+}

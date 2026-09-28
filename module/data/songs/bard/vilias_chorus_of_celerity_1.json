@@ -1,0 +1,39 @@
+{
+  "id": "vilias_chorus_of_celerity_1",
+  "name": "Vilia's Chorus of Celerity",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 54,
+  "description": "A energetic verse that heightens the attack speed of your group.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 45
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "voice"
+  ]
+}

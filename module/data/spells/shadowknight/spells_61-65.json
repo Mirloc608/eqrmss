@@ -1,0 +1,763 @@
+[
+  {
+    "_id": "shk-aura-of-darkness-61-r1",
+    "name": "Aura of Darkness",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 204,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "resist-fire",
+          "amount": -10,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-cold",
+          "amount": -10,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-magic",
+          "amount": -10,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-poison",
+          "amount": -10,
+          "duration": 60
+        },
+        {
+          "type": "debuff",
+          "stat": "resist-disease",
+          "amount": -10,
+          "duration": 60
+        }
+      ],
+      "description": "Covers your target with invading darkness for a time, stealing their resistances and giving them to your party."
+    }
+  },
+  {
+    "_id": "shk-festering-darkness-61-r1",
+    "name": "Festering Darkness",
+    "type": "spell",
+    "img": "icons/magic/death/shadow-snare.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 61,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 356,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "darkness",
+          "min": 102,
+          "max": 102,
+          "resist": "magic",
+          "resistMod": -20,
+          "duration": 120
+        },
+        {
+          "type": "debuff",
+          "stat": "movement",
+          "amount": -60,
+          "duration": 120
+        }
+      ],
+      "description": "Afflicts your target with darkness, draining 102 health every six seconds for 120 seconds. Slows your target's movement by 60% for 120 seconds."
+    }
+  },
+  {
+    "_id": "shk-ignite-blood-61-r1",
+    "name": "Ignite Blood",
+    "type": "spell",
+    "img": "icons/magic/debuff/blood-red.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 61,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 444,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 254,
+          "max": 254,
+          "resist": "fire",
+          "resistMod": -100,
+          "duration": 42
+        }
+      ],
+      "description": "Afflicts your target with flame, draining 254 health every six seconds for 42 seconds."
+    }
+  },
+  {
+    "_id": "shk-improved-invisibility-to-undead-61-r1",
+    "name": "Improved Invisibility to Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 61,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 153,
+      "effects": [
+        {
+          "type": "invisibility",
+          "vs": "undead"
+        }
+      ],
+      "description": "Veils you from the sight of the undead."
+    }
+  },
+  {
+    "_id": "shk-soul-guard-61-r1",
+    "name": "Soul Guard",
+    "type": "spell",
+    "img": "icons/magic/defense/blood-shield.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 61,
+      "school": "discipline",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mitigate-melee-damage",
+          "amount": 25,
+          "cap": 6000,
+          "duration": 30
+        }
+      ],
+      "description": "Wards your body, absorbing 25% of incoming melee damage for 30 seconds."
+    }
+  },
+  {
+    "_id": "shk-soulless-panic-61-r1",
+    "name": "Soulless Panic",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 61,
+      "school": "alteration",
+      "target": "undead",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 204,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "maxLevel": 60,
+          "duration": 30
+        }
+      ],
+      "description": "Strikes fear into your target, sending it fleeing for 30 seconds."
+    }
+  },
+  {
+    "_id": "shk-bond-of-death-62-r1",
+    "name": "Bond of Death",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 62,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 7.0,
+      "manaCost": 757,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 168,
+          "max": 168,
+          "resist": "magic",
+          "resistMod": -200,
+          "duration": 54
+        },
+        {
+          "type": "lifetap",
+          "min": 168,
+          "max": 168,
+          "duration": 54,
+          "resist": "magic",
+          "resistMod": -200,
+          "cap": 589
+        }
+      ],
+      "description": "Afflicts your target with arcane force, draining 168 health every six seconds for 54 seconds. 168 of the damage dealt each pulse is returned to you as health."
+    }
+  },
+  {
+    "_id": "shk-deny-undead-62-r1",
+    "name": "Deny Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 62,
+      "school": "evocation",
+      "target": "undead",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 505,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1850,
+          "resist": "magic",
+          "resistMod": -50
+        }
+      ],
+      "description": "Blasts your target with arcane force, dealing 1850 damage."
+    }
+  },
+  {
+    "_id": "shk-shadow-bellow-62-r1",
+    "name": "Shadow Bellow",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 62,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 421,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "maxLevel": 60,
+          "duration": 30
+        }
+      ],
+      "description": "Strikes fear into your target, sending it fleeing for 30 seconds."
+    }
+  },
+  {
+    "_id": "shk-touch-of-volatis-62-r1",
+    "name": "Touch of Volatis",
+    "type": "spell",
+    "img": "icons/magic/death/drain-life-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 62,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 612,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 875,
+          "max": 875,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains 875 life from your target and transfers it to you as health."
+    }
+  },
+  {
+    "_id": "shk-zevfeers-bite-62-r1",
+    "name": "Zevfeer's Bite",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 62,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 421,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 421,
+          "resist": "disease",
+          "resistMod": -500
+        }
+      ],
+      "description": "Blasts your target with decay, dealing 421 damage."
+    }
+  },
+  {
+    "_id": "shk-aura-of-pain-63-r1",
+    "name": "Aura of Pain",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 63,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 102,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 339,
+          "resist": "disease",
+          "resistMod": -50
+        }
+      ],
+      "description": "Blasts your target with decay, dealing 339 damage."
+    }
+  },
+  {
+    "_id": "shk-blood-of-hate-63-r1",
+    "name": "Blood of Hate",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 63,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 559,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 288,
+          "max": 288,
+          "resist": "poison",
+          "resistMod": -100,
+          "duration": 36
+        }
+      ],
+      "description": "Afflicts your target with venom, draining 288 health every six seconds for 36 seconds."
+    }
+  },
+  {
+    "_id": "shk-shroud-of-chaos-63-r1",
+    "name": "Shroud of Chaos",
+    "type": "spell",
+    "img": "icons/magic/death/skull-aura-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 63,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 763,
+      "effects": [
+        {
+          "type": "proc",
+          "name": "Shroud of Chaos Strike"
+        }
+      ],
+      "description": "Your melee strikes gain a chance to trigger Shroud of Chaos Strike."
+    }
+  },
+  {
+    "_id": "shk-terror-of-thule-63-r1",
+    "name": "Terror of Thule",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 63,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.0,
+      "manaCost": 102,
+      "effects": [
+        {
+          "type": "hate",
+          "amount": 1
+        }
+      ],
+      "description": "Provokes your target's hatred, drawing its attacks to you."
+    }
+  },
+  {
+    "_id": "shk-augmentation-of-death-64-r1",
+    "name": "Augmentation of Death",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 64,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 342,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 55,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 65,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 3600
+        }
+      ],
+      "description": "Wreathes you in spectral armor, increasing your armor class."
+    }
+  },
+  {
+    "_id": "shk-invoke-death-64-r1",
+    "name": "Invoke Death",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 64,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 669,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "invoke-death"
+        }
+      ],
+      "description": "Summons an undead servant to fight at your side."
+    }
+  },
+  {
+    "_id": "shk-pact-of-hate-64-r1",
+    "name": "Pact of Hate",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 64,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 7,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "mottled-skeletal-form"
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 15,
+          "max": 15,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision"
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 30,
+          "max": 30,
+          "duration": 3600
+        }
+      ],
+      "description": "Afflicts your target with arcane force, draining 30 health every six seconds for 3600 seconds. Grants ultravision."
+    }
+  },
+  {
+    "_id": "shk-scythe-of-innoruuk-64-r1",
+    "name": "Scythe of Innoruuk",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 64,
+      "school": "conjuration",
+      "target": "undead",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 328,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1202,
+          "resist": "magic",
+          "resistMod": -50
+        }
+      ],
+      "description": "Blasts your target with arcane force, dealing 1202 damage."
+    }
+  },
+  {
+    "_id": "shk-spear-of-decay-64-r1",
+    "name": "Spear of Decay",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 64,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 342,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 956,
+          "resist": "disease"
+        }
+      ],
+      "description": "Hurls a spear of decay at your target, striking for 956 damage."
+    }
+  },
+  {
+    "_id": "shk-ancient-bite-of-chaos-65-r1",
+    "name": "Ancient: Bite of Chaos",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 65,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 357,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 390,
+          "resist": "disease",
+          "resistMod": -500
+        }
+      ],
+      "description": "Blasts your target with decay, dealing 390 damage."
+    }
+  },
+  {
+    "_id": "shk-aura-of-hate-65-r1",
+    "name": "Aura of Hate",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 65,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 130,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 130,
+          "resist": "disease",
+          "resistMod": -75
+        }
+      ],
+      "description": "Blasts your target with decay, dealing 130 damage."
+    }
+  },
+  {
+    "_id": "shk-black-shroud-65-r1",
+    "name": "Black Shroud",
+    "type": "spell",
+    "img": "icons/magic/death/skull-aura-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 65,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 649,
+      "effects": [
+        {
+          "type": "proc",
+          "name": "Black Shroud Strike"
+        }
+      ],
+      "description": "Your melee strikes gain a chance to trigger Black Shroud Strike."
+    }
+  },
+  {
+    "_id": "shk-cloak-of-luclin-65-r1",
+    "name": "Cloak of Luclin",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 65,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 325,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 10,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 10,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 280,
+          "duration": 9000
+        }
+      ],
+      "description": "Covers your body in a protective cloak that damages anyone who strikes you. Wreathes you in spectral armor, increasing your armor class."
+    }
+  },
+  {
+    "_id": "shk-mental-horror-65-r1",
+    "name": "Mental Horror",
+    "type": "spell",
+    "img": "icons/magic/death/skull-aura-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 65,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 519,
+      "effects": [
+        {
+          "type": "proc",
+          "name": "Mental Horror Strike"
+        }
+      ],
+      "description": "Your melee strikes gain a chance to trigger Mental Horror Strike."
+    }
+  },
+  {
+    "_id": "shk-miasmic-spear-65-r1",
+    "name": "Miasmic Spear",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 65,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 357,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 1000,
+          "resist": "disease"
+        }
+      ],
+      "description": "Blasts your target with decay, dealing 1000 damage."
+    }
+  },
+  {
+    "_id": "shk-touch-of-innoruuk-65-r1",
+    "name": "Touch of Innoruuk",
+    "type": "spell",
+    "img": "icons/magic/death/drain-life-purple.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 65,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 596,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 892,
+          "max": 892,
+          "resist": "magic",
+          "resistMod": -500
+        }
+      ],
+      "description": "Drains 892 life from your target and transfers it to you as health."
+    }
+  },
+  {
+    "_id": "shk-voice-of-thule-65-r1",
+    "name": "Voice of Thule",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "shadowknight",
+      "level": 65,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 2.0,
+      "manaCost": 325,
+      "effects": [
+        {
+          "type": "hate-modifier",
+          "amount": 12,
+          "duration": 600
+        }
+      ],
+      "description": "Imbues your target's voice with the power of pure terror, causing creatures to take more notice of their attacks for minutes. Increases the hatred you generate by 12%."
+    }
+  }
+]

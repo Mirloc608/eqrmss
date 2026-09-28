@@ -1,0 +1,130 @@
+<section class="eqrmss-cc-step eqrmss-cc-step-final">
+
+  <header class="eqrmss-cc-step-header">
+    <h2>Finalize Character</h2>
+    <p>Review your selections and confirm your new EQRMSS character.</p>
+  </header>
+
+  {{!-- ========================================================= --}}
+  {{!-- GM Override Indicator                                      --}}
+  {{!-- ========================================================= --}}
+  {{#if gmOverrideActive}}
+    <div class="eqrmss-gm-override-banner">
+      <i class="fas fa-exclamation-triangle"></i>
+      GM Override Active — Race/Class compatibility was modified for this character.
+    </div>
+  {{/if}}
+
+  <div class="eqrmss-cc-summary-grid">
+
+    {{!-- ===================== --}}
+    {{!-- Race Summary          --}}
+    {{!-- ===================== --}}
+    <div class="eqrmss-cc-summary-card">
+      <h3>Race</h3>
+
+      {{#with (lookup ../races wizard.selection.raceId)}}
+        <p><strong>{{name}}</strong></p>
+
+        {{#if description}}
+          <p class="eqrmss-cc-summary-desc">{{description}}</p>
+        {{/if}}
+
+        {{#if stat_modifiers}}
+          <div class="eqrmss-cc-summary-mods">
+            <h4>Stat Modifiers</h4>
+            <ul>
+              {{#each stat_modifiers}}
+                <li>{{@key}}: {{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        {{/if}}
+      {{/with}}
+    </div>
+
+    {{!-- ===================== --}}
+    {{!-- Class Summary         --}}
+    {{!-- ===================== --}}
+    <div class="eqrmss-cc-summary-card">
+      <h3>Class</h3>
+
+      {{#with (lookup ../classes wizard.selection.classId)}}
+        <p><strong>{{name}}</strong></p>
+
+        {{#if description}}
+          <p class="eqrmss-cc-summary-desc">{{description}}</p>
+        {{/if}}
+
+        {{#if system.realm}}
+          <p><strong>Realm:</strong> {{system.realm}}</p>
+        {{/if}}
+
+        {{#if system.primary_stats}}
+          <div class="eqrmss-cc-summary-stats">
+            <h4>Primary Stats</h4>
+            <ul>
+              {{#each system.primary_stats}}
+                <li>{{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        {{/if}}
+      {{/with}}
+    </div>
+
+    {{!-- ===================== --}}
+    {{!-- City Summary          --}}
+    {{!-- ===================== --}}
+    <div class="eqrmss-cc-summary-card">
+      <h3>Starting City</h3>
+
+      {{#with (lookup ../cities wizard.selection.cityId)}}
+        <p><strong>{{name}}</strong></p>
+
+        {{#if description}}
+          <p class="eqrmss-cc-summary-desc">{{description}}</p>
+        {{/if}}
+      {{/with}}
+    </div>
+
+    {{!-- ===================== --}}
+    {{!-- Deity Summary         --}}
+    {{!-- ===================== --}}
+    <div class="eqrmss-cc-summary-card">
+      <h3>Deity</h3>
+
+      {{#if wizard.selection.deityId}}
+        {{#with (lookup ../deities wizard.selection.deityId)}}
+          <p><strong>{{name}}</strong></p>
+
+          {{#if description}}
+            <p class="eqrmss-cc-summary-desc">{{description}}</p>
+          {{/if}}
+        {{/with}}
+      {{else}}
+        <p><em>No deity selected</em></p>
+      {{/if}}
+    </div>
+
+    {{!-- ===================== --}}
+    {{!-- Stats Summary         --}}
+    {{!-- ===================== --}}
+    <div class="eqrmss-cc-summary-card">
+      <h3>Attributes</h3>
+
+      <ul class="eqrmss-cc-summary-stats">
+        {{#each wizard.selection.stats}}
+          <li><strong>{{@key}}:</strong> {{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+
+  </div>
+
+  <footer class="eqrmss-cc-step-footer">
+    <button type="button" class="eqrmss-cc-prev" data-action="previous">← Back</button>
+    <button type="button" class="eqrmss-cc-finish" data-action="finish">Create Character →</button>
+  </footer>
+
+</section>

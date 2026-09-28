@@ -1,0 +1,128 @@
+[
+  {
+    "_id": "rng-snare-6-r1",
+    "name": "Snare",
+    "type": "spell",
+    "img": "icons/magic/nature/root-entangle.webp",
+    "system": {
+      "class": "ranger",
+      "level": 6,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "snare",
+          "amount": 50,
+          "duration": 234
+        }
+      ],
+      "description": "Entangles your target's feet with magical roots, slowing their movement speed for up to 3.9 minutes.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "rng-skin-like-wood-7-r1",
+    "name": "Skin like Wood",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 7,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1.0,
+          "max": 1.0,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points and armor class for 27 minutes."
+    }
+  },
+  {
+    "_id": "rng-minor-healing-8-r1",
+    "name": "Minor Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 8,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 23
+        }
+      ],
+      "description": "Mends minor wounds, healing 10 hit points."
+    }
+  },
+  {
+    "_id": "rng-endure-fire-9-r1",
+    "name": "Endure Fire",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 9,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away fire for 27 minutes."
+    }
+  },
+  {
+    "_id": "rng-dance-of-the-fireflies-10-r1",
+    "name": "Dance of the Fireflies",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "ranger",
+      "level": 10,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "summoned-firefly-globe",
+          "amount": 1.0
+        }
+      ],
+      "description": "Summons a swarm of mystic fireflies to your hands, providing light in dark areas."
+    }
+  }
+]

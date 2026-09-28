@@ -1,0 +1,227 @@
+<!-- ============================================================
+ EQRMSS Actor Progression Panel
+ Displays class progression and level rewards
+============================================================ -->
+
+<section class="eqrmss-progression-panel">
+
+    <h2>
+        ⚔ Progression
+    </h2>
+
+    <!-- ========================================================
+         Current Class Information
+    ========================================================= -->
+
+    <div class="progression-header">
+
+        <div class="progression-row">
+
+            <label>
+                Class
+            </label>
+
+            <span>
+                {{actor.system.fixed_info.profession}}
+            </span>
+
+        </div>
+
+        <div class="progression-row">
+
+            <label>
+                Level
+            </label>
+
+            <span>
+                {{system.attributes.level.value}}
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================================
+         Progression Controls
+    ========================================================= -->
+
+    <div class="progression-actions">
+
+        <button
+            type="button"
+            class="eqrmss-sync-progression"
+            data-action="syncProgression">
+
+            <i class="fas fa-sync"></i>
+
+            Sync Progression
+
+        </button>
+
+    </div>
+
+    <!-- ========================================================
+         Granted Levels
+    ========================================================= -->
+
+    <h3>
+        Granted Levels
+    </h3>
+
+    <div class="progression-level-list">
+
+    {{#if progression.levelsGranted.length}}
+
+        {{#each progression.levelsGranted as |level|}}
+
+            <span class="progression-level">
+
+                {{level}}
+
+            </span>
+
+        {{/each}}
+
+    {{else}}
+
+        <p>
+            No progression rewards granted.
+        </p>
+
+    {{/if}}
+
+    </div>
+
+    <!-- ========================================================
+         Next Level Preview
+    ========================================================= -->
+
+    <h3>
+        Next Level Rewards
+    </h3>
+
+    {{#if progression.nextLevel}}
+
+    <div class="progression-reward-box">
+
+        <div>
+
+            <strong>
+                Level {{progression.nextLevel.level}}
+            </strong>
+
+        </div>
+
+        {{#if progression.nextLevel.abilities.length}}
+
+        <h4>
+            Abilities
+        </h4>
+
+        <ul>
+
+        {{#each progression.nextLevel.abilities}}
+
+            <li>
+                {{this}}
+            </li>
+
+        {{/each}}
+
+        </ul>
+
+        {{/if}}
+
+        {{#if progression.nextLevel.spells.length}}
+
+        <h4>
+            Spells
+        </h4>
+
+        <ul>
+
+        {{#each progression.nextLevel.spells}}
+
+            <li>
+                {{this}}
+            </li>
+
+        {{/each}}
+
+        </ul>
+
+        {{/if}}
+
+        {{#if progression.nextLevel.songs.length}}
+
+        <h4>
+            Songs
+        </h4>
+
+        <ul>
+
+        {{#each progression.nextLevel.songs}}
+
+            <li>
+                {{this}}
+            </li>
+
+        {{/each}}
+
+        </ul>
+
+        {{/if}}
+
+        {{#if progression.nextLevel.aa}}
+
+        <h4>
+            ⭐ Alternate Ability Unlock
+        </h4>
+
+        <p>
+            New AA tier available.
+        </p>
+
+        {{/if}}
+
+    </div>
+
+    {{else}}
+
+        <p>
+            Maximum progression reached.
+        </p>
+
+    {{/if}}
+
+    <!-- ========================================================
+         Pet Progression
+    ========================================================= -->
+
+    {{#if progression.pet}}
+
+    <h3>
+        Pet Progression
+    </h3>
+
+    <div class="pet-progression">
+
+        <strong>
+            Current Pet Rank:
+        </strong>
+
+        {{progression.pet.current}}
+
+        <br>
+
+        <strong>
+            Next Upgrade:
+        </strong>
+
+        {{progression.pet.next}}
+
+    </div>
+
+    {{/if}}
+
+</section>

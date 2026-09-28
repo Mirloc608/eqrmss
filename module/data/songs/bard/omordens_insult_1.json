@@ -1,0 +1,38 @@
+{
+  "id": "omordens_insult_1",
+  "name": "Omorden's Insult",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 112,
+  "description": "Words can hurt. These words will do up to 6606 damage to your target and push them away slightly.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 45,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 4900
+      }
+    }
+  ],
+  "stacking": {
+    "group": "insult",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "insult",
+    "horn"
+  ]
+}

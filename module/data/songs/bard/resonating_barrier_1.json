@@ -1,0 +1,37 @@
+{
+  "id": "resonating_barrier_1",
+  "name": "Resonating Barrier",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 121,
+  "description": "Adds a defensive barrier that can stun attacking creatures up to level 130 for up to 4 seconds. The effect will fade after 12 seconds or after it has stunned 3 creatures.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "defensive-proc",
+      "proc": "resonating-stun",
+      "amount": 400
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "drum"
+  ]
+}

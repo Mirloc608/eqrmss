@@ -1,0 +1,137 @@
+[
+  {
+  "_id": "sk-grim-aura-16",
+  "name": "Grim Aura",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/016.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 16,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 25,
+    "effects": [
+      { "type": "buff", "stat": "atk", "min": 5, "max": 15 }
+    ],
+    "description": "Surrounds the caster with a grim aura, increasing attack power."
+  }
+},
+{
+  "_id": "sk-deadeye-17",
+  "name": "Deadeye",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/017.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 17,
+    "school": "divination",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 35,
+    "effects": [
+      { "type": "vision", "effect": "see-invisible" },
+      { "type": "vision", "effect": "infravision" }
+    ],
+    "description": "Enhances the caster’s senses, granting see invisible and infravision."
+  }
+},
+{
+  "_id": "sk-ward-undead-18",
+  "name": "Ward Undead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/018.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 18,
+    "school": "evocation",
+    "target": "undead",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 5,
+    "effects": [
+      { "type": "damage", "element": "magic", "min": 7, "max": 12 }
+    ],
+    "description": "Damages undead with a burst of dark energy."
+  }
+},
+{
+  "_id": "sk-cure-disease-19",
+  "name": "Cure Disease",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/019.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 19,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 20,
+    "effects": [
+      { "type": "cure", "effect": "disease", "min": 1, "max": 5 }
+    ],
+    "description": "Removes disease counters from the target."
+  }
+},
+{
+  "_id": "sk-tiny-companion-19",
+  "name": "Tiny Companion",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/019b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 19,
+    "school": "alteration",
+    "target": "pet",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "utility", "effect": "shrink", "amount": 50 }
+    ],
+    "description": "Shrinks the caster’s pet to half its normal size."
+  }
+},
+{
+  "_id": "sk-spook-the-dead-20",
+  "name": "Spook the Dead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/020.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 20,
+    "school": "alteration",
+    "target": "undead",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 10,
+    "effects": [
+      { "type": "control", "effect": "fear", "maxLevel": 52 }
+    ],
+    "description": "Instills terror in undead, causing them to flee."
+  }
+},
+{
+  "_id": "sk-engulfing-darkness-20",
+  "name": "Engulfing Darkness",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/020b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 20,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "dot", "element": "disease", "min": 11, "max": 11 },
+      { "type": "debuff", "stat": "movement", "min": -31, "max": -70 }
+    ],
+    "description": "Inflicts disease damage over time and severely slows the target."
+  }
+}
+]

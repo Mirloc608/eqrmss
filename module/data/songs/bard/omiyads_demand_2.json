@@ -1,0 +1,40 @@
+{
+  "id": "omiyads_demand_2",
+  "name": "Omiyad's Demand",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 119,
+  "description": "A bewitching melody that charms the target, allowing you to command it. Affects creatures up to level 118.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 22,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "charm",
+      "duration": 60,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    }
+  ],
+  "stacking": {
+    "group": "charm-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "charm-song",
+    "flute"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "shauris_sonorous_clouding_1",
+  "name": "Shauri's Sonorous Clouding",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 19,
+  "description": "This sonnet surrounds your body with a light fog, allowing you to slip by many creatures undetected. This song also allows you to see invisible creatures.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "invisibility",
+      "variant": "unstable"
+    },
+    {
+      "type": "utility",
+      "effect": "see-invisible"
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "flute"
+  ]
+}

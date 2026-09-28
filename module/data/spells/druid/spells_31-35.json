@@ -1,0 +1,819 @@
+[
+  {
+    "_id": "dru-circle-of-steamfont-31-r1",
+    "name": "Circle of Steamfont",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 31,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "steamfontmts"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Steamfont Mountains."
+    }
+  },
+  {
+    "_id": "dru-earthquake-31-r1",
+    "name": "Earthquake",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 31,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 4.5,
+      "manaCost": 375,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 115,
+          "radius": 30
+        }
+      ],
+      "description": "Causes the earth to tremble around you, causing between 90 and 246 damage to up to 30 nearby enemies.",
+      "resist": "magic",
+      "radius": 30
+    }
+  },
+  {
+    "_id": "dru-lightning-strike-31-r1",
+    "name": "Lightning Strike",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 31,
+      "school": "evocation",
+      "target": "area",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 149,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 85,
+          "radius": 10
+        }
+      ],
+      "description": "Calls down lightning from the sky over your target, causing between 70 and 184 damage to up to 4 creatures in the area. This spell can only be cast outdoors.",
+      "resist": "magic",
+      "radius": 10
+    }
+  },
+  {
+    "_id": "dru-reebos-greater-augury-31-r1",
+    "name": "Reebo's Greater Augury",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 31,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest"
+        }
+      ],
+      "description": "Attempts to sense the presence of a cursed trap on the targeted object.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-ring-of-iceclad-31-r1",
+    "name": "Ring of Iceclad",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 31,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "iceclad"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Iceclad Ocean."
+    }
+  },
+  {
+    "_id": "dru-circle-of-feerrott-32-r1",
+    "name": "Circle of Feerrott",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 32,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "feerrott"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Feerrott Jungle."
+    }
+  },
+  {
+    "_id": "dru-circle-of-iceclad-32-r1",
+    "name": "Circle of Iceclad",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 32,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "iceclad"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Iceclad Ocean."
+    }
+  },
+  {
+    "_id": "dru-circle-of-ro-32-r1",
+    "name": "Circle of Ro",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 32,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "southro"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Southern Desert of Ro."
+    }
+  },
+  {
+    "_id": "dru-drones-of-doom-32-r1",
+    "name": "Drones of Doom",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 32,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 287,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 24,
+          "max": 24,
+          "duration": 48
+        }
+      ],
+      "description": "Commands a swarm of insects to attack your target relentlessly, causing between 116 and 156 damage every six seconds for 48 seconds.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-succor-butcher-32-r1",
+    "name": "Succor: Butcher",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 32,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "evac"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Butcherblock Mountains."
+    }
+  },
+  {
+    "_id": "dru-zephyr-nexus-32-r1",
+    "name": "Zephyr: Nexus",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 32,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "nexus"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Nexus."
+    }
+  },
+  {
+    "_id": "dru-zephyr-toxxulia-32-r1",
+    "name": "Zephyr: Toxxulia",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 32,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "toxxulia"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Toxxulia Forest."
+    }
+  },
+  {
+    "_id": "dru-beguile-animals-33-r1",
+    "name": "Beguile Animals",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "druid",
+      "level": 33,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 170,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 43,
+          "duration": 1230
+        }
+      ],
+      "description": "Beckons to the animals of the wild, allowing you to control them.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-circle-of-twilight-33-r1",
+    "name": "Circle of Twilight",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 33,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 24.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "twilight"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Twilight."
+    }
+  },
+  {
+    "_id": "dru-circle-of-the-combines-33-r1",
+    "name": "Circle of the Combines",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 33,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "dreadlands"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Dreadlands."
+    }
+  },
+  {
+    "_id": "dru-expel-summoned-33-r1",
+    "name": "Expel Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 33,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 108,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 145
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 159 and 385 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "dru-ring-of-great-divide-33-r1",
+    "name": "Ring of Great Divide",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 33,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "greatdivide"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Great Divide."
+    }
+  },
+  {
+    "_id": "dru-zephyr-butcherblock-33-r1",
+    "name": "Zephyr: Butcherblock",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 33,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "butcher"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Butcherblock Mountains."
+    }
+  },
+  {
+    "_id": "dru-zephyr-iceclad-33-r1",
+    "name": "Zephyr: Iceclad",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 33,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "iceclad"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Iceclad Ocean."
+    }
+  },
+  {
+    "_id": "dru-endure-magic-34-r1",
+    "name": "Endure Magic",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 34,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away magic for 27 minutes."
+    }
+  },
+  {
+    "_id": "dru-healing-water-34-r1",
+    "name": "Healing Water",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 34,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.75,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 360,
+          "max": 360
+        }
+      ],
+      "description": "Conjures healing water from the ground, healing 425 damage to your target."
+    }
+  },
+  {
+    "_id": "dru-reebos-greater-cleansing-34-r1",
+    "name": "Reebo's Greater Cleansing",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 34,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest"
+        }
+      ],
+      "description": "Attempts to destroy any cursed lock present on the targeted object.",
+      "resist": "fire",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-reebos-greater-exorcism-34-r1",
+    "name": "Reebo's Greater Exorcism",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 34,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest"
+        }
+      ],
+      "description": "Attempts to disarm a cursed trap on the targeted object. Consumes a greater scrying stone when cast.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-regeneration-34-r1",
+    "name": "Regeneration",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 34,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 8,
+          "duration": 1230
+        }
+      ],
+      "description": "Hastens your target's natural healing, regenerating up to 9 hit points every 6 seconds for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "dru-strength-of-stone-34-r1",
+    "name": "Strength of Stone",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "druid",
+      "level": 34,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 65,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 25,
+          "duration": 2160
+        }
+      ],
+      "description": "Fills your target with the power of the stone, increasing their strength for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-zephyr-karana-34-r1",
+    "name": "Zephyr: Karana",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 34,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "northkarana"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Northern Plains of Karana."
+    }
+  },
+  {
+    "_id": "dru-pack-shrew-35-r1",
+    "name": "Pack Shrew",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 35,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 320,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "ultravision"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 30,
+          "duration": 2160
+        }
+      ],
+      "description": "Infuses your group with the spirit of the shrew, granting greatly improved night vision and increased movement speed for 36 minutes. This spell also functions indoors."
+    }
+  },
+  {
+    "_id": "dru-pack-spirit-35-r1",
+    "name": "Pack Spirit",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 35,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 55,
+          "duration": 2160
+        }
+      ],
+      "description": "Imbues your group with the spirit of the wolf, increasing their movement speed for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-primary-anchor-circle-35-r1",
+    "name": "Primary Anchor Circle",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 35,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "your"
+        }
+      ],
+      "description": "Opens an arcane portal that teleports your entire group to your Primary Anchor."
+    }
+  },
+  {
+    "_id": "dru-secondary-anchor-circle-35-r1",
+    "name": "Secondary Anchor Circle",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 35,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "your"
+        }
+      ],
+      "description": "Opens an arcane portal that teleports your entire group to your Secondary Anchor."
+    }
+  },
+  {
+    "_id": "dru-share-wolf-form-35-r1",
+    "name": "Share Wolf Form",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 35,
+      "school": "alteration",
+      "target": "single",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "old-wolf"
+        },
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 60,
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 30,
+          "duration": 2160
+        }
+      ],
+      "description": "Fills your group with the spirit of the wild, allowing them to take the form of a wolf for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-zephyr-commonlands-35-r1",
+    "name": "Zephyr: Commonlands",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 35,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "commonlands"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Commonlands."
+    }
+  },
+  {
+    "_id": "dru-zephyr-stonebrunt-35-r1",
+    "name": "Zephyr: Stonebrunt",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 35,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "stonebrunt"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to the Stonebrunt Mountains."
+    }
+  },
+  {
+    "_id": "dru-zephyr-surefall-glade-35-r1",
+    "name": "Zephyr: Surefall Glade",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 35,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "qrg"
+        }
+      ],
+      "description": "Opens a mystical portal that teleports your target to Surefall Glade."
+    }
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "_id": "pal-reparation-31-r1",
+    "name": "Reparation",
+    "type": "spell",
+    "img": "icons/magic/life/angel-wings-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 31,
+      "school": "alteration",
+      "target": "corpse",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "resurrection"
+        }
+      ],
+      "description": "Revives a slain ally, restoring 20% of their lost experience. It takes some time for the recently revived to fully recover."
+    }
+  },
+  {
+    "_id": "pal-cancel-magic-32-r1",
+    "name": "Cancel Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "paladin",
+      "level": 32,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel"
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "pal-symbol-of-ryltan-33-r1",
+    "name": "Symbol of Ryltan",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 33,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 111,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 158,
+          "duration": 2160
+        },
+        {
+          "type": "heal",
+          "amount": 194
+        }
+      ],
+      "description": "Covers your target in a shimmer of holy runes, increasing their hit points for 36 minutes."
+    }
+  },
+  {
+    "_id": "pal-counteract-poison-34-r1",
+    "name": "Counteract Poison",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 34,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 5
+        }
+      ],
+      "description": "Removes toxin from your target's system, curing them of moderate poisons."
+    }
+  },
+  {
+    "_id": "pal-remove-lesser-curse-34-r1",
+    "name": "Remove Lesser Curse",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 34,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 5
+        }
+      ],
+      "description": "Cleanses your target's soul, removing lesser curses."
+    }
+  },
+  {
+    "_id": "pal-divine-vigor-35-r1",
+    "name": "Divine Vigor",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 35,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 100,
+          "duration": 3000
+        }
+      ],
+      "description": "Fills your target with divine vigor, increasing their hit points for 50 minutes."
+    }
+  }
+]

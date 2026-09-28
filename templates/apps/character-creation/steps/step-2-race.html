@@ -1,0 +1,85 @@
+<section class="eqrmss-cc-step eqrmss-cc-step-race">
+
+  <header class="eqrmss-cc-step-header">
+    <h2>Select Race</h2>
+    <p>Your race determines starting attributes, cultural background, and available classes.</p>
+  </header>
+
+  {{!-- ========================================================= --}}
+  {{!-- GM Override Indicator                                      --}}
+  {{!-- ========================================================= --}}
+  {{#if gmOverrideActive}}
+    <div class="eqrmss-gm-override-note">
+      <i class="fas fa-exclamation-triangle"></i>
+      GM Override Active — Class restrictions for this race may be modified.
+    </div>
+  {{/if}}
+
+  <div class="eqrmss-cc-race-grid">
+
+    {{#each races}}
+      <div class="eqrmss-cc-race-card {{#if (eq ../wizard.selection.raceId _id)}}selected{{/if}}">
+
+        <div class="eqrmss-cc-race-header">
+          <h3>{{name}}</h3>
+        </div>
+
+        {{#if description}}
+          <p class="eqrmss-cc-race-desc">{{description}}</p>
+        {{/if}}
+
+        {{#if stat_modifiers}}
+          <div class="eqrmss-cc-race-mods">
+            <h4>Stat Modifiers</h4>
+            <ul>
+              {{#each stat_modifiers}}
+                <li>{{@key}}: {{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        {{/if}}
+
+        {{#if allowed_classes}}
+          <div class="eqrmss-cc-race-classes">
+            <h4>Allowed Classes</h4>
+            <ul>
+              {{#each allowed_classes}}
+                <li>{{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        {{/if}}
+
+        <footer class="eqrmss-cc-race-footer">
+          <button
+            type="button"
+            class="eqrmss-cc-select"
+            data-action="set-race"
+            value="{{_id}}"
+          >
+            Select {{name}}
+          </button>
+        </footer>
+
+      </div>
+    {{/each}}
+
+  </div>
+
+  <figure class="eqrmss-cc-race-preview">
+    <img
+      src="{{eqrmssRaceImage wizard.selection.raceId races}}"
+      alt="Selected race"
+      class="eqrmss-cc-race-preview-image"
+    />
+    <figcaption>
+      {{#if wizard.selection.raceId}}Selected Race{{else}}Choose a race{{/if}}
+    </figcaption>
+  </figure>
+
+  <footer class="eqrmss-cc-step-footer">
+    <button type="button" class="eqrmss-cc-prev" data-action="previous">← Back</button>
+    <button type="button" class="eqrmss-cc-next" data-action="next">Next →</button>
+  </footer>
+
+</section>

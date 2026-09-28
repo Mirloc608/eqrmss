@@ -1,0 +1,721 @@
+[
+  {
+    "_id": "shm-crippling-spasm-66-r1",
+    "name": "Crippling Spasm",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "shaman",
+      "level": 66,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 249,
+      "effects": [
+        { "type": "debuff", "stat": "dex", "amount": -100 },
+        { "type": "debuff", "stat": "agi", "amount": -100 },
+        { "type": "debuff", "stat": "str", "amount": -100 },
+        { "type": "debuff", "stat": "ac", "min": -11, "max": -8 }
+      ],
+      "description": "Saps your target's power, decreasing their agility, dexterity, strength, and armor class for 7.5 minutes."
+    }
+  },
+  {
+    "_id": "shm-putrid-decay-66-r1",
+    "name": "Putrid Decay",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 66,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 277,
+      "effects": [
+        { "type": "debuff", "effect": "disease", "amount": 18 },
+        { "type": "debuff", "stat": "resist-disease", "min": -40, "max": -55 },
+        { "type": "debuff", "stat": "resist-poison", "min": -40, "max": -55 }
+      ],
+      "description": "Surrounds your target with a foul cloud of plague which will lower their resistance to disease and poison attacks."
+    }
+  },
+  {
+    "_id": "shm-spirit-of-perseverance-66-r1",
+    "name": "Spirit of Perseverance",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 66,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 380,
+      "effects": [
+        { "type": "regen", "stat": "hp", "min": 31, "max": 78 }
+      ],
+      "description": "Hastens your target's natural healing, regenerating up to 70 hit points every 6 seconds for 21 minutes."
+    }
+  },
+  {
+    "_id": "shm-spirit-of-sense-66-r1",
+    "name": "Spirit of Sense",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "shaman",
+      "level": 66,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 166,
+      "effects": [
+        { "type": "utility", "effect": "melee-avoidance", "percent": 7 }
+      ],
+      "description": "Fills your target with a sense of nimbleness, increasing their ability to avoid being hit for 72 minutes."
+    }
+  },
+  {
+    "_id": "shm-yoppas-spear-of-venom-66-r1",
+    "name": "Yoppa's Spear of Venom",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 66,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.25,
+      "manaCost": 470,
+      "effects": [
+        { "type": "damage", "element": "poison", "amount": 1320 }
+      ],
+      "description": "Strikes your target with a jet of poisonous acid, causing between 1197 and 1197 damage."
+    }
+  },
+  {
+    "_id": "shm-ancestral-bulwark-67-r1",
+    "name": "Ancestral Bulwark",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "shaman",
+      "level": 67,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 386,
+      "effects": [
+        { "type": "buff", "stat": "ac", "min": 10, "max": 14 }
+      ],
+      "description": "Places an ancestral guard on your target, increasing their armor class for 72 minutes."
+    }
+  },
+  {
+    "_id": "shm-breath-of-wunshi-67-r1",
+    "name": "Breath of Wunshi",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 67,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 1244,
+      "effects": [
+        { "type": "debuff", "effect": "disease", "amount": 24 },
+        { "type": "dot", "element": "disease", "min": 508, "max": 782 }
+      ],
+      "description": "Sickens your target with a fever, causing between 417 and 571 damage every six seconds for 84 seconds."
+    }
+  },
+  {
+    "_id": "shm-farrels-companion-67-r1",
+    "name": "Farrel's Companion",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 67,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12,
+      "manaCost": 803,
+      "effects": [
+        { "type": "utility", "effect": "summon-pet", "pet": "PCPetShmS14L067WolfGho" }
+      ],
+      "description": "Summons a companion from the spirit world in the form of a great wolf."
+    }
+  },
+  {
+    "_id": "shm-spirit-veil-67-r1",
+    "name": "Spirit Veil",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "shaman",
+      "level": 67,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 185,
+      "effects": [
+        { "type": "invisibility", "effect": "standard" }
+      ],
+      "description": "Cloaks you in a mystic veil, rendering you invisible to many creatures for 10 minutes."
+    }
+  },
+  {
+    "_id": "shm-spirit-of-might-67-r1",
+    "name": "Spirit of Might",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "shaman",
+      "level": 67,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 216,
+      "effects": [
+        { "type": "utility", "effect": "hit-damage-boost", "percent": 5 }
+      ],
+      "description": "Fills your target's body with strength, increasing their damage for 63 minutes."
+    }
+  },
+  {
+    "_id": "shm-lingering-sloth-68-r1",
+    "name": "Lingering Sloth",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "shaman",
+      "level": 68,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 682,
+      "effects": [
+        { "type": "proc", "name": "Lingering Sloth Trigger", "rateMod": 400, "defensive": true }
+      ],
+      "description": "Summons a protective spirit to guard your target for 4.5 minutes. The spirit can intervene when a creature strikes your target, lowering the creature's attack speed."
+    }
+  },
+  {
+    "_id": "shm-pained-memory-68-r1",
+    "name": "Pained Memory",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "shaman",
+      "level": 68,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.5,
+      "manaCost": 0,
+      "effects": [
+        { "type": "damage", "element": "health", "amount": 668 },
+        { "type": "restore", "stat": "mana", "min": 162, "max": 360 }
+      ],
+      "description": "Channels your body's energy to refresh your mind, trading hit points for mana."
+    }
+  },
+  {
+    "_id": "shm-spirit-of-fortitude-68-r1",
+    "name": "Spirit of Fortitude",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 68,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 297,
+      "effects": [
+        { "type": "buff", "stat": "sta", "amount": 75 },
+        { "type": "buff", "stat": "sta-cap", "amount": 40 }
+      ],
+      "description": "Fills your target with the spirit of fortitude, increasing their stamina for 72 minutes."
+    }
+  },
+  {
+    "_id": "shm-talisman-of-sense-68-r1",
+    "name": "Talisman of Sense",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "shaman",
+      "level": 68,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 716,
+      "effects": [
+        { "type": "utility", "effect": "melee-avoidance", "percent": 7 }
+      ],
+      "description": "Fills your target with a sense of nimbleness, increasing their ability to avoid being hit for 63 minutes."
+    }
+  },
+  {
+    "_id": "shm-wunshis-focusing-68-r1",
+    "name": "Wunshi's Focusing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-pink.webp",
+    "system": {
+      "class": "shaman",
+      "level": 68,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 8,
+      "manaCost": 1064,
+      "effects": [
+        { "type": "buff", "stat": "hp-max", "min": 408, "max": 1088 },
+        { "type": "heal", "min": 409, "max": 744 },
+        { "type": "buff", "stat": "str", "amount": 85 },
+        { "type": "buff", "stat": "dex", "amount": 85 },
+        { "type": "stacking", "slot": 4, "value": 85 },
+        { "type": "stacking", "slot": 5, "value": 85 },
+        { "type": "buff", "stat": "str-cap", "amount": 85 },
+        { "type": "buff", "stat": "dex-cap", "amount": 85 }
+      ],
+      "description": "Focuses your target's spiritual energy, granting increased hit points, strength, and dexterity for 80 minutes."
+    }
+  },
+  {
+    "_id": "shm-yoppas-mending-68-r1",
+    "name": "Yoppa's Mending",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 68,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 943,
+      "effects": [
+        { "type": "heal", "min": 1485, "max": 2700 }
+      ],
+      "description": "Mends your target's wounds with a healing touch, restoring up to 2468 damage."
+    }
+  },
+  {
+    "_id": "shm-yoppas-rain-of-venom-68-r1",
+    "name": "Yoppa's Rain of Venom",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 68,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "radius": 20,
+      "castTime": 6,
+      "manaCost": 765,
+      "effects": [
+        { "type": "damage", "element": "poison", "amount": 1460 }
+      ],
+      "description": "Conjures a rain of poison over your target, causing 893 damage every 3 seconds to creatures in the area. The rain will dissipate after damaging 4 creatures or after 3 seconds."
+    }
+  },
+  {
+    "_id": "shm-balance-of-discord-69-r1",
+    "name": "Balance of Discord",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 69,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 399,
+      "effects": [
+        { "type": "debuff", "stat": "attack-speed", "min": -60, "max": -75 },
+        { "type": "debuff", "effect": "disease", "amount": 24 }
+      ],
+      "description": "Slows your target's body, causing it to attack slower for 90 seconds."
+    }
+  },
+  {
+    "_id": "shm-curse-of-sisslak-69-r1",
+    "name": "Curse of Sisslak",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "shaman",
+      "level": 69,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 1446,
+      "effects": [
+        { "type": "debuff", "effect": "curse", "amount": 30 },
+        { "type": "dot", "element": "magic", "min": 848, "max": 1304 }
+      ],
+      "description": "Inflicts an ancient curse upon your target, causing 1085 damage every six seconds for 30 seconds."
+    }
+  },
+  {
+    "_id": "shm-ice-age-69-r1",
+    "name": "Ice Age",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "shaman",
+      "level": 69,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.5,
+      "manaCost": 471,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 1530 }
+      ],
+      "description": "Creates a rift of bitter cold, causing between 1273 and 1273 damage to your target."
+    }
+  },
+  {
+    "_id": "shm-pure-spirit-69-r1",
+    "name": "Pure Spirit",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "shaman",
+      "level": 69,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 399,
+      "effects": [
+        { "type": "utility", "effect": "dispel-detrimental", "amount": 95 }
+      ],
+      "description": "Purifies your target's spirit, potentially removing some detrimental spells from them."
+    }
+  },
+  {
+    "_id": "shm-spirit-of-the-panther-69-r1",
+    "name": "Spirit of the Panther",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "shaman",
+      "level": 69,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 542,
+      "effects": [
+        { "type": "proc", "name": "Panther Maw", "rateMod": 400 }
+      ],
+      "description": "Infuses your target with the spirit of the panther, allowing them to make a savage attack for extra damage."
+    }
+  },
+  {
+    "_id": "shm-talisman-of-fortitude-69-r1",
+    "name": "Talisman of Fortitude",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 69,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 778,
+      "effects": [
+        { "type": "buff", "stat": "sta", "amount": 75 },
+        { "type": "buff", "stat": "sta-cap", "amount": 40 }
+      ],
+      "description": "Fills your group with the spirit of fortitude, increasing their stamina for 63 minutes."
+    }
+  },
+  {
+    "_id": "shm-talisman-of-perseverance-69-r1",
+    "name": "Talisman of Perseverance",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 69,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 927,
+      "effects": [
+        { "type": "regen", "stat": "hp", "min": 30, "max": 76 }
+      ],
+      "description": "Hastens your group's natural healing, regenerating up to 70 hit points every 6 seconds for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "shm-ancient-ancestral-calling-70-r1",
+    "name": "Ancient: Ancestral Calling",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.5,
+      "manaCost": 0,
+      "effects": [
+        { "type": "damage", "element": "health", "amount": 868 },
+        { "type": "restore", "stat": "mana", "min": 211, "max": 468 }
+      ],
+      "description": "Channels your body's energy to refresh your mind, trading hit points for mana."
+    }
+  },
+  {
+    "_id": "shm-ancient-wilsliks-mending-70-r1",
+    "name": "Ancient: Wilslik's Mending",
+    "type": "spell",
+    "img": "icons/magic/life/heart-pink.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 806,
+      "effects": [
+        { "type": "heal", "min": 1595, "max": 2900 }
+      ],
+      "description": "Mends your target's wounds with a healing touch, restoring up to 2716 damage."
+    }
+  },
+  {
+    "_id": "shm-blood-of-yoppa-70-r1",
+    "name": "Blood of Yoppa",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 1677,
+      "effects": [
+        { "type": "debuff", "effect": "poison", "amount": 18 },
+        { "type": "dot", "element": "poison", "min": 874, "max": 1344 }
+      ],
+      "description": "Fills your target's blood with poison, causing 916 damage every six seconds for 42 seconds."
+    }
+  },
+  {
+    "_id": "shm-champion-70-r1",
+    "name": "Champion",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 1673,
+      "effects": [
+        { "type": "buff", "stat": "atk", "amount": 140 },
+        { "type": "utility", "effect": "hit-damage-boost", "percent": 10 },
+        { "type": "buff", "stat": "agi", "amount": 140 },
+        { "type": "buff", "stat": "str", "amount": 140 },
+        { "type": "buff", "stat": "dex", "amount": 140 }
+      ],
+      "description": "Infuses nearby allies with the power of an avatar, increasing their strength, dexterity, agility, and attack rating for 6.5 minutes."
+    }
+  },
+  {
+    "_id": "shm-ghost-of-renewal-70-r1",
+    "name": "Ghost of Renewal",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "alteration",
+      "target": "group",
+      "range": 150,
+      "castTime": 5,
+      "manaCost": 1405,
+      "effects": [
+        { "type": "regen", "stat": "hp", "min": 269, "max": 673 }
+      ],
+      "description": "Increases hit points by up to 630 every six seconds for 24 seconds."
+    }
+  },
+  {
+    "_id": "shm-hungry-plague-70-r1",
+    "name": "Hungry Plague",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 20,
+      "castTime": 3,
+      "manaCost": 502,
+      "effects": [
+        { "type": "debuff", "stat": "attack-speed", "min": -25, "max": -40 },
+        { "type": "debuff", "effect": "disease", "amount": 16 }
+      ],
+      "description": "Afflicts your target with a hungry plague that will slow their attack rate for up to 60 seconds. The plague will freqently attempt to infect nearby targets with the same malady."
+    }
+  },
+  {
+    "_id": "shm-idol-of-malos-70-r1",
+    "name": "Idol of Malos",
+    "type": "spell",
+    "img": "icons/magic/symbols/rune-stone-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 223,
+      "effects": [
+        { "type": "persistent", "effect": "idol-of-malos", "id": 8504 }
+      ],
+      "description": "Conjures an Idol of Malos at your location, which will lower resistances for any enemies that approach."
+    }
+  },
+  {
+    "_id": "shm-nectar-of-pain-70-r1",
+    "name": "Nectar of Pain",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 804,
+      "effects": [
+        { "type": "debuff", "effect": "poison", "amount": 18 },
+        { "type": "dot", "element": "poison", "min": 811, "max": 895 }
+      ],
+      "description": "Poisons the target, dealing more than 782 damage every six seconds for 42 seconds."
+    }
+  },
+  {
+    "_id": "shm-spiritual-serenity-70-r1",
+    "name": "Spiritual Serenity",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 580,
+      "effects": [
+        { "type": "regen", "stat": "hp", "min": 350, "max": 876 }
+      ],
+      "description": "Places your target into a state of serenity, healing 820 hit points every six seconds for 24 seconds."
+    }
+  },
+  {
+    "_id": "shm-talisman-of-might-70-r1",
+    "name": "Talisman of Might",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 781,
+      "effects": [
+        { "type": "utility", "effect": "hit-damage-boost", "percent": 5 }
+      ],
+      "description": "Grants your group heightened strength, increasing their damage for 63 minutes."
+    }
+  },
+  {
+    "_id": "shm-talisman-of-wunshi-70-r1",
+    "name": "Talisman of Wunshi",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 13,
+      "manaCost": 2609,
+      "effects": [
+        { "type": "buff", "stat": "hp-max", "min": 408, "max": 1088 },
+        { "type": "heal", "min": 399, "max": 726 },
+        { "type": "buff", "stat": "str", "amount": 85 },
+        { "type": "buff", "stat": "dex", "amount": 85 },
+        { "type": "stacking", "slot": 4, "value": 85 },
+        { "type": "stacking", "slot": 5, "value": 85 },
+        { "type": "buff", "stat": "str-cap", "amount": 85 },
+        { "type": "buff", "stat": "dex-cap", "amount": 85 }
+      ],
+      "description": "Focuses your target's spiritual energy, granting increased hit points, strength, and dexterity for 80 minutes."
+    }
+  },
+  {
+    "_id": "shm-vindictive-spirit-70-r1",
+    "name": "Vindictive Spirit",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "shaman",
+      "level": 70,
+      "school": "alteration",
+      "target": "area",
+      "range": 0,
+      "radius": 50,
+      "castTime": 3,
+      "manaCost": 558,
+      "effects": [
+        { "type": "debuff", "stat": "attack-speed", "min": -35, "max": -50 }
+      ],
+      "description": "Summons the power of your ancestors, slowing up to 30 nearby opponents and absorbing a portion of melee damage done to you for a short time."
+    }
+  }
+]

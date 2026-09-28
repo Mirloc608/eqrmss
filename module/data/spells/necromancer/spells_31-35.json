@@ -1,0 +1,549 @@
+[
+  {
+    "_id": "nec-beguile-undead-31-r1",
+    "name": "Beguile Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 31,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 170,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 46,
+          "duration": 1230,
+          "resist": "magic"
+        }
+      ],
+      "description": "Commands an undead creature to do your bidding, temporarily bending them to your will."
+    }
+  },
+  {
+    "_id": "nec-call-of-bones-31-r1",
+    "name": "Call of Bones",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 31,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "cast-icebone-skeletal-form",
+          "duration": 3600
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 8,
+          "max": 8,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 3600
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 1,
+          "max": 1,
+          "duration": 3600
+        }
+      ],
+      "description": "Grips your body in an unholy darkness, slowly draining your hit points while regenerating your mana."
+    }
+  },
+  {
+    "_id": "nec-resist-disease-31-r1",
+    "name": "Resist Disease",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 31,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away disease for 36 minutes."
+    }
+  },
+  {
+    "_id": "nec-steelskin-32-r1",
+    "name": "Steelskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 32,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.5,
+      "manaCost": 149,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "rune-shield",
+          "percent": 100,
+          "amount": 230,
+          "duration": 4320
+        }
+      ],
+      "description": "Surrounds your skin in a protective aura that absorbs between 168 and 230 damage. Consumes a jasper when cast."
+    }
+  },
+  {
+    "_id": "nec-surge-of-enfeeblement-32-r1",
+    "name": "Surge of Enfeeblement",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 32,
+      "school": "alteration",
+      "target": "area",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -30,
+          "duration": 360,
+          "resist": "magic"
+        }
+      ],
+      "description": "Drains the strength of up to 30 nearby creatures for 6 minutes.",
+      "radius": 30
+    }
+  },
+  {
+    "_id": "nec-torbas-acid-blast-32-r1",
+    "name": "Torbas' Acid Blast",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 32,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 147,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 114,
+          "resist": "poison"
+        }
+      ],
+      "description": "Strikes your target with a jet of poison, causing between 250 and 332 damage."
+    }
+  },
+  {
+    "_id": "nec-greater-shielding-33-r1",
+    "name": "Greater Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 33,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 100,
+          "duration": 3240
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 6,
+          "duration": 3240
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 16,
+          "duration": 3240
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "nec-invoke-shadow-33-r1",
+    "name": "Invoke Shadow",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 33,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 13.0,
+      "manaCost": 340,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "invoke-shadow"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-reebos-greater-exorcism-33-r1",
+    "name": "Reebo's Greater Exorcism",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 33,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 120
+        }
+      ],
+      "description": "Attempts to disarm a cursed trap on the targeted object. Consumes a greater scrying stone when cast."
+    }
+  },
+  {
+    "_id": "nec-wuggans-greater-appraisal-33-r1",
+    "name": "Wuggan's Greater Appraisal",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 33,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 120
+        }
+      ],
+      "description": "Attempts to sense the presence of a trap on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-focus-mass-elementary-spellcasters-empowering-essence-34-r1",
+    "name": "Focus Mass Elementary Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 34,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 800,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Elementary Spellcaster's Empowering Essence",
+          "amount": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-reebos-greater-augury-34-r1",
+    "name": "Reebo's Greater Augury",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 34,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 120
+        }
+      ],
+      "description": "Attempts to sense the presence of a cursed trap on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-reebos-greater-cleansing-34-r1",
+    "name": "Reebo's Greater Cleansing",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 34,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 125
+        }
+      ],
+      "description": "Attempts to destroy any cursed lock present on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-root-34-r1",
+    "name": "Root",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 34,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 48,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 48 seconds."
+    }
+  },
+  {
+    "_id": "nec-venom-of-the-snake-34-r1",
+    "name": "Venom of the Snake",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 34,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 203,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 7,
+          "duration": 36
+        },
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 144,
+          "resist": "poison"
+        },
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 36,
+          "max": 36,
+          "duration": 36,
+          "resist": "poison"
+        }
+      ],
+      "description": "Fills your target's blood with poison, causing 33 damage initially and between 171 and 220 damage every six seconds for 36 seconds."
+    }
+  },
+  {
+    "_id": "nec-wuggans-greater-discombobulation-34-r1",
+    "name": "Wuggan's Greater Discombobulation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 34,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 120
+        }
+      ],
+      "description": "Attempts to disarm a trap on the targeted object. Consumes a greater scrying stone when cast."
+    }
+  },
+  {
+    "_id": "nec-wuggans-greater-extrication-34-r1",
+    "name": "Wuggan's Greater Extrication",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 34,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 240,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 125
+        }
+      ],
+      "description": "Attempts to destroy any lock present on the targeted object."
+    }
+  },
+  {
+    "_id": "nec-augment-death-35-r1",
+    "name": "Augment Death",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 35,
+      "school": "enchantment",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 45,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 55,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 3600
+        }
+      ],
+      "description": "Fills your pet with rage, giving it increased attack speed, armor class, and strength for 60 minutes."
+    }
+  },
+  {
+    "_id": "nec-scourge-35-r1",
+    "name": "Scourge",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 35,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 199,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 4,
+          "duration": 72
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 20,
+          "max": 20,
+          "duration": 72,
+          "resist": "disease"
+        },
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 159,
+          "resist": "disease"
+        }
+      ],
+      "description": "Sickens your target with a fever, causing 58 damage initially and between 73 and 98 damage every six seconds for 72 seconds."
+    }
+  },
+  {
+    "_id": "nec-summon-corpse-35-r1",
+    "name": "Summon Corpse",
+    "type": "spell",
+    "img": "icons/magic/death/summon-corpse.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 35,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 500,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-corpse",
+          "amount": 60
+        }
+      ],
+      "description": "Summons your target's corpse to you. This spell works on characters up to level 60."
+    }
+  }
+]

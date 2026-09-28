@@ -1,0 +1,47 @@
+{
+  "id": "nexonas_chant_of_poison_1",
+  "name": "Nexona's Chant of Poison",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 108,
+  "description": "An envenomed chant that causes up to 2739 poison damage every six seconds to an enemy and applies Chant of Venom, which lowers their poison resistance by 29.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "poison",
+      "value": {
+        "base": 1094
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 12
+      }
+    },
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "chant-of-venom"
+    }
+  ],
+  "stacking": {
+    "group": "damage-chant",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "damage-chant",
+    "drum"
+  ]
+}

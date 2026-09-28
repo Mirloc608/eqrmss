@@ -1,0 +1,1003 @@
+[
+  {
+    "_id": "mag-cadeau-of-flame-56-r1",
+    "name": "Cadeau of Flame",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 56,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 155,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 37,
+          "duration": 900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 33,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a cadeau of flame, damaging any creature that attacks them."
+    }
+  },
+  {
+    "_id": "mag-dyzils-deafening-decoy-56-r1",
+    "name": "Dyzil's Deafening Decoy",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 56,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 3.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "dyzils-deafening-decoy",
+          "count": 1,
+          "duration": 30
+        }
+      ],
+      "description": "Directs the deafening decoy of Dyzil to distract your target for up to 30 seconds. Consumes a malachite when cast."
+    }
+  },
+  {
+    "_id": "mag-exile-summoned-56-r1",
+    "name": "Exile Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 56,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 185,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 835,
+          "bane": "summoned"
+        }
+      ],
+      "description": "A burst of holy light that causes 835 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "mag-mass-mystical-transvergence-56-r1",
+    "name": "Mass Mystical Transvergence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "magician",
+      "level": 56,
+      "school": "conjuration",
+      "target": "group",
+      "range": 300,
+      "castTime": 4.5,
+      "manaCost": 2750,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "rod-of-mystical-transvergence"
+        }
+      ],
+      "description": "Places a rod of mystical transvergence in the hands of all nearby allies."
+    }
+  },
+  {
+    "_id": "mag-muzzle-of-mardu-56-r1",
+    "name": "Muzzle of Mardu",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 56,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "muzzle-of-mardu"
+        }
+      ],
+      "description": "Focuses mana into the form of the muzzle of Mardu, an item that increases your pet's attack speed."
+    }
+  },
+  {
+    "_id": "mag-rod-of-mystical-transvergence-56-r1",
+    "name": "Rod of Mystical Transvergence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "magician",
+      "level": 56,
+      "school": "conjuration",
+      "target": "single",
+      "range": 300,
+      "castTime": 4.5,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "rod-of-mystical-transvergence"
+        }
+      ],
+      "description": "Focuses mana into the form of a rod of mystical transvergence, allowing the user to trade physical health for mental energy."
+    }
+  },
+  {
+    "_id": "mag-eye-of-tallon-57-r1",
+    "name": "Eye of Tallon",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "magician",
+      "level": 57,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 65,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "eye-of-zomm"
+        },
+        {
+          "type": "invisibility",
+          "effect": "unstable",
+          "duration": 60
+        },
+        {
+          "type": "utility",
+          "effect": "magnification",
+          "amount": 120
+        },
+        {
+          "type": "utility",
+          "effect": "detect-invisible",
+          "duration": 60
+        }
+      ],
+      "description": "Conjures a magical eye that allows you to scout dangerous areas."
+    }
+  },
+  {
+    "_id": "mag-greater-vocaration-earth-57-r1",
+    "name": "Greater Vocaration: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 57,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-vocaration-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-imbue-earth-57-r1",
+    "name": "Imbue Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 57,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "brown-diamond-of-earth"
+        }
+      ],
+      "description": "Focuses the power of earth into a diamond. Consumes a raw diamond and earth mephit blood when cast."
+    }
+  },
+  {
+    "_id": "mag-shock-of-steel-57-r1",
+    "name": "Shock of Steel",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 57,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 293,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1205
+        }
+      ],
+      "description": "Conjures a shock of steel that assaults your target, causing 1205 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-greater-vocaration-fire-58-r1",
+    "name": "Greater Vocaration: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 58,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-vocaration-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-guard-of-calliav-58-r1",
+    "name": "Guard of Calliav",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 58,
+      "school": "abjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb-hits",
+          "amount": 2,
+          "cap": 12922,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Guard of Calliav on your pet, absorbing up to 12922 damage from the next 2 melee strikes or direct damage spells that hit it."
+    }
+  },
+  {
+    "_id": "mag-malosini-58-r1",
+    "name": "Malosini",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 0,
+          "duration": 1230
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "cold",
+          "amount": 60,
+          "duration": 1230
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "magic",
+          "amount": 60,
+          "duration": 1230
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "poison",
+          "amount": 60,
+          "duration": 1230
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "fire",
+          "amount": 60,
+          "duration": 1230
+        }
+      ],
+      "description": "Decreases your target's resistance to cold, fire, magic, and poison.",
+      "resist": "magic",
+      "resistMod": -25
+    }
+  },
+  {
+    "_id": "mag-reflect-58-r1",
+    "name": "Reflect",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-reflect.webp",
+    "system": {
+      "class": "magician",
+      "level": 58,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "spell-reflect",
+          "amount": 50,
+          "maxDamage": 50
+        }
+      ],
+      "description": "Surrounds your body in a reflective aura, providing a chance for all incoming spells to rebound back against the caster."
+    }
+  },
+  {
+    "_id": "mag-transons-phantasmal-protection-58-r1",
+    "name": "Transon's Phantasmal Protection",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 58,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 325,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 8,
+          "duration": 9000
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 6,
+          "max": 6,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 9,
+          "duration": 9000
+        }
+      ],
+      "description": "Covers you in phantasmal protection, increasing your hit point regeneration, mana regeneration and armor class."
+    }
+  },
+  {
+    "_id": "mag-velocity-58-r1",
+    "name": "Velocity",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 58,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 95,
+          "duration": 2160
+        }
+      ],
+      "description": "Fills your elemental pet with speed, increasing their movement rate."
+    }
+  },
+  {
+    "_id": "mag-focus-mass-spellcasters-empowering-essence-59-r1",
+    "name": "Focus Mass Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 59,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "spellcasters-empowering-essence",
+          "quantity": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-greater-vocaration-air-59-r1",
+    "name": "Greater Vocaration: Air",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 59,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-vocaration-air"
+        }
+      ],
+      "description": "Summons an air elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-imbue-air-59-r1",
+    "name": "Imbue Air",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 59,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "cloudy-diamond-of-air"
+        }
+      ],
+      "description": "Focuses the power of air into a diamond. Consumes a raw diamond and air mephit blood when cast."
+    }
+  },
+  {
+    "_id": "mag-manastorm-59-r1",
+    "name": "Manastorm",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 59,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 6.0,
+      "manaCost": 427,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 673,
+          "radius": 25
+        },
+        {
+          "type": "utility",
+          "effect": "drain-mana",
+          "amount": 50
+        }
+      ],
+      "description": "Creates a storm of mana around your target, causing 673 damage and consuming 50 mana every 3 seconds to 4 targets. The storm will dissipate after 3 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-manifest-elements-59-r1",
+    "name": "Manifest Elements",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "magician",
+      "level": 59,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 500,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "manifest-elements"
+        }
+      ],
+      "description": "Forms the primal elements into a powerful servant."
+    }
+  },
+  {
+    "_id": "mag-seeking-flame-of-seukor-59-r1",
+    "name": "Seeking Flame of Seukor",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 59,
+      "school": "evocation",
+      "target": "single",
+      "range": 300,
+      "castTime": 6.5,
+      "manaCost": 413,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1600
+        }
+      ],
+      "description": "Burns your target's skin with the seeking flame of Seukor, causing 1600 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-valiant-companion-59-r1",
+    "name": "Valiant Companion",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 59,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "fear-immunity",
+          "duration": 210
+        }
+      ],
+      "description": "Fills your elemental pet with mystical valor, rendering them immune to fear effects."
+    }
+  },
+  {
+    "_id": "mag-aegis-of-ro-60-r1",
+    "name": "Aegis of Ro",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 450,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 47,
+          "duration": 900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 33,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your group in the aegis of Ro, damaging any creature that attacks them."
+    }
+  },
+  {
+    "_id": "mag-ancient-burnout-blaze-60-r1",
+    "name": "Ancient: Burnout Blaze",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 80,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 80,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 40,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 6,
+          "duration": 3600
+        }
+      ],
+      "description": "Infuses your elemental companion with energy, increasing their attack speed, armor class, and strength."
+    }
+  },
+  {
+    "_id": "mag-ancient-shock-of-sun-60-r1",
+    "name": "Ancient: Shock of Sun",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 285,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1800
+        }
+      ],
+      "description": "Burns your target's skin with the shock of the sun, causing 1800 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-banishment-60-r1",
+    "name": "Banishment",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 500,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "banish"
+        }
+      ],
+      "description": "Banishes your target to the nether realm, completely removing them from this plane of existence. Consumes a star ruby when cast.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-focus-refined-spellcasters-empowering-essence-60-r1",
+    "name": "Focus Refined Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "refined-spellcasters-empowering-essence"
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-greater-vocaration-water-60-r1",
+    "name": "Greater Vocaration: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "greater-vocaration-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-imbue-fire-60-r1",
+    "name": "Imbue Fire",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "red-diamond-of-fire"
+        }
+      ],
+      "description": "Focuses the power of fire into a diamond. Consumes a raw diamond and fire mephit blood when cast."
+    }
+  },
+  {
+    "_id": "mag-imbue-water-60-r1",
+    "name": "Imbue Water",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "aqua-diamond-of-water"
+        }
+      ],
+      "description": "Focuses the power of water into a diamond. Consumes a raw diamond and water mephit blood when cast."
+    }
+  },
+  {
+    "_id": "mag-maelstrom-of-electricity-60-r1",
+    "name": "Maelstrom of Electricity",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 6.0,
+      "manaCost": 475,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 900,
+          "radius": 25
+        }
+      ],
+      "description": "Conjures a maelstrom of electricity around your target, causing 900 damage every 3 seconds to creatures in the area. The maelstrom will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-mala-60-r1",
+    "name": "Mala",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "cold",
+          "amount": 35,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "magic",
+          "amount": 35,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "poison",
+          "amount": 35,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "fire",
+          "amount": 35,
+          "duration": 840
+        }
+      ],
+      "description": "Strips magical protection from your target, lowering their magic, fire, cold and poison resistances."
+    }
+  },
+  {
+    "_id": "mag-monster-summoning-iii-60-r1",
+    "name": "Monster Summoning III",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "monster-summoning-iii"
+        }
+      ],
+      "description": "Conjures a pet in the form of a local monster to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-shock-of-fiery-blades-60-r1",
+    "name": "Shock of Fiery Blades",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 335,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1725
+        }
+      ],
+      "description": "Conjures a shock of fiery blades that assaults your target, causing 1725 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-transons-elemental-renewal-60-r1",
+    "name": "Transon's Elemental Renewal",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.75,
+      "manaCost": 237,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 1165
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "amount": 20
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "amount": 20
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "amount": 20
+        }
+      ],
+      "description": "Renews the health of your elemental pet, healing 1,165 damage, and curing their diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "mag-wind-of-the-desert-60-r1",
+    "name": "Wind of the Desert",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 60,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 780,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1400,
+          "radius": 25
+        }
+      ],
+      "description": "Creates an circle of burning sand around you, causing 1400 damage to up to 30 nearby creatures.",
+      "resist": "fire"
+    }
+  }
+]

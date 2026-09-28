@@ -1,0 +1,23 @@
+<div class="eqrmss-config">
+
+  <h3>Stat Bonuses</h3>
+  {{#each system.stat_bonuses as |val key|}}
+    <div class="form-group">
+      <label>{{key}}</label>
+      <input type="number" name="system.stat_bonuses.{{key}}" value="{{val}}"/>
+    </div>
+  {{/each}}
+
+  <button type="button" class="add-stat">+ Add Stat</button>
+
+  <h3>Skill Costs</h3>
+  {{#each system.skill_costs as |val key|}}
+    <div class="form-group">
+      <label>{{key}}</label>
+      <input type="number" name="system.skill_costs.{{key}}" value="{{val}}"/>
+    </div>
+  {{/each}}
+
+  <button type="button" class="add-skill">+ Add Skill</button>
+
+</div>

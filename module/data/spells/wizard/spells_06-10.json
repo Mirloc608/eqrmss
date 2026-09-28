@@ -1,0 +1,215 @@
+[
+  {
+    "_id": "wiz-lesser-shielding-6-r1",
+    "name": "Lesser Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "wizard",
+      "level": 6,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 25,
+      "effects": [
+        { "type": "buff", "stat": "hp", "amount": 13 },
+        { "type": "buff", "stat": "ac", "amount": 3 },
+        { "type": "buff", "stat": "resist-magic", "amount": 5 }
+      ],
+      "description": "Provides a stronger protective barrier, increasing HP, AC, and magic resistance."
+    }
+  },
+  {
+    "_id": "wiz-icestrike-6-r1",
+    "name": "Icestrike",
+    "type": "spell",
+    "img": "icons/magic/water/aoe-frost.webp",
+    "system": {
+      "class": "wizard",
+      "level": 6,
+      "school": "evocation",
+      "target": "area",
+      "range": 700,
+      "castTime": 3,
+      "manaCost": 15,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 16, "radius": 10 }
+      ],
+      "description": "A targeted blast of icy energy that damages multiple enemies."
+    }
+  },
+  {
+    "_id": "wiz-sense-summoned-7-r1",
+    "name": "Sense Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "wizard",
+      "level": 7,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 1,
+      "manaCost": 5,
+      "effects": [
+        { "type": "utility", "effect": "sense-summoned" }
+      ],
+      "description": "Allows the caster to sense the presence of summoned creatures nearby."
+    }
+  },
+  {
+    "_id": "wiz-shadow-step-7-r1",
+    "name": "Shadow Step",
+    "type": "spell",
+    "img": "icons/magic/arcane/shadowstep.webp",
+    "system": {
+      "class": "wizard",
+      "level": 7,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1,
+      "manaCost": 10,
+      "effects": [
+        { "type": "utility", "effect": "shadowstep" }
+      ],
+      "description": "Instantly shifts the caster a short distance away."
+    }
+  },
+  {
+    "_id": "wiz-eye-of-zomm-8-r1",
+    "name": "Eye of Zomm",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-floating.webp",
+    "system": {
+      "class": "wizard",
+      "level": 8,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 30,
+      "effects": [
+        { "type": "utility", "effect": "summon-eye-of-zomm" }
+      ],
+      "description": "Summons a magical eye that allows the caster to scout ahead."
+    }
+  },
+  {
+    "_id": "wiz-column-of-frost-8-r1",
+    "name": "Column of Frost",
+    "type": "spell",
+    "img": "icons/magic/water/aoe-frost.webp",
+    "system": {
+      "class": "wizard",
+      "level": 8,
+      "school": "evocation",
+      "target": "area",
+      "range": 900,
+      "castTime": 4,
+      "manaCost": 39,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 19, "radius": 15 }
+      ],
+      "description": "Creates a column of frost that damages multiple enemies in a radius."
+    }
+  },
+  {
+    "_id": "wiz-shock-of-ice-8-r1",
+    "name": "Shock of Ice",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "wizard",
+      "level": 8,
+      "school": "evocation",
+      "target": "single",
+      "range": 1000,
+      "castTime": 3,
+      "manaCost": 23,
+      "effects": [
+        { "type": "damage", "element": "cold", "amount": 30 }
+      ],
+      "description": "A powerful cold nuke that deals significant single‑target damage."
+    }
+  },
+  {
+    "_id": "wiz-halo-of-light-9-r1",
+    "name": "Halo of Light",
+    "type": "spell",
+    "img": "icons/magic/light/sphere-glow.webp",
+    "system": {
+      "class": "wizard",
+      "level": 9,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 40,
+      "effects": [
+        { "type": "utility", "effect": "summon-item", "item": "halo-of-light" }
+      ],
+      "description": "Summons a halo of light to illuminate the caster’s surroundings."
+    }
+  },
+  {
+    "_id": "wiz-resistant-skin-9-r1",
+    "name": "Resistant Skin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "wizard",
+      "level": 9,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 35,
+      "effects": [
+        { "type": "buff", "stat": "resist-disease", "amount": 5 },
+        { "type": "buff", "stat": "resist-poison", "amount": 5 }
+      ],
+      "description": "Strengthens the caster’s skin, increasing resistance to disease and poison."
+    }
+  },
+  {
+    "_id": "wiz-okeils-embers-10-r1",
+    "name": "O'Keil's Embers",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "wizard",
+      "level": 10,
+      "school": "abjuration",
+      "target": "single",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 35,
+      "effects": [
+        { "type": "buff", "stat": "damage-shield", "element": "fire", "amount": 3 },
+        { "type": "buff", "stat": "resist-fire", "amount": 10 }
+      ],
+      "description": "Surrounds the target with fiery embers, damaging attackers and increasing fire resistance."
+    }
+  },
+  {
+    "_id": "wiz-shock-of-lightning-10-r1",
+    "name": "Shock of Lightning",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "wizard",
+      "level": 10,
+      "school": "evocation",
+      "target": "single",
+      "range": 1100,
+      "castTime": 3,
+      "manaCost": 50,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 54 }
+      ],
+      "description": "A powerful lightning nuke that deals heavy single‑target damage."
+    }
+  }
+]

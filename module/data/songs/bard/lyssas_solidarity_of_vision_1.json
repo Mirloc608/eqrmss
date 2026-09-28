@@ -1,0 +1,35 @@
+{
+  "id": "lyssas_solidarity_of_vision_1",
+  "name": "Lyssa's Solidarity of Vision",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 34,
+  "description": "This song weaves a magical mesh around your eyes, allowing you to see what your target sees.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 3000,
+    "targets": "ally"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "bind-sight"
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "flute"
+  ]
+}

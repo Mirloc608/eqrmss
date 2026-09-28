@@ -1,0 +1,39 @@
+{
+  "id": "lapsing_lullaby_2",
+  "name": "Lapsing Lullaby",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 92,
+  "description": "This soothing lullaby has a 44% chance to cause your target to forget its enemies.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "memory-blur",
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    }
+  ],
+  "stacking": {
+    "group": "mez-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "debuff",
+    "mez-song",
+    "flute"
+  ]
+}

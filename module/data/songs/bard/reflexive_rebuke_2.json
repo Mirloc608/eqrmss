@@ -1,0 +1,58 @@
+{
+  "id": "reflexive_rebuke_2",
+  "name": "Reflexive Rebuke",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 121,
+  "description": "You steel your reflexes, delivering four 1H Slash attacks of base damage 1524 base damage to your target and casting Reflected Rebuke II, which restores 32463 mana to your group.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 15,
+    "targets": "ally"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "physical",
+      "value": {
+        "base": 1100
+      }
+    },
+    {
+      "type": "damage",
+      "element": "physical",
+      "value": {
+        "base": 1100
+      }
+    },
+    {
+      "type": "damage",
+      "element": "physical",
+      "value": {
+        "base": 1100
+      }
+    },
+    {
+      "type": "damage",
+      "element": "physical",
+      "value": {
+        "base": 1100
+      }
+    }
+  ],
+  "stacking": {
+    "group": "discipline",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "discipline"
+  ]
+}

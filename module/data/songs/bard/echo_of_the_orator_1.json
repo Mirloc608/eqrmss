@@ -1,0 +1,36 @@
+{
+  "id": "echo_of_the_orator_1",
+  "name": "Echo of the Orator",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 95,
+  "description": "Increases your companions' attack speed, spell damage, attack rate, and chance to flurry as long as they stay within earshot of your echo.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "aura",
+      "aura": "echo-of-the-orator-effect"
+    }
+  ],
+  "stacking": {
+    "group": "aura",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "aura",
+    "voice"
+  ]
+}

@@ -1,0 +1,366 @@
+[
+  {
+    "_id": "wiz-imbue-fire-opal-26-r1",
+    "name": "Imbue Fire Opal",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "wizard",
+      "level": 26,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 200,
+      "effects": [
+        { "type": "utility", "effect": "summon-item", "item": "imbued-fire-opal" }
+      ],
+      "description": "Summons an imbued fire opal for magical use."
+    }
+  },
+  {
+    "_id": "wiz-inferno-shock-26-r1",
+    "name": "Inferno Shock",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "wizard",
+      "level": 26,
+      "school": "evocation",
+      "target": "single",
+      "range": 1200,
+      "castTime": 4,
+      "manaCost": 185,
+      "effects": [
+        { "type": "damage", "element": "fire", "amount": 300 }
+      ],
+      "description": "A devastating fire nuke that deals massive single‑target damage."
+    }
+  },
+  {
+    "_id": "wiz-energy-storm-26-r1",
+    "name": "Energy Storm",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "wizard",
+      "level": 26,
+      "school": "evocation",
+      "target": "area",
+      "range": 1200,
+      "castTime": 5,
+      "manaCost": 148,
+      "effects": [
+        { "type": "damage", "element": "arcane", "amount": 238, "radius": 20 }
+      ],
+      "description": "Unleashes a storm of raw energy, damaging multiple enemies in a radius."
+    }
+  },
+  {
+    "_id": "wiz-evacuate-north-26-r1",
+    "name": "Evacuate North",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "wizard",
+      "level": 26,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "evacuate-group", "destination": "north-karana" }
+      ],
+      "description": "Emergency teleport that transports the group to North Karana."
+    }
+  },
+  {
+    "_id": "wiz-knowledge-gate-27-r1",
+    "name": "Knowledge Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-city.webp",
+    "system": {
+      "class": "wizard",
+      "level": 27,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "plane-of-knowledge" }
+      ],
+      "description": "Teleports the caster to the Plane of Knowledge."
+    }
+  },
+  {
+    "_id": "wiz-stonebrunt-portal-27-r1",
+    "name": "Stonebrunt Portal",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-mountain.webp",
+    "system": {
+      "class": "wizard",
+      "level": 27,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-group", "destination": "stonebrunt" }
+      ],
+      "description": "Teleports the entire group to Stonebrunt Mountains."
+    }
+  },
+  {
+    "_id": "wiz-fay-portal-27-r1",
+    "name": "Fay Portal",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "wizard",
+      "level": 27,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-group", "destination": "greater-faydark" }
+      ],
+      "description": "Teleports the entire group to Greater Faydark."
+    }
+  },
+  {
+    "_id": "wiz-bonds-of-force-27-r1",
+    "name": "Bonds of Force",
+    "type": "spell",
+    "img": "icons/magic/arcane/bind.webp",
+    "system": {
+      "class": "wizard",
+      "level": 27,
+      "school": "alteration",
+      "target": "area",
+      "range": 800,
+      "castTime": 3,
+      "manaCost": 75,
+      "effects": [
+        { "type": "control", "effect": "slow", "amount": 36 }
+      ],
+      "description": "Restrains enemies with bonds of force, slowing their movement."
+    }
+  },
+  {
+    "_id": "wiz-mass-imbue-fire-opal-28-r1",
+    "name": "Mass Imbue Fire Opal",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "wizard",
+      "level": 28,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 600,
+      "effects": [
+        { "type": "utility", "effect": "summon-item", "item": "imbued-fire-opal", "quantity": "mass" }
+      ],
+      "description": "Summons multiple imbued fire opals for magical use."
+    }
+  },
+  {
+    "_id": "wiz-shock-spiral-28-r1",
+    "name": "Shock Spiral of Al'Kabor",
+    "type": "spell",
+    "img": "icons/magic/lightning/aoe-lightning.webp",
+    "system": {
+      "class": "wizard",
+      "level": 28,
+      "school": "evocation",
+      "target": "area",
+      "range": 1200,
+      "castTime": 5,
+      "manaCost": 200,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 83, "radius": 20 }
+      ],
+      "description": "Summons a spiral of lightning that damages multiple enemies in a radius."
+    }
+  },
+  {
+    "_id": "wiz-thunder-strike-28-r1",
+    "name": "Thunder Strike",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt-large.webp",
+    "system": {
+      "class": "wizard",
+      "level": 28,
+      "school": "evocation",
+      "target": "single",
+      "range": 1200,
+      "castTime": 4,
+      "manaCost": 150,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 160 },
+        { "type": "control", "effect": "stun", "duration": 1 }
+      ],
+      "description": "A devastating lightning strike that deals heavy damage and briefly stuns the target."
+    }
+  },
+  {
+    "_id": "wiz-tox-portal-28-r1",
+    "name": "Tox Portal",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-swamp.webp",
+    "system": {
+      "class": "wizard",
+      "level": 28,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-group", "destination": "toxxulia" }
+      ],
+      "description": "Teleports the entire group to Toxxulia Forest."
+    }
+  },
+  {
+    "_id": "wiz-grimling-portal-29-r1",
+    "name": "Grimling Portal",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-swamp.webp",
+    "system": {
+      "class": "wizard",
+      "level": 29,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 600,
+      "effects": [
+        { "type": "utility", "effect": "teleport-group", "destination": "grimling" }
+      ],
+      "description": "Teleports the entire group to Grimling Forest."
+    }
+  },
+  {
+    "_id": "wiz-dawnshroud-gate-29-r1",
+    "name": "Dawnshroud Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-desert.webp",
+    "system": {
+      "class": "wizard",
+      "level": 29,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-self", "destination": "dawnshroud" }
+      ],
+      "description": "Teleports the caster to Dawnshroud Peaks."
+    }
+  },
+  {
+    "_id": "wiz-nexus-portal-29-r1",
+    "name": "Nexus Portal",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-nexus.webp",
+    "system": {
+      "class": "wizard",
+      "level": 29,
+      "school": "alteration",
+      "target": "group",
+      "range": "zone",
+      "castTime": 10,
+      "manaCost": 300,
+      "effects": [
+        { "type": "utility", "effect": "teleport-group", "destination": "nexus" }
+      ],
+      "description": "Teleports the entire group to the Nexus."
+    }
+  },
+  {
+    "_id": "wiz-magnify-29-r1",
+    "name": "Magnify",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye.webp",
+    "system": {
+      "class": "wizard",
+      "level": 29,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 25,
+      "effects": [
+        { "type": "utility", "effect": "magnification", "amount": 30 },
+        { "type": "utility", "effect": "ultravision", "duration": 1200 }
+      ],
+      "description": "Enhances the caster’s vision with magnification and ultravision."
+    }
+  },
+  {
+    "_id": "wiz-steelskin-30-r1",
+    "name": "Steelskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-grey.webp",
+    "system": {
+      "class": "wizard",
+      "level": 30,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2,
+      "manaCost": 149,
+      "effects": [
+        { "type": "buff", "stat": "absorb-damage", "amount": 398 }
+      ],
+      "description": "Creates a protective shield of steel that absorbs incoming damage."
+    }
+  },
+  {
+    "_id": "wiz-thunderclap-30-r1",
+    "name": "Thunderclap",
+    "type": "spell",
+    "img": "icons/magic/lightning/aoe-lightning.webp",
+    "system": {
+      "class": "wizard",
+      "level": 30,
+      "school": "evocation",
+      "target": "area",
+      "range": 1000,
+      "castTime": 4,
+      "manaCost": 175,
+      "effects": [
+        { "type": "damage", "element": "electric", "amount": 120, "radius": 20 },
+        { "type": "control", "effect": "stun", "duration": 1 }
+      ],
+      "description": "Unleashes a thunderous clap of lightning, damaging and briefly stunning nearby enemies."
+    }
+  },
+  {
+    "_id": "wiz-focus-elementary-essence-30-r1",
+    "name": "Focus Elementary Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "wizard",
+      "level": 30,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6,
+      "manaCost": 200,
+      "effects": [
+        { "type": "utility", "effect": "summon-item", "item": "elementary-essence" }
+      ],
+      "description": "Summons an elementary empowering essence for spellcasters."
+    }
+  }
+]

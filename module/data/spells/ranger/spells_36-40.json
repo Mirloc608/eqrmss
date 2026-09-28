@@ -1,0 +1,188 @@
+[
+  {
+    "_id": "rng-call-of-sky-36-r1",
+    "name": "Call of Sky",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "ranger",
+      "level": 36,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "proc": "call-of-sky-strike",
+          "duration": 600
+        }
+      ],
+      "description": "Imparts your weapons with the power of sky for 10 minutes, allowing them a chance to strike with the fury of the storm."
+    }
+  },
+  {
+    "_id": "rng-careless-lightning-37-r1",
+    "name": "Careless Lightning",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 37,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 37,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 104
+        }
+      ],
+      "description": "Calls down lightning from the sky, causing between 80 and 105 damage to your target.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "rng-natures-precision-37-r1",
+    "name": "Nature's Precision",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 37,
+      "school": "evocation",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 15,
+          "duration": 1800
+        }
+      ],
+      "description": "Focuses your attacks with the precision of nature, increasing your attack rating for 30 minutes."
+    }
+  },
+  {
+    "_id": "rng-skin-like-steel-38-r1",
+    "name": "Skin like Steel",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 38,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2.0,
+          "max": 3.0,
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 100,
+          "duration": 2160
+        },
+        {
+          "type": "heal",
+          "amount": 76
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points and armor class for 36 minutes."
+    }
+  },
+  {
+    "_id": "rng-burning-arrow-39-r1",
+    "name": "Burning Arrow",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "ranger",
+      "level": 39,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 86,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 128
+        }
+      ],
+      "description": "Hurls a magically burning arrow at your target, causing 182 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "rng-harmony-of-nature-39-r1",
+    "name": "Harmony of Nature",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "ranger",
+      "level": 39,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-aggro-radius",
+          "amount": 15
+        },
+        {
+          "type": "utility",
+          "effect": "reduce-social-radius",
+          "amount": 15
+        }
+      ],
+      "description": "Calms the savage spirit of almost any creature, making them less likely to attack. This spell works on creatures up to level 65, and only works outdoors."
+    }
+  },
+  {
+    "_id": "rng-swarm-of-pain-40-r1",
+    "name": "Swarm of Pain",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "ranger",
+      "level": 40,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 167,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 79,
+          "max": 79,
+          "duration": 60
+        }
+      ],
+      "description": "Commands a swarm of insects to attack your target relentlessly, causing between 10 and 56 every 6 seconds for 60 seconds.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  }
+]

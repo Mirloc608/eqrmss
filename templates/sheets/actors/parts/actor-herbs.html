@@ -1,0 +1,92 @@
+<div class="herbs-grid-container">
+
+    <!-- Header -->
+    <div class="herbs-grid-heading herb-name">
+        {{ localize "eqrmss.pc_sheet_items.item_name" }}
+    </div>
+
+    <div class="herbs-grid-heading">
+        {{ localize "eqrmss.pc_sheet_items.quantity" }}
+    </div>
+
+    <div class="herbs-grid-heading">
+        {{ localize "eqrmss.herb_or_poison.codes" }}
+    </div>
+
+    <div class="herbs-grid-heading">
+        {{ localize "eqrmss.herb_or_poison.af" }}
+    </div>
+
+    <div class="herbs-grid-heading">
+        {{ localize "eqrmss.pc_sheet_items.weight" }}
+    </div>
+
+    <div class="herbs-grid-heading">
+        {{ localize "eqrmss.pc_sheet_items.cost" }}
+    </div>
+
+    <div class="herbs-grid-heading item-create-cell">
+
+        <a class="item-control item-create"
+           title="{{localize 'DOCUMENT.Create'}}"
+           data-type="herb_or_poison">
+
+            <i class="fas fa-plus"></i>
+            {{ localize "eqrmss.pc_sheet_items.add_item" }}
+
+        </a>
+
+    </div>
+
+    <!-- Herbs / Poisons -->
+    {{#each herbs as |herb id|}}
+
+        <div class="herbs-grid-cell herb-name item"
+             data-item-id="{{herb._id}}">
+            {{herb.name}}
+        </div>
+
+        <div class="herbs-grid-cell item"
+             data-item-id="{{herb._id}}">
+            {{herb.system.quantity}}
+        </div>
+
+        <div class="herbs-grid-cell item"
+             data-item-id="{{herb._id}}">
+            {{herb.system.codes}}
+        </div>
+
+        <div class="herbs-grid-cell item"
+             data-item-id="{{herb._id}}">
+            {{herb.system.af}}
+        </div>
+
+        <div class="herbs-grid-cell item"
+             data-item-id="{{herb._id}}">
+            {{herb.system.weight}}
+        </div>
+
+        <div class="herbs-grid-cell item"
+             data-item-id="{{herb._id}}">
+            {{herb.system.cost}}
+        </div>
+
+        <div class="herbs-grid-cell item-controls">
+
+            <a class="item-control item-edit"
+               title="{{localize 'DOCUMENT.Edit'}}"
+               data-item-id="{{herb._id}}">
+                <i class="fas fa-edit"></i>
+            </a>
+
+            <a class="item-control item-delete"
+               title="{{localize 'DOCUMENT.Delete'}}"
+               data-item-id="{{herb._id}}">
+                <i class="fas fa-trash"></i>
+            </a>
+
+        </div>
+
+    {{/each}}
+
+</div>

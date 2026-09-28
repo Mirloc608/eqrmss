@@ -1,0 +1,38 @@
+{
+  "id": "magmalisks_burning_call_2",
+  "name": "Magmalisk's Burning Call",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 110,
+  "description": "A long-distance call deals up to 523 damage to your target. This damage will decline at extreme distances.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 90,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "fire",
+      "value": {
+        "base": 490
+      }
+    }
+  ],
+  "stacking": {
+    "group": "direct-damage",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "direct-damage",
+    "horn"
+  ]
+}

@@ -1,0 +1,16 @@
+<section class="eq-tab eq-tab-spells" data-tab="spells">
+  <h2>Spells</h2>
+
+  <div class="eq-spell-list">
+    {{#each spells}}
+      <div class="eq-spell-entry" draggable="true" data-item-id="{{_id}}">
+        <img src="{{img}}" class="eq-spell-icon" />
+        <span class="eq-spell-name">
+          {{name}} (Lv {{system.level}})
+        </span>
+      </div>
+    {{/each}}
+  </div>
+
+  {{> "systems/eqrmss/templates/sheets/actors/partials/spell-gems.html" }}
+</section>

@@ -1,0 +1,38 @@
+{
+  "id": "firionas_blessed_clarinet_1",
+  "name": "Firiona's Blessed Clarinet",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 84,
+  "description": "This purifying tune slowly removes the corruption from your target's system.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 30,
+    "targets": "ally"
+  },
+  "effects": [
+    {
+      "type": "cure",
+      "effect": "corruption",
+      "value": {
+        "base": 2
+      }
+    }
+  ],
+  "stacking": {
+    "group": "cure-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "heal",
+    "cure-song",
+    "flute"
+  ]
+}

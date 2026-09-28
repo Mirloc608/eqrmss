@@ -1,0 +1,117 @@
+[
+  {
+  "_id": "sk-blood-of-pain-41",
+  "name": "Blood of Pain",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/041.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 41,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 172,
+    "effects": [
+      { "type": "dot", "element": "disease", "min": 15, "max": 68 }
+    ],
+    "description": "Inflicts a painful disease that deals damage over time."
+  }
+},
+{
+  "_id": "sk-terror-of-shadows-42",
+  "name": "Terror of Shadows",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/042.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 42,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 1,
+    "manaCost": 40,
+    "effects": [
+      { "type": "hate", "amount": 1 }
+    ],
+    "description": "A burst of shadowy terror that increases hate toward the caster."
+  }
+},
+{
+  "_id": "sk-invoke-fear-43",
+  "name": "Invoke Fear",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/043.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 43,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "control", "effect": "fear", "maxLevel": 52 }
+    ],
+    "description": "Instills terror in the target, causing it to flee."
+  }
+},
+{
+  "_id": "sk-dooming-darkness-44",
+  "name": "Dooming Darkness",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/044.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 44,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 120,
+    "effects": [
+      { "type": "dot", "element": "disease", "min": 20, "max": 20 },
+      { "type": "debuff", "stat": "movement", "min": -35, "max": -94 }
+    ],
+    "description": "Inflicts disease damage over time and severely slows the target."
+  }
+},
+{
+  "_id": "sk-word-of-spirit-45",
+  "name": "Word of Spirit",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/045.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 45,
+    "school": "evocation",
+    "target": "area",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 133,
+    "effects": [
+      { "type": "damage", "element": "magic", "min": 39, "max": 104 }
+    ],
+    "description": "Deals magic damage to all nearby enemies."
+  }
+},
+{
+  "_id": "sk-breath-of-the-dead-45",
+  "name": "Breath of the Dead",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/045b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 45,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 45,
+    "effects": [
+      { "type": "utility", "effect": "water-breathing" }
+    ],
+    "description": "Allows the caster to breathe underwater."
+  }
+}
+]

@@ -1,0 +1,62 @@
+{
+  "id": "pulse_of_vhalsera_2",
+  "name": "Pulse of Vhal`Sera",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 111,
+  "description": "Increases your companions' health regeneration by 257, mana regeneration by 187, and endurance regeneration by 20 and increases the yield of their healing spells by 14%. This bonus will decay on spells over level 115.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "healing",
+      "value": {
+        "base": 14
+      },
+      "duration": 12
+    },
+    {
+      "type": "heal",
+      "value": {
+        "base": 2629
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "mana",
+      "value": {
+        "base": 95
+      },
+      "duration": 12
+    },
+    {
+      "type": "regen",
+      "stat": "endurance",
+      "value": {
+        "base": 10
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "heal-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "heal-song",
+    "voice"
+  ]
+}

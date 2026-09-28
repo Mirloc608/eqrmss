@@ -1,0 +1,204 @@
+{{!-- ============================================================
+EQRMSS Fixed Information Panel
+
+ApplicationV2 Compatible
+
+Purpose:
+- Permanent character identity data
+- Race / Profession bindings
+- Training Packages
+- Realm
+- DP Ledger preview
+
+Data Schema:
+system.fixed_info
+system.development.history
+
+============================================================ --}}
+
+<section class="eqrmss-fixed-info-section"
+         data-section="fixed-info">
+
+    <!-- ========================================================
+    RACE
+    ========================================================= -->
+
+    <div class="eqrmss-fixed-field"
+         data-field="race">
+
+        <label>
+            {{ localize "eqrmss.pc_sheet_fixed_info.race" }}
+        </label>
+
+        <input type="hidden"
+               name="system.fixed_info.race"
+               value="{{system.fixed_info.race}}"/>
+
+        <input type="text"
+               class="eqrmss-display-only"
+               value="{{system.fixed_info.race_name}}"
+               readonly
+               tabindex="-1"/>
+
+    </div>
+
+    <!-- ========================================================
+    PROFESSION
+    ========================================================= -->
+
+    <div class="eqrmss-fixed-field"
+         data-field="profession">
+
+        <label>
+            {{ localize "eqrmss.pc_sheet_fixed_info.profession" }}
+        </label>
+
+        <input type="hidden"
+               name="system.fixed_info.profession"
+               value="{{system.fixed_info.profession}}"/>
+
+        <input type="text"
+               class="eqrmss-display-only"
+               value="{{system.fixed_info.profession_name}}"
+               readonly
+               tabindex="-1"/>
+
+    </div>
+
+    <!-- ========================================================
+    TRAINING PACKAGES
+    ========================================================= -->
+
+    <div class="eqrmss-fixed-field"
+         data-field="training-packages">
+
+        <label>
+            {{ localize "eqrmss.pc_sheet_fixed_info.training_packages" }}
+        </label>
+
+        <input type="text"
+               name="system.fixed_info.training_packages"
+               value="{{system.fixed_info.training_packages}}"
+               data-dtype="String"/>
+
+    </div>
+
+    <!-- ========================================================
+    REALM
+    ========================================================= -->
+
+    <div class="eqrmss-fixed-field"
+         data-field="realm">
+
+        <label>
+            {{ localize "eqrmss.pc_sheet_fixed_info.realm" }}
+        </label>
+
+        <input type="text"
+               name="system.fixed_info.realm"
+               value="{{system.fixed_info.realm}}"
+               data-dtype="String"/>
+
+    </div>
+
+    <!-- ========================================================
+    DP LEDGER
+    ========================================================= -->
+
+    <div class="eqrmss-fixed-field eqrmss-dp-ledger"
+         data-field="development-history">
+
+        <header class="eqrmss-field-header">
+
+            <label>
+                {{ localize "eqrmss.pc_sheet_fixed_info.dp_ledger" }}
+            </label>
+
+            <span class="eqrmss-ledger-count">
+
+                {{#if system.development.history}}
+                    {{system.development.history.length}}
+                {{else}}
+                    0
+                {{/if}}
+
+            </span>
+
+        </header>
+
+        <div class="eqrmss-ledger-scroll">
+
+            {{#if system.development.history}}
+
+                <ol class="eqrmss-ledger-list">
+
+                {{#each system.development.history}}
+
+                    <li class="eqrmss-ledger-entry
+                               dp-{{this.type}}">
+
+                        <div class="ledger-header">
+
+                            <time>
+                                {{this.timestamp}}
+                            </time>
+
+                            <span class="ledger-user">
+                                {{this.userName}}
+                            </span>
+
+                        </div>
+
+                        <div class="ledger-change">
+
+                            <span class="ledger-type">
+
+                                {{this.type}}
+
+                            </span>
+
+                            <span class="ledger-amount">
+
+                                {{#if (gt this.amount 0)}}
+                                    +{{this.amount}}
+                                {{else}}
+                                    {{this.amount}}
+                                {{/if}}
+
+                                DP
+
+                            </span>
+
+                        </div>
+
+                        {{#if this.note}}
+
+                            <div class="ledger-note">
+
+                                {{this.note}}
+
+                            </div>
+
+                        {{/if}}
+
+                    </li>
+
+                {{/each}}
+
+                </ol>
+
+            {{else}}
+
+                <div class="eqrmss-empty-state">
+
+                    {{ localize "eqrmss.pc_sheet_fixed_info.no_dp_history" }}
+
+                </div>
+
+            {{/if}}
+
+        </div>
+
+    </div>
+
+</section>

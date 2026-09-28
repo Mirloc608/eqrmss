@@ -1,0 +1,53 @@
+<div class="tab" data-group="primary" data-tab="aa">
+  <h3>Alternate Advancement</h3>
+
+  <div class="aa-points">
+    <strong>AA Points:</strong> {{aa.points}}
+    <span class="aa-spent">(lifetime spent: {{aa.spent}})</span>
+  </div>
+
+  {{#if aa.isGM}}
+  <div class="aa-grant">
+    <label>Grant AA points (GM):
+      <input type="number" name="aaGrantAmount" min="1" step="1" value="1" style="width: 5em;">
+    </label>
+    <button type="button" data-action="grantAAPoints">Grant</button>
+  </div>
+  {{/if}}
+
+  <h4>Purchased AAs ({{aa.purchased.length}})</h4>
+  {{#if aa.purchased.length}}
+  <ul class="aa-purchased">
+    {{#each aa.purchased}}
+    <li>{{this.name}} — Rank {{this.rank}}/{{this.maxRanks}}</li>
+    {{/each}}
+  </ul>
+  {{else}}
+  <p class="aa-empty">No AAs purchased yet.</p>
+  {{/if}}
+
+  <h4>Available AAs</h4>
+  {{#if aa.available.length}}
+  <ul class="aa-available">
+    {{#each aa.available}}
+    <li>
+      <strong>{{this.name}}</strong>
+      <span class="aa-meta">(Level {{this.levelRequired}} · Rank {{this.currentRank}}/{{this.maxRanks}})</span>
+      {{#if this.eligible}}
+        {{#if this.affordable}}
+        <button type="button" data-action="purchaseAA" data-aa-id="{{this.id}}">
+          Buy — {{this.cost}} point(s)
+        </button>
+        {{else}}
+        <span class="aa-cost">Cost: {{this.cost}} point(s) — not enough points</span>
+        {{/if}}
+      {{else}}
+        <span class="aa-locked">{{this.reason}}</span>
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+  {{else}}
+  <p class="aa-empty">No AAs available. AA data may still be loading, or none are unlocked for this class and expansion.</p>
+  {{/if}}
+</div>

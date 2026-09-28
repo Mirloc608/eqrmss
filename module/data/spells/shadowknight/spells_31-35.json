@@ -1,0 +1,137 @@
+[
+  {
+  "_id": "sk-shieldskin-31",
+  "name": "Shieldskin",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/031.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 31,
+    "school": "abjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 41,
+    "effects": [
+      { "type": "absorb", "min": 78, "max": 82 }
+    ],
+    "description": "Forms a protective barrier around the caster, absorbing incoming damage."
+  }
+},
+{
+  "_id": "sk-dark-temptation-32",
+  "name": "Dark Temptation",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/032.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 32,
+    "school": "alteration",
+    "target": "self",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "buff", "stat": "atk", "amount": 25 },
+      { "type": "dot", "element": "health", "min": 3, "max": 3 }
+    ],
+    "description": "Increases attack power while draining a small amount of the caster’s life over time."
+  }
+},
+{
+  "_id": "sk-terror-of-darkness-33",
+  "name": "Terror of Darkness",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/033.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 33,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 1,
+    "manaCost": 20,
+    "effects": [
+      { "type": "hate", "amount": 1 }
+    ],
+    "description": "A burst of dark terror that instantly increases the caster’s hate with the target."
+  }
+},
+{
+  "_id": "sk-spear-of-disease-34",
+  "name": "Spear of Disease",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/034.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 34,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 118,
+    "effects": [
+      { "type": "damage", "element": "disease", "amount": 251 }
+    ],
+    "description": "Launches a spear of festering disease at the target."
+  }
+},
+{
+  "_id": "sk-shroud-of-hate-35",
+  "name": "Shroud of Hate",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/035.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 35,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "debuff", "stat": "atk", "amount": -20 }
+    ],
+    "description": "A hateful shroud that weakens the target’s attack power."
+  }
+},
+{
+  "_id": "sk-summon-corpse-35",
+  "name": "Summon Corpse",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/035b.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 35,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 10,
+    "manaCost": 500,
+    "effects": [
+      { "type": "utility", "effect": "summon-corpse", "maxLevel": 60 }
+    ],
+    "description": "Summons the corpse of a fallen ally up to level 60."
+  }
+},
+{
+  "_id": "sk-resist-cold-35",
+  "name": "Resist Cold",
+  "type": "spell",
+  "img": "systems/eqrmss/assets/Icons/spells/035c.png",
+  "system": {
+    "class": "shadowknight",
+    "level": 35,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "buff", "stat": "resist-cold", "min": 16, "max": 55 }
+    ],
+    "description": "Increases the target’s resistance to cold."
+  }
+}
+
+]

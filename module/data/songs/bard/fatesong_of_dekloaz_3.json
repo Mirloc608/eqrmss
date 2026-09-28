@@ -1,0 +1,39 @@
+{
+  "id": "fatesong_of_dekloaz_3",
+  "name": "Fatesong of Dekloaz",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 107,
+  "description": "This chilling song adds 8065 damage to cold-based direct damage spells cast by members of your group. The song improves spells that are at least level 101, up to level 110.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-damage",
+      "value": {
+        "base": 8195
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "spell-focus",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "spell-focus",
+    "voice"
+  ]
+}

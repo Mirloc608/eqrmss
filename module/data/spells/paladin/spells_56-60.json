@@ -1,0 +1,535 @@
+[
+  {
+    "_id": "pal-breath-of-tunare-56-r1",
+    "name": "Breath of Tunare",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 56,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 1,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 4,
+          "max": 4,
+          "duration": 1050
+        },
+        {
+          "type": "heal",
+          "amount": 4,
+          "duration": 1050
+        }
+      ],
+      "description": "Surrounds you with the breath of the All Mother, regenerating your hit points while slowly draining your mana for 17.5 minutes."
+    }
+  },
+  {
+    "_id": "pal-counteract-disease-56-r1",
+    "name": "Counteract Disease",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 56,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 5
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing them of moderate diseases."
+    }
+  },
+  {
+    "_id": "pal-guard-of-piety-56-r1",
+    "name": "Guard of Piety",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 56,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "discipline-guard-of-piety",
+          "duration": 30
+        }
+      ],
+      "description": "Covers your body in the Guard of Humility, absorbing 25% of incoming melee damage. The Guard will fail once it has absorbed 2500 damage."
+    }
+  },
+  {
+    "_id": "pal-yaulp-iii-56-r1",
+    "name": "Yaulp III",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 56,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.5,
+      "manaCost": 1,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 30,
+          "duration": 24
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 24
+        }
+      ],
+      "description": "Focuses your spiritual energy into a great battle cry, increasing your strength and armor class for 24 seconds."
+    }
+  },
+  {
+    "_id": "pal-blessing-of-austerity-58-r1",
+    "name": "Blessing of Austerity",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 58,
+      "school": "abjuration",
+      "target": "group",
+      "range": 100,
+      "castTime": 12.0,
+      "manaCost": 1650,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 800,
+          "duration": 3600
+        },
+        {
+          "type": "heal",
+          "amount": 634
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 11,
+          "max": 14,
+          "duration": 3600
+        }
+      ],
+      "description": "Cloaks your group in an aura of austerity, granting them increased hit points and armor class for 60 minutes."
+    }
+  },
+  {
+    "_id": "pal-healing-wave-of-prexus-58-r1",
+    "name": "Healing Wave of Prexus",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 58,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 698,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 553
+        }
+      ],
+      "description": "Emanates a wave of healing water from the caster, healing 698 hit points for everyone in your group."
+    }
+  },
+  {
+    "_id": "pal-nullify-magic-58-r1",
+    "name": "Nullify Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "paladin",
+      "level": 58,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel"
+        },
+        {
+          "type": "utility",
+          "effect": "dispel"
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "pal-symbol-of-naltron-58-r1",
+    "name": "Symbol of Naltron",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 58,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 315,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 525,
+          "duration": 3240
+        },
+        {
+          "type": "heal",
+          "amount": 975
+        }
+      ],
+      "description": "Covers your target in a shimmer of holy runes, increasing their hit points for 54 minutes."
+    }
+  },
+  {
+    "_id": "pal-celestial-cleansing-59-r1",
+    "name": "Celestial Cleansing",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 59,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 252,
+          "duration": 24
+        }
+      ],
+      "description": "Fills your target's body with celestial cleansing light, healing between 10 and 175 hit points every 6 seconds for 24 seconds."
+    }
+  },
+  {
+    "_id": "pal-deflection-discipline-59-r1",
+    "name": "Deflection Discipline",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 59,
+      "school": "block",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "discipline-deflection-discipline",
+          "duration": 12
+        }
+      ],
+      "description": "Increases your combat reflexes, allowing you to block most attacks with your shield."
+    }
+  },
+  {
+    "_id": "pal-resurrection-59-r1",
+    "name": "Resurrection",
+    "type": "spell",
+    "img": "icons/magic/life/angel-wings-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 59,
+      "school": "alteration",
+      "target": "corpse",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 700,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "resurrection"
+        }
+      ],
+      "description": "Revives a slain ally, restoring 90% of their lost experience. It takes some time for the recently revived to fully recover."
+    }
+  },
+  {
+    "_id": "pal-brells-mountainous-barrier-60-r1",
+    "name": "Brell's Mountainous Barrier",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 60,
+      "school": "alteration",
+      "target": "group",
+      "range": 100,
+      "castTime": 8.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 225,
+          "duration": 9000
+        }
+      ],
+      "description": "Surrounds your group with the barrier of the Underfoot, increasing their hit points for 2.5 hours."
+    }
+  },
+  {
+    "_id": "pal-divine-strength-60-r1",
+    "name": "Divine Strength",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 200,
+          "duration": 3000
+        }
+      ],
+      "description": "Fills your target with a divine strength, increasing their hit points for 50 minutes."
+    }
+  },
+  {
+    "_id": "pal-eradicate-curse-60-r1",
+    "name": "Eradicate Curse",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.25,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 5
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 5
+        }
+      ],
+      "description": "Cleanses your target's soul, removing strong curses."
+    }
+  },
+  {
+    "_id": "pal-remove-greater-curse-60-r1",
+    "name": "Remove Greater Curse",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 5
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 5
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 5
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 5
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 5
+        }
+      ],
+      "description": "Cleanses your target's soul, removing major curses."
+    }
+  },
+  {
+    "_id": "pal-resolution-60-r1",
+    "name": "Resolution",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 60,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 110,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 5,
+          "duration": 3780
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 250,
+          "duration": 3780
+        },
+        {
+          "type": "heal",
+          "amount": 1039
+        }
+      ],
+      "description": "Provides your target with a sense of resolution, increasing their hit points and armor class for 63 minutes."
+    }
+  },
+  {
+    "_id": "pal-sanctification-discipline-60-r1",
+    "name": "Sanctification Discipline",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 60,
+      "school": "defense",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "discipline-sanctification-discipline",
+          "duration": 18
+        }
+      ],
+      "description": "Surrounds your body in an aura of sanctification, turning aside most detrimental spells."
+    }
+  },
+  {
+    "_id": "pal-shield-of-words-60-r1",
+    "name": "Shield of Words",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 60,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 8.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 9,
+          "duration": 4320
+        }
+      ],
+      "description": "Covers your target in a holy guard, increasing their armor class for 72 minutes."
+    }
+  },
+  {
+    "_id": "pal-yaulp-iv-60-r1",
+    "name": "Yaulp IV",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 60,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.5,
+      "manaCost": 1,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 17,
+          "duration": 24
+        },
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 40,
+          "duration": 24
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 24
+        }
+      ],
+      "description": "Focuses your spiritual energy into a great battle cry, increasing your strength, armor class, and attack rating for 24 seconds."
+    }
+  }
+]

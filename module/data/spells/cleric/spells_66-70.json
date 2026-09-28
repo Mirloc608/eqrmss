@@ -1,0 +1,1157 @@
+[
+ {
+  "_id": "clr-confidence-66-r1",
+  "name": "Confidence",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 66,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.5,
+   "manaCost": 199,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 7,
+     "max": 9,
+     "duration": 4320
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 497,
+     "duration": 4320
+    },
+    {
+     "type": "heal",
+     "amount": 497
+    }
+   ],
+   "description": "Provides your target with heroic valor, increasing their hit points and armor class for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-greater-reviviscence-66-r1",
+  "name": "Greater Reviviscence",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 66,
+   "school": "alteration",
+   "target": "area",
+   "range": 0,
+   "castTime": 16.0,
+   "manaCost": 2826,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "resurrect",
+     "xp": 96
+    }
+   ],
+   "description": "Revives up to 18 slain allies surrounding you, restoring 96% of their lost experience. It takes some time for the recently revived to fully recover; You can only cast this spell while you are out of combat.",
+   "radius": 60
+  }
+ },
+ {
+  "_id": "clr-pious-remedy-66-r1",
+  "name": "Pious Remedy",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 66,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 1.75,
+   "manaCost": 378,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 1520,
+     "max": 1520
+    }
+   ],
+   "description": "Mends severe wounds, healing between 1,520 and 1,520 hit points."
+  }
+ },
+ {
+  "_id": "clr-revulsion-of-death-66-r1",
+  "name": "Revulsion of Death",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 66,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 134,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 42,
+     "resist": "magic"
+    }
+   ],
+   "description": "A booming voice fills your target's ears, causing them to flee in terror."
+  }
+ },
+ {
+  "_id": "clr-shock-of-wonder-66-r1",
+  "name": "Shock of Wonder",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 66,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.0,
+   "manaCost": 180,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 8.0,
+     "resist": "magic",
+     "resistMod": -10
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 227,
+     "resist": "magic",
+     "resistMod": -10
+    }
+   ],
+   "description": "Strikes an enemy with holy might, briefly stunning them and causing between 227 and 227 damage. This spell works on creatures up to level 70."
+  }
+ },
+ {
+  "_id": "clr-sun-cloak-66-r1",
+  "name": "Sun Cloak",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 66,
+   "school": "divination",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 115,
+   "effects": [
+    {
+     "type": "invisibility",
+     "vs": "undead",
+     "duration": 600
+    }
+   ],
+   "description": "Cloaks you in a mystic veil, rendering you invisible to undead creatures for 10 minutes."
+  }
+ },
+ {
+  "_id": "clr-symbol-of-balikor-66-r1",
+  "name": "Symbol of Balikor",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 66,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 596,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 869,
+     "duration": 4320
+    },
+    {
+     "type": "heal",
+     "amount": 869
+    }
+   ],
+   "description": "Covers your target in a shimmer of holy runes, increasing their hit points for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-ward-of-valiance-66-r1",
+  "name": "Ward of Valiance",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 66,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 7.0,
+   "manaCost": 420,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 16,
+     "max": 21,
+     "duration": 4320
+    }
+   ],
+   "description": "Covers your target in a holy guard, increasing their armor class for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-blessing-of-devotion-67-r1",
+  "name": "Blessing of Devotion",
+  "type": "spell",
+  "img": "icons/magic/symbols/rune-stone-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 67,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 298,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "spell-haste",
+     "amount": 10,
+     "duration": 2400
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Level: 70 (lose 5% per level)"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Spell: Exclude Complete Heal"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Casting Time: 3s"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Exclude Current HP Percent"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Exclude Combat Skills"
+    }
+   ],
+   "description": "Bestows your target with a divine blessing, allowing them to cast spells faster for 40 minutes. This blessing works on spells up to level 70."
+  }
+ },
+ {
+  "_id": "clr-conviction-67-r1",
+  "name": "Conviction",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 67,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 14.0,
+   "manaCost": 993,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 2787"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 1365,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 1365
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 21,
+     "max": 27,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 2787"
+    }
+   ],
+   "description": "Cloaks your target in an aura of protection, granting them increased hit points and armor class for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-panoply-of-vie-67-r1",
+  "name": "Panoply of Vie",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 67,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 286,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 2080,
+     "duration": 2160
+    }
+   ],
+   "description": "Places the Panoply of Vie on your target, absorbing a portion of incoming melee damage. This spell absorbs a set amount of damage before dissipating."
+  }
+ },
+ {
+  "_id": "clr-pious-elixir-67-r1",
+  "name": "Pious Elixir",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 67,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 680,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 894,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your target's body with pious elixir, healing 894 hit points every 6 seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-reproach-67-r1",
+  "name": "Reproach",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 67,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 6.0,
+   "manaCost": 251,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 831,
+     "resist": "magic"
+    }
+   ],
+   "description": "Calls upon the condemnation of the gods to strike your target, causing 831 damage."
+  }
+ },
+ {
+  "_id": "clr-sermon-of-reproach-67-r1",
+  "name": "Sermon of Reproach",
+  "type": "spell",
+  "img": "icons/magic/death/skull-debuff-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 67,
+   "school": "evocation",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 286,
+   "effects": [
+    {
+     "type": "dot",
+     "element": "magic",
+     "min": 449,
+     "max": 449,
+     "duration": 30,
+     "resist": "magic",
+     "resistMod": -100
+    }
+   ],
+   "description": "Strikes your target with holy light, causing between 482 and 449 damage to undead every 6 seconds for 30 seconds."
+  }
+ },
+ {
+  "_id": "clr-deaths-regret-68-r1",
+  "name": "Death's Regret",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 68,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 5.0,
+   "manaCost": 198,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 939,
+     "resist": "magic",
+     "resistMod": -100
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-bind-death",
+     "chance": 25
+    }
+   ],
+   "description": "Strikes down an undead target with divine energy, causing 939 damage and potentially slowing their movement and doing additional damage for a short time."
+  }
+ },
+ {
+  "_id": "clr-deistic-howl-68-r1",
+  "name": "Deistic Howl",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 68,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 267,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 42,
+     "resist": "magic"
+    }
+   ],
+   "description": "A booming voice fills your target's ears, causing them to flee in terror."
+  }
+ },
+ {
+  "_id": "clr-desolate-undead-68-r1",
+  "name": "Desolate Undead",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 68,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 5.0,
+   "manaCost": 181,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 939,
+     "resist": "magic",
+     "resistMod": -100
+    }
+   ],
+   "description": "A burst of holy power that inflicts 939 damage to an undead target."
+  }
+ },
+ {
+  "_id": "clr-hammer-of-reproach-68-r1",
+  "name": "Hammer of Reproach",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 68,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 348,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Hammer of Reproach"
+    }
+   ],
+   "description": "Summons a magical hammer that is particularly adept at smiting undead."
+  }
+ },
+ {
+  "_id": "clr-pious-light-68-r1",
+  "name": "Pious Light",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 68,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.75,
+   "manaCost": 613,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 2541,
+     "max": 3121
+    }
+   ],
+   "description": "Bathes your target in pious light, healing between 2,345 and 3,121 hit points."
+  }
+ },
+ {
+  "_id": "clr-sound-of-divinity-68-r1",
+  "name": "Sound of Divinity",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 68,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 0.75,
+   "manaCost": 76,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 5.0,
+     "resist": "magic"
+    }
+   ],
+   "description": "Strikes an enemy with holy might, briefly stunning them. This spell works on creatures up to level 70."
+  }
+ },
+ {
+  "_id": "clr-unswerving-hammer-of-retribution-68-r1",
+  "name": "Unswerving Hammer of Retribution",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+   "class": "cleric",
+   "level": 68,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.5,
+   "manaCost": 134,
+   "effects": [
+    {
+     "type": "summon-pet",
+     "pet": "hammer-of-wrath"
+    }
+   ],
+   "description": "Summons a magical hammer that attacks your target relentlessly until either the hammer or the target dies."
+  }
+ },
+ {
+  "_id": "clr-aura-of-devotion-69-r1",
+  "name": "Aura of Devotion",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 69,
+   "school": "alteration",
+   "target": "group",
+   "range": 100,
+   "castTime": 8.0,
+   "manaCost": 859,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "spell-haste",
+     "amount": 10,
+     "duration": 2700
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Max Level: 70 (lose 5% per level)"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Spell: Exclude Complete Heal"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Min Casting Time: 3s"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Exclude Current HP Percent"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Exclude Combat Skills"
+    }
+   ],
+   "description": "Bestows your group with a divine blessing, allowing them to cast spells faster for 45 minutes. This blessing affects spells up to level 70."
+  }
+ },
+ {
+  "_id": "clr-calamity-69-r1",
+  "name": "Calamity",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 69,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 5.0,
+   "manaCost": 473,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 644,
+     "radius": 35,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to tremble around you, causing between 644 and 644 damage to up to 30 nearby enemies.",
+   "radius": 35
+  }
+ },
+ {
+  "_id": "clr-chromastrike-69-r1",
+  "name": "Chromastrike",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 69,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 6.0,
+   "manaCost": 219,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 700,
+     "resist": "lowest"
+    }
+   ],
+   "description": "Channels holy power into a cohesive bolt of energy, causing 700 damage. The holy power attempts to breach the weakest of your target's magical defenses, and is therefore harder to resist."
+  }
+ },
+ {
+  "_id": "clr-mark-of-the-blameless-69-r1",
+  "name": "Mark of the Blameless",
+  "type": "spell",
+  "img": "icons/magic/defense/armor-scale-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 69,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 191,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "damage-shield",
+     "amount": -25,
+     "duration": 900
+    },
+    {
+     "type": "buff",
+     "stat": "damage-shield",
+     "amount": 45,
+     "duration": 900
+    }
+   ],
+   "description": "Places the mark of the blameless on your target, dealing 45 damage each time the target strikes another creature and healing 25 hit points for your allies each time they strike the target."
+  }
+ },
+ {
+  "_id": "clr-ward-of-retribution-69-r1",
+  "name": "Ward of Retribution",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 69,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 573,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "defensive-proc-ward-of-retribution-parry"
+    }
+   ],
+   "description": "Places the Ward of Retribution around your body. This ward will periodically strike out at any creature that attacks you; This effect will fade after 120 strikes."
+  }
+ },
+ {
+  "_id": "clr-word-of-vivification-69-r1",
+  "name": "Word of Vivification",
+  "type": "spell",
+  "img": "icons/magic/life/heart-cross-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 69,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 1037,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 2083,
+     "max": 2618
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 21
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 21
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 14
+    }
+   ],
+   "description": "Mends the severe wounds of everyone in your group, healing between 2,083 and 2,618 hit points as well as curing moderate diseases and poisons."
+  }
+ },
+ {
+  "_id": "clr-yaulp-vii-69-r1",
+  "name": "Yaulp VII",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 69,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 0.5,
+   "manaCost": 8,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "atk",
+     "amount": 80,
+     "duration": 24
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 14,
+     "max": 14,
+     "duration": 24
+    },
+    {
+     "type": "buff",
+     "stat": "dex",
+     "amount": 100,
+     "duration": 24
+    },
+    {
+     "type": "buff",
+     "stat": "haste",
+     "amount": 30,
+     "duration": 24
+    }
+   ],
+   "description": "Focuses your spiritual energy into a great battle cry, increasing your attack rating, dexterity, attack speed, and mana regeneration for 24 seconds. The effects of this spell will fade if you sit down."
+  }
+ },
+ {
+  "_id": "clr-ancient-hallowed-light-70-r1",
+  "name": "Ancient: Hallowed Light",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.75,
+   "manaCost": 592,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 2636,
+     "max": 3170
+    }
+   ],
+   "description": "Bathes your target in supernal light, healing between 2,636 and 3,170 hit points."
+  }
+ },
+ {
+  "_id": "clr-ancient-pious-conscience-70-r1",
+  "name": "Ancient: Pious Conscience",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 6.0,
+   "manaCost": 267,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 960,
+     "resist": "magic"
+    }
+   ],
+   "description": "Commands the power of chaos to strike your target for 960 damage."
+  }
+ },
+ {
+  "_id": "clr-armor-of-the-pious-70-r1",
+  "name": "Armor of the Pious",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 397,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 430,
+     "duration": 8640
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 10,
+     "max": 13,
+     "duration": 8640
+    },
+    {
+     "type": "heal",
+     "amount": 430
+    },
+    {
+     "type": "regen",
+     "stat": "mana",
+     "min": 9,
+     "max": 9,
+     "duration": 8640
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 1 is 'HP Buff' and < 1563"
+    }
+   ],
+   "description": "Places mystic armor of protection around you, increasing your hit points, armor class, and mana regeneration for 2.4 hours."
+  }
+ },
+ {
+  "_id": "clr-aura-of-the-pious-70-r1",
+  "name": "Aura of the Pious",
+  "type": "spell",
+  "img": "icons/magic/light/sphere-glow.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 3.0,
+   "manaCost": 382,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "aura-aura-of-the-pious-effect"
+    }
+   ],
+   "description": "Allows your companions to absorb a portion of incoming melee damage, as long as they stay inside the area of the aura."
+  }
+ },
+ {
+  "_id": "clr-balikors-mark-70-r1",
+  "name": "Balikor's Mark",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 1788,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 869,
+     "duration": 4320
+    },
+    {
+     "type": "heal",
+     "amount": 869
+    }
+   ],
+   "description": "Covers your group in a shimmer of holy runes, increasing their hit points for 72 minutes."
+  }
+ },
+ {
+  "_id": "clr-desperate-renewal-70-r1",
+  "name": "Desperate Renewal",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 1050,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 3770
+    },
+    {
+     "type": "cure",
+     "effect": "poison",
+     "min": 1,
+     "max": 18
+    },
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 18
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 18
+    }
+   ],
+   "description": "Channels holy power to heal your target for up to 3,770 hit points as well as attempting to remove poisons, diseases, and curses."
+  }
+ },
+ {
+  "_id": "clr-elixir-of-divinity-70-r1",
+  "name": "Elixir of Divinity",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "alteration",
+   "target": "group",
+   "range": 150,
+   "castTime": 5.0,
+   "manaCost": 1185,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 688,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your group with holy energy which will continually heal their wounds for a short period of time."
+  }
+ },
+ {
+  "_id": "clr-hand-of-conviction-70-r1",
+  "name": "Hand of Conviction",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "abjuration",
+   "target": "group",
+   "range": 100,
+   "castTime": 24.0,
+   "manaCost": 2387,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 2787"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 1365,
+     "duration": 9000
+    },
+    {
+     "type": "heal",
+     "amount": 1365
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 21,
+     "max": 27,
+     "duration": 9000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 2787"
+    }
+   ],
+   "description": "Cloaks your group in an aura of protection, granting them increased hit points and armor class for 2.5 hours."
+  }
+ },
+ {
+  "_id": "clr-placate-70-r1",
+  "name": "Placate",
+  "type": "spell",
+  "img": "icons/magic/debuff/sleep-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.5,
+   "manaCost": 348,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 42
+    }
+   ],
+   "description": "Pacifies your target, lowering its aggressiveness for 42 seconds. Affects creatures up to level 70."
+  }
+ },
+ {
+  "_id": "clr-puratus-70-r1",
+  "name": "Puratus",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 76,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "spell-block"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Effect: Poison Counter"
+    },
+    {
+     "type": "utility",
+     "effect": "limit-rule",
+     "detail": "Limit Type: Detrimental"
+    },
+    {
+     "type": "utility",
+     "effect": "trigger-antidote"
+    }
+   ],
+   "description": "Cleanses your target of poisons and prevents the next poison-based spell from affecting them."
+  }
+ },
+ {
+  "_id": "clr-silent-dictation-70-r1",
+  "name": "Silent Dictation",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 70,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 1.0,
+   "manaCost": 401,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 3.0,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 461,
+     "radius": 20,
+     "resist": "magic"
+    }
+   ],
+   "description": "Strikes up to 30 nearby creatures with a silent decree, inflicting 461 damage and stunning them.",
+   "radius": 20
+  }
+ }
+]

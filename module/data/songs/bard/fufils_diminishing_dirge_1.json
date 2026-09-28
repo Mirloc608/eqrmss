@@ -1,0 +1,50 @@
+{
+  "id": "fufils_diminishing_dirge_1",
+  "name": "Fufil's Diminishing Dirge",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 60,
+  "description": "A magical chant that causes damage to an enemy and makes them more vulnerable to magic.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 78
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 12
+      }
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-magic",
+      "value": {
+        "base": -34
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "damage-chant",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "damage-chant",
+    "drum"
+  ]
+}

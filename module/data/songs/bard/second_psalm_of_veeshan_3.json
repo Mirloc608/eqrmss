@@ -1,0 +1,55 @@
+{
+  "id": "second_psalm_of_veeshan_3",
+  "name": "Second Psalm of Veeshan",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 108,
+  "description": "Surrounds your group with the Second Psalm of Veeshan Rk. III, increasing their armor class by up to 121 and resistance to most types of magic by 147, dealing 85 damage any creature that attacks them.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "damage-shield",
+      "value": {
+        "base": 88
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-all",
+      "value": {
+        "base": 165
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 10
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "damage-shield",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "damage-shield",
+    "voice"
+  ]
+}

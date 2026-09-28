@@ -1,0 +1,509 @@
+[
+  {
+    "_id": "enc-alacrity-21-r1",
+    "name": "Alacrity",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 21,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 115,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 40,
+          "duration": 660
+        }
+      ],
+      "description": "Grants your target quickened movement, increasing their attack speed for 11 minutes."
+    }
+  },
+  {
+    "_id": "enc-chaos-flux-21-r1",
+    "name": "Chaos Flux",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 21,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 67,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 48
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "amount": 55,
+          "duration": 1.0,
+          "resist": "magic"
+        }
+      ],
+      "description": "Strikes your target with a chaotic burst of mental energy, causing between 110 and 48 damage and stunning targets up to level 55 for 1 second."
+    }
+  },
+  {
+    "_id": "enc-illusion-earth-elemental-21-r1",
+    "name": "Illusion: Earth Elemental",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 21,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "elemental",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be an Earth Elemental. This spell also grants you increased strength."
+    }
+  },
+  {
+    "_id": "enc-rune-ii-22-r1",
+    "name": "Rune II",
+    "type": "spell",
+    "img": "icons/magic/symbols/rune-stone-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 22,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 83,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 37,
+          "duration": 3240
+        }
+      ],
+      "description": "Covers your target in a shimmer of runes that absorb damage. Consumes a bloodstone when cast."
+    }
+  },
+  {
+    "_id": "enc-sagars-animation-22-r1",
+    "name": "Sagar's Animation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 22,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 130,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "sagars-animation-pet"
+        }
+      ],
+      "description": "Animates a weapon and shield to attack your enemies. Consumes a tiny dagger when cast."
+    }
+  },
+  {
+    "_id": "enc-strip-enchantment-22-r1",
+    "name": "Strip Enchantment",
+    "type": "spell",
+    "img": "icons/magic/arcane/dispel-magic.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 22,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 1
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 1
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 1
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 1
+        }
+      ],
+      "description": "Tears the magic from your target, causing their enchantments to fade."
+    }
+  },
+  {
+    "_id": "enc-beguile-23-r1",
+    "name": "Beguile",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 23,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 37,
+          "duration": 1230,
+          "resist": "magic"
+        }
+      ],
+      "description": "Dominates your target's mind, allowing you to control them for a short time. This spell works on creatures up to level 37."
+    }
+  },
+  {
+    "_id": "enc-major-shielding-23-r1",
+    "name": "Major Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 23,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 75,
+          "duration": 2700
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 4,
+          "max": 5,
+          "duration": 2700
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 14,
+          "duration": 2700
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "enc-tepid-deeds-23-r1",
+    "name": "Tepid Deeds",
+    "type": "spell",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 23,
+      "school": "enchantment",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "slow",
+          "amount": 50,
+          "duration": 210,
+          "resist": "magic"
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 9
+        }
+      ],
+      "description": "Constricts your target's muscles, reducing attack speed by 50% for 3.5 minutes."
+    }
+  },
+  {
+    "_id": "enc-wuggans-appraisal-23-r1",
+    "name": "Wuggan's Appraisal",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 23,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 72
+        }
+      ],
+      "description": "Attempts to sense the presence of a trap on the targeted object."
+    }
+  },
+  {
+    "_id": "enc-enchant-gold-24-r1",
+    "name": "Enchant Gold",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 24,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-gold-bar",
+          "count": 1
+        }
+      ],
+      "description": "Enchants a bar of gold with magical energy. Consumes a bar of gold when cast."
+    }
+  },
+  {
+    "_id": "enc-illusion-skeleton-24-r1",
+    "name": "Illusion: Skeleton",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 24,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "skeleton",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Skeleton."
+    }
+  },
+  {
+    "_id": "enc-mass-enchant-gold-24-r1",
+    "name": "Mass Enchant Gold",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 24,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 450,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-gold-bar",
+          "count": 5
+        }
+      ],
+      "description": "Enchants five bars of gold with magical energy. Consumes five bars of gold when cast."
+    }
+  },
+  {
+    "_id": "enc-wuggans-discombobulation-24-r1",
+    "name": "Wuggan's Discombobulation",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 24,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 72
+        }
+      ],
+      "description": "Attempts to disarm a trap on the targeted object. Consumes a scrying stone when cast."
+    }
+  },
+  {
+    "_id": "enc-wuggans-extrication-24-r1",
+    "name": "Wuggan's Extrication",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 24,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 114
+        }
+      ],
+      "description": "Attempts to destroy any lock present on the targeted object."
+    }
+  },
+  {
+    "_id": "enc-feedback-25-r1",
+    "name": "Feedback",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 25,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "amount": 11,
+          "duration": 900
+        }
+      ],
+      "description": "Wraps your target in chaotic energy that damages anything that attacks them."
+    }
+  },
+  {
+    "_id": "enc-focus-elementary-spellcasters-empowering-essence-25-r1",
+    "name": "Focus Elementary Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 25,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "elementary-spellcasters-empowering-essence",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-instill-25-r1",
+    "name": "Instill",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 25,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 96,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 96 seconds."
+    }
+  },
+  {
+    "_id": "enc-listless-power-25-r1",
+    "name": "Listless Power",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 25,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.75,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -35,
+          "duration": 390,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -35,
+          "duration": 390,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -5,
+          "max": -4,
+          "duration": 390,
+          "resist": "magic"
+        }
+      ],
+      "description": "Saps your target's power, decreasing their agility, strength, and armor class for 6.5 minutes."
+    }
+  }
+]

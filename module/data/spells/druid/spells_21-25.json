@@ -1,0 +1,603 @@
+[
+  {
+    "_id": "dru-ensnaring-roots-21-r1",
+    "name": "Ensnaring Roots",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 21,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 34
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 96
+        }
+      ],
+      "description": "Commands roots to take hold of your target, doing between 10 and 60 damage, and preventing their movement for 96 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-reebos-augury-21-r1",
+    "name": "Reebo's Augury",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 21,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest"
+        }
+      ],
+      "description": "Attempts to sense the presence of a cursed trap on the targeted object.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-ring-of-steamfont-21-r1",
+    "name": "Ring of Steamfont",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 21,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "steamfontmts"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Steamfont Mountains."
+    }
+  },
+  {
+    "_id": "dru-spirit-of-cheetah-21-r1",
+    "name": "Spirit of Cheetah",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 21,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0.5,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "movement",
+          "amount": 115,
+          "duration": 48
+        }
+      ],
+      "description": "Imbues you with the spirit of the cheetah, greatly increasing your movement speed for 48 seconds."
+    }
+  },
+  {
+    "_id": "dru-tremor-21-r1",
+    "name": "Tremor",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 21,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 69,
+          "radius": 30
+        }
+      ],
+      "description": "Causes the earth to tremble around you, causing between 64 and 122 damage to up to 30 nearby enemies.",
+      "resist": "magic",
+      "radius": 30
+    }
+  },
+  {
+    "_id": "dru-pogonip-22-r1",
+    "name": "Pogonip",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-shard.webp",
+    "system": {
+      "class": "druid",
+      "level": 22,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 3.5,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 82,
+          "radius": 20
+        }
+      ],
+      "description": "Calls down a hailstorm over your target, causing 62 damage every 3 seconds to creatures in the area. This storm will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "cold",
+      "radius": 20
+    }
+  },
+  {
+    "_id": "dru-ring-of-feerrott-22-r1",
+    "name": "Ring of Feerrott",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 22,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "feerrott"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Feerrott Jungle."
+    }
+  },
+  {
+    "_id": "dru-ring-of-lavastorm-22-r1",
+    "name": "Ring of Lavastorm",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 22,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "lavastorm"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Lavastorm Mountains."
+    }
+  },
+  {
+    "_id": "dru-sunbeam-22-r1",
+    "name": "Sunbeam",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 22,
+      "school": "divination",
+      "target": "area",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "blind"
+        }
+      ],
+      "description": "Calls down an intense sunbeam that blinds up to 30 creatures near your target. This spell can only be cast outdoors.",
+      "resist": "magic",
+      "radius": 20
+    }
+  },
+  {
+    "_id": "dru-charm-animals-23-r1",
+    "name": "Charm Animals",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "druid",
+      "level": 23,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 33,
+          "duration": 1230
+        }
+      ],
+      "description": "Beckons to the animals of the wild, allowing you to control them.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "dru-dismiss-summoned-23-r1",
+    "name": "Dismiss Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "druid",
+      "level": 23,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 73,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 94
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 180 and 244 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "dru-remove-lesser-curse-23-r1",
+    "name": "Remove Lesser Curse",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 23,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 4
+        }
+      ],
+      "description": "Cleanses your target's soul, removing lesser curses."
+    }
+  },
+  {
+    "_id": "dru-ring-of-twilight-23-r1",
+    "name": "Ring of Twilight",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 23,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.5,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "twilight"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Twilight Sea."
+    }
+  },
+  {
+    "_id": "dru-creeping-crud-24-r1",
+    "name": "Creeping Crud",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 24,
+      "school": "conjuration",
+      "target": "single",
+      "range": 250,
+      "castTime": 3.0,
+      "manaCost": 167,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 20,
+          "max": 20,
+          "duration": 48
+        }
+      ],
+      "description": "Covers your target in oozing filth, causing between 53 and 85 damage every 6 seconds for 48 seconds.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-reebos-cleansing-24-r1",
+    "name": "Reebo's Cleansing",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 24,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest"
+        }
+      ],
+      "description": "Attempts to destroy any cursed lock present on the targeted object.",
+      "resist": "fire",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-reebos-exorcism-24-r1",
+    "name": "Reebo's Exorcism",
+    "type": "spell",
+    "img": "icons/magic/divination/crystal-ball-blue.webp",
+    "system": {
+      "class": "druid",
+      "level": 24,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 145,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest"
+        }
+      ],
+      "description": "Attempts to disarm a cursed trap on the targeted object. Consumes a scrying stone when cast.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "dru-ring-of-the-combines-24-r1",
+    "name": "Ring of the Combines",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 24,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "dreadlands"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Dreadlands."
+    }
+  },
+  {
+    "_id": "dru-skin-like-steel-24-r1",
+    "name": "Skin like Steel",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "druid",
+      "level": 24,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 3,
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 100,
+          "duration": 2160
+        },
+        {
+          "type": "heal",
+          "amount": 235,
+          "max": 235
+        }
+      ],
+      "description": "Hardens the skin of your target, increasing their hit points and armor class for 36 minutes."
+    }
+  },
+  {
+    "_id": "dru-circle-of-butcher-25-r1",
+    "name": "Circle of Butcher",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 25,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "butcher"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Butcherblock Mountains."
+    }
+  },
+  {
+    "_id": "dru-circle-of-karana-25-r1",
+    "name": "Circle of Karana",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 25,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "northkarana"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Northern Plains of Karana."
+    }
+  },
+  {
+    "_id": "dru-circle-of-toxxulia-25-r1",
+    "name": "Circle of Toxxulia",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-group.webp",
+    "system": {
+      "class": "druid",
+      "level": 25,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "toxxulia"
+        }
+      ],
+      "description": "Opens a mystical portal that transports your group to the Toxxulia Forest."
+    }
+  },
+  {
+    "_id": "dru-immolate-25-r1",
+    "name": "Immolate",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "druid",
+      "level": 25,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 72,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 22,
+          "max": 22,
+          "duration": 48
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -4,
+          "max": -3,
+          "duration": 48
+        }
+      ],
+      "description": "Inflicts burns on your target, causing between 17 and 72 damage every 6 seconds for 48 seconds. Requires a fire beetle eye to cast.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "dru-ring-of-knowledge-25-r1",
+    "name": "Ring of Knowledge",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 25,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.5,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "poknowledge"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to New Tanaan, in the Plane of Knowledge."
+    }
+  },
+  {
+    "_id": "dru-ring-of-misty-25-r1",
+    "name": "Ring of Misty",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-forest.webp",
+    "system": {
+      "class": "druid",
+      "level": 25,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 7.0,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport",
+          "destination": "mistythicket"
+        }
+      ],
+      "description": "Opens a mystical portal that transports you to the Misty Thicket."
+    }
+  }
+]

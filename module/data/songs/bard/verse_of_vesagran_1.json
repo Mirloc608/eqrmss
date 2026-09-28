@@ -1,0 +1,55 @@
+{
+  "id": "verse_of_vesagran_1",
+  "name": "Verse of Vesagran",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 69,
+  "description": "Surrounds your group in a protective aura, granting them protection from melee and spell attacks.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "melee-rune",
+      "value": {
+        "base": 450
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "spell-rune",
+      "value": {
+        "base": 450
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "all-stats",
+      "value": {
+        "base": 10
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "rune-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "rune-song",
+    "flute"
+  ]
+}

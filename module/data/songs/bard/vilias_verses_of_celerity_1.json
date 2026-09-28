@@ -1,0 +1,55 @@
+{
+  "id": "vilias_verses_of_celerity_1",
+  "name": "Vilia's Verses of Celerity",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 36,
+  "description": "An energetic verse which hastens the attack speed of your group.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 20
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "agi",
+      "value": {
+        "base": 70
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 5
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "voice"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "sograns_insult_3",
+  "name": "Sogran's Insult",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 117,
+  "description": "Words can hurt. These words will do up to 8833 damage to your target and push them away slightly.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 45,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "magic",
+      "value": {
+        "base": 6608
+      }
+    }
+  ],
+  "stacking": {
+    "group": "insult",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "insult",
+    "horn"
+  ]
+}

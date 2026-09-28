@@ -1,0 +1,55 @@
+{
+  "id": "psalm_of_the_nomad_3",
+  "name": "Psalm of the Nomad",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 123,
+  "description": "Surrounds your group with the Psalm of the Nomad Rk. III, increasing their armor class by up to 195 and resistance to most types of magic by 170, dealing 941 damage any creature that attacks them.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "damage-shield",
+      "value": {
+        "base": 955
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "resist-all",
+      "value": {
+        "base": 190
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 15
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "damage-shield",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "damage-shield",
+    "voice"
+  ]
+}

@@ -1,0 +1,25 @@
+<div class="tab" data-group="primary" data-tab="status">
+  <div class="panel">
+    <h3>Concussion Hits</h3>
+    <div class="hit-track-header">
+      <span>Total Hits: {{system.hits.max}}</span>
+      <span>Rounds of Stun: {{system.hits.stun}}</span>
+      <span>Bleeding/Round: {{system.hits.bleeding}}</span>
+    </div>
+    <div class="hit-boxes-grid">
+      <div class="hit-box-row"><span>Current Damage: {{system.hits.value}}</span></div>
+    </div>
+  </div>
+
+  <div class="status-split-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+    <div class="panel">
+      <h3>Exhaustion Points</h3>
+      <p>Total: {{system.exhaustion.value}} / {{system.exhaustion.max}}</p>
+    </div>
+    <div class="panel">
+      <h3>Encumbrance &amp; Movement</h3>
+      <div class="field-row"><label>BWA:</label> <span>{{system.encumbrance.bwa}} lbs</span></div>
+      <div class="field-row"><label>Base Move Rate:</label> <span>{{system.encumbrance.moveRate}} ft/rnd</span></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,241 @@
+[
+  {
+    "_id": "bst-fleeting-fury-11-r1",
+    "name": "Fleeting Fury",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 11,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 0.5,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 15,
+          "duration": 18
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 2,
+          "duration": 18
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 20,
+          "duration": 18
+        }
+      ],
+      "description": "Fills your target with a fleeting fury, increasing their strength, dexterity, and armor class for 18 seconds."
+    }
+  },
+  {
+    "_id": "bst-blast-of-frost-12-r1",
+    "name": "Blast of Frost",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear-small.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 12,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 33,
+          "resist": "cold"
+        }
+      ],
+      "description": "Blasts your target with frost, causing between 71 and 71 damage."
+    }
+  },
+  {
+    "_id": "bst-cure-poison-13-r1",
+    "name": "Cure Poison",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 13,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2,
+      "manaCost": 20,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 4
+        }
+      ],
+      "description": "Removes toxin from your target's system, curing them of minor poisons."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-lightning-13-r1",
+    "name": "Spirit of Lightning",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 13,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "name": "spirit-of-lightning-strike",
+          "chance": 150
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 75,
+          "duration": 2400
+        }
+      ],
+      "description": "Fills your warder with the power of a great spirit, increasing their dexterity by 75 and giving them a chance to perform Spirit of Lightning Strike, a [Item 1] attack."
+    }
+  },
+  {
+    "_id": "bst-sicken-14-r1",
+    "name": "Sicken",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 14,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 11,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 1,
+          "resist": "disease"
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 56,
+          "max": 56,
+          "duration": 84,
+          "resist": "disease"
+        },
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 41,
+          "resist": "disease"
+        }
+      ],
+      "description": "Sickens your target with a fever, causing 8 damage initially and 1 damage every six seconds for 84 seconds."
+    }
+  },
+  {
+    "_id": "bst-strengthen-14-r1",
+    "name": "Strengthen",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 14,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 10,
+          "duration": 1620
+        }
+      ],
+      "description": "Increases your target's strength for 27 minutes."
+    }
+  },
+  {
+    "_id": "bst-keshuvals-rejuvenation-15-r1",
+    "name": "Keshuval's Rejuvenation",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 15,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 61,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 52
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 10
+        }
+      ],
+      "description": "Restores your warder's health, healing between 97 and 149 hit points, as well as curing them of diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-khaliz-15-r1",
+    "name": "Spirit of Khaliz",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 15,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s03-l015-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  }
+]

@@ -1,0 +1,638 @@
+[
+  {
+    "_id": "bst-resist-disease-51-r1",
+    "name": "Resist Disease",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 51,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-disease",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away disease for 36 minutes."
+    }
+  },
+  {
+    "_id": "bst-resistant-discipline-51-r1",
+    "name": "Resistant Discipline",
+    "type": "spell",
+    "img": "icons/magic/fire/shield-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 51,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-all",
+          "amount": 20,
+          "duration": 300
+        }
+      ],
+      "description": "Focuses your will, increasing your resistances for a short time."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-wind-51-r1",
+    "name": "Spirit of Wind",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 51,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "name": "spirit-of-wind-strike",
+          "chance": 150
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 75,
+          "duration": 2880
+        }
+      ],
+      "description": "Fills your warder with the power of a great spirit, increasing their dexterity by 75 and giving them a chance to perform Spirit of Wind Strike, a [Item 1] attack that can stun targets up to level 55."
+    }
+  },
+  {
+    "_id": "bst-ultravision-51-r1",
+    "name": "Ultravision",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 51,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 55,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 2160
+        }
+      ],
+      "description": "Provides vastly improved night vision."
+    }
+  },
+  {
+    "_id": "bst-aid-of-khurenz-52-r1",
+    "name": "Aid of Khurenz",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 52,
+      "school": "alteration",
+      "target": "pet",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 293,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 364
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 16
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 16
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 16
+        }
+      ],
+      "description": "Restores your warder's health, healing between 738 and 1044 hit points, as well as curing them of diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "bst-bond-of-the-wild-52-r1",
+    "name": "Bond of the Wild",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 52,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 450,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 55,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 60,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 25,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 3600
+        }
+      ],
+      "description": "Creates a magical bond between you and your warder, boosting your hit points, as well as increasing your warder's attack speed, armor class, strength, and attack rating for 60 minutes."
+    }
+  },
+  {
+    "_id": "bst-health-52-r1",
+    "name": "Health",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 52,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "sta",
+          "amount": 31,
+          "duration": 3240
+        }
+      ],
+      "description": "Fills your target with superior health, increasing their stamina for 54 minutes."
+    }
+  },
+  {
+    "_id": "bst-spiritual-radiance-52-r1",
+    "name": "Spiritual Radiance",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 52,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 5,
+      "manaCost": 550,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 2,
+          "max": 2,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 2,
+          "duration": 4320
+        }
+      ],
+      "description": "Envelops your target in an aura of spiritual light, increasing their mana and hit point regeneration."
+    }
+  },
+  {
+    "_id": "bst-venom-of-the-snake-52-r1",
+    "name": "Venom of the Snake",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 52,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 203,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 7,
+          "resist": "poison"
+        },
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 350,
+          "resist": "poison"
+        },
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 2335,
+          "max": 2335,
+          "duration": 36,
+          "resist": "poison"
+        }
+      ],
+      "description": "Fills your target's blood with poison, causing 33 damage initially and between 171 and 220 damage every six seconds for 36 seconds."
+    }
+  },
+  {
+    "_id": "bst-deftness-53-r1",
+    "name": "Deftness",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 53,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 40,
+          "duration": 3240
+        }
+      ],
+      "description": "Fills your target with a sense of deftness, increasing their dexterity for 54 minutes."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-the-storm-53-r1",
+    "name": "Spirit of the Storm",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 53,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 110,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "name": "spirit-of-storm-strike",
+          "chance": 150
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 75,
+          "duration": 2880
+        }
+      ],
+      "description": "Fills your warder with the power of a great spirit, increasing their dexterity by 75 and giving them a chance to perform Spirit of Storm Strike, a [Item 2] attack that can stun targets up to level 55."
+    }
+  },
+  {
+    "_id": "bst-talisman-of-tnarg-53-r1",
+    "name": "Talisman of Tnarg",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 53,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 150,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 382
+        }
+      ],
+      "description": "Imbues your target with the talisman of Tnarg, providing increased hit points for 72 minutes."
+    }
+  },
+  {
+    "_id": "bst-fearless-discipline-54-r1",
+    "name": "Fearless Discipline",
+    "type": "spell",
+    "img": "icons/magic/nature/leaf-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 54,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "fear-resist",
+          "amount": 100,
+          "duration": 60
+        }
+      ],
+      "description": "Strengthens your resolve, rendering you immune to fear."
+    }
+  },
+  {
+    "_id": "bst-furious-strength-54-r1",
+    "name": "Furious Strength",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 54,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 34,
+          "duration": 3240
+        }
+      ],
+      "description": "Fills your target's body with furious power, increases their strength for 54 minutes."
+    }
+  },
+  {
+    "_id": "bst-ice-shard-54-r1",
+    "name": "Ice Shard",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear-small.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 54,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 156,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 386,
+          "resist": "cold"
+        }
+      ],
+      "description": "Strikes your target with an ice shard, causing between 404 and 404 damage."
+    }
+  },
+  {
+    "_id": "bst-resist-poison-54-r1",
+    "name": "Resist Poison",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 54,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-poison",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away poison for 36 minutes."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-omakin-54-r1",
+    "name": "Spirit of Omakin",
+    "type": "spell",
+    "img": "icons/magic/nature/bear-spirit.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 54,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 8,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s11-l054-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-snow-54-r1",
+    "name": "Spirit of Snow",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 54,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "name": "spirit-of-snow-strike",
+          "chance": 150
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 75,
+          "duration": 2880
+        }
+      ],
+      "description": "Fills your warder with the power of a great spirit, increasing their dexterity by 75 and giving them a chance to perform Spirit of Snow Strike, a [Item 3] attack that can stun targets up to level 55."
+    }
+  },
+  {
+    "_id": "bst-chloroplast-55-r1",
+    "name": "Chloroplast",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 55,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 5,
+          "duration": 1230
+        }
+      ],
+      "description": "Hastens your target's natural healing, regenerating up to 19 hit points every 6 seconds for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "bst-omakins-alacrity-55-r1",
+    "name": "Omakin's Alacrity",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 55,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 60,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 70,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 40,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 9,
+          "duration": 3600
+        }
+      ],
+      "description": "Fills your warder with the alacrity of Omakin, increasing their attack speed, strength, armor class, and attack rating."
+    }
+  },
+  {
+    "_id": "bst-protective-spirit-discipline-55-r1",
+    "name": "Protective Spirit Discipline",
+    "type": "spell",
+    "img": "icons/magic/life/heart-flame-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 55,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mitigation",
+          "amount": 90,
+          "duration": 12
+        }
+      ],
+      "description": "Calls a protective spirit to guard your body, greatly decreasing the damage you take."
+    }
+  },
+  {
+    "_id": "bst-shas-restoration-55-r1",
+    "name": "Sha's Restoration",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 55,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.75,
+      "manaCost": 404,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 418
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 20
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 20
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 20
+        }
+      ],
+      "description": "Restores your warder's health, healing between 1041 and 1461 hit points, as well as curing them of diseases, poisons, and curses."
+    }
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "id": "kanghammers_song_of_suffering_1",
+  "name": "Kanghammer's Song of Suffering",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 124,
+  "description": "Grants your companions the ability to deal 56511 magical damage to those they strike in melee combat. These strikes will lower the recipient's hatred for the attacker by 3469.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "skill-proc",
+      "proc": "kanghammers-strike",
+      "amount": 200
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "voice"
+  ]
+}

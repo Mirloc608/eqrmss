@@ -1,0 +1,806 @@
+[
+  {
+    "_id": "nec-dread-of-night-51-r1",
+    "name": "Dread of Night",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 51,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52,
+          "duration": 48,
+          "resist": "magic",
+          "resistMod": -25
+        }
+      ],
+      "description": "Inspires fear in an undead opponent, causing them to flee."
+    }
+  },
+  {
+    "_id": "nec-sacrifice-51-r1",
+    "name": "Sacrifice",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 51,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "sacrifice"
+        }
+      ],
+      "description": "Consumes a willing target's soul and binds it within an essence emerald. Players killed in this manner cannot be resurrected."
+    }
+  },
+  {
+    "_id": "nec-splurt-51-r1",
+    "name": "Splurt",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 51,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 237,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 15,
+          "max": 258,
+          "duration": 96,
+          "resist": "magic",
+          "resistMod": -100
+        }
+      ],
+      "description": "Causes your target's body to splurt, doing progressively more damage the longer it lasts."
+    }
+  },
+  {
+    "_id": "nec-comatose-52-r1",
+    "name": "Comatose",
+    "type": "spell",
+    "img": "icons/magic/death/feign-death.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 52,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "feign-death",
+          "amount": 87
+        }
+      ],
+      "description": "Causes you to stop breathing and appear dead to most creatures."
+    }
+  },
+  {
+    "_id": "nec-defoliation-52-r1",
+    "name": "Defoliation",
+    "type": "spell",
+    "img": "icons/magic/debuff/disease-cloud-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 52,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 545,
+          "resist": "disease"
+        }
+      ],
+      "description": "Inflicts severe damage upon a targeted plant, causing between 125 and 725 damage."
+    }
+  },
+  {
+    "_id": "nec-degeneration-52-r1",
+    "name": "Degeneration",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 52,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.5,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -30,
+          "duration": 360,
+          "resist": "disease"
+        },
+        {
+          "type": "debuff",
+          "stat": "sta",
+          "amount": -30,
+          "duration": 360,
+          "resist": "disease"
+        }
+      ],
+      "description": "Steals your target's strength and stamina in order to increase your own for 6 minutes."
+    }
+  },
+  {
+    "_id": "nec-manaskin-52-r1",
+    "name": "Manaskin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 52,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 330,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "rune-shield",
+          "percent": 100,
+          "amount": 600,
+          "duration": 7200
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 1,
+          "max": 1,
+          "duration": 7200
+        }
+      ],
+      "description": "Covers you in a magical skin that absorbs some damage before dissipating. This spell also increases your mana regeneration rate."
+    }
+  },
+  {
+    "_id": "nec-plague-52-r1",
+    "name": "Plague",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 52,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 308,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 9,
+          "duration": 78
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 77,
+          "max": 77,
+          "duration": 78,
+          "resist": "disease"
+        },
+        {
+          "type": "damage",
+          "element": "disease",
+          "amount": 108,
+          "resist": "disease"
+        }
+      ],
+      "description": "Sickens your target with a fever, causing 144 damage initially and between 97 and 156 damage every six seconds for 78 seconds."
+    }
+  },
+  {
+    "_id": "nec-scent-of-terris-52-r1",
+    "name": "Scent of Terris",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 52,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 9,
+          "duration": 840
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 36,
+          "duration": 840,
+          "resist": "poison"
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 36,
+          "duration": 840,
+          "resist": "poison"
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 36,
+          "duration": 840,
+          "resist": "poison"
+        }
+      ],
+      "description": "Reduces fire, poison, and disease resistance by 7 for 14 minutes."
+    }
+  },
+  {
+    "_id": "nec-annul-magic-53-r1",
+    "name": "Annul Magic",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 53,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel-magic",
+          "amount": 9
+        },
+        {
+          "type": "utility",
+          "effect": "dispel-magic",
+          "amount": 9
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "nec-convergence-53-r1",
+    "name": "Convergence",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 53,
+      "school": "alteration",
+      "target": "corpse",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 700,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "resurrect",
+          "percent": 93
+        }
+      ],
+      "description": "Revives a slain ally, restoring 93% of their lost experience. It takes some time for the recently revived to fully recover."
+    }
+  },
+  {
+    "_id": "nec-instill-53-r1",
+    "name": "Instill",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 53,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 96,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 96 seconds."
+    }
+  },
+  {
+    "_id": "nec-minion-of-shadows-53-r1",
+    "name": "Minion of Shadows",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 53,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 14.0,
+      "manaCost": 525,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "minion-of-shadows"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-deflux-54-r1",
+    "name": "Deflux",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 54,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 299,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 466,
+          "max": 466,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 535 and 535 hit points."
+    }
+  },
+  {
+    "_id": "nec-focus-mass-simple-spellcasters-empowering-essence-54-r1",
+    "name": "Focus Mass Simple Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 54,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Simple Spellcaster's Empowering Essence",
+          "amount": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-imprecation-54-r1",
+    "name": "Imprecation",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 54,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 290,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "curse",
+          "amount": 16,
+          "duration": 30
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 208,
+          "max": 208,
+          "duration": 30,
+          "resist": "magic",
+          "resistMod": -20
+        }
+      ],
+      "description": "Inflicts a dark curse upon your target, addingg 16 curse counters and causing between 120 and 245 damage every six seconds for 30 seconds."
+    }
+  },
+  {
+    "_id": "nec-shadowbond-54-r1",
+    "name": "Shadowbond",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 54,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 109,
+          "duration": 24
+        }
+      ],
+      "description": "Transfers your own health to your target at a rate of 125 hit points every six seconds for 24 seconds."
+    }
+  },
+  {
+    "_id": "nec-shield-of-the-magi-54-r1",
+    "name": "Shield of the Magi",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 54,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 250,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 7,
+          "max": 9,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 24,
+          "duration": 5400
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "nec-succussion-of-shadows-54-r1",
+    "name": "Succussion of Shadows",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 54,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -5,
+          "max": -4,
+          "duration": 360,
+          "resist": "disease"
+        }
+      ],
+      "description": "Assaults your target with living shadow, draining their armor class while increasing your group's for 6 minutes."
+    }
+  },
+  {
+    "_id": "nec-thrall-of-bones-54-r1",
+    "name": "Thrall of Bones",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 54,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 53,
+          "duration": 1230,
+          "resist": "magic",
+          "resistMod": -10
+        }
+      ],
+      "description": "Commands an undead creature to do your bidding, temporarily bending them to your will."
+    }
+  },
+  {
+    "_id": "nec-torbas-venom-blast-54-r1",
+    "name": "Torbas' Venom Blast",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 54,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 251,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 600,
+          "resist": "poison"
+        }
+      ],
+      "description": "Strikes your target with a jet of poison, causing between 688 and 688 damage."
+    }
+  },
+  {
+    "_id": "nec-augmentation-of-death-55-r1",
+    "name": "Augmentation of Death",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 55,
+      "school": "enchantment",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 55,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 65,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 3600
+        }
+      ],
+      "description": "Fills your pet with rage, giving it increased attack speed, armor class, and strength for 60 minutes."
+    }
+  },
+  {
+    "_id": "nec-chill-bones-55-r1",
+    "name": "Chill Bones",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-transform.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 55,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 210,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 627,
+          "resist": "cold"
+        },
+        {
+          "type": "illusion",
+          "form": "skeleton",
+          "duration": 12
+        },
+        {
+          "type": "utility",
+          "effect": "interrupt"
+        }
+      ],
+      "description": "Freezes the flesh on your target's body, causing 450 damage and temporarily transforming them into a skeleton. Can stun targets up to level 55 for up to 0.5 seconds."
+    }
+  },
+  {
+    "_id": "nec-conglaciation-of-bone-55-r1",
+    "name": "Conglaciation of Bone",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 55,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 210,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 541,
+          "resist": "cold"
+        },
+        {
+          "type": "control",
+          "effect": "stun",
+          "duration": 1,
+          "amount": 55,
+          "resist": "cold"
+        }
+      ],
+      "description": "Freezes the flesh from your target's body, causing between 450 and 500 damage and stunning them for 1 second up to level 55."
+    }
+  },
+  {
+    "_id": "nec-dark-rune-55-r1",
+    "name": "Dark Rune",
+    "type": "spell",
+    "img": "icons/magic/death/skull-aura-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 55,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "aura-dark-rune-effect"
+        }
+      ],
+      "description": "Scribes a rune of darkness on the ground that will curse any creature that wanders too close to it. The curse will cause continual damage for a short time."
+    }
+  },
+  {
+    "_id": "nec-focus-spellcasters-empowering-essence-55-r1",
+    "name": "Focus Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 55,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Spellcaster's Empowering Essence",
+          "amount": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-infusion-55-r1",
+    "name": "Infusion",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 55,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 1,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana",
+          "amount": 1000
+        }
+      ],
+      "description": "Fuels your mind with energy taken from an essence emerald. Consumes an essence emerald when cast."
+    }
+  },
+  {
+    "_id": "nec-levant-55-r1",
+    "name": "Levant",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-self.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 55,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 500,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "evacuate"
+        }
+      ],
+      "description": "Teleports you through the shadow realm temporarily, reappearing in reality at the safe point of the zone."
+    }
+  },
+  {
+    "_id": "nec-skin-of-the-shadow-55-r1",
+    "name": "Skin of the Shadow",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 55,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "standard",
+          "duration": 2160
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 2160
+        }
+      ],
+      "description": "Covers your body in the skin of the shadow, granting invisibility and improved night vision."
+    }
+  }
+]

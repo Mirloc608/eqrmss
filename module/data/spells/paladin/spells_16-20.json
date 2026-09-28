@@ -1,0 +1,155 @@
+[
+  {
+    "_id": "pal-halo-of-light-16-r1",
+    "name": "Halo of Light",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "paladin",
+      "level": 16,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "halo-of-light"
+        }
+      ],
+      "description": "Focuses magical energy into a halo that provides an aura of light when worn."
+    }
+  },
+  {
+    "_id": "pal-invisibility-versus-undead-17-r1",
+    "name": "Invisibility Versus Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "paladin",
+      "level": 17,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "invisibility",
+          "vs": "undead",
+          "duration": 1620
+        }
+      ],
+      "description": "Cloaks your target in a light aura, rendering them invisible to most undead creatures for up to 27 minutes."
+    }
+  },
+  {
+    "_id": "pal-reckless-strength-18-r1",
+    "name": "Reckless Strength",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 18,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 19,
+          "duration": 180
+        }
+      ],
+      "description": "Focuses your target's strength into an intense burst, increasing it for a short time, but then gradually decaying over the next 3 minutes."
+    }
+  },
+  {
+    "_id": "pal-remove-minor-curse-19-r1",
+    "name": "Remove Minor Curse",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 19,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 5
+        }
+      ],
+      "description": "Cleanses your target's soul, removing minor curses."
+    }
+  },
+  {
+    "_id": "pal-root-19-r1",
+    "name": "Root",
+    "type": "spell",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "class": "paladin",
+      "level": 19,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 48
+        }
+      ],
+      "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 48 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-center-20-r1",
+    "name": "Center",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 20,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.25,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 2,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 105,
+          "duration": 1620
+        },
+        {
+          "type": "heal",
+          "amount": 96
+        }
+      ],
+      "description": "Provides your target with a focused sense of self, increasing their hit points and armor class for 27 minutes."
+    }
+  }
+]

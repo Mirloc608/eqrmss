@@ -1,0 +1,1160 @@
+[
+  {
+    "_id": "enc-augment-56-r1",
+    "name": "Augment",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 56,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 135,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 70,
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "agi",
+          "amount": 70,
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 8,
+          "max": 11,
+          "duration": 2160
+        }
+      ],
+      "description": "Fills your target with energy, increasing their attack speed, agility, and stamina regeneration."
+    }
+  },
+  {
+    "_id": "enc-gift-of-pure-thought-56-r1",
+    "name": "Gift of Pure Thought",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 56,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 12,
+          "max": 12,
+          "duration": 1980
+        }
+      ],
+      "description": "Calms your group's thoughts, allowing them to regenerate mana more quickly."
+    }
+  },
+  {
+    "_id": "enc-horrifying-visage-56-r1",
+    "name": "Horrifying Visage",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 56,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 2.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "increase-hate",
+          "amount": 10,
+          "duration": 36
+        }
+      ],
+      "description": "Cloaks your target in a haunting visage, drawing more attention to any action they take."
+    }
+  },
+  {
+    "_id": "enc-imbue-disease-56-r1",
+    "name": "Imbue Disease",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 56,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "green-diamond-of-disease",
+          "count": 1
+        }
+      ],
+      "description": "Imbues a diamond with the power of disease; it consumes a raw diamond and a bubonian blood when cast."
+    }
+  },
+  {
+    "_id": "enc-imbue-justice-56-r1",
+    "name": "Imbue Justice",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 56,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "white-diamond-of-justice",
+          "count": 1
+        }
+      ],
+      "description": "Imbues a diamond with the power of justice. Consumes a raw diamond and an alkaline etched stone when cast."
+    }
+  },
+  {
+    "_id": "enc-overwhelming-splendor-56-r1",
+    "name": "Overwhelming Splendor",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 56,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 175,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "cha",
+          "amount": 50,
+          "duration": 4860
+        }
+      ],
+      "description": "Cloaks you in a radiant visage, increasing your charisma."
+    }
+  },
+  {
+    "_id": "enc-torment-of-argli-56-r1",
+    "name": "Torment of Argli",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 56,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 147,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "wis",
+          "amount": -39,
+          "duration": 120,
+          "resist": "magic"
+        },
+        {
+          "type": "dot",
+          "element": "mana",
+          "min": 28,
+          "max": 28,
+          "duration": 120,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "int",
+          "amount": -39,
+          "duration": 120,
+          "resist": "magic"
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 23,
+          "max": 23,
+          "duration": 120
+        }
+      ],
+      "description": "Consumes your target in mental torment, causing 23 damage every six seconds for 2 minutes. This spell also lowers their intelligence and wisdom, and drains their mana."
+    }
+  },
+  {
+    "_id": "enc-trepidation-56-r1",
+    "name": "Trepidation",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 56,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52,
+          "duration": 36,
+          "resist": "magic",
+          "resistMod": -25
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  },
+  {
+    "_id": "enc-enlightenment-57-r1",
+    "name": "Enlightenment",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "wis",
+          "amount": 44,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "int",
+          "amount": 44,
+          "duration": 3600
+        }
+      ],
+      "description": "Expands your target's mind, increasing their intelligence and wisdom."
+    }
+  },
+  {
+    "_id": "enc-forlorn-deeds-57-r1",
+    "name": "Forlorn Deeds",
+    "type": "spell",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 57,
+      "school": "enchantment",
+      "target": "single",
+      "range": 250,
+      "castTime": 6.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "slow",
+          "amount": 70,
+          "duration": 210,
+          "resist": "magic"
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 16
+        }
+      ],
+      "description": "Constricts your target's muscles, causing their attack speed to slow for 3.5 minutes."
+    }
+  },
+  {
+    "_id": "enc-imbue-earth-57-r1",
+    "name": "Imbue Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 57,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "brown-diamond-of-earth",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the power of earth into a diamond. Consumes a raw diamond and earth mephit blood when cast."
+    }
+  },
+  {
+    "_id": "enc-imbue-nightmare-57-r1",
+    "name": "Imbue Nightmare",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 57,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "black-diamond-of-nightmares",
+          "count": 1
+        }
+      ],
+      "description": "Imbues a diamond with the power of nightmares. Consumes a raw diamond and nightmare mephit blood when cast."
+    }
+  },
+  {
+    "_id": "enc-imbue-storm-57-r1",
+    "name": "Imbue Storm",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 57,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "gray-diamond-of-storms",
+          "count": 1
+        }
+      ],
+      "description": "Imbues a diamond with the power of the storm. Consumes a raw diamond and storm rider blood when cast."
+    }
+  },
+  {
+    "_id": "enc-imbue-torment-57-r1",
+    "name": "Imbue Torment",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 57,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "purple-diamond-of-torment",
+          "count": 1
+        }
+      ],
+      "description": "Imbues a diamond with the power of torment. Consumes a raw diamond and tormentor blood when cast."
+    }
+  },
+  {
+    "_id": "enc-phobia-57-r1",
+    "name": "Phobia",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 57,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 55,
+          "duration": 42,
+          "resist": "magic"
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  },
+  {
+    "_id": "enc-tashanian-57-r1",
+    "name": "Tashanian",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 57,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 1
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 43,
+          "resist": "magic",
+          "duration": 840
+        }
+      ],
+      "description": "Causes your target's ears to echo with the barking of Tashan, lowering their magic resistance."
+    }
+  },
+  {
+    "_id": "enc-umbra-57-r1",
+    "name": "Umbra",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 57,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 7.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 6,
+          "duration": 5940
+        }
+      ],
+      "description": "Causes your image to blur, making it harder for your opponents to hit you by increasing your armor class."
+    }
+  },
+  {
+    "_id": "enc-bedlam-58-r1",
+    "name": "Bedlam",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 50,
+          "duration": 450
+        },
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 326,
+          "duration": 450
+        },
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -25,
+          "duration": 450
+        }
+      ],
+      "description": "Hardens your skin and fills your arms with energy, increasing strength and absorbing damage, while also decreasing your agility."
+    }
+  },
+  {
+    "_id": "enc-dementing-visions-58-r1",
+    "name": "Dementing Visions",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 58,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.5,
+      "manaCost": 239,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 779
+        }
+      ],
+      "description": "Strikes your target with a chaotic burst of mental energy, causing 779 damage."
+    }
+  },
+  {
+    "_id": "enc-fetter-58-r1",
+    "name": "Fetter",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 180,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes the earth to adhere to your target's body, preventing them from moving for up to 3 minutes."
+    }
+  },
+  {
+    "_id": "enc-glamorous-visage-58-r1",
+    "name": "Glamorous Visage",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 58,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 2.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "decrease-hate-generated",
+          "amount": 10,
+          "duration": 36
+        }
+      ],
+      "description": "Cloaks your target in a calming visage, diverting attention from any action they take."
+    }
+  },
+  {
+    "_id": "enc-imbue-valor-58-r1",
+    "name": "Imbue Valor",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 58,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "yellow-diamond-of-valor",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the essence of Valor into a raw diamond. Consumes a diamond and Blood of Valor when cast."
+    }
+  },
+  {
+    "_id": "enc-imbue-war-58-r1",
+    "name": "Imbue War",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 58,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "orange-diamond-of-war",
+          "count": 1
+        }
+      ],
+      "description": "Imbues a diamond with the power of war. Consumes a raw diamond and a war wraith blood when cast."
+    }
+  },
+  {
+    "_id": "enc-reflect-58-r1",
+    "name": "Reflect",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 58,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "reflect-spell",
+          "amount": 50,
+          "maxAmount": 50,
+          "duration": 12
+        }
+      ],
+      "description": "Surrounds your body in a reflective aura, providing a chance for all incoming spells to rebound back against the caster."
+    }
+  },
+  {
+    "_id": "enc-wondrous-rapidity-58-r1",
+    "name": "Wondrous Rapidity",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 58,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 7.0,
+      "manaCost": 325,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 71,
+          "duration": 1230
+        }
+      ],
+      "description": "Grants your target quickened movement, increasing their attack speed for 20.5 minutes."
+    }
+  },
+  {
+    "_id": "enc-asphyxiate-59-r1",
+    "name": "Asphyxiate",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 59,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 334,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 178
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -75,
+          "duration": 48,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -75,
+          "duration": 48,
+          "resist": "magic"
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 178,
+          "max": 178,
+          "duration": 48
+        }
+      ],
+      "description": "Constricts your target's throat, causing 178 damage initially and between 108 and 178 damage every six seconds for 48 seconds, as well as lowering their strength and agility."
+    }
+  },
+  {
+    "_id": "enc-focus-mass-refined-spellcasters-empowering-essence-59-r1",
+    "name": "Focus Mass Refined Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 59,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "refined-spellcasters-empowering-essence",
+          "count": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-greater-mass-distill-mana-59-r1",
+    "name": "Greater Mass Distill Mana",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 59,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 4800,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "vial-of-distilled-mana",
+          "count": 20
+        }
+      ],
+      "description": "Distills mana into a physical form, creating twenty vials of distilled mana. Consumes twenty poison vials and fourty sapphires when cast."
+    }
+  },
+  {
+    "_id": "enc-imbue-air-59-r1",
+    "name": "Imbue Air",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 59,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "cloudy-diamond-of-air",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the power of air into a diamond. Consumes a raw diamond and air mephit blood when cast."
+    }
+  },
+  {
+    "_id": "enc-rapture-59-r1",
+    "name": "Rapture",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 59,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 61,
+          "duration": 42,
+          "resist": "magic",
+          "resistMod": -1000
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 80
+        }
+      ],
+      "description": "Causes your opponent to fall into an enchanted sleep for up to 42 seconds. This spell works on creatures up to level 61."
+    }
+  },
+  {
+    "_id": "enc-ancient-chaotic-visions-60-r1",
+    "name": "Ancient: Chaotic Visions",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.5,
+      "manaCost": 220,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1000
+        }
+      ],
+      "description": "Strikes your target with a chaotic burst of mental energy, causing 1000 damage."
+    }
+  },
+  {
+    "_id": "enc-ancient-eternal-rapture-60-r1",
+    "name": "Ancient: Eternal Rapture",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 61,
+          "duration": 42,
+          "resist": "magic",
+          "resistMod": -1000
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 80
+        }
+      ],
+      "description": "Causes your opponent to fall into an enchanted sleep for up to 42 seconds. This spell works on creatures up to level 61."
+    }
+  },
+  {
+    "_id": "enc-dictate-60-r1",
+    "name": "Dictate",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 750,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 58,
+          "duration": 48,
+          "resist": "magic",
+          "resistMod": -1000
+        }
+      ],
+      "description": "Dominates your target's mind, allowing you to control them for a short time. This spell works on creatures up to level 58 ."
+    }
+  },
+  {
+    "_id": "enc-focus-intricate-spellcasters-empowering-essence-60-r1",
+    "name": "Focus Intricate Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 450,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "intricate-spellcasters-empowering-essence",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-gift-of-brilliance-60-r1",
+    "name": "Gift of Brilliance",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 450,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana",
+          "amount": 150,
+          "duration": 6000
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 2,
+          "max": 2,
+          "duration": 6000
+        }
+      ],
+      "description": "Grants your target increased mental capacities, increasing their mana pool and mana regeneration."
+    }
+  },
+  {
+    "_id": "enc-imbue-fire-60-r1",
+    "name": "Imbue Fire",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "red-diamond-of-fire",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the power of fire into a diamond. Consumes a raw diamond and fire mephit blood when cast."
+    }
+  },
+  {
+    "_id": "enc-imbue-water-60-r1",
+    "name": "Imbue Water",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "aqua-diamond-of-water",
+          "count": 1
+        }
+      ],
+      "description": "Focuses the power of water into a diamond. Consumes a raw diamond and water mephit blood when cast."
+    }
+  },
+  {
+    "_id": "enc-koadics-endless-intellect-60-r1",
+    "name": "Koadic's Endless Intellect",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 900,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana",
+          "amount": 250,
+          "duration": 9000
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 14,
+          "max": 14,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "int",
+          "amount": 25,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "wis",
+          "amount": 25,
+          "duration": 9000
+        }
+      ],
+      "description": "Calms your group's thoughts, allowing them to regenerate mana more quickly, as well as increasing their wisdom, intelligence, and mana pool."
+    }
+  },
+  {
+    "_id": "enc-speed-of-the-brood-60-r1",
+    "name": "Speed of the Brood",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "enchantment",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 560,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 66,
+          "duration": 1800
+        },
+        {
+          "type": "buff",
+          "stat": "agi",
+          "amount": 40,
+          "duration": 1800
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 1800
+        }
+      ],
+      "description": "Fills your group with energy, increasing their attack speed, agility, armor class, and stamina regeneration."
+    }
+  },
+  {
+    "_id": "enc-visions-of-grandeur-60-r1",
+    "name": "Visions of Grandeur",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 275,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 58,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "agi",
+          "amount": 40,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 25,
+          "duration": 2520
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 20,
+          "duration": 2520
+        }
+      ],
+      "description": "Fills your target with energy, increasing their attack speed, dexterity, and attack rating."
+    }
+  },
+  {
+    "_id": "enc-wind-of-tashanian-60-r1",
+    "name": "Wind of Tashanian",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 60,
+      "school": "abjuration",
+      "target": "area",
+      "range": 200,
+      "castTime": 1.0,
+      "manaCost": 70,
+      "radius": 40,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 1
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "amount": 40,
+          "resist": "magic",
+          "duration": 840
+        }
+      ],
+      "description": "Causes the ears of up to 30 creatures in a small radius around your target to echo with the barking of Tashan, lowering their magic resistance."
+    }
+  }
+]

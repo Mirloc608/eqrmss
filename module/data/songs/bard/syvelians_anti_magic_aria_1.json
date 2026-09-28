@@ -1,0 +1,36 @@
+{
+  "id": "syvelians_anti_magic_aria_1",
+  "name": "Syvelian's Anti-Magic Aria",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 40,
+  "description": "An aria that can strip away magical effects from your target.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "dispel",
+      "amount": 4
+    }
+  ],
+  "stacking": {
+    "group": "dispel-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "debuff",
+    "dispel-song",
+    "voice"
+  ]
+}

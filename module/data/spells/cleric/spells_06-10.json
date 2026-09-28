@@ -1,0 +1,340 @@
+[
+ {
+  "_id": "clr-endure-poison-6-r1",
+  "name": "Endure Poison",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 6,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 2.5,
+   "manaCost": 20,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "resist-poison",
+     "amount": 20,
+     "duration": 1620
+    }
+   ],
+   "description": "Surrounds your target with an aura of protection, warding away poison for 27 minutes."
+  }
+ },
+ {
+  "_id": "clr-fear-6-r1",
+  "name": "Fear",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 6,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.5,
+   "manaCost": 40,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 18,
+     "resist": "magic"
+    }
+   ],
+   "description": "A booming voice fills your target's ears, causing them to flee in terror."
+  }
+ },
+ {
+  "_id": "clr-sanctuary-6-r1",
+  "name": "Sanctuary",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 6,
+   "school": "divination",
+   "target": "area",
+   "range": 100,
+   "castTime": 2.5,
+   "manaCost": 25,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "sanctuary"
+    }
+   ],
+   "description": "Creates a watchful ward at a location you choose, which will alert you to movement in the area every 2 seconds for up to 144 seconds.",
+   "radius": 100
+  }
+ },
+ {
+  "_id": "clr-center-7-r1",
+  "name": "Center",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 7,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 2.25,
+   "manaCost": 40,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 1,
+     "max": 2,
+     "duration": 1620
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 59,
+     "duration": 1620
+    },
+    {
+     "type": "heal",
+     "amount": 59
+    }
+   ],
+   "description": "Provides your target with a focused sense of self, increasing their hit points and armor class for 27 minutes."
+  }
+ },
+ {
+  "_id": "clr-hammer-of-wrath-7-r1",
+  "name": "Hammer of Wrath",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+   "class": "cleric",
+   "level": 7,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "summon-pet",
+     "pet": "hammer-of-wrath"
+    }
+   ],
+   "description": "Summons a magical hammer that is particularly adept at smiting undead."
+  }
+ },
+ {
+  "_id": "clr-root-7-r1",
+  "name": "Root",
+  "type": "spell",
+  "img": "icons/magic/nature/root-vines-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 7,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.0,
+   "manaCost": 30,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "root",
+     "duration": 48,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 48 seconds."
+  }
+ },
+ {
+  "_id": "clr-endure-fire-8-r1",
+  "name": "Endure Fire",
+  "type": "spell",
+  "img": "icons/magic/symbols/rune-stone-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 8,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 2.5,
+   "manaCost": 20,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "resist-fire",
+     "amount": 20,
+     "duration": 1620
+    }
+   ],
+   "description": "Surrounds your target with an aura of protection, warding away fire for 27 minutes."
+  }
+ },
+ {
+  "_id": "clr-remove-minor-curse-8-r1",
+  "name": "Remove Minor Curse",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 8,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.0,
+   "manaCost": 25,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 2
+    }
+   ],
+   "description": "Cleanses your target's soul, removing minor curses."
+  }
+ },
+ {
+  "_id": "clr-summon-food-8-r1",
+  "name": "Summon Food",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 8,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 10,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Black Bread"
+    }
+   ],
+   "description": "Focuses mana into an edible loaf of black bread."
+  }
+ },
+ {
+  "_id": "clr-sense-the-dead-9-r1",
+  "name": "Sense the Dead",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 9,
+   "school": "divination",
+   "target": "self",
+   "range": 0,
+   "castTime": 2.0,
+   "manaCost": 5,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "sense-undead"
+    }
+   ],
+   "description": "Provides you with a mystical undead awareness, pointing you towards the nearest undead creature."
+  }
+ },
+ {
+  "_id": "clr-word-of-pain-9-r1",
+  "name": "Word of Pain",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 9,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 2.0,
+   "manaCost": 47,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 16,
+     "radius": 20,
+     "resist": "magic"
+    }
+   ],
+   "description": "A forbidden word that causes between 8.4 and 16 damage to up to 30 nearby enemies.",
+   "radius": 20
+  }
+ },
+ {
+  "_id": "clr-bind-affinity-10-r1",
+  "name": "Bind Affinity",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 10,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 6.0,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "bind"
+    }
+   ],
+   "description": "Binds the soul of your target to their current location. Use of this spell is often limited to towns and cities."
+  }
+ },
+ {
+  "_id": "clr-healing-10-r1",
+  "name": "Healing",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 10,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 2.5,
+   "manaCost": 65,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 54,
+     "max": 99
+    }
+   ],
+   "description": "Mends moderate wounds, healing between 54 and 99 hit points."
+  }
+ },
+ {
+  "_id": "clr-ionys-lesser-augury-10-r1",
+  "name": "Iony's Lesser Augury",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 10,
+   "school": "divination",
+   "target": "single",
+   "range": 40,
+   "castTime": 4.0,
+   "manaCost": 70,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "appraise-chest"
+    }
+   ],
+   "description": "Attempts to sense the presence of a cursed trap on the targeted object."
+  }
+ }
+]

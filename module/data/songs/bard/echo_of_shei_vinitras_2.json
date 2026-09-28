@@ -1,0 +1,36 @@
+{
+  "id": "echo_of_shei_vinitras_2",
+  "name": "Echo of Shei Vinitras",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 117,
+  "description": "Calls forth a blessing of renewal to add 1129 health, 309 mana, and 24 endurance every six seconds to your group, as long as they stay within earshot of your echo.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "aura",
+      "aura": "echo-of-shei-vinitras-effect"
+    }
+  ],
+  "stacking": {
+    "group": "aura",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "aura",
+    "voice"
+  ]
+}

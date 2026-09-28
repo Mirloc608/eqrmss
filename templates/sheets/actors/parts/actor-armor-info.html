@@ -1,0 +1,105 @@
+<section class="armor-block">
+
+    <div class="armor-field">
+        <label>
+            {{ localize "eqrmss.pc_sheet_armor_info.armor_type" }}
+        </label>
+        <input type="text"
+               name="system.combat.armorType"
+               value="{{system.combat.armorType}}"
+               data-dtype="String"/>
+    </div>
+
+    <div class="armor-field">
+        <label>
+            {{ localize "eqrmss.pc_sheet_armor_info.mmp" }}
+        </label>
+        <input type="number"
+               name="system.combat.mmp"
+               value="{{system.combat.mmp}}"
+               data-dtype="Number"/>
+    </div>
+
+    <div class="armor-field">
+        <label>
+            {{ localize "eqrmss.pc_sheet_armor_info.weight_penalty" }}
+        </label>
+        <input type="number"
+               name="system.combat.penalties.weight"
+               value="{{system.combat.penalties.weight}}"
+               data-dtype="Number"/>
+    </div>
+
+    <div class="armor-field">
+        <label>
+            {{ localize "eqrmss.pc_sheet_armor_info.missile_penalty" }}
+        </label>
+        <input type="number"
+               name="system.combat.penalties.missile"
+               value="{{system.combat.penalties.missile}}"
+               data-dtype="Number"/>
+    </div>
+
+    <div class="armor-field">
+        <label>
+            {{ localize "eqrmss.pc_sheet_armor_info.quickness_penalty" }}
+        </label>
+        <input type="number"
+               name="system.combat.penalties.quickness"
+               value="{{system.combat.penalties.quickness}}"
+               data-dtype="Number"/>
+    </div>
+
+    <div class="armor-field">
+        <label>
+            {{ localize "eqrmss.pc_sheet_armor_info.quickness_bonus" }}
+        </label>
+        <input type="number"
+               name="system.combat.quicknessBonus"
+               value="{{system.combat.quicknessBonus}}"
+               data-dtype="Number"/>
+    </div>
+
+    <div class="armor-field">
+        <label>
+            {{ localize "eqrmss.pc_sheet_armor_info.adrenal_defense" }}
+        </label>
+        <input type="number"
+               name="system.combat.adrenalDefense"
+               value="{{system.combat.adrenalDefense}}"
+               data-dtype="Number"/>
+    </div>
+
+    <div class="armor-field">
+        <label>
+            {{ localize "eqrmss.pc_sheet_armor_info.shield_bonus" }}
+        </label>
+        <input type="number"
+               name="system.combat.shieldBonus"
+               value="{{system.combat.shieldBonus}}"
+               data-dtype="Number"/>
+    </div>
+
+    <div class="armor-field">
+        <label>
+            {{ localize "eqrmss.pc_sheet_armor_info.magic" }}
+        </label>
+        <input type="text"
+               name="system.combat.magic"
+               value="{{system.combat.magic}}"
+               data-dtype="String"/>
+    </div>
+
+    <div class="armor-field">
+        <label>
+            {{ localize "eqrmss.pc_sheet_armor_info.total_db" }}
+        </label>
+
+        <input type="number"
+               name="system.combat.totalDB"
+               value="{{system.combat.totalDB}}"
+               readonly
+               disabled/>
+    </div>
+
+</section>

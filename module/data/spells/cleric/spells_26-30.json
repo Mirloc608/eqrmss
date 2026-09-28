@@ -1,0 +1,867 @@
+[
+ {
+  "_id": "clr-panic-the-dead-26-r1",
+  "name": "Panic the Dead",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 26,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.0,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 54,
+     "resist": "magic"
+    }
+   ],
+   "description": "Inspires fear in an undead opponent, causing them to flee."
+  }
+ },
+ {
+  "_id": "clr-word-of-spirit-26-r1",
+  "name": "Word of Spirit",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 26,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 133,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 21,
+     "radius": 20,
+     "resist": "magic"
+    }
+   ],
+   "description": "A forbidden word that causes between 8 and 21 damage to up to 30 nearby enemies.",
+   "radius": 20
+  }
+ },
+ {
+  "_id": "clr-expulse-summoned-27-r1",
+  "name": "Expulse Summoned",
+  "type": "spell",
+  "img": "icons/magic/death/skull-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 27,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.5,
+   "manaCost": 41,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 25,
+     "resist": "magic",
+     "resistMod": -50
+    }
+   ],
+   "description": "A burst of holy light that inflicts between 20 and 25 damage to a summoned target."
+  }
+ },
+ {
+  "_id": "clr-instill-27-r1",
+  "name": "Instill",
+  "type": "spell",
+  "img": "icons/magic/nature/root-vines-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 27,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.5,
+   "manaCost": 60,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "root",
+     "duration": 96,
+     "resist": "magic"
+    }
+   ],
+   "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 96 seconds."
+  }
+ },
+ {
+  "_id": "clr-revive-27-r1",
+  "name": "Revive",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 27,
+   "school": "alteration",
+   "target": "corpse",
+   "range": 200,
+   "castTime": 6.0,
+   "manaCost": 300,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "resurrect",
+     "xp": 35
+    }
+   ],
+   "description": "Revives a slain ally, restoring 35% of their lost experience. It takes some time for the recently revived to fully recover."
+  }
+ },
+ {
+  "_id": "clr-abundant-drink-28-r1",
+  "name": "Abundant Drink",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 28,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 25,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Globe of Water"
+    }
+   ],
+   "description": "Focuses mana into globes of pure drinking water."
+  }
+ },
+ {
+  "_id": "clr-counteract-disease-28-r1",
+  "name": "Counteract Disease",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 28,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "disease",
+     "min": 1,
+     "max": 8
+    }
+   ],
+   "description": "Cleanses your target's immune system, curing them of moderate diseases."
+  }
+ },
+ {
+  "_id": "clr-celestial-health-29-r1",
+  "name": "Celestial Health",
+  "type": "spell",
+  "img": "icons/magic/life/heart-blood-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.5,
+   "manaCost": 205,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 90,
+     "duration": 24
+    }
+   ],
+   "description": "Fills your target's body with celestial health, healing between 90 and 90 hit points every 6 seconds for 24 seconds."
+  }
+ },
+ {
+  "_id": "clr-divine-barrier-29-r1",
+  "name": "Divine Barrier",
+  "type": "spell",
+  "img": "icons/magic/life/heart-pink.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "abjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 1.0,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "invulnerability",
+     "duration": 18
+    },
+    {
+     "type": "heal",
+     "amount": 1520
+    }
+   ],
+   "description": "Encases the caster in a divine aura, rendering them invulnerable to all attacks for 18 seconds and healing 1 hit points."
+  }
+ },
+ {
+  "_id": "clr-imbue-amber-29-r1",
+  "name": "Imbue Amber",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Amber"
+    }
+   ],
+   "description": "Focuses the power of Cazic-Thule into amber. Consumes an amber when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-black-pearl-29-r1",
+  "name": "Imbue Black Pearl",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Black Pearl"
+    }
+   ],
+   "description": "Focuses the power of Prexus into a black pearl. Consumes a black pearl when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-black-sapphire-29-r1",
+  "name": "Imbue Black Sapphire",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Black Sapphire"
+    }
+   ],
+   "description": "Focuses the power of Bertoxxulous into a black sapphire. Consumes a black sapphire when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-diamond-29-r1",
+  "name": "Imbue Diamond",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Diamond"
+    }
+   ],
+   "description": "Focuses the power of Mithaniel Marr into a diamond. Consumes a diamond when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-emerald-29-r1",
+  "name": "Imbue Emerald",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Emerald"
+    }
+   ],
+   "description": "Focuses the power of Tunare into an emerald. Consumes an emerald when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-opal-29-r1",
+  "name": "Imbue Opal",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Opal"
+    }
+   ],
+   "description": "Focuses the power of Rodcet Nife into an opal. Consumes an opal when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-peridot-29-r1",
+  "name": "Imbue Peridot",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Peridot"
+    }
+   ],
+   "description": "Focuses the power of Bristlebane into a peridot. Consumes a peridot when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-plains-pebble-29-r1",
+  "name": "Imbue Plains Pebble",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Plains Pebble"
+    }
+   ],
+   "description": "Focuses the power of Karana into a plains pebble. Consumes a plains pebble when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-rose-quartz-29-r1",
+  "name": "Imbue Rose Quartz",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Rose Quartz"
+    }
+   ],
+   "description": "Focuses the power of Erollisi Marr into a star rose quartz. Consumes a star rose quartz when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-ruby-29-r1",
+  "name": "Imbue Ruby",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Ruby"
+    }
+   ],
+   "description": "Focuses the power of Brell Serilis into a ruby. Consumes a ruby when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-sapphire-29-r1",
+  "name": "Imbue Sapphire",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Sapphire"
+    }
+   ],
+   "description": "Focuses the power of Innoruuk into a sapphire. Consumes a sapphire when cast."
+  }
+ },
+ {
+  "_id": "clr-imbue-topaz-29-r1",
+  "name": "Imbue Topaz",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 6.0,
+   "manaCost": 200,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Topaz"
+    }
+   ],
+   "description": "Focuses the power of Quellious into a topaz. Consumes a topaz when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-amber-29-r1",
+  "name": "Mass Imbue Amber",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Amber"
+    }
+   ],
+   "description": "Focuses the power of Cazic-Thule into five pieces of amber. Consumes five ambers when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-black-pearl-29-r1",
+  "name": "Mass Imbue Black Pearl",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Black Pearl"
+    }
+   ],
+   "description": "Focuses the power of Prexus into five black pearls. Consumes five black pearls when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-black-sapphire-29-r1",
+  "name": "Mass Imbue Black Sapphire",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Black Sapphire"
+    }
+   ],
+   "description": "Focuses the power of Bertoxxulous into five black sapphires. Consumes five black sapphires when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-diamond-29-r1",
+  "name": "Mass Imbue Diamond",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Diamond"
+    }
+   ],
+   "description": "Focuses the power of Mithaniel Marr into five diamonds. Consumes five diamonds when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-emerald-29-r1",
+  "name": "Mass Imbue Emerald",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Emerald"
+    }
+   ],
+   "description": "Focuses the power of Tunare into five emeralds. Consumes five emeralds when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-opal-29-r1",
+  "name": "Mass Imbue Opal",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Opal"
+    }
+   ],
+   "description": "Focuses the power of Rodcet Nife into five opals. Consumes five opals when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-peridot-29-r1",
+  "name": "Mass Imbue Peridot",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Peridot"
+    }
+   ],
+   "description": "Focuses the power of Bristlebane into five peridots. Consumes five peridots when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-plains-pebble-29-r1",
+  "name": "Mass Imbue Plains Pebble",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Plains Pebble"
+    }
+   ],
+   "description": "Focuses the power of Karana into five plains pebbles. Consumes five plains pebbles when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-rose-quartz-29-r1",
+  "name": "Mass Imbue Rose Quartz",
+  "type": "spell",
+  "img": "icons/magic/arcane/bag-pouch.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Rose Quartz"
+    }
+   ],
+   "description": "Focuses the power of Erollisi Marr into five pieces of star rose quartz. Consumes five star rose quartz when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-ruby-29-r1",
+  "name": "Mass Imbue Ruby",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Ruby"
+    }
+   ],
+   "description": "Focuses the power of Brell Serilis into five rubies. Consumes five rubies when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-sapphire-29-r1",
+  "name": "Mass Imbue Sapphire",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Sapphire"
+    }
+   ],
+   "description": "Focuses the power of Innoruuk into five sapphires. Consumes five sapphires when cast."
+  }
+ },
+ {
+  "_id": "clr-mass-imbue-topaz-29-r1",
+  "name": "Mass Imbue Topaz",
+  "type": "spell",
+  "img": "icons/magic/arcane/summon-gem.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "alteration",
+   "target": "self",
+   "range": 0,
+   "castTime": 10.0,
+   "manaCost": 600,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "summon-item",
+     "item": "Imbued Topaz"
+    }
+   ],
+   "description": "Focuses the power of Quellious into five topaz. Consumes five topaz when cast."
+  }
+ },
+ {
+  "_id": "clr-wrath-29-r1",
+  "name": "Wrath",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 29,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 77,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 36,
+     "resist": "magic"
+    }
+   ],
+   "description": "Calls upon the wrath of the gods to strike your target, inflicting between 18 and 36 damage."
+  }
+ },
+ {
+  "_id": "clr-resist-poison-30-r1",
+  "name": "Resist Poison",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 30,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.5,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "resist-poison",
+     "amount": 40,
+     "duration": 2160
+    }
+   ],
+   "description": "Surrounds your target with an aura of protection, warding away poison for 36 minutes."
+  }
+ },
+ {
+  "_id": "clr-superior-healing-30-r1",
+  "name": "Superior Healing",
+  "type": "spell",
+  "img": "icons/magic/life/hand-fingers-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 30,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 3.5,
+   "manaCost": 185,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 156,
+     "max": 468
+    }
+   ],
+   "description": "Mends severe wounds, healing between 156 and 468 hit points."
+  }
+ },
+ {
+  "_id": "clr-word-of-health-30-r1",
+  "name": "Word of Health",
+  "type": "spell",
+  "img": "icons/magic/life/heart-cross-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 30,
+   "school": "alteration",
+   "target": "group",
+   "range": 0,
+   "castTime": 3.5,
+   "manaCost": 302,
+   "effects": [
+    {
+     "type": "heal",
+     "min": 132,
+     "max": 378
+    }
+   ],
+   "description": "Mends the wounds of everyone in your group, healing between 132 and 378 hit points."
+  }
+ }
+]

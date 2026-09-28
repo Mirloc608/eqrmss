@@ -1,0 +1,55 @@
+{
+  "id": "chant_of_battle_1",
+  "name": "Chant of Battle",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 1,
+  "description": "A simple tune that increases the strength, dexterity, and armor class of group members.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 2
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "str",
+      "value": {
+        "base": 37
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "dex",
+      "value": {
+        "base": 37
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "ac-buff",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "ac-buff",
+    "drum"
+  ]
+}

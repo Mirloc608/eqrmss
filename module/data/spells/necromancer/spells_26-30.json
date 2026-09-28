@@ -1,0 +1,310 @@
+[
+  {
+    "_id": "nec-renew-bones-26-r1",
+    "name": "Renew Bones",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 26,
+      "school": "necromancy",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 64,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 84
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 10
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 10
+        }
+      ],
+      "description": "Restores an undead servant, healing between 43 and 175 hit points and curing them of diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "nec-spirit-tap-26-r1",
+    "name": "Spirit Tap",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 26,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 152,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 72,
+          "max": 101,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 150 and 210 hit points."
+    }
+  },
+  {
+    "_id": "nec-dooming-darkness-27-r1",
+    "name": "Dooming Darkness",
+    "type": "spell",
+    "img": "icons/magic/death/shadow-snare.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 27,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 9,
+          "max": 9,
+          "duration": 90,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "movement",
+          "amount": -59,
+          "duration": 90,
+          "resist": "magic"
+        }
+      ],
+      "description": "Summons a dooming darkness that binds your target's feet, decreasing their movement rate, and doing 20 damage every 6 seconds for 90 seconds."
+    }
+  },
+  {
+    "_id": "nec-eternities-torment-27-r1",
+    "name": "Eternities Torment",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 27,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 140,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 7,
+          "max": 7,
+          "duration": 126,
+          "resist": "magic",
+          "resistMod": -100
+        }
+      ],
+      "description": "Places an undead target in the torment of eternity, causing 30 damage every six seconds for 2.1 minutes."
+    }
+  },
+  {
+    "_id": "nec-word-of-spirit-27-r1",
+    "name": "Word of Spirit",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 27,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 3.5,
+      "manaCost": 133,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 97,
+          "resist": "magic"
+        }
+      ],
+      "description": "A forbidden word that causes between 39 and 104 damage to up to 30 nearby enemies.",
+      "radius": 20
+    }
+  },
+  {
+    "_id": "nec-boil-blood-28-r1",
+    "name": "Boil Blood",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 28,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 136,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 43,
+          "max": 43,
+          "duration": 42,
+          "resist": "fire",
+          "resistMod": -100
+        }
+      ],
+      "description": "Heats the blood of your target, causing between 40 and 67 damage every 6 seconds for 42 seconds."
+    }
+  },
+  {
+    "_id": "nec-dismiss-undead-28-r1",
+    "name": "Dismiss Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 28,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 63,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 92,
+          "resist": "magic",
+          "resistMod": -50
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 150 and 211 damage to an undead target."
+    }
+  },
+  {
+    "_id": "nec-summon-dead-29-r1",
+    "name": "Summon Dead",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 29,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 290,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "summon-dead"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-vampiric-curse-29-r1",
+    "name": "Vampiric Curse",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 29,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 144,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 25,
+          "max": 25,
+          "duration": 54,
+          "resist": "magic",
+          "resistMod": -200
+        },
+        {
+          "type": "utility",
+          "effect": "spell-damage-leech",
+          "percent": 100.0,
+          "maxPerHit": 74,
+          "duration": 54
+        }
+      ],
+      "description": "Drains the life from your target, doing 21 damage every six seconds for 54 seconds. 100% of the life-force taken is used to heal your wounds."
+    }
+  },
+  {
+    "_id": "nec-focus-elementary-spellcasters-empowering-essence-30-r1",
+    "name": "Focus Elementary Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 30,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Elementary Spellcaster's Empowering Essence",
+          "amount": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-invoke-fear-30-r1",
+    "name": "Invoke Fear",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 30,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52,
+          "duration": 42,
+          "resist": "magic",
+          "resistMod": -20
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  }
+]

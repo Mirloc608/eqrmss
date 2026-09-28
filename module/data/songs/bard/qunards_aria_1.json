@@ -1,0 +1,39 @@
+{
+  "id": "qunards_aria_1",
+  "name": "Qunard's Aria",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 108,
+  "description": "This energizing aria increases the effectiveness of fire-based direct damage spells cast by members of your group by 3975. The song improves spells that are at least level 101, up to level 110.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-damage",
+      "value": {
+        "base": 3975
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "spell-focus",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "spell-focus",
+    "voice"
+  ]
+}

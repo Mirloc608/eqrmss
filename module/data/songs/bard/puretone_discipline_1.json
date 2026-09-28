@@ -1,0 +1,35 @@
+{
+  "id": "puretone_discipline_1",
+  "name": "Puretone Discipline",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 60,
+  "description": "Causes your voice to become perfectly melodious, increase the power of your songs.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "instrument-modifier",
+      "amount": 28
+    }
+  ],
+  "stacking": {
+    "group": "discipline",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "discipline"
+  ]
+}

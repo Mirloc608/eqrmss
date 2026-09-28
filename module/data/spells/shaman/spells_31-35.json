@@ -1,0 +1,333 @@
+[
+  {
+  "_id": "shm-nimble-31",
+  "name": "Nimble",
+  "type": "spell",
+  "img": "icons/magic/life/boot-speed-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 31,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 80,
+    "effects": [
+      { "type": "buff", "stat": "agi", "min": 16, "max": 52 }
+    ],
+    "description": "Increases the target’s agility."
+  }
+},
+{
+  "_id": "shm-scourge-31",
+  "name": "Scourge",
+  "type": "spell",
+  "img": "icons/magic/debuff/disease-cloud-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 31,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 199,
+    "effects": [
+      { "type": "debuff", "effect": "disease", "amount": 4 },
+      { "type": "dot", "element": "disease", "min": 73, "max": 98 },
+      { "type": "damage", "element": "disease", "amount": 58 }
+    ],
+    "description": "Inflicts disease, dealing damage over time."
+  }
+},
+{
+  "_id": "shm-shifting-shield-31",
+  "name": "Shifting Shield",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 31,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 80,
+    "effects": [
+      { "type": "buff", "stat": "ac", "min": 7, "max": 25 }
+    ],
+    "description": "Increases the target’s armor class."
+  }
+},
+{
+  "_id": "shm-malaisement-32",
+  "name": "Malaisement",
+  "type": "spell",
+  "img": "icons/magic/debuff/hand-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 32,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 100,
+    "effects": [
+      { "type": "debuff", "stat": "resist-cold", "min": -20, "max": -60 },
+      { "type": "debuff", "stat": "resist-magic", "min": -20, "max": -60 },
+      { "type": "debuff", "stat": "resist-poison", "min": -20, "max": -60 },
+      { "type": "debuff", "stat": "resist-fire", "min": -20, "max": -60 }
+    ],
+    "description": "Reduces all elemental and magical resistances."
+  }
+},
+{
+  "_id": "shm-companion-spirit-32",
+  "name": "Companion Spirit",
+  "type": "spell",
+  "img": "icons/magic/spirit/wolf-spirit-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 32,
+    "school": "conjuration",
+    "target": "self",
+    "range": 0,
+    "castTime": 5,
+    "manaCost": 350,
+    "effects": [
+      { "type": "utility", "effect": "summon-pet", "pet": "PCPetShmS07L032WolfGho" }
+    ],
+    "description": "Summons a ghostly wolf companion."
+  }
+},
+{
+  "_id": "shm-talisman-of-tnarg-32",
+  "name": "Talisman of Tnarg",
+  "type": "spell",
+  "img": "icons/magic/nature/totem-bear.webp",
+  "system": {
+    "class": "shaman",
+    "level": 32,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 125,
+    "effects": [
+      { "type": "buff", "stat": "hp-max", "min": 101, "max": 250 },
+      { "type": "heal", "min": 101, "max": 250 }
+    ],
+    "description": "Increases maximum hitpoints and heals the target."
+  }
+},
+{
+  "_id": "shm-charm-animals-32",
+  "name": "Charm Animals",
+  "type": "spell",
+  "img": "icons/magic/nature/wolf-spirit-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 32,
+    "school": "alteration",
+    "target": "animal",
+    "range": 800,
+    "castTime": 5,
+    "manaCost": 120,
+    "effects": [
+      { "type": "control", "effect": "charm", "maxLevel": 33 }
+    ],
+    "description": "Charms an animal up to level 33."
+  }
+},
+{
+  "_id": "shm-instill-33",
+  "name": "Instill",
+  "type": "spell",
+  "img": "icons/magic/nature/root-bind-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 33,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 60,
+    "effects": [
+      { "type": "control", "effect": "root" }
+    ],
+    "description": "Roots the target in place."
+  }
+},
+{
+  "_id": "shm-reebos-greater-augury-33",
+  "name": "Reebo's Greater Augury",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-blue.webp",
+  "system": {
+    "class": "shaman",
+    "level": 33,
+    "school": "divination",
+    "target": "object",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 240,
+    "effects": [
+      { "type": "utility", "effect": "appraise-ldon-chest", "rank": 1 }
+    ],
+    "description": "Appraises a Lost Dungeons of Norrath chest."
+  }
+},
+{
+  "_id": "shm-winters-roar-33",
+  "name": "Winter's Roar",
+  "type": "spell",
+  "img": "icons/magic/water/projectile-ice-spear-large.webp",
+  "system": {
+    "class": "shaman",
+    "level": 33,
+    "school": "evocation",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 116,
+    "effects": [
+      { "type": "damage", "element": "cold", "min": 170, "max": 246 }
+    ],
+    "description": "Deals cold damage to a single target."
+  }
+},
+{
+  "_id": "shm-shock-of-the-tainted-34",
+  "name": "Shock of the Tainted",
+  "type": "spell",
+  "img": "icons/magic/debuff/poison-bolt-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 34,
+    "school": "conjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 131,
+    "effects": [
+      { "type": "damage", "element": "poison", "min": 180, "max": 254 }
+    ],
+    "description": "Deals poison damage to a single target."
+  }
+},
+{
+  "_id": "shm-pack-shrew-34",
+  "name": "Pack Shrew",
+  "type": "spell",
+  "img": "icons/magic/nature/shrew-spirit-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 34,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 320,
+    "effects": [
+      { "type": "vision", "effect": "ultravision" },
+      { "type": "movement", "amount": 30 }
+    ],
+    "description": "Grants ultravision and increased movement speed to the group."
+  }
+},
+{
+  "_id": "shm-curse-34",
+  "name": "Curse",
+  "type": "spell",
+  "img": "icons/magic/debuff/curse-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 34,
+    "school": "alteration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 212,
+    "effects": [
+      { "type": "debuff", "effect": "curse", "amount": 4 },
+      { "type": "dot", "element": "curse", "min": 99, "max": 148 }
+    ],
+    "description": "Inflicts a powerful curse, dealing damage over time."
+  }
+},
+{
+  "_id": "shm-reebos-greater-exorcism-34",
+  "name": "Reebo's Greater Exorcism",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-purple.webp",
+  "system": {
+    "class": "shaman",
+    "level": 34,
+    "school": "divination",
+    "target": "object",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 240,
+    "effects": [
+      { "type": "utility", "effect": "disarm-ldon-trap", "rank": 1 }
+    ],
+    "description": "Disarms a Lost Dungeons of Norrath trap."
+  }
+},
+{
+  "_id": "shm-reebos-greater-cleansing-34",
+  "name": "Reebo's Greater Cleansing",
+  "type": "spell",
+  "img": "icons/magic/divination/crystal-ball-gold.webp",
+  "system": {
+    "class": "shaman",
+    "level": 34,
+    "school": "divination",
+    "target": "object",
+    "range": 0,
+    "castTime": 3,
+    "manaCost": 240,
+    "effects": [
+      { "type": "utility", "effect": "unlock-ldon-chest", "rank": 1 }
+    ],
+    "description": "Unlocks a Lost Dungeons of Norrath chest."
+  }
+},
+{
+  "_id": "shm-tumultuous-strength-35",
+  "name": "Tumultuous Strength",
+  "type": "spell",
+  "img": "icons/magic/life/muscle-arm-red.webp",
+  "system": {
+    "class": "shaman",
+    "level": 35,
+    "school": "alteration",
+    "target": "group",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 150,
+    "effects": [
+      { "type": "buff", "stat": "str", "min": 11, "max": 42 }
+    ],
+    "description": "Increases the group's strength."
+  }
+},
+{
+  "_id": "shm-resist-poison-35",
+  "name": "Resist Poison",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-green.webp",
+  "system": {
+    "class": "shaman",
+    "level": 35,
+    "school": "abjuration",
+    "target": "single",
+    "range": 800,
+    "castTime": 3,
+    "manaCost": 50,
+    "effects": [
+      { "type": "buff", "stat": "resist-poison", "min": 11, "max": 50 }
+    ],
+    "description": "Increases the target’s resistance to poison."
+  }
+}
+]

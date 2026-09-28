@@ -1,0 +1,40 @@
+{
+  "id": "wave_of_slumber_3",
+  "name": "Wave of Slumber",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 85,
+  "description": "Causes up to six nearby enemies to fall into an enchanted sleep for up to 30 seconds.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 0,
+    "targets": "enemies"
+  },
+  "effects": [
+    {
+      "type": "control",
+      "condition": "mez",
+      "duration": 30,
+      "save": {
+        "stat": "willpower",
+        "difficulty": "bard_charisma_dc"
+      }
+    }
+  ],
+  "stacking": {
+    "group": "mez-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "control",
+    "mez-song",
+    "flute"
+  ]
+}

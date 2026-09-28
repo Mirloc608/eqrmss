@@ -1,0 +1,39 @@
+{
+  "id": "erradiens_psalm_of_potency_3",
+  "name": "Erradien's Psalm of Potency",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 78,
+  "description": "This tune increases the effectiveness of magic-based damage over time spells cast by members of your group. The song improves spells that are at least level 71, up to level 80.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-damage",
+      "value": {
+        "base": 380
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "spell-focus",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "spell-focus",
+    "voice"
+  ]
+}

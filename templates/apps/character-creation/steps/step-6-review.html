@@ -1,0 +1,79 @@
+<section class="eqrmss-cc-step eqrmss-cc-step-review">
+
+  <header class="eqrmss-cc-step-header">
+    <h2>Review & Confirm</h2>
+    <p>Verify your choices before creating your character.</p>
+  </header>
+
+  <div class="eqrmss-cc-review-grid">
+
+    <div class="eqrmss-cc-review-box">
+      <h3>Basic Information</h3>
+      <ul>
+        <li><strong>Name:</strong> {{wizard.selection.name}}</li>
+        <li><strong>Gender:</strong> {{wizard.selection.gender}}</li>
+      </ul>
+    </div>
+
+    <div class="eqrmss-cc-review-box">
+      <h3>Origin</h3>
+      <ul>
+        <li><strong>Race:</strong> {{preview.resolved.race.name}}</li>
+        <li><strong>Class:</strong> {{preview.resolved.class.name}}</li>
+        <li><strong>City:</strong> {{preview.resolved.city.name}}</li>
+        <li><strong>Deity:</strong> {{preview.resolved.deity.name}}</li>
+      </ul>
+    </div>
+
+    <div class="eqrmss-cc-review-box">
+      <h3>RMSS Stats</h3>
+      <table class="eqrmss-cc-stats-table">
+        <thead>
+          <tr>
+            <th>Stat</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each preview.stats}}
+            <tr>
+              <td>{{@key}}</td>
+              <td>{{this}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="eqrmss-cc-review-box">
+      <h3>Development Points (DP)</h3>
+      <p>Your DP is based on the average of AG, CO, ME, RE, and SD.</p>
+      <div class="eqrmss-cc-dp-value">
+        <strong>{{preview.devPoints}}</strong>
+      </div>
+    </div>
+
+    <div class="eqrmss-cc-review-box">
+      <h3>Derived Values</h3>
+      <ul class="eqrmss-cc-derived-list">
+        <li><strong>HP:</strong> {{preview.derived.HP}}</li>
+        <li><strong>Mana:</strong> {{preview.derived.Mana}}</li>
+        <li><strong>Initiative:</strong> {{preview.derived.Initiative}}</li>
+        <li><strong>Attack:</strong> {{preview.derived.Attack}}</li>
+        <li><strong>Defense:</strong> {{preview.derived.Defense}}</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer class="eqrmss-cc-step-footer">
+    <button type="button" class="eqrmss-cc-prev" data-action="previous">← Back</button>
+
+    <button type="button"
+            class="eqrmss-cc-create"
+            data-action="finish">
+      Create Character
+    </button>
+  </footer>
+
+</section>

@@ -1,0 +1,736 @@
+[
+  {
+    "_id": "bst-chimera-blood-66-r1",
+    "name": "Chimera Blood",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 66,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 0,
+      "manaCost": 2093,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "poison",
+          "amount": 18,
+          "resist": "poison"
+        },
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 1188,
+          "resist": "poison"
+        },
+        {
+          "type": "dot",
+          "element": "poison",
+          "min": 1339,
+          "max": 1339,
+          "duration": 42,
+          "resist": "poison"
+        }
+      ],
+      "description": "Fills your target's veins with deadly venom, causing 424 damage initially and between 336 and 478 damage every six seconds for 42 seconds."
+    }
+  },
+  {
+    "_id": "bst-eradicate-disease-66-r1",
+    "name": "Eradicate Disease",
+    "type": "spell",
+    "img": "icons/magic/life/cross-purify-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 66,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.25,
+      "manaCost": 700,
+      "effects": [
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 30
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 30
+        }
+      ],
+      "description": "Cleanses your target's immune system, curing them of strong diseases."
+    }
+  },
+  {
+    "_id": "bst-healing-of-mikkily-66-r1",
+    "name": "Healing of Mikkily",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 66,
+      "school": "alteration",
+      "target": "pet",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 217,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 1000
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "min": 1,
+          "max": 28
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "min": 1,
+          "max": 28
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "min": 1,
+          "max": 28
+        }
+      ],
+      "description": "Restores your warder's health, healing between 2160 and 2810 hit points, as well as curing them of diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "bst-focus-of-alladnu-67-r1",
+    "name": "Focus of Alladnu",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 67,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 8,
+      "manaCost": 404,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 513,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 442
+        }
+      ],
+      "description": "Imbues your target with the focus of Alladnu, providing increased hit points for 72 minutes."
+    }
+  },
+  {
+    "_id": "bst-muadas-mending-67-r1",
+    "name": "Muada's Mending",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 67,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3,
+      "manaCost": 324,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 1040
+        }
+      ],
+      "description": "Mends severe wounds, healing between 506 and 1206 hit points. If your target is an enemy, you will heal that enemy's current target instead."
+    }
+  },
+  {
+    "_id": "bst-spiritual-vitality-67-r1",
+    "name": "Spiritual Vitality",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 67,
+      "school": "alteration",
+      "target": "group",
+      "range": 250,
+      "castTime": 5,
+      "manaCost": 732,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 52,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 280,
+          "duration": 4320
+        }
+      ],
+      "description": "Fills your group with spiritual brawn, increasing their hit points and attack rating for 72 minutes."
+    }
+  },
+  {
+    "_id": "bst-bestial-empathy-68-r1",
+    "name": "Bestial Empathy",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 68,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 3,
+      "manaCost": 993,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "swarm-s14-l068-warder",
+          "duration": 18
+        },
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 2
+        }
+      ],
+      "description": "Beckons to the creatures of the wild to attack your target for a short time. Type 39"
+    }
+  },
+  {
+    "_id": "bst-growl-of-the-beast-68-r1",
+    "name": "Growl of the Beast",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 68,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 1063,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hit-damage",
+          "amount": 5,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 85,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 90,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 17,
+          "max": 23,
+          "duration": 3600
+        }
+      ],
+      "description": "Fills your warder with bestial power, increasing their attack speed, damage, armor class, and attack rating."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-alladnu-68-r1",
+    "name": "Spirit of Alladnu",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 68,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10,
+      "manaCost": 757,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s14-l068-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-irionu-68-r1",
+    "name": "Spirit of Irionu",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 68,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 530,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "name": "spirit-of-irionu-strike",
+          "chance": 150
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 75,
+          "duration": 4500
+        }
+      ],
+      "description": "Fills your warder with the power of a great spirit, increasing their dexterity by 75 and giving them a chance to perform Spirit of Irionu Strike, a [Item 3] attack that can stun targets up to level 70."
+    }
+  },
+  {
+    "_id": "bst-empathic-fury-69-r1",
+    "name": "Empathic Fury",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 69,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hit-damage",
+          "amount": 50,
+          "duration": 30
+        },
+        {
+          "type": "buff",
+          "stat": "min-hit-damage",
+          "amount": 400,
+          "duration": 30
+        },
+        {
+          "type": "buff",
+          "stat": "crit-chance",
+          "amount": 100,
+          "duration": 30
+        },
+        {
+          "type": "utility",
+          "effect": "trigger-cast",
+          "name": "empathic-fury"
+        }
+      ],
+      "description": "Consumes your warder and yourself in a feral fury, greatly increasing your melee damage."
+    }
+  },
+  {
+    "_id": "bst-feral-guard-69-r1",
+    "name": "Feral Guard",
+    "type": "spell",
+    "img": "icons/magic/life/heart-flame-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 69,
+      "school": "abjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 719,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "rune",
+          "amount": 4,
+          "maxPerHit": 15635,
+          "duration": 2160
+        }
+      ],
+      "description": "Places a feral guard on your pet, absorbing up to 15635 damage from the next 4 melee strikes or direct damage spells that hit it."
+    }
+  },
+  {
+    "_id": "bst-feral-vigor-69-r1",
+    "name": "Feral Vigor",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 69,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6,
+      "manaCost": 2800,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 224,
+          "duration": 1230
+        }
+      ],
+      "description": "Hastens your target's natural healing, regenerating 30 hit points every 6 seconds."
+    }
+  },
+  {
+    "_id": "bst-glacier-spear-69-r1",
+    "name": "Glacier Spear",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear-small.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 69,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 446,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 1377,
+          "resist": "cold"
+        }
+      ],
+      "description": "Strikes your target with a frost spear, causing between 958 and 958 damage."
+    }
+  },
+  {
+    "_id": "bst-growl-of-the-panther-69-r1",
+    "name": "Growl of the Panther",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 69,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 4853,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hit-damage",
+          "amount": 20,
+          "duration": 60
+        },
+        {
+          "type": "heal",
+          "amount": 1120,
+          "duration": 60
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 1500,
+          "duration": 60
+        }
+      ],
+      "description": "Infuses you and your pet with the power of a panther, increasing melee damage by 20%, healing 150 health every six seconds and increasing your maximum hit points by 1500 for up to 60 seconds."
+    }
+  },
+  {
+    "_id": "bst-growl-of-the-panther-recourse-69-r1",
+    "name": "Growl of the Panther (Recourse)",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 69,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hit-damage",
+          "amount": 20,
+          "duration": 60
+        },
+        {
+          "type": "heal",
+          "amount": 1120,
+          "duration": 60
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 1500,
+          "duration": 60
+        }
+      ],
+      "description": "Increases your hit damage by 20; restores 1120 health to you over time; increases your maximum HP by 1500."
+    }
+  },
+  {
+    "_id": "bst-spiritual-ascendance-69-r1",
+    "name": "Spiritual Ascendance",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 69,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 5,
+      "manaCost": 6720,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 75,
+          "max": 75,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 75,
+          "duration": 4320
+        }
+      ],
+      "description": "Envelops your group in an aura of spiritual dominion, increasing their mana and hit point regeneration."
+    }
+  },
+  {
+    "_id": "bst-ancient-savage-ice-70-r1",
+    "name": "Ancient: Savage Ice",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 70,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 0.5,
+      "manaCost": 458,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 1440,
+          "resist": "cold"
+        }
+      ],
+      "description": "Strikes your target with savage ice, doing 1034 damage."
+    }
+  },
+  {
+    "_id": "bst-ferocity-of-irionu-70-r1",
+    "name": "Ferocity of Irionu",
+    "type": "spell",
+    "img": "icons/magic/life/heart-flame-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 1044,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "sta",
+          "amount": 52,
+          "duration": 390
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 187,
+          "duration": 390
+        },
+        {
+          "type": "buff",
+          "stat": "resist-all",
+          "amount": 65,
+          "duration": 390
+        }
+      ],
+      "description": "Consumes your target in a spirit of savagery, increasing their resistances, attack rating, and stamina."
+    }
+  },
+  {
+    "_id": "bst-festering-malady-70-r1",
+    "name": "Festering Malady",
+    "type": "spell",
+    "img": "icons/magic/debuff/disease-cloud-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 70,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 0,
+      "manaCost": 912,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 18,
+          "resist": "disease"
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 561,
+          "max": 561,
+          "duration": 72,
+          "resist": "disease"
+        }
+      ],
+      "description": "Infects your target with a festering disease that causes between 253 and 403 damage every six seconds for 72 seconds."
+    }
+  },
+  {
+    "_id": "bst-rake-70-r1",
+    "name": "Rake",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 70,
+      "school": "alteration",
+      "target": "single",
+      "range": 50,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "physical",
+          "amount": 91
+        },
+        {
+          "type": "damage",
+          "element": "physical",
+          "amount": 91
+        },
+        {
+          "type": "damage",
+          "element": "physical",
+          "amount": 91
+        }
+      ],
+      "description": "Infuses your body with the power of the dragon, causing your next attack to do extra magical damage."
+    }
+  },
+  {
+    "_id": "bst-shas-legacy-70-r1",
+    "name": "Sha's Legacy",
+    "type": "spell",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 70,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 279,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "slow",
+          "amount": 65,
+          "resist": "magic",
+          "resistMod": -30,
+          "duration": 90
+        },
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 24,
+          "resist": "magic",
+          "resistMod": -30
+        }
+      ],
+      "description": "Causes your target to fall into a lethargic state, slowing their attack speed for 90 seconds."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-oroshar-70-r1",
+    "name": "Spirit of Oroshar",
+    "type": "spell",
+    "img": "icons/magic/fire/sword-flame.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 70,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 446,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "name": "spirit-of-oroshar-strike",
+          "chance": 150
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 75,
+          "duration": 4500
+        }
+      ],
+      "description": "Fills your warder with the power of a great spirit, increasing their dexterity by 75 and giving them a chance to perform Spirit of Oroshar Strike, a [Item 2] attack that can stun targets up to level 72."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-rashara-70-r1",
+    "name": "Spirit of Rashara",
+    "type": "spell",
+    "img": "icons/magic/nature/cat-spirit-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 70,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10,
+      "manaCost": 557,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s14-l070-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  }
+]

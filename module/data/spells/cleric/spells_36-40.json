@@ -1,0 +1,412 @@
+[
+ {
+  "_id": "clr-invoke-fear-36-r1",
+  "name": "Invoke Fear",
+  "type": "spell",
+  "img": "icons/magic/control/fear-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 36,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 2.5,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "fear",
+     "duration": 42,
+     "resist": "magic",
+     "resistMod": -20
+    }
+   ],
+   "description": "A booming voice fills your target's ears, causing them to flee in terror."
+  }
+ },
+ {
+  "_id": "clr-pacify-36-r1",
+  "name": "Pacify",
+  "type": "spell",
+  "img": "icons/magic/debuff/sleep-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 36,
+   "school": "alteration",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 100,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 42
+    },
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 42
+    },
+    {
+     "type": "utility",
+     "effect": "pacify",
+     "duration": 42
+    }
+   ],
+   "description": "Pacifies your target, lowering its aggressiveness for 42 seconds. Affects creatures up to level 55."
+  }
+ },
+ {
+  "_id": "clr-resist-disease-36-r1",
+  "name": "Resist Disease",
+  "type": "spell",
+  "img": "icons/magic/defense/armor-scale-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 36,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.5,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "resist-disease",
+     "amount": 40,
+     "duration": 2160
+    }
+   ],
+   "description": "Surrounds your target with an aura of protection, warding away disease for 36 minutes."
+  }
+ },
+ {
+  "_id": "clr-dismiss-summoned-37-r1",
+  "name": "Dismiss Summoned",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 37,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 73,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 120,
+     "resist": "magic",
+     "resistMod": -50
+    }
+   ],
+   "description": "A burst of holy power that inflicts between 89 and 120 damage to a summoned target."
+  }
+ },
+ {
+  "_id": "clr-resuscitate-37-r1",
+  "name": "Resuscitate",
+  "type": "spell",
+  "img": "icons/magic/life/angel-wings-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 37,
+   "school": "alteration",
+   "target": "corpse",
+   "range": 200,
+   "castTime": 6.0,
+   "manaCost": 500,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "resurrect",
+     "xp": 60
+    }
+   ],
+   "description": "Revives a slain ally, restoring 60% of their lost experience. It takes some time for the recently revived to fully recover."
+  }
+ },
+ {
+  "_id": "clr-turning-of-the-unnatural-37-r1",
+  "name": "Turning of the Unnatural",
+  "type": "spell",
+  "img": "icons/magic/death/disease-skull.webp",
+  "system": {
+   "class": "cleric",
+   "level": 37,
+   "school": "evocation",
+   "target": "single",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 144,
+   "effects": [
+    {
+     "type": "dot",
+     "element": "magic",
+     "min": 59,
+     "max": 59,
+     "duration": 30,
+     "resist": "magic",
+     "resistMod": -100
+    }
+   ],
+   "description": "Strikes your target with holy light, causing between 73 and 59 damage to undead every 6 seconds for 30 seconds."
+  }
+ },
+ {
+  "_id": "clr-nullify-magic-38-r1",
+  "name": "Nullify Magic",
+  "type": "spell",
+  "img": "icons/magic/arcane/eye.webp",
+  "system": {
+   "class": "cleric",
+   "level": 38,
+   "school": "abjuration",
+   "target": "single",
+   "range": 200,
+   "castTime": 4.5,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "dispel",
+     "amount": 4
+    },
+    {
+     "type": "utility",
+     "effect": "dispel",
+     "amount": 4
+    }
+   ],
+   "description": "Cancels magical enchantments affecting your target."
+  }
+ },
+ {
+  "_id": "clr-remove-curse-38-r1",
+  "name": "Remove Curse",
+  "type": "spell",
+  "img": "icons/magic/life/cross-purify-purple.webp",
+  "system": {
+   "class": "cleric",
+   "level": 38,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 5.0,
+   "manaCost": 75,
+   "effects": [
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 4
+    },
+    {
+     "type": "cure",
+     "effect": "curse",
+     "min": 1,
+     "max": 4
+    }
+   ],
+   "description": "Cleanses your target's soul, removing minor curses."
+  }
+ },
+ {
+  "_id": "clr-resist-cold-38-r1",
+  "name": "Resist Cold",
+  "type": "spell",
+  "img": "icons/magic/symbols/rune-stone-red.webp",
+  "system": {
+   "class": "cleric",
+   "level": 38,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.5,
+   "manaCost": 50,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "resist-cold",
+     "amount": 40,
+     "duration": 2160
+    }
+   ],
+   "description": "Surrounds your target with an aura of protection, warding away cold for 36 minutes."
+  }
+ },
+ {
+  "_id": "clr-complete-heal-39-r1",
+  "name": "Complete Heal",
+  "type": "spell",
+  "img": "icons/magic/life/heart-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 39,
+   "school": "alteration",
+   "target": "single",
+   "range": 100,
+   "castTime": 10.0,
+   "manaCost": 400,
+   "effects": [
+    {
+     "type": "heal",
+     "amount": 684
+    }
+   ],
+   "description": "Completely heals your target of all wounds up to 684 hit points."
+  }
+ },
+ {
+  "_id": "clr-sacred-word-39-r1",
+  "name": "Sacred Word",
+  "type": "spell",
+  "img": "icons/magic/light/exorcism-burst.webp",
+  "system": {
+   "class": "cleric",
+   "level": 39,
+   "school": "evocation",
+   "target": "area",
+   "range": 200,
+   "castTime": 3.0,
+   "manaCost": 120,
+   "effects": [
+    {
+     "type": "control",
+     "effect": "stun",
+     "duration": 6.0,
+     "resist": "magic"
+    },
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 44,
+     "radius": 20,
+     "resist": "magic"
+    }
+   ],
+   "description": "A forbidden word that causes between 20 and 44 damage to 5 enemies in an area around your target and stuns them up to level 55 for 6 seconds.",
+   "radius": 20
+  }
+ },
+ {
+  "_id": "clr-word-of-souls-39-r1",
+  "name": "Word of Souls",
+  "type": "spell",
+  "img": "icons/magic/arcane/force-strike.webp",
+  "system": {
+   "class": "cleric",
+   "level": 39,
+   "school": "evocation",
+   "target": "area",
+   "range": 0,
+   "castTime": 4.5,
+   "manaCost": 171,
+   "effects": [
+    {
+     "type": "damage",
+     "element": "magic",
+     "amount": 76,
+     "radius": 20,
+     "resist": "magic"
+    }
+   ],
+   "description": "A forbidden word that causes between 15 and 76 damage to up to 15 nearby enemies.",
+   "radius": 20
+  }
+ },
+ {
+  "_id": "clr-guard-of-vie-40-r1",
+  "name": "Guard of Vie",
+  "type": "spell",
+  "img": "icons/magic/defense/shield-energy-blue.webp",
+  "system": {
+   "class": "cleric",
+   "level": 40,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 4.0,
+   "manaCost": 175,
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 700,
+     "duration": 2160
+    }
+   ],
+   "description": "Places the Guard of Vie on your target, absorbing a portion of incoming melee damage. This spell absorbs a set amount of damage before dissipating."
+  }
+ },
+ {
+  "_id": "clr-hammer-of-requital-40-r1",
+  "name": "Hammer of Requital",
+  "type": "spell",
+  "img": "icons/magic/fire/sword-flame.webp",
+  "system": {
+   "class": "cleric",
+   "level": 40,
+   "school": "conjuration",
+   "target": "self",
+   "range": 0,
+   "castTime": 4.0,
+   "manaCost": 150,
+   "effects": [
+    {
+     "type": "summon-pet",
+     "pet": "hammer-of-wrath"
+    }
+   ],
+   "description": "Summons a magical hammer that is particularly adept at smiting undead."
+  }
+ },
+ {
+  "_id": "clr-temperance-40-r1",
+  "name": "Temperance",
+  "type": "spell",
+  "img": "icons/magic/life/eye-heal-green.webp",
+  "system": {
+   "class": "cleric",
+   "level": 40,
+   "school": "abjuration",
+   "target": "single",
+   "range": 100,
+   "castTime": 9.0,
+   "manaCost": 550,
+   "effects": [
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Block new spell if slot 3 is 'HP Buff' and < 2800"
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 593,
+     "duration": 6000
+    },
+    {
+     "type": "heal",
+     "amount": 593
+    },
+    {
+     "type": "buff",
+     "stat": "ac",
+     "min": 11,
+     "max": 14,
+     "duration": 6000
+    },
+    {
+     "type": "utility",
+     "effect": "stacking-rule",
+     "detail": "Overwrite existing spell if slot 3 is 'HP Buff' and < 2800"
+    }
+   ],
+   "description": "Cloaks your target in an aura of protection, granting them increased hit points and armor class for 100 minutes."
+  }
+ }
+]

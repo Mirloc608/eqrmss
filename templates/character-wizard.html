@@ -1,0 +1,62 @@
+<form class="eqrmss-character-creation-wizard">
+
+  <header class="wizard-header">
+    <div class="wizard-title">
+      <h1>EverQuest - Rolemaster Character Creation</h1>
+
+      <div class="wizard-progress">
+        <div class="wizard-progress-bar" style="width: {{progress}}%;"></div>
+      </div>
+
+      <div class="wizard-progress-label">
+        Step {{step}} of {{steps.length}} — {{currentStep.label}}
+      </div>
+    </div>
+  </header>
+
+  <nav class="wizard-steps">
+    {{#each steps}}
+      <div class="wizard-step
+          {{#if this.active}}active{{/if}}
+          {{#if this.completed}}completed{{/if}}">
+        <span class="wizard-step-number">{{this.id}}</span>
+        <span class="wizard-step-label">{{this.label}}</span>
+      </div>
+    {{/each}}
+  </nav>
+
+  {{#if validationMessage}}
+    <section class="wizard-validation">
+      <strong>Please correct the following:</strong>
+      <ul>
+        {{#each validationErrors}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </section>
+  {{/if}}
+
+  <main class="wizard-body">
+    {{{stepHtml}}}
+  </main>
+
+  <footer class="wizard-footer">
+    <div class="wizard-footer-left">
+      <button type="button" data-action="cancel">Cancel</button>
+      <button type="button" data-action="reset">Reset</button>
+    </div>
+
+    <div class="wizard-footer-right">
+      {{#if canPrevious}}
+        <button type="button" data-action="previous">Previous</button>
+      {{/if}}
+
+      {{#if canNext}}
+        <button type="button" data-action="next">Next</button>
+      {{else}}
+        <button type="button" data-action="create" class="create-character">Create Character</button>
+      {{/if}}
+    </div>
+  </footer>
+
+</form>

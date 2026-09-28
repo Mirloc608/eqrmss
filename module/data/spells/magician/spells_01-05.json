@@ -1,0 +1,507 @@
+[
+  {
+    "_id": "mag-burst-of-flame-1-r1",
+    "name": "Burst of Flame",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 1,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 4,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 13
+        }
+      ],
+      "description": "Creates a ball of fire that burns your target, doing 13 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-fire-flux-1-r1",
+    "name": "Fire Flux",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 1,
+      "school": "evocation",
+      "target": "area",
+      "range": 0,
+      "castTime": 1.75,
+      "manaCost": 23,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 30,
+          "radius": 20
+        }
+      ],
+      "description": "Creates a circle of fire around you, causing 30 damage to up to 30 nearby creatures.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-flare-1-r1",
+    "name": "Flare",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 1,
+      "school": "evocation",
+      "target": "single",
+      "range": 400,
+      "castTime": 2.5,
+      "manaCost": 3,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reduce-stamina-loss",
+          "amount": 1
+        }
+      ],
+      "description": "Conjures a bolt of light that illuminates the surrounding area briefly."
+    }
+  },
+  {
+    "_id": "mag-minor-shielding-1-r1",
+    "name": "Minor Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 1,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.5,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 10,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 1,
+          "max": 1,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points and armor class."
+    }
+  },
+  {
+    "_id": "mag-reclaim-energy-1-r1",
+    "name": "Reclaim Energy",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 1,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "reclaim-pet-mana"
+        }
+      ],
+      "description": "Reclaims the energy needed to maintain your pet, causing the pet to dissipate and restore 75% of the mana cost spent to summon it."
+    }
+  },
+  {
+    "_id": "mag-summon-dagger-1-r1",
+    "name": "Summon Dagger",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 1,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "dagger"
+        }
+      ],
+      "description": "Focuses mana into the form of a magical dagger."
+    }
+  },
+  {
+    "_id": "mag-summon-drink-1-r1",
+    "name": "Summon Drink",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 1,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "globe-of-water"
+        }
+      ],
+      "description": "Focuses mana into a globe of pure drinking water."
+    }
+  },
+  {
+    "_id": "mag-summon-food-1-r1",
+    "name": "Summon Food",
+    "type": "spell",
+    "img": "icons/consumables/food/bread-loaf.webp",
+    "system": {
+      "class": "magician",
+      "level": 1,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 10,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "black-bread"
+        }
+      ],
+      "description": "Focuses mana into an edible loaf of black bread."
+    }
+  },
+  {
+    "_id": "mag-true-north-1-r1",
+    "name": "True North",
+    "type": "spell",
+    "img": "icons/magic/arcane/compass.webp",
+    "system": {
+      "class": "magician",
+      "level": 1,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "true-north"
+        }
+      ],
+      "description": "Provides a magical sense of direction, changing your heading to point directly North."
+    }
+  },
+  {
+    "_id": "mag-elementalkin-water-2-r1",
+    "name": "Elementalkin: Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 2,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elementalkin-water"
+        }
+      ],
+      "description": "Summons a water elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-summon-bandages-2-r1",
+    "name": "Summon Bandages",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 2,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 15,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "bandages",
+          "quantity": 20
+        }
+      ],
+      "description": "Focuses mana into the form of a several bandages."
+    }
+  },
+  {
+    "_id": "mag-summon-brass-choker-2-r1",
+    "name": "Summon Brass Choker",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 2,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "jedahs-brass-choker"
+        }
+      ],
+      "description": "Focuses mana into the form of a brass choker that sometimes allows you to cast a spell without consuming any reagents. This item works on spells up to level 12."
+    }
+  },
+  {
+    "_id": "mag-elementalkin-fire-3-r1",
+    "name": "Elementalkin: Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 3,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elementalkin-fire"
+        }
+      ],
+      "description": "Summons a fire elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-sense-summoned-3-r1",
+    "name": "Sense Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 3,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "sense-summoned"
+        }
+      ],
+      "description": "Provides you with a mystical awareness, pointing you towards the nearest summoned creature."
+    }
+  },
+  {
+    "_id": "mag-summon-wisp-3-r1",
+    "name": "Summon Wisp",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 3,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "wisp-stone"
+        }
+      ],
+      "description": "Focuses mana into the form of a wisp stone."
+    }
+  },
+  {
+    "_id": "mag-burn-4-r1",
+    "name": "Burn",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 4,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 7,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 27
+        }
+      ],
+      "description": "Burns your target's skin with fire, causing 27 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-elementalkin-air-4-r1",
+    "name": "Elementalkin: Air",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 4,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elementalkin-air"
+        }
+      ],
+      "description": "Summons an air elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-gate-4-r1",
+    "name": "Gate",
+    "type": "spell",
+    "img": "icons/magic/arcane/teleport-self.webp",
+    "system": {
+      "class": "magician",
+      "level": 4,
+      "school": "alteration",
+      "target": "self",
+      "range": "zone",
+      "castTime": 5.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "teleport-self",
+          "destination": "bind-point",
+          "chance": 98
+        }
+      ],
+      "description": "Opens a magical portal that returns you to your bind point."
+    }
+  },
+  {
+    "_id": "mag-elementalkin-earth-5-r1",
+    "name": "Elementalkin: Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 5,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "elementalkin-earth"
+        }
+      ],
+      "description": "Summons an earth elemental to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-flame-bolt-5-r1",
+    "name": "Flame Bolt",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-small.webp",
+    "system": {
+      "class": "magician",
+      "level": 5,
+      "school": "evocation",
+      "target": "single",
+      "range": 300,
+      "castTime": 2.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 32
+        }
+      ],
+      "description": "Burns your target's skin with a bolt of fire, causing 32 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-lesser-shielding-5-r1",
+    "name": "Lesser Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 5,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 25,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 30,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 2,
+          "max": 2,
+          "duration": 1620
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 10,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  }
+]

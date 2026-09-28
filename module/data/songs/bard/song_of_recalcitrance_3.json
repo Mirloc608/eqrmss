@@ -1,0 +1,61 @@
+{
+  "id": "song_of_recalcitrance_3",
+  "name": "Song of Recalcitrance",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 86,
+  "description": "A defiant drumbeat that allows you and your companions a 7% chance to resist blindness, stun, charm, fear, and mesmerization effects.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "chance-to-resist-blind-effects",
+      "amount": 5,
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-resist-stun-effects",
+      "amount": 5,
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-resist-charm-effects",
+      "amount": 5,
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-resist-fear-effects",
+      "amount": 5,
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-resist-mesmerize-effects",
+      "amount": 5,
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "utility-song",
+    "drum"
+  ]
+}

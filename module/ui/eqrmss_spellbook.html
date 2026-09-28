@@ -1,0 +1,78 @@
+<section class="eqrmss-spellbook">
+
+  <!-- Class Tabs -->
+  <nav class="spellbook-class-tabs">
+    {{#each spellbook.classes}}
+      <div class="spellbook-class-tab" data-class="{{this.id}}">
+        {{this.label}}
+      </div>
+    {{/each}}
+  </nav>
+
+  <!-- Spellbook Body -->
+  <div class="spellbook-body">
+
+    {{#each spellbook.classes}}
+      <div class="spellbook-class-panel" data-class="{{this.id}}">
+
+        <!-- Rank Groups -->
+        {{#each this.ranks}}
+          <div class="spellbook-rank-block">
+
+            <h3 class="rank-header">
+              Rank {{@key}}
+            </h3>
+
+            <div class="spellbook-rank-grid">
+
+              {{#each this}}
+                <div class="spell-icon-block">
+
+                  <img class="spell-icon"
+                       src="{{this.img}}"
+                       title="{{this.name}}"
+                       data-item-id="{{this._id}}"/>
+
+                  <div class="spell-icon-controls">
+
+                    <div class="spell-favorite-toggle"
+                         data-item-id="{{this._id}}">
+                      {{#if this.system.favorite}}★{{else}}☆{{/if}}
+                    </div>
+
+                    <div class="spell-memorized-toggle"
+                         data-item-id="{{this._id}}">
+                      {{#if this.system.memorized}}M{{else}}–{{/if}}
+                    </div>
+
+                    <div class="spell-rank-cycle"
+                         data-item-id="{{this._id}}">
+                      {{this.system.rank}}
+                    </div>
+
+                    <div class="spell-edit"
+                         data-item-id="{{this._id}}">
+                      ✎
+                    </div>
+
+                    <div class="spell-delete"
+                         data-item-id="{{this._id}}">
+                      ✖
+                    </div>
+
+                  </div>
+
+                </div>
+              {{/each}}
+
+            </div>
+
+          </div>
+        {{/each}}
+
+      </div>
+    {{/each}}
+
+  </div>
+
+</section>

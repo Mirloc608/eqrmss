@@ -1,0 +1,41 @@
+{
+  "id": "dichotomic_psalm_1",
+  "name": "Dichotomic Psalm",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 101,
+  "description": "Triggers two psalms to assist your group. One will increase the damage of most spells, and the other will provide health, mana, and endurance to them while increasing the minimum damage dealt by all melee skills.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "dichotomic-psalm-of-potential"
+    },
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "dichotomic-psalm-of-empowerment"
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "voice"
+  ]
+}

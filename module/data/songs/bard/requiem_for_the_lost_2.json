@@ -1,0 +1,37 @@
+{
+  "id": "requiem_for_the_lost_2",
+  "name": "Requiem for the Lost",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 81,
+  "description": "If a companion perishes, your remaining group members will take reduced spell and melee damage for a time.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-on-death",
+      "spell": "requiem-for-the-lost-effect",
+      "amount": 100
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "lute"
+  ]
+}

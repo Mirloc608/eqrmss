@@ -1,0 +1,41 @@
+{
+  "id": "silisias_lively_crescendo_3",
+  "name": "Silisia's Lively Crescendo",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 104,
+  "description": "When this song builds to a crescendo it awakens the senses of your group members, restoring their health, mana, and endurance.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-on-fade",
+      "spell": "crescendo-effect"
+    },
+    {
+      "type": "utility",
+      "effect": "buff-blocker",
+      "amount": 190
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "utility-song",
+    "lute"
+  ]
+}

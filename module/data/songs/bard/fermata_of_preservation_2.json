@@ -1,0 +1,35 @@
+{
+  "id": "fermata_of_preservation_2",
+  "name": "Fermata of Preservation",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 73,
+  "description": "A single suspended note that protects your target from nearly all harm for a short time.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 22,
+    "targets": "ally"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "invulnerability"
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "flute"
+  ]
+}

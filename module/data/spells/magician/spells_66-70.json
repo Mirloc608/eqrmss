@@ -1,0 +1,1137 @@
+[
+  {
+    "_id": "mag-bolt-of-jerikor-66-r1",
+    "name": "Bolt of Jerikor",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "evocation",
+      "target": "single",
+      "range": 300,
+      "castTime": 7.0,
+      "manaCost": 530,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 2375
+        }
+      ],
+      "description": "Burns your target's skin with the firebolt of Jerikor, causing 2375 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-child-of-wind-66-r1",
+    "name": "Child of Wind",
+    "type": "spell",
+    "img": "icons/magic/air/wind-gust-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 329,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "child-of-wind"
+        }
+      ],
+      "description": "Summons the ward of Xegony to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-elemental-aura-66-r1",
+    "name": "Elemental Aura",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 374,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 390,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 10,
+          "max": 14,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 40,
+          "duration": 5400
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "mag-fireskin-66-r1",
+    "name": "Fireskin",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "abjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 5.0,
+      "manaCost": 203,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 51,
+          "duration": 900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 45,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in a shield of flames, damaging any creature that attacks them."
+    }
+  },
+  {
+    "_id": "mag-summon-calliavs-glowing-bauble-66-r1",
+    "name": "Summon Calliav's Glowing Bauble",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 164,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-glowing-bauble"
+        }
+      ],
+      "description": "Focuses mana into the form of a glowing bauble that lowers the mana cost of detrimental spells when worn. This item works on spells up to level 70."
+    }
+  },
+  {
+    "_id": "mag-summon-calliavs-jeweled-bracelet-66-r1",
+    "name": "Summon Calliav's Jeweled Bracelet",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 164,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-jeweled-bracelet"
+        }
+      ],
+      "description": "Focuses mana into the form of a jeweled bracelet that increases the damage of many spells. This item works on spells up to level 70."
+    }
+  },
+  {
+    "_id": "mag-summon-calliavs-platinum-choker-66-r1",
+    "name": "Summon Calliav's Platinum Choker",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 164,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-platinum-choker"
+        }
+      ],
+      "description": "Focuses mana into the form of a platinum choker that sometimes allows you to cast a spell without consuming any reagents. This item works on spells up to level 70."
+    }
+  },
+  {
+    "_id": "mag-summon-calliavs-runed-mantle-66-r1",
+    "name": "Summon Calliav's Runed Mantle",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 164,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-runed-mantle"
+        }
+      ],
+      "description": "Focuses mana into the form of a runed mantle that allows many of your beneficial spells to last a longer period of time. This item works on spells up to level 70."
+    }
+  },
+  {
+    "_id": "mag-summon-calliavs-spiked-ring-66-r1",
+    "name": "Summon Calliav's Spiked Ring",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 164,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-spiked-ring"
+        }
+      ],
+      "description": "Focuses mana into the form of a spiked ring that allows you to cast many spells faster. This item works on spells up to level 70."
+    }
+  },
+  {
+    "_id": "mag-summon-calliavs-steel-bracelet-66-r1",
+    "name": "Summon Calliav's Steel Bracelet",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 164,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-steel-bracelet"
+        }
+      ],
+      "description": "Focuses mana into the form of an steel bracelet that increases the damage of long term detrimental spells. This item works on spells up to level 70."
+    }
+  },
+  {
+    "_id": "mag-summon-fireblade-66-r1",
+    "name": "Summon Fireblade",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 66,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 123,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "fireblade"
+        }
+      ],
+      "description": "Focuses mana into the form of the Fireblade, a useful weapon for summoned creatures."
+    }
+  },
+  {
+    "_id": "mag-child-of-water-67-r1",
+    "name": "Child of Water",
+    "type": "spell",
+    "img": "icons/magic/water/orb-globe-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 67,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 413,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "child-of-water"
+        }
+      ],
+      "description": "Summons a servant of Marr to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-rain-of-jerikor-67-r1",
+    "name": "Rain of Jerikor",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 67,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 4.0,
+      "manaCost": 567,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1135,
+          "radius": 25
+        }
+      ],
+      "description": "Conjures a storm of solar energy over your target, causing 1135 damage every 3 seconds to creatures in the area. The storm will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-summon-crystal-belt-67-r1",
+    "name": "Summon Crystal Belt",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 67,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 129,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "crystal-belt"
+        }
+      ],
+      "description": "Focuses mana into the form of a crystal belt, an item that increases your pet's hit points, strength, stamina, dexterity, and agility."
+    }
+  },
+  {
+    "_id": "mag-summon-dagger-of-the-deep-67-r1",
+    "name": "Summon Dagger of the Deep",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 67,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 129,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "dagger-of-the-deep"
+        }
+      ],
+      "description": "Focuses mana into the form of the Dagger of the Deep, a useful weapon for summoned creatures."
+    }
+  },
+  {
+    "_id": "mag-summon-sphere-of-air-67-r1",
+    "name": "Summon Sphere of Air",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 67,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 310,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "sphere-of-air"
+        }
+      ],
+      "description": "Focuses mana into the form of a sphere of air, an item which can grant invisibilty to its user."
+    }
+  },
+  {
+    "_id": "mag-summon-staff-of-the-north-wind-67-r1",
+    "name": "Summon Staff of the North Wind",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 67,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 155,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "staff-of-the-north-wind"
+        }
+      ],
+      "description": "Focuses mana into the form of the Staff of the North Wind, a useful weapon for summoned creatures."
+    }
+  },
+  {
+    "_id": "mag-blade-strike-68-r1",
+    "name": "Blade Strike",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 68,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 558,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 2630
+        }
+      ],
+      "description": "Conjures a shock of black steel that assaults your target, causing 2630 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-burning-aura-68-r1",
+    "name": "Burning Aura",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 68,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 389,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "defensive-proc",
+          "proc": "burning-vengeance",
+          "amount": 400
+        }
+      ],
+      "description": "Cloaks your target in an aura of flames. The flames will frequently lash out at an attacking creature causing moderate damage."
+    }
+  },
+  {
+    "_id": "mag-child-of-fire-68-r1",
+    "name": "Child of Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "magician",
+      "level": 68,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 518,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "child-of-fire"
+        }
+      ],
+      "description": "Summons a child of Ro to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-phantom-shield-68-r1",
+    "name": "Phantom Shield",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 68,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 606,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 17,
+          "duration": 9000
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 9,
+          "max": 9,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 12,
+          "max": 16,
+          "duration": 9000
+        }
+      ],
+      "description": "Covers you in a phantom shield, increasing your hit point regeneration, mana regeneration, and armor class."
+    }
+  },
+  {
+    "_id": "mag-pyrilen-skin-68-r1",
+    "name": "Pyrilen Skin",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 68,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 3.0,
+      "manaCost": 389,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 544,
+          "duration": 12
+        }
+      ],
+      "description": "Surrounds your target in a magical shield that causes damage to anything that strikes them for a short time. After several strikes the effect will fade."
+    }
+  },
+  {
+    "_id": "mag-summon-pouch-of-jerikor-68-r1",
+    "name": "Summon Pouch of Jerikor",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 68,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 389,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-satchel"
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-platinum-choker",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-runed-mantle",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-jeweled-bracelet",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-spiked-ring",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-glowing-bauble",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "calliavs-steel-bracelet",
+          "intoBag": true
+        }
+      ],
+      "description": "Focuses mana into the form of a bag of jewelry that grants a number of spell enhancements to the wearer."
+    }
+  },
+  {
+    "_id": "mag-bulwark-of-calliav-69-r1",
+    "name": "Bulwark of Calliav",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 69,
+      "school": "abjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 556,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb-hits",
+          "amount": 4,
+          "cap": 15635,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Bulwark of Calliav on your pet, absorbing up to 15635 damage from the next 4 melee strikes or direct damage spells that hit it."
+    }
+  },
+  {
+    "_id": "mag-burning-earth-69-r1",
+    "name": "Burning Earth",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 69,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 375,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1500
+        }
+      ],
+      "description": "Strikes your target with burning sand, causing 1500 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-desolate-summoned-69-r1",
+    "name": "Desolate Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 69,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 397,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 2065,
+          "bane": "summoned"
+        }
+      ],
+      "description": "A burst of holy light that causes 2065 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-elemental-fury-69-r1",
+    "name": "Elemental Fury",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 69,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 208,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-bonus",
+          "amount": 5,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 85,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 52,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 6,
+          "max": 8,
+          "duration": 3600
+        }
+      ],
+      "description": "Infuses your elemental companion with energy, increasing their attack speed, armor class, and damage."
+    }
+  },
+  {
+    "_id": "mag-fickle-fire-69-r1",
+    "name": "Fickle Fire",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 69,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 578,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 2755
+        }
+      ],
+      "description": "Strikes your target with a bolt of focused elemental fire, causing 2755 damage. The force of this fire can sometimes be harnessed to greatly increase the damage of your next direct damage spell.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-focus-mass-intricate-spellcasters-empowering-essence-69-r1",
+    "name": "Focus Mass Intricate Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 69,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 2005,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "intricate-spellcasters-empowering-essence",
+          "quantity": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-renewal-of-jerikor-69-r1",
+    "name": "Renewal of Jerikor",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 69,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.75,
+      "manaCost": 398,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 1830
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "amount": 28
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "amount": 28
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "amount": 28
+        }
+      ],
+      "description": "Renews the health of your elemental pet, healing 1830 damage, and curing their diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "mag-summon-molten-orb-69-r1",
+    "name": "Summon: Molten Orb",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 69,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.5,
+      "manaCost": 1725,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "molten-orb"
+        }
+      ],
+      "description": "Summons an orb of molten energy in to your hands. The energy in this orb can be used to strike out at your opponents with fire."
+    }
+  },
+  {
+    "_id": "mag-ancient-nova-strike-70-r1",
+    "name": "Ancient: Nova Strike",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 485,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 2195
+        }
+      ],
+      "description": "Summons a bolt of solar energy to strike your target for 2195 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-ancient-veil-of-pyrilonus-70-r1",
+    "name": "Ancient: Veil of Pyrilonus",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "conjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 305,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 462,
+          "duration": 24
+        }
+      ],
+      "description": "Surrounds your target in a magical shield that causes damage to anything that strikes them for a short time. After several strikes the effect will fade."
+    }
+  },
+  {
+    "_id": "mag-child-of-earth-70-r1",
+    "name": "Child of Earth",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 369,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "child-of-earth"
+        }
+      ],
+      "description": "Summons the Rathe's son to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-circle-of-fireskin-70-r1",
+    "name": "Circle of Fireskin",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 540,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 57,
+          "duration": 900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 45,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your group in radiating fire, damaging any creature that attacks them."
+    }
+  },
+  {
+    "_id": "mag-elemental-simulacrum-70-r1",
+    "name": "Elemental Simulacrum",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1475
+        }
+      ],
+      "description": "Converts your pet's life into a shield around you that will increase your mana regen."
+    }
+  },
+  {
+    "_id": "mag-focus-elaborate-spellcasters-empowering-essence-70-r1",
+    "name": "Focus Elaborate Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 462,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "elaborate-spellcasters-empowering-essence"
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-iceflame-guard-70-r1",
+    "name": "Iceflame Guard",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 185,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "proc": "iceflame-strike",
+          "amount": 150
+        },
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 14,
+          "duration": 1800
+        }
+      ],
+      "description": "Cloaks your pet in an iceflame guard which will cause damage to any creature that strikes it in melee combat, as well as granting a chance to strike enemies with fire. The combat effect will also cause your pet to be cloaked in a brief protective aura that will absorb one melee attack or spell."
+    }
+  },
+  {
+    "_id": "mag-raging-servant-70-r1",
+    "name": "Raging Servant",
+    "type": "spell",
+    "img": "icons/magic/nature/insects-swarm-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 3.0,
+      "manaCost": 1525,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "raging-servant",
+          "count": 1,
+          "duration": 18
+        },
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1
+        }
+      ],
+      "description": "Summons a raging elemental servant that will relentlessly attack your opponent for 18 seconds."
+    }
+  },
+  {
+    "_id": "mag-rathes-strength-70-r1",
+    "name": "Rathe's Strength",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 369,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "aura",
+          "aura": "rathes-strength-effect"
+        }
+      ],
+      "description": "Augments your pet with the strength of the Rathe which will increase their melee damage by 10%. The effect will also augment all nearby pets by the same amount."
+    }
+  },
+  {
+    "_id": "mag-spear-of-ro-70-r1",
+    "name": "Spear of Ro",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "evocation",
+      "target": "single",
+      "range": 300,
+      "castTime": 7.0,
+      "manaCost": 632,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 2880
+        }
+      ],
+      "description": "Strikes your target with the spear of Ro, causing 2880 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-star-scream-70-r1",
+    "name": "Star Scream",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 6.0,
+      "manaCost": 552,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1140,
+          "radius": 25
+        }
+      ],
+      "description": "Conjures a maelstrom of thunder around your target, causing 1140 damage every 3 seconds to creatures in the area. The maelstrom will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-star-strike-70-r1",
+    "name": "Star Strike",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 70,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 456,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 2030
+        }
+      ],
+      "description": "Burns your target's skin with a vortex of the sun, causing 2030 damage.",
+      "resist": "fire"
+    }
+  }
+]

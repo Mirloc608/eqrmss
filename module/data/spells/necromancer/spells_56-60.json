@@ -1,0 +1,987 @@
+[
+  {
+    "_id": "nec-cessation-of-cor-56-r1",
+    "name": "Cessation of Cor",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 56,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 203,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 5,
+          "duration": 54
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -6,
+          "max": -5,
+          "duration": 54,
+          "resist": "disease"
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 126,
+          "max": 126,
+          "duration": 54,
+          "resist": "disease"
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -55,
+          "duration": 54,
+          "resist": "disease"
+        }
+      ],
+      "description": "Causes your target's heartbeat to become irregular, adding 5 disease counters, lowering their strength by 55, armor class by 70, and doing 117 disease damage every 6 seconds for 54 seconds."
+    }
+  },
+  {
+    "_id": "nec-crippling-claudication-56-r1",
+    "name": "Crippling Claudication",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 56,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "atk",
+          "amount": -35,
+          "duration": 360,
+          "resist": "disease"
+        }
+      ],
+      "description": "Steals the attack strength of your opponent and transfers a portion of it to your group for 6 minutes."
+    }
+  },
+  {
+    "_id": "nec-demi-lich-56-r1",
+    "name": "Demi Lich",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 56,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 1,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "cast-skeletal-form",
+          "duration": 3600
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 31,
+          "max": 31,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 3600
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 1,
+          "max": 1,
+          "duration": 3600
+        }
+      ],
+      "description": "Grips your body in an unholy darkness, slowly draining your hit points while regenerating your mana."
+    }
+  },
+  {
+    "_id": "nec-eidolon-voice-56-r1",
+    "name": "Eidolon Voice",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 56,
+      "school": "necromancy",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 55,
+          "duration": 42,
+          "resist": "magic"
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  },
+  {
+    "_id": "nec-form-of-mottled-bone-56-r1",
+    "name": "Form of Mottled Bone",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-transform.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 56,
+      "school": "divination",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "drybone-skeleton",
+          "duration": 7200
+        }
+      ],
+      "description": "Bestows upon your pet the form of a mottled skeleton. This effect lasts for 2 hours."
+    }
+  },
+  {
+    "_id": "nec-sedulous-subversion-56-r1",
+    "name": "Sedulous Subversion",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 56,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "mana",
+          "amount": 150
+        }
+      ],
+      "description": "Restores your target's mana at the expense of your own."
+    }
+  },
+  {
+    "_id": "nec-servant-of-bones-56-r1",
+    "name": "Servant of Bones",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 56,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 15.0,
+      "manaCost": 525,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "servant-of-bones"
+        }
+      ],
+      "description": "Animates an undead servant from the remnants of the fallen. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-trepidation-56-r1",
+    "name": "Trepidation",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 56,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 52,
+          "duration": 36,
+          "resist": "magic",
+          "resistMod": -25
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  },
+  {
+    "_id": "nec-conjure-corpse-57-r1",
+    "name": "Conjure Corpse",
+    "type": "spell",
+    "img": "icons/magic/death/summon-corpse.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 57,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 700,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-corpse",
+          "amount": 70
+        }
+      ],
+      "description": "Summons your target's corpse to you. This spell works on characters up to level 70."
+    }
+  },
+  {
+    "_id": "nec-exile-undead-57-r1",
+    "name": "Exile Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 57,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 210,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 936,
+          "resist": "magic",
+          "resistMod": -50
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 946 and 946 damage to an undead target."
+    }
+  },
+  {
+    "_id": "nec-imbue-nightmare-57-r1",
+    "name": "Imbue Nightmare",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 57,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Black Diamond of Nightmares",
+          "amount": 1
+        }
+      ],
+      "description": "Imbues a diamond with the power of nightmares. Consumes a raw diamond and nightmare mephit blood when cast."
+    }
+  },
+  {
+    "_id": "nec-unholy-voice-57-r1",
+    "name": "Unholy Voice",
+    "type": "spell",
+    "img": "icons/magic/control/fear-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 57,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "fear",
+          "amount": 55,
+          "duration": 42,
+          "resist": "magic"
+        }
+      ],
+      "description": "A booming voice fills your target's ears, causing them to flee in terror."
+    }
+  },
+  {
+    "_id": "nec-vexing-mordinia-57-r1",
+    "name": "Vexing Mordinia",
+    "type": "spell",
+    "img": "icons/magic/death/skull-debuff-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 57,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.5,
+      "manaCost": 495,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 368,
+          "max": 368,
+          "duration": 54,
+          "resist": "magic",
+          "resistMod": -200
+        },
+        {
+          "type": "utility",
+          "effect": "spell-damage-leech",
+          "percent": 100.0,
+          "maxPerHit": 427,
+          "duration": 54
+        }
+      ],
+      "description": "Drains the life from your target, doing 122 damage every six seconds for 54 seconds. 100% of the life-force taken is used to heal your wounds."
+    }
+  },
+  {
+    "_id": "nec-guard-of-calliav-58-r1",
+    "name": "Guard of Calliav",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 58,
+      "school": "abjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "spell-rune",
+          "hits": 2,
+          "maxPerHit": 12922,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Guard of Calliav on your pet, absorbing up to 12922 damage from the next 2 melee strikes or direct damage spells that hit it."
+    }
+  },
+  {
+    "_id": "nec-imbue-disease-58-r1",
+    "name": "Imbue Disease",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 58,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Green Diamond of Disease",
+          "amount": 1
+        }
+      ],
+      "description": "Imbues a diamond with the power of disease; it consumes a raw diamond and a bubonian blood when cast."
+    }
+  },
+  {
+    "_id": "nec-imbue-torment-58-r1",
+    "name": "Imbue Torment",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 58,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Purple Diamond of Torment",
+          "amount": 1
+        }
+      ],
+      "description": "Imbues a diamond with the power of torment. Consumes a raw diamond and tormentor blood when cast."
+    }
+  },
+  {
+    "_id": "nec-immobilize-58-r1",
+    "name": "Immobilize",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 60,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 60 seconds."
+    }
+  },
+  {
+    "_id": "nec-mind-wrack-58-r1",
+    "name": "Mind Wrack",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 600,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "mana-drain",
+          "amount": 300,
+          "resist": "disease",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains the power from your target's mind and uses it to restore the mental energy of your group."
+    }
+  },
+  {
+    "_id": "nec-pyrocruor-58-r1",
+    "name": "Pyrocruor",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 58,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 295,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 204,
+          "max": 204,
+          "duration": 48,
+          "resist": "fire",
+          "resistMod": -100
+        }
+      ],
+      "description": "Burns the blood of your target, causing between 40 and 166 every six seconds for 48 seconds."
+    }
+  },
+  {
+    "_id": "nec-quivering-veil-of-xarn-58-r1",
+    "name": "Quivering Veil of Xarn",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blood-red.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 58,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.0,
+      "manaCost": 135,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "invulnerability",
+          "duration": 18
+        },
+        {
+          "type": "heal",
+          "amount": 198
+        }
+      ],
+      "description": "Surrounds your body in the veil of Xarn, rendering you invulnerable for 18 seconds as well as healing you for 150."
+    }
+  },
+  {
+    "_id": "nec-reflect-58-r1",
+    "name": "Reflect",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 58,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.5,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "spell-reflect",
+          "percent": 50,
+          "duration": 12
+        }
+      ],
+      "description": "Surrounds your body in a reflective aura, providing a chance for all incoming spells to rebound back against the caster."
+    }
+  },
+  {
+    "_id": "nec-devouring-darkness-59-r1",
+    "name": "Devouring Darkness",
+    "type": "spell",
+    "img": "icons/magic/death/shadow-snare.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 59,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 150,
+          "max": 150,
+          "duration": 78,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "movement",
+          "amount": -75,
+          "duration": 78,
+          "resist": "magic"
+        }
+      ],
+      "description": "Summons a devouring darkness that binds your target's feet, decreasing their movement rate, and doing 123 damage every six seconds for 78 seconds."
+    }
+  },
+  {
+    "_id": "nec-emissary-of-thule-59-r1",
+    "name": "Emissary of Thule",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-warrior.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 59,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 16.0,
+      "manaCost": 650,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "emissary-of-thule"
+        }
+      ],
+      "description": "Summons forth a servant of fear to do your bidding. Consumes bone chips when cast."
+    }
+  },
+  {
+    "_id": "nec-focus-mass-spellcasters-empowering-essence-59-r1",
+    "name": "Focus Mass Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 59,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Spellcaster's Empowering Essence",
+          "amount": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-touch-of-night-59-r1",
+    "name": "Touch of Night",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 59,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 382,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 1245,
+          "max": 1245,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 708 and 708 hit points."
+    }
+  },
+  {
+    "_id": "nec-ancient-lifebane-60-r1",
+    "name": "Ancient: Lifebane",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-bolt-green.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 340,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "poison",
+          "amount": 980,
+          "resist": "poison"
+        }
+      ],
+      "description": "Strikes your target with a jet of poison, causing between 1050 and 1050 damage."
+    }
+  },
+  {
+    "_id": "nec-ancient-master-of-death-60-r1",
+    "name": "Ancient: Master of Death",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 1,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "cast-specter-form",
+          "duration": 3600
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 44,
+          "max": 44,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 3600
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 1,
+          "max": 1,
+          "duration": 3600
+        }
+      ],
+      "description": "Grips your body in an unholy darkness, slowly draining your hit points while regenerating your mana."
+    }
+  },
+  {
+    "_id": "nec-arch-lich-60-r1",
+    "name": "Arch Lich",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-blue.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 2.0,
+      "manaCost": 1,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "cast-specter-form",
+          "duration": 3600
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 35,
+          "max": 35,
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "ultravision",
+          "duration": 3600
+        },
+        {
+          "type": "utility",
+          "effect": "see-invisible",
+          "duration": 3600
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 1,
+          "max": 1,
+          "duration": 3600
+        }
+      ],
+      "description": "Grips your body in an unholy darkness, slowly draining your hit points while regenerating your mana."
+    }
+  },
+  {
+    "_id": "nec-banishment-of-shadows-60-r1",
+    "name": "Banishment of Shadows",
+    "type": "spell",
+    "img": "icons/magic/death/skull-purple.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.0,
+      "manaCost": 750,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "destroy"
+        }
+      ],
+      "description": "Banishes an undead creature to the shadow realm. Consumes a star ruby to cast."
+    }
+  },
+  {
+    "_id": "nec-death-peace-60-r1",
+    "name": "Death Peace",
+    "type": "spell",
+    "img": "icons/magic/death/feign-death.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "necromancy",
+      "target": "self",
+      "range": 0,
+      "castTime": 1.0,
+      "manaCost": 120,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "feign-death",
+          "amount": 98
+        }
+      ],
+      "description": "Causes you to stop breathing and appear dead to most creatures."
+    }
+  },
+  {
+    "_id": "nec-enslave-death-60-r1",
+    "name": "Enslave Death",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 500,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 55,
+          "duration": 30,
+          "resist": "magic",
+          "resistMod": -1000
+        }
+      ],
+      "description": "Commands an undead creature to do your bidding, temporarily bending them to your will."
+    }
+  },
+  {
+    "_id": "nec-focus-refined-spellcasters-empowering-essence-60-r1",
+    "name": "Focus Refined Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-gem.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "Refined Spellcaster's Empowering Essence",
+          "amount": 1
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "nec-funeral-pyre-of-kelador-60-r1",
+    "name": "Funeral Pyre of Kelador",
+    "type": "spell",
+    "img": "icons/magic/fire/symbol-flame.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 470,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "fire",
+          "min": 329,
+          "max": 329,
+          "duration": 48,
+          "resist": "fire",
+          "resistMod": -100
+        }
+      ],
+      "description": "Incinerates the blood of your target, causing 310 damage every 6 seconds for 48 seconds."
+    }
+  },
+  {
+    "_id": "nec-gangrenous-touch-of-zumuul-60-r1",
+    "name": "Gangrenous Touch of Zum`uul",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 360,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 672,
+          "max": 672,
+          "resist": "disease",
+          "resistMod": -150
+        }
+      ],
+      "description": "Touches your target with the hand of the plague, draining your target of life energy, siphoning between 720 and 720 damage."
+    }
+  },
+  {
+    "_id": "nec-trucidation-60-r1",
+    "name": "Trucidation",
+    "type": "spell",
+    "img": "icons/magic/death/blood-leech.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 375,
+      "effects": [
+        {
+          "type": "lifetap",
+          "min": 1400,
+          "max": 1400,
+          "resist": "magic",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains your target of life energy, siphoning between 1500 and 1500 hit points. Consumes an essence emerald when cast."
+    }
+  },
+  {
+    "_id": "nec-zevfeers-theft-of-vitae-60-r1",
+    "name": "Zevfeer's Theft of Vitae",
+    "type": "spell",
+    "img": "icons/magic/death/disease-skull.webp",
+    "system": {
+      "class": "necromancer",
+      "level": 60,
+      "school": "necromancy",
+      "target": "single",
+      "range": 200,
+      "castTime": 8.0,
+      "manaCost": 650,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 404,
+          "max": 404,
+          "duration": 54,
+          "resist": "disease",
+          "resistMod": -200
+        }
+      ],
+      "description": "Drains the life from your target, doing 80 damage every six seconds for 54 seconds. Triggers Zevfeer's Theft of Vitae Recourse, which will heal your group for 80 hit points every six seconds."
+    }
+  }
+]

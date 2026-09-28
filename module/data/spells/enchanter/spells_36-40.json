@@ -1,0 +1,588 @@
+[
+  {
+    "_id": "enc-calming-visage-36-r1",
+    "name": "Calming Visage",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 36,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 2.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "decrease-hate-generated",
+          "amount": 5,
+          "duration": 36
+        }
+      ],
+      "description": "Cloaks your target in a calming visage, diverting attention from any action they take."
+    }
+  },
+  {
+    "_id": "enc-gravity-flux-36-r1",
+    "name": "Gravity Flux",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 36,
+      "school": "alteration",
+      "target": "area",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 337,
+      "radius": 35,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 131
+        },
+        {
+          "type": "utility",
+          "effect": "gravity-pull"
+        }
+      ],
+      "description": "Causes a sudden reversal in the gravity around your target, doing 170 damage to up to 4 entities."
+    }
+  },
+  {
+    "_id": "enc-mind-wipe-36-r1",
+    "name": "Mind Wipe",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 36,
+      "school": "enchantment",
+      "target": "area",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 100,
+      "radius": 60,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 55
+        }
+      ],
+      "description": "Attacks your target's mind, providing a chance to forget those that have done them harm."
+    }
+  },
+  {
+    "_id": "enc-aanyas-animation-37-r1",
+    "name": "Aanya's Animation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 37,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "aanyas-animation-pet"
+        }
+      ],
+      "description": "Animates a weapon and shield to attack your enemies. Consumes a tiny dagger when cast."
+    }
+  },
+  {
+    "_id": "enc-cajoling-whispers-37-r1",
+    "name": "Cajoling Whispers",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 37,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.5,
+      "manaCost": 195,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 46,
+          "duration": 1230,
+          "resist": "magic"
+        }
+      ],
+      "description": "Dominates your target's mind, allowing you to control them for a short time. This spell works on creatures up to level 46."
+    }
+  },
+  {
+    "_id": "enc-illusion-dry-bone-37-r1",
+    "name": "Illusion: Dry Bone",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 37,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "drybone-skeleton",
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 25,
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Drybone Skeleton. This spell also grants increased fire resistance."
+    }
+  },
+  {
+    "_id": "enc-resist-magic-37-r1",
+    "name": "Resist Magic",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 37,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.5,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 40,
+          "duration": 2160
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away magic for 36 minutes."
+    }
+  },
+  {
+    "_id": "enc-shade-37-r1",
+    "name": "Shade",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 37,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 5,
+          "duration": 4320
+        }
+      ],
+      "description": "Causes your target's image to blur, making it harder for your opponents to hit you by increasing your armor class."
+    }
+  },
+  {
+    "_id": "enc-distill-mana-38-r1",
+    "name": "Distill Mana",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 38,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "vial-of-distilled-mana",
+          "count": 1
+        }
+      ],
+      "description": "Distills mana into a physical form. Consumes a poison vial and two sapphires when cast."
+    }
+  },
+  {
+    "_id": "enc-greater-mass-enchant-platinum-38-r1",
+    "name": "Greater Mass Enchant Platinum",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 38,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 20.0,
+      "manaCost": 2700,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-platinum-bar",
+          "count": 20
+        }
+      ],
+      "description": "Enchants twenty bars of platinum with magical energy. Consumes twenty bars of platinum when cast."
+    }
+  },
+  {
+    "_id": "enc-illusion-spirit-wolf-38-r1",
+    "name": "Illusion: Spirit Wolf",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 38,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "spirit-wolf",
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 15,
+          "duration": 2160
+        },
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 10,
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Spirit Wolf. This spell can only be cast outdoors."
+    }
+  },
+  {
+    "_id": "enc-rampage-38-r1",
+    "name": "Rampage",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 38,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 75,
+          "duration": 390
+        },
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 41,
+          "duration": 390
+        },
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -20,
+          "duration": 390
+        }
+      ],
+      "description": "Hardens your skin and fills your arms with energy, increasing strength and absorbing damage, while also decreasing your agility."
+    }
+  },
+  {
+    "_id": "enc-wandering-mind-38-r1",
+    "name": "Wandering Mind",
+    "type": "spell",
+    "img": "icons/magic/debuff/poison-cloud-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 38,
+      "school": "conjuration",
+      "target": "single",
+      "range": 125,
+      "castTime": 4.5,
+      "manaCost": 5,
+      "effects": [
+        {
+          "type": "dot",
+          "element": "mana",
+          "min": 3,
+          "max": 3,
+          "duration": 120,
+          "resist": "magic",
+          "resistMod": -100
+        }
+      ],
+      "description": "Draws the energy from your target's mind, draining their mana and giving it to you."
+    }
+  },
+  {
+    "_id": "enc-celerity-39-r1",
+    "name": "Celerity",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 39,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 8.0,
+      "manaCost": 185,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 50,
+          "duration": 960
+        }
+      ],
+      "description": "Grants your target quickened movement, increasing their attack speed for 16 minutes."
+    }
+  },
+  {
+    "_id": "enc-focus-mass-modest-spellcasters-empowering-essence-39-r1",
+    "name": "Focus Mass Modest Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 39,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 1000,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "modest-spellcasters-empowering-essence",
+          "count": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "enc-immobilize-39-r1",
+    "name": "Immobilize",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 39,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.75,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 60,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes the earth to adhere to your target's feet, preventing them from moving for up to 60 seconds."
+    }
+  },
+  {
+    "_id": "enc-mass-distill-mana-39-r1",
+    "name": "Mass Distill Mana",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 39,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 1200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "vial-of-distilled-mana",
+          "count": 5
+        }
+      ],
+      "description": "Distills mana into a physical form, creating five vials of distilled mana. Consumes five poison vials and ten sapphires when cast."
+    }
+  },
+  {
+    "_id": "enc-arch-shielding-40-r1",
+    "name": "Arch Shielding",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 40,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 150,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 6,
+          "max": 8,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 20,
+          "duration": 4320
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "enc-boon-of-the-garou-40-r1",
+    "name": "Boon of the Garou",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 40,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "werewolf",
+          "duration": 780
+        },
+        {
+          "type": "proc",
+          "name": "lifetap-strike",
+          "duration": 780
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 30,
+          "duration": 780
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 100,
+          "duration": 780
+        }
+      ],
+      "description": "Transforms your target into a feral werewolf, increasing their attack rating, dexterity, and allowing a chance to perform a life draining attack."
+    }
+  },
+  {
+    "_id": "enc-incapacitate-40-r1",
+    "name": "Incapacitate",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 40,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -55,
+          "duration": 390,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -55,
+          "duration": 390,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -7,
+          "max": -5,
+          "duration": 390,
+          "resist": "magic"
+        }
+      ],
+      "description": "Saps your target's power, decreasing their agility, strength, and armor class for 6.5 minutes."
+    }
+  },
+  {
+    "_id": "enc-rune-iv-40-r1",
+    "name": "Rune IV",
+    "type": "spell",
+    "img": "icons/magic/symbols/rune-stone-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 40,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 236,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 213,
+          "duration": 5400
+        }
+      ],
+      "description": "Covers your target in a shimmer of runes that absorb damage. Consumes a peridot when cast."
+    }
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "id": "echo_of_sionachie_3",
+  "name": "Echo of Sionachie",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 102,
+  "description": "Calls forth a blessing of renewal to regenerate the health and mana of your group, as long as they stay within earshot of your echo.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "aura",
+      "aura": "echo-of-sionachie-effect"
+    }
+  ],
+  "stacking": {
+    "group": "aura",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "aura",
+    "voice"
+  ]
+}

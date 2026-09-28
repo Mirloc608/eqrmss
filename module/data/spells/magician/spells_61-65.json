@@ -1,0 +1,1172 @@
+[
+  {
+    "_id": "mag-belt-of-magikot-61-r1",
+    "name": "Belt of Magi`Kot",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "belt-of-magikot"
+        }
+      ],
+      "description": "Focuses mana into the form of the belt of Magi`Kot, an item that increases your pet's hit points, strength, stamina, dexterity, and agility."
+    }
+  },
+  {
+    "_id": "mag-blade-of-walnan-61-r1",
+    "name": "Blade of Walnan",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 90,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "blade-of-walnan"
+        }
+      ],
+      "description": "Focuses mana into the form of the blade of Walnan, a useful weapon for summoned creatures."
+    }
+  },
+  {
+    "_id": "mag-elemental-barrier-61-r1",
+    "name": "Elemental Barrier",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 68,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-cold",
+          "amount": 60,
+          "duration": 3900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 60,
+          "duration": 3900
+        }
+      ],
+      "description": "Covers your skin in an elemental barrier, protecting you from fire and cold."
+    }
+  },
+  {
+    "_id": "mag-firebolt-of-tallon-61-r1",
+    "name": "Firebolt of Tallon",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "evocation",
+      "target": "single",
+      "range": 300,
+      "castTime": 7.0,
+      "manaCost": 464,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1890
+        }
+      ],
+      "description": "Burns your target's skin with the firebolt of Tallon, causing 1890 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-flameshield-of-ro-61-r1",
+    "name": "Flameshield of Ro",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "abjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 5.0,
+      "manaCost": 171,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 43,
+          "duration": 900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 45,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your target in the flame shield of Ro, damaging any creature that attacks them."
+    }
+  },
+  {
+    "_id": "mag-shield-of-the-arcane-61-r1",
+    "name": "Shield of the Arcane",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 315,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 300,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 8,
+          "max": 10,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 30,
+          "duration": 5400
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "mag-summon-glowing-bauble-61-r1",
+    "name": "Summon Glowing Bauble",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 144,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "jolums-glowing-bauble"
+        }
+      ],
+      "description": "Focuses mana into the form of a glowing bauble that sometimes allows you to cast a spell for a reduced mana cost. This item works on spells up to level sixty-five."
+    }
+  },
+  {
+    "_id": "mag-summon-platinum-choker-61-r1",
+    "name": "Summon Platinum Choker",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 144,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "jedahs-platinum-choker"
+        }
+      ],
+      "description": "Focuses mana into the form of a platinum choker that sometimes allows you to cast a spell without consuming any reagents. This item works on spells up to level sixty-five."
+    }
+  },
+  {
+    "_id": "mag-summon-runed-mantle-61-r1",
+    "name": "Summon Runed Mantle",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 144,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "tavees-runed-mantle"
+        }
+      ],
+      "description": "Focuses mana into the form of a runed mantle that allows many of your beneficial spells to last a longer period of time. This item works on spells up to level sixty-five."
+    }
+  },
+  {
+    "_id": "mag-summon-sapphire-bracelet-61-r1",
+    "name": "Summon Sapphire Bracelet",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 144,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "gallenites-sapphire-bracelet"
+        }
+      ],
+      "description": "Focuses mana into the form of a sapphire bracelet that increases the damage of many spells. This item works on spells up to level sixty-five."
+    }
+  },
+  {
+    "_id": "mag-summon-spiked-ring-61-r1",
+    "name": "Summon Spiked Ring",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 144,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "nakis-spiked-ring"
+        }
+      ],
+      "description": "Focuses mana into the form of a spiked ring that allows you to cast many spells faster. This item works on spells up to level sixty-five."
+    }
+  },
+  {
+    "_id": "mag-summon-steel-bracelet-61-r1",
+    "name": "Summon Steel Bracelet",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 144,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "rallicans-steel-bracelet"
+        }
+      ],
+      "description": "Focuses mana into the form of an steel bracelet that increases the damage of many affliction spells. This item works on spells up to level sixty five."
+    }
+  },
+  {
+    "_id": "mag-summon-lava-orb-61-r1",
+    "name": "Summon: Lava Orb",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.5,
+      "manaCost": 1150,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "lava-orb"
+        }
+      ],
+      "description": "Summons an orb of molten energy in to your hands. The energy in this orb can be used to strike out at your opponents with fire."
+    }
+  },
+  {
+    "_id": "mag-ward-of-xegony-61-r1",
+    "name": "Ward of Xegony",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 61,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 360,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "ward-of-xegony"
+        }
+      ],
+      "description": "Summons the ward of Xegony to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-burning-sand-62-r1",
+    "name": "Burning Sand",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 62,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 546,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1980
+        }
+      ],
+      "description": "Strikes your target with burning sand, causing 1,1980 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-burnout-v-62-r1",
+    "name": "Burnout V",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 62,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 303,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 80,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 85,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 40,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 5,
+          "max": 6,
+          "duration": 3600
+        }
+      ],
+      "description": "Infuses your elemental companion with energy, increasing their attack speed, armor class, and strength."
+    }
+  },
+  {
+    "_id": "mag-fist-of-ixiblat-62-r1",
+    "name": "Fist of Ixiblat",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 62,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 202,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "hand-of-ixiblat"
+        }
+      ],
+      "description": "Focuses mana into the form of the fist of Ixiblat, a useful weapon for summoned creatures."
+    }
+  },
+  {
+    "_id": "mag-servant-of-marr-62-r1",
+    "name": "Servant of Marr",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 62,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 808,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "servant-of-marr"
+        }
+      ],
+      "description": "Summons a servant of Marr to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-sun-storm-62-r1",
+    "name": "Sun Storm",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 62,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 4.0,
+      "manaCost": 889,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1615,
+          "radius": 25
+        }
+      ],
+      "description": "Conjures a storm of solar energy over your target, causing 1,615 damage every 3 seconds to creatures in the area. The storm will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-talisman-of-return-62-r1",
+    "name": "Talisman of Return",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 62,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 606,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "talisman-of-return"
+        }
+      ],
+      "description": "Focuses mana into the form of a talisman of return that allows you to teleport to the Plane of Knowledge."
+    }
+  },
+  {
+    "_id": "mag-xegonys-phantasmal-guard-62-r1",
+    "name": "Xegony's Phantasmal Guard",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 62,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 758,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 16,
+          "duration": 9000
+        },
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 8,
+          "max": 8,
+          "duration": 9000
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 9,
+          "max": 12,
+          "duration": 9000
+        }
+      ],
+      "description": "Covers you in the Xegony's phantasmal guard, increasing your hit point regeneration, mana regeneration, and armor class."
+    }
+  },
+  {
+    "_id": "mag-black-steel-63-r1",
+    "name": "Black Steel",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 63,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 484,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 2070
+        }
+      ],
+      "description": "Conjures a shock of black steel that assaults your target, causing 2070 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-blade-of-the-kedge-63-r1",
+    "name": "Blade of The Kedge",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 63,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 140,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "blade-of-the-kedge"
+        }
+      ],
+      "description": "Focuses mana into the form of the blade of the Kedge, a useful weapon for summoned creatures."
+    }
+  },
+  {
+    "_id": "mag-child-of-ro-63-r1",
+    "name": "Child of Ro",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 63,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 561,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "child-of-ro"
+        }
+      ],
+      "description": "Summons a child of Ro to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-elemental-silence-63-r1",
+    "name": "Elemental Silence",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 63,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 211,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "maxLevel": 60,
+          "duration": 30
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "chance": 70
+        }
+      ],
+      "description": "Freezes an elemental in stasis, preventing them from taking any action for 30 seconds.",
+      "resist": "magic",
+      "resistMod": -10
+    }
+  },
+  {
+    "_id": "mag-maelstrom-of-ro-63-r1",
+    "name": "Maelstrom of Ro",
+    "type": "spell",
+    "img": "icons/magic/fire/damage-shield.webp",
+    "system": {
+      "class": "magician",
+      "level": 63,
+      "school": "abjuration",
+      "target": "group",
+      "range": 0,
+      "castTime": 9.0,
+      "manaCost": 632,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "damage-shield",
+          "element": "fire",
+          "amount": 67,
+          "duration": 900
+        },
+        {
+          "type": "buff",
+          "stat": "resist-fire",
+          "amount": 45,
+          "duration": 900
+        }
+      ],
+      "description": "Surrounds your group in the maelstrom of Ro, damaging any creature that attacks them."
+    }
+  },
+  {
+    "_id": "mag-malosinia-63-r1",
+    "name": "Malosinia",
+    "type": "spell",
+    "img": "icons/magic/debuff/curse-red.webp",
+    "system": {
+      "class": "magician",
+      "level": 63,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 421,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "cold",
+          "amount": 70,
+          "duration": 1230
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "magic",
+          "amount": 70,
+          "duration": 1230
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "poison",
+          "amount": 70,
+          "duration": 1230
+        },
+        {
+          "type": "debuff",
+          "effect": "resist-lower",
+          "element": "fire",
+          "amount": 70,
+          "duration": 1230
+        }
+      ],
+      "description": "Decreases your target's resistance to cold, fire, magic, and poison.",
+      "resist": "magic",
+      "resistMod": -40
+    }
+  },
+  {
+    "_id": "mag-summon-jewelry-bag-63-r1",
+    "name": "Summon Jewelry Bag",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 63,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 421,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "phantom-satchel"
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "jedahs-platinum-choker",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "tavees-runed-mantle",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "gallenites-sapphire-bracelet",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "nakis-spiked-ring",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "jolums-glowing-bauble",
+          "intoBag": true
+        },
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "rallicans-steel-bracelet",
+          "intoBag": true
+        }
+      ],
+      "description": "Focuses mana into the form of a bag of jewelry that grants a number of spell enhancements to the wearer."
+    }
+  },
+  {
+    "_id": "mag-destroy-summoned-64-r1",
+    "name": "Destroy Summoned",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 64,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 367,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1735,
+          "bane": "summoned"
+        }
+      ],
+      "description": "A burst of holy light that causes 1735 damage to a summoned target.",
+      "resist": "magic",
+      "resistMod": -100
+    }
+  },
+  {
+    "_id": "mag-focus-mass-refined-spellcasters-empowering-essence-64-r1",
+    "name": "Focus Mass Refined Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 64,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 2055,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "refined-spellcasters-empowering-essence",
+          "quantity": 5
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-girdle-of-magikot-64-r1",
+    "name": "Girdle of Magi`Kot",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 64,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 4.0,
+      "manaCost": 128,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "girdle-of-magikot"
+        }
+      ],
+      "description": "Focuses mana into the form of the girdle of Magi`Kot, an item that increases your pet's hit points, strength, stamina, dexterity, and agility."
+    }
+  },
+  {
+    "_id": "mag-maelstrom-of-thunder-64-r1",
+    "name": "Maelstrom of Thunder",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 64,
+      "school": "evocation",
+      "target": "area",
+      "range": 150,
+      "castTime": 6.0,
+      "manaCost": 616,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1155,
+          "radius": 25
+        }
+      ],
+      "description": "Conjures a maelstrom of thunder around your target, causing 1,155 damage every 3 seconds to creatures in the area. The maelstrom will dissipate after damaging 4 creatures or after 3 seconds.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-planar-renewal-64-r1",
+    "name": "Planar Renewal",
+    "type": "spell",
+    "img": "icons/magic/life/heart-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 64,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3.75,
+      "manaCost": 372,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 1540
+        },
+        {
+          "type": "cure",
+          "effect": "disease",
+          "amount": 24
+        },
+        {
+          "type": "cure",
+          "effect": "poison",
+          "amount": 24
+        },
+        {
+          "type": "cure",
+          "effect": "curse",
+          "amount": 24
+        }
+      ],
+      "description": "Renews the health of your elemental pet, healing 1540 damage, and curing their diseases, poisons, and curses."
+    }
+  },
+  {
+    "_id": "mag-protection-of-calliav-64-r1",
+    "name": "Protection of Calliav",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-blue.webp",
+    "system": {
+      "class": "magician",
+      "level": 64,
+      "school": "abjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 642,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb-hits",
+          "amount": 3,
+          "cap": 14214,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Protection of Calliav on your pet, absorbing up to 14214 damage from the next 3 melee strikes or direct damage spells that hit it."
+    }
+  },
+  {
+    "_id": "mag-shield-of-maelin-64-r1",
+    "name": "Shield of Maelin",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "magician",
+      "level": 64,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 385,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 350,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 8,
+          "max": 11,
+          "duration": 5400
+        },
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 40,
+          "duration": 5400
+        }
+      ],
+      "description": "Surrounds your body in a magical shield, increasing your hit points, armor class, and magic resistance."
+    }
+  },
+  {
+    "_id": "mag-ancient-chaos-vortex-65-r1",
+    "name": "Ancient: Chaos Vortex",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 65,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 555,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 2250
+        }
+      ],
+      "description": "Commands a vortex of chaos to strike your target for 2250 damage.",
+      "resist": "fire"
+    }
+  },
+  {
+    "_id": "mag-call-of-the-arch-mage-65-r1",
+    "name": "Call of the Arch Mage",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "magician",
+      "level": 65,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 5.0,
+      "manaCost": 586,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "maxLevel": 60,
+          "duration": 1230
+        }
+      ],
+      "description": "Dominates the will of an elemental, allowing you to control them for a short time.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-elemental-siphon-65-r1",
+    "name": "Elemental Siphon",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 65,
+      "school": "conjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 1.5,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1405
+        }
+      ],
+      "description": "Siphons a portion of your pet's energy, dealing 1405 damage and placing an aura of energy around you that causes your mana to regenerate faster."
+    }
+  },
+  {
+    "_id": "mag-focus-intricate-spellcasters-empowering-essence-65-r1",
+    "name": "Focus Intricate Spellcaster's Empowering Essence",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 65,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 527,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "intricate-spellcasters-empowering-essence"
+        }
+      ],
+      "description": "Focuses the casters mana into a form that can be physically handled."
+    }
+  },
+  {
+    "_id": "mag-monster-summoning-iv-65-r1",
+    "name": "Monster Summoning IV",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "magician",
+      "level": 65,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 12.0,
+      "manaCost": 469,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "monster-summoning-iv"
+        }
+      ],
+      "description": "Conjures a pet in the form of a local monster to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-rathes-son-65-r1",
+    "name": "Rathe's Son",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-orb.webp",
+    "system": {
+      "class": "magician",
+      "level": 65,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 469,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "rathes-son"
+        }
+      ],
+      "description": "Summons the Rathe's son to aid you in battle."
+    }
+  },
+  {
+    "_id": "mag-rock-of-taelosia-65-r1",
+    "name": "Rock of Taelosia",
+    "type": "spell",
+    "img": "icons/magic/arcane/force-strike.webp",
+    "system": {
+      "class": "magician",
+      "level": 65,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 444,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 1900
+        }
+      ],
+      "description": "Crushes your target's body under heavy rocks, causing 1900 damage.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "mag-sun-vortex-65-r1",
+    "name": "Sun Vortex",
+    "type": "spell",
+    "img": "icons/magic/fire/projectile-fireball-large.webp",
+    "system": {
+      "class": "magician",
+      "level": 65,
+      "school": "conjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 6.25,
+      "manaCost": 463,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "fire",
+          "amount": 1875
+        }
+      ],
+      "description": "Burns your target's skin with a vortex of the sun, causing 1875 damage.",
+      "resist": "fire"
+    }
+  }
+]

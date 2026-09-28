@@ -1,0 +1,689 @@
+[
+  {
+    "_id": "enc-charm-11-r1",
+    "name": "Charm",
+    "type": "spell",
+    "img": "icons/magic/arcane/mind-control.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 11,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 60,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "charm",
+          "amount": 25,
+          "duration": 1230,
+          "resist": "magic"
+        }
+      ],
+      "description": "Dominates your target's mind, allowing you to control them for a short time. This spell works on creatures up to level 25."
+    }
+  },
+  {
+    "_id": "enc-choke-11-r1",
+    "name": "Choke",
+    "type": "spell",
+    "img": "icons/magic/arcane/aoe-energy.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 11,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.0,
+      "manaCost": 73,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 22
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -10,
+          "duration": 48,
+          "resist": "magic"
+        },
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -10,
+          "duration": 48,
+          "resist": "magic"
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "min": 14,
+          "max": 14,
+          "duration": 48
+        }
+      ],
+      "description": "Constricts your target's throat, causing between 27 and 22 damage initially and 14 damage every six seconds for 48 seconds, as well as lowering their strength and agility."
+    }
+  },
+  {
+    "_id": "enc-greater-mass-enchant-silver-11-r1",
+    "name": "Greater Mass Enchant Silver",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 11,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 20.0,
+      "manaCost": 720,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-silver-bar",
+          "count": 20
+        }
+      ],
+      "description": "Enchants twenty bars of silver with magical energy. Consumes twenty bars of silver when cast."
+    }
+  },
+  {
+    "_id": "enc-illusion-high-elf-11-r1",
+    "name": "Illusion: High Elf",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 11,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "high-elf",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a High Elf."
+    }
+  },
+  {
+    "_id": "enc-intellectual-advancement-11-r1",
+    "name": "Intellectual Advancement",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 11,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "casting-level-boost",
+          "amount": 3,
+          "duration": 1620
+        }
+      ],
+      "description": "Focuses your target's mental faculties, reducing their fizzle rate."
+    }
+  },
+  {
+    "_id": "enc-mass-thicken-mana-11-r1",
+    "name": "Mass Thicken Mana",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 11,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 300,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "vial-of-viscous-mana",
+          "count": 5
+        }
+      ],
+      "description": "Thickens mana into a physical form, creating five vials of viscous mana. Consumes five poison vials and five pearls when cast."
+    }
+  },
+  {
+    "_id": "enc-thicken-mana-11-r1",
+    "name": "Thicken Mana",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 11,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "vial-of-viscous-mana",
+          "count": 1
+        }
+      ],
+      "description": "Thickens mana into a physical form. Consumes a poison vial and a pearl when cast."
+    }
+  },
+  {
+    "_id": "enc-bind-affinity-12-r1",
+    "name": "Bind Affinity",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 12,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "bind-affinity"
+        }
+      ],
+      "description": "Binds the soul of your target to their current location. Use of this spell is often limited to towns and cities."
+    }
+  },
+  {
+    "_id": "enc-enduring-breath-12-r1",
+    "name": "Enduring Breath",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 12,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "enduring-breath",
+          "duration": 1620
+        }
+      ],
+      "description": "Magically fills your lungs with air, removing your need to breathe for 27 minutes. Consumes a handful of fish scales to cast."
+    }
+  },
+  {
+    "_id": "enc-greater-mass-enchant-clay-12-r1",
+    "name": "Greater Mass Enchant Clay",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 12,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 720,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "large-block-of-magic-clay",
+          "count": 20
+        }
+      ],
+      "description": "Enchants twenty large blocks of clay with magical energy. Consumes twenty large blocks of clay when cast."
+    }
+  },
+  {
+    "_id": "enc-illusion-erudite-12-r1",
+    "name": "Illusion: Erudite",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 12,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "erudite",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be an Erudite."
+    }
+  },
+  {
+    "_id": "enc-illusion-halfling-12-r1",
+    "name": "Illusion: Halfling",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 12,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "halfling",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Halfling."
+    }
+  },
+  {
+    "_id": "enc-enthrall-13-r1",
+    "name": "Enthrall",
+    "type": "spell",
+    "img": "icons/magic/debuff/sleep-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 13,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "mez",
+          "amount": 55,
+          "duration": 48,
+          "resist": "magic"
+        },
+        {
+          "type": "control",
+          "effect": "memory-blur",
+          "amount": 41
+        }
+      ],
+      "description": "Causes your opponent to fall into an enchanted sleep for up to 48 seconds. This spell works on creatures up to level 55."
+    }
+  },
+  {
+    "_id": "enc-illusion-dwarf-13-r1",
+    "name": "Illusion: Dwarf",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 13,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "dwarf",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Dwarf."
+    }
+  },
+  {
+    "_id": "enc-rune-i-13-r1",
+    "name": "Rune I",
+    "type": "spell",
+    "img": "icons/magic/symbols/rune-stone-red.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 13,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.5,
+      "manaCost": 41,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "absorb",
+          "amount": 100,
+          "total": 36,
+          "duration": 2160
+        }
+      ],
+      "description": "Covers your target in a shimmer of runes that absorb damage. Consumes a cat's eye agate when cast."
+    }
+  },
+  {
+    "_id": "enc-wuggans-lesser-appraisal-13-r1",
+    "name": "Wuggan's Lesser Appraisal",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 13,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "appraise-chest",
+          "amount": 69
+        }
+      ],
+      "description": "Attempts to sense the presence of a trap on the targeted object."
+    }
+  },
+  {
+    "_id": "enc-breeze-14-r1",
+    "name": "Breeze",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 14,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.5,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 6,
+          "max": 6,
+          "duration": 1620
+        }
+      ],
+      "description": "Calms your target's thoughts, allowing them to regenerate mana more quickly."
+    }
+  },
+  {
+    "_id": "enc-enchant-electrum-14-r1",
+    "name": "Enchant Electrum",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 14,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 6.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-electrum-bar",
+          "count": 1
+        }
+      ],
+      "description": "Enchants a bar of electrum with magical energy. Consumes a bar of electrum when cast."
+    }
+  },
+  {
+    "_id": "enc-invisibility-versus-undead-14-r1",
+    "name": "Invisibility Versus Undead",
+    "type": "spell",
+    "img": "icons/magic/arcane/invisibility.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 4.0,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "invisibility",
+          "effect": "unstable",
+          "vs": "undead"
+        }
+      ],
+      "description": "Cloaks your target in a light aura, rendering them invisible to most undead creatures for up to 27 minutes."
+    }
+  },
+  {
+    "_id": "enc-mass-enchant-electrum-14-r1",
+    "name": "Mass Enchant Electrum",
+    "type": "spell",
+    "img": "icons/magic/arcane/bag-pouch.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 14,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10.0,
+      "manaCost": 225,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "summon-item",
+          "item": "enchanted-electrum-bar",
+          "count": 5
+        }
+      ],
+      "description": "Enchants five bars of electrum with magical energy. Consumes five bars of electrum when cast."
+    }
+  },
+  {
+    "_id": "enc-shalees-animation-14-r1",
+    "name": "Shalee's Animation",
+    "type": "spell",
+    "img": "icons/magic/arcane/summon-familiar.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 14,
+      "school": "conjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 5.0,
+      "manaCost": 85,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "shalees-animation-pet"
+        }
+      ],
+      "description": "Animates a weapon and shield to attack your enemies. Consumes a tiny dagger when cast."
+    }
+  },
+  {
+    "_id": "enc-wuggans-lesser-discombobulation-14-r1",
+    "name": "Wuggan's Lesser Discombobulation",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "disarm-chest",
+          "amount": 69
+        }
+      ],
+      "description": "Attempts to disarm a trap on the targeted object. Consumes a lesser scrying stone when cast."
+    }
+  },
+  {
+    "_id": "enc-wuggans-lesser-extrication-14-r1",
+    "name": "Wuggan's Lesser Extrication",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 14,
+      "school": "divination",
+      "target": "single",
+      "range": 40,
+      "castTime": 4.0,
+      "manaCost": 70,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "unlock-chest",
+          "amount": 87
+        }
+      ],
+      "description": "Attempts to destroy any lock present on the targeted object."
+    }
+  },
+  {
+    "_id": "enc-identify-15-r1",
+    "name": "Identify",
+    "type": "spell",
+    "img": "systems/eqrmss/assets/Icons/spells/001.png",
+    "system": {
+      "class": "enchanter",
+      "level": 15,
+      "school": "divination",
+      "target": "single",
+      "range": 100,
+      "castTime": 5.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "identify-item"
+        }
+      ],
+      "description": "Provides magical information about the item that your target is holding."
+    }
+  },
+  {
+    "_id": "enc-illusion-barbarian-15-r1",
+    "name": "Illusion: Barbarian",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 15,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "barbarian",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a Barbarian."
+    }
+  },
+  {
+    "_id": "enc-illusion-tree-15-r1",
+    "name": "Illusion: Tree",
+    "type": "spell",
+    "img": "icons/magic/arcane/eye-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 15,
+      "school": "divination",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "illusion",
+          "form": "tree",
+          "duration": 2160
+        },
+        {
+          "type": "control",
+          "effect": "root",
+          "duration": 2160
+        }
+      ],
+      "description": "Cloaks you in a shimmering illusion that makes you appear to be a tree. This spell can only be cast outdoors."
+    }
+  },
+  {
+    "_id": "enc-levitate-15-r1",
+    "name": "Levitate",
+    "type": "spell",
+    "img": "icons/magic/air/feather-fall-blue.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 15,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 30,
+      "effects": [
+        {
+          "type": "levitate",
+          "duration": 1230
+        }
+      ],
+      "description": "Forms a cloud of dense air around your feet, allowing you to float slightly off the ground for up to 20.5 minutes. Consumes a bat wing when cast."
+    }
+  },
+  {
+    "_id": "enc-quickness-15-r1",
+    "name": "Quickness",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "enchanter",
+      "level": 15,
+      "school": "enchantment",
+      "target": "single",
+      "range": 100,
+      "castTime": 3.0,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 30,
+          "duration": 660
+        }
+      ],
+      "description": "Grants your target quickened movement, increasing their attack speed for 11 minutes."
+    }
+  }
+]

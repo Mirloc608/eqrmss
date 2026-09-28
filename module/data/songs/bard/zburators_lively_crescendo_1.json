@@ -1,0 +1,41 @@
+{
+  "id": "zburators_lively_crescendo_1",
+  "name": "Zburator's Lively Crescendo",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 114,
+  "description": "Plays a song that slowly builds for 30 seconds. When it crescendoes, your group will receive the effect of Zburator's Crescendo Effect, restoring health, mana, and endurance.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-on-fade",
+      "spell": "zburators-crescendo-effect"
+    },
+    {
+      "type": "utility",
+      "effect": "buff-blocker",
+      "amount": 220
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "utility-song",
+    "lute"
+  ]
+}

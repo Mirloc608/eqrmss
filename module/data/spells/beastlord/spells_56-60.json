@@ -1,0 +1,562 @@
+[
+  {
+    "_id": "bst-incapacitate-56-r1",
+    "name": "Incapacitate",
+    "type": "spell",
+    "img": "icons/magic/debuff/blood-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 56,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.25,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "debuff",
+          "stat": "agi",
+          "amount": -55,
+          "resist": "magic",
+          "duration": 390
+        },
+        {
+          "type": "debuff",
+          "stat": "str",
+          "amount": -55,
+          "resist": "magic",
+          "duration": 390
+        },
+        {
+          "type": "debuff",
+          "stat": "ac",
+          "min": -7,
+          "max": -5,
+          "resist": "magic",
+          "duration": 390
+        }
+      ],
+      "description": "Saps your target's power, decreasing their agility, strength, and armor class for 6.5 minutes."
+    }
+  },
+  {
+    "_id": "bst-shifting-shield-56-r1",
+    "name": "Shifting Shield",
+    "type": "spell",
+    "img": "icons/magic/defense/armor-scale-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 56,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 80,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 4,
+          "max": 5,
+          "duration": 2700
+        }
+      ],
+      "description": "Places a shifting shield on your target, increasing their armor class for 45 minutes."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-flame-56-r1",
+    "name": "Spirit of Flame",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 56,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 130,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc",
+          "name": "spirit-of-flame-strike",
+          "chance": 150
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 75,
+          "duration": 2880
+        }
+      ],
+      "description": "Fills your warder with the power of a great spirit, increasing their dexterity by 75 and giving them a chance to perform Spirit of Flame Strike, a [Item 2] attack that can stun targets up to level 55."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-zehkes-56-r1",
+    "name": "Spirit of Zehkes",
+    "type": "spell",
+    "img": "icons/magic/nature/totem-bear.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 56,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 9,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s12-l056-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-dexterity-57-r1",
+    "name": "Dexterity",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 50,
+          "duration": 3780
+        }
+      ],
+      "description": "Fills your target with pure nimbleness, increasing their dexterity for 63 minutes."
+    }
+  },
+  {
+    "_id": "bst-stamina-57-r1",
+    "name": "Stamina",
+    "type": "spell",
+    "img": "icons/magic/light/sphere-glow.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 57,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 100,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "sta",
+          "amount": 40,
+          "duration": 3780
+        }
+      ],
+      "description": "Fills your target with pure endurance, increasing their stamina for 63 minutes."
+    }
+  },
+  {
+    "_id": "bst-guard-of-calliav-58-r1",
+    "name": "Guard of Calliav",
+    "type": "spell",
+    "img": "icons/magic/light/sphere-glow.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 58,
+      "school": "abjuration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 5,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "rune",
+          "amount": 2,
+          "maxPerHit": 12922,
+          "duration": 2160
+        }
+      ],
+      "description": "Places the Guard of Calliav on your pet, absorbing up to 12922 damage from the next 2 melee strikes or direct damage spells that hit it."
+    }
+  },
+  {
+    "_id": "bst-nullify-magic-58-r1",
+    "name": "Nullify Magic",
+    "type": "spell",
+    "img": "icons/magic/arcane/compass.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 58,
+      "school": "abjuration",
+      "target": "single",
+      "range": 200,
+      "castTime": 4.5,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 4
+        },
+        {
+          "type": "utility",
+          "effect": "dispel",
+          "amount": 4
+        }
+      ],
+      "description": "Cancels magical enchantments affecting your target."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-khurenz-58-r1",
+    "name": "Spirit of Khurenz",
+    "type": "spell",
+    "img": "icons/magic/nature/cat-spirit-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 58,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 10,
+      "manaCost": 400,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s12-l058-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-talisman-of-altuna-58-r1",
+    "name": "Talisman of Altuna",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 58,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 8,
+      "manaCost": 250,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 250,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 780
+        }
+      ],
+      "description": "Imbues your target with the talisman of Altuna, providing increased hit points for 72 minutes."
+    }
+  },
+  {
+    "_id": "bst-blizzard-blast-59-r1",
+    "name": "Blizzard Blast",
+    "type": "spell",
+    "img": "icons/magic/water/projectile-ice-spear-large.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 59,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 4,
+      "manaCost": 147,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "cold",
+          "amount": 801,
+          "resist": "cold"
+        }
+      ],
+      "description": "Creates a rift of bitter cold, causing between 200 and 346 damage to your target."
+    }
+  },
+  {
+    "_id": "bst-chloroblast-59-r1",
+    "name": "Chloroblast",
+    "type": "spell",
+    "img": "icons/magic/life/heart-blue.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 59,
+      "school": "alteration",
+      "target": "single",
+      "range": 200,
+      "castTime": 3.75,
+      "manaCost": 331,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 806
+        }
+      ],
+      "description": "Mends severe wounds, healing between 444 and 1044 hit points."
+    }
+  },
+  {
+    "_id": "bst-shas-ferocity-59-r1",
+    "name": "Sha's Ferocity",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 59,
+      "school": "alteration",
+      "target": "pet",
+      "range": 100,
+      "castTime": 6.5,
+      "manaCost": 350,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 100,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 85,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 60,
+          "duration": 3600
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 13,
+          "max": 18,
+          "duration": 3600
+        }
+      ],
+      "description": "Fills your warder with the ferocity of Sha, increasing their attack speed, strength, armor class, and attack rating."
+    }
+  },
+  {
+    "_id": "bst-spiritual-purity-59-r1",
+    "name": "Spiritual Purity",
+    "type": "spell",
+    "img": "icons/magic/life/eye-heal-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 59,
+      "school": "alteration",
+      "target": "group",
+      "range": 0,
+      "castTime": 5,
+      "manaCost": 700,
+      "effects": [
+        {
+          "type": "regen",
+          "stat": "mana",
+          "min": 5,
+          "max": 5,
+          "duration": 4320
+        },
+        {
+          "type": "heal",
+          "amount": 5,
+          "duration": 4320
+        }
+      ],
+      "description": "Envelops your target in an aura of spiritual purity, increasing their mana and hit point regeneration."
+    }
+  },
+  {
+    "_id": "bst-alacrity-60-r1",
+    "name": "Alacrity",
+    "type": "spell",
+    "img": "icons/magic/life/boot-speed-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 4,
+      "manaCost": 115,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "haste",
+          "amount": 40,
+          "duration": 660
+        }
+      ],
+      "description": "Grants your target quickened movement, increasing their attack speed for 11 minutes."
+    }
+  },
+  {
+    "_id": "bst-bestial-fury-discipline-60-r1",
+    "name": "Bestial Fury Discipline",
+    "type": "spell",
+    "img": "icons/magic/death/skeleton-buff.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "hit-damage",
+          "amount": 50,
+          "duration": 30
+        },
+        {
+          "type": "buff",
+          "stat": "min-hit-damage",
+          "amount": 400,
+          "duration": 30
+        }
+      ],
+      "description": "Increases the damage of melee attacks."
+    }
+  },
+  {
+    "_id": "bst-savagery-60-r1",
+    "name": "Savagery",
+    "type": "spell",
+    "img": "icons/magic/light/sphere-glow.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 3,
+      "manaCost": 450,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "sta",
+          "amount": 25,
+          "duration": 390
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 100,
+          "duration": 390
+        },
+        {
+          "type": "buff",
+          "stat": "resist-all",
+          "amount": 50,
+          "duration": 390
+        }
+      ],
+      "description": "Consumes your target in a spirit of savagery, increasing their resistances, attack rating, and stamina. Consumes a peridot when cast."
+    }
+  },
+  {
+    "_id": "bst-shas-advantage-60-r1",
+    "name": "Sha's Advantage",
+    "type": "spell",
+    "img": "icons/magic/debuff/hand-purple.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 60,
+      "school": "enchantment",
+      "target": "single",
+      "range": 200,
+      "castTime": 5,
+      "manaCost": 125,
+      "effects": [
+        {
+          "type": "debuff",
+          "effect": "slow",
+          "amount": 50,
+          "resist": "magic",
+          "duration": 210
+        },
+        {
+          "type": "debuff",
+          "effect": "disease",
+          "amount": 16,
+          "resist": "magic"
+        }
+      ],
+      "description": "Causes your target to fall into a lethargic state, slowing their attack speed for 3.5 minutes."
+    }
+  },
+  {
+    "_id": "bst-spirit-of-khati-sha-60-r1",
+    "name": "Spirit of Khati Sha",
+    "type": "spell",
+    "img": "icons/magic/nature/wolf-spirit-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 60,
+      "school": "alteration",
+      "target": "self",
+      "range": 0,
+      "castTime": 11,
+      "manaCost": 450,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "s12-l060-warder"
+        }
+      ],
+      "description": "Summons a feral warder to aid you in battle."
+    }
+  },
+  {
+    "_id": "bst-spiritual-strength-60-r1",
+    "name": "Spiritual Strength",
+    "type": "spell",
+    "img": "icons/magic/life/muscle-arm-red.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 60,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 10,
+      "manaCost": 150,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 25,
+          "duration": 4320
+        },
+        {
+          "type": "buff",
+          "stat": "hp-max",
+          "amount": 150,
+          "duration": 4320
+        }
+      ],
+      "description": "Fills your target with spiritual strength, increasing their hit points and attack rating for 72 minutes."
+    }
+  }
+]

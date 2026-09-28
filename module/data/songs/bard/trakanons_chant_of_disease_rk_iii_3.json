@@ -1,0 +1,47 @@
+{
+  "id": "trakanons_chant_of_disease_rk_iii_3",
+  "name": "Trakanon's Chant of Disease Rk.III",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 81,
+  "description": "A plagued chant that causes up to 753 disease damage every six seconds to an enemy and applies Chant of Plague, which lowers their disease resistance by 29.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "disease",
+      "value": {
+        "base": 332
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 12
+      }
+    },
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "chant-of-plague"
+    }
+  ],
+  "stacking": {
+    "group": "damage-chant",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "damage-chant",
+    "drum"
+  ]
+}

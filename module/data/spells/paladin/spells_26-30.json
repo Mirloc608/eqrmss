@@ -1,0 +1,169 @@
+[
+  {
+    "_id": "pal-instrument-of-nife-26-r1",
+    "name": "Instrument of Nife",
+    "type": "spell",
+    "img": "icons/magic/life/hand-fingers-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 26,
+      "school": "abjuration",
+      "target": "self",
+      "range": 0,
+      "castTime": 3.0,
+      "manaCost": 50,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "melee-proc-condemnation-of-nife"
+        }
+      ],
+      "description": "Imbues your weapon with the power of Rodcet Nife, granting it a chance to cause great pain to undead creatures."
+    }
+  },
+  {
+    "_id": "pal-healing-27-r1",
+    "name": "Healing",
+    "type": "spell",
+    "img": "icons/magic/life/heart-cross-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 27,
+      "school": "alteration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 65,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 158
+        }
+      ],
+      "description": "Mends moderate wounds, healing between 95 and 175 hit points."
+    }
+  },
+  {
+    "_id": "pal-stun-28-r1",
+    "name": "Stun",
+    "type": "spell",
+    "img": "icons/magic/light/explosion-beam-blind.webp",
+    "system": {
+      "class": "paladin",
+      "level": 28,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 1.5,
+      "manaCost": 35,
+      "effects": [
+        {
+          "type": "control",
+          "effect": "stun",
+          "duration": 4.0,
+          "maxLevel": 55
+        }
+      ],
+      "description": "Strikes an enemy with holy power, briefly stunning them. This spell works on creatures up to level 55.",
+      "resist": "magic"
+    }
+  },
+  {
+    "_id": "pal-endure-magic-29-r1",
+    "name": "Endure Magic",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-energy-green.webp",
+    "system": {
+      "class": "paladin",
+      "level": 29,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 2.5,
+      "manaCost": 40,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "resist-magic",
+          "amount": 20,
+          "duration": 1620
+        }
+      ],
+      "description": "Surrounds your target with an aura of protection, warding away magic for 27 minutes."
+    }
+  },
+  {
+    "_id": "pal-expulse-undead-30-r1",
+    "name": "Expulse Undead",
+    "type": "spell",
+    "img": "icons/magic/lightning/projectile-bolt.webp",
+    "system": {
+      "class": "paladin",
+      "level": 30,
+      "school": "evocation",
+      "target": "single",
+      "range": 200,
+      "castTime": 2.0,
+      "manaCost": 36,
+      "effects": [
+        {
+          "type": "damage",
+          "element": "magic",
+          "amount": 42,
+          "resist": "magic",
+          "resistMod": -50
+        }
+      ],
+      "description": "A burst of holy power that inflicts between 86 and 106 damage to an undead target.",
+      "resist": "magic",
+      "resistMod": -50
+    }
+  },
+  {
+    "_id": "pal-reconstitution-30-r1",
+    "name": "Reconstitution",
+    "type": "spell",
+    "img": "icons/magic/life/angel-wings-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 30,
+      "school": "alteration",
+      "target": "corpse",
+      "range": 200,
+      "castTime": 6.0,
+      "manaCost": 200,
+      "effects": [
+        {
+          "type": "utility",
+          "effect": "resurrection"
+        }
+      ],
+      "description": "Revives a slain ally, restoring 10% of their lost experience. It takes some time for the recently revived to fully recover."
+    }
+  },
+  {
+    "_id": "pal-spirit-armor-30-r1",
+    "name": "Spirit Armor",
+    "type": "spell",
+    "img": "icons/magic/defense/shield-blue.webp",
+    "system": {
+      "class": "paladin",
+      "level": 30,
+      "school": "abjuration",
+      "target": "single",
+      "range": 100,
+      "castTime": 6.0,
+      "manaCost": 75,
+      "effects": [
+        {
+          "type": "buff",
+          "stat": "ac",
+          "min": 3,
+          "max": 4,
+          "duration": 2160
+        }
+      ],
+      "description": "Covers your target in spiritual armor, increasing their armor class for 36 minutes."
+    }
+  }
+]

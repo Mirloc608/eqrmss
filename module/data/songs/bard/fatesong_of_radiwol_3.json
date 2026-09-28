@@ -1,0 +1,39 @@
+{
+  "id": "fatesong_of_radiwol_3",
+  "name": "Fatesong of Radiwol",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 112,
+  "description": "This chilling song adds 10225 damage to cold-based direct damage spells cast by members of your group. The song improves spells that are at least level 106, up to level 115.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-damage",
+      "value": {
+        "base": 10387
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "spell-focus",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "spell-focus",
+    "voice"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "terasals_spry_sonata_2",
+  "name": "Terasal's Spry Sonata",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 93,
+  "description": "Those that hear the spry sonata move with a serpentine precision and fluidity that grants them increased armor class, resistance to detrimental spells, and reduced damage shield taken from offhand attacks.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-rune",
+      "value": {
+        "base": 11
+      },
+      "duration": 12
+    },
+    {
+      "type": "modifier",
+      "stat": "ac",
+      "value": {
+        "base": 17
+      },
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "reduce-damageshield-taken",
+      "amount": 76,
+      "duration": 12
+    },
+    {
+      "type": "utility",
+      "effect": "chance-to-resist-spell",
+      "amount": 12,
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "rune-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "rune-song",
+    "voice"
+  ]
+}

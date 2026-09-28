@@ -1,0 +1,62 @@
+{{!-- ======================================================= --}}
+    {{!-- STEP 5: STATS --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 5)}}
+    <div class="step-content step-stats">
+      <h3>Step 5: Character Statistics</h3>
+  
+      <div class="stats-layout-container" style="display: flex; gap: 20px;">
+        <!-- Left: Stats Assignment Table -->
+        <div class="stats-table-wrapper" style="flex: 3;">
+          <div class="pool-controls" style="margin-bottom: 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <button type="button" data-action="rollPool">Roll Temp Pool (600 + 10d10)</button>
+            <button type="button" data-action="rollAllStats">Roll All Stats</button>
+            <label style="cursor: pointer;">
+              <input type="checkbox" data-action="togglePotentials" {{#if characterData.useFixedPotentials}}checked{{/if}}>
+              Fixed Potentials (†)
+            </label>
+          </div>
+
+          <table class="eqrmss-table stats-table" style="width: 100%;">
+            <thead>
+              <tr>
+                <th>Stat</th>
+                <th>Temp</th>
+                <th>Bonus</th>
+                <th>Potential</th>
+                <th>Adjustment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each enrichedStats}}
+              <tr style="{{#unless this.isValid}}background-color: rgba(255, 77, 77, 0.08);{{/unless}}">
+                <td>
+                  <strong style="{{#unless this.isValid}}color: #ff4d4d;{{/unless}}">{{@key}}</strong> 
+                  {{#if this.isPrime}}<span class="prime-badge" style="font-size: 0.8em; {{#unless this.isValid}}color: #ff4d4d; font-weight: bold;{{else}}color: #e69500;{{/unless}}">(Prime)</span>{{/if}}
+                </td>
+                <td>  
+                  <input type="number" name="stats.{{@key}}" value="{{this.value}}" min="{{this.minRequired}}" max="101" data-field="{{@key}}" data-action="setStat" style="width: 60px; {{#unless this.isValid}}border-color: #ff4d4d; color: #ff4d4d; font-weight: bold;{{/unless}}" />
+                </td>
+                <td><span class="stat-bonus">{{numberFormat this.bonus sign=true}}</span></td>
+                <td>{{this.potential}}</td>
+                <td>
+                  <button type="button" data-action="decrementStat" data-stat="{{@key}}">-</button>
+                  <button type="button" data-action="incrementStat" data-stat="{{@key}}">+</button>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div> 
+
+        <!-- Right: Remaining Points Sidebar -->
+        <div class="stats-sidebar" style="flex: 1; background: rgba(0,0,0,0.05); padding: 15px; border-radius: 6px; height: fit-content;">
+          <h4>Point Budget</h4>
+          <p><strong>Total Pool:</strong> {{characterData.tempPointPool}}</p>
+          <p><strong>Remaining:</strong> <span class="{{#if (lt remainingPoints 0)}}text-error{{/if}}" style="{{#if (lt remainingPoints 0)}}color: #ff4d4d; font-weight: bold;{{/if}}">{{remainingPoints}}</span></p>
+          <hr>
+          <small>Prime stats require min 90 pts. Non-prime stats require min 20 pts.</small>
+        </div>
+      </div>
+    </div>
+    {{/if}}
