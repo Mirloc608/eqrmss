@@ -21,7 +21,6 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         window: {
             title: "EQRMSS Character Sheet"
         },
-        dragDrop: [{ dragSelector: ".item", dropSelector: null }],
         actions: {
             levelUp: EQRMSSPlayerSheet.prototype.levelUp,
             rollResistance: EQRMSSPlayerSheet.prototype.rollResistance,
@@ -341,10 +340,26 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }));
 
         // ------------------------------------------------------------
-        // Manual Drag & Drop binding (V13 ApplicationV2)
+        // Open item sheet when clicking an item name in Equipment
         // ------------------------------------------------------------
-        html.addEventListener("dragover", ev => ev.preventDefault());
-        html.addEventListener("drop", ev => this._onDrop(ev));
+        html.querySelectorAll(".item-open").forEach(el => {
+            el.addEventListener("click", ev => {
+                ev.preventDefault();
+                const itemId = el.dataset.itemId;
+                const item = this.actor.items.get(itemId);
+                if (item) item.sheet.render(true);
+            });
+        });
+
+        // ------------------------------------------------------------
+        // Manual Drag & Drop binding (V13 ApplicationV2)
+        // Use a flag to prevent duplicate bindings on re-render
+        // ------------------------------------------------------------
+        if (!this._dropBound) {
+            html.addEventListener("dragover", ev => ev.preventDefault());
+            html.addEventListener("drop", ev => this._onDrop(ev));
+            this._dropBound = true;
+        }
     }
 
     // ------------------------------------------------------------
