@@ -7,15 +7,6 @@ import { progressionManager } from "../../progression/progression-manager.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
 
-// Skill Engine Imports
-import {
-    getSkillRegistry,
-    resolveActorSkillProfile,
-    resolveActorSkillCost,
-    getSkillCheckEngine,
-    getSkillAdvancementEngine
-} from "../../utils/skills/index.js";
-
 export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
     // ------------------------------------------------------------
@@ -406,51 +397,62 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
     // ------------------------------------------------------------
     // Skill Engine: Roll Skill Check
     // ------------------------------------------------------------
-    async _onSkillAdvance(skillId) {
-    const skillData = CONFIG.EQRMSS?.skills?.[skillId];
-    if (!skillData) {
-       ui.notifications.error(`Unknown skill: ${skillId}`);
-       return;
+    async _onSkillRoll(skillId) {
+        const skillData = CONFIG.EQRMSS?.skills?.[skillId];
+        if (!skillData) {
+            ui.notifications.error(`Unknown skill: ${skillId}`);
+            return;
+        }
+        const sys = skillData.system || {};
+        const actorSkill = this.actor.system.skills?.[skillId] || {};
+        const ranks = actorSkill.ranks ?? sys.ranks ?? 0;
+        const totalBonus = ranks * 5 + (sys.statBonus ?? 0) + (sys.profBonus ?? 0) + (sys.specialBonus ?? 0);
+
+        const roll = await new Roll("1d100").roll({ async: true });
+        const total = roll.total + totalBonus;
+        const target = 75;
+        const success = total >= target;
+
+        ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: `
+                <h2>${skillData.name}</h2>
+                <p><strong>Roll:</strong> ${roll.total} + ${totalBonus} = ${total}</p>
+                <p><strong>Target:</strong> ${target}</p>
+                <p><strong>Success:</strong> ${success ? "Yes" : "No"}</p>
+            `
+        });
     }
-    // Parse cost "2/5" -> use first number as DP per rank (simplified)
-    const costStr = skillData.system?.cost || "1";
-    const costPerRank = parseInt(costStr.split("/")[0]) || 1;
-
-    const currentDp = this.actor.system.developmentPoints ?? this.actor.system.dp ?? 0;
-    if (currentDp < costPerRank) {
-        ui.notifications.error(`Not enough development points (need ${costPerRank}, have ${currentDp})`);
-        return;
-    }
-
-    const actorSkills = foundry.utils.duplicate(this.actor.system.skills || {});
-    actorSkills[skillId] = actorSkills[skillId] || {};
-    actorSkills[skillId].ranks = (actorSkills[skillId].ranks ?? 0) + 1;
-
-    await this.actor.update({
-        "system.skills": actorSkills,
-        "system.developmentPoints": currentDp - costPerRank
-    });
-
-    ui.notifications.info(`${this.actor.name} gained +1 rank in ${skillData.name}. Remaining DP: ${currentDp - costPerRank}`);
-}
 
 
     // ------------------------------------------------------------
     // Skill Engine: Buy Ranks
     // ------------------------------------------------------------
     async _onSkillAdvance(skillId) {
-        const engine = getSkillAdvancementEngine();
-
-        try {
-            const result = engine.buySkillRanks(this.actor, skillId, { ranks: 1 });
-
-            ui.notifications.info(
-                `${this.actor.name} gained +1 rank in ${result.skillId}. Remaining DP: ${result.remainingDp}`
-            );
-
-            await this.actor.update({ "system.skills": this.actor.system.skills });
-        } catch (err) {
-            ui.notifications.error(err.message);
+        const skillData = CONFIG.EQRMSS?.skills?.[skillId];
+        if (!skillData) {
+            ui.notifications.error(`Unknown skill: ${skillId}`);
+            return;
         }
+        // Parse cost "2/5" -> use first number as DP per rank (simplified)
+        const costStr = skillData.system?.cost || "1";
+        const costPerRank = parseInt(costStr.split("/")[0]) || 1;
+
+        const currentDp = this.actor.system.developmentPoints ?? this.actor.system.dp ?? 0;
+        if (currentDp < costPerRank) {
+            ui.notifications.error(`Not enough development points (need ${costPerRank}, have ${currentDp})`);
+            return;
+        }
+
+        const actorSkills = foundry.utils.duplicate(this.actor.system.skills || {});
+        actorSkills[skillId] = actorSkills[skillId] || {};
+        actorSkills[skillId].ranks = (actorSkills[skillId].ranks ?? 0) + 1;
+
+        await this.actor.update({
+            "system.skills": actorSkills,
+            "system.developmentPoints": currentDp - costPerRank
+        });
+
+        ui.notifications.info(`${this.actor.name} gained +1 rank in ${skillData.name}. Remaining DP: ${currentDp - costPerRank}`);
     }
 }
