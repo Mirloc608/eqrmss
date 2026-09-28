@@ -1,0 +1,35 @@
+{
+  "id": "tempest-throne-travel",
+  "zone": "tempest-throne",
+
+  "nodes": [
+    "tempest-entry",
+    "storm-crown",
+    "lightning-arc",
+    "sovereign-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "tempest-entry",
+      "to": "storm-crown",
+      "type": "wind-path"
+    },
+    {
+      "from": "storm-crown",
+      "to": "lightning-arc",
+      "type": "tempest-transition",
+      "requirements": {
+        "shock-resistance": true
+      }
+    },
+    {
+      "from": "lightning-arc",
+      "to": "sovereign-sanctum",
+      "type": "storm-ascent",
+      "requirements": {
+        "elemental-attunement-air": true
+      }
+    }
+  ]
+}

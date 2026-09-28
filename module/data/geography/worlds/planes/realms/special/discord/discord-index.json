@@ -1,0 +1,72 @@
+{
+  "id": "discord-index",
+  "key": "discord",
+  "name": "Realm of Discord",
+  "type": "realm-index",
+
+  "manifest": "discord.json",
+  "lore": "discord-lore.json",
+  "cosmology": "discord-cosmology.json",
+
+  "worlds": [
+    "discord-core",
+    "riftlands",
+    "muramite-dominion"
+  ],
+
+  "worldIndex": {
+    "discord-core": {
+      "manifest": "discord-core.json",
+      "lore": "discord-core.lore.json",
+      "cosmology": "discord-core.cosmology.json",
+      "regions": [
+        "fracture-plains",
+        "discord-forges",
+        "rift-heart",
+        "war-shade-expanse"
+      ],
+      "regionIndex": {
+        "fracture-plains": "fracture-plains.index.json",
+        "discord-forges": "discord-forges.index.json",
+        "rift-heart": "rift-heart.index.json",
+        "war-shade-expanse": "war-shade-expanse.index.json"
+      }
+    },
+
+    "riftlands": {
+      "manifest": "riftlands.json",
+      "lore": "riftlands-lore.json",
+      "cosmology": "riftlands-cosmology.json",
+      "regions": [
+        "outer-fracture-belt",
+        "voidscar-wastes",
+        "riftspire-reaches",
+        "temporal-echo-badlands"
+      ],
+      "regionIndex": {
+        "outer-fracture-belt": "outer-fracture-belt.index.json",
+        "voidscar-wastes": "voidscar-wastes.index.json",
+        "riftspire-reaches": "riftspire-reaches.index.json",
+        "temporal-echo-badlands": "temporal-echo-badlands.index.json"
+      }
+    },
+
+    "muramite-dominion": {
+      "manifest": "muramite-dominion.json",
+      "lore": "muramite-dominion-lore.json",
+      "cosmology": "muramite-dominion-cosmology.json",
+      "regions": [
+        "dominion-heartlands",
+        "legion-warworks",
+        "conquest-hold",
+        "imperator-citadel"
+      ],
+      "regionIndex": {
+        "dominion-heartlands": "dominion-heartlands.index.json",
+        "legion-warworks": "legion-warworks.index.json",
+        "conquest-hold": "conquest-hold.index.json",
+        "imperator-citadel": "imperator-citadel.index.json"
+      }
+    }
+  }
+}

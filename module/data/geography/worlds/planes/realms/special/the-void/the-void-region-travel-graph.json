@@ -1,0 +1,62 @@
+{
+  "id": "the-void-region-travel-graph",
+  "plane": "the-void",
+
+  "nodes": [
+    "fractured-time",
+    "echoes-of-existence",
+    "zebuxoruks-prison",
+    "the-entropic-deep"
+  ],
+
+  "edges": [
+    {
+      "from": "fractured-time",
+      "to": "echoes-of-existence",
+      "type": "temporal-collapse",
+      "requirements": {
+        "temporal-anchor": true
+      }
+    },
+    {
+      "from": "echoes-of-existence",
+      "to": "zebuxoruks-prison",
+      "type": "echo-resonance",
+      "requirements": {
+        "memory-stability": true
+      }
+    },
+    {
+      "from": "zebuxoruks-prison",
+      "to": "fractured-time",
+      "type": "void-loop",
+      "requirements": {
+        "void-attunement": true
+      }
+    },
+    {
+      "from": "the-entropic-deep",
+      "to": "fractured-time",
+      "type": "entropy-shear",
+      "requirements": {
+        "entropy-shielding": true
+      }
+    },
+    {
+      "from": "the-entropic-deep",
+      "to": "echoes-of-existence",
+      "type": "null-drift",
+      "requirements": {
+        "existence-anchor": true
+      }
+    },
+    {
+      "from": "the-entropic-deep",
+      "to": "zebuxoruks-prison",
+      "type": "pressure-fold",
+      "requirements": {
+        "void-pressure-resistance": true
+      }
+    }
+  ]
+}

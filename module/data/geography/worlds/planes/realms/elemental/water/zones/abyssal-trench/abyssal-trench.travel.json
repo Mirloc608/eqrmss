@@ -1,0 +1,35 @@
+{
+  "id": "abyssal-trench-travel",
+  "zone": "abyssal-trench",
+
+  "nodes": [
+    "trench-entry",
+    "pressure-canyon",
+    "silt-plains",
+    "colossus-pit"
+  ],
+
+  "edges": [
+    {
+      "from": "trench-entry",
+      "to": "pressure-canyon",
+      "type": "abyssal-descent"
+    },
+    {
+      "from": "pressure-canyon",
+      "to": "silt-plains",
+      "type": "pressure-transition",
+      "requirements": {
+        "water-breathing": true
+      }
+    },
+    {
+      "from": "silt-plains",
+      "to": "colossus-pit",
+      "type": "deep-current-path",
+      "requirements": {
+        "elemental-attunement-water": true
+      }
+    }
+  ]
+}

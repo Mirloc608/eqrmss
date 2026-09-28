@@ -1,0 +1,38 @@
+{
+  "id": "temporal-echo-badlands-travel",
+  "region": "temporal-echo-badlands",
+
+  "nodes": [
+    "timefract-hollows",
+    "echo-surge-steppe",
+    "chronoscatter-fields",
+    "the-paradox-throne"
+  ],
+
+  "edges": [
+    {
+      "from": "timefract-hollows",
+      "to": "echo-surge-steppe",
+      "type": "time-shear-path",
+      "requirements": {
+        "temporal-stabilizer": true
+      }
+    },
+    {
+      "from": "echo-surge-steppe",
+      "to": "chronoscatter-fields",
+      "type": "echo-transition",
+      "requirements": {
+        "anti-echo-ward": true
+      }
+    },
+    {
+      "from": "chronoscatter-fields",
+      "to": "the-paradox-throne",
+      "type": "paradox-ascent",
+      "requirements": {
+        "chronal-attunement": true
+      }
+    }
+  ]
+}

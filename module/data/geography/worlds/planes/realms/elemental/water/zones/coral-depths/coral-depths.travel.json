@@ -1,0 +1,35 @@
+{
+  "id": "coral-depths-travel",
+  "zone": "coral-depths",
+
+  "nodes": [
+    "reef-entry",
+    "coral-forest",
+    "tidal-cavern",
+    "sovereign-chamber"
+  ],
+
+  "edges": [
+    {
+      "from": "reef-entry",
+      "to": "coral-forest",
+      "type": "current-path"
+    },
+    {
+      "from": "coral-forest",
+      "to": "tidal-cavern",
+      "type": "reef-transition",
+      "requirements": {
+        "water-breathing": true
+      }
+    },
+    {
+      "from": "tidal-cavern",
+      "to": "sovereign-chamber",
+      "type": "abyssal-descent",
+      "requirements": {
+        "elemental-attunement-water": true
+      }
+    }
+  ]
+}

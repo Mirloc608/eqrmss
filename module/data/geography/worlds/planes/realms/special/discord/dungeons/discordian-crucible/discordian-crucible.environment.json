@@ -1,0 +1,39 @@
+{
+  "dungeon": "discordian-crucible",
+
+  "levels": [
+    {
+      "id": "outer-forgeworks",
+      "name": "Outer Forgeworks",
+      "description": "Industrial platforms, molten channels, and corruption vats. The outer ring of the Crucible.",
+      "hazards": [
+        { "id": "forge-eruption", "dc": 34, "effect": "damage_and_knockback" },
+        { "id": "corruption-surge", "dc": 35, "effect": "stat_decay_and_dot" }
+      ]
+    },
+    {
+      "id": "siphon-chambers",
+      "name": "Siphon Chambers",
+      "description": "Massive siphon pillars extract Discord energy and refine it into corruption essence.",
+      "hazards": [
+        { "id": "siphon-collapse", "dc": 36, "effect": "forced_movement_and_stun" }
+      ]
+    },
+    {
+      "id": "engine-core",
+      "name": "Engine Core",
+      "description": "The heart of the Corruption Engine. Molten Discord flows through conduits, and the Corruption Heart pulses at the center.",
+      "hazards": [
+        { "id": "core-overload", "dc": 38, "effect": "massive_damage" },
+        { "id": "discord-backlash", "dc": 37, "effect": "fear_and_dot" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "forge",
+    "industrial",
+    "corruption",
+    "discord"
+  ]
+}

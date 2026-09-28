@@ -1,0 +1,31 @@
+{
+  "zone": "discordian-crucible",
+  "description": "The Discordian Crucible is a vast forge-basin carved into the heart of the Fracture Plains. Here the land is transformed into an industrial labyrinth of vents, channels, vats, and molten rivers. The ground is a patchwork of furnace-scarred stone and blackened iron, while towering siphon pillars draw in raw discord energy and refine it into violent, living power. The region glows with orange, violet, and deep red light, and the air itself feels dense enough to bruise the skin.",
+  "landscape": {
+    "summary": "A volcanic forge district where black spires, flowing magma channels, and corruption vats dominate the terrain.",
+    "mountains": [
+      "The Cinder Perches, fire-scarred ridges that rise around the inner basin.",
+      "Volcanic flues and stack-ridges where the Crucible vents its heat into the sky."
+    ],
+    "rivers": [
+      "Molten discord channels that move like glowing rivers through the forge floor.",
+      "Cooling runoff cuts through the basin in black chasms lined with old slag."
+    ],
+    "forests": [
+      "Only a few ironwood groves survive on the outer ring, twisted by heat and corruption.",
+      "Wraith-briar patches grow near the vents where smoke and shadow mix."
+    ],
+    "notableFeatures": [
+      "Siphon pillars that draw discord-energy from the sky and ground.",
+      "Corruption vats and refinement towers that pulse with internal light.",
+      "The Corruption Heart, a massive furnace-core at the center of the basin."
+    ]
+  },
+  "terrain": ["discord-forge", "corruption-vats"],
+  "lighting": "crucible-glow",
+  "hazards": [
+    { "id": "forge-eruption", "dc": 31, "effect": "damage_and_knockback" }
+  ],
+  "travel": { "encounterDensity": "high", "restSafety": "none" },
+  "environmentTags": ["forge", "discord"]
+}

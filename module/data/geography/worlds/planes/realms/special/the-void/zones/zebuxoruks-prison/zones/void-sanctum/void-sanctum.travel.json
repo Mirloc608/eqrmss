@@ -1,0 +1,35 @@
+{
+  "id": "void-sanctum-travel",
+  "zone": "void-sanctum",
+
+  "nodes": [
+    "pressure-chamber",
+    "eternity-corridor",
+    "null-altar",
+    "warden-core"
+  ],
+
+  "edges": [
+    {
+      "from": "pressure-chamber",
+      "to": "eternity-corridor",
+      "type": "void-flow"
+    },
+    {
+      "from": "eternity-corridor",
+      "to": "null-altar",
+      "type": "eternity-transition",
+      "requirements": {
+        "temporal-anchor": true
+      }
+    },
+    {
+      "from": "null-altar",
+      "to": "warden-core",
+      "type": "void-binding",
+      "requirements": {
+        "void-attunement": true
+      }
+    }
+  ]
+}

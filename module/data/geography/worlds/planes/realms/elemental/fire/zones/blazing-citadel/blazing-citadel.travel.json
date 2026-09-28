@@ -1,0 +1,35 @@
+{
+  "id": "blazing-citadel-travel",
+  "zone": "blazing-citadel",
+
+  "nodes": [
+    "citadel-gate",
+    "flame-hall",
+    "ember-courtyard",
+    "molten-throne"
+  ],
+
+  "edges": [
+    {
+      "from": "citadel-gate",
+      "to": "flame-hall",
+      "type": "flame-path"
+    },
+    {
+      "from": "flame-hall",
+      "to": "ember-courtyard",
+      "type": "ember-transition",
+      "requirements": {
+        "heat-resistance": true
+      }
+    },
+    {
+      "from": "ember-courtyard",
+      "to": "molten-throne",
+      "type": "citadel-core-path",
+      "requirements": {
+        "elemental-attunement-fire": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "thunder-citadel",
+  "key": "thunder-citadel",
+  "name": "Thunder Citadel",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "storms",
+
+  "description": "The Thunder Citadel is the heart of the Plane of Storms, a fortress of elemental chaos where the Storm Sovereign resides.",
+
+  "hazards": [
+    { "id": "thunder-collapse", "dc": 38, "effect": "stat_decay_and_massive_damage" }
+  ],
+
+  "encounters": [
+    { "creature": "Citadel Guardian", "level": 99 },
+    { "creature": "Storm Titan", "level": 100 }
+  ],
+
+  "boss": {
+    "name": "The Storm Sovereign",
+    "level": 100,
+    "role": "boss"
+  },
+
+  "tags": ["storms", "thunder", "outer"]
+}

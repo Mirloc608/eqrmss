@@ -1,0 +1,26 @@
+{
+  "region": "shadeweavers-thicket",
+
+  "nodes": [
+    { "id": "savanna-borderlands", "name": "Savanna Borderlands" },
+    { "id": "vah-shir-outskirts", "name": "Vah Shir Outskirts" },
+    { "id": "inner-thicket", "name": "Inner Thicket" },
+    { "id": "grimling-raider-paths", "name": "Grimling Raider Paths" },
+    { "id": "netherbian-faultline", "name": "Netherbian Faultline" },
+    { "id": "thicket-cavern-mouths", "name": "Thicket Cavern Mouths" }
+  ],
+
+  "edges": [
+    { "from": "savanna-borderlands", "to": "vah-shir-outskirts", "method": "savanna trail" },
+    { "from": "vah-shir-outskirts", "to": "inner-thicket", "method": "forest breach" },
+    { "from": "inner-thicket", "to": "grimling-raider-paths", "method": "shadow trail" },
+    { "from": "inner-thicket", "to": "thicket-cavern-mouths", "method": "root tunnel" },
+    { "from": "thicket-cavern-mouths", "to": "netherbian-faultline", "method": "burrow descent" }
+  ],
+
+  "externalConnections": [
+    { "to": "shar-vahl", "method": "city gate" },
+    { "to": "patrol-routes", "method": "forest pass" },
+    { "to": "netherbian-lair", "method": "faultline tunnel" }
+  ]
+}

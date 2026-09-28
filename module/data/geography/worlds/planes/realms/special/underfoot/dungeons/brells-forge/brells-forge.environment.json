@@ -1,0 +1,37 @@
+{
+  "dungeon": "brells-forge",
+
+  "levels": [
+    {
+      "id": "magma-rivers",
+      "name": "Magma Rivers",
+      "description": "Molten rivers flow through colossal caverns.",
+      "hazards": [
+        { "id": "magma-surge", "dc": 35, "effect": "fire_damage_and_knockback" }
+      ]
+    },
+    {
+      "id": "divine-forge",
+      "name": "Divine Forge",
+      "description": "The central forge chamber where divine hammers echo.",
+      "hazards": [
+        { "id": "forge-eruption", "dc": 36, "effect": "massive_damage" }
+      ]
+    },
+    {
+      "id": "hammer-sanctum",
+      "name": "Hammer Sanctum",
+      "description": "The sanctum where the Forge Titan resides.",
+      "hazards": [
+        { "id": "collapse-pressure", "dc": 37, "effect": "stat_decay_and_stun" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "forge",
+    "magma",
+    "stone",
+    "underfoot"
+  ]
+}

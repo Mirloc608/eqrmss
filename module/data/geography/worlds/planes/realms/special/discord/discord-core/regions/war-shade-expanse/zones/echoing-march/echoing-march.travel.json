@@ -1,0 +1,35 @@
+{
+  "id": "echoing-march-travel",
+  "zone": "echoing-march",
+
+  "nodes": [
+    "march-entry",
+    "temporal-corridor",
+    "shadow-loop",
+    "marshal-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "march-entry",
+      "to": "temporal-corridor",
+      "type": "time-path"
+    },
+    {
+      "from": "temporal-corridor",
+      "to": "shadow-loop",
+      "type": "echo-transition",
+      "requirements": {
+        "temporal-stabilizer": true
+      }
+    },
+    {
+      "from": "shadow-loop",
+      "to": "marshal-sanctum",
+      "type": "discord-core-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

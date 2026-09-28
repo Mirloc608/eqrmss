@@ -1,0 +1,24 @@
+{
+  "id": "crystal-root-travel",
+  "dungeon": "crystal-root",
+
+  "nodes": [
+    "dungeon-entry",
+    "prism-chambers",
+    "resonance-veins",
+    "sovereign-sanctum",
+    "crystal-sovereign-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "prism-chambers", "type": "prism-path" },
+    { "from": "prism-chambers", "to": "resonance-veins", "type": "resonance-transition" },
+    { "from": "resonance-veins", "to": "sovereign-sanctum", "type": "sanctum-descent" },
+    {
+      "from": "sovereign-sanctum",
+      "to": "crystal-sovereign-lair",
+      "type": "sovereign-ascent",
+      "requirements": { "underfoot-attunement": true }
+    }
+  ]
+}

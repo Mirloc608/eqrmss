@@ -1,0 +1,44 @@
+{
+  "zone": "shadefall-battlefield",
+
+  "terrain": [
+    "shadow-scarred-plains",
+    "discord-corrupted-earth",
+    "warshade-rising-pits",
+    "broken-battlefronts"
+  ],
+
+  "lighting": "discord-gloom",
+
+  "hazards": [
+    {
+      "id": "shade-rift-eruption",
+      "dc": 28,
+      "effect": "shadow_damage_and_fear"
+    },
+    {
+      "id": "discord-corruption-wave",
+      "dc": 27,
+      "effect": "stat_decay_and_dot"
+    },
+    {
+      "id": "warshade-manifestation",
+      "dc": 29,
+      "effect": "forced_movement_and_stun"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "War-Shades rise unpredictably; corruption waves alter terrain constantly."
+  },
+
+  "environmentTags": [
+    "discord",
+    "shadow",
+    "war",
+    "corruption",
+    "chaos"
+  ]
+}

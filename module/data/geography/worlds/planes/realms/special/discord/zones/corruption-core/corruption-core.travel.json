@@ -1,0 +1,35 @@
+{
+  "id": "corruption-core-travel",
+  "zone": "corruption-core",
+
+  "nodes": [
+    "core-entry",
+    "siphon-pillar",
+    "essence-reservoir",
+    "corruption-heart"
+  ],
+
+  "edges": [
+    {
+      "from": "core-entry",
+      "to": "siphon-pillar",
+      "type": "corruption-path"
+    },
+    {
+      "from": "siphon-pillar",
+      "to": "essence-reservoir",
+      "type": "siphon-transition",
+      "requirements": {
+        "corruption-ward": true
+      }
+    },
+    {
+      "from": "essence-reservoir",
+      "to": "corruption-heart",
+      "type": "core-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

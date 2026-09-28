@@ -1,0 +1,37 @@
+{
+  "dungeon": "crystal-root",
+
+  "levels": [
+    {
+      "id": "prism-chambers",
+      "name": "Prism Chambers",
+      "description": "Glittering halls where crystal prisms refract divine resonance.",
+      "hazards": [
+        { "id": "prism-overload", "dc": 36, "effect": "radiant_damage_and_stun" }
+      ]
+    },
+    {
+      "id": "resonance-veins",
+      "name": "Resonance Veins",
+      "description": "Crystal veins pulse with planar bleed‑through.",
+      "hazards": [
+        { "id": "resonance-surge", "dc": 37, "effect": "fear_and_dot" }
+      ]
+    },
+    {
+      "id": "sovereign-sanctum",
+      "name": "Sovereign Sanctum",
+      "description": "The sanctum where the Crystal Sovereign resides.",
+      "hazards": [
+        { "id": "collapse-fracture", "dc": 38, "effect": "stat_decay_and_knockback" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "crystal",
+    "resonance",
+    "planar",
+    "underfoot"
+  ]
+}

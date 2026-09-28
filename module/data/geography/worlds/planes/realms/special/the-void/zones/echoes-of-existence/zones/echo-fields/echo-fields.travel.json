@@ -1,0 +1,35 @@
+{
+  "id": "echo-fields-travel",
+  "zone": "echo-fields",
+
+  "nodes": [
+    "echo-plains",
+    "resonance-pool",
+    "unreal-ridge",
+    "sovereign-core"
+  ],
+
+  "edges": [
+    {
+      "from": "echo-plains",
+      "to": "resonance-pool",
+      "type": "echo-flow"
+    },
+    {
+      "from": "resonance-pool",
+      "to": "unreal-ridge",
+      "type": "memory-transition",
+      "requirements": {
+        "memory-stability": true
+      }
+    },
+    {
+      "from": "unreal-ridge",
+      "to": "sovereign-core",
+      "type": "echo-path",
+      "requirements": {
+        "existence-anchor": true
+      }
+    }
+  ]
+}

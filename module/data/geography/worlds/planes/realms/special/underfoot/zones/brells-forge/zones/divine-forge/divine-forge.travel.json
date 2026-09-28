@@ -1,0 +1,35 @@
+{
+  "id": "divine-forge-travel",
+  "zone": "divine-forge",
+
+  "nodes": [
+    "forge-entry",
+    "magma-flow",
+    "anvil-platform",
+    "forge-core"
+  ],
+
+  "edges": [
+    {
+      "from": "forge-entry",
+      "to": "magma-flow",
+      "type": "heat-shift"
+    },
+    {
+      "from": "magma-flow",
+      "to": "anvil-platform",
+      "type": "forge-channel",
+      "requirements": {
+        "heat-resonance": true
+      }
+    },
+    {
+      "from": "anvil-platform",
+      "to": "forge-core",
+      "type": "divine-path",
+      "requirements": {
+        "brell-attunement": true
+      }
+    }
+  ]
+}

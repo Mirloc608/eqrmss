@@ -1,0 +1,43 @@
+{
+  "id": "muramite-dominion-cosmology",
+  "world": "muramite-dominion",
+
+  "cosmicRules": {
+    "magic": "Muramite war‑magic is rigid, disciplined, and reinforced by Discord corruption.",
+    "space": "Dominion architecture stabilizes Discord geometry through engineered anchors.",
+    "time": "Temporal bleed is suppressed by Imperator edicts and stabilizer engines.",
+    "travel": "Movement relies on Legion Gateworks, Rift‑Anchors, and command‑controlled portals."
+  },
+
+  "connections": {
+    "realms": [
+      "discord",
+      "discord-core",
+      "riftlands",
+      "kuua"
+    ],
+    "regions": [
+      "dominion-heartlands",
+      "legion-warworks",
+      "conquest-hold",
+      "imperator-citadel"
+    ],
+    "portals": [
+      {
+        "name": "Legion Gateworks",
+        "connects": ["muramite-dominion", "kuua"],
+        "stability": "stable"
+      },
+      {
+        "name": "Imperator Rift",
+        "connects": ["muramite-dominion", "discord-core"],
+        "stability": "semi-stable"
+      },
+      {
+        "name": "Warworks Conduit",
+        "connects": ["muramite-dominion", "riftlands"],
+        "stability": "unstable"
+      }
+    ]
+  }
+}

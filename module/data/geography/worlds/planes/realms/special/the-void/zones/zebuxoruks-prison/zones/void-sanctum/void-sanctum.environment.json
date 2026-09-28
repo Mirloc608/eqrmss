@@ -1,0 +1,44 @@
+{
+  "zone": "void-sanctum",
+
+  "terrain": [
+    "void-pressure-chambers",
+    "eternity-lock-corridors",
+    "null-resonance-altars",
+    "temporal-binding-rings"
+  ],
+
+  "lighting": "void-pressure-darklight",
+
+  "hazards": [
+    {
+      "id": "void-pressure-wave",
+      "dc": 27,
+      "effect": "void_damage_and_knockback"
+    },
+    {
+      "id": "eternity-lock-feedback",
+      "dc": 26,
+      "effect": "initiative-loss_and_temporal-stagger"
+    },
+    {
+      "id": "null-resonance-burst",
+      "dc": 28,
+      "effect": "stat_decay_and_force_damage"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "The Sanctum pulses with void pressure; movement timing becomes critical as eternity locks shift."
+  },
+
+  "environmentTags": [
+    "void",
+    "eternity",
+    "temporal",
+    "cosmic",
+    "raid"
+  ]
+}

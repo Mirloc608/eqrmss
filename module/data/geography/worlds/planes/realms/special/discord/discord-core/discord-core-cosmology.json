@@ -1,0 +1,37 @@
+{
+  "id": "discord-core-cosmology",
+  "world": "discord-core",
+
+  "cosmicRules": {
+    "magic": "Discord energy corrupts all magic; spells may mutate or destabilize.",
+    "space": "Spatial geometry folds, loops, and collapses unpredictably.",
+    "time": "Temporal bleed causes events to repeat, skip, or overlap.",
+    "travel": "Movement requires Riftseeker anchors or Muramite stabilizers."
+  },
+
+  "connections": {
+    "realms": [
+      "discord",
+      "kuua",
+      "the-void"
+    ],
+    "regions": [
+      "fracture-plains",
+      "discord-forges",
+      "war-shade-expanse",
+      "rift-heart"
+    ],
+    "portals": [
+      {
+        "name": "Primary Discord Rift",
+        "connects": ["discord-core", "kuua"],
+        "stability": "unstable"
+      },
+      {
+        "name": "Rift-Heart Breach",
+        "connects": ["discord-core", "the-void"],
+        "stability": "volatile"
+      }
+    ]
+  }
+}

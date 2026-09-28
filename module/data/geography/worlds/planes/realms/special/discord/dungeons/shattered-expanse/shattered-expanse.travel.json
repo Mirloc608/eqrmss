@@ -1,0 +1,24 @@
+{
+  "id": "shattered-expanse-travel",
+  "dungeon": "shattered-expanse",
+
+  "nodes": [
+    "dungeon-entry",
+    "fracture-caverns",
+    "echoing-depths",
+    "void-pocket",
+    "fracture-prime-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "fracture-caverns", "type": "fracture-path" },
+    { "from": "fracture-caverns", "to": "echoing-depths", "type": "echo-transition" },
+    { "from": "echoing-depths", "to": "void-pocket", "type": "void-descent" },
+    {
+      "from": "void-pocket",
+      "to": "fracture-prime-lair",
+      "type": "prime-ascent",
+      "requirements": { "discord-attunement": true }
+    }
+  ]
+}

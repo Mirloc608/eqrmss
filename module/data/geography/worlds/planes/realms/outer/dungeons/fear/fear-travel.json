@@ -1,0 +1,24 @@
+{
+  "id": "fear-region-travel",
+  "plane": "fear",
+
+  "nodes": [
+    "region-entry",
+    "dread-maw",
+    "nightmare-pits",
+    "fear-temple",
+    "cazic-thule-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "dread-maw", "type": "labyrinth-entry" },
+    { "from": "dread-maw", "to": "nightmare-pits", "type": "nightmare-descent" },
+    { "from": "nightmare-pits", "to": "fear-temple", "type": "temple-ascent" },
+    {
+      "from": "fear-temple",
+      "to": "cazic-thule-throne",
+      "type": "throne-descent",
+      "requirements": { "outer-attunement": true }
+    }
+  ]
+}

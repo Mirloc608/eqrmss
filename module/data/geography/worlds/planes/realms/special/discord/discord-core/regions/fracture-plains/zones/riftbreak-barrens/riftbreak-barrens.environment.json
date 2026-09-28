@@ -1,0 +1,32 @@
+{
+  "zone": "riftbreak-barrens",
+  "description": "The Riftbreak Barrens are a blasted and broken waste of ash fields, volcanic gullies, and half-open fissures. Here the land has lost its shape entirely. Black ridges rise out of pools of mineral sludge, and the soil is scored by bursts of raw planar force that blow open huge wounds in the Earth. The barrens feel abandoned even when living things are nearby; even the wind sounds like distant breaking stone.",
+  "landscape": {
+    "summary": "A harsh wasteland of ash flats, sinkholes, and volcanic fractures where nothing grows except bitter thorns and corruption sprouts.",
+    "mountains": [
+      "The Broken Maw Range, a chain of low black peaks broken by smoke vents and rift-cut gullies.",
+      "Scalded basalt ridges that ring the largest cinder basins."
+    ],
+    "rivers": [
+      "The Glasswake Wash, a channel of oily runoff that cuts across the barrens in a jagged line.",
+      "Dry river beds that become active only during devilish storms or rage-driven riftbursts."
+    ],
+    "forests": [
+      "No true forests survive here; only sparse scrublands of iron-thorn and corruption briars cling to the edges of the trenches.",
+      "Fetid whorl-groves that grow around mineral vents and pulse with faint corruption light."
+    ],
+    "notableFeatures": [
+      "Wide collapse basins where the earth has caved inward during unseen planar convulsions.",
+      "Sulfur vents and red-hot fissures that hiss under the weight of the storm.",
+      "Broken fort walls and collapsed watchposts half-buried by ash and ruin."
+    ]
+  },
+  "terrain": ["ruptured-earth", "corruption-wastes"],
+  "lighting": "discord-storm",
+  "hazards": [
+    { "id": "corruption-wave", "dc": 29, "effect": "stat_decay" },
+    { "id": "riftburst", "dc": 30, "effect": "shadow_damage" }
+  ],
+  "travel": { "encounterDensity": "extreme", "restSafety": "none" },
+  "environmentTags": ["discord", "corruption"]
+}

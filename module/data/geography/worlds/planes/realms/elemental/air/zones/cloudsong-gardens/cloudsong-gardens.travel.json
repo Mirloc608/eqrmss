@@ -1,0 +1,35 @@
+{
+  "id": "cloudsong-gardens-travel",
+  "zone": "cloudsong-gardens",
+
+  "nodes": [
+    "garden-entry",
+    "skyblossom-grove",
+    "wind-harmonic-bridge",
+    "sovereign-perch"
+  ],
+
+  "edges": [
+    {
+      "from": "garden-entry",
+      "to": "skyblossom-grove",
+      "type": "cloud-path"
+    },
+    {
+      "from": "skyblossom-grove",
+      "to": "wind-harmonic-bridge",
+      "type": "harmonic-transition",
+      "requirements": {
+        "featherfall": true
+      }
+    },
+    {
+      "from": "wind-harmonic-bridge",
+      "to": "sovereign-perch",
+      "type": "sky-ascent",
+      "requirements": {
+        "elemental-attunement-air": true
+      }
+    }
+  ]
+}

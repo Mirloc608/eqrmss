@@ -1,0 +1,26 @@
+{
+  "id": "time-phase-5-travel",
+  "zone": "time-phase-5",
+
+  "nodes": [
+    "phase-5-entry",
+    "phase-5-collapse-field",
+    "phase-5-core"
+  ],
+
+  "edges": [
+    {
+      "from": "phase-5-entry",
+      "to": "phase-5-collapse-field",
+      "type": "temporal-collapse"
+    },
+    {
+      "from": "phase-5-collapse-field",
+      "to": "phase-5-core",
+      "type": "cataclysmic-convergence",
+      "requirements": {
+        "chronomanticAttunement": true
+      }
+    }
+  ]
+}

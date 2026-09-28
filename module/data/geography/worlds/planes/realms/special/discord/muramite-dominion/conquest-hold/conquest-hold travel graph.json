@@ -1,0 +1,38 @@
+{
+  "id": "conquest-hold-travel",
+  "region": "conquest-hold",
+
+  "nodes": [
+    "mustering-fields",
+    "command-ramparts",
+    "warpath-barricades",
+    "invasion-gateworks"
+  ],
+
+  "edges": [
+    {
+      "from": "mustering-fields",
+      "to": "command-ramparts",
+      "type": "legion-path",
+      "requirements": {
+        "dominion-clearance": true
+      }
+    },
+    {
+      "from": "command-ramparts",
+      "to": "warpath-barricades",
+      "type": "rampart-transition",
+      "requirements": {
+        "warlord-sigil": true
+      }
+    },
+    {
+      "from": "warpath-barricades",
+      "to": "invasion-gateworks",
+      "type": "gateworks-ascent",
+      "requirements": {
+        "gate-attunement": true
+      }
+    }
+  ]
+}

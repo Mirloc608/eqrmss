@@ -1,0 +1,35 @@
+{
+  "id": "void-heart-travel",
+  "zone": "void-heart",
+
+  "nodes": [
+    "pressure-chamber",
+    "null-core",
+    "entropy-ring",
+    "void-pulse-nexus"
+  ],
+
+  "edges": [
+    {
+      "from": "pressure-chamber",
+      "to": "null-core",
+      "type": "void-pressure-path"
+    },
+    {
+      "from": "null-core",
+      "to": "entropy-ring",
+      "type": "entropy-flow",
+      "requirements": {
+        "entropy-shielding": true
+      }
+    },
+    {
+      "from": "entropy-ring",
+      "to": "void-pulse-nexus",
+      "type": "pulse-transition",
+      "requirements": {
+        "void-pressure-resistance": true
+      }
+    }
+  ]
+}

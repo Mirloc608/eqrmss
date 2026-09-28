@@ -1,0 +1,38 @@
+{
+  "id": "fracture-plains-travel-graph",
+  "region": "fracture-plains",
+
+  "nodes": [
+    "shattered-expanse",
+    "riftbreak-barrens",
+    "warshade-field",
+    "discordian-crucible"
+  ],
+
+  "edges": [
+    {
+      "from": "shattered-expanse",
+      "to": "riftbreak-barrens",
+      "type": "fracture-path",
+      "requirements": {
+        "rift-stability-anchor": true
+      }
+    },
+    {
+      "from": "riftbreak-barrens",
+      "to": "warshade-field",
+      "type": "shadow-transition",
+      "requirements": {
+        "anti-corruption-ward": true
+      }
+    },
+    {
+      "from": "warshade-field",
+      "to": "discordian-crucible",
+      "type": "discord-core-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

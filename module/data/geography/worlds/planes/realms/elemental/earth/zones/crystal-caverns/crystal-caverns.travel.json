@@ -1,0 +1,35 @@
+{
+  "id": "crystal-caverns-travel",
+  "zone": "crystal-caverns",
+
+  "nodes": [
+    "geode-entry",
+    "resonant-hall",
+    "mineral-bridge",
+    "sovereign-chamber"
+  ],
+
+  "edges": [
+    {
+      "from": "geode-entry",
+      "to": "resonant-hall",
+      "type": "crystal-path"
+    },
+    {
+      "from": "resonant-hall",
+      "to": "mineral-bridge",
+      "type": "resonance-transition",
+      "requirements": {
+        "earth-attunement": true
+      }
+    },
+    {
+      "from": "mineral-bridge",
+      "to": "sovereign-chamber",
+      "type": "geode-core-path",
+      "requirements": {
+        "elemental-attunement-earth": true
+      }
+    }
+  ]
+}

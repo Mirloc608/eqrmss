@@ -1,0 +1,35 @@
+{
+  "id": "stone-halls-travel",
+  "zone": "stone-halls",
+
+  "nodes": [
+    "hall-entry",
+    "echo-chamber",
+    "mountain-corridor",
+    "guardian-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "hall-entry",
+      "to": "echo-chamber",
+      "type": "stone-path"
+    },
+    {
+      "from": "echo-chamber",
+      "to": "mountain-corridor",
+      "type": "resonance-transition",
+      "requirements": {
+        "earth-attunement": true
+      }
+    },
+    {
+      "from": "mountain-corridor",
+      "to": "guardian-sanctum",
+      "type": "tectonic-rise",
+      "requirements": {
+        "elemental-attunement-earth": true
+      }
+    }
+  ]
+}

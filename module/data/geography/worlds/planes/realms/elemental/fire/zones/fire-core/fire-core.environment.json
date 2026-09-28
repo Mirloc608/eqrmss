@@ -1,0 +1,44 @@
+{
+  "zone": "fire-core",
+
+  "terrain": [
+    "elemental-heart-chamber",
+    "pyroclast-fissures",
+    "flame-well-bridges",
+    "core-ember-fields"
+  ],
+
+  "lighting": "core-flame-glare",
+
+  "hazards": [
+    {
+      "id": "core-flame-burst",
+      "dc": 27,
+      "effect": "fire_damage_and_burning"
+    },
+    {
+      "id": "pyroclast-eruption",
+      "dc": 28,
+      "effect": "fire_damage_and_knockback"
+    },
+    {
+      "id": "ember-field-collapse",
+      "dc": 29,
+      "effect": "stat_decay_and_heat_exhaustion"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "The Fire Core pulses with elemental flame; pathways shift as pyroclasts erupt."
+  },
+
+  "environmentTags": [
+    "fire",
+    "elemental",
+    "core",
+    "flame",
+    "raid"
+  ]
+}

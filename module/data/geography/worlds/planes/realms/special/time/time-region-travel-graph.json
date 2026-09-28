@@ -1,0 +1,43 @@
+{
+  "id": "time-region-travel-graph",
+  "region": "time",
+
+  "nodes": [
+    "time-phase-1",
+    "time-phase-2",
+    "time-phase-3",
+    "time-phase-4",
+    "time-phase-5",
+    "time-throne"
+  ],
+
+  "edges": [
+    {
+      "from": "time-phase-1",
+      "to": "time-phase-2",
+      "type": "temporal-shift",
+      "requirements": { "chronomanticAttunement": true }
+    },
+    {
+      "from": "time-phase-2",
+      "to": "time-phase-3",
+      "type": "temporal-shift"
+    },
+    {
+      "from": "time-phase-3",
+      "to": "time-phase-4",
+      "type": "temporal-shift"
+    },
+    {
+      "from": "time-phase-4",
+      "to": "time-phase-5",
+      "type": "temporal-shift"
+    },
+    {
+      "from": "time-phase-5",
+      "to": "time-throne",
+      "type": "temporal-convergence",
+      "requirements": { "chronomanticAttunement": true }
+    }
+  ]
+}

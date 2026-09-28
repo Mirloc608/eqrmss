@@ -1,0 +1,21 @@
+{
+  "id": "halls-of-honor",
+  "key": "halls-of-honor",
+  "name": "Halls of Honor",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "valor",
+
+  "description": "The Halls of Honor are the entry to the Plane of Valor, where mortals prove their worth through trials of courage and loyalty.",
+
+  "hazards": [
+    { "id": "honor-surge", "dc": 36, "effect": "fear_resistance_test" }
+  ],
+
+  "encounters": [
+    { "creature": "Honor Guardian", "level": 95 },
+    { "creature": "Valor Knight", "level": 96 }
+  ],
+
+  "tags": ["valor", "honor", "outer"]
+}

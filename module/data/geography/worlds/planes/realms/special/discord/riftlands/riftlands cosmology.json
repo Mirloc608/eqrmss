@@ -1,0 +1,42 @@
+{
+  "id": "riftlands-cosmology",
+  "world": "riftlands",
+
+  "cosmicRules": {
+    "magic": "Magic destabilizes near rifts; spells may duplicate, invert, or collapse.",
+    "space": "Spatial fractures cause looping paths, sudden folds, and void drops.",
+    "time": "Temporal echoes repeat events or skip forward unpredictably.",
+    "travel": "Movement requires Riftseeker anchors or stable Riftspire pathways."
+  },
+
+  "connections": {
+    "realms": [
+      "discord",
+      "discord-core",
+      "the-void"
+    ],
+    "regions": [
+      "outer-fracture-belt",
+      "voidscar-wastes",
+      "riftspire-reaches",
+      "temporal-echo-badlands"
+    ],
+    "portals": [
+      {
+        "name": "Outer Discord Rift",
+        "connects": ["riftlands", "discord-core"],
+        "stability": "unstable"
+      },
+      {
+        "name": "Voidscar Breach",
+        "connects": ["riftlands", "the-void"],
+        "stability": "volatile"
+      },
+      {
+        "name": "Riftspire Anchor",
+        "connects": ["riftlands", "discord"],
+        "stability": "semi-stable"
+      }
+    ]
+  }
+}

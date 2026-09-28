@@ -1,0 +1,35 @@
+{
+  "id": "warshade-halls-travel",
+  "zone": "warshade-halls",
+
+  "nodes": [
+    "hall-entry",
+    "training-chamber",
+    "attunement-conduit",
+    "shadow-marshal-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "hall-entry",
+      "to": "training-chamber",
+      "type": "training-path"
+    },
+    {
+      "from": "training-chamber",
+      "to": "attunement-conduit",
+      "type": "shadow-transition",
+      "requirements": {
+        "anti-shadow-ward": true
+      }
+    },
+    {
+      "from": "attunement-conduit",
+      "to": "shadow-marshal-sanctum",
+      "type": "command-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

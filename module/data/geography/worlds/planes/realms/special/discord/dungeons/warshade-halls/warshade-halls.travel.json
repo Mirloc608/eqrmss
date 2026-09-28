@@ -1,0 +1,22 @@
+{
+  "id": "warshade-halls-travel",
+  "dungeon": "warshade-halls",
+
+  "nodes": [
+    "dungeon-entry",
+    "command-chambers",
+    "crucible-forges",
+    "shadow-prime-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "command-chambers", "type": "command-path" },
+    { "from": "command-chambers", "to": "crucible-forges", "type": "crucible-transition" },
+    {
+      "from": "crucible-forges",
+      "to": "shadow-prime-lair",
+      "type": "prime-ascent",
+      "requirements": { "discord-attunement": true }
+    }
+  ]
+}

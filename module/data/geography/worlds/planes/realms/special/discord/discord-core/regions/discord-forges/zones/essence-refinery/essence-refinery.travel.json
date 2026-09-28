@@ -1,0 +1,10 @@
+{
+  "id": "essence-refinery-travel",
+  "zone": "essence-refinery",
+
+  "nodes": ["entry", "essence-conduit", "refinery-core"],
+  "edges": [
+    { "from": "entry", "to": "essence-conduit", "type": "refinery-path" },
+    { "from": "essence-conduit", "to": "refinery-core", "type": "core-ascent" }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "temporal-maelstrom-travel",
+  "dungeon": "temporal-maelstrom",
+
+  "nodes": [
+    "dungeon-entry",
+    "chrono-rifts",
+    "echo-chambers",
+    "temporal-core",
+    "chrono-titan-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "chrono-rifts", "type": "rift-path" },
+    { "from": "chrono-rifts", "to": "echo-chambers", "type": "echo-transition" },
+    { "from": "echo-chambers", "to": "temporal-core", "type": "core-descent" },
+    {
+      "from": "temporal-core",
+      "to": "chrono-titan-lair",
+      "type": "titan-ascent",
+      "requirements": { "void-attunement": true }
+    }
+  ]
+}

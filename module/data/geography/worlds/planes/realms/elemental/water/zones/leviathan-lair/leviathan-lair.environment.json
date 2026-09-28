@@ -1,0 +1,44 @@
+{
+  "zone": "leviathan-lair",
+
+  "terrain": [
+    "abyssal-throne-pit",
+    "tidal-maw-caverns",
+    "pressure-ridge-bridges",
+    "leviathan-resting-chamber"
+  ],
+
+  "lighting": "abyssal-bioluminescence",
+
+  "hazards": [
+    {
+      "id": "tidal-maw-pull",
+      "dc": 30,
+      "effect": "forced_movement_and_massive_water_damage"
+    },
+    {
+      "id": "pressure-ridge-collapse",
+      "dc": 28,
+      "effect": "crushing_damage_and_stun"
+    },
+    {
+      "id": "leviathan-roar",
+      "dc": 29,
+      "effect": "fear_effect_and_stat_decay"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "The Leviathan’s movements reshape the lair; caverns expand or collapse unpredictably."
+  },
+
+  "environmentTags": [
+    "water",
+    "abyss",
+    "leviathan",
+    "pressure",
+    "raid"
+  ]
+}

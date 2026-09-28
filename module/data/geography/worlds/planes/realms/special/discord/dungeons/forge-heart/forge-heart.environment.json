@@ -1,0 +1,39 @@
+{
+  "dungeon": "forge-heart",
+
+  "levels": [
+    {
+      "id": "outer-furnaces",
+      "name": "Outer Furnaces",
+      "description": "Molten channels and corruption vats line the outer ring of the Forge Heart.",
+      "hazards": [
+        { "id": "furnace-eruption", "dc": 34, "effect": "damage_and_knockback" },
+        { "id": "corruption-surge", "dc": 35, "effect": "stat_decay_and_dot" }
+      ]
+    },
+    {
+      "id": "assembly-lines",
+      "name": "Assembly Lines",
+      "description": "Industrial platforms where constructs are shaped and armed.",
+      "hazards": [
+        { "id": "assembly-collapse", "dc": 36, "effect": "forced_movement_and_stun" }
+      ]
+    },
+    {
+      "id": "forge-core",
+      "name": "Forge Core",
+      "description": "The central chamber of the Forge Heart. The Forge Core Titan resides here.",
+      "hazards": [
+        { "id": "core-overload", "dc": 38, "effect": "massive_damage" },
+        { "id": "discord-backlash", "dc": 37, "effect": "fear_and_dot" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "forge",
+    "industrial",
+    "corruption",
+    "discord"
+  ]
+}

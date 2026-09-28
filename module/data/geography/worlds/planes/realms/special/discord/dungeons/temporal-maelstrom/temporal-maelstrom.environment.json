@@ -1,0 +1,37 @@
+{
+  "dungeon": "temporal-maelstrom",
+
+  "levels": [
+    {
+      "id": "chrono-rifts",
+      "name": "Chrono Rifts",
+      "description": "Caverns where time snaps forward and backward.",
+      "hazards": [
+        { "id": "time-snap", "dc": 35, "effect": "forced_movement_and_damage" }
+      ]
+    },
+    {
+      "id": "echo-chambers",
+      "name": "Echo Chambers",
+      "description": "Halls filled with repeating echoes of past battles.",
+      "hazards": [
+        { "id": "echo-collapse", "dc": 36, "effect": "fear_and_dot" }
+      ]
+    },
+    {
+      "id": "temporal-core",
+      "name": "Temporal Core",
+      "description": "The heart of the maelstrom, where timelines collapse into singularity.",
+      "hazards": [
+        { "id": "chrono-surge", "dc": 37, "effect": "initiative_loss_and_stun" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "time",
+    "paradox",
+    "echo",
+    "void"
+  ]
+}

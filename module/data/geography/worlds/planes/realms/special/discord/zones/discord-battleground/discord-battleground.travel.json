@@ -1,0 +1,35 @@
+{
+  "id": "discord-battleground-travel",
+  "zone": "discord-battleground",
+
+  "nodes": [
+    "warfront-entry",
+    "shadow-rift",
+    "discord-scar",
+    "warmaster-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "warfront-entry",
+      "to": "shadow-rift",
+      "type": "shadow-path"
+    },
+    {
+      "from": "shadow-rift",
+      "to": "discord-scar",
+      "type": "discord-transition",
+      "requirements": {
+        "anti-corruption-ward": true
+      }
+    },
+    {
+      "from": "discord-scar",
+      "to": "warmaster-sanctum",
+      "type": "warfront-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

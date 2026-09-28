@@ -1,0 +1,24 @@
+{
+  "id": "resonance-hollow-travel",
+  "dungeon": "resonance-hollow",
+
+  "nodes": [
+    "dungeon-entry",
+    "echo-crystal-fields",
+    "identity-basins",
+    "reflection-hollows",
+    "echo-sovereign-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "echo-crystal-fields", "type": "crystal-path" },
+    { "from": "echo-crystal-fields", "to": "identity-basins", "type": "identity-transition" },
+    { "from": "identity-basins", "to": "reflection-hollows", "type": "reflection-descent" },
+    {
+      "from": "reflection-hollows",
+      "to": "echo-sovereign-lair",
+      "type": "sovereign-ascent",
+      "requirements": { "discord-attunement": true }
+    }
+  ]
+}

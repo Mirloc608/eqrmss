@@ -1,0 +1,26 @@
+{
+  "id": "fire-region-travel",
+  "plane": "fire",
+
+  "nodes": [
+    "region-entry",
+    "blazing-citadel",
+    "fire-cove",
+    "inferno-maw",
+    "magma-rivers",
+    "fire-sovereign-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "blazing-citadel", "type": "citadel-entry" },
+    { "from": "blazing-citadel", "to": "fire-cove", "type": "cove-transition" },
+    { "from": "fire-cove", "to": "inferno-maw", "type": "maw-descent" },
+    { "from": "inferno-maw", "to": "magma-rivers", "type": "river-ascent" },
+    {
+      "from": "magma-rivers",
+      "to": "fire-sovereign-throne",
+      "type": "throne-access",
+      "requirements": { "elemental-attunement": true }
+    }
+  ]
+}

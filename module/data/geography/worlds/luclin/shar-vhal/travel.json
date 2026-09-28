@@ -1,0 +1,25 @@
+{
+  "region": "shar-vahl",
+
+  "nodes": [
+    { "id": "royal-district", "name": "Royal District" },
+    { "id": "hunter’s-quarter", "name": "Hunter’s Quarter" },
+    { "id": "artisan-ward", "name": "Artisan Ward" },
+    { "id": "arcane-sanctum", "name": "Arcane Sanctum" },
+    { "id": "market-terraces", "name": "Market Terraces" },
+    { "id": "outer-ramparts", "name": "Outer Ramparts" }
+  ],
+
+  "edges": [
+    { "from": "royal-district", "to": "hunter’s-quarter", "method": "royal walkway" },
+    { "from": "hunter’s-quarter", "to": "artisan-ward", "method": "training path" },
+    { "from": "artisan-ward", "to": "market-terraces", "method": "guild street" },
+    { "from": "market-terraces", "to": "arcane-sanctum", "method": "sanctum ascent" },
+    { "from": "hunter’s-quarter", "to": "outer-ramparts", "method": "patrol trail" }
+  ],
+
+  "externalConnections": [
+    { "to": "shadeweavers-thicket", "method": "city gate" },
+    { "to": "vah-shir-homesteads", "method": "savanna road" }
+  ]
+}

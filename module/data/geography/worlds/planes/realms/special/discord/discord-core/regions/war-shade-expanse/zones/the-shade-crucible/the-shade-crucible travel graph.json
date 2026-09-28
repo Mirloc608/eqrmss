@@ -1,0 +1,35 @@
+{
+  "id": "the-shade-crucible-travel",
+  "zone": "the-shade-crucible",
+
+  "nodes": [
+    "crucible-entry",
+    "shadow-forge",
+    "corruption-vats",
+    "shade-lord-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "crucible-entry",
+      "to": "shadow-forge",
+      "type": "forge-path"
+    },
+    {
+      "from": "shadow-forge",
+      "to": "corruption-vats",
+      "type": "corruption-transition",
+      "requirements": {
+        "anti-corruption-ward": true
+      }
+    },
+    {
+      "from": "corruption-vats",
+      "to": "shade-lord-sanctum",
+      "type": "discord-core-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

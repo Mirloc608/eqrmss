@@ -1,0 +1,38 @@
+{
+  "dungeon": "shattered-expanse",
+
+  "levels": [
+    {
+      "id": "fracture-caverns",
+      "name": "Fracture Caverns",
+      "description": "Twisting caverns formed by collapsed shards. Dimensional cracks pulse with unstable energy.",
+      "hazards": [
+        { "id": "shardfall", "dc": 32, "effect": "damage_and_knockdown" },
+        { "id": "rift-snap", "dc": 33, "effect": "forced_movement" }
+      ]
+    },
+    {
+      "id": "echoing-depths",
+      "name": "Echoing Depths",
+      "description": "Shadowy tunnels where echoes of past battles manifest as hostile entities.",
+      "hazards": [
+        { "id": "echo-collapse", "dc": 34, "effect": "fear_and_dot" }
+      ]
+    },
+    {
+      "id": "void-pocket",
+      "name": "Void Pocket",
+      "description": "A dimensional pocket where void energy bleeds into Discord. Gravity shifts unpredictably.",
+      "hazards": [
+        { "id": "void-pulse", "dc": 35, "effect": "shadow_damage_and_fear" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "fracture",
+    "discord",
+    "void",
+    "shadow"
+  ]
+}

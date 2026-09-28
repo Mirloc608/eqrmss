@@ -1,0 +1,26 @@
+{
+  "id": "air-region-travel",
+  "plane": "air",
+
+  "nodes": [
+    "region-entry",
+    "cloudsong-gardens",
+    "skyreach-spires",
+    "stormvault",
+    "tempest-throne",
+    "air-sovereign-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "cloudsong-gardens", "type": "garden-path" },
+    { "from": "cloudsong-gardens", "to": "skyreach-spires", "type": "spire-ascent" },
+    { "from": "skyreach-spires", "to": "stormvault", "type": "vault-transition" },
+    { "from": "stormvault", "to": "tempest-throne", "type": "tempest-descent" },
+    {
+      "from": "tempest-throne",
+      "to": "air-sovereign-throne",
+      "type": "throne-access",
+      "requirements": { "elemental-attunement": true }
+    }
+  ]
+}

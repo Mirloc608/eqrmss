@@ -1,0 +1,44 @@
+{
+  "zone": "entropy-maw",
+
+  "terrain": [
+    "entropy-well",
+    "collapse-funnels",
+    "null-pressure-fields",
+    "void-shear-chambers"
+  ],
+
+  "lighting": "anti-radiance",
+
+  "hazards": [
+    {
+      "id": "entropy-shear",
+      "dc": 25,
+      "effect": "void_damage_and_stat_decay"
+    },
+    {
+      "id": "null-pressure-crush",
+      "dc": 24,
+      "effect": "force_damage_and_stun"
+    },
+    {
+      "id": "collapse-wave",
+      "dc": 23,
+      "effect": "knockback_and_temporal_displacement"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "Entropy flows unpredictably; pathways collapse and reform constantly."
+  },
+
+  "environmentTags": [
+    "entropy",
+    "collapse",
+    "void",
+    "cosmic",
+    "raid"
+  ]
+}

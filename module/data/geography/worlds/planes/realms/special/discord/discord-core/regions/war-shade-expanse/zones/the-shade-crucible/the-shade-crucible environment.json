@@ -1,0 +1,44 @@
+{
+  "zone": "the-shade-crucible",
+
+  "terrain": [
+    "shadow-forge-chambers",
+    "discord-ritual-platforms",
+    "warshade-birth-vats",
+    "corruption-conduits"
+  ],
+
+  "lighting": "crucible-glow",
+
+  "hazards": [
+    {
+      "id": "shadow-forge-eruption",
+      "dc": 31,
+      "effect": "shadow_damage_and_knockback"
+    },
+    {
+      "id": "corruption-conduit-overload",
+      "dc": 30,
+      "effect": "stat_decay_and_dot"
+    },
+    {
+      "id": "warshade-birth-surge",
+      "dc": 32,
+      "effect": "forced_movement_and_stun"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "War-Shades manifest directly from Crucible vats; corruption conduits pulse unpredictably."
+  },
+
+  "environmentTags": [
+    "discord",
+    "shadow",
+    "forge",
+    "corruption",
+    "war"
+  ]
+}

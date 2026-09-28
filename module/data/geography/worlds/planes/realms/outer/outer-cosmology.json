@@ -1,0 +1,55 @@
+{
+  "id": "outer-cosmology",
+  "realm": "outer",
+
+  "structure": {
+    "planes": [
+      "fear",
+      "hate",
+      "sky",
+      "valor",
+      "storms",
+      "justice",
+      "innovation",
+      "torment"
+    ]
+  },
+
+  "portals": [
+    {
+      "name": "Planar Tears",
+      "locations": [
+        "fear",
+        "hate",
+        "sky",
+        "valor",
+        "storms",
+        "justice",
+        "innovation",
+        "torment"
+      ],
+      "connects": ["planes", "norrath"]
+    },
+    {
+      "name": "Divine Anchors",
+      "locations": [
+        "valor",
+        "justice",
+        "storms"
+      ],
+      "connects": ["outer"]
+    },
+    {
+      "name": "Torment Rifts",
+      "locations": ["torment"],
+      "connects": ["outer", "discord"]
+    }
+  ],
+
+  "cosmicRules": {
+    "souls": "Outer Planes process mortal souls according to divine law.",
+    "magic": "Divine magic originates from Outer Planes.",
+    "alignment": "Each plane embodies a metaphysical concept or moral axis.",
+    "travel": "Access requires divine sanction, planar attunement, or breach events."
+  }
+}

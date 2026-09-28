@@ -1,0 +1,44 @@
+{
+  "zone": "skyreach-spires",
+
+  "terrain": [
+    "floating-wind-spires",
+    "skybridge-currents",
+    "aerial-plaza-platforms",
+    "windwell-chambers"
+  ],
+
+  "lighting": "sky-glow",
+
+  "hazards": [
+    {
+      "id": "wind-shear",
+      "dc": 26,
+      "effect": "air_damage_and_knockback"
+    },
+    {
+      "id": "skybridge-collapse",
+      "dc": 27,
+      "effect": "fall_damage_and_displacement"
+    },
+    {
+      "id": "pressure-gust",
+      "dc": 28,
+      "effect": "forced_movement_and_stun"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "medium",
+    "notes": "Wind currents shift constantly; skybridges may reorient or vanish with elemental flow."
+  },
+
+  "environmentTags": [
+    "air",
+    "wind",
+    "floating",
+    "sky",
+    "elemental"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "chains-of-eternity-travel",
+  "dungeon": "chains-of-eternity",
+
+  "nodes": [
+    "dungeon-entry",
+    "chain-bridges",
+    "anchor-pillars",
+    "eternity-locks",
+    "warden-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "chain-bridges", "type": "chain-path" },
+    { "from": "chain-bridges", "to": "anchor-pillars", "type": "anchor-transition" },
+    { "from": "anchor-pillars", "to": "eternity-locks", "type": "lock-descent" },
+    {
+      "from": "eternity-locks",
+      "to": "warden-lair",
+      "type": "warden-ascent",
+      "requirements": { "discord-attunement": true }
+    }
+  ]
+}

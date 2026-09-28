@@ -1,0 +1,35 @@
+{
+  "id": "stormvault-travel",
+  "zone": "stormvault",
+
+  "nodes": [
+    "vault-entry",
+    "cyclone-chamber",
+    "lightning-hall",
+    "sovereign-core"
+  ],
+
+  "edges": [
+    {
+      "from": "vault-entry",
+      "to": "cyclone-chamber",
+      "type": "wind-path"
+    },
+    {
+      "from": "cyclone-chamber",
+      "to": "lightning-hall",
+      "type": "storm-transition",
+      "requirements": {
+        "shock-resistance": true
+      }
+    },
+    {
+      "from": "lightning-hall",
+      "to": "sovereign-core",
+      "type": "tempest-ascent",
+      "requirements": {
+        "elemental-attunement-air": true
+      }
+    }
+  ]
+}

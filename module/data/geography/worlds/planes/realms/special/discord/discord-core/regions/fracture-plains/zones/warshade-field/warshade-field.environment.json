@@ -1,0 +1,31 @@
+{
+  "zone": "warshade-field",
+  "description": "The Warshade Field is a scarred battleground where shadow-formed trenches, broken earthworks, and smoke-choked ridges stretch as far as the eye can see. The ground is not simply dusty but layered with old conflict: weapons, armor, and lost banners were swallowed by the land and now rise as warped memorials. Long black grass bends in invisible currents, and every rise of the ground seems to carry the memory of a battle still being fought.",
+  "landscape": {
+    "summary": "A battlefield landscape of black grass plains, broken ridges, and trench-lines cut by the weight of endless conflict.",
+    "mountains": [
+      "A low ring of hillocks and shadowed ridges known as the Mourning Steps.",
+      "Black basalt outcrops where fallen banners and weapon fragments cling to the stone."
+    ],
+    "rivers": [
+      "The Mourning Run, a scar of dark water that follows old trench lines.",
+      "The Tainted Ditch, a shallow, ash-laced channel filled with old blood and discord runoff."
+    ],
+    "forests": [
+      "A few collapsed thornwoods survive on the far edges, their trunks bent by the weight of battle.",
+      "Burned scrub and blackened groves that still shiver with the memory of old charges."
+    ],
+    "notableFeatures": [
+      "Layered trenches and shattered embankments left by countless armies.",
+      "Cairns of fallen warriors, each one surrounded by unnatural silence.",
+      "Shadow pools in which the ghosts of old campaigns can be seen reflected."
+    ]
+  },
+  "terrain": ["shadow-battlefield", "rift-scarred-earth"],
+  "lighting": "shadow-war-glow",
+  "hazards": [
+    { "id": "shade-manifestation", "dc": 30, "effect": "fear_and_damage" }
+  ],
+  "travel": { "encounterDensity": "extreme", "restSafety": "none" },
+  "environmentTags": ["shadow", "war"]
+}

@@ -1,0 +1,45 @@
+{
+  "zone": "zebuxoruks-cell",
+
+  "terrain": [
+    "void-core-chamber",
+    "eternity-chain-nexus",
+    "temporal-stasis-field",
+    "null-binding-throne"
+  ],
+
+  "lighting": "void-core-darklight",
+
+  "hazards": [
+    {
+      "id": "void-core-pulse",
+      "dc": 29,
+      "effect": "void_damage_and_temporal-collapse"
+    },
+    {
+      "id": "stasis-feedback",
+      "dc": 28,
+      "effect": "initiative-loss_and_round-freeze"
+    },
+    {
+      "id": "null-binding-crush",
+      "dc": 30,
+      "effect": "stat_decay_and_force_damage"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "The Cell is a metaphysical lock; movement is restricted by temporal stasis and void pressure."
+  },
+
+  "environmentTags": [
+    "void",
+    "eternity",
+    "temporal",
+    "null",
+    "cosmic",
+    "raid"
+  ]
+}

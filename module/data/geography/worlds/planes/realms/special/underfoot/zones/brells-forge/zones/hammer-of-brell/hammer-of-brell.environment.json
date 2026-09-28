@@ -1,0 +1,44 @@
+{
+  "zone": "hammer-of-brell",
+
+  "terrain": [
+    "divine-anvil-platform",
+    "magma-heart-chamber",
+    "crystal-resonance-halls",
+    "forge-of-creation"
+  ],
+
+  "lighting": "divine-glow",
+
+  "hazards": [
+    {
+      "id": "divine-hammer-strike",
+      "dc": 23,
+      "effect": "massive-force-damage"
+    },
+    {
+      "id": "magma-heart-eruption",
+      "dc": 22,
+      "effect": "fire_damage_and_knockback"
+    },
+    {
+      "id": "crystal-resonance-overload",
+      "dc": 21,
+      "effect": "radiant_damage_and_stun"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "mythic",
+    "restSafety": "none",
+    "notes": "Divine hammer strikes may alter terrain, destroy platforms, or reshape pathways."
+  },
+
+  "environmentTags": [
+    "divine",
+    "forge",
+    "magma",
+    "crystal",
+    "raid-final"
+  ]
+}

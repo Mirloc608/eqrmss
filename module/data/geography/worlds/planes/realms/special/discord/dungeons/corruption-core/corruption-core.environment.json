@@ -1,0 +1,45 @@
+{
+  "dungeon": "corruption-core",
+
+  "levels": [
+    {
+      "id": "blight-furnaces",
+      "name": "Blight Furnaces",
+      "description": "Molten corruption channels and furnaces refine Discord energy.",
+      "hazards": [
+        { "id": "furnace-overflow", "dc": 35, "effect": "damage_and_dot" }
+      ]
+    },
+    {
+      "id": "corruption-warrens",
+      "name": "Corruption Warrens",
+      "description": "Twisting warrens where corruption‑born entities spawn.",
+      "hazards": [
+        { "id": "warren-collapse", "dc": 36, "effect": "forced_movement_and_stun" }
+      ]
+    },
+    {
+      "id": "essence-pits",
+      "name": "Discord Essence Pits",
+      "description": "Primary source of planar corruption, unstable and volatile.",
+      "hazards": [
+        { "id": "essence-surge", "dc": 37, "effect": "stat_decay_and_fear" }
+      ]
+    },
+    {
+      "id": "black-crucible",
+      "name": "The Black Crucible",
+      "description": "The ultimate corruption engine, pulsing with Discord energy.",
+      "hazards": [
+        { "id": "crucible-overload", "dc": 38, "effect": "massive_damage" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "corruption",
+    "forge",
+    "discord",
+    "industrial"
+  ]
+}

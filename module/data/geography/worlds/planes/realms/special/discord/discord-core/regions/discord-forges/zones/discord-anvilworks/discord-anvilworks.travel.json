@@ -1,0 +1,10 @@
+{
+  "id": "discord-anvilworks-travel",
+  "zone": "discord-anvilworks",
+
+  "nodes": ["entry", "resonance-anvil", "hammerworks"],
+  "edges": [
+    { "from": "entry", "to": "resonance-anvil", "type": "anvil-path" },
+    { "from": "resonance-anvil", "to": "hammerworks", "type": "forge-transition" }
+  ]
+}

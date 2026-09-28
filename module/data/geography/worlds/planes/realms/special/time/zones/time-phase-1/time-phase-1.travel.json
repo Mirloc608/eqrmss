@@ -1,0 +1,26 @@
+{
+  "id": "time-phase-1-travel",
+  "zone": "time-phase-1",
+
+  "nodes": [
+    "phase-1-entry",
+    "phase-1-halls",
+    "phase-1-core"
+  ],
+
+  "edges": [
+    {
+      "from": "phase-1-entry",
+      "to": "phase-1-halls",
+      "type": "temporal-shift"
+    },
+    {
+      "from": "phase-1-halls",
+      "to": "phase-1-core",
+      "type": "temporal-shift",
+      "requirements": {
+        "chronomanticAttunement": true
+      }
+    }
+  ]
+}

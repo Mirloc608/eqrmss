@@ -1,0 +1,38 @@
+{
+  "id": "rift-heart-travel-graph",
+  "region": "rift-heart",
+
+  "nodes": [
+    "temporal-fracture",
+    "void-breach",
+    "discordian-maelstrom",
+    "heart-of-the-rift"
+  ],
+
+  "edges": [
+    {
+      "from": "temporal-fracture",
+      "to": "void-breach",
+      "type": "time-shear-path",
+      "requirements": {
+        "temporal-stabilizer": true
+      }
+    },
+    {
+      "from": "void-breach",
+      "to": "discordian-maelstrom",
+      "type": "void-transition",
+      "requirements": {
+        "anti-void-ward": true
+      }
+    },
+    {
+      "from": "discordian-maelstrom",
+      "to": "heart-of-the-rift",
+      "type": "rift-core-descent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

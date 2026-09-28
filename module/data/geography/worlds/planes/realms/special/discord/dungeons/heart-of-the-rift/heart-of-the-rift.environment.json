@@ -1,0 +1,38 @@
+{
+  "dungeon": "heart-of-the-rift",
+
+  "levels": [
+    {
+      "id": "rift-chasms",
+      "name": "Rift Chasms",
+      "description": "Massive dimensional cracks filled with unstable energy.",
+      "hazards": [
+        { "id": "rift-collapse", "dc": 36, "effect": "massive_damage" },
+        { "id": "time-break", "dc": 34, "effect": "stun_and_dot" }
+      ]
+    },
+    {
+      "id": "void-storms",
+      "name": "Void Storms",
+      "description": "Storm chambers where void energy bleeds into Discord.",
+      "hazards": [
+        { "id": "void-storm", "dc": 35, "effect": "shadow_damage_and_fear" }
+      ]
+    },
+    {
+      "id": "temporal-collapse",
+      "name": "Temporal Collapse",
+      "description": "Temporal instability chambers where time loops violently.",
+      "hazards": [
+        { "id": "temporal-snap", "dc": 37, "effect": "forced_movement_and_damage" }
+      ]
+    }
+  ],
+
+  "environmentTags": [
+    "rift",
+    "void",
+    "temporal",
+    "discord"
+  ]
+}

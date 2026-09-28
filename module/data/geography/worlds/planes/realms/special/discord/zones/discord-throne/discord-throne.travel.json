@@ -1,0 +1,35 @@
+{
+  "id": "discord-throne-travel",
+  "zone": "discord-throne",
+
+  "nodes": [
+    "throne-entry",
+    "command-spire",
+    "shadow-platform",
+    "sovereign-sanctum"
+  ],
+
+  "edges": [
+    {
+      "from": "throne-entry",
+      "to": "command-spire",
+      "type": "command-path"
+    },
+    {
+      "from": "command-spire",
+      "to": "shadow-platform",
+      "type": "shadow-transition",
+      "requirements": {
+        "anti-shadow-ward": true
+      }
+    },
+    {
+      "from": "shadow-platform",
+      "to": "sovereign-sanctum",
+      "type": "throne-ascent",
+      "requirements": {
+        "discord-attunement": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "corruption-core-travel",
+  "dungeon": "corruption-core",
+
+  "nodes": [
+    "dungeon-entry",
+    "blight-furnaces",
+    "corruption-warrens",
+    "essence-pits",
+    "black-crucible",
+    "crucible-overlord-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "blight-furnaces", "type": "furnace-path" },
+    { "from": "blight-furnaces", "to": "corruption-warrens", "type": "warren-transition" },
+    { "from": "corruption-warrens", "to": "essence-pits", "type": "pit-descent" },
+    { "from": "essence-pits", "to": "black-crucible", "type": "crucible-ascent" },
+    {
+      "from": "black-crucible",
+      "to": "crucible-overlord-lair",
+      "type": "overlord-ascent",
+      "requirements": { "discord-attunement": true }
+    }
+  ]
+}

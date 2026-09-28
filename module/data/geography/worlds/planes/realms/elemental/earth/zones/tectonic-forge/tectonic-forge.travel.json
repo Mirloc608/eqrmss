@@ -1,0 +1,35 @@
+{
+  "id": "tectonic-forge-travel",
+  "zone": "tectonic-forge",
+
+  "nodes": [
+    "forge-entry",
+    "molten-furnace",
+    "pressure-vent",
+    "forge-heart"
+  ],
+
+  "edges": [
+    {
+      "from": "forge-entry",
+      "to": "molten-furnace",
+      "type": "stone-path"
+    },
+    {
+      "from": "molten-furnace",
+      "to": "pressure-vent",
+      "type": "molten-transition",
+      "requirements": {
+        "earth-attunement": true
+      }
+    },
+    {
+      "from": "pressure-vent",
+      "to": "forge-heart",
+      "type": "tectonic-core-path",
+      "requirements": {
+        "elemental-attunement-earth": true
+      }
+    }
+  ]
+}

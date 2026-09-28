@@ -1,0 +1,24 @@
+{
+  "id": "hate-region-travel",
+  "plane": "hate",
+
+  "nodes": [
+    "region-entry",
+    "spite-halls",
+    "anguish-courtyard",
+    "hate-castle",
+    "innoruuk-throne"
+  ],
+
+  "edges": [
+    { "from": "region-entry", "to": "spite-halls", "type": "spite-path" },
+    { "from": "spite-halls", "to": "anguish-courtyard", "type": "anguish-transition" },
+    { "from": "anguish-courtyard", "to": "hate-castle", "type": "fortress-ascent" },
+    {
+      "from": "hate-castle",
+      "to": "innoruuk-throne",
+      "type": "throne-descent",
+      "requirements": { "outer-attunement": true }
+    }
+  ]
+}

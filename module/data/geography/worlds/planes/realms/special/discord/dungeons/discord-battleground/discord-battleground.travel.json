@@ -1,0 +1,22 @@
+{
+  "id": "discord-battleground-travel",
+  "dungeon": "discord-battleground",
+
+  "nodes": [
+    "dungeon-entry",
+    "frontlines",
+    "siege-works",
+    "warfront-overlord-lair"
+  ],
+
+  "edges": [
+    { "from": "dungeon-entry", "to": "frontlines", "type": "battle-path" },
+    { "from": "frontlines", "to": "siege-works", "type": "siege-transition" },
+    {
+      "from": "siege-works",
+      "to": "warfront-overlord-lair",
+      "type": "overlord-ascent",
+      "requirements": { "discord-attunement": true }
+    }
+  ]
+}

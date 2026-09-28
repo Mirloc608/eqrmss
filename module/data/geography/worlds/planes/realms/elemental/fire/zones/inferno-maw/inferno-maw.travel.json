@@ -1,0 +1,35 @@
+{
+  "id": "inferno-maw-travel",
+  "zone": "inferno-maw",
+
+  "nodes": [
+    "lava-throat",
+    "firestorm-chasm",
+    "emberfall-bridge",
+    "maw-core"
+  ],
+
+  "edges": [
+    {
+      "from": "lava-throat",
+      "to": "firestorm-chasm",
+      "type": "molten-flow"
+    },
+    {
+      "from": "firestorm-chasm",
+      "to": "emberfall-bridge",
+      "type": "firestorm-transition",
+      "requirements": {
+        "heat-resistance": true
+      }
+    },
+    {
+      "from": "emberfall-bridge",
+      "to": "maw-core",
+      "type": "inferno-path",
+      "requirements": {
+        "elemental-attunement-fire": true
+      }
+    }
+  ]
+}

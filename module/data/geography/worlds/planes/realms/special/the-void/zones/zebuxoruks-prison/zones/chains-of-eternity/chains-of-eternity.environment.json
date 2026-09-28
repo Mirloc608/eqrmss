@@ -1,0 +1,44 @@
+{
+  "zone": "chains-of-eternity",
+
+  "terrain": [
+    "void-chain-bridges",
+    "temporal-anchor-pillars",
+    "eternity-lock-platforms",
+    "null-binding-chasms"
+  ],
+
+  "lighting": "eternity-glow",
+
+  "hazards": [
+    {
+      "id": "chain-snap",
+      "dc": 26,
+      "effect": "void_damage_and_knockback"
+    },
+    {
+      "id": "temporal-anchor-feedback",
+      "dc": 25,
+      "effect": "initiative-loss_and_temporal-stagger"
+    },
+    {
+      "id": "null-binding-pressure",
+      "dc": 27,
+      "effect": "stat_decay_and_force_damage"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "The chains shift unpredictably; pathways may collapse or reform as temporal anchors pulse."
+  },
+
+  "environmentTags": [
+    "chains",
+    "eternity",
+    "temporal",
+    "void",
+    "cosmic"
+  ]
+}

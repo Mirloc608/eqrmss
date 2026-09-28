@@ -1,0 +1,21 @@
+{
+  "id": "trial-chambers",
+  "key": "trial-chambers",
+  "name": "Trial Chambers",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "justice",
+
+  "description": "The Trial Chambers are where mortals face divine tests. Each chamber manifests a trial of strength, wisdom, or resolve.",
+
+  "hazards": [
+    { "id": "trial-overload", "dc": 37, "effect": "damage_and_knockback" }
+  ],
+
+  "encounters": [
+    { "creature": "Trial Guardian", "level": 97 },
+    { "creature": "Judgment Horror", "level": 98 }
+  ],
+
+  "tags": ["justice", "trial", "outer"]
+}

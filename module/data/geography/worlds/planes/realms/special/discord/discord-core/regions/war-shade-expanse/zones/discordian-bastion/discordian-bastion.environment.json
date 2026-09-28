@@ -1,0 +1,44 @@
+{
+  "zone": "discordian-bastion",
+
+  "terrain": [
+    "muramite-command-fortress",
+    "discord-forged-barricades",
+    "warshade-drill-yards",
+    "shadow-infused-halls"
+  ],
+
+  "lighting": "discord-furnace-glow",
+
+  "hazards": [
+    {
+      "id": "command-shockwave",
+      "dc": 30,
+      "effect": "forced_movement_and_stun"
+    },
+    {
+      "id": "discord-forge-vent",
+      "dc": 29,
+      "effect": "corruption_damage_and_dot"
+    },
+    {
+      "id": "warshade-overmanifestation",
+      "dc": 31,
+      "effect": "shadow_damage_and_fear"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "extreme",
+    "restSafety": "none",
+    "notes": "Muramite patrols move in coordinated formations; War-Shades manifest unpredictably in drill yards."
+  },
+
+  "environmentTags": [
+    "discord",
+    "muramite",
+    "fortress",
+    "shadow",
+    "war"
+  ]
+}

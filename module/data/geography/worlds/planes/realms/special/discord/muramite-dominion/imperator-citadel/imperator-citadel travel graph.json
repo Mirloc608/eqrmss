@@ -1,0 +1,38 @@
+{
+  "id": "imperator-citadel-travel",
+  "region": "imperator-citadel",
+
+  "nodes": [
+    "citadel-approach",
+    "imperator-hall",
+    "dominion-sanctum",
+    "throne-of-command"
+  ],
+
+  "edges": [
+    {
+      "from": "citadel-approach",
+      "to": "imperator-hall",
+      "type": "citadel-path",
+      "requirements": {
+        "dominion-clearance": true
+      }
+    },
+    {
+      "from": "imperator-hall",
+      "to": "dominion-sanctum",
+      "type": "hall-transition",
+      "requirements": {
+        "imperator-sigil": true
+      }
+    },
+    {
+      "from": "dominion-sanctum",
+      "to": "throne-of-command",
+      "type": "command-ascent",
+      "requirements": {
+        "throne-attunement": true
+      }
+    }
+  ]
+}

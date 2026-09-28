@@ -1,0 +1,10 @@
+{
+  "id": "the-grand-foundry-travel",
+  "zone": "the-grand-foundry",
+
+  "nodes": ["entry", "assembly-platform", "foundry-core"],
+  "edges": [
+    { "from": "entry", "to": "assembly-platform", "type": "assembly-path" },
+    { "from": "assembly-platform", "to": "foundry-core", "type": "core-ascent" }
+  ]
+}

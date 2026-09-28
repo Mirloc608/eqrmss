@@ -1,0 +1,28 @@
+{
+  "id": "hate-castle",
+  "key": "hate-castle",
+  "name": "Hate Castle",
+  "type": "outer-zone",
+  "realm": "outer",
+  "plane": "hate",
+
+  "description": "Innoruuk’s fortress of spite, towering walls echo with divine corruption. The castle is the seat of Hate’s dominion.",
+
+  "hazards": [
+    { "id": "hate-surge", "dc": 37, "effect": "fear_and_confusion" },
+    { "id": "corruption-wave", "dc": 38, "effect": "stat_decay_and_dot" }
+  ],
+
+  "encounters": [
+    { "creature": "Hate Knight", "level": 97 },
+    { "creature": "Corruption Wraith", "level": 98 }
+  ],
+
+  "boss": {
+    "name": "Innoruuk, Lord of Hate",
+    "level": 100,
+    "role": "boss"
+  },
+
+  "tags": ["hate", "fortress", "outer"]
+}
