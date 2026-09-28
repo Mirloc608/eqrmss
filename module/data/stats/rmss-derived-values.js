@@ -53,7 +53,7 @@ export function calculateArmorAndDefenses(actorData) {
     const quPenalty = Number(combat.penalties?.quickness ?? combat.quPenalty ?? 0);
     
     // Quickness Bonus derived from engine Qu or base stat bonus mapping
-    const baseQUBonus = Math.floor(((stats.Qu ?? 50) - 50) / 5); // Standard RMSS stat bonus formula approximation
+    const baseQUBonus = Math.floor(((stats.QU ?? stats.Qu ?? 50) - 50) / 5);
     const quicknessBonus = baseQUBonus - quPenalty;
 
     // Additional DB components
