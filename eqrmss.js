@@ -101,7 +101,7 @@ async function loadModules() {
     ClassModule = await tryImport(['./module/data/loaders/class-loader.js']);
     SpellModule = await tryImport(['./module/data/loaders/spell-loader.js']);
     RaceModule = await tryImport(['./module/data/loaders/race-loader.js']);
-    SkillModule = await tryImport(['./module/data/loaders/skill-loader.js']);
+    SkillModule = await tryImport(['./module/data/skills/skill-loader.js', './module/data/loaders/skill-loader.js']);
     AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
     ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
     SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
