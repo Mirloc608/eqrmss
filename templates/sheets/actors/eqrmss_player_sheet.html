@@ -9,21 +9,22 @@
       <div class="combat-defense-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
         <div class="panel">
           <h3>Armor &amp; Defense</h3>
-          <div class="field-row"><label>Armor Type:</label> <span>{{system.defense.armorType}}</span></div>
-          <div class="field-row"><label>MMP / Penalties:</label> <span>{{system.defense.mmp}}</span></div>
-          <div class="field-row"><label>Quickness Bonus:</label> <span>{{system.defense.quBonus}}</span></div>
-          <div class="field-row"><label>Adrenal Defense:</label> <span>{{system.defense.adrenal}}</span></div>
-          <div class="field-row"><label>Total DB:</label> <span>{{system.defense.totalDB}}</span></div>
+           <div class="sheet-subinfo" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 25px; font-size: 0.85rem; color: #ccc;">
+           <div style="display: flex; justify-content: space-between;"><strong>Armor Type:</strong> <span>{{system.defense.armorType}}</span></div>
+           <div style="display: flex; justify-content: space-between;"><strong>MMP / Penalties:</strong> <span>{{system.defense.mmp}}</span></div>
+           <div style="display: flex; justify-content: space-between;"><strong>Quickness Bonus:</strong> <span>{{system.defense.quBonus}}</span></div>
+           <div style="display: flex; justify-content: space-between;"><strong>Adrenal Defense:</strong> <span>{{system.defense.adrenal}}</span></div>
+           <div style="display: flex; justify-content: space-between;"><strong>Total DB:</strong> <span>{{derived.resistance.disease}}</span></div>
         </div>
-
+       
         <div class="panel">
           <h3>Resistance Rolls</h3>
-          <div class="field-row"><label>Essence:</label> <span>{{derived.resistance.essence}}</span></div>
-          <div class="field-row"><label>Channeling:</label> <span>{{derived.resistance.channeling}}</span></div>
-          <div class="field-row"><label>Mentalism:</label> <span>{{derived.resistance.mentalism}}</span></div>
-          <div class="field-row"><label>Poison:</label> <span>{{derived.resistance.poison}}</span></div>
-          <div class="field-row"><label>Disease:</label> <span>{{derived.resistance.disease}}</span></div>
-        </div>
+           <div class="sheet-subinfo" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 25px; font-size: 0.85rem; color: #ccc;">
+           <div style="display: flex; justify-content: space-between;"><strong>Essence:</strong> <span>{{derived.resistance.essence}}</span></div>
+           <div style="display: flex; justify-content: space-between;"><strong>Channeling:</strong> <span>{{derived.resistance.channeling}}</span></div>
+           <div style="display: flex; justify-content: space-between;"><strong>Mentalism:</strong> <<span>{{derived.resistance.mentalism}}</span></div>
+           <div style="display: flex; justify-content: space-between;"><strong>Poison:</strong> <span>{{derived.resistance.poison}}</span></div>
+           <div style="display: flex; justify-content: space-between;"><strong>Disease:</strong> <span>{{derived.resistance.disease}}</span></div>
       </div>
 
       <div class="panel stats-panel">
