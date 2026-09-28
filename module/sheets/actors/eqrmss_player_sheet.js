@@ -408,7 +408,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         const ranks = actorSkill.ranks ?? sys.ranks ?? 0;
         const totalBonus = ranks * 5 + (sys.statBonus ?? 0) + (sys.profBonus ?? 0) + (sys.specialBonus ?? 0);
 
-        const roll = await new Roll("1d100").roll({ async: true });
+        const roll = await new Roll("1d100").evaluate();
         const total = roll.total + totalBonus;
         const target = 75;
         const success = total >= target;
