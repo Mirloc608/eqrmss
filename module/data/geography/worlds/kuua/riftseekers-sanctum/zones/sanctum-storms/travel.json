@@ -1,0 +1,53 @@
+{
+  "zone": "sanctum-storms",
+  "nodes": [
+    {
+      "id": "storm-bridge",
+      "type": "bridge",
+      "label": "Storm Bridge"
+    },
+    {
+      "id": "tempest-platform",
+      "type": "platform",
+      "label": "Tempest Platform"
+    },
+    {
+      "id": "storm-pylon",
+      "type": "pylon",
+      "label": "Storm Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "storm-bridge",
+      "to": "tempest-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Riftseeker tempestcallers and guardians."
+    },
+    {
+      "from": "storm-bridge",
+      "to": "storm-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord‑amplified storm zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "sanctum-core",
+      "type": "elemental",
+      "description": "Chamber of Storms connects back to the Sanctum Core via planar conduits."
+    },
+    {
+      "to": "sanctum-frost",
+      "type": "elemental",
+      "description": "Storm and Frost chambers share atmospheric and temporal conduits."
+    },
+    {
+      "to": "sanctum-flame",
+      "type": "elemental",
+      "description": "Storm and Flame chambers share energetic and combustion conduits."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-outer",
+  "nodes": [
+    {
+      "id": "outer-wall",
+      "type": "wall",
+      "label": "Outer Wall"
+    },
+    {
+      "id": "gatehouse",
+      "type": "gate",
+      "label": "Gatehouse"
+    },
+    {
+      "id": "siege-platform",
+      "type": "platform",
+      "label": "Siege Platform"
+    }
+  ],
+  "edges": [
+    {
+      "from": "outer-wall",
+      "to": "gatehouse",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols."
+    },
+    {
+      "from": "outer-wall",
+      "to": "siege-platform",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord siege zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-barracks",
+      "type": "forward",
+      "description": "Outer Wall leads inward to the Barracks."
+    },
+    {
+      "to": "dranik-scar-west",
+      "type": "back",
+      "description": "Outer Citadel connects back to Dranik’s Scar."
+    }
+  ]
+}

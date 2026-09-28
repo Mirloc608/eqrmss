@@ -1,0 +1,26 @@
+{
+  "zone": "proving-grounds-weaponry",
+  "hazards": [
+    {
+      "id": "weapon-disruption",
+      "name": "Weapon Disruption",
+      "severity": "extreme",
+      "trigger": "proximity-to-weapon-pylon",
+      "effects": [
+        "weapon-drop",
+        "arcane-damage",
+        "stun"
+      ]
+    },
+    {
+      "id": "platform-collapse",
+      "name": "Platform Collapse",
+      "severity": "high",
+      "trigger": "movement-on-tactical-platform",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

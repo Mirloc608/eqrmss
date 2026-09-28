@@ -1,0 +1,26 @@
+{
+  "zone": "causeway-upper-terrace",
+  "hazards": [
+    {
+      "id": "rift-surge",
+      "name": "Rift Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-fissure-rift",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "altar-collapse",
+      "name": "Altar Collapse",
+      "severity": "high",
+      "trigger": "movement-near-broken-altars",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

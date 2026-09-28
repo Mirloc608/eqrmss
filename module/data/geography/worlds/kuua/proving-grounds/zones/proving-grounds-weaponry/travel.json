@@ -1,0 +1,43 @@
+{
+  "zone": "proving-grounds-weaponry",
+  "nodes": [
+    {
+      "id": "weapon-lane",
+      "type": "lane",
+      "label": "Weapon Lane"
+    },
+    {
+      "id": "tactical-platform",
+      "type": "platform",
+      "label": "Tactical Platform"
+    },
+    {
+      "id": "weapon-pylon",
+      "type": "pylon",
+      "label": "Weapon Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "weapon-lane",
+      "to": "tactical-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols and resistance fighters."
+    },
+    {
+      "from": "weapon-lane",
+      "to": "weapon-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord weapon zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "proving-grounds",
+      "type": "back",
+      "description": "Trial of Weaponry connects back to the central Proving Grounds arena."
+    }
+  ]
+}

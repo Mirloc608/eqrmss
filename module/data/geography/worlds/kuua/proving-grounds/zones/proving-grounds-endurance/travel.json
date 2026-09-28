@@ -1,0 +1,43 @@
+{
+  "zone": "proving-grounds-endurance",
+  "nodes": [
+    {
+      "id": "attrition-corridor",
+      "type": "corridor",
+      "label": "Attrition Corridor"
+    },
+    {
+      "id": "endurance-pit",
+      "type": "pit",
+      "label": "Endurance Pit"
+    },
+    {
+      "id": "fatigue-pylon",
+      "type": "pylon",
+      "label": "Fatigue Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "attrition-corridor",
+      "to": "endurance-pit",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols and resistance fighters."
+    },
+    {
+      "from": "attrition-corridor",
+      "to": "fatigue-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord fatigue zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "proving-grounds",
+      "type": "back",
+      "description": "Trial of Endurance connects back to the central Proving Grounds arena."
+    }
+  ]
+}

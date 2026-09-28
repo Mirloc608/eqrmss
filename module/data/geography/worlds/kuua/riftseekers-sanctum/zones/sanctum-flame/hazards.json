@@ -1,0 +1,26 @@
+{
+  "zone": "sanctum-flame",
+  "hazards": [
+    {
+      "id": "lava-surge",
+      "name": "Lava Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-lava-channel",
+      "effects": [
+        "fire-damage",
+        "knockdown",
+        "burning"
+      ]
+    },
+    {
+      "id": "ember-collapse",
+      "name": "Ember Collapse",
+      "severity": "high",
+      "trigger": "movement-on-ember-platform",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

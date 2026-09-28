@@ -1,0 +1,43 @@
+{
+  "zone": "muramite-industrial-discord-reactor",
+  "nodes": [
+    {
+      "id": "reactor-core",
+      "type": "core",
+      "label": "Reactor Core"
+    },
+    {
+      "id": "containment-pylon",
+      "type": "pylon",
+      "label": "Containment Pylon"
+    },
+    {
+      "id": "discord-fissure",
+      "type": "fissure",
+      "label": "Discord Fissure"
+    }
+  ],
+  "edges": [
+    {
+      "from": "reactor-core",
+      "to": "containment-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path between core and containment pylons."
+    },
+    {
+      "from": "reactor-core",
+      "to": "discord-fissure",
+      "difficulty": "catastrophic",
+      "type": "arcane",
+      "description": "A perilous route into raw Discord fissures."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-industrial-refinery",
+      "type": "back",
+      "description": "Reactor connects back to the Refinery."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "zone": "muramite-citadel-sanctum",
+  "nodes": [
+    {
+      "id": "sanctum-dais",
+      "type": "dais",
+      "label": "Sanctum Dais"
+    },
+    {
+      "id": "banner-hall",
+      "type": "hall",
+      "label": "Banner Hall"
+    },
+    {
+      "id": "warded-archway",
+      "type": "archway",
+      "label": "Warded Archway"
+    }
+  ],
+  "edges": [
+    {
+      "from": "sanctum-dais",
+      "to": "banner-hall",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by officers moving between ceremonies and halls."
+    },
+    {
+      "from": "sanctum-dais",
+      "to": "warded-archway",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord ward zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "muramite-citadel-halls",
+      "type": "back",
+      "description": "Sanctum connects back to the Halls."
+    },
+    {
+      "to": "muramite-citadel-command",
+      "type": "forward",
+      "description": "Sanctum leads deeper into the Command Center."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "zone": "sanctum-core",
+  "nodes": [
+    {
+      "id": "crystal-conduit",
+      "type": "conduit",
+      "label": "Crystal Conduit"
+    },
+    {
+      "id": "rift-platform",
+      "type": "platform",
+      "label": "Rift Platform"
+    },
+    {
+      "id": "core-pylon",
+      "type": "pylon",
+      "label": "Core Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "crystal-conduit",
+      "to": "rift-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Riftseeker guardians."
+    },
+    {
+      "from": "crystal-conduit",
+      "to": "core-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into planar stabilization zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "sanctum-flame",
+      "type": "elemental"
+    },
+    {
+      "to": "sanctum-frost",
+      "type": "elemental"
+    },
+    {
+      "to": "sanctum-storms",
+      "type": "elemental"
+    },
+    {
+      "to": "sanctum-rift-heart",
+      "type": "rift"
+    }
+  ]
+}

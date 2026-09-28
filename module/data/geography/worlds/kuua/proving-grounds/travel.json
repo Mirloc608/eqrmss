@@ -1,0 +1,38 @@
+{
+  "id": "proving-grounds-region-travel",
+  "region": "proving-grounds-region",
+
+  "nodes": [
+    "proving-grounds",
+    "proving-grounds-fear",
+    "proving-grounds-hate",
+    "proving-grounds-endurance",
+    "proving-grounds-weaponry",
+    "proving-grounds-specialization",
+    "proving-grounds-efficiency",
+    "proving-grounds-adaptation"
+  ],
+
+  "edges": [
+    { "from": "proving-grounds", "to": "proving-grounds-fear", "difficulty": "moderate", "type": "internal" },
+    { "from": "proving-grounds", "to": "proving-grounds-hate", "difficulty": "moderate", "type": "internal" },
+    { "from": "proving-grounds", "to": "proving-grounds-endurance", "difficulty": "moderate", "type": "internal" },
+    { "from": "proving-grounds", "to": "proving-grounds-weaponry", "difficulty": "moderate", "type": "internal" },
+    { "from": "proving-grounds", "to": "proving-grounds-specialization", "difficulty": "moderate", "type": "internal" },
+    { "from": "proving-grounds", "to": "proving-grounds-efficiency", "difficulty": "moderate", "type": "internal" },
+    { "from": "proving-grounds", "to": "proving-grounds-adaptation", "difficulty": "moderate", "type": "internal" }
+  ],
+
+  "region_links": [
+    {
+      "to": "wall-of-slaughter-region",
+      "type": "back",
+      "description": "Proving Grounds Region connects back to the Wall of Slaughter warfront."
+    },
+    {
+      "to": "muramite-citadel-region",
+      "type": "forward",
+      "description": "Proving Grounds Region leads forward into the Muramite Citadel Complex."
+    }
+  ]
+}

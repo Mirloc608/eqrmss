@@ -1,0 +1,45 @@
+{
+  "id": "muramite-industrial-territories-travel",
+  "region": "muramite-industrial-territories",
+
+  "nodes": [
+    "muramite-industrial-yard",
+    "muramite-industrial-foundry",
+    "muramite-industrial-refinery",
+    "muramite-industrial-discord-reactor"
+  ],
+
+  "edges": [
+    {
+      "from": "muramite-industrial-yard",
+      "to": "muramite-industrial-foundry",
+      "type": "logistics-route",
+      "requirements": { "industrial-clearance": true }
+    },
+    {
+      "from": "muramite-industrial-foundry",
+      "to": "muramite-industrial-refinery",
+      "type": "material-transfer",
+      "requirements": { "refinery-pass": true }
+    },
+    {
+      "from": "muramite-industrial-refinery",
+      "to": "muramite-industrial-discord-reactor",
+      "type": "reactor-access",
+      "requirements": { "reactor-attunement": true }
+    }
+  ],
+
+  "region_links": [
+    {
+      "to": "muramite-citadel-complex",
+      "type": "supply-chain",
+      "description": "Industrial Territories supply the Citadel with weapons, armor, and arcane cores."
+    },
+    {
+      "to": "wall-of-slaughter",
+      "type": "warfront-logistics",
+      "description": "Materials are shipped directly to the Wall of Slaughter warfront."
+    }
+  ]
+}

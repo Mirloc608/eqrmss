@@ -1,0 +1,54 @@
+{
+  "id": "eqrmss-region-ruined-city-of-dranik-travel",
+  "key": "ruined_city_of_dranik-travel",
+  "name": "Ruined City of Dranik Travel",
+  "type": "region-travel",
+
+  "summary": "Travel through the Ruined City of Dranik is hazardous due to Discord ruptures, collapsed structures, Muramite patrols, and temporal anomalies.",
+
+  "nodes": [
+    { "id": "dranik_causeway", "name": "Dranik Causeway", "type": "subregion" },
+    { "id": "dranik_citadel", "name": "Dranik Citadel", "type": "subregion" },
+    { "id": "dranik_lower_wards", "name": "Lower Wards", "type": "subregion" },
+    { "id": "dranik_arcane_anchor", "name": "Arcane Anchor", "type": "subregion" }
+  ],
+
+  "edges": [
+    {
+      "from": "dranik_causeway",
+      "to": "dranik_citadel",
+      "mode": "planar_rift",
+      "difficulty": "high",
+      "description": "Discord ruptures create unstable shortcuts through collapsed structures."
+    },
+    {
+      "from": "dranik_lower_wards",
+      "to": "dranik_causeway",
+      "mode": "stealth-route",
+      "difficulty": "moderate",
+      "description": "Survivor‑maintained tunnels bypass Muramite patrols."
+    },
+    {
+      "from": "dranik_citadel",
+      "to": "dranik_arcane_anchor",
+      "mode": "temporal-fracture",
+      "difficulty": "extreme",
+      "description": "Temporal echoes distort traversal toward the Arcane Anchor."
+    }
+  ],
+
+  "external_links": [
+    {
+      "to": "eqrmss-region-dranik_scar",
+      "mode": "planar_rift",
+      "description": "Major Discord ruptures link the city directly to Dranik Scar."
+    }
+  ],
+
+  "travel_modes": [
+    "planar_rift",
+    "stealth-route",
+    "temporal-fracture",
+    "collapsed-terrain"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "zone": "causeway-upper-terrace",
+  "nodes": [
+    {
+      "id": "broken-altars",
+      "type": "altars",
+      "label": "Broken Altars"
+    },
+    {
+      "id": "upper-ledge",
+      "type": "ledge",
+      "label": "Upper Ledge"
+    },
+    {
+      "id": "fissure-rift",
+      "type": "fissure",
+      "label": "Fissure Rift"
+    }
+  ],
+  "edges": [
+    {
+      "from": "broken-altars",
+      "to": "upper-ledge",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols and resistance ambushers."
+    },
+    {
+      "from": "broken-altars",
+      "to": "fissure-rift",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord rift zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "causeway-lower-terrace",
+      "type": "back",
+      "description": "Upper Terrace descends to the Lower Terrace."
+    },
+    {
+      "to": "causeway-fissure-ridge",
+      "type": "forward",
+      "description": "Upper Terrace leads into the Fissure Ridge."
+    },
+    {
+      "to": "causeway-ruined-shrines",
+      "type": "side",
+      "description": "Upper Terrace connects laterally to the Ruined Shrines."
+    }
+  ]
+}

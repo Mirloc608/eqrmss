@@ -1,0 +1,48 @@
+{
+  "zone": "causeway-ruined-shrines",
+  "nodes": [
+    {
+      "id": "collapsed-sanctuary",
+      "type": "sanctuary",
+      "label": "Collapsed Sanctuary"
+    },
+    {
+      "id": "broken-altar-ring",
+      "type": "altars",
+      "label": "Broken Altar Ring"
+    },
+    {
+      "id": "discord-shrine-fissure",
+      "type": "fissure",
+      "label": "Discord Shrine Fissure"
+    }
+  ],
+  "edges": [
+    {
+      "from": "collapsed-sanctuary",
+      "to": "broken-altar-ring",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols and resistance ambushers."
+    },
+    {
+      "from": "collapsed-sanctuary",
+      "to": "discord-shrine-fissure",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord fissure zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "causeway-upper-terrace",
+      "type": "back",
+      "description": "Ruined Shrines connect back to the Upper Terrace."
+    },
+    {
+      "to": "causeway-fissure-ridge",
+      "type": "side",
+      "description": "Ruined Shrines connect laterally to the Fissure Ridge."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "zone": "sanctum-flame",
+  "nodes": [
+    {
+      "id": "lava-channel",
+      "type": "channel",
+      "label": "Lava Channel"
+    },
+    {
+      "id": "ember-platform",
+      "type": "platform",
+      "label": "Ember Platform"
+    },
+    {
+      "id": "flame-pylon",
+      "type": "pylon",
+      "label": "Flame Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "lava-channel",
+      "to": "ember-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Riftseeker pyromancers and guardians."
+    },
+    {
+      "from": "lava-channel",
+      "to": "flame-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord‑amplified fire zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "sanctum-core",
+      "type": "elemental",
+      "description": "Chamber of Flame connects back to the Sanctum Core via planar conduits."
+    },
+    {
+      "to": "sanctum-frost",
+      "type": "elemental",
+      "description": "Elemental pathways link Flame and Frost chambers through balanced planar flows."
+    }
+  ]
+}

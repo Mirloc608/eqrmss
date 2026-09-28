@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-industrial-foundry",
+  "hazards": [
+    {
+      "id": "arcane-flare",
+      "name": "Arcane Flare",
+      "severity": "extreme",
+      "trigger": "proximity-to-arcane-press",
+      "effects": [
+        "arcane-damage",
+        "random-displacement",
+        "stun"
+      ]
+    },
+    {
+      "id": "crucible-overflow",
+      "name": "Crucible Overflow",
+      "severity": "high",
+      "trigger": "interaction-with-crucible-floor",
+      "effects": [
+        "burn-damage",
+        "knockback"
+      ]
+    }
+  ]
+}

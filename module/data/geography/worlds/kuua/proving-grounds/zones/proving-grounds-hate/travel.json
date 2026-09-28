@@ -1,0 +1,43 @@
+{
+  "zone": "proving-grounds-hate",
+  "nodes": [
+    {
+      "id": "rage-chamber",
+      "type": "chamber",
+      "label": "Rage Chamber"
+    },
+    {
+      "id": "aggression-corridor",
+      "type": "corridor",
+      "label": "Aggression Corridor"
+    },
+    {
+      "id": "hate-pylon",
+      "type": "pylon",
+      "label": "Hate Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "rage-chamber",
+      "to": "aggression-corridor",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols and resistance fighters."
+    },
+    {
+      "from": "rage-chamber",
+      "to": "hate-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord hate zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "proving-grounds",
+      "type": "back",
+      "description": "Trial of Hate connects back to the central Proving Grounds arena."
+    }
+  ]
+}

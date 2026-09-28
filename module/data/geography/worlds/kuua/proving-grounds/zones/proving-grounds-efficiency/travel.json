@@ -1,0 +1,43 @@
+{
+  "zone": "proving-grounds-efficiency",
+  "nodes": [
+    {
+      "id": "precision-lane",
+      "type": "lane",
+      "label": "Precision Lane"
+    },
+    {
+      "id": "timed-platform",
+      "type": "platform",
+      "label": "Timed Platform"
+    },
+    {
+      "id": "efficiency-pylon",
+      "type": "pylon",
+      "label": "Efficiency Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "precision-lane",
+      "to": "timed-platform",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols and resistance fighters."
+    },
+    {
+      "from": "precision-lane",
+      "to": "efficiency-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord drain zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "proving-grounds",
+      "type": "back",
+      "description": "Trial of Efficiency connects back to the central Proving Grounds arena."
+    }
+  ]
+}

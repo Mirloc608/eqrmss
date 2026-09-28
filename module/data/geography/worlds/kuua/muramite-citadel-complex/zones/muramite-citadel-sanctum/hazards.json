@@ -1,0 +1,26 @@
+{
+  "zone": "muramite-citadel-sanctum",
+  "hazards": [
+    {
+      "id": "sanctum-ward-flare",
+      "name": "Sanctum Ward Flare",
+      "severity": "extreme",
+      "trigger": "proximity-to-warded-archway",
+      "effects": [
+        "arcane-damage",
+        "stun",
+        "random-displacement"
+      ]
+    },
+    {
+      "id": "banner-collapse",
+      "name": "Banner Collapse",
+      "severity": "high",
+      "trigger": "movement-in-banner-hall",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

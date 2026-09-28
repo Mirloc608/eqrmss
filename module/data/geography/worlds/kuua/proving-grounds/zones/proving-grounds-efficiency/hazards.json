@@ -1,0 +1,26 @@
+{
+  "zone": "proving-grounds-efficiency",
+  "hazards": [
+    {
+      "id": "efficiency-collapse",
+      "name": "Efficiency Collapse",
+      "severity": "extreme",
+      "trigger": "proximity-to-efficiency-pylon",
+      "effects": [
+        "arcane-damage",
+        "stamina-drain",
+        "random-displacement"
+      ]
+    },
+    {
+      "id": "timed-platform-drop",
+      "name": "Timed Platform Drop",
+      "severity": "high",
+      "trigger": "movement-on-timed-platform",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "zone": "proving-grounds-specialization",
+  "nodes": [
+    {
+      "id": "focus-chamber",
+      "type": "chamber",
+      "label": "Focus Chamber"
+    },
+    {
+      "id": "discipline-lane",
+      "type": "lane",
+      "label": "Discipline Lane"
+    },
+    {
+      "id": "focus-pylon",
+      "type": "pylon",
+      "label": "Focus Pylon"
+    }
+  ],
+  "edges": [
+    {
+      "from": "focus-chamber",
+      "to": "discipline-lane",
+      "difficulty": "moderate",
+      "type": "internal",
+      "description": "A route used by Muramite patrols and resistance fighters."
+    },
+    {
+      "from": "focus-chamber",
+      "to": "focus-pylon",
+      "difficulty": "high",
+      "type": "arcane",
+      "description": "A dangerous path into Discord focus zones."
+    }
+  ],
+  "zone_links": [
+    {
+      "to": "proving-grounds",
+      "type": "back",
+      "description": "Trial of Specialization connects back to the central Proving Grounds arena."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "zone": "proving-grounds-endurance",
+  "hazards": [
+    {
+      "id": "fatigue-surge",
+      "name": "Fatigue Surge",
+      "severity": "extreme",
+      "trigger": "proximity-to-fatigue-pylon",
+      "effects": [
+        "stamina-drain",
+        "arcane-damage",
+        "slow"
+      ]
+    },
+    {
+      "id": "attrition-collapse",
+      "name": "Attrition Collapse",
+      "severity": "high",
+      "trigger": "movement-in-attrition-corridor",
+      "effects": [
+        "fall-damage",
+        "immobilization"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "zone": "muramite-industrial-yard",
+  "scripts": [
+    {
+      "id": "yard-instability-cycle",
+      "name": "Yard Instability Cycle",
+      "trigger": "time",
+      "description": "Cycles yard activity between calm, overseer-heavy, and surge states."
+    },
+    {
+      "id": "slag-eruption-check",
+      "name": "Slag Eruption Check",
+      "trigger": "proximity-to-slag-dump",
+      "description": "Triggers slag eruption hazard."
+    }
+  ]
+}
