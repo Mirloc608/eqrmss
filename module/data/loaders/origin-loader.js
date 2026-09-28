@@ -26,7 +26,11 @@ const ORIGIN_FILES = {
   cities:    `${ORIGIN_ROOT}/cities.json`,
   deities:   `${ORIGIN_ROOT}/deities.json`,
   factions:  `${ORIGIN_ROOT}/factions.json`,
-  languages: `${ORIGIN_ROOT}/languages.json`
+  languages: `${ORIGIN_ROOT}/languages.json`,
+  continents: `${ORIGIN_ROOT}/origins/continents.json`,
+  regions:   `${ORIGIN_ROOT}/origins/regions.json`,
+  settlements: `${ORIGIN_ROOT}/origins/settlements.json`,
+  raceAvailability: `${ORIGIN_ROOT}/race_city_availability.json`
 };
 
 // ------------------------------------------------------------
@@ -128,25 +132,99 @@ export class OriginDataLoader {
   static async load() {
     console.log("EQRMSS | OriginDataLoader.load()");
 
-    const [cities, deities, factions, languages] = await Promise.all([
+    const [cities, deities, factions, languages, continents, regions, settlements] = await Promise.all([
       loadJSON(ORIGIN_FILES.cities, "cities"),
       loadJSON(ORIGIN_FILES.deities, "deities"),
       loadJSON(ORIGIN_FILES.factions, "factions"),
-      loadJSON(ORIGIN_FILES.languages, "languages")
+      loadJSON(ORIGIN_FILES.languages, "languages"),
+      loadJSON(ORIGIN_FILES.continents, "continents"),
+      loadJSON(ORIGIN_FILES.regions, "regions"),
+      loadJSON(ORIGIN_FILES.settlements, "settlements")
     ]);
+
+    // race_city_availability.json is a plain { raceName: [cityNames] } map, NOT a
+    // collection — load it raw. normalizeCollection would discard every entry
+    // because its Case 4 object-map branch filters out array values.
+    let raceAvailability = {};
+    try {
+      const raceResp = await fetch(ORIGIN_FILES.raceAvailability);
+      if (raceResp.ok) raceAvailability = await raceResp.json();
+      else console.warn(`EQRMSS | Origin data missing: ${ORIGIN_FILES.raceAvailability}`);
+    } catch (e) {
+      console.error("EQRMSS | Failed to load race availability", e);
+    }
 
     const origin = {
       cities,
       deities,
       factions,
-      languages
+      languages,
+      continents,
+      regions,
+      settlements,
+      raceAvailability: (raceAvailability && typeof raceAvailability === "object" && !Array.isArray(raceAvailability))
+        ? raceAvailability
+        : {}
+    };
+
+    // Build lookup maps for hierarchical navigation
+    origin.continentById = Object.fromEntries(continents.map(c => [c.id, c]));
+    origin.regionById = Object.fromEntries(regions.map(r => [r.id, r]));
+    origin.settlementById = Object.fromEntries(settlements.map(s => [s.id, s]));
+    origin.cityById = Object.fromEntries(cities.map(c => [c.id ?? c.name, c]));
+
+    // Helper: get regions for a continent
+    origin.getRegionsForContinent = (continentId) => {
+      return regions.filter(r => r.continent === continentId);
+    };
+
+    // Helper: get settlements for a region
+    origin.getSettlementsForRegion = (regionId) => {
+      return settlements.filter(s => s.parent === regionId);
+    };
+
+    // Helper: get available cities for a race
+    origin.getCitiesForRace = (raceName) => {
+      const allowed = origin.raceAvailability[raceName];
+      if (!allowed || allowed.length === 0) return cities;
+      return cities.filter(c => allowed.includes(c.name));
+    };
+
+    // Helper: get the full origin path for display
+    origin.getOriginPath = (originId) => {
+      const city = origin.cityById[originId];
+      if (city) {
+        return {
+          type: "city",
+          continent: city.system?.continent ?? "Unknown",
+          region: city.system?.region ?? city.name,
+          name: city.name,
+          data: city
+        };
+      }
+      const settlement = origin.settlementById[originId];
+      if (settlement) {
+        const region = origin.regionById[settlement.parent];
+        const continent = region ? origin.continentById[region.continent] : null;
+        return {
+          type: "settlement",
+          continent: continent?.name ?? "Unknown",
+          region: region?.name ?? "Unknown",
+          name: settlement.name,
+          data: settlement
+        };
+      }
+      return null;
     };
 
     console.log("EQRMSS | Origin data loaded", {
       cities: cities.length,
       deities: deities.length,
       factions: factions.length,
-      languages: languages.length
+      languages: languages.length,
+      continents: continents.length,
+      regions: regions.length,
+      settlements: settlements.length
     });
 
     return origin;

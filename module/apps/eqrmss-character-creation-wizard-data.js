@@ -85,6 +85,10 @@ export class EQRMSSCharacterCreationData {
     this.classes = [];
     this.cities = [];
     this.deities = [];
+    this.continents = [];
+    this.regions = [];
+    this.settlements = [];
+    this.raceAvailability = {};
 
         this.raceDefinitions = {};
         this.classDefinitions = {};
@@ -114,9 +118,31 @@ export class EQRMSSCharacterCreationData {
       this.#resolveList(CONFIG.EQRMSS.classes, game?.eqrmss?.classes)
     );
 
-    // Cities and Deities load from compendium packs
-    this.cities = await this.#loadPack("eqrmss.cities");
-    this.deities = await this.#loadPack("eqrmss.deities");
+    // Cities and Deities: prefer the origin data loader (game.eqrmss.origin),
+    // fall back to direct JSON fetch if the loader hasn't run yet.
+    const originData = game?.eqrmss?.origin;
+    if (originData?.cities?.length) {
+      this.cities = originData.cities;
+      this.deities = originData.deities ?? [];
+      this.continents = originData.continents ?? [];
+      this.regions = originData.regions ?? [];
+      this.settlements = originData.settlements ?? [];
+      this.raceAvailability = originData.raceAvailability ?? {};
+      // Expose helper functions
+      this.getRegionsForContinent = originData.getRegionsForContinent?.bind(originData);
+      this.getSettlementsForRegion = originData.getSettlementsForRegion?.bind(originData);
+      this.getCitiesForRace = originData.getCitiesForRace?.bind(originData);
+      this.getOriginPath = originData.getOriginPath?.bind(originData);
+    } else {
+      // Fallback: load directly from JSON
+      this.cities = await this.#loadJson("systems/eqrmss/module/data/origin/cities.json");
+      this.deities = await this.#loadJson("systems/eqrmss/module/data/origin/deities.json");
+      this.continents = await this.#loadJson("systems/eqrmss/module/data/origin/origins/continents.json");
+      this.regions = await this.#loadJson("systems/eqrmss/module/data/origin/origins/regions.json");
+      this.settlements = await this.#loadJson("systems/eqrmss/module/data/origin/origins/settlements.json");
+      const raceAvail = await this.#loadJson("systems/eqrmss/module/data/origin/race_city_availability.json");
+      this.raceAvailability = Array.isArray(raceAvail) ? raceAvail[0] ?? {} : raceAvail ?? {};
+    }
 
             // Definitions ARE the already-loaded documents; keep key→doc maps for
     // API compatibility instead of re-fetching the same JSON files.
@@ -142,29 +168,27 @@ export class EQRMSSCharacterCreationData {
   }
 
   // ------------------------------------------------------------
-  // COMPENDIA
+  // JSON DATA (cities, deities — canonical source, replaces compendia)
   // ------------------------------------------------------------
 
-  async #loadPack(packName) {
-    const pack = game.packs.get(packName);
-
-    if (!pack) {
-      console.warn(`EQRMSS | Missing compendium: ${packName}`);
-      return [];
-    }
-
+  async #loadJson(path) {
     try {
-      await pack.getIndex();
-      // Compendium index entries are stored with `_id`, while the wizard
-      // template uses the same `id` field as race/class JSON definitions.
-      // Normalize that boundary once so every selection has a usable value.
-      return Array.from(pack.index.values()).map(entry => ({
+      const response = await fetch(path);
+      if (!response.ok) {
+        console.warn(`EQRMSS | Missing data file: ${path}`);
+        return [];
+      }
+      const data = await response.json();
+      // Normalize `id` so every selection has a usable value, matching
+      // the same boundary the old compendium loader established.
+      const list = Array.isArray(data) ? data : [data];
+      return list.map(entry => ({
         ...entry,
-        id: entry.id ?? entry._id
+        id: entry.id ?? entry._id ?? entry.name
       }));
     }
     catch (error) {
-      console.error(`EQRMSS | Failed loading ${packName}`, error);
+      console.error(`EQRMSS | Failed loading ${path}`, error);
       return [];
     }
   }
@@ -386,6 +410,10 @@ export class EQRMSSCharacterCreationData {
       classes: filterByExpansionGate(this.classes, "isClassUnlocked"),
       cities: this.cities,
       deities: this.deities,
+      continents: this.continents,
+      regions: this.regions,
+      settlements: this.settlements,
+      raceAvailability: this.raceAvailability,
       raceDefinitions: this.raceDefinitions,
       classDefinitions: this.classDefinitions,
       rmssPriorities: this.rmssPriorities

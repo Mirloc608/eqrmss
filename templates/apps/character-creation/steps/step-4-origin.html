@@ -74,18 +74,45 @@
     </div>
 
     {{!-- ===================== --}}
-    {{!-- City Summary          --}}
+    {{!-- Origin Summary        --}}
     {{!-- ===================== --}}
     <div class="eqrmss-cc-summary-card">
-      <h3>Starting City</h3>
+      <h3>Origin</h3>
 
-      {{#with (lookup ../cities wizard.selection.cityId)}}
-        <p><strong>{{name}}</strong></p>
+      {{#if wizard.selection.originId}}
+        {{#with (lookup ../settlements wizard.selection.originId)}}
+          <p><strong>{{name}}</strong> ({{type}})</p>
+          <p class="eqrmss-cc-summary-desc">Settlement</p>
+        {{/with}}
+        {{#with (lookup ../cities wizard.selection.originId)}}
+          <p><strong>{{name}}</strong></p>
+          {{#if system.description}}
+            <p class="eqrmss-cc-summary-desc">{{system.description}}</p>
+          {{/if}}
+        {{/with}}
+      {{else}}
+        {{#with (lookup ../cities wizard.selection.cityId)}}
+          <p><strong>{{name}}</strong></p>
 
-        {{#if description}}
-          <p class="eqrmss-cc-summary-desc">{{description}}</p>
-        {{/if}}
-      {{/with}}
+          {{#if description}}
+            <p class="eqrmss-cc-summary-desc">{{description}}</p>
+          {{/if}}
+          {{#if system.description}}
+            <p class="eqrmss-cc-summary-desc">{{system.description}}</p>
+          {{/if}}
+        {{/with}}
+      {{/if}}
+
+      {{#if wizard.selection.continentId}}
+        {{#with (lookup ../continents wizard.selection.continentId)}}
+          <p><em>Continent:</em> {{name}}</p>
+        {{/with}}
+      {{/if}}
+      {{#if wizard.selection.regionId}}
+        {{#with (lookup ../regions wizard.selection.regionId)}}
+          <p><em>Region:</em> {{name}}</p>
+        {{/with}}
+      {{/if}}
     </div>
 
     {{!-- ===================== --}}

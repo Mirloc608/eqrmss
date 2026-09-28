@@ -34,11 +34,15 @@ export class EQRMSSCharacterCreationPreview {
         selection.classId
       );
 
+    const originId = selection.originId || selection.cityId;
     const city =
       this.#find(
         this.context.cities,
-        selection.cityId
+        originId
       );
+
+    // Also check settlements for hierarchical origin
+    const settlement = (this.context.settlements ?? []).find(s => s.id === originId);
 
     const deity =
       this.#find(
@@ -93,7 +97,8 @@ export class EQRMSSCharacterCreationPreview {
 
       race,
       class: cls,
-      city,
+      city: city ?? settlement,
+      settlement,
       deity,
 
       compatibility,

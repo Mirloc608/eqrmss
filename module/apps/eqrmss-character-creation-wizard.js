@@ -24,6 +24,9 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       raceId: "",
       classId: "",
       cityId: "",
+      continentId: "",
+      regionId: "",
+      originId: "",
       deityId: "",
       ownerUserId: game.userId,
       nationality: "",
@@ -201,9 +204,67 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
 
     const remainingPoints = (selection.tempPointPool ?? 655) - totalSpent;
 
+    // Hierarchical origin data: filter regions by continent, origins by region and race
+    const continents = dataContext.continents ?? [];
+    const regions = dataContext.regions ?? [];
+    const settlements = dataContext.settlements ?? [];
+    const cities = dataContext.cities ?? [];
+    const raceAvailability = dataContext.raceAvailability ?? {};
+
+    // Filter regions by selected continent
+    const filteredRegions = selection.continentId
+      ? regions.filter(r => r.continent === selection.continentId)
+      : regions;
+
+    // Get race name for city filtering
+    const raceName = selectedRace?.name ?? "";
+    const allowedCityNames = raceAvailability[raceName];
+
+    // Filter cities by race (if mapping exists) and by region/continent
+    let filteredCities = cities;
+    if (allowedCityNames && allowedCityNames.length > 0) {
+      filteredCities = filteredCities.filter(c => allowedCityNames.includes(c.name));
+    }
+    // Further filter by continent if selected (match city.system.continent)
+    if (selection.continentId) {
+      const continentName = continents.find(c => c.id === selection.continentId)?.name;
+      if (continentName) {
+        filteredCities = filteredCities.filter(c => {
+          const cityContinent = c.system?.continent ?? "";
+          return cityContinent.toLowerCase() === continentName.toLowerCase();
+        });
+      }
+    }
+
+    // Filter settlements by selected region
+    const filteredSettlements = selection.regionId
+      ? settlements.filter(s => s.parent === selection.regionId)
+      : [];
+
+    // Combine cities and settlements for the origin dropdown
+    // Cities are marked with (City), settlements with their type
+    const originOptions = [
+      ...filteredCities.map(c => ({
+        id: c.id ?? c.name,
+        name: `${c.name} (City)`,
+        type: "city",
+        data: c
+      })),
+      ...filteredSettlements.map(s => ({
+        id: s.id,
+        name: `${s.name} (${s.type})`,
+        type: s.type,
+        data: s
+      }))
+    ];
+
     return {
       ...context,
       ...dataContext,
+      filteredRegions,
+      filteredCities,
+      filteredSettlements,
+      originOptions,
       wizard: {
         step: this.currentStep,
         selection,
@@ -269,6 +330,23 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
           const race = this.dataService?.getContext().races.find(item => (item.id ?? item._id) === input.value);
           const cls = this.dataService?.getContext().classes.find(item => (item.id ?? item._id) === this.characterData.classId);
           if (race && cls && !checkRaceClassCompatibility(race, cls)) this.characterData.classId = "";
+        }
+
+        // Hierarchical origin selection: cascading dropdowns
+        if (key === "continentId") {
+          // Changing continent clears region and origin selections
+          this.characterData.regionId = "";
+          this.characterData.originId = "";
+          this.characterData.cityId = "";
+        }
+        if (key === "regionId") {
+          // Changing region clears origin selection
+          this.characterData.originId = "";
+          this.characterData.cityId = "";
+        }
+        if (key === "originId") {
+          // Origin selection sets cityId for backward compatibility
+          this.characterData.cityId = input.value;
         }
 
         if (input.tagName === "SELECT" || input.type === "checkbox") this.render();

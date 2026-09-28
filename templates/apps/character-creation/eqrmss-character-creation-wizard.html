@@ -222,18 +222,69 @@
     <div class="eqrmss-step eqrmss-step-origin">
 
       <h3>Origin</h3>
+      <p class="hint">Choose your character's homeland. Select a continent, then a region, then your specific home settlement or city.</p>
 
       <div class="form-group">
-        <label>Starting City</label>
+        <label>Continent</label>
+        <select data-field="continentId">
+          <option value="">Select Continent</option>
+          {{#each continents}}
+            <option value="{{id}}" {{#if (eq ../wizard.selection.continentId id)}}selected{{/if}}>
+              {{name}}
+            </option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Region</label>
+        <select data-field="regionId" {{#unless wizard.selection.continentId}}disabled{{/unless}}>
+          <option value="">Select Region</option>
+          {{#each filteredRegions}}
+            <option value="{{id}}" {{#if (eq ../wizard.selection.regionId id)}}selected{{/if}}>
+              {{name}} ({{type}})
+            </option>
+          {{/each}}
+        </select>
+        {{#unless wizard.selection.continentId}}
+          <p class="hint">Select a continent first to see its regions.</p>
+        {{/unless}}
+      </div>
+
+      <div class="form-group">
+        <label>Home Settlement / City</label>
+        <select data-field="originId" {{#unless wizard.selection.regionId}}disabled{{/unless}}>
+          <option value="">Select Home</option>
+          {{#each originOptions}}
+            <option value="{{id}}" {{#if (eq ../wizard.selection.originId id)}}selected{{/if}}>
+              {{name}}
+            </option>
+          {{/each}}
+        </select>
+        {{#unless wizard.selection.regionId}}
+          <p class="hint">Select a region to see available settlements and cities.</p>
+        {{/unless}}
+        {{#if wizard.selection.regionId}}
+          {{#unless originOptions.length}}
+            <p class="hint">No settlements or cities found for this region. Try another region.</p>
+          {{/unless}}
+        {{/if}}
+      </div>
+
+      {{!-- Fallback: direct city selection (for races without region mapping) --}}
+      {{#unless wizard.selection.continentId}}
+      <div class="form-group">
+        <label>Or select a Starting City directly</label>
         <select data-field="cityId">
           <option value="">Select City</option>
-          {{#each cities}}
+          {{#each filteredCities}}
             <option value="{{id}}" {{#if (eq ../wizard.selection.cityId id)}}selected{{/if}}>
               {{name}}
             </option>
           {{/each}}
         </select>
       </div>
+      {{/unless}}
 
       <div class="form-group">
         <label>Deity</label>

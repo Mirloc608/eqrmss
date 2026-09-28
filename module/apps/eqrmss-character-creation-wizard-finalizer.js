@@ -15,20 +15,33 @@ export class EQRMSSCharacterCreationWizardFinalizer {
   async finalize() {
     const race = this.#resolve(this.context.races, this.state.raceId);
     const cls = this.#resolve(this.context.classes, this.state.classId);
-    const city = this.#resolve(this.context.cities, this.state.cityId);
     const deity = this.#resolve(this.context.deities, this.state.deityId);
+
+    // Resolve origin: prefer hierarchical originId, fall back to legacy cityId
+    // Origin can be a city (with full game data) or a settlement (smaller location)
+    const originId = this.state.originId || this.state.cityId;
+    let city = this.#resolve(this.context.cities, originId);
+    let settlement = null;
+
+    if (!city) {
+      // Try settlements
+      settlement = (this.context.settlements ?? []).find(s => s.id === originId);
+    }
 
     if (!race || !cls) {
       ui.notifications.error("Race or profession data is missing — cannot finalize character.");
       return null;
     }
 
-    if (!city) {
-      ui.notifications.error("Starting city data is missing — cannot finalize character.");
+    if (!city && !settlement) {
+      ui.notifications.error("Origin data is missing — cannot finalize character.");
       return null;
     }
 
-    const actorData = this.#buildActorData(race, cls, city, deity);
+    // For settlements, find the parent city for game mechanics (or use settlement data)
+    // For now, use the settlement name as home_town and pass settlement data
+    const originData = city ?? settlement;
+    const actorData = this.#buildActorData(race, cls, originData, deity, settlement);
 
     try {
       const actor = await Actor.create(actorData, { renderSheet: true });
@@ -49,7 +62,7 @@ export class EQRMSSCharacterCreationWizardFinalizer {
     }
   }
 
-  #buildActorData(race, cls, city, deity) {
+  #buildActorData(race, cls, city, deity, settlement = null) {
     const rawStats = this.state.stats || {};
     const rawPotentials = this.state.potentials || {};
     
@@ -107,7 +120,13 @@ export class EQRMSSCharacterCreationWizardFinalizer {
           classId: String(cls.id ?? cls._id ?? ""),
           className: professionName,
           cityName: city.name,
-          deityName: deity?.name ?? ""
+          deityName: deity?.name ?? "",
+          // Hierarchical origin data
+          continentId: this.state.continentId ?? "",
+          regionId: this.state.regionId ?? "",
+          originId: this.state.originId ?? this.state.cityId ?? "",
+          originType: settlement ? "settlement" : "city",
+          settlementName: settlement?.name ?? null
         },
 
         character: {

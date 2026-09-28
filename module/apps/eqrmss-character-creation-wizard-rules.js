@@ -230,24 +230,25 @@ export class EQRMSSCharacterCreationRules {
     context
   ) {
 
-    if (!selection.cityId) {
+    // Accept either hierarchical originId or legacy cityId
+    const originId = selection.originId || selection.cityId;
+
+    if (!originId) {
 
       this.errors.cityId =
-        "Starting city is required.";
+        "Starting city or home settlement is required.";
 
       return;
     }
 
-    const city =
-      this.#find(
-        context.cities,
-        selection.cityId
-      );
+    // Check cities first, then settlements
+    const city = this.#find(context.cities, originId);
+    const settlement = (context.settlements ?? []).find(s => s.id === originId);
 
-    if (!city) {
+    if (!city && !settlement) {
 
       this.errors.cityId =
-        "Invalid starting city.";
+        "Invalid origin selection.";
     }
   }
 
