@@ -200,7 +200,12 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             initiative: system.attributes?.initiative?.value || 0,
             proficiency: system.attributes?.proficiency?.value || 0,
             resistance: calcResistance,
-            wealth: system.wealth || {}
+            wealth: {
+                pp: system.wealth?.pp ?? 0,
+                gp: system.wealth?.gp ?? 0,
+                sp: system.wealth?.sp ?? 0,
+                cp: system.wealth?.cp ?? 0
+            }
         };
 
         // ------------------------------------------------------------
@@ -324,6 +329,48 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             const skillId = ev.currentTarget.dataset.skillId;
             this._onSkillAdvance(skillId);
         }));
+
+        // ------------------------------------------------------------
+        // Equipment Location Changes
+        // ------------------------------------------------------------
+        html.querySelectorAll(".item-location").forEach(el => el.addEventListener("change", ev => {
+            const itemId = ev.currentTarget.dataset.itemId;
+            const newLocation = ev.currentTarget.value;
+            this._onItemLocationChange(itemId, newLocation);
+        }));
+    }
+
+    // ------------------------------------------------------------
+    // Equipment Location Change Handler
+    // ------------------------------------------------------------
+    async _onItemLocationChange(itemId, newLocation) {
+        const actor = this.document;
+        if (!actor || !itemId) return;
+
+        const item = actor.items.get(itemId);
+        if (!item) return;
+
+        if (newLocation === "ground") {
+            // Dropped - remove from inventory
+            const confirm = await Dialog.confirm({
+                title: "Drop Item",
+                content: `<p>Drop <strong>${item.name}</strong> on the ground? It will be removed from your inventory.</p>`
+            });
+            if (confirm) {
+                await item.delete();
+                ui.notifications.info(`${item.name} dropped.`);
+            } else {
+                // Revert dropdown
+                await this.render();
+            }
+        } else {
+            // Equipped or Pack - update location
+            await item.update({ "system.location": newLocation });
+            if (newLocation === "equipped") {
+                ui.notifications.info(`${item.name} equipped.`);
+                // TODO: Apply equipment bonuses to character sheet
+            }
+        }
     }
 
     // ------------------------------------------------------------
