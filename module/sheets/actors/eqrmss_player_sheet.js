@@ -178,18 +178,29 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             actor._prepareSkills();
         }
 
-        // ------------------------------------------------------------
-        // Derived Context
-        // ------------------------------------------------------------
-        const derived = {
-            stats: formattedStats,
-            skills: actor.system?.derived?.skills || system.skills || {},
-            categories: system.categories || [],
-            initiative: system.attributes?.initiative?.value || 0,
-            proficiency: system.attributes?.proficiency?.value || 0,
-            resistance: system.resistance || {},
-            wealth: system.wealth || {}
+         // ------------------------------------------------------------
+         // Derived Context
+         // ------------------------------------------------------------
+        const getBonus = (k) => formattedStats[k]?.basicBonus ?? 0;
+        const manualRes = system.resistance || {};
+        const calcResistance = {
+            essence: 3 * getBonus("EM") + (manualRes.essence ?? 0),
+            channeling: 3 * getBonus("IN") + (manualRes.channeling ?? 0),
+            mentalism: 3 * getBonus("PR") + (manualRes.mentalism ?? 0),
+            poison: 3 * getBonus("CO") + (manualRes.poison ?? 0),
+            disease: 3 * getBonus("CO") + (manualRes.disease ?? 0)
         };
+         const derived = {
+             stats: formattedStats,
+             skills: actor.system?.derived?.skills || system.skills || {},
+             categories: system.categories || [],
+             initiative: system.attributes?.initiative?.value || 0,
+             proficiency: system.attributes?.proficiency?.value || 0,
+            resistance: system.resistance || {},
+            resistance: calcResistance,
+             wealth: system.wealth || {}
+         };
+
 
         // ------------------------------------------------------------
         // Skill Engine View Models
