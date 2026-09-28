@@ -159,7 +159,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
             let isDeficient = primeReqs.includes(key) && tempVal < 90;
 
-            const basicBonus = data.basic_bonus ?? data.basicBonus ?? Math.floor((tempVal - 50) / 5);
+            const storedBonus = data.basic_bonus ?? data.basicBonus ?? 0;
+            const basicBonus = storedBonus !== 0 ? storedBonus : Math.floor((tempVal - 50) / 5);
             formattedStats[key] = {
                 label: statNameMap[key] || key,
                 temp: tempVal,
