@@ -183,7 +183,17 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // ------------------------------------------------------------
         // Derived Context
         // ------------------------------------------------------------
-        const getBonus = (k) => formattedStats[k]?.basicBonus ?? 0;
+        const getBonus = (k) => {
+            // Try exact, uppercase, and title-case keys
+            const variants = [k, k.toUpperCase(), k.charAt(0).toUpperCase() + k.slice(1).toLowerCase()];
+            for (const v of variants) {
+                if (formattedStats[v]?.basicBonus) return formattedStats[v].basicBonus;
+            }
+            // Fallback: search case-insensitively
+            const found = Object.entries(formattedStats).find(([key]) => key.toUpperCase() === k.toUpperCase());
+            return found ? found[1].basicBonus ?? 0 : 0;
+        };
+
         const manualRes = system.resistance || {};
         const calcResistance = {
             essence: 3 * getBonus("EM") + (manualRes.essence ?? 0),
