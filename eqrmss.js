@@ -198,7 +198,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, weapons:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, weapons:false, armor:false, shields:false };
 
     if (ClassLoader) {
         try {
@@ -281,6 +281,58 @@ export async function initializeDataLoaders() {
         game.eqrmss.weapons = null;
     }
 
+    // Armor (template + material + condition composer)
+    try {
+        const armorMod = await import('./module/data/armor/armor-composer.js');
+        await armorMod.loadArmorData();
+        game.eqrmss.armor = {
+            compose: armorMod.composeArmor,
+            options: armorMod.getArmorOptions
+        };
+        game.eqrmss._loadStatus.armor = true;
+        const armorOpts = armorMod.getArmorOptions();
+        console.log(`EQRMSS | Armor ready: ${armorOpts.templates.length} templates, ${armorOpts.materials.length} materials, ${armorOpts.conditions.length} conditions`);
+    } catch (e) {
+        console.error("Armor data load failed", e);
+        game.eqrmss.armor = null;
+    }
+
+    // Shields (template + material + condition composer; DB not AT)
+    try {
+        const shieldMod = await import('./module/data/shields/shield-composer.js');
+        await shieldMod.loadShieldData();
+        game.eqrmss.shields = {
+            compose: shieldMod.composeShield,
+            options: shieldMod.getShieldOptions
+        };
+        game.eqrmss._loadStatus.shields = true;
+        const shieldOpts = shieldMod.getShieldOptions();
+        console.log(`EQRMSS | Shields ready: ${shieldOpts.templates.length} templates, ${shieldOpts.materials.length} materials, ${shieldOpts.conditions.length} conditions`);
+    } catch (e) {
+        console.error("Shield data load failed", e);
+        game.eqrmss.shields = null;
+    }
+
+    // Reference charts: accessories, transport, herbs, poisons (plain data, no composer)
+    const refCharts = [
+        ["accessories", "items/accessories.json"],
+        ["transports", "transport/transports.json"],
+        ["herbs", "herbs/herbs.json"],
+        ["poisons", "herbs/poisons.json"]
+    ];
+    for (const [key, file] of refCharts) {
+        try {
+            const r = await fetch(`systems/eqrmss/module/data/${file}`);
+            game.eqrmss[key] = await r.json();
+            game.eqrmss._loadStatus[key] = true;
+            console.log(`EQRMSS | ${key} ready: ${game.eqrmss[key].length} entries`);
+        } catch (e) {
+            console.error(`${key} load failed`, e);
+            game.eqrmss[key] = null;
+        }
+    }
+
+
     // Final filter
     for (const k of Object.keys(game.eqrmss.races)) {
         if (k.toLowerCase().includes('schema')) delete game.eqrmss.races[k];
@@ -293,6 +345,8 @@ export async function initializeDataLoaders() {
     game.eqrmss.data.abilities = game.eqrmss.abilities;
     game.eqrmss.data.skills = game.eqrmss.skills;
     game.eqrmss.data.weapons = game.eqrmss.weapons;
+    game.eqrmss.data.armor = game.eqrmss.armor;
+    game.eqrmss.data.shields = game.eqrmss.shields;
 
     console.log("EQRMSS | initializeDataLoaders() v4.14 complete", game.eqrmss._loadStatus);
     Hooks.callAll("eqrmss:dataLoadersReady", game.eqrmss);

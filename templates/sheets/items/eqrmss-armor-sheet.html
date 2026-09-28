@@ -5,6 +5,28 @@
   </header>
     <div class="sheet-content">
       <div>
+        <fieldset class="eqrmss-armor-composer">
+          <legend>Armor Composer</legend>
+          <div class="form-group">
+            <label>Template</label>
+            <select name="system.armorTemplate" class="armor-composer-select">
+              {{selectOptions armorOptions.templates selected=system.armorTemplate valueAttr="id" labelAttr="name"}}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Material</label>
+            <select name="system.armorMaterial" class="armor-composer-select">
+              {{selectOptions armorOptions.materials selected=system.armorMaterial valueAttr="id" labelAttr="name"}}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Condition</label>
+            <select name="system.armorCondition" class="armor-composer-select">
+              {{selectOptions armorOptions.conditions selected=system.armorCondition valueAttr="id" labelAttr="name"}}
+            </select>
+          </div>
+          <p class="hint">Changing any of these recomposes the armor below (name and stats).</p>
+        </fieldset>
         <table>
           <tr>
             <th>{{localize "eqrmss.item.equipped"}}</th>
@@ -13,6 +35,7 @@
             <th>{{localize "eqrmss.armor.cost"}}</th>
             <th>{{localize "eqrmss.armor.prod_time"}}</th>
             <th>{{localize "eqrmss.armor.at"}}</th>
+            <th>Maneuver Penalty</th>
           </tr>
           <td>
             <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
@@ -30,6 +53,9 @@
           </td>
           <td>
             <input name="system.at" type="text" value="{{system.at}}" data-dtype="Number"/>
+          </td>
+          <td>
+            <input name="system.maneuverPenalty" type="text" value="{{system.maneuverPenalty}}" data-dtype="Number"/>
           </td>
         </table>
           {{localize "eqrmss.item.description"}}

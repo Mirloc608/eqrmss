@@ -21,7 +21,8 @@ export async function loadWeaponData() {
         "one-handed-crushing",
         "missile",
         "two-handed",
-        "polearm"
+        "polearm",
+        "thrown"
     ];
     for (const cat of categories) {
         const res = await fetch(`${base}/templates/${cat}.json`);
@@ -83,6 +84,9 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
         conditionId: condition.id,
         attackTable: template.attackTable,
         weaponType: template.weaponType,
+        typeCode: template.typeCode,
+        cost: template.cost,
+        prodTime: template.prodTime,
         length: template.length,
         weight,
         fumble: template.fumble,

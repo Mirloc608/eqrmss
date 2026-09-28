@@ -8,6 +8,7 @@ import EQRMSSItemSheet from "../sheets/items/eqrmss_item_sheet.js";
 import EQRMSSArmorSheet from "../sheets/items/eqrmss_armor_sheet.js";
 import EQRMSSTransportSheet from "../sheets/items/eqrmss_transport_sheet.js";
 import EQRMSSWeaponSheet from "../sheets/items/eqrmss_weapon_sheet.js";
+import EQRMSSShieldSheet from "../sheets/items/eqrmss_shield_sheet.js";
 import EQRMSSHerbOrPoisonSheet from "../sheets/items/eqrmss_herb_or_poison_sheet.js";
 import EQRMSSSpellSheet from "../sheets/spells/eqrmss_spell_sheet.js";
 import EQRMSSSkillCategorySheet from "../sheets/skills/eqrmss_skill_category_sheet.js";
@@ -47,6 +48,12 @@ export function registerEQRMSSSheets() {
     DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSWeaponSheet, {
         types: ["weapon"],
         label: "eqrmss.entity_sheet.weapon",
+        makeDefault: true
+    });
+
+    DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSShieldSheet, {
+        types: ["shield"],
+        label: "eqrmss.entity_sheet.shield",
         makeDefault: true
     });
 

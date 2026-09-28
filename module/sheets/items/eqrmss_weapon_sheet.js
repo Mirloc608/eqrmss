@@ -41,25 +41,33 @@ export default class EQRMSSWeaponSheet extends EQRMSSItemSheet {
       return;
     }
 
-    const breakageStr = composed.breakage.join("-")
-      + (composed.breakageMod ? ` (${composed.breakageMod >= 0 ? "+" : ""}${composed.breakageMod})` : "");
+    const breakageStr = composed.breakage
+      ? composed.breakage.join("-")
+        + (composed.breakageMod ? ` (${composed.breakageMod >= 0 ? "+" : ""}${composed.breakageMod})` : "")
+      : "";
 
-    await this.document.update({
+    const updates = {
       name: composed.name,
       "system.weaponTemplate": composed.templateId,
       "system.material": composed.materialId,
       "system.condition": composed.conditionId,
       "system.type": composed.weaponType,
       "system.weight": composed.weight,
+      "system.cost": composed.cost,
+      "system.prod_time": composed.prodTime,
       "system.breakage_range": breakageStr,
-      "system.strength": String(composed.strength),
+      "system.strength": composed.strength != null ? String(composed.strength) : "",
       "system.fumble_range": composed.fumble,
-      "system.attackTable": composed.attackTable,
-      "system.length": composed.length,
-      "system.criticalType": composed.criticalType,
       "system.obMod": composed.obMod,
       "system.damageMod": composed.damageMod
-    });
+    };
+    // Only overwrite attack table / length / crit type when the template provides one;
+    // a GM's manual entry is otherwise preserved across recomposes.
+    if (composed.attackTable != null) updates["system.attackTable"] = composed.attackTable;
+    if (composed.length != null) updates["system.length"] = composed.length;
+    if (composed.criticalType != null) updates["system.criticalType"] = composed.criticalType;
+
+    await this.document.update(updates);
   }
 
 }
