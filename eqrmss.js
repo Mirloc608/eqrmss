@@ -332,18 +332,20 @@ export async function initializeDataLoaders() {
         }
     }
 
-    // Combat tables: weapon attack tables + critical tables (plain data, no composer)
+    // Combat tables: weapon attack tables + critical tables + weapon fumble table (plain data, no composer)
     try {
-        const [wtR, ctR] = await Promise.all([
+        const [wtR, ctR, fbR] = await Promise.all([
             fetch("systems/eqrmss/module/data/combat/weapon-tables.json"),
-            fetch("systems/eqrmss/module/data/combat/crit-tables.json")
+            fetch("systems/eqrmss/module/data/combat/crit-tables.json"),
+            fetch("systems/eqrmss/module/data/combat/fumble-table.json")
         ]);
         game.eqrmss.combatTables = {
             weapons: (await wtR.json()).tables,
-            crits: (await ctR.json()).tables
+            crits: (await ctR.json()).tables,
+            fumble: await fbR.json()
         };
         game.eqrmss._loadStatus.combatTables = true;
-        console.log(`EQRMSS | Combat tables ready: ${game.eqrmss.combatTables.weapons.length} weapon tables, ${game.eqrmss.combatTables.crits.length} crit tables`);
+        console.log(`EQRMSS | Combat tables ready: ${game.eqrmss.combatTables.weapons.length} weapon tables, ${game.eqrmss.combatTables.crits.length} crit tables, fumble table: ${game.eqrmss.combatTables.fumble.name}`);
     } catch (e) {
         console.error("Combat tables load failed", e);
         game.eqrmss.combatTables = null;

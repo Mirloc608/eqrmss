@@ -8,16 +8,30 @@
   "typeCode": "1hc",
   "cost": "2cp",
   "prodTime": "6 hours",
-  "weight": 0.5,
+  "weight": 1.5,
   "breakage": [
    1,
    8
   ],
   "strength": "47-53(s)",
-  "fumble": "01",
-  "attackTable": null,
-  "length": null,
-  "criticalType": null
+  "fumble": "01-01",
+  "attackTable": "Armored Fist",
+  "length": ".5-1",
+  "criticalType": null,
+  "bookNotes": [
+   "CRIT NOTE (not a type override): 'E-criticals are treated as D-criticals.'",
+   "WEIGHT per user ruling 2026-09-28: Equipment Chart 0.5 superseded by book Wt '1-2' -> midpoint 1.5.",
+   "TABLE: chart Table Used 'Barefist'; book table is 'Armored Fist' (name match assumed, not explicit). User per user ruling 2026-09-28: Blackjack is a small hard flexible club (weapon); Armored Fist is an unarmed attack in a weighted/spiked gauntlet — distinct weapons sharing this table per the chart."
+  ],
+  "bookChart": {
+   "row": "Blackjack",
+   "type": "1HC",
+   "weight": "1-2",
+   "length": ".5-1",
+   "fumble": "01-01",
+   "tableUsed": "Barefist",
+   "special": "E-criticals are treated as D-criticals."
+  }
  },
  {
   "id": "cat_o_nine_tails",
@@ -28,16 +42,28 @@
   "typeCode": "1hc/1he",
   "cost": "1sp",
   "prodTime": "1 day",
-  "weight": 4,
+  "weight": 1.5,
   "breakage": [
    1,
    4
   ],
   "strength": "56-64(s)",
   "fumble": "01-07",
-  "attackTable": null,
-  "length": null,
-  "criticalType": null
+  "attackTable": "Whip",
+  "length": "2.5-3.5",
+  "criticalType": null,
+  "bookChart": {
+   "row": "Cat of Nine Tails",
+   "type": "1HC",
+   "weight": "1-2",
+   "length": "2.5-3.5",
+   "fumble": "01-07",
+   "tableUsed": "Whip",
+   "special": null
+  },
+  "bookNotes": [
+   "WEIGHT per user ruling 2026-09-28: Equipment Chart 4 superseded by book Wt '1-2' -> midpoint 1.5."
+  ]
  },
  {
   "id": "cudgel",
@@ -48,16 +74,28 @@
   "typeCode": "1hc/2h",
   "cost": "5cp",
   "prodTime": "12 hours",
-  "weight": 3,
+  "weight": 2.5,
   "breakage": [
    1,
    8
   ],
   "strength": "47-53(w)",
   "fumble": "01-03",
-  "attackTable": null,
-  "length": null,
-  "criticalType": null
+  "attackTable": "Club",
+  "length": "2-3",
+  "criticalType": null,
+  "bookChart": {
+   "row": "Cudgel",
+   "type": "2H",
+   "weight": "2-3",
+   "length": "2-3",
+   "fumble": "01-03",
+   "tableUsed": "Club",
+   "special": "Large walking stick."
+  },
+  "bookNotes": [
+   "WEIGHT per user ruling 2026-09-28: Equipment Chart 3 superseded by book Wt '2-3' -> midpoint 2.5."
+  ]
  },
  {
   "id": "jo",
@@ -68,16 +106,28 @@
   "typeCode": "1hc/2h",
   "cost": "3cp",
   "prodTime": "12 hours",
-  "weight": 4.25,
+  "weight": 2.0,
   "breakage": [
    1,
    6
   ],
   "strength": "47-53(w)",
-  "fumble": "01-03",
-  "attackTable": null,
-  "length": null,
-  "criticalType": null
+  "fumble": "01-05",
+  "attackTable": "Quarterstaff",
+  "length": "4-5",
+  "criticalType": null,
+  "bookChart": {
+   "row": "Jo",
+   "type": "2H",
+   "weight": "1.5-2.5",
+   "length": "4-5",
+   "fumble": "01-05",
+   "tableUsed": "Q-Staff",
+   "special": "Japanese staff."
+  },
+  "bookNotes": [
+   "WEIGHT per user ruling 2026-09-28: Equipment Chart 4.25 superseded by book Wt '1.5-2.5' -> midpoint 2.0."
+  ]
  },
  {
   "id": "mace",
@@ -97,7 +147,11 @@
   "fumble": "01-02",
   "attackTable": null,
   "length": null,
-  "criticalType": null
+  "criticalType": null,
+  "bookNotes": [
+   "Not on the Weapon Statistics Chart: attackTable, length, criticalType have no explicit book value."
+  ],
+  "bookChart": null
  },
  {
   "id": "morning_star",
@@ -117,7 +171,11 @@
   "fumble": "01-08",
   "attackTable": null,
   "length": null,
-  "criticalType": null
+  "criticalType": null,
+  "bookNotes": [
+   "Not on the Weapon Statistics Chart: attackTable, length, criticalType have no explicit book value."
+  ],
+  "bookChart": null
  },
  {
   "id": "net_fishing",
@@ -128,16 +186,30 @@
   "typeCode": "1hc/th",
   "cost": "1sp",
   "prodTime": "3 days",
-  "weight": 4,
+  "weight": 3.0,
   "breakage": [
    1,
    5
   ],
   "strength": "56-64(s)",
   "fumble": "01-08",
-  "attackTable": null,
-  "length": null,
-  "criticalType": null
+  "attackTable": "Grapple/Grasp/Envelop/Swallow",
+  "length": "5-8",
+  "criticalType": null,
+  "bookNotes": [
+   "TABLE: No Grapple attack table in the book transcription.",
+   "WEIGHT per user ruling 2026-09-28: Equipment Chart 4 superseded by book Wt '2-4' -> midpoint 3.0.",
+   "TABLE: chart Table Used 'Grapple' = book chart 11.1.4 Grapple/Grasp/Envelop/Swallow (per user ruling 2026-09-28); section 11.1.4 not yet transcribed."
+  ],
+  "bookChart": {
+   "row": "Net (fishing)",
+   "type": "TH",
+   "weight": "2-4",
+   "length": "5-8",
+   "fumble": "01-08",
+   "tableUsed": "Grapple",
+   "special": "Maximum result is Medium."
+  }
  },
  {
   "id": "net_gladiator",
@@ -148,16 +220,31 @@
   "typeCode": "1hc/th",
   "cost": "7sp",
   "prodTime": "7 days",
-  "weight": 3,
+  "weight": 2.25,
   "breakage": [
    1,
    5
   ],
   "strength": "56-64(s)",
   "fumble": "01-05",
-  "attackTable": null,
-  "length": null,
-  "criticalType": null
+  "attackTable": "Grapple/Grasp/Envelop/Swallow",
+  "length": "4-6",
+  "criticalType": null,
+  "bookNotes": [
+   "CHART FLAG: Special text ends with a comma in the print; the entry appears truncated (the cell likely continues).",
+   "TABLE: No Grapple attack table in the book transcription.",
+   "WEIGHT per user ruling 2026-09-28: Equipment Chart 3 superseded by book Wt '1.5-3' -> midpoint 2.25.",
+   "TABLE: chart Table Used 'Grapple' = book chart 11.1.4 Grapple/Grasp/Envelop/Swallow (per user ruling 2026-09-28); section 11.1.4 not yet transcribed."
+  ],
+  "bookChart": {
+   "row": "Net (gladiator's)",
+   "type": "TH",
+   "weight": "1.5-3",
+   "length": "4-6",
+   "fumble": "01-05",
+   "tableUsed": "Grapple",
+   "special": "Maximum result is Large,"
+  }
  },
  {
   "id": "nunchaku",
@@ -168,16 +255,29 @@
   "typeCode": "1hc/2h",
   "cost": "4cp",
   "prodTime": "1 day",
-  "weight": 1.5,
+  "weight": 2.5,
   "breakage": [
    1,
    7
   ],
   "strength": "47-53(w)",
   "fumble": "01-07",
-  "attackTable": null,
-  "length": null,
-  "criticalType": null
+  "attackTable": "Morning Star",
+  "length": "2.5-3",
+  "criticalType": null,
+  "bookNotes": [
+   "JUDGMENT: Two chart rows (1HC/Morning Star, 2H/Flail); used the 1HC row (template is one-handed-crushing).",
+   "WEIGHT per user ruling 2026-09-28: Equipment Chart 1.5 superseded by book Wt '2-3' -> midpoint 2.5."
+  ],
+  "bookChart": {
+   "row": "Nunchaku",
+   "type": "1HC",
+   "weight": "2-3",
+   "length": "2.5-3",
+   "fumble": "01-07",
+   "tableUsed": "Morning Star",
+   "special": "Okinawan cereal beater."
+  }
  },
  {
   "id": "tonfa",
@@ -188,16 +288,28 @@
   "typeCode": "1hc",
   "cost": "9cp",
   "prodTime": "1 day",
-  "weight": 3.5,
+  "weight": 1.75,
   "breakage": [
    1,
    7
   ],
   "strength": "47-53(w)",
   "fumble": "01-04",
-  "attackTable": null,
-  "length": null,
-  "criticalType": null
+  "attackTable": "Club",
+  "length": "2-2.5",
+  "criticalType": null,
+  "bookChart": {
+   "row": "Tonfa (special)",
+   "type": "1HC",
+   "weight": "1.5-2",
+   "length": "2-2.5",
+   "fumble": "01-04",
+   "tableUsed": "Club",
+   "special": "Okinawan rice husking rod."
+  },
+  "bookNotes": [
+   "WEIGHT per user ruling 2026-09-28: Equipment Chart 3.5 superseded by book Wt '1.5-2' -> midpoint 1.75."
+  ]
  },
  {
   "id": "war_hammer",
@@ -217,7 +329,11 @@
   "fumble": "01-04",
   "attackTable": null,
   "length": null,
-  "criticalType": null
+  "criticalType": null,
+  "bookNotes": [
+   "Not on the Weapon Statistics Chart: attackTable, length, criticalType have no explicit book value."
+  ],
+  "bookChart": null
  },
  {
   "id": "whip",
@@ -237,6 +353,10 @@
   "fumble": "01-06",
   "attackTable": null,
   "length": null,
-  "criticalType": null
+  "criticalType": null,
+  "bookNotes": [
+   "Not on the Weapon Statistics Chart: attackTable, length, criticalType have no explicit book value."
+  ],
+  "bookChart": null
  }
 ]
