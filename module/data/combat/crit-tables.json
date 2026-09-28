@@ -1,0 +1,5775 @@
+{
+ "tables": [
+  {
+   "name": "Grappling Critical Table",
+   "code": "G",
+   "source": "book",
+   "criticals": [
+    {
+     "severity": "A",
+     "low": 1,
+     "high": 5,
+     "result": "Weak grip. No bonus."
+    },
+    {
+     "severity": "B",
+     "low": 1,
+     "high": 5,
+     "result": "Indecision. An opportunity lost."
+    },
+    {
+     "severity": "C",
+     "low": 1,
+     "high": 5,
+     "result": "+1 hit."
+    },
+    {
+     "severity": "D",
+     "low": 1,
+     "high": 5,
+     "result": "+2 hits."
+    },
+    {
+     "severity": "E",
+     "low": 1,
+     "high": 5,
+     "result": "+3hits."
+    },
+    {
+     "severity": "A",
+     "low": 6,
+     "high": 10,
+     "result": "+1 hit."
+    },
+    {
+     "severity": "B",
+     "low": 6,
+     "high": 10,
+     "result": "+2 hits."
+    },
+    {
+     "severity": "C",
+     "low": 6,
+     "high": 10,
+     "result": "+3 hits."
+    },
+    {
+     "severity": "D",
+     "low": 6,
+     "high": 10,
+     "result": "+4 hits."
+    },
+    {
+     "severity": "E",
+     "low": 6,
+     "high": 10,
+     "result": "Glancing attack. You have the initiative next round. +5 hits"
+    },
+    {
+     "severity": "A",
+     "low": 11,
+     "high": 15,
+     "result": "Glancing attack. No extra damage, but you have the initiative next rnd. Practice."
+    },
+    {
+     "severity": "B",
+     "low": 11,
+     "high": 15,
+     "result": "Passing strike. You have the initiative next round. +2 hits."
+    },
+    {
+     "severity": "C",
+     "low": 11,
+     "high": 15,
+     "result": "Grazing side strike. You receive the initiative next round. +4 hits."
+    },
+    {
+     "severity": "D",
+     "low": 11,
+     "high": 15,
+     "result": "Glancing blow. You receive the initiative next round. +6 hits."
+    },
+    {
+     "severity": "E",
+     "low": 11,
+     "high": 15,
+     "result": "Lame attack, but foe must parry next round. +6 hiits."
+    },
+    {
+     "severity": "A",
+     "low": 16,
+     "high": 20,
+     "result": "Foe is free, but you have the initiative next round. +3 hits."
+    },
+    {
+     "severity": "B",
+     "low": 16,
+     "high": 20,
+     "result": "Foe fends off attack. But is forced to parry 1 rnd. +2 hits."
+    },
+    {
+     "severity": "C",
+     "low": 16,
+     "high": 20,
+     "result": "Foe recovers but is forced to parry next round. +4 hits."
+    },
+    {
+     "severity": "D",
+     "low": 16,
+     "high": 20,
+     "result": "Side strike unbalances foe. You have initiative for 2 rnds. +5 hits."
+    },
+    {
+     "severity": "E",
+     "low": 16,
+     "high": 20,
+     "result": "Strong, passing blow. Foe is stunned for 1 round. +3 hits"
+    },
+    {
+     "severity": "A",
+     "low": 21,
+     "high": 35,
+     "result": "Grazing hip strike. You have the initiative next round. +5 hits."
+    },
+    {
+     "severity": "B",
+     "low": 21,
+     "high": 35,
+     "result": "Attack has punch, but nothing more. Foe must parry next round at -20."
+    },
+    {
+     "severity": "C",
+     "low": 21,
+     "high": 35,
+     "result": "Glancing attack. Foe is stunned for 1 round. +2 hits."
+    },
+    {
+     "severity": "D",
+     "low": 21,
+     "high": 35,
+     "result": "Hard but misplaced strike. Foe eludes grip but is stunned for 1 round. +3 hits."
+    },
+    {
+     "severity": "E",
+     "low": 21,
+     "high": 35,
+     "result": "Disjointed attack and a little luck allow foe to escape grasp. Foe is stunned for 1 rnd. You have initiative 2 rnds."
+    },
+    {
+     "severity": "A",
+     "low": 36,
+     "high": 45,
+     "result": "Blow to lower back. Foe must parry next round."
+    },
+    {
+     "severity": "B",
+     "low": 36,
+     "high": 45,
+     "result": "Unbalance foe. +4 hits. Foe must parry next round. You have initiative for 2 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 36,
+     "high": 45,
+     "result": "Flailing attack. Foe is stunned for 1 round and must parry the following round."
+    },
+    {
+     "severity": "D",
+     "low": 36,
+     "high": 45,
+     "result": "Strike to foe's shield arm. If foe has shield, +3 hits. If not, arm is caught for 6 rounds (and immobile), and foe stunned 3 rnds."
+    },
+    {
+     "severity": "E",
+     "low": 36,
+     "high": 45,
+     "result": "Attack to upper leg. Foe is spun about and breaks loose, but is stunned and unable to parry 1 round."
+    },
+    {
+     "severity": "A",
+     "low": 46,
+     "high": 50,
+     "result": "Passing hip strike. Foe must parry next round at -20. +3 hits."
+    },
+    {
+     "severity": "B",
+     "low": 46,
+     "high": 50,
+     "result": "Blow to chest stuns foe for 1 round. +5 hits."
+    },
+    {
+     "severity": "C",
+     "low": 46,
+     "high": 50,
+     "result": "Your attack produces a weak grasp around foe's waist. Foe is at -25 for 3 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 46,
+     "high": 50,
+     "result": "Attack yields weak hold around foe's chest. Foe is at -30 for 3 rnds. You have initiative 4 rnds."
+    },
+    {
+     "severity": "E",
+     "low": 46,
+     "high": 50,
+     "result": "Attack produces a hold around foe's leg. Foe slips away, but is stunned 2 rnds and unable to parry next rnd."
+    },
+    {
+     "severity": "A",
+     "low": 51,
+     "high": 55,
+     "result": "Slightly unbalancing blow to chest. Foe must parry next round. You have initiative for 2 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 51,
+     "high": 55,
+     "result": "Blow to back stuns foe for 1 round. +7 hits."
+    },
+    {
+     "severity": "C",
+     "low": 51,
+     "high": 55,
+     "result": "Attack yields slipping grasp around foe's leg. Foe is stunned and unable to parry for 1 round."
+    },
+    {
+     "severity": "D",
+     "low": 51,
+     "high": 55,
+     "result": "Attack results in slipping grip around foe's waist. Foe is at -50 for 3 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 51,
+     "high": 55,
+     "result": "Foe breaks free of hold around shield arm. Foe is stunned for 2 rounds and unable to parry next round. +5 hits."
+    },
+    {
+     "severity": "A",
+     "low": 56,
+     "high": 60,
+     "result": "Glancing back blow. Foe must parry next round at -25. You have initiative 2 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 56,
+     "high": 60,
+     "result": "Unbalancing strike. Foe spins free but is stunned for 1 rnd. Must parry the following rnd."
+    },
+    {
+     "severity": "C",
+     "low": 56,
+     "high": 60,
+     "result": "Foe breaks free of hold around thigh, but is stunned and unable to parry 1 round. +3 hits."
+    },
+    {
+     "severity": "D",
+     "low": 56,
+     "high": 60,
+     "result": "Attack produces hold around leg. Grip is slipping but foe stunned 3 rounds. +6 hits."
+    },
+    {
+     "severity": "E",
+     "low": 56,
+     "high": 60,
+     "result": "Grasp around foe's leg. Foe is stunned and unable to parry 1 round and is at -25 the following 3 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 61,
+     "high": 65,
+     "result": "Blow to shoulder. Foe is stunned 1 round. +3 hits."
+    },
+    {
+     "severity": "B",
+     "low": 61,
+     "high": 65,
+     "result": "Slipping grasp around foe's waist is weak. Foe is stunned for 2 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 61,
+     "high": 65,
+     "result": "Grasp around foe's chest. Foe is at -50 for 3 rounds. +3 hits."
+    },
+    {
+     "severity": "D",
+     "low": 61,
+     "high": 65,
+     "result": "Grasp around foe's chest. Foe is stunned and unable to parry for 1 round and is at -20 for the following 2 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 61,
+     "high": 65,
+     "result": "Attack to foe's shield arm. If foe has shield, +6 hits. If not, stunned and unable to parry for 3 rnds. +7 hits."
+    },
+    {
+     "severity": "A",
+     "low": 66,
+     "high": 66,
+     "result": "Grasp around weapon arm disarms foe. +2 hits. Foe is stunned for 2 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 66,
+     "high": 66,
+     "result": "Grasp around weapon arm disarms foe and sprains his wrist. Foe is stunned 2 rounds, and fights at -25."
+    },
+    {
+     "severity": "C",
+     "low": 66,
+     "high": 66,
+     "result": "Grasp around both of foe's legs. Foe slips away, but is knocked down and prone for 1 round. +5 hits."
+    },
+    {
+     "severity": "D",
+     "low": 66,
+     "high": 66,
+     "result": "Grasp around leg knocks foe down. Tight grip. Foe is prone and immobile 2 rounds. +6 hits."
+    },
+    {
+     "severity": "E",
+     "low": 66,
+     "high": 66,
+     "result": "Grasp foe around neck and knock him down. Foe has torn neck muscles, is at -20. Foe is prone and immobile for 3 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 67,
+     "high": 70,
+     "result": "Passing chest strike. Foe eludes entanglement, but must parry next two rounds at -20."
+    },
+    {
+     "severity": "B",
+     "low": 67,
+     "high": 70,
+     "result": "Entangle foe's leg. +4 hits. Foe is stunned and unable to parry for 1 round."
+    },
+    {
+     "severity": "C",
+     "low": 67,
+     "high": 70,
+     "result": "Entangle shield arm. If foe has shield, he is at -50 until he drops it. If not, foe is at -50."
+    },
+    {
+     "severity": "D",
+     "low": 67,
+     "high": 70,
+     "result": "Entangle leg. Foe is stunned for 2 rounds and unable to parry next round. +7 hits."
+    },
+    {
+     "severity": "E",
+     "low": 67,
+     "high": 70,
+     "result": "Entangle weapon arm. Stunned and unable to parry for 2 rounds, and at -75 round following."
+    },
+    {
+     "severity": "A",
+     "low": 71,
+     "high": 75,
+     "result": "Attack results in an uneasy hold on foe's midsection. Foe is at -50 for 2 rounds. +5 hits."
+    },
+    {
+     "severity": "B",
+     "low": 71,
+     "high": 75,
+     "result": "Attack yields a weak hold around foe's lower chest. Foe is at -50 for 3 rounds. +4 hits."
+    },
+    {
+     "severity": "C",
+     "low": 71,
+     "high": 75,
+     "result": "Attack results in loose grasp on foe's midsection. Foe is stunned for 2 rounds and is at -50 for the following 3 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 71,
+     "high": 75,
+     "result": "Attack yields loose hold around foe's midsection. Foe is stunned and unable to parry 1 round and is at -70 the following 3 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 71,
+     "high": 75,
+     "result": "Entangle foe's leg. Foe is knocked down, and stunned and unable to parry for 2 rounds. +9 hits."
+    },
+    {
+     "severity": "A",
+     "low": 76,
+     "high": 80,
+     "result": "Unfirm hold on foe's midsection. For the next 3 rounds foe is at -50 and you have the initiative."
+    },
+    {
+     "severity": "B",
+     "low": 76,
+     "high": 80,
+     "result": "Untangle shield arm. If foe has shield, he is at -30 until he drops it. If not, foe is at -40."
+    },
+    {
+     "severity": "C",
+     "low": 76,
+     "high": 80,
+     "result": "Entangle weapon arm. Foe is stunned and unable to parry for 2 rounds, and is at -50 during the following round."
+    },
+    {
+     "severity": "D",
+     "low": 76,
+     "high": 80,
+     "result": "Entangle foe's weapon arm. Foe hangs onto weapon, but the arm is immobilized. +3 hits."
+    },
+    {
+     "severity": "E",
+     "low": 76,
+     "high": 80,
+     "result": "Grapple weapon arm. Foe is disarmed and is left stunned for 3 rounds. Torn ligaments and pulled muscle leave foe at -40."
+    },
+    {
+     "severity": "A",
+     "low": 81,
+     "high": 85,
+     "result": "Grasp foe's leg. Foe breaks free but is stunned for 2 rounds. +3 hits. You have initiative 6 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 81,
+     "high": 85,
+     "result": "Infirm grasp on foe's midsection. For the next 6 rounds foe is at -50 and you have the initiative."
+    },
+    {
+     "severity": "C",
+     "low": 81,
+     "high": 85,
+     "result": "Grasp around foe's chest breaks rib and leaves foe stunned and unable to parry for 3 rounds. Foe fights at -5."
+    },
+    {
+     "severity": "D",
+     "low": 81,
+     "high": 85,
+     "result": "Entangle foe's leg. Foe is knocked down, stunned, disarmed, and unable to parry 2 rounds. Fall breaks shield arm."
+    },
+    {
+     "severity": "E",
+     "low": 81,
+     "high": 85,
+     "result": "Entangle both of foe's arms and pin them to his chest. Foe cannot move his arms and has mobility reduced by -75."
+    },
+    {
+     "severity": "A",
+     "low": 86,
+     "high": 90,
+     "result": "Attack to foe's shield arm. If foe has shield, he must parry next round. If not, arm is immobilized and foe is at -50."
+    },
+    {
+     "severity": "B",
+     "low": 86,
+     "high": 90,
+     "result": "Entangle foe's leg. Foe is knocked down and is stunned and unable to parry for 2 rnds. Pulled muscle leaves foe at -10."
+    },
+    {
+     "severity": "C",
+     "low": 86,
+     "high": 90,
+     "result": "Entangle foe's foot. Foe stumbles, falls, and breaks shoulder. +8 hits. Foe is stunned 6 rnds and fights at -30."
+    },
+    {
+     "severity": "D",
+     "low": 86,
+     "high": 90,
+     "result": "Tie up both of foe's arms so they are immobile. Foe is stunned for 9 rounds and cannot fight. +6 hits."
+    },
+    {
+     "severity": "E",
+     "low": 86,
+     "high": 90,
+     "result": "Entangle foe's foot. Foe stumbles, falls, breaks weapon on impact, and is stunned 2 rounds. If no chest armor, roll \"D\" crush crit."
+    },
+    {
+     "severity": "A",
+     "low": 91,
+     "high": 95,
+     "result": "Entangle foe's leg. Foe is knocked down. Stunned and unable to parry for 2 rounds. +3 hits."
+    },
+    {
+     "severity": "B",
+     "low": 91,
+     "high": 95,
+     "result": "Both of foe's legs are tied up. Foe is at -25, downed, disarmed and stunned and unable to parry for 2 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 91,
+     "high": 95,
+     "result": "Pin both of foe's arms to chest. Foe is stunned and unable to parry 44 rounds, then fights at -95."
+    },
+    {
+     "severity": "D",
+     "low": 91,
+     "high": 95,
+     "result": "Entangle and completely immobilize foe's legs. Foe falls and is left stunned and unable to parry for 30 rounds. +10 hits."
+    },
+    {
+     "severity": "E",
+     "low": 91,
+     "high": 95,
+     "result": "Wrap up both of foe's legs. Foe tumbles to ground and is knocked out. Foe is at -95 due to 2 broken arms and a broken ankle. +20 hits."
+    },
+    {
+     "severity": "A",
+     "low": 96,
+     "high": 99,
+     "result": "Tie foe up completely. Foe is entirely immobilized for 12 rounds, and is at -60 for the following 3 rnds. +7 hits."
+    },
+    {
+     "severity": "B",
+     "low": 96,
+     "high": 99,
+     "result": "Attack completely entangles and immobilizes foe. Broken leg leaves foe at -40. The pitiful creature is left prone but conscious."
+    },
+    {
+     "severity": "C",
+     "low": 96,
+     "high": 99,
+     "result": "Entangle and completely immobilize foe's legs. Foe falls, is disarmed, breaks weapon arm, and is knocked out. +20 hits."
+    },
+    {
+     "severity": "D",
+     "low": 96,
+     "high": 99,
+     "result": "Grapple foe's neck. If foe has neck armor, he is left disarmed, and stunned and unable to parry for 3 rounds. If not, he dies in 6 rnds."
+    },
+    {
+     "severity": "E",
+     "low": 96,
+     "high": 99,
+     "result": "Attack results in strangling hold. Foe is unable to break free and dies after 9 rounds of amazingly helpless struggling. Grim."
+    },
+    {
+     "severity": "A",
+     "low": 100,
+     "high": 100,
+     "result": "Both of foe's legs are entangled. Foe is downed and knocked out. +9 hits. Add +20 to your next roll."
+    },
+    {
+     "severity": "B",
+     "low": 100,
+     "high": 100,
+     "result": "Attack yields vicious hold around foe's neck. Foe is knocked out. Spained neck leaves foe at -90."
+    },
+    {
+     "severity": "C",
+     "low": 100,
+     "high": 100,
+     "result": "Grapple foe's neck. If he has neck armor, he is at -75 due to a neck sprain and stunned for 3 rnds. If not, he dies of broken neck."
+    },
+    {
+     "severity": "D",
+     "low": 100,
+     "high": 100,
+     "result": "Grapple foe's head. If foe has helm, he is stunned and unable to parry for 9 rounds. If not, foe falls into coma due to fracture."
+    },
+    {
+     "severity": "E",
+     "low": 100,
+     "high": 100,
+     "result": "Crush foe's windpipe. Foe dies instantly due to massive shock and savage asphyxiation. Add +25 to your next roll."
+    }
+   ]
+  },
+  {
+   "code": "K",
+   "criticals": [
+    {
+     "high": 5,
+     "low": 1,
+     "result": "Zip.",
+     "severity": "A"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "Weak grip. No extra damage.",
+     "severity": "B"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+1 hit",
+     "severity": "C"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+2 hits",
+     "severity": "D"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+3 hits",
+     "severity": "E"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+1 hit.",
+     "severity": "A"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+2 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+3 hits",
+     "severity": "C"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+4 hits",
+     "severity": "D"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "Glancing blow +6 hits. Foe is slightly unbalanced. You have initiative next round.",
+     "severity": "E"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Glancing blow. Foe takes +3 hits. You have the initiative next rnd.",
+     "severity": "A"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Glanncing blow. +3 hits. You have the initiative next round.",
+     "severity": "B"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Blow to foe's side. +7 hits. You receive initiative next round.",
+     "severity": "C"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "+5 hits. Foe must parry next round at -10.",
+     "severity": "D"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "+6 hits. Foe is stunned for 1 round. Add +5 to your next swing.",
+     "severity": "E"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "+2 hits. Foe must parry next round of action.",
+     "severity": "A"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Blow to foe's side. +4 hits. Foe must parry next round at -10.",
+     "severity": "B"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Blow to foe's side. +6 hits. Foe must parry next round at -20.",
+     "severity": "C"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Minor fracture of ribs. +5 hits. Foe fights at -5. You have initiative next round.",
+     "severity": "D"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Strong blow. Foe is stunned and unable to parry next round. Add +10 to your next swing.",
+     "severity": "E"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Foe must parry next round. +3 hits. Add +5 to your next swing.",
+     "severity": "A"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Foe must parry next round at -20. +4 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "You break foe's rib. +5 hits. Foe is stunned during next round. Hard blow to foe's side.",
+     "severity": "C"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Strike to foe's side. +4 hits. Foe is stunned and unable to parry during next round.",
+     "severity": "D"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Strike cracks foe's ribs. +6 hits. Foe is at -10. You have initiative next round.",
+     "severity": "E"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Bruise foe's calf. +6 hits. You gain the initiative. Foe fights at -5 for next round.",
+     "severity": "A"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Bruise foe's calf. +6 hits. You gain the initiative. Foe fights at -20 for next 2 rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Bruise foe's calf. +9 hits. You gain the initiative. Foe fights at -25 for next 2 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Major calf bruise. +10 hits. Foe fights at -10. You have the initiative next round.",
+     "severity": "D"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Strike to upper leg. Minor fracture. +12 hits. Foe fights at -10. You have the initiative next round.",
+     "severity": "E"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Blow to foe's back. +4 hits. Foe must parry next round at -25. Hard, glancing strike.",
+     "severity": "A"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Blow to foe's back. +6 hits. Foe must parry next round at -25.",
+     "severity": "B"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Blow to back. +5 hits. Stunned and unable to parry 1 rnd. You have the initiative for 2 rnds.",
+     "severity": "C"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Hard blow to back. +10 hits. Foe is stunned and unable to parry during next round.",
+     "severity": "D"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Strike to foe's lower back. +15 hits. Foe is stunned and unable to parry during next round.",
+     "severity": "E"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Blow to foe's chest. +5 hits. Foe must parry next round at -25. Foe has a bruised rib.",
+     "severity": "A"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Blow to foe's chest. +6 hits. Foe must parry for next 2 rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Hard blow to chest. +5 hits. Foe fights at -10. Foe is stunned during next round.",
+     "severity": "C"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Blow to chest. +10 hits. Foe has a pair of broken ribs and must fight at -15.",
+     "severity": "D"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Blow to chest. +15 hits. Foe is stunned for 2 rounds. Foe fights -15.",
+     "severity": "E"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Strike foe's thigh. +5 hits. Foe is forced to parry next round at -25. Glancing blow.",
+     "severity": "A"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Strike foe's thigh. +6 hits. Foe has a bruise and is forced to parry 1 round. Foe is at -5.",
+     "severity": "B"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Strike foe's thigh. +6 hits. Foe is at -5. Add +10 to your next swing. Foe must parry next rnd.",
+     "severity": "C"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Blow to thigh. Foe is stunned next round. +6 hits. Foe is at -10 and is upset.",
+     "severity": "D"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Blow to thigh. Foe is stunned and unable to parry next round. +10 hits. Foe is at -10.",
+     "severity": "E"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Blow to foe's forearm. +5 hits. Foe is stunned 1rnd. Add +20 to your next swing.",
+     "severity": "A"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Blow to foe's forearm. Foe is at -10. +9 hits. Foe is stunned during next round.",
+     "severity": "B"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Disarm foe with a blow to forearm. +8 hits. Foe is stunned during next round.",
+     "severity": "C"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Blow to forearm. Foe is stunned and unable to parry next round. +10 hits. Foe at -10.",
+     "severity": "D"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Blow to forearm. Foe drops weapon. Foe is at -15. +10 hits. Foe is stunned for next round.",
+     "severity": "E"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Shatter shoulder in foe's shield arm. Arm is quite useless. Foe is stunned and unable to parry for the next 2 rounds. +8 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Shatter elbow in foe's weapon arm. Arm is useless. Foe drops weapon, and is stunned and unable to parry for 3 rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Shatter foe's knee. +9 hits. Foe is knocked down and is stunned and unable to parry for 3 rounds. Foe at -90.",
+     "severity": "C"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Blow to side of foe's head. If foe has no helm, you crush his skull. If foe has helm, you knock him out for 4 hours. +20 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Blow to back of neck, crushes backbone and severs spine. +15 hits. Foe dies instantly. Add +10 to your next swing.",
+     "severity": "E"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Strike upper chest area. +8 hits. Foe is stunned for 3 rounds and unable to parry during next round.",
+     "severity": "A"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Strike upper chest area. Foe is stunned and unable to parry for 2 rounds +10 hits. Foe is at -10.",
+     "severity": "B"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Strike upper chest area. Foe is stunned for 3 rounds and unable to parry during next 2 rounds, +10 hits. Foe is at -10.",
+     "severity": "C"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Blow to foe's shoulder area. Minor fracture. Foe is at -20. Foe is stunned and unable to parry for 2 rounds.",
+     "severity": "D"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Blow to foe's shield shoulder. If foe has a shield, it if broken. If foe has no shield, the shoulder is shattered, arm useless.",
+     "severity": "E"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Blow to foe's lower leg. Bad bruise. +5 hits. Foe is stunned for 2 rounds and unable to parry next round. Foe at -20.",
+     "severity": "A"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Blow bruises foe's calf. Foe is at -35. +10 hits. Foe is stunned 2 rounds and unable to parry next round.",
+     "severity": "B"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Blow bruises foe's knee. Foe is at -40. +10 hits. Foe is stunned and unable to parry for 2 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Blow breaks bone in leg. Foe is at -50. +12 hits. Foe is stunned and unable to parry for 2 rounds. Major cartilage damage.",
+     "severity": "D"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Blow breaks foe's hip. Foe is at -75 and is knocked down. +15 hits. Foe is stunned 3 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Blow to foe's shield arm. If foe has a shield, it is broken. If foe has no shield, the arm is badly broken and useless.",
+     "severity": "A"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Blow to foe's shield arm, shatters wrist. Arm is useless. Foe is stunned for next round, +6 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Blow to foe's weapon arm. Bad bruise. +9 hits. Foe is stunned and unable to parry for next round. Foe is at -50.",
+     "severity": "C"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Blow breaks foe's weapon arm. Foe is stunned and unable to parry for 1 round. Arm is useless. +8 hits. Tendon damage.",
+     "severity": "D"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Blow to foe's elbow. +9 hits. Joint is shattered. Arm is useless. Foe is stunned and unable to parry for 2 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Blow to foe's side. +10 hits. Foe is stunned and unable to parry for 2 rounds. Foe is at -20.",
+     "severity": "A"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Blow to foe's side. +12 hits. Foe has broken ribs. Foe is stunned and unable to parry for 2 rounds. Foe is at -25.",
+     "severity": "B"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Strike to foe's side. Breaks 3 ribs. Foe is at -40. +12 hits. Foe is stunned and unable to parry 3 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Strike to foe's side +15 hits. Foe is knocked down. Add +10 to your next swing. Foe is stunned and unable to parry 3 rounds.",
+     "severity": "D"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Catch foe in armpit. +30 hits. Crush foe's ribs and destroy side. Foe drops and dies of nerve and organ damage in 3 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Strike Foe in back. +12 hits. Muscle and cartilage. Foe is stunned and unable to parry for 3 rounds. Foe is at -25.",
+     "severity": "A"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Strike to back knocks foe down and smashes tendons. Foe is stunned and unable to parry for 4 rounds. Foe is at -30.",
+     "severity": "B"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Blow to back smashes muscle and breaks bone. +20 hits. Foe is at -50. Foe is knocked down and stunned for 6 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Blow to foe's neck area breaks backbone and destroys spine. +25 hits. Foe falls and dies in 2 rounds.",
+     "severity": "D"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Neck strike shatters bone and severs an artery. Foe cannot breath and is inactive for 12 rounds. The poor fool then expires.",
+     "severity": "E"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Break foe's nose. Foe is stunned and unable to parry for 3 rnds. +15 hits. Foe fights at -30 for 2 days.",
+     "severity": "A"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Foe's upper head hit. If no helm, he is in a coma for 3 weeks. If foe has a helm, +20 hits and foe is stunned 12 rnds.",
+     "severity": "B"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Blow shatters thigh. +9 hits and a compound fracture. Bone severs an artery. Foe dies after 12 rounds of inactivity.",
+     "severity": "C"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Blow shatters shield arm. Bone severs vein and an artery. Foe dies of shock and blood loss after 9 inactive rounds.",
+     "severity": "D"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Blast to foe's back. +25 hits. Bone is driven into vital organs and foe is down for 6 rounds ...Then dies, sad.",
+     "severity": "E"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Blow to foe's head. If foe has no helm he is dead. If foe has a helm, he is knocked down and stunned 6 rnds. +20 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Blast foe's chest. Send ribcage through heart. Foe drops and dies. Add +20 to your next swing.",
+     "severity": "B"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Blow to foe's abdomen destroys a variety of organs. The poor fool expires after 6 rounds of inactivity.",
+     "severity": "C"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Blow to foe's side crushes chest cavity. Foe drops and dies in 3 rounds. Add +25 to your next swing.",
+     "severity": "D"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Crush foe's skull. +30 hits. Opponent dies immediately. Add +20 to your next swing. You have a half round left to act.",
+     "severity": "E"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Blow to foe's jaw. Drives bone through brain. Foe dies instantly. +50 hits, add +20 to your next swing.",
+     "severity": "A"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Blow to back of neck paralyzes foe from the shoulders down. +25 hits. Foe is quite stunned.",
+     "severity": "B"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Strike to forehead. +30 hits. You squash foe's eyes and destroy them. Foe is stunned and is unable to parry 24 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Blast to foe's chest area. Destroy foe's heart. Foe dies immediately. +25 hits. Fine work.",
+     "severity": "D"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Crush foe's hip. +35 hits. Opponent is stunned for 2 rounds, active following 4 rounds at -30. then dies of nerve damage.",
+     "severity": "E"
+    }
+   ],
+   "name": "Krush Critical Table",
+   "source": "book"
+  },
+  {
+   "code": "L",
+   "criticals": [
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+12 hits your weapon breaks. You are upset.",
+     "severity": "Normal"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+15 hits you fumble your weapon and must parry next round. Good luck pal.",
+     "severity": "Magic"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+18 hits you move poorly and yield the initiative next round.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+20 hits flat blow. Subtract 10 from you next swing.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+5 hits.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+3 hits.",
+     "severity": "Normal"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+4 hits.",
+     "severity": "Magic"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+5 hits.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+9 hits.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+10 hits.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 20,
+     "low": 11,
+     "result": "+6 hits.",
+     "severity": "Normal"
+    },
+    {
+     "high": 20,
+     "low": 11,
+     "result": "+8 hits.",
+     "severity": "Magic"
+    },
+    {
+     "high": 20,
+     "low": 11,
+     "result": "+9 hits.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 20,
+     "low": 11,
+     "result": "+12 hits.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 20,
+     "low": 11,
+     "result": "+15 hits.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 30,
+     "low": 21,
+     "result": "+9 hits.",
+     "severity": "Normal"
+    },
+    {
+     "high": 30,
+     "low": 21,
+     "result": "+10 hits.",
+     "severity": "Magic"
+    },
+    {
+     "high": 30,
+     "low": 21,
+     "result": "+12 hits.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 30,
+     "low": 21,
+     "result": "+15 hits.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 30,
+     "low": 21,
+     "result": "+20 hits.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 40,
+     "low": 31,
+     "result": "+12 hits.",
+     "severity": "Normal"
+    },
+    {
+     "high": 40,
+     "low": 31,
+     "result": "+15 hits.",
+     "severity": "Magic"
+    },
+    {
+     "high": 40,
+     "low": 31,
+     "result": "+20 hits.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 40,
+     "low": 31,
+     "result": "+25 hits.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 40,
+     "low": 31,
+     "result": "+30 hits.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 50,
+     "low": 41,
+     "result": "+15 hits.",
+     "severity": "Normal"
+    },
+    {
+     "high": 50,
+     "low": 41,
+     "result": "+18 hits.",
+     "severity": "Magic"
+    },
+    {
+     "high": 50,
+     "low": 41,
+     "result": "+25 hits.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 50,
+     "low": 41,
+     "result": "+30 hits.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 50,
+     "low": 41,
+     "result": "Light wound. +12 hits. Foe takes 5 hits per rnd and is forced to parry 1 rnd. Add +10 to your next swing.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 65,
+     "low": 51,
+     "result": "+20 hits.",
+     "severity": "Normal"
+    },
+    {
+     "high": 65,
+     "low": 51,
+     "result": "+25 hits.",
+     "severity": "Magic"
+    },
+    {
+     "high": 65,
+     "low": 51,
+     "result": "+30 hits.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 65,
+     "low": 51,
+     "result": "Light wound. +10 hits. Foe takes 3 hits per round and is forced to parry next round. You have initiative for 3 rounds.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 65,
+     "low": 51,
+     "result": "Hard flat swing. +15 hits and foe is staggered. Foe is stunned and unable to parry for the next round.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Well placed strike to foe's neck severs the juglar vein. +15 hits. Foe dies in 6 rounds, and is inactive until then.",
+     "severity": "Normal"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Vicious strike to abomenal region destroys a variety of important organs. Foe drops and dies in 3 rounds. +30 hits.",
+     "severity": "Magic"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Strike to foe's heart. +12 hits and foe dies instantly. Add +10 to your next swing. Very clean kill.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Inspired strike that catches foe between the eyes. +20 hits. Foe dies instantly. You have 1/2 a round left to act.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Strike through foe's ear destroys brain. Foe dies immediately. Add +10 to all friends' swings next round.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "+25 hits.",
+     "severity": "Normal"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "+30 hits.",
+     "severity": "Magic"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Light wound. +15 hits. Foe is stunned for 2 rounds and fights at -20. Add +10 to your next swing.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Hard strike. +20 hits. Foe is stunned and unable to parry for 2 rounds. Add +10 to your next swing.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Brutal strike through foe's heart. +20 hits. Foe dies immediately. Add +10 to your next swing.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 80,
+     "low": 71,
+     "result": "+30 hits.",
+     "severity": "Normal"
+    },
+    {
+     "high": 80,
+     "low": 71,
+     "result": "Light wound. +13 hits. Foe is stunned for 3 rounds and is unable to parry for the next round.",
+     "severity": "Magic"
+    },
+    {
+     "high": 80,
+     "low": 71,
+     "result": "Hard blow. +20 hits. Foe is stunned and unable to parry for 2 rounds. Foe takes 3 hits per round due to light wound.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 80,
+     "low": 71,
+     "result": "Strike to foe's leg. +9 hits. Foe is stunned and unable to parry for 1 round. Foe is at -10, takes 3 hits per round.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 80,
+     "low": 71,
+     "result": "Shatter shoulder in foe's weapon arm. +15 hits. Foe is stunned for 3 rounds. Arm is quite useless.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 90,
+     "low": 81,
+     "result": "Strong blast staggers foe. +20 hits. Foe is stunned and unable to parry for 2 rounds. Add +5 to next swing.",
+     "severity": "Normal"
+    },
+    {
+     "high": 90,
+     "low": 81,
+     "result": "Hard blow stuns foe for 3 rounds. Foe is unable to parry next round. +22 hits. Add +10 to your next swing.",
+     "severity": "Magic"
+    },
+    {
+     "high": 90,
+     "low": 81,
+     "result": "Strike to foe's leg. +15 hits. Foe is stunned for 2 rounds and fights at -20. Foe takes 2 hits per round.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 90,
+     "low": 81,
+     "result": "Strike to foe's forehead. If foe has no helm, you kill him. if foe has a helm, you knock him out. +30 hits.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 90,
+     "low": 81,
+     "result": "Strike to foe's chest destroys the heart. +25 hits. Foe dies immediately. Add +15 to your next swing.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Fine strike to foe's leg yields +18 hits. Foe takes 5 hits per round and is at -10. Foe is stunned for 3 rounds.",
+     "severity": "Normal"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Strike foe in face. +5 hits. Foe takes 3 hits per round and fights at -25. Add +20 to your next swing.",
+     "severity": "Magic"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Strike foe in head. +30 hits and foe is knocked out. Add +10 to all friendly swings next round. Fine shot.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Cruel strike to foe's chest severs a vein. Foe is stunned for 2 rounds, falls into unconsciousness, then dies after 6 rounds.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Sever an artery in foe's leg. +10 hits. Foe dies after 12 sad rounds of inactivity.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 98,
+     "low": 96,
+     "result": "Strike foe in heart. Foe dies instantly and falls upon you. You then take 20 hits and are pinned for 6 rounds.",
+     "severity": "Normal"
+    },
+    {
+     "high": 98,
+     "low": 96,
+     "result": "Strike foe through both lungs. Foe dies in 3 rounds. Your weapon is stuck in foe for 12 rounds. +25 hits.",
+     "severity": "Magic"
+    },
+    {
+     "high": 98,
+     "low": 96,
+     "result": "Strike foe in nose and drive bone into brain. Foe dies instantly and you have a half round to act. Clean kill.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 98,
+     "low": 96,
+     "result": "Strike through foe's ear drops sucker. +15 hits. Foe dies next rnd. Add +25 to your next swing.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 98,
+     "low": 96,
+     "result": "Shatter foe's skull. +30 hits. Foe dies instantly. A piece of foe's skull sails straight back to 10 feet. Not pretty.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 100,
+     "low": 99,
+     "result": "Strike through foe's lungs. Foe falls down and dies after 6 rnds. +24 hits. Add +20 to all friendly swings next rnd.",
+     "severity": "Normal"
+    },
+    {
+     "high": 100,
+     "low": 99,
+     "result": "Hard but flat strike. Foe takes +35 hits, is stunned for 1 rnd, and is unable to parry. Your weapon breaks in half.",
+     "severity": "Magic"
+    },
+    {
+     "high": 100,
+     "low": 99,
+     "result": "Strike foe in neck. +20 hits. Foe is stunned and unable to parry for 6 rounds -- then dies. Your weapon is stuck 2 rounds.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 100,
+     "low": 99,
+     "result": "Blind for cleanly. Foe is stunned and unable to parry for 2 rounds. +5 hits. Foe is at -100. Precision surgery.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 100,
+     "low": 99,
+     "result": "Strike foe through cheek. Foe dies immediately. +15 hits. Unfortunately, your weapon is stuck in the bone for 2 rounds.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 150,
+     "low": 101,
+     "result": "Awesome strike. +50 hits. Foe is stunned for 3 rounds and is unable to parry. Foe fights at -25.",
+     "severity": "Normal"
+    },
+    {
+     "high": 150,
+     "low": 101,
+     "result": "Strike to side of foe's head knocks foe out. +20 hits. Foe is out for at least 3 hours. Add +10 to your next swing.",
+     "severity": "Magic"
+    },
+    {
+     "high": 150,
+     "low": 101,
+     "result": "Strike to foe's chin shatters jaw and knocks foe out. +60 hits and foe is in a coma foe 30 days.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 150,
+     "low": 101,
+     "result": "Shatter foe's knee. Foe takes 2 hits per round, fights at -30, and is stunned for 3 rounds.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 150,
+     "low": 101,
+     "result": "Sever a vein in foe's forelimb. Foe is stunned and unable to parry for 6 rounds. Foe then falls dead. +20 hits.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 175,
+     "low": 151,
+     "result": "Strike drives bone into kidneys and liver. Foe falls, taking 40 hits. Foe then dies...pity.",
+     "severity": "Normal"
+    },
+    {
+     "high": 175,
+     "low": 151,
+     "result": "Strike drives shattered remnants of foe's jaw into the brain. Foe dies instantly. You have 1/2 round left to act.",
+     "severity": "Magic"
+    },
+    {
+     "high": 175,
+     "low": 151,
+     "result": "Strike to foe's abdomen destroys a variety of important organs. Foe drops and dies after 6 rounds. +30 hits.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 175,
+     "low": 151,
+     "result": "Smooth strike through foe's cheek. +10 hits. Foe dies immediately. You have a half round left in which to act.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 175,
+     "low": 151,
+     "result": "Strike through foe's neck. Foe dies instantly. +25 hits. Add +10 to your next swing. Fine piece of work.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 200,
+     "low": 176,
+     "result": "Strike to bowels destroys foe's adomenal areas. Foe falls and dies after 12 rounds. +35 hits. Add +15 to your next swing.",
+     "severity": "Normal"
+    },
+    {
+     "high": 200,
+     "low": 176,
+     "result": "Strike through foe's ear kills foe with clean ease. +10 hits. Add +20 to the swings of all nearby allies next round.",
+     "severity": "Magic"
+    },
+    {
+     "high": 200,
+     "low": 176,
+     "result": "Strike severs and artery in foe's leg. Foe fights at - 20 for 2 rmds, then drops. Foe is then inactive and dies after 6 rounds.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 200,
+     "low": 176,
+     "result": "Strike severs foe's spine. +20 hits. Foe drops immediately and is paralyzed from the waist down.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 200,
+     "low": 176,
+     "result": "Strike foe through the eye. Foe dies immediately. +15 hits. Add 20 to your next swing. You have a half round to act.",
+     "severity": "Slaying"
+    },
+    {
+     "high": 250,
+     "low": 201,
+     "result": "Blow to foe's forelimb severs a vein and stuns foe for 6 rounds. Foe drops on round 7, passes out, then dies. +15 hits.",
+     "severity": "Normal"
+    },
+    {
+     "high": 250,
+     "low": 201,
+     "result": "Strike severs foe's spine. +15 hits. Foe is paralyzed from the neck down. Sadly, your weapon breaks in half.",
+     "severity": "Magic"
+    },
+    {
+     "high": 250,
+     "low": 201,
+     "result": "Strike to foe's heart. +20 hits foe dies instantly. Add +15 to all friendly swings for the next 2 rounds of action.",
+     "severity": "Mithril"
+    },
+    {
+     "high": 250,
+     "low": 201,
+     "result": "Strike to foe's heart. +25 hits. Foe dies. Add +20 to all friendly swings for the next 3 rounds of action.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": 250,
+     "low": 201,
+     "result": "Strike carries all the way through foe's head. Foe dies instantly. The action carries onto any nearby opponent (this round.)",
+     "severity": "Slaying"
+    },
+    {
+     "high": null,
+     "low": 251,
+     "result": "Extremely hard but flat swing. +35 hits. Foe is stunned and unable to parry for 3 rounds. Unfortunately, you knock yourself out.",
+     "severity": "Normal"
+    },
+    {
+     "high": null,
+     "low": 251,
+     "result": "Strike through foe's eye proves fatal. Foe dies immmediately. +20 hits. Add +25 to your next swing.",
+     "severity": "Magic"
+    },
+    {
+     "high": null,
+     "low": 251,
+     "result": "Blind foe with vicious crossing strike. Foe is at -100 and is upset. +10 hits and foe is quite stunned for 6 rounds.",
+     "severity": "Mithril"
+    },
+    {
+     "high": null,
+     "low": 251,
+     "result": "Strike through foe's ribs punctures a lung. +30 hits. Foe is knocked out. Your weapon is stuck for 6 rounds. Good luck.",
+     "severity": "Holy Arms"
+    },
+    {
+     "high": null,
+     "low": 251,
+     "result": "Blind foe with precision strike across eyes. +6 hits. Foe is stunned and unable to parry for 24 rounds.",
+     "severity": "Slaying"
+    }
+   ],
+   "name": "Large Creature Critical Table",
+   "source": "book"
+  },
+  {
+   "name": "Martial Arts Striking Critical Table",
+   "code": "T",
+   "source": "book",
+   "criticals": [
+    {
+     "severity": "A",
+     "low": 1,
+     "high": 5,
+     "result": "Sorry."
+    },
+    {
+     "severity": "B",
+     "low": 1,
+     "high": 5,
+     "result": "Fine artistry, but no extra damage."
+    },
+    {
+     "severity": "C",
+     "low": 1,
+     "high": 5,
+     "result": "+1 hit."
+    },
+    {
+     "severity": "D",
+     "low": 1,
+     "high": 5,
+     "result": "+2 hits."
+    },
+    {
+     "severity": "E",
+     "low": 1,
+     "high": 5,
+     "result": "+3 hits."
+    },
+    {
+     "severity": "A",
+     "low": 6,
+     "high": 10,
+     "result": "+1 hits."
+    },
+    {
+     "severity": "B",
+     "low": 6,
+     "high": 10,
+     "result": "+2 hits."
+    },
+    {
+     "severity": "C",
+     "low": 6,
+     "high": 10,
+     "result": "+3 hits."
+    },
+    {
+     "severity": "D",
+     "low": 6,
+     "high": 10,
+     "result": "+4 hits."
+    },
+    {
+     "severity": "E",
+     "low": 6,
+     "high": 10,
+     "result": "Glancing strike makes foe respect you a little more. +5 hits."
+    },
+    {
+     "severity": "A",
+     "low": 11,
+     "high": 15,
+     "result": "Weak strike, but you gain the initiative. +3 hits."
+    },
+    {
+     "severity": "B",
+     "low": 11,
+     "high": 15,
+     "result": "Mild blow. You gain the initiative next round. +4 hits."
+    },
+    {
+     "severity": "C",
+     "low": 11,
+     "high": 15,
+     "result": "Mild strike. You have the initiative next round. +5 hits."
+    },
+    {
+     "severity": "D",
+     "low": 11,
+     "high": 15,
+     "result": "Kick to foe's side yields +6 hits. You have the initiative next round."
+    },
+    {
+     "severity": "E",
+     "low": 11,
+     "high": 15,
+     "result": "Moderate strike stuns foe for 1 round. +7 hits."
+    },
+    {
+     "severity": "A",
+     "low": 16,
+     "high": 20,
+     "result": "Kick to foe's side yields +4 hits and you have the initiative next round."
+    },
+    {
+     "severity": "B",
+     "low": 16,
+     "high": 20,
+     "result": "Side strike. Foe loses initiative next 2 rounds. +5 hits."
+    },
+    {
+     "severity": "C",
+     "low": 16,
+     "high": 20,
+     "result": "Side strike forces foe to parry next round. +6 hits."
+    },
+    {
+     "severity": "D",
+     "low": 16,
+     "high": 20,
+     "result": "Side strike forces foe to parry at -10 next round. +8 hits."
+    },
+    {
+     "severity": "E",
+     "low": 16,
+     "high": 20,
+     "result": "Side strike cracks foe's ribs and stuns foe for 1 round. +5 hits. Foe is at -10."
+    },
+    {
+     "severity": "A",
+     "low": 21,
+     "high": 35,
+     "result": "Light,but well-placed strike forces foe to parry 1 round. +5 hits."
+    },
+    {
+     "severity": "B",
+     "low": 21,
+     "high": 35,
+     "result": "Strong, but poorly aimed strike forces foe to parry next round. +6 hits."
+    },
+    {
+     "severity": "C",
+     "low": 21,
+     "high": 35,
+     "result": "Kick foe in ribs and stun him for 1 round. +6 hits."
+    },
+    {
+     "severity": "D",
+     "low": 21,
+     "high": 35,
+     "result": "Side strike. Foe is stunned next round and loses initiative for 3 rounds. +2 hits."
+    },
+    {
+     "severity": "E",
+     "low": 21,
+     "high": 35,
+     "result": "Fine side strike cracks 3 ribs. Foe is at -20. +6 hits."
+    },
+    {
+     "severity": "A",
+     "low": 36,
+     "high": 45,
+     "result": "Mild chest strike forces foe to parry next round at -10. +6 hits."
+    },
+    {
+     "severity": "B",
+     "low": 36,
+     "high": 45,
+     "result": "Chest strike. Foe must parry next round at -20. +7 hits."
+    },
+    {
+     "severity": "C",
+     "low": 36,
+     "high": 45,
+     "result": "Clever fake yields fine but light chest strike. Foe is stunned 1 round. +8 hits."
+    },
+    {
+     "severity": "D",
+     "low": 36,
+     "high": 45,
+     "result": "Chest strike. Foe is stunned and unable to parry next round. +5 hits."
+    },
+    {
+     "severity": "E",
+     "low": 36,
+     "high": 45,
+     "result": "Back strike stuns foe 1 round. You have a clear shot to foe's rear next round."
+    },
+    {
+     "severity": "A",
+     "low": 46,
+     "high": 50,
+     "result": "Acrobatic move forces foe to parry next round at -25. +6 hits."
+    },
+    {
+     "severity": "B",
+     "low": 46,
+     "high": 50,
+     "result": "Glancing kick to foe's back. Foe is stunned 1 round. +5 hits."
+    },
+    {
+     "severity": "C",
+     "low": 46,
+     "high": 50,
+     "result": "Strike to foe's back. Foe is stunned and unable to parry for 1 round."
+    },
+    {
+     "severity": "D",
+     "low": 46,
+     "high": 50,
+     "result": "Chest strike. Foe is stunned for 2 rounds. Broken ribs. Foe is at -10, +3 hits."
+    },
+    {
+     "severity": "E",
+     "low": 46,
+     "high": 50,
+     "result": "Chest strike. Foe is stunned 2 rounds and unable to parry 1 round. +5 hits."
+    },
+    {
+     "severity": "A",
+     "low": 51,
+     "high": 55,
+     "result": "Strike to hip stuns foe for 1 round. +3 hits."
+    },
+    {
+     "severity": "B",
+     "low": 51,
+     "high": 55,
+     "result": "Strike to foe's chest. Stuns him for 1 round. +6 hits."
+    },
+    {
+     "severity": "C",
+     "low": 51,
+     "high": 55,
+     "result": "Side strike. Foe is stunned and unable to parry next round. Add +20 next attack."
+    },
+    {
+     "severity": "D",
+     "low": 51,
+     "high": 55,
+     "result": "Upper leg strike causes deep bruise. Foe operates at -25. +6 hits."
+    },
+    {
+     "severity": "E",
+     "low": 51,
+     "high": 55,
+     "result": "Hip strike spins foe. +5 hits. Foe stunned for 3 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 56,
+     "high": 60,
+     "result": "Strike to foe's lower chest stuns foe for 1 round. +5 hits."
+    },
+    {
+     "severity": "B",
+     "low": 56,
+     "high": 60,
+     "result": "Back strike. Foe is stunned for 2 rounds. +3 hits."
+    },
+    {
+     "severity": "C",
+     "low": 56,
+     "high": 60,
+     "result": "Strong wheel kick sends foe 10 feet in any desired direction. Foe is stunned 2 rounds. +8 hits."
+    },
+    {
+     "severity": "D",
+     "low": 56,
+     "high": 60,
+     "result": "Back strike. Foe is stunned for 3 rounds. +4 hits."
+    },
+    {
+     "severity": "E",
+     "low": 56,
+     "high": 60,
+     "result": "Chest strike. Foe is stunned 2 rounds, unable to parry next round and operates at -10."
+    },
+    {
+     "severity": "A",
+     "low": 61,
+     "high": 65,
+     "result": "Blow to top of foe's foot is slightly misplaced but quick. Foe operates at -20 +5 hits."
+    },
+    {
+     "severity": "B",
+     "low": 61,
+     "high": 65,
+     "result": "Strike to back of lower leg. Foe is stunned for 2 rounds. +7 hits."
+    },
+    {
+     "severity": "C",
+     "low": 61,
+     "high": 65,
+     "result": "Upper leg strike. Foe has deep bruise and operates at -25. +5 hits."
+    },
+    {
+     "severity": "D",
+     "low": 61,
+     "high": 65,
+     "result": "Blow to nerve in upper leg. Foe is stunned 2 rounds and operates at -25 for 6 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 61,
+     "high": 65,
+     "result": "Forearm strike cleanly disarms foe. +3 hits."
+    },
+    {
+     "severity": "A",
+     "low": 66,
+     "high": 66,
+     "result": "Strike to Achilles tendon. Vicious bruise. Foe is at -50. +7 hits and foe stunned 2 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 66,
+     "high": 66,
+     "result": "Kick to foe's head sprains neck and fractures jaw. Foe is stunned 9 rounds, operates at -50."
+    },
+    {
+     "severity": "C",
+     "low": 66,
+     "high": 66,
+     "result": "Knife hand strike breaks foe's weapon arm, leaving it useless. Follow-up punch to solar plexus knocks foe out."
+    },
+    {
+     "severity": "D",
+     "low": 66,
+     "high": 66,
+     "result": "Superb move. Break foe's weapon. Foe is stunned for 3 rounds. Add +20 next roll."
+    },
+    {
+     "severity": "E",
+     "low": 66,
+     "high": 66,
+     "result": "Simultaneous open palm strikes destroy foe's hearing and balance. Foe at -95. He is stunned 24 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 67,
+     "high": 70,
+     "result": "Weak spear hand stuns foe for 2 rounds. +2 hits."
+    },
+    {
+     "severity": "B",
+     "low": 67,
+     "high": 70,
+     "result": "Spear hand to foe's chest. Foe is stunned 3 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 67,
+     "high": 70,
+     "result": "Strong knife hand to upper portion of foe's shield arm. Arm is broken and useless."
+    },
+    {
+     "severity": "D",
+     "low": 67,
+     "high": 70,
+     "result": "Strike to top of foe's foot. Foe is stunned and unable to parry for 2 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 67,
+     "high": 70,
+     "result": "Elbow to solar plexus and back fist to face drops foe. Foe stunned 3 mds,and unable to parry 2 mds."
+    },
+    {
+     "severity": "A",
+     "low": 71,
+     "high": 75,
+     "result": "Knife hand, spear hand combination. Foe must roll on fumble table and is stunned 1 round."
+    },
+    {
+     "severity": "B",
+     "low": 71,
+     "high": 75,
+     "result": "Strike to foe's weapon arm. Deep bruise. Foe is at -20. +6 hits. Foe stunned 2 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 71,
+     "high": 75,
+     "result": "Strike to back of lower leg. Foe is stunned and unable to parry for 2 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 71,
+     "high": 75,
+     "result": "Knife hand strike breaks foe's collarbone. Foe is stunned and unable to parry 2 rounds, acts at -25."
+    },
+    {
+     "severity": "E",
+     "low": 71,
+     "high": 75,
+     "result": "Heel kick breaks bone is foe's foot. Foe is at -50. +5 hits. Fool stunned for 3 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 76,
+     "high": 80,
+     "result": "Kick to foe's shield arm. If foe has shield, it is broken.If not, arm is useless and +6 hits."
+    },
+    {
+     "severity": "B",
+     "low": 76,
+     "high": 80,
+     "result": "Blow to back of foe's knee damages tendons. Foe is stunned 2 rounds and operates at -25."
+    },
+    {
+     "severity": "C",
+     "low": 76,
+     "high": 80,
+     "result": "Kick disarms foe and stuns him for 1 round. Foe fights at -10 due to cartilage damage."
+    },
+    {
+     "severity": "D",
+     "low": 76,
+     "high": 80,
+     "result": "Striike to area behind foe's knee. Tendon and cartilage damage. Foe is at -75."
+    },
+    {
+     "severity": "E",
+     "low": 76,
+     "high": 80,
+     "result": "Front kick to midsection doubles foe over. You follow with knee strike which breaks foe's nose and knocks him out."
+    },
+    {
+     "severity": "A",
+     "low": 81,
+     "high": 85,
+     "result": "Kick to foe's weapon arm disarms him. +3 hits."
+    },
+    {
+     "severity": "B",
+     "low": 81,
+     "high": 85,
+     "result": "Kick foe's weapon 5 feet away and break 2 fingers. Foe stunned 2 rounds and fights at -20."
+    },
+    {
+     "severity": "C",
+     "low": 81,
+     "high": 85,
+     "result": "Heel kick breaks bone in foe's foot. Foe is at -50; he is also stunned and unable to parry for 2 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 81,
+     "high": 85,
+     "result": "Kick breaks foe's leg. Foe is stunned and unable to parry 2 rounds and operates at -75. +5 hits."
+    },
+    {
+     "severity": "E",
+     "low": 81,
+     "high": 85,
+     "result": "Strike to knee shatters joint. Foe drops and is stunned and unable to parry 6 rounds. Foe is at -80. +6 hits."
+    },
+    {
+     "severity": "A",
+     "low": 86,
+     "high": 90,
+     "result": "Fluid move followed by a leaping kick to foe's back knocks foe down and stuns him 3 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 86,
+     "high": 90,
+     "result": "Wheel kick knocks foe flat. Smash tendons and tear muscle. Foe is at -30. He is also stunned 9 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 86,
+     "high": 90,
+     "result": "Strike to leg severs Achilles tendon and drops foe. +10 hits. Foe stunned 9 rounds, acts at -80."
+    },
+    {
+     "severity": "D",
+     "low": 86,
+     "high": 90,
+     "result": "Open-handed blow to foe's adam's apple (neck) crushes windpipe. Foe dies in 18 rounds - shock and asphyxiation."
+    },
+    {
+     "severity": "E",
+     "low": 86,
+     "high": 90,
+     "result": "Roundhouse kick hits kidney drops foe. Your follow-up knife hand snaps foe's neck. He is knocked out, dies in 9 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 91,
+     "high": 95,
+     "result": "Strike to nerve in upper leg. +8 hits. Foe stunned and unable to parry for 2 rounds, and operates at -40 for 6 mds."
+    },
+    {
+     "severity": "B",
+     "low": 91,
+     "high": 95,
+     "result": "Strike to foe's knee shatters joint. Foe drops, is at -85. He is stunned and unable to parry 4 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 91,
+     "high": 95,
+     "result": "Flying kick to foe's back. You knock foe down, disarm him, and leave him stunned and unable to parry for 12 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 91,
+     "high": 95,
+     "result": "Jab to foe's eyes blinds him. Crescent kick sends foe 10 feet to right or left. Sucker is at -100. He is stunned 10 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 91,
+     "high": 95,
+     "result": "Strike to stomach destroys a variety of organs. Foe drops helplessly and dies in 12 rounds. Add +10 to your next round."
+    },
+    {
+     "severity": "A",
+     "low": 96,
+     "high": 99,
+     "result": "A chop deflects foe's attack, and a follow-up strike knocks him down. Foe stunned and unable to parry for 3 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 96,
+     "high": 99,
+     "result": "Roundhouse kick knocks foe out and fractures collarbone. Foe has sprained neck and shoulder."
+    },
+    {
+     "severity": "C",
+     "low": 96,
+     "high": 99,
+     "result": "Kick to solar plexus drops foe and leaves him stunned and unable to parry 30 rounds. +30 hits."
+    },
+    {
+     "severity": "D",
+     "low": 96,
+     "high": 99,
+     "result": "Brutal head kick flips foe over onto his head. Skull fracture is minor but concussion severe. Foe dies of hemorrhage in 9 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 96,
+     "high": 99,
+     "result": "Double palmstrike to foe's nose breaks cartilage and drives bone into brain. Foe drops helplessly and dies in 6 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 100,
+     "high": 100,
+     "result": "Gooseneck strike. Foe's inner ear ruptured. He hears at -50, operates at -75. Foe is knocked out by follow-up strike."
+    },
+    {
+     "severity": "B",
+     "low": 100,
+     "high": 100,
+     "result": "Knife hand strike to foe's weapon arm breaks bone. Kick to lower back breaks backbone, leaving foe paralyzed from waist down."
+    },
+    {
+     "severity": "C",
+     "low": 100,
+     "high": 100,
+     "result": "Sweep lays foe out and heel strike to foe's sternum collapses the ribcage. Foe is helpless and dies in 4 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 100,
+     "high": 100,
+     "result": "Awesome spear hand strike finds seam, penetrates solar plexus and ruptures the heart. Foe dies instantly."
+    },
+    {
+     "severity": "E",
+     "low": 100,
+     "high": 100,
+     "result": "Kick disarms foe. A follow-up chop snaps his neck and subsequent flip sends foe 5 feet in any desired direction. Foe dies."
+    }
+   ]
+  },
+  {
+   "name": "Martial Arts Sweeps & Throws Critical Table",
+   "code": "U",
+   "source": "book",
+   "criticals": [
+    {
+     "severity": "A",
+     "low": 1,
+     "high": 5,
+     "result": "Acrobatic, but no extra damage. +0 hits."
+    },
+    {
+     "severity": "B",
+     "low": 1,
+     "high": 5,
+     "result": "Shoddy follow through. +0 hits."
+    },
+    {
+     "severity": "C",
+     "low": 1,
+     "high": 5,
+     "result": "+1 hit"
+    },
+    {
+     "severity": "D",
+     "low": 1,
+     "high": 5,
+     "result": "+2 hits"
+    },
+    {
+     "severity": "E",
+     "low": 1,
+     "high": 5,
+     "result": "+3 hits"
+    },
+    {
+     "severity": "A",
+     "low": 6,
+     "high": 10,
+     "result": "+1 hit."
+    },
+    {
+     "severity": "B",
+     "low": 6,
+     "high": 10,
+     "result": "+1 hit."
+    },
+    {
+     "severity": "C",
+     "low": 6,
+     "high": 10,
+     "result": "+2 hits"
+    },
+    {
+     "severity": "D",
+     "low": 6,
+     "high": 10,
+     "result": "+3 hits"
+    },
+    {
+     "severity": "E",
+     "low": 6,
+     "high": 10,
+     "result": "Unbalance foe. You have initiative next round. +4 hits."
+    },
+    {
+     "severity": "A",
+     "low": 11,
+     "high": 15,
+     "result": "You have initiative next round. +1 hit."
+    },
+    {
+     "severity": "B",
+     "low": 11,
+     "high": 15,
+     "result": "Foe takes 3 extra hits and you have the initiatiive next round."
+    },
+    {
+     "severity": "C",
+     "low": 11,
+     "high": 15,
+     "result": "You have the initiative next round. Add +20 to your next attack. Foe is confused."
+    },
+    {
+     "severity": "D",
+     "low": 11,
+     "high": 15,
+     "result": "Foe must parry next round. +4 hits."
+    },
+    {
+     "severity": "E",
+     "low": 11,
+     "high": 15,
+     "result": "Stun foe with your fine moves. Add +10 to next attack. Foe is stunned 1 round."
+    },
+    {
+     "severity": "A",
+     "low": 16,
+     "high": 20,
+     "result": "Foe must parry next round. +2 hits."
+    },
+    {
+     "severity": "B",
+     "low": 16,
+     "high": 20,
+     "result": "Dazzle foe. He must parry next round at -10."
+    },
+    {
+     "severity": "C",
+     "low": 16,
+     "high": 20,
+     "result": "Foe unbalanced and must parry next round at -20. +3 hits."
+    },
+    {
+     "severity": "D",
+     "low": 16,
+     "high": 20,
+     "result": "Foe is stunned for 1 round. +4 hits."
+    },
+    {
+     "severity": "E",
+     "low": 16,
+     "high": 20,
+     "result": "Sweep staggers foe. +2 hits. Foe is stunned and unable to parry 1 round."
+    },
+    {
+     "severity": "A",
+     "low": 21,
+     "high": 35,
+     "result": "Sweep forces foe to parry next round at -10. +2 hits."
+    },
+    {
+     "severity": "B",
+     "low": 21,
+     "high": 35,
+     "result": "Sweep unbalances foe. +3 hits. Foe must parry next round at -20."
+    },
+    {
+     "severity": "C",
+     "low": 21,
+     "high": 35,
+     "result": "Sweep stuns foe for 1 round. +4 hits."
+    },
+    {
+     "severity": "D",
+     "low": 21,
+     "high": 35,
+     "result": "Sweep sends foe to his knees. Foe is stunned and unable to parry for 1 round. +4 hits."
+    },
+    {
+     "severity": "E",
+     "low": 21,
+     "high": 35,
+     "result": "Sweep downs foe. Foe is stunned for 2 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 36,
+     "high": 45,
+     "result": "Sweep staggers foe. Foe must parry next round at -20. +3 hits."
+    },
+    {
+     "severity": "B",
+     "low": 36,
+     "high": 45,
+     "result": "Sweep bruises foe's leg. For operates at -25 for 3 rounds. +4 hits."
+    },
+    {
+     "severity": "C",
+     "low": 36,
+     "high": 45,
+     "result": "Sweep bruises foe's leg. Foe fights at -10. You have the initiative next round."
+    },
+    {
+     "severity": "D",
+     "low": 36,
+     "high": 45,
+     "result": "Sweep bruises foe's calf. Foe operates at -20. +5 hits."
+    },
+    {
+     "severity": "E",
+     "low": 36,
+     "high": 45,
+     "result": "Sweep drops foe and bruises thigh. Foe is stunned 1 round. +5 hits. Foe is at -20."
+    },
+    {
+     "severity": "A",
+     "low": 46,
+     "high": 50,
+     "result": "Sweep forces foe to parry next round at -25. +4 hits."
+    },
+    {
+     "severity": "B",
+     "low": 46,
+     "high": 50,
+     "result": "Sweep stuns foe for 1 round. +5 hits."
+    },
+    {
+     "severity": "C",
+     "low": 46,
+     "high": 50,
+     "result": "Sweep downs foe. +4 hits. Foe is stunned for 2 rounds while trying to rally."
+    },
+    {
+     "severity": "D",
+     "low": 46,
+     "high": 50,
+     "result": "Sweep drops foe. +5 hits. Foe is stunned and unable to parry for 1 round."
+    },
+    {
+     "severity": "E",
+     "low": 46,
+     "high": 50,
+     "result": "Foe slips to his knees. +7 hits. Foe is stunned for 2 rounds and is unable to parry next round."
+    },
+    {
+     "severity": "A",
+     "low": 51,
+     "high": 55,
+     "result": "Sweep drives foe back 3 feet. Foe must parry next round at -30. +5 hits."
+    },
+    {
+     "severity": "B",
+     "low": 51,
+     "high": 55,
+     "result": "Throw knocks wind out of foe, and he is stunned for 1 round. +6 hits."
+    },
+    {
+     "severity": "C",
+     "low": 51,
+     "high": 55,
+     "result": "Throw stuns foe for 2 rounds. +6 hits."
+    },
+    {
+     "severity": "D",
+     "low": 51,
+     "high": 55,
+     "result": "Throw breaks 3 of foe's ribs. Foe is stunned for 1 round and operates at -20. +6 hits."
+    },
+    {
+     "severity": "E",
+     "low": 51,
+     "high": 55,
+     "result": "Throw drops foe. +8 hits. Foe is stunned for 3 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 56,
+     "high": 60,
+     "result": "Throw stuns foe for 1 round. +6 hits."
+    },
+    {
+     "severity": "B",
+     "low": 56,
+     "high": 60,
+     "result": "Throw stuns foe for 1 round and sprains a finger on his weapon hand. Foe is at -10."
+    },
+    {
+     "severity": "C",
+     "low": 56,
+     "high": 60,
+     "result": "Sweep knocks foe back 5 feet. Foe is stunned and unable to parry for 1 round."
+    },
+    {
+     "severity": "D",
+     "low": 56,
+     "high": 60,
+     "result": "Sweep nearly knocks foe down. Foe is stunned and unable to parry for 1 round. +7 hits."
+    },
+    {
+     "severity": "E",
+     "low": 56,
+     "high": 60,
+     "result": "Surprising sweep sends foe reeling. Foe is stunned for 3 rounds. +9 hits."
+    },
+    {
+     "severity": "A",
+     "low": 61,
+     "high": 65,
+     "result": "Throw downs foe, but there is a good recovery. Foe is stunned for 1 round. +7 hits."
+    },
+    {
+     "severity": "B",
+     "low": 61,
+     "high": 65,
+     "result": "Throw pulls muscle in foe's weapon arm. Foe is stunned for 1 round. +3 hits. Foe is at -20."
+    },
+    {
+     "severity": "C",
+     "low": 61,
+     "high": 65,
+     "result": "Throw disarms foe. +3 hits and foe is stunned for 1 round. If you want to run, the time is now."
+    },
+    {
+     "severity": "D",
+     "low": 61,
+     "high": 65,
+     "result": "Throw disarms foe and leaves him stunned for 2 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 61,
+     "high": 65,
+     "result": "Fine throw. Foe lands on his weapon arm, is disarmed, and is stunned for 3 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 66,
+     "high": 66,
+     "result": "Throw dislocates foe's shield shoulder. Foe is stunned and unable to parry 3 rounds, and is -50."
+    },
+    {
+     "severity": "B",
+     "low": 66,
+     "high": 66,
+     "result": "Nifty throw. You have foe pinned, on his face, and in an arm lock. +9 hits. Foe is disarmed and immobilized."
+    },
+    {
+     "severity": "C",
+     "low": 66,
+     "high": 66,
+     "result": "Sweep shatters foe's knee. Foe is stunned and unable to parry 4 rounds, operates -80."
+    },
+    {
+     "severity": "D",
+     "low": 66,
+     "high": 66,
+     "result": "Smooth throw. Foe lands on his head. If foe has helm, he is knocked out. If not, he is paralyzed from the waist down."
+    },
+    {
+     "severity": "E",
+     "low": 66,
+     "high": 66,
+     "result": "Perfect toss sends foe flying over your shoulder and 10 feet. Foe dies on impact. Add +10 next roll."
+    },
+    {
+     "severity": "A",
+     "low": 67,
+     "high": 70,
+     "result": "Hard, but unsmooth throw stuns foe for 2 rounds. +7 hits."
+    },
+    {
+     "severity": "B",
+     "low": 67,
+     "high": 70,
+     "result": "Strong throw stuns foe for 2 rounds. You have the initiative for 6 rounds. +8 hits."
+    },
+    {
+     "severity": "C",
+     "low": 67,
+     "high": 70,
+     "result": "Foe is knocked back 5 feet and has a bruised chest muscle. Foe is stunned 2 rounds, is -10."
+    },
+    {
+     "severity": "D",
+     "low": 67,
+     "high": 70,
+     "result": "Throw drops foe on his shield shoulder. Breaks arm and collar bone. +5 hits."
+    },
+    {
+     "severity": "E",
+     "low": 67,
+     "high": 70,
+     "result": "Foe lands on shield arm. If foe has shield, +10 hits and shield is broken. If not, foe's arm shattered. +20 hits."
+    },
+    {
+     "severity": "A",
+     "low": 71,
+     "high": 75,
+     "result": "Fall bruises foe's thigh. Foe is stunned and unable to parry 1 rnd. +2 hits. Foe is at -5."
+    },
+    {
+     "severity": "B",
+     "low": 71,
+     "high": 75,
+     "result": "Fall tears ligament in leg. Foe is at -10. +5 hits. Foe stunned and unable to parry for 1 rnd."
+    },
+    {
+     "severity": "C",
+     "low": 71,
+     "high": 75,
+     "result": "Fall pulls muscle in foe's leg. Foe stunned 2 rnds and unable to parry next rnd. Operates at -25."
+    },
+    {
+     "severity": "D",
+     "low": 71,
+     "high": 75,
+     "result": "Foe falls and breaks leg. Minor fracture, but foe operates at -30. Poor fool stunned for 3 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 71,
+     "high": 75,
+     "result": "Foe falls and breaks his hip. Mild fracture, foe is at -40. He is stunned and unable to parry 2 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 76,
+     "high": 80,
+     "result": "Foe lands on shield arm. If foe has shield, it is broken. If not, foe's arm is sprained, he is at -10, and he is stunned for 2 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 76,
+     "high": 80,
+     "result": "Foe breaks fall with his weapon hand and sprains 2 fingers. Foe is at -25 and is stunned for 2 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 76,
+     "high": 80,
+     "result": "Foe falls and dislocates shield shoulder. +6 hits. Foe is at -40 and must parry for 6 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 76,
+     "high": 80,
+     "result": "Throw puts foe on back an breaks shoulder blade. Foe is at -20. +9 hits. Foe stunned and unable to parry 2 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 76,
+     "high": 80,
+     "result": "Throw sends foe down on his elbow. Joint shattered and arm is useless. Foe is stunned 4 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 81,
+     "high": 85,
+     "result": "Sweep unbalances foe. +3 hits. Foe is stunned for 3 rounds. Add +25 to your next round."
+    },
+    {
+     "severity": "B",
+     "low": 81,
+     "high": 85,
+     "result": "Sweep knocks foe 10 feet to side. Foe stunned and unable to parry 2 rounds. +9 hits."
+    },
+    {
+     "severity": "C",
+     "low": 81,
+     "high": 85,
+     "result": "Sweep staggers foe. +7 hits. Foe is stunned and unable to parry 2 rounds. Add +30 to next attack."
+    },
+    {
+     "severity": "D",
+     "low": 81,
+     "high": 85,
+     "result": "Break foe's wrist on weapon arm. Arm is useless. +10 hits. Fine hand throw."
+    },
+    {
+     "severity": "E",
+     "low": 81,
+     "high": 85,
+     "result": "Throw foe 10 feet. Foe is down on his face, disarmed and stunned and unable to parry 6 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 86,
+     "high": 90,
+     "result": "Foe lands on his back. Muscle and cartilage damage. Foe quickly recovers, but is stunned and unable to parry for 2 rounds. Foe is at -20."
+    },
+    {
+     "severity": "B",
+     "low": 86,
+     "high": 90,
+     "result": "Foe lands on his back and is stunned and unable to parry for 2 rounds. Torn tendon and broken bone, foe is at -25."
+    },
+    {
+     "severity": "C",
+     "low": 86,
+     "high": 90,
+     "result": "Throw drops foe on his back. Vertebrae cracked and foe is at -50. Foe is stunned and unable to parry 3 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 86,
+     "high": 90,
+     "result": "Throw drops foe and you put him into a severely immobolizing arm lock. Foe is stunned and unable to parry for 6 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 86,
+     "high": 90,
+     "result": "Throw sends foe flying into nearest enemy within 10 feet. All involved are stunned and unable to parry 3 rounds, take +9 hits."
+    },
+    {
+     "severity": "A",
+     "low": 91,
+     "high": 95,
+     "result": "Throw downs foe and breaks his nose. Foe is at -25. +7 hits. Foe is stunned and unable to parry 2 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 91,
+     "high": 95,
+     "result": "Fall breaks ribs, disarms foe, and sends him rolling 10 feet. Foe is at -30 and is stunned and unable to parry for 12 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 91,
+     "high": 95,
+     "result": "Sweep downs foe and you put him in a leg-breaking hold. +9 hits. Foe is pinned, stunned and unable to parry 15 rnds."
+    },
+    {
+     "severity": "D",
+     "low": 91,
+     "high": 95,
+     "result": "Throw bashes foe against nearly hard surface. Foe is knocked out and you can use a killing kick if you so desire."
+    },
+    {
+     "severity": "E",
+     "low": 91,
+     "high": 95,
+     "result": "Sly rolling throw sends foe into air. Foe is left disarmed and unconscious. You spring to your feet 10 feet away."
+    },
+    {
+     "severity": "A",
+     "low": 96,
+     "high": 99,
+     "result": "Throw sends foe down on his head. If foe has helm, he is stunned 9 rounds. If not, foe is knocked out."
+    },
+    {
+     "severity": "B",
+     "low": 96,
+     "high": 99,
+     "result": "Sweep stuns foe; kick disarms him; and another sweep knocks him flat on his back. Foe is unconscious. +20 hits."
+    },
+    {
+     "severity": "C",
+     "low": 96,
+     "high": 99,
+     "result": "Throw cracks foe's skull. If foe has helm, he is in a coma. If not, he dies of brain damage in 1 round."
+    },
+    {
+     "severity": "D",
+     "low": 96,
+     "high": 99,
+     "result": "Throw sends foe down. He is impaled by broken rib or his own weapon and dies in 6 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 96,
+     "high": 99,
+     "result": "Fall snaps foe's neck, killing him instantly. Add +25 to your next attack."
+    },
+    {
+     "severity": "A",
+     "low": 100,
+     "high": 100,
+     "result": "Snazzy throw. Foe is stunned and unable to parry 6 rounds. Foe is prone and you can finish him (if you desire) with a knee to the solar plexus."
+    },
+    {
+     "severity": "B",
+     "low": 100,
+     "high": 100,
+     "result": "Fabulous throw sends foe flying. Foe's neck is broken on impact and he dies after rolling 15 feet."
+    },
+    {
+     "severity": "C",
+     "low": 100,
+     "high": 100,
+     "result": "Fall breaks foe's back. +12 hits. Foe paralyzed from the neck down. Add +20 next roll."
+    },
+    {
+     "severity": "D",
+     "low": 100,
+     "high": 100,
+     "result": "Sweeps sends foe twisting backwards 5 feet. Foe's spine is snapped and he is left a quadriplegic."
+    },
+    {
+     "severity": "E",
+     "low": 100,
+     "high": 100,
+     "result": "Using but half the round, you use a rolling throw to send foe against nearest hard surface. Foe dies, you are up, press on."
+    }
+   ]
+  },
+  {
+   "name": "Puncture Critical Table",
+   "code": "P",
+   "source": "book",
+   "criticals": [
+    {
+     "severity": "A",
+     "low": 1,
+     "high": 5,
+     "result": "Zip."
+    },
+    {
+     "severity": "B",
+     "low": 1,
+     "high": 5,
+     "result": "Glancing blow. No extra damage. +0."
+    },
+    {
+     "severity": "C",
+     "low": 1,
+     "high": 5,
+     "result": "+1 hit."
+    },
+    {
+     "severity": "D",
+     "low": 1,
+     "high": 5,
+     "result": "+2 hits."
+    },
+    {
+     "severity": "E",
+     "low": 1,
+     "high": 5,
+     "result": "+3 hits."
+    },
+    {
+     "severity": "A",
+     "low": 6,
+     "high": 10,
+     "result": "+1 hit."
+    },
+    {
+     "severity": "B",
+     "low": 6,
+     "high": 10,
+     "result": "+2 hits."
+    },
+    {
+     "severity": "C",
+     "low": 6,
+     "high": 10,
+     "result": "+3 hits."
+    },
+    {
+     "severity": "D",
+     "low": 6,
+     "high": 10,
+     "result": "+4 hits."
+    },
+    {
+     "severity": "E",
+     "low": 6,
+     "high": 10,
+     "result": "Unbalance foe with a nice grazing strike. You gain initiative +5 hits."
+    },
+    {
+     "severity": "A",
+     "low": 11,
+     "high": 15,
+     "result": "You receive initiative for next round. +1 hit."
+    },
+    {
+     "severity": "B",
+     "low": 11,
+     "high": 15,
+     "result": "Glancing blow to side. +3 hits. You receive initiative next rnd."
+    },
+    {
+     "severity": "C",
+     "low": 11,
+     "high": 15,
+     "result": "Blow to foe's side. +5 hits. You receive initiative next round."
+    },
+    {
+     "severity": "D",
+     "low": 11,
+     "high": 15,
+     "result": "+2 hits Foe must parry for next round."
+    },
+    {
+     "severity": "E",
+     "low": 11,
+     "high": 15,
+     "result": "+3 hits Foe must parry for next round."
+    },
+    {
+     "severity": "A",
+     "low": 16,
+     "high": 20,
+     "result": "Foe must parry next round. +1 hit."
+    },
+    {
+     "severity": "B",
+     "low": 16,
+     "high": 20,
+     "result": "Blow to side. +2 hits. Foe must parry next round at -10."
+    },
+    {
+     "severity": "C",
+     "low": 16,
+     "high": 20,
+     "result": "Blow across side. Foe must parry next round at -20. +3 hits."
+    },
+    {
+     "severity": "D",
+     "low": 16,
+     "high": 20,
+     "result": "Minor side wound. Foe fights at -10. You have the initiative 1 rnd."
+    },
+    {
+     "severity": "E",
+     "low": 16,
+     "high": 20,
+     "result": "Stun foe for 1 round. Add +20 to your next attack."
+    },
+    {
+     "severity": "A",
+     "low": 21,
+     "high": 35,
+     "result": "Foe must parry next round. +2 hits. Add +10 to next attack."
+    },
+    {
+     "severity": "B",
+     "low": 21,
+     "high": 35,
+     "result": "Foe must parry next round at -20. +2 hits."
+    },
+    {
+     "severity": "C",
+     "low": 21,
+     "high": 35,
+     "result": "You wound foe along side of chest. Foe is stunned 1 round and takes 1 hit per round.."
+    },
+    {
+     "severity": "D",
+     "low": 21,
+     "high": 35,
+     "result": "You wound foe along side of hip. Foe is stunned 1 round and takes 2 hits per round."
+    },
+    {
+     "severity": "E",
+     "low": 21,
+     "high": 35,
+     "result": "Foe receives minor side wound. +2 hits. Foe is at -10. Foe takes 2 hits per round."
+    },
+    {
+     "severity": "A",
+     "low": 36,
+     "high": 45,
+     "result": "Minor calf wound. Foe receives 1 hit per round."
+    },
+    {
+     "severity": "B",
+     "low": 36,
+     "high": 45,
+     "result": "Minor calf wound. Foe takes 1 hit per round. +2 hits."
+    },
+    {
+     "severity": "C",
+     "low": 36,
+     "high": 45,
+     "result": "Minor calf wound. Foe takes 2 hits per round."
+    },
+    {
+     "severity": "D",
+     "low": 36,
+     "high": 45,
+     "result": "Minor thigh wound. Foe takes 3 hits per round."
+    },
+    {
+     "severity": "E",
+     "low": 36,
+     "high": 45,
+     "result": "Thigh strike. If foe has leg armor, +3 hits. If none, +2 hits, 3 hits/rnd."
+    },
+    {
+     "severity": "A",
+     "low": 46,
+     "high": 50,
+     "result": "Strike along foe's back. +2 hits. Foe must now parry next round at -30."
+    },
+    {
+     "severity": "B",
+     "low": 46,
+     "high": 50,
+     "result": "Strike along foe's back. Foe is stunned for 1 round and takes 1 hit per round."
+    },
+    {
+     "severity": "C",
+     "low": 46,
+     "high": 50,
+     "result": "Strike across foe's back stuns foe for 2 rounds. Foe takes 1 hit per round."
+    },
+    {
+     "severity": "D",
+     "low": 46,
+     "high": 50,
+     "result": "Strike to foe's lower back. Foe is stunned and unable to parry next round. +6 hits."
+    },
+    {
+     "severity": "E",
+     "low": 46,
+     "high": 50,
+     "result": "Strike to foe's lower back. Foe takes 3 hits/rnd. +5 hits. Foe is stunned and unable to parry during next rnd."
+    },
+    {
+     "severity": "A",
+     "low": 51,
+     "high": 55,
+     "result": "Strike to foe's chest. Foe must parry next round at -25. Foe takes 2 hits per round."
+    },
+    {
+     "severity": "B",
+     "low": 51,
+     "high": 55,
+     "result": "Minor chest wound. Foe takes 2 hits per round. +3 hits. Foe must parry for next 2 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 51,
+     "high": 55,
+     "result": "Minor chest wound. Foe takes 2 hits per round. +3 hits. Foe is stunned for 2 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 51,
+     "high": 55,
+     "result": "Strike to chest. +5 hits. Foe takes 3 hits per round and fights at -15. Foe must parry next round."
+    },
+    {
+     "severity": "E",
+     "low": 51,
+     "high": 55,
+     "result": "Chest wound. Foe takes 4 hits/rnd. +5 hits. Foe fights at -10. Foe is stunned and unable to parry 1 round."
+    },
+    {
+     "severity": "A",
+     "low": 56,
+     "high": 60,
+     "result": "Minor thigh wound. Foe takes 2 hits per round. +2 hits. Foe is stunned next round."
+    },
+    {
+     "severity": "B",
+     "low": 56,
+     "high": 60,
+     "result": "Minor thigh wound. Foe takes 2 hits per rounds. +3 hits. Foe is stunned and unable to parry next round."
+    },
+    {
+     "severity": "C",
+     "low": 56,
+     "high": 60,
+     "result": "Minor thigh wound. +5 hits. Foe takes 2 hits per round and is at -10. Foe is stunned for 2 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 56,
+     "high": 60,
+     "result": "Strike to thigh. Foe takes 3 hits per round. Foe is stunned and unable to parry for the next round. +3 hits."
+    },
+    {
+     "severity": "E",
+     "low": 56,
+     "high": 60,
+     "result": "Thigh wound. Foe takes 5 hits per round. +6 hits. Foe is stunned and unable to parry next round."
+    },
+    {
+     "severity": "A",
+     "low": 61,
+     "high": 65,
+     "result": "Minor forearm wound. +2 hits. Foe takes 2 hits per round. Foe is at -10."
+    },
+    {
+     "severity": "B",
+     "low": 61,
+     "high": 65,
+     "result": "Minor forearm wound. Foe is stunned during next round. +2 hits. Foe is at -10 and takes 2 hits per round."
+    },
+    {
+     "severity": "C",
+     "low": 61,
+     "high": 65,
+     "result": "Forearm wound. Foe takes 2 hits per round and is at -10. +3 hits. Foe is stunned for 2 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 61,
+     "high": 65,
+     "result": "Forearm wound takes 3 hits per round and is at -10. +3 hits. Foe is stunned for 2 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 61,
+     "high": 65,
+     "result": "Forearm wound. Foe takes 3 hits per round and is at -15. +5 hits. Foe is stunned for 2 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 66,
+     "high": 66,
+     "result": "Strike through foe's shield shoulder. Arm is useless. Add +10 to your next attack. Foe is stunned for 3 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 66,
+     "high": 66,
+     "result": "Strike shatters elbow in foe's weapon arm. +3 hits. Arm is useless. Foe is stunned 4 rnds and cannot parry for 2 rnds."
+    },
+    {
+     "severity": "C",
+     "low": 66,
+     "high": 66,
+     "result": "Strike shatters foe's knee. Foe is knocked down, is at -90, and stays down for 3 rounds. Foe is unable to parry 2 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 66,
+     "high": 66,
+     "result": "Strike to side of head. Foe is knocked out for 6 hours. +10 hits. If foe has no helm, you kill him."
+    },
+    {
+     "severity": "E",
+     "low": 66,
+     "high": 66,
+     "result": "Strike through both of foe's lungs. Foe drops and passes out. Foe dies in 6 rounds. Add +10 to your next attack."
+    },
+    {
+     "severity": "A",
+     "low": 67,
+     "high": 70,
+     "result": "Strike along foe's neck. +5 hits. Foe is stunned for 3 rounds and cannot parry next round."
+    },
+    {
+     "severity": "B",
+     "low": 67,
+     "high": 70,
+     "result": "Strike to foe's neck area. Foe takes 3 hits per round and is at -5. Foe is stunned for 2 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 67,
+     "high": 70,
+     "result": "Strike along foe's neck. Foe is stunned for 4 rounds and cannot parry for 2 rounds. Add +15 to your next attack."
+    },
+    {
+     "severity": "D",
+     "low": 67,
+     "high": 70,
+     "result": "Strike foe in shoulder. +3 hits. Foe is stunned and unable to parry for 2 rounds. Foe is at -20."
+    },
+    {
+     "severity": "E",
+     "low": 67,
+     "high": 70,
+     "result": "Strike for is shoulder. Sever muscle and tendons. Arm is useless. Foe takes 3 hits per round. Foe is stunned for 6 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 71,
+     "high": 75,
+     "result": "Strike lower leg. Tear tendons. Foe is at -25. +3 hits. Foe is stunned and unable to parry next round."
+    },
+    {
+     "severity": "B",
+     "low": 71,
+     "high": 75,
+     "result": "Strike to foe's calf. Slash muscle. Foe is at -40 +3 hits. Foe is stunned and unable to parry for 2 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 71,
+     "high": 75,
+     "result": "Strike to lower leg. Foe is stunned and unable to parry for 2 rounds. +5 hits. Foe is at -50. Slash muscle and tendons."
+    },
+    {
+     "severity": "D",
+     "low": 71,
+     "high": 75,
+     "result": "Strike to lower leg. Foe is at -50. Slash muscle and cartilage. +6 hits. Foe is stunned and unable to parry for 2 rounds."
+    },
+    {
+     "severity": "E",
+     "low": 71,
+     "high": 75,
+     "result": "Strike through lower leg. Foe is stunned and unable to parry for 3 rnds. Sever muscle. Foe is at -75."
+    },
+    {
+     "severity": "A",
+     "low": 76,
+     "high": 80,
+     "result": "Strike to foe's upper arm. +3 hits. Foe takes 3 hits per round and is at -25. Foe is stunned for 2 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 76,
+     "high": 80,
+     "result": "Strike through muscle in foe's shield arm. Foe is at -30 and takes 3 hits per round. Foe is stunned for 3 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 76,
+     "high": 80,
+     "result": "Strike foe in shield arm. Tear muscle and tendons. Foe takes 3 hits per round, fights at -25. Foe is stunned 6 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 76,
+     "high": 80,
+     "result": "Strike foe in shield arm. Arm is useless. Foe is stunned for 6 rounds. Foe takes 3 hits per round. +12 hits."
+    },
+    {
+     "severity": "E",
+     "low": 76,
+     "high": 80,
+     "result": "Strike foe is weapon arm, bone is broken. Foe is stunned and unable to parry for 3 rounds. +10 hits."
+    },
+    {
+     "severity": "A",
+     "low": 81,
+     "high": 85,
+     "result": "Side wound. Foe takes 5 hits per round and is stunned for 6 rounds. Add +20 to your next attack."
+    },
+    {
+     "severity": "B",
+     "low": 81,
+     "high": 85,
+     "result": "Side wound. +6 hits. Foe takes 5 hits per round. Foe is at -25. Foe is stunned and unable to parry for 3 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 81,
+     "high": 85,
+     "result": "Side wound. +6 hits. Foe takes 5 hits per round. Foe is at -25. Foe is stunned and unable to parry for 3 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 81,
+     "high": 85,
+     "result": "Major abdomenal wound. Foe takes 6 hits per round. +10 hits. Foe is stunned and unable to parry for 3 rounds. Foe is at -20."
+    },
+    {
+     "severity": "E",
+     "low": 81,
+     "high": 85,
+     "result": "Strike through foe's back severs a vein. Foe is stunned and unable to parry for 12 rounds. Then dies."
+    },
+    {
+     "severity": "A",
+     "low": 86,
+     "high": 90,
+     "result": "Strike foe in back. Foe is at -20 and takes 3 hits per round. Foe is stunned and unable to parry 2 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 86,
+     "high": 90,
+     "result": "Strike to back of head. If foe has no helm, he dies. If foe has a helm, +6 hits and foe is down for for 2 rounds."
+    },
+    {
+     "severity": "C",
+     "low": 86,
+     "high": 90,
+     "result": "Strike to back of head. If foe has no helm, he dies. If foe has a helm, +6 hits and foe is down for 2 rounds."
+    },
+    {
+     "severity": "D",
+     "low": 86,
+     "high": 90,
+     "result": "Strike through foe's kidneys. Foe drops. +9 hits. Foe dies after 6 rounds of very intense agony. Sad."
+    },
+    {
+     "severity": "E",
+     "low": 86,
+     "high": 90,
+     "result": "Strike through leg severs an artery. Foe drops, lapses into unconsciousness, and dies after 12 rounds."
+    },
+    {
+     "severity": "A",
+     "low": 91,
+     "high": 95,
+     "result": "Rip off foe's ear. +3 hits. Foe takes 2 hits pr round, hears at -50. Foe is stunned and not able to parry for 2 rounds."
+    },
+    {
+     "severity": "B",
+     "low": 91,
+     "high": 95,
+     "result": "Strike through foe's hip. Foe takes 3 hits per round. +5 hits. Foe is stunned next round. Foe is at -25."
+    },
+    {
+     "severity": "C",
+     "low": 91,
+     "high": 95,
+     "result": "Strike through foe's chest, severs a vein. Foe drops immediately and dies in 9 rounds due to shock and blood loss."
+    },
+    {
+     "severity": "D",
+     "low": 91,
+     "high": 95,
+     "result": "Strike through foe's side destroys a variety of organs. Foe fights normally for 6 rounds then dies."
+    },
+    {
+     "severity": "E",
+     "low": 91,
+     "high": 95,
+     "result": "Sever artery in foe's arm. Foe is stunned for 12 rounds and then dies."
+    },
+    {
+     "severity": "A",
+     "low": 96,
+     "high": 99,
+     "result": "Strike foe's nose. There is a permanent scar. Foe takes 3 hits/round. Foe is stunned and unable to parry 3 rnds."
+    },
+    {
+     "severity": "B",
+     "low": 96,
+     "high": 99,
+     "result": "Strike through foe's cheek. Foe drops and dies after 9 rounds of incapacity. Add +20 to your next attack."
+    },
+    {
+     "severity": "C",
+     "low": 96,
+     "high": 99,
+     "result": "Strike through foe's neck breaks backbone and severs spine. Foe is paralyzed from the neck down \u2014 permanently."
+    },
+    {
+     "severity": "D",
+     "low": 96,
+     "high": 99,
+     "result": "Nail sucker in lower back. Internal bleeding and shock kill foe in 6 rounds. Foe is down and out."
+    },
+    {
+     "severity": "E",
+     "low": 96,
+     "high": 99,
+     "result": "Shot through heart send foe reeling back 10 feet to a spot suitable for dying. Weapon is stuck in reeling foe."
+    },
+    {
+     "severity": "A",
+     "low": 100,
+     "high": 100,
+     "result": "Strike through neck. Sever vein and artery. Foe cannot breath. Foe drops and dies of a massive heart failure."
+    },
+    {
+     "severity": "B",
+     "low": 100,
+     "high": 100,
+     "result": "Strike through foe's eye. Foe dies instantly. Add +10 to all friendly attacks within 30 feet next round."
+    },
+    {
+     "severity": "C",
+     "low": 100,
+     "high": 100,
+     "result": "Shot through both ears proves effective. Foe dies instantly. Add +20 to your next 6 round. Pretty shot."
+    },
+    {
+     "severity": "D",
+     "low": 100,
+     "high": 100,
+     "result": "Strike through brain makes life difficult for foe. You have a half round left to act. Add +20 to your next attack."
+    },
+    {
+     "severity": "E",
+     "low": 100,
+     "high": 100,
+     "result": "Strike through foe's eye. Foe dies instantly. Add +25 to our next attack. Carry on."
+    }
+   ]
+  },
+  {
+   "code": "S",
+   "criticals": [
+    {
+     "high": 5,
+     "low": 1,
+     "result": "Zip.",
+     "severity": "A"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "Weak strike. +0 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+1 hit",
+     "severity": "C"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+ 2 hits",
+     "severity": "D"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+3 hits",
+     "severity": "E"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+1 hit.",
+     "severity": "A"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+2 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+3 hits",
+     "severity": "C"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+4 hits",
+     "severity": "D"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "Unbalance foe. +5 hits. You receive initiative next round.",
+     "severity": "E"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "You receive initiative next round. +1 hit.",
+     "severity": "A"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Glancing blow to foe's side. +3 hits. You receive initiative next round.",
+     "severity": "B"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Blow to foe's side yields +6 hits. You receive initiative next round.",
+     "severity": "C"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "+3 hits. Foe must parry for next round of action.",
+     "severity": "D"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "+4 hits. Foe must parry next round of action.",
+     "severity": "E"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Foe must parry next round. +1 hit.",
+     "severity": "A"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Blow to side. +2 hits. Foe must parry next round at -10.",
+     "severity": "B"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Blow to side. +4 hits. Foe must parry next round -20.",
+     "severity": "C"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Minor side wound. Foe at -10. +2 hits. Receive initiative next round.",
+     "severity": "D"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Stun foe for 1 round. Foe may not parry. Add +10 to your next swing.",
+     "severity": "E"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Foe must parry next round. +2 hits. Add +10 to next swing.",
+     "severity": "A"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Foe must parry next round -20 +2 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "You break foe's rib. 3 extra hits. Foe is stunned next round.",
+     "severity": "C"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Strike to side. Foe is stunned for next round and cannot parry. +3 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Foe receives minor side wound, fights at -10 and takes 1 hit per round. +3 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Minor calf wound. Foe receives 1 hit per round.",
+     "severity": "A"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Minor calf wound. Foe takes 1 hit per round. +2 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "You slash foe's leg. Foe takes 2 hits per round. +2 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "You slash foe's upper leg and deliver 3 extra hits. Foe takes 2 hits a round.",
+     "severity": "D"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Blow to foe's upper leg. If foe has leg armor +5 hits. If foe has no armor, +3 hits and +3 hits per rnd.",
+     "severity": "E"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Blow to foe's back. +2 hits. Foe must parry next round at -30.",
+     "severity": "A"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Blow to foe's back. Foe must parry next round at -30. +4 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Blow to foe's back stun foe 1 round. Foe may not parry. +3 hits and foe takes 1 hit/rnd.",
+     "severity": "C"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Strike foe's lower back. Foe may not parry and is out next round. +3 hits. Foe takes 2 hits/rnd.",
+     "severity": "D"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Strike to foe's lower back. Foe may not parry and is out next round. +4 hits. Foe takes 3 hits per round.",
+     "severity": "E"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Blow to foe's chest. Foe must parry next round -25. Wound gives 1 hit per round. +2 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Minor chest wound. Foe takes 1 hit/rnd and must parry next 2 rnds. +3 hits. Foe fights -5.",
+     "severity": "B"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Minor chest wound. +4 hits. Foe takes 2 hits per round and fights at -10. Foe must parry next rnd.",
+     "severity": "C"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Medium chest wound. +5 hits. Foe takes 3 hits per round, fights at -15, and must parry next round.",
+     "severity": "D"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Chest wound. Foe takes 4 hits per round, is at -10, and is stunned 2 rounds. +6 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Minor thigh wound. Foe takes 2 hits per round and must parry next rnd. +3 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Minor thigh wound. Foe takes 2 hits per round. +4 hits. Foe must parry next two rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Minor thigh wound. Foe takes 2 hits per round. +5 hits. Foe is stunned next round.",
+     "severity": "C"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Medium thigh wound. +6 hits. Foe takes 2 hits per round and is stunned 2 rounds.",
+     "severity": "D"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Thigh wound. Foe is stunned for 2 rounds. +8 hits. Foe takes 5 hits a round.",
+     "severity": "E"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Minor forearm wound. +3 hits. Foe takes 2 hits per round and is at -10.",
+     "severity": "A"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Minor forearm wound. Foe is stunned next rnd, takes 2 hits per rnd and is at -10. +4 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Medium forearm wound. +4 hits. Foe takes 3 hits per round, is at -10, and is stunned next round.",
+     "severity": "C"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Medium forearm wound. +4 hits. Foe takes 3 hits per round, is at -10, and is stunned next 2 rounds.",
+     "severity": "D"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Forearm wound. Foe is stunned for 2 rounds. +6 hits. Foe takes 3 hits per round and is at -15.",
+     "severity": "E"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "You shatter shoulder in foe's shield arm. Arm is useless. +10 next swing. Foe is stunned 3 rounds. +9 hits. Your initiative.",
+     "severity": "A"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Shatter elbow in foe's weapon arm. +8 hits. Foe is stunned 4 rounds and cannot parry during first 2 rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "You shatter foe's knee. Foe is knocked down. +6 hits. Foe at -90 and is down for 3 rounds. (and cannot parry).",
+     "severity": "C"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "You knock foe out for 6 hours with a strike to side of head. +15 hits. If foe has no helm, you kill him instantly.",
+     "severity": "D"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Sever foe's weapon arm. +12 hits. Foe expires in 12 rounds, drops immediately. Add +10 to your next swing.",
+     "severity": "E"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Slash foe's neck. +6 hits. Foe is stunned for 3 rounds and cannot parry during next round.",
+     "severity": "A"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Blow to foe's neck area. Foe takes 3 hits per round and fights at -5. Stun foe for 2 rounds. +7 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Slash foe's neck. Foe is stunned 4 rounds and cannot parry during next 2 rounds. +8 hits. +10 next round.",
+     "severity": "C"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Slash muscle in foe's shoulder area. +5 hits. Foe is stunned 3 rounds, and is at -20. Add +10 to your next swing.",
+     "severity": "D"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Slash tendons and crush the bone in foe's shield shoulder. Arm useless and foe takes 2 hits per round. Stun foe 4 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Slash tendons in foe's lower leg. Foe at -30 and takes 2 hits/round. +4 hits. Stun foe 2 rounds. Poor sucker.",
+     "severity": "A"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Slash muscle in foe's calf. Foe is stunned for 3 rounds and cannot parry during next round. +6 hits. Foe at -40.",
+     "severity": "B"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Slash muscle and tendons in foe's lower leg. Foe is stunned for 2 rounds and cannot parry. +7 hits. Foe at -45.",
+     "severity": "C"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Slash muscle and sever tendons in foe's lower leg. Foe is stunned for 3 rounds and cannot parry for next 2 rounds. Foe is at -50.",
+     "severity": "D"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Slash foe's lower leg and sever muscle and tendons. Foe at -70. +8 hits. Stun foe 6 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Slash foe's upper arm. +5 hits. Foe takes 3 hits per round and is at -25. Foe is stunned and unable to parry 2 rounds.",
+     "severity": "A"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Slash muscle in foe's shield arm. Foe is at -30 and takes 3 hits/rnd. Stunned and unable to parry for 2 rounds. +6 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Slash muscle and tendons in foe's shield arm. +9 hits. Foe takes 4 hits per round and arm is useless. Foe is stunned 6 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Slash muscle and tendons in foe's weapon arm. Arm is useless and foe is stunned 4 rounds. Foe cannot parry next 2 rnds. +10 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Slash tendons and break bone in foe's shield arm. Arm is useless. +12 hits. Foe is stunned and unable to parry for next 3 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Slash foe in side. +6 hits and a major wound. Foe takes 6 hits/rnd and is stunned 5 rnds. Add +20 to your next swing.",
+     "severity": "A"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Slash foe in side. +7 hits and a major wound. Foe takes 6 hits per round. Foe is stunned and cannot parry for next 2 rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Strike to foe's side. +8 hits. Foe takes 4 hits per round and is at -20. Foe is stunned and cannot parry for next 2 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Major abdomenal wound. +10 hits. Foe takes 8 hits/rnd, is stunned for 4 rnds, and is unable to parry for next 2 rnds. Foe at -10.",
+     "severity": "D"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Sever opponent's hand. +5 hits. Foe is stunned and unable to parry for next 12 rounds. Foe then dies.",
+     "severity": "E"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Slash foe in back. +8 hits. Foe is stunned and cannot parry for 2 rounds. Wound yields 2 hits/rnd. Foe at -10.",
+     "severity": "A"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Stricke to back knocks foe down. Foe is stunned and unable to parry for 3 rounds. +10 hits. Foe takes 3 hits/rnd.",
+     "severity": "B"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Blast to back breaks bone and knocks foe down. +9 hits and foe at -10. Foe is stunned and unable to parry for 4 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Sever opponent's hand. +6 hits. Foe is stunned for 6 rounds, unable to parry. Foe then drops and dies 6 rounds later.",
+     "severity": "D"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Sever foe's leg. +15 hits. Foe drops and lapses into unconsciousness. Foe dies in 9 rounds. Add +10 to your next swing.",
+     "severity": "E"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Cut off foe's ear. +3 hits. Foe takes 3 hits per round and hears at -50. Foe is stunned 3 rounds and unable to parry next round.",
+     "severity": "A"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Strike to foe's hip. +7 hits and foe is stunned 3 rounds. Foe cannot parry next round and fights -20. Add +10 to your next swing.",
+     "severity": "B"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Sever foe's leg. Foe drops immediately and dies in 6 rounds due to shock and blood loss. +20 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Sever foe's weapon arm. Foe is stunned and unable to parry for next 9 rounds. Foe then dies. +15 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Sever foe's spine. +20 hits. Foe collapses in a second, and is paralyzed from the neck down permanently.",
+     "severity": "E"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Slash foe's nose. Minor wound. +2 hits and a permanent scar. Foe takes 2 hits a round and is at -30. Foe stunned 6 rounds.",
+     "severity": "A"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Strike to foe's head and neck breaks skull and causes massive brain damage. Foe drops and dies in 6 rounds. +20 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Sever foe's shield arm. Foe is stunned, unable to parry for next +18 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Slash foe's side. +20 hits. Foe dies in 3 rounds due to massive internal organ damage. Foe is down and unconscious immediately.",
+     "severity": "D"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Strike to foe's head destroys brain and makes life difficult for the poor fool. Foe expires in a heap \u2014 immediately.",
+     "severity": "E"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Neck strike severs carotid artery and jugular vein. Foe's neck is broken. Foe dies in 1 round of intense agony.",
+     "severity": "A"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Disembowel foe, killing him instantly. 25% chance your weapon is stuck in opponent during next round.",
+     "severity": "B"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Destroy foe's eyes. +5 hits and foe is stunned and unable to parry for next 30 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Impale adversary in heart. +12 hits. Foe dies instantly. Heart is destroyed. 25% chance your weapon is stuck in foe 2 rnds.",
+     "severity": "D"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Strike to foe's groin area. +10 hits. All vitals are destroyed immediately. Foe is stunned and unable to parry for 12 rounds.",
+     "severity": "E"
+    }
+   ],
+   "name": "Slash Critical Table",
+   "source": "book"
+  },
+  {
+   "code": "SL",
+   "criticals": [
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+10 hits, but your weapon breaks in half. Shoddy workmanship.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+10 hits, but you drop your weapon and it will take 2 rnds to get it back. Bum luck buddy.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+10 hits, but you fumble your weapon for remainder of round. You are stunned next round.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+10 hits, but you fumble your weapon for remainder of round. You must parry next round... at -5.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+10 hits, but you must parry next round.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+2 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+3 hits.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+4 hits.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+6 hits.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+8 hits.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 20,
+     "low": 11,
+     "result": "+3 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 20,
+     "low": 11,
+     "result": "+4 hits.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 20,
+     "low": 11,
+     "result": "+5 hits.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 20,
+     "low": 11,
+     "result": "+8 hits.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 20,
+     "low": 11,
+     "result": "+10 hits.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 30,
+     "low": 21,
+     "result": "+4 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 30,
+     "low": 21,
+     "result": "+5 hits.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 30,
+     "low": 21,
+     "result": "+6 hits.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 30,
+     "low": 21,
+     "result": "+10 hits.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 30,
+     "low": 21,
+     "result": "+12 hits.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 40,
+     "low": 31,
+     "result": "+5 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 40,
+     "low": 31,
+     "result": "+6 hits.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 40,
+     "low": 31,
+     "result": "+7 hits.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 40,
+     "low": 31,
+     "result": "+12 hits.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 40,
+     "low": 31,
+     "result": "+15 hits.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 50,
+     "low": 41,
+     "result": "+6 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 50,
+     "low": 41,
+     "result": "+7 hits.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 50,
+     "low": 41,
+     "result": "+8 hits.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 50,
+     "low": 41,
+     "result": "+15 hits.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 50,
+     "low": 41,
+     "result": "+18 hits.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 65,
+     "low": 51,
+     "result": "+7 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 65,
+     "low": 51,
+     "result": "+8 hits.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 65,
+     "low": 51,
+     "result": "+9 hits.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 65,
+     "low": 51,
+     "result": "+18 hits.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 65,
+     "low": 51,
+     "result": "+20 hits.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "+20 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Blow gives foe light wound. +12 hits. Foe takes 3 hits for round and fights -10. Your weapon breaks.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Blow gives foe light wound. +15 hits foe takes 5 hits per round, fights -10, and yields initiative next round.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Heavy wound. +20 hits. Foe is stunned and unable to parry next round. Foe fights -15 and takes 10 hits per round.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Strike foe's heart and kill sucker. Add +20 to your next swing you are, however, covered with foe's blood. +50 hits.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "+8 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "+9 hits.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "+10 hits.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "+20 hits.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Heavy blow breaks bones in foe's upper body. +30 hits. Foe is stunned and unable to parry for 2 rounds. Flat strike.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 80,
+     "low": 71,
+     "result": "+9 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 80,
+     "low": 71,
+     "result": "+10 hits.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 80,
+     "low": 71,
+     "result": "+15 hits.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 80,
+     "low": 71,
+     "result": "Light wound. +13 hits. Foe takes 5 hits per round, fights -10, and yields the initiative. Add +10 to your next swing.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 80,
+     "low": 71,
+     "result": "Hard blow. +24 hits and foe fights at -20. Foe is stunned for 3 rounds and unable to parry. Foe takes 5 hits per round.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 90,
+     "low": 81,
+     "result": "+10 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 90,
+     "low": 81,
+     "result": "+15 hits.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 90,
+     "low": 81,
+     "result": "+20 hits.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 90,
+     "low": 81,
+     "result": "Light wound. +12 hits. Foe takes 4 hits per round and must parry next round. Add +20 to your next round.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 90,
+     "low": 81,
+     "result": "Heavy wound. Foe is stunned and unable to parry for 3 rnds. Foe takes 20 hits per round and fights at -25. +25 hits.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "+15 hits.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "+20 hits.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Light wound. +12 hits. Foe takes 4 hits per round and you have the initiative next 2 rounds. Add +10 next swing.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Hard blow. +25 hits. Foe is stunned for 2 rounds and is unable to parry next round. Foe takes 3 hits per round.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Strike to foe's neck severs a variety of blood vessels and knocks foe down. Foe expires in 3 rounds due to shock. +35 hits. Nice...",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 98,
+     "low": 96,
+     "result": "Blow severs vein and artery. Foe is stunned for 12 rounds, drops, then dies. Awesome.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 98,
+     "low": 96,
+     "result": "Massive blow to neck crushes bone and breaks spine. Foe dies in 1 round, but drops instantly. Add +25 to next swing.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 98,
+     "low": 96,
+     "result": "Blow to lower skull area kills foe instantly. Foe staggers for 1 round before dropping. Add +20 to your next swing.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 98,
+     "low": 96,
+     "result": "You cut foe's skull in half. Weapon is stuck in carnage for 6 rounds. Add +10 to all friendly swings for 6 rounds.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 98,
+     "low": 96,
+     "result": "Strike drives bone through Foe's heart. Foe dies instantly, but your weapon is stuck in foe for 12 rounds. +40 hits.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 100,
+     "low": 99,
+     "result": "Blow shatters bone. +30 hits and 10 hits per round due to compound fracture. Foe is at -25.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 100,
+     "low": 99,
+     "result": "Strike foe in leg and sever vein. +25 hits. Foe drops in 2 rounds and dies. Foe can fight in the interim.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 100,
+     "low": 99,
+     "result": "Crush bones in Foe's neck. 50% chance foe is paralyzed from neck down. 50% chance that foe is killed. You have a half round left to act.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 100,
+     "low": 99,
+     "result": "Strike through heart kills foe. +20 hits. 25% chance foe falls on you out of spite.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 100,
+     "low": 99,
+     "result": "Catch foe between the eyes and shatter the skull. Foe dies instantly. You have a half round to act. Add +25 to your next swing.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 150,
+     "low": 101,
+     "result": "Light wound. +12 hits. Foe bleeds at 1 hit per round. Add +10 to your next swing.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 150,
+     "low": 101,
+     "result": "Light wound. +13 hits and foe must parry next round. Foe takes 2 hits per round. Add +20 to your next swing.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 150,
+     "low": 101,
+     "result": "Hard blow. +30 hits. Foe is stunned for 3 rounds and is unable to parry during next round. Add +10 to your next swing.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 150,
+     "low": 101,
+     "result": "Serious compound fracture. +30 hits and foe is stunned, unable to parry, for 2 rounds.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 150,
+     "low": 101,
+     "result": "Strike foe through leg and sever vein. Foe is stunned and unable to parry for 6 rounds. Foe then dies. +20 hits.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 175,
+     "low": 151,
+     "result": "Blow cuts muscle and causes light wound. +20 hits. Foe is at -20 and takes 5 hits per round.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 175,
+     "low": 151,
+     "result": "Blow stuns foe for 1 round and foe is unable to parry. +25 hits. Foe is at -20 and is quite upset.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 175,
+     "low": 151,
+     "result": "Knock foe down. +25 hits. Foe is down and unable to parry for next 2 rounds. Add +10 to your next swing.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 175,
+     "low": 151,
+     "result": "Knock foe down with a vicious blow. +40 hits. 50% chance of coma -- 50% chance foe is down and unable to parry 6 rounds.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 175,
+     "low": 151,
+     "result": "Awesome blow knocks foe down. Foe breaks back and neck and suffocates in 12 rounds. +25 hits. Add +20 to your next swing.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 200,
+     "low": 176,
+     "result": "Blow cuts tendons. +15 hits and Foe fights -25. Add +20 to your next swing.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 200,
+     "low": 176,
+     "result": "Knock foe down. +20 hits. Foe is down for 2 rounds and unable to parry. Add +25 to your next swing.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 200,
+     "low": 176,
+     "result": "Heavy wound. +28 hits and foe is at -40. Foe is unable to parry and stunned for next 3 rounds. Foe takes 10 hits per round.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 200,
+     "low": 176,
+     "result": "Strike severs vast number of blood vessels. +25 hits and foe is stunned, unable to parry, for 9 rounds. Foe is at -25.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 200,
+     "low": 176,
+     "result": "Strike through foe's eye hits home and rips through brain. +24 hits. Foe drops immediately and dies. Fine blast.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": 250,
+     "low": 201,
+     "result": "Blow shatters bone. +35 hits. Foe takes 10 hits per round, is stunned 2 rounds, and fights at -30.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": 250,
+     "low": 201,
+     "result": "Heavy wound. +35 hits and foe is stunned for 3 rounds, unable to parry. Foe fights at -40 and takes 10 hits per round.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": 250,
+     "low": 201,
+     "result": "Vicious blow to foe's leg. Foe takes 12 hits per round and fights at -50. Foe is stunned and unable to parry for 6 rounds. +30 hits.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": 250,
+     "low": 201,
+     "result": "Strike through foe's ear. +15 hits. Foe dies of massive brain damage in 3 rounds. Add +20 to your next swing.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": 250,
+     "low": 201,
+     "result": "Magnificent abdomenal strike drops foe in a heap. +35 hits and foe dies of shock in 4 rounds. You are stunned next round.",
+     "severity": "SLAYING"
+    },
+    {
+     "high": null,
+     "low": 251,
+     "result": "Foe is blinded. +20 hits and foe fights at -100. Foe is stunned and unable to parry for 6 rounds.",
+     "severity": "NORMAL"
+    },
+    {
+     "high": null,
+     "low": 251,
+     "result": "Strike through foe's eye. You kill foe instantly. Add +20 to your next swing. 20% chance your weapon is stuck in foe for 3 rounds.",
+     "severity": "MAGIC"
+    },
+    {
+     "high": null,
+     "low": 251,
+     "result": "Awe inspiring strike drives bone through both lungs. Foe takes 100 hits, falls in a coma, and dies in 18 rounds.",
+     "severity": "MITHRIL"
+    },
+    {
+     "high": null,
+     "low": 251,
+     "result": "Incredible strike severs an artery and vein and breaks foe's spine. +50 hits, falls, and dies after 2 rounds of agony.",
+     "severity": "HOLY ARMS"
+    },
+    {
+     "high": null,
+     "low": 251,
+     "result": "Strike through side kills foe after a chain reaction of broken bones splinter. You are covered with foe's blood. +100 hits.",
+     "severity": "SLAYING"
+    }
+   ],
+   "name": "Super Large Creature Critical Table",
+   "source": "book"
+  },
+  {
+   "code": "Ti",
+   "criticals": [
+    {
+     "high": 5,
+     "low": 1,
+     "result": "Dubious strike. +0 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "Not enough. +0 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "Real weak. +0 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "HA!",
+     "severity": "D"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+1 hit.",
+     "severity": "E"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "Zip.",
+     "severity": "A"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "No bonus. +0 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "Nothing extra.",
+     "severity": "C"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+1 hit.",
+     "severity": "D"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+2 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Looking bad. +0 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "+1 hit.",
+     "severity": "B"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "+1 hit.",
+     "severity": "C"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "+1 hit.",
+     "severity": "D"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "+2 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "+1 hit.",
+     "severity": "A"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "+1 hit.",
+     "severity": "B"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "+1 hit.",
+     "severity": "C"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "+2 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Cutting strike. +2 hits and foe takes +1 hit per round.",
+     "severity": "E"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "+1 hit.",
+     "severity": "A"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "+2 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "+2 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "+3 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Minor calf wound. +2 hits and foe takes +1 hit per round.",
+     "severity": "E"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Cruel blow. +2 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "+3 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Light wound. +2 hits and foe takes +1 hit per round.",
+     "severity": "C"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Leg strike. If foe has no leg armor, +5 hits and he takes +1 hit per rnd.",
+     "severity": "D"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Leg hit. +3 hits and foe takes +1 hit per round.",
+     "severity": "E"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Poor follow through. You lose a claw and fight at +5 for 2 rounds. Foe takes +4 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "+3 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "+4 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Mild puncture. +3 hits and foe takes +1 hit per round.",
+     "severity": "D"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Lower back strike. +5 hits. Foe must parry next round and takes +1 hit per round.",
+     "severity": "E"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Leaping chest strike yields +3 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Light wound. Foe takes +1 hit per round. +3 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Mild chest wound. Foe takes +2 hits per rounds. +4 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Slash foe's lower chest. If foe has no metal chest armor, +5 hits and +3 per round.",
+     "severity": "D"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Chest strike. +6 hits and foe is forced to parry next round. Foe takes +2 hits pr round.",
+     "severity": "E"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Light thigh wound. Foe takes +1 hit per round. +1 hit.",
+     "severity": "A"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Thigh strike, but no real penetration. +6 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Mild thigh wound stuns foe next round. +4 hits and foe takes +2 hits per round.",
+     "severity": "C"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Thigh strike stuns foe for next round. +6 hits and foe takes +2 hits per round.",
+     "severity": "D"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Thigh wound. Foe is stunned for next round. +7 hits and foe takes +3 hits per round.",
+     "severity": "E"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Mild forearm wound. Foe takes +2 hits per round. +2 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Raking forearm strike leaves nasty scar. Foe takes +2 hits per round. +3 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Forearm strike. Foe is forced to parry for 2 rounds. +3 hits and foe takes +2 hits per round.",
+     "severity": "C"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Forearm wound. Foe is forced to parry for 2 rounds. +5 hits. Foe takes +2 hits per round. Add +10 to your next roll.",
+     "severity": "D"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Strike to forearm. Foe is stunned next round and you gain initiative for next 2 rounds. Foe takes +3 hits per round. +6 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Leg strike. Foe is stunned and unable to parry next round. +4 hits. Foe takes +2 hits per round.",
+     "severity": "A"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Calf strike. Foe tears muscle, is stunned 2 rounds, and is at -20. +5 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Bizarre wrist strike disarms foe, +4 hits. Foe is stunned next round. Add +10 to your next roll.",
+     "severity": "C"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Astounding head strike. If foe has a helm, +4 hits. If not, +7 hits and foe is unable to parry for 6 rounds.",
+     "severity": "D"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Bizarre strike to eyes destroys 1 eye and blinds the other eye for 2 days. Foe is at -95 and is stunned for 24 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Shoulder strike. Foe takes +1 hit per round and must parry next round. +3 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Upper chest strike. Foe is stunned next round. +4 hits. Foe takes +1 hit per round.",
+     "severity": "B"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Strike to foe's shoulder. Foe takes +2 hits per round. +5 hits. Foe is stunned next round at -20.",
+     "severity": "C"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Upper arm strike. Foe stunned and unable to parry next rnd. Foe takes +2 hits per round. +6 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Inspired shoulder strike tears muscle. Foe is stunned and unable to parry next rnd. Foe is at -20. +7 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Lower leg strike. If foe has leg armor, +1 hit. If not, foe takes +4 hits and +2 hits per round. Foe has initiative next round.",
+     "severity": "A"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Strike to lower leg. If foe has leg armor, +3 hits. If not, foe takes +6 hits, +2 hits per rounds, and must parry next 2 rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Calf strike. Slash muscle. Foe is at -20. Wound gives foe +2 hits per round, and stuns him for 2 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Lower leg strike. If foe has leg armor, +3 hits and he is stunned next round. If not, foe is stunned 2 rounds, is unable to parry next round.",
+     "severity": "D"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Vicious leg wound. Foe takes +4 hits per round and is stunned 3 rounds. +5 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Weak, but precise strike to foe's arm. Foe takes +1 hit per round and is stunned next round. +3 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Strong, but imprecise arm strike. Foe takes +2 hits per round and is at -15 due to moderate wound. +5 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Forearm strike. Muscle and tendon slashed. Foe fights at -25, takes +2 hits per round, and is stunned 2 rounds. +5 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Arm strike. Muscle and tendon torn. Foe fights at -25, takes +2 hits per rounds, and is stunned 3 rounds. +5 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Sly arm strike gives foe a troublesome wound. Foe is stunned and unable to parry for 2 rounds and takes 3 hits per round.",
+     "severity": "E"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Strike to foe's face. +4 hits. Foe is stunned next round and takes +2 hits per round.",
+     "severity": "A"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Flying face strike. If foe has facial armor, +2 hits and foe must parry next round. If not, foe takes +3 hits per round and stunned for 3 rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Head strike. If foe has helm, +3 hits and he is stunned next round. If not, foe has vicious scar, takes +3 hits per round, and is at -40.",
+     "severity": "C"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Acrobatic face strike. If foe has facial armor, +5 hits. If not, foe's nose torn and he takes +3 hits per round, is stunned 3 rounds, and is at -40.",
+     "severity": "D"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Head strike. If foe has helm, +4 hits and he is stunned next round. If not, foe takes +3 hits per round, fights at -25, and is stunned 9 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Sudden, well-placed blow. Foe is stunned for 2 rounds. +6 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Slash foe's neck. Foe takes +2 hits per round and is stunned for 3 rounds. +5 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Shoulder strike spins foe. Foe is stunned and unable to parry 2 rounds. +6 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Strike to foe's weapon arm. Foe is disarmed and stunned next round. +5 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Upper thigh wound, muscle torn. Foe is at -40 and takes +3 hits pr round. +4 hits. Foe is stunned for 3 rounds, unable to parry 1 round.",
+     "severity": "E"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Leaping head strike. If foe has helm, +3 hits and foe is stunned next round. If not, foe is at -30 and stunned 2 rounds. Ear torn.",
+     "severity": "A"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Wrist strike. Wound yields +2 hits per round. Foe is stunned fo 3 rounds and unable to parry next round. +5 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Neck strike. Foe is stunned and unable to parry for 2 rounds and takes +2 hits per round. Foe fights at -20. +3 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Well-timed attack tears muscle in thumb on foe's hand. Foe is disarmed and stunned and unable to parry 2 rounds. Foe fights at -50.",
+     "severity": "D"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Dazzling leap knocks foe down. Foe is disarmed and unconscious. +9 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Insulting strike to foe's nose. If foe has full helm, he is stunned 2 rnds. If not, foe has shredded nose, takes +3 hits per rnd, and is stunned 9 rnds.",
+     "severity": "A"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Head strikke. Foe is blinded by bleeding, takes +3 hits per round, and is stunned and unable to parry for 3 rounds. Foe at -40 while bleeding.",
+     "severity": "B"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Slash foe's Achilles tendon. Foe is knocked down and is stunned and unable to parry for 3 rounds. Foe takes +1 hit per round, operates at -75.",
+     "severity": "C"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Strike to foe's eyes. If foe has full helm, he is blind and at -95 for 1 week. If not, foe loses 1 eye and is blind in the other...and at -100.",
+     "severity": "D"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Head strike knocks foe down. Foe has massive concussion and dies in 9 rounds due to shock and internal bleeding. Pitiful sight.",
+     "severity": "E"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Strike to foe's eyes. If foe has full helm, he is stunned and unable to parry for 2 rounds. If not, foe loses 1 eye, is at -75, and is stunned and unable to parry for 3 rounds.",
+     "severity": "A"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Slashing throat attack knocks foe down. Foe is stunned and unable to parry for 6 rounds, takes +3 hits per rounds, and fights -50.",
+     "severity": "B"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Bizarre attack to foe's head area causes foe to strike himself. Foe must roll on the \"E\" column on the crush critical strike table.",
+     "severity": "C"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Strike to foe's eyes. +10 hits. Foe is stunned and unable to parry for 6 rounds, takes +2 hits per round, and is at -95. Blindness permanent.",
+     "severity": "D"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Unbelievable neck strike knocks foe down. Vein and artery are severed. Foe takes +20 hits per round, dies after 6 inactive rounds.",
+     "severity": "E"
+    }
+   ],
+   "name": "Tiny Animal Critical Table",
+   "source": "book"
+  },
+  {
+   "code": "Un",
+   "criticals": [
+    {
+     "high": 5,
+     "low": 1,
+     "result": "Nary a thing extra. +0 hits",
+     "severity": "A"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "Fairly weak. +0 zip.",
+     "severity": "B"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "Nope.",
+     "severity": "C"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+1 hit.",
+     "severity": "D"
+    },
+    {
+     "high": 5,
+     "low": 1,
+     "result": "+2 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "Sorry pal, maybe next time.",
+     "severity": "A"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+1 hit.",
+     "severity": "B"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+2 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+3 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 10,
+     "low": 6,
+     "result": "+5 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Glancing strike. +3 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Lame side strike. +4 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Weak blow. +5 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Back strike. +6 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 15,
+     "low": 11,
+     "result": "Blow to back. +7 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Foe must parry next round. +3 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Glancing side blow. +4 hits and foe must parry next round.",
+     "severity": "B"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Side strike. Foe must parry next round. +5 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Blow to foe's side. Foe is at -10 next round. +7 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 20,
+     "low": 16,
+     "result": "Side blow. Foe is at -20 next round. +8 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "On line, but weak. Foe must parry next round. +4 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Foe is unbalanced and is at -20 next round. +5 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Chest strike. Foe is stunned next round. +6 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Blow is weak but stuns foe for next round. +8 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 35,
+     "low": 21,
+     "result": "Blow cracks foe's rib. Foe is stunned and at -10 next round. +9 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Break foe's concentration. You gain initiative for next round. +4 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Leg strike unsteadies foe. +5 hits. You gain initiative next rnd. Foe is at -5 for 2 rnds.",
+     "severity": "B"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Blow to leg. Foe is at -40 next round. +5 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Calf strike. Foe's hurt muscle impairs maneuvers by -25. You gain the initiative next rnd. +7 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 45,
+     "low": 36,
+     "result": "Hard glancing blow to leg. If foe has leg armor, +10 hits. If not, +12 hits and foe stunned for 2 rnds.",
+     "severity": "E"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Back strike. +5 hits. Foe must parry next round at -10. Good, glancing shot.",
+     "severity": "A"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Back hit forces foe to parry next round at -20. +5 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Lower back strike. Foe reels and is stunned and unable to parry next round. +5 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Blow to back spins foe. +8 hits and foe is stunned and unable to parry next round.",
+     "severity": "D"
+    },
+    {
+     "high": 50,
+     "low": 46,
+     "result": "Strong back blow staggers foe. +12 hits. Foe is stunned and sadly unable to parry next round.",
+     "severity": "E"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Chest strike knocks foe back. Foe must parry next round at -20. +5 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Blow stuns foe for next round. +5 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Blast staggers foe. +6 hits and foe is stunned and unable to parry next round.",
+     "severity": "C"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Chest strike takes wind out of foe. +10 hits. Foe is stunned and unable to parry next round.",
+     "severity": "D"
+    },
+    {
+     "high": 55,
+     "low": 51,
+     "result": "Foe is knocked down. +12 hits. Foe is stunned and sadly unable to parry next round.",
+     "severity": "E"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Glancing leg strike. If foe has leg armor, +5 hits. If not, +7 hits and foe is stunned next round.",
+     "severity": "A"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Thigh strike bruises foe. +6 hits. Foe is forced to parry at -30 next round.",
+     "severity": "B"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Skipping calf strike. If foe has leg armor, +7 hits. If not, +9 hits, foe is stunned 2 rounds, and moves at -10.",
+     "severity": "C"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Thigh strike. +12 hits. Foe is stunned for 2 rounds. You have initiative next 3 rounds.",
+     "severity": "D"
+    },
+    {
+     "high": 60,
+     "low": 56,
+     "result": "Glancing strike to leg. Foe is stunned for 3 rounds. +14 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Arm strike. Foe is stunned for next round. +6 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Forearm strike disarms foe. +6 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Shoulder strike disarms foe and leaves foe stunned for 2 rounds. +6 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Arm strike disarms foe. Foe is stunned for 2 rounds. Add 20 to next action. +7 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 65,
+     "low": 61,
+     "result": "Blow to shoulder spins foe. +13 hits. Foe is stunned and unable to parry for 2 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Shoulder strike sends foe spinning. +7 hits. Foe is stunned and unable to parry for 2 rounds while regaining bearings.",
+     "severity": "A"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Elbow strike numbs foe's forearm. +8 hits. Foe drops his weapon and is stunned and unable to parry 2 rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Knee strike knocks foe down. +9 hits. Foe is at -80 due to broken knee and is stunned and unable to parry 3 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Hard hit strike. If foe has helm, he is knocked back 10 feet and stunned for 6 rounds. If not, foe is knocked out for 24 hours.",
+     "severity": "D"
+    },
+    {
+     "high": 66,
+     "low": 66,
+     "result": "Foe is knocked down and is unconscious. +30 hits.",
+     "severity": "E"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Chest strike unbalances foe. +6 hits. Foe is unbalanced and fights at -50 for 2 rounds.",
+     "severity": "A"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Blow to foe's chest. +7 hits. Confused foe is stunned and unable to parry next round.",
+     "severity": "B"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Strike to chest. Foe is at -20 due to broken ribs. +8 hits. Foe is stunned for 2 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Shoulder strike spins foe. +10 hits. Foe is at -25 due to a broken collar bone and is stunned and unable to parry next round.",
+     "severity": "D"
+    },
+    {
+     "high": 70,
+     "low": 67,
+     "result": "Shoulder blast knocks foe down. Foe is stunned and unable to parry for 2 rounds and is at -10 due to minor fracture.",
+     "severity": "E"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Blow to foe's lower leg. Foe is stunned for 2 rounds. +7 hits.",
+     "severity": "A"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Blow bruises foe's calf. Foe is stunned next round. +9 hits. Foe is at -10.",
+     "severity": "B"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Bruise foe's leg. +10 hits. Foe is stunned and unable to parry next round. Foe operates at -20.",
+     "severity": "C"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Blow break foe's leg. Foe moves at -75, +12 hits. Foe is stunned and unable to parry next round.",
+     "severity": "D"
+    },
+    {
+     "high": 75,
+     "low": 71,
+     "result": "Hard blow to foe's thigh knock foe down. +15 hits. Foe is stunned and unable to parry 3 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Blow to shield arm. If foe has a shield, it is torn away and +8 hits. If not, +12 hits and foe is stunned for 2 rnds.",
+     "severity": "A"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Strike to foe's shield arm. Foe is stunned for 2 rounds and is knocked backwards 5 feet. +10 hits. Bruise \u2014 foe at -10.",
+     "severity": "B"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Strike to foe's weapon arm. Foe is knocked back 5 feet and is stunned for 3 rounds. +11 hits. Mild fracture. Foe is at -25.",
+     "severity": "C"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Strong blow to foe's weapon arm. Foe is knocked back 10 feet. +10 hits. Foe is at -25 and drops weapon. Foe is stunned for 3 rnds.",
+     "severity": "D"
+    },
+    {
+     "high": 80,
+     "low": 76,
+     "result": "Strike to foe's shield arm. Foe stumbles back 3 feet and falls down. +15 hits. Foe is stunned and unable to parry for 4 rnds and is disarmed.",
+     "severity": "E"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Side strike, +12 hits. Foe is stunned and unable to parry next round. Add +10 to your next roll.",
+     "severity": "A"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Blow to foe's side. Foe is knocked sideways 3 feet and is stunned for 3 rounds. +15 hits.",
+     "severity": "B"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Shot to side knocks foe 5 feet sideways. Foe drops anything carried in his shield hand (and any shield) and is stunned for 6 rounds.",
+     "severity": "C"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Strike to foe's shield side knocks foe 5 feet sideways. Foe breaks ankle and falls down. Foe is at -50. +11 hits.",
+     "severity": "D"
+    },
+    {
+     "high": 85,
+     "low": 81,
+     "result": "Awesome side shot sends foe tripping sideways. Foe breaks leg and rolls 5 feet. Foe is at -50, is stunned and unable to parry 6 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Blow to back. Foe stumbles 5 feet sideways and is stunned for 3 rounds. +13 hits. Add +20 to your next roll.",
+     "severity": "A"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Strike to foe's back knocks foe sideways 10 feet. +12 hits. Foe is stunned and unable to parry for 2 rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Precise back strike knocks foe down. Foe is disarmed and stunned for 6 rounds. +14 hits. Add +20 to your next roll.",
+     "severity": "C"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Brutal back strike knocks foe down. +12 hits. Foe is disarmed and stunned and unable to parry for 4 rounds.",
+     "severity": "D"
+    },
+    {
+     "high": 90,
+     "low": 86,
+     "result": "Cruel head strike... Foe sees stars. +20 hits. Foe is knocked 10 feet backwards and is stunned and unable to parry 12 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Head strike breaks foe's nose. If foe has helm, he is stunned 3 rounds. If not, foe is knocked out for at least 2 hours.",
+     "severity": "A"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Blow to side of foe's head crushes ear area. Foe is stunned for 6 rounds. +9 hits. Foe is at -50 for 3 weeks .... impaired balance.",
+     "severity": "B"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Side strike spins foe 10 feet sideways. Foe must roll on appropriate fumble table next 3 rounds. +8 hits.",
+     "severity": "C"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Strike to foe's arm. If foe has shield, he loses it and take +10 hits. If not foe's arm is useless and he is stunned for 9 rounds.",
+     "severity": "D"
+    },
+    {
+     "high": 95,
+     "low": 91,
+     "result": "Blow to foe's shield shoulder. If foe has shield, he is stunned 6 rounds. If not, he is knocked down, has a useless arm, passes out.",
+     "severity": "E"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Nicely placed strike sends foe sprawling on his face. +10 hits. Foe is stunned and unable to parry for 3 rounds.",
+     "severity": "A"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Side strike causes foe to ungracefully stumble to an embarrassing prone position. Foe is stunned and unable to parry 6 rounds.",
+     "severity": "B"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Smooth and snazzy strike sends foe to his knees. If foe was using 1-hand weapon, it is thrown backwards 10 feet. Foe is stunned 24 hours.",
+     "severity": "C"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Strike to foe's head sends him 10 feet backwards. If helmed, +9 hits, the helm is destroyed, and foe stunned 6 rnds. If not, foe is sent into coma for 4 weeks.",
+     "severity": "D"
+    },
+    {
+     "high": 99,
+     "low": 96,
+     "result": "Pinpoint strike breaks foe's neck. Foe falls back 5 feet, spins, and stumbles to the ground. Foe dies of shock and suffocation in 3 rounds.",
+     "severity": "E"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Brutal hip strike knocks foe down, tears tendon and shatters joint. Foe is stunned and unable to parry for 9 hours. Leg useless, foe -90.",
+     "severity": "A"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Inspired back strike sends foe flying 10 feet and onto his face. Severe nerve damage. Foe is paralyzed from waist down.",
+     "severity": "B"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Upper chest strike knocks foe 10 feet sideways. Foe falls down and breaks both arms. Foe is sent into a 2 month coma.",
+     "severity": "C"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Savage blow to foe's head knocks foe down. Foe falls into coma and dies in 12 rounds due to severed vein. Add +20 next roll.",
+     "severity": "D"
+    },
+    {
+     "high": 100,
+     "low": 100,
+     "result": "Frightening strike to foe's temple knocks foe back 20 feet. Foe dies instantly. Add +20 to your next 3 rolls. Be kind now.",
+     "severity": "E"
+    }
+   ],
+   "name": "Unbalancing Critical Table",
+   "source": "book"
+  }
+ ],
+ "_ruling": "2026-09-28 user ruling: the book's 10 critical tables are authoritative; the 24 XML crit tables are shed."
+}

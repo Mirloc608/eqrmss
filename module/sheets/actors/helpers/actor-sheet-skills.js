@@ -11,8 +11,6 @@
 //
 // ============================================================================
 
-import { rmssRankBonus } from "../../../data/skills/rmss-rank-bonus.js";
-
 export class EQRMSSActorSkillsHelper {
 
     constructor(sheet) {
@@ -105,8 +103,7 @@ export class EQRMSSActorSkillsHelper {
 
         const ranks   = Number(skillItem.system.ranks ?? 0);
         const newRank = Number(skillItem.system.new_rank ?? 0);
-        // Table 15.2.2: bonus is a function of TOTAL ranks (existing + new).
-        const rankBonus = rmssRankBonus(ranks + newRank);
+        const rankBonus = ranks * 5 + newRank * 5;
 
         const catBonus = Number(categoryItem?.system?.category_bonus ?? 0);
         const itemBonus = Number(skillItem.system.item_bonus ?? 0);

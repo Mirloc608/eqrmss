@@ -11,6 +11,10 @@
           <div class="pool-controls" style="margin-bottom: 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
             <button type="button" data-action="rollPool">Roll Temp Pool (600 + 10d10)</button>
             <button type="button" data-action="rollAllStats">Roll All Stats</button>
+            <label style="cursor: pointer;">
+              <input type="checkbox" data-action="togglePotentials" {{#if characterData.useFixedPotentials}}checked{{/if}}>
+              Fixed Potentials (†)
+            </label>
           </div>
 
           <table class="eqrmss-table stats-table" style="width: 100%;">
