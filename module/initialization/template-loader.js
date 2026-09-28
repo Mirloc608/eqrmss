@@ -63,6 +63,12 @@ export async function loadEQRMSSTemplates() {
         "systems/eqrmss/templates/sheets/actors/parts/actor-aa.html",
         "systems/eqrmss/templates/sheets/actors/parts/actor-fav-spells.html",
         "systems/eqrmss/templates/sheets/actors/parts/actor-fav-items.html",
+        "systems/eqrmss/templates/sheets/actors/parts/actor-tabs.html",
+        "systems/eqrmss/templates/sheets/actors/parts/actor-main.html",
+        "systems/eqrmss/templates/sheets/actors/parts/actor-status.html",
+        "systems/eqrmss/templates/sheets/actors/parts/actor-equipment.html",
+        "systems/eqrmss/templates/sheets/actors/parts/actor-logs.html",
+
         "systems/eqrmss/templates/sheets/actors/apps/actor-settings.html",
 
         // ==========================================================
