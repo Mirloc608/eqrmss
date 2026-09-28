@@ -1,0 +1,44 @@
+{
+  "id": "alliance_of_sticks_and_stones_1",
+  "name": "Alliance of Sticks and Stones",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 102,
+  "description": "Forms an alliance of song over your target, causing other Bards' insults up to level 110 to deal between 100 and 125% more damage for 18 seconds. If 3 or more insults are focused in this time, it will trigger Broken Bones, dealing 1965366 damage to the target!.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "spell-damage-taken",
+      "value": {
+        "base": 0
+      },
+      "duration": 18
+    },
+    {
+      "type": "utility",
+      "effect": "cast-on-max-hits",
+      "spell": "broken-bones"
+    }
+  ],
+  "stacking": {
+    "group": "spell-vulnerability",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "debuff",
+    "spell-vulnerability",
+    "drum"
+  ]
+}

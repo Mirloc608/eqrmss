@@ -1,0 +1,36 @@
+{
+  "id": "hammer-of-brell-travel",
+  "zone": "hammer-of-brell",
+
+  "nodes": [
+    "hammer-entry",
+    "anvil-platform",
+    "forge-heart",
+    "hammer-core"
+  ],
+
+  "edges": [
+    {
+      "from": "hammer-entry",
+      "to": "anvil-platform",
+      "type": "divine-path"
+    },
+    {
+      "from": "anvil-platform",
+      "to": "forge-heart",
+      "type": "magma-channel",
+      "requirements": {
+        "heat-resonance": true
+      }
+    },
+    {
+      "from": "forge-heart",
+      "to": "hammer-core",
+      "type": "brell-summoning",
+      "requirements": {
+        "brell-attunement": true,
+        "forgeCompletion": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "arcane_hymn_2",
+  "name": "Arcane Hymn",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 100,
+  "description": "Fuels the destructive power of your group members, applying an additional damage effect to their attacks and every damaging spell they cast.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-on-spell-use",
+      "spell": "arcane-hymn-effect",
+      "amount": 100
+    },
+    {
+      "type": "utility",
+      "effect": "melee-proc",
+      "proc": "arcane-hymn-strike",
+      "amount": 200
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "flute"
+  ]
+}

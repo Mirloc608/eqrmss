@@ -1,0 +1,191 @@
+{
+    "id": "eqrmss-erudite",
+    "key": "erudite",
+    "name": "Erudite",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/erudite.png",
+
+    "description": "Erudites are an ancient and scholarly race of highly intelligent humans who have dedicated themselves to the pursuit of knowledge, magic, and the mysteries of the universe. Originating from the city of Erudin, they are known for their exceptional intellect, magical aptitude, and disciplined academic culture.",
+
+    "lore": {
+        "homeland": [
+            "Erudin",
+            "Toxxulia Forest"
+        ],
+        "culture": "Erudite society is built upon scholarship, arcane mastery, philosophical study, and strict intellectual discipline. They value logic, magical research, and academic achievement above all else.",
+        "alignment": "Often Lawful Neutral or Neutral, with strong tendencies toward intellectual detachment.",
+        "languages": [
+            "Common",
+            "Erudite"
+        ]
+    },
+
+    "stats": {
+        "Ag": -5,
+        "Co": -10,
+        "Me": 15,
+        "Re": 10,
+        "SD": 10,
+        "Em": 0,
+        "In": 5,
+        "Pr": 0,
+        "Qu": 0,
+        "St": -5
+    },
+
+    "racialTalents": [
+        {
+            "id": "arcane_supremacy",
+            "name": "Arcane Supremacy",
+            "description": "Erudites possess unmatched natural talent for arcane magic, granting exceptional magical affinity.",
+            "effects": [
+                {
+                    "type": "affinity",
+                    "target": "magical",
+                    "value": 15
+                }
+            ]
+        },
+        {
+            "id": "scholarly_mind",
+            "name": "Scholarly Mind",
+            "description": "Erudites excel in academic study, gaining bonuses to reasoning, memory, and magical theory.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Me",
+                    "value": 5
+                },
+                {
+                    "type": "stat",
+                    "target": "Re",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "magic_resistance",
+            "name": "Magic Resistance",
+            "description": "Erudites possess natural resistance to magical effects due to their deep understanding of arcane forces.",
+            "effects": [
+                {
+                    "type": "resistance",
+                    "target": "magic",
+                    "value": 15
+                }
+            ]
+        },
+        {
+            "id": "low_light_vision",
+            "name": "Low-Light Vision",
+            "description": "Erudites can see more clearly in dim environments due to their arcane attunement.",
+            "effects": [
+                {
+                    "type": "sense",
+                    "target": "lowLightVision",
+                    "value": 60
+                }
+            ]
+        },
+        {
+            "id": "academic_training",
+            "name": "Academic Training",
+            "description": "Erudites receive formal training in magical theory, history, and scholarly disciplines.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "lore",
+                    "value": 10
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "magical",
+                    "value": 10
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 25,
+        "pace": "Normal",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "5'10\" - 6'4\"",
+        "female": "5'8\" - 6'2\""
+    },
+
+    "weight": {
+        "male": "140 - 190 lbs",
+        "female": "120 - 170 lbs"
+    },
+
+    "lifespan": {
+        "average": "120-150 years"
+    },
+
+    "skillBonuses": {
+        "combat": {},
+        "physical": {},
+        "subterfuge": {},
+        "magical": {
+            "spellcasting": 10,
+            "arcaneLore": 10,
+            "ritualMagic": 5
+        },
+        "lore": {
+            "history": 10,
+            "philosophy": 10,
+            "magicTheory": 10
+        },
+        "social": {
+            "diplomacy": 5
+        }
+    },
+
+    "skillCosts": {
+        "combat": "D",
+        "physical": "C",
+        "subterfuge": "C",
+        "magical": "A",
+        "lore": "A",
+        "social": "B"
+    },
+
+    "favoredProfessions": [
+        "wizard",
+        "enchanter",
+        "magician",
+        "cleric"
+    ],
+
+    "restrictedProfessions": [
+        "warrior",
+        "berserker",
+        "ranger",
+        "rogue"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Erudite",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "scholar's robes",
+        "arcane focus crystal",
+        "research journal",
+        "ink and quill"
+    ]
+}

@@ -1,0 +1,44 @@
+{
+  "zone": "brells-sanctum",
+
+  "terrain": [
+    "divine-stone-halls",
+    "crystal-convergence-altars",
+    "magma-heart-fountains",
+    "sanctum-core-chamber"
+  ],
+
+  "lighting": "divine-stone-glow",
+
+  "hazards": [
+    {
+      "id": "stone-resonance-burst",
+      "dc": 22,
+      "effect": "force_damage_and_knockback"
+    },
+    {
+      "id": "magma-heart-surge",
+      "dc": 23,
+      "effect": "fire_damage_and_stagger"
+    },
+    {
+      "id": "crystal-convergence-flare",
+      "dc": 21,
+      "effect": "radiant_damage_and_blindness"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "very-high",
+    "restSafety": "none",
+    "notes": "The Sanctum shifts subtly with Brell’s will; pathways may realign or seal during combat."
+  },
+
+  "environmentTags": [
+    "divine",
+    "stone",
+    "crystal",
+    "magma",
+    "raid"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "brells-sanctum-travel",
+  "zone": "brells-sanctum",
+
+  "nodes": [
+    "sanctum-entry",
+    "stone-hall",
+    "crystal-altar",
+    "sanctum-core"
+  ],
+
+  "edges": [
+    {
+      "from": "sanctum-entry",
+      "to": "stone-hall",
+      "type": "divine-path"
+    },
+    {
+      "from": "stone-hall",
+      "to": "crystal-altar",
+      "type": "stone-resonance",
+      "requirements": {
+        "brell-attunement": true
+      }
+    },
+    {
+      "from": "crystal-altar",
+      "to": "sanctum-core",
+      "type": "divine-summoning",
+      "requirements": {
+        "forgeCompletion": true,
+        "crystalRootCompletion": true
+      }
+    }
+  ]
+}

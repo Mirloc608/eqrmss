@@ -1,0 +1,36 @@
+{
+  "id": "aura_of_margidor_2",
+  "name": "Aura of Margidor",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 115,
+  "description": "Creates an aura around you that applies Aura of Margidor Effect II to your companions, which increases their attack speed by 25%, spell damage by 32%, triple attack rate by 25%, their chance to flurry by 23%, and their companions' chance to flurry by 29% as long as they stay inside the area of the aura.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "aura",
+      "aura": "aura-of-margidor-effect"
+    }
+  ],
+  "stacking": {
+    "group": "aura",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "aura",
+    "voice"
+  ]
+}

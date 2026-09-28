@@ -1,0 +1,47 @@
+{
+  "id": "ancient_chaos_chant_1",
+  "name": "Ancient: Chaos Chant",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 65,
+  "description": "A chant of chaos that causes 51 damage to your target every six seconds and lowers their protection against magical attacks.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "single",
+    "range": 60,
+    "targets": "enemy"
+  },
+  "effects": [
+    {
+      "type": "damage",
+      "element": "disease",
+      "value": {
+        "base": 112
+      },
+      "over_time": {
+        "interval": "round",
+        "duration": 12
+      }
+    },
+    {
+      "type": "utility",
+      "effect": "cast-spell",
+      "spell": "chant-of-chaos"
+    }
+  ],
+  "stacking": {
+    "group": "damage-chant",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "damage",
+    "damage-chant",
+    "drum"
+  ]
+}

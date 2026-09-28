@@ -1,0 +1,35 @@
+{
+  "id": "crystal-veins-travel",
+  "zone": "crystal-veins",
+
+  "nodes": [
+    "veins-entry",
+    "resonance-chamber",
+    "root-lattice",
+    "veins-core"
+  ],
+
+  "edges": [
+    {
+      "from": "veins-entry",
+      "to": "resonance-chamber",
+      "type": "resonance-shift"
+    },
+    {
+      "from": "resonance-chamber",
+      "to": "root-lattice",
+      "type": "crystal-channel",
+      "requirements": {
+        "resonance-attunement": true
+      }
+    },
+    {
+      "from": "root-lattice",
+      "to": "veins-core",
+      "type": "divine-path",
+      "requirements": {
+        "brell-attunement": true
+      }
+    }
+  ]
+}

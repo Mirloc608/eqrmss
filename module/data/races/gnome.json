@@ -1,0 +1,194 @@
+{
+    "id": "eqrmss-gnome",
+    "key": "gnome",
+    "name": "Gnome",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/gnome.png",
+
+    "description": "Gnomes are a brilliant and inventive race of Norrath known for their curiosity, mechanical genius, and mastery of engineering. Originating from the underground city of Ak'Anon, they are renowned for their intellect, creativity, and eccentric approach to problem‑solving. Gnomes blend arcane study with technological innovation, making them one of the most unique peoples of Norrath.",
+
+    "lore": {
+        "homeland": [
+            "Ak'Anon",
+            "Steamfont Mountains"
+        ],
+        "culture": "Gnomes value innovation, experimentation, arcane study, and engineering mastery. Their society is filled with tinkerers, scholars, and eccentric inventors.",
+        "alignment": "Often Neutral or Good, with a tendency toward intellectual curiosity.",
+        "languages": [
+            "Common",
+            "Gnomish"
+        ]
+    },
+
+    "stats": {
+        "Ag": 0,
+        "Co": -5,
+        "Me": 10,
+        "Re": 10,
+        "SD": 5,
+        "Em": 0,
+        "In": 5,
+        "Pr": 0,
+        "Qu": 0,
+        "St": -5
+    },
+
+    "racialTalents": [
+        {
+            "id": "clockwork_insight",
+            "name": "Clockwork Insight",
+            "description": "Gnomes possess an innate understanding of mechanical devices, granting bonuses to engineering and tinkering skills.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "lore",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "arcane_tinkering",
+            "name": "Arcane Tinkering",
+            "description": "Gnomes blend magic with machinery, granting increased magical affinity and arcane reasoning.",
+            "effects": [
+                {
+                    "type": "affinity",
+                    "target": "magical",
+                    "value": 10
+                },
+                {
+                    "type": "stat",
+                    "target": "Re",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "magic_resistance",
+            "name": "Magic Resistance",
+            "description": "Gnomes possess natural resistance to magical effects due to their arcane experimentation.",
+            "effects": [
+                {
+                    "type": "resistance",
+                    "target": "magic",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "keen_mind",
+            "name": "Keen Mind",
+            "description": "Gnomes have sharp intuition and memory, aiding in problem‑solving and arcane study.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Me",
+                    "value": 5
+                },
+                {
+                    "type": "stat",
+                    "target": "In",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "low_light_vision",
+            "name": "Low-Light Vision",
+            "description": "Gnomes can see clearly in dim environments due to their subterranean origins.",
+            "effects": [
+                {
+                    "type": "sense",
+                    "target": "lowLightVision",
+                    "value": 60
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 25,
+        "pace": "Normal",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Small",
+
+    "height": {
+        "male": "3'6\" - 4'0\"",
+        "female": "3'4\" - 3'10\""
+    },
+
+    "weight": {
+        "male": "60 - 90 lbs",
+        "female": "50 - 80 lbs"
+    },
+
+    "lifespan": {
+        "average": "200-250 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "daggers": 5
+        },
+        "physical": {},
+        "subterfuge": {
+            "deviceManipulation": 10
+        },
+        "magical": {
+            "spellcasting": 5,
+            "arcaneLore": 10
+        },
+        "lore": {
+            "engineering": 15,
+            "mechanics": 10,
+            "alchemy": 5
+        },
+        "social": {
+            "diplomacy": 5
+        }
+    },
+
+    "skillCosts": {
+        "combat": "C",
+        "physical": "C",
+        "subterfuge": "B",
+        "magical": "A",
+        "lore": "A",
+        "social": "B"
+    },
+
+    "favoredProfessions": [
+        "wizard",
+        "magician",
+        "enchanter",
+        "rogue"
+    ],
+
+    "restrictedProfessions": [
+        "warrior",
+        "berserker",
+        "ranger",
+        "shadowknight"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Gnomish",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "tinker's toolkit",
+        "clockwork parts",
+        "arcane capacitor",
+        "light leather armor"
+    ]
+}

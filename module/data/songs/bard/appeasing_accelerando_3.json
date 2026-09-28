@@ -1,0 +1,44 @@
+{
+  "id": "appeasing_accelerando_3",
+  "name": "Appeasing Accelerando",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 123,
+  "description": "Lowers the recast time of your companions' beneficial spells by 2.2 and reduces the hatred they generate by 30%. This will benefit spells that are at least level 111 and up to level 125.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 60,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "reduce-recast-timer",
+      "amount": 2.0
+    },
+    {
+      "type": "modifier",
+      "stat": "hate",
+      "value": {
+        "base": -34
+      },
+      "duration": 12
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "lute"
+  ]
+}

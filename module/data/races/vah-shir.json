@@ -1,0 +1,205 @@
+{
+    "id": "eqrmss-vah-shir",
+    "key": "vah-shir",
+    "name": "Vah Shir",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/vah-shir.png",
+
+    "description": "The Vah Shir are noble, feline warriors and hunters who hail from the moon of Luclin. Known for their agility, honor, discipline, and keen senses, the Vah Shir maintain a proud martial tradition. Their society is built around loyalty, clan duty, and the teachings of their great King Raja Kerrath.",
+
+    "lore": {
+        "homeland": [
+            "Shar Vahl",
+            "The Hollowshade Moor (Luclin)"
+        ],
+        "culture": "Vah Shir culture emphasizes honor, discipline, martial training, and community. They are proud hunters, scouts, and warriors with strong spiritual traditions.",
+        "alignment": "Often Good or Neutral, guided by honor and clan duty.",
+        "languages": [
+            "Common",
+            "Vah Shir"
+        ]
+    },
+
+    "stats": {
+        "Ag": 10,
+        "Co": 5,
+        "Me": 0,
+        "Re": 0,
+        "SD": 5,
+        "Em": 5,
+        "In": 5,
+        "Pr": 0,
+        "Qu": 10,
+        "St": 5
+    },
+
+    "racialTalents": [
+        {
+            "id": "feline_agility",
+            "name": "Feline Agility",
+            "description": "Vah Shir possess exceptional agility and reflexes.",
+            "effects": [
+                {
+                    "type": "stat",
+                    "target": "Ag",
+                    "value": 5
+                },
+                {
+                    "type": "stat",
+                    "target": "Qu",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "keen_senses",
+            "name": "Keen Senses",
+            "description": "Vah Shir have heightened perception, hearing, and night vision.",
+            "effects": [
+                {
+                    "type": "sense",
+                    "target": "lowLightVision",
+                    "value": 60
+                },
+                {
+                    "type": "stat",
+                    "target": "In",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "hunter_instinct",
+            "name": "Hunter's Instinct",
+            "description": "Vah Shir excel at tracking, stalking, and wilderness survival.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "physical",
+                    "value": 10
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "lore",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "clan_discipline",
+            "name": "Clan Discipline",
+            "description": "Vah Shir are trained from youth in martial discipline and honor.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "combat",
+                    "value": 10
+                },
+                {
+                    "type": "stat",
+                    "target": "SD",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "sure_footed",
+            "name": "Sure-Footed",
+            "description": "Vah Shir move with balance and precision even on uneven terrain.",
+            "effects": [
+                {
+                    "type": "movement",
+                    "target": "balance",
+                    "value": 10
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 30,
+        "pace": "Fast",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "6'2\" - 7'0\"",
+        "female": "5'10\" - 6'8\""
+    },
+
+    "weight": {
+        "male": "180 - 260 lbs",
+        "female": "160 - 220 lbs"
+    },
+
+    "lifespan": {
+        "average": "90-120 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "unarmedCombat": 10,
+            "lightBlades": 5
+        },
+        "physical": {
+            "climbing": 10,
+            "jumping": 10,
+            "tracking": 10
+        },
+        "subterfuge": {
+            "stealth": 10
+        },
+        "magical": {},
+        "lore": {
+            "nature": 10
+        },
+        "social": {
+            "diplomacy": 5
+        }
+    },
+
+    "skillCosts": {
+        "combat": "A",
+        "physical": "A",
+        "subterfuge": "B",
+        "magical": "C",
+        "lore": "B",
+        "social": "B"
+    },
+
+    "favoredProfessions": [
+        "beastlord",
+        "ranger",
+        "rogue",
+        "bard"
+    ],
+
+    "restrictedProfessions": [
+        "shadowknight",
+        "paladin",
+        "wizard",
+        "enchanter",
+        "magician"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Vah Shir",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "clan leathers",
+        "hunting claws",
+        "tracking kit",
+        "moon rations"
+    ]
+}

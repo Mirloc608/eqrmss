@@ -1,0 +1,197 @@
+{
+    "id": "eqrmss-drakkin",
+    "key": "drakkin",
+    "name": "Drakkin",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/drakkin.png",
+
+    "description": "The Drakkin are a proud dragon‑blooded race created through the blessing of the ancient dragons of Norrath. Each Drakkin carries the essence of a specific dragon lineage, granting them unique abilities, magical affinity, and a deep connection to draconic heritage. They are disciplined, mystical, and often serve as emissaries or champions of their dragon patrons.",
+
+    "lore": {
+        "homeland": [
+            "Crescent Reach",
+            "The Serpent's Spine"
+        ],
+        "culture": "Drakkin society is structured around dragon lineages, each emphasizing discipline, honor, magical study, and service to their draconic progenitors.",
+        "alignment": "Varies by lineage, often Neutral or Good with strong personal codes.",
+        "languages": [
+            "Common",
+            "Draconic"
+        ]
+    },
+
+    "stats": {
+        "Ag": 5,
+        "Co": 5,
+        "Me": 5,
+        "Re": 10,
+        "SD": 5,
+        "Em": 0,
+        "In": 5,
+        "Pr": 0,
+        "Qu": 0,
+        "St": 0
+    },
+
+    "racialTalents": [
+        {
+            "id": "dragon_touched",
+            "name": "Dragon‑Touched",
+            "description": "Drakkin possess innate magical potential inherited from their dragon lineage.",
+            "effects": [
+                {
+                    "type": "affinity",
+                    "target": "magical",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "draconic_resilience",
+            "name": "Draconic Resilience",
+            "description": "The blood of dragons grants natural resistance to magical and elemental forces.",
+            "effects": [
+                {
+                    "type": "resistance",
+                    "target": "magic",
+                    "value": 10
+                },
+                {
+                    "type": "resistance",
+                    "target": "fire",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "keen_senses",
+            "name": "Keen Senses",
+            "description": "Drakkin possess heightened perception and awareness.",
+            "effects": [
+                {
+                    "type": "sense",
+                    "target": "lowLightVision",
+                    "value": 60
+                },
+                {
+                    "type": "stat",
+                    "target": "In",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "discipline_of_the_dragons",
+            "name": "Discipline of the Dragons",
+            "description": "Drakkin are trained in both martial and mystical arts, gaining bonuses to combat and magical skills.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "combat",
+                    "value": 5
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "magical",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "scaled_skin",
+            "name": "Scaled Skin",
+            "description": "Drakkin possess faint draconic scales that provide minor natural protection.",
+            "effects": [
+                {
+                    "type": "armor",
+                    "target": "naturalArmor",
+                    "value": 1
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 25,
+        "pace": "Normal",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "5'10\" - 6'6\"",
+        "female": "5'8\" - 6'4\""
+    },
+
+    "weight": {
+        "male": "160 - 230 lbs",
+        "female": "140 - 200 lbs"
+    },
+
+    "lifespan": {
+        "average": "120-150 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "martialArts": 5,
+            "polearms": 5
+        },
+        "physical": {
+            "climbing": 5
+        },
+        "subterfuge": {},
+        "magical": {
+            "spellcasting": 10,
+            "arcaneLore": 10
+        },
+        "lore": {
+            "dragonLore": 10,
+            "history": 5
+        },
+        "social": {
+            "diplomacy": 5
+        }
+    },
+
+    "skillCosts": {
+        "combat": "B",
+        "physical": "B",
+        "subterfuge": "C",
+        "magical": "A",
+        "lore": "A",
+        "social": "B"
+    },
+
+    "favoredProfessions": [
+        "wizard",
+        "magician",
+        "ranger",
+        "monk"
+    ],
+
+    "restrictedProfessions": [
+        "shadowknight",
+        "necromancer"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Draconic",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "scaled leather armor",
+        "draconic focus gem",
+        "arcane primer",
+        "travel rations"
+    ]
+}

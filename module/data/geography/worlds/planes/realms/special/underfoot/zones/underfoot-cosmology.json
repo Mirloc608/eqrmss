@@ -1,0 +1,33 @@
+{
+  "id": "underfoot-cosmology",
+  "plane": "underfoot",
+
+  "structure": {
+    "layers": [
+      "stone-deep",
+      "brells-forge",
+      "crystal-root",
+      "underfoot-throne"
+    ]
+  },
+
+  "portals": [
+    {
+      "name": "Underfoot Fissures",
+      "locations": ["stone-deep", "crystal-root"],
+      "connects": ["underfoot", "planes"]
+    },
+    {
+      "name": "Forge Gates",
+      "locations": ["brells-forge"],
+      "connects": ["underfoot"]
+    }
+  ],
+
+  "cosmicRules": {
+    "magic": "Earth and stone magic are amplified; fire and magma magic are stable.",
+    "travel": "Movement requires divine resonance or fissure alignment.",
+    "time": "Flows normally but slows near the Throne.",
+    "matter": "Stone and crystal obey divine laws rather than physics."
+  }
+}

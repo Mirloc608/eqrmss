@@ -1,0 +1,44 @@
+{
+  "zone": "throne-approach",
+
+  "terrain": [
+    "stone-ascension-path",
+    "crystal-root-arches",
+    "magma-illumined-passages",
+    "divine-resonance-steps"
+  ],
+
+  "lighting": "subterranean-divine-glow",
+
+  "hazards": [
+    {
+      "id": "stone-resonance-crack",
+      "dc": 20,
+      "effect": "force_damage_and_knockback"
+    },
+    {
+      "id": "magma-illumination-flare",
+      "dc": 21,
+      "effect": "fire_damage_and_blindness"
+    },
+    {
+      "id": "crystal-root-pulse",
+      "dc": 19,
+      "effect": "radiant_damage_and_disorientation"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "low",
+    "notes": "The path subtly shifts with Brell’s will; crystal arches may open or close during combat."
+  },
+
+  "environmentTags": [
+    "stone",
+    "crystal",
+    "magma",
+    "divine",
+    "raid"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "eqrmss://schemas/origin.schema.json",
+  "title": "EQ-RMSS Origin Geography Schema",
+  "description": "Schema definitions for EverQuest - Rolemaster Standard System origin geography.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "type",
+    "canon"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable machine-readable identifier."
+    },
+
+    "name": {
+      "type": "string",
+      "description": "Player-facing display name."
+    },
+
+    "type": {
+      "type": "string",
+      "enum": [
+        "continent",
+        "region",
+        "capital",
+        "settlement",
+        "village",
+        "camp",
+        "outpost",
+        "keep",
+        "tower",
+        "mine",
+        "falls",
+        "woods",
+        "lake",
+        "free-city",
+        "independent-city",
+        "unknown"
+      ]
+    },
+
+    "continent": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+
+    "parent": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+
+    "politicalCenter": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+
+    "canon": {
+      "type": "string",
+      "enum": [
+        "official",
+        "eqrmss"
+      ]
+    },
+
+    "canonSource": {
+      "type": "string"
+    },
+
+    "description": {
+      "type": "string"
+    },
+
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+
+    "metadata": {
+      "type": "object"
+    }
+  }
+}

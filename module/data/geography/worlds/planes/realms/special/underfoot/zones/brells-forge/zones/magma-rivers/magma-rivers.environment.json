@@ -1,0 +1,44 @@
+{
+  "zone": "magma-rivers",
+
+  "terrain": [
+    "divine-magma-flows",
+    "stone-bridge-spans",
+    "forge-vent-chambers",
+    "obsidian-shorelines"
+  ],
+
+  "lighting": "molten-glow",
+
+  "hazards": [
+    {
+      "id": "magma-surge",
+      "dc": 20,
+      "effect": "fire_damage_and_knockback"
+    },
+    {
+      "id": "forge-vent-eruption",
+      "dc": 21,
+      "effect": "area_burn"
+    },
+    {
+      "id": "obsidian-fracture",
+      "dc": 19,
+      "effect": "bleed_damage"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "none",
+    "notes": "Magma surges may alter terrain; stone bridges can collapse under heavy combat."
+  },
+
+  "environmentTags": [
+    "magma",
+    "stone",
+    "forge",
+    "heat",
+    "raid"
+  ]
+}

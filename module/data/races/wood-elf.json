@@ -1,0 +1,199 @@
+{
+    "id": "eqrmss-wood-elf",
+    "key": "wood-elf",
+    "name": "Wood Elf",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/wood-elf.png",
+
+    "description": "Wood Elves, known as Feir'Dal, are agile, perceptive, and deeply connected to the natural world. Living high among the treetop city of Kelethin, they are skilled hunters, scouts, and archers. Their culture emphasizes harmony with nature, artistic expression, and devotion to Tunare.",
+
+    "lore": {
+        "homeland": [
+            "Kelethin",
+            "Greater Faydark"
+        ],
+        "culture": "Feir'Dal society values nature, artistry, agility, and spiritual connection. They are peaceful yet fiercely protective of their forest home.",
+        "alignment": "Often Good or Neutral, guided by Tunare’s teachings.",
+        "languages": [
+            "Common",
+            "Elvish"
+        ]
+    },
+
+    "stats": {
+        "Ag": 10,
+        "Co": 0,
+        "Me": 0,
+        "Re": 0,
+        "SD": 0,
+        "Em": 5,
+        "In": 10,
+        "Pr": 0,
+        "Qu": 10,
+        "St": -5
+    },
+
+    "racialTalents": [
+        {
+            "id": "forest_grace",
+            "name": "Forest Grace",
+            "description": "Wood Elves move with exceptional agility and balance through natural environments.",
+            "effects": [
+                {
+                    "type": "movement",
+                    "target": "balance",
+                    "value": 15
+                },
+                {
+                    "type": "stat",
+                    "target": "Ag",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "keen_senses",
+            "name": "Keen Senses",
+            "description": "Wood Elves possess heightened perception and awareness.",
+            "effects": [
+                {
+                    "type": "sense",
+                    "target": "lowLightVision",
+                    "value": 60
+                },
+                {
+                    "type": "stat",
+                    "target": "In",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "nature_affinity",
+            "name": "Nature Affinity",
+            "description": "Wood Elves are deeply attuned to the natural world, granting bonuses to nature lore and druidic magic.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "lore",
+                    "value": 10
+                },
+                {
+                    "type": "affinity",
+                    "target": "nature",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "treeborn_resilience",
+            "name": "Treeborn Resilience",
+            "description": "Wood Elves possess natural resistance to disease and environmental hazards.",
+            "effects": [
+                {
+                    "type": "resistance",
+                    "target": "disease",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "archers_instinct",
+            "name": "Archer's Instinct",
+            "description": "Wood Elves are naturally gifted archers with exceptional precision.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "combat",
+                    "value": 10
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 25,
+        "pace": "Normal",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "5'6\" - 6'2\"",
+        "female": "5'4\" - 6'0\""
+    },
+
+    "weight": {
+        "male": "130 - 180 lbs",
+        "female": "110 - 160 lbs"
+    },
+
+    "lifespan": {
+        "average": "350-450 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "bows": 15,
+            "lightBlades": 5
+        },
+        "physical": {
+            "climbing": 10,
+            "jumping": 5
+        },
+        "subterfuge": {
+            "stealth": 10
+        },
+        "magical": {
+            "druidicMagic": 5
+        },
+        "lore": {
+            "nature": 15
+        },
+        "social": {
+            "diplomacy": 5
+        }
+    },
+
+    "skillCosts": {
+        "combat": "B",
+        "physical": "A",
+        "subterfuge": "B",
+        "magical": "B",
+        "lore": "A",
+        "social": "B"
+    },
+
+    "favoredProfessions": [
+        "ranger",
+        "druid",
+        "bard",
+        "rogue"
+    ],
+
+    "restrictedProfessions": [
+        "shadowknight",
+        "berserker",
+        "monk"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Elvish",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "light bow",
+        "forest leathers",
+        "travel cloak",
+        "nature rations"
+    ]
+}

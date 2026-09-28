@@ -1,0 +1,277 @@
+{
+    "id": "berserker",
+
+    "name": "Berserker Skill Profile",
+
+    "class": "berserker",
+
+
+    "developmentPoints": {
+
+        "perLevel": 40,
+
+        "bonusCategories": [
+
+            "combat"
+
+        ]
+
+    },
+
+
+    "categories": {
+
+
+        "combat": {
+
+            "priority": "primary",
+
+            "costModifier": 0.75,
+
+            "skills": [
+
+                "two_handed_edge",
+                "polearms",
+                "two_handed_concussion",
+                "frenzy",
+                "critical_strike"
+
+            ]
+
+        },
+
+
+        "armor": {
+
+            "priority": "secondary",
+
+            "costModifier": 1.0,
+
+            "skills": [
+
+                "chain_armor",
+                "armor_maneuver"
+
+            ]
+
+        },
+
+
+        "physical": {
+
+            "priority": "secondary",
+
+            "costModifier": 1.0,
+
+            "skills": [
+
+                "body_development",
+                "stamina",
+                "running",
+                "climbing",
+                "swimming"
+
+            ]
+
+        },
+
+
+        "weapon_mastery": {
+
+            "priority": "primary",
+
+            "costModifier": 0.5,
+
+            "skills": [
+
+                "axe_specialization",
+                "heavy_weapon_mastery"
+
+            ]
+
+        },
+
+
+        "combat_maneuvers": {
+
+            "priority": "primary",
+
+            "costModifier": 0.75,
+
+            "skills": [
+
+                "charge",
+                "disarm",
+                "sunder",
+                "knockdown",
+                "grapple"
+
+            ]
+
+        },
+
+
+        "survival": {
+
+            "priority": "tertiary",
+
+            "costModifier": 1.5,
+
+            "skills": [
+
+                "tracking",
+                "survival",
+                "foraging"
+
+            ]
+
+        },
+
+
+        "influence": {
+
+            "priority": "restricted",
+
+            "costModifier": 2.0,
+
+            "skills": [
+
+                "leadership",
+                "intimidation"
+
+            ]
+
+        },
+
+
+        "magic": {
+
+            "priority": "restricted",
+
+            "costModifier": 3.0,
+
+            "skills": []
+
+        }
+
+
+    },
+
+
+    "weaponTraining": {
+
+
+        "allowed": [
+
+            "great_axes",
+            "swords",
+            "hammers",
+            "polearms"
+
+        ],
+
+
+        "preferred": [
+
+            "two_handed_weapons"
+
+        ],
+
+
+        "specialization": {
+
+            "weaponGroup": "axes",
+
+            "bonus": 10
+
+        }
+
+    },
+
+
+    "armorTraining": {
+
+
+        "allowed": [
+
+            "light",
+            "medium"
+
+        ],
+
+
+        "restricted": [
+
+            "robes",
+            "caster_armor"
+
+        ]
+
+    },
+
+
+    "skillBonuses": {
+
+
+        "melee_attack": {
+
+            "bonus": 10
+
+        },
+
+
+        "critical_strike": {
+
+            "bonus": 5
+
+        },
+
+
+        "stamina": {
+
+            "bonus": 10
+
+        }
+
+
+    },
+
+
+    "skillPenalties": {
+
+
+        "spell_research": {
+
+            "penalty": -50
+
+        },
+
+
+        "channeling": {
+
+            "penalty": -50
+
+        }
+
+
+    },
+
+
+    "classRules": {
+
+
+        "cannotCastSpells": true,
+
+
+        "usesCombatManeuvers": true,
+
+
+        "usesRageSystem": true,
+
+
+        "favoredCombatStyle": "aggressive"
+
+
+    }
+
+}

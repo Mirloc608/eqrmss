@@ -1,0 +1,39 @@
+{
+  "id": "battlecry_of_the_vah_shir_1",
+  "name": "Battlecry of the Vah Shir",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 52,
+  "description": "A powerful battle cry that causes your group to attack with enhanced speed. This increase is cumulative with most other effects that increase attack speed.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "haste",
+      "value": {
+        "base": 15
+      },
+      "duration": 18
+    }
+  ],
+  "stacking": {
+    "group": "haste-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "haste-song",
+    "horn"
+  ]
+}

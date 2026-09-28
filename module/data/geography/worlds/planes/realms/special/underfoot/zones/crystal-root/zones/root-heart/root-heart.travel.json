@@ -1,0 +1,36 @@
+{
+  "id": "root-heart-travel",
+  "zone": "root-heart",
+
+  "nodes": [
+    "heart-entry",
+    "pulse-chamber",
+    "root-convergence",
+    "heart-core"
+  ],
+
+  "edges": [
+    {
+      "from": "heart-entry",
+      "to": "pulse-chamber",
+      "type": "resonance-shift"
+    },
+    {
+      "from": "pulse-chamber",
+      "to": "root-convergence",
+      "type": "crystal-channel",
+      "requirements": {
+        "resonance-attunement": true
+      }
+    },
+    {
+      "from": "root-convergence",
+      "to": "heart-core",
+      "type": "divine-path",
+      "requirements": {
+        "brell-attunement": true,
+        "crystalVeinsCompletion": true
+      }
+    }
+  ]
+}

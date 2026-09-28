@@ -1,0 +1,35 @@
+{
+  "id": "crystal-root-region-travel-graph",
+  "region": "crystal-root",
+
+  "nodes": [
+    "root-entry",
+    "crystal-veins",
+    "root-heart",
+    "prism-chambers"
+  ],
+
+  "edges": [
+    {
+      "from": "root-entry",
+      "to": "crystal-veins",
+      "type": "resonance-shift"
+    },
+    {
+      "from": "crystal-veins",
+      "to": "root-heart",
+      "type": "crystal-channel",
+      "requirements": {
+        "resonance-attunement": true
+      }
+    },
+    {
+      "from": "root-heart",
+      "to": "prism-chambers",
+      "type": "divine-path",
+      "requirements": {
+        "brell-attunement": true
+      }
+    }
+  ]
+}

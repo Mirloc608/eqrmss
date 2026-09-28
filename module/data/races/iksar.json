@@ -1,0 +1,202 @@
+{
+    "id": "eqrmss-iksar",
+    "key": "iksar",
+    "name": "Iksar",
+    "type": "race",
+
+    "img": "systems/eqrmss/assets/Icons/race/iksar.png",
+
+    "description": "The Iksar are a proud, ancient race of scaled warriors and mystics who once ruled a vast empire across Kunark. Their reptilian physiology grants them natural armor, resilience, and keen predatory senses. Iksar culture is shaped by discipline, martial tradition, and the remnants of their imperial past.",
+
+    "lore": {
+        "homeland": [
+            "Cabilis",
+            "Kunark"
+        ],
+        "culture": "Iksar society is rigid, disciplined, and martial. They value strength, endurance, and loyalty to their caste traditions. Their history is filled with conquest, empire, and survival.",
+        "alignment": "Often Neutral or Evil, shaped by harsh environments and imperial legacy.",
+        "languages": [
+            "Common",
+            "Iksar"
+        ]
+    },
+
+    "stats": {
+        "Ag": 5,
+        "Co": 10,
+        "Me": 0,
+        "Re": 0,
+        "SD": 5,
+        "Em": -5,
+        "In": 5,
+        "Pr": -5,
+        "Qu": 5,
+        "St": 5
+    },
+
+    "racialTalents": [
+        {
+            "id": "scaled_hide",
+            "name": "Scaled Hide",
+            "description": "Iksar possess thick reptilian scales that provide natural armor.",
+            "effects": [
+                {
+                    "type": "armor",
+                    "target": "naturalArmor",
+                    "value": 3
+                }
+            ]
+        },
+        {
+            "id": "predator_senses",
+            "name": "Predator Senses",
+            "description": "Iksar have heightened perception and awareness, especially in dim environments.",
+            "effects": [
+                {
+                    "type": "sense",
+                    "target": "lowLightVision",
+                    "value": 60
+                },
+                {
+                    "type": "stat",
+                    "target": "In",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "swampborn_resilience",
+            "name": "Swampborn Resilience",
+            "description": "Iksar are naturally resistant to disease and poison due to their harsh environment.",
+            "effects": [
+                {
+                    "type": "resistance",
+                    "target": "disease",
+                    "value": 20
+                },
+                {
+                    "type": "resistance",
+                    "target": "poison",
+                    "value": 15
+                }
+            ]
+        },
+        {
+            "id": "ancient_discipline",
+            "name": "Ancient Discipline",
+            "description": "Iksar are trained from birth in martial discipline and physical endurance.",
+            "effects": [
+                {
+                    "type": "skillCategory",
+                    "target": "combat",
+                    "value": 10
+                },
+                {
+                    "type": "skillCategory",
+                    "target": "physical",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "amphibious_training",
+            "name": "Amphibious Training",
+            "description": "Iksar are adept swimmers and can hold their breath for extended periods.",
+            "effects": [
+                {
+                    "type": "movement",
+                    "target": "swimSpeed",
+                    "value": 20
+                },
+                {
+                    "type": "sense",
+                    "target": "breathHold",
+                    "value": 30
+                }
+            ]
+        }
+    ],
+
+    "movement": {
+        "base": 25,
+        "pace": "Normal",
+        "encumbranceMultiplier": 1.0
+    },
+
+    "size": "Medium",
+
+    "height": {
+        "male": "6'0\" - 7'0\"",
+        "female": "5'10\" - 6'8\""
+    },
+
+    "weight": {
+        "male": "180 - 260 lbs",
+        "female": "160 - 220 lbs"
+    },
+
+    "lifespan": {
+        "average": "90-120 years"
+    },
+
+    "skillBonuses": {
+        "combat": {
+            "unarmedCombat": 10,
+            "spears": 5
+        },
+        "physical": {
+            "swimming": 10,
+            "endurance": 10
+        },
+        "subterfuge": {},
+        "magical": {},
+        "lore": {
+            "history": 5,
+            "survival": 10
+        },
+        "social": {
+            "intimidation": 10
+        }
+    },
+
+    "skillCosts": {
+        "combat": "A",
+        "physical": "A",
+        "subterfuge": "C",
+        "magical": "C",
+        "lore": "B",
+        "social": "C"
+    },
+
+    "favoredProfessions": [
+        "monk",
+        "shadowknight",
+        "shaman",
+        "warrior"
+    ],
+
+    "restrictedProfessions": [
+        "paladin",
+        "bard",
+        "wizard",
+        "enchanter"
+    ],
+
+    "startingLanguages": [
+        {
+            "name": "Common",
+            "rank": 3
+        },
+        {
+            "name": "Iksar",
+            "rank": 5
+        }
+    ],
+
+    "startingEquipment": [
+        "scaled leather armor",
+        "bone‑forged weapon",
+        "swamp survival kit",
+        "travel rations"
+    ]
+}

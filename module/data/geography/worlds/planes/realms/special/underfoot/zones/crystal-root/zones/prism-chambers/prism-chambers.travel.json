@@ -1,0 +1,36 @@
+{
+  "id": "prism-chambers-travel",
+  "zone": "prism-chambers",
+
+  "nodes": [
+    "prism-entry",
+    "refraction-hall",
+    "spectrum-core",
+    "prism-throne"
+  ],
+
+  "edges": [
+    {
+      "from": "prism-entry",
+      "to": "refraction-hall",
+      "type": "resonance-shift"
+    },
+    {
+      "from": "refraction-hall",
+      "to": "spectrum-core",
+      "type": "prism-channel",
+      "requirements": {
+        "resonance-attunement": true
+      }
+    },
+    {
+      "from": "spectrum-core",
+      "to": "prism-throne",
+      "type": "divine-path",
+      "requirements": {
+        "brell-attunement": true,
+        "rootHeartCompletion": true
+      }
+    }
+  ]
+}

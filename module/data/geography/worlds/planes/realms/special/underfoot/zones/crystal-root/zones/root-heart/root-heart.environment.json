@@ -1,0 +1,44 @@
+{
+  "zone": "root-heart",
+
+  "terrain": [
+    "crystal-heart-chamber",
+    "resonance-pulse-nodes",
+    "root-convergence-halls",
+    "divine-crystal-wells"
+  ],
+
+  "lighting": "pulsing-radiance",
+
+  "hazards": [
+    {
+      "id": "heart-pulse",
+      "dc": 21,
+      "effect": "radiant_damage_and_knockback"
+    },
+    {
+      "id": "crystal-overload",
+      "dc": 22,
+      "effect": "stun_and_resonance_burn"
+    },
+    {
+      "id": "root-surge",
+      "dc": 20,
+      "effect": "random_position_shift"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "very-high",
+    "restSafety": "none",
+    "notes": "The Root Heart pulses with divine resonance; pathways may shift or collapse during combat."
+  },
+
+  "environmentTags": [
+    "crystal",
+    "root",
+    "resonance",
+    "divine",
+    "raid"
+  ]
+}

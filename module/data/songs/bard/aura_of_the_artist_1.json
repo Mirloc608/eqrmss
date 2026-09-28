@@ -1,0 +1,36 @@
+{
+  "id": "aura_of_the_artist_1",
+  "name": "Aura of the Artist",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 80,
+  "description": "Increases your companions' attack speed and spell damage, as long as they stay inside the area of the aura.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "aura",
+      "aura": "aura-of-the-artist-effect"
+    }
+  ],
+  "stacking": {
+    "group": "aura",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "aura",
+    "voice"
+  ]
+}

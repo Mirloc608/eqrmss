@@ -1,0 +1,370 @@
+{
+  "id": "bard",
+  "name": "Bard Song Profile",
+
+  "system": "eqrmss",
+
+  "class": "bard",
+
+  "enabled": true,
+
+
+  "songSystem": {
+
+    "usesSongs": true,
+
+    "resource": "performance",
+
+    "resourceFormula": {
+      "type": "derived",
+      "formula": "level + presenceBonus"
+    },
+
+
+    "maxActiveSongs": {
+
+      "base": 1,
+
+      "scaling": [
+
+        {
+          "level": 20,
+          "amount": 2
+        },
+
+        {
+          "level": 40,
+          "amount": 3
+        },
+
+        {
+          "level": 60,
+          "amount": 4
+        }
+
+      ]
+
+    },
+
+
+    "songDuration": {
+
+      "type": "maintained",
+
+      "requiresPerformance": true,
+
+      "breakOn":
+
+      [
+        "unconscious",
+        "silenced",
+        "stunned"
+      ]
+
+    }
+
+  },
+
+
+  "performance": {
+
+    "skill":
+
+    "bard_performance",
+
+
+    "attributes":
+
+    [
+      "presence",
+      "intuition"
+    ],
+
+
+    "trainingCategory":
+
+    "performance"
+
+
+  },
+
+
+  "instruments": {
+
+
+    "required": true,
+
+
+    "allowedTypes":
+
+    [
+
+      "lute",
+
+      "drum",
+
+      "horn",
+
+      "flute",
+
+      "percussion",
+
+      "string",
+
+      "wind"
+
+    ],
+
+
+    "instrumentBonus":
+
+    {
+
+      "enabled": true,
+
+      "source":
+
+      "equippedInstrument"
+
+    }
+
+  },
+
+
+  "songTwisting": {
+
+
+    "enabled": true,
+
+
+    "unlockLevel": 5,
+
+
+    "maximumConcurrentSongs": {
+
+
+      "level5": 2,
+
+      "level25": 3,
+
+      "level50": 4
+
+    },
+
+
+    "twistCheck":
+
+    {
+
+      "enabled": true,
+
+      "skill":
+
+      "song_twisting",
+
+      "difficulty":
+
+      "song_complexity"
+
+    }
+
+  },
+
+
+  "songCategories": {
+
+
+    "combat":
+
+    {
+
+      "enabled": true,
+
+      "examples":
+
+      [
+        "anthem",
+        "battle",
+        "offense"
+      ]
+
+    },
+
+
+    "defense":
+
+    {
+
+      "enabled": true,
+
+      "examples":
+
+      [
+        "armor",
+        "resistance",
+        "protection"
+      ]
+
+    },
+
+
+    "utility":
+
+    {
+
+      "enabled": true,
+
+      "examples":
+
+      [
+        "movement",
+        "travel",
+        "tracking"
+      ]
+
+    },
+
+
+    "control":
+
+    {
+
+      "enabled": true,
+
+      "examples":
+
+      [
+        "fear",
+        "charm",
+        "mez"
+      ]
+
+    },
+
+
+    "mana":
+
+    {
+
+      "enabled": true,
+
+      "examples":
+
+      [
+        "clarity",
+        "regeneration"
+      ]
+
+    }
+
+  },
+
+
+  "unlockRules": {
+
+
+    "songs":
+
+    {
+
+      "source":
+
+      "progression",
+
+
+      "reference":
+
+      "progression/bard.json"
+
+    },
+
+
+    "levelBased":
+
+    true
+
+  },
+
+
+  "modifiers": {
+
+
+    "songPotency":
+
+    {
+
+      "attribute":
+
+      "presence"
+
+    },
+
+
+    "songDuration":
+
+    {
+
+      "attribute":
+
+      "presence"
+
+    },
+
+
+    "songResistanceDC":
+
+    {
+
+      "attribute":
+
+      "presence"
+
+    }
+
+  },
+
+
+  "restrictions":
+
+  {
+
+    "cannotUse":
+
+    [
+
+      "heavy_armor",
+
+      "silenced"
+
+    ],
+
+
+    "movementPenalty":
+
+    {
+
+      "enabled":
+
+      false
+
+    }
+
+  },
+
+
+  "metadata":
+
+  {
+
+    "description":
+
+    "Defines how the Bard interacts with the EQRMSS song engine. Individual songs are stored separately.",
+
+
+    "version":
+
+    "1.0"
+
+  }
+
+}

@@ -1,0 +1,36 @@
+{
+  "id": "underfoot-throne-region-travel-graph",
+  "region": "underfoot-throne",
+
+  "nodes": [
+    "throne-entry",
+    "throne-approach",
+    "brells-sanctum",
+    "throne-of-underfoot"
+  ],
+
+  "edges": [
+    {
+      "from": "throne-entry",
+      "to": "throne-approach",
+      "type": "divine-path"
+    },
+    {
+      "from": "throne-approach",
+      "to": "brells-sanctum",
+      "type": "stone-resonance",
+      "requirements": {
+        "brell-attunement": true
+      }
+    },
+    {
+      "from": "brells-sanctum",
+      "to": "throne-of-underfoot",
+      "type": "divine-summoning",
+      "requirements": {
+        "forgeCompletion": true,
+        "crystalRootCompletion": true
+      }
+    }
+  ]
+}

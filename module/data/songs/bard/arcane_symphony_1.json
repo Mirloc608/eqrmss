@@ -1,0 +1,43 @@
+{
+  "id": "arcane_symphony_1",
+  "name": "Arcane Symphony",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 115,
+  "description": "Fuels the destructive power of your group members, allowing them to strike with Arcane Symphony Effect, which deals 15286 damage when they cast a damaging spell up to level 115, or a chance to strike with Arcane Symphony Strike, which deals 14063 damage, when making melee attacks. Lasts for 12 seconds or until you have enhanced 4 spells.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "area",
+    "range": 30,
+    "targets": "allies"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "cast-on-spell-use",
+      "spell": "arcane-symphony-effect",
+      "amount": 100
+    },
+    {
+      "type": "utility",
+      "effect": "melee-proc",
+      "proc": "arcane-symphony-strike",
+      "amount": 200
+    }
+  ],
+  "stacking": {
+    "group": "utility-song",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "utility",
+    "utility-song",
+    "flute"
+  ]
+}

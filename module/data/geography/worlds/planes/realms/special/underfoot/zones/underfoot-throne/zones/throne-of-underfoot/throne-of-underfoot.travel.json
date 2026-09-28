@@ -1,0 +1,37 @@
+{
+  "id": "throne-of-underfoot-travel",
+  "zone": "throne-of-underfoot",
+
+  "nodes": [
+    "throne-entry",
+    "convergence-hall",
+    "divine-core",
+    "throne-platform"
+  ],
+
+  "edges": [
+    {
+      "from": "throne-entry",
+      "to": "convergence-hall",
+      "type": "divine-path"
+    },
+    {
+      "from": "convergence-hall",
+      "to": "divine-core",
+      "type": "stone-crystal-resonance",
+      "requirements": {
+        "brell-attunement": true
+      }
+    },
+    {
+      "from": "divine-core",
+      "to": "throne-platform",
+      "type": "divine-summoning",
+      "requirements": {
+        "forgeCompletion": true,
+        "crystalRootCompletion": true,
+        "sanctumCompletion": true
+      }
+    }
+  ]
+}

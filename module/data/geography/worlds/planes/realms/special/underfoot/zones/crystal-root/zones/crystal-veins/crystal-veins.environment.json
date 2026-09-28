@@ -1,0 +1,44 @@
+{
+  "zone": "crystal-veins",
+
+  "terrain": [
+    "crystal-conduits",
+    "resonance-chambers",
+    "root-lattice-passages",
+    "prismatic-caverns"
+  ],
+
+  "lighting": "radiant-crystal-glow",
+
+  "hazards": [
+    {
+      "id": "resonance-overload",
+      "dc": 20,
+      "effect": "radiant_damage_and_stun"
+    },
+    {
+      "id": "crystal-fracture",
+      "dc": 19,
+      "effect": "bleed_damage"
+    },
+    {
+      "id": "root-pulse",
+      "dc": 21,
+      "effect": "knockback_and_disorientation"
+    }
+  ],
+
+  "travel": {
+    "encounterDensity": "high",
+    "restSafety": "low",
+    "notes": "Crystal resonance pulses may alter pathways or open temporary conduits."
+  },
+
+  "environmentTags": [
+    "crystal",
+    "resonance",
+    "root",
+    "subterranean",
+    "raid"
+  ]
+}

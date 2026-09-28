@@ -1,0 +1,36 @@
+{
+  "id": "aura_of_vaker_1",
+  "name": "Aura of Va'Ker",
+  "type": "song",
+  "class": "Bard",
+  "level_required": 100,
+  "description": "Increases your companions' attack speed, spell damage, attack rate, and chance to flurry as long as they stay inside the area of the aura.",
+  "performance": {
+    "activation": "standard",
+    "maintained": true,
+    "pulse_interval": "round"
+  },
+  "targeting": {
+    "type": "self",
+    "range": 0,
+    "targets": "self"
+  },
+  "effects": [
+    {
+      "type": "utility",
+      "effect": "aura",
+      "aura": "aura-of-vaker-effect"
+    }
+  ],
+  "stacking": {
+    "group": "aura",
+    "same_effect": "refresh"
+  },
+  "tags": [
+    "bard",
+    "song",
+    "buff",
+    "aura",
+    "voice"
+  ]
+}
