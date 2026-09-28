@@ -339,6 +339,12 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             const newLocation = ev.currentTarget.value;
             this._onItemLocationChange(itemId, newLocation);
         }));
+
+        // ------------------------------------------------------------
+        // Manual Drag & Drop binding (V13 ApplicationV2)
+        // ------------------------------------------------------------
+        html.addEventListener("dragover", ev => ev.preventDefault());
+        html.addEventListener("drop", ev => this._onDrop(ev));
     }
 
     // ------------------------------------------------------------
@@ -346,11 +352,13 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
     // ------------------------------------------------------------
     async _onDrop(event) {
         event.preventDefault();
+        console.log("EQRMSS | Drop event received");
         const actor = this.document;
         if (!actor) return;
 
         try {
             const data = TextEditor.getDragEventData(event);
+            console.log("EQRMSS | Drop data:", data);
             
             // Handle Item drops
             if (data.type === "Item") {
