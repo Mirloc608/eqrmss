@@ -19,7 +19,7 @@ import {
 from "./class-progression.js";
 
 const PROGRESSION_PATH =
-    "module/data/progressions/";
+    "systems/eqrmss/module/data/progressions/";
 
 const loadedProgressions =
     {};

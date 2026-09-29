@@ -444,7 +444,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             await item.update({ "system.location": newLocation });
             if (newLocation === "equipped") {
                 ui.notifications.info(`${item.name} equipped.`);
-                // TODO: Apply equipment bonuses to character sheet
+                // Equipment bonuses apply automatically: calculateArmorAndDefenses
+                // derives armorType, maneuver penalties, and shield DB from
+                // equipped items on the next prepare.
             }
         }
     }

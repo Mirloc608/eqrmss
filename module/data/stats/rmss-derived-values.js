@@ -1,6 +1,8 @@
 /**
  * RMSS Derived Value Engine (EQRMSS-flavored)
  */
+
+import { isEquipped } from "../../utils/equipment/equipment-utils.js";
 export class RMSSDerivedValueEngine {
   compute(stats) {
     const St = stats.St ?? 50;
@@ -46,19 +48,43 @@ export function calculateArmorAndDefenses(actorData) {
     const engine = new RMSSDerivedValueEngine();
     const derivedStats = engine.compute(stats);
 
-    // Armor and Penalties retrieval
+    // Armor, maneuver penalties, and shield DB are derived from equipped
+    // gear every prepare. An item counts as equipped via the item-sheet
+    // checkbox (system.equipped) or the player-sheet location dropdown
+    // (system.location === "equipped").
     const combat = system.combat || {};
-    const armorType = combat.armorType ?? "No Armor";
-    const mmp = Number(combat.mmp ?? 0);
+    const rawItems = actorData.items;
+    const itemList = Array.isArray(rawItems)
+        ? rawItems
+        : (rawItems?.contents ?? []);
+    const isWorn = (i) => isEquipped(i) || i?.system?.location === "equipped";
+
+    const wornArmor = itemList.filter((i) => i?.type === "armor" && isWorn(i));
+    const wornShields = itemList.filter((i) => i?.type === "shield" && isWorn(i));
+
+    let armorType = "No Armor";
+    let mmp = 0;
+    if (wornArmor.length > 0) {
+        const ats = wornArmor
+            .map((i) => Number(i.system?.at))
+            .filter((n) => Number.isFinite(n) && n > 0);
+        if (ats.length > 0) armorType = `AT ${Math.max(...ats)}`;
+        mmp = wornArmor.reduce((sum, i) => sum + (Number(i.system?.maneuverPenalty) || 0), 0);
+    }
+
+    let shieldBonus = 0;
+    if (wornShields.length > 0) {
+        shieldBonus = Math.max(...wornShields.map((i) => Number(i.system?.meleeDB) || 0));
+    }
+
     const quPenalty = Number(combat.penalties?.quickness ?? combat.quPenalty ?? 0);
     
     // Quickness Bonus derived from engine Qu or base stat bonus mapping
     const baseQUBonus = Math.floor(((stats.QU ?? stats.Qu ?? 50) - 50) / 5);
     const quicknessBonus = baseQUBonus - quPenalty;
 
-    // Additional DB components
+    // Additional DB components (stored; armor itself grants no DB in RMSS)
     const adrenalDefense = Number(combat.adrenalDefense ?? 0);
-    const shieldBonus = Number(combat.shieldBonus ?? 0);
     const otherDB = Number(combat.otherDB ?? 0);
     const armorDB = Number(combat.armorDB ?? 0);
 
