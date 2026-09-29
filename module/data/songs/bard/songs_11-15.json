@@ -1,0 +1,249 @@
+[
+  {
+    "id": "cindas_charismatic_carillon_1",
+    "name": "Cinda's Charismatic Carillon",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 11,
+    "description": "A quiet tune that improves your faction standing with all creatures associated with your target.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "ally"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "faction",
+        "amount": 1310
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "bruscos_boastful_bellow_1",
+    "name": "Brusco's Boastful Bellow",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 12,
+    "description": "A great bellow that causes 1 damage to your opponent.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "magic",
+        "value": {
+          "base": 18
+        }
+      }
+    ],
+    "stacking": {
+      "group": "direct-damage",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "direct-damage",
+      "voice"
+    ]
+  },
+  {
+    "id": "purifying_rhythms_1",
+    "name": "Purifying Rhythms",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 13,
+    "description": "A mystic tune that offers your group protection from poison, disease, and magic.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-magic",
+        "value": {
+          "base": 60
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-poison",
+        "value": {
+          "base": 60
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-disease",
+        "value": {
+          "base": 60
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 2
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-buff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "resist-buff",
+      "drum"
+    ]
+  },
+  {
+    "id": "lyssas_cataloging_libretto_1",
+    "name": "Lyssa's Cataloging Libretto",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 14,
+    "description": "An ancient tune that provides arcane information about the item that your target is holding.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "ally"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "identify-item"
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "kelins_lucid_lullaby_1",
+    "name": "Kelin's Lucid Lullaby",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 15,
+    "description": "A quiet lullaby that causes your target to fall into an enchanted sleep. Affects creatures up to level 30.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "control",
+        "condition": "mez",
+        "duration": 18,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      }
+    ],
+    "stacking": {
+      "group": "mez-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "mez-song",
+      "lute"
+    ]
+  },
+  {
+    "id": "song_of_sustenance_1",
+    "name": "Song of Sustenance",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 15,
+    "description": "An energetic song that fills your group with energy, eliminating their need for food and water.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "satiate"
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "lute"
+    ]
+  }
+]

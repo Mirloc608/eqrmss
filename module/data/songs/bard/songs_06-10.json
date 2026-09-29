@@ -1,0 +1,292 @@
+[
+  {
+    "id": "hymn_of_restoration_1",
+    "name": "Hymn of Restoration",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 6,
+    "description": "A gentle melody that encourages your group's wounds to heal faster.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "heal",
+        "value": {
+          "base": 9
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "heal-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "heal",
+      "heal-song",
+      "lute"
+    ]
+  },
+  {
+    "id": "jonthans_whistling_warsong_1",
+    "name": "Jonthan's Whistling Warsong",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 7,
+    "description": "An ancient war song that speeds your attacks and raises your armor class and strength.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "self",
+      "range": 0,
+      "targets": "self"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 25
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 6
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "str",
+        "value": {
+          "base": 70
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "haste-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "haste-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "kelins_lugubrious_lament_1",
+    "name": "Kelin's Lugubrious Lament",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 8,
+    "description": "A sad song that calms the aggressive nature of many creatures. Affects creatures up to level 60.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "reduce-aggro-radius",
+        "amount": 5,
+        "duration": 30
+      },
+      {
+        "type": "utility",
+        "effect": "reduce-social-radius",
+        "amount": 10,
+        "duration": 30
+      },
+      {
+        "type": "control",
+        "condition": "pacify",
+        "duration": 30,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      }
+    ],
+    "stacking": {
+      "group": "calm-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "calm-song",
+      "lute"
+    ]
+  },
+  {
+    "id": "elemental_rhythms_1",
+    "name": "Elemental Rhythms",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 9,
+    "description": "A mystic tune that offers your group protection from fire, ice, and magic.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-magic",
+        "value": {
+          "base": 50
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-cold",
+        "value": {
+          "base": 50
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-fire",
+        "value": {
+          "base": 50
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 2
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-buff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "resist-buff",
+      "drum"
+    ]
+  },
+  {
+    "id": "magical_monologue_1",
+    "name": "Magical Monologue",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 9,
+    "description": "A simple tune that adds a magical quality to your group's weapons, allowing them to harm creatures that would otherwise be invulnerable.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "self",
+      "range": 0,
+      "targets": "self"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "magic-weapon"
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "anthem_de_arms_1",
+    "name": "Anthem de Arms",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 10,
+    "description": "An ancient anthem that increases the strength and attack rate of your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 10
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "str",
+        "value": {
+          "base": 70
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "haste-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "haste-song",
+      "voice"
+    ]
+  }
+]

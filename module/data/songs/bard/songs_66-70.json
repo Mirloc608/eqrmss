@@ -1,0 +1,1109 @@
+[
+  {
+    "id": "bellow_of_chaos_1",
+    "name": "Bellow of Chaos",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 66,
+    "description": "A great scream of torment that does 18 damage to your opponent, increasing by 1 damage per level, and potentially interrupts casting.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "magic",
+        "value": {
+          "base": 660
+        }
+      }
+    ],
+    "stacking": {
+      "group": "direct-damage",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "direct-damage",
+      "voice"
+    ]
+  },
+  {
+    "id": "luvwens_aria_of_serenity_1",
+    "name": "Luvwen's Aria of Serenity",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 66,
+    "description": "A calming song that calms the aggressive nature of many monsters.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "reduce-social-radius",
+        "amount": 10,
+        "duration": 30
+      }
+    ],
+    "stacking": {
+      "group": "calm-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "calm-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "selos_accelerato_1",
+    "name": "Selo's Accelerato",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 66,
+    "description": "The quick pace of this song fills your feet with speed, increasing the movement rate of your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "movement",
+        "value": {
+          "base": 100
+        },
+        "duration": 12
+      },
+      {
+        "type": "utility",
+        "effect": "movement-speed-cap",
+        "amount": 4,
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "movement-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "movement-song",
+      "drum"
+    ]
+  },
+  {
+    "id": "vulkas_chant_of_disease_1",
+    "name": "Vulka's Chant of Disease",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 66,
+    "description": "A plagued chant that causes between 17 and 55 damage every six seconds to an enemy and makes them more vulnerable to disease.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "disease",
+        "value": {
+          "base": 123
+        },
+        "over_time": {
+          "interval": "round",
+          "duration": 12
+        }
+      },
+      {
+        "type": "utility",
+        "effect": "cast-spell",
+        "spell": "chant-of-plague"
+      }
+    ],
+    "stacking": {
+      "group": "damage-chant",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "damage-chant",
+      "drum"
+    ]
+  },
+  {
+    "id": "angstlichs_wail_of_panic_1",
+    "name": "Angstlich's Wail of Panic",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 67,
+    "description": "A terrifying screech that causes up to 30 nearby enemies to run in terror.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 0,
+      "targets": "enemies"
+    },
+    "effects": [
+      {
+        "type": "control",
+        "condition": "fear",
+        "duration": 12,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      }
+    ],
+    "stacking": {
+      "group": "fear-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "fear-song",
+      "horn"
+    ]
+  },
+  {
+    "id": "cantata_of_life_1",
+    "name": "Cantata of Life",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 67,
+    "description": "Calls forth the wind of Marr to regenerate the health and mana of your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "heal",
+        "value": {
+          "base": 520
+        },
+        "duration": 12
+      },
+      {
+        "type": "regen",
+        "stat": "mana",
+        "value": {
+          "base": 12
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "heal-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "heal",
+      "heal-song",
+      "lute"
+    ]
+  },
+  {
+    "id": "luvwens_lullaby_1",
+    "name": "Luvwen's Lullaby",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 67,
+    "description": "A quiet lullaby that causes your target to fall into an enchanted sleep. Affects creatures up to level 70.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "control",
+        "condition": "mez",
+        "duration": 18,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      }
+    ],
+    "stacking": {
+      "group": "mez-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "mez-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "vulkas_chant_of_frost_1",
+    "name": "Vulka's Chant of Frost",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 67,
+    "description": "An icy chant that causes between 17 and 55 damage every six seconds to an enemy and makes them more vulnerable to cold.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "cold",
+        "value": {
+          "base": 106
+        },
+        "over_time": {
+          "interval": "round",
+          "duration": 12
+        }
+      },
+      {
+        "type": "utility",
+        "effect": "cast-spell",
+        "spell": "chant-of-frost"
+      }
+    ],
+    "stacking": {
+      "group": "damage-chant",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "damage-chant",
+      "drum"
+    ]
+  },
+  {
+    "id": "zurikis_song_of_shenanigans_1",
+    "name": "Zuriki's Song of Shenanigans",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 67,
+    "description": "A melody that summons a horde of ethereal halflings to attack up to 30 of your opponents, causing them damage and slowing their attack speed.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 0,
+      "targets": "enemies"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "magic",
+        "value": {
+          "base": 94
+        },
+        "over_time": {
+          "interval": "round",
+          "duration": 12
+        },
+        "condition": "target-not-moving"
+      },
+      {
+        "type": "debuff",
+        "effect": "slow",
+        "value": {
+          "base": 45
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "damage-chant",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "damage-chant",
+      "lute"
+    ]
+  },
+  {
+    "id": "creeping_dreams_1",
+    "name": "Creeping Dreams",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 68,
+    "description": "Fills your target's mind with creeping dreams, causing them to cease actions for up to 18 seconds. The dreams take on a sentience of their own and will try to spread to nearby enemies periodically.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 9,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "control",
+        "condition": "mez",
+        "duration": 18,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      }
+    ],
+    "stacking": {
+      "group": "mez-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "mez-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "dirge_of_metala_1",
+    "name": "Dirge of Metala",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 68,
+    "description": "A slow rhythm that lowers the movement rate of an opponent for 12 seconds.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 45,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "debuff",
+        "effect": "snare",
+        "value": {
+          "base": 50
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "snare-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "snare-song",
+      "horn"
+    ]
+  },
+  {
+    "id": "vulkas_chant_of_poison_1",
+    "name": "Vulka's Chant of Poison",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 68,
+    "description": "An envenomed chant that causes between 17 and 55 damage every six seconds to an enemy and makes them more vulnerable to poison.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "poison",
+        "value": {
+          "base": 106
+        },
+        "over_time": {
+          "interval": "round",
+          "duration": 12
+        }
+      },
+      {
+        "type": "utility",
+        "effect": "cast-spell",
+        "spell": "chant-of-venom"
+      }
+    ],
+    "stacking": {
+      "group": "damage-chant",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "damage-chant",
+      "drum"
+    ]
+  },
+  {
+    "id": "war_march_of_muram_1",
+    "name": "War March of Muram",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 68,
+    "description": "The song of the warlord fills your group's arms with strength, granting them increased attack speed, strength, attack rating. It also adds an aura that damages opponents that strike them.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 60
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "str",
+        "value": {
+          "base": 75
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "atk",
+        "value": {
+          "base": 40
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "damage-shield",
+        "value": {
+          "base": 25
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "haste-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "haste-song",
+      "horn"
+    ]
+  },
+  {
+    "id": "yelhuns_mystic_call_1",
+    "name": "Yelhun's Mystic Call",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 68,
+    "description": "Increases the damage of your companions' spells by up to 15%. This bonus will decay on spells over level 70.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "spell-damage",
+        "value": {
+          "base": 8
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 25
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "spell-focus",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "spell-focus",
+      "voice"
+    ]
+  },
+  {
+    "id": "chorus_of_life_1",
+    "name": "Chorus of Life",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 69,
+    "description": "Calls forth the wind of Marr to regenerate the health and mana of nearby allies.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 0,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "heal",
+        "value": {
+          "base": 560
+        },
+        "duration": 12
+      },
+      {
+        "type": "regen",
+        "stat": "mana",
+        "value": {
+          "base": 12
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "heal-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "heal",
+      "heal-song",
+      "lute"
+    ]
+  },
+  {
+    "id": "erikis_psalm_of_power_1",
+    "name": "Eriki's Psalm of Power",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 69,
+    "description": "Increases the damage of your companions' spells by up to 25%. This bonus will decay on spells over level 70.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "spell-damage",
+        "value": {
+          "base": 13
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 25
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "spell-focus",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "spell-focus",
+      "voice"
+    ]
+  },
+  {
+    "id": "storm_blade_1",
+    "name": "Storm Blade",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 69,
+    "description": "Infuses your group's weapons with the power of the storm, allowing them a chance to strike their target with electrical energy.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 3,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "melee-proc",
+        "proc": "storm-blade-strike",
+        "amount": 400
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "thousand_blades_1",
+    "name": "Thousand Blades",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 69,
+    "description": "Brings your blades and your steps into perfect alignment increasing your melee accuracy by 100%, the chance your melee attacks will deal critical damage by 5%, and grants a 200% non-cumulative increase to the damage of your critical melee attacks for 60 seconds.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "self",
+      "range": 0,
+      "targets": "self"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "chance-to-hit",
+        "amount": 100,
+        "duration": 60
+      },
+      {
+        "type": "utility",
+        "effect": "crit-hit-damage",
+        "amount": 200,
+        "duration": 60
+      },
+      {
+        "type": "utility",
+        "effect": "chance-to-critical-hit",
+        "amount": 5,
+        "duration": 60
+      }
+    ],
+    "stacking": {
+      "group": "discipline",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "discipline"
+    ]
+  },
+  {
+    "id": "verse_of_vesagran_1",
+    "name": "Verse of Vesagran",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 69,
+    "description": "Surrounds your group in a protective aura, granting them protection from melee and spell attacks.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "melee-rune",
+        "value": {
+          "base": 450
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "spell-rune",
+        "value": {
+          "base": 450
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "all-stats",
+        "value": {
+          "base": 10
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "rune-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "rune-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "ancient_call_of_power_1",
+    "name": "Ancient: Call of Power",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 70,
+    "description": "Increases the damage of your companions' spells by up to 30%. This bonus will decay on spells over level 70.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "spell-damage",
+        "value": {
+          "base": 16
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 25
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "spell-focus",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "spell-focus",
+      "voice"
+    ]
+  },
+  {
+    "id": "arcane_aria_1",
+    "name": "Arcane Aria",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 70,
+    "description": "Conjures the power of your voice into arcane orbs of power that will fuel the destructive power of group members who use direct damage spells.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "cast-on-spell-use",
+        "spell": "arcane-aria-effect",
+        "amount": 100
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "aura_of_the_muse_1",
+    "name": "Aura of the Muse",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 70,
+    "description": "Increases your companions' attack speed and spell damage, as long as they stay inside the area of the aura.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "self",
+      "range": 0,
+      "targets": "self"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "aura",
+        "aura": "aura-of-the-muse-effect"
+      }
+    ],
+    "stacking": {
+      "group": "aura",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "aura",
+      "voice"
+    ]
+  },
+  {
+    "id": "voice_of_the_vampire_1",
+    "name": "Voice of the Vampire",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 70,
+    "description": "A bewitching melody that charms the target, allowing you to command it.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 22,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "control",
+        "condition": "charm",
+        "duration": 60,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      }
+    ],
+    "stacking": {
+      "group": "charm-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "charm-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "vulkas_chant_of_flame_1",
+    "name": "Vulka's Chant of Flame",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 70,
+    "description": "A fiery chant that causes 55 damage every six seconds to an enemy and makes them more vulnerable to fire.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "value": {
+          "base": 110
+        },
+        "over_time": {
+          "interval": "round",
+          "duration": 12
+        }
+      },
+      {
+        "type": "utility",
+        "effect": "cast-spell",
+        "spell": "chant-of-flame"
+      }
+    ],
+    "stacking": {
+      "group": "damage-chant",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "damage-chant",
+      "drum"
+    ]
+  },
+  {
+    "id": "vulkas_lullaby_1",
+    "name": "Vulka's Lullaby",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 70,
+    "description": "A quiet lullaby that causes your target to fall into an enchanted sleep.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "control",
+        "condition": "mez",
+        "duration": 18,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      }
+    ],
+    "stacking": {
+      "group": "mez-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "mez-song",
+      "voice"
+    ]
+  }
+]

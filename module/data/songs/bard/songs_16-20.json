@@ -1,0 +1,260 @@
+[
+  {
+    "id": "tarews_aquatic_ayre_1",
+    "name": "Tarew's Aquatic Ayre",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 16,
+    "description": "A song that surrounds your head with a cloud of air bubbles, allowing you to breathe underwater indefinitely.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "enduring-breath"
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "guardian_rhythms_1",
+    "name": "Guardian Rhythms",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 17,
+    "description": "A mystic tune that offers your group protection from magic and increases their armor class.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 6
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-magic",
+        "value": {
+          "base": 60
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "ac-buff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "ac-buff",
+      "drum"
+    ]
+  },
+  {
+    "id": "denons_disruptive_discord_1",
+    "name": "Denon's Disruptive Discord",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 18,
+    "description": "A screeching dissonance that causes 4 damage to up to 30 nearby creatures and lowers their armor class by 131.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 0,
+      "targets": "enemies"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "magic",
+        "value": {
+          "base": 6
+        },
+        "over_time": {
+          "interval": "round",
+          "duration": 12
+        },
+        "condition": "target-not-moving"
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 0
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "damage-chant",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "damage-chant",
+      "horn"
+    ]
+  },
+  {
+    "id": "shauris_sonorous_clouding_1",
+    "name": "Shauri's Sonorous Clouding",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 19,
+    "description": "This sonnet surrounds your body with a light fog, allowing you to slip by many creatures undetected. This song also allows you to see invisible creatures.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "invisibility",
+        "variant": "unstable"
+      },
+      {
+        "type": "utility",
+        "effect": "see-invisible"
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "cassindras_chant_of_clarity_1",
+    "name": "Cassindra's Chant of Clarity",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 20,
+    "description": "A light melody that restores the mana of your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "regen",
+        "stat": "mana",
+        "value": {
+          "base": 2
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "mana-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "mana-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "largos_melodic_binding_1",
+    "name": "Largo's Melodic Binding",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 20,
+    "description": "This melody encompasses up to 30 nearby creatures in magical bonds, slowing their attack speed.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 0,
+      "targets": "enemies"
+    },
+    "effects": [
+      {
+        "type": "debuff",
+        "effect": "slow",
+        "value": {
+          "base": 35
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 0
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "slow-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "slow-song",
+      "voice"
+    ]
+  }
+]

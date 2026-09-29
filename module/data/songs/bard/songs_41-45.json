@@ -1,0 +1,390 @@
+[
+  {
+    "id": "psalm_of_mystic_shielding_1",
+    "name": "Psalm of Mystic Shielding",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 41,
+    "description": "A mystic psalm enfolds your group, protecting them from magic as well as regenerating their health.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-magic",
+        "value": {
+          "base": 140
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "spell-rune",
+        "value": {
+          "base": 15
+        },
+        "duration": 12
+      },
+      {
+        "type": "heal",
+        "value": {
+          "base": 97
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 2
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-buff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "resist-buff",
+      "voice"
+    ]
+  },
+  {
+    "id": "mcvaxius_berserker_crescendo_1",
+    "name": "McVaxius' Berserker Crescendo",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 42,
+    "description": "A crescendo that increases your group's attack speed, as well as increasing their strength and armor class.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 33
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "str",
+        "value": {
+          "base": 44
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 5
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "haste-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "haste-song",
+      "horn"
+    ]
+  },
+  {
+    "id": "tuyens_chant_of_disease_1",
+    "name": "Tuyen's Chant of Disease",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 42,
+    "description": "A diseased chant that causes between 1 and 40 damage every six seconds to an enemy and makes them more vulnerable to disease.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "disease",
+        "value": {
+          "base": 6
+        },
+        "over_time": {
+          "interval": "round",
+          "duration": 12
+        }
+      },
+      {
+        "type": "utility",
+        "effect": "cast-spell",
+        "spell": "chant-of-plague"
+      }
+    ],
+    "stacking": {
+      "group": "damage-chant",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "damage-chant",
+      "drum"
+    ]
+  },
+  {
+    "id": "denons_desperate_dirge_1",
+    "name": "Denon's Desperate Dirge",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 43,
+    "description": "A dark dirge that causes between 315 and 635 damage to 5 enemies in an area around your target.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 45,
+      "targets": "enemies"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "magic",
+        "value": {
+          "base": 168
+        }
+      }
+    ],
+    "stacking": {
+      "group": "direct-damage",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "direct-damage",
+      "voice"
+    ]
+  },
+  {
+    "id": "cassindras_elegy_1",
+    "name": "Cassindra's Elegy",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 44,
+    "description": "A quiet elegy that bolsters the intelligence and wisdom of your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "int",
+        "value": {
+          "base": 33
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "wis",
+        "value": {
+          "base": 33
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "stat-buff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "stat-buff",
+      "voice"
+    ]
+  },
+  {
+    "id": "aria_of_asceticism_1",
+    "name": "Aria of Asceticism",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 45,
+    "description": "A long forgotten aria that cleanses the target's body of poison and disease.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "ally"
+    },
+    "effects": [
+      {
+        "type": "cure",
+        "effect": "poison",
+        "value": {
+          "base": 6
+        }
+      },
+      {
+        "type": "cure",
+        "effect": "disease",
+        "value": {
+          "base": 6
+        }
+      }
+    ],
+    "stacking": {
+      "group": "cure-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "heal",
+      "cure-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "jonthans_provocation_1",
+    "name": "Jonthan's Provocation",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 45,
+    "description": "An ancient war song that increases your attack speed, strength, and attack rating.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "self",
+      "range": 0,
+      "targets": "self"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 50
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "str",
+        "value": {
+          "base": 20
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "atk",
+        "value": {
+          "base": 20
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "haste-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "haste-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "rizlonas_embers_1",
+    "name": "Rizlona's Embers",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 45,
+    "description": "Increases the damage of your companions' direct damage spells by up to 15%. This bonus will decay on spells over level 52.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "spell-damage",
+        "value": {
+          "base": 8
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "spell-focus",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "spell-focus",
+      "voice"
+    ]
+  }
+]

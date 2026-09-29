@@ -1,0 +1,257 @@
+[
+  {
+    "id": "melanies_mellifluous_motion_1",
+    "name": "Melanie's Mellifluous Motion",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 21,
+    "description": "A chaotic chorus that causes your group to randomly teleport short distances.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 180,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "shadowstep"
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "alenias_disenchanting_melody_1",
+    "name": "Alenia's Disenchanting Melody",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 22,
+    "description": "A melody that strips the magical effects from everyone in your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "dispel",
+        "amount": 1
+      }
+    ],
+    "stacking": {
+      "group": "dispel-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "dispel-song",
+      "lute"
+    ]
+  },
+  {
+    "id": "selos_consonant_chain_1",
+    "name": "Selo's Consonant Chain",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 23,
+    "description": "This song engulfs your target in magical bonds, slowing their movement and attack speed.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 45,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "debuff",
+        "effect": "snare",
+        "value": {
+          "base": 160
+        },
+        "duration": 12
+      },
+      {
+        "type": "debuff",
+        "effect": "slow",
+        "value": {
+          "base": 40
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "snare-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "snare-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "lyssas_veracious_concord_1",
+    "name": "Lyssa's Veracious Concord",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 24,
+    "description": "This song grants your group the ability to see invisible beings, as well as greatly enhancing night vision.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "see-invisible"
+      },
+      {
+        "type": "utility",
+        "effect": "ultravision"
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "psalm_of_warmth_1",
+    "name": "Psalm of Warmth",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 25,
+    "description": "This psalm surrounds your group in an aura of fire, granting them protection from cold, as well as harming anything that attacks them.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "damage-shield",
+        "value": {
+          "base": 22
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-cold",
+        "value": {
+          "base": 140
+        },
+        "duration": 12
+      },
+      {
+        "type": "utility",
+        "effect": "infravision"
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 2
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "damage-shield",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "damage-shield",
+      "voice"
+    ]
+  },
+  {
+    "id": "selos_rhythm_of_speed_1",
+    "name": "Selo's Rhythm of Speed",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 25,
+    "description": "The quick pace of this song fills your feet with speed, increasing the movement rate of your group. This song also functions indoors.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "movement",
+        "value": {
+          "base": 10
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "movement-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "movement-song",
+      "drum"
+    ]
+  }
+]

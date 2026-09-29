@@ -1,0 +1,335 @@
+[
+  {
+    "id": "vilias_verses_of_celerity_1",
+    "name": "Vilia's Verses of Celerity",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 36,
+    "description": "An energetic verse which hastens the attack speed of your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 20
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "agi",
+        "value": {
+          "base": 70
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 5
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "haste-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "haste-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "psalm_of_purity_1",
+    "name": "Psalm of Purity",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 37,
+    "description": "This psalm surrounds your group in an aura of purity, affording them protection from poison, as well as harming anything that attacks them.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "damage-shield",
+        "value": {
+          "base": 22
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-poison",
+        "value": {
+          "base": 140
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 2
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "damage-shield",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "damage-shield",
+      "voice"
+    ]
+  },
+  {
+    "id": "tuyens_chant_of_flame_1",
+    "name": "Tuyen's Chant of Flame",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 38,
+    "description": "A fiery chant that causes between 1 and 40 damage to your target every 6 seconds and makes them more vulnerable to fire.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "fire",
+        "value": {
+          "base": 6
+        },
+        "over_time": {
+          "interval": "round",
+          "duration": 12
+        }
+      },
+      {
+        "type": "utility",
+        "effect": "cast-spell",
+        "spell": "chant-of-flame"
+      }
+    ],
+    "stacking": {
+      "group": "damage-chant",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "damage-chant",
+      "drum"
+    ]
+  },
+  {
+    "id": "kattas_song_of_sword_dancing_1",
+    "name": "Katta's Song of Sword Dancing",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 39,
+    "description": "Katta's song increases the dexterity of your group, and gives your group members a chance to lower the dexterity of their opponent.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "melee-proc",
+        "proc": "blade-dance"
+      },
+      {
+        "type": "modifier",
+        "stat": "dex",
+        "value": {
+          "base": 40
+        },
+        "duration": 18
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "utility-song",
+      "drum"
+    ]
+  },
+  {
+    "id": "solons_bewitching_bravura_1",
+    "name": "Solon's Bewitching Bravura",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 39,
+    "description": "A bewitching melody that charms the target, allowing you to command it.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "control",
+        "condition": "charm",
+        "duration": 60,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-magic",
+        "value": {
+          "base": -17
+        },
+        "duration": 60
+      }
+    ],
+    "stacking": {
+      "group": "charm-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "charm-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "sionachies_dreams_1",
+    "name": "Sionachie's Dreams",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 40,
+    "description": "A quiet lullaby that causes your target to fall into an enchanted sleep. Affects creatures up to level 53.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "control",
+        "condition": "mez",
+        "duration": 18,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-magic",
+        "value": {
+          "base": -22
+        },
+        "duration": 18
+      }
+    ],
+    "stacking": {
+      "group": "mez-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "mez-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "syvelians_anti_magic_aria_1",
+    "name": "Syvelian's Anti-Magic Aria",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 40,
+    "description": "An aria that can strip away magical effects from your target.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "dispel",
+        "amount": 4
+      }
+    ],
+    "stacking": {
+      "group": "dispel-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "dispel-song",
+      "voice"
+    ]
+  }
+]

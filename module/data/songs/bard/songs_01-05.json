@@ -1,0 +1,408 @@
+[
+  {
+    "id": "chant_of_battle_1",
+    "name": "Chant of Battle",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 1,
+    "description": "A simple tune that increases the strength, dexterity, and armor class of group members.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 2
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "str",
+        "value": {
+          "base": 37
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "dex",
+        "value": {
+          "base": 37
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "ac-buff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "ac-buff",
+      "drum"
+    ]
+  },
+  {
+    "id": "chant_of_chaos_1",
+    "name": "Chant of Chaos",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 1,
+    "description": "A chant of chaos lowers your target's resistances to magical attacks.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-all",
+        "value": {
+          "base": -10
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-debuff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "resist-debuff",
+      "drum"
+    ]
+  },
+  {
+    "id": "chant_of_flame_1",
+    "name": "Chant of Flame",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 1,
+    "description": "Reduces resistance to fire spells by 2 points for 12 seconds.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-fire",
+        "value": {
+          "base": -29
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-debuff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "resist-debuff",
+      "drum"
+    ]
+  },
+  {
+    "id": "chant_of_frost_1",
+    "name": "Chant of Frost",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 1,
+    "description": "Reduces resistance to cold spells by 2 points for 12 seconds.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-cold",
+        "value": {
+          "base": -29
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-debuff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "resist-debuff",
+      "drum"
+    ]
+  },
+  {
+    "id": "chant_of_magic_1",
+    "name": "Chant of Magic",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 1,
+    "description": "Decreases magic resistance of the target by 2 to 29 points for 12 seconds.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-magic",
+        "value": {
+          "base": -29
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-debuff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "resist-debuff",
+      "drum"
+    ]
+  },
+  {
+    "id": "chant_of_plague_1",
+    "name": "Chant of Plague",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 1,
+    "description": "Reduces resistance to disease spells by 1 points for 12 seconds.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-disease",
+        "value": {
+          "base": -29
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-debuff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "resist-debuff",
+      "drum"
+    ]
+  },
+  {
+    "id": "chant_of_venom_1",
+    "name": "Chant of Venom",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 1,
+    "description": "Reduces resistance to poison spells by 1 points for 12 seconds.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-poison",
+        "value": {
+          "base": -29
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-debuff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "resist-debuff",
+      "drum"
+    ]
+  },
+  {
+    "id": "chords_of_dissonance_1",
+    "name": "Chords of Dissonance",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 2,
+    "description": "Clashing notes that cause 2 damage to up to 30 nearby creatures that are not moving.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 0,
+      "targets": "enemies"
+    },
+    "effects": [
+      {
+        "type": "damage",
+        "element": "magic",
+        "value": {
+          "base": 5
+        },
+        "over_time": {
+          "interval": "round",
+          "duration": 12
+        },
+        "condition": "target-not-moving"
+      }
+    ],
+    "stacking": {
+      "group": "damage-chant",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "damage-chant",
+      "lute"
+    ]
+  },
+  {
+    "id": "lyssas_locating_lyric_1",
+    "name": "Lyssa's Locating Lyric",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 4,
+    "description": "A clairvoyant chorus which points you towards your target's nearest corpse. If nothing is targeted then it will point you to the closest corpse of any kind.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "self",
+      "range": 0,
+      "targets": "self"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "locate-corpse"
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "selos_accelerando_1",
+    "name": "Selo's Accelerando",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 5,
+    "description": "The quick pace of this song fills your feet with speed, increasing the movement rate of your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "movement",
+        "value": {
+          "base": 65
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "movement-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "movement-song",
+      "drum"
+    ]
+  }
+]

@@ -1,0 +1,71 @@
+diff --git a/module/data/loaders/song-loader.js b/module/data/loaders/song-loader.js
+index 9c98c2c1..c619170c 100644
+--- a/module/data/loaders/song-loader.js
++++ b/module/data/loaders/song-loader.js
+@@ -154,6 +154,53 @@ async function loadClassSongs(
+             }
+ 
+ 
++            // Band files: {"bands":["songs_01-05.json", ...]} — each band
++            // file holds an array of song records.
++            if (
++                Array.isArray(
++                    index?.bands
++                )
++            )
++            {
++                for (
++                    const bandFile
++                    of index.bands
++                )
++                {
++                    const band =
++                        await loadSongFile(
++                            className,
++                            bandFile
++                        );
++
++
++                    if (Array.isArray(band))
++                    {
++                        for (const entry of band)
++                        {
++                            if (
++                                entry
++                                &&
++                                typeof entry === "object"
++                            )
++                            {
++                                songs.push(entry);
++                            }
++                        }
++                    }
++                    else if (
++                        band
++                        &&
++                        typeof band === "object"
++                    )
++                    {
++                        songs.push(band);
++                    }
++                }
++            }
++
++
++            // Individual song files (legacy / hand-authored overrides).
+             if (
+                 Array.isArray(
+                     index?.songs
+@@ -175,10 +222,11 @@ async function loadClassSongs(
+                     if (song)
+                         songs.push(song);
+                 }
++            }
+ 
+ 
++            if (songs.length)
+                 return songs;
+-            }
+         }
+     }
+     catch (error)

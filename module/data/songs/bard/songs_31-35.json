@@ -1,0 +1,252 @@
+[
+  {
+    "id": "agilmentes_aria_of_eagles_1",
+    "name": "Agilmente's Aria of Eagles",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 31,
+    "description": "An aria that allows your group to levitate for a short time.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "levitate"
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "cassindras_chorus_of_clarity_1",
+    "name": "Cassindra's Chorus of Clarity",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 32,
+    "description": "A quiet chorus that clears the minds of your group, allowing them to regenerate their mana faster.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "regen",
+        "stat": "mana",
+        "value": {
+          "base": 4
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "mana-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "mana-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "psalm_of_cooling_1",
+    "name": "Psalm of Cooling",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 33,
+    "description": "This psalm surrounds your group in an aura of cold, affording them protection from fire, as well as harming anything that attacks them.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "damage-shield",
+        "value": {
+          "base": 22
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-fire",
+        "value": {
+          "base": 140
+        },
+        "duration": 12
+      },
+      {
+        "type": "utility",
+        "effect": "ultravision"
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 2
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "damage-shield",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "damage-shield",
+      "voice"
+    ]
+  },
+  {
+    "id": "cantata_of_soothing_1",
+    "name": "Cantata of Soothing",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 34,
+    "description": "A light cantata that regenerates the health, mana, and stamina of your entire group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "heal",
+        "value": {
+          "base": 80
+        },
+        "duration": 12
+      },
+      {
+        "type": "regen",
+        "stat": "mana",
+        "value": {
+          "base": 3
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "heal-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "heal",
+      "heal-song",
+      "lute"
+    ]
+  },
+  {
+    "id": "lyssas_solidarity_of_vision_1",
+    "name": "Lyssa's Solidarity of Vision",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 34,
+    "description": "This song weaves a magical mesh around your eyes, allowing you to see what your target sees.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 3000,
+      "targets": "ally"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "bind-sight"
+      }
+    ],
+    "stacking": {
+      "group": "utility-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "utility-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "denons_dissension_1",
+    "name": "Denon's Dissension",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 35,
+    "description": "A harsh dissonance that assails the minds of up to 30 nearby creatures, draining their mana.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 0,
+      "targets": "enemies"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "drain-mana",
+        "amount": 70
+      }
+    ],
+    "stacking": {
+      "group": "mana-drain",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "mana-drain",
+      "horn"
+    ]
+  }
+]

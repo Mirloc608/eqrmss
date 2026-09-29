@@ -1,0 +1,829 @@
+[
+  {
+    "id": "largos_assonant_binding_1",
+    "name": "Largo's Assonant Binding",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 51,
+    "description": "A binding melody that surrounds your target in magical bonds, slowing their movement and attack speed, as well as lowering their agility.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 45,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "debuff",
+        "effect": "slow",
+        "value": {
+          "base": 35
+        },
+        "duration": 12
+      },
+      {
+        "type": "debuff",
+        "effect": "snare",
+        "value": {
+          "base": 131
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "agi",
+        "value": {
+          "base": -85
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 0
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "slow-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "slow-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "resistant_discipline_1",
+    "name": "Resistant Discipline",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 51,
+    "description": "Focuses your will, increasing your resistances for a short time.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "self",
+      "range": 0,
+      "targets": "self"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-all",
+        "value": {
+          "base": 20
+        },
+        "duration": 300
+      }
+    ],
+    "stacking": {
+      "group": "discipline",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "discipline"
+    ]
+  },
+  {
+    "id": "selos_song_of_travel_1",
+    "name": "Selo's Song of Travel",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 51,
+    "description": "This song allows greatly increased freedom of movement. It provides levitation, increased movement speed, the ability to see invisible creatures, and invisibility for your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "movement",
+        "value": {
+          "base": 65
+        },
+        "duration": 12
+      },
+      {
+        "type": "invisibility",
+        "variant": "unstable"
+      },
+      {
+        "type": "utility",
+        "effect": "see-invisible"
+      },
+      {
+        "type": "utility",
+        "effect": "levitate"
+      }
+    ],
+    "stacking": {
+      "group": "movement-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "movement-song",
+      "drum"
+    ]
+  },
+  {
+    "id": "aria_of_innocence_1",
+    "name": "Aria of Innocence",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 52,
+    "description": "A long forgotten aria that cleanses the target's body of harmful curses.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "ally"
+    },
+    "effects": [
+      {
+        "type": "cure",
+        "effect": "curse",
+        "value": {
+          "base": 2
+        }
+      },
+      {
+        "type": "cure",
+        "effect": "curse",
+        "value": {
+          "base": 2
+        }
+      }
+    ],
+    "stacking": {
+      "group": "cure-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "heal",
+      "cure-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "battlecry_of_the_vah_shir_1",
+    "name": "Battlecry of the Vah Shir",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 52,
+    "description": "A powerful battle cry that causes your group to attack with enhanced speed. This increase is cumulative with most other effects that increase attack speed.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 15
+        },
+        "duration": 18
+      }
+    ],
+    "stacking": {
+      "group": "haste-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "haste-song",
+      "horn"
+    ]
+  },
+  {
+    "id": "nillipus_march_of_the_wee_1",
+    "name": "Nillipus' March of the Wee",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 52,
+    "description": "A marching tune that surrounds your group with an aura of protection that absorbs some damage, as well as increasing armor class and agility.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 2
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "agi",
+        "value": {
+          "base": 18
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "rune",
+        "value": {
+          "base": 12
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "ac-buff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "ac-buff",
+      "drum"
+    ]
+  },
+  {
+    "id": "rizlonas_fire_1",
+    "name": "Rizlona's Fire",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 53,
+    "description": "Increases the damage of your companions' direct damage spells by up to 15%. This bonus will decay on spells over level 60.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "spell-damage",
+        "value": {
+          "base": 8
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "spell-focus",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "spell-focus",
+      "voice"
+    ]
+  },
+  {
+    "id": "song_of_dawn_1",
+    "name": "Song of Dawn",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 53,
+    "description": "The sounds of the dawn confuse your enemy and make them more likely to attack a different target.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "hate",
+        "value": {
+          "base": -220
+        }
+      }
+    ],
+    "stacking": {
+      "group": "hate-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "hate-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "song_of_twilight_1",
+    "name": "Song of Twilight",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 53,
+    "description": "A quiet lullaby that causes your target to fall into an enchanted sleep. Affects creatures up to level 55.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "control",
+        "condition": "mez",
+        "duration": 18,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-magic",
+        "value": {
+          "base": -33
+        },
+        "duration": 18
+      }
+    ],
+    "stacking": {
+      "group": "mez-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "control",
+      "mez-song",
+      "flute"
+    ]
+  },
+  {
+    "id": "elemental_chorus_1",
+    "name": "Elemental Chorus",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 54,
+    "description": "A mystic tune that offers protection from fire, ice and magic to all nearby allies.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 0,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-magic",
+        "value": {
+          "base": 50
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-cold",
+        "value": {
+          "base": 50
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-fire",
+        "value": {
+          "base": 50
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "ac",
+        "value": {
+          "base": 0
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-buff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "resist-buff",
+      "drum"
+    ]
+  },
+  {
+    "id": "fearless_discipline_1",
+    "name": "Fearless Discipline",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 54,
+    "description": "Strengthens your resolve, rendering you immune to fear.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "self",
+      "range": 0,
+      "targets": "self"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "chance-to-resist-fear-spell",
+        "amount": 10000,
+        "duration": 60
+      }
+    ],
+    "stacking": {
+      "group": "discipline",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "discipline"
+    ]
+  },
+  {
+    "id": "selos_assonant_strain_1",
+    "name": "Selo's Assonant Strain",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 54,
+    "description": "A compelling song that surrounds up to 30 nearby creatures in magical bonds, slowing their attack speed and movement rate.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 0,
+      "targets": "enemies"
+    },
+    "effects": [
+      {
+        "type": "debuff",
+        "effect": "snare",
+        "value": {
+          "base": 62
+        },
+        "duration": 12
+      },
+      {
+        "type": "debuff",
+        "effect": "slow",
+        "value": {
+          "base": 40
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "snare-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "snare-song",
+      "lute"
+    ]
+  },
+  {
+    "id": "vilias_chorus_of_celerity_1",
+    "name": "Vilia's Chorus of Celerity",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 54,
+    "description": "A energetic verse that heightens the attack speed of your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "haste",
+        "value": {
+          "base": 45
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "haste-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "haste-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "aura_of_insight_1",
+    "name": "Aura of Insight",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 55,
+    "description": "Increases your companions' attack speed and spell damage, as long as they stay inside the area of the aura.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "self",
+      "range": 0,
+      "targets": "self"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "aura",
+        "aura": "aura-of-insight"
+      }
+    ],
+    "stacking": {
+      "group": "aura",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "buff",
+      "aura",
+      "horn"
+    ]
+  },
+  {
+    "id": "bruscos_bombastic_bellow_1",
+    "name": "Brusco's Bombastic Bellow",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 55,
+    "description": "A powerful bellow that causes 222 damage and stuns your enemy for 8 seconds up to level 55 .",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 30,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "control",
+        "condition": "stun",
+        "duration": 8,
+        "save": {
+          "stat": "willpower",
+          "difficulty": "bard_charisma_dc"
+        }
+      },
+      {
+        "type": "damage",
+        "element": "magic",
+        "value": {
+          "base": 224
+        }
+      }
+    ],
+    "stacking": {
+      "group": "stun-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "damage",
+      "stun-song",
+      "voice"
+    ]
+  },
+  {
+    "id": "cantata_of_replenishment_1",
+    "name": "Cantata of Replenishment",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 55,
+    "description": "A light cantata that regenerates the health, mana, and stamina of your group.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "area",
+      "range": 30,
+      "targets": "allies"
+    },
+    "effects": [
+      {
+        "type": "heal",
+        "value": {
+          "base": 209
+        },
+        "duration": 12
+      },
+      {
+        "type": "regen",
+        "stat": "mana",
+        "value": {
+          "base": 12
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "heal-song",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "heal",
+      "heal-song",
+      "lute"
+    ]
+  },
+  {
+    "id": "deftdance_discipline_1",
+    "name": "Deftdance Discipline",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 55,
+    "description": "Increases your combat reflexes, allowing you to avoid most attacks and allowing you to dual wield every round.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "self",
+      "range": 0,
+      "targets": "self"
+    },
+    "effects": [
+      {
+        "type": "utility",
+        "effect": "chance-to-dodge",
+        "amount": 10000,
+        "duration": 18
+      },
+      {
+        "type": "utility",
+        "effect": "chance-to-dual-wield",
+        "amount": 10000,
+        "duration": 18
+      }
+    ],
+    "stacking": {
+      "group": "discipline",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "utility",
+      "discipline"
+    ]
+  },
+  {
+    "id": "occlusion_of_sound_1",
+    "name": "Occlusion of Sound",
+    "type": "song",
+    "class": "Bard",
+    "level_required": 55,
+    "description": "An aura of silence envelops your enemy, causing them to become more susceptible to fire, ice, and magic.",
+    "performance": {
+      "activation": "standard",
+      "maintained": true,
+      "pulse_interval": "round"
+    },
+    "targeting": {
+      "type": "single",
+      "range": 60,
+      "targets": "enemy"
+    },
+    "effects": [
+      {
+        "type": "modifier",
+        "stat": "resist-cold",
+        "value": {
+          "base": -10
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-fire",
+        "value": {
+          "base": -10
+        },
+        "duration": 12
+      },
+      {
+        "type": "modifier",
+        "stat": "resist-magic",
+        "value": {
+          "base": -10
+        },
+        "duration": 12
+      }
+    ],
+    "stacking": {
+      "group": "resist-debuff",
+      "same_effect": "refresh"
+    },
+    "tags": [
+      "bard",
+      "song",
+      "debuff",
+      "resist-debuff",
+      "drum"
+    ]
+  }
+]
