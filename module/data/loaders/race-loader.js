@@ -60,7 +60,7 @@ async function loadRaces() {
         for (const file of baseBrowse.files) {
             if (!file.endsWith('.json')) continue;
             const baseName = file.split('/').pop().replace('.json','').toLowerCase();
-            if (['index','manifest','race-schema','schema','races'].includes(baseName) || baseName.includes('schema') || RACES[baseName]) continue;
+            if (['index','manifest','race-schema','schema','races','base-hits'].includes(baseName) || baseName.includes('schema') || RACES[baseName]) continue;
             const json = await fetchJsonSafe(file);
             if (json) {
                 if (Array.isArray(json)) {
