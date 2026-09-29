@@ -21,6 +21,7 @@ export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(Document
   get id() { return `eqrmss-item-sheet-${this.document.id}`; }
   async _updateObject(event, formData)
   {
+      if (!this.isEditable) return;
       try
       {
           if(this.document.pack)
@@ -59,6 +60,7 @@ export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(Document
       if (image) {
         image.addEventListener('click', ev => {
           ev.preventDefault();
+          if (!this.isEditable) return;
           new foundry.applications.apps.FilePicker.implementation({ type: 'image', current: this.document.img, callback: async path => { await this.document.update({ img: path }); } }).browse();
         });
       }
@@ -67,7 +69,7 @@ export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(Document
     // Add a small Save button into header if missing
     try {
       const header = this.element.querySelector('.window-header') || this.element.querySelector('.app-header') || this.element.querySelector('.window-titlebar');
-      if (header && !header.querySelector('.eqrmss-save-btn')) {
+      if (header && !header.querySelector('.eqrmss-save-btn') && this.isEditable) {
         const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'eqrmss-save-btn button'; btn.innerHTML = '<i class="fas fa-save"></i> Save';
         btn.addEventListener('click', async () => { const form = this.element.querySelector('form'); if (!form) return; const fd = new FormData(form); const obj = {}; for (const [k,v] of fd.entries()) obj[k]=v; await this._updateObject(undefined, obj); });
         header.appendChild(btn);
@@ -75,12 +77,12 @@ export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(Document
     } catch (e) { console.error('eqrmss | item header setup failed', e); }
   }
 
-  async close(options = {}) { try { const form = this.element?.querySelector('form'); if (form) { const fd = new FormData(form); const obj = {}; for (const [k,v] of fd.entries()) obj[k]=v; await this._updateObject(undefined, obj); } } catch(e){console.error('eqrmss | item close save failed', e);} return super.close(options); }
+  async close(options = {}) { try { if (this.isEditable) { const form = this.element?.querySelector('form'); if (form) { const fd = new FormData(form); const obj = {}; for (const [k,v] of fd.entries()) obj[k]=v; await this._updateObject(undefined, obj); } } } catch(e){console.error('eqrmss | item close save failed', e);} return super.close(options); }
 
   async activateListeners(html) {
     if (super.activateListeners) super.activateListeners(html);
     const img = this.element?.querySelector('img[data-edit="img"]');
-    if (img) img.addEventListener('click', ev => { ev.preventDefault(); new foundry.applications.apps.FilePicker.implementation({ type: 'image', current: this.document.img, callback: async path => { await this.document.update({ img: path }); } }).render(true); });
+    if (img) img.addEventListener('click', ev => { ev.preventDefault(); if (!this.isEditable) return; new foundry.applications.apps.FilePicker.implementation({ type: 'image', current: this.document.img, callback: async path => { await this.document.update({ img: path }); } }).render(true); });
 
     // Make header-image draggable
     try {
