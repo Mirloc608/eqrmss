@@ -29,7 +29,7 @@ export function registerEQRMSSSheets() {
 
     // --- Item Sheets ---
     DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSItemSheet, {
-        types: ["item"],
+        types: ["item", "consumable"],
         label: "eqrmss.entity_sheet.item",
         makeDefault: true
     });

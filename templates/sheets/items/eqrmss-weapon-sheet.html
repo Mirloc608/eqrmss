@@ -5,28 +5,33 @@
     </header>
     <div class="sheet-content">
         <div>
+            {{#if isGM}}
             <fieldset class="eqrmss-weapon-composer">
                 <legend>Weapon Composer</legend>
                 <div class="form-group">
                     <label>Template</label>
                     <select name="system.weaponTemplate" class="weapon-composer-select">
+                        <option value=""></option>
                         {{selectOptions weaponOptions.templates selected=system.weaponTemplate valueAttr="id" labelAttr="name"}}
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Material</label>
                     <select name="system.material" class="weapon-composer-select">
+                        <option value=""></option>
                         {{selectOptions weaponOptions.materials selected=system.material valueAttr="id" labelAttr="name"}}
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Condition</label>
                     <select name="system.condition" class="weapon-composer-select">
+                        <option value=""></option>
                         {{selectOptions weaponOptions.conditions selected=system.condition valueAttr="id" labelAttr="name"}}
                     </select>
                 </div>
                 <p class="hint">Changing any of these recomposes the weapon below (name and stats).</p>
             </fieldset>
+            {{/if}}
             <fieldset class="eqrmss-weapon-stats">
                 <legend>Weapon Data</legend>
                 <div class="form-group" style="margin-bottom: 6px;">

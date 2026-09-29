@@ -5,28 +5,33 @@
   </header>
     <div class="sheet-content">
       <div>
+      {{#if isGM}}
         <fieldset class="eqrmss-armor-composer">
           <legend>Armor Composer</legend>
           <div class="form-group">
             <label>Template</label>
             <select name="system.armorTemplate" class="armor-composer-select">
+              <option value=""></option>
               {{selectOptions armorOptions.templates selected=system.armorTemplate valueAttr="id" labelAttr="name"}}
             </select>
           </div>
           <div class="form-group">
             <label>Material</label>
             <select name="system.armorMaterial" class="armor-composer-select">
+              <option value=""></option>
               {{selectOptions armorOptions.materials selected=system.armorMaterial valueAttr="id" labelAttr="name"}}
             </select>
           </div>
           <div class="form-group">
             <label>Condition</label>
             <select name="system.armorCondition" class="armor-composer-select">
+              <option value=""></option>
               {{selectOptions armorOptions.conditions selected=system.armorCondition valueAttr="id" labelAttr="name"}}
             </select>
           </div>
           <p class="hint">Changing any of these recomposes the armor below (name and stats).</p>
         </fieldset>
+      {{/if}}
         <table>
           <tr>
             <th>{{localize "eqrmss.item.equipped"}}</th>
