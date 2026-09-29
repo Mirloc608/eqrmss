@@ -155,6 +155,11 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
     const selection = this.characterData;
     const selectedRace = dataContext.races.find(race => (race.id ?? race._id) === selection.raceId);
     const selectedClass = dataContext.classes.find(cls => (cls.id ?? cls._id) === selection.classId);
+
+    // Locked starting spells/songs for the review display (fixed sets, no picker).
+    const startingSpells = selectedClass
+      ? (this.dataService?.resolveStartingSpells?.(selectedClass.id ?? selectedClass._id) ?? [])
+      : [];
     
     const classChoices = dataContext.classes.map(cls => {
       const classKey = String(cls.key ?? cls.id ?? cls._id ?? "").toLowerCase();
@@ -267,12 +272,13 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
         selection,
         steps: [
           { label: "Overview" }, { label: "Basic Info" }, { label: "Race" },
-          { label: "Class" }, { label: "Origin" }, { label: "Stats" }, { label: "Review" }
+          { label: "Class" }, { label: "Origin" }, { label: "Stats" }, { label: "Spells & Songs" }, { label: "Review" }
         ]
       },
       selectedRace,
       selectedClass,
       classChoices,
+      startingSpells,
       physical: getPhysicalRange(selectedRace, selection.gender),
       preview: buildCharacterCreationPreview(selection, dataContext),
       ownerOptions: game.user.isGM
@@ -290,7 +296,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       remainingPoints,
       isPoolExceeded: totalSpent > selection.tempPointPool,
       isFirstStep: this.currentStep === 0,
-      isLastStep: this.currentStep === 6
+      isLastStep: this.currentStep === 7
     };
   }
 
@@ -476,7 +482,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
     const form = target.form || target.closest("form") || target.closest(".eqrmss-character-creation-wizard");
     await this._saveCurrentStepData(form);
 
-    if (this.currentStep < 6) {
+    if (this.currentStep < 7) {
       this.currentStep++;
       this._savedScrollTop = 0;
       this.render();
@@ -496,7 +502,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
 
   static async _onGotoStep(event, target) {
     const step = Number(target.dataset.step);
-    if (!Number.isInteger(step) || step < 0 || step > 6) return;
+    if (!Number.isInteger(step) || step < 0 || step > 7) return;
     await this._saveCurrentStepData(target.closest("form") || target.closest(".eqrmss-character-creation-wizard"));
     this.currentStep = step;
     this._savedScrollTop = 0;

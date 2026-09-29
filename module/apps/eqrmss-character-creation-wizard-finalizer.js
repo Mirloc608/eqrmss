@@ -53,6 +53,12 @@ export class EQRMSSCharacterCreationWizardFinalizer {
 
       ui.notifications.info(`Character "${actor.name}" created successfully.`);
       console.log("EQRMSS | Character finalized", actor);
+
+      // Grant the locked starting spells/songs (fixed sets from
+      // module/data/spells/starting-spells.json). Fail-soft: never blocks
+      // creation.
+      await this.#grantStartingSpells(actor, cls);
+
       return actor;
     }
     catch (error) {
@@ -227,6 +233,64 @@ export class EQRMSSCharacterCreationWizardFinalizer {
       if (target && !target.isGM) return target.id;
     }
     return game.userId;
+  }
+
+  /**
+   * Grant the locked starting spells/songs as lightweight embedded Item
+   * documents, following the codebase's reference-item convention
+   * (progression rewards / song unlock engine): name + type, details
+   * resolved by name from the loaders at render time. Fail-soft: a
+   * missing spell/song is skipped with a warning; creation never blocks.
+   */
+  async #grantStartingSpells(actor, cls) {
+    try {
+      const key = String(cls?.id ?? cls?._id ?? "").toLowerCase();
+      if (!key) return;
+
+      let names = [];
+      try {
+        const resp = await fetch("systems/eqrmss/module/data/spells/starting-spells.json");
+        if (resp.ok) names = (await resp.json())[key] ?? [];
+      } catch { /* fall through */ }
+
+      if (!names.length) return;
+
+      const spellPool = game?.eqrmss?.spells?.[key] ?? [];
+      const songPool = CONFIG?.EQRMSS?.songs ?? [];
+      const items = [];
+
+      for (const name of names) {
+        const doc =
+          spellPool.find(s => s?.name === name) ??
+          songPool.find(s => s?.name === name);
+        if (!doc) {
+          console.warn(`EQRMSS | Finalizer | starting spell/song not found: "${name}" (${key})`);
+          continue;
+        }
+        if (doc.type === "song") {
+          items.push({
+            name: doc.name,
+            type: "song",
+            img: doc.img ?? "icons/svg/music.svg",
+            system: { level: doc.level_required ?? 1, active: false, favorite: false }
+          });
+        } else {
+          items.push({
+            name: doc.name,
+            type: "spell",
+            img: doc.img ?? "icons/svg/book.svg",
+            system: { rank: 1, favorite: false, memorized: false }
+          });
+        }
+      }
+
+      if (items.length) {
+        await actor.createEmbeddedDocuments("Item", items);
+        console.log(`EQRMSS | Finalizer | granted ${items.length} starting spell(s)/song(s)`, items.map(i => i.name));
+      }
+    } catch (error) {
+      console.warn("EQRMSS | Finalizer | starting spell grant failed (non-fatal)", error);
+    }
   }
 }
 

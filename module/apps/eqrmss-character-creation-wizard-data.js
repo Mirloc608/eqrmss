@@ -95,6 +95,8 @@ export class EQRMSSCharacterCreationData {
 
     this.rmssPriorities = {};
 
+    this.startingSpells = {};
+
     this.initialized = false;
   }
 
@@ -153,6 +155,16 @@ export class EQRMSSCharacterCreationData {
     // do not maintain a second copy here. Stat keys are normalized to the
     // canonical uppercase spelling so they always match wizard stat keys.
     this.rmssPriorities = this.#normalizePriorities(RMSS_STAT_PRIORITIES);
+
+    // Locked starting spells/songs granted by the wizard (fixed sets, no
+    // picker). Object keyed by lowercase class id — fetched directly, not
+    // via #loadJson, to preserve the key→names shape.
+    try {
+      const resp = await fetch("systems/eqrmss/module/data/spells/starting-spells.json");
+      this.startingSpells = resp.ok ? (await resp.json()) ?? {} : {};
+    } catch {
+      this.startingSpells = {};
+    }
 
     this.initialized = true;
 
@@ -416,8 +428,35 @@ export class EQRMSSCharacterCreationData {
       raceAvailability: this.raceAvailability,
       raceDefinitions: this.raceDefinitions,
       classDefinitions: this.classDefinitions,
-      rmssPriorities: this.rmssPriorities
+      rmssPriorities: this.rmssPriorities,
+      startingSpells: this.startingSpells
     };
+  }
+
+  // ------------------------------------------------------------
+  // STARTING SPELLS / SONGS
+  //
+  // Resolve the locked starting sets for a class id into full
+  // spell/song documents from the runtime loaders (display data for
+  // the wizard step; the finalizer creates the items). Fail-soft:
+  // unknown names are skipped with a warning so creation never blocks.
+  // ------------------------------------------------------------
+
+  resolveStartingSpells(classId) {
+    const key = String(classId ?? "").toLowerCase();
+    const names = this.startingSpells?.[key] ?? [];
+    if (!names.length) return [];
+    const spellPool = game?.eqrmss?.spells?.[key] ?? [];
+    const songPool = CONFIG?.EQRMSS?.songs ?? [];
+    const resolved = [];
+    for (const name of names) {
+      const doc =
+        spellPool.find(s => s?.name === name) ??
+        songPool.find(s => s?.name === name);
+      if (doc) resolved.push(doc);
+      else console.warn(`EQRMSS | Wizard | starting spell/song not found: "${name}" (${key})`);
+    }
+    return resolved;
   }
 }
 

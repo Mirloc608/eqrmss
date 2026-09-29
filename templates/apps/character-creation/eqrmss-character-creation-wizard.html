@@ -379,9 +379,36 @@
     {{/if}}
 
     {{!-- ======================================================= --}}
-    {{!-- STEP 6: REVIEW --}}
+    {{!-- STEP 6: SPELLS & SONGS --}}
     {{!-- ======================================================= --}}
     {{#if (eq wizard.step 6)}}
+    <div class="eqrmss-step eqrmss-step-spells">
+      <h3>Step 6: Starting Spells &amp; Songs</h3>
+      {{#if selectedClass}}
+        {{#if startingSpells.length}}
+          <p class="hint">{{selectedClass.name}} begins play with the following, granted automatically:</p>
+          <ul class="eqrmss-cc-starting-spells" style="list-style-type: none; padding: 0;">
+            {{#each startingSpells}}
+              <li style="margin-bottom: 10px;">
+                <strong>{{name}}</strong>
+                {{#if system}}<span class="eqrmss-cc-spell-meta"> ({{type}}{{#if system.manaCost}}, {{system.manaCost}} mana{{/if}}{{#if system.level}}, level {{system.level}}{{/if}})</span>{{/if}}
+                <br><small>{{#if system.description}}{{system.description}}{{else}}{{description}}{{/if}}</small>
+              </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <p class="hint">{{selectedClass.name}} begins play with no spells or songs.</p>
+        {{/if}}
+      {{else}}
+        <p class="hint">Select a profession to see starting spells and songs.</p>
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- ======================================================= --}}
+    {{!-- STEP 7: REVIEW --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 7)}}
     <div class="eqrmss-step eqrmss-step-review">
 
       <h3>Review & Finalize</h3>
