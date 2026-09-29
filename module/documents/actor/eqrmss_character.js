@@ -10,7 +10,7 @@
 // ============================================================
 
 import { EQRMSSActor } from "./eqrmss_actor.js";
-import { RMSSDerivedValueEngine, calculateArmorAndDefenses } from "/systems/eqrmss/module/data/stats/rmss-derived-values.js";
+import { RMSSDerivedValueEngine, calculateArmorAndDefenses, calculateEncumbrance, calculateBaseMovementRate } from "/systems/eqrmss/module/data/stats/rmss-derived-values.js";
 
 export class EQRMSSCharacter extends EQRMSSActor
 {
@@ -36,6 +36,10 @@ export class EQRMSSCharacter extends EQRMSSActor
         this._prepareProgression();
 
         this._prepareCombatAndDefenses();
+
+        this._prepareEncumbrance();
+
+        this._prepareMovement();
     }
 
     // ========================================================
@@ -117,6 +121,37 @@ export class EQRMSSCharacter extends EQRMSSActor
         this.system.combat.armorDB = combatMetrics.armorDB;
         this.system.combat.totalDB = combatMetrics.totalDB;
         this.system.combat.magic = combatMetrics.magic ?? "";
+    }
+
+    _prepareEncumbrance()
+    {
+        const enc = calculateEncumbrance(this);
+
+        this.system.encumbrance ??= {};
+        this.system.encumbrance.bwa = enc.bwa;
+        this.system.encumbrance.load = enc.load;
+        this.system.encumbrance.chartPenalty = enc.chartPenalty;
+        this.system.encumbrance.stBonus = enc.stBonus;
+        this.system.encumbrance.penalty = enc.penalty;
+        this.system.encumbrance.excessST = enc.excessST;
+    }
+
+    _prepareMovement()
+    {
+        const move = calculateBaseMovementRate(this);
+
+        this.system.movement ??= {};
+        this.system.movement = {
+            quTotal: move.quTotal,
+            quBonus: move.quBonus,
+            chartBase: move.chartBase,
+            racialMod: move.racialMod,
+            armorPen: move.armorPen,
+            armorApplied: move.armorApplied,
+            strideMod: move.strideMod,
+            encPenalty: move.encPenalty,
+            baseRate: move.total
+        };
     }
 
     // ========================================================

@@ -3,6 +3,21 @@
  */
 
 import { isEquipped } from "../../utils/equipment/equipment-utils.js";
+import { rmssStatBonus } from "./rmss-stat-bonus.js";
+
+/**
+ * Shared "is this item worn?" check. An item counts as equipped via the
+ * item-sheet checkbox (system.equipped) or the player-sheet location
+ * dropdown (system.location === "equipped").
+ */
+function isWornItem(item) {
+    return isEquipped(item) || item?.system?.location === "equipped";
+}
+
+function itemListOf(actorData) {
+    const rawItems = actorData.items;
+    return Array.isArray(rawItems) ? rawItems : (rawItems?.contents ?? []);
+}
 export class RMSSDerivedValueEngine {
   compute(stats) {
     const St = stats.St ?? 50;
@@ -53,14 +68,10 @@ export function calculateArmorAndDefenses(actorData) {
     // checkbox (system.equipped) or the player-sheet location dropdown
     // (system.location === "equipped").
     const combat = system.combat || {};
-    const rawItems = actorData.items;
-    const itemList = Array.isArray(rawItems)
-        ? rawItems
-        : (rawItems?.contents ?? []);
-    const isWorn = (i) => isEquipped(i) || i?.system?.location === "equipped";
+    const itemList = itemListOf(actorData);
 
-    const wornArmor = itemList.filter((i) => i?.type === "armor" && isWorn(i));
-    const wornShields = itemList.filter((i) => i?.type === "shield" && isWorn(i));
+    const wornArmor = itemList.filter((i) => i?.type === "armor" && isWornItem(i));
+    const wornShields = itemList.filter((i) => i?.type === "shield" && isWornItem(i));
 
     let armorType = "No Armor";
     let mmp = 0;
@@ -106,4 +117,161 @@ export function calculateArmorAndDefenses(actorData) {
         armorDB,
         totalDB
     };
+}
+
+/**
+ * ENCUMBRANCE — RMSS §7.2.2
+ *
+ * BWA ("weight allowance") = 10% of body weight (system.physical.weight, lbs).
+ * Load ("dead weight") = carried weight in pounds. Worn armor is excluded:
+ * it is "non-dead" weight covered by maneuver penalties (ChL Tables
+ * 15.3.1/15.3.3), not by encumbrance.
+ *
+ * The chart penalty is reduced by the Strength stat bonus (Table 15.1.3).
+ * Any excess ST bonus is reported but NOT auto-applied; per the rule it may
+ * cancel armor Quickness penalty instead. The penalty's application to Base
+ * Movement Rate (§7.2.1) is left to the GM — moveRate is not modified here.
+ */
+export function calculateEncumbrance(actorData) {
+    const system = actorData.system ?? {};
+    const bodyWeight = Number(system.physical?.weight);
+    const itemList = itemListOf(actorData);
+
+    let load = 0;
+    for (const item of itemList) {
+        if (item?.type === "armor" && isWornItem(item)) continue;
+        const w = Number(item?.system?.weight);
+        if (!Number.isFinite(w) || w <= 0) continue;
+        const qty = Number(item?.system?.quantity ?? 1);
+        load += w * (Number.isFinite(qty) && qty > 0 ? qty : 1);
+    }
+
+    if (!Number.isFinite(bodyWeight) || bodyWeight <= 0) {
+        return { bwa: null, load, chartPenalty: 0, stBonus: 0, penalty: 0, excessST: 0 };
+    }
+
+    const bwa = bodyWeight * 0.10;
+    const chartPenalty = encumbranceChartPenalty(bwa > 0 ? load / bwa : 0);
+
+    const stats = system.stats ?? {};
+    const st = stats.ST ?? stats.St ?? {};
+    const stBonus = rmssStatBonus(st.total ?? st.temp ?? 50);
+    const penalty = Math.min(0, chartPenalty + stBonus);
+    const excessST = Math.max(0, chartPenalty + stBonus);
+
+    return { bwa, load, chartPenalty, stBonus, penalty, excessST };
+}
+
+/**
+ * BASE MOVEMENT RATE — RMSS §7.2.1
+ *
+ * Chart lookup on the Quickness STAT value, then:
+ *  (+) racial Quickness modification (ChL 6.2 / Table 15.5.1)
+ *  (-) armor Quickness penalty = worn-armor maneuver penalty (mmp),
+ *      reduced by excess ST bonus (§7.2.2); it can only cancel the QU
+ *      stat bonus (+ racial), so armor alone cannot drop the rate below
+ *      50'/rnd
+ *  (+/-) stride modification from height (inches)
+ *  (-) encumbrance penalty (§7.2.2), applied directly
+ *
+ * Stride/encumbrance CAN take the rate below 50. Pace is a per-round
+ * choice and is not computed here.
+ */
+export function calculateBaseMovementRate(actorData) {
+    const system = actorData.system ?? {};
+    const stats = system.stats ?? {};
+    const qu = stats.QU ?? stats.Qu ?? {};
+    const quTotal = qu.total ?? qu.temp ?? 50;
+    const quBonus = rmssStatBonus(quTotal);
+
+    const chartBase = movementRateChart(quTotal);
+
+    // Racial QU modification: race stat-mod semantics are undecided
+    // (open design question #6), so this is 0 until racial mods reach
+    // the actor. It slots into both the bonus and the rate here.
+    const racialMod = 0;
+
+    const mmp = Number(system.combat?.mmp ?? 0);
+    const armorPen = Math.max(0, -mmp);
+    const excessST = Number(system.encumbrance?.excessST ?? 0);
+    const armorPenAfterST = Math.max(0, armorPen - excessST);
+    const cancellable = Math.max(0, quBonus + racialMod);
+    const armorApplied = Math.min(armorPenAfterST, cancellable);
+
+    const heightIn = Number(system.physical?.height);
+    const strideMod = strideModification(
+        Number.isFinite(heightIn) && heightIn > 0 ? heightIn : null);
+
+    const encPenalty = Number(system.encumbrance?.penalty ?? 0);
+
+    const total = chartBase + racialMod - armorApplied + strideMod + encPenalty;
+
+    return {
+        quTotal, quBonus, chartBase, racialMod,
+        armorPen, armorApplied, strideMod, encPenalty, total
+    };
+}
+
+/**
+ * RMSS §7.2.1 Movement Rate Chart. Lookup is on the Quickness stat
+ * value (not the bonus). Values below 1 clamp to the bottom row.
+ */
+function movementRateChart(qu) {
+    if (qu >= 102) return 85;
+    if (qu >= 101) return 80;
+    if (qu >= 100) return 75;
+    if (qu >= 98) return 70;
+    if (qu >= 95) return 65;
+    if (qu >= 90) return 60;
+    if (qu >= 75) return 55;
+    if (qu >= 25) return 50;
+    if (qu >= 10) return 45;
+    if (qu >= 5) return 40;
+    if (qu >= 3) return 35;
+    if (qu >= 2) return 30;
+    return 25;
+}
+
+/**
+ * RMSS §7.2.1 Stride Modification Chart. Height in inches, compared
+ * against the 6' norm in 6" bands. Outside the chart, clamps to the
+ * nearest band.
+ */
+function strideModification(heightIn) {
+    if (heightIn == null) return 0;
+    if (heightIn >= 94) return 20;   // 7'10" - 8'3"
+    if (heightIn >= 88) return 15;   // 7'4" - 7'9"
+    if (heightIn >= 82) return 10;   // 6'10" - 7'3"
+    if (heightIn >= 76) return 5;    // 6'4" - 6'9"
+    if (heightIn >= 70) return 0;    // 5'10" - 6'3"
+    if (heightIn >= 64) return -5;   // 5'4" - 5'9"
+    if (heightIn >= 58) return -10;  // 4'10" - 5'3"
+    if (heightIn >= 52) return -15;  // 4'4" - 4'9"
+    if (heightIn >= 46) return -20;  // 3'10" - 4'3"
+    if (heightIn >= 40) return -25;  // 3'4" - 3'9"
+    if (heightIn >= 34) return -30;  // 2'10" - 3'3"
+    if (heightIn >= 28) return -35;  // 2'4" - 2'9"
+    return -40;                      // 1'10" - 2'3" (and below)
+}
+
+/**
+ * RMSS §7.2.2 Encumbrance Chart. ratio = load / weight allowance.
+ * Bands are (lower, upper]: e.g. (1x, 2x] -> -10.
+ */
+function encumbranceChartPenalty(ratio) {
+    if (ratio <= 1) return 0;
+    if (ratio <= 2) return -10;
+    if (ratio <= 3) return -20;
+    if (ratio <= 4) return -25;
+    if (ratio <= 5) return -30;
+    if (ratio <= 6) return -35;
+    if (ratio <= 7) return -40;
+    if (ratio <= 8) return -50;
+    if (ratio <= 9) return -60;
+    if (ratio <= 10) return -70;
+    if (ratio <= 11) return -80;
+    if (ratio <= 12) return -90;
+    if (ratio <= 13) return -100;
+    if (ratio <= 14) return -110;
+    return -120;
 }

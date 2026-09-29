@@ -216,7 +216,6 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // ------------------------------------------------------------
         const coBonus = getBonus("CO");
         const sdBonus = getBonus("SD");
-        const quBonus = getBonus("QU");
 
         // Concussion Hits = 10 + (2 × Co bonus) + SD bonus + prof/skill/special
         const hitsMax = 10 + (2 * coBonus) + sdBonus;
@@ -224,9 +223,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // Exhaustion Points = 40 + (3 × Co bonus)
         const exhaustionMax = 40 + (3 * coBonus);
 
-        // Base Movement Rate = 50 + (3 × Qu bonus)
-        // (Stride modification and weight penalty need height/weight data)
-        const baseMoveRate = 50 + (3 * quBonus);
+        // Base Movement Rate — RMSS §7.2.1 (chart + racial + armor + stride + encumbrance).
+        // Replaces the earlier 50 + (3 × Qu bonus) house formula.
+        const baseMoveRate = system.movement?.baseRate ?? "—";
 
         const statusData = {
             hits: {
@@ -241,6 +240,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             },
             encumbrance: {
                 bwa: system.encumbrance?.bwa ?? "—",
+                load: system.encumbrance?.load ?? "—",
+                penalty: system.encumbrance?.penalty ?? 0,
                 moveRate: baseMoveRate
             }
         };
