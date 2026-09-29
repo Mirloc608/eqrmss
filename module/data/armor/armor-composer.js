@@ -74,8 +74,10 @@ export function composeArmor(locationId, categoryId, materialId, conditionId) {
     const c = conditions[conditionId];
     if (!c) throw new Error(`Unknown armor condition: ${conditionId}`);
 
-    // Name: "[Condition] [Material] [noun]" (e.g. "Worn Steel Breastplate")
-    const noun = loc.names?.[materialId] ?? loc.name;
+    // Name: "[Condition] [Material] [noun]" (e.g. "Worn Steel Breastplate").
+    // The noun is per-material when the location defines one, else the
+    // category default for the location, else the location's plain name.
+    const noun = loc.names?.[materialId] ?? categories[categoryId]?.nouns?.[locationId] ?? loc.name;
     const parts = [];
     if (c.prefix) parts.push(c.prefix);
     if (m.prefix) parts.push(m.prefix);
