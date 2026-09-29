@@ -938,6 +938,23 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       return;
     }
 
+    // Unspent development points are forfeited at finalization — warn first.
+    const dev = this._getDevelopmentState();
+    const dpPool = this._getDpPool();
+    const unspentAdolescence = Math.max(0, dpPool - (dev.adolescence?.spent ?? 0));
+    const unspentApprenticeship = Math.max(0, dpPool - (dev.apprenticeship?.spent ?? 0));
+    const totalUnspent = unspentAdolescence + unspentApprenticeship;
+    if (totalUnspent > 0) {
+      const confirmed = await Dialog.confirm({
+        title: "Forfeit Unspent Development Points",
+        content: `<p>Unspent development points are <strong>forfeited</strong> when the character is finalized:</p>
+          <ul><li>Adolescence: ${unspentAdolescence} unspent</li>
+          <li>Apprenticeship: ${unspentApprenticeship} unspent</li></ul>
+          <p>Finalize anyway?</p>`
+      });
+      if (!confirmed) return;
+    }
+
     const actor = await new EQRMSSCharacterCreationWizardFinalizer(
       this.characterData,
       dataContext
