@@ -5,27 +5,51 @@
         <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
     </header>
     <div class="sheet-content">
-        <div>
-            <table>
-                <tr>
-                    <th>{{localize "eqrmss.spell.favorite"}}</th>
-                    <th>{{localize "eqrmss.spell.level"}}</th>
-                    <th>{{localize "eqrmss.song.active"}}</th>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="system.favorite" {{checked system.favorite}}/>
-                    </td>
-                    <td>
-                        <input name="system.level" type="text" value="{{system.level}}" data-dtype="Number"/>
-                    </td>
-                    <td>
-                        <input type="checkbox" name="system.active" {{checked system.active}}/>
-                    </td>
-                </tr>
-            </table>
-            {{localize "eqrmss.spell.description"}}
-            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
-        </div>
+        <table style="width:100%;table-layout:fixed;">
+            <tr>
+                <th>{{localize "eqrmss.song.favorite"}}</th>
+                <th>{{localize "eqrmss.song.level"}}</th>
+                <th>{{localize "eqrmss.song.active"}}</th>
+                <th>{{localize "eqrmss.song.maintained"}}</th>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="system.favorite" {{checked system.favorite}}/></td>
+                <td><input name="system.level" type="text" value="{{system.level}}" data-dtype="Number" style="width:100%;"/></td>
+                <td><input type="checkbox" name="system.active" {{checked system.active}}/></td>
+                <td><input type="checkbox" name="system.maintained" {{checked system.maintained}}/></td>
+            </tr>
+            <tr>
+                <th>{{localize "eqrmss.song.activation"}}</th>
+                <th>{{localize "eqrmss.song.pulse"}}</th>
+                <th>{{localize "eqrmss.song.target_type"}}</th>
+                <th>{{localize "eqrmss.song.range"}}</th>
+            </tr>
+            <tr>
+                <td><input name="system.activation" type="text" value="{{system.activation}}" data-dtype="String" style="width:100%;"/></td>
+                <td><input name="system.pulse" type="text" value="{{system.pulse}}" data-dtype="String" style="width:100%;"/></td>
+                <td><input name="system.targetType" type="text" value="{{system.targetType}}" data-dtype="String" style="width:100%;"/></td>
+                <td><input name="system.range" type="text" value="{{system.range}}" data-dtype="String" style="width:100%;"/></td>
+            </tr>
+            <tr>
+                <th>{{localize "eqrmss.song.targets"}}</th>
+                <th>{{localize "eqrmss.song.stacking"}}</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <td><input name="system.targets" type="text" value="{{system.targets}}" data-dtype="String" style="width:100%;"/></td>
+                <td><input name="system.stacking" type="text" value="{{system.stacking}}" data-dtype="String" style="width:100%;"/></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <div style="margin-top:6px;font-weight:bold;">{{localize "eqrmss.song.effects"}}</div>
+        <ul style="margin:4px 0;padding-left:20px;">
+        {{#each system.effectsSummary}}
+            <li>{{this}}</li>
+        {{/each}}
+        </ul>
+        {{localize "eqrmss.song.description"}}
+        {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
     </div>
 </form>

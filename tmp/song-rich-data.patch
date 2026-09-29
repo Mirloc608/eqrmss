@@ -1,0 +1,88 @@
+diff --git a/lang/en.json b/lang/en.json
+index 9d6e32c7..cd8726cc 100644
+--- a/lang/en.json
++++ b/lang/en.json
+@@ -264,7 +264,18 @@
+       "target": "Target"
+     },
+     "song": {
+-      "active": "Active"
++      "favorite": "Favorite",
++      "level": "Level",
++      "active": "Active",
++      "maintained": "Maintained",
++      "activation": "Activation",
++      "pulse": "Pulse",
++      "target_type": "Target Type",
++      "range": "Range",
++      "targets": "Targets",
++      "stacking": "Stacking",
++      "effects": "Effects",
++      "description": "Description"
+     },
+     "skill_category": {
+       "applicable_stats": "Applicable Stats:",
+diff --git a/module/apps/eqrmss-character-creation-wizard-finalizer.js b/module/apps/eqrmss-character-creation-wizard-finalizer.js
+index ef167554..6c605ba2 100644
+--- a/module/apps/eqrmss-character-creation-wizard-finalizer.js
++++ b/module/apps/eqrmss-character-creation-wizard-finalizer.js
+@@ -5,6 +5,30 @@
+ 
+ import { extractRacialModifiers } from "../utils/actor/rmss-stats.js";
+ 
++/**
++ * Format one song effect record into a short human-readable summary line
++ * for display on the song item sheet.
++ */
++function songEffectSummary(e) {
++  const base = e?.value?.base ?? e?.value;
++  const plus = (typeof base === "number" && base > 0) ? "+" : "";
++  const dur = e?.duration ? ` (${e.duration} rounds)` : "";
++  const ot = e?.over_time ? ` over ${e.over_time.duration} rounds` : "";
++  switch (e?.type) {
++    case "modifier": return `${String(e.stat ?? "").toUpperCase()} ${plus}${base ?? ""}${dur}`.trim();
++    case "damage": return `Damage ${plus}${base ?? ""}${e.element ? " " + e.element : ""}${ot}${e.condition ? " if " + e.condition : ""}`.trim();
++    case "heal": return `Heal ${plus}${base ?? ""}${dur}`.trim();
++    case "regen": return `Regen ${e.stat ?? ""} ${plus}${base ?? ""}${dur}`.trim();
++    case "utility": return `Utility: ${e.effect ?? ""}`.trim();
++    case "control": return `Control: ${e.condition ?? ""}${dur}`.trim();
++    case "invisibility": return `Invisibility${e.variant ? " (" + e.variant + ")" : ""}`.trim();
++    case "debuff": return `Debuff: ${e.effect ?? ""} ${plus}${base ?? ""}${dur}`.trim();
++    case "cure": return `Cure: ${e.effect ?? ""}`.trim();
++    case "summon": return `Summon: ${e.pet ?? e.effect ?? ""}`.trim();
++    default: return String(e?.type ?? "effect");
++  }
++}
++
+ export class EQRMSSCharacterCreationWizardFinalizer {
+ 
+   constructor(wizardState = {}, context = {}) {
+@@ -268,11 +292,27 @@ export class EQRMSSCharacterCreationWizardFinalizer {
+           continue;
+         }
+         if (doc.type === "song") {
++          const perf = doc.performance ?? {};
++          const targ = doc.targeting ?? {};
++          const stack = doc.stacking ?? {};
+           items.push({
+             name: doc.name,
+             type: "song",
+             img: doc.img ?? "systems/eqrmss/assets/Icons/game/musical-notes.svg",
+-            system: { level: doc.level_required ?? 1, active: false, favorite: false, description: doc.description ?? "" }
++            system: {
++              level: doc.level_required ?? 1,
++              active: false,
++              favorite: false,
++              description: doc.description ?? "",
++              activation: perf.activation ?? "",
++              maintained: !!perf.maintained,
++              pulse: perf.pulse_interval ?? "",
++              targetType: targ.type ?? "",
++              range: targ.range ?? "",
++              targets: targ.targets ?? "",
++              stacking: stack.group ?? "",
++              effectsSummary: (doc.effects ?? []).map(songEffectSummary)
++            }
+           });
+         } else {
+           items.push({
