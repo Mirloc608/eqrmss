@@ -83,6 +83,10 @@ export class EQRMSSCharacterCreationWizardFinalizer {
       // creation.
       await this.#grantStartingSpells(actor, cls);
 
+      // Grant the class starter kit (equipment + starting money) from
+      // module/data/starter-kits.json. Fail-soft: never blocks creation.
+      await this.#grantStarterKit(actor, cls, race);
+
       return actor;
     }
     catch (error) {
@@ -345,6 +349,97 @@ export class EQRMSSCharacterCreationWizardFinalizer {
       }
     } catch (error) {
       console.warn("EQRMSS | Finalizer | starting spell grant failed (non-fatal)", error);
+    }
+  }
+
+  /**
+   * Grant the class starter kit (equipment + starting money) from
+   * module/data/starter-kits.json. Mirrors #grantStartingSpells:
+   * lightweight embedded Item documents, fail-soft, never blocks creation.
+   *
+   * Race overrides apply after the class kit (e.g. any ogre character's
+   * chest piece becomes the Worn Hide Tunic). Money gp is fixed per kit;
+   * the cp die (e.g. "1d100") is rolled here.
+   */
+  async #grantStarterKit(actor, cls, race) {
+    try {
+      const key = String(cls?.id ?? cls?._id ?? "").toLowerCase();
+      if (!key) return;
+
+      let data = {};
+      try {
+        const resp = await fetch("systems/eqrmss/module/data/starter-kits.json");
+        if (resp.ok) data = await resp.json();
+      } catch { /* fall through */ }
+
+      const kit = data[key];
+      if (!kit) {
+        console.warn(`EQRMSS | Finalizer | no starter kit for class "${key}"`);
+        return;
+      }
+
+      // Race key: race JSON ids look like "eqrmss-ogre"; fall back to the name.
+      const raceKey =
+        String(race?.id ?? race?._id ?? "").toLowerCase().replace(/^eqrmss-/, "") ||
+        String(race?.name ?? "").toLowerCase();
+      const overrides = (data.raceOverrides ?? {})[raceKey] ?? {};
+
+      const items = [];
+      for (const entry of kit.items ?? []) {
+        const name = (entry.slot && overrides[entry.slot]) || entry.name;
+        const item = { name, type: entry.type };
+        const system = {};
+        if (entry.slot) system.slot = entry.slot;
+        if (entry.equipped) system.equipped = true;
+        if (entry.type === "consumable") {
+          system.item = {
+            category: null,
+            rarity: "common",
+            quality: "normal",
+            weight: 0,
+            value: 0,
+            stackable: (entry.quantity ?? 1) > 1,
+            quantity: entry.quantity ?? 1
+          };
+          system.consumable = {
+            category: entry.category ?? "food",
+            charges: entry.charges ?? 1,
+            maxCharges: entry.charges ?? 1,
+            consumeOnUse: true
+          };
+        }
+        if (Object.keys(system).length) item.system = system;
+        items.push(item);
+      }
+
+      if (items.length) {
+        await actor.createEmbeddedDocuments("Item", items);
+        console.log(`EQRMSS | Finalizer | granted starter kit (${key})`, items.map(i => i.name));
+      }
+
+      // Starting money: { gp: N, cp: "1d100" | N }
+      const money = kit.money ?? {};
+      let cp = 0;
+      if (typeof money.cp === "string" && money.cp.includes("d")) {
+        try {
+          cp = (await new Roll(money.cp).evaluate()).total ?? 0;
+        } catch {
+          cp = 0;
+        }
+      } else {
+        cp = Number(money.cp) || 0;
+      }
+      await actor.update({
+        "system.wealth": {
+          pp: Number(money.pp) || 0,
+          gp: Number(money.gp) || 0,
+          sp: Number(money.sp) || 0,
+          cp
+        }
+      });
+      console.log(`EQRMSS | Finalizer | starting money: ${Number(money.gp) || 0} gp + ${cp} cp`);
+    } catch (error) {
+      console.warn("EQRMSS | Finalizer | starter kit grant failed (non-fatal)", error);
     }
   }
 }
