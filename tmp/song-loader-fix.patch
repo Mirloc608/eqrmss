@@ -1,0 +1,66 @@
+diff --git a/eqrmss.js b/eqrmss.js
+index 40c00af..c69d32e 100644
+--- a/eqrmss.js
++++ b/eqrmss.js
+@@ -63,8 +63,8 @@ import { initializeSkillEngine } from "./module/utils/skills/index.js";
+ // ---------- Part 2: v4.14 data loader (unchanged) ----------
+ console.log("EQRMSS | Initialize Data Loaders v4.14 | Starting - Wizard+Sheet+LazyGeo fix - NO TLA");
+ 
+-let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null;
+-let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null;
++let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null, SongModule = null;
++let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null, SongLoader = null;
+ let modulesLoaded = false;
+ 
+ async function tryImport(paths) {
+@@ -102,11 +102,13 @@ async function loadModules() {
+     SpellModule = await tryImport(['./module/data/loaders/spell-loader.js']);
+     RaceModule = await tryImport(['./module/data/loaders/race-loader.js']);
+     SkillModule = await tryImport(['./module/data/skills/skill-loader.js', './module/data/loaders/skill-loader.js']);
++    SongModule = await tryImport(['./module/data/loaders/song-loader.js']);
+     AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
+     ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
+     SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
+     RaceLoader = resolveLoader(RaceModule, 'RaceLoader','EQRMSSRaceLoader','EQRMSS_RACE_LOADER','RacesLoader');
+     SkillLoader = resolveLoader(SkillModule, 'SkillLoader','EQRMSSSkillLoader','EQRMSS_SKILL_LOADER');
++    SongLoader = resolveLoader(SongModule, 'SongLoader','EQRMSSSongLoader','EQRMSS_SONG_LOADER');
+     modulesLoaded = true;
+ }
+ 
+@@ -198,7 +200,7 @@ export async function initializeDataLoaders() {
+     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
+     await loadModules();
+     game.eqrmss = game.eqrmss || {};
+-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, weapons:false, armor:false, shields:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
++    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, weapons:false, armor:false, shields:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
+ 
+     if (ClassLoader) {
+         try {
+@@ -259,6 +261,14 @@ export async function initializeDataLoaders() {
+         console.log(`EQRMSS | Skills ready (manual): ${Object.keys(game.eqrmss.skills||{}).length}`);
+     }
+ 
++    if (SongLoader) {
++        try {
++            if (typeof SongLoader.load === 'function') await SongLoader.load();
++            game.eqrmss._loadStatus.songs = true;
++            console.log(`EQRMSS | Songs ready: ${(CONFIG.EQRMSS?.songs?.length) || 0} songs`);
++        } catch (e) { console.error("Song load failed", e); }
++    }
++
+     if (!game.eqrmss.races) game.eqrmss.races = {};
+     if (!game.eqrmss.classes) game.eqrmss.classes = {};
+     if (!game.eqrmss.spells) game.eqrmss.spells = {};
+diff --git a/module/data/loaders/spell-loader.js b/module/data/loaders/spell-loader.js
+index 1458c72..a9e3349 100644
+--- a/module/data/loaders/spell-loader.js
++++ b/module/data/loaders/spell-loader.js
+@@ -124,7 +124,7 @@ async function loadSpells() {
+         for (const file of baseBrowse.files) {
+             if (!file.endsWith('.json')) continue;
+             const bn = file.split('/').pop().replace('.json','').toLowerCase();
+-            if (['index','manifest'].includes(bn)) continue;
++            if (['index','manifest','starting-spells'].includes(bn)) continue;
+             const c = await loadSingleFile(bn, file);
+             if (c > 0) { STATS.classes++; STATS.total += c; }
+         }

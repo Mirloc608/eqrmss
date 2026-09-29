@@ -124,7 +124,7 @@ async function loadSpells() {
         for (const file of baseBrowse.files) {
             if (!file.endsWith('.json')) continue;
             const bn = file.split('/').pop().replace('.json','').toLowerCase();
-            if (['index','manifest'].includes(bn)) continue;
+            if (['index','manifest','starting-spells'].includes(bn)) continue;
             const c = await loadSingleFile(bn, file);
             if (c > 0) { STATS.classes++; STATS.total += c; }
         }

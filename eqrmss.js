@@ -63,8 +63,8 @@ import { initializeSkillEngine } from "./module/utils/skills/index.js";
 // ---------- Part 2: v4.14 data loader (unchanged) ----------
 console.log("EQRMSS | Initialize Data Loaders v4.14 | Starting - Wizard+Sheet+LazyGeo fix - NO TLA");
 
-let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null;
-let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null;
+let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null, SongModule = null;
+let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null, SongLoader = null;
 let modulesLoaded = false;
 
 async function tryImport(paths) {
@@ -102,11 +102,13 @@ async function loadModules() {
     SpellModule = await tryImport(['./module/data/loaders/spell-loader.js']);
     RaceModule = await tryImport(['./module/data/loaders/race-loader.js']);
     SkillModule = await tryImport(['./module/data/skills/skill-loader.js', './module/data/loaders/skill-loader.js']);
+    SongModule = await tryImport(['./module/data/loaders/song-loader.js']);
     AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
     ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
     SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
     RaceLoader = resolveLoader(RaceModule, 'RaceLoader','EQRMSSRaceLoader','EQRMSS_RACE_LOADER','RacesLoader');
     SkillLoader = resolveLoader(SkillModule, 'SkillLoader','EQRMSSSkillLoader','EQRMSS_SKILL_LOADER');
+    SongLoader = resolveLoader(SongModule, 'SongLoader','EQRMSSSongLoader','EQRMSS_SONG_LOADER');
     modulesLoaded = true;
 }
 
@@ -198,7 +200,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, weapons:false, armor:false, shields:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, weapons:false, armor:false, shields:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
 
     if (ClassLoader) {
         try {
@@ -257,6 +259,14 @@ export async function initializeDataLoaders() {
         game.eqrmss.skills = await manualLoadSkills();
         game.eqrmss._loadStatus.skills = true;
         console.log(`EQRMSS | Skills ready (manual): ${Object.keys(game.eqrmss.skills||{}).length}`);
+    }
+
+    if (SongLoader) {
+        try {
+            if (typeof SongLoader.load === 'function') await SongLoader.load();
+            game.eqrmss._loadStatus.songs = true;
+            console.log(`EQRMSS | Songs ready: ${(CONFIG.EQRMSS?.songs?.length) || 0} songs`);
+        } catch (e) { console.error("Song load failed", e); }
     }
 
     if (!game.eqrmss.races) game.eqrmss.races = {};
