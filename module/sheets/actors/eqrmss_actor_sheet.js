@@ -157,6 +157,31 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
             await pet.update({ "system.active": false });
             ui.notifications.info(`${pet.name} has been dismissed.`);
         }));
+
+        // ------------------------------------------------------------
+        // BUFFS & DEBUFFS (Status tab)
+        // ------------------------------------------------------------
+        // Name links back to the originating spell; buffs can be
+        // dismissed by the player, debuffs only via curative spells.
+        html.querySelectorAll(".buff-debuff-open").forEach(el => el.addEventListener("click", async ev => {
+            ev.preventDefault();
+            const origin = el.dataset.origin;
+            if (origin) {
+                try {
+                    const doc = await fromUuid(origin);
+                    if (doc?.sheet) { doc.sheet.render(true); return; }
+                } catch (err) { /* fall through to effect sheet */ }
+            }
+            const effect = this.actor?.effects?.get(el.dataset.effectId);
+            effect?.sheet?.render(true);
+        }));
+
+        html.querySelectorAll(".buff-remove").forEach(el => el.addEventListener("click", async ev => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            const effect = this.actor?.effects?.get(el.dataset.effectId);
+            if (effect) await effect.delete();
+        }));
     }
 
     // ============================================================

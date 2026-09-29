@@ -54,6 +54,7 @@ export class EQRMSSActorContextHelper {
         this._annotateStats(context);
         this._categorizeItems(context);
         this._buildProgression(context);
+        this._buildBuffsDebuffs(context);
 
         context.data ??= {};
         context.data.name = this.actor.name ?? "";
@@ -241,5 +242,32 @@ export class EQRMSSActorContextHelper {
 
     _buildProgression(context) {
         context.progression = { current: {}, next: {} };
+    }
+
+    // ------------------------------------------------------------
+    // BUFFS & DEBUFFS (Status tab)
+    //
+    // Reads the actor's Foundry ActiveEffects and splits them into
+    // two display lists. Category comes from
+    // effect.flags.eqrmss.category ("buff" | "debuff"); effects
+    // without the flag default to buffs. The spell-casting engine
+    // should set the flag when applying spell effects; debuffs are
+    // only removable via curative spells, never by hand.
+    // ------------------------------------------------------------
+    _buildBuffsDebuffs(context) {
+        const buffs = [];
+        const debuffs = [];
+        for (const effect of this.actor?.effects ?? []) {
+            if (effect.disabled) continue;
+            const entry = {
+                id: effect.id,
+                name: effect.name ?? "Unnamed Effect",
+                origin: effect.origin ?? null
+            };
+            if (effect.flags?.eqrmss?.category === "debuff") debuffs.push(entry);
+            else buffs.push(entry);
+        }
+        context.buffs = buffs;
+        context.debuffs = debuffs;
     }
 }
