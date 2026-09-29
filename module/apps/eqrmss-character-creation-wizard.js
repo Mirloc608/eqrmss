@@ -8,7 +8,23 @@ import { buildCharacterCreationPreview } from "./eqrmss-character-creation-wizar
 import { EQRMSSCharacterCreationWizardFinalizer } from "./eqrmss-character-creation-wizard-finalizer.js";
 import { EQRMSSCharacterCreationRules, checkRaceClassCompatibility } from "./eqrmss-character-creation-wizard-rules.js";
 import { getStatValueFromPoints, calculatePotentialStat } from "./eqrmss-character-creation-tables.js";
-import { rmssStatBonus } from "../data/stats/rmss-stat-bonus.js";
+import { rmssStatBonus, rmssDevelopmentPoints } from "../data/stats/rmss-stat-bonus.js";
+import { rmssRankBonus } from "../data/skills/rmss-rank-bonus.js";
+import {
+  WEAPON_CATEGORIES,
+  parseCost,
+  nextRankCost,
+  maxRanksPerPass,
+  createPassState,
+  buyRank,
+  refundRank,
+  remainingDp,
+  totalRanks,
+  validateWeaponAssignment,
+  rollHitDie,
+  buildSkillList,
+  displayName
+} from "../development/dp-engine.js";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -36,7 +52,16 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       statRolls: [],
       stats: { ST: 50, AG: 50, CO: 50, ME: 50, RE: 50, SD: 50, QU: 50, EM: 50, IN: 50, PR: 50 },
       potentials: {},
-      trainingPackages: []
+      trainingPackages: [],
+      // Two-pass DP development (RMSS §16.4 adolescence → level 0,
+      // §10.5 apprenticeship → level 1). Each pass gets the full DP
+      // pool; pools never combine. dpPool is derived from temp stats
+      // at render; spent/ranks/rolls persist here.
+      development: {
+        activePass: "adolescence",
+        adolescence: { spent: 0, ranks: {}, bodyDevRolls: [], weaponAssignment: null },
+        apprenticeship: { spent: 0, ranks: {}, bodyDevRolls: [] }
+      }
     };
     this._initializeDefaultPotentials();
 
@@ -132,7 +157,15 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       prevStep: EQRMSSCharacterCreationWizard._onPrevStep,
       selectRace: EQRMSSCharacterCreationWizard._onSelectRace,
       selectClass: EQRMSSCharacterCreationWizard._onSelectClass,
-      createActor: EQRMSSCharacterCreationWizard._onCreateActor
+      createActor: EQRMSSCharacterCreationWizard._onCreateActor,
+      devBuyRank: EQRMSSCharacterCreationWizard._onDevBuyRank,
+      "dev-buy-rank": EQRMSSCharacterCreationWizard._onDevBuyRank,
+      devRefundRank: EQRMSSCharacterCreationWizard._onDevRefundRank,
+      "dev-refund-rank": EQRMSSCharacterCreationWizard._onDevRefundRank,
+      devSwitchPass: EQRMSSCharacterCreationWizard._onDevSwitchPass,
+      "dev-switch-pass": EQRMSSCharacterCreationWizard._onDevSwitchPass,
+      devAssignWeapon: EQRMSSCharacterCreationWizard._onDevAssignWeapon,
+      "dev-assign-weapon": EQRMSSCharacterCreationWizard._onDevAssignWeapon
     }
   };
 
@@ -272,7 +305,8 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
         selection,
         steps: [
           { label: "Overview" }, { label: "Basic Info" }, { label: "Race" },
-          { label: "Class" }, { label: "Origin" }, { label: "Stats" }, { label: "Spells & Songs" }, { label: "Review" }
+          { label: "Class" }, { label: "Origin" }, { label: "Stats" },
+          { label: "Skills" }, { label: "Spells & Songs" }, { label: "Review" }
         ]
       },
       selectedRace,
@@ -296,8 +330,320 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       remainingPoints,
       isPoolExceeded: totalSpent > selection.tempPointPool,
       isFirstStep: this.currentStep === 0,
-      isLastStep: this.currentStep === 7
+      isLastStep: this.currentStep === 8,
+      skillsContext: this._buildSkillsContext(dataContext, selectedClass, selectedRace),
+      developmentSummary: this._buildDevelopmentSummary(dataContext, selectedClass)
     };
+  }
+
+  // ------------------------------------------------------------
+  // SKILLS STEP — two-pass development-point system
+  // RMSS §16.4 (adolescence → level 0) and §10.5 (apprenticeship →
+  // level 1). Each pass gets the FULL DP pool; pools never combine.
+  // Cost "a/b": first rank step in a pass costs a, second costs b;
+  // progression resets each pass while ranks accumulate. Max 2
+  // ranks/skill/pass; "a/*" costs buy unlimited ranks at a DP each.
+  // ------------------------------------------------------------
+
+  _getDevelopmentState() {
+    return (this.characterData.development ??= {
+      activePass: "adolescence",
+      adolescence: { spent: 0, ranks: {}, bodyDevRolls: [], weaponAssignment: null },
+      apprenticeship: { spent: 0, ranks: {}, bodyDevRolls: [] }
+    });
+  }
+
+  /** DP pool for one pass: Table 15.1.3 bonus total of temp CO/AG/SD/RE/ME. */
+  _getDpPool() {
+    const s = this.characterData.stats ?? {};
+    return rmssDevelopmentPoints({
+      Co: s.CO ?? 0, Ag: s.AG ?? 0, SD: s.SD ?? 0, Me: s.ME ?? 0, Re: s.RE ?? 0
+    });
+  }
+
+  _getClassCosts(dataContext, selectedClass) {
+    const key = String(selectedClass?.id ?? selectedClass?._id ?? "").toLowerCase();
+    if (!key) return null;
+    return dataContext.developmentCosts?.classes?.[key] ?? null;
+  }
+
+  _getRaceHitDie(dataContext, selectedRace) {
+    const key = String(selectedRace?.key ?? selectedRace?.id ?? selectedRace?._id ?? "").toLowerCase();
+    return dataContext.baseHits?.[key]?.hitDie ?? 10;
+  }
+
+  /** Weapon cost for a category: assigned figure, or fixed (berserker). */
+  _getWeaponCost(classCosts, dev, category) {
+    if (classCosts?.weaponAssignment === "fixed") {
+      return String(classCosts.weaponCosts?.[category] ?? "");
+    }
+    return String(dev.adolescence.weaponAssignment?.[category] ?? "");
+  }
+
+  _isWeaponAssignmentComplete() {
+    const dataContext = this.dataService?.getContext?.();
+    if (!dataContext) return true;
+    const selectedClass = dataContext.classes.find(c => (c.id ?? c._id) === this.characterData.classId);
+    const classCosts = this._getClassCosts(dataContext, selectedClass);
+    if (!classCosts) return true;
+    if (classCosts.weaponAssignment === "fixed") return true;
+    const dev = this._getDevelopmentState();
+    const figures = Array.isArray(classCosts.weaponCosts) ? classCosts.weaponCosts : [];
+    return validateWeaponAssignment(figures, dev.adolescence.weaponAssignment).ok;
+  }
+
+  _buildSkillsContext(dataContext, selectedClass, selectedRace) {
+    const dev = this._getDevelopmentState();
+    const classCosts = this._getClassCosts(dataContext, selectedClass);
+    if (!selectedClass || !classCosts) {
+      return { hasClass: false };
+    }
+
+    const dpPool = this._getDpPool();
+    const ado = dev.adolescence;
+    const app = dev.apprenticeship;
+    const activeKey = dev.activePass === "apprenticeship" ? "apprenticeship" : "adolescence";
+    const activePass = dev[activeKey];
+    const hitDie = this._getRaceHitDie(dataContext, selectedRace);
+
+    const rowFor = (entry, costStr) => {
+      const cost = parseCost(costStr);
+      const ranksThisPass = activePass.ranks[entry.key] ?? 0;
+      const total = totalRanks(ado, app, entry.key);
+      const nextCost = nextRankCost(cost, ranksThisPass);
+      const atCap = ranksThisPass >= maxRanksPerPass(cost);
+      const afford = activePass.spent + nextCost <= dpPool;
+      return {
+        key: entry.key,
+        name: entry.name,
+        cost: costStr,
+        unlimited: cost.unlimited,
+        ranksThisPass,
+        totalRanks: total,
+        rankBonus: rmssRankBonus(total),
+        nextCost,
+        canBuy: !atCap && afford,
+        buyBlockedReason: atCap ? "rank-cap" : (afford ? null : "insufficient-dp"),
+        canRefund: ranksThisPass > 0
+      };
+    };
+
+    // Non-weapon skill rows, grouped for display.
+    const skillGroups = [];
+    for (const [table, groupName] of [["generalSkills", "General"], ["magicalSkills", "Magical"], ["maneuveringInArmor", "Maneuvering"], ["specialSkills", "Special"]]) {
+      const rows = [];
+      for (const [key, cost] of Object.entries(classCosts[table] ?? {})) {
+        if (key === "spellLists") continue;
+        rows.push(rowFor({ key, name: displayName(key) }, String(cost)));
+      }
+      if (rows.length) skillGroups.push({ name: groupName, rows });
+    }
+
+    // Weapon section: costs come from the one-time adolescence assignment
+    // (player mode) or the fixed table (berserker).
+    const weaponMode = classCosts.weaponAssignment === "fixed" ? "fixed" : "player";
+    const figures = weaponMode === "player" && Array.isArray(classCosts.weaponCosts)
+      ? classCosts.weaponCosts.map(String)
+      : [];
+    const weaponFigureOptions = [...new Set(figures)];
+    const weaponRows = WEAPON_CATEGORIES.map(cat => {
+      const costStr = this._getWeaponCost(classCosts, dev, cat);
+      const row = costStr
+        ? rowFor({ key: cat, name: displayName(cat) }, costStr)
+        : {
+            key: cat, name: displayName(cat), cost: "—", unlimited: false,
+            ranksThisPass: 0, totalRanks: totalRanks(ado, app, cat),
+            rankBonus: rmssRankBonus(totalRanks(ado, app, cat)),
+            nextCost: null, canBuy: false, buyBlockedReason: "unassigned", canRefund: false
+          };
+      row.assigned = costStr || "";
+      return row;
+    });
+
+    const assignmentCheck = weaponMode === "fixed"
+      ? { ok: true }
+      : validateWeaponAssignment(figures, dev.adolescence.weaponAssignment);
+
+    const bodyDevRolls = [...ado.bodyDevRolls, ...app.bodyDevRolls];
+
+    return {
+      hasClass: true,
+      className: selectedClass.name,
+      activePass: activeKey,
+      passes: {
+        adolescence: {
+          key: "adolescence",
+          label: "Adolescence",
+          sublabel: "→ Level 0",
+          dpPool,
+          spent: ado.spent,
+          remaining: dpPool - ado.spent
+        },
+        apprenticeship: {
+          key: "apprenticeship",
+          label: "Apprenticeship",
+          sublabel: "→ Level 1",
+          dpPool,
+          spent: app.spent,
+          remaining: dpPool - app.spent
+        }
+      },
+      skillGroups,
+      weaponMode,
+      weaponFigures: figures,
+      weaponFigureOptions,
+      weaponRows,
+      weaponAssignment: dev.adolescence.weaponAssignment ?? {},
+      weaponAssignmentComplete: assignmentCheck.ok,
+      hitDie,
+      bodyDevRolls,
+      bodyDevTotal: bodyDevRolls.reduce((a, b) => a + b, 0)
+    };
+  }
+
+  /** Flat list of developed skills for the Review step. */
+  _buildDevelopmentSummary(dataContext, selectedClass) {
+    const dev = this._getDevelopmentState();
+    const classCosts = this._getClassCosts(dataContext, selectedClass);
+    if (!selectedClass || !classCosts) return [];
+    const ado = dev.adolescence;
+    const app = dev.apprenticeship;
+    const summary = [];
+
+    const assignment = dev.adolescence.weaponAssignment ?? {};
+    for (const cat of WEAPON_CATEGORIES) {
+      const total = totalRanks(ado, app, cat);
+      if (total <= 0) continue;
+      const costStr = classCosts.weaponAssignment === "fixed"
+        ? String(classCosts.weaponCosts?.[cat] ?? "")
+        : String(assignment[cat] ?? "");
+      summary.push({
+        name: displayName(cat),
+        category: "Weapon",
+        cost: costStr,
+        adolescenceRanks: ado.ranks?.[cat] ?? 0,
+        apprenticeshipRanks: app.ranks?.[cat] ?? 0,
+        totalRanks: total,
+        rankBonus: rmssRankBonus(total)
+      });
+    }
+
+    for (const entry of buildSkillList(classCosts)) {
+      const total = totalRanks(ado, app, entry.key);
+      if (total <= 0) continue;
+      summary.push({
+        name: entry.name,
+        category: { general: "General", magical: "Magical", maneuvering: "Maneuvering", special: "Special" }[entry.group] ?? entry.group,
+        cost: entry.cost,
+        adolescenceRanks: ado.ranks?.[entry.key] ?? 0,
+        apprenticeshipRanks: app.ranks?.[entry.key] ?? 0,
+        totalRanks: total,
+        rankBonus: rmssRankBonus(total)
+      });
+    }
+    return summary;
+  }
+
+  static async _onDevSwitchPass(event, target) {    const pass = target.dataset.pass === "apprenticeship" ? "apprenticeship" : "adolescence";
+    this._getDevelopmentState().activePass = pass;
+    this._savedScrollTop = this.element?.querySelector(".window-content")?.scrollTop ?? 0;
+    this.render();
+  }
+
+  static async _onDevBuyRank(event, target) {
+    const dev = this._getDevelopmentState();
+    const activeKey = dev.activePass === "apprenticeship" ? "apprenticeship" : "adolescence";
+    const pass = dev[activeKey];
+    const skillKey = target.dataset.skill;
+    if (!skillKey) return;
+
+    const dataContext = this.dataService.getContext();
+    const selectedClass = dataContext.classes.find(c => (c.id ?? c._id) === this.characterData.classId);
+    const selectedRace = dataContext.races.find(r => (r.id ?? r._id) === this.characterData.raceId);
+    const classCosts = this._getClassCosts(dataContext, selectedClass);
+    if (!classCosts) return;
+
+    // Resolve the cost: weapon categories use the assignment.
+    let costStr = "";
+    if (WEAPON_CATEGORIES.includes(skillKey)) {
+      costStr = this._getWeaponCost(classCosts, dev, skillKey);
+      if (!costStr) {
+        ui.notifications.warn("EQRMSS | Assign a cost figure to this weapon category first.");
+        return;
+      }
+    } else {
+      const entry = buildSkillList(classCosts).find(e => e.key === skillKey);
+      costStr = entry?.cost ?? "";
+    }
+    if (!costStr) return;
+    const cost = parseCost(costStr);
+
+    // Lazily set the pool from current temp stats (re-derived each render).
+    pass.dpPool = this._getDpPool();
+
+    const result = buyRank(pass, skillKey, cost);
+    if (!result.ok) {
+      ui.notifications.warn(
+        result.reason === "rank-cap"
+          ? `EQRMSS | ${displayName(skillKey)}: rank limit reached for this pass.`
+          : `EQRMSS | Not enough development points (${result.cost ?? ""}).`
+      );
+      return;
+    }
+
+    // Body Development: roll the racial hit die immediately; the roll
+    // persists so re-renders never re-roll it.
+    if (skillKey === "bodyDevelopment") {
+      const hitDie = this._getRaceHitDie(dataContext, selectedRace);
+      const roll = rollHitDie(hitDie);
+      pass.bodyDevRolls.push(roll);
+      ui.notifications.info(`EQRMSS | Body Development: rolled ${roll} on d${hitDie}.`);
+    }
+
+    this._savedScrollTop = this.element?.querySelector(".window-content")?.scrollTop ?? 0;
+    this.render();
+  }
+
+  static async _onDevRefundRank(event, target) {
+    const dev = this._getDevelopmentState();
+    const activeKey = dev.activePass === "apprenticeship" ? "apprenticeship" : "adolescence";
+    const pass = dev[activeKey];
+    const skillKey = target.dataset.skill;
+    if (!skillKey) return;
+
+    const dataContext = this.dataService.getContext();
+    const selectedClass = dataContext.classes.find(c => (c.id ?? c._id) === this.characterData.classId);
+    const classCosts = this._getClassCosts(dataContext, selectedClass);
+    if (!classCosts) return;
+
+    let costStr = "";
+    if (WEAPON_CATEGORIES.includes(skillKey)) {
+      costStr = this._getWeaponCost(classCosts, dev, skillKey);
+    } else {
+      costStr = buildSkillList(classCosts).find(e => e.key === skillKey)?.cost ?? "";
+    }
+    if (!costStr) return;
+
+    pass.dpPool = this._getDpPool();
+    const result = refundRank(pass, skillKey, parseCost(costStr));
+    if (result.ok && skillKey === "bodyDevelopment") {
+      // Remove the most recent Body Development roll (LIFO with the rank).
+      pass.bodyDevRolls.pop();
+    }
+    this._savedScrollTop = this.element?.querySelector(".window-content")?.scrollTop ?? 0;
+    this.render();
+  }
+
+  static async _onDevAssignWeapon(event, target) {
+    const dev = this._getDevelopmentState();
+    const category = target.dataset.category;
+    const figure = target.value;
+    if (!category) return;
+    dev.adolescence.weaponAssignment ??= {};
+    if (!figure) delete dev.adolescence.weaponAssignment[category];
+    else dev.adolescence.weaponAssignment[category] = figure;
+    this._savedScrollTop = this.element?.querySelector(".window-content")?.scrollTop ?? 0;
+    this.render();
   }
 
   async _onRender(context, options) {
@@ -310,6 +656,15 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
 
     const root = this.element instanceof HTMLElement ? this.element : this.element?.[0];
     if (!root) return;
+
+    // Weapon-category cost assignment selects (Skills step): delegated
+    // change binding — the assignment is permanent once all six figures
+    // are placed.
+    for (const sel of root.querySelectorAll("[data-weapon-category]")) {
+      sel.addEventListener("change", event => {
+        EQRMSSCharacterCreationWizard._onDevAssignWeapon.call(this, event, event.currentTarget);
+      });
+    }
 
     for (const field of root.querySelectorAll("[data-field]")) {
       field.addEventListener("change", async event => {
@@ -482,7 +837,14 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
     const form = target.form || target.closest("form") || target.closest(".eqrmss-character-creation-wizard");
     await this._saveCurrentStepData(form);
 
-    if (this.currentStep < 7) {
+    // Leaving the Skills step requires the one-time weapon-category
+    // assignment (adolescence) — it is permanent once set.
+    if (this.currentStep === 6 && !this._isWeaponAssignmentComplete()) {
+      ui.notifications.warn("EQRMSS | Assign all six weapon cost figures before leaving the Skills step.");
+      return;
+    }
+
+    if (this.currentStep < 8) {
       this.currentStep++;
       this._savedScrollTop = 0;
       this.render();
@@ -502,7 +864,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
 
   static async _onGotoStep(event, target) {
     const step = Number(target.dataset.step);
-    if (!Number.isInteger(step) || step < 0 || step > 7) return;
+    if (!Number.isInteger(step) || step < 0 || step > 8) return;
     await this._saveCurrentStepData(target.closest("form") || target.closest(".eqrmss-character-creation-wizard"));
     this.currentStep = step;
     this._savedScrollTop = 0;

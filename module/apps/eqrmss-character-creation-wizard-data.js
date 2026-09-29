@@ -166,6 +166,25 @@ export class EQRMSSCharacterCreationData {
       this.startingSpells = {};
     }
 
+    // Per-class development costs for the wizard Skills step (Table
+    // 15.2.1 mapping, user-ruled 2026-09-29). Full document fetched
+    // directly to preserve the classes key→entry shape.
+    try {
+      const resp = await fetch("systems/eqrmss/module/data/skills/class-development-costs.json");
+      this.developmentCosts = resp.ok ? (await resp.json()) ?? {} : {};
+    } catch {
+      this.developmentCosts = {};
+    }
+
+    // Racial base-hits data (Table 15.5.1: hit die, max BHPT, rounds to
+    // soul departure) for Body Development rolls in the Skills step.
+    try {
+      const resp = await fetch("systems/eqrmss/module/data/races/base-hits.json");
+      this.baseHits = resp.ok ? (await resp.json())?.races ?? {} : {};
+    } catch {
+      this.baseHits = {};
+    }
+
     this.initialized = true;
 
     console.log("EQRMSS | Character Creation Data Service ready", {
@@ -429,7 +448,9 @@ export class EQRMSSCharacterCreationData {
       raceDefinitions: this.raceDefinitions,
       classDefinitions: this.classDefinitions,
       rmssPriorities: this.rmssPriorities,
-      startingSpells: this.startingSpells
+      startingSpells: this.startingSpells,
+      developmentCosts: this.developmentCosts,
+      baseHits: this.baseHits
     };
   }
 
@@ -457,6 +478,21 @@ export class EQRMSSCharacterCreationData {
       else console.warn(`EQRMSS | Wizard | starting spell/song not found: "${name}" (${key})`);
     }
     return resolved;
+  }
+
+  // ------------------------------------------------------------
+  // DEVELOPMENT COSTS (Skills step)
+  //
+  // Per-class Table 15.2.1 cost mapping for the two-pass DP system.
+  // Returns the class entry (generalSkills, magicalSkills,
+  // maneuveringInArmor, specialSkills, weaponCosts, weaponAssignment)
+  // or null when unknown. Fail-soft: the Skills step renders an
+  // explanatory empty state instead of breaking creation.
+  // ------------------------------------------------------------
+
+  resolveDevelopmentCosts(classId) {
+    const key = String(classId ?? "").toLowerCase();
+    return this.developmentCosts?.classes?.[key] ?? null;
   }
 }
 

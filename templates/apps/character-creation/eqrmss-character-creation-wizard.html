@@ -379,11 +379,106 @@
     {{/if}}
 
     {{!-- ======================================================= --}}
-    {{!-- STEP 6: SPELLS & SONGS --}}
+    {{!-- STEP 6: SKILLS — DEVELOPMENT POINTS --}}
     {{!-- ======================================================= --}}
     {{#if (eq wizard.step 6)}}
+    <div class="eqrmss-step eqrmss-step-skills">
+      <h3>Step 6: Skills — Development Points</h3>
+      {{#if skillsContext.hasClass}}
+      <p class="hint">{{skillsContext.className}}: each pass grants the full {{skillsContext.passes.adolescence.dpPool}} DP pool (RMSS §16.4 adolescence → level 0, §10.5 apprenticeship → level 1). Pools never combine. Up to 2 ranks per skill per pass — ∗ costs buy unlimited ranks.</p>
+
+      <div class="eqrmss-cc-pass-tabs">
+        <button type="button" data-action="dev-switch-pass" data-pass="adolescence" class="eqrmss-cc-pass-tab {{#if (eq skillsContext.activePass 'adolescence')}}active{{/if}}">Adolescence <small>→ Level 0</small></button>
+        <button type="button" data-action="dev-switch-pass" data-pass="apprenticeship" class="eqrmss-cc-pass-tab {{#if (eq skillsContext.activePass 'apprenticeship')}}active{{/if}}">Apprenticeship <small>→ Level 1</small></button>
+      </div>
+
+      {{#with (lookup skillsContext.passes skillsContext.activePass)}}
+      <div class="eqrmss-cc-dp-summary">
+        <span>Pool <strong>{{dpPool}}</strong></span>
+        <span>Spent <strong>{{spent}}</strong></span>
+        <span>Remaining <strong>{{remaining}}</strong></span>
+      </div>
+      {{/with}}
+
+      <h4>Weapon Training (RMSS §3.5)</h4>
+      {{#if (eq skillsContext.weaponMode 'player')}}
+      <p class="hint">Assign each cost figure ({{join skillsContext.weaponFigures ", "}}) to one weapon category — every figure must be used exactly as often as listed. The assignment is permanent once all six are placed.</p>
+      {{else}}
+      <p class="hint">Fixed weapon costs for this profession (no assignment).</p>
+      {{/if}}
+      {{#unless skillsContext.weaponAssignmentComplete}}
+      <p class="hint eqrmss-cc-warning">Weapon assignment incomplete — finish it before leaving this step.</p>
+      {{/unless}}
+      <table class="eqrmss-cc-skills-table">
+        <thead>
+          <tr><th>Weapon Category</th><th>Cost</th><th>Ranks</th><th>Total</th><th>Bonus</th><th>Next</th><th></th></tr>
+        </thead>
+        <tbody>
+          {{#each skillsContext.weaponRows}}
+          <tr>
+            <td>{{name}}</td>
+            <td>
+              {{#if (eq ../skillsContext.weaponMode 'player')}}
+              <select data-weapon-category="{{key}}">
+                <option value="">—</option>
+                {{#each ../skillsContext.weaponFigureOptions}}
+                <option value="{{this}}" {{#if (eq this ../assigned)}}selected{{/if}}>{{this}}</option>
+                {{/each}}
+              </select>
+              {{else}}{{cost}}{{/if}}
+            </td>
+            <td>{{ranksThisPass}}</td>
+            <td>{{totalRanks}}</td>
+            <td>{{rankBonus}}</td>
+            <td>{{#if nextCost}}{{nextCost}} DP{{else}}—{{/if}}</td>
+            <td>
+              {{#if canBuy}}<button type="button" data-action="dev-buy-rank" data-skill="{{key}}" title="Buy rank">+1</button>{{/if}}
+              {{#if canRefund}}<button type="button" data-action="dev-refund-rank" data-skill="{{key}}" title="Refund rank">−1</button>{{/if}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      {{#each skillsContext.skillGroups}}
+      <h4>{{name}}</h4>
+      <table class="eqrmss-cc-skills-table">
+        <thead>
+          <tr><th>Skill</th><th>Cost</th><th>Ranks</th><th>Total</th><th>Bonus</th><th>Next</th><th></th></tr>
+        </thead>
+        <tbody>
+          {{#each rows}}
+          <tr>
+            <td>{{name}}{{#if unlimited}} <small>(∗ unlimited)</small>{{/if}}</td>
+            <td>{{cost}}</td>
+            <td>{{ranksThisPass}}</td>
+            <td>{{totalRanks}}</td>
+            <td>{{rankBonus}}</td>
+            <td>{{#if nextCost}}{{nextCost}} DP{{else}}—{{/if}}</td>
+            <td>
+              {{#if canBuy}}<button type="button" data-action="dev-buy-rank" data-skill="{{key}}" title="Buy rank">+1</button>{{/if}}
+              {{#if canRefund}}<button type="button" data-action="dev-refund-rank" data-skill="{{key}}" title="Refund rank">−1</button>{{/if}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{/each}}
+
+      <h4>Body Development</h4>
+      <p class="hint">Each rank rolls d{{skillsContext.hitDie}} (racial hit die), added to base hits up to the racial maximum. Rolls so far: {{#if skillsContext.bodyDevRolls.length}}{{join skillsContext.bodyDevRolls ", "}} (total +{{skillsContext.bodyDevTotal}}){{else}}none yet{{/if}}.</p>
+      {{else}}
+      <p class="hint">Select a profession to develop skills.</p>
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- ======================================================= --}}
+    {{!-- STEP 7: SPELLS & SONGS --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 7)}}
     <div class="eqrmss-step eqrmss-step-spells">
-      <h3>Step 6: Starting Spells &amp; Songs</h3>
+      <h3>Step 7: Starting Spells &amp; Songs</h3>
       {{#if selectedClass}}
         {{#if startingSpells.length}}
           <p class="hint">{{selectedClass.name}} begins play with the following, granted automatically:</p>
@@ -406,9 +501,9 @@
     {{/if}}
 
     {{!-- ======================================================= --}}
-    {{!-- STEP 7: REVIEW --}}
+    {{!-- STEP 8: REVIEW --}}
     {{!-- ======================================================= --}}
-    {{#if (eq wizard.step 7)}}
+    {{#if (eq wizard.step 8)}}
     <div class="eqrmss-step eqrmss-step-review">
 
       <h3>Review & Finalize</h3>
@@ -422,6 +517,29 @@
 
       <h4>Development Points</h4>
       <p>{{preview.devPoints}}</p>
+
+      <h4>Developed Skills</h4>
+      {{#if developmentSummary.length}}
+      <table class="eqrmss-cc-skills-table">
+        <thead>
+          <tr><th>Skill</th><th>Category</th><th>Adolescence</th><th>Apprenticeship</th><th>Total</th><th>Bonus</th></tr>
+        </thead>
+        <tbody>
+          {{#each developmentSummary}}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{category}}</td>
+            <td>{{adolescenceRanks}}</td>
+            <td>{{apprenticeshipRanks}}</td>
+            <td>{{totalRanks}}</td>
+            <td>{{rankBonus}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{else}}
+      <p class="hint">No skills developed.</p>
+      {{/if}}
 
       <h4>Derived Values</h4>
       <ul>

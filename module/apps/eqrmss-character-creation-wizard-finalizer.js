@@ -4,6 +4,14 @@
 // ============================================================
 
 import { extractRacialModifiers } from "../utils/actor/rmss-stats.js";
+import { rmssDevelopmentPoints } from "../data/stats/rmss-stat-bonus.js";
+import { rmssRankBonus } from "../data/skills/rmss-rank-bonus.js";
+import {
+  WEAPON_CATEGORIES,
+  totalRanks,
+  displayName,
+  buildSkillList
+} from "../development/dp-engine.js";
 
 /**
  * Format one song effect record into a short human-readable summary line
@@ -86,6 +94,10 @@ export class EQRMSSCharacterCreationWizardFinalizer {
       // Grant the class starter kit (equipment + starting money) from
       // module/data/starter-kits.json. Fail-soft: never blocks creation.
       await this.#grantStarterKit(actor, cls, race);
+
+      // Grant skills developed in the wizard's two-pass DP system
+      // (adolescence + apprenticeship). Fail-soft: never blocks creation.
+      await this.#grantDevelopedSkills(actor, cls);
 
       return actor;
     }
@@ -174,6 +186,22 @@ export class EQRMSSCharacterCreationWizardFinalizer {
           mana: { value: 0, max: 0 }
         },
 
+        // RMSS §3.8: Base Hit Point Total starts at ceil(temp CO / 10),
+        // plus 1d(racial hit die) per Body Development rank bought in the
+        // wizard's Skills step, capped at the racial maximum (Table
+        // 15.5.1). The sheet derives the running total from base + CO bonus.
+        hits: {
+          base: this.#computeBaseHits(finalStats, race),
+          value: 0,
+          stun: 0,
+          bleeding: 0
+        },
+
+        // Two-pass DP development history (RMSS §16.4 / §10.5). The
+        // weapon assignment is permanent; per-pass ranks/spent/rolls are
+        // kept for audit and future level-up cost progression.
+        development: this.#buildDevelopmentRecord(finalStats),
+
                 fixed_info: {
           realm: realm,
           training_packages: (this.state.trainingPackages ?? []).join(", "),
@@ -202,6 +230,129 @@ export class EQRMSSCharacterCreationWizardFinalizer {
         }
       }
     };
+  }
+
+  // ------------------------------------------------------------
+  // SKILLS STEP PERSISTENCE
+  //
+  // #computeBaseHits: RMSS §3.8 — ceil(temp CO / 10) plus the stored
+  // Body Development d(racial hit die) rolls, capped at the racial
+  // maximum BHPT (Table 15.5.1, via dataContext.baseHits).
+  //
+  // #buildDevelopmentRecord: the two-pass history for audit and for
+  // future level-up cost progression (weapon assignment is permanent).
+  //
+  // #grantDevelopedSkills: creates one skill Item per developed
+  // development area (total ranks > 0), mirroring the
+  // #grantStartingSpells pattern. Fail-soft: never blocks creation.
+  // ------------------------------------------------------------
+
+  #computeBaseHits(finalStats, race) {
+    const tempCo = Number(finalStats?.CO?.temp ?? 0);
+    let base = Math.ceil(tempCo / 10);
+    const dev = this.state?.development;
+    if (dev) {
+      for (const passKey of ["adolescence", "apprenticeship"]) {
+        for (const roll of dev[passKey]?.bodyDevRolls ?? []) {
+          base += Number(roll) || 0;
+        }
+      }
+    }
+    const raceKey = String(race?.key ?? race?.id ?? race?._id ?? "").toLowerCase();
+    const max = this.context?.baseHits?.[raceKey]?.maxBaseHits;
+    if (Number.isFinite(max) && base > max) base = max;
+    return base;
+  }
+
+  #buildDevelopmentRecord(finalStats) {
+    const dev = this.state?.development ?? {};
+    const stats = {};
+    for (const [k, v] of Object.entries(finalStats ?? {})) stats[k] = Number(v?.temp ?? 0);
+    // rmssDevelopmentPoints expects {Co, Ag, SD, Me, Re}.
+    const dpPool = rmssDevelopmentPoints({
+      Co: stats.CO ?? 0, Ag: stats.AG ?? 0, SD: stats.SD ?? 0,
+      Me: stats.ME ?? 0, Re: stats.RE ?? 0
+    });
+    const passRecord = (p = {}) => ({
+      dpPool,
+      spent: Number(p.spent) || 0,
+      ranks: { ...(p.ranks ?? {}) },
+      bodyDevRolls: [...(p.bodyDevRolls ?? [])]
+    });
+    return {
+      dpPool,
+      weaponAssignment: { ...(dev.adolescence?.weaponAssignment ?? {}) },
+      adolescence: passRecord(dev.adolescence),
+      apprenticeship: passRecord(dev.apprenticeship)
+    };
+  }
+
+  async #grantDevelopedSkills(actor, cls) {
+    try {
+      const dev = this.state?.development;
+      if (!dev) return;
+      const key = String(cls?.id ?? cls?._id ?? "").toLowerCase();
+      const classCosts = this.context?.developmentCosts?.classes?.[key];
+      if (!classCosts) return;
+
+      const ado = dev.adolescence ?? {};
+      const app = dev.apprenticeship ?? {};
+      const items = [];
+
+      const pushSkill = (skillKey, name, category, costStr) => {
+        const total = totalRanks(ado, app, skillKey);
+        if (total <= 0) return;
+        const rankBonus = rmssRankBonus(total);
+        items.push({
+          name,
+          type: "skill",
+          img: "systems/eqrmss/assets/Icons/game/skills.svg",
+          system: {
+            slug: skillKey,
+            category,
+            statsString: "",
+            cost: costStr,
+            ranks: total,
+            rankBonus,
+            statBonus: 0,
+            profBonus: 0,
+            specialBonus: 0,
+            bonus: rankBonus,
+            favorite: false,
+            description: `Developed during character creation (${total} rank${total === 1 ? "" : "s"}).`
+          },
+          flags: {
+            eqrmss: {
+              fromWizardDevelopment: true,
+              adolescenceRanks: ado.ranks?.[skillKey] ?? 0,
+              apprenticeshipRanks: app.ranks?.[skillKey] ?? 0
+            }
+          }
+        });
+      };
+
+      // Weapon categories use the permanent adolescence assignment
+      // (player mode) or the fixed table (berserker).
+      const assignment = dev.adolescence?.weaponAssignment ?? {};
+      for (const cat of WEAPON_CATEGORIES) {
+        const costStr = classCosts.weaponAssignment === "fixed"
+          ? String(classCosts.weaponCosts?.[cat] ?? "")
+          : String(assignment[cat] ?? "");
+        if (costStr) pushSkill(cat, displayName(cat), "Weapon", costStr);
+      }
+
+      // Non-weapon development areas (spell lists excluded by ruling).
+      for (const entry of buildSkillList(classCosts)) {
+        const groupName = { general: "General", magical: "Magical", maneuvering: "Maneuvering", special: "Special" }[entry.group] ?? entry.group;
+        pushSkill(entry.key, entry.name, groupName, entry.cost);
+      }
+
+      if (!items.length) return;
+      await actor.createEmbeddedDocuments("Item", items);
+      console.log(`EQRMSS | Finalizer | granted ${items.length} developed skills`);
+    } catch (error) {
+      console.warn("EQRMSS | Finalizer | developed-skill grant failed (non-blocking)", error);
+    }
   }
 
     #resolve(collection = [], id) {
