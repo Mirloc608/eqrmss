@@ -154,6 +154,53 @@ async function loadClassSongs(
             }
 
 
+            // Band files: {"bands":["songs_01-05.json", ...]} — each band
+            // file holds an array of song records.
+            if (
+                Array.isArray(
+                    index?.bands
+                )
+            )
+            {
+                for (
+                    const bandFile
+                    of index.bands
+                )
+                {
+                    const band =
+                        await loadSongFile(
+                            className,
+                            bandFile
+                        );
+
+
+                    if (Array.isArray(band))
+                    {
+                        for (const entry of band)
+                        {
+                            if (
+                                entry
+                                &&
+                                typeof entry === "object"
+                            )
+                            {
+                                songs.push(entry);
+                            }
+                        }
+                    }
+                    else if (
+                        band
+                        &&
+                        typeof band === "object"
+                    )
+                    {
+                        songs.push(band);
+                    }
+                }
+            }
+
+
+            // Individual song files (legacy / hand-authored overrides).
             if (
                 Array.isArray(
                     index?.songs
@@ -175,10 +222,11 @@ async function loadClassSongs(
                     if (song)
                         songs.push(song);
                 }
-
-
-                return songs;
             }
+
+
+            if (songs.length)
+                return songs;
         }
     }
     catch (error)
