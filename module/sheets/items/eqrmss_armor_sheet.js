@@ -36,19 +36,23 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
       return;
     }
     const locationId = this.element.querySelector('[name="system.armorLocation"]')?.value;
-    const categoryId = this.element.querySelector('[name="system.armorCategory"]')?.value;
-    let materialId = this.element.querySelector('[name="system.armorMaterial"]')?.value;
+    const categoryId = this.element.querySelector('[name="system.armorCategory"]')?.value ?? "";
+    let materialId = this.element.querySelector('[name="system.armorMaterial"]')?.value ?? "";
     const conditionId = this.element.querySelector('[name="system.armorCondition"]')?.value;
 
-    // If the selected material isn't valid for the chosen category, clear it;
-    // the sheet re-renders with only valid materials to choose from.
-    if (categoryId && materialId) {
-      const valid = armor.materialsForCategory(categoryId).some(m => m.id === materialId);
-      if (!valid) {
+    // Persist a changed category right away so the material dropdown
+    // re-renders filtered to that category; drop a material it invalidates.
+    // (The sheet doesn't submit on change, so without this the filter in
+    // _prepareContext would never engage on a fresh item.)
+    if (categoryId !== (this.document.system?.armorCategory ?? "")) {
+      const catUpdate = { "system.armorCategory": categoryId };
+      if (categoryId && materialId && !armor.materialsForCategory(categoryId).some(m => m.id === materialId)) {
+        catUpdate["system.armorMaterial"] = "";
         materialId = "";
-        await this.document.update({ "system.armorMaterial": "" });
       }
+      await this.document.update(catUpdate);
     }
+
     if (!locationId || !categoryId || !materialId || !conditionId) return;
 
     let composed;
