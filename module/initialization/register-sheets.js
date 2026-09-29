@@ -11,6 +11,7 @@ import EQRMSSWeaponSheet from "../sheets/items/eqrmss_weapon_sheet.js";
 import EQRMSSShieldSheet from "../sheets/items/eqrmss_shield_sheet.js";
 import EQRMSSHerbOrPoisonSheet from "../sheets/items/eqrmss_herb_or_poison_sheet.js";
 import EQRMSSSpellSheet from "../sheets/spells/eqrmss_spell_sheet.js";
+import EQRMSSSongSheet from "../sheets/songs/eqrmss_song_sheet.js";
 import EQRMSSSkillCategorySheet from "../sheets/skills/eqrmss_skill_category_sheet.js";
 import EQRMSSSkillSheet from "../sheets/skills/eqrmss_skill_sheet.js";
 
@@ -66,6 +67,12 @@ export function registerEQRMSSSheets() {
     DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSSpellSheet, {
         types: ["spell"],
         label: "eqrmss.entity_sheet.spell",
+        makeDefault: true
+    });
+
+    DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSSongSheet, {
+        types: ["song"],
+        label: "eqrmss.entity_sheet.song",
         makeDefault: true
     });
 

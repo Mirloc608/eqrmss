@@ -97,6 +97,7 @@ export async function loadEQRMSSTemplates() {
         "systems/eqrmss/templates/sheets/skills/eqrmss-skill-sheet.html",
         "systems/eqrmss/templates/sheets/skills/eqrmss-skill-category-sheet.html",
         "systems/eqrmss/templates/sheets/spells/eqrmss-spell-sheet.html",
+        "systems/eqrmss/templates/sheets/songs/eqrmss-song-sheet.html",
 
         // ==========================================================
         // Character Creation Wizard & Steps

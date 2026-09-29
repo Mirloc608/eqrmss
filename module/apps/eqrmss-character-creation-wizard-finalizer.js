@@ -271,8 +271,8 @@ export class EQRMSSCharacterCreationWizardFinalizer {
           items.push({
             name: doc.name,
             type: "song",
-            img: doc.img ?? "icons/svg/music.svg",
-            system: { level: doc.level_required ?? 1, active: false, favorite: false }
+            img: doc.img ?? "systems/eqrmss/assets/Icons/game/musical-notes.svg",
+            system: { level: doc.level_required ?? 1, active: false, favorite: false, description: doc.description ?? "" }
           });
         } else {
           items.push({

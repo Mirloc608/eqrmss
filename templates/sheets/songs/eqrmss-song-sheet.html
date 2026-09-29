@@ -1,0 +1,30 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
+    </header>
+    <div class="sheet-content">
+        <div>
+            <table>
+                <tr>
+                    <th>{{localize "eqrmss.spell.favorite"}}</th>
+                    <th>{{localize "eqrmss.spell.level"}}</th>
+                    <th>{{localize "eqrmss.song.active"}}</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="system.favorite" {{checked system.favorite}}/>
+                    </td>
+                    <td>
+                        <input name="system.level" type="text" value="{{system.level}}" data-dtype="Number"/>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="system.active" {{checked system.active}}/>
+                    </td>
+                </tr>
+            </table>
+            {{localize "eqrmss.spell.description"}}
+            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
+        </div>
+    </div>
+</form>

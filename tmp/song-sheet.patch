@@ -1,0 +1,105 @@
+diff --git a/lang/en.json b/lang/en.json
+index 607006a5..41a71008 100644
+--- a/lang/en.json
++++ b/lang/en.json
+@@ -186,6 +186,7 @@
+     },
+     "entity_sheet": {
+       "spell": "EQRMSS Spell",
++      "song": "EQRMSS Song",
+       "weapon": "EQRMSS Weapon",
+       "shield": "EQRMSS Shield",
+       "item": "EQRMSS Armor",
+@@ -258,6 +259,9 @@
+       "type": "Type",
+       "description": "Description"
+     },
++    "song": {
++      "active": "Active"
++    },
+     "skill_category": {
+       "applicable_stats": "Applicable Stats:",
+       "development_cost": "Development Cost:",
+diff --git a/module/initialization/register-sheets.js b/module/initialization/register-sheets.js
+index 7080a169..19e41db4 100644
+--- a/module/initialization/register-sheets.js
++++ b/module/initialization/register-sheets.js
+@@ -11,6 +11,7 @@ import EQRMSSWeaponSheet from "../sheets/items/eqrmss_weapon_sheet.js";
+ import EQRMSSShieldSheet from "../sheets/items/eqrmss_shield_sheet.js";
+ import EQRMSSHerbOrPoisonSheet from "../sheets/items/eqrmss_herb_or_poison_sheet.js";
+ import EQRMSSSpellSheet from "../sheets/spells/eqrmss_spell_sheet.js";
++import EQRMSSSongSheet from "../sheets/songs/eqrmss_song_sheet.js";
+ import EQRMSSSkillCategorySheet from "../sheets/skills/eqrmss_skill_category_sheet.js";
+ import EQRMSSSkillSheet from "../sheets/skills/eqrmss_skill_sheet.js";
+ 
+@@ -69,6 +70,12 @@ export function registerEQRMSSSheets() {
+         makeDefault: true
+     });
+ 
++    DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSSongSheet, {
++        types: ["song"],
++        label: "eqrmss.entity_sheet.song",
++        makeDefault: true
++    });
++
+     DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSSkillCategorySheet, {
+         types: ["skill_category"],
+         label: "eqrmss.entity_sheet.skill_category",
+diff --git a/module/initialization/template-loader.js b/module/initialization/template-loader.js
+index b7f58d72..a488be25 100644
+--- a/module/initialization/template-loader.js
++++ b/module/initialization/template-loader.js
+@@ -97,6 +97,7 @@ export async function loadEQRMSSTemplates() {
+         "systems/eqrmss/templates/sheets/skills/eqrmss-skill-sheet.html",
+         "systems/eqrmss/templates/sheets/skills/eqrmss-skill-category-sheet.html",
+         "systems/eqrmss/templates/sheets/spells/eqrmss-spell-sheet.html",
++        "systems/eqrmss/templates/sheets/songs/eqrmss-song-sheet.html",
+ 
+         // ==========================================================
+         // Character Creation Wizard & Steps
+diff --git a/module/sheets/songs/eqrmss_song_sheet.js b/module/sheets/songs/eqrmss_song_sheet.js
+new file mode 100644
+index 00000000..a966b139
+--- /dev/null
++++ b/module/sheets/songs/eqrmss_song_sheet.js
+@@ -0,0 +1,4 @@
++import EQRMSSItemSheet from "../items/eqrmss_item_sheet.js";
++export default class EQRMSSSongSheet extends EQRMSSItemSheet {
++  static PARTS = { form: { template: "systems/eqrmss/templates/sheets/songs/eqrmss-song-sheet.html" } };
++}
+diff --git a/templates/sheets/songs/eqrmss-song-sheet.html b/templates/sheets/songs/eqrmss-song-sheet.html
+new file mode 100644
+index 00000000..284989e5
+--- /dev/null
++++ b/templates/sheets/songs/eqrmss-song-sheet.html
+@@ -0,0 +1,30 @@
++<form class="{{cssClass}}" autocomplete="off">
++    <header class="sheet-header">
++        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
++        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
++    </header>
++    <div class="sheet-content">
++        <div>
++            <table>
++                <tr>
++                    <th>{{localize "eqrmss.spell.favorite"}}</th>
++                    <th>{{localize "eqrmss.spell.level"}}</th>
++                    <th>{{localize "eqrmss.song.active"}}</th>
++                </tr>
++                <tr>
++                    <td>
++                        <input type="checkbox" name="system.favorite" {{checked system.favorite}}/>
++                    </td>
++                    <td>
++                        <input name="system.level" type="text" value="{{system.level}}" data-dtype="Number"/>
++                    </td>
++                    <td>
++                        <input type="checkbox" name="system.active" {{checked system.active}}/>
++                    </td>
++                </tr>
++            </table>
++            {{localize "eqrmss.spell.description"}}
++            {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
++        </div>
++    </div>
++</form>
