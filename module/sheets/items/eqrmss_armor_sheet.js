@@ -11,7 +11,7 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const armor = game.eqrmss?.armor;
-    context.armorOptions = armor ? armor.options() : { templates: [], materials: [], conditions: [] };
+    context.armorOptions = armor ? armor.options() : { locations: [], materials: [], conditions: [] };
     return context;
   }
 
@@ -28,14 +28,14 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
       ui.notifications.warn("Armor data not loaded yet.");
       return;
     }
-    const templateId = this.element.querySelector('[name="system.armorTemplate"]')?.value;
+    const locationId = this.element.querySelector('[name="system.armorLocation"]')?.value;
     const materialId = this.element.querySelector('[name="system.armorMaterial"]')?.value;
     const conditionId = this.element.querySelector('[name="system.armorCondition"]')?.value;
-    if (!templateId || !materialId || !conditionId) return;
+    if (!locationId || !materialId || !conditionId) return;
 
     let composed;
     try {
-      composed = armor.compose(templateId, materialId, conditionId);
+      composed = armor.compose(locationId, materialId, conditionId);
     } catch (e) {
       ui.notifications.error(`Armor compose failed: ${e.message}`);
       return;
@@ -43,7 +43,7 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
 
     const updates = {
       name: composed.name,
-      "system.armorTemplate": composed.templateId,
+      "system.armorLocation": composed.locationId,
       "system.armorMaterial": composed.materialId,
       "system.armorCondition": composed.conditionId,
       "system.at": composed.armorType ?? "",

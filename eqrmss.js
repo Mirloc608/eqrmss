@@ -303,7 +303,7 @@ export async function initializeDataLoaders() {
         };
         game.eqrmss._loadStatus.armor = true;
         const armorOpts = armorMod.getArmorOptions();
-        console.log(`EQRMSS | Armor ready: ${armorOpts.templates.length} templates, ${armorOpts.materials.length} materials, ${armorOpts.conditions.length} conditions`);
+        console.log(`EQRMSS | Armor ready: ${armorOpts.locations.length} locations, ${armorOpts.materials.length} materials, ${armorOpts.conditions.length} conditions`);
     } catch (e) {
         console.error("Armor data load failed", e);
         game.eqrmss.armor = null;

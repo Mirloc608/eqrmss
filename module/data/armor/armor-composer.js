@@ -1,23 +1,25 @@
 // ============================================================
 // EQRMSS Armor Composer
-// Template + Material + Condition -> finished armor piece
+// Location + Material + Condition -> finished armor piece
+//
+// The location is the base item (slot, base weight/cost, name nouns).
+// The material carries the stats that make each piece what it is:
+// AT, weight multiplier, maneuver modifier, cost multiplier.
+// The condition modifies as before.
 // ============================================================
 
-let templates = {};
+let locations = {};
 let materials = {};
 let conditions = {};
 let loaded = false;
 
-const TEMPLATE_FILES = ["light.json", "medium.json", "heavy.json", "helms.json"];
-
 export async function loadArmorData() {
     if (loaded) return;
-    for (const f of TEMPLATE_FILES) {
-        const res = await fetch(`systems/eqrmss/module/data/armor/templates/${f}`);
-        if (!res.ok) throw new Error(`Armor template file missing: ${f}`);
-        const data = await res.json();
-        for (const t of data.templates) templates[t.id] = t;
-    }
+    const lRes = await fetch("systems/eqrmss/module/data/armor/locations.json");
+    if (!lRes.ok) throw new Error("Armor locations file missing");
+    const lData = await lRes.json();
+    for (const l of lData.locations) locations[l.id] = l;
+
     const mRes = await fetch("systems/eqrmss/module/data/armor/materials.json");
     if (!mRes.ok) throw new Error("Armor materials file missing");
     const mData = await mRes.json();
@@ -29,45 +31,69 @@ export async function loadArmorData() {
     for (const c of cData.conditions) conditions[c.id] = c;
 
     loaded = true;
-    console.log(`EQRMSS | Armor loaded: ${Object.keys(templates).length} templates, ${Object.keys(materials).length} materials, ${Object.keys(conditions).length} conditions`);
+    console.log(`EQRMSS | Armor loaded: ${Object.keys(locations).length} locations, ${Object.keys(materials).length} materials, ${Object.keys(conditions).length} conditions`);
 }
 
-export function composeArmor(templateId, materialId, conditionId) {
-    const t = templates[templateId];
-    if (!t) throw new Error(`Unknown armor template: ${templateId}`);
+// --- Coin helpers: costs are strings like "15bp" or "1sp" (1sp = 10bp, 1gp = 10sp) ---
+function parseCostToBp(str) {
+    const m = /^\s*([\d.]+)\s*(bp|sp|gp|cp|pp)?\s*$/i.exec(str ?? "");
+    if (!m) return 0;
+    const n = parseFloat(m[1]);
+    const unit = (m[2] ?? "bp").toLowerCase();
+    if (unit === "sp") return n * 10;
+    if (unit === "gp") return n * 100;
+    if (unit === "pp") return n * 1000;
+    return n; // bp (and cp treated as bp)
+}
+
+function formatBp(bp) {
+    bp = Math.round(bp);
+    if (bp >= 100 && bp % 100 === 0) return `${bp / 100}gp`;
+    if (bp >= 10 && bp % 10 === 0) return `${bp / 10}sp`;
+    return `${bp}bp`;
+}
+
+export function composeArmor(locationId, materialId, conditionId) {
+    const loc = locations[locationId];
+    if (!loc) throw new Error(`Unknown armor location: ${locationId}`);
     const m = materials[materialId];
     if (!m) throw new Error(`Unknown armor material: ${materialId}`);
     const c = conditions[conditionId];
     if (!c) throw new Error(`Unknown armor condition: ${conditionId}`);
 
+    // Name: "[Condition] [Material] [noun]" (e.g. "Worn Steel Breastplate")
+    const noun = loc.names?.[materialId] ?? loc.name;
     const parts = [];
     if (c.prefix) parts.push(c.prefix);
     if (m.prefix) parts.push(m.prefix);
-    parts.push(t.name);
+    parts.push(noun);
     const name = parts.join(" ");
 
-    const weight = Math.round(t.weight * (m.weightMult ?? 1) * (c.weightMult ?? 1) * 10) / 10;
-    const armorType = t.armorType == null ? null : Math.max(1, t.armorType + (m.atMod ?? 0) + (c.atMod ?? 0));
-    const maneuverPenalty = (t.maneuverPenalty ?? 0) + (m.maneuverMod ?? 0) + (c.maneuverMod ?? 0);
+    // AT comes from the material; weight scales the location's base weight;
+    // maneuver and cost combine location base with material/condition mods.
+    const weight = Math.round(loc.baseWeight * (m.weightMult ?? 1) * (c.weightMult ?? 1) * 10) / 10;
+    const armorType = Math.max(1, (m.baseAT ?? 1) + (c.atMod ?? 0));
+    const maneuverPenalty = (loc.baseManeuver ?? 0) + (m.maneuverMod ?? 0) + (c.maneuverMod ?? 0);
+    const cost = formatBp(parseCostToBp(loc.baseCost) * (m.costMult ?? 1));
 
     return {
         name,
-        templateId,
+        locationId,
         materialId,
         conditionId,
         armorType,
         weight,
         maneuverPenalty,
-        slot: t.slot,
-        cost: t.cost ?? "",
-        prodTime: t.prodTime ?? "",
-        notes: t.notes ?? null
+        slot: loc.slot,
+        cost,
+        prodTime: loc.baseProdTime ?? "",
+        notes: loc.notes ?? null
     };
 }
 
 export function getArmorOptions() {
     return {
-        templates: Object.values(templates).map(t => ({ id: t.id, name: t.name })),
+        locations: Object.values(locations).map(l => ({ id: l.id, name: l.name })),
         materials: Object.values(materials).map(m => ({ id: m.id, name: m.name })),
         conditions: Object.values(conditions).map(c => ({ id: c.id, name: c.name }))
     };
