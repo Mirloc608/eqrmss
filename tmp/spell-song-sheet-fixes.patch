@@ -1,0 +1,38 @@
+--- a/lang/en.json
++++ b/lang/en.json
+@@ -257,7 +257,11 @@
+       "duration": "Duration",
+       "range": "Range",
+       "type": "Type",
+-      "description": "Description"
++      "description": "Description",
++      "cast_time": "Cast Time",
++      "mana_cost": "Mana Cost",
++      "resist": "Resist",
++      "target": "Target"
+     },
+     "song": {
+       "active": "Active"
+--- a/templates/sheets/songs/eqrmss-song-sheet.html
++++ b/templates/sheets/songs/eqrmss-song-sheet.html
+@@ -1,7 +1,8 @@
+ <form class="{{cssClass}}" autocomplete="off">
+     <header class="sheet-header">
+-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
++        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"
++             onerror="this.onerror=null;this.src='systems/eqrmss/assets/Icons/game/musical-notes.svg';"/>
+         <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
+     </header>
+     <div class="sheet-content">
+         <div>
+--- a/module/utils/progression/song-unlock-engine.js
++++ b/module/utils/progression/song-unlock-engine.js
+@@ -26,7 +26,7 @@
+     const items = unlocks.map(song => ({
+       name: song.name,
+       type: "song",
+-      img: song.icon ?? "icons/svg/music.svg",
++      img: song.icon ?? "systems/eqrmss/assets/Icons/game/musical-notes.svg",
+       system: {
+         level: song.level,
+         durationRounds: song.durationRounds ?? 1,
