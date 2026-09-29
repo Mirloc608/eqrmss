@@ -9,6 +9,7 @@
  */
 
 import { EQRMSSSongUnlockEngine } from "../../../utils/progression/song-unlock-engine.js";
+import { visibleSongs } from "../../../utils/item-visibility.js";
 
 export class EQRMSSActorBardHelper {
   constructor(sheet) {
@@ -17,7 +18,7 @@ export class EQRMSSActorBardHelper {
 
   prepare(context) {
     const actor = this.sheet.actor;
-    context.songs = actor.items.filter(i => i.type === "song");
+    context.songs = visibleSongs(actor.items);
     return context;
   }
 

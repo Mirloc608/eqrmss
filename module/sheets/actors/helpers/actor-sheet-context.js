@@ -5,6 +5,7 @@
 // helpers/ is three levels below module/, hence ../../../
 import { RMSS_STAT_KEYS, canonicalStatKey } from "../../../utils/actor/rmss-stats.js";
 import { RMSSDerivedValueEngine, calculateArmorAndDefenses } from "../../../data/stats/rmss-derived-values.js";
+import { visibleSpells, visibleSongs } from "../../../utils/item-visibility.js";
 
 const STAT_LABELS = {
     ST: "Strength",
@@ -229,8 +230,8 @@ export class EQRMSSActorContextHelper {
             weapons: items.filter(i => i?.type === "weapon"),
             armor: items.filter(i => i?.type === "armor"),
             herbs: items.filter(i => i?.type === "herb_or_poison"),
-            spells: items.filter(i => i?.type === "spell"),
-            songs: items.filter(i => i?.type === "song"),
+            spells: visibleSpells(items),
+            songs: visibleSongs(items),
             skills: items.filter(i => i?.type === "skill"),
             skillCategories: items.filter(i => i?.type === "skillcategory"),
             inventory: items.filter(i => new Set(["item", "consumable", "jewelry", "shield", "transport"]).has(i?.type)),

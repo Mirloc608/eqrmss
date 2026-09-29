@@ -6,8 +6,7 @@
     <table class="rmss-table">
       <thead><tr><th>Name</th><th>Spell List</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
       <tbody>
-        {{#each actor.items}}
-          {{#if (eq this.type "spell")}}
+        {{#each items.spells}}
           <tr data-item-id="{{this._id}}">
             <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
             <td>{{this.system.spell_list}}</td>
@@ -16,7 +15,6 @@
             <td>{{this.system.range}}</td>
             <td>{{this.system.duration}}</td>
           </tr>
-          {{/if}}
         {{/each}}
       </tbody>
     </table>
@@ -27,8 +25,7 @@
     <table class="rmss-table">
       <thead><tr><th>Name</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
       <tbody>
-        {{#each actor.items}}
-          {{#if (eq this.type "song")}}
+        {{#each items.songs}}
           <tr data-item-id="{{this._id}}">
             <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
             <td>{{this.system.level}}</td>
@@ -36,7 +33,6 @@
             <td>{{this.system.range}}</td>
             <td>{{this.system.duration}}</td>
           </tr>
-          {{/if}}
         {{/each}}
       </tbody>
     </table>

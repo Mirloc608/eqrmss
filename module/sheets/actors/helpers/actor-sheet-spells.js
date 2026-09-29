@@ -4,6 +4,7 @@
 // - Spell gem bar drag-and-drop + casting
 
 import { EQRMSSSpellcastingEngine } from "../../../utils/spells/spellcasting-engine.js";
+import { visibleSpells } from "../../../utils/item-visibility.js";
 
 export class EQRMSSActorSpellsHelper {
   constructor(sheet) {
@@ -13,7 +14,7 @@ export class EQRMSSActorSpellsHelper {
   prepare(context) {
     const actor = this.sheet.actor;
 
-    context.spells = actor.items.filter(i => i.type === "spell");
+    context.spells = visibleSpells(actor.items);
     context.memorized = actor.system.memorized ?? [
       {}, {}, {}, {}, {}, {}, {}, {}
     ];
