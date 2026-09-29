@@ -5,7 +5,7 @@
         <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
     </header>
     <div class="sheet-content">
-        <table class="eqrmss-spell-grid">
+        <table style="width:100%;table-layout:fixed;">
             <tr>
                 <th>{{localize "eqrmss.spell.favorite"}}</th>
                 <th>{{localize "eqrmss.spell.spell_list"}}</th>
@@ -14,9 +14,9 @@
             </tr>
             <tr>
                 <td><input type="checkbox" name="system.favorite" {{checked system.favorite}}/></td>
-                <td><input name="system.spell_list" type="text" value="{{system.spell_list}}" data-dtype="String"/></td>
-                <td><input name="system.level" type="text" value="{{system.level}}" data-dtype="Number"/></td>
-                <td><input name="system.type" type="text" value="{{system.type}}" data-dtype="String"/></td>
+                <td><input name="system.spell_list" type="text" value="{{system.spell_list}}" data-dtype="String" style="width:100%;"/></td>
+                <td><input name="system.level" type="text" value="{{system.level}}" data-dtype="Number" style="width:100%;"/></td>
+                <td><input name="system.type" type="text" value="{{system.type}}" data-dtype="String" style="width:100%;"/></td>
             </tr>
             <tr>
                 <th>{{localize "eqrmss.spell.range"}}</th>
@@ -25,10 +25,10 @@
                 <th>{{localize "eqrmss.spell.target"}}</th>
             </tr>
             <tr>
-                <td><input name="system.range" type="text" value="{{system.range}}" data-dtype="String"/></td>
-                <td><input name="system.area_of_effect" type="text" value="{{system.area_of_effect}}" data-dtype="String"/></td>
-                <td><input name="system.duration" type="text" value="{{system.duration}}" data-dtype="String"/></td>
-                <td><input name="system.target" type="text" value="{{system.target}}" data-dtype="String"/></td>
+                <td><input name="system.range" type="text" value="{{system.range}}" data-dtype="String" style="width:100%;"/></td>
+                <td><input name="system.area_of_effect" type="text" value="{{system.area_of_effect}}" data-dtype="String" style="width:100%;"/></td>
+                <td><input name="system.duration" type="text" value="{{system.duration}}" data-dtype="String" style="width:100%;"/></td>
+                <td><input name="system.target" type="text" value="{{system.target}}" data-dtype="String" style="width:100%;"/></td>
             </tr>
             <tr>
                 <th>{{localize "eqrmss.spell.cast_time"}}</th>
@@ -37,9 +37,9 @@
                 <th></th>
             </tr>
             <tr>
-                <td><input name="system.castTime" type="text" value="{{system.castTime}}" data-dtype="String"/></td>
-                <td><input name="system.manaCost" type="text" value="{{system.manaCost}}" data-dtype="String"/></td>
-                <td><input name="system.resist" type="text" value="{{system.resist}}" data-dtype="String"/></td>
+                <td><input name="system.castTime" type="text" value="{{system.castTime}}" data-dtype="String" style="width:100%;"/></td>
+                <td><input name="system.manaCost" type="text" value="{{system.manaCost}}" data-dtype="String" style="width:100%;"/></td>
+                <td><input name="system.resist" type="text" value="{{system.resist}}" data-dtype="String" style="width:100%;"/></td>
                 <td></td>
             </tr>
         </table>
@@ -47,8 +47,3 @@
         {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
     </div>
 </form>
-<style>
-.eqrmss-spell-grid { width: 100%; table-layout: fixed; }
-.eqrmss-spell-grid th, .eqrmss-spell-grid td { padding: 2px 4px; }
-.eqrmss-spell-grid input[type="text"] { width: 100%; min-width: 0; }
-</style>
