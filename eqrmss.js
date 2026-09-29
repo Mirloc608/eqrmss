@@ -293,17 +293,18 @@ export async function initializeDataLoaders() {
         game.eqrmss.weapons = null;
     }
 
-    // Armor (template + material + condition composer)
+    // Armor (location + category + material + condition composer)
     try {
         const armorMod = await import('./module/data/armor/armor-composer.js');
         await armorMod.loadArmorData();
         game.eqrmss.armor = {
             compose: armorMod.composeArmor,
-            options: armorMod.getArmorOptions
+            options: armorMod.getArmorOptions,
+            materialsForCategory: armorMod.getMaterialsForCategory
         };
         game.eqrmss._loadStatus.armor = true;
         const armorOpts = armorMod.getArmorOptions();
-        console.log(`EQRMSS | Armor ready: ${armorOpts.locations.length} locations, ${armorOpts.materials.length} materials, ${armorOpts.conditions.length} conditions`);
+        console.log(`EQRMSS | Armor ready: ${armorOpts.locations.length} locations, ${armorOpts.categories.length} categories, ${armorOpts.materials.length} materials, ${armorOpts.conditions.length} conditions`);
     } catch (e) {
         console.error("Armor data load failed", e);
         game.eqrmss.armor = null;

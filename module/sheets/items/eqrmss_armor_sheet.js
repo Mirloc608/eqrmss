@@ -11,7 +11,14 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const armor = game.eqrmss?.armor;
-    context.armorOptions = armor ? armor.options() : { locations: [], materials: [], conditions: [] };
+    const opts = armor ? armor.options() : { locations: [], categories: [], materials: [], conditions: [] };
+    // Gate the material list by the item's current category so an invalid
+    // combination (e.g. adamantine cloth) can't be picked.
+    const categoryId = this.document.system?.armorCategory ?? "";
+    if (categoryId) {
+      opts.materials = opts.materials.filter(m => (m.categories ?? []).includes(categoryId));
+    }
+    context.armorOptions = opts;
     return context;
   }
 
@@ -29,13 +36,24 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
       return;
     }
     const locationId = this.element.querySelector('[name="system.armorLocation"]')?.value;
-    const materialId = this.element.querySelector('[name="system.armorMaterial"]')?.value;
+    const categoryId = this.element.querySelector('[name="system.armorCategory"]')?.value;
+    let materialId = this.element.querySelector('[name="system.armorMaterial"]')?.value;
     const conditionId = this.element.querySelector('[name="system.armorCondition"]')?.value;
-    if (!locationId || !materialId || !conditionId) return;
+
+    // If the selected material isn't valid for the chosen category, clear it;
+    // the sheet re-renders with only valid materials to choose from.
+    if (categoryId && materialId) {
+      const valid = armor.materialsForCategory(categoryId).some(m => m.id === materialId);
+      if (!valid) {
+        materialId = "";
+        await this.document.update({ "system.armorMaterial": "" });
+      }
+    }
+    if (!locationId || !categoryId || !materialId || !conditionId) return;
 
     let composed;
     try {
-      composed = armor.compose(locationId, materialId, conditionId);
+      composed = armor.compose(locationId, categoryId, materialId, conditionId);
     } catch (e) {
       ui.notifications.error(`Armor compose failed: ${e.message}`);
       return;
@@ -44,6 +62,7 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
     const updates = {
       name: composed.name,
       "system.armorLocation": composed.locationId,
+      "system.armorCategory": composed.categoryId,
       "system.armorMaterial": composed.materialId,
       "system.armorCondition": composed.conditionId,
       "system.at": composed.armorType ?? "",

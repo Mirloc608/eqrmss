@@ -16,6 +16,13 @@
             </select>
           </div>
           <div class="form-group">
+            <label>Category</label>
+            <select name="system.armorCategory" class="armor-composer-select">
+              <option value=""></option>
+              {{selectOptions armorOptions.categories selected=system.armorCategory valueAttr="id" labelAttr="name"}}
+            </select>
+          </div>
+          <div class="form-group">
             <label>Material</label>
             <select name="system.armorMaterial" class="armor-composer-select">
               <option value=""></option>
