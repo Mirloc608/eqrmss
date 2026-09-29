@@ -636,7 +636,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
 
   static async _onDevAssignWeapon(event, target) {
     const dev = this._getDevelopmentState();
-    const category = target.dataset.category;
+    const category = target.dataset.weaponCategory;
     const figure = target.value;
     if (!category) return;
     dev.adolescence.weaponAssignment ??= {};
