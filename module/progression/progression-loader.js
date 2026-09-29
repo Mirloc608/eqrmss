@@ -3,7 +3,7 @@
 // Foundry VTT V13 / V14 Compatible
 //
 // Loads class progression JSON files from:
-// packs/progression/classes/
+// module/data/progressions/ 
 //
 // Merges JSON progression data with:
 // class-progression.js
@@ -19,7 +19,7 @@ import {
 from "./class-progression.js";
 
 const PROGRESSION_PATH =
-    "systems/eqrmss/packs/progression/classes/";
+    "module/data/progressions/";
 
 const loadedProgressions =
     {};

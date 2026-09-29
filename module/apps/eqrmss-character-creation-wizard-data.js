@@ -319,7 +319,7 @@ export class EQRMSSCharacterCreationData {
         .filter(Boolean);
 
             // progression: real level-by-level data lives in the progression
-            // loader (packs/progression/classes/<id>.json), keyed by class id.
+            // loader (module/data/progressions/<id>.json), keyed by class id.
             const classKey = c.key ?? c.id ?? c.name?.toLowerCase?.();
             const levelsSource =
               getLoadedProgression(classKey)?.levels
