@@ -1,23 +1,222 @@
 {
-  "id": "paladin",
-
-  "name": "Paladin",
-
-  "category": "hybrid",
-
-  "features": [
-    "parry",
-    "riposte",
-    "weapon-specialization"
-  ],
-
-  "abilities": [
-    "shield-bash",
-    "taunt"
-  ],
-
-  "signatures": [
-    "lay-on-hands",
-    "divine-challenge"
-  ]
+    "abilities": {
+        "level1": [
+            {
+                "description": "The paladin channels divine light to mend a grievous wound.",
+                "id": "paladin_lay_on_hands",
+                "name": "Lay on Hands"
+            },
+            {
+                "description": "The paladin challenges an enemy to face them in righteous combat.",
+                "id": "paladin_taunt",
+                "name": "Taunt"
+            }
+        ],
+        "level10": [
+            {
+                "description": "The paladin turns an enemy's attack back upon them with a swift counter.",
+                "id": "paladin_riposte",
+                "name": "Riposte"
+            }
+        ],
+        "level20": [
+            {
+                "description": "The paladin issues a divine challenge that no enemy can ignore.",
+                "id": "paladin_divine_challenge",
+                "name": "Divine Challenge"
+            }
+        ],
+        "level5": [
+            {
+                "description": "The paladin slams an enemy with their shield, with a chance to stun.",
+                "id": "paladin_shield_bash",
+                "name": "Shield Bash"
+            }
+        ]
+    },
+    "armor": {
+        "allowed": [
+            "Cloth",
+            "Leather",
+            "Chain",
+            "Plate"
+        ],
+        "restricted": []
+    },
+    "classFeatures": [
+        "Lay on Hands",
+        "Parry",
+        "Riposte",
+        "Weapon Specialization",
+        "Holy Magic",
+        "Divine Challenge"
+    ],
+    "combatActions": [
+        {
+            "id": "taunt",
+            "name": "Taunt"
+        },
+        {
+            "id": "bash",
+            "name": "Bash"
+        },
+        {
+            "id": "holy_strike",
+            "name": "Holy Strike"
+        }
+    ],
+    "description": {
+        "lore": "Paladins are holy knights of Norrath, sworn to defend the innocent and smite the wicked. Blending martial mastery with divine magic, they stand unbroken against the forces of darkness \u2014 healing allies, shielding the faithful, and turning undead with righteous light.",
+        "summary": "Paladins are holy warriors who blend martial prowess with divine magic to protect allies and smite evil."
+    },
+    "disciplines": [
+        "Holy Discipline",
+        "Valor Discipline",
+        "Protection Discipline"
+    ],
+    "eqrmss": {
+        "classification": {
+            "archetype": "hybrid tank",
+            "primaryRole": "defense",
+            "secondaryRoles": [
+                "healing",
+                "support"
+            ]
+        },
+        "identity": {
+            "strengths": [
+                "holy magic",
+                "healing",
+                "anti-undead",
+                "protection",
+                "durability"
+            ]
+        },
+        "pending": [
+            "attack table IDs",
+            "spell list mapping"
+        ],
+        "schemaVersion": 1,
+        "signatureMechanics": [
+            "lay on hands",
+            "divine challenge",
+            "holy strike",
+            "turn undead"
+        ],
+        "tags": [
+            "divine",
+            "holy",
+            "valor",
+            "protection",
+            "righteousness",
+            "anti-undead",
+            "martial"
+        ],
+        "weaknesses": [
+            "lower damage than warriors",
+            "limited offensive spells"
+        ]
+    },
+    "experienceProgression": {
+        "table": "hybrid-martial-channeling"
+    },
+    "icon": "systems/eqrmss/assets/Icons/class/paladin.png",
+    "id": "paladin",
+    "name": "Paladin",
+    "profession": {
+        "category": "Holy / Light / Valor / Protection / Righteousness",
+        "powerSource": "Divine Favor",
+        "realm": "Divine"
+    },
+    "role": {
+        "primary": "Hybrid Tank",
+        "secondary": [
+            "Holy Magic",
+            "Healing",
+            "Anti-Undead",
+            "Protection"
+        ]
+    },
+    "skills": {
+        "bonusCategories": [
+            "Holy Magic",
+            "Healing",
+            "Anti-Undead",
+            "Protection"
+        ],
+        "categoryCosts": {
+            "Athletics": 2,
+            "Body Development": 2,
+            "Combat Maneuvers": 2,
+            "Divine Spell Lists": 3,
+            "Lore": 3,
+            "Perception": 3,
+            "Weapon Skills": 2
+        }
+    },
+    "spellLists": {
+        "baseLists": {
+            "Divine": {
+                "Anti-Undead": [
+                    "Smite Undead"
+                ],
+                "Healing": [
+                    "Lay on Hands"
+                ],
+                "Holy": [
+                    "Holy Light"
+                ],
+                "Protection": [
+                    "Divine Shielding"
+                ]
+            }
+        },
+        "specialization": [
+            "Holy Magic",
+            "Healing Mastery",
+            "Anti-Undead Magic"
+        ]
+    },
+    "startingEquipment": [
+        {
+            "name": "Rusty Long Sword",
+            "type": "weapon"
+        },
+        {
+            "name": "Leather Armor",
+            "type": "armor"
+        },
+        {
+            "name": "Holy Symbol",
+            "type": "tool"
+        }
+    ],
+    "startingLanguages": [
+        "Common"
+    ],
+    "stats": {
+        "primeRequisites": [
+            "Strength",
+            "Empathy"
+        ],
+        "secondaryStats": [
+            "Constitution",
+            "Presence",
+            "Intuition"
+        ]
+    },
+    "type": "class",
+    "weapons": {
+        "allowed": [
+            "Swords",
+            "Maces",
+            "Hammers",
+            "Polearms",
+            "Shields"
+        ],
+        "restricted": [
+            "Daggers",
+            "Thrown Weapons"
+        ]
+    }
 }
