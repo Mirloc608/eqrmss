@@ -25,7 +25,7 @@ export class EQRMSSSongUnlockEngine {
     const items = unlocks.map(song => ({
       name: song.name,
       type: "song",
-      img: song.icon ?? "icons/svg/music.svg",
+      img: song.icon ?? "systems/eqrmss/assets/Icons/game/musical-notes.svg",
       system: {
         level: song.level,
         durationRounds: song.durationRounds ?? 1,
