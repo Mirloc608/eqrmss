@@ -204,11 +204,11 @@ export function calculateBaseMovementRate(actorData) {
 
     const encPenalty = Number(system.encumbrance?.penalty ?? 0);
 
-    const total = chartBase + racialMod - armorApplied + strideMod + encPenalty;
+    const baseRate = chartBase + racialMod - armorApplied + strideMod + encPenalty;
 
     return {
         quTotal, quBonus, chartBase, racialMod,
-        armorPen, armorApplied, strideMod, encPenalty, total
+        armorPen, armorApplied, strideMod, encPenalty, baseRate
     };
 }
 

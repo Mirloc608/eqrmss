@@ -24,6 +24,12 @@ import {
 }
 from "../../utils/actor/rmss-stats.js";
 
+import {
+    calculateEncumbrance,
+    calculateBaseMovementRate
+}
+from "../../data/stats/rmss-derived-values.js";
+
 export class EQRMSSActor extends Actor
 {
 
@@ -99,6 +105,10 @@ export class EQRMSSActor extends Actor
         this._prepareCombat();
 
         this._prepareMovement();
+
+        this._prepareEncumbrance();
+
+        this._prepareRMSSMovementRate();
 
     }
 
@@ -584,6 +594,83 @@ _prepareMovement()
             movement.speed;
 
     }
+
+}
+
+// ========================================================
+// RMSS §7.2.2 ENCUMBRANCE + §7.2.1 MOVEMENT RATE
+// ========================================================
+//
+// NOTE: These run here on the base actor class because it is
+// the document class actually instantiated for every actor
+// type (see module/initialization/register-documents.js).
+// EQRMSSCharacter is exported but never registered, so its
+// own _prepare* methods never execute.
+
+_prepareEncumbrance()
+{
+
+    const enc =
+
+        calculateEncumbrance(this);
+
+    this.system.encumbrance ??= {};
+
+    this.system.encumbrance.bwa =
+        enc.bwa;
+
+    this.system.encumbrance.load =
+        enc.load;
+
+    this.system.encumbrance.chartPenalty =
+        enc.chartPenalty;
+
+    this.system.encumbrance.stBonus =
+        enc.stBonus;
+
+    this.system.encumbrance.penalty =
+        enc.penalty;
+
+    this.system.encumbrance.excessST =
+        enc.excessST;
+
+}
+
+_prepareRMSSMovementRate()
+{
+
+    const move =
+
+        calculateBaseMovementRate(this);
+
+    this.system.movement ??= {};
+
+    this.system.movement.quTotal =
+        move.quTotal;
+
+    this.system.movement.quBonus =
+        move.quBonus;
+
+    this.system.movement.chartBase =
+        move.chartBase;
+
+    this.system.movement.racialMod =
+        move.racialMod;
+
+    this.system.movement.armorPen =
+        move.armorPen;
+
+    this.system.movement.armorApplied =
+        move.armorApplied;
+
+    this.system.movement.strideMod =
+        move.strideMod;
+
+    this.system.movement.encPenalty =
+        move.encPenalty;
+
+    this.system.movement.baseRate =
+        move.baseRate;
 
 }
 

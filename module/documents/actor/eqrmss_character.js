@@ -150,7 +150,7 @@ export class EQRMSSCharacter extends EQRMSSActor
             armorApplied: move.armorApplied,
             strideMod: move.strideMod,
             encPenalty: move.encPenalty,
-            baseRate: move.total
+            baseRate: move.baseRate
         };
     }
 
