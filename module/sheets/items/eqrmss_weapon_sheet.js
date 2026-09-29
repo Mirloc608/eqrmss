@@ -12,6 +12,11 @@ export default class EQRMSSWeaponSheet extends EQRMSSItemSheet {
     const context = await super._prepareContext(options);
     const weapons = game.eqrmss?.weapons;
     context.weaponOptions = weapons ? weapons.options() : { templates: [], materials: [], conditions: [] };
+    // Type dropdown: canonical slugs with display labels, plus a blank for untyped items
+    const typeLabels = weapons?.typeLabels ?? {};
+    context.weaponTypeOptions = [{ value: "", label: "" }].concat(
+      Object.entries(typeLabels).map(([value, label]) => ({ value, label }))
+    );
     return context;
   }
 

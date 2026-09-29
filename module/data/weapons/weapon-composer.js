@@ -103,6 +103,23 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
 /**
  * Get all available templates, materials, conditions for UI dropdowns.
  */
+/**
+ * Display labels for the canonical weapon type slugs.
+ * Stored values stay slugs; sheets show these labels.
+ */
+export const WEAPON_TYPE_LABELS = {
+    "one-handed-edged": "1-H Edged",
+    "one-handed-crushing": "1-H Crush",
+    "two-handed": "2-H",
+    "polearm": "Pole Arm",
+    "missile": "Missile",
+    "thrown": "Thrown"
+};
+
+export function weaponTypeLabel(slug) {
+    return WEAPON_TYPE_LABELS[slug] ?? slug ?? "";
+}
+
 export function getWeaponOptions() {
     return {
         templates: Object.values(TEMPLATES),

@@ -91,6 +91,23 @@
   align-content: start;
 }
 
+/* Item cards: the template form fills the window so its content area
+   scrolls vertically when it exceeds the window (header stays fixed). */
+.application.sheet.eqrmss.item .window-content > form {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+}
+
+.application.sheet.eqrmss.item .window-content > form > .sheet-content,
+.application.sheet.eqrmss.item .window-content > form > .sheet-body {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
 
 /* Header & Portrait Constraints */
 .application.sheet.eqrmss .sheet-header {

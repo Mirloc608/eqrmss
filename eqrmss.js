@@ -281,7 +281,9 @@ export async function initializeDataLoaders() {
         await weaponMod.loadWeaponData();
         game.eqrmss.weapons = {
             compose: weaponMod.composeWeapon,
-            options: weaponMod.getWeaponOptions
+            options: weaponMod.getWeaponOptions,
+            typeLabels: weaponMod.WEAPON_TYPE_LABELS,
+            typeLabel: weaponMod.weaponTypeLabel
         };
         game.eqrmss._loadStatus.weapons = true;
         const opts = weaponMod.getWeaponOptions();

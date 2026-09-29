@@ -36,7 +36,9 @@
                 <legend>Weapon Data</legend>
                 <div class="form-group" style="margin-bottom: 6px;">
                     <label style="min-width: 110px; flex: 0 0 auto;">{{localize "eqrmss.weapon.type"}}</label>
-                    <input name="system.type" type="text" value="{{system.type}}" data-dtype="String" style="flex: 1;"/>
+                    <select name="system.type" style="flex: 1;">
+                        {{selectOptions weaponTypeOptions selected=system.type valueAttr="value" labelAttr="label"}}
+                    </select>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px;">
                     <div class="form-group">
