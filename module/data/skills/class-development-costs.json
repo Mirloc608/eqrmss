@@ -1,0 +1,783 @@
+{
+ "_armorColumnMapping": "Soft Leather -> Cloth, Rigid Leather -> Leather, Chain -> Chain, Plate -> Plate (user ruling 2026-09-29)",
+ "_source": "Resolved per-EQ-class development costs. Table values from RMSS Character Law Table 15.2.1 (profession-development-costs.json). Class mapping user-ruled 2026-09-29.",
+ "_weaponCategories": [
+  "oneHandedEdged",
+  "oneHandedCrushing",
+  "twoHanded",
+  "bows",
+  "thrown",
+  "poleArms"
+ ],
+ "_weaponNotes": "weaponAssignment=player: the six weaponCosts figures are assigned by the player to the six categories during adolescence (permanent). =fixed: costs are pre-assigned to categories (berserker).",
+ "classes": {
+  "bard": {
+   "generalSkills": {
+    "climbing": "3/9",
+    "disarmTraps": "4",
+    "perception": "2/7",
+    "pickLocks": "4",
+    "riding": "2/6",
+    "stalkHide": "2/7",
+    "swimming": "2/6"
+   },
+   "magicalSkills": {
+    "channeling": "13",
+    "directedSpells": "10",
+    "runes": "5",
+    "spellLists": "4/*",
+    "stavesWands": "6"
+   },
+   "maneuveringInArmor": {
+    "chain": "3/*",
+    "cloth": "2/*",
+    "leather": "2/*",
+    "plate": "5/*"
+   },
+   "professionSources": {
+    "armor": "bard",
+    "general": "bard",
+    "magical": "bard",
+    "special": "bard",
+    "weapons": "bard"
+   },
+   "specialSkills": {
+    "adrenalDefense": "15",
+    "adrenalMoves": "2/7",
+    "ambush": "6",
+    "bodyDevelopment": "3/8",
+    "linguistics": "1/*",
+    "martialArts": "3"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "3/9",
+    "6",
+    "7",
+    "7",
+    "7",
+    "15"
+   ]
+  },
+  "beastlord": {
+   "generalSkills": {
+    "climbing": "3/9",
+    "disarmTraps": "4",
+    "perception": "2/7",
+    "pickLocks": "4",
+    "riding": "2/6",
+    "stalkHide": "1/5",
+    "swimming": "2/6"
+   },
+   "magicalSkills": {
+    "channeling": "3",
+    "directedSpells": "15",
+    "runes": "5",
+    "spellLists": "4/*",
+    "stavesWands": "6"
+   },
+   "maneuveringInArmor": {
+    "chain": "11",
+    "cloth": "1/*",
+    "leather": "2/*",
+    "plate": "11"
+   },
+   "professionSources": {
+    "armor": null,
+    "general": "ranger",
+    "magical": "ranger",
+    "special": "ranger",
+    "weapons": "monk"
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "2/7",
+    "ambush": "3",
+    "bodyDevelopment": "2/7",
+    "linguistics": "3/*",
+    "martialArts": "4"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "5",
+    "8",
+    "8",
+    "8",
+    "15",
+    "15"
+   ]
+  },
+  "berserker": {
+   "generalSkills": {
+    "climbing": "3/7",
+    "disarmTraps": "3/8",
+    "perception": "2/5",
+    "pickLocks": "3/9",
+    "riding": "2/6",
+    "stalkHide": "2/5",
+    "swimming": "2/6"
+   },
+   "magicalSkills": {
+    "channeling": "25",
+    "directedSpells": "20",
+    "runes": "7",
+    "spellLists": "20",
+    "stavesWands": "9"
+   },
+   "maneuveringInArmor": {
+    "chain": "3/*",
+    "cloth": "1/*",
+    "leather": "2/*",
+    "plate": "11"
+   },
+   "professionSources": {
+    "armor": "ranger",
+    "general": "fighter",
+    "magical": "fighter",
+    "special": "fighter",
+    "weapons": null
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "2/6",
+    "ambush": "3/8",
+    "bodyDevelopment": "1/3",
+    "linguistics": "3/*",
+    "martialArts": "3/7"
+   },
+   "weaponAssignment": "fixed",
+   "weaponCosts": {
+    "bows": "15",
+    "oneHandedCrushing": "15",
+    "oneHandedEdged": "15",
+    "poleArms": "15",
+    "thrown": "3/8",
+    "twoHanded": "2/7"
+   }
+  },
+  "cleric": {
+   "generalSkills": {
+    "climbing": "6",
+    "disarmTraps": "8",
+    "perception": "3",
+    "pickLocks": "8",
+    "riding": "2",
+    "stalkHide": "6",
+    "swimming": "3"
+   },
+   "magicalSkills": {
+    "channeling": "1/4",
+    "directedSpells": "3",
+    "runes": "2/5",
+    "spellLists": "1/*",
+    "stavesWands": "2/5"
+   },
+   "maneuveringInArmor": {
+    "chain": "4/*",
+    "cloth": "2/*",
+    "leather": "3/*",
+    "plate": "5/*"
+   },
+   "professionSources": {
+    "armor": "layHealer",
+    "general": "layHealer",
+    "magical": "cleric",
+    "special": "layHealer",
+    "weapons": "warriorMonk"
+   },
+   "specialSkills": {
+    "adrenalDefense": "15",
+    "adrenalMoves": "3",
+    "ambush": "9",
+    "bodyDevelopment": "6",
+    "linguistics": "2/*",
+    "martialArts": "3"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "4",
+    "6",
+    "8",
+    "8",
+    "8",
+    "15"
+   ]
+  },
+  "druid": {
+   "generalSkills": {
+    "climbing": "6",
+    "disarmTraps": "8",
+    "perception": "3",
+    "pickLocks": "8",
+    "riding": "2",
+    "stalkHide": "6",
+    "swimming": "3"
+   },
+   "magicalSkills": {
+    "channeling": "1/4",
+    "directedSpells": "3",
+    "runes": "2/5",
+    "spellLists": "1/*",
+    "stavesWands": "2/5"
+   },
+   "maneuveringInArmor": {
+    "chain": "10",
+    "cloth": "1/*",
+    "leather": "2/*",
+    "plate": "11"
+   },
+   "professionSources": {
+    "armor": "cleric",
+    "general": "layHealer",
+    "magical": "cleric",
+    "special": "layHealer",
+    "weapons": "cleric"
+   },
+   "specialSkills": {
+    "adrenalDefense": "15",
+    "adrenalMoves": "3",
+    "ambush": "9",
+    "bodyDevelopment": "6",
+    "linguistics": "2/*",
+    "martialArts": "3"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "6",
+    "7",
+    "9",
+    "9",
+    "9",
+    "20"
+   ]
+  },
+  "enchanter": {
+   "generalSkills": {
+    "climbing": "6",
+    "disarmTraps": "7",
+    "perception": "3",
+    "pickLocks": "8",
+    "riding": "3",
+    "stalkHide": "5",
+    "swimming": "3"
+   },
+   "magicalSkills": {
+    "channeling": "7",
+    "directedSpells": "2/5",
+    "runes": "1/4",
+    "spellLists": "1/*",
+    "stavesWands": "1/4"
+   },
+   "maneuveringInArmor": {
+    "chain": "10",
+    "cloth": "9",
+    "leather": "9",
+    "plate": "11"
+   },
+   "professionSources": {
+    "armor": "magician",
+    "general": "magician",
+    "magical": "magician",
+    "special": "magician",
+    "weapons": "magician"
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "6",
+    "ambush": "9",
+    "bodyDevelopment": "8",
+    "linguistics": "2/*",
+    "martialArts": "9"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "9",
+    "20",
+    "20",
+    "20",
+    "20",
+    "20"
+   ]
+  },
+  "magician": {
+   "generalSkills": {
+    "climbing": "6",
+    "disarmTraps": "7",
+    "perception": "3",
+    "pickLocks": "8",
+    "riding": "3",
+    "stalkHide": "5",
+    "swimming": "3"
+   },
+   "magicalSkills": {
+    "channeling": "7",
+    "directedSpells": "2/5",
+    "runes": "1/4",
+    "spellLists": "1/*",
+    "stavesWands": "1/4"
+   },
+   "maneuveringInArmor": {
+    "chain": "10",
+    "cloth": "9",
+    "leather": "9",
+    "plate": "11"
+   },
+   "professionSources": {
+    "armor": "magician",
+    "general": "magician",
+    "magical": "magician",
+    "special": "magician",
+    "weapons": "magician"
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "6",
+    "ambush": "9",
+    "bodyDevelopment": "8",
+    "linguistics": "2/*",
+    "martialArts": "9"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "9",
+    "20",
+    "20",
+    "20",
+    "20",
+    "20"
+   ]
+  },
+  "monk": {
+   "generalSkills": {
+    "climbing": "3/7",
+    "disarmTraps": "4",
+    "perception": "2/7",
+    "pickLocks": "4",
+    "riding": "3",
+    "stalkHide": "2/7",
+    "swimming": "2/6"
+   },
+   "magicalSkills": {
+    "channeling": "25",
+    "directedSpells": "20",
+    "runes": "7",
+    "spellLists": "20",
+    "stavesWands": "9"
+   },
+   "maneuveringInArmor": {
+    "chain": "11",
+    "cloth": "1/*",
+    "leather": "2/*",
+    "plate": "11"
+   },
+   "professionSources": {
+    "armor": null,
+    "general": "monk",
+    "magical": "fighter",
+    "special": "monk",
+    "weapons": "monk"
+   },
+   "specialSkills": {
+    "adrenalDefense": "6",
+    "adrenalMoves": "2/4",
+    "ambush": "4",
+    "bodyDevelopment": "3/7",
+    "linguistics": "3/*",
+    "martialArts": "2/5"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "5",
+    "8",
+    "8",
+    "8",
+    "15",
+    "15"
+   ]
+  },
+  "necromancer": {
+   "generalSkills": {
+    "climbing": "6",
+    "disarmTraps": "7",
+    "perception": "3",
+    "pickLocks": "8",
+    "riding": "3",
+    "stalkHide": "5",
+    "swimming": "3"
+   },
+   "magicalSkills": {
+    "channeling": "7",
+    "directedSpells": "2/5",
+    "runes": "1/4",
+    "spellLists": "1/*",
+    "stavesWands": "1/4"
+   },
+   "maneuveringInArmor": {
+    "chain": "10",
+    "cloth": "9",
+    "leather": "9",
+    "plate": "11"
+   },
+   "professionSources": {
+    "armor": "magician",
+    "general": "magician",
+    "magical": "magician",
+    "special": "magician",
+    "weapons": "magician"
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "6",
+    "ambush": "9",
+    "bodyDevelopment": "8",
+    "linguistics": "2/*",
+    "martialArts": "9"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "9",
+    "20",
+    "20",
+    "20",
+    "20",
+    "20"
+   ]
+  },
+  "paladin": {
+   "generalSkills": {
+    "climbing": "3/7",
+    "disarmTraps": "3/8",
+    "perception": "2/5",
+    "pickLocks": "3/9",
+    "riding": "2/6",
+    "stalkHide": "2/5",
+    "swimming": "2/6"
+   },
+   "magicalSkills": {
+    "channeling": "3",
+    "directedSpells": "15",
+    "runes": "5",
+    "spellLists": "4/*",
+    "stavesWands": "6"
+   },
+   "maneuveringInArmor": {
+    "chain": "2/*",
+    "cloth": "1/*",
+    "leather": "1/*",
+    "plate": "2/*"
+   },
+   "professionSources": {
+    "armor": "fighter",
+    "general": "fighter",
+    "magical": "ranger",
+    "special": "fighter",
+    "weapons": "fighter"
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "2/6",
+    "ambush": "3/8",
+    "bodyDevelopment": "1/3",
+    "linguistics": "3/*",
+    "martialArts": "3/7"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "1/5",
+    "2/5",
+    "2/7",
+    "2/7",
+    "2/7",
+    "5"
+   ]
+  },
+  "ranger": {
+   "generalSkills": {
+    "climbing": "3/9",
+    "disarmTraps": "4",
+    "perception": "2/7",
+    "pickLocks": "4",
+    "riding": "2/6",
+    "stalkHide": "1/5",
+    "swimming": "2/6"
+   },
+   "magicalSkills": {
+    "channeling": "3",
+    "directedSpells": "15",
+    "runes": "5",
+    "spellLists": "4/*",
+    "stavesWands": "6"
+   },
+   "maneuveringInArmor": {
+    "chain": "3/*",
+    "cloth": "1/*",
+    "leather": "2/*",
+    "plate": "4/*"
+   },
+   "professionSources": {
+    "armor": "ranger",
+    "general": "ranger",
+    "magical": "ranger",
+    "special": "ranger",
+    "weapons": "ranger"
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "2/7",
+    "ambush": "3",
+    "bodyDevelopment": "2/7",
+    "linguistics": "3/*",
+    "martialArts": "4"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "3/7",
+    "4",
+    "6",
+    "6",
+    "6",
+    "9"
+   ]
+  },
+  "rogue": {
+   "generalSkills": {
+    "climbing": "3/7",
+    "disarmTraps": "2/5",
+    "perception": "1/3",
+    "pickLocks": "2/6",
+    "riding": "2/5",
+    "stalkHide": "1/3",
+    "swimming": "2/5"
+   },
+   "magicalSkills": {
+    "channeling": "20",
+    "directedSpells": "20",
+    "runes": "6",
+    "spellLists": "8",
+    "stavesWands": "8"
+   },
+   "maneuveringInArmor": {
+    "chain": "2/*",
+    "cloth": "1/*",
+    "leather": "1/*",
+    "plate": "3/*"
+   },
+   "professionSources": {
+    "armor": "rogue",
+    "general": "rogue",
+    "magical": "rogue",
+    "special": "rogue",
+    "weapons": "rogue"
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "2/6",
+    "ambush": "2/5",
+    "bodyDevelopment": "2/5",
+    "linguistics": "3/*",
+    "martialArts": "3/7"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "2/5",
+    "3/8",
+    "3/9",
+    "3/9",
+    "3/9",
+    "6"
+   ]
+  },
+  "shadowknight": {
+   "generalSkills": {
+    "climbing": "3/7",
+    "disarmTraps": "3/8",
+    "perception": "2/5",
+    "pickLocks": "3/9",
+    "riding": "2/6",
+    "stalkHide": "2/5",
+    "swimming": "2/6"
+   },
+   "magicalSkills": {
+    "channeling": "3",
+    "directedSpells": "15",
+    "runes": "5",
+    "spellLists": "4/*",
+    "stavesWands": "6"
+   },
+   "maneuveringInArmor": {
+    "chain": "2/*",
+    "cloth": "1/*",
+    "leather": "1/*",
+    "plate": "2/*"
+   },
+   "professionSources": {
+    "armor": "fighter",
+    "general": "fighter",
+    "magical": "ranger",
+    "special": "fighter",
+    "weapons": "fighter"
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "2/6",
+    "ambush": "3/8",
+    "bodyDevelopment": "1/3",
+    "linguistics": "3/*",
+    "martialArts": "3/7"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "1/5",
+    "2/5",
+    "2/7",
+    "2/7",
+    "2/7",
+    "5"
+   ]
+  },
+  "shaman": {
+   "generalSkills": {
+    "climbing": "6",
+    "disarmTraps": "8",
+    "perception": "3",
+    "pickLocks": "8",
+    "riding": "2",
+    "stalkHide": "6",
+    "swimming": "3"
+   },
+   "magicalSkills": {
+    "channeling": "1/4",
+    "directedSpells": "3",
+    "runes": "2/5",
+    "spellLists": "1/*",
+    "stavesWands": "2/5"
+   },
+   "maneuveringInArmor": {
+    "chain": "10",
+    "cloth": "2/*",
+    "leather": "3/*",
+    "plate": "11"
+   },
+   "professionSources": {
+    "armor": "animist",
+    "general": "layHealer",
+    "magical": "cleric",
+    "special": "layHealer",
+    "weapons": "animist"
+   },
+   "specialSkills": {
+    "adrenalDefense": "15",
+    "adrenalMoves": "3",
+    "ambush": "9",
+    "bodyDevelopment": "6",
+    "linguistics": "2/*",
+    "martialArts": "3"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "6",
+    "7",
+    "9",
+    "9",
+    "9",
+    "20"
+   ]
+  },
+  "warrior": {
+   "generalSkills": {
+    "climbing": "3/7",
+    "disarmTraps": "3/8",
+    "perception": "2/5",
+    "pickLocks": "3/9",
+    "riding": "2/6",
+    "stalkHide": "2/5",
+    "swimming": "2/6"
+   },
+   "magicalSkills": {
+    "channeling": "25",
+    "directedSpells": "20",
+    "runes": "7",
+    "spellLists": "20",
+    "stavesWands": "9"
+   },
+   "maneuveringInArmor": {
+    "chain": "2/*",
+    "cloth": "1/*",
+    "leather": "1/*",
+    "plate": "2/*"
+   },
+   "professionSources": {
+    "armor": "fighter",
+    "general": "fighter",
+    "magical": "fighter",
+    "special": "fighter",
+    "weapons": "fighter"
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "2/6",
+    "ambush": "3/8",
+    "bodyDevelopment": "1/3",
+    "linguistics": "3/*",
+    "martialArts": "3/7"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "1/5",
+    "2/5",
+    "2/7",
+    "2/7",
+    "2/7",
+    "5"
+   ]
+  },
+  "wizard": {
+   "generalSkills": {
+    "climbing": "6",
+    "disarmTraps": "7",
+    "perception": "3",
+    "pickLocks": "8",
+    "riding": "3",
+    "stalkHide": "5",
+    "swimming": "3"
+   },
+   "magicalSkills": {
+    "channeling": "7",
+    "directedSpells": "2/5",
+    "runes": "1/4",
+    "spellLists": "1/*",
+    "stavesWands": "1/4"
+   },
+   "maneuveringInArmor": {
+    "chain": "10",
+    "cloth": "9",
+    "leather": "9",
+    "plate": "11"
+   },
+   "professionSources": {
+    "armor": "magician",
+    "general": "magician",
+    "magical": "magician",
+    "special": "magician",
+    "weapons": "magician"
+   },
+   "specialSkills": {
+    "adrenalDefense": "20",
+    "adrenalMoves": "6",
+    "ambush": "9",
+    "bodyDevelopment": "8",
+    "linguistics": "2/*",
+    "martialArts": "9"
+   },
+   "weaponAssignment": "player",
+   "weaponCosts": [
+    "9",
+    "20",
+    "20",
+    "20",
+    "20",
+    "20"
+   ]
+  }
+ }
+}
