@@ -6,7 +6,6 @@ import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
 import { progressionManager } from "../../progression/progression-manager.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
-import { rmssRankBonus } from "../../data/skills/rmss-rank-bonus.js";
 
 export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
@@ -247,32 +246,24 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         };
 
         // ------------------------------------------------------------
-        // Skill Engine View Models
+        // RMSS Skills: the actor's skill items (e.g. granted by the
+        // character-creation wizard's two-pass development system).
         // ------------------------------------------------------------
-        const skillModels = [];
-        const jsonSkills = CONFIG.EQRMSS?.skills || {};
-
-        for (const [id, s] of Object.entries(jsonSkills)) {
-            const sys = s.system || {};
-            const actorSkill = system.skills?.[id] || {};
-            const ranks = actorSkill.ranks ?? sys.ranks ?? 0;
-            const statBonus = sys.statBonus ?? 0;
-            // Table 15.2.2 rank bonus; sys.rankBonus is a manual adjustment slot (0 on all shipped skills).
-            const rankBonus = (sys.rankBonus ?? 0) + rmssRankBonus(ranks);
-            const totalBonus = rankBonus + statBonus + (sys.profBonus ?? 0) + (sys.specialBonus ?? 0);
-
-            skillModels.push({
-                id,
-                name: s.name,
-                category: sys.category || "",
-                statShort: (sys.statsString || "").split("/")[0] || "—",
-                ranks,
-                costPerRank: sys.cost || "—",
-                totalBonus
-            });
-        }
-
-        skillModels.sort((a, b) => a.name.localeCompare(b.name));
+        const skillModels = (actor.items?.contents ?? [])
+            .filter(i => i?.type === "skill")
+            .map(item => {
+                const sys = item.system ?? {};
+                return {
+                    id: item.id,
+                    name: item.name,
+                    category: sys.category || "",
+                    cost: sys.cost || "—",
+                    ranks: Number(sys.ranks) || 0,
+                    rankBonus: Number(sys.rankBonus) || 0,
+                    totalBonus: Number(sys.bonus) || 0
+                };
+            })
+            .sort((a, b) => a.name.localeCompare(b.name));
 
         // ------------------------------------------------------------
         // AA Advancement Context
@@ -335,16 +326,11 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         const html = this.element;
 
         // ------------------------------------------------------------
-        // Skill Engine Event Binding
+        // Skill Roll Buttons (RMSS skill items)
         // ------------------------------------------------------------
         html.querySelectorAll(".skill-roll").forEach(el => el.addEventListener("click", ev => {
-            const skillId = ev.currentTarget.dataset.skillId;
-            this._onSkillRoll(skillId);
-        }));
-
-        html.querySelectorAll(".skill-advance").forEach(el => el.addEventListener("click", ev => {
-            const skillId = ev.currentTarget.dataset.skillId;
-            this._onSkillAdvance(skillId);
+            const itemId = ev.currentTarget.dataset.itemId;
+            this._onSkillRoll(itemId);
         }));
 
         // ------------------------------------------------------------
@@ -628,18 +614,15 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
     }
 
     // ------------------------------------------------------------
-    // Skill Engine: Roll Skill Check
+    // Skill Roll (RMSS skill item: 1d100 + total bonus vs target)
     // ------------------------------------------------------------
-    async _onSkillRoll(skillId) {
-        const skillData = CONFIG.EQRMSS?.skills?.[skillId];
-        if (!skillData) {
-            ui.notifications.error(`Unknown skill: ${skillId}`);
+    async _onSkillRoll(itemId) {
+        const item = this.actor.items.get(itemId);
+        if (!item || item.type !== "skill") {
+            ui.notifications.error(`Unknown skill: ${itemId}`);
             return;
         }
-        const sys = skillData.system || {};
-        const actorSkill = this.actor.system.skills?.[skillId] || {};
-        const ranks = actorSkill.ranks ?? sys.ranks ?? 0;
-        const totalBonus = rmssRankBonus(ranks) + (sys.statBonus ?? 0) + (sys.profBonus ?? 0) + (sys.specialBonus ?? 0);
+        const totalBonus = Number(item.system?.bonus) || 0;
 
         const roll = await new Roll("1d100").evaluate();
         const total = roll.total + totalBonus;
@@ -649,43 +632,11 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: `
-                <h2>${skillData.name}</h2>
+                <h2>${item.name}</h2>
                 <p><strong>Roll:</strong> ${roll.total} + ${totalBonus} = ${total}</p>
                 <p><strong>Target:</strong> ${target}</p>
                 <p><strong>Success:</strong> ${success ? "Yes" : "No"}</p>
             `
         });
-    }
-
-
-    // ------------------------------------------------------------
-    // Skill Engine: Buy Ranks
-    // ------------------------------------------------------------
-    async _onSkillAdvance(skillId) {
-        const skillData = CONFIG.EQRMSS?.skills?.[skillId];
-        if (!skillData) {
-            ui.notifications.error(`Unknown skill: ${skillId}`);
-            return;
-        }
-        // Parse cost "2/5" -> use first number as DP per rank (simplified)
-        const costStr = skillData.system?.cost || "1";
-        const costPerRank = parseInt(costStr.split("/")[0]) || 1;
-
-        const currentDp = this.actor.system.developmentPoints ?? this.actor.system.dp ?? 0;
-        if (currentDp < costPerRank) {
-            ui.notifications.error(`Not enough development points (need ${costPerRank}, have ${currentDp})`);
-            return;
-        }
-
-        const actorSkills = foundry.utils.duplicate(this.actor.system.skills || {});
-        actorSkills[skillId] = actorSkills[skillId] || {};
-        actorSkills[skillId].ranks = (actorSkills[skillId].ranks ?? 0) + 1;
-
-        await this.actor.update({
-            "system.skills": actorSkills,
-            "system.developmentPoints": currentDp - costPerRank
-        });
-
-        ui.notifications.info(`${this.actor.name} gained +1 rank in ${skillData.name}. Remaining DP: ${currentDp - costPerRank}`);
     }
 }
