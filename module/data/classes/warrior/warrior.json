@@ -1,17 +1,1 @@
-{
-  "id": "warrior",
-
-  "features": [
-    "parry",
-    "double-attack"
-  ],
-
-  "abilities": [
-    "taunt",
-    "shield-bash"
-  ],
-
-  "signatures": [
-    "last-stand"
-  ]
-}
+{"abilities":{"level1":[{"description":"The warrior provokes an enemy into attacking them instead of their allies.","id":"warrior_taunt","name":"Taunt"},{"description":"The warrior slams an enemy with their shield, with a chance to stun.","id":"warrior_shield_bash","name":"Shield Bash"}],"level10":[{"description":"The warrior delivers a stunning slam that leaves the enemy reeling.","id":"warrior_slam","name":"Slam"}],"level20":[{"description":"The warrior refuses to fall, fighting on through wounds that would kill lesser mortals.","id":"warrior_last_stand","name":"Last Stand"}],"level5":[{"description":"The warrior strikes twice in rapid succession with their weapon.","id":"warrior_double_attack","name":"Double Attack"}]},"armor":{"allowed":["Cloth","Leather","Chain","Plate"],"restricted":[]},"classFeatures":["Taunt","Parry","Double Attack","Shield Bash","Weapon Mastery","Battlefield Control"],"combatActions":[{"id":"taunt","name":"Taunt"},{"id":"bash","name":"Bash"},{"id":"kick","name":"Kick"}],"description":{"lore":"Warriors stand on the front lines of every battle in Norrath, shield raised and blade ready. Through rigorous training and unbreakable resolve, they master every weapon of war and endure blows that would fell lesser mortals. When a warrior holds the line, allies fight with confidence.","summary":"Warriors are masters of melee combat, unmatched in resilience and martial prowess."},"disciplines":["Weapon Discipline","Shield Discipline","Battle Discipline"],"eqrmss":{"classification":{"archetype":"martial tank","primaryRole":"tanking","secondaryRoles":["damage","control"]},"identity":{"strengths":["durability","taunt","weapon mastery","shield defense","battlefield control"]},"pending":["attack table IDs"],"schemaVersion":1,"signatureMechanics":["taunt","shield bash","double attack","last stand"],"tags":["martial","arms","warfare","tanking","melee"],"weaknesses":["no spellcasting","limited ranged options"]},"experienceProgression":{"table":"martial-specialist"},"icon":"systems/eqrmss/assets/Icons/class/warrior.png","id":"warrior","name":"Warrior","profession":{"category":"Arms / Warfare / Tactics / Martial Mastery","powerSource":"Martial Prowess","realm":"Martial"},"role":{"primary":"Frontline Tank","secondary":["Melee Damage","Crowd Control","Protection"]},"skills":{"bonusCategories":["Melee Weapons","Taunt","Shield Use","Physical Resilience"],"categoryCosts":{"Athletics":2,"Body Development":1,"Combat Maneuvers":2,"Lore":4,"Perception":2,"Spell Lists":9,"Weapon Skills":1}},"spellLists":{"baseLists":{"Martial":{"Defense":["Shield Techniques"],"Tactics":["Battle Tactics"],"Warfare":["Weapon Mastery"]}},"specialization":["Weapon Specialization","Defensive Mastery","Taunt Mastery"]},"startingEquipment":[{"name":"Rusty Long Sword","type":"weapon"},{"name":"Leather Armor","type":"armor"},{"name":"Iron Rations","type":"tool"}],"startingLanguages":["Common"],"stats":{"primeRequisites":["Strength","Constitution"],"secondaryStats":["Agility","Intuition","Presence"]},"type":"class","weapons":{"allowed":["Swords","Axes","Maces","Two-Handed Weapons","Bows","Thrown Weapons"],"restricted":["Spell Foci"]}}
