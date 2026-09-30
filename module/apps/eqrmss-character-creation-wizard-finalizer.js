@@ -671,6 +671,10 @@ export class EQRMSSCharacterCreationWizardFinalizer {
     const system = {};
     const weight = parseFloat(entry.weight);
     if (Number.isFinite(weight)) system.weight = weight;
+    // Carry the buy-list data onto the item so the sheet shows it.
+    if (entry.cost) system.cost = String(entry.cost);
+    if (entry.notes) system.description = String(entry.notes);
+    system.quantity = 1;
     if (doc.type === "consumable") {
       system.item = {
         category: null,
