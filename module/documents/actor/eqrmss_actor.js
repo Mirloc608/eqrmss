@@ -25,6 +25,7 @@ import {
 from "../../utils/actor/rmss-stats.js";
 
 import {
+    calculateArmorAndDefenses,
     calculateEncumbrance,
     calculateBaseMovementRate
 }
@@ -535,6 +536,16 @@ _prepareCombat()
         ??
         {};
 
+    // NOTE: EQRMSSCharacter._prepareCombatAndDefenses() is dead code — the
+    // subclass is never instantiated (CONFIG.Actor.documentClass is
+    // EQRMSSActor for every actor type), so armor/DB derivation lives here.
+
+    const prev =
+
+        this.system.combat
+        ??
+        {};
+
     this.system.combat =
 
     {
@@ -561,9 +572,53 @@ _prepareCombat()
 
             equipment.shield
             ??
-            0
+            0,
+
+        // Preserve any stored defense components across prepares.
+        adrenalDefense:
+
+            Number(prev.adrenalDefense) || 0,
+
+        otherDB:
+
+            Number(prev.otherDB) || 0,
+
+        armorDB:
+
+            Number(prev.armorDB) || 0,
+
+        penalties:
+
+            prev.penalties
+            ??
+            {}
 
     };
+
+    // Derive armor type, maneuver penalties, and total DB from equipped
+    // gear every prepare — feeds the Combat tab and attack resolution.
+    try
+    {
+
+        const metrics = calculateArmorAndDefenses(this);
+
+        this.system.combat.armorType = metrics.armorType;
+        this.system.combat.mmp = metrics.mmp;
+        this.system.combat.penalties = metrics.penalties;
+        this.system.combat.quicknessBonus = metrics.quicknessBonus;
+        this.system.combat.shieldBonus = metrics.shieldBonus;
+        this.system.combat.totalDB = metrics.totalDB;
+
+    }
+    catch (e)
+    {
+
+        console.error("EQRMSS | Combat derivation failed", e);
+
+        this.system.combat.armorType ??= "No Armor";
+        this.system.combat.totalDB ??= 0;
+
+    }
 
 }
 
