@@ -44,18 +44,19 @@ export class EQRMSSItem extends Item {
     ]);
 
     /**
-     * Restrict the Create Item dialog's type dropdown to hand-creatable
-     * item types, using the official `types` dialog-data option.
-     * A caller-supplied `types` list always wins.
+     * Flag dialogs whose caller explicitly requested hidden types, so the
+     * render hook below leaves those alone. Everything else gets filtered.
+     * (Core ignores the `types` dialog-data option on this build, so the
+     * list is pruned from the rendered dialog instead.)
      */
 
     static async createDialog(data = {}, createOptions = {}, dialogOptions = {}) {
 
-        data.types ??= (game.documentTypes?.Item ?? []).filter(
+        if (data.types?.some((t) => EQRMSSItem.HIDDEN_CREATE_TYPES.has(t))) {
 
-            (t) => !EQRMSSItem.HIDDEN_CREATE_TYPES.has(t)
+            dialogOptions.eqrmssAllowHiddenTypes = true;
 
-        );
+        }
 
         return super.createDialog(data, createOptions, dialogOptions);
 
@@ -578,3 +579,34 @@ export class EQRMSSItem extends Item {
     }
 
 }
+
+// ============================================================
+// CREATE ITEM DIALOG - HIDE SYSTEM-OWNED TYPES
+// ============================================================
+// Core ignores the `types` dialog-data option on this build, so the type
+// list is pruned from the rendered dialog instead. Only the Item create
+// dialog is touched (identified by the presence of item-type options);
+// Actor create and every other dialog are left alone. Programmatic
+// creation via Item.create is unaffected.
+
+Hooks.on("renderDialog", (dialog, html) => {
+
+    const typeSelect = html.find('select[name="type"]');
+
+    if (!typeSelect.length) return;
+
+    const options = typeSelect.find("option");
+
+    // Not the Item create dialog: none of the system-owned types present.
+    if (!options.toArray().some((o) => EQRMSSItem.HIDDEN_CREATE_TYPES.has(o.value))) return;
+
+    // Caller explicitly requested hidden types: honor it.
+    if (dialog.options?.eqrmssAllowHiddenTypes) return;
+
+    options.each((i, o) => {
+
+        if (EQRMSSItem.HIDDEN_CREATE_TYPES.has(o.value) || o.value === "*" || o.value === "base") o.remove();
+
+    });
+
+});
