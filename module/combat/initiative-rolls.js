@@ -87,15 +87,32 @@ async function promptSituational() {
     }
 }
 
-export async function rollInitiative(actor) {
-    if (!actor) {
-        ui.notifications?.warn("No actor to compute initiative for.");
-        return;
-    }
-    const sys = actor.system ?? {};
+/**
+ * Derive the §6.1 initiative input for an actor.
+ *
+ * Shared by the Combat-tab button (full situational prompt) and the
+ * combat-tracker path (derived values only — getInitiativeRoll is
+ * synchronous, so no prompt there).
+ *
+ * @param {Actor} actor
+ * @param {object} [opts]
+ * @param {number} [opts.round]        combat round (1 = first)
+ * @param {object} [opts.situational] { surprised, charging, movementPct }
+ * @param {boolean} [opts.useTargets] run the pairwise checks against
+ *        the first targeted token's actor (default true)
+ * @returns {{ input, weapons, primary }}
+ */
+export function deriveInitiativeInput(actor, opts = {}) {
+    const {
+        round = 1,
+        situational = null,
+        useTargets = true
+    } = opts;
+    const sit = situational ?? { surprised: false, charging: false, movementPct: 0 };
+
+    const sys = actor?.system ?? {};
     const items = itemListOf(actor);
 
-    // ---- Derived from the actor ----
     const qu = statVal(actor, "QU");
     const st = statVal(actor, "ST");
 
@@ -109,23 +126,45 @@ export async function rollInitiative(actor) {
     const hitsMax = Number(sys.hits?.max) || 0;
     const woundedOverHalf = hitsMax > 0 && (Number(sys.hits?.value) || 0) > hitsMax / 2;
 
-    // ---- Situational (declared) ----
-    const sit = await promptSituational();
-    if (!sit) return; // cancelled
-
-    // ---- Pairwise opponent: first targeted token ----
+    // Pairwise opponent: first targeted token.
     let opponent = null;
-    let opponentName = null;
-    const targeted = [...(game.user?.targets ?? [])][0];
-    if (targeted?.actor && targeted.actor.id !== actor.id) {
-        const oWeapons = readiedWeapons(targeted.actor);
-        const owLen = oWeapons[0]?.system?.length;
-        opponent = {
-            strength: statVal(targeted.actor, "ST"),
-            weaponLength: owLen == null ? null : Number(owLen),
-            charging: false // opponent's actions are unknown — GM adjudicates
-        };
-        opponentName = targeted.name ?? targeted.actor?.name ?? "opponent";
+    if (useTargets) {
+        const targeted = [...(game.user?.targets ?? [])][0];
+        if (targeted?.actor && targeted.actor.id !== actor?.id) {
+            const oWeapons = readiedWeapons(targeted.actor);
+            const owLen = oWeapons[0]?.system?.length;
+            opponent = {
+                strength: statVal(targeted.actor, "ST"),
+                weaponLength: owLen == null ? null : Number(owLen),
+                charging: false // opponent's actions are unknown — GM adjudicates
+            };
+        }
+    }
+
+    const input = {
+        quickness: qu,
+        strength: st,
+        weaponReady: !!primary,
+        hands: wtype === "two-handed" ? 2 : 1,
+        isPolearm: wtype === "polearm",
+        round,
+        weaponLength: wsys.length == null ? null : Number(wsys.length),
+        twoWeapon: weapons.length > 1,
+        shield,
+        surprised: !!sit.surprised,
+        encumbered,
+        woundedOverHalf,
+        movementPct: Math.max(0, Math.min(100, Number(sit.movementPct) || 0)),
+        charging: !!sit.charging,
+        opponent
+    };
+    return { input, weapons, primary };
+}
+
+export async function rollInitiative(actor) {
+    if (!actor) {
+        ui.notifications?.warn("No actor to compute initiative for.");
+        return;
     }
 
     // ---- Round: active combat's round when the actor is in it ----
@@ -140,23 +179,16 @@ export async function rollInitiative(actor) {
         if (combatant) round = Math.max(1, Number(combat.round) || 1);
     }
 
-    const input = {
-        quickness: qu,
-        strength: st,
-        weaponReady: !!primary,
-        hands: wtype === "two-handed" ? 2 : 1,
-        isPolearm: wtype === "polearm",
+    // ---- Situational (declared) ----
+    const sit = await promptSituational();
+    if (!sit) return; // cancelled
+
+    const { input, weapons, primary } = deriveInitiativeInput(actor, {
         round,
-        weaponLength: wsys.length == null ? null : Number(wsys.length),
-        twoWeapon: weapons.length > 1,
-        shield,
-        surprised: sit.surprised,
-        encumbered,
-        woundedOverHalf,
-        movementPct: sit.movementPct,
-        charging: sit.charging,
-        opponent
-    };
+        situational: sit,
+        useTargets: true
+    });
+    const opponent = input.opponent;
     const { total, breakdown } = computeInitiative(input);
 
     // Second melee attack (two weapons): same table, totaled after

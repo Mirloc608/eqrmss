@@ -4,10 +4,12 @@
 
 import EQRMSSActor from "../documents/actor.js";
 import EQRMSSItem  from "../documents/item.js";
+import EQRMSSCombatant from "../documents/combatant.js";
 
 export function registerEQRMSSDocuments() {
   console.info("EQRMSS | Registering documents");
 
   CONFIG.Actor.documentClass = EQRMSSActor;
   CONFIG.Item.documentClass  = EQRMSSItem;
+  CONFIG.Combatant.documentClass = EQRMSSCombatant;
 }
