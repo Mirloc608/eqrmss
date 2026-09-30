@@ -27,6 +27,13 @@ import {
 }
 from "./eqrmss_item.js";
 
+import {
+
+    LEGACY_ICON_REMAP
+
+}
+from "./legacy-icon-remap.js";
+
 export class EQRMSSSpell extends EQRMSSItem
 {
 
@@ -39,11 +46,30 @@ export class EQRMSSSpell extends EQRMSSItem
 
         super.prepareDerivedData();
 
+        this._normalizeLegacyIcon();
+
         this._ensureSpellData();
 
         this._prepareCasting();
 
         this._prepareEffects();
+
+    }
+
+    // ========================================================
+    // LEGACY ICON NORMALIZATION
+    // ========================================================
+
+    // Spell items created before 2026-09-30 may carry icons/...
+    // paths that V13 no longer ships. Remap to the verified V13
+    // replacement for display; the stored value is left untouched.
+    _normalizeLegacyIcon()
+    {
+
+        const remapped = LEGACY_ICON_REMAP[this.img];
+
+        if (remapped)
+            this.img = remapped;
 
     }
 
