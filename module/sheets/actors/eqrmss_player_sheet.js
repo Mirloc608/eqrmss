@@ -346,6 +346,14 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }));
 
         // ------------------------------------------------------------
+        // Combat Tab: Weapon Attack Rolls (RMSS §6.2–6.4)
+        // ------------------------------------------------------------
+        html.querySelectorAll(".attack-roll").forEach(el => el.addEventListener("click", ev => {
+            const itemId = ev.currentTarget.dataset.itemId;
+            this._onAttackRoll(itemId);
+        }));
+
+        // ------------------------------------------------------------
         // Equipment Location Changes
         // ------------------------------------------------------------
         html.querySelectorAll(".item-location").forEach(el => el.addEventListener("change", ev => {
@@ -680,5 +688,20 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
                 <p><strong>Success:</strong> ${success ? "Yes" : "No"}</p>
             `
         });
+    }
+
+    async _onAttackRoll(itemId) {
+        const item = this.actor.items.get(itemId);
+        if (!item || item.type !== "weapon") {
+            ui.notifications.error(`Unknown weapon: ${itemId}`);
+            return;
+        }
+        try {
+            const { rollWeaponAttack } = await import("../../combat/combat-rolls.js");
+            await rollWeaponAttack(this.actor, item);
+        } catch (e) {
+            console.error("EQRMSS | Attack roll failed", e);
+            ui.notifications.error(`Attack roll failed: ${e.message}`);
+        }
     }
 }

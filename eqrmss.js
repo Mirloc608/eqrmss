@@ -403,6 +403,16 @@ export async function initializeDataLoaders() {
         game.eqrmss.combatTables = null;
     }
 
+    // Combat rolls: Arms Law attack resolution (RMSS §6.2–6.4)
+    try {
+        const combatRolls = await import("./module/combat/combat-rolls.js");
+        game.eqrmss.combat = { rollWeaponAttack: combatRolls.rollWeaponAttack };
+        console.log("EQRMSS | Combat rolls ready");
+    } catch (e) {
+        console.error("Combat rolls load failed", e);
+        game.eqrmss.combat = null;
+    }
+
     // Final filter
     for (const k of Object.keys(game.eqrmss.races)) {
         if (k.toLowerCase().includes('schema')) delete game.eqrmss.races[k];
