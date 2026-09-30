@@ -24,6 +24,8 @@ import "./module/config.js";
 import { registerEQRMSSSheets } from "./module/initialization/register-sheets.js";
 
 import * as WizardModule from "./module/apps/eqrmss-character-creation-wizard.js";
+import { EQRMSSCharacterCreationWizardFinalizer } from "./module/apps/eqrmss-character-creation-wizard-finalizer.js";
+import { EQRMSSCharacterCreationData } from "./module/apps/eqrmss-character-creation-wizard-data.js";
 console.log("EQRMSS v4.12 | Wizard module imported:", Object.keys(WizardModule));
 
 (function exportWizardGlobal() {
@@ -41,6 +43,20 @@ console.log("EQRMSS v4.12 | Wizard module imported:", Object.keys(WizardModule))
         console.log(`EQRMSS v4.12 | Wizard exported: ${wizardClass.name}`);
         Hooks.once("init", () => { game.eqrmss = game.eqrmss || {}; game.eqrmss.CharacterCreationWizard = wizardClass; });
     }
+})();
+
+// Test hooks for the in-Foundry wizard test harness: expose the finalizer
+// and the wizard data service so a GM macro can drive character creation
+// end-to-end without the DOM. No runtime behavior change.
+(function exportWizardTestHooks() {
+    globalThis.EQRMSSCharacterCreationWizardFinalizer = EQRMSSCharacterCreationWizardFinalizer;
+    globalThis.EQRMSSCharacterCreationData = EQRMSSCharacterCreationData;
+    Hooks.once("init", () => {
+        game.eqrmss = game.eqrmss || {};
+        game.eqrmss.CharacterCreationWizardFinalizer = EQRMSSCharacterCreationWizardFinalizer;
+        game.eqrmss.WizardDataService = EQRMSSCharacterCreationData;
+    });
+    console.log("EQRMSS v4.12 | Wizard test hooks exported (finalizer + data service)");
 })();
 
 import { EQRMSSGeography } from "./module/data/geography/geography-loader.js";
