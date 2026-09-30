@@ -62,6 +62,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         },
         logs: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-logs.html"
+        },
+        background: {
+            template: "systems/eqrmss/templates/sheets/actors/parts/actor-background-info.html"
         }
     };
 
