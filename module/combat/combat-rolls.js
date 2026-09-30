@@ -44,16 +44,33 @@ async function openEndedAttackRoll() {
 }
 
 // Manual target entry when nothing is targeted.
+// Offers a world-actor picker: picking an actor uses its derived AT/DB
+// and auto-applies damage (permission-checked, like a targeted token).
+// Pure manual entry keeps the typed name/AT/DB and reports the damage
+// for the GM to apply by hand.
 async function promptTarget() {
     const DialogV2 = foundry?.applications?.api?.DialogV2;
     if (!DialogV2?.prompt) {
-        ui.notifications.warn("No token targeted — target a token or enter AT/DB manually.");
+        ui.notifications.warn("No token targeted — target a token or pick one below.");
         return null;
     }
+    const actorOptions = (game.actors?.contents ?? [])
+        .slice()
+        .sort((a, b) => String(a.name ?? "").localeCompare(String(b.name ?? "")))
+        .map(a => `<option value="${esc(a.id)}">${esc(a.name)}</option>`)
+        .join("");
     try {
         const fd = await DialogV2.prompt({
             window: { title: "Attack: target details" },
             content: `
+                <div class="form-group">
+                    <label>Target actor (auto-applies damage)</label>
+                    <select name="actorId">
+                        <option value="">— Manual entry —</option>
+                        ${actorOptions}
+                    </select>
+                </div>
+                <p class="hint">Picking an actor uses its AT/DB and applies damage automatically. Leave on manual entry to type the values by hand.</p>
                 <div class="form-group">
                     <label>Target name</label>
                     <input type="text" name="name" value="Target">
@@ -73,7 +90,14 @@ async function promptTarget() {
         // on this Foundry build (FormDataExtended on others). Read both ways.
         const val = k => (typeof fd.get === "function" ? fd.get(k) : fd[k]);
         const at = Math.max(1, Math.min(20, Number(val("at")) || 1));
-        return { name: String(val("name") || "Target"), at, db: Number(val("db")) || 0, actor: null };
+        const actorId = val("actorId");
+        const picked = actorId ? game.actors?.get(actorId) : null;
+        return {
+            name: String(val("name") || "Target"),
+            at,
+            db: Number(val("db")) || 0,
+            actor: picked ?? null
+        };
     } catch (e) {
         console.error("EQRMSS | Target prompt failed", e);
         return null;
@@ -126,9 +150,19 @@ export async function rollWeaponAttack(actor, weaponItem) {
     if (at == null) {
         const manual = await promptTarget();
         if (!manual) return;
-        targetName = manual.name;
-        at = manual.at;
-        db = manual.db;
+        if (manual.actor) {
+            // World-actor pick: same handling as a targeted token —
+            // derived AT/DB, damage auto-applies (permission-checked).
+            targetActor = manual.actor;
+            targetName = targetActor.name;
+            const aat = parseArmorType(targetActor.system?.combat?.armorType);
+            at = aat ?? manual.at;
+            db = Number(targetActor.system?.combat?.totalDB) || 0;
+        } else {
+            targetName = manual.name;
+            at = manual.at;
+            db = manual.db;
+        }
     }
 
     // ---- Attack roll (high open-ended) ----
