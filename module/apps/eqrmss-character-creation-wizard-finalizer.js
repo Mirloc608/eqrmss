@@ -563,6 +563,11 @@ export class EQRMSSCharacterCreationWizardFinalizer {
             consumeOnUse: true
           };
         }
+        if (entry.type === "weapon" && entry.weaponTemplate) {
+          // Compose the kit weapon now so it carries real stats immediately
+          // (same bake the weapon sheet performs on recompose). Fail-soft.
+          Object.assign(system, this.#composeKitWeapon(entry));
+        }
         if (Object.keys(system).length) item.system = system;
         items.push(item);
       }
@@ -608,6 +613,53 @@ export class EQRMSSCharacterCreationWizardFinalizer {
       });
     } catch (error) {
       console.warn("EQRMSS | Finalizer | starter kit grant failed (non-fatal)", error);
+    }
+  }
+
+  /**
+   * Compose a kit weapon (template + material + condition) at grant time so
+   * the item carries real stats immediately. Mirrors the bake the weapon
+   * sheet performs in _recomposeWeapon. Fail-soft: returns {} when the
+   * composer is unavailable or the combination is invalid, leaving the
+   * weapon as a bare name+type for the GM to compose by hand.
+   */
+  #composeKitWeapon(entry) {
+    try {
+      const weapons = game.eqrmss?.weapons;
+      if (!weapons?.compose) return {};
+      const composed = weapons.compose(
+        entry.weaponTemplate,
+        entry.material ?? "steel",
+        entry.condition ?? "normal"
+      );
+      const breakageStr = composed.breakage
+        ? composed.breakage.join("-") +
+          (composed.breakageMod ? ` (${composed.breakageMod >= 0 ? "+" : ""}${composed.breakageMod})` : "")
+        : "";
+      const system = {
+        weaponTemplate: composed.templateId,
+        material: composed.materialId,
+        condition: composed.conditionId,
+        type: composed.weaponType,
+        weight: composed.weight,
+        cost: composed.cost,
+        prod_time: composed.prodTime,
+        breakage_range: breakageStr,
+        strength: composed.strength != null ? String(composed.strength) : "",
+        fumble_range: composed.fumble,
+        obMod: composed.obMod,
+        damageMod: composed.damageMod
+      };
+      // Only take attack table / length / crit type when the template
+      // provides one, matching the sheet's recompose behavior.
+      if (composed.attackTable != null) system.attackTable = composed.attackTable;
+      if (composed.length != null) system.length = composed.length;
+      if (composed.criticalType != null) system.criticalType = composed.criticalType;
+      if (composed.notes != null) system.notes = composed.notes;
+      return system;
+    } catch (error) {
+      console.warn("EQRMSS | Finalizer | kit weapon compose failed (non-fatal)", error);
+      return {};
     }
   }
 
