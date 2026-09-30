@@ -96,7 +96,11 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
         strength: template.strength,
         criticalType: template.criticalType,
         obMod,
-        damageMod
+        damageMod,
+        // Item-effect hook: materials may grant a proc (weapons only).
+        // Stored as an id; resolved through the item-effect catalog at fire
+        // time so catalog tuning updates existing items without recompose.
+        proc: material.proc ?? null
     };
 }
 

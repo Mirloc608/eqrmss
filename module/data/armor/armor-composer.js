@@ -103,7 +103,11 @@ export function composeArmor(locationId, categoryId, materialId, conditionId) {
         slot: loc.slot,
         cost,
         prodTime: loc.baseProdTime ?? "",
-        notes: loc.notes ?? null
+        notes: loc.notes ?? null,
+        // Item-effect hooks: materials may grant worn/triggered effects
+        // (armor never procs). Stored as ids; resolved at fire time.
+        wornEffect: m.wornEffect ?? null,
+        triggeredEffect: m.triggeredEffect ?? null
     };
 }
 

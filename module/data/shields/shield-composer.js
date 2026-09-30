@@ -58,7 +58,11 @@ export function composeShield(templateId, materialId, conditionId) {
         weight,
         cost: t.cost ?? "",
         prodTime: t.prodTime ?? "",
-        notes: t.notes ?? null
+        notes: t.notes ?? null,
+        // Item-effect hooks: materials may grant worn/triggered effects
+        // (shields never proc). Stored as ids; resolved at fire time.
+        wornEffect: m.wornEffect ?? null,
+        triggeredEffect: m.triggeredEffect ?? null
     };
 }
 

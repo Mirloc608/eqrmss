@@ -1,0 +1,47 @@
+{
+    "effects": [
+        {
+            "castTime": "instant",
+            "description": "On a critical hit, shards of velium shear from the weapon, striking the target for bonus cold damage.",
+            "id": "velium-shards",
+            "kind": "proc",
+            "name": "Velium Shards",
+            "payload": [
+                {
+                    "element": "cold",
+                    "max": 156,
+                    "min": 96,
+                    "type": "damage"
+                }
+            ],
+            "trigger": "onCrit"
+        },
+        {
+            "description": "While worn, the bearer regenerates 1 mana per combat round (6-second tick).",
+            "id": "flowing-thought-1",
+            "kind": "worn",
+            "name": "Flowing Thought I",
+            "payload": [
+                {
+                    "amount": 1,
+                    "per": "round",
+                    "pool": "mana",
+                    "type": "regen"
+                }
+            ]
+        },
+        {
+            "castTime": "instant",
+            "description": "Triggered effect: grants the wearer Grim Aura. Payload to be defined.",
+            "id": "grim-aura",
+            "kind": "triggered",
+            "name": "Grim Aura",
+            "payload": [
+                {
+                    "note": "Effect definition pending user ruling.",
+                    "type": "buff"
+                }
+            ]
+        }
+    ]
+}

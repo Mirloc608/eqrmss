@@ -216,7 +216,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, weapons:false, armor:false, shields:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, weapons:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
 
     if (ClassLoader) {
         try {
@@ -340,6 +340,29 @@ export async function initializeDataLoaders() {
     } catch (e) {
         console.error("Shield data load failed", e);
         game.eqrmss.shields = null;
+    }
+
+    // Item effects (proc / worn / triggered catalog + engines).
+    // Separate from spells: procs borrow no spell entry and reference no spell id.
+    try {
+        const fxMod = await import('./module/data/item-effects/item-effect-loader.js');
+        await fxMod.loadItemEffectData();
+        const procEngine = await import('./module/item-effects/proc-engine.js');
+        const wornEngine = await import('./module/item-effects/worn-engine.js');
+        const triggeredEngine = await import('./module/item-effects/triggered-engine.js');
+        game.eqrmss.itemEffects = {
+            get: fxMod.getItemEffect,
+            byKind: fxMod.getItemEffectsByKind,
+            options: fxMod.getItemEffectOptions,
+            fireProc: procEngine.fireWeaponProc,
+            applyWornRound: wornEngine.applyWornRoundEffects,
+            fireTriggered: triggeredEngine.fireTriggeredEffect
+        };
+        game.eqrmss._loadStatus.itemEffects = true;
+        console.log(`EQRMSS | Item effects ready: ${fxMod.getItemEffectOptions().length} effects`);
+    } catch (e) {
+        console.error("Item effect data load failed", e);
+        game.eqrmss.itemEffects = null;
     }
 
     // Reference charts: accessories, transport, herbs, poisons (plain data, no composer)
