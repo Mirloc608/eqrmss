@@ -61,6 +61,19 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
         activePass: "adolescence",
         adolescence: { spent: 0, ranks: {}, bodyDevRolls: [], weaponAssignment: null },
         apprenticeship: { spent: 0, ranks: {}, bodyDevRolls: [] }
+      },
+      // Equipment step (step 8): the class starter kit is granted at
+      // finalization; starting money is rolled when the step is first
+      // entered (re-rolled if the class changes) and buy-list purchases
+      // are tracked here until finalization.
+      equipment: {
+        moneyRolled: false,
+        moneyClassId: "",
+        gp: 0,
+        cp: 0,
+        buyList: null,
+        kit: null,
+        purchases: {}
       }
     };
     this._initializeDefaultPotentials();
@@ -165,7 +178,11 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       devSwitchPass: EQRMSSCharacterCreationWizard._onDevSwitchPass,
       "dev-switch-pass": EQRMSSCharacterCreationWizard._onDevSwitchPass,
       devAssignWeapon: EQRMSSCharacterCreationWizard._onDevAssignWeapon,
-      "dev-assign-weapon": EQRMSSCharacterCreationWizard._onDevAssignWeapon
+      "dev-assign-weapon": EQRMSSCharacterCreationWizard._onDevAssignWeapon,
+      equipBuyItem: EQRMSSCharacterCreationWizard._onEquipBuyItem,
+      "equip-buy-item": EQRMSSCharacterCreationWizard._onEquipBuyItem,
+      equipRefundItem: EQRMSSCharacterCreationWizard._onEquipRefundItem,
+      "equip-refund-item": EQRMSSCharacterCreationWizard._onEquipRefundItem
     }
   };
 
@@ -306,7 +323,8 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
         steps: [
           { label: "Overview" }, { label: "Basic Info" }, { label: "Race" },
           { label: "Class" }, { label: "Origin" }, { label: "Stats" },
-          { label: "Skills" }, { label: "Spells & Songs" }, { label: "Review" }
+          { label: "Skills" }, { label: "Spells & Songs" },
+          { label: "Equipment" }, { label: "Review" }
         ]
       },
       selectedRace,
@@ -330,9 +348,10 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       remainingPoints,
       isPoolExceeded: totalSpent > selection.tempPointPool,
       isFirstStep: this.currentStep === 0,
-      isLastStep: this.currentStep === 8,
+      isLastStep: this.currentStep === 9,
       skillsContext: this._buildSkillsContext(dataContext, selectedClass, selectedRace),
-      developmentSummary: this._buildDevelopmentSummary(dataContext, selectedClass)
+      developmentSummary: this._buildDevelopmentSummary(dataContext, selectedClass),
+      equipmentContext: await this._buildEquipmentContext(dataContext, selectedClass, selectedRace)
     };
   }
 
@@ -542,6 +561,189 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       });
     }
     return summary;
+  }
+
+  // ------------------------------------------------------------
+  // EQUIPMENT STEP — starter kit preview, starting money, buy-list
+  // ------------------------------------------------------------
+
+  _getEquipmentState() {
+    this.characterData.equipment ??= {
+      moneyRolled: false, moneyClassId: "", gp: 0, cp: 0,
+      buyList: null, kit: null, purchases: {}
+    };
+    return this.characterData.equipment;
+  }
+
+  // Coin helpers — same rates as the armor composer:
+  // 1sp = 10bp, 1gp = 100bp, 1pp = 1000bp (cp/tp count as bp).
+  _parseCostToBp(str) {
+    const m = /^\s*([\d.]+)\s*(bp|sp|gp|cp|pp|tp)?\s*$/i.exec(str ?? "");
+    if (!m) return 0;
+    const n = parseFloat(m[1]);
+    const unit = (m[2] ?? "bp").toLowerCase();
+    if (unit === "sp") return n * 10;
+    if (unit === "gp") return n * 100;
+    if (unit === "pp") return n * 1000;
+    return n;
+  }
+
+  _formatBp(bp) {
+    bp = Math.round(bp);
+    if (bp >= 100 && bp % 100 === 0) return `${bp / 100}gp`;
+    if (bp >= 10 && bp % 10 === 0) return `${bp / 10}sp`;
+    return `${bp}bp`;
+  }
+
+  async _loadBuyList() {
+    const eq = this._getEquipmentState();
+    if (eq.buyList) return eq.buyList;
+    try {
+      const resp = await fetch("systems/eqrmss/module/data/starter-buy-list.json");
+      if (resp.ok) eq.buyList = await resp.json();
+    } catch { /* fall through — empty list */ }
+    eq.buyList ??= { items: [] };
+    return eq.buyList;
+  }
+
+  // Kit preview mirrors the finalizer's #grantStarterKit lookup
+  // (class kit + race overrides), without creating anything.
+  async _loadKitPreview(selectedClass, selectedRace) {
+    const eq = this._getEquipmentState();
+    const classKey = String(selectedClass?.id ?? selectedClass?._id ?? "").toLowerCase();
+    const raceKey =
+      String(selectedRace?.id ?? selectedRace?._id ?? "").toLowerCase().replace(/^eqrmss-/, "") ||
+      String(selectedRace?.name ?? "").toLowerCase();
+    if (eq.kit && eq.kit.classKey === classKey && eq.kit.raceKey === raceKey) return eq.kit;
+    let kit = null;
+    try {
+      const resp = await fetch("systems/eqrmss/module/data/starter-kits.json");
+      if (resp.ok) {
+        const data = await resp.json();
+        const raw = data[classKey];
+        if (raw) {
+          const overrides = (data.raceOverrides ?? {})[raceKey] ?? {};
+          kit = {
+            classKey, raceKey,
+            money: raw.money ?? {},
+            items: (raw.items ?? []).map(entry => ({
+              name: (entry.slot && overrides[entry.slot]) || entry.name,
+              slot: entry.slot ?? "",
+              quantity: entry.quantity ?? 1,
+              type: entry.type ?? "item"
+            }))
+          };
+        }
+      }
+    } catch { /* fall through — no preview */ }
+    eq.kit = kit;
+    return kit;
+  }
+
+  // Roll starting money once per class when the Equipment step is entered.
+  async _ensureEquipmentMoney() {
+    const eq = this._getEquipmentState();
+    const classId = this.characterData.classId ?? "";
+    if (eq.moneyRolled && eq.moneyClassId === classId) return;
+    const dataContext = this.dataService?.getContext?.() ?? {};
+    const selectedClass = (dataContext.classes ?? []).find(c => (c.id ?? c._id) === classId);
+    const selectedRace = (dataContext.races ?? []).find(r => (r.id ?? r._id) === this.characterData.raceId);
+    const kit = selectedClass ? await this._loadKitPreview(selectedClass, selectedRace) : null;
+    const money = kit?.money ?? {};
+    eq.gp = Number(money.gp) || 0;
+    const cpSpec = money.cp;
+    if (typeof cpSpec === "string" && cpSpec.includes("d")) {
+      try {
+        eq.cp = (await new Roll(cpSpec).evaluate()).total ?? 0;
+      } catch {
+        eq.cp = 0;
+      }
+    } else {
+      eq.cp = Number(cpSpec) || 0;
+    }
+    eq.moneyRolled = true;
+    eq.moneyClassId = classId;
+  }
+
+  _equipmentSpentBp(eq, buyList) {
+    let spent = 0;
+    for (const [id, qty] of Object.entries(eq.purchases ?? {})) {
+      if (!(qty > 0)) continue;
+      const item = (buyList.items ?? []).find(i => i.id === id);
+      if (item) spent += this._parseCostToBp(item.cost) * qty;
+    }
+    return spent;
+  }
+
+  async _buildEquipmentContext(dataContext, selectedClass, selectedRace) {
+    const eq = this._getEquipmentState();
+    const buyList = await this._loadBuyList();
+    const kit = selectedClass ? await this._loadKitPreview(selectedClass, selectedRace) : null;
+    const startBp = eq.gp * 100 + eq.cp;
+    const spentBp = this._equipmentSpentBp(eq, buyList);
+    const remainingBp = Math.max(0, startBp - spentBp);
+
+    const cart = [];
+    for (const [id, qty] of Object.entries(eq.purchases ?? {})) {
+      if (!(qty > 0)) continue;
+      const item = (buyList.items ?? []).find(i => i.id === id);
+      if (item) cart.push({ ...item, qty });
+    }
+
+    const CATEGORY_LABELS = {
+      light: "Light", carry: "Carry", camping: "Camping", climbing: "Climbing",
+      ammunition: "Ammunition", rogue: "Rogue Tools", writing: "Writing",
+      clothing: "Clothing", tools: "Tools", weapons: "Backup Weapons", rations: "Rations"
+    };
+    const groups = [];
+    for (const item of buyList.items ?? []) {
+      const unitBp = this._parseCostToBp(item.cost);
+      let group = groups.find(g => g.category === item.category);
+      if (!group) {
+        group = { category: item.category, label: CATEGORY_LABELS[item.category] ?? item.category, items: [] };
+        groups.push(group);
+      }
+      group.items.push({ ...item, unitBp, affordable: unitBp <= remainingBp });
+    }
+
+    return {
+      moneyRolled: eq.moneyRolled,
+      hasClass: !!selectedClass,
+      moneyLabel: `${eq.gp}gp + ${eq.cp}cp`,
+      spentLabel: this._formatBp(spentBp),
+      remainingLabel: this._formatBp(remainingBp),
+      kitItems: kit?.items ?? [],
+      cart,
+      groups
+    };
+  }
+
+  static async _onEquipBuyItem(event, target) {
+    const eq = this._getEquipmentState();
+    const id = target.dataset.item;
+    if (!id) return;
+    const buyList = await this._loadBuyList();
+    const item = (buyList.items ?? []).find(i => i.id === id);
+    if (!item) return;
+    const costBp = this._parseCostToBp(item.cost);
+    const remainingBp = (eq.gp * 100 + eq.cp) - this._equipmentSpentBp(eq, buyList);
+    if (costBp > remainingBp) {
+      ui.notifications.warn(`EQRMSS | Not enough coin for ${item.name} (${item.cost}).`);
+      return;
+    }
+    eq.purchases[id] = (eq.purchases[id] ?? 0) + 1;
+    this._savedScrollTop = this.element?.querySelector(".window-content")?.scrollTop ?? 0;
+    this.render();
+  }
+
+  static async _onEquipRefundItem(event, target) {
+    const eq = this._getEquipmentState();
+    const id = target.dataset.item;
+    if (!id || !(eq.purchases[id] > 0)) return;
+    eq.purchases[id] -= 1;
+    if (eq.purchases[id] <= 0) delete eq.purchases[id];
+    this._savedScrollTop = this.element?.querySelector(".window-content")?.scrollTop ?? 0;
+    this.render();
   }
 
   static async _onDevSwitchPass(event, target) {    const pass = target.dataset.pass === "apprenticeship" ? "apprenticeship" : "adolescence";
@@ -844,8 +1046,10 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       return;
     }
 
-    if (this.currentStep < 8) {
+    if (this.currentStep < 9) {
       this.currentStep++;
+      // Entering the Equipment step: roll starting money once per class.
+      if (this.currentStep === 8) await this._ensureEquipmentMoney();
       this._savedScrollTop = 0;
       this.render();
     }
@@ -864,9 +1068,11 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
 
   static async _onGotoStep(event, target) {
     const step = Number(target.dataset.step);
-    if (!Number.isInteger(step) || step < 0 || step > 8) return;
+    if (!Number.isInteger(step) || step < 0 || step > 9) return;
     await this._saveCurrentStepData(target.closest("form") || target.closest(".eqrmss-character-creation-wizard"));
     this.currentStep = step;
+    // Jumping straight to the Equipment step: roll starting money once per class.
+    if (this.currentStep === 8) await this._ensureEquipmentMoney();
     this._savedScrollTop = 0;
     this.render();
   }

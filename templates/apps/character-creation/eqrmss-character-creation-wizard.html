@@ -501,9 +501,69 @@
     {{/if}}
 
     {{!-- ======================================================= --}}
-    {{!-- STEP 8: REVIEW --}}
+    {{!-- STEP 8: EQUIPMENT --}}
     {{!-- ======================================================= --}}
     {{#if (eq wizard.step 8)}}
+    <div class="eqrmss-step eqrmss-step-equipment">
+      <h3>Step 8: Equipment</h3>
+      {{#if equipmentContext.hasClass}}
+        <h4>Starter Kit</h4>
+        <p class="hint">Granted automatically when the character is finalized:</p>
+        {{#if equipmentContext.kitItems.length}}
+        <ul>
+          {{#each equipmentContext.kitItems}}
+          <li>{{name}}{{#if (gt quantity 1)}} ×{{quantity}}{{/if}}{{#if slot}} <span class="eqrmss-cc-spell-meta">({{slot}})</span>{{/if}}</li>
+          {{/each}}
+        </ul>
+        {{else}}
+        <p class="hint">No kit data for this class.</p>
+        {{/if}}
+
+        <h4>Starting Money</h4>
+        <p>{{equipmentContext.moneyLabel}} — spent {{equipmentContext.spentLabel}}, remaining <strong>{{equipmentContext.remainingLabel}}</strong></p>
+
+        {{#if equipmentContext.cart.length}}
+        <h4>Purchased</h4>
+        <ul style="list-style-type: none; padding: 0;">
+          {{#each equipmentContext.cart}}
+          <li style="margin-bottom: 6px;">
+            {{name}} ×{{qty}} <span class="eqrmss-cc-spell-meta">({{cost}} each)</span>
+            <button type="button" data-action="equip-refund-item" data-item="{{id}}" title="Refund one">−1</button>
+          </li>
+          {{/each}}
+        </ul>
+        {{/if}}
+
+        <h4>Buy Gear</h4>
+        <p class="hint">Town prices. Unspent coin becomes your starting wealth.</p>
+        {{#each equipmentContext.groups}}
+        <h5>{{label}}</h5>
+        <table class="eqrmss-cc-skills-table">
+          <thead>
+            <tr><th>Item</th><th>Cost</th><th>Weight</th><th></th></tr>
+          </thead>
+          <tbody>
+            {{#each items}}
+            <tr title="{{notes}}">
+              <td>{{name}}</td>
+              <td>{{cost}}</td>
+              <td>{{weight}}</td>
+              <td>{{#if affordable}}<button type="button" data-action="equip-buy-item" data-item="{{id}}" title="Buy">+1</button>{{/if}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        {{/each}}
+      {{else}}
+        <p class="hint">Select a profession to see your starter kit and starting money.</p>
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- ======================================================= --}}
+    {{!-- STEP 9: REVIEW --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 9)}}
     <div class="eqrmss-step eqrmss-step-review">
 
       <h3>Review & Finalize</h3>
@@ -539,6 +599,18 @@
       </table>
       {{else}}
       <p class="hint">No skills developed.</p>
+      {{/if}}
+
+      <h4>Equipment</h4>
+      <p>Starting money: {{equipmentContext.moneyLabel}} — remaining <strong>{{equipmentContext.remainingLabel}}</strong></p>
+      {{#if equipmentContext.cart.length}}
+      <ul style="list-style-type: none; padding: 0;">
+        {{#each equipmentContext.cart}}
+        <li>{{name}} ×{{qty}} <span class="eqrmss-cc-spell-meta">({{cost}} each)</span></li>
+        {{/each}}
+      </ul>
+      {{else}}
+      <p class="hint">No extra gear purchased.</p>
       {{/if}}
 
       <h4>Derived Values</h4>

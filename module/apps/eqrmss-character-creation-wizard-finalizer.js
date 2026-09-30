@@ -95,6 +95,10 @@ export class EQRMSSCharacterCreationWizardFinalizer {
       // module/data/starter-kits.json. Fail-soft: never blocks creation.
       await this.#grantStarterKit(actor, cls, race);
 
+      // Grant buy-list purchases from the wizard's Equipment step and
+      // deduct them from starting wealth. Fail-soft: never blocks creation.
+      await this.#grantPurchases(actor);
+
       // Grant skills developed in the wizard's two-pass DP system
       // (adolescence + apprenticeship). Fail-soft: never blocks creation.
       await this.#grantDevelopedSkills(actor, cls);
@@ -568,30 +572,124 @@ export class EQRMSSCharacterCreationWizardFinalizer {
         console.log(`EQRMSS | Finalizer | granted starter kit (${key})`, items.map(i => i.name));
       }
 
-      // Starting money: { gp: N, cp: "1d100" | N }
-      const money = kit.money ?? {};
+      // Starting money: prefer the wizard's Equipment-step roll
+      // (state.equipment); fall back to rolling the kit's cp die here
+      // when the step was skipped.
+      const eqMoney = this.state?.equipment;
+      let gp = 0;
       let cp = 0;
-      if (typeof money.cp === "string" && money.cp.includes("d")) {
-        try {
-          cp = (await new Roll(money.cp).evaluate()).total ?? 0;
-        } catch {
-          cp = 0;
-        }
+      if (eqMoney?.moneyRolled) {
+        gp = Number(eqMoney.gp) || 0;
+        cp = Number(eqMoney.cp) || 0;
+        console.log(`EQRMSS | Finalizer | starting money (wizard roll): ${gp} gp + ${cp} cp`);
       } else {
-        cp = Number(money.cp) || 0;
+        const money = kit.money ?? {};
+        gp = Number(money.gp) || 0;
+        if (typeof money.cp === "string" && money.cp.includes("d")) {
+          try {
+            cp = (await new Roll(money.cp).evaluate()).total ?? 0;
+          } catch {
+            cp = 0;
+          }
+        } else {
+          cp = Number(money.cp) || 0;
+        }
+        console.log(`EQRMSS | Finalizer | starting money: ${gp} gp + ${cp} cp`);
       }
+      // Stash the pre-purchase total (in bp) so #grantPurchases can deduct.
+      this._startingWealthBp = gp * 100 + cp;
       await actor.update({
         "system.wealth": {
-          pp: Number(money.pp) || 0,
-          gp: Number(money.gp) || 0,
-          sp: Number(money.sp) || 0,
+          pp: Number(kit.money?.pp) || 0,
+          gp,
+          sp: 0,
           cp
         }
       });
-      console.log(`EQRMSS | Finalizer | starting money: ${Number(money.gp) || 0} gp + ${cp} cp`);
     } catch (error) {
       console.warn("EQRMSS | Finalizer | starter kit grant failed (non-fatal)", error);
     }
+  }
+
+  /**
+   * Grant Equipment-step buy-list purchases and deduct their cost from
+   * starting wealth, leaving the remainder as gp/sp/cp. Fail-soft:
+   * never blocks creation.
+   */
+  async #grantPurchases(actor) {
+    try {
+      const purchases = this.state?.equipment?.purchases ?? {};
+      const ids = Object.entries(purchases).filter(([, qty]) => qty > 0);
+      if (!ids.length) return;
+
+      let buyList = { items: [] };
+      try {
+        const resp = await fetch("systems/eqrmss/module/data/starter-buy-list.json");
+        if (resp.ok) buyList = await resp.json();
+      } catch { /* fall through */ }
+
+      const items = [];
+      let spentBp = 0;
+      for (const [id, qty] of ids) {
+        const entry = (buyList.items ?? []).find(i => i.id === id);
+        if (!entry) continue;
+        spentBp += this.#parseCostToBp(entry.cost) * qty;
+        for (let n = 0; n < qty; n++) items.push(this.#buyListItemToDoc(entry));
+      }
+
+      if (items.length) {
+        await actor.createEmbeddedDocuments("Item", items);
+        console.log(`EQRMSS | Finalizer | granted ${items.length} purchased items`, items.map(i => i.name));
+      }
+
+      const startBp = this._startingWealthBp
+        ?? ((Number(this.state?.equipment?.gp) || 0) * 100 + (Number(this.state?.equipment?.cp) || 0));
+      const remainingBp = Math.max(0, startBp - spentBp);
+      const gp = Math.floor(remainingBp / 100);
+      const sp = Math.floor((remainingBp % 100) / 10);
+      const cp = remainingBp % 10;
+      await actor.update({ "system.wealth": { pp: 0, gp, sp, cp } });
+      console.log(`EQRMSS | Finalizer | wealth after purchases: ${gp}gp ${sp}sp ${cp}cp (spent ${spentBp}bp)`);
+    } catch (error) {
+      console.warn("EQRMSS | Finalizer | purchase grant failed (non-fatal)", error);
+    }
+  }
+
+  #parseCostToBp(str) {
+    const m = /^\s*([\d.]+)\s*(bp|sp|gp|cp|pp|tp)?\s*$/i.exec(str ?? "");
+    if (!m) return 0;
+    const n = parseFloat(m[1]);
+    const unit = (m[2] ?? "bp").toLowerCase();
+    if (unit === "sp") return n * 10;
+    if (unit === "gp") return n * 100;
+    if (unit === "pp") return n * 1000;
+    return n;
+  }
+
+  #buyListItemToDoc(entry) {
+    const doc = { name: entry.name, type: entry.type ?? "item" };
+    const system = {};
+    const weight = parseFloat(entry.weight);
+    if (Number.isFinite(weight)) system.weight = weight;
+    if (doc.type === "consumable") {
+      system.item = {
+        category: null,
+        rarity: "common",
+        quality: "normal",
+        weight: Number.isFinite(weight) ? weight : 0,
+        value: 0,
+        stackable: false,
+        quantity: 1
+      };
+      system.consumable = {
+        category: entry.consumableCategory ?? "food",
+        charges: entry.charges ?? 1,
+        maxCharges: entry.charges ?? 1,
+        consumeOnUse: true
+      };
+    }
+    if (Object.keys(system).length) doc.system = system;
+    return doc;
   }
 }
 
