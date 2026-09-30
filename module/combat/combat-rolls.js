@@ -9,12 +9,13 @@
 //      unmodified fumble range → Weapon Fumble Table (§6.3)
 //   4. Net = AR + OB − DB (cap 150) vs AT on the weapon's table (§6.4)
 //   5. Crit → flat d100 on the crit table at the rolled severity (§6.4.2)
-//   6. Damage applied to the target actor; weapon procs fire on crit
+//   6. Damage applied to the target actor; weapon procs fire on crit;
+//      critical conditions parsed and applied (stun pool, bleed,
+//      death timer, next-swing bonus, must-parry) — see crit-conditions.js
 //   7. Full breakdown posted to chat
 // ============================================================
 
 import {
-    WEAPON_TYPE_TO_SKILL_ID,
     WEAPON_TYPE_TO_FUMBLE_COLUMN,
     parseFumbleRange,
     inFumbleRange,
@@ -25,6 +26,13 @@ import {
     parseArmorType,
     critBonusHits
 } from "./attack-resolver.js";
+import {
+    applyCritConditions,
+    consumeNextSwingBonus,
+    computeWeaponOB,
+    activeStun,
+    STUN_LABEL
+} from "./crit-conditions.js";
 
 async function d100() {
     return (await new Roll("1d100").evaluate()).total;
@@ -151,14 +159,19 @@ export async function rollWeaponAttack(actor, weaponItem) {
         return;
     }
 
-    // ---- OB: weapon skill bonus + weapon OB mod ----
-    const skillId = WEAPON_TYPE_TO_SKILL_ID[weaponType];
-    const skill = skillId
-        ? actor.items.find(i => i.type === "skill" && i.system?.slug === skillId)
-        : null;
-    const skillBonus = Number(skill?.system?.bonus) || 0;
-    const obMod = Number(sys.obMod) || 0;
-    const ob = skillBonus + obMod;
+    // ---- Stun: any active stun bars offensive action ----
+    const stunState = activeStun(actor.system?.status?.stun);
+    if (stunState) {
+        await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor }),
+            content: `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>`
+                + `<p><em>${esc(actor.name)} is ${STUN_LABEL[stunState.type]} and cannot take offensive action.</em></p>`
+        });
+        return;
+    }
+
+    // ---- OB: weapon skill bonus + weapon OB mod (shared with parry) ----
+    const { skill, skillBonus, obMod, ob: baseOb } = computeWeaponOB(actor, weaponItem);
 
     // ---- Target: first targeted token, else manual ----
     let targetActor = null;
@@ -193,6 +206,23 @@ export async function rollWeaponAttack(actor, weaponItem) {
         }
     }
 
+    // ---- Target parry: a declared parry puts ALL of the target's OB
+    // into DB — unless they are stun-no-parry/down-or-out (base
+    // defense only).
+    let parryDB = 0;
+    if (targetActor) {
+        const tst = activeStun(targetActor.system?.status?.stun);
+        if (!tst || tst.type === "stunned") parryDB = Number(targetActor.system?.status?.parryDB) || 0;
+    }
+    db += parryDB;
+
+    // ---- Next-swing bonus (critical condition, consumed on use) ----
+    // Placed after target determination so a cancelled prompt does not burn it.
+    const swingBonus = await consumeNextSwingBonus(actor);
+    // ---- Action penalty: "at -N" hits ALL actions ----
+    const actionPenalty = Math.min(0, Number(actor.system?.status?.actionPenalty?.value) || 0);
+    const ob = baseOb + swingBonus + actionPenalty;
+
     // ---- Attack roll (high open-ended) ----
     const ar = await openEndedAttackRoll();
     const firstDie = ar.rolls[0];
@@ -220,8 +250,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const lookup = lookupAttack(tables.weapons, tableName, net, at);
 
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}`
-        + ` − DB ${db} = <strong>${ar.total + ob - db}</strong>`
+        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}`
+        + ` − DB ${db}${parryDB ? ` (+${parryDB} parry)` : ""} = <strong>${ar.total + ob - db}</strong>`
         + (net > 150 ? ` → treated as 150` : "");
 
     if (lookup.error && lookup.miss) {
@@ -250,6 +280,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
         if (!critResult.error) {
             critBonus = critBonusHits(critResult.text);
             critFired = true;
+            // ---- Critical conditions (stun pool, bleed, death timer, next swing, must parry) ----
+            condNote = await applyCritConditions(targetActor, actor, critResult.text);
             critLine = `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${crit.severity}): ${esc(critResult.text)}`;
         } else {
             critLine = `<strong>${esc(lookup.critCode)}</strong> — ${esc(critResult.error)} (GM adjudicates)`;
@@ -279,6 +311,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
 
     // ---- Weapon proc on crit (already-ruled: procs fire onCrit) ----
     let procNote = "";
+    let condNote = "";
     if (critFired && sys.proc && game.eqrmss?.itemEffects?.fireProc) {
         try {
             await game.eqrmss.itemEffects.fireProc({ wielder: actor, weapon: weaponItem, target: targetActor, event: "onCrit" });
@@ -295,6 +328,6 @@ export async function rollWeaponAttack(actor, weaponItem) {
             <p>${arLine}</p>
             <p><strong>${esc(lookup.table)}</strong> vs AT ${at}: <strong>${totalDamage} hits</strong> (${dmgParts.map(esc).join(", ")})</p>
             <p>${critLine}</p>
-            ${appliedNote}${procNote}`
+            ${appliedNote}${condNote}${procNote}`
     });
 }

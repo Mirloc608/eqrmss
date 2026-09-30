@@ -408,9 +408,19 @@ export async function initializeDataLoaders() {
     try {
         const combatRolls = await import("./module/combat/combat-rolls.js");
         const initiativeRolls = await import("./module/combat/initiative-rolls.js");
+        const critConditions = await import("./module/combat/crit-conditions.js");
         game.eqrmss.combat = {
             rollWeaponAttack: combatRolls.rollWeaponAttack,
-            rollInitiative: initiativeRolls.rollInitiative
+            rollInitiative: initiativeRolls.rollInitiative,
+            // Critical conditions (2026-09-30): stun pool, bleed, death
+            // timer, next-swing bonus, action penalty, must-parry capture.
+            declareParry: critConditions.declareParry,
+            tickConditions: critConditions.tickConditions,
+            // Healing magic: stabilizes death timers, stops bleeding
+            // (wire to the healing spell subsystem when it lands).
+            applyHealingSpell: critConditions.applyHealingSpell,
+            // First aid: stubbed until non-combat actions per round land.
+            declareFirstAid: critConditions.declareFirstAid
         };
         console.log("EQRMSS | Combat rolls ready");
     } catch (e) {

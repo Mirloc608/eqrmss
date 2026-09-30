@@ -2,8 +2,18 @@
 // EQRMSS Hook Registration
 // ============================================================
 
+import { tickConditions } from "../combat/crit-conditions.js";
+
 export function registerEQRMSSHooks() {
   console.info("EQRMSS | Registering hooks");
+
+  // Critical conditions tick: on each combat round change the GM ticks
+  // stun pools (-1, most severe first), bleed, and death timers.
+  Hooks.on("updateCombat", (combat, changed) => {
+    if (!game.user?.isGM) return;
+    if (!changed || typeof changed.round !== "number") return;
+    tickConditions(combat).catch(e => console.error("EQRMSS | Condition tick failed", e));
+  });
 
   // NOTE: Templates are loaded once during "init" by the bootstrap
   // (eqrmss.js -> loadEQRMSSTemplates). The duplicate "ready" reload
