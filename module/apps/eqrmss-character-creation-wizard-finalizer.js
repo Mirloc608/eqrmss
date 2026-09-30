@@ -579,6 +579,14 @@ export class EQRMSSCharacterCreationWizardFinalizer {
           // (same bake the weapon sheet performs on recompose). Fail-soft.
           Object.assign(system, this.#composeKitWeapon(entry));
         }
+        if (entry.type === "armor") {
+          // Starter clothing carries its own minimal stats (AT 1, no
+          // maneuver penalty) so it never counts as adventuring armor.
+          // Fail-soft: fields absent from the entry simply stay unset.
+          for (const key of ["at", "maneuverPenalty", "weight", "armorMaterial", "armorCondition", "notes"]) {
+            if (entry[key] !== undefined) system[key] = entry[key];
+          }
+        }
         if (Object.keys(system).length) item.system = system;
         items.push(item);
       }
