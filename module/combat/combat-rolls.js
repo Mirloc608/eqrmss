@@ -69,8 +69,11 @@ async function promptTarget() {
             ok: { label: "Roll Attack" }
         });
         if (!fd) return null; // cancelled
-        const at = Math.max(1, Math.min(20, Number(fd.get("at")) || 1));
-        return { name: String(fd.get("name") || "Target"), at, db: Number(fd.get("db")) || 0, actor: null };
+        // DialogV2.prompt resolves with the form data — as a plain object
+        // on this Foundry build (FormDataExtended on others). Read both ways.
+        const val = k => (typeof fd.get === "function" ? fd.get(k) : fd[k]);
+        const at = Math.max(1, Math.min(20, Number(val("at")) || 1));
+        return { name: String(val("name") || "Target"), at, db: Number(val("db")) || 0, actor: null };
     } catch (e) {
         console.error("EQRMSS | Target prompt failed", e);
         return null;
