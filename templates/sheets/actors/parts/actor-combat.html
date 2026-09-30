@@ -23,10 +23,11 @@
   <div class="panel">
     <h4>Readied Weapons</h4>
     <table class="rmss-table">
-      <thead><tr><th>Name</th><th>Attack Table</th><th>OB Mod</th><th>Crit</th><th>Fumble</th><th>Length</th></tr></thead>
+      <thead><tr><th></th><th>Name</th><th>Attack Table</th><th>OB Mod</th><th>Crit</th><th>Fumble</th><th>Length</th></tr></thead>
       <tbody>
         {{#each readiedWeapons}}
           <tr data-item-id="{{this._id}}">
+            <td><button class="attack-roll" data-item-id="{{this._id}}" title="Roll attack vs targeted token (RMSS §6.2)">Attack</button></td>
             <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
             <td>{{this.system.attackTable}}</td>
             <td>{{this.system.obMod}}</td>
@@ -35,7 +36,7 @@
             <td>{{this.system.length}}</td>
           </tr>
         {{else}}
-          <tr><td colspan="6"><em>No weapons readied — set a weapon's Location to Equipped on the Equipment tab.</em></td></tr>
+          <tr><td colspan="7"><em>No weapons readied — set a weapon's Location to Equipped on the Equipment tab.</em></td></tr>
         {{/each}}
       </tbody>
     </table>
