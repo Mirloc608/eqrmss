@@ -365,8 +365,36 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       isLastStep: this.currentStep === 10,
       skillsContext: this._buildSkillsContext(dataContext, selectedClass, selectedRace),
       developmentSummary: this._buildDevelopmentSummary(dataContext, selectedClass),
-      equipmentContext: await this._buildEquipmentContext(dataContext, selectedClass, selectedRace)
+      equipmentContext: await this._buildEquipmentContext(dataContext, selectedClass, selectedRace),
+      hitsPreview: this._buildHitsPreview(dataContext, selectedRace)
     };
+  }
+
+  // ------------------------------------------------------------
+  // REVIEW STEP — §3.8 hits preview.
+  //
+  // Mirrors the finalizer's #computeBaseHits: Base Hit Point Total starts
+  // at ceil(temp CO / 10), plus the stored Body Development rolls from
+  // both passes, capped at the racial maximum (Table 15.1.1 via
+  // dataContext.baseHits). The running total adds the CO stat bonus
+  // percentage (Math.round per the locked §3.8 rounding ruling), exactly
+  // as the sheet derives it from system.hits.base.
+  // ------------------------------------------------------------
+  _buildHitsPreview(dataContext, selectedRace) {
+    const stats = this.characterData.stats ?? {};
+    const tempCo = Number(stats.CO ?? 0);
+    let base = Math.ceil(tempCo / 10);
+    const dev = this._getDevelopmentState();
+    for (const passKey of ["adolescence", "apprenticeship"]) {
+      for (const roll of dev[passKey]?.bodyDevRolls ?? []) base += Number(roll) || 0;
+    }
+    const raceKey = String(selectedRace?.key ?? selectedRace?.id ?? selectedRace?._id ?? "").toLowerCase();
+    const max = dataContext.baseHits?.[raceKey]?.maxBaseHits;
+    const capped = Number.isFinite(max) && base > max;
+    if (capped) base = max;
+    const coBonus = rmssStatBonus(tempCo);
+    const total = base + Math.round(base * coBonus / 100);
+    return { base, coBonus, total, capped, maxBaseHits: max ?? null };
   }
 
   // ------------------------------------------------------------

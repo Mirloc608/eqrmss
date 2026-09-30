@@ -18,10 +18,10 @@
     <div class="eqrmss-cc-review-box">
       <h3>Origin</h3>
       <ul>
-        <li><strong>Race:</strong> {{preview.resolved.race.name}}</li>
-        <li><strong>Class:</strong> {{preview.resolved.class.name}}</li>
-        <li><strong>City:</strong> {{preview.resolved.city.name}}</li>
-        <li><strong>Deity:</strong> {{preview.resolved.deity.name}}</li>
+        <li><strong>Race:</strong> {{preview.race.name}}</li>
+        <li><strong>Class:</strong> {{preview.class.name}}</li>
+        <li><strong>City:</strong> {{preview.city.name}}</li>
+        <li><strong>Deity:</strong> {{preview.deity.name}}</li>
       </ul>
     </div>
 
@@ -46,21 +46,125 @@
     </div>
 
     <div class="eqrmss-cc-review-box">
-      <h3>Development Points (DP)</h3>
-      <p>Your DP is based on the average of AG, CO, ME, RE, and SD.</p>
-      <div class="eqrmss-cc-dp-value">
-        <strong>{{preview.devPoints}}</strong>
-      </div>
+      <h3>Development Points</h3>
+      <p>Each pass receives the full DP pool (Table 15.1.3 bonus total of temp CO, AG, SD, RE, ME). Unspent DP is forfeited.</p>
+      {{#if skillsContext.hasClass}}
+        <table class="eqrmss-cc-stats-table">
+          <thead>
+            <tr>
+              <th>Pass</th>
+              <th>Pool</th>
+              <th>Spent</th>
+              <th>Unspent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Adolescence → Level 0</td>
+              <td>{{skillsContext.passes.adolescence.dpPool}}</td>
+              <td>{{skillsContext.passes.adolescence.spent}}</td>
+              <td>{{skillsContext.passes.adolescence.remaining}}</td>
+            </tr>
+            <tr>
+              <td>Apprenticeship → Level 1</td>
+              <td>{{skillsContext.passes.apprenticeship.dpPool}}</td>
+              <td>{{skillsContext.passes.apprenticeship.spent}}</td>
+              <td>{{skillsContext.passes.apprenticeship.remaining}}</td>
+            </tr>
+          </tbody>
+        </table>
+      {{/if}}
     </div>
 
     <div class="eqrmss-cc-review-box">
-      <h3>Derived Values</h3>
-      <ul class="eqrmss-cc-derived-list">
-        <li><strong>HP:</strong> {{preview.derived.HP}}</li>
-        <li><strong>Mana:</strong> {{preview.derived.Mana}}</li>
-        <li><strong>Initiative:</strong> {{preview.derived.Initiative}}</li>
-        <li><strong>Attack:</strong> {{preview.derived.Attack}}</li>
-        <li><strong>Defense:</strong> {{preview.derived.Defense}}</li>
+      <h3>Hits (RMSS §3.8)</h3>
+      <ul>
+        <li><strong>Base Hits:</strong> {{hitsPreview.base}}{{#if hitsPreview.capped}} (racial max {{hitsPreview.maxBaseHits}}){{/if}}</li>
+        <li><strong>CO Bonus:</strong> {{hitsPreview.coBonus}}%</li>
+        <li><strong>Total Hits:</strong> {{hitsPreview.total}}</li>
+      </ul>
+    </div>
+
+    <div class="eqrmss-cc-review-box">
+      <h3>Skills</h3>
+      {{#if developmentSummary.length}}
+        <table class="eqrmss-cc-stats-table">
+          <thead>
+            <tr>
+              <th>Skill</th>
+              <th>Category</th>
+              <th>Cost</th>
+              <th>Adol.</th>
+              <th>Appr.</th>
+              <th>Total</th>
+              <th>Bonus</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each developmentSummary}}
+              <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.category}}</td>
+                <td>{{this.cost}}</td>
+                <td>{{this.adolescenceRanks}}</td>
+                <td>{{this.apprenticeshipRanks}}</td>
+                <td>{{this.totalRanks}}</td>
+                <td>{{this.rankBonus}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <p>No skills developed.</p>
+      {{/if}}
+    </div>
+
+    <div class="eqrmss-cc-review-box">
+      <h3>Spells &amp; Songs</h3>
+      {{#if startingSpells.length}}
+        <ul>
+          {{#each startingSpells}}
+            <li>{{this.name}}</li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>None.</p>
+      {{/if}}
+    </div>
+
+    <div class="eqrmss-cc-review-box">
+      <h3>Equipment</h3>
+      <p><strong>Starting money:</strong> {{equipmentContext.moneyLabel}}</p>
+      {{#if equipmentContext.kitItems.length}}
+        <p><strong>Starter kit:</strong></p>
+        <ul>
+          {{#each equipmentContext.kitItems}}
+            <li>{{this.name}}{{#if this.quantity}} ×{{this.quantity}}{{/if}}</li>
+          {{/each}}
+        </ul>
+      {{/if}}
+      {{#if equipmentContext.cart.length}}
+        <p><strong>Purchased ({{equipmentContext.spentLabel}}):</strong></p>
+        <ul>
+          {{#each equipmentContext.cart}}
+            <li>{{this.name}} ×{{this.qty}} ({{this.cost}})</li>
+          {{/each}}
+        </ul>
+      {{/if}}
+      <p><strong>Remaining:</strong> {{equipmentContext.remainingLabel}}</p>
+    </div>
+
+    <div class="eqrmss-cc-review-box">
+      <h3>Background</h3>
+      <ul>
+        <li><strong>History:</strong> {{characterData.background.history}}</li>
+        <li><strong>Parents:</strong> {{characterData.background.parents}}</li>
+        <li><strong>Spouse:</strong> {{characterData.background.spouse}}</li>
+        <li><strong>Children:</strong> {{characterData.background.children}}</li>
+        <li><strong>Family Notes:</strong> {{characterData.background.family_notes}}</li>
+        <li><strong>Notable Experiences:</strong> {{characterData.background.experiences}}</li>
+        <li><strong>Special Abilities:</strong> {{characterData.background.special_abilities}}</li>
+        <li><strong>Special Equipment:</strong> {{characterData.background.special_equipment}}</li>
       </ul>
     </div>
 
