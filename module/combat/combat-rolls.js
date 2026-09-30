@@ -270,11 +270,11 @@ export async function rollWeaponAttack(actor, weaponItem) {
     if (targetActor && totalDamage > 0 && (targetActor.isOwner || game.user?.isGM)) {
         const cur = Number(targetActor.system?.hits?.value) || 0;
         await targetActor.update({ "system.hits.value": cur + totalDamage });
-        appliedNote = `<p><em>${totalDamage} concussion hits applied to ${esc(targetName)}.</em></p>`;
+        appliedNote = `<p><em>${totalDamage} concussion hit${totalDamage === 1 ? "" : "s"} applied to ${esc(targetName)}.</em></p>`;
     } else if (targetActor && totalDamage > 0) {
         appliedNote = `<p><em>Damage not applied — you don't control ${esc(targetName)}.</em></p>`;
     } else if (!targetActor && totalDamage > 0) {
-        appliedNote = `<p><em>Damage not applied — no token targeted. Apply ${totalDamage} concussion hits to ${esc(targetName)} manually (target the token before rolling to auto-apply).</em></p>`;
+        appliedNote = `<p><em>Damage not applied — no token targeted. Apply ${totalDamage} concussion hit${totalDamage === 1 ? "" : "s"} to ${esc(targetName)} manually (target the token before rolling to auto-apply).</em></p>`;
     }
 
     // ---- Weapon proc on crit (already-ruled: procs fire onCrit) ----
