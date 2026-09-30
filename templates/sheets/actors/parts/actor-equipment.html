@@ -157,6 +157,28 @@
           {{/each}}
         </tbody>
       </table>
+
+      <h4>Items</h4>
+      <table class="rmss-table">
+        <thead><tr><th>Item</th><th>Location</th><th>Weight</th></tr></thead>
+        <tbody>
+          {{#each actor.items}}
+            {{#if (eq this.type "item")}}
+            <tr data-item-id="{{this._id}}">
+              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+              <td>
+                <select class="item-location" data-item-id="{{this._id}}">
+                  <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
+                  <option value="pack" {{#if (eq this.system.location "pack")}}selected{{/if}}>Pack</option>
+                  <option value="ground" {{#if (eq this.system.location "ground")}}selected{{/if}}>Ground</option>
+                </select>
+              </td>
+              <td>{{this.system.weight}}</td>
+            </tr>
+            {{/if}}
+          {{/each}}
+        </tbody>
+      </table>
     </div>
     <div class="panel" style="flex: 1;">
       <h3>Coins and Wealth</h3>

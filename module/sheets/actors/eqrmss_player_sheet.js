@@ -378,13 +378,20 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         if (!actor) return;
 
         try {
-            const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
+            const data = this._getDropData(event);
             console.log("EQRMSS | Drop data:", data);
-            
+            if (!data) {
+                console.warn("EQRMSS | Drop ignored: could not read drag data from the drop event.");
+                return;
+            }
+
             // Handle Item drops
             if (data.type === "Item") {
                 const item = await fromUuid(data.uuid);
-                if (!item) return;
+                if (!item) {
+                    console.warn("EQRMSS | Drop ignored: could not resolve", data.uuid);
+                    return;
+                }
 
                 // If dropping from another actor, create a copy on this actor
                 if (item.parent !== actor) {
@@ -404,6 +411,29 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         } catch (err) {
             console.warn("EQRMSS | Drop failed", err);
         }
+    }
+
+    // ------------------------------------------------------------
+    // Read drag data with fallbacks across Foundry versions.
+    // V13 AppV2:  foundry.applications.ux.TextEditor.implementation.getDragEventData
+    // Legacy:     global TextEditor.getDragEventData
+    // Last resort: raw dataTransfer payload set by the drag source.
+    // ------------------------------------------------------------
+    _getDropData(event) {
+        try {
+            const te = foundry?.applications?.ux?.TextEditor?.implementation;
+            if (te?.getDragEventData) return te.getDragEventData(event);
+        } catch (err) { /* fall through to next method */ }
+        try {
+            if (typeof TextEditor !== "undefined" && TextEditor?.getDragEventData) {
+                return TextEditor.getDragEventData(event);
+            }
+        } catch (err) { /* fall through to next method */ }
+        try {
+            const raw = event?.dataTransfer?.getData("text/plain");
+            if (raw) return JSON.parse(raw);
+        } catch (err) { /* no readable drag data */ }
+        return null;
     }
 
     // ------------------------------------------------------------
