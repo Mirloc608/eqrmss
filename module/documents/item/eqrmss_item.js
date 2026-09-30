@@ -589,24 +589,40 @@ export class EQRMSSItem extends Item {
 // Actor create and every other dialog are left alone. Programmatic
 // creation via Item.create is unaffected.
 
-Hooks.on("renderDialog", (dialog, html) => {
+// Prune system-owned types from the Create Item dialog's type dropdown.
+// Uses only vanilla DOM APIs: AppV1 passes a jQuery object as html,
+// AppV2 passes a plain HTMLElement. Idempotent: a second run finds
+// nothing to strip and exits via the item-dialog sniff below.
+function pruneCreateItemTypeList(dialog, html) {
 
-    const typeSelect = html.find('select[name="type"]');
+    const root = (typeof HTMLElement !== "undefined" && html instanceof HTMLElement) ? html : html?.[0];
 
-    if (!typeSelect.length) return;
+    if (!root || typeof root.querySelector !== "function") return;
 
-    const options = typeSelect.find("option");
+    const typeSelect = root.matches?.('select[name="type"]') ? root : root.querySelector('select[name="type"]');
+
+    if (!typeSelect) return;
+
+    const options = [...typeSelect.querySelectorAll("option")];
 
     // Not the Item create dialog: none of the system-owned types present.
-    if (!options.toArray().some((o) => EQRMSSItem.HIDDEN_CREATE_TYPES.has(o.value))) return;
+    if (!options.some((o) => EQRMSSItem.HIDDEN_CREATE_TYPES.has(o.value))) return;
 
     // Caller explicitly requested hidden types: honor it.
     if (dialog.options?.eqrmssAllowHiddenTypes) return;
 
-    options.each((i, o) => {
+    for (const o of options) {
 
         if (EQRMSSItem.HIDDEN_CREATE_TYPES.has(o.value) || o.value === "*" || o.value === "base") o.remove();
 
-    });
+    }
 
-});
+}
+
+// The Create Item dialog is AppV2 on this build (its frame renders
+// templates/generic/frame-buttons.hbs); hook both the V1 and V2 render
+// hook names so the prune runs regardless of which Dialog class core
+// instantiates.
+Hooks.on("renderDialog", pruneCreateItemTypeList);
+
+Hooks.on("renderDialogV2", pruneCreateItemTypeList);
