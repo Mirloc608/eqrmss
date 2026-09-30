@@ -100,6 +100,11 @@ export async function loadEQRMSSTemplates() {
         "systems/eqrmss/templates/sheets/songs/eqrmss-song-sheet.html",
 
         // ==========================================================
+        // GM Tools
+        // ==========================================================
+        "systems/eqrmss/templates/sheets/items/race-class-config.html",
+
+        // ==========================================================
         // Character Creation Wizard & Steps
         // ==========================================================
         "systems/eqrmss/templates/apps/character-creation/eqrmss-character-creation-wizard.html",
