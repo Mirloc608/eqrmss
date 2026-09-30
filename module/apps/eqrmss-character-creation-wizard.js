@@ -74,6 +74,20 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
         buyList: null,
         kit: null,
         purchases: {}
+      },
+      // Background step (step 9, RMSS §7): freeform background notes —
+      // past history, family, experiences (§7.0/§7.3) plus §7.1 special
+      // abilities/equipment. §7.1 grants are GM-assigned; the wizard only
+      // captures them as notes — no mechanics are invented here.
+      background: {
+        history: "",
+        family_notes: "",
+        experiences: "",
+        parents: "",
+        spouse: "",
+        children: "",
+        special_abilities: "",
+        special_equipment: ""
       }
     };
     this._initializeDefaultPotentials();
@@ -324,7 +338,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
           { label: "Overview" }, { label: "Basic Info" }, { label: "Race" },
           { label: "Class" }, { label: "Origin" }, { label: "Stats" },
           { label: "Skills" }, { label: "Spells & Songs" },
-          { label: "Equipment" }, { label: "Review" }
+          { label: "Equipment" }, { label: "Background" }, { label: "Review" }
         ]
       },
       selectedRace,
@@ -348,7 +362,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       remainingPoints,
       isPoolExceeded: totalSpent > selection.tempPointPool,
       isFirstStep: this.currentStep === 0,
-      isLastStep: this.currentStep === 9,
+      isLastStep: this.currentStep === 10,
       skillsContext: this._buildSkillsContext(dataContext, selectedClass, selectedRace),
       developmentSummary: this._buildDevelopmentSummary(dataContext, selectedClass),
       equipmentContext: await this._buildEquipmentContext(dataContext, selectedClass, selectedRace)
@@ -924,6 +938,16 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
         const actualVal = getStatValueFromPoints(rawValue);
         this.characterData.stats[key] = actualVal;
         this.characterData.potentials[key] = await calculatePotentialStat(actualVal);
+      } else if (key.includes(".")) {
+        // One level of nesting, e.g. data-field="background.history".
+        // Falls back to a flat key when the head object does not exist.
+        const [head, ...rest] = key.split(".");
+        const leaf = rest.join(".");
+        if (Object.hasOwn(this.characterData, head) && typeof this.characterData[head] === "object") {
+          this.characterData[head][leaf] = field.value;
+        } else {
+          this.characterData[key] = field.value;
+        }
       } else {
         this.characterData[key] = field.value;
       }
@@ -1046,7 +1070,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
       return;
     }
 
-    if (this.currentStep < 9) {
+    if (this.currentStep < 10) {
       this.currentStep++;
       // Entering the Equipment step: roll starting money once per class.
       if (this.currentStep === 8) await this._ensureEquipmentMoney();
@@ -1068,7 +1092,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
 
   static async _onGotoStep(event, target) {
     const step = Number(target.dataset.step);
-    if (!Number.isInteger(step) || step < 0 || step > 9) return;
+    if (!Number.isInteger(step) || step < 0 || step > 10) return;
     await this._saveCurrentStepData(target.closest("form") || target.closest(".eqrmss-character-creation-wizard"));
     this.currentStep = step;
     // Jumping straight to the Equipment step: roll starting money once per class.

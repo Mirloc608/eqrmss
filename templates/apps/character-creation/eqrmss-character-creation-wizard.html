@@ -561,12 +561,57 @@
     {{/if}}
 
     {{!-- ======================================================= --}}
-    {{!-- STEP 9: REVIEW --}}
+    {{!-- STEP 9: BACKGROUND (RMSS §7) --}}
     {{!-- ======================================================= --}}
     {{#if (eq wizard.step 9)}}
+    <div class="eqrmss-step eqrmss-step-background">
+      <h3>Step 9: Background</h3>
+      <p class="hint">RMSS §7 — background material individualizes your character: past, culture, family, and the experiences that shaped them. §7.1 special abilities and equipment are assigned by the Gamemaster; note them here and work out any mechanics at the table.</p>
+
+      <h4>Past History</h4>
+      <p class="hint">Birth, childhood, adolescence — the important facts of your character's past (§7.0).</p>
+      <textarea data-field="background.history" rows="4" style="width: 100%;">{{wizard.selection.background.history}}</textarea>
+
+      <h4>Family</h4>
+      <div class="form-group">
+        <label>Parents</label>
+        <input type="text" data-field="background.parents" value="{{wizard.selection.background.parents}}" style="width: 100%;"/>
+      </div>
+      <div class="form-group">
+        <label>Spouse</label>
+        <input type="text" data-field="background.spouse" value="{{wizard.selection.background.spouse}}" style="width: 100%;"/>
+      </div>
+      <div class="form-group">
+        <label>Children</label>
+        <input type="text" data-field="background.children" value="{{wizard.selection.background.children}}" style="width: 100%;"/>
+      </div>
+      <p class="hint">Legacies, feuds, traditions (§7.3):</p>
+      <textarea data-field="background.family_notes" rows="3" style="width: 100%;">{{wizard.selection.background.family_notes}}</textarea>
+
+      <h4>Notable Experiences</h4>
+      <p class="hint">Events that shaped your character's outlook (§7.3).</p>
+      <textarea data-field="background.experiences" rows="3" style="width: 100%;">{{wizard.selection.background.experiences}}</textarea>
+
+      <h4>Special Abilities &amp; Equipment (§7.1)</h4>
+      <p class="hint">Unusual capabilities or possessions from your character's past, assigned by the Gamemaster.</p>
+      <div class="form-group">
+        <label>Special Abilities</label>
+        <textarea data-field="background.special_abilities" rows="2" style="width: 100%;">{{wizard.selection.background.special_abilities}}</textarea>
+      </div>
+      <div class="form-group">
+        <label>Special Equipment</label>
+        <textarea data-field="background.special_equipment" rows="2" style="width: 100%;">{{wizard.selection.background.special_equipment}}</textarea>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ======================================================= --}}
+    {{!-- STEP 10: REVIEW --}}
+    {{!-- ======================================================= --}}
+    {{#if (eq wizard.step 10)}}
     <div class="eqrmss-step eqrmss-step-review">
 
-      <h3>Review & Finalize</h3>
+      <h3>Step 10: Review & Finalize</h3>
 
       <h4>Stats (Temporary / Potential)</h4>
       <ul style="list-style-type: none; padding: 0;">
@@ -612,6 +657,16 @@
       {{else}}
       <p class="hint">No extra gear purchased.</p>
       {{/if}}
+
+      <h4>Background</h4>
+      {{#if wizard.selection.background.history}}<p><strong>History:</strong> {{wizard.selection.background.history}}</p>{{/if}}
+      {{#if wizard.selection.background.parents}}<p><strong>Parents:</strong> {{wizard.selection.background.parents}}</p>{{/if}}
+      {{#if wizard.selection.background.spouse}}<p><strong>Spouse:</strong> {{wizard.selection.background.spouse}}</p>{{/if}}
+      {{#if wizard.selection.background.children}}<p><strong>Children:</strong> {{wizard.selection.background.children}}</p>{{/if}}
+      {{#if wizard.selection.background.family_notes}}<p><strong>Family notes:</strong> {{wizard.selection.background.family_notes}}</p>{{/if}}
+      {{#if wizard.selection.background.experiences}}<p><strong>Experiences:</strong> {{wizard.selection.background.experiences}}</p>{{/if}}
+      {{#if wizard.selection.background.special_abilities}}<p><strong>Special abilities:</strong> {{wizard.selection.background.special_abilities}}</p>{{/if}}
+      {{#if wizard.selection.background.special_equipment}}<p><strong>Special equipment:</strong> {{wizard.selection.background.special_equipment}}</p>{{/if}}
 
       <h4>Derived Values</h4>
       <ul>

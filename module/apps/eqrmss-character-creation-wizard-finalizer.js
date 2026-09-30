@@ -215,7 +215,18 @@ export class EQRMSSCharacterCreationWizardFinalizer {
                 background: {
           home_town: city.name,
           deity: deity?.name ?? "",
-          nationality: this.state.nationality ?? ""
+          nationality: this.state.nationality ?? "",
+          // RMSS §7: background notes from the wizard's Background step.
+          // §7.1 special abilities/equipment are GM-assigned; captured here
+          // as notes only — no mechanics are derived from them.
+          history: this.state.background?.history ?? "",
+          family_notes: this.state.background?.family_notes ?? "",
+          experiences: this.state.background?.experiences ?? "",
+          parents: this.state.background?.parents ?? "",
+          spouse: this.state.background?.spouse ?? "",
+          children: this.state.background?.children ?? "",
+          special_abilities: this.state.background?.special_abilities ?? "",
+          special_equipment: this.state.background?.special_equipment ?? ""
         },
 
         physical: {
