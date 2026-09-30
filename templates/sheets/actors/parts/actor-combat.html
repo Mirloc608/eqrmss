@@ -1,0 +1,84 @@
+<div class="tab" data-group="primary" data-tab="combat">
+  <h3>Combat</h3>
+
+  <div class="panel">
+    <h4>Defense</h4>
+    <table class="rmss-table">
+      <thead><tr><th>AT</th><th>Total DB</th><th>Shield</th><th>Armor DB</th><th>Other DB</th><th>MMP</th><th>Quickness</th><th>Initiative</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>{{system.combat.armorType}}</td>
+          <td>{{system.combat.totalDB}}</td>
+          <td>{{system.combat.shieldBonus}}</td>
+          <td>{{system.combat.armorDB}}</td>
+          <td>{{system.combat.otherDB}}</td>
+          <td>{{system.combat.mmp}}</td>
+          <td>{{system.combat.quicknessBonus}}</td>
+          <td>{{derived.initiative}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h4>Readied Weapons</h4>
+    <table class="rmss-table">
+      <thead><tr><th>Name</th><th>Attack Table</th><th>OB Mod</th><th>Crit</th><th>Fumble</th><th>Length</th></tr></thead>
+      <tbody>
+        {{#each readiedWeapons}}
+          <tr data-item-id="{{this._id}}">
+            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+            <td>{{this.system.attackTable}}</td>
+            <td>{{this.system.obMod}}</td>
+            <td>{{this.system.criticalType}}</td>
+            <td>{{this.system.fumble_range}}</td>
+            <td>{{this.system.length}}</td>
+          </tr>
+        {{else}}
+          <tr><td colspan="6"><em>No weapons readied — set a weapon's Location to Equipped on the Equipment tab.</em></td></tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h4>Spells</h4>
+    <table class="rmss-table">
+      <thead><tr><th>Name</th><th>Spell List</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
+      <tbody>
+        {{#each items.spells}}
+          <tr data-item-id="{{this._id}}">
+            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+            <td>{{this.system.spell_list}}</td>
+            <td>{{this.system.level}}</td>
+            <td>{{this.system.type}}</td>
+            <td>{{this.system.range}}</td>
+            <td>{{this.system.duration}}</td>
+          </tr>
+        {{else}}
+          <tr><td colspan="6"><em>No spells known.</em></td></tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  {{#if items.songs}}
+  <div class="panel">
+    <h4>Songs</h4>
+    <table class="rmss-table">
+      <thead><tr><th>Name</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
+      <tbody>
+        {{#each items.songs}}
+          <tr data-item-id="{{this._id}}">
+            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+            <td>{{this.system.level}}</td>
+            <td>{{this.system.type}}</td>
+            <td>{{this.system.range}}</td>
+            <td>{{this.system.duration}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{/if}}
+</div>

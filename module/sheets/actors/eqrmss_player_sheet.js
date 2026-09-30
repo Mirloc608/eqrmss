@@ -45,6 +45,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         main: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-main.html"
         },
+        combat: {
+            template: "systems/eqrmss/templates/sheets/actors/parts/actor-combat.html"
+        },
         skills: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-skills.html"
         },
@@ -75,6 +78,11 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         const context = await super._prepareContext(options);
         const actor = this.document;
         const system = actor.system ?? {};
+
+        // Readied weapons = equipped (boolean flag or location), for the Combat tab.
+        const readiedWeapons = (context.items?.weapons ?? []).filter(
+            w => w?.system?.equipped || w?.system?.location === "equipped"
+        );
 
         // ------------------------------------------------------------
         // Combat Context
@@ -308,6 +316,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             },
             derived,
             skills: skillModels,
+            readiedWeapons,
 
             playerskill: actor.system?.derived?.skills || system.skills || {},
             progression: {

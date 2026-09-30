@@ -65,6 +65,7 @@ export async function loadEQRMSSTemplates() {
         "systems/eqrmss/templates/sheets/actors/parts/actor-fav-items.html",
         "systems/eqrmss/templates/sheets/actors/parts/actor-tabs.html",
         "systems/eqrmss/templates/sheets/actors/parts/actor-main.html",
+        "systems/eqrmss/templates/sheets/actors/parts/actor-combat.html",
         "systems/eqrmss/templates/sheets/actors/parts/actor-status.html",
         "systems/eqrmss/templates/sheets/actors/parts/actor-equipment.html",
         "systems/eqrmss/templates/sheets/actors/parts/actor-logs.html",
