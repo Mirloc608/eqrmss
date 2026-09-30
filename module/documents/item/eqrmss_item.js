@@ -9,6 +9,58 @@
 
 export class EQRMSSItem extends Item {
 
+    // ============================================================
+    // CREATE DIALOG
+    // ============================================================
+
+    // Item types owned by the system data loaders and the character
+    // creation wizard. They are never hand-created through the
+    // Create Item dialog, so they are hidden from its type list.
+    // Programmatic creation via Item.create is unaffected.
+    static HIDDEN_CREATE_TYPES = new Set([
+
+        "aa",
+
+        "class",
+
+        "combat_action",
+
+        "deity",
+
+        "faction",
+
+        "race",
+
+        "skill",
+
+        "skill_category",
+
+        "song",
+
+        "spell",
+
+        "training_package"
+
+    ]);
+
+    /**
+     * Restrict the Create Item dialog's type dropdown to hand-creatable
+     * item types, using the official `types` dialog-data option.
+     * A caller-supplied `types` list always wins.
+     */
+
+    static async createDialog(data = {}, createOptions = {}, dialogOptions = {}) {
+
+        data.types ??= (game.documentTypes?.Item ?? []).filter(
+
+            (t) => !EQRMSSItem.HIDDEN_CREATE_TYPES.has(t)
+
+        );
+
+        return super.createDialog(data, createOptions, dialogOptions);
+
+    }
+
     prepareData() {
 
         super.prepareData();
