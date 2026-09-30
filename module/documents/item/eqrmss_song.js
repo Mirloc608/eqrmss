@@ -38,11 +38,28 @@ export class EQRMSSSong extends EQRMSSItem
 
         super.prepareDerivedData();
 
+        this._normalizeLegacyIcon();
+
         this._ensureSongData();
 
         this._preparePulse();
 
         this._prepareEffects();
+
+    }
+
+    // ========================================================
+    // LEGACY ICON NORMALIZATION
+    // ========================================================
+
+    // Songs finalized before 2026-09-29 carry icons/svg/music.svg,
+    // which does not resolve. Remap to the current fallback for
+    // display; the stored value is left untouched.
+    _normalizeLegacyIcon()
+    {
+
+        if (this.img === "icons/svg/music.svg")
+            this.img = "systems/eqrmss/assets/Icons/game/musical-notes.svg";
 
     }
 
