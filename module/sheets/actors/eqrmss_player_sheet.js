@@ -354,6 +354,13 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }));
 
         // ------------------------------------------------------------
+        // Combat Tab: Initiative (RMSS §6.1)
+        // ------------------------------------------------------------
+        html.querySelectorAll(".initiative-roll").forEach(el => el.addEventListener("click", () => {
+            this._onInitiativeRoll();
+        }));
+
+        // ------------------------------------------------------------
         // Equipment Location Changes
         // ------------------------------------------------------------
         html.querySelectorAll(".item-location").forEach(el => el.addEventListener("change", ev => {
@@ -688,6 +695,16 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
                 <p><strong>Success:</strong> ${success ? "Yes" : "No"}</p>
             `
         });
+    }
+
+    async _onInitiativeRoll() {
+        try {
+            const { rollInitiative } = await import("../../combat/initiative-rolls.js");
+            await rollInitiative(this.actor);
+        } catch (e) {
+            console.error("EQRMSS | Initiative failed", e);
+            ui.notifications.error(`Initiative failed: ${e.message}`);
+        }
     }
 
     async _onAttackRoll(itemId) {

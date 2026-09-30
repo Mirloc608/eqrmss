@@ -403,10 +403,15 @@ export async function initializeDataLoaders() {
         game.eqrmss.combatTables = null;
     }
 
-    // Combat rolls: Arms Law attack resolution (RMSS §6.2–6.4)
+    // Combat rolls: Arms Law attack resolution (RMSS §6.2–6.4) and
+    // initiative determination (RMSS §6.1).
     try {
         const combatRolls = await import("./module/combat/combat-rolls.js");
-        game.eqrmss.combat = { rollWeaponAttack: combatRolls.rollWeaponAttack };
+        const initiativeRolls = await import("./module/combat/initiative-rolls.js");
+        game.eqrmss.combat = {
+            rollWeaponAttack: combatRolls.rollWeaponAttack,
+            rollInitiative: initiativeRolls.rollInitiative
+        };
         console.log("EQRMSS | Combat rolls ready");
     } catch (e) {
         console.error("Combat rolls load failed", e);
