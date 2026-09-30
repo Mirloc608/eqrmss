@@ -44,23 +44,51 @@ async function openEndedAttackRoll() {
 }
 
 // Manual target entry when nothing is targeted.
-// Offers a world-actor picker: picking an actor uses its derived AT/DB
-// and auto-applies damage (permission-checked, like a targeted token).
-// Pure manual entry keeps the typed name/AT/DB and reports the damage
-// for the GM to apply by hand.
+// Offers a world-actor picker: picking an actor fills in its name/AT/DB,
+// uses its derived AT/DB, and auto-applies damage (permission-checked,
+// like a targeted token). Pure manual entry keeps the typed name/AT/DB
+// and reports the damage for the GM to apply by hand.
 async function promptTarget() {
     const DialogV2 = foundry?.applications?.api?.DialogV2;
     if (!DialogV2?.prompt) {
         ui.notifications.warn("No token targeted — target a token or pick one below.");
         return null;
     }
+
+    // DialogV2 subclass so that picking an actor live-fills the
+    // name/AT/DB fields (codebase pattern: _onRender + addEventListener).
+    // Defined here so `extends` never evaluates against a missing DialogV2.
+    class TargetActorDialog extends DialogV2 {
+        async _onRender(context, options) {
+            await super._onRender(context, options);
+            const sel = this.element.querySelector('select[name="actorId"]');
+            if (!sel) return;
+            const form = sel.closest("form") ?? this.element;
+            sel.addEventListener("change", () => {
+                const opt = sel.selectedOptions?.[0];
+                if (!opt?.value) return; // "Manual entry" — keep the typed values
+                const nameInput = form.querySelector('input[name="name"]');
+                const atInput = form.querySelector('input[name="at"]');
+                const dbInput = form.querySelector('input[name="db"]');
+                if (nameInput && opt.dataset.actorName) nameInput.value = opt.dataset.actorName;
+                if (atInput && opt.dataset.at) atInput.value = opt.dataset.at;
+                if (dbInput && opt.dataset.db) dbInput.value = opt.dataset.db;
+            });
+        }
+    }
+
     const actorOptions = (game.actors?.contents ?? [])
         .slice()
         .sort((a, b) => String(a.name ?? "").localeCompare(String(b.name ?? "")))
-        .map(a => `<option value="${esc(a.id)}">${esc(a.name)}</option>`)
+        .map(a => {
+            const at = parseArmorType(a.system?.combat?.armorType);
+            const db = Number(a.system?.combat?.totalDB) || 0;
+            return `<option value="${esc(a.id)}" data-actor-name="${esc(a.name)}"`
+                + ` data-at="${at ?? ""}" data-db="${db}">${esc(a.name)}</option>`;
+        })
         .join("");
     try {
-        const fd = await DialogV2.prompt({
+        const fd = await TargetActorDialog.prompt({
             window: { title: "Attack: target details" },
             content: `
                 <div class="form-group">
@@ -70,7 +98,7 @@ async function promptTarget() {
                         ${actorOptions}
                     </select>
                 </div>
-                <p class="hint">Picking an actor uses its AT/DB and applies damage automatically. Leave on manual entry to type the values by hand.</p>
+                <p class="hint">Picking an actor fills in its name/AT/DB and applies damage automatically. Leave on manual entry to type the values by hand.</p>
                 <div class="form-group">
                     <label>Target name</label>
                     <input type="text" name="name" value="Target">
