@@ -63,10 +63,10 @@ if (![8, 10].includes(hitDie)) fail("--hit-die must be 8 or 10");
 if (!Number.isFinite(maxBaseHits) || maxBaseHits <= 0) fail("--max-hits must be a positive number");
 if (!Number.isFinite(soulRounds) || soulRounds < 0) fail("--soul-rounds must be a non-negative number");
 
-const racesDir = join(ROOT, "module", "data", "races");
 const creaturesDir = join(ROOT, "module", "data", "creatures");
-const racePath = join(racesDir, `${key}.json`);
-const baseHitsPath = join(racesDir, "base-hits.json");
+const typeDir = join(creaturesDir, creatureType);
+const racePath = join(typeDir, `${key}.json`);
+const baseHitsPath = join(ROOT, "module", "data", "races", "base-hits.json");
 
 if (existsSync(racePath) && !force) fail(`${racePath} already exists (use --force to overwrite)`);
 
@@ -124,7 +124,7 @@ const race = {
   }
 };
 
-mkdirSync(racesDir, { recursive: true });
+mkdirSync(typeDir, { recursive: true });
 writeFileSync(racePath, JSON.stringify(race, null, 4) + "\n");
 console.log(`wrote ${racePath}`);
 

@@ -77,6 +77,35 @@ async function loadRaces() {
         }
         
         console.log(`EQRMSS | Races loaded: ${Object.keys(RACES).length} [${Object.keys(RACES).sort().join(', ')}]`);
+
+        // Creatures & Treasures bestiary: module/data/creatures/<type>/<name>.json
+        // races/ stays PC-sentient-only; creatures/ holds every NPC entry
+        // (including NPC versions of PC races). types.json and attack-packages.json
+        // are data files, not creature entries — skip them.
+        try {
+            const cBrowse = await FilePickerImpl.browse("data", "systems/eqrmss/module/data/creatures");
+            const skipCreatureFiles = new Set(["types", "attack-packages"]);
+            for (const dir of cBrowse.dirs || []) {
+                try {
+                    const sub = await FilePickerImpl.browse("data", dir);
+                    for (const file of sub.files || []) {
+                        if (!file.endsWith(".json")) continue;
+                        const key = file.split("/").pop().replace(".json", "").toLowerCase();
+                        if (skipCreatureFiles.has(key) || RACES[key]) continue;
+                        const json = await fetchJsonSafe(file);
+                        if (json) RACES[key] = json;
+                    }
+                } catch {}
+            }
+            for (const file of cBrowse.files || []) {
+                if (!file.endsWith(".json")) continue;
+                const key = file.split("/").pop().replace(".json", "").toLowerCase();
+                if (skipCreatureFiles.has(key) || RACES[key]) continue;
+                const json = await fetchJsonSafe(file);
+                if (json) RACES[key] = json;
+            }
+            console.log(`EQRMSS | Creatures loaded into race registry: ${Object.keys(RACES).length} total`);
+        } catch {}
         game.eqrmss = game.eqrmss||{};
         game.eqrmss.races = RACES;
         game.eqrmss.data = game.eqrmss.data||{};
