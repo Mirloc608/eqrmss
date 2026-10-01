@@ -249,13 +249,17 @@ export async function rollWeaponAttack(actor, weaponItem) {
     }
 
     // ---- Net attack roll (§6.2): AR + OB − DB, cap 150 ----
+    // Claw Law (AL&CL 11.1): the net roll also cannot exceed the attack
+    // table's maximum-result threshold for the weapon's attack size.
     const net = ar.total + ob - db;
-    const lookup = lookupAttack(tables.weapons, tableName, net, at);
+    const attackSize = sys.attackSize ?? null;
+    const lookup = lookupAttack(tables.weapons, tableName, net, at, attackSize);
 
+    const SIZE_LABEL = { T: "Tiny", S: "Small", M: "Medium", L: "Large", H: "Huge" };
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
         + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}`
         + ` − DB ${db}${parryDB ? ` (+${parryDB} parry)` : ""} = <strong>${ar.total + ob - db}</strong>`
-        + (net > 150 ? ` → treated as 150` : "");
+        + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
     if (lookup.error && lookup.miss) {
         await ChatMessage.create({
@@ -278,17 +282,37 @@ export async function rollWeaponAttack(actor, weaponItem) {
     let critFired = false;
     let condNote = ""; // critical-condition notes (stun pool, bleed, death timer, next swing, must parry)
     const crit = parseCritCode(lookup.critCode);
-    if (crit && !crit.unparseable) {
+    // Resolve one critical strike: roll d100 on the mapped table, accumulate
+    // bonus hits and conditions. Returns the chat fragment.
+    async function resolveOneCrit(type, severity) {
         const cr = await d100();
-        const critResult = lookupCrit(tables.crits, crit.type, crit.severity, cr);
-        if (!critResult.error) {
-            critBonus = critBonusHits(critResult.text);
-            critFired = true;
-            // ---- Critical conditions (stun pool, bleed, death timer, next swing, must parry) ----
-            condNote = await applyCritConditions(targetActor, actor, critResult.text);
-            critLine = `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${crit.severity}): ${esc(critResult.text)}`;
+        const critResult = lookupCrit(tables.crits, type, severity, cr);
+        if (critResult.error) return `<strong>${esc(lookup.critCode)}</strong> — ${esc(critResult.error)} (GM adjudicates)`;
+        critBonus += critBonusHits(critResult.text);
+        critFired = true;
+        // ---- Critical conditions (stun pool, bleed, death timer, next swing, must parry) ----
+        condNote += await applyCritConditions(targetActor, actor, critResult.text);
+        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critResult.text)}`;
+    }
+    if (crit && !crit.unparseable) {
+        if (crit.severity === "F") {
+            // Claw Law F-severity (AL&CL 11.1): two critical strikes, rolled
+            // separately and applied cumulatively, per the attack table's rule.
+            const rule = lookup.fSeverityRule;
+            if (Array.isArray(rule) && rule.length) {
+                const parts = [];
+                for (const r of rule) parts.push(await resolveOneCrit(r.type, r.severity));
+                critLine = parts.join("<br>");
+            } else {
+                critLine = `<strong>${esc(crit.raw)}</strong> — F-severity: no table rule transcribed, GM adjudicates.`;
+            }
         } else {
-            critLine = `<strong>${esc(lookup.critCode)}</strong> — ${esc(critResult.error)} (GM adjudicates)`;
+            // Single-letter codes carry severity only; the type is indicated
+            // on the attack table itself (AL&CL 11.1).
+            const type = crit.type ?? lookup.impliedCritType ?? null;
+            critLine = type
+                ? await resolveOneCrit(type, crit.severity)
+                : `<strong>${esc(crit.raw)}</strong> — unusual result, GM adjudicates.`;
         }
     } else if (crit?.unparseable) {
         critLine = `<strong>${esc(crit.raw)}</strong> — unusual result, GM adjudicates.`;

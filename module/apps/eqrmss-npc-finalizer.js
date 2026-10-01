@@ -548,6 +548,10 @@ export class EQRMSSNPCFinalizer {
           console.warn(`EQRMSS | NPC quick-build | natural weapon compose failed for "${templateId}" (non-blocking)`, error);
           system.obMod = obMod;
         }
+        // Claw Law (AL&CL 11.1): the attack size selects the attack table's
+        // maximum-result threshold at roll time.
+        const atkSize = String(atk?.attackSize ?? "").trim().toUpperCase();
+        if (["T", "S", "M", "L", "H"].includes(atkSize)) system.attackSize = atkSize;
         items.push({
           name: String(atk?.name ?? templateId),
           type: "weapon",

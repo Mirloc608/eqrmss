@@ -29,12 +29,16 @@ export const WEAPON_TYPE_TO_FUMBLE_COLUMN = {
 };
 
 // Crit-code type letter → critical-table code in crit-tables.json.
-// Only S/P/K occur on the 32 book weapon tables; anything else is
-// left for GM adjudication (never invented).
+// S/P/K occur on the Arms Law weapon tables; G/U/T occur on the
+// Claw Law animal attack tables (AL&CL 11.1: G = Grapple, U = Unbalance,
+// T = Tiny). Anything else is left for GM adjudication (never invented).
 export const CRIT_TYPE_TO_TABLE_CODE = {
-    "S": "S", // Slash
-    "P": "P", // Puncture
-    "K": "K"  // Krush
+    "S": "S",   // Slash
+    "P": "P",   // Puncture
+    "K": "K",   // Krush
+    "G": "G",   // Grapple (Claw Law 11.3.1)
+    "U": "Un",  // Unbalance (Claw Law 11.3.5)
+    "T": "Ti"   // Tiny (Claw Law 11.3.4)
 };
 
 export const NET_ROLL_CAP = 150; // §6.4: net attack rolls above 150 are treated as 150
@@ -71,15 +75,25 @@ export function openEndedD100(rollD100) {
 }
 
 // ------------------------------------------------------------
-// Attack table lookup (§6.4): net roll capped at 150,
-// cross-indexed with defender AT.
-// Returns { table, netRoll, damage, critCode, damageRaw }
+// Attack table lookup (§6.4 + AL&CL 11.1): net roll capped at 150,
+// cross-indexed with defender AT. Claw Law animal tables also carry
+// four maximum-result thresholds (S/M/L/H): an attack's net roll
+// cannot exceed the threshold for its attack size — the maximum
+// allowed result is used as the net roll instead.
+// Returns { table, netRoll, uncappedRoll, capped, cap, attackSize,
+//           fSeverityRule, impliedCritType, damage, critCode, damageRaw }
 // or { error }.
 // ------------------------------------------------------------
-export function lookupAttack(weaponTables, tableName, netRoll, at) {
+export function lookupAttack(weaponTables, tableName, netRoll, at, attackSize) {
     const table = (weaponTables ?? []).find(t => t.name === tableName);
     if (!table) return { error: `No attack table "${tableName}" found.` };
-    const net = Math.min(netRoll, NET_ROLL_CAP);
+    const sizeKey = String(attackSize ?? "").trim().toUpperCase();
+    const threshold = table.maxResult?.[sizeKey];
+    const cap = threshold != null && Number.isFinite(Number(threshold))
+        ? Math.min(Number(threshold), NET_ROLL_CAP)
+        : NET_ROLL_CAP;
+    const net = Math.min(netRoll, cap);
+    const capped = netRoll > cap;
     const range = (table.ranges ?? []).find(r => net >= r.low && net <= r.high);
     if (!range) {
         return { table: table.name, netRoll: net, miss: true,
@@ -92,6 +106,12 @@ export function lookupAttack(weaponTables, tableName, netRoll, at) {
     return {
         table: table.name,
         netRoll: net,
+        uncappedRoll: netRoll,
+        capped,
+        cap,
+        attackSize: sizeKey || null,
+        fSeverityRule: table.fSeverityRule ?? null,
+        impliedCritType: table.impliedCritType ?? null,
         damage,
         damageRaw: row.damage,
         critCode: row.critical || null
@@ -99,15 +119,22 @@ export function lookupAttack(weaponTables, tableName, netRoll, at) {
 }
 
 // ------------------------------------------------------------
-// Crit code parse (§6.4): "ES" → { severity: "E", type: "S" }.
-// Anything outside A–E + S/P/K (lone "K", "RS", "AF", "F", …)
-// is returned unparseable for GM adjudication — never guessed.
+// Crit code parse (§6.4, AL&CL 11.1): "ES" → { severity: "E", type: "S" }.
+// Claw Law adds G (Grapple), U (Unbalance), T (Tiny). A lone letter
+// ("A") carries severity only — the type is indicated on the attack
+// table itself (MA Striking / MA Sweeps & Throws). "F" severity means
+// two critical strikes per the table's fSeverityRule.
+// Anything else is returned unparseable for GM adjudication — never guessed.
 // ------------------------------------------------------------
 export function parseCritCode(code) {
     if (!code) return null;
     const c = String(code).trim().toUpperCase();
-    const m = c.match(/^([A-E])([SPK])$/);
+    let m = c.match(/^([A-E])([SPKGUT])$/);
     if (m) return { severity: m[1], type: m[2], raw: code };
+    m = c.match(/^F([SPKGUT])?$/);
+    if (m) return { severity: "F", type: m[1] ?? null, raw: code };
+    m = c.match(/^([A-E])$/);
+    if (m) return { severity: m[1], type: null, implied: true, raw: code };
     return { raw: code, unparseable: true };
 }
 
