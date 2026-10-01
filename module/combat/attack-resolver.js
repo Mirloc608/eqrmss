@@ -14,7 +14,8 @@ export const WEAPON_TYPE_TO_SKILL_ID = {
     "two-handed": "twoHanded",
     "polearm": "poleArms",
     "missile": "bows",
-    "thrown": "thrown"
+    "thrown": "thrown",
+    "natural": "naturalWeapons"
 };
 
 // Weapon type slug → Weapon Fumble Table (8.2.1) column

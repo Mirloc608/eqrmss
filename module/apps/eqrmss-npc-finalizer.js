@@ -1,9 +1,13 @@
 // ============================================================
-// EQRMSS — NPC Quick-Build Finalizer (Stage 1)
+// EQRMSS — NPC Quick-Build Finalizer (Stage 1 + creature types)
 //
 // Builds generic NPCs: average stats, §3.8-style base hits by
-// level, a fixed generic skill package, the class starter kit,
-// and the class starter spells/songs.
+// level, a fixed generic skill package, the class starter kit
+// (sentients only), and the class starter spells/songs.
+//
+// Non-sentient creatures skip class-gated grants until attack
+// packages land — they get stats, hits, Body Development and
+// Perception.
 //
 // Detailed NPCs are built by the GM as full characters — this
 // wizard intentionally stays shallow and fast.
@@ -60,12 +64,13 @@ function raceHitsKey(race) {
 
 export class EQRMSSNPCFinalizer {
 
-  constructor({ name = "", sex = "", raceId = "", classId = "", level = 1 } = {}) {
+  constructor({ name = "", sex = "", raceId = "", classId = "", level = 1, creatureType = "sentient" } = {}) {
     this.name = String(name ?? "").trim();
     this.sex = String(sex ?? "");
     this.raceId = String(raceId ?? "");
     this.classId = String(classId ?? "");
     this.level = Math.min(125, Math.max(1, Math.floor(Number(level) || 1)));
+    this.creatureType = String(creatureType ?? "sentient").toLowerCase();
     // Captured while granting the kit so the skill package can match
     // the NPC's actual weapon.
     this._kitWeaponType = "";
@@ -73,9 +78,10 @@ export class EQRMSSNPCFinalizer {
 
   async finalize() {
     const race = resolveRecord(game?.eqrmss?.races, this.raceId);
-    const cls = resolveRecord(game?.eqrmss?.classes, this.classId);
+    // Non-sentients have no class — classId is empty for them.
+    const cls = this.classId ? resolveRecord(game?.eqrmss?.classes, this.classId) : null;
 
-    if (!race || !cls) {
+    if (!race || (this.classId && !cls)) {
       ui.notifications.error("Race or class data is missing — cannot create NPC.");
       return null;
     }
@@ -85,7 +91,7 @@ export class EQRMSSNPCFinalizer {
       const baseHits = await this.#computeBaseHits(race);
 
       const actorData = {
-        name: this.name || `Unnamed ${cls.name}`,
+        name: this.name || `Unnamed ${cls?.name ?? race.name}`,
         type: "npc",
         system: {
           gender: this.sex,
@@ -94,16 +100,18 @@ export class EQRMSSNPCFinalizer {
           character: { level: this.level, experience: 0 },
           fixed_info: {
             race: race.name,
-            profession: cls.name,
+            profession: cls?.name ?? "",
             sex: this.sex,
-            realm: cls.realm ?? ""
-          }
+            realm: cls?.realm ?? ""
+          },
+          details: { creatureType: this.creatureType }
         },
         flags: {
           eqrmss: {
             createdByNPCWizard: true,
             raceId: race._id ?? race.id,
-            classId: cls._id ?? cls.id,
+            classId: cls?._id ?? cls?.id ?? null,
+            creatureType: this.creatureType,
             npcLevel: this.level
           }
         }
@@ -120,8 +128,9 @@ export class EQRMSSNPCFinalizer {
       await this.#grantStarterKit(actor, cls, race);
       await this.#grantStartingSpells(actor, cls);
       await this.#grantSkillPackage(actor, cls);
+      if (!cls) await this.#grantAttackPackage(actor, race);
 
-      ui.notifications.info(`NPC "${actor.name}" created (level ${this.level} ${race.name} ${cls.name}).`);
+      ui.notifications.info(`NPC "${actor.name}" created (level ${this.level} ${race.name}${cls ? " " + cls.name : ""}).`);
       console.log("EQRMSS | NPC quick-build finalized", actor);
       return actor;
     }
@@ -214,7 +223,7 @@ export class EQRMSSNPCFinalizer {
         });
       };
 
-      const weaponCat = WEAPON_TYPE_TO_SKILL[this._kitWeaponType];
+      const weaponCat = cls ? WEAPON_TYPE_TO_SKILL[this._kitWeaponType] : null;
       if (weaponCat) {
         const idx = WEAPON_CATEGORIES.indexOf(weaponCat);
         pushSkill(weaponCat, "Weapon", idx >= 0 ? costs.weaponCosts?.[idx] : "");
@@ -256,6 +265,7 @@ export class EQRMSSNPCFinalizer {
 
   async #grantStarterKit(actor, cls, race) {
     try {
+      if (!cls) return; // non-sentients have no class kit
       const key = String(this.classId || cls?.id || cls?._id || "").toLowerCase();
       if (!key) return;
 
@@ -379,6 +389,7 @@ export class EQRMSSNPCFinalizer {
 
   async #grantStartingSpells(actor, cls) {
     try {
+      if (!cls) return; // non-sentients have no class spells
       const key = String(this.classId || cls?.id || cls?._id || "").toLowerCase();
       if (!key) return;
 
@@ -455,6 +466,97 @@ export class EQRMSSNPCFinalizer {
       }
     } catch (error) {
       console.warn("EQRMSS | NPC quick-build | starting spell grant failed (non-blocking)", error);
+    }
+  }
+
+  // ------------------------------------------------------------
+  // ATTACK PACKAGE — the class-equivalent for non-sentients:
+  // natural-weapon items (composed from natural templates) plus
+  // one Natural Weapons skill at level ranks, so attacks flow
+  // through the normal combat rolls (attack-resolver maps
+  // weaponType "natural" to the naturalWeapons skill slug).
+  // Fail-soft.
+  // ------------------------------------------------------------
+
+  async #grantAttackPackage(actor, race) {
+    try {
+      const raceKey = raceHitsKey(race);
+      let data = {};
+      try {
+        const resp = await fetch("systems/eqrmss/module/data/creatures/attack-packages.json");
+        if (resp.ok) data = await resp.json();
+      } catch { /* fall through */ }
+      const pkg = data?.packages?.[raceKey] ?? data?.typeDefaults?.[this.creatureType] ?? null;
+      const attacks = pkg?.attacks ?? [];
+      if (!attacks.length) {
+        console.log(`EQRMSS | NPC quick-build | no attack package for race "${raceKey}" (type ${this.creatureType})`);
+        return;
+      }
+
+      const weapons = game?.eqrmss?.weapons;
+      const items = [];
+      for (const atk of attacks) {
+        const templateId = String(atk?.weapon ?? "").trim();
+        if (!templateId) continue;
+        const system = { type: "natural", equipped: true };
+        try {
+          // steel/normal are the compose baselines: neutral name, neutral mods.
+          const composed = weapons?.compose?.(templateId);
+          if (composed) {
+            system.weaponTemplate = composed.templateId;
+            system.material = composed.materialId;
+            system.condition = composed.conditionId;
+            system.type = composed.weaponType; // "natural"
+            system.weight = composed.weight;
+            system.obMod = (Number(composed.obMod) || 0) + (Number(atk?.obMod) || 0);
+            if (composed.damageMod) system.damageMod = composed.damageMod;
+            if (composed.attackTable != null) system.attackTable = composed.attackTable;
+            if (composed.criticalType != null) system.criticalType = composed.criticalType;
+            if (composed.fumble != null) system.fumble_range = composed.fumble;
+            if (composed.length) system.length = composed.length;
+          } else {
+            system.obMod = Number(atk?.obMod) || 0;
+          }
+        } catch (error) {
+          console.warn(`EQRMSS | NPC quick-build | natural weapon compose failed for "${templateId}" (non-blocking)`, error);
+          system.obMod = Number(atk?.obMod) || 0;
+        }
+        items.push({
+          name: String(atk?.name ?? templateId),
+          type: "weapon",
+          system,
+          flags: { eqrmss: { fromNPCWizard: true, attackPackage: true } }
+        });
+      }
+
+      const level = this.level;
+      const rankBonus = rmssRankBonus(level);
+      items.push({
+        name: "Natural Weapons",
+        type: "skill",
+        img: NPC_SKILL_ICON,
+        system: {
+          slug: "naturalWeapons",
+          category: "Weapon",
+          statsString: "",
+          cost: "",
+          ranks: level,
+          rankBonus,
+          statBonus: 0,
+          profBonus: 0,
+          specialBonus: 0,
+          bonus: rankBonus,
+          favorite: false,
+          description: `NPC quick-build (${level} rank${level === 1 ? "" : "s"}).`
+        },
+        flags: { eqrmss: { fromNPCWizard: true } }
+      });
+
+      if (!items.length) return;
+      await actor.createEmbeddedDocuments("Item", items);
+      console.log(`EQRMSS | NPC quick-build | granted attack package (${attacks.length} natural weapon(s) + skill)`, items.map(i => i.name));
+    } catch (error) {
+      console.warn("EQRMSS | NPC quick-build | attack package grant failed (non-blocking)", error);
     }
   }
 }

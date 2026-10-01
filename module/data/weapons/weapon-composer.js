@@ -22,7 +22,8 @@ export async function loadWeaponData() {
         "missile",
         "two-handed",
         "polearm",
-        "thrown"
+        "thrown",
+        "natural"
     ];
     for (const cat of categories) {
         const res = await fetch(`${base}/templates/${cat}.json`);
@@ -117,7 +118,8 @@ export const WEAPON_TYPE_LABELS = {
     "two-handed": "2-H",
     "polearm": "Pole Arm",
     "missile": "Missile",
-    "thrown": "Thrown"
+    "thrown": "Thrown",
+    "natural": "Natural"
 };
 
 export function weaponTypeLabel(slug) {
