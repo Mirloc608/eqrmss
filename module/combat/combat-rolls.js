@@ -273,6 +273,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
     let critLine = "<em>No critical.</em>";
     let critBonus = 0;
     let critFired = false;
+    let condNote = ""; // critical-condition notes (stun pool, bleed, death timer, next swing, must parry)
     const crit = parseCritCode(lookup.critCode);
     if (crit && !crit.unparseable) {
         const cr = await d100();
@@ -311,7 +312,6 @@ export async function rollWeaponAttack(actor, weaponItem) {
 
     // ---- Weapon proc on crit (already-ruled: procs fire onCrit) ----
     let procNote = "";
-    let condNote = "";
     if (critFired && sys.proc && game.eqrmss?.itemEffects?.fireProc) {
         try {
             await game.eqrmss.itemEffects.fireProc({ wielder: actor, weapon: weaponItem, target: targetActor, event: "onCrit" });
