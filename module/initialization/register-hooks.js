@@ -33,6 +33,16 @@ export function registerEQRMSSHooks() {
       game.eqrmss?.openWizard?.();
     });
     target.appendChild(button);
+
+    // NPC quick-build wizard (Stage 1): generic NPCs only.
+    const npcButton = document.createElement("button");
+    npcButton.type = "button";
+    npcButton.className = "eqrmss-npc-wizard-launcher";
+    npcButton.innerHTML = '<i class="fas fa-hat-wizard"></i> Create NPC';
+    npcButton.addEventListener("click", () => {
+      game.eqrmss?.openNPCWizard?.();
+    });
+    target.appendChild(npcButton);
   });
 
 }

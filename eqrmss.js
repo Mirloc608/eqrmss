@@ -26,7 +26,22 @@ import { registerEQRMSSSheets } from "./module/initialization/register-sheets.js
 import * as WizardModule from "./module/apps/eqrmss-character-creation-wizard.js";
 import { EQRMSSCharacterCreationWizardFinalizer } from "./module/apps/eqrmss-character-creation-wizard-finalizer.js";
 import { EQRMSSCharacterCreationData } from "./module/apps/eqrmss-character-creation-wizard-data.js";
+import { EQRMSSNPCWizard } from "./module/apps/eqrmss-npc-wizard.js";
+import { EQRMSSNPCFinalizer } from "./module/apps/eqrmss-npc-finalizer.js";
 console.log("EQRMSS v4.12 | Wizard module imported:", Object.keys(WizardModule));
+
+// NPC quick-build wizard (Stage 1): generic NPCs only. Detailed NPCs
+// are built by the GM as full characters.
+globalThis.EQRMSSNPCWizard = EQRMSSNPCWizard;
+globalThis.EQRMSSNPCFinalizer = EQRMSSNPCFinalizer;
+globalThis.EQRMSS = globalThis.EQRMSS || {};
+globalThis.EQRMSS.NPCWizard = EQRMSSNPCWizard;
+globalThis.EQRMSS.NPCFinalizer = EQRMSSNPCFinalizer;
+Hooks.once("init", () => {
+  game.eqrmss = game.eqrmss || {};
+  game.eqrmss.NPCWizard = EQRMSSNPCWizard;
+  game.eqrmss.NPCFinalizer = EQRMSSNPCFinalizer;
+});
 
 (function exportWizardGlobal() {
     let wizardClass = null;
@@ -518,6 +533,18 @@ Hooks.once("ready", async function () {
             return wizard;
         };
         console.log("EQRMSS v4.15 | openWizard registered");
+
+        game.eqrmss.openNPCWizard = async () => {
+           const wizardClass = game.eqrmss.NPCWizard || globalThis.EQRMSSNPCWizard;
+            if (typeof wizardClass !== "function") {
+                ui.notifications.error("EQRMSS | NPC quick-build wizard is not available.");
+                return null;
+            }
+            const wizard = new wizardClass();
+            await wizard.render(true);
+            return wizard;
+        };
+        console.log("EQRMSS v4.15 | openNPCWizard registered");
 
         console.log("EQRMSS v4.15 | Ready - Wizard:", !!globalThis.EQRMSSCharacterCreationWizard, "Races:", Object.keys(game.eqrmss?.races||{}).length);
     } catch (error) { console.error("EQRMSS | Ready failed", error); }

@@ -109,6 +109,7 @@ export async function loadEQRMSSTemplates() {
         // Character Creation Wizard & Steps
         // ==========================================================
         "systems/eqrmss/templates/apps/character-creation/eqrmss-character-creation-wizard.html",
+        "systems/eqrmss/templates/apps/npc-wizard/eqrmss-npc-wizard.html",
         "systems/eqrmss/templates/apps/character-creation/partials/dp-table.html",
         "systems/eqrmss/templates/apps/character-creation/steps/step-0-preview.html",
         "systems/eqrmss/templates/apps/character-creation/steps/step-1-basic.html",

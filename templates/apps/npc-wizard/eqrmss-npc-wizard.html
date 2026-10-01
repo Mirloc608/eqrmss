@@ -1,0 +1,45 @@
+<form class="eqrmss-npc-wizard-form" autocomplete="off">
+  <p class="eqrmss-npc-wizard-hint">Generic NPCs get average stats, level-scaled hits, a fixed skill package, the class kit, and starter spells. Build detailed NPCs as full characters.</p>
+
+  <div class="form-group">
+    <label for="npc-name">Name</label>
+    <input type="text" id="npc-name" name="name" placeholder="Unnamed" />
+  </div>
+
+  <div class="form-group">
+    <label for="npc-sex">Sex</label>
+    <select id="npc-sex" name="sex">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="npc-race">Race</label>
+    <select id="npc-race" name="race">
+      <option value="">— select —</option>
+      {{#each races}}
+      <option value="{{id}}">{{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="npc-class">Class</label>
+    <select id="npc-class" name="class">
+      <option value="">— select —</option>
+      {{#each classes}}
+      <option value="{{id}}">{{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="npc-level">Level</label>
+    <input type="number" id="npc-level" name="level" value="1" min="1" max="125" />
+  </div>
+
+  <div class="form-group eqrmss-npc-wizard-actions">
+    <button type="submit" class="eqrmss-npc-wizard-create"><i class="fas fa-hat-wizard"></i> Create NPC</button>
+  </div>
+</form>
