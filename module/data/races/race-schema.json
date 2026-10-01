@@ -41,6 +41,15 @@
       "type": "string",
       "const": "race"
     },
+    "creatureType": {
+      "type": "string",
+      "enum": ["sentient", "animal", "undead", "insect", "plant", "construct", "dragon", "elemental"],
+      "description": "NPC creature-type axis. The NPC wizard uses this to choose class (sentient) vs attack-package (all others). Optional; defaults to sentient when absent."
+    },
+    "_scaffold": {
+      "type": "object",
+      "description": "Scaffolding metadata written by tools/scaffold-monster-race.js. Delete once the race is finalized."
+    },
     "img": {
       "type": "string",
       "pattern": "^systems/eqrmss/assets/Icons/race/.+\\.png$"

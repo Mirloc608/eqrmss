@@ -30,13 +30,25 @@ const NPC_TEMP = 50;
 
 const NPC_SKILL_ICON = "systems/eqrmss/assets/Icons/game/skills.svg";
 
-/** Resolve one record from a keyed object or an array. */
+/** Resolve one record from a keyed object or an array.
+ *  Prefers the collection key, then scans records by _id/id/key/name
+ *  (case-insensitive) so internal ids ("eqrmss-human") still resolve. */
 function resolveRecord(collection, id) {
-  if (!collection || !id) return null;
+  if (!collection || id == null || id === "") return null;
+  const sid = String(id);
   if (Array.isArray(collection)) {
-    return collection.find(d => String(d?._id ?? d?.id ?? "") === String(id)) ?? null;
+    return collection.find(d =>
+      [d?._id, d?.id, d?.key, d?.name].filter(v => v != null).map(String).includes(sid)
+    ) ?? null;
   }
-  return collection[id] ?? null;
+  if (collection[sid]) return collection[sid];
+  const low = sid.toLowerCase();
+  for (const r of Object.values(collection)) {
+    if (!r) continue;
+    const candidates = [r._id, r.id, r.key, r.name].filter(v => v != null).map(String);
+    if (candidates.includes(sid) || candidates.some(c => c.toLowerCase() === low)) return r;
+  }
+  return null;
 }
 
 /** Race key matching module/data/races/base-hits.json ("dark-elf", …). */
@@ -220,7 +232,7 @@ export class EQRMSSNPCFinalizer {
 
   async #classCosts(cls) {
     try {
-      const key = String(cls?.id ?? cls?._id ?? "").toLowerCase();
+      const key = String(this.classId || cls?.id || cls?._id || "").toLowerCase();
       const resp = await fetch("systems/eqrmss/module/data/skills/class-development-costs.json");
       if (!resp.ok) return { generalSkills: {}, specialSkills: {}, weaponCosts: [] };
       const data = await resp.json();
@@ -244,7 +256,7 @@ export class EQRMSSNPCFinalizer {
 
   async #grantStarterKit(actor, cls, race) {
     try {
-      const key = String(cls?.id ?? cls?._id ?? "").toLowerCase();
+      const key = String(this.classId || cls?.id || cls?._id || "").toLowerCase();
       if (!key) return;
 
       let data = {};
@@ -367,7 +379,7 @@ export class EQRMSSNPCFinalizer {
 
   async #grantStartingSpells(actor, cls) {
     try {
-      const key = String(cls?.id ?? cls?._id ?? "").toLowerCase();
+      const key = String(this.classId || cls?.id || cls?._id || "").toLowerCase();
       if (!key) return;
 
       let names = [];

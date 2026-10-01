@@ -8,6 +8,8 @@
 
 import { EQRMSSNPCFinalizer } from "./eqrmss-npc-finalizer.js";
 
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+
 export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
 
   static DEFAULT_OPTIONS = {
@@ -28,13 +30,17 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     }
   };
 
-  /** game.eqrmss.races / classes are keyed objects; the form wants arrays. */
+  /** game.eqrmss.races / classes are keyed objects; the form wants arrays.
+   *  The option value is the COLLECTION KEY ("human"), which is what the
+   *  finalizer resolves — record ids ("eqrmss-human") differ. */
   static #asList(collection) {
     if (!collection) return [];
-    const arr = Array.isArray(collection) ? collection : Object.values(collection);
-    return arr
-      .filter(r => r && (r.name || r.id))
-      .map(r => ({ id: String(r._id ?? r.id ?? ""), name: String(r.name ?? r.id ?? "") }))
+    const entries = Array.isArray(collection)
+      ? collection.map(r => [String(r?._id ?? r?.id ?? ""), r])
+      : Object.entries(collection);
+    return entries
+      .filter(([, r]) => r && (r.name || r.id))
+      .map(([key, r]) => ({ id: key, name: String(r.name ?? r.id ?? key) }))
       .filter(r => r.id)
       .sort((a, b) => a.name.localeCompare(b.name));
   }

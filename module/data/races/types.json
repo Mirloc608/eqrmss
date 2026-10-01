@@ -1,0 +1,45 @@
+{
+    "_note": "Creature-type vocabulary for the NPC system. Race files declare creatureType; the NPC wizard uses the sentient flag to choose class vs attack-package.",
+    "types": {
+        "sentient": {
+            "name": "Sentient",
+            "sentient": true,
+            "description": "Self-aware peoples (including giants, orcs, kerran). Uses classes."
+        },
+        "animal": {
+            "name": "Animal",
+            "sentient": false,
+            "description": "Natural beasts. Attacks via natural-weapon packages."
+        },
+        "undead": {
+            "name": "Undead",
+            "sentient": false,
+            "description": "Animated dead. Attacks via natural-weapon packages."
+        },
+        "insect": {
+            "name": "Insect",
+            "sentient": false,
+            "description": "Giant insects and arachnids. Attacks via natural-weapon packages."
+        },
+        "plant": {
+            "name": "Plant",
+            "sentient": false,
+            "description": "Animate flora. Attacks via natural-weapon packages."
+        },
+        "construct": {
+            "name": "Construct",
+            "sentient": false,
+            "description": "Built beings (golems, clockworks). Attacks via natural-weapon packages."
+        },
+        "dragon": {
+            "name": "Dragon",
+            "sentient": false,
+            "description": "Dragons, drakes, wurms. Attacks via natural-weapon packages."
+        },
+        "elemental": {
+            "name": "Elemental",
+            "sentient": false,
+            "description": "Living elements. Attacks via natural-weapon packages."
+        }
+    }
+}
