@@ -8,6 +8,7 @@
       <span><strong>Parrying:</strong> {{#if system.status.parrying}}+{{system.status.parryDB}} DB{{else}}&mdash;{{/if}}</span>
       <span><strong>Stun:</strong> {{#if (add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut)}}{{add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</span>
       <span><strong>Action Penalty:</strong> {{#if system.status.actionPenalty.value}}-{{system.status.actionPenalty.value}} ({{system.status.actionPenalty.rounds}} rnd){{else}}&mdash;{{/if}}</span>
+      <span><strong>Unconscious:</strong> {{#if system.status.unconscious}}<strong style="color: #b00;">Yes</strong>{{else}}&mdash;{{/if}}</span>
     </div>
   </div>
 

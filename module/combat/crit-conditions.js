@@ -24,6 +24,13 @@
 //   Declaration timing and attack-forfeit enforcement are still
 //   pending (non-offensive combat mechanics).
 // - FIRST AID: stubbed — lands with non-combat actions per round.
+// - UNCONSCIOUS (§6.4.1): concussion hits taken EXCEEDING total hits
+//   → unconscious; no further action until back under the limit
+//   (condition-based — does not tick down).
+// - DYING (§3.8): concussion hits taken EXCEEDING total hits + CO stat
+//   → dies after the race's roundsToSoulDeparture rounds
+//   (Table 15.5.1, module/data/races/base-hits.json); dropping back
+//   under the threshold clears the countdown.
 //
 // NOT yet ruled — parsed/stored but not mechanically enforced:
 // - which table phrasings map to down-or-out (counter exists in pool)
@@ -40,6 +47,10 @@
 //   status.nextSwingBonus number
 //   status.parrying       boolean (declared parry, cleared each round)
 //   status.parryDB        number (the parrier's full OB)
+//   status.unconscious    boolean (§6.4.1)
+//   status.soulTimer      number (rounds left; §3.8 dying countdown)
+//   status.soulTimerUnknown boolean (dying, race not in Table 15.5.1 —
+//                         GM adjudicates; no invented countdown)
 //   status.dead           boolean
 // ============================================================
 
@@ -290,6 +301,23 @@ export async function applyCritConditions(targetActor, attackerActor, critText) 
     return notes.length ? `<p>${notes.join("<br>")}</p>` : "";
 }
 
+// Shared death cleanup — dead, everything cleared.
+function deathCleanup() {
+    return {
+        "system.status.deathTimer": 0,
+        "system.status.bleed": { perRound: 0 },
+        "system.status.stun": { stunned: 0, stunNoParry: 0, downOrOut: 0 },
+        "system.status.actionPenalty": { value: 0, rounds: 0 },
+        "system.status.mustParry": { rounds: 0, penalty: 0 },
+        "system.status.parrying": false,
+        "system.status.parryDB": 0,
+        "system.status.unconscious": false,
+        "system.status.soulTimer": 0,
+        "system.status.soulTimerUnknown": false,
+        "system.status.dead": true
+    };
+}
+
 // ------------------------------------------------------------
 // Round tick (GM only, on combat round change)
 // ------------------------------------------------------------
@@ -310,20 +338,28 @@ export async function tickConditions(combat) {
         if (dt > 0) {
             dt -= 1;
             if (dt <= 0) {
-                updates["system.status.deathTimer"] = 0;
-                updates["system.status.dead"] = true;
-                updates["system.status.bleed"] = { perRound: 0 };
-                updates["system.status.stun"] = { stunned: 0, stunNoParry: 0, downOrOut: 0 };
-                updates["system.status.actionPenalty"] = { value: 0, rounds: 0 };
-                updates["system.status.mustParry"] = { rounds: 0, penalty: 0 };
-                updates["system.status.parrying"] = false;
-                updates["system.status.parryDB"] = 0;
+                Object.assign(updates, deathCleanup());
                 notes.push(`<strong>${esc(actor.name)}</strong> dies.`);
                 await actor.update(updates);
                 continue;
             }
             updates["system.status.deathTimer"] = dt;
             notes.push(`${esc(actor.name)}: death in ${roundsWord(dt)} — stabilize with healing magic.`);
+        }
+
+        // Soul departure (§3.8) — dying countdown; dropping back under
+        // the damage threshold clears it (re-checked after bleed below).
+        let soul = Number(st.soulTimer) || 0;
+        if (soul > 0) {
+            soul -= 1;
+            if (soul <= 0) {
+                Object.assign(updates, deathCleanup());
+                notes.push(`<strong>${esc(actor.name)}</strong> dies — soul departs.`);
+                await actor.update(updates);
+                continue;
+            }
+            updates["system.status.soulTimer"] = soul;
+            notes.push(`${esc(actor.name)}: soul departs in ${roundsWord(soul)}.`);
         }
 
         // Bleed — hits until stopped (death, heal spell, first aid).
@@ -372,12 +408,101 @@ export async function tickConditions(combat) {
         }
 
         if (Object.keys(updates).length) await actor.update(updates);
+        // Bleed (or anything else this tick) may have crossed a
+        // concussion-hit threshold — unconsciousness / dying.
+        if (!actor.system?.status?.dead) await checkHitThresholds(actor);
     }
     if (notes.length) {
         await ChatMessage.create({
             content: `<p><em>Condition tick — round ${combat.round}.</em></p><p>${notes.join("<br>")}</p>`
         });
     }
+}
+
+// ------------------------------------------------------------
+// Concussion-hit thresholds — unconsciousness (§6.4.1) and the
+// §3.8 dying countdown.
+// - Damage EXCEEDING total hits → unconscious: no further action
+//   until back under the limit (condition-based, does not tick).
+// - Damage EXCEEDING total hits + CO stat → dying: the soul departs
+//   after the race's roundsToSoulDeparture rounds (Table 15.5.1,
+//   module/data/races/base-hits.json). Dropping back under the
+//   threshold clears the countdown.
+// Call after anything that changes system.hits.value: damage
+// application, bleed ticks, hit restoration.
+// ------------------------------------------------------------
+
+let _baseHitsCache = null;
+async function baseHitsTable() {
+    if (!_baseHitsCache) {
+        const resp = await fetch("systems/eqrmss/module/data/races/base-hits.json");
+        _baseHitsCache = await resp.json();
+    }
+    return _baseHitsCache;
+}
+
+// Lenient race-key match ("Dark Elf" / "dark_elf" -> "dark-elf").
+// Returns roundsToSoulDeparture, or null when the race has no Table
+// 15.5.1 entry — the GM adjudicates; the number is never invented.
+async function soulDepartureRounds(actor) {
+    try {
+        const races = (await baseHitsTable())?.races ?? {};
+        const norm = s => String(s ?? "").toLowerCase().trim().replace(/[\s_]+/g, "-");
+        const candidates = [
+            norm(actor.system?.fixed_info?.race),
+            norm(actor.system?.fixed_info?.race_name)
+        ].filter(Boolean);
+        for (const want of candidates) {
+            for (const [key, v] of Object.entries(races)) {
+                if (norm(key) === want) return Number(v.roundsToSoulDeparture);
+            }
+        }
+    } catch (e) {
+        console.warn("EQRMSS | base-hits.json unavailable", e);
+    }
+    return null;
+}
+
+export async function checkHitThresholds(actor) {
+    if (!actor || actor.system?.status?.dead) return;
+    const max = Number(actor.system?.hits?.max) || 0;
+    const value = Number(actor.system?.hits?.value) || 0;
+    if (max <= 0) return; // no concussion-hit track — nothing to threshold against
+    const st = actor.system?.status ?? {};
+    const updates = {};
+    const notes = [];
+
+    // Unconscious — §6.4.1.
+    if (value > max && !st.unconscious) {
+        updates["system.status.unconscious"] = true;
+        notes.push(`<strong>${esc(actor.name)}</strong> is knocked unconscious (${value} damage exceeds ${max} total hits).`);
+    } else if (value <= max && st.unconscious) {
+        updates["system.status.unconscious"] = false;
+        notes.push(`<strong>${esc(actor.name)}</strong> regains consciousness.`);
+    }
+
+    // Dying — §3.8.
+    const co = Number(actor.system?.stats?.CO?.total) || 0;
+    const dying = value > max + co;
+    const timerActive = (Number(st.soulTimer) || 0) > 0 || !!st.soulTimerUnknown;
+    if (dying && !timerActive) {
+        const rounds = await soulDepartureRounds(actor);
+        if (rounds == null) {
+            updates["system.status.soulTimerUnknown"] = true;
+            const raceLabel = actor.system?.fixed_info?.race_name || actor.system?.fixed_info?.race || "unknown";
+            notes.push(`<strong>${esc(actor.name)}</strong> is dying! Race "${esc(raceLabel)}" has no Table 15.5.1 entry — GM adjudicates rounds to soul departure.`);
+        } else {
+            updates["system.status.soulTimer"] = rounds;
+            notes.push(`<strong>${esc(actor.name)}</strong> is dying — soul departs in ${roundsWord(rounds)} unless damage is brought under ${max + co}.`);
+        }
+    } else if (!dying && timerActive) {
+        updates["system.status.soulTimer"] = 0;
+        updates["system.status.soulTimerUnknown"] = false;
+        notes.push(`<strong>${esc(actor.name)}</strong> is no longer dying.`);
+    }
+
+    if (Object.keys(updates).length) await actor.update(updates);
+    if (notes.length) await ChatMessage.create({ content: `<p>${notes.join("<br>")}</p>` });
 }
 
 // ------------------------------------------------------------
@@ -403,6 +528,11 @@ export async function declareParry(actor, weaponItem) {
     }
     if (!weaponItem) {
         ui.notifications?.warn("Declare Parry: choose the parrying weapon, shield, or martial-arts item.");
+        return;
+    }
+    // Unconscious: no action at all (§6.4.1).
+    if (actor.system?.status?.unconscious) {
+        ui.notifications?.warn(`${actor.name} is unconscious and cannot parry.`);
         return;
     }
     // Stun-no-parry / down-or-out: no defensive actions but base defense.
@@ -452,6 +582,9 @@ export async function applyHealingSpell(targetActor) {
         speaker: ChatMessage.getSpeaker({ actor: targetActor }),
         content: `<p>${esc(targetActor.name)} receives healing magic — bleeding stops${hadTimer ? " and the death timer is stabilized" : ""}.</p>`
     });
+    // Hit restoration (when the spell subsystem lands) may drop the
+    // actor back under a concussion-hit threshold — re-check.
+    await checkHitThresholds(targetActor);
 }
 
 // ------------------------------------------------------------

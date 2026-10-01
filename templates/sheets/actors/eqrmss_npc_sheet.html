@@ -122,6 +122,16 @@
                 <td>{{#if system.status.parrying}}+{{system.status.parryDB}} DB{{else}}&mdash;{{/if}}</td>
             </tr>
 
+            <tr>
+                <td>Unconscious</td>
+                <td>{{#if system.status.unconscious}}Yes{{else}}&mdash;{{/if}}</td>
+            </tr>
+
+            <tr>
+                <td>Soul Timer</td>
+                <td>{{#if system.status.soulTimer}}{{system.status.soulTimer}} round(s) &mdash; dying{{else}}{{#if system.status.soulTimerUnknown}}Dying &mdash; GM adjudicates{{else}}&mdash;{{/if}}{{/if}}</td>
+            </tr>
+
         </table>
 
         {{#if system.status.dead}}<p style="color: #b00;"><strong>Dead.</strong></p>{{/if}}

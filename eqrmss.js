@@ -416,6 +416,9 @@ export async function initializeDataLoaders() {
             // timer, next-swing bonus, action penalty, must-parry capture.
             declareParry: critConditions.declareParry,
             tickConditions: critConditions.tickConditions,
+            // Concussion-hit thresholds (2026-09-30): §6.4.1 unconsciousness,
+            // §3.8 dying countdown.
+            checkHitThresholds: critConditions.checkHitThresholds,
             // Healing magic: stabilizes death timers, stops bleeding
             // (wire to the healing spell subsystem when it lands).
             applyHealingSpell: critConditions.applyHealingSpell,

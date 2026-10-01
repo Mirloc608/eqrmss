@@ -28,6 +28,7 @@ import {
 } from "./attack-resolver.js";
 import {
     applyCritConditions,
+    checkHitThresholds,
     consumeNextSwingBonus,
     computeWeaponOB,
     activeStun,
@@ -159,13 +160,15 @@ export async function rollWeaponAttack(actor, weaponItem) {
         return;
     }
 
-    // ---- Stun: any active stun bars offensive action ----
+    // ---- Stun / unconscious: no offensive action ----
     const stunState = activeStun(actor.system?.status?.stun);
-    if (stunState) {
+    const unconscious = !!actor.system?.status?.unconscious;
+    if (stunState || unconscious) {
+        const why = unconscious ? "unconscious" : STUN_LABEL[stunState.type];
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
             content: `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>`
-                + `<p><em>${esc(actor.name)} is ${STUN_LABEL[stunState.type]} and cannot take offensive action.</em></p>`
+                + `<p><em>${esc(actor.name)} is ${why} and cannot take offensive action.</em></p>`
         });
         return;
     }
@@ -304,6 +307,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
         const cur = Number(targetActor.system?.hits?.value) || 0;
         await targetActor.update({ "system.hits.value": cur + totalDamage });
         appliedNote = `<p><em>${totalDamage} concussion hit${totalDamage === 1 ? "" : "s"} applied to ${esc(targetName)}.</em></p>`;
+        // Concussion-hit thresholds — unconsciousness (§6.4.1), dying (§3.8).
+        await checkHitThresholds(targetActor);
     } else if (targetActor && totalDamage > 0) {
         appliedNote = `<p><em>Damage not applied — you don't control ${esc(targetName)}.</em></p>`;
     } else if (!targetActor && totalDamage > 0) {

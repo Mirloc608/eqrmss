@@ -20,6 +20,8 @@
       <div style="display: flex; justify-content: space-between;"><strong>Must Parry:</strong> <span>{{#if system.status.mustParry.rounds}}{{system.status.mustParry.rounds}} round(s){{else}}&mdash;{{/if}}</span></div>
       <div style="display: flex; justify-content: space-between;"><strong>Next Swing:</strong> <span>{{#if system.status.nextSwingBonus}}+{{system.status.nextSwingBonus}}{{else}}&mdash;{{/if}}</span></div>
       <div style="display: flex; justify-content: space-between;"><strong>Parrying:</strong> <span>{{#if system.status.parrying}}+{{system.status.parryDB}} DB{{else}}&mdash;{{/if}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Unconscious:</strong> <span>{{#if system.status.unconscious}}<strong style="color: #b00;">Yes</strong>{{else}}&mdash;{{/if}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Soul Timer:</strong> <span>{{#if system.status.soulTimer}}{{system.status.soulTimer}} round(s) &mdash; dying{{else}}{{#if system.status.soulTimerUnknown}}<strong style="color: #b00;">Dying &mdash; GM adjudicates</strong>{{else}}&mdash;{{/if}}{{/if}}</span></div>
     </div>
     {{#if system.status.dead}}<p style="color: #b00; margin: 8px 0 0;"><strong>Dead.</strong></p>{{/if}}
   </div>
