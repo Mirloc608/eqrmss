@@ -225,10 +225,10 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // Status & Hits Calculations (RMSS formulas)
         // ------------------------------------------------------------
         const coBonus = getBonus("CO");
-        const sdBonus = getBonus("SD");
 
-        // Concussion Hits = 10 + (2 × Co bonus) + SD bonus + prof/skill/special
-        const hitsMax = 10 + (2 * coBonus) + sdBonus;
+        // Concussion Hits — RMSS §3.8 total, derived in prepareDerivedData
+        // from system.hits.base: base + round(base × CO bonus / 100).
+        const hitsMax = Number(system.hits?.max) || 0;
 
         // Exhaustion Points = 40 + (3 × Co bonus)
         const exhaustionMax = 40 + (3 * coBonus);

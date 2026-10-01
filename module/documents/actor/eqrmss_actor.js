@@ -97,6 +97,8 @@ export class EQRMSSActor extends Actor
 
         this._prepareResources();
 
+        this._prepareConcussionHits();
+
         this._prepareEquipment();
 
         this._prepareEffects();
@@ -301,6 +303,50 @@ export class EQRMSSActor extends Actor
             attributes.stamina
             ??
             0;
+
+    }
+
+    // ========================================================
+    // CONCUSSION HITS — RMSS §3.8
+    // ========================================================
+
+    _prepareConcussionHits()
+    {
+
+        const hits =
+            this.system.hits ??= {};
+
+        const base =
+            Number(hits.base) || 0;
+
+        // Total Hits = BHPT + round(BHPT × CO bonus / 100).
+        // Base and total are tracked separately; the total is
+        // recalculated every preparation cycle (e.g. when CO changes).
+        // Actors with no hit track keep a total of 0.
+        hits.max =
+            base + Math.round(base * this._constitutionBonus() / 100);
+
+    }
+
+    _constitutionBonus()
+    {
+
+        const co =
+            this.system.stats?.CO;
+
+        if (!co || typeof co !== "object") return 0;
+
+        const stored =
+            co.basic_bonus ?? co.basicBonus ?? 0;
+
+        if (Number(stored) !== 0) return Number(stored);
+
+        // No stored bonus: fall back to the temp-stat heuristic the
+        // sheet uses. No temp stat at all means no bonus, not a
+        // penalty conjured from a zero temp.
+        if (co.temp == null) return 0;
+
+        return Math.floor((Number(co.temp) - 50) / 5);
 
     }
 

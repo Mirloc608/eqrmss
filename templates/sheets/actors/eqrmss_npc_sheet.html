@@ -66,6 +66,30 @@
 
     </section>
 
+    <section class="npc-vitals">
+
+        <h2>Combat Vitals</h2>
+
+        <div class="form-group">
+            <label>Base Hits</label>
+            <input
+                name="system.hits.base"
+                type="number"
+                value="{{system.hits.base}}"
+            />
+        </div>
+
+        <div class="form-group">
+            <label>Total Hits</label>
+            <input
+                type="number"
+                value="{{system.hits.max}}"
+                readonly
+            />
+        </div>
+
+    </section>
+
     <section class="npc-conditions">
 
         <h2>Conditions</h2>
