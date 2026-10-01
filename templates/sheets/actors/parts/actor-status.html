@@ -4,9 +4,24 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px;">
       <div style="display: flex; justify-content: space-between;"><strong>Total Hits:</strong> <span>{{system.hits.max}}</span></div>
       <div style="display: flex; justify-content: space-between;"><strong>Current Damage:</strong> <span>{{system.hits.value}}</span></div>
-      <div style="display: flex; justify-content: space-between;"><strong>Bleeding/Round:</strong> <span>{{system.hits.bleeding}}</span></div>
-      <div style="display: flex; justify-content: space-between;"><strong>Rounds of Stun:</strong> <span>{{system.hits.stun}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Bleeding:</strong> <span>{{#if system.status.bleed.perRound}}{{system.status.bleed.perRound}} hits/round{{else}}&mdash;{{/if}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Stun:</strong> <span>{{#if (add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut)}}{{add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</span></div>
     </div>
+  </div>
+
+  <div class="panel" style="margin-top: 10px;">
+    <h3>Critical Conditions</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px;">
+      <div style="display: flex; justify-content: space-between;"><strong>Stunned:</strong> <span>{{#if system.status.stun.stunned}}{{system.status.stun.stunned}} round(s){{else}}&mdash;{{/if}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Stunned (no parry):</strong> <span>{{#if system.status.stun.stunNoParry}}{{system.status.stun.stunNoParry}} round(s){{else}}&mdash;{{/if}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Down or Out:</strong> <span>{{#if system.status.stun.downOrOut}}{{system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Death Timer:</strong> <span>{{#if system.status.deathTimer}}<strong style="color: #b00;">{{system.status.deathTimer}} round(s) &mdash; healing spell only</strong>{{else}}&mdash;{{/if}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Action Penalty:</strong> <span>{{#if system.status.actionPenalty.value}}-{{system.status.actionPenalty.value}} ({{system.status.actionPenalty.rounds}} round(s)){{else}}&mdash;{{/if}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Must Parry:</strong> <span>{{#if system.status.mustParry.rounds}}{{system.status.mustParry.rounds}} round(s){{else}}&mdash;{{/if}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Next Swing:</strong> <span>{{#if system.status.nextSwingBonus}}+{{system.status.nextSwingBonus}}{{else}}&mdash;{{/if}}</span></div>
+      <div style="display: flex; justify-content: space-between;"><strong>Parrying:</strong> <span>{{#if system.status.parrying}}+{{system.status.parryDB}} DB{{else}}&mdash;{{/if}}</span></div>
+    </div>
+    {{#if system.status.dead}}<p style="color: #b00; margin: 8px 0 0;"><strong>Dead.</strong></p>{{/if}}
   </div>
 
   <div class="status-split-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">

@@ -66,6 +66,68 @@
 
     </section>
 
+    <section class="npc-conditions">
+
+        <h2>Conditions</h2>
+
+        <table>
+
+            <tr>
+                <th>Condition</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>Stunned</td>
+                <td>{{#if system.status.stun.stunned}}{{system.status.stun.stunned}} round(s){{else}}&mdash;{{/if}}</td>
+            </tr>
+
+            <tr>
+                <td>Stunned (no parry)</td>
+                <td>{{#if system.status.stun.stunNoParry}}{{system.status.stun.stunNoParry}} round(s){{else}}&mdash;{{/if}}</td>
+            </tr>
+
+            <tr>
+                <td>Down or Out</td>
+                <td>{{#if system.status.stun.downOrOut}}{{system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</td>
+            </tr>
+
+            <tr>
+                <td>Bleeding</td>
+                <td>{{#if system.status.bleed.perRound}}{{system.status.bleed.perRound}} hits/round{{else}}&mdash;{{/if}}</td>
+            </tr>
+
+            <tr>
+                <td>Death Timer</td>
+                <td>{{#if system.status.deathTimer}}{{system.status.deathTimer}} round(s) &mdash; healing spell only{{else}}&mdash;{{/if}}</td>
+            </tr>
+
+            <tr>
+                <td>Action Penalty</td>
+                <td>{{#if system.status.actionPenalty.value}}-{{system.status.actionPenalty.value}} ({{system.status.actionPenalty.rounds}} round(s)){{else}}&mdash;{{/if}}</td>
+            </tr>
+
+            <tr>
+                <td>Must Parry</td>
+                <td>{{#if system.status.mustParry.rounds}}{{system.status.mustParry.rounds}} round(s){{else}}&mdash;{{/if}}</td>
+            </tr>
+
+            <tr>
+                <td>Next Swing</td>
+                <td>{{#if system.status.nextSwingBonus}}+{{system.status.nextSwingBonus}}{{else}}&mdash;{{/if}}</td>
+            </tr>
+
+            <tr>
+                <td>Parrying</td>
+                <td>{{#if system.status.parrying}}+{{system.status.parryDB}} DB{{else}}&mdash;{{/if}}</td>
+            </tr>
+
+        </table>
+
+        {{#if system.status.dead}}<p style="color: #b00;"><strong>Dead.</strong></p>{{/if}}
+
+    </section>
+
     <section class="npc-stats">
 
         <h2>Stats</h2>

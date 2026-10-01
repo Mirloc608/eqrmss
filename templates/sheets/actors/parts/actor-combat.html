@@ -2,6 +2,16 @@
   <h3>Combat</h3>
 
   <div class="panel">
+    <h4>Active Conditions</h4>
+    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+      <span><strong>Next Swing:</strong> {{#if system.status.nextSwingBonus}}+{{system.status.nextSwingBonus}}{{else}}&mdash;{{/if}}</span>
+      <span><strong>Parrying:</strong> {{#if system.status.parrying}}+{{system.status.parryDB}} DB{{else}}&mdash;{{/if}}</span>
+      <span><strong>Stun:</strong> {{#if (add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut)}}{{add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</span>
+      <span><strong>Action Penalty:</strong> {{#if system.status.actionPenalty.value}}-{{system.status.actionPenalty.value}} ({{system.status.actionPenalty.rounds}} rnd){{else}}&mdash;{{/if}}</span>
+    </div>
+  </div>
+
+  <div class="panel">
     <h4>Defense</h4>
     <table class="rmss-table">
       <thead><tr><th>AT</th><th>Total DB</th><th>Shield</th><th>Armor DB</th><th>Other DB</th><th>MMP</th><th>Quickness</th><th>Initiative</th></tr></thead>
