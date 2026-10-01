@@ -1,9 +1,11 @@
 // ============================================================
 // EQRMSS — NPC Quick-Build Finalizer (Stage 1 + creature types)
 //
-// Builds generic NPCs: average stats, §3.8-style base hits by
-// level, a fixed generic skill package, the class starter kit
-// (sentients only), and the class starter spells/songs.
+// Builds generic NPCs: average stats, base hits (chart hits for chart
+// animals, §3.8-style by level otherwise), a fixed generic skill package,
+// the class starter kit (sentients only), the class starter spells/songs,
+// and attack packages (non-sentients: chart-OB natural weapons + Natural
+// Weapons skill).
 //
 // Non-sentient creatures skip class-gated grants until attack
 // packages land — they get stats, hits, Body Development and
@@ -112,7 +114,16 @@ export class EQRMSSNPCFinalizer {
             raceId: race._id ?? race.id,
             classId: cls?._id ?? cls?.id ?? null,
             creatureType: this.creatureType,
-            npcLevel: this.level
+            npcLevel: this.level,
+            // Chart AT/DB/size/MS/AQ are recorded for later sheet support;
+            // not yet applied to the actor's defenses.
+            ...(race.chart ? { chartStats: {
+              size: race.chart.size ?? null,
+              at: race.chart.at ?? null,
+              db: race.chart.db ?? null,
+              ms: race.chart.ms ?? null,
+              aq: race.chart.aq ?? null
+            } } : {})
           }
         }
       };
@@ -170,6 +181,11 @@ export class EQRMSSNPCFinalizer {
   // ------------------------------------------------------------
 
   async #computeBaseHits(race) {
+    // Chart animals use chart hits directly (RMSS Animal Statistics Chart),
+    // not the level-derived §3.8-style formula.
+    const chartHits = Number(race?.chart?.hits);
+    if (chartHits > 0) return Math.round(chartHits);
+
     let hitDie = 10;
     let maxBaseHits = 150;
     try {
@@ -495,9 +511,20 @@ export class EQRMSSNPCFinalizer {
 
       const weapons = game?.eqrmss?.weapons;
       const items = [];
+      // Chart OBs are totals: the engine adds the Natural Weapons skill bonus
+      // at the wizard's level, so each weapon carries chart OB minus the rank
+      // bonus at CHART level. At chart level the engine total matches the chart
+      // exactly; higher wizard levels scale OB through skill ranks.
+      const chartLevel = Math.max(1, Math.floor(Number(race?.chart?.level) || this.level));
+      const rankBonusAtChart = rmssRankBonus(chartLevel);
       for (const atk of attacks) {
         const templateId = String(atk?.weapon ?? "").trim();
-        if (!templateId) continue;
+        if (!templateId) {
+          console.log(`EQRMSS | NPC quick-build | attack "${atk?.name}" has no natural-weapon template yet — recorded but not granted (${atk?.chartAttack ?? ""})`);
+          continue;
+        }
+        const chartOb = (atk?.ob != null && atk.ob !== "") ? Number(atk.ob) : null;
+        const obMod = chartOb != null ? chartOb - rankBonusAtChart : (Number(atk?.obMod) || 0);
         const system = { type: "natural", equipped: true };
         try {
           // steel/normal are the compose baselines: neutral name, neutral mods.
@@ -508,18 +535,18 @@ export class EQRMSSNPCFinalizer {
             system.condition = composed.conditionId;
             system.type = composed.weaponType; // "natural"
             system.weight = composed.weight;
-            system.obMod = (Number(composed.obMod) || 0) + (Number(atk?.obMod) || 0);
+            system.obMod = (Number(composed.obMod) || 0) + obMod;
             if (composed.damageMod) system.damageMod = composed.damageMod;
             if (composed.attackTable != null) system.attackTable = composed.attackTable;
             if (composed.criticalType != null) system.criticalType = composed.criticalType;
             if (composed.fumble != null) system.fumble_range = composed.fumble;
             if (composed.length) system.length = composed.length;
           } else {
-            system.obMod = Number(atk?.obMod) || 0;
+            system.obMod = obMod;
           }
         } catch (error) {
           console.warn(`EQRMSS | NPC quick-build | natural weapon compose failed for "${templateId}" (non-blocking)`, error);
-          system.obMod = Number(atk?.obMod) || 0;
+          system.obMod = obMod;
         }
         items.push({
           name: String(atk?.name ?? templateId),

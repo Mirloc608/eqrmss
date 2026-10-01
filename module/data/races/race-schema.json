@@ -46,6 +46,22 @@
       "enum": ["sentient", "animal", "undead", "insect", "plant", "construct", "dragon", "elemental"],
       "description": "NPC creature-type axis. The NPC wizard uses this to choose class (sentient) vs attack-package (all others). Optional; defaults to sentient when absent."
     },
+    "chart": {
+      "type": "object",
+      "description": "RMSS Animal Statistics Chart values for this race (OCR-decoded; verify against the book). The NPC finalizer uses chart.hits as base hits and chart OBs as attack totals.",
+      "properties": {
+        "source": { "type": "string" },
+        "size": { "type": "string" },
+        "hits": { "type": "number" },
+        "at": { "type": "number" },
+        "db": { "type": "number" },
+        "ms": { "type": "string" },
+        "aq": { "type": "string" },
+        "level": { "type": "number" },
+        "special": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
     "_scaffold": {
       "type": "object",
       "description": "Scaffolding metadata written by tools/scaffold-monster-race.js. Delete once the race is finalized."
