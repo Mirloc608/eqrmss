@@ -115,8 +115,8 @@ export class EQRMSSNPCFinalizer {
             classId: cls?._id ?? cls?.id ?? null,
             creatureType: this.creatureType,
             npcLevel: this.level,
-            // Chart AT/DB/size/MS/AQ are recorded for later sheet support;
-            // not yet applied to the actor's defenses.
+            // Chart defenses/size/MS/AQ: the defense derivation applies
+            // chart AT/DB from these flags on every actor prepare.
             ...(race.chart ? { chartStats: {
               size: race.chart.size ?? null,
               at: race.chart.at ?? null,

@@ -5,6 +5,7 @@
     .npc-mini .npc-bar input[name="name"] { flex: 1; font-size: 14px; font-weight: bold; padding: 1px 4px; min-width: 0; }
     .npc-mini .npc-hits { white-space: nowrap; }
     .npc-mini .npc-hits input { width: 40px; padding: 1px 2px; font-size: 12px; text-align: center; }
+    .npc-mini .npc-defenses { display: flex; justify-content: space-between; margin-top: 2px; font-size: 11px; opacity: 0.85; flex: 0 0 auto; }
     .npc-mini .npc-attacks { margin-top: 4px; flex: 1 1 auto; overflow-y: auto; min-height: 0; }
     .npc-mini .npc-atk { display: flex; gap: 4px; align-items: center; padding: 1px 0; }
     .npc-mini .npc-atk .attack-roll { padding: 0 6px; font-size: 12px; line-height: 1.4; flex: 0 0 auto; }
@@ -16,6 +17,7 @@
     <input name="name" type="text" value="{{actor.name}}"/>
     <span class="npc-hits"><input name="system.hits.value" type="number" value="{{system.hits.value}}"/>/{{system.hits.max}}</span>
   </div>
+  <div class="npc-defenses"><span>{{system.combat.armorType}}</span><span>DB {{system.combat.totalDB}}</span></div>
   <div class="npc-attacks">
     {{#each items.weapons}}
     <div class="npc-atk">

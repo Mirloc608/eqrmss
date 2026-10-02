@@ -50,6 +50,23 @@ export class RMSSDerivedValueEngine {
  */
 export function calculateArmorAndDefenses(actorData) {
     const system = actorData.system ?? actorData;
+
+    // NPC Wizard chart animals carry their RMSS Animal Statistics Chart
+    // defenses in flags. The chart AT is the creature's natural armor type;
+    // the chart DB already bundles its natural quickness/toughness, so it
+    // replaces (rather than stacks with) the stat-derived Quickness DB.
+    const chartStats =
+        actorData?.flags?.eqrmss?.chartStats ??
+        actorData?.system?.flags?.eqrmss?.chartStats ??
+        null;
+    const chartAtNumber = Number(chartStats?.at);
+    const chartArmorType = Number.isFinite(chartAtNumber) && chartAtNumber >= 1 && chartAtNumber <= 20
+        ? Math.round(chartAtNumber)
+        : null;
+    const chartDbNumber = Number(chartStats?.db);
+    const chartDB = chartStats && chartStats.db != null && Number.isFinite(chartDbNumber)
+        ? chartDbNumber
+        : null;
     
     // Extract stats safely for the engine
     const stats = {};
@@ -73,7 +90,7 @@ export function calculateArmorAndDefenses(actorData) {
     const wornArmor = itemList.filter((i) => i?.type === "armor" && isWornItem(i));
     const wornShields = itemList.filter((i) => i?.type === "shield" && isWornItem(i));
 
-    let armorType = "No Armor";
+    let armorType = chartArmorType ? `AT ${chartArmorType}` : "No Armor";
     let mmp = 0;
     if (wornArmor.length > 0) {
         const ats = wornArmor
@@ -99,12 +116,17 @@ export function calculateArmorAndDefenses(actorData) {
     const otherDB = Number(combat.otherDB ?? 0);
     const armorDB = Number(combat.armorDB ?? 0);
 
-    // Total DB Calculation
-    const totalDB = quicknessBonus + adrenalDefense + shieldBonus + otherDB + armorDB;
+    // Total DB Calculation. A chart animal uses its chart DB as the natural
+    // defensive base; external components (adrenal, shield, stored extras)
+    // still add normally.
+    const naturalDB = chartDB ?? quicknessBonus;
+    const totalDB = naturalDB + adrenalDefense + shieldBonus + otherDB + armorDB;
 
     return {
         derived: derivedStats,
         armorType,
+        chartArmorType,
+        chartDB,
         mmp,
         penalties: {
             action: mmp,

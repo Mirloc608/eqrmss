@@ -649,6 +649,8 @@ _prepareCombat()
         const metrics = calculateArmorAndDefenses(this);
 
         this.system.combat.armorType = metrics.armorType;
+        this.system.combat.chartArmorType = metrics.chartArmorType ?? null;
+        this.system.combat.chartDB = metrics.chartDB ?? null;
         this.system.combat.mmp = metrics.mmp;
         this.system.combat.penalties = metrics.penalties;
         this.system.combat.quicknessBonus = metrics.quicknessBonus;
