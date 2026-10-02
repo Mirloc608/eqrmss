@@ -1,16 +1,16 @@
 <form class="eqrmss sheet actor npc-sheet npc-mini" autocomplete="off">
   <style>
-    .npc-mini { font-size: 12px; padding: 4px; min-width: 260px; }
-    .npc-mini .npc-bar { display: flex; gap: 6px; align-items: center; }
+    .npc-mini { font-size: 12px; padding: 4px; min-width: 260px; height: 220px; display: flex; flex-direction: column; }
+    .npc-mini .npc-bar { display: flex; gap: 6px; align-items: center; flex: 0 0 auto; }
     .npc-mini .npc-bar input[name="name"] { flex: 1; font-size: 14px; font-weight: bold; padding: 1px 4px; min-width: 0; }
     .npc-mini .npc-hits { white-space: nowrap; }
     .npc-mini .npc-hits input { width: 40px; padding: 1px 2px; font-size: 12px; text-align: center; }
-    .npc-mini .npc-attacks { margin-top: 4px; }
+    .npc-mini .npc-attacks { margin-top: 4px; flex: 1 1 auto; overflow-y: auto; min-height: 0; }
     .npc-mini .npc-atk { display: flex; gap: 4px; align-items: center; padding: 1px 0; }
-    .npc-mini .npc-atk .attack-roll { padding: 0 6px; font-size: 12px; line-height: 1.4; }
+    .npc-mini .npc-atk .attack-roll { padding: 0 6px; font-size: 12px; line-height: 1.4; flex: 0 0 auto; }
     .npc-mini .npc-atk .n { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .npc-mini .npc-atk .ob { font-size: 11px; opacity: 0.8; }
-    .npc-mini .npc-drop-hint { margin-top: 6px; padding: 6px; border: 1px dashed #999; border-radius: 4px; text-align: center; font-size: 11px; opacity: 0.7; }
+    .npc-mini .npc-atk .ob { font-size: 11px; opacity: 0.8; flex: 0 0 auto; }
+    .npc-mini .npc-drop-hint { margin-top: 4px; padding: 4px; border: 1px dashed #999; border-radius: 4px; text-align: center; font-size: 11px; opacity: 0.7; flex: 0 0 auto; }
   </style>
   <div class="npc-bar">
     <input name="name" type="text" value="{{actor.name}}"/>
