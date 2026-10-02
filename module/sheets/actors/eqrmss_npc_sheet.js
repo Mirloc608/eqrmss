@@ -46,6 +46,10 @@ export default class EQRMSSNPCSheet
 
     async _onRender(context, options) {
         await super._onRender(context, options);
+        if (!this._npcSized) {
+            this._npcSized = true;
+            try { this.setPosition({ width: 300, height: 260 }); } catch (e) {}
+        }
         const html = this.element;
         if (!html) return;
 
