@@ -5,7 +5,7 @@
     <h4>Active Conditions</h4>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
       <span><strong>Next Swing:</strong> {{#if system.status.nextSwingBonus}}+{{system.status.nextSwingBonus}}{{else}}&mdash;{{/if}}</span>
-      <span><strong>Parrying:</strong> {{#if system.status.parrying}}+{{system.status.parryDB}} DB{{else}}&mdash;{{/if}}</span>
+      <span><strong>Parrying:</strong> {{#if system.status.parrying}}+{{system.status.parryDB}} DB{{#if system.status.parryWeaponName}} ({{system.status.parryWeaponName}}){{/if}}{{else}}&mdash;{{/if}}</span>
       <span><strong>Stun:</strong> {{#if (add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut)}}{{add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</span>
       <span><strong>Action Penalty:</strong> {{#if system.status.actionPenalty.value}}-{{system.status.actionPenalty.value}} ({{system.status.actionPenalty.rounds}} rnd){{else}}&mdash;{{/if}}</span>
       <span><strong>Unconscious:</strong> {{#if system.status.unconscious}}<strong style="color: #b00;">Yes</strong>{{else}}&mdash;{{/if}}</span>
@@ -15,12 +15,13 @@
   <div class="panel">
     <h4>Defense</h4>
     <table class="rmss-table">
-      <thead><tr><th>AT</th><th>Total DB</th><th>Shield</th><th>Armor DB</th><th>Other DB</th><th>MMP</th><th>Quickness</th><th>Initiative</th></tr></thead>
+      <thead><tr><th>AT</th><th>DB (Melee)</th><th>DB (Missile)</th><th>Shield</th><th>Armor DB</th><th>Other DB</th><th>MMP</th><th>Quickness</th><th>Initiative</th></tr></thead>
       <tbody>
         <tr>
           <td>{{system.combat.armorType}}</td>
           <td>{{system.combat.totalDB}}</td>
-          <td>{{system.combat.shieldBonus}}</td>
+          <td>{{system.combat.totalMissileDB}}</td>
+          <td>{{system.combat.shieldBonus}} / {{system.combat.shieldMissileBonus}}</td>
           <td>{{system.combat.armorDB}}</td>
           <td>{{system.combat.otherDB}}</td>
           <td>{{system.combat.mmp}}</td>
@@ -38,7 +39,7 @@
       <tbody>
         {{#each readiedWeapons}}
           <tr data-item-id="{{this._id}}">
-            <td><button class="attack-roll" data-item-id="{{this._id}}" title="Roll attack vs targeted token (RMSS §6.2)">Attack</button> <button class="parry-declare" data-item-id="{{this._id}}" title="Declare Full Parry with this weapon — all OB becomes DB for the round">Parry</button></td>
+            <td><button class="attack-roll" data-item-id="{{this._id}}" title="Roll attack vs targeted token (RMSS §6.2)">Attack</button> <button class="parry-declare" data-item-id="{{this._id}}" title="Declare Parry with this weapon — allocate OB to DB (Arms Law §4.3)">Parry</button></td>
             <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
             <td>{{this.system.attackTable}}</td>
             <td>{{this.system.obMod}}</td>

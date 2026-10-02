@@ -101,8 +101,10 @@ export function calculateArmorAndDefenses(actorData) {
     }
 
     let shieldBonus = 0;
+    let shieldMissileBonus = 0;
     if (wornShields.length > 0) {
         shieldBonus = Math.max(...wornShields.map((i) => Number(i.system?.meleeDB) || 0));
+        shieldMissileBonus = Math.max(...wornShields.map((i) => Number(i.system?.missileDB) || 0));
     }
 
     const quPenalty = Number(combat.penalties?.quickness ?? combat.quPenalty ?? 0);
@@ -117,10 +119,13 @@ export function calculateArmorAndDefenses(actorData) {
     const armorDB = Number(combat.armorDB ?? 0);
 
     // Total DB Calculation. A chart animal uses its chart DB as the natural
-    // defensive base; external components (adrenal, shield, stored extras)
-    // still add normally.
+    // defensive base; external components (shield, stored extras) still
+    // add normally. Melee and missile attacks use the equipped shield's
+    // DB for that attack type; the Adrenal Defense component counts in
+    // full against melee and at half against missile attacks (§4.4.3).
     const naturalDB = chartDB ?? quicknessBonus;
     const totalDB = naturalDB + adrenalDefense + shieldBonus + otherDB + armorDB;
+    const totalMissileDB = naturalDB + (adrenalDefense / 2) + shieldMissileBonus + otherDB + armorDB;
 
     return {
         derived: derivedStats,
@@ -135,9 +140,11 @@ export function calculateArmorAndDefenses(actorData) {
         quicknessBonus,
         adrenalDefense,
         shieldBonus,
+        shieldMissileBonus,
         otherDB,
         armorDB,
-        totalDB
+        totalDB,
+        totalMissileDB
     };
 }
 

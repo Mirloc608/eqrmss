@@ -94,9 +94,11 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             quicknessBonus: 0,
             adrenalDefense: 0,
             shieldBonus: 0,
+            shieldMissileBonus: 0,
             otherDB: 0,
             armorDB: 0,
             totalDB: 0,
+            totalMissileDB: 0,
             magic: ""
         };
 
@@ -354,7 +356,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }));
 
         // ------------------------------------------------------------
-        // Combat Tab: Full Parry declarations (all OB -> DB)
+        // Combat Tab: Parry declarations (OB/DB split, Arms Law §4.3)
         // ------------------------------------------------------------
         html.querySelectorAll(".parry-declare").forEach(el => el.addEventListener("click", ev => {
             const itemId = ev.currentTarget.dataset.itemId;

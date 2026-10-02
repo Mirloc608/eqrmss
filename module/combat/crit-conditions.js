@@ -46,7 +46,12 @@
 //   status.mustParry      { rounds, penalty }
 //   status.nextSwingBonus number
 //   status.parrying       boolean (declared parry, cleared each round)
-//   status.parryDB        number (the parrier's full OB)
+//   status.parryDB        number (OB allocated to DB by the parry)
+//   status.parryMaxOB     number (the parrying weapon's full OB)
+//   status.parryWeaponId  string (item id the parry was declared with)
+//   status.parryWeaponName string (display name for the parry weapon)
+//   status.parryWeaponType string (weapon category for parry limits)
+//   status.parryFull      boolean (all of the weapon's OB allocated)
 //   status.attackedThisRound boolean (attack made; blocks a later parry)
 //   status.unconscious    boolean (§6.4.1)
 //   status.soulTimer      number (rounds left; §3.8 dying countdown)
@@ -312,6 +317,11 @@ function deathCleanup() {
         "system.status.mustParry": { rounds: 0, penalty: 0 },
         "system.status.parrying": false,
         "system.status.parryDB": 0,
+        "system.status.parryMaxOB": 0,
+        "system.status.parryWeaponId": "",
+        "system.status.parryWeaponName": "",
+        "system.status.parryWeaponType": "",
+        "system.status.parryFull": false,
         "system.status.unconscious": false,
         "system.status.soulTimer": 0,
         "system.status.soulTimerUnknown": false,
@@ -403,9 +413,14 @@ export async function tickConditions(combat) {
 
         // Declared parry lapses at the round change; the round's attack
         // marker clears with it.
-        if (st.parrying || (Number(st.parryDB) || 0) > 0) {
+        if (st.parrying || (Number(st.parryDB) || 0) > 0 || st.parryWeaponId) {
             updates["system.status.parrying"] = false;
             updates["system.status.parryDB"] = 0;
+            updates["system.status.parryMaxOB"] = 0;
+            updates["system.status.parryWeaponId"] = "";
+            updates["system.status.parryWeaponName"] = "";
+            updates["system.status.parryWeaponType"] = "";
+            updates["system.status.parryFull"] = false;
             notes.push(`${esc(actor.name)}'s parry lapses.`);
         }
         if (st.attackedThisRound) {
@@ -521,13 +536,38 @@ export async function consumeNextSwingBonus(actor) {
 }
 
 // ------------------------------------------------------------
-// Parry — ruled conversion (full OB -> DB) for the current round.
-// Attack resolution enforces the forfeit both ways: a parrying
-// combatant cannot attack, and a combatant who has already attacked
-// this round cannot switch into a full parry.
+// Parry — Arms Law §4.3 OB/DB split. A combatant may sacrifice some
+// or all of the OB of the weapon in use to increase DB against melee
+// attacks. The remainder stays available for an attack with that same
+// weapon later in the round. Attack resolution applies the defender's
+// allocated DB, the full-parry weapon-as-shield bonus, and the
+// two-handed/pole-arm 50% melee-parry limits.
 // ------------------------------------------------------------
 
-export async function declareParry(actor, weaponItem) {
+async function promptParryAllocation(actor, weaponItem, maxOb) {
+    const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
+    if (!DialogV2?.prompt || maxOb <= 0) return maxOb;
+    try {
+        const formData = await DialogV2.prompt({
+            window: { title: "Parry: OB Allocation" },
+            content: `
+                <div class="form-group">
+                    <label>OB to move to DB (0-${maxOb})</label>
+                    <input type="number" name="allocation" value="${maxOb}" min="0" max="${maxOb}" step="1">
+                </div>
+                <p class="hint">${esc(actor.name)} may allocate any part of ${esc(weaponItem.name)}'s OB ${maxOb} to DB. The remainder stays available for an attack with that weapon.</p>`,
+            ok: { label: "Declare Parry" }
+        });
+        if (!formData) return null;
+        const raw = typeof formData.get === "function" ? formData.get("allocation") : formData.allocation;
+        return Number(raw);
+    } catch (e) {
+        console.warn("EQRMSS | Parry allocation prompt failed; declaration cancelled.", e);
+        return null;
+    }
+}
+
+export async function declareParry(actor, weaponItem, allocation = null) {
     if (!actor) {
         ui.notifications?.warn("Declare Parry: no actor.");
         return;
@@ -547,20 +587,40 @@ export async function declareParry(actor, weaponItem) {
         ui.notifications?.warn(`${actor.name} is ${STUN_LABEL[st.type]} and cannot parry.`);
         return;
     }
-    // Attack-forfeit: the round's OB cannot be spent twice.
-    if (actor.system?.status?.attackedThisRound) {
-        ui.notifications?.warn(`${actor.name} has already attacked this round and cannot switch to a full parry.`);
-        return;
-    }
     if (actor.system?.status?.parrying) {
         ui.notifications?.warn(`${actor.name} is already parrying this round.`);
         return;
     }
-    // Full Parry: ALL of the combatant's OB goes into DB.
+    // The Melee Phase split cannot be declared retroactively after the
+    // round's attack has already been made at unreduced OB.
+    if (actor.system?.status?.attackedThisRound) {
+        ui.notifications?.warn(`${actor.name} has already attacked this round and cannot declare a parry split.`);
+        return;
+    }
+    // Parry split: allocate some or all of this weapon's OB to DB.
     const { ob } = computeWeaponOB(actor, weaponItem);
+    const maxOb = Math.max(0, ob);
+    if (maxOb <= 0) {
+        ui.notifications?.warn(`${actor.name} has no positive OB with ${weaponItem.name} to allocate to parry.`);
+        return;
+    }
+    if (allocation == null) allocation = await promptParryAllocation(actor, weaponItem, maxOb);
+    if (allocation == null) return;
+    const allocated = Math.max(0, Math.min(maxOb, Math.round(Number(allocation) || 0)));
+    if (allocated <= 0) {
+        ui.notifications?.warn(`${actor.name} must allocate at least 1 OB to parry with ${weaponItem.name}.`);
+        return;
+    }
+    const full = allocated >= maxOb;
+    const remaining = maxOb - allocated;
     const updates = {
         "system.status.parrying": true,
-        "system.status.parryDB": ob
+        "system.status.parryDB": allocated,
+        "system.status.parryMaxOB": maxOb,
+        "system.status.parryWeaponId": weaponItem.id ?? weaponItem._id ?? "",
+        "system.status.parryWeaponName": weaponItem.name ?? "",
+        "system.status.parryWeaponType": weaponItem.system?.type ?? "",
+        "system.status.parryFull": full
     };
     const mp = actor.system?.status?.mustParry;
     if (mp && (Number(mp.rounds) || 0) > 0) {
@@ -569,7 +629,7 @@ export async function declareParry(actor, weaponItem) {
     await actor.update(updates);
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content: `<p><em>${esc(actor.name)} parries with ${esc(weaponItem.name)} — +${ob} DB this round.</em></p>`
+        content: `<p><em>${esc(actor.name)} parries with ${esc(weaponItem.name)} — allocates ${allocated} of ${maxOb} OB to DB${full ? " (full parry)" : `; ${remaining} OB remains for attack`}.</em></p>`
     });
 }
 

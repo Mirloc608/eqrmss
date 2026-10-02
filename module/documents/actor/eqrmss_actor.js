@@ -655,7 +655,9 @@ _prepareCombat()
         this.system.combat.penalties = metrics.penalties;
         this.system.combat.quicknessBonus = metrics.quicknessBonus;
         this.system.combat.shieldBonus = metrics.shieldBonus;
+        this.system.combat.shieldMissileBonus = metrics.shieldMissileBonus ?? metrics.shieldBonus;
         this.system.combat.totalDB = metrics.totalDB;
+        this.system.combat.totalMissileDB = metrics.totalMissileDB ?? metrics.totalDB;
 
     }
     catch (e)
@@ -665,6 +667,8 @@ _prepareCombat()
 
         this.system.combat.armorType ??= "No Armor";
         this.system.combat.totalDB ??= 0;
+        this.system.combat.totalMissileDB ??= this.system.combat.totalDB;
+        this.system.combat.shieldMissileBonus ??= this.system.combat.shieldBonus ?? 0;
 
     }
 
