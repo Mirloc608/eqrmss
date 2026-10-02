@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A small shadow-creature of the deep caverns.",
+  "lore": "Shadel swarm in the lightless places beneath Luclin.",
   "observedLevels": {
     "lo": 35,
     "hi": 46
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 41,
+    "level": [
+      35,
+      75
+    ],
+    "hp": [
+      1656,
+      860000
+    ],
+    "damage": [
+      14,
+      1767
+    ],
+    "ac": [
+      164,
+      552
+    ],
+    "resists": {
+      "MR": 24,
+      "CR": 24,
+      "DR": 23,
+      "FR": 24,
+      "PR": 23,
+      "CO": 31
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 11.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

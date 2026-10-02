@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A gaunt undead from the nether reaches, starved and swift.",
+  "lore": "Netherbians slip between worlds, hunting the living for warmth.",
   "observedLevels": {
     "lo": 53,
     "hi": 58
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 23,
+    "level": [
+      53,
+      73
+    ],
+    "hp": [
+      13089,
+      600000
+    ],
+    "damage": [
+      42,
+      1700
+    ],
+    "ac": [
+      234,
+      538
+    ],
+    "resists": {
+      "MR": 38,
+      "CR": 38,
+      "DR": 380,
+      "FR": 38,
+      "PR": 91,
+      "CO": 64
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.75
+    ]
+  },
+  "size": {
+    "lo": 8.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

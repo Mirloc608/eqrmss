@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "elemental",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A generic living embodiment of elemental force, raw and unshaped.",
+  "lore": "Elementals are the building blocks of the planes given will \u2014 and temper.",
   "observedLevels": {
     "lo": 1,
     "hi": 75
@@ -34,10 +34,46 @@
       7
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 387,
+    "level": [
+      1,
+      100
+    ],
+    "hp": [
+      50,
+      900000000
+    ],
+    "damage": [
+      1,
+      4500
+    ],
+    "ac": [
+      24,
+      1000
+    ],
+    "resists": {
+      "MR": 61,
+      "CR": 67,
+      "DR": 74,
+      "FR": 117,
+      "PR": 71,
+      "CO": 35
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 2.0,
+    "hi": 40.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

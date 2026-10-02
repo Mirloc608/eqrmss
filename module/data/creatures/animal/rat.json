@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A filthy ubiquitous rodent, bold in numbers, cowardly alone.",
+  "lore": "Rats infest every city and dungeon in Norrath; where civilization goes, they follow.",
   "observedLevels": {
     "lo": 1,
     "hi": 100
@@ -34,10 +34,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 431,
+    "level": [
+      1,
+      100
+    ],
+    "hp": [
+      11,
+      100000
+    ],
+    "damage": [
+      1,
+      1500
+    ],
+    "ac": [
+      8,
+      683
+    ],
+    "resists": {
+      "MR": 11,
+      "CR": 11,
+      "DR": 11,
+      "FR": 11,
+      "PR": 11,
+      "CO": 12
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 2.0,
+    "hi": 29.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

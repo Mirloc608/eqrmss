@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "elemental",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A spinning whirlwind given a dancer's form, veiled and frenzied.",
+  "lore": "Dervishes dance in desert storms, and their dance is death.",
   "observedLevels": {
     "lo": 12,
     "hi": 102
@@ -62,10 +62,46 @@
       5
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 576,
+    "level": [
+      1,
+      102
+    ],
+    "hp": [
+      30,
+      350000
+    ],
+    "damage": [
+      1,
+      1950
+    ],
+    "ac": [
+      32,
+      650
+    ],
+    "resists": {
+      "MR": 29,
+      "CR": 29,
+      "DR": 35,
+      "FR": 35,
+      "PR": 29,
+      "CO": 42
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.75
+    ]
+  },
+  "size": {
+    "lo": 2.0,
+    "hi": 55.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

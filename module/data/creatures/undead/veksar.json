@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A drowned horror of the sunken city, bloated and vengeful.",
+  "lore": "Veksar's dead do not rest beneath the waves.",
   "observedLevels": {
     "lo": 45,
     "hi": 63
@@ -26,10 +26,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 77,
+    "level": [
+      45,
+      70
+    ],
+    "hp": [
+      6000,
+      72000
+    ],
+    "damage": [
+      36,
+      1721
+    ],
+    "ac": [
+      193,
+      295
+    ],
+    "resists": {
+      "MR": 22,
+      "CR": 22,
+      "DR": 22,
+      "FR": 22,
+      "PR": 22,
+      "CO": 34
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 4.5,
+    "hi": 12.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

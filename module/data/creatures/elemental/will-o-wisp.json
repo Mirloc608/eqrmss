@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "elemental",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A floating ball of eerie light that lures travelers off safe paths.",
+  "lore": "Will-o-wisps feed on the lost; their light is the last thing many see.",
   "observedLevels": {
     "lo": 1,
     "hi": 80
@@ -30,10 +30,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 217,
+    "level": [
+      1,
+      80
+    ],
+    "hp": [
+      11,
+      1000000
+    ],
+    "damage": [
+      1,
+      1404
+    ],
+    "ac": [
+      12,
+      512
+    ],
+    "resists": {
+      "MR": 30,
+      "CR": 26,
+      "DR": 26,
+      "FR": 26,
+      "PR": 26,
+      "CO": 35
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.5
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 30.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

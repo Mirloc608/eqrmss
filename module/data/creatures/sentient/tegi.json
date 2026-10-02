@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A small fierce humanoid of the wilds, quick and vicious.",
+  "lore": "Tegi swarm in packs, overwhelming prey with numbers.",
   "observedLevels": {
     "lo": 5,
     "hi": 57
@@ -18,10 +18,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 569,
+    "level": [
+      1,
+      60
+    ],
+    "hp": [
+      75,
+      59235
+    ],
+    "damage": [
+      1,
+      350
+    ],
+    "ac": [
+      20,
+      262
+    ],
+    "resists": {
+      "MR": 15,
+      "CR": 15,
+      "DR": 14,
+      "FR": 15,
+      "PR": 14,
+      "CO": 23
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.75
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 6.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

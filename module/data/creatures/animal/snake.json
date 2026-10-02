@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A legless scaled predator, from harmless garden snakes to venomous killers.",
+  "lore": "Snakes are everywhere; the wise watch where they step.",
   "observedLevels": {
     "lo": 1,
     "hi": 101
@@ -26,10 +26,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 548,
+    "level": [
+      1,
+      101
+    ],
+    "hp": [
+      11,
+      1500000
+    ],
+    "damage": [
+      1,
+      7440
+    ],
+    "ac": [
+      8,
+      544
+    ],
+    "resists": {
+      "MR": 6,
+      "CR": 5,
+      "DR": 5,
+      "FR": 7,
+      "PR": 6,
+      "CO": 8
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      0.75,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 100.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

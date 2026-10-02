@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A large raven with blood-red plumage and an unnerving intelligence in its eyes.",
+  "lore": "Blood ravens are carrion birds drawn to battlefields, sometimes serving darker masters as spies.",
   "observedLevels": {
     "lo": 46,
     "hi": 100
@@ -18,10 +18,46 @@
       21
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 32,
+    "level": [
+      46,
+      100
+    ],
+    "hp": [
+      3111,
+      100000
+    ],
+    "damage": [
+      44,
+      684
+    ],
+    "ac": [
+      166,
+      490
+    ],
+    "resists": {
+      "MR": 12,
+      "CR": 12,
+      "DR": 12,
+      "FR": 12,
+      "PR": 13,
+      "CO": 20
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.75
+    ]
+  },
+  "size": {
+    "lo": 5.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

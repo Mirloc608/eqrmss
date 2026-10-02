@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A leathery-winged nocturnal flyer with needle teeth and keen echolocation.",
+  "lore": "Bats swarm in the lightless depths of Norrath's dungeons, from Befallen to the deepest Kunark ruins.",
   "observedLevels": {
     "lo": 45,
     "hi": 56
@@ -22,10 +22,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 13,
+    "level": [
+      45,
+      56
+    ],
+    "hp": [
+      7475,
+      9446
+    ],
+    "damage": [
+      36,
+      222
+    ],
+    "ac": [
+      201,
+      246
+    ],
+    "resists": {
+      "MR": 19,
+      "CR": 19,
+      "DR": 19,
+      "FR": 19,
+      "PR": 19,
+      "CO": 30
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 6.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

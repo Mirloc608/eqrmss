@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "An iksar raised in undeath, scaled and implacable.",
+  "lore": "Dead iksar serve necromancers and old empires alike.",
   "observedLevels": {
     "lo": 1,
     "hi": 72
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 448,
+    "level": [
+      1,
+      72
+    ],
+    "hp": [
+      11,
+      100000
+    ],
+    "damage": [
+      1,
+      1100
+    ],
+    "ac": [
+      12,
+      344
+    ],
+    "resists": {
+      "MR": 17,
+      "CR": 16,
+      "DR": 17,
+      "FR": 16,
+      "PR": 17,
+      "CO": 24
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.75
+    ]
+  },
+  "size": {
+    "lo": 3.05,
+    "hi": 15.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A living shadow, cold and hungry for warmth.",
+  "lore": "Shades are the remnants of the dead, clinging to darkness.",
   "observedLevels": {
     "lo": 28,
     "hi": 101
@@ -42,10 +42,46 @@
       7
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 254,
+    "level": [
+      1,
+      101
+    ],
+    "hp": [
+      1064,
+      99999999
+    ],
+    "damage": [
+      1,
+      10003
+    ],
+    "ac": [
+      23,
+      900
+    ],
+    "resists": {
+      "MR": 23,
+      "CR": 23,
+      "DR": 39,
+      "FR": 22,
+      "PR": 39,
+      "CO": 32
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.0,
+      1.75
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

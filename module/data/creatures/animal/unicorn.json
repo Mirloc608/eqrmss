@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A pure white horse with a single spiraled horn, radiating calm.",
+  "lore": "Unicorns appear only to the pure of heart; their horn purges poison and evil.",
   "observedLevels": {
     "lo": 16,
     "hi": 60
@@ -22,10 +22,46 @@
       21
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 30,
+    "level": [
+      16,
+      65
+    ],
+    "hp": [
+      480,
+      36000
+    ],
+    "damage": [
+      2,
+      376
+    ],
+    "ac": [
+      58,
+      405
+    ],
+    "resists": {
+      "MR": 104,
+      "CR": 47,
+      "DR": 54,
+      "FR": 46,
+      "PR": 55,
+      "CO": 29
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 12.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

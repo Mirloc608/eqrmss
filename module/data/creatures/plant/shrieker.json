@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "plant",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A fungus that screams when disturbed, alerting everything nearby.",
+  "lore": "Shriekers are dungeon alarms; wise delvers gag them first.",
   "observedLevels": {
     "lo": 5,
     "hi": 55
@@ -18,10 +18,46 @@
       25
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 76,
+    "level": [
+      5,
+      60
+    ],
+    "hp": [
+      75,
+      23800
+    ],
+    "damage": [
+      1,
+      480
+    ],
+    "ac": [
+      31,
+      262
+    ],
+    "resists": {
+      "MR": 15,
+      "CR": 15,
+      "DR": 15,
+      "FR": 15,
+      "PR": 17,
+      "CO": 23
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 2.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

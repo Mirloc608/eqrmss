@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A lesser dragon-kin, winged and scaled but lacking the age and cunning of true dragons.",
+  "lore": "Drakes serve greater wyrms or lair alone in high peaks, fiercely guarding their hoards.",
   "observedLevels": {
     "lo": 65,
     "hi": 75
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 51,
+    "level": [
+      35,
+      75
+    ],
+    "hp": [
+      1575,
+      500000
+    ],
+    "damage": [
+      222,
+      2000
+    ],
+    "ac": [
+      196,
+      600
+    ],
+    "resists": {
+      "MR": 24,
+      "CR": 28,
+      "DR": 24,
+      "FR": 28,
+      "PR": 24,
+      "CO": 29
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.75
+    ]
+  },
+  "size": {
+    "lo": 20.0,
+    "hi": 250.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "elemental",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A small impish elemental of flame, mischievous and hot-tempered.",
+  "lore": "Fire mephits are the sparks of the Plane of Fire, starting trouble wherever they land.",
   "observedLevels": {
     "lo": 46,
     "hi": 102
@@ -30,10 +30,46 @@
       7
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 44,
+    "level": [
+      46,
+      102
+    ],
+    "hp": [
+      7500,
+      100000
+    ],
+    "damage": [
+      25,
+      1000
+    ],
+    "ac": [
+      166,
+      499
+    ],
+    "resists": {
+      "MR": 52,
+      "CR": 51,
+      "DR": 52,
+      "FR": 3508,
+      "PR": 52,
+      "CO": 65
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 10.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

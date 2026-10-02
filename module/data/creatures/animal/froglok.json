@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "An upright amphibian humanoid with bulging eyes and a wide, toothy maw.",
+  "lore": "Frogloks built a civilization in the ruins of Guk; the Sebilisian empire's fall scattered them across Kunark.",
   "observedLevels": {
     "lo": 40,
     "hi": 65
@@ -18,10 +18,46 @@
       7
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 12,
+    "level": [
+      40,
+      65
+    ],
+    "hp": [
+      2000,
+      1000000
+    ],
+    "damage": [
+      32,
+      233
+    ],
+    "ac": [
+      176,
+      477
+    ],
+    "resists": {
+      "MR": 30,
+      "CR": 26,
+      "DR": 26,
+      "FR": 26,
+      "PR": 26,
+      "CO": 34
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 2.0,
+    "hi": 6.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

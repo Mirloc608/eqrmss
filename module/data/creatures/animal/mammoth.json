@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A colossal shaggy elephant with curved tusks like ivory scythes.",
+  "lore": "Mammoths roam the frozen north in herds, shaking the earth with their tread.",
   "observedLevels": {
     "lo": 10,
     "hi": 97
@@ -26,10 +26,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 66,
+    "level": [
+      10,
+      97
+    ],
+    "hp": [
+      260,
+      45000
+    ],
+    "damage": [
+      1,
+      586
+    ],
+    "ac": [
+      34,
+      478
+    ],
+    "resists": {
+      "MR": 9,
+      "CR": 9,
+      "DR": 8,
+      "FR": 9,
+      "PR": 8,
+      "CO": 10
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

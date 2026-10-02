@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A desert-dwelling elf, lean and sun-hardened.",
+  "lore": "Sand elves survive where others die of thirst, patient as dunes.",
   "observedLevels": {
     "lo": 12,
     "hi": 69
@@ -22,10 +22,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 683,
+    "level": [
+      12,
+      80
+    ],
+    "hp": [
+      240,
+      400000
+    ],
+    "damage": [
+      6,
+      1735
+    ],
+    "ac": [
+      64,
+      528
+    ],
+    "resists": {
+      "MR": 39,
+      "CR": 38,
+      "DR": 39,
+      "FR": 41,
+      "PR": 39,
+      "CO": 55
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.25
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 12.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

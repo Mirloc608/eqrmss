@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "insect",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A disease-bearing insect, swollen with contagion.",
+  "lore": "Malarians spread fever through swamps; their bite is a slow death sentence.",
   "observedLevels": {
     "lo": 9,
     "hi": 65
@@ -18,10 +18,46 @@
       22
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 43,
+    "level": [
+      9,
+      68
+    ],
+    "hp": [
+      171,
+      100000
+    ],
+    "damage": [
+      55,
+      821
+    ],
+    "ac": [
+      75,
+      351
+    ],
+    "resists": {
+      "MR": 37,
+      "CR": 37,
+      "DR": 58,
+      "FR": 37,
+      "PR": 38,
+      "CO": 58
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 15.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

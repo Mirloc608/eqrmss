@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A generic catch-all for the small scaled swimmers of Norrath's waters.",
+  "lore": "Fish school in every river, lake, and sea; where they gather, larger predators follow.",
   "observedLevels": {
     "lo": 1,
     "hi": 91
@@ -26,10 +26,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 111,
+    "level": [
+      1,
+      91
+    ],
+    "hp": [
+      11,
+      50000
+    ],
+    "damage": [
+      1,
+      893
+    ],
+    "ac": [
+      8,
+      450
+    ],
+    "resists": {
+      "MR": 6,
+      "CR": 476,
+      "DR": 6,
+      "FR": 6,
+      "PR": 6,
+      "CO": 10
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 25.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

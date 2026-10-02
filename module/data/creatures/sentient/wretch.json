@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A miserable broken humanoid, twisted by suffering.",
+  "lore": "Wretches haunt battlefields and prisons, too broken to flee.",
   "observedLevels": {
     "lo": 21,
     "hi": 58
@@ -18,10 +18,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 50,
+    "level": [
+      21,
+      67
+    ],
+    "hp": [
+      651,
+      122000
+    ],
+    "damage": [
+      1,
+      656
+    ],
+    "ac": [
+      103,
+      348
+    ],
+    "resists": {
+      "MR": 21,
+      "CR": 20,
+      "DR": 20,
+      "FR": 20,
+      "PR": 20,
+      "CO": 31
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 22.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

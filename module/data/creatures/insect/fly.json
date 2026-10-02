@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "insect",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A buzzing pest, from harmless houseflies to horse-sized horrors.",
+  "lore": "Flies gather where things rot; the giant ones make the rot themselves.",
   "observedLevels": {
     "lo": 46,
     "hi": 64
@@ -18,10 +18,46 @@
       22
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 22,
+    "level": [
+      46,
+      65
+    ],
+    "hp": [
+      7700,
+      35000
+    ],
+    "damage": [
+      31,
+      1250
+    ],
+    "ac": [
+      166,
+      295
+    ],
+    "resists": {
+      "MR": 35,
+      "CR": 35,
+      "DR": 79,
+      "FR": 35,
+      "PR": 35,
+      "CO": 55
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 6.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

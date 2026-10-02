@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A severed hand given unlife, crawling with purpose.",
+  "lore": "Reanimated hands do their masters' quiet work \u2014 throttling, stealing, spying.",
   "observedLevels": {
     "lo": 21,
     "hi": 91
@@ -26,10 +26,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 37,
+    "level": [
+      21,
+      91
+    ],
+    "hp": [
+      651,
+      475000
+    ],
+    "damage": [
+      1,
+      6350
+    ],
+    "ac": [
+      91,
+      446
+    ],
+    "resists": {
+      "MR": 39,
+      "CR": 39,
+      "DR": 39,
+      "FR": 34,
+      "PR": 39,
+      "CO": 45
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 6.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

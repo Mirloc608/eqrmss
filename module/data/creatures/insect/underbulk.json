@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "insect",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A bloated subterranean horror, all bulk and grinding appetite.",
+  "lore": "Underbulks wallow in dungeon depths, eating stone, steel, and adventurers alike.",
   "observedLevels": {
     "lo": 5,
     "hi": 64
@@ -18,10 +18,46 @@
       22
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 71,
+    "level": [
+      5,
+      64
+    ],
+    "hp": [
+      75,
+      22400
+    ],
+    "damage": [
+      1,
+      549
+    ],
+    "ac": [
+      31,
+      295
+    ],
+    "resists": {
+      "MR": 18,
+      "CR": 18,
+      "DR": 18,
+      "FR": 18,
+      "PR": 18,
+      "CO": 28
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 6.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

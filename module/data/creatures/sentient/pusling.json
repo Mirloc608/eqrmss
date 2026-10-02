@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A small oozing horror, all pus and malice.",
+  "lore": "Puslings burst from the infected dead, spreading corruption.",
   "observedLevels": {
     "lo": 12,
     "hi": 68
@@ -18,10 +18,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 212,
+    "level": [
+      1,
+      68
+    ],
+    "hp": [
+      20,
+      200000
+    ],
+    "damage": [
+      1,
+      1186
+    ],
+    "ac": [
+      32,
+      351
+    ],
+    "resists": {
+      "MR": 39,
+      "CR": 36,
+      "DR": 71,
+      "FR": 37,
+      "PR": 37,
+      "CO": 55
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 16.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

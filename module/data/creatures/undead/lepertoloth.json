@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A leprous undead horror, shedding corruption.",
+  "lore": "Lepertoloths are the diseased dead, spreading rot with every step.",
   "observedLevels": {
     "lo": 55,
     "hi": 66
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 34,
+    "level": [
+      55,
+      74
+    ],
+    "hp": [
+      6216,
+      250000
+    ],
+    "damage": [
+      40,
+      5004
+    ],
+    "ac": [
+      175,
+      368
+    ],
+    "resists": {
+      "MR": 42,
+      "CR": 40,
+      "DR": 551,
+      "FR": 40,
+      "PR": 43,
+      "CO": 61
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 8.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

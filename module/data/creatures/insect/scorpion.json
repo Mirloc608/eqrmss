@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "insect",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "An armored arachnid with crushing pincers and a venomous tail sting.",
+  "lore": "Scorpions lurk under desert rocks and in dungeon cracks, striking at warmth.",
   "observedLevels": {
     "lo": 1,
     "hi": 90
@@ -26,10 +26,46 @@
       7
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 54,
+    "level": [
+      1,
+      90
+    ],
+    "hp": [
+      11,
+      9000
+    ],
+    "damage": [
+      1,
+      204
+    ],
+    "ac": [
+      14,
+      441
+    ],
+    "resists": {
+      "MR": 7,
+      "CR": 7,
+      "DR": 7,
+      "FR": 7,
+      "PR": 7,
+      "CO": 11
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 2.0,
+    "hi": 10.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

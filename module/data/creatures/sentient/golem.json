@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A massive humanoid of stone or clay, animated by inscription or ritual.",
+  "lore": "Golems are the classic guardians: tireless, literal-minded, and very heavy.",
   "observedLevels": {
     "lo": 10,
     "hi": 98
@@ -22,10 +22,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 28,
+    "level": [
+      10,
+      98
+    ],
+    "hp": [
+      200,
+      50000
+    ],
+    "damage": [
+      1,
+      912
+    ],
+    "ac": [
+      34,
+      478
+    ],
+    "resists": {
+      "MR": 38,
+      "CR": 38,
+      "DR": 38,
+      "FR": 25,
+      "PR": 28,
+      "CO": 32
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.0,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

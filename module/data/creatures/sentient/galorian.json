@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A horse-lord humanoid of the plains, proud and swift.",
+  "lore": "Galorians ride like the wind and fight like storms.",
   "observedLevels": {
     "lo": 28,
     "hi": 58
@@ -18,10 +18,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 185,
+    "level": [
+      28,
+      58
+    ],
+    "hp": [
+      1064,
+      60003
+    ],
+    "damage": [
+      11,
+      404
+    ],
+    "ac": [
+      131,
+      254
+    ],
+    "resists": {
+      "MR": 18,
+      "CR": 17,
+      "DR": 17,
+      "FR": 18,
+      "PR": 17,
+      "CO": 27
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 14.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "construct",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A generic term for the spider-like horrors of Norrath, with chitinous legs and glistening fangs.",
+  "lore": "Arachnids infest dungeons and wilds across every continent, from the caves of Faydwer to the jungles of Kunark.",
   "observedLevels": {
     "lo": 50,
     "hi": 52
@@ -18,10 +18,46 @@
       5
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 3,
+    "level": [
+      50,
+      52
+    ],
+    "hp": [
+      9500,
+      9880
+    ],
+    "damage": [
+      100,
+      196
+    ],
+    "ac": [
+      170,
+      172
+    ],
+    "resists": {
+      "MR": 27,
+      "CR": 27,
+      "DR": 27,
+      "FR": 27,
+      "PR": 27,
+      "CO": 42
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 3.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

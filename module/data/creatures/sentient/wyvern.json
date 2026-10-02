@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A two-legged dragon-kin with a barbed stinging tail and leathery wings.",
+  "lore": "Wyverns are less intelligent than true dragons but no less deadly; their sting kills in agony.",
   "observedLevels": {
     "lo": 39,
     "hi": 67
@@ -18,10 +18,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 96,
+    "level": [
+      1,
+      68
+    ],
+    "hp": [
+      1100,
+      1000000
+    ],
+    "damage": [
+      1,
+      734
+    ],
+    "ac": [
+      16,
+      550
+    ],
+    "resists": {
+      "MR": 104,
+      "CR": 47,
+      "DR": 24,
+      "FR": 50,
+      "PR": 24,
+      "CO": 25
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 8.0,
+    "hi": 25.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

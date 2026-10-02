@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A regenerating brute of Innothule, ugly and nearly unkillable.",
+  "lore": "Trolls of Grobb regenerate from almost anything; fire and acid excepted.",
   "observedLevels": {
     "lo": 4,
     "hi": 80
@@ -26,10 +26,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 603,
+    "level": [
+      1,
+      101
+    ],
+    "hp": [
+      30,
+      2500000
+    ],
+    "damage": [
+      1,
+      7440
+    ],
+    "ac": [
+      13,
+      726
+    ],
+    "resists": {
+      "MR": 21,
+      "CR": 19,
+      "DR": 19,
+      "FR": 19,
+      "PR": 19,
+      "CO": 29
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      250.0
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A strange wild creature of the deep forests, little understood.",
+  "lore": "Tureptas keep to the oldest woods; even druids speak of them rarely.",
   "observedLevels": {
     "lo": 20,
     "hi": 96
@@ -26,10 +26,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 98,
+    "level": [
+      20,
+      96
+    ],
+    "hp": [
+      600,
+      662000
+    ],
+    "damage": [
+      34,
+      1668
+    ],
+    "ac": [
+      134,
+      532
+    ],
+    "resists": {
+      "MR": 24,
+      "CR": 24,
+      "DR": 23,
+      "FR": 23,
+      "PR": 23,
+      "CO": 32
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 30.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

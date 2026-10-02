@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A small armored mammal with banded plating, rooting through underbrush with its keen nose.",
+  "lore": "Harmless foragers found in warmer wilds; their plating deters all but the most determined predators.",
   "observedLevels": {
     "lo": 1,
     "hi": 64
@@ -18,10 +18,46 @@
       21
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 11,
+    "level": [
+      1,
+      64
+    ],
+    "hp": [
+      11,
+      26000
+    ],
+    "damage": [
+      1,
+      613
+    ],
+    "ac": [
+      8,
+      184
+    ],
+    "resists": {
+      "MR": 17,
+      "CR": 17,
+      "DR": 17,
+      "FR": 17,
+      "PR": 17,
+      "CO": 27
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 15.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

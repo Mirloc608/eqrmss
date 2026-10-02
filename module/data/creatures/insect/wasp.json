@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "insect",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A stinging horror with a wasp waist and a worse temper.",
+  "lore": "Wasps defend their nests suicidally; the giant ones defend territories.",
   "observedLevels": {
     "lo": 1,
     "hi": 88
@@ -18,10 +18,46 @@
       22
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 60,
+    "level": [
+      1,
+      88
+    ],
+    "hp": [
+      11,
+      28000
+    ],
+    "damage": [
+      1,
+      664
+    ],
+    "ac": [
+      8,
+      433
+    ],
+    "resists": {
+      "MR": 32,
+      "CR": 32,
+      "DR": 30,
+      "FR": 132,
+      "PR": 31,
+      "CO": 13
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.25
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 18.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

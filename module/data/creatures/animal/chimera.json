@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A monstrous fusion with a lion's body, a goat's head rising from its back, and a serpent for a tail.",
+  "lore": "Chimeras are rare apex horrors; their three heads never agree, which is the only mercy they offer.",
   "observedLevels": {
     "lo": 63,
     "hi": 72
@@ -18,10 +18,46 @@
       21
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 17,
+    "level": [
+      63,
+      80
+    ],
+    "hp": [
+      20000,
+      2500000
+    ],
+    "damage": [
+      133,
+      3600
+    ],
+    "ac": [
+      295,
+      608
+    ],
+    "resists": {
+      "MR": 102,
+      "CR": 133,
+      "DR": 94,
+      "FR": 347,
+      "PR": 133,
+      "CO": 56
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

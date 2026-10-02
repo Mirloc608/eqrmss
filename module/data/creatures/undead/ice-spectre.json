@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A spectre of frozen death, wailing with winter's voice.",
+  "lore": "Ice spectres rise where travelers froze; their touch is the grave's cold.",
   "observedLevels": {
     "lo": 28,
     "hi": 66
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 23,
+    "level": [
+      28,
+      67
+    ],
+    "hp": [
+      1064,
+      150000
+    ],
+    "damage": [
+      11,
+      415
+    ],
+    "ac": [
+      127,
+      484
+    ],
+    "resists": {
+      "MR": 56,
+      "CR": 194,
+      "DR": 39,
+      "FR": 35,
+      "PR": 40,
+      "CO": 28
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

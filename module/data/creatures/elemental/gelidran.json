@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "elemental",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A creature of living ice, cold as the deep winter.",
+  "lore": "Gelidrans stalk the glaciers of Velious, freezing prey solid.",
   "observedLevels": {
     "lo": 65,
     "hi": 86
@@ -22,10 +22,46 @@
       24
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 59,
+    "level": [
+      65,
+      86
+    ],
+    "hp": [
+      4875,
+      2600000
+    ],
+    "damage": [
+      190,
+      5400
+    ],
+    "ac": [
+      315,
+      608
+    ],
+    "resists": {
+      "MR": 115,
+      "CR": 312,
+      "DR": 100,
+      "FR": 111,
+      "PR": 95,
+      "CO": 40
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 5.0,
+    "hi": 25.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A corpse-eating undead with a hyena's hunger and a man's cunning.",
+  "lore": "Ghouls haunt graveyards and battlefields, eating the dead \u2014 and the nearly dead.",
   "observedLevels": {
     "lo": 13,
     "hi": 100
@@ -22,10 +22,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 97,
+    "level": [
+      13,
+      100
+    ],
+    "hp": [
+      299,
+      475000
+    ],
+    "damage": [
+      1,
+      6350
+    ],
+    "ac": [
+      43,
+      490
+    ],
+    "resists": {
+      "MR": 18,
+      "CR": 16,
+      "DR": 15,
+      "FR": 14,
+      "PR": 15,
+      "CO": 17
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

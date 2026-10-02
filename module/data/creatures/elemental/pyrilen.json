@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "elemental",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A serpentine creature of living flame, coiling and striking.",
+  "lore": "Pyrilens are the fire-snakes of blasted lands, leaving ash in their wake.",
   "observedLevels": {
     "lo": 66,
     "hi": 86
@@ -22,10 +22,46 @@
       24
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 60,
+    "level": [
+      66,
+      86
+    ],
+    "hp": [
+      5016,
+      2029000
+    ],
+    "damage": [
+      56,
+      5400
+    ],
+    "ac": [
+      319,
+      608
+    ],
+    "resists": {
+      "MR": 114,
+      "CR": 90,
+      "DR": 94,
+      "FR": 348,
+      "PR": 94,
+      "CO": 42
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 5.0,
+    "hi": 25.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

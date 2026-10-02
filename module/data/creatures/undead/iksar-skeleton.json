@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "An iksar skeleton, scaled bones clattering with purpose.",
+  "lore": "Dead iksar are rarely allowed to rest; Sebilis has uses for them.",
   "observedLevels": {
     "lo": 50,
     "hi": 50
@@ -18,10 +18,46 @@
       32
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 1,
+    "level": [
+      50,
+      50
+    ],
+    "hp": [
+      10000,
+      10000
+    ],
+    "damage": [
+      74,
+      204
+    ],
+    "ac": [
+      245,
+      245
+    ],
+    "resists": {
+      "MR": 26,
+      "CR": 26,
+      "DR": 26,
+      "FR": 26,
+      "PR": 26,
+      "CO": 41
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      null,
+      0.0
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 6.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

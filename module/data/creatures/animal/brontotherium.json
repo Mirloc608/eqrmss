@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A massive prehistoric beast with a great forked horn atop its skull, built like a siege engine.",
+  "lore": "These thunder-lizards roam ancient wilds, indifferent to all but the largest predators.",
   "observedLevels": {
     "lo": 46,
     "hi": 47
@@ -18,10 +18,46 @@
       21
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 3,
+    "level": [
+      46,
+      65
+    ],
+    "hp": [
+      8035,
+      56000
+    ],
+    "damage": [
+      68,
+      377
+    ],
+    "ac": [
+      201,
+      279
+    ],
+    "resists": {
+      "MR": 50,
+      "CR": 28,
+      "DR": 128,
+      "FR": 128,
+      "PR": 33,
+      "CO": 33
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 11.0,
+    "hi": 15.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

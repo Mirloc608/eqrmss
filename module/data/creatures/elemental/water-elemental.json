@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "elemental",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A surging figure of living water, crashing and reforming.",
+  "lore": "Water elementals drown the unwary and serve the patient summoner.",
   "observedLevels": {
     "lo": 64,
     "hi": 101
@@ -22,10 +22,46 @@
       24
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 43,
+    "level": [
+      1,
+      101
+    ],
+    "hp": [
+      2500,
+      100200
+    ],
+    "damage": [
+      20,
+      850
+    ],
+    "ac": [
+      24,
+      608
+    ],
+    "resists": {
+      "MR": 18,
+      "CR": 265,
+      "DR": 15,
+      "FR": 15,
+      "PR": 15,
+      "CO": 15
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.0,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 25.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

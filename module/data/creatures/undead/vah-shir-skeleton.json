@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A vah shir skeleton, feline bones articulated for the hunt.",
+  "lore": "The dead vah shir prowl still, graceful and terrible.",
   "observedLevels": {
     "lo": 5,
     "hi": 60
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 40,
+    "level": [
+      5,
+      63
+    ],
+    "hp": [
+      75,
+      27501
+    ],
+    "damage": [
+      1,
+      293
+    ],
+    "ac": [
+      31,
+      275
+    ],
+    "resists": {
+      "MR": 16,
+      "CR": 16,
+      "DR": 16,
+      "FR": 16,
+      "PR": 16,
+      "CO": 25
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 5.0,
+    "hi": 8.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

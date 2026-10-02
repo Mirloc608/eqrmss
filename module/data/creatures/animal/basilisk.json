@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "construct",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A crested reptile whose unblinking gaze is said to stop the blood of those who meet it.",
+  "lore": "Basilisks lair in dark caverns; even seasoned adventurers avert their eyes when one rears its head.",
   "observedLevels": {
     "lo": 66,
     "hi": 68
@@ -18,10 +18,46 @@
       5
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 189,
+    "level": [
+      5,
+      100
+    ],
+    "hp": [
+      75,
+      250000
+    ],
+    "damage": [
+      1,
+      1920
+    ],
+    "ac": [
+      28,
+      490
+    ],
+    "resists": {
+      "MR": 8,
+      "CR": 7,
+      "DR": 7,
+      "FR": 14,
+      "PR": 7,
+      "CO": 12
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 32.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

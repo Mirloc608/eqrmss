@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A wailing female spirit whose cry foretells \u2014 or causes \u2014 death.",
+  "lore": "Banshees haunt places of great sorrow; to hear one is to be marked.",
   "observedLevels": {
     "lo": 46,
     "hi": 90
@@ -26,10 +26,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 50,
+    "level": [
+      35,
+      94
+    ],
+    "hp": [
+      1575,
+      588350
+    ],
+    "damage": [
+      15,
+      1350
+    ],
+    "ac": [
+      160,
+      458
+    ],
+    "resists": {
+      "MR": 12,
+      "CR": 12,
+      "DR": 30,
+      "FR": 12,
+      "PR": 12,
+      "CO": 16
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.75
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 15.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

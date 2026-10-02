@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "insect",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "An eight-legged weaver of silk and venom, patient as time.",
+  "lore": "Spiders infest Norrath's dark places; the great ones spin webs that trap horses.",
   "observedLevels": {
     "lo": 1,
     "hi": 101
@@ -42,10 +42,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 713,
+    "level": [
+      1,
+      101
+    ],
+    "hp": [
+      11,
+      475000
+    ],
+    "damage": [
+      1,
+      6350
+    ],
+    "ac": [
+      8,
+      495
+    ],
+    "resists": {
+      "MR": 17,
+      "CR": 26,
+      "DR": 16,
+      "FR": 19,
+      "PR": 16,
+      "CO": 18
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      0.5,
+      2.5
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 50.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

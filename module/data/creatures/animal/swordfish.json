@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A swift billfish whose rostrum is a natural lance.",
+  "lore": "Swordfish run in deep waters; their charges have holed small boats.",
   "observedLevels": {
     "lo": 28,
     "hi": 71
@@ -22,10 +22,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 30,
+    "level": [
+      28,
+      71
+    ],
+    "hp": [
+      1064,
+      45000
+    ],
+    "damage": [
+      11,
+      1033
+    ],
+    "ac": [
+      119,
+      348
+    ],
+    "resists": {
+      "MR": 32,
+      "CR": 1835,
+      "DR": 27,
+      "FR": 26,
+      "PR": 27,
+      "CO": 30
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 13.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

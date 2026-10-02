@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "dragon",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "An ancient wyrm of immense power, scaled and winged, with breath that unmakes armies.",
+  "lore": "True dragons are the eldest powers of Norrath \u2014 Nagafen, Vox, and their kin shape the fate of continents.",
   "observedLevels": {
     "lo": 66,
     "hi": 102
@@ -26,10 +26,46 @@
       26
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 60,
+    "level": [
+      53,
+      103
+    ],
+    "hp": [
+      7200,
+      100000
+    ],
+    "damage": [
+      63,
+      1306
+    ],
+    "ac": [
+      185,
+      503
+    ],
+    "resists": {
+      "MR": 25,
+      "CR": 2844,
+      "DR": 25,
+      "FR": 25,
+      "PR": 25,
+      "CO": 39
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 2.0,
+    "hi": 200.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

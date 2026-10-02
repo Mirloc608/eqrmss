@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A shapeshifting predator that takes the form of chests, doors, and other inviting objects.",
+  "lore": "Mimics wait in dungeons for greedy hands; the teeth come out only when it's too late.",
   "observedLevels": {
     "lo": 1,
     "hi": 60
@@ -26,10 +26,46 @@
       7
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 25,
+    "level": [
+      1,
+      60
+    ],
+    "hp": [
+      11,
+      30000
+    ],
+    "damage": [
+      1,
+      529
+    ],
+    "ac": [
+      8,
+      397
+    ],
+    "resists": {
+      "MR": 36,
+      "CR": 34,
+      "DR": 32,
+      "FR": 34,
+      "PR": 32,
+      "CO": 33
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 6.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

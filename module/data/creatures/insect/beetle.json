@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "insect",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A hard-shelled insect, from tiny garden beetles to horse-sized horrors.",
+  "lore": "Beetles fill every niche; the giant ones are siege engines with mandibles.",
   "observedLevels": {
     "lo": 1,
     "hi": 100
@@ -26,10 +26,46 @@
       22
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 240,
+    "level": [
+      1,
+      100
+    ],
+    "hp": [
+      11,
+      25000
+    ],
+    "damage": [
+      1,
+      454
+    ],
+    "ac": [
+      8,
+      490
+    ],
+    "resists": {
+      "MR": 6,
+      "CR": 6,
+      "DR": 6,
+      "FR": 9,
+      "PR": 6,
+      "CO": 9
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.0,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

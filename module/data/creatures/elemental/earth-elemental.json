@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "elemental",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A hulking figure of living stone and soil, slow and inexorable.",
+  "lore": "Earth elementals are summoned for labor and war, or rise where the earth is angry.",
   "observedLevels": {
     "lo": 1,
     "hi": 101
@@ -26,10 +26,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 103,
+    "level": [
+      1,
+      104
+    ],
+    "hp": [
+      360,
+      100000
+    ],
+    "damage": [
+      7,
+      1250
+    ],
+    "ac": [
+      64,
+      507
+    ],
+    "resists": {
+      "MR": 19,
+      "CR": 19,
+      "DR": 36,
+      "FR": 19,
+      "PR": 24,
+      "CO": 27
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 5.0,
+    "hi": 15.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

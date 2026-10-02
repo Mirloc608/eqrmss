@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A small reptilian humanoid with a yapping bark and a coward's heart.",
+  "lore": "Kobolds infest mines and caves, fleeing the strong and mobbing the weak.",
   "observedLevels": {
     "lo": 1,
     "hi": 89
@@ -34,10 +34,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 448,
+    "level": [
+      1,
+      89
+    ],
+    "hp": [
+      11,
+      25000
+    ],
+    "damage": [
+      1,
+      784
+    ],
+    "ac": [
+      8,
+      715
+    ],
+    "resists": {
+      "MR": 10,
+      "CR": 17,
+      "DR": 8,
+      "FR": 8,
+      "PR": 8,
+      "CO": 11
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 2.0,
+    "hi": 15.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

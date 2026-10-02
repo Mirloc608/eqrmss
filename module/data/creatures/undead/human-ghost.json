@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "The ghost of a human, clinging to familiar places.",
+  "lore": "Human ghosts haunt homes and halls, repeating their last days.",
   "observedLevels": {
     "lo": 75,
     "hi": 100
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 32,
+    "level": [
+      75,
+      100
+    ],
+    "hp": [
+      6375,
+      450000
+    ],
+    "damage": [
+      1275,
+      5292
+    ],
+    "ac": [
+      368,
+      490
+    ],
+    "resists": {
+      "MR": 9,
+      "CR": 9,
+      "DR": 9,
+      "FR": 9,
+      "PR": 9,
+      "CO": 13
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 6.0,
+    "hi": 6.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

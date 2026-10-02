@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A preserved corpse wrapped in funerary linens, animated by curse.",
+  "lore": "Mummies guard tombs; their touch carries the grave-rot.",
   "observedLevels": {
     "lo": 10,
     "hi": 100
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 292,
+    "level": [
+      1,
+      100
+    ],
+    "hp": [
+      30,
+      396000
+    ],
+    "damage": [
+      1,
+      1621
+    ],
+    "ac": [
+      32,
+      490
+    ],
+    "resists": {
+      "MR": 39,
+      "CR": 36,
+      "DR": 36,
+      "FR": 36,
+      "PR": 39,
+      "CO": 54
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.0,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 13.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

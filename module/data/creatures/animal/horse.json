@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "The classic riding horse, strong-backed and swift.",
+  "lore": "Horses are the common mount of Norrath, from Qeynos cavalry to frontier traders.",
   "observedLevels": {
     "lo": 20,
     "hi": 97
@@ -30,10 +30,46 @@
       7
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 35,
+    "level": [
+      20,
+      97
+    ],
+    "hp": [
+      600,
+      10379
+    ],
+    "damage": [
+      10,
+      219
+    ],
+    "ac": [
+      130,
+      478
+    ],
+    "resists": {
+      "MR": 3,
+      "CR": 3,
+      "DR": 3,
+      "FR": 3,
+      "PR": 3,
+      "CO": 4
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 8.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

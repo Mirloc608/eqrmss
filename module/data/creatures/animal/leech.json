@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A blood-drinking worm that swells grotesquely as it feeds.",
+  "lore": "Leeches infest stagnant waters, dropping from overhangs onto the unwary.",
   "observedLevels": {
     "lo": 1,
     "hi": 65
@@ -18,10 +18,46 @@
       21
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 43,
+    "level": [
+      1,
+      65
+    ],
+    "hp": [
+      11,
+      120000
+    ],
+    "damage": [
+      1,
+      632
+    ],
+    "ac": [
+      12,
+      275
+    ],
+    "resists": {
+      "MR": 11,
+      "CR": 14,
+      "DR": 10,
+      "FR": 9,
+      "PR": 12,
+      "CO": 13
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 2.0,
+    "hi": 30.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

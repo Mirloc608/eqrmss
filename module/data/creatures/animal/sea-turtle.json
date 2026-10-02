@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A placid shelled reptile paddling through warm shallows.",
+  "lore": "Sea turtles are harmless grazers; sailors consider them good luck.",
   "observedLevels": {
     "lo": 2,
     "hi": 96
@@ -18,10 +18,46 @@
       21
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 77,
+    "level": [
+      2,
+      96
+    ],
+    "hp": [
+      24,
+      60000
+    ],
+    "damage": [
+      1,
+      818
+    ],
+    "ac": [
+      40,
+      470
+    ],
+    "resists": {
+      "MR": 7,
+      "CR": 783,
+      "DR": 7,
+      "FR": 7,
+      "PR": 7,
+      "CO": 10
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 10.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

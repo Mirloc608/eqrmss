@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A hulking rock-skinned brute that blends with cliff faces until it moves.",
+  "lore": "Cragbeasts ambush travelers on mountain passes, striking from stone-still camouflage.",
   "observedLevels": {
     "lo": 64,
     "hi": 71
@@ -22,10 +22,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 21,
+    "level": [
+      53,
+      75
+    ],
+    "hp": [
+      5751,
+      2105145
+    ],
+    "damage": [
+      163,
+      2750
+    ],
+    "ac": [
+      291,
+      568
+    ],
+    "resists": {
+      "MR": 78,
+      "CR": 79,
+      "DR": 76,
+      "FR": 83,
+      "PR": 75,
+      "CO": 74
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 2.0,
+    "hi": 25.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

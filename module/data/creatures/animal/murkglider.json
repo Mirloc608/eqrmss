@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A gliding reptile that rides thermals above swamps on membranous wings.",
+  "lore": "Murkgliders circle endlessly, dropping onto prey too slow to flee the shallows.",
   "observedLevels": {
     "lo": 40,
     "hi": 72
@@ -26,10 +26,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 220,
+    "level": [
+      40,
+      80
+    ],
+    "hp": [
+      5500,
+      880000
+    ],
+    "damage": [
+      16,
+      2514
+    ],
+    "ac": [
+      200,
+      608
+    ],
+    "resists": {
+      "MR": 40,
+      "CR": 40,
+      "DR": 45,
+      "FR": 40,
+      "PR": 41,
+      "CO": 44
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 30.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

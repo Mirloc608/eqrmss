@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A froglok skeleton, animated and hostile.",
+  "lore": "The dead of Guk rise easily; the swamp remembers every corpse.",
   "observedLevels": {
     "lo": 12,
     "hi": 68
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 134,
+    "level": [
+      12,
+      68
+    ],
+    "hp": [
+      300,
+      38000
+    ],
+    "damage": [
+      6,
+      806
+    ],
+    "ac": [
+      64,
+      381
+    ],
+    "resists": {
+      "MR": 54,
+      "CR": 72,
+      "DR": 72,
+      "FR": 72,
+      "PR": 72,
+      "CO": 37
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 6.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

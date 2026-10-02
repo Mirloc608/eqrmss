@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A battle-bred boar with iron-shod tusks and a warrior's temperament.",
+  "lore": "War boars are living battering rams, trained to break shield walls.",
   "observedLevels": {
     "lo": 12,
     "hi": 81
@@ -22,10 +22,46 @@
       1
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 101,
+    "level": [
+      12,
+      81
+    ],
+    "hp": [
+      360,
+      350000
+    ],
+    "damage": [
+      7,
+      3000
+    ],
+    "ac": [
+      64,
+      528
+    ],
+    "resists": {
+      "MR": 45,
+      "CR": 45,
+      "DR": 44,
+      "FR": 45,
+      "PR": 44,
+      "CO": 58
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.18,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 5.0,
+    "hi": 30.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "insect",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A writhing burrower, from harmless earthworms to purple horrors.",
+  "lore": "Worms turn the earth \u2014 and occasionally swallow the farmer.",
   "observedLevels": {
     "lo": 1,
     "hi": 80
@@ -38,10 +38,46 @@
       7
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 88,
+    "level": [
+      1,
+      80
+    ],
+    "hp": [
+      11,
+      840000
+    ],
+    "damage": [
+      1,
+      1300
+    ],
+    "ac": [
+      8,
+      650
+    ],
+    "resists": {
+      "MR": 28,
+      "CR": 28,
+      "DR": 26,
+      "FR": 27,
+      "PR": 26,
+      "CO": 38
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 15.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

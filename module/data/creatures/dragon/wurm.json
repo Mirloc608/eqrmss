@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "dragon",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A wingless wyrm, all serpentine muscle and ancient hunger.",
+  "lore": "Wurms burrow beneath the earth, surfacing to devour whole caravans.",
   "observedLevels": {
     "lo": 29,
     "hi": 98
@@ -26,10 +26,46 @@
       26
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 110,
+    "level": [
+      29,
+      98
+    ],
+    "hp": [
+      1131,
+      300000
+    ],
+    "damage": [
+      11,
+      1504
+    ],
+    "ac": [
+      131,
+      900
+    ],
+    "resists": {
+      "MR": 68,
+      "CR": 172,
+      "DR": 38,
+      "FR": 184,
+      "PR": 38,
+      "CO": 39
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      2.5
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 20.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "plant",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A walking tree, ancient and slow to anger, terrible when roused.",
+  "lore": "Treants guard old forests; those who harm the woods answer to them.",
   "observedLevels": {
     "lo": 1,
     "hi": 100
@@ -30,10 +30,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 245,
+    "level": [
+      1,
+      103
+    ],
+    "hp": [
+      29,
+      300000
+    ],
+    "damage": [
+      1,
+      1403
+    ],
+    "ac": [
+      12,
+      550
+    ],
+    "resists": {
+      "MR": 18,
+      "CR": 17,
+      "DR": 17,
+      "FR": 17,
+      "PR": 17,
+      "CO": 18
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.0,
+      1.75
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 45.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

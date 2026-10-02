@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "construct",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A stone-winged horror that perches motionless, then strikes.",
+  "lore": "Gargoyles adorn evil temples, indistinguishable from carvings until they move.",
   "observedLevels": {
     "lo": 18,
     "hi": 94
@@ -34,10 +34,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 236,
+    "level": [
+      18,
+      94
+    ],
+    "hp": [
+      504,
+      200000
+    ],
+    "damage": [
+      1,
+      2100
+    ],
+    "ac": [
+      82,
+      500
+    ],
+    "resists": {
+      "MR": 59,
+      "CR": 82,
+      "DR": 51,
+      "FR": 52,
+      "PR": 50,
+      "CO": 24
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.75
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 50.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A rotting undead hound, slavering and relentless.",
+  "lore": "Rotdogs hunt in packs, tireless and immune to pain.",
   "observedLevels": {
     "lo": 83,
     "hi": 89
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 23,
+    "level": [
+      83,
+      93
+    ],
+    "hp": [
+      8075,
+      558000
+    ],
+    "damage": [
+      1275,
+      7440
+    ],
+    "ac": [
+      380,
+      483
+    ],
+    "resists": {
+      "MR": 33,
+      "CR": 33,
+      "DR": 33,
+      "FR": 33,
+      "PR": 33,
+      "CO": 47
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 7.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

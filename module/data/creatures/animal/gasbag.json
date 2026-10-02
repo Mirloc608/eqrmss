@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "animal",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A bloated floating sac of gas and malice, drifting on foul winds.",
+  "lore": "Gasbags drift through poisoned skies, exploding in toxic bursts when struck.",
   "observedLevels": {
     "lo": 18,
     "hi": 50
@@ -18,10 +18,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 2,
+    "level": [
+      18,
+      50
+    ],
+    "hp": [
+      504,
+      3000
+    ],
+    "damage": [
+      1,
+      40
+    ],
+    "ac": [
+      78,
+      285
+    ],
+    "resists": {
+      "MR": 4,
+      "CR": 4,
+      "DR": 4,
+      "FR": 4,
+      "PR": 4,
+      "CO": 6
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 1.0,
+    "hi": 9.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "construct",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "An iksar-shaped golem of stone and scale-patterned plates.",
+  "lore": "Iksar golems guard Sebilisian ruins, built in the image of their makers.",
   "observedLevels": {
     "lo": 33,
     "hi": 85
@@ -30,10 +30,46 @@
       4
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 93,
+    "level": [
+      33,
+      85
+    ],
+    "hp": [
+      1419,
+      400000
+    ],
+    "damage": [
+      11,
+      1612
+    ],
+    "ac": [
+      120,
+      544
+    ],
+    "resists": {
+      "MR": 23,
+      "CR": 21,
+      "DR": 21,
+      "FR": 21,
+      "PR": 21,
+      "CO": 27
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      0.75,
+      1.5
+    ]
+  },
+  "size": {
+    "lo": 4.0,
+    "hi": 18.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

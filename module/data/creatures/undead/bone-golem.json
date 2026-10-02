@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A golem assembled from the bones of many dead, bound by necromancy.",
+  "lore": "Bone golems guard the tombs they were built from, hating all living things.",
   "observedLevels": {
     "lo": 68,
     "hi": 102
@@ -18,10 +18,46 @@
       3
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 48,
+    "level": [
+      68,
+      102
+    ],
+    "hp": [
+      5304,
+      11424
+    ],
+    "damage": [
+      null,
+      4
+    ],
+    "ac": [
+      327,
+      499
+    ],
+    "resists": {
+      "MR": 0,
+      "CR": 0,
+      "DR": 0,
+      "FR": 0,
+      "PR": 0,
+      "CO": 0
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 8.0,
+    "hi": 30.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "elemental",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A living conflagration given shape, wreathed in flame that never consumes its form.",
+  "lore": "Fire elementals are summoned from the Plane of Fire or rise where the veil between worlds runs thin.",
   "observedLevels": {
     "lo": 47,
     "hi": 90
@@ -26,10 +26,46 @@
       23
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 65,
+    "level": [
+      47,
+      90
+    ],
+    "hp": [
+      2679,
+      60800
+    ],
+    "damage": [
+      51,
+      1172
+    ],
+    "ac": [
+      181,
+      572
+    ],
+    "resists": {
+      "MR": 31,
+      "CR": 31,
+      "DR": 31,
+      "FR": 974,
+      "PR": 31,
+      "CO": 33
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.0,
+      2.0
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 30.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "plant",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A heap of rotting vegetation given shambling life.",
+  "lore": "Shambling mounds are compost with intent, smothering prey in decay.",
   "observedLevels": {
     "lo": 25,
     "hi": 97
@@ -30,10 +30,46 @@
       5
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 123,
+    "level": [
+      25,
+      97
+    ],
+    "hp": [
+      875,
+      445000
+    ],
+    "damage": [
+      1275,
+      5100
+    ],
+    "ac": [
+      155,
+      474
+    ],
+    "resists": {
+      "MR": 1,
+      "CR": 1,
+      "DR": 1,
+      "FR": 1,
+      "PR": 1,
+      "CO": 1
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 40.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",

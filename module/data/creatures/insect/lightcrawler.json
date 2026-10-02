@@ -5,8 +5,8 @@
   "type": "race",
   "creatureType": "insect",
   "img": "PLACEHOLDER",
-  "description": "PLACEHOLDER",
-  "lore": "PLACEHOLDER",
+  "description": "A pale insect drawn to light, skittering with unnatural speed.",
+  "lore": "Lightcrawlers swarm lanterns in the deep dark, and then swarm the bearer.",
   "observedLevels": {
     "lo": 22,
     "hi": 90
@@ -18,10 +18,46 @@
       22
     ]
   ],
-  "stats": "PLACEHOLDER",
+  "stats": {
+    "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
+    "sampleRows": 46,
+    "level": [
+      22,
+      90
+    ],
+    "hp": [
+      704,
+      16000
+    ],
+    "damage": [
+      1,
+      305
+    ],
+    "ac": [
+      107,
+      441
+    ],
+    "resists": {
+      "MR": 16,
+      "CR": 16,
+      "DR": 16,
+      "FR": 16,
+      "PR": 16,
+      "CO": 26
+    }
+  },
   "racialTalents": [],
-  "movement": "PLACEHOLDER",
-  "size": "PLACEHOLDER",
+  "movement": {
+    "runspeed": [
+      1.25,
+      1.25
+    ]
+  },
+  "size": {
+    "lo": 3.0,
+    "hi": 10.0,
+    "_note": "EQ model scale multiplier"
+  },
   "height": "PLACEHOLDER",
   "weight": "PLACEHOLDER",
   "lifespan": "PLACEHOLDER",
