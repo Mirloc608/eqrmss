@@ -656,6 +656,9 @@ _prepareCombat()
         this.system.combat.quicknessBonus = metrics.quicknessBonus;
         this.system.combat.shieldBonus = metrics.shieldBonus;
         this.system.combat.shieldMissileBonus = metrics.shieldMissileBonus ?? metrics.shieldBonus;
+        this.system.combat.adrenalSkillBonus = metrics.adrenalSkillBonus ?? 0;
+        this.system.combat.adrenalBlockedByArmor = metrics.adrenalBlockedByArmor ?? false;
+        this.system.combat.adrenalEffective = metrics.adrenalEffective ?? metrics.adrenalDefense ?? 0;
         this.system.combat.totalDB = metrics.totalDB;
         this.system.combat.totalMissileDB = metrics.totalMissileDB ?? metrics.totalDB;
 
@@ -669,6 +672,7 @@ _prepareCombat()
         this.system.combat.totalDB ??= 0;
         this.system.combat.totalMissileDB ??= this.system.combat.totalDB;
         this.system.combat.shieldMissileBonus ??= this.system.combat.shieldBonus ?? 0;
+        this.system.combat.adrenalEffective ??= this.system.combat.adrenalDefense ?? 0;
 
     }
 

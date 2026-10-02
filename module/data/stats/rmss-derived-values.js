@@ -114,9 +114,24 @@ export function calculateArmorAndDefenses(actorData) {
     const quicknessBonus = baseQUBonus - quPenalty;
 
     // Additional DB components (stored; armor itself grants no DB in RMSS)
-    const adrenalDefense = Number(combat.adrenalDefense ?? 0);
+    const storedAdrenal = Number(combat.adrenalDefense ?? 0);
     const otherDB = Number(combat.otherDB ?? 0);
     const armorDB = Number(combat.armorDB ?? 0);
+
+    // Adrenal Defense (§4.4.3): the skill's bonus adds to DB, but the
+    // skill is restrictive — it does not work while wearing armor.
+    // (Awareness of the attacker and heavy/non-kata weapon carriage
+    // are per-attack GM adjudications, not derivation state.) Actors
+    // with the adrenalDefense skill item use its bonus; actors without
+    // it keep the stored manual field as a fallback.
+    const adrenalSkill = itemList.find(
+        (i) => i?.type === "skill" && i.system?.slug === "adrenalDefense"
+    ) ?? null;
+    const adrenalSkillBonus = Number(adrenalSkill?.system?.bonus) || 0;
+    const adrenalBlockedByArmor = !!adrenalSkill && wornArmor.length > 0;
+    const adrenalEffective = adrenalSkill
+        ? (adrenalBlockedByArmor ? 0 : adrenalSkillBonus)
+        : storedAdrenal;
 
     // Total DB Calculation. A chart animal uses its chart DB as the natural
     // defensive base; external components (shield, stored extras) still
@@ -124,8 +139,8 @@ export function calculateArmorAndDefenses(actorData) {
     // DB for that attack type; the Adrenal Defense component counts in
     // full against melee and at half against missile attacks (§4.4.3).
     const naturalDB = chartDB ?? quicknessBonus;
-    const totalDB = naturalDB + adrenalDefense + shieldBonus + otherDB + armorDB;
-    const totalMissileDB = naturalDB + (adrenalDefense / 2) + shieldMissileBonus + otherDB + armorDB;
+    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB;
+    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB;
 
     return {
         derived: derivedStats,
@@ -138,7 +153,10 @@ export function calculateArmorAndDefenses(actorData) {
             quickness: quPenalty
         },
         quicknessBonus,
-        adrenalDefense,
+        adrenalDefense: storedAdrenal,
+        adrenalSkillBonus,
+        adrenalBlockedByArmor,
+        adrenalEffective,
         shieldBonus,
         shieldMissileBonus,
         otherDB,
