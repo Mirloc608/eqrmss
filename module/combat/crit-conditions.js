@@ -548,7 +548,12 @@ async function promptParryAllocation(actor, weaponItem, maxOb) {
     const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
     if (!DialogV2?.prompt || maxOb <= 0) return maxOb;
     try {
-        const formData = await DialogV2.prompt({
+        // Read the allocation from the live input in the ok callback:
+        // this build's prompt resolution shape for form data has proven
+        // unreliable (a submitted 5 came back as 0), while the DOM value
+        // at click time is authoritative. Fall back to the resolved form
+        // data if the callback result is not a usable primitive.
+        const result = await DialogV2.prompt({
             window: { title: "Parry: OB Allocation" },
             content: `
                 <div class="form-group">
@@ -556,11 +561,21 @@ async function promptParryAllocation(actor, weaponItem, maxOb) {
                     <input type="number" name="allocation" value="${maxOb}" min="0" max="${maxOb}" step="1">
                 </div>
                 <p class="hint">${esc(actor.name)} may allocate any part of ${esc(weaponItem.name)}'s OB ${maxOb} to DB. The remainder stays available for an attack with that weapon.</p>`,
-            ok: { label: "Declare Parry" }
+            ok: {
+                label: "Declare Parry",
+                callback: (event, button, dialog) => {
+                    const input = dialog?.element?.querySelector?.('input[name="allocation"]')
+                        ?? button?.form?.elements?.allocation
+                        ?? null;
+                    return input?.value ?? "";
+                }
+            }
         });
-        if (!formData) return null;
-        const raw = typeof formData.get === "function" ? formData.get("allocation") : formData.allocation;
-        return Number(raw);
+        if (result == null) return null; // cancelled
+        if (typeof result === "number") return result;
+        if (typeof result === "string") return result.trim() === "" ? null : Number(result);
+        const raw = typeof result.get === "function" ? result.get("allocation") : result.allocation;
+        return raw == null || raw === "" ? null : Number(raw);
     } catch (e) {
         console.warn("EQRMSS | Parry allocation prompt failed; declaration cancelled.", e);
         return null;
