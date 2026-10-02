@@ -28,7 +28,7 @@ export default class EQRMSSNPCSheet
 
         position:{
             width: 300,
-            height: "auto"
+            height: 260
         }
 
     };
