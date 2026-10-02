@@ -187,7 +187,20 @@ function targetParryDB(targetActor, attackerWeaponType, missileAttack) {
 
 export async function rollWeaponAttack(actor, weaponItem) {
     const sys = weaponItem.system ?? {};
-    const tableName = sys.attackTable;
+    // Weapons granted before their template carried an attack table
+    // have none baked into the item; resolve it through the composer
+    // from the stored template id so legacy items roll without a
+    // manual weapon-sheet recompose.
+    let tableName = sys.attackTable ?? null;
+    if (!tableName && sys.weaponTemplate && game.eqrmss?.weapons?.compose) {
+        try {
+            tableName = game.eqrmss.weapons.compose(
+                sys.weaponTemplate,
+                sys.material ?? "steel",
+                sys.condition ?? "normal"
+            )?.attackTable ?? null;
+        } catch (e) { /* unknown template — fall through to the warning */ }
+    }
     const weaponType = sys.type;
 
     if (!tableName) {
