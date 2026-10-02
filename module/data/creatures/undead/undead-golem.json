@@ -1,49 +1,53 @@
 {
-  "id": "ogre-npc-male",
-  "key": "ogre-npc-male",
-  "name": "Ogre NPC - Male",
+  "id": "undead-golem",
+  "key": "undead-golem",
+  "name": "Undead Golem",
   "type": "race",
   "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "A male ogre townsfolk or functionary, going about his business.",
-  "lore": "Not every ogre is a warrior; some just want lunch.",
+  "description": "A massive humanoid of stone or clay, animated by inscription or ritual.",
+  "lore": "Golems are the classic guardians: tireless, literal-minded, and very heavy.",
   "observedLevels": {
-    "lo": 95,
-    "hi": 95
+    "lo": 33,
+    "hi": 76
   },
   "observedZones": [],
   "peqVariants": [
     [
-      624,
+      17,
+      3
+    ],
+    [
+      374,
       3
     ]
   ],
   "stats": {
     "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
-    "sampleRows": 1,
+    "sampleRows": 10,
     "level": [
-      95,
-      95
+      33,
+      76
     ],
     "hp": [
-      9975,
-      9975
+      1419,
+      6536
     ],
     "damage": [
-      null,
-      4
+      13,
+      78
     ],
     "ac": [
-      466,
-      466
+      148,
+      376
     ],
     "resists": {
-      "MR": 0,
-      "CR": 0,
-      "DR": 0,
-      "FR": 0,
-      "PR": 0,
-      "CO": 0
+      "MR": 8,
+      "CR": 8,
+      "DR": 8,
+      "FR": 8,
+      "PR": 8,
+      "CO": 13
     }
   },
   "racialTalents": [],
@@ -54,8 +58,8 @@
     ]
   },
   "size": {
-    "lo": 10.0,
-    "hi": 10.0,
+    "lo": 8.0,
+    "hi": 15.0,
     "_note": "EQ model scale multiplier"
   },
   "height": "PLACEHOLDER",

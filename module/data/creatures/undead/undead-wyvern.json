@@ -1,53 +1,49 @@
 {
-  "id": "drake",
-  "key": "drake",
-  "name": "Drake",
+  "id": "undead-wyvern",
+  "key": "undead-wyvern",
+  "name": "Undead Wyvern",
   "type": "race",
-  "creatureType": "animal",
+  "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "A lesser dragon-kin, winged and scaled but lacking the age and cunning of true dragons.",
-  "lore": "Drakes serve greater wyrms or lair alone in high peaks, fiercely guarding their hoards.",
+  "description": "A two-legged dragon-kin with a barbed stinging tail and leathery wings.",
+  "lore": "Wyverns are less intelligent than true dragons but no less deadly; their sting kills in agony.",
   "observedLevels": {
-    "lo": 2,
-    "hi": 12
+    "lo": 70,
+    "hi": 70
   },
   "observedZones": [],
   "peqVariants": [
     [
-      89,
-      21
-    ],
-    [
-      432,
-      21
+      157,
+      3
     ]
   ],
   "stats": {
     "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
-    "sampleRows": 16,
+    "sampleRows": 1,
     "level": [
-      2,
-      62
+      70,
+      70
     ],
     "hp": [
-      25,
-      10230
+      78000,
+      78000
     ],
     "damage": [
-      1,
-      345
+      200,
+      904
     ],
     "ac": [
-      13,
-      307
+      299,
+      299
     ],
     "resists": {
-      "MR": 6,
-      "CR": 6,
-      "DR": 6,
-      "FR": 6,
-      "PR": 6,
-      "CO": 8
+      "MR": 75,
+      "CR": 75,
+      "DR": 75,
+      "FR": 100,
+      "PR": 75,
+      "CO": 200
     }
   },
   "racialTalents": [],
@@ -58,8 +54,8 @@
     ]
   },
   "size": {
-    "lo": 3.0,
-    "hi": 12.0,
+    "lo": 14.0,
+    "hi": 14.0,
     "_note": "EQ model scale multiplier"
   },
   "height": "PLACEHOLDER",

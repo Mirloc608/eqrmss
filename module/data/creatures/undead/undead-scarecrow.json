@@ -1,49 +1,53 @@
 {
-  "id": "treant",
-  "key": "treant",
-  "name": "Treant",
+  "id": "undead-scarecrow",
+  "key": "undead-scarecrow",
+  "name": "Undead Scarecrow",
   "type": "race",
-  "creatureType": "construct",
+  "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "A walking tree, ancient and slow to anger, terrible when roused.",
-  "lore": "Treants guard old forests; those who harm the woods answer to them.",
+  "description": "A straw-stuffed field guardian, sometimes given a darker purpose.",
+  "lore": "Scarecrows frighten crows; the enchanted ones frighten everyone.",
   "observedLevels": {
-    "lo": 93,
-    "hi": 95
+    "lo": 12,
+    "hi": 97
   },
   "observedZones": [],
   "peqVariants": [
     [
-      496,
-      5
+      82,
+      3
+    ],
+    [
+      575,
+      3
     ]
   ],
   "stats": {
     "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
-    "sampleRows": 4,
+    "sampleRows": 26,
     "level": [
-      93,
-      95
+      10,
+      97
     ],
     "hp": [
-      9579,
-      9975
+      180,
+      9999999
     ],
     "damage": [
-      null,
-      4
+      1,
+      10004
     ],
     "ac": [
-      458,
-      466
+      34,
+      504
     ],
     "resists": {
-      "MR": 0,
-      "CR": 0,
-      "DR": 0,
-      "FR": 0,
-      "PR": 0,
-      "CO": 0
+      "MR": 75,
+      "CR": 67,
+      "DR": 67,
+      "FR": 66,
+      "PR": 67,
+      "CO": 76
     }
   },
   "racialTalents": [],
@@ -54,8 +58,8 @@
     ]
   },
   "size": {
-    "lo": 8.0,
-    "hi": 11.0,
+    "lo": 1.0,
+    "hi": 15.0,
     "_note": "EQ model scale multiplier"
   },
   "height": "PLACEHOLDER",

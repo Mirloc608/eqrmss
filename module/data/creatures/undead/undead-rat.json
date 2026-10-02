@@ -1,61 +1,65 @@
 {
-  "id": "drolvarg",
-  "key": "drolvarg",
-  "name": "Drolvarg",
+  "id": "undead-rat",
+  "key": "undead-rat",
+  "name": "Undead Rat",
   "type": "race",
-  "creatureType": "animal",
+  "creatureType": "undead",
   "img": "PLACEHOLDER",
-  "description": "A gnoll-like dog-man standing upright, with slavering jaws and pack-hunter cunning.",
-  "lore": "Drolvarg packs hunt the wilds of Kunark, answering to stronger masters when it suits them.",
+  "description": "A filthy ubiquitous rodent, bold in numbers, cowardly alone.",
+  "lore": "Rats infest every city and dungeon in Norrath; where civilization goes, they follow.",
   "observedLevels": {
-    "lo": 23,
-    "hi": 52
+    "lo": 4,
+    "hi": 99
   },
   "observedZones": [],
   "peqVariants": [
     [
-      133,
-      2
+      415,
+      3
+    ],
+    [
+      36,
+      3
     ]
   ],
   "stats": {
     "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
-    "sampleRows": 67,
+    "sampleRows": 49,
     "level": [
-      23,
-      70
+      4,
+      99
     ],
     "hp": [
-      759,
-      300000
+      56,
+      100000
     ],
     "damage": [
       1,
-      1512
+      1177
     ],
     "ac": [
-      103,
-      508
+      16,
+      486
     ],
     "resists": {
-      "MR": 20,
-      "CR": 20,
-      "DR": 20,
-      "FR": 20,
-      "PR": 20,
-      "CO": 32
+      "MR": 60,
+      "CR": 59,
+      "DR": 59,
+      "FR": 59,
+      "PR": 59,
+      "CO": 15
     }
   },
   "racialTalents": [],
   "movement": {
     "runspeed": [
-      1.25,
-      1.5
+      1.0,
+      2.0
     ]
   },
   "size": {
     "lo": 6.0,
-    "hi": 11.0,
+    "hi": 40.0,
     "_note": "EQ model scale multiplier"
   },
   "height": "PLACEHOLDER",
