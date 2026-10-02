@@ -173,6 +173,16 @@ export async function rollWeaponAttack(actor, weaponItem) {
         return;
     }
 
+    // ---- Full Parry forfeits the attack: the OB is already in DB ----
+    if (actor.system?.status?.parrying) {
+        await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor }),
+            content: `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>`
+                + `<p><em>${esc(actor.name)} is parrying this round and cannot take offensive action.</em></p>`
+        });
+        return;
+    }
+
     // ---- OB: weapon skill bonus + weapon OB mod (shared with parry) ----
     const { skill, skillBonus, obMod, ob: baseOb } = computeWeaponOB(actor, weaponItem);
 
@@ -225,6 +235,10 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // ---- Action penalty: "at -N" hits ALL actions ----
     const actionPenalty = Math.min(0, Number(actor.system?.status?.actionPenalty?.value) || 0);
     const ob = baseOb + swingBonus + actionPenalty;
+
+    // The attack is committed once target selection succeeds: mark the
+    // round so a later Full Parry declaration is refused.
+    await actor.update({ "system.status.attackedThisRound": true });
 
     // ---- Attack roll (high open-ended) ----
     const ar = await openEndedAttackRoll();

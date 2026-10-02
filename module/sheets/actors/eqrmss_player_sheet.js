@@ -354,6 +354,14 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }));
 
         // ------------------------------------------------------------
+        // Combat Tab: Full Parry declarations (all OB -> DB)
+        // ------------------------------------------------------------
+        html.querySelectorAll(".parry-declare").forEach(el => el.addEventListener("click", ev => {
+            const itemId = ev.currentTarget.dataset.itemId;
+            this._onParryDeclare(itemId);
+        }));
+
+        // ------------------------------------------------------------
         // Combat Tab: Initiative (RMSS §6.1)
         // ------------------------------------------------------------
         html.querySelectorAll(".initiative-roll").forEach(el => el.addEventListener("click", () => {
@@ -719,6 +727,21 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         } catch (e) {
             console.error("EQRMSS | Attack roll failed", e);
             ui.notifications.error(`Attack roll failed: ${e.message}`);
+        }
+    }
+
+    async _onParryDeclare(itemId) {
+        const item = this.actor.items.get(itemId);
+        if (!item || item.type !== "weapon") {
+            ui.notifications.error(`Unknown weapon: ${itemId}`);
+            return;
+        }
+        try {
+            const { declareParry } = await import("../../combat/crit-conditions.js");
+            await declareParry(this.actor, item);
+        } catch (e) {
+            console.error("EQRMSS | Parry declaration failed", e);
+            ui.notifications.error(`Parry declaration failed: ${e.message}`);
         }
     }
 }

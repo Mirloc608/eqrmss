@@ -47,6 +47,7 @@
 //   status.nextSwingBonus number
 //   status.parrying       boolean (declared parry, cleared each round)
 //   status.parryDB        number (the parrier's full OB)
+//   status.attackedThisRound boolean (attack made; blocks a later parry)
 //   status.unconscious    boolean (§6.4.1)
 //   status.soulTimer      number (rounds left; §3.8 dying countdown)
 //   status.soulTimerUnknown boolean (dying, race not in Table 15.5.1 —
@@ -400,11 +401,15 @@ export async function tickConditions(combat) {
             updates["system.status.mustParry"] = { rounds: mpr - 1, penalty: Number(st.mustParry?.penalty) || 0 };
         }
 
-        // Declared parry lapses at the round change.
+        // Declared parry lapses at the round change; the round's attack
+        // marker clears with it.
         if (st.parrying || (Number(st.parryDB) || 0) > 0) {
             updates["system.status.parrying"] = false;
             updates["system.status.parryDB"] = 0;
             notes.push(`${esc(actor.name)}'s parry lapses.`);
+        }
+        if (st.attackedThisRound) {
+            updates["system.status.attackedThisRound"] = false;
         }
 
         if (Object.keys(updates).length) await actor.update(updates);
@@ -516,9 +521,10 @@ export async function consumeNextSwingBonus(actor) {
 }
 
 // ------------------------------------------------------------
-// Parry — ruled conversion (full OB -> DB); declaration timing
-// and attack-forfeit enforcement still pending with the
-// non-offensive combat mechanics.
+// Parry — ruled conversion (full OB -> DB) for the current round.
+// Attack resolution enforces the forfeit both ways: a parrying
+// combatant cannot attack, and a combatant who has already attacked
+// this round cannot switch into a full parry.
 // ------------------------------------------------------------
 
 export async function declareParry(actor, weaponItem) {
@@ -541,6 +547,15 @@ export async function declareParry(actor, weaponItem) {
         ui.notifications?.warn(`${actor.name} is ${STUN_LABEL[st.type]} and cannot parry.`);
         return;
     }
+    // Attack-forfeit: the round's OB cannot be spent twice.
+    if (actor.system?.status?.attackedThisRound) {
+        ui.notifications?.warn(`${actor.name} has already attacked this round and cannot switch to a full parry.`);
+        return;
+    }
+    if (actor.system?.status?.parrying) {
+        ui.notifications?.warn(`${actor.name} is already parrying this round.`);
+        return;
+    }
     // Full Parry: ALL of the combatant's OB goes into DB.
     const { ob } = computeWeaponOB(actor, weaponItem);
     const updates = {
@@ -554,7 +569,7 @@ export async function declareParry(actor, weaponItem) {
     await actor.update(updates);
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content: `<p><em>${esc(actor.name)} parries with ${esc(weaponItem.name)} — +${ob} DB. (Declaration timing and attack-forfeit pending.)</em></p>`
+        content: `<p><em>${esc(actor.name)} parries with ${esc(weaponItem.name)} — +${ob} DB this round.</em></p>`
     });
 }
 

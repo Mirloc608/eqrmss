@@ -38,7 +38,7 @@
       <tbody>
         {{#each readiedWeapons}}
           <tr data-item-id="{{this._id}}">
-            <td><button class="attack-roll" data-item-id="{{this._id}}" title="Roll attack vs targeted token (RMSS §6.2)">Attack</button></td>
+            <td><button class="attack-roll" data-item-id="{{this._id}}" title="Roll attack vs targeted token (RMSS §6.2)">Attack</button> <button class="parry-declare" data-item-id="{{this._id}}" title="Declare Full Parry with this weapon — all OB becomes DB for the round">Parry</button></td>
             <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
             <td>{{this.system.attackTable}}</td>
             <td>{{this.system.obMod}}</td>

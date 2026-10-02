@@ -8,7 +8,7 @@
     .npc-mini .npc-defenses { display: flex; justify-content: space-between; margin-top: 2px; font-size: 11px; opacity: 0.85; flex: 0 0 auto; }
     .npc-mini .npc-attacks { margin-top: 4px; flex: 1 1 auto; overflow-y: auto; min-height: 0; }
     .npc-mini .npc-atk { display: flex; gap: 4px; align-items: center; padding: 1px 0; }
-    .npc-mini .npc-atk .attack-roll { padding: 0 6px; font-size: 12px; line-height: 1.4; flex: 0 0 auto; }
+    .npc-mini .npc-atk .attack-roll, .npc-mini .npc-atk .parry-declare { padding: 0 6px; font-size: 12px; line-height: 1.4; flex: 0 0 auto; }
     .npc-mini .npc-atk .n { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .npc-mini .npc-atk .ob { font-size: 11px; opacity: 0.8; flex: 0 0 auto; }
     .npc-mini .npc-drop-hint { margin-top: 4px; padding: 4px; border: 1px dashed #999; border-radius: 4px; text-align: center; font-size: 11px; opacity: 0.7; flex: 0 0 auto; }
@@ -17,11 +17,12 @@
     <input name="name" type="text" value="{{actor.name}}"/>
     <span class="npc-hits"><input name="system.hits.value" type="number" value="{{system.hits.value}}"/>/{{system.hits.max}}</span>
   </div>
-  <div class="npc-defenses"><span>{{system.combat.armorType}}</span><span>DB {{system.combat.totalDB}}</span></div>
+  <div class="npc-defenses"><span>{{system.combat.armorType}}</span><span>DB {{system.combat.totalDB}}{{#if system.status.parrying}} (+{{system.status.parryDB}} parry){{/if}}</span></div>
   <div class="npc-attacks">
     {{#each items.weapons}}
     <div class="npc-atk">
       <button type="button" class="attack-roll" data-item-id="{{_id}}" title="Roll {{name}}"><i class="fas fa-dice-d20"></i></button>
+      <button type="button" class="parry-declare" data-item-id="{{_id}}" title="Declare Full Parry with {{name}}"><i class="fas fa-shield-halved"></i></button>
       <span class="n">{{name}}</span>
       <span class="ob">{{system.obMod}}</span>
     </div>
