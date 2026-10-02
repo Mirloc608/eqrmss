@@ -92,7 +92,9 @@ async function promptTarget(missileAttack = false) {
         .map(a => {
             const at = parseArmorType(a.system?.combat?.armorType);
             const missileDB = Number(a.system?.combat?.totalMissileDB);
-            const db = missileAttack && Number.isFinite(missileDB) ? (missileDB || 0) : (Number(a.system?.combat?.totalDB) || 0);
+            const db = a.system?.status?.unconscious
+                ? 0 // unconscious: no derived DB
+                : (missileAttack && Number.isFinite(missileDB) ? (missileDB || 0) : (Number(a.system?.combat?.totalDB) || 0));
             return `<option value="${esc(a.id)}" data-actor-name="${esc(a.name)}"`
                 + ` data-at="${at ?? ""}" data-db="${db}">${esc(a.name)}</option>`;
         })
@@ -155,6 +157,9 @@ function isMissileAttack(weaponType) {
 }
 
 function targetDefenseDB(targetActor, missileAttack) {
+    // An unconscious defender has no derived DB at all (user ruling
+    // 2026-10-02) — the whole derivation is negated, not just Adrenal.
+    if (targetActor?.system?.status?.unconscious) return 0;
     const combat = targetActor?.system?.combat ?? {};
     const missileDB = Number(combat.totalMissileDB);
     if (missileAttack && Number.isFinite(missileDB)) return missileDB || 0;
@@ -168,6 +173,7 @@ function targetDefenseDB(targetActor, missileAttack) {
 // non-pole arms. Stun-no-parry/down-or-out suppresses the parry DB.
 function targetParryDB(targetActor, attackerWeaponType, missileAttack) {
     if (!targetActor || missileAttack) return 0;
+    if (targetActor.system?.status?.unconscious) return 0; // no DB while unconscious
     const tst = activeStun(targetActor.system?.status?.stun);
     if (tst && tst.type !== "stunned") return 0;
     const status = targetActor.system?.status ?? {};
@@ -288,6 +294,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // (base defense only). Weapon parries do not apply vs missiles.
     const parryDB = targetParryDB(targetActor, weaponType, missileAttack);
     db += parryDB;
+    const targetUnconscious = !!targetActor?.system?.status?.unconscious;
 
     // ---- Next-swing bonus (critical condition, consumed on use) ----
     // Placed after target determination so a cancelled prompt does not burn it.
@@ -332,7 +339,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const SIZE_LABEL = { T: "Tiny", S: "Small", M: "Medium", L: "Large", H: "Huge" };
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
         + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}`
-        + ` − DB ${db}${parryDB ? ` (+${parryDB} parry)` : ""} = <strong>${ar.total + ob - db}</strong>`
+        + ` − DB ${db}${parryDB ? ` (+${parryDB} parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
     if (lookup.error && lookup.miss) {
