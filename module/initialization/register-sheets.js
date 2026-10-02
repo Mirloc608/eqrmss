@@ -4,6 +4,7 @@
 // ============================================================
 
 import EQRMSSPlayerSheet from "../sheets/actors/eqrmss_player_sheet.js";
+import EQRMSSNPCSheet from "../sheets/actors/eqrmss_npc_sheet.js";
 import EQRMSSItemSheet from "../sheets/items/eqrmss_item_sheet.js";
 import EQRMSSArmorSheet from "../sheets/items/eqrmss_armor_sheet.js";
 import EQRMSSTransportSheet from "../sheets/items/eqrmss_transport_sheet.js";
@@ -22,8 +23,14 @@ export function registerEQRMSSSheets() {
 
     // --- Actor Sheets ---
     DocumentSheetConfig.registerSheet(Actor, "eqrmss", EQRMSSPlayerSheet, {
-        types: ["character", "npc"],
+        types: ["character"],
         label: "eqrmss.entity_sheet.player",
+        makeDefault: true
+    });
+
+    DocumentSheetConfig.registerSheet(Actor, "eqrmss", EQRMSSNPCSheet, {
+        types: ["npc"],
+        label: "eqrmss.entity_sheet.npc",
         makeDefault: true
     });
 

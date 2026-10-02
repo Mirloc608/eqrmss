@@ -1,257 +1,56 @@
-<form class="eqrmss sheet actor npc-sheet" autocomplete="off">
-
-    <header class="sheet-header">
-
-        <img
-            src="{{actor.img}}"
-            data-edit="img"
-            title="{{actor.name}}"
-            height="64"
-            width="64"
-        />
-
-        <h1>
-            <input
-                name="name"
-                type="text"
-                value="{{actor.name}}"
-            />
-        </h1>
-
-    </header>
-
-    <section class="npc-info">
-
-        <h2>NPC Information</h2>
-
-        <div class="form-group">
-            <label>Race</label>
-            <input
-                name="system.fixed_info.race"
-                type="text"
-                value="{{system.fixed_info.race}}"
-            />
-        </div>
-
-        <div class="form-group">
-            <label>Profession</label>
-            <input
-                name="system.fixed_info.profession"
-                type="text"
-                value="{{system.fixed_info.profession}}"
-            />
-        </div>
-
-        <div class="form-group">
-            <label>Realm</label>
-            <input
-                name="system.fixed_info.realm"
-                type="text"
-                value="{{system.fixed_info.realm}}"
-                readonly
-            />
-        </div>
-
-        <div class="form-group">
-            <label>Description</label>
-
-            {{editor
-                enrichedDescription
-                target="system.description"
-                button=true
-                editable=editable
-            }}
-
-        </div>
-
-    </section>
-
-    <section class="npc-vitals">
-
-        <h2>Combat Vitals</h2>
-
-        <div class="form-group">
-            <label>Base Hits</label>
-            <input
-                name="system.hits.base"
-                type="number"
-                value="{{system.hits.base}}"
-            />
-        </div>
-
-        <div class="form-group">
-            <label>Total Hits</label>
-            <input
-                type="number"
-                value="{{system.hits.max}}"
-                readonly
-            />
-        </div>
-
-    </section>
-
-    <section class="npc-conditions">
-
-        <h2>Conditions</h2>
-
-        <table>
-
-            <tr>
-                <th>Condition</th>
-                <th>Status</th>
-            </tr>
-
-            <tr>
-                <td>Stunned</td>
-                <td>{{#if system.status.stun.stunned}}{{system.status.stun.stunned}} round(s){{else}}&mdash;{{/if}}</td>
-            </tr>
-
-            <tr>
-                <td>Stunned (no parry)</td>
-                <td>{{#if system.status.stun.stunNoParry}}{{system.status.stun.stunNoParry}} round(s){{else}}&mdash;{{/if}}</td>
-            </tr>
-
-            <tr>
-                <td>Down or Out</td>
-                <td>{{#if system.status.stun.downOrOut}}{{system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</td>
-            </tr>
-
-            <tr>
-                <td>Bleeding</td>
-                <td>{{#if system.status.bleed.perRound}}{{system.status.bleed.perRound}} hits/round{{else}}&mdash;{{/if}}</td>
-            </tr>
-
-            <tr>
-                <td>Death Timer</td>
-                <td>{{#if system.status.deathTimer}}{{system.status.deathTimer}} round(s) &mdash; healing spell only{{else}}&mdash;{{/if}}</td>
-            </tr>
-
-            <tr>
-                <td>Action Penalty</td>
-                <td>{{#if system.status.actionPenalty.value}}-{{system.status.actionPenalty.value}} ({{system.status.actionPenalty.rounds}} round(s)){{else}}&mdash;{{/if}}</td>
-            </tr>
-
-            <tr>
-                <td>Must Parry</td>
-                <td>{{#if system.status.mustParry.rounds}}{{system.status.mustParry.rounds}} round(s){{else}}&mdash;{{/if}}</td>
-            </tr>
-
-            <tr>
-                <td>Next Swing</td>
-                <td>{{#if system.status.nextSwingBonus}}+{{system.status.nextSwingBonus}}{{else}}&mdash;{{/if}}</td>
-            </tr>
-
-            <tr>
-                <td>Parrying</td>
-                <td>{{#if system.status.parrying}}+{{system.status.parryDB}} DB{{else}}&mdash;{{/if}}</td>
-            </tr>
-
-            <tr>
-                <td>Unconscious</td>
-                <td>{{#if system.status.unconscious}}Yes{{else}}&mdash;{{/if}}</td>
-            </tr>
-
-            <tr>
-                <td>Soul Timer</td>
-                <td>{{#if system.status.soulTimer}}{{system.status.soulTimer}} round(s) &mdash; dying{{else}}{{#if system.status.soulTimerUnknown}}Dying &mdash; GM adjudicates{{else}}&mdash;{{/if}}{{/if}}</td>
-            </tr>
-
-        </table>
-
-        {{#if system.status.dead}}<p style="color: #b00;"><strong>Dead.</strong></p>{{/if}}
-
-    </section>
-
-    <section class="npc-stats">
-
-        <h2>Stats</h2>
-
-        <table>
-
-            <tr>
-                <th>Stat</th>
-                <th>Total</th>
-                <th>Bonus</th>
-            </tr>
-
-            {{#each system.stats}}
-
-            <tr>
-
-                <td>
-                    {{@key}}
-                </td>
-
-                <td>
-                    <input
-                        name="system.stats.{{@key}}.total"
-                        type="number"
-                        value="{{total}}"
-                    />
-                </td>
-
-                <td>
-                    {{stat_bonus}}
-                </td>
-
-            </tr>
-
-            {{/each}}
-
-        </table>
-
-    </section>
-
-    <section class="npc-items">
-
-        <h2>Equipment</h2>
-
-        {{#each inventory}}
-
-            <div class="item-row">
-
-                <span>
-                    {{name}}
-                </span>
-
-                <button
-                    type="button"
-                    class="item-edit"
-                    data-item-id="{{id}}"
-                >
-                    Edit
-                </button>
-
-            </div>
-
-        {{/each}}
-
-    </section>
-
-    <section class="npc-skills">
-
-        <h2>Skills</h2>
-
-        {{#each skills}}
-
-            <div class="item-row">
-
-                <span>
-                    {{name}}
-                </span>
-
-                <button
-                    type="button"
-                    class="item-edit"
-                    data-item-id="{{id}}"
-                >
-                    Edit
-                </button>
-
-            </div>
-
-        {{/each}}
-
-    </section>
-
+<form class="eqrmss sheet actor npc-sheet npc-compact" autocomplete="off">
+  <header class="sheet-header">
+    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="48" width="48"/>
+    <div class="npc-title">
+      <h1><input name="name" type="text" value="{{actor.name}}"/></h1>
+      <div class="npc-subtitle">{{system.fixed_info.race}}{{#if system.fixed_info.profession}} &bull; {{system.fixed_info.profession}}{{/if}} &bull; Level {{system.character.level}}</div>
+    </div>
+    <div class="npc-hits">
+      <label>Hits</label>
+      <input name="system.hits.value" type="number" value="{{system.hits.value}}"/> /
+      <span>{{system.hits.max}}</span>
+    </div>
+  </header>
+
+  <section class="npc-combat">
+    <h2>Attacks</h2>
+    {{#each items.weapons}}
+    <div class="item-row">
+      <span class="item-name">{{name}}</span>
+      <span class="item-ob">OB {{system.obMod}}</span>
+    </div>
+    {{else}}
+    <p class="npc-empty">No attacks.</p>
+    {{/each}}
+  </section>
+
+  <details class="npc-details">
+    <summary>Stats</summary>
+    <table>
+      {{#each system.stats}}
+      <tr><td>{{@key}}</td><td>{{total}} ({{stat_bonus}})</td></tr>
+      {{/each}}
+    </table>
+  </details>
+
+  <details class="npc-details">
+    <summary>Skills ({{items.skills.length}})</summary>
+    {{#each items.skills}}
+    <div class="item-row"><span>{{name}}</span><span>+{{system.bonus}}</span></div>
+    {{/each}}
+  </details>
+
+  {{#if items.spells.length}}
+  <details class="npc-details">
+    <summary>Spells ({{items.spells.length}})</summary>
+    {{#each items.spells}}
+    <div class="item-row"><span>{{name}}</span></div>
+    {{/each}}
+  </details>
+  {{/if}}
+
+  <details class="npc-details">
+    <summary>Notes</summary>
+    <div class="npc-notes">{{system.description}}</div>
+  </details>
 </form>
