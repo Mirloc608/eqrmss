@@ -1,61 +1,65 @@
 {
-  "id": "high-elf",
-  "key": "high-elf",
-  "name": "High Elf",
+  "id": "npc-erudite",
+  "key": "npc-erudite",
+  "name": "NPC Erudite",
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "A golden-skinned elf of Felwithe, proud and long-lived.",
-  "lore": "High elves consider themselves Norrath's first and finest; others disagree.",
+  "description": "A tall dark-skinned human of Erudin, devoted to intellect.",
+  "lore": "Erudites prize knowledge above all; their wizards are feared across Norrath.",
   "observedLevels": {
-    "lo": 2,
-    "hi": 97
+    "lo": 6,
+    "hi": 99
   },
   "observedZones": [],
   "peqVariants": [
     [
-      5,
+      3,
+      1
+    ],
+    [
+      678,
       1
     ]
   ],
   "stats": {
     "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
-    "sampleRows": 486,
+    "sampleRows": 772,
     "level": [
       1,
-      103
+      100
     ],
     "hp": [
       11,
-      2150000
+      900000000
     ],
     "damage": [
       1,
-      7440
+      100003
     ],
     "ac": [
-      10,
-      992
+      8,
+      1065
     ],
     "resists": {
       "MR": 25,
-      "CR": 22,
-      "DR": 22,
-      "FR": 22,
-      "PR": 22,
-      "CO": 29
+      "CR": 25,
+      "DR": 25,
+      "FR": 25,
+      "PR": 25,
+      "CO": 30
     }
   },
   "racialTalents": [],
   "movement": {
     "runspeed": [
-      0.75,
+      1.2,
       2.5
     ]
   },
   "size": {
     "lo": 5.0,
-    "hi": 8.0,
+    "hi": 30.0,
     "_note": "EQ model scale multiplier"
   },
   "height": "PLACEHOLDER",

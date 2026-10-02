@@ -1,12 +1,12 @@
 {
-  "id": "human",
-  "key": "human",
-  "name": "Human",
+  "id": "npc-halfling",
+  "key": "npc-halfling",
+  "name": "NPC Halfling",
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "The adaptable, ambitious folk of Qeynos and Freeport.",
-  "lore": "Humans are everywhere, building, warring, and thriving on every continent.",
+  "description": "A small folk barely half a human's height, fond of food, comfort, and mischief.",
+  "lore": "Halflings built Rivervale in the Misty Thicket; their curiosity outweighs their caution.",
   "observedLevels": {
     "lo": 1,
     "hi": 100
@@ -14,56 +14,52 @@
   "observedZones": [],
   "peqVariants": [
     [
-      1,
+      11,
       1
     ],
     [
-      566,
-      1
-    ],
-    [
-      71,
+      81,
       1
     ]
   ],
   "stats": {
     "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
-    "sampleRows": 3938,
+    "sampleRows": 791,
     "level": [
       1,
-      102
+      100
     ],
     "hp": [
       11,
-      2147483647
+      15000000
     ],
     "damage": [
       1,
-      32050
+      10005
     ],
     "ac": [
       8,
       1065
     ],
     "resists": {
-      "MR": 22,
-      "CR": 20,
-      "DR": 20,
-      "FR": 20,
-      "PR": 20,
-      "CO": 22
+      "MR": 24,
+      "CR": 21,
+      "DR": 21,
+      "FR": 21,
+      "PR": 21,
+      "CO": 26
     }
   },
   "racialTalents": [],
   "movement": {
     "runspeed": [
-      1.0,
+      1.25,
       2.5
     ]
   },
   "size": {
-    "lo": 1.0,
-    "hi": 14.0,
+    "lo": 2.0,
+    "hi": 20.0,
     "_note": "EQ model scale multiplier"
   },
   "height": "PLACEHOLDER",

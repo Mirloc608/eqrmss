@@ -1,32 +1,40 @@
 {
-  "id": "wood-elf",
-  "key": "wood-elf",
-  "name": "Wood Elf",
+  "id": "npc-troll",
+  "key": "npc-troll",
+  "name": "NPC Troll",
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "A forest-dwelling elf of Kelethin, at one with the treetops.",
-  "lore": "Wood elves are rangers and druids without peer, guarding the Faydark.",
+  "description": "A regenerating brute of Innothule, ugly and nearly unkillable.",
+  "lore": "Trolls of Grobb regenerate from almost anything; fire and acid excepted.",
   "observedLevels": {
-    "lo": 1,
-    "hi": 95
+    "lo": 4,
+    "hi": 80
   },
   "observedZones": [],
   "peqVariants": [
     [
-      4,
+      9,
+      1
+    ],
+    [
+      332,
+      1
+    ],
+    [
+      331,
       1
     ]
   ],
   "stats": {
     "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
-    "sampleRows": 387,
+    "sampleRows": 603,
     "level": [
       1,
-      100
+      101
     ],
     "hp": [
-      11,
+      30,
       2500000
     ],
     "damage": [
@@ -34,28 +42,28 @@
       7440
     ],
     "ac": [
-      8,
-      886
+      13,
+      726
     ],
     "resists": {
-      "MR": 26,
-      "CR": 25,
-      "DR": 25,
-      "FR": 25,
-      "PR": 25,
-      "CO": 30
+      "MR": 21,
+      "CR": 19,
+      "DR": 19,
+      "FR": 19,
+      "PR": 19,
+      "CO": 29
     }
   },
   "racialTalents": [],
   "movement": {
     "runspeed": [
-      0.75,
-      2.5
+      1.25,
+      250.0
     ]
   },
   "size": {
-    "lo": 4.0,
-    "hi": 6.5,
+    "lo": 3.0,
+    "hi": 20.0,
     "_note": "EQ model scale multiplier"
   },
   "height": "PLACEHOLDER",

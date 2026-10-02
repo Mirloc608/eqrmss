@@ -1,49 +1,57 @@
 {
-  "id": "dwarf",
-  "key": "dwarf",
-  "name": "Dwarf",
+  "id": "npc-human",
+  "key": "npc-human",
+  "name": "NPC Human",
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "A stout bearded folk of Kaladim, master smiths and warriors.",
-  "lore": "Dwarves hold grudges for centuries and ale for an evening.",
+  "description": "The adaptable, ambitious folk of Qeynos and Freeport.",
+  "lore": "Humans are everywhere, building, warring, and thriving on every continent.",
   "observedLevels": {
     "lo": 1,
-    "hi": 95
+    "hi": 100
   },
   "observedZones": [],
   "peqVariants": [
     [
-      8,
+      1,
+      1
+    ],
+    [
+      566,
+      1
+    ],
+    [
+      71,
       1
     ]
   ],
   "stats": {
     "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
-    "sampleRows": 1141,
+    "sampleRows": 3938,
     "level": [
       1,
-      103
+      102
     ],
     "hp": [
       11,
-      2500000
+      2147483647
     ],
     "damage": [
       1,
-      7440
+      32050
     ],
     "ac": [
       8,
-      772
+      1065
     ],
     "resists": {
-      "MR": 12,
-      "CR": 12,
-      "DR": 12,
-      "FR": 13,
-      "PR": 12,
-      "CO": 15
+      "MR": 22,
+      "CR": 20,
+      "DR": 20,
+      "FR": 20,
+      "PR": 20,
+      "CO": 22
     }
   },
   "racialTalents": [],
@@ -54,8 +62,8 @@
     ]
   },
   "size": {
-    "lo": 3.0,
-    "hi": 8.0,
+    "lo": 1.0,
+    "hi": 14.0,
     "_note": "EQ model scale multiplier"
   },
   "height": "PLACEHOLDER",

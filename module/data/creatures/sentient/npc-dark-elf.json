@@ -1,33 +1,37 @@
 {
-  "id": "half-elf",
-  "key": "half-elf",
-  "name": "Half Elf",
+  "id": "npc-dark-elf",
+  "key": "npc-dark-elf",
+  "name": "NPC Dark Elf",
   "type": "race",
   "creatureType": "sentient",
   "img": "PLACEHOLDER",
-  "description": "Caught between human and elven worlds, belonging fully to neither.",
-  "lore": "Half-elves are wanderers and diplomats, comfortable everywhere and home nowhere.",
+  "description": "A blue-skinned elf of Neriak, beautiful and utterly ruthless.",
+  "lore": "Dark elves serve Innoruuk; treachery is their native tongue.",
   "observedLevels": {
-    "lo": 6,
-    "hi": 95
+    "lo": 3,
+    "hi": 99
   },
   "observedZones": [],
   "peqVariants": [
     [
-      7,
+      6,
+      1
+    ],
+    [
+      77,
       1
     ]
   ],
   "stats": {
     "_note": "Observed EQ values from PEQ dump 2026-09-26; NOT RMSS stats",
-    "sampleRows": 489,
+    "sampleRows": 867,
     "level": [
       1,
       102
     ],
     "hp": [
       11,
-      2500000
+      2000000
     ],
     "damage": [
       1,
@@ -38,24 +42,24 @@
       829
     ],
     "resists": {
-      "MR": 22,
+      "MR": 26,
       "CR": 21,
       "DR": 21,
-      "FR": 21,
+      "FR": 20,
       "PR": 21,
-      "CO": 29
+      "CO": 25
     }
   },
   "racialTalents": [],
   "movement": {
     "runspeed": [
       1.25,
-      6.0
+      2.5
     ]
   },
   "size": {
-    "lo": 4.5,
-    "hi": 7.0,
+    "lo": 5.0,
+    "hi": 15.0,
     "_note": "EQ model scale multiplier"
   },
   "height": "PLACEHOLDER",
