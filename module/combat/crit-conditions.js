@@ -159,15 +159,29 @@ export function parseNextSwing(text) {
 
 // "at -25", "at -50 for 3 rounds", "operates at -50", "fights at -95".
 // Must-parry clauses are stripped first (their "-20" stays descriptive
-// on the must-parry record). Returns { value, rounds } — rounds 0 =
-// indefinite (no duration stated).
+// on the must-parry record). Sense-specific penalties ("hears at -50",
+// "vision at -25") are NOT global action penalties: a match is skipped
+// when a sense word precedes it in the same sentence segment, so only
+// penalties the text applies to the foe in general count. Returns
+// { value, rounds } — rounds 0 = indefinite (no duration stated).
+const SENSE_RE = /\b(?:hears?|hearing|vision|sees?|seeing|sight|smells?|smelling|tastes?|tasting|perception)\b/i;
+
 export function parsePenalty(text) {
     const out = { value: 0, rounds: 0 };
     if (!text) return out;
-    const stripped = text.replace(/must\s+parry[^.]*/gi, "");
+    const stripped = String(text).replace(/must\s+parry[^.]*/gi, "");
     const re = new RegExp(`\\bat\\s+(-\\d+)(?:\\s+for\\s+(\\d+)\\s+${ROUNDS_RE})?`, "gi");
     let m;
+    let senseCursor = 0; // a sense word excuses only the next penalty after it
     while ((m = re.exec(stripped))) {
+        // Segment prefix: text since the last sentence break before
+        // this match. A sense word there (not already consumed by an
+        // earlier sense penalty) makes this a sense penalty.
+        const segStart = Math.max(stripped.lastIndexOf(".", m.index), stripped.lastIndexOf(";", m.index)) + 1;
+        if (SENSE_RE.test(stripped.slice(Math.max(segStart, senseCursor), m.index))) {
+            senseCursor = m.index + m[0].length;
+            continue;
+        }
         const v = Number(m[1]);
         if (v < out.value) {
             out.value = v;
