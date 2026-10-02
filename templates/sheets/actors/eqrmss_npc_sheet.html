@@ -1,69 +1,29 @@
-<form class="eqrmss sheet actor npc-sheet npc-compact" autocomplete="off">
+<form class="eqrmss sheet actor npc-sheet npc-mini" autocomplete="off">
   <style>
-    .npc-compact { font-size: 12px; padding: 6px; }
-    .npc-compact .sheet-header { display: flex; gap: 8px; align-items: center; padding: 4px; }
-    .npc-compact .npc-title h1 { margin: 0; font-size: 15px; }
-    .npc-compact .npc-title h1 input { font-size: 15px; padding: 1px 4px; }
-    .npc-compact .npc-subtitle { font-size: 11px; opacity: 0.8; }
-    .npc-compact .npc-hits { margin-left: auto; white-space: nowrap; font-size: 12px; }
-    .npc-compact .npc-hits input { width: 44px; padding: 1px 3px; font-size: 12px; }
-    .npc-compact h2 { font-size: 13px; margin: 6px 0 3px; }
-    .npc-compact .item-row { display: flex; gap: 6px; align-items: center; padding: 2px 0; }
-    .npc-compact .item-row .item-name { flex: 1; }
-    .npc-compact .item-row .item-ob { font-size: 11px; opacity: 0.85; }
-    .npc-compact .attack-roll { padding: 1px 8px; font-size: 11px; }
-    .npc-compact details.npc-details { margin-top: 4px; }
-    .npc-compact details.npc-details summary { cursor: pointer; font-size: 12px; }
-    .npc-compact table { font-size: 11px; }
-    .npc-compact table td { padding: 1px 4px; }
+    .npc-mini { font-size: 12px; padding: 4px; min-width: 260px; }
+    .npc-mini .npc-bar { display: flex; gap: 6px; align-items: center; }
+    .npc-mini .npc-bar input[name="name"] { flex: 1; font-size: 14px; font-weight: bold; padding: 1px 4px; min-width: 0; }
+    .npc-mini .npc-hits { white-space: nowrap; }
+    .npc-mini .npc-hits input { width: 40px; padding: 1px 2px; font-size: 12px; text-align: center; }
+    .npc-mini .npc-attacks { margin-top: 4px; }
+    .npc-mini .npc-atk { display: flex; gap: 4px; align-items: center; padding: 1px 0; }
+    .npc-mini .npc-atk .attack-roll { padding: 0 6px; font-size: 12px; line-height: 1.4; }
+    .npc-mini .npc-atk .n { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .npc-mini .npc-atk .ob { font-size: 11px; opacity: 0.8; }
+    .npc-mini .npc-drop-hint { margin-top: 6px; padding: 6px; border: 1px dashed #999; border-radius: 4px; text-align: center; font-size: 11px; opacity: 0.7; }
   </style>
-  <header class="sheet-header">
-    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="36" width="36"/>
-    <div class="npc-title">
-      <h1><input name="name" type="text" value="{{actor.name}}"/></h1>
-      <div class="npc-subtitle">{{system.fixed_info.race}}{{#if system.fixed_info.profession}} &bull; {{system.fixed_info.profession}}{{/if}} &bull; Lvl {{system.character.level}}</div>
-    </div>
-    <div class="npc-hits">
-      <label>Hits</label>
-      <input name="system.hits.value" type="number" value="{{system.hits.value}}"/>/<span>{{system.hits.max}}</span>
-    </div>
-  </header>
-
-  <section class="npc-combat">
-    <h2>Attacks</h2>
+  <div class="npc-bar">
+    <input name="name" type="text" value="{{actor.name}}"/>
+    <span class="npc-hits"><input name="system.hits.value" type="number" value="{{system.hits.value}}"/>/{{system.hits.max}}</span>
+  </div>
+  <div class="npc-attacks">
     {{#each items.weapons}}
-    <div class="item-row">
-      <button type="button" class="attack-roll" data-item-id="{{_id}}" title="Roll attack">⚔</button>
-      <span class="item-name">{{name}}</span>
-      <span class="item-ob">OB {{system.obMod}}</span>
+    <div class="npc-atk">
+      <button type="button" class="attack-roll" data-item-id="{{_id}}" title="Roll {{name}}"><i class="fas fa-dice-d20"></i></button>
+      <span class="n">{{name}}</span>
+      <span class="ob">{{system.obMod}}</span>
     </div>
-    {{else}}
-    <p class="npc-empty">No attacks.</p>
     {{/each}}
-  </section>
-
-  <details class="npc-details">
-    <summary>Stats</summary>
-    <table>
-      {{#each system.stats}}
-      <tr><td>{{@key}}</td><td>{{total}} ({{stat_bonus}})</td></tr>
-      {{/each}}
-    </table>
-  </details>
-
-  <details class="npc-details">
-    <summary>Skills ({{items.skills.length}})</summary>
-    {{#each items.skills}}
-    <div class="item-row"><span>{{name}}</span><span>+{{system.bonus}}</span></div>
-    {{/each}}
-  </details>
-
-  {{#if items.spells.length}}
-  <details class="npc-details">
-    <summary>Spells ({{items.spells.length}})</summary>
-    {{#each items.spells}}
-    <div class="item-row"><span>{{name}}</span></div>
-    {{/each}}
-  </details>
-  {{/if}}
+  </div>
+  <div class="npc-drop-hint">Drop equipment here</div>
 </form>
