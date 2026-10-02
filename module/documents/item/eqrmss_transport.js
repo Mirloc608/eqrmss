@@ -72,7 +72,11 @@ export class EQRMSSTransport extends EQRMSSItem
 
                 flying:false,
 
-                swimming:false
+                swimming:false,
+
+                climbing:false,
+
+                flightOnly:false
 
             },
 
@@ -199,6 +203,18 @@ export class EQRMSSTransport extends EQRMSSItem
 
     // ========================================================
     // MOVEMENT
+    //
+    // Flight / climb semantics (ruling 2026-10-01):
+    //  - Fly1 (bee, dragonfly, flying carpet): flight is the mount's ONLY
+    //    movement mode (flightOnly = true). It cannot walk; where it cannot
+    //    fly — indoors, wings bound — it is immobile.
+    //  - Fly2 (griffon, sokokar): flight is SECONDARY (flightOnly = false).
+    //    The mount keeps its ground speed; fly speed equals the listed rate.
+    //  - Climb (spider): climbing = true. Treats up to 45-degree grades as
+    //    normal terrain with a rider; no climb check where a horse needs one.
+    // Chart `movement` entries map to these flags when a transport item is
+    // created from the reference chart: Fly1/Fly2 -> flying (+flightOnly for
+    // Fly1), Swim -> swimming, Climb -> climbing.
     // ========================================================
 
     _prepareMovement()
@@ -268,6 +284,36 @@ export class EQRMSSTransport extends EQRMSSItem
             this.system.transport
                 .movement
                 .swimming
+            ===
+            true
+
+        );
+
+    }
+
+    canClimb()
+    {
+
+        return (
+
+            this.system.transport
+                .movement
+                .climbing
+            ===
+            true
+
+        );
+
+    }
+
+    isFlightOnly()
+    {
+
+        return (
+
+            this.system.transport
+                .movement
+                .flightOnly
             ===
             true
 
@@ -459,7 +505,13 @@ export class EQRMSSTransport extends EQRMSSItem
                 this.canFly(),
 
             swimming:
-                this.canSwim()
+                this.canSwim(),
+
+            climbing:
+                this.canClimb(),
+
+            flightOnly:
+                this.isFlightOnly()
 
         };
 
