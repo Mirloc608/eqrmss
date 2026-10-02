@@ -57,7 +57,7 @@ async function openEndedAttackRoll() {
 // uses its derived AT/DB, and auto-applies damage (permission-checked,
 // like a targeted token). Pure manual entry keeps the typed name/AT/DB
 // and reports the damage for the GM to apply by hand.
-async function promptTarget(missileAttack = false) {
+async function promptTarget(missileAttack = false, attackerActor = null) {
     const DialogV2 = foundry?.applications?.api?.DialogV2;
     if (!DialogV2?.prompt) {
         ui.notifications.warn("No token targeted — target a token or pick one below.");
@@ -91,10 +91,7 @@ async function promptTarget(missileAttack = false) {
         .sort((a, b) => String(a.name ?? "").localeCompare(String(b.name ?? "")))
         .map(a => {
             const at = parseArmorType(a.system?.combat?.armorType);
-            const missileDB = Number(a.system?.combat?.totalMissileDB);
-            const db = a.system?.status?.unconscious
-                ? 0 // unconscious: no derived DB
-                : (missileAttack && Number.isFinite(missileDB) ? (missileDB || 0) : (Number(a.system?.combat?.totalDB) || 0));
+            const db = targetDefense(a, missileAttack, attackerActor).db;
             return `<option value="${esc(a.id)}" data-actor-name="${esc(a.name)}"`
                 + ` data-at="${at ?? ""}" data-db="${db}">${esc(a.name)}</option>`;
         })
@@ -156,14 +153,72 @@ function isMissileAttack(weaponType) {
     return MISSILE_WEAPON_TYPES.has(weaponType);
 }
 
-function targetDefenseDB(targetActor, missileAttack) {
+function actorKey(actor) {
+    return actor?.uuid ?? actor?.id ?? actor?._id ?? actor?.name ?? "";
+}
+
+function currentShieldRoundKey() {
+    const combat = game.combat;
+    return combat?.id ? `${combat.id}:${Number(combat.round) || 0}` : "no-combat";
+}
+
+// Arms Law §4.2: a shield bonus may only be used against one opponent's
+// attack(s) per round. The defender's derived DB carries the shield
+// component; resolution subtracts it when that opponent is not the one
+// the shield is currently assigned to. The assignment is recorded on
+// the defender's status and lapses at the round tick.
+function targetDefense(targetActor, missileAttack, attackerActor) {
+    if (!targetActor) return { db: 0, shieldDB: 0, shieldBlocked: false, shieldOpponentName: "", needsShieldAssignment: false };
     // An unconscious defender has no derived DB at all (user ruling
     // 2026-10-02) — the whole derivation is negated, not just Adrenal.
-    if (targetActor?.system?.status?.unconscious) return 0;
-    const combat = targetActor?.system?.combat ?? {};
+    if (targetActor.system?.status?.unconscious) {
+        return { db: 0, shieldDB: 0, shieldBlocked: false, shieldOpponentName: "", needsShieldAssignment: false };
+    }
+
+    const combat = targetActor.system?.combat ?? {};
     const missileDB = Number(combat.totalMissileDB);
-    if (missileAttack && Number.isFinite(missileDB)) return missileDB || 0;
-    return Number(combat.totalDB) || 0;
+    const rawDB = missileAttack && Number.isFinite(missileDB)
+        ? (missileDB || 0)
+        : (Number(combat.totalDB) || 0);
+    const shieldDB = missileAttack
+        ? (Number(combat.shieldMissileBonus ?? combat.shieldBonus) || 0)
+        : (Number(combat.shieldBonus) || 0);
+    if (!shieldDB) {
+        return { db: rawDB, shieldDB: 0, shieldBlocked: false, shieldOpponentName: "", needsShieldAssignment: false };
+    }
+
+    const status = targetActor.system?.status ?? {};
+    const roundKey = currentShieldRoundKey();
+    const assignedId = status.shieldOpponentRoundKey === roundKey ? (status.shieldOpponentId ?? "") : "";
+    const assignedName = status.shieldOpponentRoundKey === roundKey ? (status.shieldOpponentName ?? "") : "";
+    const attackerId = actorKey(attackerActor);
+
+    if (!assignedId) {
+        return { db: rawDB, shieldDB, shieldBlocked: false, shieldOpponentName: "", needsShieldAssignment: !!attackerId };
+    }
+    if (attackerId && assignedId === attackerId) {
+        return { db: rawDB, shieldDB, shieldBlocked: false, shieldOpponentName: assignedName, needsShieldAssignment: false };
+    }
+    return {
+        db: rawDB - shieldDB,
+        shieldDB: 0,
+        shieldBlocked: true,
+        shieldOpponentName: assignedName,
+        needsShieldAssignment: false
+    };
+}
+
+async function recordShieldAssignment(targetActor, attackerActor, defense) {
+    if (!targetActor || !attackerActor || !defense?.needsShieldAssignment || !defense.shieldDB) return false;
+    if (!(targetActor.isOwner || game.user?.isGM)) return false;
+    const attackerId = actorKey(attackerActor);
+    if (!attackerId) return false;
+    await targetActor.update({
+        "system.status.shieldOpponentId": attackerId,
+        "system.status.shieldOpponentName": attackerActor.name ?? "",
+        "system.status.shieldOpponentRoundKey": currentShieldRoundKey()
+    });
+    return true;
 }
 
 // Arms Law §4.3/§4.4.8: a declared weapon parry adds its allocated OB
@@ -261,18 +316,20 @@ export async function rollWeaponAttack(actor, weaponItem) {
     let targetName = "Target";
     let at = null;
     let db = 0;
+    let shieldDefense = { db: 0, shieldDB: 0, shieldBlocked: false, shieldOpponentName: "", needsShieldAssignment: false };
     const targeted = [...(game.user?.targets ?? [])][0];
     if (targeted?.actor) {
         targetActor = targeted.actor;
         targetName = targeted.name ?? targetActor.name;
         at = parseArmorType(targetActor.system?.combat?.armorType);
-        db = targetDefenseDB(targetActor, missileAttack);
+        shieldDefense = targetDefense(targetActor, missileAttack, actor);
+        db = shieldDefense.db;
         if (at == null) {
             ui.notifications.warn(`Could not read AT from ${targetName} — enter it manually.`);
         }
     }
     if (at == null) {
-        const manual = await promptTarget(missileAttack);
+        const manual = await promptTarget(missileAttack, actor);
         if (!manual) return;
         if (manual.actor) {
             // World-actor pick: same handling as a targeted token —
@@ -281,7 +338,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
             targetName = targetActor.name;
             const aat = parseArmorType(targetActor.system?.combat?.armorType);
             at = aat ?? manual.at;
-            db = targetDefenseDB(targetActor, missileAttack);
+            shieldDefense = targetDefense(targetActor, missileAttack, actor);
+            db = shieldDefense.db;
         } else {
             targetName = manual.name;
             at = manual.at;
@@ -306,6 +364,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
     await actor.update({ "system.status.attackedThisRound": true });
+    await recordShieldAssignment(targetActor, actor, shieldDefense);
 
     // ---- Attack roll (high open-ended) ----
     const ar = await openEndedAttackRoll();
@@ -337,9 +396,12 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const lookup = lookupAttack(tables.weapons, tableName, net, at, attackSize);
 
     const SIZE_LABEL = { T: "Tiny", S: "Small", M: "Medium", L: "Large", H: "Huge" };
+    const shieldNote = shieldDefense.shieldBlocked
+        ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
+        : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
         + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}`
-        + ` − DB ${db}${parryDB ? ` (+${parryDB} parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
+        + ` − DB ${db}${shieldNote}${parryDB ? ` (+${parryDB} parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
     if (lookup.error && lookup.miss) {

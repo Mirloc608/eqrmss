@@ -52,6 +52,9 @@
 //   status.parryWeaponName string (display name for the parry weapon)
 //   status.parryWeaponType string (weapon category for parry limits)
 //   status.parryFull      boolean (all of the weapon's OB allocated)
+//   status.shieldOpponentId string (opponent the shield DB is assigned to)
+//   status.shieldOpponentName string (display name for that opponent)
+//   status.shieldOpponentRoundKey string (combat id:round for the assignment)
 //   status.attackedThisRound boolean (attack made; blocks a later parry)
 //   status.unconscious    boolean (§6.4.1)
 //   status.soulTimer      number (rounds left; §3.8 dying countdown)
@@ -353,6 +356,9 @@ function deathCleanup() {
         "system.status.parryWeaponName": "",
         "system.status.parryWeaponType": "",
         "system.status.parryFull": false,
+        "system.status.shieldOpponentId": "",
+        "system.status.shieldOpponentName": "",
+        "system.status.shieldOpponentRoundKey": "",
         "system.status.unconscious": false,
         "system.status.soulTimer": 0,
         "system.status.soulTimerUnknown": false,
@@ -456,6 +462,12 @@ export async function tickConditions(combat) {
         }
         if (st.attackedThisRound) {
             updates["system.status.attackedThisRound"] = false;
+        }
+        // Shield assignment (§4.2) is per round.
+        if (st.shieldOpponentId || st.shieldOpponentName || st.shieldOpponentRoundKey) {
+            updates["system.status.shieldOpponentId"] = "";
+            updates["system.status.shieldOpponentName"] = "";
+            updates["system.status.shieldOpponentRoundKey"] = "";
         }
 
         if (Object.keys(updates).length) await actor.update(updates);
