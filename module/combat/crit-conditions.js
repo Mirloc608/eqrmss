@@ -97,24 +97,41 @@ export function computeWeaponOB(actor, weaponItem) {
 // ------------------------------------------------------------
 
 // "stunned for 2 rounds", "stunned 3 rnds", "stuns foe for 1 round",
-// "stunned next round" (= 1). A number that belongs to an "unable to
-// parry" clause is NOT plain stun — it is captured by the no-parry
-// branch below.
+// "stunned next round" (= 1). A number that belongs to a no-parry
+// clause ("unable to parry", "cannot parry", "can't parry") is NOT
+// plain stun — it is captured by the no-parry branch below. Combined
+// clauses state the no-parry rounds INSIDE the stun total ("stunned
+// for 4 rounds and cannot parry for 2 rounds" = 2 stun-no-parry +
+// 2 plain stun); those are split first so nothing double-counts.
 export function parseStun(text) {
     const out = { stunned: 0, stunNoParry: 0 };
     if (!text) return out;
-    const npRe = new RegExp(`unable to parry\\s+(?:for\\s+)?(?:next\\s+)?(?:(\\d+)\\s+)?(${ROUNDS_RE})`, "gi");
+    let rest = String(text);
+
+    // Combined clause: stun total with a no-parry subset.
+    const combRe = new RegExp(
+        `stun(?:ned|s)?(?:\\s+foe)?(?:\\s+for)?\\s+(\\d+)\\s+${ROUNDS_RE}\\s+and\\s+(?:cannot|can not|can't|unable to|not able to)\\s+parry(?:\\s+for)?\\s+(\\d+)\\s+${ROUNDS_RE}`,
+        "gi"
+    );
+    rest = rest.replace(combRe, (m, x, y) => {
+        const total = Number(x), noParry = Number(y);
+        out.stunNoParry += noParry;
+        out.stunned += Math.max(0, total - noParry);
+        return "";
+    });
+
+    const npRe = new RegExp(`(?:unable to|not able to|cannot|can not|can't)\\s+parry\\s+(?:for\\s+)?(?:next\\s+)?(?:(\\d+)\\s+)?(${ROUNDS_RE})`, "gi");
     let m;
-    while ((m = npRe.exec(text))) out.stunNoParry += m[1] ? Number(m[1]) : 1;
+    while ((m = npRe.exec(rest))) out.stunNoParry += m[1] ? Number(m[1]) : 1;
     const stRe = new RegExp(`stun(?:ned|s)?(?:\\s+foe)?(?:\\s+for)?\\s+(\\d+)\\s+(${ROUNDS_RE})`, "gi");
-    while ((m = stRe.exec(text))) {
-        if (/unable to parry/i.test(m[0])) continue; // duration belongs to the no-parry clause
+    while ((m = stRe.exec(rest))) {
+        if (/(?:unable to|not able to|cannot|can not|can't)\s+parry/i.test(m[0])) continue; // duration belongs to the no-parry clause
         out.stunned += Number(m[1]);
     }
     // Numberless "stunned next round" (= 1). The numbered branches above
     // consume digits, so these cannot double-count them.
     const bareRe = /stun(?:ned|s)?(?:\s+foe)?\s+next\s+round(?!\s*\d)/gi;
-    while (bareRe.exec(text)) out.stunned += 1;
+    while (bareRe.exec(rest)) out.stunned += 1;
     return out;
 }
 
