@@ -36,7 +36,20 @@
               {{selectOptions armorOptions.conditions selected=system.armorCondition valueAttr="id" labelAttr="name"}}
             </select>
           </div>
-          <p class="hint">Changing any of these recomposes the armor below (name and stats).</p>
+          <div class="form-group">
+            <label>Quality</label>
+            <select name="system.armorQuality" class="armor-composer-select">
+              {{selectOptions armorOptions.qualities selected=system.armorQuality valueAttr="id" labelAttr="name"}}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Enhancement</label>
+            <select name="system.armorEnhancement" class="armor-composer-select">
+              <option value=""></option>
+              {{selectOptions armorOptions.enhancements selected=system.armorEnhancement valueAttr="id" labelAttr="name"}}
+            </select>
+          </div>
+          <p class="hint">Changing any of these recomposes the armor below (name and stats). Quality and enhancement add DB, not AT.</p>
         </fieldset>
       {{/if}}
         <table>
@@ -46,6 +59,7 @@
             <th>{{localize "eqrmss.armor.cost"}}</th>
             <th>{{localize "eqrmss.armor.prod_time"}}</th>
             <th>{{localize "eqrmss.armor.at"}}</th>
+            <th>DB Bonus</th>
             <th>Maneuver Penalty</th>
           </tr>
           <td>
@@ -61,6 +75,9 @@
           </td>
           <td>
             <input name="system.at" type="text" value="{{system.at}}" data-dtype="Number"/>
+          </td>
+          <td>
+            <input name="system.dbBonus" type="text" value="{{system.dbBonus}}" data-dtype="Number"/>
           </td>
           <td>
             <input name="system.maneuverPenalty" type="text" value="{{system.maneuverPenalty}}" data-dtype="Number"/>

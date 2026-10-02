@@ -96,6 +96,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             adrenalDefense: 0,
             shieldBonus: 0,
             shieldMissileBonus: 0,
+            enhancedArmorDB: 0,
+            armorDBTotal: 0,
             adrenalSkillBonus: 0,
             adrenalBlockedByArmor: false,
             adrenalEffective: 0,

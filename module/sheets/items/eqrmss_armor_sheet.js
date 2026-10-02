@@ -18,7 +18,15 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
     if (categoryId) {
       opts.materials = opts.materials.filter(m => (m.categories ?? []).includes(categoryId));
     }
+    // Enhancements gate on category (and the material's base AT).
+    const materialId = this.document.system?.armorMaterial ?? "";
+    opts.enhancements = armor?.enhancementsFor
+      ? armor.enhancementsFor(categoryId, materialId || null)
+      : (opts.enhancements ?? []);
     context.armorOptions = opts;
+    if (!this.document.system?.armorQuality) {
+      context.system = { ...context.system, armorQuality: "average" };
+    }
     return context;
   }
 
@@ -39,6 +47,8 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
     const categoryId = this.element.querySelector('[name="system.armorCategory"]')?.value ?? "";
     let materialId = this.element.querySelector('[name="system.armorMaterial"]')?.value ?? "";
     const conditionId = this.element.querySelector('[name="system.armorCondition"]')?.value;
+    const qualityId = this.element.querySelector('[name="system.armorQuality"]')?.value || "average";
+    const enhancementId = this.element.querySelector('[name="system.armorEnhancement"]')?.value || null;
 
     // Persist a changed category right away so the material dropdown
     // re-renders filtered to that category; drop a material it invalidates.
@@ -57,7 +67,7 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
 
     let composed;
     try {
-      composed = armor.compose(locationId, categoryId, materialId, conditionId);
+      composed = armor.compose(locationId, categoryId, materialId, conditionId, { qualityId, enhancementId });
     } catch (e) {
       ui.notifications.error(`Armor compose failed: ${e.message}`);
       return;
@@ -69,6 +79,9 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
       "system.armorCategory": composed.categoryId,
       "system.armorMaterial": composed.materialId,
       "system.armorCondition": composed.conditionId,
+      "system.armorQuality": composed.qualityId,
+      "system.armorEnhancement": composed.enhancementId,
+      "system.dbBonus": composed.dbBonus,
       "system.at": composed.armorType ?? "",
       "system.weight": composed.weight,
       "system.maneuverPenalty": composed.maneuverPenalty,

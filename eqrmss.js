@@ -331,7 +331,8 @@ export async function initializeDataLoaders() {
         game.eqrmss.armor = {
             compose: armorMod.composeArmor,
             options: armorMod.getArmorOptions,
-            materialsForCategory: armorMod.getMaterialsForCategory
+            materialsForCategory: armorMod.getMaterialsForCategory,
+            enhancementsFor: armorMod.getEnhancementsFor
         };
         game.eqrmss._loadStatus.armor = true;
         const armorOpts = armorMod.getArmorOptions();

@@ -112,10 +112,12 @@ export function calculateArmorAndDefenses(actorData) {
     const baseQUBonus = Math.floor(((stats.QU ?? stats.Qu ?? 50) - 50) / 5);
     const quicknessBonus = baseQUBonus - quPenalty;
 
-    // Additional DB components (stored; armor itself grants no DB in RMSS)
+    // Additional DB components (stored; plain armor grants no DB in RMSS)
     const storedAdrenal = Number(combat.adrenalDefense ?? 0);
     const otherDB = Number(combat.otherDB ?? 0);
     const armorDB = Number(combat.armorDB ?? 0);
+    // Arms Companion 5.1/6.23: worn armor's enhancement/quality DB bonus.
+    const enhancedArmorDB = wornArmor.reduce((sum, i) => sum + (Number(i.system?.dbBonus) || 0), 0);
 
     // Adrenal Defense (§4.4.3): the skill's bonus adds to DB, but the
     // skill is restrictive — it does not work while wearing armor.
@@ -138,8 +140,8 @@ export function calculateArmorAndDefenses(actorData) {
     // DB for that attack type; the Adrenal Defense component counts in
     // full against melee and at half against missile attacks (§4.4.3).
     const naturalDB = chartDB ?? quicknessBonus;
-    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB;
-    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB;
+    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB;
+    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB;
 
     return {
         derived: derivedStats,
@@ -160,6 +162,7 @@ export function calculateArmorAndDefenses(actorData) {
         shieldMissileBonus,
         otherDB,
         armorDB,
+        enhancedArmorDB,
         totalDB,
         totalMissileDB
     };

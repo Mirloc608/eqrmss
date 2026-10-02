@@ -15,6 +15,8 @@ let locations = {};
 let categories = {};
 let materials = {};
 let conditions = {};
+let enhancements = {};
+let qualities = {};
 let loaded = false;
 
 export async function loadArmorData() {
@@ -39,6 +41,13 @@ export async function loadArmorData() {
     const cData = await cRes.json();
     for (const c of cData.conditions) conditions[c.id] = c;
 
+    // Arms Companion 5.1/6.23: enhanced armor and workmanship quality.
+    const eRes = await fetch("systems/eqrmss/module/data/armor/enhancements.json");
+    if (!eRes.ok) throw new Error("Armor enhancements file missing");
+    const eData = await eRes.json();
+    for (const e of eData.enhancements) enhancements[e.id] = e;
+    for (const q of eData.qualities) qualities[q.id] = q;
+
     loaded = true;
     console.log(`EQRMSS | Armor loaded: ${Object.keys(locations).length} locations, ${Object.keys(categories).length} categories, ${Object.keys(materials).length} materials, ${Object.keys(conditions).length} conditions`);
 }
@@ -62,7 +71,7 @@ function formatBp(bp) {
     return `${bp}bp`;
 }
 
-export function composeArmor(locationId, categoryId, materialId, conditionId) {
+export function composeArmor(locationId, categoryId, materialId, conditionId, options = {}) {
     const loc = locations[locationId];
     if (!loc) throw new Error(`Unknown armor location: ${locationId}`);
     const cat = categories[categoryId];
@@ -74,22 +83,48 @@ export function composeArmor(locationId, categoryId, materialId, conditionId) {
     const c = conditions[conditionId];
     if (!c) throw new Error(`Unknown armor condition: ${conditionId}`);
 
-    // Name: "[Condition] [Material] [noun]" (e.g. "Worn Steel Breastplate").
+    // Arms Companion 6.23 workmanship quality and 5.1 enhancement.
+    // Enhancing armor affects DB only; the AT worn does not change.
+    const qualityId = options.qualityId || "average";
+    const q = qualities[qualityId];
+    if (!q) throw new Error(`Unknown armor quality: ${qualityId}`);
+    let enh = null;
+    if (options.enhancementId) {
+        enh = enhancements[options.enhancementId];
+        if (!enh) throw new Error(`Unknown armor enhancement: ${options.enhancementId}`);
+        if (!(enh.categories ?? []).includes(categoryId))
+            throw new Error(`${enh.name} cannot be applied to ${cat.name} armor`);
+        const baseAT = m.baseAT ?? 1;
+        if (enh.minBaseAT != null && baseAT < enh.minBaseAT)
+            throw new Error(`${enh.name} requires AT ${enh.minBaseAT}+ armor`);
+        if (enh.maxBaseAT != null && baseAT > enh.maxBaseAT)
+            throw new Error(`${enh.name} is already built into AT ${baseAT} armor`);
+    }
+    const dbBonus = (q.dbBonus ?? 0) + (enh?.dbBonus ?? 0);
+    const enhWeightMult = enh
+        ? (enh.weightMultByCategory?.[categoryId] ?? enh.weightMult ?? 1)
+        : 1;
+
+    // Name: "[Condition] [Quality] [Material] [noun]" (e.g. "Worn Steel
+    // Breastplate"; quality is named only when not Average).
     // The noun is per-material when the location defines one, else the
     // category default for the location, else the location's plain name.
     const noun = loc.names?.[materialId] ?? categories[categoryId]?.nouns?.[locationId] ?? loc.name;
     const parts = [];
     if (c.prefix) parts.push(c.prefix);
+    if (qualityId !== "average") parts.push(q.name);
     if (m.prefix) parts.push(m.prefix);
+    if (enh) parts.push(enh.name);
     parts.push(noun);
     const name = parts.join(" ");
 
     // AT comes from the material; weight scales the location's base weight;
     // maneuver and cost combine location base with material/condition mods.
-    const weight = Math.round(loc.baseWeight * (m.weightMult ?? 1) * (c.weightMult ?? 1) * 10) / 10;
+    // Quality and enhancement scale cost (and enhancement scales weight).
+    const weight = Math.round(loc.baseWeight * (m.weightMult ?? 1) * (c.weightMult ?? 1) * enhWeightMult * 10) / 10;
     const armorType = Math.max(1, (m.baseAT ?? 1) + (c.atMod ?? 0));
     const maneuverPenalty = (loc.baseManeuver ?? 0) + (m.maneuverMod ?? 0) + (c.maneuverMod ?? 0);
-    const cost = formatBp(parseCostToBp(loc.baseCost) * (m.costMult ?? 1));
+    const cost = formatBp(parseCostToBp(loc.baseCost) * (m.costMult ?? 1) * (enh?.costMult ?? 1) * (q.costMult ?? 1));
 
     return {
         name,
@@ -97,6 +132,9 @@ export function composeArmor(locationId, categoryId, materialId, conditionId) {
         categoryId,
         materialId,
         conditionId,
+        qualityId,
+        enhancementId: enh?.id ?? null,
+        dbBonus,
         armorType,
         weight,
         maneuverPenalty,
@@ -116,8 +154,21 @@ export function getArmorOptions() {
         locations: Object.values(locations).map(l => ({ id: l.id, name: l.name })),
         categories: Object.values(categories).map(g => ({ id: g.id, name: g.name })),
         materials: Object.values(materials).map(m => ({ id: m.id, name: m.name, categories: m.categories ?? [] })),
-        conditions: Object.values(conditions).map(c => ({ id: c.id, name: c.name }))
+        conditions: Object.values(conditions).map(c => ({ id: c.id, name: c.name })),
+        qualities: Object.values(qualities).map(q => ({ id: q.id, name: q.name })),
+        enhancements: Object.values(enhancements).map(e => ({ id: e.id, name: e.name, categories: e.categories ?? [] }))
     };
+}
+
+/** Enhancements valid for a category (and, when given, a material's base AT). */
+export function getEnhancementsFor(categoryId, materialId = null) {
+    const baseAT = materialId ? (materials[materialId]?.baseAT ?? null) : null;
+    return Object.values(enhancements)
+        .filter(e => (e.categories ?? []).includes(categoryId))
+        .filter(e => baseAT == null
+            || ((e.minBaseAT == null || baseAT >= e.minBaseAT)
+                && (e.maxBaseAT == null || baseAT <= e.maxBaseAT)))
+        .map(e => ({ id: e.id, name: e.name, categories: e.categories ?? [] }));
 }
 
 export function getMaterialsForCategory(categoryId) {

@@ -656,6 +656,8 @@ _prepareCombat()
         this.system.combat.quicknessBonus = metrics.quicknessBonus;
         this.system.combat.shieldBonus = metrics.shieldBonus;
         this.system.combat.shieldMissileBonus = metrics.shieldMissileBonus ?? metrics.shieldBonus;
+        this.system.combat.enhancedArmorDB = metrics.enhancedArmorDB ?? 0;
+        this.system.combat.armorDBTotal = (metrics.armorDB ?? 0) + (metrics.enhancedArmorDB ?? 0);
         this.system.combat.adrenalSkillBonus = metrics.adrenalSkillBonus ?? 0;
         this.system.combat.adrenalBlockedByArmor = metrics.adrenalBlockedByArmor ?? false;
         this.system.combat.adrenalEffective = metrics.adrenalEffective ?? metrics.adrenalDefense ?? 0;
