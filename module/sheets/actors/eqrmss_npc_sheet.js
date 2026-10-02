@@ -46,12 +46,19 @@ export default class EQRMSSNPCSheet
 
     async _onRender(context, options) {
         await super._onRender(context, options);
-        if (!this._npcSized) {
-            this._npcSized = true;
-            try { this.setPosition({ width: 300, height: 260 }); } catch (e) {}
-        }
         const html = this.element;
         if (!html) return;
+
+        // Force the small card size on the window element. Foundry restores a
+        // saved window position for document sheets, overriding the class
+        // default — set the inline height directly so it actually sticks.
+        html.style.setProperty("width", "300px", "important");
+        html.style.setProperty("height", "300px", "important");
+        html.style.setProperty("max-height", "300px", "important");
+        requestAnimationFrame(() => {
+            try { this.setPosition({ width: 300, height: 300 }); } catch (e) {}
+            html.style.setProperty("height", "300px", "important");
+        });
 
         html.querySelectorAll(".attack-roll").forEach(el => el.addEventListener("click", ev => {
             ev.preventDefault();
