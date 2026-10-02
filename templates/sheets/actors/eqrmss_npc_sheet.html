@@ -1,14 +1,31 @@
 <form class="eqrmss sheet actor npc-sheet npc-compact" autocomplete="off">
+  <style>
+    .npc-compact { font-size: 12px; padding: 6px; }
+    .npc-compact .sheet-header { display: flex; gap: 8px; align-items: center; padding: 4px; }
+    .npc-compact .npc-title h1 { margin: 0; font-size: 15px; }
+    .npc-compact .npc-title h1 input { font-size: 15px; padding: 1px 4px; }
+    .npc-compact .npc-subtitle { font-size: 11px; opacity: 0.8; }
+    .npc-compact .npc-hits { margin-left: auto; white-space: nowrap; font-size: 12px; }
+    .npc-compact .npc-hits input { width: 44px; padding: 1px 3px; font-size: 12px; }
+    .npc-compact h2 { font-size: 13px; margin: 6px 0 3px; }
+    .npc-compact .item-row { display: flex; gap: 6px; align-items: center; padding: 2px 0; }
+    .npc-compact .item-row .item-name { flex: 1; }
+    .npc-compact .item-row .item-ob { font-size: 11px; opacity: 0.85; }
+    .npc-compact .attack-roll { padding: 1px 8px; font-size: 11px; }
+    .npc-compact details.npc-details { margin-top: 4px; }
+    .npc-compact details.npc-details summary { cursor: pointer; font-size: 12px; }
+    .npc-compact table { font-size: 11px; }
+    .npc-compact table td { padding: 1px 4px; }
+  </style>
   <header class="sheet-header">
-    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="48" width="48"/>
+    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="36" width="36"/>
     <div class="npc-title">
       <h1><input name="name" type="text" value="{{actor.name}}"/></h1>
-      <div class="npc-subtitle">{{system.fixed_info.race}}{{#if system.fixed_info.profession}} &bull; {{system.fixed_info.profession}}{{/if}} &bull; Level {{system.character.level}}</div>
+      <div class="npc-subtitle">{{system.fixed_info.race}}{{#if system.fixed_info.profession}} &bull; {{system.fixed_info.profession}}{{/if}} &bull; Lvl {{system.character.level}}</div>
     </div>
     <div class="npc-hits">
       <label>Hits</label>
-      <input name="system.hits.value" type="number" value="{{system.hits.value}}"/> /
-      <span>{{system.hits.max}}</span>
+      <input name="system.hits.value" type="number" value="{{system.hits.value}}"/>/<span>{{system.hits.max}}</span>
     </div>
   </header>
 
@@ -16,6 +33,7 @@
     <h2>Attacks</h2>
     {{#each items.weapons}}
     <div class="item-row">
+      <button type="button" class="attack-roll" data-item-id="{{_id}}" title="Roll attack">⚔</button>
       <span class="item-name">{{name}}</span>
       <span class="item-ob">OB {{system.obMod}}</span>
     </div>
@@ -48,9 +66,4 @@
     {{/each}}
   </details>
   {{/if}}
-
-  <details class="npc-details">
-    <summary>Notes</summary>
-    <div class="npc-notes">{{system.description}}</div>
-  </details>
 </form>
