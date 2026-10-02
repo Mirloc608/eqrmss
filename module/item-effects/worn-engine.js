@@ -7,16 +7,13 @@
  * 6 seconds); call applyWornRoundEffects(actor) from the combat round
  * engine's per-round step for each combatant.
  *
- * An item counts as worn when system.equipped === true or
- * system.location === "equipped" (same rule as the armor/shield derivation).
+ * An item counts as worn per the shared isWorn rule (location
+ * dropdown authoritative when set; equipped checkbox as fallback).
  */
 
 import { getItemEffect } from "../data/item-effects/item-effect-loader.js";
 import { applyEffectPayload } from "./damage-pipeline.js";
-
-function isWorn(item) {
-    return item?.system?.equipped === true || item?.system?.location === "equipped";
-}
+import { isWorn } from "../utils/equipment/equipment-utils.js";
 
 /**
  * Apply one round of worn effects for an actor (regen ticks etc.).

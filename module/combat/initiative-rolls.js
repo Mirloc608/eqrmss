@@ -23,6 +23,7 @@
 // ============================================================
 
 import { computeInitiative } from "./initiative.js";
+import { isWorn } from "../utils/equipment/equipment-utils.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -39,7 +40,7 @@ function statVal(actor, key) {
 }
 
 function isReadied(item) {
-    return item?.system?.equipped === true || item?.system?.location === "equipped";
+    return isWorn(item);
 }
 
 function readiedWeapons(actor) {

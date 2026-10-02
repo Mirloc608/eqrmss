@@ -34,6 +34,22 @@ export function isEquipped(item)
 
 }
 
+/**
+ * Shared "is this item worn?" check. The player-sheet location
+ * dropdown (equipped / pack / ground) is authoritative whenever it
+ * is set — an item moved to the pack is NOT worn even if a stale
+ * system.equipped flag still says so. The item-sheet equipped
+ * checkbox is the fallback for items with no location.
+ */
+export function isWorn(item)
+{
+
+    const loc = item?.system?.location;
+    if (typeof loc === "string" && loc.length) return loc === "equipped";
+    return item?.system?.equipped === true;
+
+}
+
 export function isBroken(item)
 {
 

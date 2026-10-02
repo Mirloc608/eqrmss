@@ -2,16 +2,15 @@
  * RMSS Derived Value Engine (EQRMSS-flavored)
  */
 
-import { isEquipped } from "../../utils/equipment/equipment-utils.js";
+import { isWorn } from "../../utils/equipment/equipment-utils.js";
 import { rmssStatBonus } from "./rmss-stat-bonus.js";
 
 /**
- * Shared "is this item worn?" check. An item counts as equipped via the
- * item-sheet checkbox (system.equipped) or the player-sheet location
- * dropdown (system.location === "equipped").
+ * Shared "is this item worn?" check: the location dropdown is
+ * authoritative when set; the equipped checkbox is the fallback.
  */
 function isWornItem(item) {
-    return isEquipped(item) || item?.system?.location === "equipped";
+    return isWorn(item);
 }
 
 function itemListOf(actorData) {

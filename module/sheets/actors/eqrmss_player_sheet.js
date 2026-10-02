@@ -3,6 +3,7 @@
 // ============================================================
 
 import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
+import { isWorn } from "../../utils/equipment/equipment-utils.js";
 import { progressionManager } from "../../progression/progression-manager.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
@@ -79,9 +80,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         const actor = this.document;
         const system = actor.system ?? {};
 
-        // Readied weapons = equipped (boolean flag or location), for the Combat tab.
+        // Readied weapons = worn per the shared isWorn rule, for the Combat tab.
         const readiedWeapons = (context.items?.weapons ?? []).filter(
-            w => w?.system?.equipped || w?.system?.location === "equipped"
+            w => isWorn(w)
         );
 
         // ------------------------------------------------------------
