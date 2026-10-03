@@ -34,6 +34,7 @@ import {
     activeStun,
     STUN_LABEL
 } from "./crit-conditions.js";
+import { isWorn } from "../utils/equipment/equipment-utils.js";
 
 async function d100() {
     return (await new Roll("1d100").evaluate()).total;
@@ -203,7 +204,9 @@ function ammoTypeFor(weaponItem, weaponType) {
 
 function ammoStacksFor(actor, ammoType) {
     const items = actor?.items?.contents ?? actor?.items ?? [];
-    return [...items].filter(i => i?.system?.ammoType === ammoType && (Number(i.system?.quantity) || 0) > 0);
+    // Only equipped ammunition is at hand — arrows in the pack do not
+    // show up and cannot be fired.
+    return [...items].filter(i => i?.system?.ammoType === ammoType && isWorn(i) && (Number(i.system?.quantity) || 0) > 0);
 }
 
 // Missile shot prompt: range band + preparation rounds for this shot.
