@@ -153,6 +153,81 @@ function isMissileAttack(weaponType) {
     return MISSILE_WEAPON_TYPES.has(weaponType);
 }
 
+// Arms Law §5.2.11 RANGE: OB modification by distance, printed on each
+// missile attack table (8.5.x) and stored as `rangeBands` on those
+// tables in weapon-tables.json ([{ upTo (feet), obMod }], ascending).
+// §5.2.12 RELOADING: OB penalty by preparation rounds spent before the
+// shot (chart result is the penalty; null = firing not allowed).
+const RELOAD_PENALTIES = {
+    "Short Bow": { 0: 10, 1: 0, 2: 0, 3: 0 },
+    "Composite Bow": { 0: 20, 1: 0, 2: 0, 3: 0 },
+    "Long Bow": { 0: 30, 1: 0, 2: 0, 3: 0 },
+    "Sling": { 0: 10, 1: 0, 2: 0, 3: 0 },
+    "Light Crossbow": { 0: null, 1: 20, 2: 0, 3: 0 },
+    "Heavy Crossbow": { 0: null, 1: 30, 2: 10, 3: 0 }
+};
+
+function rangeBandsFor(tables, tableName) {
+    const list = tables?.weapons;
+    const entry = Array.isArray(list) ? list.find(t => t?.name === tableName) : list?.[tableName];
+    const bands = entry?.rangeBands;
+    return Array.isArray(bands) && bands.length ? bands : null;
+}
+
+function bandLabel(bands, i) {
+    const lo = i === 0 ? 1 : (Number(bands[i - 1].upTo) || 0) + 1;
+    const mod = Number(bands[i].obMod) || 0;
+    return `${lo}'–${bands[i].upTo}' (${mod >= 0 ? "+" : ""}${mod})`;
+}
+
+// Missile shot prompt: range band + preparation rounds for this shot.
+// Returns { rangeMod, reloadPenalty, bandIndex, prepRounds } or null
+// on cancel. Without DialogV2 (headless callers), the unmodified band
+// and one preparation round are used.
+async function promptMissileShot(bands, reloadChart, weaponName) {
+    const defaultBand = Math.max(0, bands.findIndex(b => (Number(b.obMod) || 0) === 0));
+    const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
+    if (!DialogV2?.prompt) {
+        return { rangeMod: Number(bands[defaultBand].obMod) || 0, bandIndex: defaultBand, prepRounds: 1, reloadPenalty: reloadChart ? (reloadChart[1] ?? 0) : 0 };
+    }
+    const bandOptions = bands.map((b, i) => `<option value="${i}"${i === defaultBand ? " selected" : ""}>${esc(bandLabel(bands, i))}</option>`).join("");
+    const prepOptions = reloadChart
+        ? [0, 1, 2, 3].map(r => {
+            const p = reloadChart[r];
+            const note = p == null ? "cannot fire" : (p > 0 ? `OB −${p}` : "no penalty");
+            return `<option value="${r}"${r === 1 ? " selected" : ""}>${r} round${r === 1 ? "" : "s"} (${note})</option>`;
+        }).join("")
+        : "";
+    try {
+        const fd = await DialogV2.prompt({
+            window: { title: `Missile Attack: ${weaponName}` },
+            content: `
+                <div class="form-group">
+                    <label>Range to target</label>
+                    <select name="band">${bandOptions}</select>
+                </div>
+                ${reloadChart ? `<div class="form-group">
+                    <label>Preparation rounds spent (reloading, §5.2.12)</label>
+                    <select name="prep">${prepOptions}</select>
+                </div>` : ""}`,
+            ok: { label: "Fire" }
+        });
+        if (!fd) return null;
+        const val = k => (typeof fd.get === "function" ? fd.get(k) : fd[k]);
+        const bandIndex = Math.max(0, Math.min(bands.length - 1, Number(val("band")) || 0));
+        const prepRounds = reloadChart ? Math.max(0, Math.min(3, Number(val("prep")) || 0)) : 1;
+        return {
+            rangeMod: Number(bands[bandIndex].obMod) || 0,
+            bandIndex,
+            prepRounds,
+            reloadPenalty: reloadChart ? reloadChart[prepRounds] : 0
+        };
+    } catch (e) {
+        console.error("EQRMSS | Missile prompt failed", e);
+        return null;
+    }
+}
+
 function actorKey(actor) {
     return actor?.uuid ?? actor?.id ?? actor?._id ?? actor?.name ?? "";
 }
@@ -354,12 +429,33 @@ export async function rollWeaponAttack(actor, weaponItem) {
     db += parryDB;
     const targetUnconscious = !!targetActor?.system?.status?.unconscious;
 
+    // ---- Missile shot: range band (§5.2.11) and reloading (§5.2.12).
+    // Prompted after target determination; cancelling aborts the shot
+    // without consuming anything. Crossbows cannot fire with zero
+    // preparation rounds.
+    let rangeMod = 0;
+    let reloadPenalty = 0;
+    if (missileAttack) {
+        const bands = rangeBandsFor(tables, tableName);
+        const reloadChart = weaponType === "missile" ? (RELOAD_PENALTIES[tableName] ?? null) : null;
+        if (bands) {
+            const shot = await promptMissileShot(bands, reloadChart, weaponItem.name);
+            if (!shot) return;
+            if (reloadChart && shot.reloadPenalty == null) {
+                ui.notifications.warn(`${weaponItem.name} cannot be fired without at least 1 round of preparation (reloading, §5.2.12).`);
+                return;
+            }
+            rangeMod = shot.rangeMod;
+            reloadPenalty = shot.reloadPenalty ?? 0;
+        }
+    }
+
     // ---- Next-swing bonus (critical condition, consumed on use) ----
     // Placed after target determination so a cancelled prompt does not burn it.
     const swingBonus = await consumeNextSwingBonus(actor);
     // ---- Action penalty: "at -N" hits ALL actions ----
     const actionPenalty = Math.min(0, Number(actor.system?.status?.actionPenalty?.value) || 0);
-    const ob = baseOb - attackerParryAllocation + swingBonus + actionPenalty;
+    const ob = baseOb - attackerParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty;
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -400,7 +496,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}`
+        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}`
         + ` − DB ${db}${shieldNote}${parryDB ? ` (+${parryDB} parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 

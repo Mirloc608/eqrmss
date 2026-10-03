@@ -173,7 +173,7 @@ export function parseDeathTimer(text) {
 // "Add +10 to your next swing." -> bonus.
 export function parseNextSwing(text) {
     if (!text) return 0;
-    const m = text.match(/add\s+\+(\d+)\s+to\s+your\s+next\s+(?:swing|attack)/i);
+    const m = text.match(/add\s+\+(\d+)\s+to\s+(?:your\s+)?next\s+(?:swing|attack)/i);
     return m ? Number(m[1]) : 0;
 }
 
