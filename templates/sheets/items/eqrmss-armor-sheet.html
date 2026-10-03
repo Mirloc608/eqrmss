@@ -56,7 +56,13 @@
               {{selectOptions armorOptions.enhancements selected=system.armorEnhancement valueAttr="id" labelAttr="name"}}
             </select>
           </div>
-          <p class="hint">Changing any of these recomposes the armor below (name and stats). Quality and enhancement add DB, not AT.</p>
+          <div class="form-group">
+            <label>Thickness</label>
+            <select name="system.armorThickness" class="armor-composer-select">
+              {{selectOptions armorOptions.thicknesses selected=system.armorThickness valueAttr="id" labelAttr="name"}}
+            </select>
+          </div>
+          <p class="hint">Changing any of these recomposes the armor below (name and stats). Quality, enhancement, and thickness add DB, not AT (Arms Companion §5.1/§5.7/§6.23).</p>
         </fieldset>
       {{/if}}
         <table>

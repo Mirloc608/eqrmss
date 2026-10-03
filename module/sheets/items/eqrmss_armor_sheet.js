@@ -27,6 +27,9 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
     if (!this.document.system?.armorQuality) {
       context.system = { ...context.system, armorQuality: "average" };
     }
+    if (!this.document.system?.armorThickness) {
+      context.system = { ...context.system, armorThickness: "standard" };
+    }
     return context;
   }
 
@@ -51,9 +54,10 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
     const conditionId = this.element.querySelector('[name="system.armorCondition"]')?.value || "normal";
     const qualityId = this.element.querySelector('[name="system.armorQuality"]')?.value || "average";
     const enhancementId = this.element.querySelector('[name="system.armorEnhancement"]')?.value || null;
+    const thicknessId = this.element.querySelector('[name="system.armorThickness"]')?.value || "standard";
     let composed;
     try {
-      composed = armor.composeHelmet(presetId, conditionId, { qualityId, enhancementId });
+      composed = armor.composeHelmet(presetId, conditionId, { qualityId, enhancementId, thicknessId });
     } catch (e) {
       ui.notifications.error(`Helmet compose failed: ${e.message}`);
       return;
@@ -66,6 +70,7 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
       "system.armorCondition": composed.conditionId,
       "system.armorQuality": composed.qualityId,
       "system.armorEnhancement": composed.enhancementId,
+      "system.armorThickness": composed.thicknessId,
       "system.armorHelmetPreset": composed.presetId,
       "system.dbBonus": composed.dbBonus,
       "system.at": composed.armorType ?? "",
@@ -90,6 +95,7 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
     const conditionId = this.element.querySelector('[name="system.armorCondition"]')?.value;
     const qualityId = this.element.querySelector('[name="system.armorQuality"]')?.value || "average";
     const enhancementId = this.element.querySelector('[name="system.armorEnhancement"]')?.value || null;
+    const thicknessId = this.element.querySelector('[name="system.armorThickness"]')?.value || "standard";
 
     // Persist a changed category right away so the material dropdown
     // re-renders filtered to that category; drop a material it invalidates.
@@ -108,7 +114,7 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
 
     let composed;
     try {
-      composed = armor.compose(locationId, categoryId, materialId, conditionId, { qualityId, enhancementId });
+      composed = armor.compose(locationId, categoryId, materialId, conditionId, { qualityId, enhancementId, thicknessId });
     } catch (e) {
       ui.notifications.error(`Armor compose failed: ${e.message}`);
       return;
@@ -122,6 +128,7 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
       "system.armorCondition": composed.conditionId,
       "system.armorQuality": composed.qualityId,
       "system.armorEnhancement": composed.enhancementId,
+      "system.armorThickness": composed.thicknessId,
       "system.dbBonus": composed.dbBonus,
       "system.at": composed.armorType ?? "",
       "system.weight": composed.weight,

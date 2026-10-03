@@ -17,6 +17,7 @@ let materials = {};
 let conditions = {};
 let enhancements = {};
 let qualities = {};
+let thicknesses = {};
 let helmets = {};
 let loaded = false;
 
@@ -48,6 +49,7 @@ export async function loadArmorData() {
     const eData = await eRes.json();
     for (const e of eData.enhancements) enhancements[e.id] = e;
     for (const q of eData.qualities) qualities[q.id] = q;
+    for (const t of (eData.thicknesses ?? [])) thicknesses[t.id] = t;
 
     // Named helmet presets (Character Law 118-124 + Arms Companion 5.4).
     const hRes = await fetch("systems/eqrmss/module/data/armor/helmets.json");
@@ -107,7 +109,12 @@ export function composeArmor(locationId, categoryId, materialId, conditionId, op
         if (enh.maxBaseAT != null && baseAT > enh.maxBaseAT)
             throw new Error(`${enh.name} is already built into AT ${baseAT} armor`);
     }
-    const dbBonus = (q.dbBonus ?? 0) + (enh?.dbBonus ?? 0);
+    // Arms Companion 5.7: armor thickness — a DB modifier that
+    // applies to all attacks; the AT worn does not change.
+    const thicknessId = options.thicknessId || "standard";
+    const thk = thicknesses[thicknessId];
+    if (!thk) throw new Error(`Unknown armor thickness: ${thicknessId}`);
+    const dbBonus = (q.dbBonus ?? 0) + (enh?.dbBonus ?? 0) + (thk?.dbBonus ?? 0);
     const enhWeightMult = enh
         ? (enh.weightMultByCategory?.[categoryId] ?? enh.weightMult ?? 1)
         : 1;
@@ -123,15 +130,16 @@ export function composeArmor(locationId, categoryId, materialId, conditionId, op
     if (m.prefix) parts.push(m.prefix);
     if (enh) parts.push(enh.name);
     parts.push(noun);
-    const name = parts.join(" ");
+    const thicknessSuffix = thk.short ? ` (${thk.short})` : "";
+    const name = parts.join(" ") + thicknessSuffix;
 
     // AT comes from the material; weight scales the location's base weight;
     // maneuver and cost combine location base with material/condition mods.
     // Quality and enhancement scale cost (and enhancement scales weight).
-    const weight = Math.round(loc.baseWeight * (m.weightMult ?? 1) * (c.weightMult ?? 1) * enhWeightMult * 10) / 10;
+    const weight = Math.round(loc.baseWeight * (m.weightMult ?? 1) * (c.weightMult ?? 1) * enhWeightMult * (thk?.weightMult ?? 1) * 10) / 10;
     const armorType = Math.max(1, (m.baseAT ?? 1) + (c.atMod ?? 0));
     const maneuverPenalty = (loc.baseManeuver ?? 0) + (m.maneuverMod ?? 0) + (c.maneuverMod ?? 0);
-    const cost = formatBp(parseCostToBp(loc.baseCost) * (m.costMult ?? 1) * (enh?.costMult ?? 1) * (q.costMult ?? 1));
+    const cost = formatBp(parseCostToBp(loc.baseCost) * (m.costMult ?? 1) * (enh?.costMult ?? 1) * (q.costMult ?? 1) * (thk?.costMult ?? 1));
 
     return {
         name,
@@ -141,6 +149,8 @@ export function composeArmor(locationId, categoryId, materialId, conditionId, op
         conditionId,
         qualityId,
         enhancementId: enh?.id ?? null,
+        thicknessId,
+        thicknessSuffix,
         dbBonus,
         armorType,
         weight,
@@ -164,6 +174,7 @@ export function getArmorOptions() {
         conditions: Object.values(conditions).map(c => ({ id: c.id, name: c.name })),
         qualities: Object.values(qualities).map(q => ({ id: q.id, name: q.name })),
         enhancements: Object.values(enhancements).map(e => ({ id: e.id, name: e.name, categories: e.categories ?? [] })),
+        thicknesses: Object.values(thicknesses).map(t => ({ id: t.id, name: t.name })),
         helmets: Object.values(helmets).map(h => ({ id: h.id, name: h.name, source: h.source }))
     };
 }
@@ -177,7 +188,7 @@ export function composeHelmet(presetId, conditionId = "normal", options = {}) {
     if (!preset) throw new Error(`Unknown helmet preset: ${presetId}`);
     const composed = composeArmor("head", preset.categoryId, preset.materialId, conditionId, options);
     const c = conditions[conditionId];
-    composed.name = `${c?.prefix ? `${c.prefix} ` : ""}${preset.name}`;
+    composed.name = `${c?.prefix ? `${c.prefix} ` : ""}${preset.name}${composed.thicknessSuffix ?? ""}`;
     composed.presetId = preset.id;
     composed.source = preset.source;
     if (preset.cost != null) composed.cost = preset.cost;
