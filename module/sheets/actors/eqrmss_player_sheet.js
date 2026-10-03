@@ -105,6 +105,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             armorDB: 0,
             formationDB: 0,
             formationMissileDB: 0,
+            mixedArmorDB: 0,
             formationLeft: "",
             formationRight: "",
             totalDB: 0,

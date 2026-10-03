@@ -673,6 +673,7 @@ _prepareCombat()
         this.system.combat.totalMissileDB = metrics.totalMissileDB ?? metrics.totalDB;
         this.system.combat.formationDB = metrics.formationDB ?? 0;
         this.system.combat.formationMissileDB = metrics.formationMissileDB ?? 0;
+        this.system.combat.mixedArmorDB = metrics.mixedArmorDB ?? 0;
 
     }
     catch (e)

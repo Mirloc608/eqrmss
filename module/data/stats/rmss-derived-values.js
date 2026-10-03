@@ -29,6 +29,35 @@ export const FORMATION_SHIELD_DB = {
     full: { melee: 15, missile: 15, twoMelee: 30, twoMissile: 30 },
     wall: { melee: 20, missile: 25, twoMelee: 40, twoMissile: 50 }
 };
+
+// Arms Companion §5.2 (APAC — Armor Pick and Choose): the chest armor
+// sets the base AT/stage; other areas add DB per stage of difference
+// (Mixed Armor DB Modification Chart, Full Body column, per shift).
+// Stages: Plate 4, Chain 3, Rigid Leather 2, Soft Leather 1,
+// No Armor 0 (by AT band). Missing areas count as No Armor, so
+// inferior or absent pieces shift DB down (book default). The
+// chart's Torso cover row is unused: the chest piece IS the base.
+// Neck cover has no composer location; bracers (wrist) share the
+// arm-greaves area.
+export const APAC_STAGE_BANDS = [
+    { minAT: 17, stage: 4 },
+    { minAT: 13, stage: 3 },
+    { minAT: 9, stage: 2 },
+    { minAT: 5, stage: 1 },
+    { minAT: 1, stage: 0 }
+];
+export function apacStageOfAT(at) {
+    const n = Number(at) || 0;
+    for (const band of APAC_STAGE_BANDS) if (n >= band.minAT) return band.stage;
+    return 0;
+}
+export const APAC_AREAS = [
+    { locations: ["head"], dbPerShift: 3 },
+    { locations: ["arms", "wrist"], dbPerShift: 3 },
+    { locations: ["legs"], dbPerShift: 2 },
+    { locations: ["hands"], dbPerShift: 2 },
+    { locations: ["feet"], dbPerShift: 1 }
+];
 export class RMSSDerivedValueEngine {
   compute(stats) {
     const St = stats.St ?? 50;
@@ -103,12 +132,31 @@ export function calculateArmorAndDefenses(actorData) {
 
     let armorType = chartArmorType ? `AT ${chartArmorType}` : "No Armor";
     let mmp = 0;
+    let mixedArmorDB = 0;
     if (wornArmor.length > 0) {
         const ats = wornArmor
             .map((i) => Number(i.system?.at))
             .filter((n) => Number.isFinite(n) && n > 0);
-        if (ats.length > 0) armorType = `AT ${Math.max(...ats)}`;
+        // APAC §5.2: the chest armor sets the base AT; with no chest
+        // piece, fall back to the best worn AT (pre-APAC behavior).
+        const chestPieces = wornArmor.filter((i) => i.system?.armorLocation === "chest");
+        const chestAts = chestPieces
+            .map((i) => Number(i.system?.at))
+            .filter((n) => Number.isFinite(n) && n > 0);
+        const baseAts = chestAts.length > 0 ? chestAts : ats;
+        if (baseAts.length > 0) armorType = `AT ${Math.max(...baseAts)}`;
         mmp = wornArmor.reduce((sum, i) => sum + (Number(i.system?.maneuverPenalty) || 0), 0);
+
+        // Mixed-armor DB: each area shifts by its stage difference
+        // from the base stage (missing areas count as No Armor).
+        const baseStage = baseAts.length > 0 ? apacStageOfAT(Math.max(...baseAts)) : 0;
+        for (const area of APAC_AREAS) {
+            const pieces = wornArmor.filter((i) => area.locations.includes(i.system?.armorLocation));
+            const stage = pieces.length > 0
+                ? Math.max(...pieces.map((i) => apacStageOfAT(i.system?.at)))
+                : 0;
+            mixedArmorDB += area.dbPerShift * (stage - baseStage);
+        }
     }
 
     let shieldBonus = 0;
@@ -166,8 +214,8 @@ export function calculateArmorAndDefenses(actorData) {
     // DB for that attack type; the Adrenal Defense component counts in
     // full against melee and at half against missile attacks (§4.4.3).
     const naturalDB = chartDB ?? quicknessBonus;
-    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB;
-    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB;
+    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB + mixedArmorDB;
+    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB;
 
     return {
         derived: derivedStats,
@@ -188,6 +236,7 @@ export function calculateArmorAndDefenses(actorData) {
         shieldMissileBonus,
         formationDB,
         formationMissileDB,
+        mixedArmorDB,
         otherDB,
         armorDB,
         enhancedArmorDB,
