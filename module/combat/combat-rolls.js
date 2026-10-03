@@ -360,6 +360,19 @@ function targetParryDB(targetActor, attackerWeaponType, missileAttack) {
     return allocated;
 }
 
+// Arms Law §4.3 ("Parrying Missile Fire"): a declared missile parry
+// adds its allocated OB to DB against missile/thrown attacks only,
+// and is consumed by the first such attack. Requires shield/terrain
+// at declaration (checked there); stun-no-parry/down-or-out and
+// unconsciousness suppress it like any parry.
+function targetMissileParryDB(targetActor, missileAttack) {
+    if (!targetActor || !missileAttack) return 0;
+    if (targetActor.system?.status?.unconscious) return 0;
+    const tst = activeStun(targetActor.system?.status?.stun);
+    if (tst && tst.type !== "stunned") return 0;
+    return Math.max(0, Number(targetActor.system?.status?.missileParryDB) || 0);
+}
+
 export async function rollWeaponAttack(actor, weaponItem) {
     const sys = weaponItem.system ?? {};
     // Weapons granted before their template carried an attack table
@@ -423,6 +436,16 @@ export async function rollWeaponAttack(actor, weaponItem) {
         }
         attackerParryAllocation = Math.max(0, Math.min(Number(attackerStatus.parryDB) || 0, Math.max(0, baseOb)));
     }
+    // Missile parry (§4.3) draws on the same weapon's OB budget: OB
+    // shifted to missile DB is not available to this weapon's attack.
+    let attackerMissileParryAllocation = 0;
+    {
+        const mpWeaponId = attackerStatus.missileParryWeaponId ?? "";
+        const attackWeaponId = weaponItem.id ?? weaponItem._id ?? "";
+        if (mpWeaponId && attackWeaponId && mpWeaponId === attackWeaponId) {
+            attackerMissileParryAllocation = Math.max(0, Math.min(Number(attackerStatus.missileParryDB) || 0, Math.max(0, baseOb)));
+        }
+    }
     const missileAttack = isMissileAttack(weaponType);
 
     // ---- Target: first targeted token, else manual ----
@@ -466,6 +489,9 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // (base defense only). Weapon parries do not apply vs missiles.
     const parryDB = targetParryDB(targetActor, weaponType, missileAttack);
     db += parryDB;
+    // Missile parry (§4.3): applies vs missile/thrown only, one attack.
+    const missileParryDB = targetMissileParryDB(targetActor, missileAttack);
+    db += missileParryDB;
     const targetUnconscious = !!targetActor?.system?.status?.unconscious;
 
     // ---- Missile shot: range band (§5.2.11) and reloading (§5.2.12).
@@ -506,7 +532,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const swingBonus = await consumeNextSwingBonus(actor);
     // ---- Action penalty: "at -N" hits ALL actions ----
     const actionPenalty = Math.min(0, Number(actor.system?.status?.actionPenalty?.value) || 0);
-    const ob = baseOb - attackerParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty;
+    const ob = baseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty;
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -542,13 +568,23 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const attackSize = sys.attackSize ?? null;
     const lookup = lookupAttack(tables.weapons, tableName, net, at, attackSize);
 
+    // A declared missile parry is spent by this one missile attack.
+    if (missileParryDB > 0 && targetActor) {
+        await targetActor.update({
+            "system.status.missileParryDB": 0,
+            "system.status.missileParryWeaponId": "",
+            "system.status.missileParryWeaponName": "",
+            "system.status.missileParrySource": ""
+        });
+    }
+
     const SIZE_LABEL = { T: "Tiny", S: "Small", M: "Medium", L: "Large", H: "Huge" };
     const shieldNote = shieldDefense.shieldBlocked
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}`
-        + ` − DB ${db}${shieldNote}${parryDB ? ` (+${parryDB} parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
+        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}`
+        + ` − DB ${db}${shieldNote}${parryDB ? ` (+${parryDB} parry)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
     if (lookup.error && lookup.miss) {

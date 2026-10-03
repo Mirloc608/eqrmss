@@ -64,6 +64,7 @@
 // ============================================================
 
 import { WEAPON_TYPE_TO_SKILL_ID } from "./attack-resolver.js";
+import { isWorn } from "../utils/equipment/equipment-utils.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -356,6 +357,10 @@ function deathCleanup() {
         "system.status.parryWeaponName": "",
         "system.status.parryWeaponType": "",
         "system.status.parryFull": false,
+        "system.status.missileParryDB": 0,
+        "system.status.missileParryWeaponId": "",
+        "system.status.missileParryWeaponName": "",
+        "system.status.missileParrySource": "",
         "system.status.shieldOpponentId": "",
         "system.status.shieldOpponentName": "",
         "system.status.shieldOpponentRoundKey": "",
@@ -462,6 +467,14 @@ export async function tickConditions(combat) {
         }
         if (st.attackedThisRound) {
             updates["system.status.attackedThisRound"] = false;
+        }
+        // Declared missile parry (§4.3) also lapses at the round change.
+        if ((Number(st.missileParryDB) || 0) > 0 || st.missileParryWeaponId) {
+            updates["system.status.missileParryDB"] = 0;
+            updates["system.status.missileParryWeaponId"] = "";
+            updates["system.status.missileParryWeaponName"] = "";
+            updates["system.status.missileParrySource"] = "";
+            notes.push(`${esc(actor.name)}'s missile parry lapses.`);
         }
         // Shield assignment (§4.2) is per round.
         if (st.shieldOpponentId || st.shieldOpponentName || st.shieldOpponentRoundKey) {
@@ -688,6 +701,131 @@ export async function declareParry(actor, weaponItem, allocation = null) {
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: `<p><em>${esc(actor.name)} parries with ${esc(weaponItem.name)} — allocates ${allocated} of ${maxOb} OB to DB${full ? " (full parry)" : `; ${remaining} OB remains for attack`}.</em></p>`
+    });
+}
+
+// ------------------------------------------------------------
+// Missile parry (Arms Law §4.3, "Parrying Missile Fire"): the
+// defender shifts part of a weapon's OB to DB against ONE missile
+// attack. Requires a shield (a weapon won't do) or suitable
+// terrain, awareness of the attack (GM adjudicates), declaration
+// before the round's attack, and 50% of the round's activity. The
+// OB budget is shared with melee parry and the weapon's attack.
+// ------------------------------------------------------------
+
+async function promptMissileParryAllocation(actor, weaponItem, maxOb, hasShield) {
+    const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
+    if (!DialogV2?.prompt || maxOb <= 0) {
+        return { allocation: maxOb, terrain: !hasShield };
+    }
+    try {
+        const result = await DialogV2.prompt({
+            window: { title: "Missile Parry: OB Allocation" },
+            content: `
+                <div class="form-group">
+                    <label>OB to move to DB vs one missile attack (0-${maxOb})</label>
+                    <input type="number" name="allocation" value="${maxOb}" min="0" max="${maxOb}" step="1">
+                </div>
+                <p class="hint">${hasShield ? `${esc(actor.name)} has a shield ready.` : `${esc(actor.name)} has no shield ready — missile parry needs suitable terrain.`}</p>
+                <div class="form-group">
+                    <label><input type="checkbox" name="terrain"${hasShield ? "" : " checked"}> Suitable terrain (GM adjudicates)</label>
+                </div>
+                <p class="hint">Declared at the start of the Fire Phase; costs 50% of the round's activity and applies to the next missile attack only.</p>`,
+            ok: {
+                label: "Declare Missile Parry",
+                callback: (event, button, dialog) => {
+                    const form = dialog?.element ?? button?.form ?? null;
+                    const allocInput = form?.querySelector?.('input[name="allocation"]') ?? button?.form?.elements?.allocation ?? null;
+                    const terrainInput = form?.querySelector?.('input[name="terrain"]') ?? button?.form?.elements?.terrain ?? null;
+                    return { allocation: allocInput?.value ?? "", terrain: !!terrainInput?.checked };
+                }
+            }
+        });
+        if (result == null) return null; // cancelled
+        if (typeof result === "object" && !(typeof result.get === "function")) {
+            const raw = result.allocation;
+            return { allocation: raw == null || raw === "" ? null : Number(raw), terrain: !!result.terrain };
+        }
+        const raw = typeof result.get === "function" ? result.get("allocation") : result.allocation;
+        const terrain = typeof result.get === "function" ? !!result.get("terrain") : !!result.terrain;
+        return { allocation: raw == null || raw === "" ? null : Number(raw), terrain };
+    } catch (e) {
+        console.warn("EQRMSS | Missile parry prompt failed; declaration cancelled.", e);
+        return null;
+    }
+}
+
+export async function declareMissileParry(actor, weaponItem, allocation = null) {
+    if (!actor) {
+        ui.notifications?.warn("Declare Missile Parry: no actor.");
+        return;
+    }
+    if (!weaponItem) {
+        ui.notifications?.warn("Declare Missile Parry: choose the weapon whose OB funds the parry.");
+        return;
+    }
+    if (actor.system?.status?.unconscious) {
+        ui.notifications?.warn(`${actor.name} is unconscious and cannot parry.`);
+        return;
+    }
+    const stunState = activeStun(actor.system?.status?.stun);
+    if (stunState && stunState.type !== "stunned") {
+        ui.notifications?.warn(`${actor.name} is ${STUN_LABEL[stunState.type]} and cannot parry.`);
+        return;
+    }
+    const status = actor.system?.status ?? {};
+    if ((Number(status.missileParryDB) || 0) > 0) {
+        ui.notifications?.warn(`${actor.name} has already declared a missile parry this round.`);
+        return;
+    }
+    // Declared at the start of the Fire Phase — not retroactively
+    // after the round's attack has been made.
+    if (status.attackedThisRound) {
+        ui.notifications?.warn(`${actor.name} has already attacked this round and cannot declare a missile parry.`);
+        return;
+    }
+    const { ob } = computeWeaponOB(actor, weaponItem);
+    const maxOb = Math.max(0, ob);
+    if (maxOb <= 0) {
+        ui.notifications?.warn(`${actor.name} has no positive OB with ${weaponItem.name} to allocate to missile parry.`);
+        return;
+    }
+    // Shared OB budget (§4.3): melee parry with the same weapon has
+    // already claimed part of this weapon's OB.
+    const weaponId = weaponItem.id ?? weaponItem._id ?? "";
+    const meleeClaim = status.parrying && status.parryWeaponId === weaponId ? (Number(status.parryDB) || 0) : 0;
+    const available = Math.max(0, maxOb - meleeClaim);
+    if (available <= 0) {
+        ui.notifications?.warn(`${actor.name} has already allocated all of ${weaponItem.name}'s OB this round.`);
+        return;
+    }
+    const items = actor.items?.contents ?? actor.items ?? [];
+    const hasShield = [...items].some(i => i?.type === "shield" && isWorn(i));
+    let terrain = false;
+    if (allocation == null) {
+        const answer = await promptMissileParryAllocation(actor, weaponItem, available, hasShield);
+        if (!answer || answer.allocation == null) return;
+        allocation = answer.allocation;
+        terrain = answer.terrain;
+    }
+    if (!hasShield && !terrain) {
+        ui.notifications?.warn(`${actor.name} needs a shield or suitable terrain to parry missile fire.`);
+        return;
+    }
+    const allocated = Math.max(0, Math.min(available, Math.round(Number(allocation) || 0)));
+    if (allocated <= 0) {
+        ui.notifications?.warn(`${actor.name} must allocate at least 1 OB to missile parry with ${weaponItem.name}.`);
+        return;
+    }
+    await actor.update({
+        "system.status.missileParryDB": allocated,
+        "system.status.missileParryWeaponId": weaponId,
+        "system.status.missileParryWeaponName": weaponItem.name ?? "",
+        "system.status.missileParrySource": hasShield ? "shield" : "terrain"
+    });
+    await ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor }),
+        content: `<p><em>${esc(actor.name)} declares missile parry (${hasShield ? "shield" : "suitable terrain"}) — +${allocated} DB against the next missile attack (50% activity).</em></p>`
     });
 }
 

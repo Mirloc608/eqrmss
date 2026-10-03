@@ -70,6 +70,11 @@ export default class EQRMSSNPCSheet
             this._onParryDeclare(ev.currentTarget.dataset.itemId);
         }));
 
+        html.querySelectorAll(".missile-parry-declare").forEach(el => el.addEventListener("click", ev => {
+            ev.preventDefault();
+            this._onMissileParryDeclare(ev.currentTarget.dataset.itemId);
+        }));
+
         if (!this._npcDropBound) {
             html.addEventListener("dragover", ev => ev.preventDefault());
             html.addEventListener("drop", ev => this._onDrop(ev));
@@ -104,6 +109,21 @@ export default class EQRMSSNPCSheet
         } catch (e) {
             console.error("EQRMSS | NPC parry declaration failed", e);
             ui.notifications.error(`Parry declaration failed: ${e.message}`);
+        }
+    }
+
+    async _onMissileParryDeclare(itemId) {
+        const item = this.actor.items.get(itemId);
+        if (!item || item.type !== "weapon") {
+            ui.notifications.error(`Unknown weapon: ${itemId}`);
+            return;
+        }
+        try {
+            const { declareMissileParry } = await import("../../combat/crit-conditions.js");
+            await declareMissileParry(this.actor, item);
+        } catch (e) {
+            console.error("EQRMSS | NPC missile parry declaration failed", e);
+            ui.notifications.error(`Missile parry declaration failed: ${e.message}`);
         }
     }
 

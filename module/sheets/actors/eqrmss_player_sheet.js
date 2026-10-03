@@ -368,6 +368,10 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             const itemId = ev.currentTarget.dataset.itemId;
             this._onParryDeclare(itemId);
         }));
+        html.querySelectorAll(".missile-parry-declare").forEach(el => el.addEventListener("click", ev => {
+            const itemId = ev.currentTarget.dataset.itemId;
+            this._onMissileParryDeclare(itemId);
+        }));
 
         // ------------------------------------------------------------
         // Combat Tab: Initiative (RMSS §6.1)
@@ -750,6 +754,21 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         } catch (e) {
             console.error("EQRMSS | Parry declaration failed", e);
             ui.notifications.error(`Parry declaration failed: ${e.message}`);
+        }
+    }
+
+    async _onMissileParryDeclare(itemId) {
+        const item = this.actor.items.get(itemId);
+        if (!item || item.type !== "weapon") {
+            ui.notifications.error(`Unknown weapon: ${itemId}`);
+            return;
+        }
+        try {
+            const { declareMissileParry } = await import("../../combat/crit-conditions.js");
+            await declareMissileParry(this.actor, item);
+        } catch (e) {
+            console.error("EQRMSS | Missile parry declaration failed", e);
+            ui.notifications.error(`Missile parry declaration failed: ${e.message}`);
         }
     }
 }
