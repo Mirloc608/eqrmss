@@ -336,11 +336,13 @@ async function recordShieldAssignment(targetActor, attackerActor, defense) {
 }
 
 // Arms Law §4.3/§4.4.8: a declared weapon parry adds its allocated OB
-// to DB against melee attacks only. A full-OB parry also gains the
-// weapon's +5 shield bonus. Two-handed weapons use at most 50% of OB
-// to parry one-handed weapons; pole arms use at most 50% against
-// non-pole arms. Stun-no-parry/down-or-out suppresses the parry DB.
-function targetParryDB(targetActor, attackerWeaponType, missileAttack) {
+// to DB against melee attacks only, and only against the ONE foe the
+// defender attacks (§4.3) — designated at declaration and (re)set by
+// the defender's own attack. A full-OB parry also gains the weapon's
+// +5 shield bonus. Two-handed weapons use at most 50% of OB to parry
+// one-handed weapons; pole arms use at most 50% against non-pole
+// arms. Stun-no-parry/down-or-out suppresses the parry DB.
+function targetParryDB(targetActor, attackerWeaponType, missileAttack, attacker = null) {
     if (!targetActor || missileAttack) return 0;
     if (targetActor.system?.status?.unconscious) return 0; // no DB while unconscious
     const tst = activeStun(targetActor.system?.status?.stun);
@@ -348,6 +350,10 @@ function targetParryDB(targetActor, attackerWeaponType, missileAttack) {
     const status = targetActor.system?.status ?? {};
     let allocated = Number(status.parryDB) || 0;
     if (allocated <= 0) return 0;
+    // Foe-specific (§4.3): no foe recorded yet, or this attacker is
+    // not the foe, means the parry does not apply to this attack.
+    const foeId = status.parryTargetId ?? "";
+    if (!foeId || !attacker || attacker.id !== foeId) return 0;
     const maxOb = Number(status.parryMaxOB) || allocated;
     const parryWeaponType = status.parryWeaponType ?? "";
     if (parryWeaponType === "two-handed" && ONE_HANDED_WEAPON_TYPES.has(attackerWeaponType)) {
@@ -487,8 +493,16 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // ---- Target parry: the defender's allocated OB adds to DB
     // against melee attacks, unless they are stun-no-parry/down-or-out
     // (base defense only). Weapon parries do not apply vs missiles.
-    const parryDB = targetParryDB(targetActor, weaponType, missileAttack);
+    const parryDB = targetParryDB(targetActor, weaponType, missileAttack, actor);
     db += parryDB;
+    // §4.3 foe-specific parry: note when the defender's declared parry
+    // does not cover this attacker (different foe, or none established).
+    const foeStatus = targetActor?.system?.status ?? {};
+    const defenderStun = targetActor ? activeStun(targetActor.system?.status?.stun) : null;
+    const parryHeldNote = (!missileAttack && targetActor && parryDB <= 0 && (Number(foeStatus.parryDB) || 0) > 0
+        && !targetActor.system?.status?.unconscious && !(defenderStun && defenderStun.type !== "stunned"))
+        ? (foeStatus.parryTargetName ? ` (parry held vs ${foeStatus.parryTargetName})` : " (parry foe not yet established)")
+        : "";
     // Missile parry (§4.3): applies vs missile/thrown only, one attack.
     const missileParryDB = targetMissileParryDB(targetActor, missileAttack);
     db += missileParryDB;
@@ -537,6 +551,14 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
     await actor.update({ "system.status.attackedThisRound": true });
+    // §4.3: a parrying combatant's foe is the foe they attack — record
+    // this attack's target so their parry DB applies against them.
+    if (attackerStatus.parrying && targetActor) {
+        await actor.update({
+            "system.status.parryTargetId": targetActor.id ?? "",
+            "system.status.parryTargetName": targetActor.name ?? ""
+        });
+    }
     await recordShieldAssignment(targetActor, actor, shieldDefense);
 
     // ---- Attack roll (high open-ended) ----
@@ -584,7 +606,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
         + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}`
-        + ` − DB ${db}${shieldNote}${parryDB ? ` (+${parryDB} parry)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
+        + ` − DB ${db}${shieldNote}${parryDB ? ` (+${parryDB} parry)` : ""}${parryHeldNote}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
     if (lookup.error && lookup.miss) {

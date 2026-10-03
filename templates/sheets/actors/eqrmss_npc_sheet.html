@@ -17,7 +17,7 @@
     <input name="name" type="text" value="{{actor.name}}"/>
     <span class="npc-hits"><input name="system.hits.value" type="number" value="{{system.hits.value}}"/>/{{system.hits.max}}</span>
   </div>
-  <div class="npc-defenses"><span>{{system.combat.armorType}}</span><span>DB {{system.combat.totalDB}} · Msl {{system.combat.totalMissileDB}}{{#if system.status.parrying}} (+{{system.status.parryDB}} parry){{/if}}{{#if system.status.missileParryDB}} (+{{system.status.missileParryDB}} msl parry){{/if}}</span></div>
+  <div class="npc-defenses"><span>{{system.combat.armorType}}</span><span>DB {{system.combat.totalDB}} · Msl {{system.combat.totalMissileDB}}{{#if system.status.parrying}} (+{{system.status.parryDB}} parry{{#if system.status.parryTargetName}} vs {{system.status.parryTargetName}}{{/if}}){{/if}}{{#if system.status.missileParryDB}} (+{{system.status.missileParryDB}} msl parry){{/if}}</span></div>
   <div class="npc-attacks">
     {{#each items.weapons}}
     <div class="npc-atk">

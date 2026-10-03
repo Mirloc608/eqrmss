@@ -51,6 +51,10 @@
 //   status.parryWeaponId  string (item id the parry was declared with)
 //   status.parryWeaponName string (display name for the parry weapon)
 //   status.parryWeaponType string (weapon category for parry limits)
+//   status.parryTargetId / parryTargetName: the ONE foe the parry
+//     applies against (§4.3: "A combatant may only parry the foe
+//     that he attacks") — designated at declaration from the current
+//     target, and (re)set to whoever the parrier attacks.
 //   status.parryFull      boolean (all of the weapon's OB allocated)
 //   status.shieldOpponentId string (opponent the shield DB is assigned to)
 //   status.shieldOpponentName string (display name for that opponent)
@@ -356,6 +360,8 @@ function deathCleanup() {
         "system.status.parryWeaponId": "",
         "system.status.parryWeaponName": "",
         "system.status.parryWeaponType": "",
+        "system.status.parryTargetId": "",
+        "system.status.parryTargetName": "",
         "system.status.parryFull": false,
         "system.status.missileParryDB": 0,
         "system.status.missileParryWeaponId": "",
@@ -462,6 +468,8 @@ export async function tickConditions(combat) {
             updates["system.status.parryWeaponId"] = "";
             updates["system.status.parryWeaponName"] = "";
             updates["system.status.parryWeaponType"] = "";
+            updates["system.status.parryTargetId"] = "";
+            updates["system.status.parryTargetName"] = "";
             updates["system.status.parryFull"] = false;
             notes.push(`${esc(actor.name)}'s parry lapses.`);
         }
@@ -684,6 +692,10 @@ export async function declareParry(actor, weaponItem, allocation = null) {
     }
     const full = allocated >= maxOb;
     const remaining = maxOb - allocated;
+    // §4.3: the parry applies only against the foe the combatant
+    // attacks. Designate that foe now from the current target (the
+    // combatant's own attack will (re)set it when made).
+    const designated = [...(game.user?.targets ?? [])][0]?.actor ?? null;
     const updates = {
         "system.status.parrying": true,
         "system.status.parryDB": allocated,
@@ -691,6 +703,8 @@ export async function declareParry(actor, weaponItem, allocation = null) {
         "system.status.parryWeaponId": weaponItem.id ?? weaponItem._id ?? "",
         "system.status.parryWeaponName": weaponItem.name ?? "",
         "system.status.parryWeaponType": weaponItem.system?.type ?? "",
+        "system.status.parryTargetId": designated?.id ?? "",
+        "system.status.parryTargetName": designated?.name ?? "",
         "system.status.parryFull": full
     };
     const mp = actor.system?.status?.mustParry;
@@ -700,8 +714,11 @@ export async function declareParry(actor, weaponItem, allocation = null) {
     await actor.update(updates);
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content: `<p><em>${esc(actor.name)} parries with ${esc(weaponItem.name)} — allocates ${allocated} of ${maxOb} OB to DB${full ? " (full parry)" : `; ${remaining} OB remains for attack`}.</em></p>`
+        content: `<p><em>${esc(actor.name)} parries with ${esc(weaponItem.name)} — allocates ${allocated} of ${maxOb} OB to DB${full ? " (full parry)" : `; ${remaining} OB remains for attack`}${designated ? ` against ${esc(designated.name)}` : ""}.</em></p>`
     });
+    if (!designated) {
+        ui.notifications?.info(`${actor.name}: no foe designated — the parry will apply against the foe ${actor.name} attacks. Target that foe before declaring to cover their earlier attacks.`);
+    }
 }
 
 // ------------------------------------------------------------

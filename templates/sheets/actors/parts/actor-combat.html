@@ -5,7 +5,7 @@
     <h4>Active Conditions</h4>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
       <span><strong>Next Swing:</strong> {{#if system.status.nextSwingBonus}}+{{system.status.nextSwingBonus}}{{else}}&mdash;{{/if}}</span>
-      <span><strong>Parrying:</strong> {{#if system.status.parrying}}+{{system.status.parryDB}} DB{{#if system.status.parryWeaponName}} ({{system.status.parryWeaponName}}){{/if}}{{else}}&mdash;{{/if}}</span>
+      <span><strong>Parrying:</strong> {{#if system.status.parrying}}+{{system.status.parryDB}} DB{{#if system.status.parryWeaponName}} ({{system.status.parryWeaponName}}){{/if}}{{#if system.status.parryTargetName}} vs {{system.status.parryTargetName}}{{else}} (no foe yet){{/if}}{{else}}&mdash;{{/if}}</span>
       {{#if system.status.missileParryDB}}<span><strong>Missile Parry:</strong> +{{system.status.missileParryDB}} DB (next missile attack)</span>{{/if}}
       <span><strong>Shield vs:</strong> {{#if system.status.shieldOpponentName}}{{system.status.shieldOpponentName}}{{else}}&mdash;{{/if}}</span>
       <span><strong>Stun:</strong> {{#if (add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut)}}{{add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</span>
