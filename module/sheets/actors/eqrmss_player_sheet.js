@@ -377,6 +377,10 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             const itemId = ev.currentTarget.dataset.itemId;
             this._onMissileParryDeclare(itemId);
         }));
+        html.querySelectorAll(".cqc-toggle").forEach(el => el.addEventListener("click", ev => {
+            ev.preventDefault();
+            this._onCQCToggle();
+        }));
 
         // Shield formation (§5.6): GM-declared flank shields feeding DB.
         html.querySelectorAll(".formation-shield").forEach(el => el.addEventListener("change", ev => {
@@ -782,6 +786,16 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         } catch (e) {
             console.error("EQRMSS | Missile parry declaration failed", e);
             ui.notifications.error(`Missile parry declaration failed: ${e.message}`);
+        }
+    }
+
+    async _onCQCToggle() {
+        try {
+            const { declareCloseQuarters } = await import("../../combat/crit-conditions.js");
+            await declareCloseQuarters(this.actor);
+        } catch (e) {
+            console.error("EQRMSS | Close-quarters toggle failed", e);
+            ui.notifications.error(`Close-quarters toggle failed: ${e.message}`);
         }
     }
 }

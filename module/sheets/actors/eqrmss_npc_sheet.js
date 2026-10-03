@@ -75,6 +75,11 @@ export default class EQRMSSNPCSheet
             this._onMissileParryDeclare(ev.currentTarget.dataset.itemId);
         }));
 
+        html.querySelectorAll(".cqc-toggle").forEach(el => el.addEventListener("click", ev => {
+            ev.preventDefault();
+            this._onCQCToggle();
+        }));
+
         if (!this._npcDropBound) {
             html.addEventListener("dragover", ev => ev.preventDefault());
             html.addEventListener("drop", ev => this._onDrop(ev));
@@ -124,6 +129,16 @@ export default class EQRMSSNPCSheet
         } catch (e) {
             console.error("EQRMSS | NPC missile parry declaration failed", e);
             ui.notifications.error(`Missile parry declaration failed: ${e.message}`);
+        }
+    }
+
+    async _onCQCToggle() {
+        try {
+            const { declareCloseQuarters } = await import("../../combat/crit-conditions.js");
+            await declareCloseQuarters(this.actor);
+        } catch (e) {
+            console.error("EQRMSS | NPC close-quarters toggle failed", e);
+            ui.notifications.error(`Close-quarters toggle failed: ${e.message}`);
         }
     }
 

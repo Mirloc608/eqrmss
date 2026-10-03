@@ -272,6 +272,15 @@ function actorKey(actor) {
     return actor?.uuid ?? actor?.id ?? actor?._id ?? actor?.name ?? "";
 }
 
+// A weapon's length in feet from its baked template length
+// ("2.5-3" -> 3). Unknown length conveys no CQC penalty.
+function weaponLengthFeet(weaponItem) {
+    const raw = weaponItem?.system?.length;
+    if (raw == null || raw === "") return null;
+    const nums = String(raw).match(/[\d.]+/g)?.map(Number).filter(Number.isFinite) ?? [];
+    return nums.length ? Math.max(...nums) : null;
+}
+
 function currentShieldRoundKey() {
     const combat = game.combat;
     return combat?.id ? `${combat.id}:${Number(combat.round) || 0}` : "no-combat";
@@ -494,6 +503,15 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // ---- Target parry: the defender's allocated OB adds to DB
     // against melee attacks, unless they are stun-no-parry/down-or-out
     // (base defense only). Weapon parries do not apply vs missiles.
+    // Close Quarters Combat (§4.7) pair state, resolved before the
+    // defender's parry and Quickness DB are applied below.
+    const attackerId = actor.id ?? actor._id ?? "";
+    const defenderId = targetActor ? (targetActor.id ?? targetActor._id ?? "") : "";
+    const closingOnTarget = !!defenderId && !!attackerStatus.cqcTargetId && attackerStatus.cqcTargetId === defenderId;
+    const closedOnByTarget = !!defenderId && !!targetActor.system?.status?.cqcTargetId && targetActor.system.status.cqcTargetId === attackerId;
+    let cqcQuLoss = 0;
+    let cqcLengthPenalty = 0;
+
     const parryDB = targetParryDB(targetActor, weaponType, missileAttack, actor);
     db += parryDB;
     // §4.3 foe-specific parry: note when the defender's declared parry
@@ -508,6 +526,33 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const missileParryDB = targetMissileParryDB(targetActor, missileAttack);
     db += missileParryDB;
     const targetUnconscious = !!targetActor?.system?.status?.unconscious;
+
+    // ---- Close Quarters Combat (Arms Companion §4.7): the closer
+    // is within a foot of their foe. The foe cannot parry the
+    // closer and loses half their Quickness DB against them; the
+    // closer gains +30 OB. A combatant who has been closed on
+    // strikes back at -50/-100 OB with a weapon over 2/3 feet,
+    // and the closer's own Quickness DB is given up while engaged.
+    let cqcParryNote = "";
+    if (closingOnTarget && parryDB > 0) {
+        cqcParryNote = " (cannot parry — close quarters)";
+    }
+    const effectiveParryDB = closingOnTarget ? 0 : parryDB;
+    if (closingOnTarget && !targetUnconscious && targetActor) {
+        const quDB = Math.max(0, Number(targetActor.system?.combat?.quicknessBonus) || 0);
+        cqcQuLoss = Math.floor(quDB / 2);
+    } else if (!targetUnconscious && targetActor?.system?.status?.cqcTargetId) {
+        cqcQuLoss = Math.max(0, Number(targetActor.system?.combat?.quicknessBonus) || 0);
+    }
+    if (closingOnTarget) db -= parryDB;
+    db = Math.max(0, db - cqcQuLoss);
+    // The closed-on combatant's own long weapon is useless in close:
+    // -100 OB over 3 feet, -50 over 2 feet (their attack back).
+    if (closedOnByTarget && !missileAttack) {
+        const len = weaponLengthFeet(weaponItem);
+        if (len != null && len > 3) cqcLengthPenalty = 100;
+        else if (len != null && len > 2) cqcLengthPenalty = 50;
+    }
 
     // ---- Missile shot: range band (§5.2.11) and reloading (§5.2.12).
     // Prompted after target determination; cancelling aborts the shot
@@ -555,6 +600,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
             if (pick.areaId) {
                 calledShot = pick;
                 calledShotMod = pick.modifier || 0;
+                // §4.7: the closer gains +30 to Strategic Targeting.
+                if (closingOnTarget) calledShotMod += 30;
             }
         }
     }
@@ -564,7 +611,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const swingBonus = await consumeNextSwingBonus(actor);
     // ---- Action penalty: "at -N" hits ALL actions ----
     const actionPenalty = Math.min(0, Number(actor.system?.status?.actionPenalty?.value) || 0);
-    const ob = baseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty + calledShotMod;
+    const ob = baseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty;
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -623,8 +670,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}`
-        + ` − DB ${db}${shieldNote}${parryDB ? ` (+${parryDB} parry)` : ""}${parryHeldNote}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
+        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
+        + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
     if (lookup.error && lookup.miss) {

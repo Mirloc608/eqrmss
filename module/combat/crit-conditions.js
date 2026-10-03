@@ -370,6 +370,8 @@ function deathCleanup() {
         "system.status.shieldOpponentId": "",
         "system.status.shieldOpponentName": "",
         "system.status.shieldOpponentRoundKey": "",
+        "system.status.cqcTargetId": "",
+        "system.status.cqcTargetName": "",
         "system.status.unconscious": false,
         "system.status.soulTimer": 0,
         "system.status.soulTimerUnknown": false,
@@ -890,5 +892,48 @@ export async function declareFirstAid(actor, targetActor) {
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: `<p><em>${esc(actor.name)} administers first aid to ${esc(targetActor?.name ?? "their patient")}. (First-aid mechanics pending — stub.)</em></p>`
+    });
+}
+
+// Arms Companion §4.7 CLOSE QUARTERS COMBAT: the closer has moved
+// to within a foot of a foe, rendering long weapons useless. The
+// state is a toggle on the closer (cqcTargetId/cqcTargetName);
+// it persists until toggled off (it is positional, not a
+// per-round declaration). Approaching uses the Closing skill —
+// adjudicated by the GM, not rolled here.
+export async function declareCloseQuarters(actor) {
+    if (!actor) {
+        ui.notifications?.warn("Close Quarters: no actor.");
+        return;
+    }
+    const st = actor.system?.status ?? {};
+    if (st.cqcTargetId) {
+        const foe = st.cqcTargetName || "their foe";
+        await actor.update({
+            "system.status.cqcTargetId": "",
+            "system.status.cqcTargetName": ""
+        });
+        await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor }),
+            content: `<p><em>${esc(actor.name)} disengages from close quarters with ${esc(foe)}.</em></p>`
+        });
+        return;
+    }
+    if (actor.system?.status?.unconscious) {
+        ui.notifications?.warn(`${actor.name} is unconscious and cannot close.`);
+        return;
+    }
+    const designated = [...(game.user?.targets ?? [])][0]?.actor ?? null;
+    if (!designated) {
+        ui.notifications?.warn(`${actor.name}: target a foe to close with first.`);
+        return;
+    }
+    await actor.update({
+        "system.status.cqcTargetId": designated.id ?? "",
+        "system.status.cqcTargetName": designated.name ?? ""
+    });
+    await ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor }),
+        content: `<p><em>${esc(actor.name)} closes to within a foot of ${esc(designated.name)} — Close Quarters Combat (§4.7): +30 OB against them, +30 to Strategic Targeting, and they cannot parry ${esc(actor.name)} (long weapons penalized, half Quickness DB). ${esc(actor.name)} gives up their own Quickness DB while engaged.</em></p>`
     });
 }

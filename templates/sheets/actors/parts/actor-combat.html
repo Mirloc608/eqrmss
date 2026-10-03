@@ -8,6 +8,7 @@
       <span><strong>Parrying:</strong> {{#if system.status.parrying}}+{{system.status.parryDB}} DB{{#if system.status.parryWeaponName}} ({{system.status.parryWeaponName}}){{/if}}{{#if system.status.parryTargetName}} vs {{system.status.parryTargetName}}{{else}} (no foe yet){{/if}}{{else}}&mdash;{{/if}}</span>
       {{#if system.status.missileParryDB}}<span><strong>Missile Parry:</strong> +{{system.status.missileParryDB}} DB (next missile attack)</span>{{/if}}
       <span><strong>Shield vs:</strong> {{#if system.status.shieldOpponentName}}{{system.status.shieldOpponentName}}{{else}}&mdash;{{/if}}</span>
+      <span><strong>Close Qtrs:</strong> {{#if system.status.cqcTargetName}}{{system.status.cqcTargetName}}{{else}}&mdash;{{/if}} <button type="button" class="cqc-toggle" title="Toggle Close Quarters Combat against the targeted foe (Arms Companion §4.7)">{{#if system.status.cqcTargetId}}Disengage{{else}}Close{{/if}}</button></span>
       <span><strong>Stun:</strong> {{#if (add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut)}}{{add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</span>
       <span><strong>Action Penalty:</strong> {{#if system.status.actionPenalty.value}}-{{system.status.actionPenalty.value}} ({{system.status.actionPenalty.rounds}} rnd){{else}}&mdash;{{/if}}</span>
       <span><strong>Unconscious:</strong> {{#if system.status.unconscious}}<strong style="color: #b00;">Yes</strong>{{else}}&mdash;{{/if}}</span>
