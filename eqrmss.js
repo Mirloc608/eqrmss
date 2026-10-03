@@ -330,6 +330,7 @@ export async function initializeDataLoaders() {
         await armorMod.loadArmorData();
         game.eqrmss.armor = {
             compose: armorMod.composeArmor,
+            composeHelmet: armorMod.composeHelmet,
             options: armorMod.getArmorOptions,
             materialsForCategory: armorMod.getMaterialsForCategory,
             enhancementsFor: armorMod.getEnhancementsFor

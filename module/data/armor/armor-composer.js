@@ -17,6 +17,7 @@ let materials = {};
 let conditions = {};
 let enhancements = {};
 let qualities = {};
+let helmets = {};
 let loaded = false;
 
 export async function loadArmorData() {
@@ -47,6 +48,12 @@ export async function loadArmorData() {
     const eData = await eRes.json();
     for (const e of eData.enhancements) enhancements[e.id] = e;
     for (const q of eData.qualities) qualities[q.id] = q;
+
+    // Named helmet presets (Character Law 118-124 + Arms Companion 5.4).
+    const hRes = await fetch("systems/eqrmss/module/data/armor/helmets.json");
+    if (!hRes.ok) throw new Error("Armor helmets file missing");
+    const hData = await hRes.json();
+    for (const h of hData.helmets) helmets[h.id] = h;
 
     loaded = true;
     console.log(`EQRMSS | Armor loaded: ${Object.keys(locations).length} locations, ${Object.keys(categories).length} categories, ${Object.keys(materials).length} materials, ${Object.keys(conditions).length} conditions`);
@@ -156,8 +163,28 @@ export function getArmorOptions() {
         materials: Object.values(materials).map(m => ({ id: m.id, name: m.name, categories: m.categories ?? [] })),
         conditions: Object.values(conditions).map(c => ({ id: c.id, name: c.name })),
         qualities: Object.values(qualities).map(q => ({ id: q.id, name: q.name })),
-        enhancements: Object.values(enhancements).map(e => ({ id: e.id, name: e.name, categories: e.categories ?? [] }))
+        enhancements: Object.values(enhancements).map(e => ({ id: e.id, name: e.name, categories: e.categories ?? [] })),
+        helmets: Object.values(helmets).map(h => ({ id: h.id, name: h.name, source: h.source }))
     };
+}
+
+// Named helmet presets: a preset composes a head piece from its
+// mapped category/material; book cost/weight/production time (when
+// the source chart gives them) override the composer's computed
+// values. The name is the preset's name, keeping condition prefix.
+export function composeHelmet(presetId, conditionId = "normal", options = {}) {
+    const preset = helmets[presetId];
+    if (!preset) throw new Error(`Unknown helmet preset: ${presetId}`);
+    const composed = composeArmor("head", preset.categoryId, preset.materialId, conditionId, options);
+    const c = conditions[conditionId];
+    composed.name = `${c?.prefix ? `${c.prefix} ` : ""}${preset.name}`;
+    composed.presetId = preset.id;
+    composed.source = preset.source;
+    if (preset.cost != null) composed.cost = preset.cost;
+    if (preset.weight != null) composed.weight = preset.weight;
+    if (preset.prodTime != null) composed.prodTime = preset.prodTime;
+    composed.notes = preset.notes ?? composed.notes;
+    return composed;
 }
 
 /** Enhancements valid for a category (and, when given, a material's base AT). */

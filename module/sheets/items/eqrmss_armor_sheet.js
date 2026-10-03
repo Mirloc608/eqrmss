@@ -35,6 +35,47 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
     this.element?.querySelectorAll(".armor-composer-select").forEach(el => {
       el.addEventListener("change", () => this._recomposeArmor());
     });
+    this.element?.querySelectorAll(".armor-helmet-select").forEach(el => {
+      el.addEventListener("change", () => this._applyHelmetPreset());
+    });
+  }
+
+  async _applyHelmetPreset() {
+    const armor = game.eqrmss?.armor;
+    if (!armor?.composeHelmet) {
+      ui.notifications.warn("Armor data not loaded yet.");
+      return;
+    }
+    const presetId = this.element.querySelector(".armor-helmet-select")?.value;
+    if (!presetId) return;
+    const conditionId = this.element.querySelector('[name="system.armorCondition"]')?.value || "normal";
+    const qualityId = this.element.querySelector('[name="system.armorQuality"]')?.value || "average";
+    const enhancementId = this.element.querySelector('[name="system.armorEnhancement"]')?.value || null;
+    let composed;
+    try {
+      composed = armor.composeHelmet(presetId, conditionId, { qualityId, enhancementId });
+    } catch (e) {
+      ui.notifications.error(`Helmet compose failed: ${e.message}`);
+      return;
+    }
+    const updates = {
+      name: composed.name,
+      "system.armorLocation": composed.locationId,
+      "system.armorCategory": composed.categoryId,
+      "system.armorMaterial": composed.materialId,
+      "system.armorCondition": composed.conditionId,
+      "system.armorQuality": composed.qualityId,
+      "system.armorEnhancement": composed.enhancementId,
+      "system.armorHelmetPreset": composed.presetId,
+      "system.dbBonus": composed.dbBonus,
+      "system.at": composed.armorType ?? "",
+      "system.weight": composed.weight,
+      "system.maneuverPenalty": composed.maneuverPenalty,
+      "system.cost": composed.cost,
+      "system.prod_time": composed.prodTime
+    };
+    if (composed.notes != null) updates["system.notes"] = composed.notes;
+    await this.document.update(updates);
   }
 
   async _recomposeArmor() {

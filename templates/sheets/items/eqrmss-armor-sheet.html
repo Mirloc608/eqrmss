@@ -16,6 +16,13 @@
             </select>
           </div>
           <div class="form-group">
+            <label>Helmet Preset</label>
+            <select class="armor-helmet-select">
+              <option value=""></option>
+              {{#each armorOptions.helmets}}<option value="{{this.id}}"{{#if (eq ../system.armorHelmetPreset this.id)}} selected{{/if}}>{{this.name}} ({{this.source}})</option>{{/each}}
+            </select>
+          </div>
+          <div class="form-group">
             <label>Category</label>
             <select name="system.armorCategory" class="armor-composer-select">
               <option value=""></option>
