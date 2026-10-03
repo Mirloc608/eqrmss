@@ -180,15 +180,41 @@ function bandLabel(bands, i) {
     return `${lo}'–${bands[i].upTo}' (${mod >= 0 ? "+" : ""}${mod})`;
 }
 
+// Ammunition: a missile weapon fires a tagged stack from the actor's
+// inventory (item sheet -> Ammunition). Stacks are ordinary items with
+// system.ammoType set and system.quantity as the count; each shot
+// consumes one. A missile weapon with no matching ammunition cannot
+// be fired. Thrown weapons are themselves the projectile — no count.
+const AMMO_TYPE_BY_TEMPLATE = {
+    composite_bow: "arrow",
+    long_bow: "arrow",
+    short_bow: "arrow",
+    crossbow_heavy: "bolt",
+    crossbow_light: "bolt",
+    sling: "stone",
+    blowpipe: "dart"
+};
+const AMMO_TYPE_LABEL = { arrow: "arrows", bolt: "bolts", stone: "stones", dart: "darts" };
+
+function ammoTypeFor(weaponItem, weaponType) {
+    if (weaponType !== "missile") return null;
+    return AMMO_TYPE_BY_TEMPLATE[weaponItem?.system?.weaponTemplate] ?? "arrow";
+}
+
+function ammoStacksFor(actor, ammoType) {
+    const items = actor?.items?.contents ?? actor?.items ?? [];
+    return [...items].filter(i => i?.system?.ammoType === ammoType && (Number(i.system?.quantity) || 0) > 0);
+}
+
 // Missile shot prompt: range band + preparation rounds for this shot.
 // Returns { rangeMod, reloadPenalty, bandIndex, prepRounds } or null
 // on cancel. Without DialogV2 (headless callers), the unmodified band
 // and one preparation round are used.
-async function promptMissileShot(bands, reloadChart, weaponName) {
+async function promptMissileShot(bands, reloadChart, weaponName, ammoStacks = []) {
     const defaultBand = Math.max(0, bands.findIndex(b => (Number(b.obMod) || 0) === 0));
     const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
     if (!DialogV2?.prompt) {
-        return { rangeMod: Number(bands[defaultBand].obMod) || 0, bandIndex: defaultBand, prepRounds: 1, reloadPenalty: reloadChart ? (reloadChart[1] ?? 0) : 0 };
+        return { rangeMod: Number(bands[defaultBand].obMod) || 0, bandIndex: defaultBand, prepRounds: 1, reloadPenalty: reloadChart ? (reloadChart[1] ?? 0) : 0, ammoItem: ammoStacks[0] ?? null };
     }
     const bandOptions = bands.map((b, i) => `<option value="${i}"${i === defaultBand ? " selected" : ""}>${esc(bandLabel(bands, i))}</option>`).join("");
     const prepOptions = reloadChart
@@ -197,6 +223,9 @@ async function promptMissileShot(bands, reloadChart, weaponName) {
             const note = p == null ? "cannot fire" : (p > 0 ? `OB −${p}` : "no penalty");
             return `<option value="${r}"${r === 1 ? " selected" : ""}>${r} round${r === 1 ? "" : "s"} (${note})</option>`;
         }).join("")
+        : "";
+    const ammoOptions = ammoStacks.length
+        ? ammoStacks.map(i => `<option value="${esc(i.id ?? i._id ?? "")}">${esc(i.name)} × ${Number(i.system?.quantity) || 0}</option>`).join("")
         : "";
     try {
         const fd = await DialogV2.prompt({
@@ -209,6 +238,10 @@ async function promptMissileShot(bands, reloadChart, weaponName) {
                 ${reloadChart ? `<div class="form-group">
                     <label>Preparation rounds spent (reloading, §5.2.12)</label>
                     <select name="prep">${prepOptions}</select>
+                </div>` : ""}
+                ${ammoStacks.length ? `<div class="form-group">
+                    <label>Ammunition</label>
+                    <select name="ammo">${ammoOptions}</select>
                 </div>` : ""}`,
             ok: { label: "Fire" }
         });
@@ -216,11 +249,14 @@ async function promptMissileShot(bands, reloadChart, weaponName) {
         const val = k => (typeof fd.get === "function" ? fd.get(k) : fd[k]);
         const bandIndex = Math.max(0, Math.min(bands.length - 1, Number(val("band")) || 0));
         const prepRounds = reloadChart ? Math.max(0, Math.min(3, Number(val("prep")) || 0)) : 1;
+        const ammoId = val("ammo");
+        const ammoItem = ammoStacks.find(i => (i.id ?? i._id ?? "") === ammoId) ?? ammoStacks[0] ?? null;
         return {
             rangeMod: Number(bands[bandIndex].obMod) || 0,
             bandIndex,
             prepRounds,
-            reloadPenalty: reloadChart ? reloadChart[prepRounds] : 0
+            reloadPenalty: reloadChart ? reloadChart[prepRounds] : 0,
+            ammoItem
         };
     } catch (e) {
         console.error("EQRMSS | Missile prompt failed", e);
@@ -435,11 +471,18 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // preparation rounds.
     let rangeMod = 0;
     let reloadPenalty = 0;
+    let ammoNote = "";
     if (missileAttack) {
         const bands = rangeBandsFor(tables, tableName);
         const reloadChart = weaponType === "missile" ? (RELOAD_PENALTIES[tableName] ?? null) : null;
         if (bands) {
-            const shot = await promptMissileShot(bands, reloadChart, weaponItem.name);
+            const ammoType = ammoTypeFor(weaponItem, weaponType);
+            const ammoStacks = ammoType ? ammoStacksFor(actor, ammoType) : [];
+            if (ammoType && ammoStacks.length === 0) {
+                ui.notifications.warn(`${actor.name} has no ${AMMO_TYPE_LABEL[ammoType] ?? "ammunition"} for ${weaponItem.name} — shot not fired.`);
+                return;
+            }
+            const shot = await promptMissileShot(bands, reloadChart, weaponItem.name, ammoStacks);
             if (!shot) return;
             if (reloadChart && shot.reloadPenalty == null) {
                 ui.notifications.warn(`${weaponItem.name} cannot be fired without at least 1 round of preparation (reloading, §5.2.12).`);
@@ -447,6 +490,11 @@ export async function rollWeaponAttack(actor, weaponItem) {
             }
             rangeMod = shot.rangeMod;
             reloadPenalty = shot.reloadPenalty ?? 0;
+            if (shot.ammoItem) {
+                const left = Math.max(0, (Number(shot.ammoItem.system?.quantity) || 0) - 1);
+                await shot.ammoItem.update({ "system.quantity": left });
+                ammoNote = `<p><em>${esc(shot.ammoItem.name)} fired — ${left} remaining.</em></p>`;
+            }
         }
     }
 
@@ -479,7 +527,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
                 <p><strong>Attack roll:</strong> ${firstDie} — FUMBLE (range ${esc(sys.fumble_range)})</p>
                 <p><strong>Fumble roll:</strong> ${fr} (${esc(fumbleCol)})</p>
                 <p>${fumble.error ? esc(fumble.error) : esc(fumble.text)}</p>
-                <p><em>No effect on ${esc(targetName)}.</em></p>`
+                <p><em>No effect on ${esc(targetName)}.</em></p>${ammoNote}`
         });
         return;
     }
@@ -506,7 +554,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
             content: `
                 <h2>${esc(actor.name)} attacks ${esc(targetName)} with ${esc(weaponItem.name)}</h2>
                 <p>${arLine}</p>
-                <p><strong>Miss</strong> — ${esc(lookup.error)}</p>`
+                <p><strong>Miss</strong> — ${esc(lookup.error)}</p>${ammoNote}`
         });
         return;
     }
@@ -596,6 +644,6 @@ export async function rollWeaponAttack(actor, weaponItem) {
             <p>${arLine}</p>
             <p><strong>${esc(lookup.table)}</strong> vs AT ${at}: <strong>${totalDamage} hits</strong> (${dmgParts.map(esc).join(", ")})</p>
             <p>${critLine}</p>
-            ${appliedNote}${condNote}${procNote}`
+            ${appliedNote}${condNote}${procNote}${ammoNote}`
     });
 }

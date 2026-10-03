@@ -46,6 +46,20 @@
 
 <div class="form-group">
 
+    <label>Ammunition</label>
+
+    <select name="system.ammoType">
+        <option value="" {{#if (eq system.ammoType "")}}selected{{/if}}>Not ammunition</option>
+        <option value="arrow" {{#if (eq system.ammoType "arrow")}}selected{{/if}}>Arrows</option>
+        <option value="bolt" {{#if (eq system.ammoType "bolt")}}selected{{/if}}>Bolts</option>
+        <option value="stone" {{#if (eq system.ammoType "stone")}}selected{{/if}}>Stones</option>
+        <option value="dart" {{#if (eq system.ammoType "dart")}}selected{{/if}}>Darts</option>
+    </select>
+
+</div>
+
+<div class="form-group">
+
     <label>
         {{localize "eqrmss.item.quantity"}}
     </label>
