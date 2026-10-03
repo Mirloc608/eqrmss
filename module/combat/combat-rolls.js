@@ -35,6 +35,7 @@ import {
     STUN_LABEL
 } from "./crit-conditions.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
+import { strategicTargetingSkill, promptCalledShot } from "./strategic-targeting.js";
 
 async function d100() {
     return (await new Roll("1d100").evaluate()).total;
@@ -541,12 +542,29 @@ export async function rollWeaponAttack(actor, weaponItem) {
         }
     }
 
+    // ---- Strategic Targeting (§4.15.3): attackers with the skill
+    // may call a shot at a body area. Prompted before the swing
+    // bonus is consumed so cancelling does not burn it.
+    let calledShot = null;
+    let calledShotMod = 0;
+    {
+        const stSkill = strategicTargetingSkill(actor);
+        if (stSkill != null) {
+            const pick = await promptCalledShot(actor, targetActor, targetName, stSkill);
+            if (pick == null) return;
+            if (pick.areaId) {
+                calledShot = pick;
+                calledShotMod = pick.modifier || 0;
+            }
+        }
+    }
+
     // ---- Next-swing bonus (critical condition, consumed on use) ----
     // Placed after target determination so a cancelled prompt does not burn it.
     const swingBonus = await consumeNextSwingBonus(actor);
     // ---- Action penalty: "at -N" hits ALL actions ----
     const actionPenalty = Math.min(0, Number(actor.system?.status?.actionPenalty?.value) || 0);
-    const ob = baseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty;
+    const ob = baseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty + calledShotMod;
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -605,7 +623,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}`
+        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}`
         + ` − DB ${db}${shieldNote}${parryDB ? ` (+${parryDB} parry)` : ""}${parryHeldNote}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
