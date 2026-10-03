@@ -629,6 +629,14 @@ _prepareCombat()
 
             Number(prev.otherDB) || 0,
 
+        formationLeft:
+
+            prev.formationLeft ?? "",
+
+        formationRight:
+
+            prev.formationRight ?? "",
+
         armorDB:
 
             Number(prev.armorDB) || 0,
@@ -663,6 +671,8 @@ _prepareCombat()
         this.system.combat.adrenalEffective = metrics.adrenalEffective ?? metrics.adrenalDefense ?? 0;
         this.system.combat.totalDB = metrics.totalDB;
         this.system.combat.totalMissileDB = metrics.totalMissileDB ?? metrics.totalDB;
+        this.system.combat.formationDB = metrics.formationDB ?? 0;
+        this.system.combat.formationMissileDB = metrics.formationMissileDB ?? 0;
 
     }
     catch (e)

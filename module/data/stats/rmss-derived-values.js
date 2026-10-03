@@ -17,6 +17,18 @@ function itemListOf(actorData) {
     const rawItems = actorData.items;
     return Array.isArray(rawItems) ? rawItems : (rawItems?.contents ?? []);
 }
+
+// Arms Companion §5.6, Shield Effects on DB Chart: the ADDITIONAL DB
+// from adjacent shield-bearing allies ("1 Side" values), by the
+// ally's shield type. Mixed flanks add both 1-Side values; two of the
+// same shield use the chart's "2 Sides" column (Target missile +5,
+// not 2×+2 — chart governs).
+export const FORMATION_SHIELD_DB = {
+    target: { melee: 5, missile: 2, twoMelee: 10, twoMissile: 5 },
+    normal: { melee: 10, missile: 10, twoMelee: 20, twoMissile: 20 },
+    full: { melee: 15, missile: 15, twoMelee: 30, twoMissile: 30 },
+    wall: { melee: 20, missile: 25, twoMelee: 40, twoMissile: 50 }
+};
 export class RMSSDerivedValueEngine {
   compute(stats) {
     const St = stats.St ?? 50;
@@ -107,6 +119,20 @@ export function calculateArmorAndDefenses(actorData) {
     }
 
     const quPenalty = Number(combat.penalties?.quickness ?? combat.quPenalty ?? 0);
+
+    // Arms Companion §5.6 (Multiple Shield DB): a shield-bearing ally
+    // on each flank adds DB by THEIR shield type (Shield Effects on DB
+    // Chart, "1 Side" values; two sides add both). GM-declared on the
+    // Combat tab (system.combat.formationLeft / formationRight).
+    const formationChart = FORMATION_SHIELD_DB[combat.formationLeft] ?? null;
+    const formationChartR = FORMATION_SHIELD_DB[combat.formationRight] ?? null;
+    const sameFlankShield = formationChart && formationChartR && combat.formationLeft === combat.formationRight;
+    const formationDB = sameFlankShield
+        ? formationChart.twoMelee
+        : (formationChart?.melee ?? 0) + (formationChartR?.melee ?? 0);
+    const formationMissileDB = sameFlankShield
+        ? formationChart.twoMissile
+        : (formationChart?.missile ?? 0) + (formationChartR?.missile ?? 0);
     
     // Quickness Bonus derived from engine Qu or base stat bonus mapping
     const baseQUBonus = Math.floor(((stats.QU ?? stats.Qu ?? 50) - 50) / 5);
@@ -140,8 +166,8 @@ export function calculateArmorAndDefenses(actorData) {
     // DB for that attack type; the Adrenal Defense component counts in
     // full against melee and at half against missile attacks (§4.4.3).
     const naturalDB = chartDB ?? quicknessBonus;
-    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB;
-    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB;
+    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB;
+    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB;
 
     return {
         derived: derivedStats,
@@ -160,6 +186,8 @@ export function calculateArmorAndDefenses(actorData) {
         adrenalEffective,
         shieldBonus,
         shieldMissileBonus,
+        formationDB,
+        formationMissileDB,
         otherDB,
         armorDB,
         enhancedArmorDB,

@@ -103,6 +103,10 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             adrenalEffective: 0,
             otherDB: 0,
             armorDB: 0,
+            formationDB: 0,
+            formationMissileDB: 0,
+            formationLeft: "",
+            formationRight: "",
             totalDB: 0,
             totalMissileDB: 0,
             magic: ""
@@ -371,6 +375,14 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         html.querySelectorAll(".missile-parry-declare").forEach(el => el.addEventListener("click", ev => {
             const itemId = ev.currentTarget.dataset.itemId;
             this._onMissileParryDeclare(itemId);
+        }));
+
+        // Shield formation (§5.6): GM-declared flank shields feeding DB.
+        html.querySelectorAll(".formation-shield").forEach(el => el.addEventListener("change", ev => {
+            const side = ev.currentTarget.dataset.side;
+            if (side !== "left" && side !== "right") return;
+            const key = side === "left" ? "system.combat.formationLeft" : "system.combat.formationRight";
+            this.actor.update({ [key]: ev.currentTarget.value || "" });
         }));
 
         // ------------------------------------------------------------

@@ -17,7 +17,7 @@
   <div class="panel">
     <h4>Defense</h4>
     <table class="rmss-table">
-      <thead><tr><th>AT</th><th>DB (Melee)</th><th>DB (Missile)</th><th>Shield</th><th>Adrenal</th><th>Armor DB</th><th>Other DB</th><th>MMP</th><th>Quickness</th><th>Initiative</th></tr></thead>
+      <thead><tr><th>AT</th><th>DB (Melee)</th><th>DB (Missile)</th><th>Shield</th><th>Adrenal</th><th>Armor DB</th><th>Formation</th><th>Other DB</th><th>MMP</th><th>Quickness</th><th>Initiative</th></tr></thead>
       <tbody>
         <tr>
           <td>{{system.combat.armorType}}</td>
@@ -26,6 +26,7 @@
           <td>{{system.combat.shieldBonus}} / {{system.combat.shieldMissileBonus}}</td>
           <td>{{system.combat.adrenalEffective}}{{#if system.combat.adrenalBlockedByArmor}} <span title="Adrenal Defense does not work while wearing armor">(blocked: armor)</span>{{/if}}</td>
           <td>{{system.combat.armorDBTotal}}</td>
+          <td>{{system.combat.formationDB}} / {{system.combat.formationMissileDB}}</td>
           <td>{{system.combat.otherDB}}</td>
           <td>{{system.combat.mmp}}</td>
           <td>{{system.combat.quicknessBonus}}</td>
@@ -33,6 +34,31 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="panel">
+    <h4>Shield Formation (Arms Companion §5.6)</h4>
+    <p class="hint">An adjacent shield-bearing ally on each flank adds DB by their shield type. Maximum: one ally per side.</p>
+    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+      <label>Left flank shield:
+        <select class="formation-shield" data-side="left">
+          <option value=""{{#unless system.combat.formationLeft}} selected{{/unless}}>None</option>
+          <option value="target"{{#if (eq system.combat.formationLeft "target")}} selected{{/if}}>Target (+5/+2)</option>
+          <option value="normal"{{#if (eq system.combat.formationLeft "normal")}} selected{{/if}}>Normal (+10/+10)</option>
+          <option value="full"{{#if (eq system.combat.formationLeft "full")}} selected{{/if}}>Full (+15/+15)</option>
+          <option value="wall"{{#if (eq system.combat.formationLeft "wall")}} selected{{/if}}>Wall (+20/+25)</option>
+        </select>
+      </label>
+      <label>Right flank shield:
+        <select class="formation-shield" data-side="right">
+          <option value=""{{#unless system.combat.formationRight}} selected{{/unless}}>None</option>
+          <option value="target"{{#if (eq system.combat.formationRight "target")}} selected{{/if}}>Target (+5/+2)</option>
+          <option value="normal"{{#if (eq system.combat.formationRight "normal")}} selected{{/if}}>Normal (+10/+10)</option>
+          <option value="full"{{#if (eq system.combat.formationRight "full")}} selected{{/if}}>Full (+15/+15)</option>
+          <option value="wall"{{#if (eq system.combat.formationRight "wall")}} selected{{/if}}>Wall (+20/+25)</option>
+        </select>
+      </label>
+    </div>
   </div>
 
   <div class="panel">
