@@ -193,3 +193,149 @@
     flex-shrink: 0;
     font-weight: bold;
 }
+
+/* ============================================================
+   PLAYER SHEET PARCHMENT THEME (matches the ornate NPC sheet)
+   Scoped to .actor.player so item, NPC, and pet sheets are
+   untouched. Restyles chrome only — no data or bindings change.
+   ============================================================ */
+.application.sheet.eqrmss.actor.player {
+  color: #3a2a18;
+}
+.application.sheet.eqrmss.actor.player .window-content {
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,250,230,.7), rgba(255,250,230,0) 60%),
+    radial-gradient(ellipse 55% 35% at 90% 100%, rgba(160,120,60,.28), rgba(160,120,60,0) 70%),
+    linear-gradient(165deg, #e9d6a4 0%, #dec48f 50%, #cfb178 100%);
+}
+.application.sheet.eqrmss.actor.player .sheet-header {
+  background: transparent;
+  border-bottom: none;
+}
+.application.sheet.eqrmss.actor.player .sheet-tabs {
+  background: linear-gradient(180deg, #7d6540, #5d4827);
+  border-bottom: 3px double #3c2c14;
+  padding: 6px 12px 0;
+  gap: 4px;
+  box-shadow: 0 2px 5px rgba(40,25,10,.35);
+}
+.application.sheet.eqrmss.actor.player .sheet-tabs .item {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  font-size: 0.95em;
+  color: #d9c08f;
+  padding: 5px 12px 7px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 7px 7px 0 0;
+  text-decoration: none;
+}
+.application.sheet.eqrmss.actor.player .sheet-tabs .item:hover {
+  color: #fff3cf;
+}
+.application.sheet.eqrmss.actor.player .sheet-tabs .item.active {
+  color: #3a2a18;
+  background: linear-gradient(180deg, #f7eed3, #ecd9ab);
+  border-color: #3c2c14;
+  border-bottom: 1px solid #ecd9ab;
+  font-weight: bold;
+  box-shadow: inset 0 0 8px rgba(95,74,47,.25);
+}
+.application.sheet.eqrmss.actor.player .tab[data-group="primary"] {
+  padding: 10px 12px;
+}
+.application.sheet.eqrmss.actor.player .panel {
+  background: rgba(255,250,232,.5);
+  border: 2px solid rgba(95,74,47,.6);
+  border-radius: 8px;
+  box-shadow: inset 0 0 12px rgba(95,74,47,.2);
+  padding: 10px 12px;
+  color: #3a2a18;
+}
+.application.sheet.eqrmss.actor.player .panel h3,
+.application.sheet.eqrmss.actor.player .tab h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 2px;
+  color: #4a3517;
+  border-bottom: 2px solid rgba(95,74,47,.5);
+  padding-bottom: 3px;
+  margin-top: 0;
+}
+.application.sheet.eqrmss.actor.player .panel h4,
+.application.sheet.eqrmss.actor.player .tab h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 1.5px;
+  color: #5f4a2f;
+  border-bottom: 1px dashed rgba(95,74,47,.45);
+  padding-bottom: 2px;
+}
+.application.sheet.eqrmss.actor.player .rmss-table {
+  border-collapse: collapse;
+  width: 100%;
+  color: #3a2a18;
+}
+.application.sheet.eqrmss.actor.player .rmss-table th {
+  background: linear-gradient(180deg, #6d5433, #4e3a20);
+  color: #f4e8c8;
+  font-family: Georgia, serif;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  font-weight: bold;
+  padding: 4px 6px;
+  border: 1px solid #3c2c14;
+  text-align: left;
+}
+.application.sheet.eqrmss.actor.player .rmss-table td {
+  padding: 3px 6px;
+  border-bottom: 1px dashed rgba(95,74,47,.4);
+}
+.application.sheet.eqrmss.actor.player .rmss-table tbody tr:hover td {
+  background: rgba(255,246,218,.55);
+}
+.application.sheet.eqrmss.actor.player input[type="text"],
+.application.sheet.eqrmss.actor.player input[type="number"],
+.application.sheet.eqrmss.actor.player select,
+.application.sheet.eqrmss.actor.player textarea {
+  background: rgba(255,252,240,.75);
+  border: 1px solid rgba(107,84,58,.65);
+  border-radius: 4px;
+  color: #3a2a18;
+}
+.application.sheet.eqrmss.actor.player input:focus,
+.application.sheet.eqrmss.actor.player select:focus,
+.application.sheet.eqrmss.actor.player textarea:focus {
+  outline: none;
+  border-color: #8a3b1e;
+  box-shadow: 0 0 4px rgba(138,59,30,.4);
+}
+.application.sheet.eqrmss.actor.player button {
+  background: linear-gradient(180deg, #f1e4bd, #d9c08f);
+  border: 1px solid #6b543a;
+  border-radius: 5px;
+  color: #3a2a18;
+  box-shadow: 0 1px 3px rgba(40,25,10,.3);
+  cursor: pointer;
+}
+.application.sheet.eqrmss.actor.player button:hover {
+  background: linear-gradient(180deg, #fff3cf, #e8d09c);
+  color: #8a3b1e;
+}
+.application.sheet.eqrmss.actor.player a {
+  color: #6d4423;
+}
+.application.sheet.eqrmss.actor.player .field-row label {
+  color: #5f4a2f;
+}
+.application.sheet.eqrmss.actor.player .tab[data-group="primary"].active::-webkit-scrollbar-track {
+  background: #d9c08f;
+}
+.application.sheet.eqrmss.actor.player .tab[data-group="primary"].active::-webkit-scrollbar-thumb {
+  background: #8a6d45;
+  border: 2px solid #d9c08f;
+}
+.application.sheet.eqrmss.actor.player .tab[data-group="primary"].active::-webkit-scrollbar-thumb:hover {
+  background: #6d4423;
+}
