@@ -641,7 +641,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // Weapon Use (§4.8): an overweight weapon's fumble range grows.
     const baseFumbleRange = parseFumbleRange(sys.fumble_range);
     const fumbleRange = (baseFumbleRange && weaponUse.fumbleBonus)
-        ? { ...baseFumbleRange, end: Math.min(100, baseFumbleRange.end + weaponUse.fumbleBonus) }
+        ? { ...baseFumbleRange, high: Math.min(100, baseFumbleRange.high + weaponUse.fumbleBonus) }
         : baseFumbleRange;
     if (inFumbleRange(firstDie, fumbleRange)) {
         const fr = await d100();
