@@ -100,6 +100,15 @@
           <label style="min-width: 110px; flex: 0 0 auto;">Notes</label>
           <input name="system.notes" type="text" value="{{system.notes}}" data-dtype="String" style="flex: 1;" placeholder="Informational note, e.g. chart notes"/>
         </div>
+        <div class="form-group" style="margin: 8px 0;">
+          <label style="min-width: 110px; flex: 0 0 auto;">Armor Wear (§5.9)</label>
+          <span style="display: flex; gap: 8px; align-items: center; flex: 1;">
+            <label>Slash <input name="system.armorWear.slash" type="text" value="{{system.armorWear.slash}}" data-dtype="Number" style="width: 55px;"/></label>
+            <label>Crush <input name="system.armorWear.crush" type="text" value="{{system.armorWear.crush}}" data-dtype="Number" style="width: 55px;"/></label>
+            <label>Puncture <input name="system.armorWear.puncture" type="text" value="{{system.armorWear.puncture}}" data-dtype="Number" style="width: 55px;"/></label>
+          </span>
+        </div>
+        <p class="hint">Wear accrues from criticals and leaks extra hits of the same family; reset to 0 when the armor is repaired.</p>
           {{localize "eqrmss.item.description"}}
           {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
     </div>

@@ -36,6 +36,7 @@ import {
 } from "./crit-conditions.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { strategicTargetingSkill, promptCalledShot } from "./strategic-targeting.js";
+import { applyArmorWear, ARMOR_WEAR_FAMILY_LABEL } from "./armor-wear.js";
 
 async function d100() {
     return (await new Roll("1d100").evaluate()).total;
@@ -703,9 +704,19 @@ export async function rollWeaponAttack(actor, weaponItem) {
         if (critResult.error) return `<strong>${esc(lookup.critCode)}</strong> — ${esc(critResult.error)} (GM adjudicates)`;
         critBonus += critBonusHits(critResult.text);
         critFired = true;
+        // ---- Armor wear (§5.9): the crit also damages the armor;
+        // prior wear of the same family leaks extra hits through.
+        let wearNote = "";
+        if (targetActor && (targetActor.isOwner || game.user?.isGM)) {
+            const wear = await applyArmorWear(targetActor, type, severity);
+            if (wear) {
+                if (wear.leaked > 0) critBonus += wear.leaked;
+                wearNote = `<br><em>Armor wear (§5.9): ${esc(wear.piece.name)} ${ARMOR_WEAR_FAMILY_LABEL[wear.family]} wear ${wear.wear}${wear.leaked > 0 ? ` — weakened armor leaks +${wear.leaked} hits` : ""}.</em>`;
+            }
+        }
         // ---- Critical conditions (stun pool, bleed, death timer, next swing, must parry) ----
         condNote += await applyCritConditions(targetActor, actor, critResult.text);
-        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critResult.text)}`;
+        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critResult.text)}${wearNote}`;
     }
     if (crit && !crit.unparseable) {
         if (crit.severity === "F") {
