@@ -80,6 +80,11 @@ export default class EQRMSSNPCSheet
             this._onCQCToggle();
         }));
 
+        html.querySelectorAll(".cauterize-wound").forEach(el => el.addEventListener("click", ev => {
+            ev.preventDefault();
+            this._onCauterize();
+        }));
+
         html.querySelectorAll(".stance-select").forEach(el => el.addEventListener("change", ev => {
             this.actor.update({ "system.status.stance": ev.currentTarget.value || "" });
         }));
@@ -153,6 +158,16 @@ export default class EQRMSSNPCSheet
         } catch (e) {
             console.error("EQRMSS | NPC close-quarters toggle failed", e);
             ui.notifications.error(`Close-quarters toggle failed: ${e.message}`);
+        }
+    }
+
+    async _onCauterize() {
+        try {
+            const { cauterizeWound } = await import("../../combat/cauterize.js");
+            await cauterizeWound(this.actor);
+        } catch (e) {
+            console.error("EQRMSS | NPC cauterize failed", e);
+            ui.notifications.error(`Cauterize failed: ${e.message}`);
         }
     }
 
