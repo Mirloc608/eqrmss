@@ -84,6 +84,10 @@ export default class EQRMSSNPCSheet
             this.actor.update({ "system.status.stance": ev.currentTarget.value || "" });
         }));
 
+        html.querySelectorAll(".attack-speed-select").forEach(el => el.addEventListener("change", ev => {
+            this.actor.update({ "system.status.attackSpeed": ev.currentTarget.value || "" });
+        }));
+
         html.querySelectorAll(".rac-select").forEach(el => el.addEventListener("change", ev => {
             const key = ev.currentTarget.dataset.key;
             if (!["height", "width", "weaponSpace"].includes(key)) return;

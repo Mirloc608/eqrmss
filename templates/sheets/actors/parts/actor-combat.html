@@ -15,6 +15,13 @@
         <option value="movement"{{#if (eq system.status.stance "movement")}} selected{{/if}}>Movement</option>
         <option value="defensive"{{#if (eq system.status.stance "defensive")}} selected{{/if}}>Defensive</option>
       </select></span>
+      <span><strong>Attack Speed (§4.11):</strong> <select class="attack-speed-select" title="Attack speed variance (Arms Companion §4.11) — melee only">
+        <option value=""{{#unless system.status.attackSpeed}} selected{{/unless}}>Full prep (100%)</option>
+        <option value="half"{{#if (eq system.status.attackSpeed "half")}} selected{{/if}}>Half prep (40% OB, 2/round)</option>
+        <option value="threeQuarter"{{#if (eq system.status.attackSpeed "threeQuarter")}} selected{{/if}}>3/4 prep (65% OB)</option>
+        <option value="plusQuarter"{{#if (eq system.status.attackSpeed "plusQuarter")}} selected{{/if}}>Full + 1/4 (125% OB)</option>
+        <option value="plusHalf"{{#if (eq system.status.attackSpeed "plusHalf")}} selected{{/if}}>Full + 1/2 (150% OB)</option>
+      </select></span>
       <span><strong>Stun:</strong> {{#if (add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut)}}{{add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</span>
       <span><strong>Action Penalty:</strong> {{#if system.status.actionPenalty.value}}-{{system.status.actionPenalty.value}} ({{system.status.actionPenalty.rounds}} rnd){{else}}&mdash;{{/if}}</span>
       <span><strong>Unconscious:</strong> {{#if system.status.unconscious}}<strong style="color: #b00;">Yes</strong>{{else}}&mdash;{{/if}}</span>
