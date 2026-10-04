@@ -674,6 +674,7 @@ _prepareCombat()
         this.system.combat.formationDB = metrics.formationDB ?? 0;
         this.system.combat.formationMissileDB = metrics.formationMissileDB ?? 0;
         this.system.combat.mixedArmorDB = metrics.mixedArmorDB ?? 0;
+        this.system.combat.helmetDF = metrics.helmetDF ?? 0;
         this.system.combat.stanceDB = metrics.stanceDB ?? 0;
 
     }

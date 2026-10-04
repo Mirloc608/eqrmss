@@ -134,6 +134,7 @@ export function calculateArmorAndDefenses(actorData) {
     let armorType = chartArmorType ? `AT ${chartArmorType}` : "No Armor";
     let mmp = 0;
     let mixedArmorDB = 0;
+    let helmetDF = 0;
     if (wornArmor.length > 0) {
         const ats = wornArmor
             .map((i) => Number(i.system?.at))
@@ -156,6 +157,19 @@ export function calculateArmorAndDefenses(actorData) {
                 ? Math.max(...pieces.map((i) => apacStageOfAT(i.system?.at)))
                 : 0;
             mixedArmorDB += area.dbPerShift * (stage - baseStage);
+        }
+
+        // Helmet Defense Factor (HELMET CHART): the Body DF feeds
+        // DB only when the helmet's armor type differs from the
+        // worn AT's type; flagged items apply half even when the
+        // types match. Head DF is stored on the item for area
+        // targeting (§4.15) and is not added here.
+        for (const piece of wornArmor.filter((i) => i.system?.armorLocation === "head")) {
+            const dfBody = Number(piece.system?.dfBody) || 0;
+            if (dfBody === 0) continue;
+            const pieceStage = apacStageOfAT(piece.system?.at);
+            if (pieceStage !== baseStage) helmetDF += dfBody;
+            else if (piece.system?.dfHalfSameType === true) helmetDF += Math.floor(dfBody / 2);
         }
     }
 
@@ -219,8 +233,8 @@ export function calculateArmorAndDefenses(actorData) {
     // full against melee and at half against missile attacks (§4.4.3).
     const naturalDB = chartDB ?? quicknessBonus;
     const stanceDB = stanceDBBonus(actorData);
-    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB + mixedArmorDB + stanceDB;
-    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB + stanceDB;
+    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB + mixedArmorDB + stanceDB + helmetDF;
+    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB + stanceDB + helmetDF;
 
     return {
         derived: derivedStats,
@@ -243,6 +257,7 @@ export function calculateArmorAndDefenses(actorData) {
         formationMissileDB,
         mixedArmorDB,
         stanceDB,
+        helmetDF,
         otherDB,
         armorDB,
         enhancedArmorDB,

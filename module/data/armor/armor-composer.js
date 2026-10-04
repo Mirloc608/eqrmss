@@ -151,6 +151,9 @@ export function composeArmor(locationId, categoryId, materialId, conditionId, op
         enhancementId: enh?.id ?? null,
         thicknessId,
         thicknessSuffix,
+        dfHead: 0,
+        dfBody: 0,
+        pf: 0,
         dbBonus,
         armorType,
         weight,
@@ -195,6 +198,10 @@ export function composeHelmet(presetId, conditionId = "normal", options = {}) {
     if (preset.weight != null) composed.weight = preset.weight;
     if (preset.prodTime != null) composed.prodTime = preset.prodTime;
     composed.notes = preset.notes ?? composed.notes;
+    composed.dfHead = preset.dfHead ?? 0;
+    composed.dfBody = preset.dfBody ?? 0;
+    composed.dfHalfSameType = preset.dfHalfSameType === true;
+    composed.pf = preset.pf ?? 0;
     return composed;
 }
 
