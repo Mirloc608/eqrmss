@@ -2,7 +2,8 @@
 // EQRMSS NPC Actor Sheet
 // Foundry VTT V13 ApplicationV2
 // Extends EQRMSSActorSheet
-// Minimal sheet: name, hits, attack buttons. Drop to equip.
+// Ornate NPC sheet: name banner, Hits/AT/DB medallions, conditions,
+// attack buttons, combat controls. Drop to equip.
 // ============================================================
 
 import EQRMSSActorSheet
@@ -27,8 +28,8 @@ export default class EQRMSSNPCSheet
         },
 
         position:{
-            width: 300,
-            height: 260
+            width: 560,
+            height: 700
         }
 
     };
@@ -49,15 +50,15 @@ export default class EQRMSSNPCSheet
         const html = this.element;
         if (!html) return;
 
-        // Force the small card size on the window element. Foundry restores a
+        // Force the sheet size on the window element. Foundry restores a
         // saved window position for document sheets, overriding the class
         // default — set the inline height directly so it actually sticks.
-        html.style.setProperty("width", "300px", "important");
-        html.style.setProperty("height", "300px", "important");
-        html.style.setProperty("max-height", "300px", "important");
+        html.style.setProperty("width", "560px", "important");
+        html.style.setProperty("height", "700px", "important");
+        html.style.setProperty("max-height", "700px", "important");
         requestAnimationFrame(() => {
-            try { this.setPosition({ width: 300, height: 300 }); } catch (e) {}
-            html.style.setProperty("height", "300px", "important");
+            try { this.setPosition({ width: 560, height: 700 }); } catch (e) {}
+            html.style.setProperty("height", "700px", "important");
         });
 
         html.querySelectorAll(".attack-roll").forEach(el => el.addEventListener("click", ev => {
