@@ -80,6 +80,10 @@ export default class EQRMSSNPCSheet
             this._onCQCToggle();
         }));
 
+        html.querySelectorAll(".stance-select").forEach(el => el.addEventListener("change", ev => {
+            this.actor.update({ "system.status.stance": ev.currentTarget.value || "" });
+        }));
+
         if (!this._npcDropBound) {
             html.addEventListener("dragover", ev => ev.preventDefault());
             html.addEventListener("drop", ev => this._onDrop(ev));

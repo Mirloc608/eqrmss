@@ -106,6 +106,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             formationDB: 0,
             formationMissileDB: 0,
             mixedArmorDB: 0,
+            stanceDB: 0,
             formationLeft: "",
             formationRight: "",
             totalDB: 0,
@@ -380,6 +381,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         html.querySelectorAll(".cqc-toggle").forEach(el => el.addEventListener("click", ev => {
             ev.preventDefault();
             this._onCQCToggle();
+        }));
+        html.querySelectorAll(".stance-select").forEach(el => el.addEventListener("change", ev => {
+            this.actor.update({ "system.status.stance": ev.currentTarget.value || "" });
         }));
 
         // Shield formation (§5.6): GM-declared flank shields feeding DB.

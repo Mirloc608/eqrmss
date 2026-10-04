@@ -37,6 +37,7 @@ import {
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { strategicTargetingSkill, promptCalledShot } from "./strategic-targeting.js";
 import { applyArmorWear, ARMOR_WEAR_FAMILY_LABEL } from "./armor-wear.js";
+import { actorStance, stanceOBBonus, stanceRanks, defensiveCritCap, capCritSeverity } from "./stance.js";
 
 async function d100() {
     return (await new Roll("1d100").evaluate()).total;
@@ -612,7 +613,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const swingBonus = await consumeNextSwingBonus(actor);
     // ---- Action penalty: "at -N" hits ALL actions ----
     const actionPenalty = Math.min(0, Number(actor.system?.status?.actionPenalty?.value) || 0);
-    const ob = baseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty;
+    const stanceBonus = stanceOBBonus(actor);
+    const ob = baseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus;
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -671,7 +673,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
+        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
         + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
@@ -695,7 +697,21 @@ export async function rollWeaponAttack(actor, weaponItem) {
     let critBonus = 0;
     let critFired = false;
     let condNote = ""; // critical-condition notes (stun pool, bleed, death timer, next swing, must parry)
-    const crit = parseCritCode(lookup.critCode);
+    let crit = parseCritCode(lookup.critCode);
+    // Defensive Stance (§4.16): the attacker's crit severity is
+    // capped by their Defensive Stance ranks (0 ranks = no crit).
+    let critCapNote = "";
+    if (crit && !crit.unparseable && actorStance(actor) === "defensive") {
+        const cap = defensiveCritCap(stanceRanks(actor, "defensive"));
+        const capped = capCritSeverity(crit.severity, cap);
+        if (capped === null) {
+            critCapNote = `<p><em>Defensive Stance: no critical may be delivered (0 ranks).</em></p>`;
+            crit = null;
+        } else if (capped !== crit.severity) {
+            critCapNote = `<p><em>Defensive Stance caps the critical at ${capped} (rolled ${crit.severity}).</em></p>`;
+            crit = { ...crit, severity: capped };
+        }
+    }
     // Resolve one critical strike: roll d100 on the mapped table, accumulate
     // bonus hits and conditions. Returns the chat fragment.
     async function resolveOneCrit(type, severity) {
@@ -745,10 +761,15 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // ---- Damage ----
     const damageMod = Number(sys.damageMod) || 0;
     const tableDamage = lookup.damage ?? 0;
-    const totalDamage = tableDamage + damageMod + critBonus;
+    let totalDamage = tableDamage + damageMod + critBonus;
     const dmgParts = [`table ${tableDamage}`];
     if (damageMod) dmgParts.push(`weapon ${damageMod >= 0 ? "+" : ""}${damageMod}`);
     if (critBonus) dmgParts.push(`crit +${critBonus}`);
+    // Defensive Stance delivers half concussion-hit damage (§4.16).
+    if (actorStance(actor) === "defensive" && totalDamage > 0) {
+        totalDamage = Math.floor(totalDamage / 2);
+        dmgParts.push("defensive stance ½");
+    }
 
     let appliedNote = "";
     if (targetActor && totalDamage > 0 && (targetActor.isOwner || game.user?.isGM)) {
@@ -781,6 +802,6 @@ export async function rollWeaponAttack(actor, weaponItem) {
             <p>${arLine}</p>
             <p><strong>${esc(lookup.table)}</strong> vs AT ${at}: <strong>${totalDamage} hits</strong> (${dmgParts.map(esc).join(", ")})</p>
             <p>${critLine}</p>
-            ${appliedNote}${condNote}${procNote}${ammoNote}`
+            ${appliedNote}${condNote}${critCapNote}${procNote}${ammoNote}`
     });
 }

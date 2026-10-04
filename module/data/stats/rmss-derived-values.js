@@ -4,6 +4,7 @@
 
 import { isWorn } from "../../utils/equipment/equipment-utils.js";
 import { rmssStatBonus } from "./rmss-stat-bonus.js";
+import { stanceDBBonus } from "../../combat/stance.js";
 
 /**
  * Shared "is this item worn?" check: the location dropdown is
@@ -214,8 +215,9 @@ export function calculateArmorAndDefenses(actorData) {
     // DB for that attack type; the Adrenal Defense component counts in
     // full against melee and at half against missile attacks (§4.4.3).
     const naturalDB = chartDB ?? quicknessBonus;
-    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB + mixedArmorDB;
-    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB;
+    const stanceDB = stanceDBBonus(actorData);
+    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB + mixedArmorDB + stanceDB;
+    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB + stanceDB;
 
     return {
         derived: derivedStats,
@@ -237,6 +239,7 @@ export function calculateArmorAndDefenses(actorData) {
         formationDB,
         formationMissileDB,
         mixedArmorDB,
+        stanceDB,
         otherDB,
         armorDB,
         enhancedArmorDB,
