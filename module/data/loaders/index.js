@@ -15,13 +15,6 @@ async function loadDisciplinesRegistry() { return await DisciplineLoader.load();
 
 async function loadOriginRegistry() { return await loadOriginData(); }
 
-// --- NEW DOMAIN LOADERS ---
-async function loadRegionRegistry() { return await RegionLoader.load(); }
-async function loadFactionRegistry() { return await FactionLoader.load(); }
-async function loadLoreRegistry() { return await LoreLoader.load(); }
-async function loadInfluenceRegistry() { return await InfluenceLoader.load(); }
-async function loadTravelRegistry() { return await TravelLoader.load(); }
-
 
 // ============================================================
 // REGISTRY
@@ -49,16 +42,7 @@ export const EQRMSS_DATA_LOADERS = [
     // --------------------------------------------------------
     // Origin / Character Creation data
     // --------------------------------------------------------
-    { name: "origin", loader: loadOriginRegistry },
-
-    // --------------------------------------------------------
-    // Sanctus Seru Region Domain
-    // --------------------------------------------------------
-    { name: "region", loader: loadRegionRegistry },
-    { name: "factions", loader: loadFactionRegistry },
-    { name: "lore", loader: loadLoreRegistry },
-    { name: "influence", loader: loadInfluenceRegistry },
-    { name: "travel", loader: loadTravelRegistry }
+    { name: "origin", loader: loadOriginRegistry }
 ];
 
 

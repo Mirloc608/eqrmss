@@ -16,8 +16,7 @@ import {
     registerEQRMSSDocuments,
     registerEQRMSSDataLoaders,
     loadEQRMSSTemplates,
-    registerEQRMSSHooks,
-    initializeEQRMSSSubsystems
+    registerEQRMSSHooks
 } from "./module/initialization/index.js";
 
 import "./module/config.js";
@@ -73,9 +72,6 @@ Hooks.once("init", () => {
     });
     console.log("EQRMSS v4.12 | Wizard test hooks exported (finalizer + data service)");
 })();
-
-import { EQRMSSGeography } from "./module/data/geography/geography-loader.js";
-import { EQRMSSSceneRegistry } from "./module/data/geography/scene-registry.js";
 
 import "./module/data/stats/rmss-stat-rolling.js";
 import "./module/data/stats/rmss-point-buy.js";
@@ -507,7 +503,6 @@ Hooks.once("ready", async function () {
     try {
         await initializeDataLoaders();
         console.log("EQRMSS v4.15 | Data loaders ready");
-        await initializeEQRMSSSubsystems();
         try {
             const skillsPack = game.packs.get("eqrmss.skills");
             const categoriesPack = game.packs.get("eqrmss.skill-categories");
@@ -520,7 +515,6 @@ Hooks.once("ready", async function () {
             const roller = { roll: (formula) => new Roll(formula).roll({ async: false }) };
             initializeSkillEngine({ skills, categories, metadata, professionCosts, roller });
         } catch {}
-        try { await EQRMSSGeography.loadAll(); await EQRMSSSceneRegistry.registerAllScenes(); } catch {}
         registerEQRMSSSheets();
         console.log("EQRMSS | Sheets registered v4.15");
 

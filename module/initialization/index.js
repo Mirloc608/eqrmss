@@ -16,9 +16,6 @@ export { registerEQRMSSSheets }        from "./register-sheets.js";
 export { registerEQRMSSHooks }         from "./register-hooks.js";
 export { loadEQRMSSTemplates }         from "./template-loader.js";
 
-// Subsystems
-export { initializeEQRMSSSubsystems }  from "./initialize-subsystems.js";
-
 // Data loader registration + runtime loader
 export { registerEQRMSSDataLoaders }   from "./register-data-loaders.js";
 export { initializeEQRMSSDataLoaders } from "./initialize-data-loaders.js";
