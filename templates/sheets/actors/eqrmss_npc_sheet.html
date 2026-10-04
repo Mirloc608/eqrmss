@@ -181,6 +181,7 @@
     <span class="npc-cond-title">Conditions</span>
     {{#if system.status.dead}}<span class="npc-chip bad">Dead</span>{{/if}}
     {{#if system.status.unconscious}}<span class="npc-chip bad">Unconscious</span>{{/if}}
+    {{#if system.status.exhausted}}<span class="npc-chip bad">Exhausted</span>{{/if}}
     {{#if system.status.stun.downOrOut}}<span class="npc-chip bad">Down or out {{system.status.stun.downOrOut}}</span>{{/if}}
     {{#if system.status.stun.stunNoParry}}<span class="npc-chip bad">Stunned, no parry {{system.status.stun.stunNoParry}}</span>{{/if}}
     {{#if system.status.stun.stunned}}<span class="npc-chip">Stunned {{system.status.stun.stunned}}</span>{{/if}}
@@ -189,7 +190,7 @@
     {{#if system.status.parrying}}<span class="npc-chip">Parrying +{{system.status.parryDB}}{{#if system.status.parryTargetName}} vs {{system.status.parryTargetName}}{{/if}}</span>{{/if}}
     {{#if system.status.missileParryDB}}<span class="npc-chip">Missile parry +{{system.status.missileParryDB}}</span>{{/if}}
     {{#if system.status.cqcTargetName}}<span class="npc-chip">Close quarters vs {{system.status.cqcTargetName}}</span>{{/if}}
-    {{#unless system.status.dead}}{{#unless system.status.unconscious}}{{#unless system.status.stun.downOrOut}}{{#unless system.status.stun.stunNoParry}}{{#unless system.status.stun.stunned}}{{#unless system.status.bleed.perRound}}{{#unless system.status.actionPenalty.value}}{{#unless system.status.parrying}}{{#unless system.status.missileParryDB}}{{#unless system.status.cqcTargetName}}<span class="npc-chip dim">No conditions</span>{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}
+    {{#unless system.status.dead}}{{#unless system.status.exhausted}}{{#unless system.status.unconscious}}{{#unless system.status.stun.downOrOut}}{{#unless system.status.stun.stunNoParry}}{{#unless system.status.stun.stunned}}{{#unless system.status.bleed.perRound}}{{#unless system.status.actionPenalty.value}}{{#unless system.status.parrying}}{{#unless system.status.missileParryDB}}{{#unless system.status.cqcTargetName}}<span class="npc-chip dim">No conditions</span>{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}
   </div>
 
   <div class="npc-panel npc-panel-attacks">
@@ -227,6 +228,10 @@
       <div class="npc-ctl">
         <label>Attack Speed</label>
         <select class="attack-speed-select" title="Attack speed variance (Arms Companion §4.11) — melee only"><option value=""{{#unless system.status.attackSpeed}} selected{{/unless}}>Speed 100%</option><option value="half"{{#if (eq system.status.attackSpeed "half")}} selected{{/if}}>Half 40%</option><option value="threeQuarter"{{#if (eq system.status.attackSpeed "threeQuarter")}} selected{{/if}}>3/4 65%</option><option value="plusQuarter"{{#if (eq system.status.attackSpeed "plusQuarter")}} selected{{/if}}>+1/4 125%</option><option value="plusHalf"{{#if (eq system.status.attackSpeed "plusHalf")}} selected{{/if}}>+1/2 150%</option></select>
+      </div>
+      <div class="npc-ctl">
+        <label>Subdue (§4.10)</label>
+        <input type="checkbox" class="subdue-toggle" {{checked system.status.subduing}}/>
       </div>
       <div class="npc-ctl">
         <label>Ceiling</label>

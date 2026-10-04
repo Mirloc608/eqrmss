@@ -38,7 +38,8 @@ export const CRIT_TYPE_TO_TABLE_CODE = {
     "K": "K",   // Krush
     "G": "G",   // Grapple (Claw Law 11.3.1)
     "U": "Un",  // Unbalance (Claw Law 11.3.5)
-    "T": "Ti"   // Tiny (Claw Law 11.3.4)
+    "T": "Ti",  // Tiny (Claw Law 11.3.4)
+    "H": "H"    // Heat (Spell Law, via crit_tables_v2 transcription)
 };
 
 export const NET_ROLL_CAP = 150; // §6.4: net attack rolls above 150 are treated as 150
@@ -129,9 +130,9 @@ export function lookupAttack(weaponTables, tableName, netRoll, at, attackSize) {
 export function parseCritCode(code) {
     if (!code) return null;
     const c = String(code).trim().toUpperCase();
-    let m = c.match(/^([A-E])([SPKGUT])$/);
+    let m = c.match(/^([A-E])([SPKGUTH])$/);
     if (m) return { severity: m[1], type: m[2], raw: code };
-    m = c.match(/^F([SPKGUT])?$/);
+    m = c.match(/^F([SPKGUTH])?$/);
     if (m) return { severity: "F", type: m[1] ?? null, raw: code };
     m = c.match(/^([A-E])$/);
     if (m) return { severity: m[1], type: null, implied: true, raw: code };
@@ -191,6 +192,10 @@ export function parseArmorType(str) {
 // ------------------------------------------------------------
 export function critBonusHits(critText) {
     if (!critText) return 0;
-    const m = String(critText).match(/\+(\d+)\s*hits?\b(?!\s*per\s+round)/i);
-    return m ? Number(m[1]) : 0;
+    const s = String(critText);
+    const m = s.match(/\+(\d+)\s*hits?\b(?!\s*per\s+round)/i);
+    if (m) return Number(m[1]);
+    // Spell Law shorthand "+NH" (also glued forms like "+13H2*").
+    const sh = s.match(/\+\s*(\d+)\s*H(?=[\s,.*@!;)]|$)/);
+    return sh ? Number(sh[1]) : 0;
 }

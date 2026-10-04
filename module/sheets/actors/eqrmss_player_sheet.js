@@ -393,6 +393,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         html.querySelectorAll(".attack-speed-select").forEach(el => el.addEventListener("change", ev => {
             this.actor.update({ "system.status.attackSpeed": ev.currentTarget.value || "" });
         }));
+        html.querySelectorAll(".subdue-toggle").forEach(el => el.addEventListener("change", ev => {
+            this.actor.update({ "system.status.subduing": !!ev.currentTarget.checked });
+        }));
         html.querySelectorAll(".rac-select").forEach(el => el.addEventListener("change", ev => {
             const key = ev.currentTarget.dataset.key;
             if (!["height", "width", "weaponSpace"].includes(key)) return;

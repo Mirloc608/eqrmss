@@ -36,8 +36,9 @@
 // - whether "at -N" touches DB (rolls only, for now)
 //
 // Parser coverage notes:
-// - DOWN-OR-OUT: only explicit "down for N rounds" maps to the pool;
-//   bare "knocked down" (no duration) stays unmapped (no ruling yet).
+// - DOWN-OR-OUT: explicit "down for N rounds" maps at that duration;
+//   bare "knocked down" counts as down-or-out for 1 round (ruling
+//   2026-10-04).
 // - CONDITIONAL CRITS: "If foe has shield/helm/..." branches are
 //   adjudicated against the target's worn gear before parsing (see
 //   adjudicateCritText); unresolvable conditions stay GM-adjudicated.
@@ -74,6 +75,7 @@
 
 import { WEAPON_TYPE_TO_SKILL_ID } from "./attack-resolver.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
+import { roundExhaustionCost, exhaustionCurrent, exhaustionMaxFor } from "./subdue.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -145,22 +147,36 @@ export function parseStun(text) {
     // consume digits, so these cannot double-count them.
     const bareRe = /stun(?:ned|s)?(?:\s+foe)?\s+next\s+round(?!\s*\d)/gi;
     while (bareRe.exec(rest)) out.stunned += 1;
+    // Spell Law shorthand (Heat and other Spell Law crit tables):
+    // "N*" = stunned N rounds, "N@" = cannot parry N rounds,
+    // "N*@" = stunned and cannot parry for N rounds (the stun-total /
+    // no-parry-subset split puts all of it in the no-parry pool).
+    rest = rest.replace(/(\d+)\s?\*@/g, (_m, n) => { out.stunNoParry += Number(n); return ""; });
+    rest = rest.replace(/(\d+)\s?@/g, (_m, n) => { out.stunNoParry += Number(n); return ""; });
+    rest = rest.replace(/(\d+)\s?\*/g, (_m, n) => { out.stunned += Number(n); return ""; });
     // Explicit "down for N rounds" -> down-or-out pool. Bare "knocked
     // down" (no duration) is still not parsed: no ruling on its length.
     const downRe = new RegExp(`\\bdown\\s+for\\s+(?:for\\s+)?(\\d+)\\s+(${ROUNDS_RE})`, "gi");
     while ((m = downRe.exec(rest))) out.downOrOut += Number(m[1]);
+    // Ruling (2026-10-04): bare "knocked down" counts as Down or Out
+    // for 1 round when no explicit "down for N rounds" is stated.
+    // ("Knocked out" is unconsciousness, a different state.)
+    if (out.downOrOut === 0 && /\bknocked\s+down\b/i.test(rest)) out.downOrOut += 1;
     return out;
 }
 
 // "bleeds at 1 hit per round", "takes +3 hits per round" -> hits/round.
+// Spell Law shorthand: "N!" bleeds N hits per round.
 export function parseBleed(text) {
     if (!text) return 0;
     let per = 0;
     let m;
     const re1 = /bleeds?\s+at\s+(\d+)\s+hits?\s+per\s+round/gi;
     const re2 = /takes?\s+\+?(\d+)\s+hits\s+per\s+round/gi;
+    const re3 = /(\d+)\s?!/g;
     while ((m = re1.exec(text))) per += Number(m[1]);
     while ((m = re2.exec(text))) per += Number(m[1]);
+    while ((m = re3.exec(text))) per += Number(m[1]);
     return per;
 }
 
@@ -317,10 +333,13 @@ export function adjudicateCritText(critText, targetActor) {
 }
 
 // "Add +10 to your next swing." -> bonus.
+// Spell Law shorthand: "(+N)" is a bonus on the next swing.
 export function parseNextSwing(text) {
     if (!text) return 0;
     const m = text.match(/add\s+\+(\d+)\s+to\s+(?:your\s+)?next\s+(?:swing|attack)/i);
-    return m ? Number(m[1]) : 0;
+    if (m) return Number(m[1]);
+    const sh = String(text).match(/\(\+(\d+)\)/);
+    return sh ? Number(sh[1]) : 0;
 }
 
 // "at -25", "at -50 for 3 rounds", "operates at -50", "fights at -95".
@@ -354,15 +373,28 @@ export function parsePenalty(text) {
             out.rounds = m[2] ? Number(m[2]) : 0;
         }
     }
+    // Spell Law shorthand: "(-N)" is an action penalty with no stated
+    // duration (indefinite). "(+N)" is a next-swing bonus, not a penalty.
+    const parRe = /\((-?\d+)\)/g;
+    while ((m = parRe.exec(stripped))) {
+        const v = Number(m[1]);
+        if (v < out.value) {
+            out.value = v;
+            out.rounds = 0;
+        }
+    }
     return out;
 }
 
 // "foe must parry next round", "... at -20" -> { rounds, penalty }.
+// Spell Law shorthand: "Nx" = foe must parry for N rounds.
 export function parseMustParry(text) {
     const out = { rounds: 0, penalty: 0 };
     if (!text) return out;
+    const x = String(text).match(/\b(\d+)\s?x\b/);
+    if (x) out.rounds = Number(x[1]);
     if (!/must\s+parry(?:\s+(?:the\s+following|next))?\s+round/i.test(text)) return out;
-    out.rounds = 1;
+    out.rounds = Math.max(out.rounds, 1);
     const p = text.match(/must\s+parry[^.]*?at\s+(-\d+)/i);
     if (p) out.penalty = Number(p[1]);
     return out;
@@ -633,6 +665,31 @@ export async function tickConditions(combat) {
             updates["system.status.shieldOpponentId"] = "";
             updates["system.status.shieldOpponentName"] = "";
             updates["system.status.shieldOpponentRoundKey"] = "";
+        }
+
+        // Exhaustion costs (ChL §7.2.3 + Arms Companion armor EF):
+        // melee activity plus worn armor/helmet EF accrue per round
+        // and deduct as whole points; at 0 the combatant is spent.
+        if (!st.unconscious) {
+            const cost = roundExhaustionCost(actor);
+            if (cost > 0) {
+                const frac = (Number(actor.system?.exhaustion?.fraction) || 0) + cost;
+                const whole = Math.floor(frac);
+                updates["system.exhaustion.fraction"] = Math.round((frac - whole) * 1000) / 1000;
+                if (whole > 0) {
+                    const curEx = exhaustionCurrent(actor);
+                    const afterEx = Math.max(0, curEx - whole);
+                    updates["system.exhaustion.value"] = afterEx;
+                    if (afterEx <= 0 && !st.exhausted) {
+                        updates["system.status.exhausted"] = true;
+                        notes.push(`${esc(actor.name)} is exhausted and cannot continue fighting.`);
+                    }
+                }
+            }
+            // Fully rested clears the subdued-cost doubling.
+            if (st.subdueDoubled && exhaustionCurrent(actor) >= exhaustionMaxFor(actor)) {
+                updates["system.status.subdueDoubled"] = false;
+            }
         }
 
         if (Object.keys(updates).length) await actor.update(updates);

@@ -74,6 +74,8 @@
             <th>{{localize "eqrmss.armor.at"}}</th>
             <th>DB Bonus</th>
             <th>Maneuver Penalty</th>
+            <th>Qk Mod (§5.1)</th>
+            <th>Msl Mod (§5.1)</th>
           </tr>
           <td>
             <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
@@ -94,6 +96,12 @@
           </td>
           <td>
             <input name="system.maneuverPenalty" type="text" value="{{system.maneuverPenalty}}" data-dtype="Number"/>
+          </td>
+          <td>
+            <input name="system.quicknessPenalty" type="text" value="{{system.quicknessPenalty}}" data-dtype="Number"/>
+          </td>
+          <td>
+            <input name="system.missilePenalty" type="text" value="{{system.missilePenalty}}" data-dtype="Number"/>
           </td>
         </table>
         <div class="form-group" style="margin: 8px 0;">

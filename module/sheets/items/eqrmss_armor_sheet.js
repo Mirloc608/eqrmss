@@ -80,6 +80,9 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
       "system.at": composed.armorType ?? "",
       "system.weight": composed.weight,
       "system.maneuverPenalty": composed.maneuverPenalty,
+      "system.quicknessPenalty": composed.quicknessPenalty ?? 0,
+      "system.missilePenalty": composed.missilePenalty ?? 0,
+      "system.epCostMult": composed.epCostMult ?? 1,
       "system.cost": composed.cost,
       "system.prod_time": composed.prodTime
     };
@@ -141,6 +144,9 @@ export default class EQRMSSArmorSheet extends EQRMSSItemSheet {
       "system.at": composed.armorType ?? "",
       "system.weight": composed.weight,
       "system.maneuverPenalty": composed.maneuverPenalty,
+      "system.quicknessPenalty": composed.quicknessPenalty ?? 0,
+      "system.missilePenalty": composed.missilePenalty ?? 0,
+      "system.epCostMult": composed.epCostMult ?? 1,
       "system.cost": composed.cost,
       "system.prod_time": composed.prodTime
     };

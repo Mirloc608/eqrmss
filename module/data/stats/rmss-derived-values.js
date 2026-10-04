@@ -185,6 +185,13 @@ export function calculateArmorAndDefenses(actorData) {
     }
 
     const quPenalty = Number(combat.penalties?.quickness ?? combat.quPenalty ?? 0);
+    // Penalties chart (§5.1, ruling 2026-10-04): worn enhancements'
+    // Quickness mod cuts the wearer's Qu bonus (hence DB), and the
+    // Missile mod cuts missile DB. Chart values are negative mods
+    // baked onto the items at compose time. (Armor worn in the pack
+    // does not count; isWornItem already filtered wornArmor.)
+    const enhQuicknessPenalty = wornArmor.reduce((sum, i) => sum + (Number(i.system?.quicknessPenalty) || 0), 0);
+    const enhMissilePenalty = wornArmor.reduce((sum, i) => sum + (Number(i.system?.missilePenalty) || 0), 0);
 
     // Arms Companion §5.6 (Multiple Shield DB): a shield-bearing ally
     // on each flank adds DB by THEIR shield type (Shield Effects on DB
@@ -202,7 +209,7 @@ export function calculateArmorAndDefenses(actorData) {
     
     // Quickness Bonus derived from engine Qu or base stat bonus mapping
     const baseQUBonus = Math.floor(((stats.QU ?? stats.Qu ?? 50) - 50) / 5);
-    const quicknessBonus = baseQUBonus - quPenalty;
+    const quicknessBonus = baseQUBonus - quPenalty + enhQuicknessPenalty;
 
     // Additional DB components (stored; plain armor grants no DB in RMSS)
     const storedAdrenal = Number(combat.adrenalDefense ?? 0);
@@ -221,7 +228,15 @@ export function calculateArmorAndDefenses(actorData) {
         (i) => i?.type === "skill" && i.system?.slug === "adrenalDefense"
     ) ?? null;
     const adrenalSkillBonus = Number(adrenalSkill?.system?.bonus) || 0;
-    const adrenalBlockedByArmor = !!adrenalSkill && wornArmor.length > 0;
+    // Ruling (2026-10-04): worn AT 1-4 (clothing-grade) does not count
+    // as "wearing armor" for the §4.4.3 restriction; only a worn piece
+    // of AT 5 or higher blocks Adrenal Defense.
+    const blocksAdrenal = (item) => {
+        const raw = item?.system?.at ?? item?.system?.armorType;
+        const at = typeof raw === "number" ? raw : (Number((String(raw ?? "").match(/\d+/))?.[0]) || 0);
+        return at >= 5;
+    };
+    const adrenalBlockedByArmor = !!adrenalSkill && wornArmor.some(blocksAdrenal);
     const adrenalEffective = adrenalSkill
         ? (adrenalBlockedByArmor ? 0 : adrenalSkillBonus)
         : storedAdrenal;
@@ -234,7 +249,7 @@ export function calculateArmorAndDefenses(actorData) {
     const naturalDB = chartDB ?? quicknessBonus;
     const stanceDB = stanceDBBonus(actorData);
     const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB + mixedArmorDB + stanceDB + helmetDF;
-    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB + stanceDB + helmetDF;
+    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB + stanceDB + helmetDF + enhMissilePenalty;
 
     return {
         derived: derivedStats,
@@ -261,6 +276,8 @@ export function calculateArmorAndDefenses(actorData) {
         otherDB,
         armorDB,
         enhancedArmorDB,
+        enhQuicknessPenalty,
+        enhMissilePenalty,
         totalDB,
         totalMissileDB
     };

@@ -1,5 +1,5 @@
 {
-  "_comment": "Arms Companion 5.1 (enhanced armor) and 6.23 (workmanship quality), transcribed from the printed charts (Arms Companion pp.36/46). Enhancing armor affects DB only; the AT worn does not change. Chain worn over other armors (5.1 #7) is not here -- it belongs with Armor Pick and Choose (5.2). The 6.23 Below Shoddy / Above Superior rows are per-Level and omitted. BF (breakage) mods are not modeled.",
+  "_comment": "Arms Companion 5.1 (enhanced armor) and 6.23 (workmanship quality), transcribed from the printed charts (Arms Companion pp.36/46). Enhancing armor does not change the AT worn. Penalties chart (p.36) per enhancement: maneuverMax (added to the piece's maneuver penalty), quicknessMod (modifies the wearer's Quickness bonus, hence DB), missileMod (modifies the wearer's missile DB); the Min column is not modeled (single maneuver penalty). Ridges/Weaves carry no additional modifications. Chain worn over other armors (5.1 #7) is not here -- it belongs with Armor Pick and Choose (5.2). The 6.23 Below Shoddy / Above Superior rows are per-Level and omitted. BF (breakage) mods are not modeled.",
   "enhancements": [
     {
       "categories": [
@@ -9,7 +9,10 @@
       "dbBonus": 5,
       "id": "metal_studs",
       "name": "Metal Studs",
-      "weightMult": 1.1
+      "weightMult": 1.1,
+      "maneuverMax": -5,
+      "quicknessMod": 0,
+      "missileMod": 0
     },
     {
       "categories": [
@@ -20,7 +23,10 @@
       "id": "double_link",
       "maxBaseAT": 15,
       "name": "Double Link",
-      "weightMult": 1.5
+      "weightMult": 1.5,
+      "maneuverMax": 0,
+      "quicknessMod": 0,
+      "missileMod": 0
     },
     {
       "categories": [
@@ -32,7 +38,10 @@
       "maxBaseAT": 16,
       "minBaseAT": 16,
       "name": "Triple Link",
-      "weightMult": 1.5
+      "weightMult": 1.5,
+      "maneuverMax": -10,
+      "quicknessMod": -10,
+      "missileMod": -10
     },
     {
       "categories": [
@@ -46,10 +55,14 @@
       "weightMultByCategory": {
         "chain": 1.25,
         "leather": 1.5
-      }
+      },
+      "maneuverMax": -10,
+      "quicknessMod": -10,
+      "missileMod": -10
     },
     {
       "categories": [
+        "cloth",
         "leather",
         "chain",
         "plate"
@@ -58,7 +71,10 @@
       "dbBonus": 10,
       "id": "leather_plates",
       "name": "Leather Plates",
-      "weightMult": 1.25
+      "weightMult": 1.25,
+      "maneuverMax": -5,
+      "quicknessMod": -5,
+      "missileMod": -5
     },
     {
       "categories": [
@@ -69,7 +85,10 @@
       "dbBonus": 5,
       "id": "ridges",
       "name": "Ridges",
-      "weightMult": 1.1
+      "weightMult": 1.1,
+      "maneuverMax": 0,
+      "quicknessMod": 0,
+      "missileMod": 0
     },
     {
       "categories": [
@@ -79,7 +98,10 @@
       "dbBonus": 5,
       "id": "chain_weaves",
       "name": "Chain Weaves",
-      "weightMult": 1
+      "weightMult": 1,
+      "maneuverMax": 0,
+      "quicknessMod": 0,
+      "missileMod": 0
     }
   ],
   "qualities": [
@@ -133,7 +155,8 @@
       "short": "",
       "dbBonus": 0,
       "weightMult": 1,
-      "costMult": 1
+      "costMult": 1,
+      "epCostMult": 1
     },
     {
       "id": "half",
@@ -141,7 +164,8 @@
       "short": "0.5x",
       "dbBonus": -20,
       "weightMult": 0.5,
-      "costMult": 0.75
+      "costMult": 0.75,
+      "epCostMult": 0.75
     },
     {
       "id": "thick_125",
@@ -149,7 +173,8 @@
       "short": "1.25x",
       "dbBonus": 5,
       "weightMult": 1.5,
-      "costMult": 1.5
+      "costMult": 1.5,
+      "epCostMult": 1.5
     },
     {
       "id": "thick_150",
@@ -157,7 +182,8 @@
       "short": "1.5x",
       "dbBonus": 15,
       "weightMult": 2,
-      "costMult": 3
+      "costMult": 3,
+      "epCostMult": 2.5
     },
     {
       "id": "thick_200",
@@ -165,7 +191,8 @@
       "short": "2x",
       "dbBonus": 35,
       "weightMult": 3,
-      "costMult": 6
+      "costMult": 6,
+      "epCostMult": 4.0
     }
   ]
 }

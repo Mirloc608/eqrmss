@@ -16,13 +16,15 @@
 //              failure — stops half the bleeding, 2d10 hits + B heat crit
 //              fumble  — 4d10 hits + D heat crit (bleeding unchanged)
 // Untrained attempts use -10 instead of the usual -25.
-// Heat criticals have no crit table in the system data; they
-// are reported for GM adjudication. Self-cauterizing applies
-// -20 (the SD roll itself is GM-adjudicated). One wound at a
-// time: this system tracks a single bleed rate per actor.
+// Heat criticals roll flat d100 on the Heat critical table
+// and resolve like any other crit (conditions applied to the
+// patient). Self-cauterizing applies -20 (the SD roll itself
+// is GM-adjudicated). One wound at a time: this system tracks
+// a single bleed rate per actor.
 // ============================================================
 
-import { checkHitThresholds } from "./crit-conditions.js";
+import { checkHitThresholds, applyCritConditions, adjudicateCritText } from "./crit-conditions.js";
+import { lookupCrit, critBonusHits } from "./attack-resolver.js";
 
 function esc(s) {
     return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -170,6 +172,34 @@ export async function cauterizeWound(patient) {
     });
     await checkHitThresholds(patient);
 
+    // Heat critical: flat d100 on the Heat table, resolved against the
+    // patient's worn gear; shorthand effects land on the patient.
+    let heatLine = "";
+    if (outcome.heatCrit) {
+        const cr = await new Roll("1d100").evaluate();
+        const crits = game.eqrmss?.combatTables?.crits;
+        const critResult = crits
+            ? lookupCrit(crits, "H", outcome.heatCrit, cr.total)
+            : { error: "Heat crit table is not loaded." };
+        if (critResult.error) {
+            heatLine = `<p><em>Plus a ${outcome.heatCrit} heat critical — GM adjudication (${esc(critResult.error)})</em></p>`;
+        } else {
+            const adjudicated = adjudicateCritText(critResult.text, patient);
+            const bonusHits = critBonusHits(adjudicated.text);
+            if (bonusHits > 0) {
+                await patient.update({
+                    "system.hits.value": Math.max(0, (Number(patient.system?.hits?.value) || 0) + bonusHits)
+                });
+                await checkHitThresholds(patient);
+            }
+            const condNotes = await applyCritConditions(patient, null, adjudicated.text);
+            heatLine = `<p><strong>${outcome.heatCrit} heat critical</strong> → d100 ${cr.total} on the ${esc(critResult.table)}: ${esc(critResult.text)}`
+                + (adjudicated.note ? `<br><em>Conditional crit: ${esc(adjudicated.note)} — matching branch applied.</em>` : "")
+                + (bonusHits > 0 ? `<br><em>The critical adds +${bonusHits} hits.</em>` : "")
+                + `</p>${condNotes}`;
+        }
+    }
+
     const tierLabel = { success: "Success", failure: "Failure", fumble: "FUMBLE" }[tier];
     const bleedLine = outcome.stop === "all"
         ? "The bleeding stops completely."
@@ -182,6 +212,6 @@ export async function cauterizeWound(patient) {
             <h2>Cauterizing ${esc(patient.name)}'s wound (§4.5)</h2>
             <p><strong>Maneuver:</strong> ${esc(difficulty.name)} (${difficulty.mod}) · Roll ${roll.rolls.join(" + ")} ${modifier >= 0 ? "+" : "−"} ${Math.abs(modifier)} = ${total} — <strong>${tierLabel}</strong></p>
             <p><strong>Burn damage:</strong> ${hitRoll.total} hits (${outcome.hitsDice}). ${bleedLine}</p>
-            ${outcome.heatCrit ? `<p><em>Plus a ${outcome.heatCrit} heat critical — GM adjudication (no Heat crit table in the system data).</em></p>` : ""}`
+            ${heatLine}`
     });
 }

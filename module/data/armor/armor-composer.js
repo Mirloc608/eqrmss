@@ -136,9 +136,14 @@ export function composeArmor(locationId, categoryId, materialId, conditionId, op
     // AT comes from the material; weight scales the location's base weight;
     // maneuver and cost combine location base with material/condition mods.
     // Quality and enhancement scale cost (and enhancement scales weight).
+    // Penalties chart (p.36): the enhancement's Max column adds to the
+    // piece's maneuver penalty; its Quickness/Missile mods ride along
+    // as item fields for the defense derivation.
     const weight = Math.round(loc.baseWeight * (m.weightMult ?? 1) * (c.weightMult ?? 1) * enhWeightMult * (thk?.weightMult ?? 1) * 10) / 10;
     const armorType = Math.max(1, (m.baseAT ?? 1) + (c.atMod ?? 0));
-    const maneuverPenalty = (loc.baseManeuver ?? 0) + (m.maneuverMod ?? 0) + (c.maneuverMod ?? 0);
+    const maneuverPenalty = (loc.baseManeuver ?? 0) + (m.maneuverMod ?? 0) + (c.maneuverMod ?? 0) + (enh?.maneuverMax ?? 0);
+    const quicknessPenalty = enh?.quicknessMod ?? 0;
+    const missilePenalty = enh?.missileMod ?? 0;
     const cost = formatBp(parseCostToBp(loc.baseCost) * (m.costMult ?? 1) * (enh?.costMult ?? 1) * (q.costMult ?? 1) * (thk?.costMult ?? 1));
 
     return {
@@ -158,6 +163,9 @@ export function composeArmor(locationId, categoryId, materialId, conditionId, op
         armorType,
         weight,
         maneuverPenalty,
+        quicknessPenalty,
+        missilePenalty,
+        epCostMult: thk?.epCostMult ?? 1,
         slot: loc.slot,
         cost,
         prodTime: loc.baseProdTime ?? "",

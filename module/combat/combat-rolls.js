@@ -39,6 +39,7 @@ import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { strategicTargetingSkill, promptCalledShot } from "./strategic-targeting.js";
 import { applyArmorWear, ARMOR_WEAR_FAMILY_LABEL } from "./armor-wear.js";
 import { actorStance, stanceOBBonus, stanceRanks, defensiveCritCap, capCritSeverity } from "./stance.js";
+import { isSubduing, subdueCritPoints, isExhausted, applySubdueExhaustion, rollExhaustionResistance } from "./subdue.js";
 import { restrictedAreaPenalty } from "./restricted-area.js";
 import { weaponUsePenalty } from "./weapon-use.js";
 import { actorAttackSpeed, speedScaledOb } from "./attack-speed.js";
@@ -427,8 +428,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // ---- Stun / unconscious: no offensive action ----
     const stunState = activeStun(actor.system?.status?.stun);
     const unconscious = !!actor.system?.status?.unconscious;
-    if (stunState || unconscious) {
-        const why = unconscious ? "unconscious" : STUN_LABEL[stunState.type];
+    if (stunState || unconscious || isExhausted(actor)) {
+        const why = unconscious ? "unconscious" : isExhausted(actor) ? "exhausted" : STUN_LABEL[stunState.type];
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
             content: `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>`
@@ -710,6 +711,10 @@ export async function rollWeaponAttack(actor, weaponItem) {
     // ---- Critical strike (§6.4.2) ----
     let critLine = "<em>No critical.</em>";
     let critBonus = 0;
+    // Subduing strikes (§4.9 Option 2 / §4.10): melee only; crits
+    // also cost the target Exhaustion Points by severity.
+    const subduing = isSubduing(actor, weaponType, MISSILE_WEAPON_TYPES);
+    let subduePoints = 0;
     let critFired = false;
     let condNote = ""; // critical-condition notes (stun pool, bleed, death timer, next swing, must parry)
     let crit = parseCritCode(lookup.critCode);
@@ -737,6 +742,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
         // resolved against the target's worn gear before any parsing.
         const adjudicated = adjudicateCritText(critResult.text, targetActor);
         critBonus += critBonusHits(adjudicated.text);
+        if (subduing) subduePoints += subdueCritPoints(severity);
         critFired = true;
         // ---- Armor wear (§5.9): the crit also damages the armor;
         // prior wear of the same family leaks extra hits through.
@@ -811,11 +817,18 @@ export async function rollWeaponAttack(actor, weaponItem) {
         totalDamage = Math.floor(totalDamage / 2);
         dmgParts.push("defensive stance ½");
     }
+    // Subduing strikes deliver half hits (§4.10).
+    if (subduing && totalDamage > 0) {
+        totalDamage = Math.floor(totalDamage / 2);
+        dmgParts.push("subduing ½");
+    }
 
     let appliedNote = "";
     if (targetActor && totalDamage > 0 && (targetActor.isOwner || game.user?.isGM)) {
         const cur = Number(targetActor.system?.hits?.value) || 0;
         await targetActor.update({ "system.hits.value": cur + totalDamage });
+        // Being subdued doubles the victim's exhaustion costs (§4.10).
+        if (subduing) await targetActor.update({ "system.status.subdueDoubled": true });
         appliedNote = `<p><em>${totalDamage} concussion hit${totalDamage === 1 ? "" : "s"} applied to ${esc(targetName)}.</em></p>`;
         // Concussion-hit thresholds — unconsciousness (§6.4.1), dying (§3.8).
         await checkHitThresholds(targetActor);
@@ -823,6 +836,25 @@ export async function rollWeaponAttack(actor, weaponItem) {
         appliedNote = `<p><em>Damage not applied — you don't control ${esc(targetName)}.</em></p>`;
     } else if (!targetActor && totalDamage > 0) {
         appliedNote = `<p><em>Damage not applied — no token targeted. Apply ${totalDamage} concussion hit${totalDamage === 1 ? "" : "s"} to ${esc(targetName)} manually (target the token before rolling to auto-apply).</em></p>`;
+    }
+
+    // Subduing: the crit's Exhaustion Point loss lands on the target
+    // (§4.10); at 0 the target cannot continue fighting. The crit's
+    // text effects were already applied above (ruling 2026-10-04).
+    let subdueNote = "";
+    if (subduing && subduePoints > 0 && targetActor && (targetActor.isOwner || game.user?.isGM)) {
+        const ex = await applySubdueExhaustion(targetActor, subduePoints);
+        if (ex) {
+            subdueNote = `<p><em>Subduing: ${esc(targetName)} loses ${subduePoints} exhaustion (${ex.before} → ${ex.after}).</em></p>`;
+            if (ex.exhausted) subdueNote += `<p><em>${esc(targetName)} is exhausted and cannot continue fighting.</em></p>`;
+            // Resistance Roll vs SD (book option, adopted 2026-10-04):
+            // made on every loss, whether points remain or not.
+            const rr = await rollExhaustionResistance(targetActor, subduePoints);
+            subdueNote += `<p><em>Resistance vs SD: ${rr.roll} ${rr.sdBonus >= 0 ? "+" : "−"} ${Math.abs(rr.sdBonus)} (SD) − ${subduePoints} = ${rr.total} — ${rr.success ? "remains conscious" : "falls unconscious"}.</em></p>`;
+            if (!rr.success) await targetActor.update({ "system.status.unconscious": true });
+        }
+    } else if (subduing && subduePoints > 0 && targetActor) {
+        subdueNote = `<p><em>Subduing: apply ${subduePoints} exhaustion loss to ${esc(targetName)} manually.</em></p>`;
     }
 
     // ---- Weapon proc on crit (already-ruled: procs fire onCrit) ----
@@ -843,6 +875,6 @@ export async function rollWeaponAttack(actor, weaponItem) {
             <p>${arLine}</p>
             <p><strong>${esc(lookup.table)}</strong> vs AT ${at}: <strong>${totalDamage} hits</strong> (${dmgParts.map(esc).join(", ")})</p>
             <p>${critLine}</p>
-            ${appliedNote}${condNote}${critCapNote}${procNote}${ammoNote}`
+            ${appliedNote}${subdueNote}${condNote}${critCapNote}${procNote}${ammoNote}`
     });
 }
