@@ -15,6 +15,7 @@
               {{selectOptions armorOptions.locations selected=system.armorLocation valueAttr="id" labelAttr="name"}}
             </select>
           </div>
+          {{#if (eq system.armorLocation "head")}}
           <div class="form-group">
             <label>Helmet Preset</label>
             <select class="armor-helmet-select">
@@ -22,6 +23,7 @@
               {{#each armorOptions.helmets}}<option value="{{this.id}}"{{#if (eq ../system.armorHelmetPreset this.id)}} selected{{/if}}>{{this.name}} ({{this.source}})</option>{{/each}}
             </select>
           </div>
+          {{/if}}
           <div class="form-group">
             <label>Category</label>
             <select name="system.armorCategory" class="armor-composer-select">
