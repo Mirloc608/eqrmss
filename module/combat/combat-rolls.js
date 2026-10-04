@@ -28,6 +28,7 @@ import {
 } from "./attack-resolver.js";
 import {
     applyCritConditions,
+    adjudicateCritText,
     checkHitThresholds,
     consumeNextSwingBonus,
     computeWeaponOB,
@@ -732,7 +733,10 @@ export async function rollWeaponAttack(actor, weaponItem) {
         const cr = await d100();
         const critResult = lookupCrit(tables.crits, type, severity, cr);
         if (critResult.error) return `<strong>${esc(lookup.critCode)}</strong> — ${esc(critResult.error)} (GM adjudicates)`;
-        critBonus += critBonusHits(critResult.text);
+        // Conditional branches ("If foe has shield... If not...") are
+        // resolved against the target's worn gear before any parsing.
+        const adjudicated = adjudicateCritText(critResult.text, targetActor);
+        critBonus += critBonusHits(adjudicated.text);
         critFired = true;
         // ---- Armor wear (§5.9): the crit also damages the armor;
         // prior wear of the same family leaks extra hits through.
@@ -745,8 +749,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
             }
         }
         // ---- Critical conditions (stun pool, bleed, death timer, next swing, must parry) ----
-        condNote += await applyCritConditions(targetActor, actor, critResult.text);
-        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critResult.text)}${wearNote}`;
+        condNote += await applyCritConditions(targetActor, actor, adjudicated.text);
+        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critResult.text)}${adjudicated.note ? `<br><em>Conditional crit: ${esc(adjudicated.note)} — matching branch applied.</em>` : ""}${wearNote}`;
     }
     if (crit && !crit.unparseable) {
         if (crit.severity === "F") {

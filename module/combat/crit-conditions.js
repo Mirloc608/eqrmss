@@ -31,11 +31,16 @@
 //   → dies after the race's roundsToSoulDeparture rounds
 //   (Table 15.5.1, module/data/races/base-hits.json); dropping back
 //   under the threshold clears the countdown.
-//
 // NOT yet ruled — parsed/stored but not mechanically enforced:
-// - which table phrasings map to down-or-out (counter exists in pool)
 // - penalty expiry when the text gives no duration (indefinite now)
 // - whether "at -N" touches DB (rolls only, for now)
+//
+// Parser coverage notes:
+// - DOWN-OR-OUT: only explicit "down for N rounds" maps to the pool;
+//   bare "knocked down" (no duration) stays unmapped (no ruling yet).
+// - CONDITIONAL CRITS: "If foe has shield/helm/..." branches are
+//   adjudicated against the target's worn gear before parsing (see
+//   adjudicateCritText); unresolvable conditions stay GM-adjudicated.
 //
 // State lives under system.status (persistent; never rebuilt by the
 // actor prepare pipeline):
@@ -112,7 +117,7 @@ export function computeWeaponOB(actor, weaponItem) {
 // for 4 rounds and cannot parry for 2 rounds" = 2 stun-no-parry +
 // 2 plain stun); those are split first so nothing double-counts.
 export function parseStun(text) {
-    const out = { stunned: 0, stunNoParry: 0 };
+    const out = { stunned: 0, stunNoParry: 0, downOrOut: 0 };
     if (!text) return out;
     let rest = String(text);
 
@@ -140,6 +145,10 @@ export function parseStun(text) {
     // consume digits, so these cannot double-count them.
     const bareRe = /stun(?:ned|s)?(?:\s+foe)?\s+next\s+round(?!\s*\d)/gi;
     while (bareRe.exec(rest)) out.stunned += 1;
+    // Explicit "down for N rounds" -> down-or-out pool. Bare "knocked
+    // down" (no duration) is still not parsed: no ruling on its length.
+    const downRe = new RegExp(`\\bdown\\s+for\\s+(?:for\\s+)?(\\d+)\\s+(${ROUNDS_RE})`, "gi");
+    while ((m = downRe.exec(rest))) out.downOrOut += Number(m[1]);
     return out;
 }
 
@@ -164,6 +173,8 @@ export function parseDeathTimer(text) {
     if (!text) return 0;
     let m = text.match(/\b(?:kills?\s+foe|dies?|dead)\s+(?:in|after)\s+(\d+)\s+r(?:ou)?nds?/i);
     if (m) return Number(m[1]);
+    m = text.match(/\bdies?\b[^.;]*?\bin\s+(\d+)\s+r(?:ou)?nds?/i);
+    if (m) return Number(m[1]);
     m = text.match(/\bdrops?\s+on\s+round\s+(\d+)/i);
     if (m && /\bthen dies\b/i.test(text)) return Number(m[1]);
     if (/\bthen dies\b/i.test(text)) {
@@ -172,7 +183,137 @@ export function parseDeathTimer(text) {
         if (rounds.length) return rounds.reduce((a, b) => a + b, 0);
         return -1; // "then dies", no countdown stated: immediate
     }
+    // Bare immediate death: "he is dead", "he dies", "you kill him",
+    // "foe then falls dead". Only reached after every timed pattern.
+    if (/\b(?:is\s+dead|falls?\s+dead|he\s+dies|foe\s+dies|you\s+kill|kills?\s+(?:him|foe))\b/i.test(text)) return -1;
     return 0;
+}
+
+// ------------------------------------------------------------
+// Conditional critical branches ("If foe has shield, ... If not, ...")
+// ------------------------------------------------------------
+// RM crit tables state equipment-conditional outcomes, and only the
+// branch matching the target's worn gear applies. Conditions that
+// can be checked from the target's items: shield, helm (incl. full
+// and facial variants), leg armor, neck armor, metal chest armor.
+// Any other condition returns the text untouched so the GM
+// adjudicates, exactly as before. The chat line still shows the
+// full book text; a note records which branch was applied.
+
+const FULL_HELM_PRESETS = new Set(["full_helm", "lobster_tail"]);
+const FACE_HELM_PRESETS = new Set(["full_helm", "lobster_tail", "visored_helm", "sallet_and_beaver"]);
+
+function wornItemsOf(actor) {
+    return [...(actor?.items?.contents ?? actor?.items ?? [])].filter(i => i && isWorn(i));
+}
+
+function isHeadPiece(item) {
+    return item?.type === "armor"
+        && (item.system?.armorLocation === "head" || item.system?.slot === "head");
+}
+
+function isFullHelm(piece) {
+    const preset = piece?.system?.presetId ?? piece?.system?.helmetId ?? "";
+    if (FULL_HELM_PRESETS.has(preset)) return true;
+    return /full helm|lobster/i.test(piece?.name ?? "");
+}
+
+function coversFace(piece) {
+    const preset = piece?.system?.presetId ?? piece?.system?.helmetId ?? "";
+    if (FACE_HELM_PRESETS.has(preset)) return true;
+    return isFullHelm(piece) || /visored|sallet/i.test(piece?.name ?? "");
+}
+
+// Truth of a "has ..." condition phrase, or null when the condition
+// is not an equipment check this system can resolve.
+function evalCritCondition(rawPhrase, actor) {
+    if (!actor) return null;
+    let phrase = String(rawPhrase ?? "").toLowerCase().replace(/\s+/g, " ").trim();
+    let negated = false;
+    if (phrase.startsWith("no ")) { negated = true; phrase = phrase.slice(3); }
+    phrase = phrase.replace(/^(?:a|an|the)\s+/, "");
+    const worn = wornItemsOf(actor);
+    const head = worn.filter(isHeadPiece);
+    let has = null;
+    if (phrase === "shield") has = worn.some(i => i.type === "shield");
+    else if (phrase === "helm") has = head.length > 0;
+    else if (phrase === "full helm") has = head.some(isFullHelm);
+    else if (phrase === "facial armor") has = head.some(coversFace);
+    else if (phrase === "leg armor") has = worn.some(i => i.type === "armor"
+        && (i.system?.armorLocation === "legs" || i.system?.slot === "legs"));
+    else if (phrase === "neck armor") has = head.some(p => p.system?.dfNeckOnly === true
+        || ["gorget", "aventail"].includes(p.system?.presetId ?? "")
+        || /gorget|aventail/i.test(p.name ?? ""));
+    else if (phrase === "metal chest armor") has = worn.some(i => i.type === "armor"
+        && (i.system?.armorLocation === "chest" || i.system?.slot === "chest")
+        && (Number(i.system?.at ?? i.system?.armorType) || 0) >= 13);
+    if (has === null) return null;
+    return negated ? !has : has;
+}
+
+function negatePhrase(phrase) {
+    let p = String(phrase ?? "").trim().toLowerCase().replace(/^(?:a|an)\s+/, "");
+    if (p.startsWith("no ")) return p.slice(3).replace(/^(?:a|an)\s+/, "");
+    return `no ${p}`;
+}
+
+// Leading "If ..." clause of a sentence: { phrase, rest } for a
+// has-condition, { ifNot, rest } for "If not, ...", else null.
+function parseIfClause(sentence) {
+    const s = String(sentence);
+    let m = s.match(/^if\s+(.+?),\s*/i);
+    if (m) {
+        const clause = m[1].trim().toLowerCase();
+        if (clause === "not") return { ifNot: true, rest: s.slice(m[0].length) };
+        const hm = clause.match(/^(?:foe\s+|he\s+)?has\s+(.+)$/);
+        if (hm) return { phrase: hm[1].trim(), rest: s.slice(m[0].length) };
+        return null;
+    }
+    // Comma-less form: "If foe has no helm he is dead."
+    m = s.match(/^if\s+(?:foe\s+|he\s+)?has\s+(no\s+)?(shield|full helm|facial armor|leg armor|neck armor|metal chest armor|an?\s+helm|helm)\s+(.+)$/i);
+    if (m) return { phrase: `${m[1] ?? ""}${m[2]}`, rest: m[3] };
+    return null;
+}
+
+export function adjudicateCritText(critText, targetActor) {
+    const original = String(critText ?? "");
+    if (!targetActor || !/\bif\s/i.test(original)) return { text: original, note: null };
+    const sentences = original.split(/(?<=\.)\s*/).map(s => s.trim()).filter(Boolean);
+    const ifAt = [];
+    sentences.forEach((s, i) => { if (parseIfClause(s)) ifAt.push(i); });
+    if (ifAt.length === 0 || ifAt.length > 2) return { text: original, note: null };
+
+    if (ifAt.length === 1) {
+        const idx = ifAt[0];
+        const clause = parseIfClause(sentences[idx]);
+        if (clause.ifNot) return { text: original, note: null };
+        const truth = evalCritCondition(clause.phrase, targetActor);
+        if (truth === null) return { text: original, note: null };
+        if (truth) sentences[idx] = clause.rest;
+        else sentences.splice(idx, 1);
+        const note = truth ? `foe has ${clause.phrase}` : `foe has ${negatePhrase(clause.phrase)}`;
+        return { text: sentences.join(" "), note };
+    }
+
+    const [i1, i2] = ifAt;
+    const c1 = parseIfClause(sentences[i1]);
+    const c2 = parseIfClause(sentences[i2]);
+    if (c1.ifNot) return { text: original, note: null };
+    const t1 = evalCritCondition(c1.phrase, targetActor);
+    if (t1 === null) return { text: original, note: null };
+    let t2;
+    if (c2.ifNot) t2 = !t1;
+    else {
+        t2 = evalCritCondition(c2.phrase, targetActor);
+        if (t2 === null) return { text: original, note: null };
+    }
+    if (t1 === t2) return { text: original, note: null }; // not an either/or pair
+    const keepFirst = t1;
+    const chosen = keepFirst ? c1 : c2;
+    const note = keepFirst ? `foe has ${c1.phrase}` : (c2.ifNot ? `foe has ${negatePhrase(c1.phrase)}` : `foe has ${c2.phrase}`);
+    sentences[keepFirst ? i1 : i2] = chosen.rest;
+    sentences.splice(keepFirst ? i2 : i1, 1);
+    return { text: sentences.join(" "), note };
 }
 
 // "Add +10 to your next swing." -> bonus.
@@ -279,11 +420,12 @@ export async function applyCritConditions(targetActor, attackerActor, critText) 
 
     const denied = suffix => `${suffix} — not applied, you don't control ${esc(tName)}.`;
 
-    if (stun.stunned > 0 || stun.stunNoParry > 0) {
+    if (stun.stunned > 0 || stun.stunNoParry > 0 || stun.downOrOut > 0) {
         if (canApply) {
             const pool = { stunned: 0, stunNoParry: 0, downOrOut: 0, ...(targetActor.system?.status?.stun ?? {}) };
             pool.stunned += stun.stunned;
             pool.stunNoParry += stun.stunNoParry;
+            pool.downOrOut = (Number(pool.downOrOut) || 0) + stun.downOrOut;
             await targetActor.update({ "system.status.stun": pool });
             const active = activeStun(pool);
             notes.push(`${esc(tName)} is ${STUN_LABEL[active.type]} (${roundsWord(active.rounds)}; ${stunTotal(pool)} total stun).`);
