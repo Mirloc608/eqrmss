@@ -749,10 +749,14 @@ export async function rollWeaponAttack(actor, weaponItem) {
         } else {
             // Single-letter codes carry severity only; the type is indicated
             // on the attack table itself (AL&CL 11.1).
-            const type = crit.type ?? lookup.impliedCritType ?? null;
+            // Sollerets (§5.8) do only puncture criticals.
+            const type = sys.sollerets ? "P" : (crit.type ?? lookup.impliedCritType ?? null);
             critLine = type
                 ? await resolveOneCrit(type, crit.severity)
                 : `<strong>${esc(crit.raw)}</strong> — unusual result, GM adjudicates.`;
+            if (sys.sollerets && crit.type && crit.type !== "P") {
+                critLine += `<br><em>Sollerets (§5.8): critical delivered as Puncture.</em>`;
+            }
         }
     } else if (crit?.unparseable) {
         critLine = `<strong>${esc(crit.raw)}</strong> — unusual result, GM adjudicates.`;

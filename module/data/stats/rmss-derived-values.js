@@ -147,7 +147,6 @@ export function calculateArmorAndDefenses(actorData) {
         const baseAts = chestAts.length > 0 ? chestAts : ats;
         if (baseAts.length > 0) armorType = `AT ${Math.max(...baseAts)}`;
         mmp = wornArmor.reduce((sum, i) => sum + (Number(i.system?.maneuverPenalty) || 0), 0);
-
         // Mixed-armor DB: each area shifts by its stage difference
         // from the base stage (missing areas count as No Armor).
         const baseStage = baseAts.length > 0 ? apacStageOfAT(Math.max(...baseAts)) : 0;
@@ -159,6 +158,10 @@ export function calculateArmorAndDefenses(actorData) {
             mixedArmorDB += area.dbPerShift * (stage - baseStage);
         }
     }
+
+    // Sollerets (§5.8): worn spiked boots cost -20 maneuvering
+    // on foot (mounted use is exempt — GM adjudicates).
+    if (itemList.some((i) => i?.type === "weapon" && i.system?.sollerets && isWornItem(i))) mmp += 20;
 
     let shieldBonus = 0;
     let shieldMissileBonus = 0;
