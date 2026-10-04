@@ -84,6 +84,12 @@ export default class EQRMSSNPCSheet
             this.actor.update({ "system.status.stance": ev.currentTarget.value || "" });
         }));
 
+        html.querySelectorAll(".rac-select").forEach(el => el.addEventListener("change", ev => {
+            const key = ev.currentTarget.dataset.key;
+            if (!["height", "width", "weaponSpace"].includes(key)) return;
+            this.actor.update({ [`system.status.restrictedArea.${key}`]: ev.currentTarget.value || "" });
+        }));
+
         if (!this._npcDropBound) {
             html.addEventListener("dragover", ev => ev.preventDefault());
             html.addEventListener("drop", ev => this._onDrop(ev));

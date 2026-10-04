@@ -385,6 +385,11 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         html.querySelectorAll(".stance-select").forEach(el => el.addEventListener("change", ev => {
             this.actor.update({ "system.status.stance": ev.currentTarget.value || "" });
         }));
+        html.querySelectorAll(".rac-select").forEach(el => el.addEventListener("change", ev => {
+            const key = ev.currentTarget.dataset.key;
+            if (!["height", "width", "weaponSpace"].includes(key)) return;
+            this.actor.update({ [`system.status.restrictedArea.${key}`]: ev.currentTarget.value || "" });
+        }));
 
         // Shield formation (§5.6): GM-declared flank shields feeding DB.
         html.querySelectorAll(".formation-shield").forEach(el => el.addEventListener("change", ev => {

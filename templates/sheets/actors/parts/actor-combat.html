@@ -71,6 +71,40 @@
   </div>
 
   <div class="panel">
+    <h4>Restricted Area Combat (Arms Companion §4.12)</h4>
+    <p class="hint">Confined-space OB penalties (cumulative); the Restricted Area Combat skill offsets them.</p>
+    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+      <label>Ceiling:
+        <select class="rac-select" data-key="height">
+          <option value=""{{#unless system.status.restrictedArea.height}} selected{{/unless}}>Full clearance</option>
+          <option value="full"{{#if (eq system.status.restrictedArea.height "full")}} selected{{/if}}>Character's height (-10)</option>
+          <option value="h75"{{#if (eq system.status.restrictedArea.height "h75")}} selected{{/if}}>75% of height (-20)</option>
+          <option value="h50"{{#if (eq system.status.restrictedArea.height "h50")}} selected{{/if}}>50% of height (-45)</option>
+          <option value="h25"{{#if (eq system.status.restrictedArea.height "h25")}} selected{{/if}}>25% of height (-80)</option>
+        </select>
+      </label>
+      <label>Width:
+        <select class="rac-select" data-key="width">
+          <option value=""{{#unless system.status.restrictedArea.width}} selected{{/unless}}>Arm's length to wall</option>
+          <option value="w75"{{#if (eq system.status.restrictedArea.width "w75")}} selected{{/if}}>75% arm's length (-5)</option>
+          <option value="w50"{{#if (eq system.status.restrictedArea.width "w50")}} selected{{/if}}>50% arm's length (-10)</option>
+          <option value="w25"{{#if (eq system.status.restrictedArea.width "w25")}} selected{{/if}}>25% arm's length (-20)</option>
+          <option value="pressed"{{#if (eq system.status.restrictedArea.width "pressed")}} selected{{/if}}>Arms pressed against side (-45)</option>
+        </select>
+      </label>
+      <label>Weapon space:
+        <select class="rac-select" data-key="weaponSpace">
+          <option value=""{{#unless system.status.restrictedArea.weaponSpace}} selected{{/unless}}>Full swing room</option>
+          <option value="s75"{{#if (eq system.status.restrictedArea.weaponSpace "s75")}} selected{{/if}}>75% weapon space (-10)</option>
+          <option value="s50"{{#if (eq system.status.restrictedArea.weaponSpace "s50")}} selected{{/if}}>50% weapon space (-20)</option>
+          <option value="s25"{{#if (eq system.status.restrictedArea.weaponSpace "s25")}} selected{{/if}}>25% weapon space (-45)</option>
+          <option value="s0"{{#if (eq system.status.restrictedArea.weaponSpace "s0")}} selected{{/if}}>No space available (-80)</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="panel">
     <h4>Readied Weapons</h4>
     <table class="rmss-table">
       <thead><tr><th></th><th>Name</th><th>Attack Table</th><th>OB Mod</th><th>Crit</th><th>Fumble</th><th>Length</th></tr></thead>
