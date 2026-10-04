@@ -86,6 +86,31 @@
                         <input name="system.damageMod" type="text" value="{{system.damageMod}}" data-dtype="Number" style="flex: 1;"/>
                     </div>
                     <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">Unusual Style (§4.13)</label>
+                        <select name="system.styleDegree" style="flex: 1;">
+                            <option value=""{{#unless system.styleDegree}} selected{{/unless}}>Normal use</option>
+                            <option value="similar"{{#if (eq system.styleDegree "similar")}} selected{{/if}}>Relatively similar (-10 OB)</option>
+                            <option value="differs"{{#if (eq system.styleDegree "differs")}} selected{{/if}}>Differs, similar nature (-30 OB)</option>
+                            <option value="opposite"{{#if (eq system.styleDegree "opposite")}} selected{{/if}}>Directly opposite (-50 OB)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">Style Crit Type</label>
+                        <select name="system.styleCritType" style="flex: 1;">
+                            <option value=""{{#unless system.styleCritType}} selected{{/unless}}>Weapon's own</option>
+                            <option value="S"{{#if (eq system.styleCritType "S")}} selected{{/if}}>Slash</option>
+                            <option value="P"{{#if (eq system.styleCritType "P")}} selected{{/if}}>Puncture</option>
+                            <option value="K"{{#if (eq system.styleCritType "K")}} selected{{/if}}>Krush</option>
+                            <option value="G"{{#if (eq system.styleCritType "G")}} selected{{/if}}>Grapple</option>
+                            <option value="U"{{#if (eq system.styleCritType "U")}} selected{{/if}}>Unbalance</option>
+                            <option value="T"{{#if (eq system.styleCritType "T")}} selected{{/if}}>Tiny</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label style="min-width: 110px; flex: 0 0 auto;">Style Severity Shift</label>
+                        <input name="system.styleSeverityShift" type="text" value="{{system.styleSeverityShift}}" data-dtype="Number" placeholder="0" style="flex: 1;"/>
+                    </div>
+                    <div class="form-group">
                         <label style="min-width: 110px; flex: 0 0 auto;">{{localize "eqrmss.weapon.equipped"}}</label>
                         <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
                     </div>

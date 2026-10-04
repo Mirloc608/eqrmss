@@ -41,6 +41,7 @@ import { actorStance, stanceOBBonus, stanceRanks, defensiveCritCap, capCritSever
 import { restrictedAreaPenalty } from "./restricted-area.js";
 import { weaponUsePenalty } from "./weapon-use.js";
 import { actorAttackSpeed, speedScaledOb } from "./attack-speed.js";
+import { unusualStyleOf, shiftSeverity } from "./unusual-style.js";
 
 async function d100() {
     return (await new Roll("1d100").evaluate()).total;
@@ -622,7 +623,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const stanceBonus = stanceOBBonus(actor);
     const racPenalty = restrictedAreaPenalty(actor);
     const weaponUse = weaponUsePenalty(actor, weaponItem);
-    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob;
+    const unusualStyle = unusualStyleOf(weaponItem);
+    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod;
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -685,7 +687,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${attackSpeed.pct}%)` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
+        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${attackSpeed.pct}%)` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
         + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
@@ -761,13 +763,32 @@ export async function rollWeaponAttack(actor, weaponItem) {
         } else {
             // Single-letter codes carry severity only; the type is indicated
             // on the attack table itself (AL&CL 11.1).
-            // Sollerets (§5.8) do only puncture criticals.
-            const type = sys.sollerets ? "P" : (crit.type ?? lookup.impliedCritType ?? null);
-            critLine = type
-                ? await resolveOneCrit(type, crit.severity)
-                : `<strong>${esc(crit.raw)}</strong> — unusual result, GM adjudicates.`;
-            if (sys.sollerets && crit.type && crit.type !== "P") {
-                critLine += `<br><em>Sollerets (§5.8): critical delivered as Puncture.</em>`;
+            // Unusual style (§4.13): severity shift and crit-type
+            // conversion if set; sollerets force Puncture otherwise.
+            let severity = crit.severity;
+            let styleNote = "";
+            if (unusualStyle.severityShift) {
+                const shifted = shiftSeverity(severity, unusualStyle.severityShift);
+                if (shifted === null) {
+                    critLine = `<strong>${esc(lookup.critCode)}</strong> — unusual style (§4.13) reduces the critical below A: no critical.`;
+                    severity = null;
+                } else if (shifted !== severity) {
+                    styleNote = `<br><em>Unusual style (§4.13): critical severity ${severity} → ${shifted}.</em>`;
+                    severity = shifted;
+                }
+            }
+            if (severity !== null) {
+                const type = unusualStyle.critType ?? (sys.sollerets ? "P" : (crit.type ?? lookup.impliedCritType ?? null));
+                critLine = type
+                    ? await resolveOneCrit(type, severity)
+                    : `<strong>${esc(crit.raw)}</strong> — unusual result, GM adjudicates.`;
+                if (unusualStyle.critType && crit.type && unusualStyle.critType !== crit.type) {
+                    styleNote += `<br><em>Unusual style (§4.13): critical delivered as ${type}.</em>`;
+                }
+                if (sys.sollerets && crit.type && crit.type !== "P") {
+                    critLine += `<br><em>Sollerets (§5.8): critical delivered as Puncture.</em>`;
+                }
+                critLine += styleNote;
             }
         }
     } else if (crit?.unparseable) {
