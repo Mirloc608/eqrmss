@@ -21,9 +21,31 @@ import { isWorn } from "../utils/equipment/equipment-utils.js";
  */
 export async function applyWornRoundEffects(actor) {
     const worn = (actor?.items ?? []).filter(i => isWorn(i) && i.system?.wornEffect);
+    // Resolve effects up front so non-stacking families can be deduplicated
+    // before anything is applied.
+    const resolved = worn.map(item => ({ item, effect: getItemEffect(item.system.wornEffect) }));
+    // Group by family (effect.family ?? effect.id). Families flagged
+    // stacking: "highest" keep only the highest-ranked entry (ties: first
+    // found wins); every other family applies every worn instance as before.
+    const suppressed = new Set();
+    const groups = new Map();
+    for (const r of resolved) {
+        if (!r.effect || r.effect.kind !== "worn") continue;
+        const key = r.effect.family ?? r.effect.id;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(r);
+    }
+    for (const list of groups.values()) {
+        if (list[0].effect.stacking !== "highest" || list.length < 2) continue;
+        let best = list[0];
+        for (const r of list) {
+            if ((r.effect.rank ?? 0) > (best.effect.rank ?? 0)) best = r;
+        }
+        for (const r of list) if (r !== best) suppressed.add(r.item);
+    }
     const out = [];
-    for (const item of worn) {
-        const effect = getItemEffect(item.system.wornEffect);
+    for (const { item, effect } of resolved) {
+        if (suppressed.has(item)) continue;
         if (!effect) { out.push({ item: item.name, applied: false, reason: "unknown-effect" }); continue; }
         if (effect.kind !== "worn") { out.push({ item: item.name, applied: false, reason: "not-a-worn-effect" }); continue; }
         const results = await applyEffectPayload({

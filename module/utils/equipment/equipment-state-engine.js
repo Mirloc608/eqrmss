@@ -176,31 +176,44 @@ export class EquipmentStateEngine
         );
 
         // -----------------------------------------------
-        // Resources
+        // Resources — highest single bonus wins (user
+        // ruling 2026-10-05): HP, mana, and exhaustion
+        // (stamina) bonuses from items do NOT stack.
+        // Stat and resistance bonuses below still stack
+        // additively.
         // -----------------------------------------------
 
-        state.hp +=
+        state.hp =
 
-            Number(
-                data.hp
-                ??
-                0
+            Math.max(
+                state.hp,
+                Number(
+                    data.hp
+                    ??
+                    0
+                )
             );
 
-        state.mana +=
+        state.mana =
 
-            Number(
-                data.mana
-                ??
-                0
+            Math.max(
+                state.mana,
+                Number(
+                    data.mana
+                    ??
+                    0
+                )
             );
 
-        state.stamina +=
+        state.stamina =
 
-            Number(
-                data.stamina
-                ??
-                0
+            Math.max(
+                state.stamina,
+                Number(
+                    data.stamina
+                    ??
+                    0
+                )
             );
 
         // -----------------------------------------------

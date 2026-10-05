@@ -271,12 +271,34 @@ export class EQRMSSActorContextHelper {
         }
         // Worn item effects (e.g. Flowing Thought) — passive, tied to the
         // item; shown read-only, no dismiss button. Unequip to remove.
+        // Non-stacking families (stacking: "highest") display only the
+        // highest-ranked worn instance; ties go to the first found item.
+        const wornEntries = [];
         for (const item of this.actor?.items ?? []) {
             if (!isWorn(item)) continue;
             const effectId = item.system?.wornEffect;
             if (!effectId) continue;
             const effect = getItemEffect(effectId);
             if (!effect) continue;
+            wornEntries.push({ item, effect, effectId });
+        }
+        const suppressedWorn = new Set();
+        const wornGroups = new Map();
+        for (const e of wornEntries) {
+            const key = e.effect.family ?? e.effect.id;
+            if (!wornGroups.has(key)) wornGroups.set(key, []);
+            wornGroups.get(key).push(e);
+        }
+        for (const list of wornGroups.values()) {
+            if (list[0].effect.stacking !== "highest" || list.length < 2) continue;
+            let best = list[0];
+            for (const e of list) {
+                if ((e.effect.rank ?? 0) > (best.effect.rank ?? 0)) best = e;
+            }
+            for (const e of list) if (e !== best) suppressedWorn.add(e.item);
+        }
+        for (const { item, effect, effectId } of wornEntries) {
+            if (suppressedWorn.has(item)) continue;
             buffs.push({
                 id: `worn-${item.id}`,
                 name: `${effect.name ?? effectId} (${item.name})`,
