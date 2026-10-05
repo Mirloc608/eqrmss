@@ -614,6 +614,41 @@ export async function tickConditions(combat) {
             notes.push(`${esc(actor.name)} bleeds for ${per} (${cur + per} concussion hits).`);
         }
 
+        // Damage over time (Stage 4 base spells) — each DoT deals
+        // its per-round hits and counts down its own duration.
+        const dots = Array.isArray(st.dots) ? st.dots : [];
+        if (dots.length) {
+            const remainingDots = [];
+            for (const d of dots) {
+                const lo = Number(d.min) || 0;
+                const hi = Number(d.max) || lo;
+                const dmg = hi > lo ? lo + Math.floor(Math.random() * (hi - lo + 1)) : lo;
+                if (dmg > 0) {
+                    const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
+                    updates["system.hits.value"] = cur + dmg;
+                    notes.push(`${esc(actor.name)} takes ${dmg} from ${esc(d.name || "a spell")} (${cur + dmg} concussion hits).`);
+                }
+                const left = (Number(d.roundsLeft) || 1) - 1;
+                if (left > 0) remainingDots.push({ ...d, roundsLeft: left });
+                else notes.push(`${esc(d.name || "A spell")} ends on ${esc(actor.name)}.`);
+            }
+            updates["system.status.dots"] = remainingDots;
+        }
+
+        // Timed spell effects (Stage 4 controls/debuffs without an
+        // engine pool of their own) count down; untimed persist.
+        const spellEffects = Array.isArray(st.spellEffects) ? st.spellEffects : [];
+        if (spellEffects.length) {
+            const remainingFx = [];
+            for (const e of spellEffects) {
+                if (e.roundsLeft == null) { remainingFx.push(e); continue; }
+                const left = (Number(e.roundsLeft) || 0) - 1;
+                if (left > 0) remainingFx.push({ ...e, roundsLeft: left });
+                else notes.push(`${esc(e.label || "A spell effect")} ends on ${esc(actor.name)}.`);
+            }
+            updates["system.status.spellEffects"] = remainingFx;
+        }
+
         // Stun pool — total decreases by one; most severe type first.
         const pool = { stunned: 0, stunNoParry: 0, downOrOut: 0, ...(st.stun ?? {}) };
         if (stunTotal(pool) > 0) {

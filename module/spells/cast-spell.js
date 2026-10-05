@@ -16,11 +16,17 @@
 // (the book's "lose spell (but not pts.)" outcome). A passed
 // ESF roll is noted on the cast card. A bolt table "F" cell is
 // a natural failure, resolved inside the attack engine.
+//
+// Stage 4: hostile non-bolt spells (poison/disease damage,
+// DoTs, controls, debuffs, lifetaps) resolve as base spell
+// attacks — Base Attack Roll + Resistance Roll (module/spells/
+// base-spell.js), effects landing in the condition tick.
 // ============================================================
 
 import { combatCard } from "../combat/chat-card.js";
 import { classifySpell, directedSpellsOB } from "./spell-mapping.js";
 import { esfGate } from "./spell-failure.js";
+import { resolveBaseSpellAttack, applyBaseSpellEffect } from "./base-spell.js";
 import { rollWeaponAttack } from "../combat/combat-rolls.js";
 import { applyHealingSpell, checkHitThresholds } from "../combat/crit-conditions.js";
 
@@ -51,9 +57,21 @@ export async function castSpell(actor, spellItem, opts = {}) {
         return { ok: false, reason: "mana" };
     }
 
+    // Base spells are aimed at someone else: no target, no cast
+    // (checked before the ESF gate so a missing target never
+    // triggers a failure roll).
+    let baseTarget = null;
+    if (cls.kind === "base") {
+        baseTarget = targetedActor();
+        if (!baseTarget || baseTarget === actor) {
+            ui.notifications?.warn(`${actor.name} cannot cast ${name}: base spells need a target other than the caster.`);
+            return { ok: false, reason: "target" };
+        }
+    }
+
     // ---- ESF gate (before the mana is spent) ----
     const gate = await esfGate(actor, spellItem, {
-        attackSpell: cls.kind === "bolt",
+        attackSpell: cls.kind === "bolt" || cls.kind === "base",
         prepRoundsShort: opts.prepRoundsShort
     });
     if (gate.required && !gate.passed) {
@@ -127,6 +145,36 @@ export async function castSpell(actor, spellItem, opts = {}) {
                 ${healLine}${esfNote}<p><em>${manaNote.trim()}</em></p>`)
         });
         return { ok: true, kind: "heal", amount: cls.amount };
+    }
+
+    if (cls.kind === "base") {
+        await spendMana();
+        if (esfNote) {
+            await ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor }),
+                content: combatCard("Spellcasting", `
+                    <h2>${esc(actor.name)} casts ${esc(name)}</h2>
+                    ${esfNote}`)
+            });
+        }
+        const res = await resolveBaseSpellAttack(actor, spellItem, baseTarget, {
+            rangeFeet: opts.rangeFeet, cover: opts.cover, staticTarget: opts.staticTarget,
+            willing: opts.willing, rrMod: opts.rrMod, rollD100: opts.rollD100
+        });
+        if (res.failed) return { ok: true, kind: "base", failed: true };
+        let effectNote = "";
+        if (!res.resisted) {
+            effectNote = (baseTarget.isOwner || game.user?.isGM)
+                ? await applyBaseSpellEffect(actor, baseTarget, cls, spellItem)
+                : `<p><em>Effect not applied — you don't control ${esc(baseTarget.name)}.</em></p>`;
+        }
+        await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor }),
+            content: combatCard("Base Spell Attack", `
+                <h2>${esc(actor.name)} casts ${esc(name)} on ${esc(baseTarget.name)}</h2>
+                ${res.html}${effectNote}<p><em>${manaNote.trim()}</em></p>`)
+        });
+        return { ok: true, kind: "base", resisted: res.resisted };
     }
 
     // Announced cast (buff/utilities and later-stage tracks land

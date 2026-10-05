@@ -53,8 +53,10 @@ export function spellEffectsOf(spellItem) {
 /**
  * Classify a spell for cast resolution:
  * { kind: "bolt", element, attackTable, critType|null }
+ * { kind: "base", subtype, effect, element } — Stage 4: hostile
+ *   spells resolved by Base Spell Attack + Resistance Roll
  * { kind: "heal", amount }
- * { kind: "later", reason } — known-but-unbuilt track (Stage 4+)
+ * { kind: "later", reason } — known-but-unbuilt track (Stage 5+)
  * { kind: "none" } — no mechanical payload (announcement only)
  */
 export function classifySpell(spellItem) {
@@ -62,13 +64,22 @@ export function classifySpell(spellItem) {
     if (override?.kind === "bolt" && override.attackTable) {
         return { kind: "bolt", element: override.element ?? "", attackTable: override.attackTable, critType: override.critType ?? null };
     }
+    if (override?.kind === "base") {
+        return { kind: "base", subtype: override.subtype ?? "damage", effect: override, element: String(override.element ?? "").toLowerCase() };
+    }
     const effects = spellEffectsOf(spellItem);
     const dmg = effects.find(e => e?.type === "damage");
     if (dmg) {
         const element = String(dmg.element ?? "").toLowerCase();
         const bolt = BOLT_BY_ELEMENT[element];
         if (bolt) return { kind: "bolt", element, attackTable: bolt.attackTable, critType: bolt.critType ?? null };
-        return { kind: "later", reason: `${element || "untyped"} damage resolves on the base-spell/RR track (later stage)` };
+    }
+    // Base-spell track (Stage 4): the first hostile effect that
+    // is not a directed bolt — poison/disease damage, DoTs,
+    // controls, debuffs, lifetaps — resolves by BAR + RR.
+    const hostile = effects.find(e => e && ["damage", "dot", "control", "debuff", "lifetap"].includes(e.type));
+    if (hostile) {
+        return { kind: "base", subtype: hostile.type, effect: hostile, element: String(hostile.element ?? "").toLowerCase() };
     }
     const heal = effects.find(e => e?.type === "heal");
     if (heal) {
