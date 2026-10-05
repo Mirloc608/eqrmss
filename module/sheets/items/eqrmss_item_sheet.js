@@ -5,6 +5,8 @@
 
 const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
+import { getItemEffectsByKind } from "../../data/item-effects/item-effect-loader.js";
+
 export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
 
   static DEFAULT_OPTIONS = {
@@ -48,7 +50,9 @@ export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(Document
     const context = await super._prepareContext(options);
     const item = this.document;
     const enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(item.system.description ?? "", { async: true });
-    return { ...context, item, system: item.system, type: item.type, config: CONFIG.eqrmss ?? {}, owner: item.isOwner, editable: this.isEditable, isGM: game?.user?.isGM ?? false, enrichedDescription };
+    return { ...context, item, system: item.system, type: item.type, config: CONFIG.eqrmss ?? {}, owner: item.isOwner, editable: this.isEditable, isGM: game?.user?.isGM ?? false, enrichedDescription,
+      wornEffects: getItemEffectsByKind("worn"),
+      triggeredEffects: getItemEffectsByKind("triggered") };
   }
 
   async _onRender(context, options) {
