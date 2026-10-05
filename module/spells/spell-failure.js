@@ -72,6 +72,12 @@ export function freeHandEsf(realm) {
     return realm === "mentalism" ? 10 : 30;
 }
 
+// EQ hybrid classes (ruling 2026-10-05): casting with weapons in
+// hand is their core function — their spells are already the
+// weaker trade — so they ignore the free-hand ESF channel
+// entirely. (Bard is not an EQ hybrid class.)
+export const HYBRID_CASTERS = new Set(["paladin", "ranger", "shadowknight", "beastlord"]);
+
 export const ESF_NONSTANDARD_LIST = 20;
 
 // ------------------------------------------------------------
@@ -307,8 +313,10 @@ export function computeESF(actor, spellItem, opts = {}) {
         if (row) add(`helmet (${kind === "leatherMetal" ? "leather/metal" : kind})`, row[realm] ?? 0);
     }
 
-    // Free hand status.
-    if (handsOccupied(actor) >= 2) {
+    // Free hand status. EQ hybrids ignore this channel
+    // entirely (ruling 2026-10-05): weapons in hand are their
+    // core casting posture.
+    if (handsOccupied(actor) >= 2 && !HYBRID_CASTERS.has(casterClass)) {
         add("no free hand", freeHandEsf(realm));
     }
 
