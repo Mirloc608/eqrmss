@@ -18,7 +18,8 @@ from "./equipment-validator.js";
 
 import {
 
-    calculateItemWeight
+    calculateItemWeight,
+    isWorn
 
 }
 from "./equipment-utils.js";
@@ -57,7 +58,7 @@ export class EquipmentManager
         return actor.items.filter(
 
             item =>
-                item.system?.equipped === true
+                isWorn(item)
 
         );
 

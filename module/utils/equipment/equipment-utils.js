@@ -46,7 +46,7 @@ export function isWorn(item)
 
     const loc = item?.system?.location;
     if (typeof loc === "string" && loc.length) return loc === "equipped";
-    return item?.system?.equipped === true;
+    return item?.system?.equipped === true || item?.system?.worn === true;
 
 }
 
