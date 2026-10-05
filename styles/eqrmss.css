@@ -339,3 +339,236 @@
 .application.sheet.eqrmss.actor.player .tab[data-group="primary"].active::-webkit-scrollbar-thumb:hover {
   background: #6d4423;
 }
+
+/* ============================================================
+   Parchment chat cards (combat output). Same design language as
+   the player (.actor.player) theme and the NPC sheet: parchment
+   ground, double-ruled frame, small-caps serif banner. Wrapped
+   by combatCard() in module/combat/chat-card.js.
+   ============================================================ */
+.chat-message .eqrmss-card {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  color: #3a2a18;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,250,230,.85), rgba(255,250,230,0) 60%),
+    radial-gradient(ellipse 60% 40% at 85% 90%, rgba(160,120,60,.35), rgba(160,120,60,0) 70%),
+    linear-gradient(160deg, #efdfae 0%, #e3cc96 45%, #d3b77e 100%);
+  border: 3px double #5f4a2f;
+  box-shadow: inset 0 0 0 2px #f7f1de, inset 0 0 26px rgba(90,70,40,.4);
+  padding: 8px 10px;
+  margin: 2px 0;
+}
+.chat-message .eqrmss-card-eyebrow {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #7a5a30;
+  margin-bottom: 2px;
+}
+.chat-message .eqrmss-card-body h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #40280f;
+  text-shadow: 0 1px 0 rgba(255,248,225,.8);
+  border: none;
+  border-bottom: 2px solid rgba(95,74,47,.45);
+  margin: 0 0 6px;
+  padding: 0 2px 3px;
+  line-height: 1.15;
+}
+.chat-message .eqrmss-card-body p { margin: 3px 0; }
+.chat-message .eqrmss-card-body strong { color: #38260f; }
+.chat-message .eqrmss-card-body em { color: #5d4326; }
+.chat-message .eqrmss-card-body ul,
+.chat-message .eqrmss-card-body ol { margin: 3px 0 3px 18px; padding: 0; }
+
+/* ============================================================
+   ITEM SHEET PARCHMENT THEME (matches the player/NPC sheets)
+   Scoped to .item so actor sheets are untouched. Chrome only —
+   no data or bindings change.
+   ============================================================ */
+.application.sheet.eqrmss.item {
+  color: #3a2a18;
+}
+.application.sheet.eqrmss.item .window-content {
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,250,230,.7), rgba(255,250,230,0) 60%),
+    radial-gradient(ellipse 55% 35% at 90% 100%, rgba(160,120,60,.28), rgba(160,120,60,0) 70%),
+    linear-gradient(165deg, #e9d6a4 0%, #dec48f 50%, #cfb178 100%);
+}
+.application.sheet.eqrmss.item .sheet-header {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,250,230,.85), rgba(255,250,230,0) 60%),
+    linear-gradient(160deg, #efdfae 0%, #e3cc96 55%, #d3b77e 100%);
+  border-bottom: 3px double #5f4a2f;
+  box-shadow: inset 0 0 24px rgba(90,70,40,.35);
+  padding: 8px 12px;
+}
+.application.sheet.eqrmss.item .sheet-header img {
+  border: 3px solid #5f4a2f;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 3px #fbf6e6, 0 2px 6px rgba(40,25,10,.5);
+  background: radial-gradient(circle at 35% 30%, #f7efdb, #e2d3ab 55%, #bfa878 100%);
+}
+.application.sheet.eqrmss.item .sheet-header h1 input,
+.application.sheet.eqrmss.item .sheet-header input[name="name"] {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 26px;
+  color: #40280f;
+  text-shadow: 0 1px 0 rgba(255,248,225,.8);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(95,74,47,.45);
+}
+.application.sheet.eqrmss.item .sheet-header h1 input:focus,
+.application.sheet.eqrmss.item .sheet-header input[name="name"]:focus {
+  outline: none;
+  border-bottom-color: #8a3b1e;
+  box-shadow: none;
+}
+.application.sheet.eqrmss.item .sheet-tabs {
+  background: linear-gradient(180deg, #7d6540, #5d4827);
+  border-bottom: 3px double #3c2c14;
+  padding: 6px 12px 0;
+  gap: 4px;
+  box-shadow: 0 2px 5px rgba(40,25,10,.35);
+}
+.application.sheet.eqrmss.item .sheet-tabs .item {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  font-size: 0.95em;
+  color: #d9c08f;
+  padding: 5px 12px 7px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 7px 7px 0 0;
+  text-decoration: none;
+}
+.application.sheet.eqrmss.item .sheet-tabs .item:hover {
+  color: #fff3cf;
+}
+.application.sheet.eqrmss.item .sheet-tabs .item.active {
+  color: #3a2a18;
+  background: linear-gradient(180deg, #f7eed3, #ecd9ab);
+  border-color: #3c2c14;
+  border-bottom: 1px solid #ecd9ab;
+  font-weight: bold;
+  box-shadow: inset 0 0 8px rgba(95,74,47,.25);
+}
+.application.sheet.eqrmss.item fieldset {
+  background: rgba(255,250,232,.5);
+  border: 2px solid rgba(95,74,47,.6);
+  border-radius: 8px;
+  box-shadow: inset 0 0 12px rgba(95,74,47,.2);
+  color: #3a2a18;
+}
+.application.sheet.eqrmss.item fieldset legend {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 2px;
+  color: #4a3517;
+  padding: 0 6px;
+}
+.application.sheet.eqrmss.item .form-group label {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  color: #5f4a2f;
+}
+.application.sheet.eqrmss.item h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 2px;
+  color: #4a3517;
+  border-bottom: 2px solid rgba(95,74,47,.5);
+  padding-bottom: 3px;
+}
+.application.sheet.eqrmss.item h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 1.5px;
+  color: #5f4a2f;
+  border-bottom: 1px dashed rgba(95,74,47,.45);
+  padding-bottom: 2px;
+}
+.application.sheet.eqrmss.item table {
+  border-collapse: collapse;
+  width: 100%;
+  color: #3a2a18;
+  background: transparent;
+}
+.application.sheet.eqrmss.item table th {
+  background: linear-gradient(180deg, #6d5433, #4e3a20);
+  color: #f4e8c8;
+  font-family: Georgia, serif;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  font-weight: bold;
+  padding: 4px 6px;
+  border: 1px solid #3c2c14;
+  text-align: left;
+}
+.application.sheet.eqrmss.item table td {
+  padding: 3px 6px;
+  border-bottom: 1px dashed rgba(95,74,47,.4);
+}
+.application.sheet.eqrmss.item table tbody tr:hover td {
+  background: rgba(255,246,218,.55);
+}
+.application.sheet.eqrmss.item input[type="text"],
+.application.sheet.eqrmss.item input[type="number"],
+.application.sheet.eqrmss.item select,
+.application.sheet.eqrmss.item textarea {
+  background: rgba(255,252,240,.75);
+  border: 1px solid rgba(107,84,58,.65);
+  border-radius: 4px;
+  color: #3a2a18;
+}
+.application.sheet.eqrmss.item input:focus,
+.application.sheet.eqrmss.item select:focus,
+.application.sheet.eqrmss.item textarea:focus {
+  outline: none;
+  border-color: #8a3b1e;
+  box-shadow: 0 0 4px rgba(138,59,30,.4);
+}
+.application.sheet.eqrmss.item input[type="checkbox"] {
+  accent-color: #6d4423;
+}
+.application.sheet.eqrmss.item button {
+  background: linear-gradient(180deg, #f1e4bd, #d9c08f);
+  border: 1px solid #6b543a;
+  border-radius: 5px;
+  color: #3a2a18;
+  box-shadow: 0 1px 3px rgba(40,25,10,.3);
+  cursor: pointer;
+}
+.application.sheet.eqrmss.item button:hover {
+  background: linear-gradient(180deg, #fff3cf, #e8d09c);
+  color: #8a3b1e;
+}
+.application.sheet.eqrmss.item a {
+  color: #6d4423;
+}
+.application.sheet.eqrmss.item .sheet-content::-webkit-scrollbar-track,
+.application.sheet.eqrmss.item .sheet-body::-webkit-scrollbar-track {
+  background: #d9c08f;
+}
+.application.sheet.eqrmss.item .sheet-content::-webkit-scrollbar-thumb,
+.application.sheet.eqrmss.item .sheet-body::-webkit-scrollbar-thumb {
+  background: #8a6d45;
+  border: 2px solid #d9c08f;
+}
+.application.sheet.eqrmss.item .sheet-content::-webkit-scrollbar-thumb:hover,
+.application.sheet.eqrmss.item .sheet-body::-webkit-scrollbar-thumb:hover {
+  background: #6d4423;
+}

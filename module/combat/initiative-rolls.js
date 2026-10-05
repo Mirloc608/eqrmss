@@ -23,6 +23,7 @@
 // ============================================================
 
 import { computeInitiative } from "./initiative.js";
+import { combatCard } from "./chat-card.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 
 function esc(s) {
@@ -207,12 +208,12 @@ export async function rollInitiative(actor) {
 
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content: `
+        content: combatCard("Initiative", `
             <h2>${esc(actor.name)} — Initiative (RMSS §6.1)</h2>
             <p>${lines}<br><strong>Total: ${total}</strong> — highest acts first.</p>
             ${secondAttack != null ? `<p><strong>Second attack (two weapons): ${secondAttack}</strong> — resolved after all first attacks.</p>` : ""}
             ${notes.length ? `<p><em>${notes.map(esc).join("<br>")}</em></p>` : ""}
-            ${combatant ? `<p>Combat-tracker initiative set to ${total}.</p>` : `<p><em>No active combat — tracker not updated.</em></p>`}`
+            ${combatant ? `<p>Combat-tracker initiative set to ${total}.</p>` : `<p><em>No active combat — tracker not updated.</em></p>`}`)
     });
 
     // ---- Combat tracker (highest-first sort matches §6.1) ----

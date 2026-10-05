@@ -44,6 +44,7 @@ import { restrictedAreaPenalty } from "./restricted-area.js";
 import { weaponUsePenalty } from "./weapon-use.js";
 import { actorAttackSpeed, speedScaledOb } from "./attack-speed.js";
 import { unusualStyleOf, shiftSeverity } from "./unusual-style.js";
+import { combatCard } from "./chat-card.js";
 
 async function d100() {
     return (await new Roll("1d100").evaluate()).total;
@@ -432,8 +433,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
         const why = unconscious ? "unconscious" : isExhausted(actor) ? "exhausted" : STUN_LABEL[stunState.type];
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
-            content: `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>`
-                + `<p><em>${esc(actor.name)} is ${why} and cannot take offensive action.</em></p>`
+            content: combatCard("Combat", `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>`
+                + `<p><em>${esc(actor.name)} is ${why} and cannot take offensive action.</em></p>`)
         });
         return;
     }
@@ -453,8 +454,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
         if (parryWeaponId && attackWeaponId && parryWeaponId !== attackWeaponId) {
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor }),
-                content: `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>`
-                    + `<p><em>${esc(actor.name)} declared parry with ${esc(attackerStatus.parryWeaponName || "another weapon")} this round; attack with that weapon at its remaining OB instead.</em></p>`
+                content: combatCard("Combat", `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>`
+                    + `<p><em>${esc(actor.name)} declared parry with ${esc(attackerStatus.parryWeaponName || "another weapon")} this round; attack with that weapon at its remaining OB instead.</em></p>`)
             });
             return;
         }
@@ -657,12 +658,12 @@ export async function rollWeaponAttack(actor, weaponItem) {
         const fumble = lookupFumble(tables.fumble, fumbleCol, fr);
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
-            content: `
+            content: combatCard("Combat", `
                 <h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>
                 <p><strong>Attack roll:</strong> ${firstDie} — FUMBLE (range ${esc(sys.fumble_range)}${weaponUse.fumbleBonus ? ` +${weaponUse.fumbleBonus} weapon use` : ""})</p>
                 <p><strong>Fumble roll:</strong> ${fr} (${esc(fumbleCol)})</p>
                 <p>${fumble.error ? esc(fumble.error) : esc(fumble.text)}</p>
-                <p><em>No effect on ${esc(targetName)}.</em></p>${ammoNote}`
+                <p><em>No effect on ${esc(targetName)}.</em></p>${ammoNote}`)
         });
         return;
     }
@@ -696,10 +697,10 @@ export async function rollWeaponAttack(actor, weaponItem) {
     if (lookup.error && lookup.miss) {
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
-            content: `
+            content: combatCard("Combat", `
                 <h2>${esc(actor.name)} attacks ${esc(targetName)} with ${esc(weaponItem.name)}</h2>
                 <p>${arLine}</p>
-                <p><strong>Miss</strong> — ${esc(lookup.error)}</p>${ammoNote}`
+                <p><strong>Miss</strong> — ${esc(lookup.error)}</p>${ammoNote}`)
         });
         return;
     }
@@ -870,11 +871,11 @@ export async function rollWeaponAttack(actor, weaponItem) {
 
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content: `
+        content: combatCard("Combat", `
             <h2>${esc(actor.name)} attacks ${esc(targetName)} with ${esc(weaponItem.name)}</h2>
             <p>${arLine}</p>
             <p><strong>${esc(lookup.table)}</strong> vs AT ${at}: <strong>${totalDamage} hits</strong> (${dmgParts.map(esc).join(", ")})</p>
             <p>${critLine}</p>
-            ${appliedNote}${subdueNote}${condNote}${critCapNote}${procNote}${ammoNote}`
+            ${appliedNote}${subdueNote}${condNote}${critCapNote}${procNote}${ammoNote}`)
     });
 }

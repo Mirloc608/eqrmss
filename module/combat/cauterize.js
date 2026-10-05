@@ -25,6 +25,7 @@
 
 import { checkHitThresholds, applyCritConditions, adjudicateCritText } from "./crit-conditions.js";
 import { lookupCrit, critBonusHits } from "./attack-resolver.js";
+import { combatCard } from "./chat-card.js";
 
 function esc(s) {
     return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -152,7 +153,7 @@ export async function cauterizeWound(patient) {
     if (!difficulty) {
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor: patient }),
-            content: `<p><strong>${esc(patient.name)}</strong> bleeds ${bleed} per round — cauterizing that is an <strong>Impossible</strong> maneuver (§4.5). The bleeding must be reduced first.</p>`
+            content: combatCard("Cauterize", `<p><strong>${esc(patient.name)}</strong> bleeds ${bleed} per round — cauterizing that is an <strong>Impossible</strong> maneuver (§4.5). The bleeding must be reduced first.</p>`)
         });
         return;
     }
@@ -208,10 +209,10 @@ export async function cauterizeWound(patient) {
             : "The bleeding continues unchecked.";
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: patient }),
-        content: `
+        content: combatCard("Cauterize", `
             <h2>Cauterizing ${esc(patient.name)}'s wound (§4.5)</h2>
             <p><strong>Maneuver:</strong> ${esc(difficulty.name)} (${difficulty.mod}) · Roll ${roll.rolls.join(" + ")} ${modifier >= 0 ? "+" : "−"} ${Math.abs(modifier)} = ${total} — <strong>${tierLabel}</strong></p>
             <p><strong>Burn damage:</strong> ${hitRoll.total} hits (${outcome.hitsDice}). ${bleedLine}</p>
-            ${heatLine}`
+            ${heatLine}`)
     });
 }

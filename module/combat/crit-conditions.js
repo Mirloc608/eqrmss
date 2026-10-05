@@ -76,6 +76,7 @@
 import { WEAPON_TYPE_TO_SKILL_ID } from "./attack-resolver.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { roundExhaustionCost, exhaustionCurrent, exhaustionMaxFor } from "./subdue.js";
+import { combatCard } from "./chat-card.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -699,7 +700,7 @@ export async function tickConditions(combat) {
     }
     if (notes.length) {
         await ChatMessage.create({
-            content: `<p><em>Condition tick — round ${combat.round}.</em></p><p>${notes.join("<br>")}</p>`
+            content: combatCard("Conditions", `<p><em>Condition tick — round ${combat.round}.</em></p><p>${notes.join("<br>")}</p>`)
         });
     }
 }
@@ -787,7 +788,7 @@ export async function checkHitThresholds(actor) {
     }
 
     if (Object.keys(updates).length) await actor.update(updates);
-    if (notes.length) await ChatMessage.create({ content: `<p>${notes.join("<br>")}</p>` });
+    if (notes.length) await ChatMessage.create({ content: combatCard("Healing", `<p>${notes.join("<br>")}</p>`) });
 }
 
 // ------------------------------------------------------------
@@ -915,7 +916,7 @@ export async function declareParry(actor, weaponItem, allocation = null) {
     await actor.update(updates);
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content: `<p><em>${esc(actor.name)} parries with ${esc(weaponItem.name)} — allocates ${allocated} of ${maxOb} OB to DB${full ? " (full parry)" : `; ${remaining} OB remains for attack`}${designated ? ` against ${esc(designated.name)}` : ""}.</em></p>`
+        content: combatCard("Parry", `<p><em>${esc(actor.name)} parries with ${esc(weaponItem.name)} — allocates ${allocated} of ${maxOb} OB to DB${full ? " (full parry)" : `; ${remaining} OB remains for attack`}${designated ? ` against ${esc(designated.name)}` : ""}.</em></p>`)
     });
     if (!designated) {
         ui.notifications?.info(`${actor.name}: no foe designated — the parry will apply against the foe ${actor.name} attacks. Target that foe before declaring to cover their earlier attacks.`);
@@ -1043,7 +1044,7 @@ export async function declareMissileParry(actor, weaponItem, allocation = null) 
     });
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content: `<p><em>${esc(actor.name)} declares missile parry (${hasShield ? "shield" : "suitable terrain"}) — +${allocated} DB against the next missile attack (50% activity).</em></p>`
+        content: combatCard("Parry", `<p><em>${esc(actor.name)} declares missile parry (${hasShield ? "shield" : "suitable terrain"}) — +${allocated} DB against the next missile attack (50% activity).</em></p>`)
     });
 }
 
@@ -1069,7 +1070,7 @@ export async function applyHealingSpell(targetActor) {
     });
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: targetActor }),
-        content: `<p>${esc(targetActor.name)} receives healing magic — bleeding stops${hadTimer ? " and the death timer is stabilized" : ""}.</p>`
+        content: combatCard("Healing", `<p>${esc(targetActor.name)} receives healing magic — bleeding stops${hadTimer ? " and the death timer is stabilized" : ""}.</p>`)
     });
     // Hit restoration (when the spell subsystem lands) may drop the
     // actor back under a concussion-hit threshold — re-check.
@@ -1090,7 +1091,7 @@ export async function declareFirstAid(actor, targetActor) {
     }
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content: `<p><em>${esc(actor.name)} administers first aid to ${esc(targetActor?.name ?? "their patient")}. (First-aid mechanics pending — stub.)</em></p>`
+        content: combatCard("First Aid", `<p><em>${esc(actor.name)} administers first aid to ${esc(targetActor?.name ?? "their patient")}. (First-aid mechanics pending — stub.)</em></p>`)
     });
 }
 
@@ -1114,7 +1115,7 @@ export async function declareCloseQuarters(actor) {
         });
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
-            content: `<p><em>${esc(actor.name)} disengages from close quarters with ${esc(foe)}.</em></p>`
+            content: combatCard("Close Quarters", `<p><em>${esc(actor.name)} disengages from close quarters with ${esc(foe)}.</em></p>`)
         });
         return;
     }
@@ -1133,6 +1134,6 @@ export async function declareCloseQuarters(actor) {
     });
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content: `<p><em>${esc(actor.name)} closes to within a foot of ${esc(designated.name)} — Close Quarters Combat (§4.7): +30 OB against them, +30 to Strategic Targeting, and they cannot parry ${esc(actor.name)} (long weapons penalized, half Quickness DB). ${esc(actor.name)} gives up their own Quickness DB while engaged.</em></p>`
+        content: combatCard("Close Quarters", `<p><em>${esc(actor.name)} closes to within a foot of ${esc(designated.name)} — Close Quarters Combat (§4.7): +30 OB against them, +30 to Strategic Targeting, and they cannot parry ${esc(actor.name)} (long weapons penalized, half Quickness DB). ${esc(actor.name)} gives up their own Quickness DB while engaged.</em></p>`)
     });
 }
