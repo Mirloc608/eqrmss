@@ -19,6 +19,7 @@ import {
     WEAPON_TYPE_TO_FUMBLE_COLUMN,
     parseFumbleRange,
     inFumbleRange,
+    resolveFumbleCheck,
     lookupAttack,
     parseCritCode,
     lookupCrit,
@@ -647,12 +648,27 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const firstDie = ar.rolls[0];
 
     // ---- Fumble check on the UNMODIFIED roll (§6.2–6.3) ----
-    // Weapon Use (§4.8): an overweight weapon's fumble range grows.
-    const baseFumbleRange = parseFumbleRange(sys.fumble_range);
-    const fumbleRange = (baseFumbleRange && weaponUse.fumbleBonus)
-        ? { ...baseFumbleRange, high: Math.min(100, baseFumbleRange.high + weaponUse.fumbleBonus) }
-        : baseFumbleRange;
+    // Natural (animal) attacks never roll on the Weapon Fumble
+    // Table: an unmodified roll in range (book 01–02) is an
+    // automatic Failure — no effect on attacker or defender.
+    // Weapon Use (§4.8): an overweight weapon's fumble range grows
+    // (manufactured weapons only).
+    const attackTableMeta = (tables.weapons ?? []).find(t => t.name === tableName) ?? null;
+    const fumbleCheck = resolveFumbleCheck({ weaponType, itemFumbleRange: sys.fumble_range, table: attackTableMeta });
+    const fumbleRange = (fumbleCheck.range && fumbleCheck.kind === "fumble" && weaponUse.fumbleBonus)
+        ? { ...fumbleCheck.range, high: Math.min(100, fumbleCheck.range.high + weaponUse.fumbleBonus) }
+        : fumbleCheck.range;
     if (inFumbleRange(firstDie, fumbleRange)) {
+        if (fumbleCheck.kind === "failure") {
+            await ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor }),
+                content: combatCard("Combat", `
+                <h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>
+                <p><strong>Attack roll:</strong> ${firstDie} — automatic Failure (unmodified ${String(fumbleRange.low).padStart(2, "0")}-${String(fumbleRange.high).padStart(2, "0")}; natural attacks do not roll on the Fumble Table)</p>
+                <p><em>No effect on ${esc(targetName)}.</em></p>`)
+            });
+            return;
+        }
         const fr = await d100();
         const fumbleCol = WEAPON_TYPE_TO_FUMBLE_COLUMN[weaponType] ?? "hand1";
         const fumble = lookupFumble(tables.fumble, fumbleCol, fr);

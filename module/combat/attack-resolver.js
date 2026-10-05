@@ -59,6 +59,28 @@ export function inFumbleRange(roll, range) {
 }
 
 // ------------------------------------------------------------
+// Fumble check resolution (§6.2–6.3). Natural (animal) attacks
+// never roll on the Weapon Fumble Table: an unmodified roll in
+// the attack's fumble range is an automatic Failure with no
+// effect on attacker or defender (Claw Law tables print 01–02,
+// onFumble "F"). The item's baked range wins; the attack table's
+// transcribed fumble range is the fallback; 01–02 is the book
+// default. Manufactured weapons keep the classic §6.3 Fumble
+// Table roll.
+// Returns { kind: "fumble" | "failure" | null, range }.
+// ------------------------------------------------------------
+export function resolveFumbleCheck({ weaponType, itemFumbleRange, table } = {}) {
+    const item = parseFumbleRange(itemFumbleRange);
+    if (weaponType === "natural") {
+        const meta = (table && Number.isFinite(Number(table.fumbleLow)) && Number.isFinite(Number(table.fumbleHigh)))
+            ? { low: Number(table.fumbleLow), high: Number(table.fumbleHigh) }
+            : null;
+        return { kind: "failure", range: item ?? meta ?? { low: 1, high: 2 } };
+    }
+    return { kind: item ? "fumble" : null, range: item };
+}
+
+// ------------------------------------------------------------
 // High open-ended d100 (§6.2): 96–100 → roll again and add,
 // repeating while 96–100 comes up.
 // Returns { rolls: [...], total, exploded }
