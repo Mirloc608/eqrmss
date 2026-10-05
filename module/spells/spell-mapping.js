@@ -169,7 +169,6 @@ export function statBonusFor(actor, code) {
 
 /** Derived mana maximum for an actor (0 for non-casters). */
 export function manaMaxFor(actor) {
-    console.log("EQRMSS-DEBUG manaMaxFor called for", actor?.name, "classId:", actor?.system?.origin?.classId, "typeof CASTING_STAT_BY_CLASS:", typeof CASTING_STAT_BY_CLASS);
     const sys = actor?.system ?? {};
     // World actors carry their class at system.origin.classId
     // (the wizard finalizer's origin block); keep the legacy spots
@@ -181,7 +180,5 @@ export function manaMaxFor(actor) {
     // EQ scale (user ruling 2026-10-04): (level x bonus) +
     // (level x primary stat / 10), the stat being its temp value.
     const temp = Number(actor?.system?.stats?.[stat]?.temp) || 0;
-    const out = Math.max(0, level * statBonusFor(actor, stat) + level * Math.floor(temp / 10));
-    console.log("EQRMSS-DEBUG manaMaxFor returning", out, "for", actor?.name);
-    return out;
+    return Math.max(0, level * statBonusFor(actor, stat) + level * Math.floor(temp / 10));
 }
