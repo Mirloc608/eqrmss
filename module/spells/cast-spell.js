@@ -68,18 +68,25 @@ function blastRadiusFt(spellItem) {
  *  Center-based measurement; returns null when the canvas is
  *  unavailable so the caller keeps the targeted list. */
 function blastActors(aimActor, radiusFt) {
-    const placeables = globalThis.canvas?.tokens?.placeables ?? [];
-    const grid = globalThis.canvas?.grid;
-    if (!aimActor || !(radiusFt > 0) || !placeables.length || !grid?.measureDistance) return null;
-    const aimTok = placeables.find(t => t?.actor?.id === aimActor.id) ?? null;
-    if (!aimTok?.center) return null;
+    const canvas = globalThis.canvas;
+    const placeables = canvas?.tokens?.placeables ?? [];
+    if (!aimActor || !(radiusFt > 0) || !placeables.length) return null;
+    // Deterministic pixel math (no grid-API dependence): feet =
+    // pixel distance / px-per-square * feet-per-square.
+    const size = Number(canvas?.dimensions?.size) || 0;
+    const dist = Number(canvas?.dimensions?.distance) || 0;
+    if (!(size > 0) || !(dist > 0)) return null;
+    const aimTok = placeables.find(t => t?.actor?.id === aimActor.id)
+        ?? aimActor.getActiveTokens?.()?.[0] ?? null;
+    const from = aimTok?.center;
+    if (!from) return null;
     const seen = new Map();
     for (const t of placeables) {
         const a = t?.actor;
-        if (!a || seen.has(a.id)) continue;
-        let d = NaN;
-        try { d = grid.measureDistance(aimTok.center, t.center, { gridSpaces: false }); } catch { /* keep NaN */ }
-        if (Number.isFinite(d) && d <= radiusFt + 1e-6) seen.set(a.id, a);
+        const c = t?.center;
+        if (!a || !c || seen.has(a.id)) continue;
+        const feet = Math.hypot(c.x - from.x, c.y - from.y) / size * dist;
+        if (feet <= radiusFt + 1e-6) seen.set(a.id, a);
     }
     // The aim point is always inside its own blast.
     if (!seen.has(aimActor.id)) seen.set(aimActor.id, aimActor);
