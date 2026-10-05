@@ -30,8 +30,10 @@ export const WEAPON_TYPE_TO_FUMBLE_COLUMN = {
 
 // Crit-code type letter → critical-table code in crit-tables.json.
 // S/P/K occur on the Arms Law weapon tables; G/U/T occur on the
-// Claw Law animal attack tables (AL&CL 11.1: G = Grapple, U = Unbalance,
-// T = Tiny). Anything else is left for GM adjudication (never invented).
+// Claw Law animal attack tables (AL&CL 11.1: G = Grapple, U =
+// Unbalance, T = Tiny). Spell Law elemental types: H = Heat,
+// C = Cold, E = Electricity, I = Impact (bolt tables). Anything
+// else is left for GM adjudication (never invented).
 export const CRIT_TYPE_TO_TABLE_CODE = {
     "S": "S",   // Slash
     "P": "P",   // Puncture
@@ -39,7 +41,10 @@ export const CRIT_TYPE_TO_TABLE_CODE = {
     "G": "G",   // Grapple (Claw Law 11.3.1)
     "U": "Un",  // Unbalance (Claw Law 11.3.5)
     "T": "Ti",  // Tiny (Claw Law 11.3.4)
-    "H": "H"    // Heat (Spell Law, via crit_tables_v2 transcription)
+    "H": "H",   // Heat (Spell Law)
+    "C": "C",   // Cold (Spell Law)
+    "E": "E",   // Electricity (Spell Law)
+    "I": "I"    // Impact (Spell Law)
 };
 
 export const NET_ROLL_CAP = 150; // §6.4: net attack rolls above 150 are treated as 150
@@ -152,13 +157,23 @@ export function lookupAttack(weaponTables, tableName, netRoll, at, attackSize) {
 export function parseCritCode(code) {
     if (!code) return null;
     const c = String(code).trim().toUpperCase();
-    let m = c.match(/^([A-E])([SPKGUTH])$/);
+    let m = c.match(/^([A-E])([SPKGUTHCEI])$/);
     if (m) return { severity: m[1], type: m[2], raw: code };
-    m = c.match(/^F([SPKGUTH])?$/);
+    m = c.match(/^F([SPKGUTHCEI])?$/);
     if (m) return { severity: "F", type: m[1] ?? null, raw: code };
     m = c.match(/^([A-E])$/);
     if (m) return { severity: m[1], type: null, implied: true, raw: code };
     return { raw: code, unparseable: true };
+}
+
+// Compound crit codes (Spell Law bolt tables, e.g. Lightning Bolt
+// "EE,AI" delivers an Electricity E crit AND an Impact A crit):
+// parse each comma-separated part. Returns null when not compound
+// (no comma); otherwise the array of parsed parts (a part may be
+// unparseable, which the caller surfaces for GM adjudication).
+export function parseCritCodes(code) {
+    if (!code || !String(code).includes(",")) return null;
+    return String(code).split(",").map(p => parseCritCode(p.trim()));
 }
 
 // ------------------------------------------------------------

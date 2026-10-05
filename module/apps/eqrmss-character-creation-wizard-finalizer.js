@@ -503,7 +503,13 @@ export class EQRMSSCharacterCreationWizardFinalizer {
               castTime: (doc.system ?? {}).castTime ?? "",
               manaCost: (doc.system ?? {}).manaCost ?? "",
               target: (doc.system ?? {}).target ?? "",
-              resist: (doc.system ?? {}).resist ?? ""
+              resist: (doc.system ?? {}).resist ?? "",
+              // Mechanical payload for the spell-mapping layer (Stage 1):
+              // the catalog's typed effects (damage/dot/debuff/heal...)
+              // ride along so cast resolution can derive RMSS mechanics.
+              effects: Array.isArray((doc.system ?? {}).effects)
+                ? JSON.parse(JSON.stringify((doc.system ?? {}).effects))
+                : []
             }
           });
         }

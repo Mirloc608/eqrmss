@@ -22,6 +22,7 @@ import {
     resolveFumbleCheck,
     lookupAttack,
     parseCritCode,
+    parseCritCodes,
     lookupCrit,
     lookupFumble,
     parseArmorType,
@@ -765,6 +766,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const resolvedSeverities = []; // severities rolled (feeds 4.15.1)
     let condNote = ""; // critical-condition notes (stun pool, bleed, death timer, next swing, must parry)
     let crit = parseCritCode(lookup.critCode);
+    // Compound crit codes (Spell Law bolt tables: "EE,AI").
+    const critCompound = parseCritCodes(lookup.critCode);
     // Defensive Stance (§4.16): the attacker's crit severity is
     // capped by their Defensive Stance ranks (0 ranks = no crit).
     let critCapNote = "";
@@ -832,13 +835,15 @@ export async function rollWeaponAttack(actor, weaponItem) {
         }
         return line;
     }
-    if (structuralMode === "random" && crit && !crit.unparseable) {
+    if (structuralMode === "random" && ((crit && !crit.unparseable) || critCompound)) {
         // 4.15.2 (book-literal): in random-location mode the Strategic
         // Targeting table replaces the directional crit tables. Armor
         // wear (5.9) still accrues from the crit as usual.
         const sevList = [];
         const wearNotes = [];
-        if (crit.severity === "F") {
+        if (critCompound) {
+            for (const p of critCompound) if (p && !p.unparseable && p.severity !== "F") sevList.push(p.severity);
+        } else if (crit.severity === "F") {
             const rule = lookup.fSeverityRule;
             if (Array.isArray(rule) && rule.length) sevList.push(...rule.map(r => r.severity));
             else critLine = `<strong>${esc(crit.raw)}</strong> — F-severity: no table rule transcribed, GM adjudicates.`;
@@ -869,6 +874,32 @@ export async function rollWeaponAttack(actor, weaponItem) {
             parts.push(await resolveOneStructuralCrit(sev));
         }
         if (sevList.length) critLine = [...parts, ...wearNotes].join("<br>");
+    } else if (critCompound) {
+        // Compound crit codes (Spell Law bolt tables, e.g. "EE,AI"):
+        // each part resolves as its own critical of the stated type
+        // and severity. Weapon-style conversions don't apply to
+        // spells; the Defensive Stance severity cap still does.
+        const parts = [];
+        for (const part of critCompound) {
+            if (!part || part.unparseable || !part.type || part.severity === "F") {
+                parts.push(`<strong>${esc(part?.raw ?? lookup.critCode)}</strong> — unusual result, GM adjudicates.`);
+                continue;
+            }
+            let sev = part.severity;
+            if (actorStance(actor) === "defensive") {
+                const capped = capCritSeverity(sev, defensiveCritCap(stanceRanks(actor, "defensive")));
+                if (capped === null) {
+                    parts.push(`<em>Defensive Stance: no critical may be delivered (0 ranks).</em>`);
+                    continue;
+                }
+                if (capped !== sev) {
+                    critCapNote = `<p><em>Defensive Stance caps the critical at ${capped} (rolled ${sev}).</em></p>`;
+                    sev = capped;
+                }
+            }
+            parts.push(await resolveOneCrit(part.type, sev));
+        }
+        critLine = parts.join("<br>");
     } else if (crit && !crit.unparseable) {
         if (crit.severity === "F") {
             // Claw Law F-severity (AL&CL 11.1): two critical strikes, rolled

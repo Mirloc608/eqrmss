@@ -264,6 +264,8 @@ function evalCritCondition(rawPhrase, actor) {
     else if (phrase === "facial armor") has = head.some(coversFace);
     else if (phrase === "leg armor") has = worn.some(i => i.type === "armor"
         && (i.system?.armorLocation === "legs" || i.system?.slot === "legs"));
+    else if (phrase === "chest armor") has = worn.some(i => i.type === "armor"
+        && (i.system?.armorLocation === "chest" || i.system?.slot === "chest"));
     else if (phrase === "neck armor") has = head.some(p => p.system?.dfNeckOnly === true
         || ["gorget", "aventail"].includes(p.system?.presetId ?? "")
         || /gorget|aventail/i.test(p.name ?? ""));
@@ -293,7 +295,7 @@ function parseIfClause(sentence) {
         return null;
     }
     // Comma-less form: "If foe has no helm he is dead."
-    m = s.match(/^if\s+(?:foe\s+|he\s+)?has\s+(no\s+)?(shield|full helm|facial armor|leg armor|neck armor|metal chest armor|an?\s+helm|helm)\s+(.+)$/i);
+    m = s.match(/^if\s+(?:foe\s+|he\s+)?has\s+(no\s+)?(shield|full helm|facial armor|leg armor|chest armor|neck armor|metal chest armor|an?\s+helm|helm)\s+(.+)$/i);
     if (m) return { phrase: `${m[1] ?? ""}${m[2]}`, rest: m[3] };
     return null;
 }
