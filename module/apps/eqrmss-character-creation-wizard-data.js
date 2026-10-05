@@ -53,6 +53,18 @@ function coerceToArray(obj) {
         });
 }
 
+/**
+ * Playable character races are the records loaded from
+ * module/data/races/. Creature records merged into the shared
+ * registry by the race loader always carry creatureType; the 16
+ * PC race records do not. Do NOT simplify this to
+ * creatureType === "sentient": NPC sentient creatures must also
+ * be excluded from character creation.
+ */
+function isPlayableCharacterRace(race) {
+  return !race?.creatureType;
+}
+
 function filterByExpansionGate(items, gateName) {
     const list = coerceToArray(items);
     const manager = getExpansionManager();
@@ -114,7 +126,7 @@ export class EQRMSSCharacterCreationData {
     // game.eqrmss dictionaries (populated by initializeDataLoaders at ready).
     this.races = this.#normalizeRaces(
       this.#resolveList(CONFIG.EQRMSS.races, game?.eqrmss?.races)
-    );
+    ).filter(isPlayableCharacterRace);
 
         this.classes = await this.#normalizeClasses(
       this.#resolveList(CONFIG.EQRMSS.classes, game?.eqrmss?.classes)
