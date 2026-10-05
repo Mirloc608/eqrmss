@@ -416,33 +416,54 @@ export class EQRMSSActor extends Actor
             return;
         }
 
-        this.system.derived.hp +=
+        // Track previously applied bonuses to avoid double-counting on
+        // re-prepare. We store the deltas in derived (which resets each
+        // prepare) and apply net changes to the system pools.
+        const prev = this.system.derived._equipBonus ?? { hp: 0, mana: 0, stats: {} };
+        const curr = {
+            hp: Number(equipment.hp ?? 0),
+            mana: Number(equipment.mana ?? 0),
+            stats: equipment.stats ?? {}
+        };
 
-            equipment.hp
-            ??
-            0;
+        // HP: adjust system.hits.max by the delta
+        const hpDelta = curr.hp - (prev.hp ?? 0);
+        if (hpDelta !== 0 && this.system.hits) {
+            this.system.hits.max = (Number(this.system.hits.max) || 0) + hpDelta;
+        }
 
-        this.system.derived.mana +=
+        // Mana: adjust attributes.mana.max by the delta
+        const manaDelta = curr.mana - (prev.mana ?? 0);
+        if (manaDelta !== 0 && this.system.attributes?.mana) {
+            this.system.attributes.mana.max = (Number(this.system.attributes.mana.max) || 0) + manaDelta;
+        }
 
-            equipment.mana
-            ??
-            0;
-
-        this.system.derived.stats =
-
-            foundry.utils.mergeObject(
-
-                this.system.derived.stats,
-
-                equipment.stats
-                ??
-                {},
-
-                {
-                    inplace:false
+        // Stats: adjust system.stats.{code} by per-stat deltas
+        if (this.system.stats) {
+            const allKeys = new Set([...Object.keys(prev.stats ?? {}), ...Object.keys(curr.stats ?? {})]);
+            for (const key of allKeys) {
+                const oldVal = Number(prev.stats?.[key] ?? 0);
+                const newVal = Number(curr.stats?.[key] ?? 0);
+                const delta = newVal - oldVal;
+                if (delta !== 0) {
+                    const statObj = this.system.stats[key];
+                    if (statObj && typeof statObj === "object") {
+                        // RMSS stats are objects with temp/value; adjust the temp
+                        if ("temp" in statObj) statObj.temp = (Number(statObj.temp) || 0) + delta;
+                        else if ("value" in statObj) statObj.value = (Number(statObj.value) || 0) + delta;
+                    } else {
+                        this.system.stats[key] = (Number(statObj) || 0) + delta;
+                    }
                 }
+            }
+        }
 
-            );
+        // Remember what we applied for next prepare
+        this.system.derived._equipBonus = curr;
+
+        // Keep the old derived fields for backward compat
+        this.system.derived.hp = (this.system.derived.hp ?? 0) + curr.hp;
+        this.system.derived.mana = (this.system.derived.mana ?? 0) + curr.mana;
 
     }
 
