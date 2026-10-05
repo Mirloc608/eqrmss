@@ -144,10 +144,13 @@ export function parseStun(text) {
         if (/(?:unable to|not able to|cannot|can not|can't)\s+parry/i.test(m[0])) continue; // duration belongs to the no-parry clause
         out.stunned += Number(m[1]);
     }
-    // Numberless "stunned next round" (= 1). The numbered branches above
-    // consume digits, so these cannot double-count them.
-    const bareRe = /stun(?:ned|s)?(?:\s+foe)?\s+next\s+round(?!\s*\d)/gi;
-    while (bareRe.exec(rest)) out.stunned += 1;
+    // "stunned next round" (= 1) and its phrasing variants in the
+    // tables: "stunned during/for/in the next round", "stunned next
+    // rnd", "stunned next 2 rounds" (numbered). "next" blocks the
+    // numbered stRe above, so these cannot double-count it;
+    // numberless = 1 round.
+    const nextRe = new RegExp(`stun(?:ned|s)?(?:\\s+foe)?\\s+(?:during\\s+|in\\s+|for\\s+)?(?:the\\s+)?next\\s+(?:(\\d+)\\s+)?(${ROUNDS_RE})`, "gi");
+    while ((m = nextRe.exec(rest))) out.stunned += m[1] ? Number(m[1]) : 1;
     // Spell Law shorthand (Heat and other Spell Law crit tables):
     // "N*" = stunned N rounds, "N@" = cannot parry N rounds,
     // "N*@" = stunned and cannot parry for N rounds (the stun-total /
