@@ -36,7 +36,7 @@ import {
     parseArmorType, lookupCrit, critBonusHits
 } from "../combat/attack-resolver.js";
 import {
-    adjudicateCritText, applyCritConditions, checkHitThresholds
+    adjudicateCritText, applyCritConditions, checkHitThresholds, critDisplayText
 } from "../combat/crit-conditions.js";
 import { resolveSpellFailure } from "./spell-failure.js";
 import { SEMI_CASTERS, d100 } from "./base-spell.js";
@@ -131,7 +131,7 @@ async function rollCrit(caster, target, critTables, critType, severity, rollD100
     }
     const condNote = await applyCritConditions(target, caster, adjudicated.text);
     return {
-        html: `<p><em>${esc(res.table)} ${esc(severity)} (${cr}): ${esc(adjudicated.text)}.${bonusNote}${note}${condNote ? ` ${condNote}` : ""}</em></p>`
+        html: `<p><em>${esc(res.table)} ${esc(severity)} (${cr}): ${esc(critDisplayText(adjudicated.text))}${bonusNote}${note}${condNote ? ` ${condNote}` : ""}</em></p>`
     };
 }
 

@@ -32,6 +32,7 @@ import {
     applyCritConditions,
     adjudicateCritText,
     checkHitThresholds,
+    critDisplayText,
     consumeNextSwingBonus,
     computeWeaponOB,
     activeStun,
@@ -822,7 +823,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         }
         // ---- Critical conditions (stun pool, bleed, death timer, next swing, must parry) ----
         condNote += await applyCritConditions(targetActor, actor, adjudicated.text);
-        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critResult.text)}${adjudicated.note ? `<br><em>Conditional crit: ${esc(adjudicated.note)} — matching branch applied.</em>` : ""}${wearNote}`;
+        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critDisplayText(critResult.text))}${adjudicated.note ? `<br><em>Conditional crit: ${esc(adjudicated.note)} — matching branch applied.</em>` : ""}${wearNote}`;
     }
     // Resolve one Strategic Targeting critical (4.15): structural
     // points land on the hit location; rider text (stun, bleed,

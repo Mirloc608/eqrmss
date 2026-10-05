@@ -341,6 +341,19 @@ export function adjudicateCritText(critText, targetActor) {
     return { text: sentences.join(" "), note };
 }
 
+// Crit result text for display: the trailing machine code
+// ("+9H,1*@..", "9*,6!,(-80)") is stripped — every element
+// already gets its own human-readable note downstream — and
+// terminal punctuation is normalized. Parsing still sees the
+// full text, so this is display-only.
+export function critDisplayText(text) {
+    const tok = String.raw`(?:[+-]?\d+H|@|\d+\s?\*\@?|\d+\s?@|\d+\s?\*|\d+\s?!|\([+-]?\d+\))`;
+    const re = new RegExp(`[\\s.,]*${tok}(?:\\s*,\\s*${tok})*\\.*\\s*$`);
+    let out = String(text ?? "").replace(re, "").trim();
+    if (!out) return String(text ?? "");
+    return /[.!?]$/.test(out) ? out : out + ".";
+}
+
 // "Add +10 to your next swing." -> bonus.
 // Spell Law shorthand: "(+N)" is a bonus on the next swing.
 export function parseNextSwing(text) {
