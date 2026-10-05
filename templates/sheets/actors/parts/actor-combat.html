@@ -57,6 +57,71 @@
   </div>
 
   <div class="panel">
+    <h4>Readied Weapons</h4>
+    <table class="rmss-table">
+      <thead><tr><th></th><th>Name</th><th>Attack Table</th><th>OB Mod</th><th>Crit</th><th>Fumble</th><th>Length</th></tr></thead>
+      <tbody>
+        {{#each readiedWeapons}}
+          <tr data-item-id="{{this._id}}">
+            <td><button class="attack-roll" data-item-id="{{this._id}}" title="Roll attack vs targeted token (RMSS §6.2)">Attack</button> <button class="parry-declare" data-item-id="{{this._id}}" title="Declare Parry with this weapon — allocate OB to DB (Arms Law §4.3)">Parry</button> <button class="missile-parry-declare" data-item-id="{{this._id}}" title="Declare Missile Parry — shield or terrain, 50% activity, vs one missile attack (Arms Law §4.3)">Msl Parry</button></td>
+            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+            <td>{{this.system.attackTable}}</td>
+            <td>{{this.system.obMod}}</td>
+            <td>{{this.system.criticalType}}</td>
+            <td>{{this.system.fumble_range}}</td>
+            <td>{{this.system.length}}</td>
+          </tr>
+        {{else}}
+          <tr><td colspan="7"><em>No weapons readied — set a weapon's Location to Equipped on the Equipment tab.</em></td></tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h4>Spells</h4>
+    <table class="rmss-table">
+      <thead><tr><th></th><th>Name</th><th>Spell List</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
+      <tbody>
+        {{#each items.spells}}
+          <tr data-item-id="{{this._id}}">
+            <td><button class="cast-spell" data-item-id="{{this._id}}" title="Cast spell (EQ mana cost; RMSS resolution)">Cast</button></td>
+            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+            <td>{{this.system.spell_list}}</td>
+            <td>{{this.system.level}}</td>
+            <td>{{this.system.type}}</td>
+            <td>{{this.system.range}}</td>
+            <td>{{this.system.duration}}</td>
+          </tr>
+        {{else}}
+          <tr><td colspan="7"><em>No spells known.</em></td></tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  {{#if items.songs}}
+  <div class="panel">
+    <h4>Songs</h4>
+    <table class="rmss-table">
+      <thead><tr><th>Name</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
+      <tbody>
+        {{#each items.songs}}
+          <tr data-item-id="{{this._id}}">
+            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+            <td>{{this.system.level}}</td>
+            <td>{{this.system.type}}</td>
+            <td>{{this.system.range}}</td>
+            <td>{{this.system.duration}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{/if}}
+</div>
+
+  <div class="panel">
     <h4>Shield Formation (Arms Companion §5.6)</h4>
     <p class="hint">An adjacent shield-bearing ally on each flank adds DB by their shield type. Maximum: one ally per side.</p>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
@@ -187,67 +252,3 @@
       </tbody>
     </table>
   </div>
-
-  <div class="panel">
-    <h4>Readied Weapons</h4>
-    <table class="rmss-table">
-      <thead><tr><th></th><th>Name</th><th>Attack Table</th><th>OB Mod</th><th>Crit</th><th>Fumble</th><th>Length</th></tr></thead>
-      <tbody>
-        {{#each readiedWeapons}}
-          <tr data-item-id="{{this._id}}">
-            <td><button class="attack-roll" data-item-id="{{this._id}}" title="Roll attack vs targeted token (RMSS §6.2)">Attack</button> <button class="parry-declare" data-item-id="{{this._id}}" title="Declare Parry with this weapon — allocate OB to DB (Arms Law §4.3)">Parry</button> <button class="missile-parry-declare" data-item-id="{{this._id}}" title="Declare Missile Parry — shield or terrain, 50% activity, vs one missile attack (Arms Law §4.3)">Msl Parry</button></td>
-            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
-            <td>{{this.system.attackTable}}</td>
-            <td>{{this.system.obMod}}</td>
-            <td>{{this.system.criticalType}}</td>
-            <td>{{this.system.fumble_range}}</td>
-            <td>{{this.system.length}}</td>
-          </tr>
-        {{else}}
-          <tr><td colspan="7"><em>No weapons readied — set a weapon's Location to Equipped on the Equipment tab.</em></td></tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
-
-  <div class="panel">
-    <h4>Spells</h4>
-    <table class="rmss-table">
-      <thead><tr><th>Name</th><th>Spell List</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
-      <tbody>
-        {{#each items.spells}}
-          <tr data-item-id="{{this._id}}">
-            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
-            <td>{{this.system.spell_list}}</td>
-            <td>{{this.system.level}}</td>
-            <td>{{this.system.type}}</td>
-            <td>{{this.system.range}}</td>
-            <td>{{this.system.duration}}</td>
-          </tr>
-        {{else}}
-          <tr><td colspan="6"><em>No spells known.</em></td></tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
-
-  {{#if items.songs}}
-  <div class="panel">
-    <h4>Songs</h4>
-    <table class="rmss-table">
-      <thead><tr><th>Name</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
-      <tbody>
-        {{#each items.songs}}
-          <tr data-item-id="{{this._id}}">
-            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
-            <td>{{this.system.level}}</td>
-            <td>{{this.system.type}}</td>
-            <td>{{this.system.range}}</td>
-            <td>{{this.system.duration}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
-  {{/if}}
-</div>
