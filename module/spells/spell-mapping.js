@@ -120,6 +120,11 @@ export function manaMaxFor(actor) {
     const classId = String(sys.origin?.classId ?? sys.fixed_info?.classId ?? sys.classId ?? "").toLowerCase();
     const stat = CASTING_STAT_BY_CLASS[classId];
     if (!stat) return 0;
-    const level = Math.max(1, Number(actor?.system?.character?.level) || 1);
-    return Math.max(0, level * statBonusFor(actor, stat));
+    // The sheet's Level Up writes system.attributes.level.value;
+    // system.character.level is a legacy field that never advances.
+    const level = Math.max(1, Number(sys.attributes?.level?.value ?? sys.character?.level) || 1);
+    // EQ scale (user ruling 2026-10-04): (level x bonus) +
+    // (level x primary stat / 10), the stat being its temp value.
+    const temp = Number(actor?.system?.stats?.[stat]?.temp) || 0;
+    return Math.max(0, level * statBonusFor(actor, stat) + level * Math.floor(temp / 10));
 }
