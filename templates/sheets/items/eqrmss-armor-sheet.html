@@ -67,44 +67,55 @@
           <p class="hint">Changing any of these recomposes the armor below (name and stats). Quality, enhancement, and thickness add DB, not AT (Arms Companion §5.1/§5.7/§6.23).</p>
         </fieldset>
       {{/if}}
-        <table>
+        <table class="stat-grid">
           <tr>
             <th>{{localize "eqrmss.item.equipped"}}</th>
+            <td>
+              <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
+            </td>
             <th>{{localize "eqrmss.armor.weight"}}</th>
-            <th>{{localize "eqrmss.armor.cost"}}</th>
-            <th>{{localize "eqrmss.armor.prod_time"}}</th>
-            <th>{{localize "eqrmss.armor.at"}}</th>
-            <th>DB Bonus</th>
-            <th>Maneuver Penalty</th>
-            <th>Qk Mod (§5.1)</th>
-            <th>Msl Mod (§5.1)</th>
+            <td>
+              <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"/>
+            </td>
           </tr>
-          <td>
-            <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
-          </td>
-          <td>
-            <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"/>
-          </td>
-          <td>
-            <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
-          </td>
-          <td> <input name="system.prod_time" type="text" value="{{system.prod_time}}" data-dtype="String"/>
-          </td>
-          <td>
-            <input name="system.at" type="text" value="{{system.at}}" data-dtype="Number"/>
-          </td>
-          <td>
-            <input name="system.dbBonus" type="text" value="{{system.dbBonus}}" data-dtype="Number"/>
-          </td>
-          <td>
-            <input name="system.maneuverPenalty" type="text" value="{{system.maneuverPenalty}}" data-dtype="Number"/>
-          </td>
-          <td>
-            <input name="system.quicknessPenalty" type="text" value="{{system.quicknessPenalty}}" data-dtype="Number"/>
-          </td>
-          <td>
-            <input name="system.missilePenalty" type="text" value="{{system.missilePenalty}}" data-dtype="Number"/>
-          </td>
+          <tr>
+            <th>{{localize "eqrmss.armor.cost"}}</th>
+            <td>
+              <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
+            </td>
+            <th>{{localize "eqrmss.armor.prod_time"}}</th>
+            <td>
+              <input name="system.prod_time" type="text" value="{{system.prod_time}}" data-dtype="String"/>
+            </td>
+          </tr>
+          <tr>
+            <th>{{localize "eqrmss.armor.at"}}</th>
+            <td>
+              <input name="system.at" type="text" value="{{system.at}}" data-dtype="Number"/>
+            </td>
+            <th>DB Bonus</th>
+            <td>
+              <input name="system.dbBonus" type="text" value="{{system.dbBonus}}" data-dtype="Number"/>
+            </td>
+          </tr>
+          <tr>
+            <th>Maneuver Penalty</th>
+            <td>
+              <input name="system.maneuverPenalty" type="text" value="{{system.maneuverPenalty}}" data-dtype="Number"/>
+            </td>
+            <th>Qk Mod (§5.1)</th>
+            <td>
+              <input name="system.quicknessPenalty" type="text" value="{{system.quicknessPenalty}}" data-dtype="Number"/>
+            </td>
+          </tr>
+          <tr>
+            <th>Msl Mod (§5.1)</th>
+            <td>
+              <input name="system.missilePenalty" type="text" value="{{system.missilePenalty}}" data-dtype="Number"/>
+            </td>
+            <th></th>
+            <td></td>
+          </tr>
         </table>
         <div class="form-group" style="margin: 8px 0;">
           <label style="min-width: 110px; flex: 0 0 auto;">Notes</label>

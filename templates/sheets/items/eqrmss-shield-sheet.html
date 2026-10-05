@@ -32,33 +32,37 @@
         <p class="hint">Changing any of these recomposes the shield below (name and stats).</p>
       </fieldset>
       {{/if}}
-      <table>
+      <table class="stat-grid">
         <tr>
           <th>{{localize "eqrmss.item.equipped"}}</th>
+          <td>
+            <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
+          </td>
           <th>Weight</th>
-          <th>Cost</th>
-          <th>Prod. Time</th>
-          <th>Melee DB</th>
-          <th>Missile DB</th>
+          <td>
+            <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"/>
+          </td>
         </tr>
-        <td>
-          <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
-        </td>
-        <td>
-          <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"/>
-        </td>
-        <td>
-          <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
-        </td>
-        <td>
-          <input name="system.prod_time" type="text" value="{{system.prod_time}}" data-dtype="String"/>
-        </td>
-        <td>
-          <input name="system.meleeDB" type="text" value="{{system.meleeDB}}" data-dtype="Number"/>
-        </td>
-        <td>
-          <input name="system.missileDB" type="text" value="{{system.missileDB}}" data-dtype="Number"/>
-        </td>
+        <tr>
+          <th>Cost</th>
+          <td>
+            <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
+          </td>
+          <th>Prod. Time</th>
+          <td>
+            <input name="system.prod_time" type="text" value="{{system.prod_time}}" data-dtype="String"/>
+          </td>
+        </tr>
+        <tr>
+          <th>Melee DB</th>
+          <td>
+            <input name="system.meleeDB" type="text" value="{{system.meleeDB}}" data-dtype="Number"/>
+          </td>
+          <th>Missile DB</th>
+          <td>
+            <input name="system.missileDB" type="text" value="{{system.missileDB}}" data-dtype="Number"/>
+          </td>
+        </tr>
       </table>
       <div class="form-group" style="margin: 8px 0;">
         <label style="min-width: 110px; flex: 0 0 auto;">Notes</label>

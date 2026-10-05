@@ -572,3 +572,17 @@
 .application.sheet.eqrmss.item .sheet-body::-webkit-scrollbar-thumb:hover {
   background: #6d4423;
 }
+
+/* Item sheet stat grids: label/value pairs, two per row, so wide
+   stat blocks (armor, shield) never run off the sheet. */
+.application.sheet.eqrmss.item table.stat-grid th {
+  width: 24%;
+  white-space: normal;
+}
+.application.sheet.eqrmss.item table.stat-grid td {
+  width: 26%;
+}
+.application.sheet.eqrmss.item table.stat-grid td input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+}
