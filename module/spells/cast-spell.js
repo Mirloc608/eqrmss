@@ -21,12 +21,21 @@
 // DoTs, controls, debuffs, lifetaps) resolve as base spell
 // attacks — Base Attack Roll + Resistance Roll (module/spells/
 // base-spell.js), effects landing in the condition tick.
+//
+// Stage 5: area-target elemental spells resolve on the ball
+// attack tables with ONE shared Elemental Attack Roll per the
+// user's ruling (module/spells/ball-spell.js); area base
+// spells make one shared BAR cross-indexed per target.
 // ============================================================
 
 import { combatCard } from "../combat/chat-card.js";
 import { classifySpell, directedSpellsOB } from "./spell-mapping.js";
-import { esfGate } from "./spell-failure.js";
-import { resolveBaseSpellAttack, applyBaseSpellEffect } from "./base-spell.js";
+import { esfGate, resolveSpellFailure } from "./spell-failure.js";
+import {
+    resolveBaseSpellAttack, applyBaseSpellEffect,
+    d100, barLevelBonus, rangeModFor
+} from "./base-spell.js";
+import { resolveBallCast } from "./ball-spell.js";
 import { rollWeaponAttack } from "../combat/combat-rolls.js";
 import { applyHealingSpell, checkHitThresholds } from "../combat/crit-conditions.js";
 
@@ -37,6 +46,14 @@ const esc = (s) => globalThis.foundry?.utils?.escapeHTML
 function targetedActor() {
     const t = [...(globalThis.game?.user?.targets ?? [])][0];
     return t?.actor ?? null;
+}
+
+/** Every currently-targeted actor (ball spells and area base
+ *  spells resolve against all of them). */
+function targetedActors() {
+    return [...(globalThis.game?.user?.targets ?? [])]
+        .map(t => t?.actor)
+        .filter(a => a && a !== undefined);
 }
 
 /**
@@ -57,21 +74,30 @@ export async function castSpell(actor, spellItem, opts = {}) {
         return { ok: false, reason: "mana" };
     }
 
-    // Base spells are aimed at someone else: no target, no cast
-    // (checked before the ESF gate so a missing target never
-    // triggers a failure roll).
-    let baseTarget = null;
+    // Targets are required before anything else for base and
+    // ball spells (checked before the ESF gate so a missing
+    // target never triggers a failure roll). Area base spells
+    // and balls resolve against every targeted token.
+    let baseTargets = [];
     if (cls.kind === "base") {
-        baseTarget = targetedActor();
-        if (!baseTarget || baseTarget === actor) {
+        baseTargets = targetedActors().filter(t => t !== actor);
+        if (!baseTargets.length) {
             ui.notifications?.warn(`${actor.name} cannot cast ${name}: base spells need a target other than the caster.`);
+            return { ok: false, reason: "target" };
+        }
+    }
+    let ballTargets = [];
+    if (cls.kind === "ball") {
+        ballTargets = targetedActors();
+        if (!ballTargets.length) {
+            ui.notifications?.warn(`${actor.name} cannot cast ${name}: ball spells need at least one targeted token.`);
             return { ok: false, reason: "target" };
         }
     }
 
     // ---- ESF gate (before the mana is spent) ----
     const gate = await esfGate(actor, spellItem, {
-        attackSpell: cls.kind === "bolt" || cls.kind === "base",
+        attackSpell: cls.kind === "bolt" || cls.kind === "base" || cls.kind === "ball",
         prepRoundsShort: opts.prepRoundsShort
     });
     if (gate.required && !gate.passed) {
@@ -157,24 +183,81 @@ export async function castSpell(actor, spellItem, opts = {}) {
                     ${esfNote}`)
             });
         }
-        const res = await resolveBaseSpellAttack(actor, spellItem, baseTarget, {
-            rangeFeet: opts.rangeFeet, cover: opts.cover, staticTarget: opts.staticTarget,
-            willing: opts.willing, rrMod: opts.rrMod, rollD100: opts.rollD100
-        });
-        if (res.failed) return { ok: true, kind: "base", failed: true };
-        let effectNote = "";
-        if (!res.resisted) {
-            effectNote = (baseTarget.isOwner || game.user?.isGM)
-                ? await applyBaseSpellEffect(actor, baseTarget, cls, spellItem)
-                : `<p><em>Effect not applied — you don't control ${esc(baseTarget.name)}.</em></p>`;
+        // Area base spells make ONE Base Attack Roll, cross-
+        // indexed per target; single-target base spells roll
+        // inside resolveBaseSpellAttack as before.
+        let sharedBar = null;
+        if (baseTargets.length > 1) {
+            const natural = await d100(opts.rollD100);
+            if (natural <= 2) {
+                await resolveSpellFailure(actor, spellItem, {
+                    section: "attack", esfTotal: 0, rollD100: opts.rollD100,
+                    headerHtml: `<p><strong>Base attack roll ${natural}</strong> — automatic spell failure (Spell Law 8.3).</p>`
+                });
+                return { ok: true, kind: "base", failed: true };
+            }
+            const coverMod = opts.cover === "full" ? -20 : opts.cover === "partial" ? -10 : 0;
+            sharedBar = {
+                natural,
+                modified: natural + barLevelBonus(actor) + rangeModFor(opts.rangeFeet)
+                    + coverMod + (opts.staticTarget ? 10 : 0)
+            };
+        }
+        let body = "";
+        const applied = [];
+        for (const baseTarget of baseTargets) {
+            const res = await resolveBaseSpellAttack(actor, spellItem, baseTarget, {
+                rangeFeet: opts.rangeFeet, cover: opts.cover, staticTarget: opts.staticTarget,
+                willing: opts.willing, rrMod: opts.rrMod, rollD100: opts.rollD100, sharedBar
+            });
+            if (res.failed) return { ok: true, kind: "base", failed: true };
+            let effectNote = "";
+            if (!res.resisted) {
+                effectNote = (baseTarget.isOwner || game.user?.isGM)
+                    ? await applyBaseSpellEffect(actor, baseTarget, cls, spellItem)
+                    : `<p><em>Effect not applied — you don't control ${esc(baseTarget.name)}.</em></p>`;
+            }
+            body += `<h3>${esc(baseTarget.name)}</h3>${res.html}${effectNote}`;
+            applied.push({ target: baseTarget.name, resisted: res.resisted });
         }
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
             content: combatCard("Base Spell Attack", `
-                <h2>${esc(actor.name)} casts ${esc(name)} on ${esc(baseTarget.name)}</h2>
-                ${res.html}${effectNote}<p><em>${manaNote.trim()}</em></p>`)
+                <h2>${esc(actor.name)} casts ${esc(name)}${baseTargets.length > 1 ? ` (${baseTargets.length} targets)` : ` on ${esc(baseTargets[0].name)}`}</h2>
+                ${body}<p><em>${manaNote.trim()}</em></p>`)
         });
-        return { ok: true, kind: "base", resisted: res.resisted };
+        return { ok: true, kind: "base", targets: applied, resisted: baseTargets.length === 1 ? applied[0].resisted : undefined };
+    }
+
+    if (cls.kind === "ball") {
+        await spendMana();
+        if (esfNote) {
+            await ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor }),
+                content: combatCard("Spellcasting", `
+                    <h2>${esc(actor.name)} casts ${esc(name)}</h2>
+                    ${esfNote}`)
+            });
+        }
+        const res = await resolveBallCast(actor, spellItem, ballTargets, {
+            table: cls.attackTable, critType: cls.critType
+        }, {
+            rangeFeet: opts.rangeFeet, centerId: opts.centerId ?? ballTargets[0]?.id ?? null,
+            coverMod: opts.cover === "full" ? -60 : opts.cover === "partial" ? -30 : 0,
+            rollD100: opts.rollD100
+        });
+        if (res.failed && res.error) {
+            ui.notifications?.warn(res.error);
+            return { ok: false, reason: "table" };
+        }
+        if (res.failed) return { ok: true, kind: "ball", failed: true };
+        await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor }),
+            content: combatCard("Ball Spell", `
+                <h2>${esc(actor.name)} casts ${esc(name)} (${ballTargets.length} in the blast)</h2>
+                ${res.html}<p><em>${manaNote.trim()}</em></p>`)
+        });
+        return { ok: true, kind: "ball" };
     }
 
     // Announced cast (buff/utilities and later-stage tracks land

@@ -448,6 +448,10 @@ export class EQRMSSNPCFinalizer {
               range: targ.range ?? "",
               targets: targ.targets ?? "",
               stacking: stack.group ?? "",
+              // Stage 5: keep the structured effects payload (mirrors the
+              // Stage 1 spell fix) so activation and the round tick can
+              // resolve song effects mechanically.
+              effects: JSON.parse(JSON.stringify(doc.effects ?? [])),
               effectsSummary: (doc.effects ?? []).map(songEffectSummary)
             }
           });

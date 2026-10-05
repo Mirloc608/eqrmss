@@ -36,6 +36,21 @@ export const BOLT_BY_ELEMENT = {
     arcane: { attackTable: "Fire Bolt", critType: "M" }
 };
 
+// Area (ball) spells (Stage 5; Spell Law 15.4). The book prints
+// only Fire Ball and Cold Ball tables; magic/arcane and
+// electric balls reuse the Fire Ball hits with the Stage 2
+// crit-type substitution. Poison/disease AoE stays on the
+// base-spell/RR track.
+export const BALL_BY_ELEMENT = {
+    fire: { table: "Fire Ball", critType: "H" },
+    cold: { table: "Cold Ball", critType: "C" },
+    magic: { table: "Fire Ball", critType: "M" },
+    arcane: { table: "Fire Ball", critType: "M" },
+    electric: { table: "Fire Ball", critType: "E" },
+    electricity: { table: "Fire Ball", critType: "E" },
+    lightning: { table: "Fire Ball", critType: "E" }
+};
+
 function catalogEffectsFor(spellItem) {
     const byClass = globalThis.game?.eqrmss?.spells ?? {};
     const list = byClass[String(spellItem?.system?.spell_list ?? "").toLowerCase()] ?? [];
@@ -53,6 +68,8 @@ export function spellEffectsOf(spellItem) {
 /**
  * Classify a spell for cast resolution:
  * { kind: "bolt", element, attackTable, critType|null }
+ * { kind: "ball", element, attackTable, critType|null } — Stage 5:
+ *   area-target elemental damage on the ball tables (shared EAR)
  * { kind: "base", subtype, effect, element } — Stage 4: hostile
  *   spells resolved by Base Spell Attack + Resistance Roll
  * { kind: "heal", amount }
@@ -67,10 +84,20 @@ export function classifySpell(spellItem) {
     if (override?.kind === "base") {
         return { kind: "base", subtype: override.subtype ?? "damage", effect: override, element: String(override.element ?? "").toLowerCase() };
     }
+    if (override?.kind === "ball" && override.attackTable) {
+        return { kind: "ball", element: String(override.element ?? "").toLowerCase(), attackTable: override.attackTable, critType: override.critType ?? null };
+    }
     const effects = spellEffectsOf(spellItem);
+    const target = String(spellItem?.system?.target ?? "").toLowerCase();
     const dmg = effects.find(e => e?.type === "damage");
     if (dmg) {
         const element = String(dmg.element ?? "").toLowerCase();
+        // Stage 5: area-target elemental damage resolves on the
+        // ball tables (one shared EAR), not the bolt track.
+        const ball = BALL_BY_ELEMENT[element];
+        if (target === "area" && ball) {
+            return { kind: "ball", element, attackTable: ball.table, critType: ball.critType ?? null };
+        }
         const bolt = BOLT_BY_ELEMENT[element];
         if (bolt) return { kind: "bolt", element, attackTable: bolt.attackTable, critType: bolt.critType ?? null };
     }

@@ -566,6 +566,15 @@ function deathCleanup() {
 // Round tick (GM only, on combat round change)
 // ------------------------------------------------------------
 
+/** A maintained song entry stays refreshed while the bard's
+ *  song item is still toggled active. */
+function songStillActive(entry) {
+    const bard = globalThis.game?.actors?.get?.(entry?.casterId);
+    const items = bard?.items?.get ? [bard.items.get(entry.songId)] : [...(bard?.items?.contents ?? bard?.items ?? [])];
+    const song = bard?.items?.get ? items[0] : items.find(i => (i.id ?? i._id) === entry.songId);
+    return !!song?.system?.active;
+}
+
 export async function tickConditions(combat) {
     if (!combat) return;
     const notes = [];
@@ -614,8 +623,10 @@ export async function tickConditions(combat) {
             notes.push(`${esc(actor.name)} bleeds for ${per} (${cur + per} concussion hits).`);
         }
 
-        // Damage over time (Stage 4 base spells) — each DoT deals
-        // its per-round hits and counts down its own duration.
+        // Damage over time (Stage 4 base spells; Stage 5 song
+        // damage) — each DoT deals its per-round hits and counts
+        // down its own duration. A maintained song DoT refreshes
+        // its duration while the bard's song is still active.
         const dots = Array.isArray(st.dots) ? st.dots : [];
         if (dots.length) {
             const remainingDots = [];
@@ -628,7 +639,8 @@ export async function tickConditions(combat) {
                     updates["system.hits.value"] = cur + dmg;
                     notes.push(`${esc(actor.name)} takes ${dmg} from ${esc(d.name || "a spell")} (${cur + dmg} concussion hits).`);
                 }
-                const left = (Number(d.roundsLeft) || 1) - 1;
+                const maintained = d.source === "song" && d.maintained && songStillActive(d);
+                const left = maintained ? (Number(d.roundsLeft) || 1) : (Number(d.roundsLeft) || 1) - 1;
                 if (left > 0) remainingDots.push({ ...d, roundsLeft: left });
                 else notes.push(`${esc(d.name || "A spell")} ends on ${esc(actor.name)}.`);
             }
@@ -637,11 +649,22 @@ export async function tickConditions(combat) {
 
         // Timed spell effects (Stage 4 controls/debuffs without an
         // engine pool of their own) count down; untimed persist.
+        // Stage 5: maintained song entries refresh while the
+        // bard's song is active; song regen entries heal each
+        // round the song is active.
         const spellEffects = Array.isArray(st.spellEffects) ? st.spellEffects : [];
         if (spellEffects.length) {
             const remainingFx = [];
             for (const e of spellEffects) {
+                const songAlive = e.source === "song" && e.maintained && songStillActive(e);
+                if (e.kind === "regen" && Number(e.amount) > 0 && songAlive) {
+                    const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
+                    const healed = Math.max(0, cur - Number(e.amount));
+                    updates["system.hits.value"] = healed;
+                    notes.push(`${esc(actor.name)} regenerates ${Number(e.amount)} from ${esc(e.song || "a song")} (${cur} → ${healed} concussion hits).`);
+                }
                 if (e.roundsLeft == null) { remainingFx.push(e); continue; }
+                if (songAlive) { remainingFx.push(e); continue; }
                 const left = (Number(e.roundsLeft) || 0) - 1;
                 if (left > 0) remainingFx.push({ ...e, roundsLeft: left });
                 else notes.push(`${esc(e.label || "A spell effect")} ends on ${esc(actor.name)}.`);

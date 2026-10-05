@@ -10,6 +10,7 @@
 
 import { EQRMSSSongUnlockEngine } from "../../../utils/progression/song-unlock-engine.js";
 import { visibleSongs } from "../../../utils/item-visibility.js";
+import { toggleSong } from "../../../spells/songs.js";
 
 export class EQRMSSActorBardHelper {
   constructor(sheet) {
@@ -26,7 +27,9 @@ export class EQRMSSActorBardHelper {
     const html = this.sheet.element;
     if (!html) return;
 
-    // Toggle active
+    // Toggle active (Stage 5: activation applies the song's
+    // effects to the currently-targeted actors; the round tick
+    // pulses them while the song stays active).
     html.querySelectorAll("[data-action='bard-song-toggle']").forEach(btn => {
       btn.addEventListener("click", async () => {
         const entry = btn.closest(".eq-song-entry");
@@ -34,8 +37,8 @@ export class EQRMSSActorBardHelper {
         const song = this.sheet.actor.items.get(id);
         if (!song) return;
 
-        const active = !!song.system?.active;
-        await song.update({ "system.active": !active });
+        const targets = [...(game.user?.targets ?? [])].map(t => t.actor).filter(Boolean);
+        await toggleSong(this.sheet.actor, song, targets);
         this.sheet.render();
       });
     });

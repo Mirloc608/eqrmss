@@ -131,7 +131,7 @@ export const RESIST_STAT_BY_REALM = { essence: "EM", channeling: "IN", mentalism
 // Semi-spell users get no caster-level bonus to the BAR (15.2:
 // "Pure and hybrid spell users only"; EQ has no hybrid tier, so
 // the melee-caster classes read as semi). Flagged house mapping.
-const SEMI_CASTERS = new Set(["paladin", "ranger", "shadowknight", "beastlord", "bard"]);
+export const SEMI_CASTERS = new Set(["paladin", "ranger", "shadowknight", "beastlord", "bard"]);
 
 function classIdOf(actor) {
     const sys = actor?.system ?? {};
@@ -189,7 +189,7 @@ export function bsaColumnFor(realm, target) {
 // Rolls
 // ------------------------------------------------------------
 
-async function d100(rollD100) {
+export async function d100(rollD100) {
     if (rollD100) return Number(await rollD100()) || 0;
     return (await new Roll("1d100").evaluate()).total;
 }
@@ -219,7 +219,11 @@ export async function rrOpenEnded(rollD100) {
  * { failed:false, resisted, html, ... } and the CALLER posts
  * the cast card (so effect notes ride the same card).
  * opts: { rangeFeet, cover: "partial"|"full", staticTarget,
- *         willing, rrMod, rollD100 }
+ *         willing, rrMod, rollD100, sharedBar } — sharedBar
+ *         { natural, modified } injects one BAR rolled by the
+ *         caller (Stage 5: area base spells make one Base Attack
+ *         Roll, cross-indexed per target); the natural-failure
+ *         roll is then the caller's to post.
  */
 export async function resolveBaseSpellAttack(caster, spellItem, target, opts = {}) {
     const realm = casterRealm(caster, spellItem);
@@ -227,8 +231,8 @@ export async function resolveBaseSpellAttack(caster, spellItem, target, opts = {
     const name = spellItem?.name ?? "spell";
 
     // ---- Base Attack Roll (flat d100, not open-ended) ----
-    const natural = await d100(opts.rollD100);
-    if (natural <= 2) {
+    const natural = opts.sharedBar ? opts.sharedBar.natural : await d100(opts.rollD100);
+    if (natural <= 2 && !opts.sharedBar) {
         await resolveSpellFailure(caster, spellItem, {
             section: "attack", esfTotal: 0, rollD100: opts.rollD100,
             headerHtml: `<p><strong>Base attack roll ${natural}</strong> — automatic spell failure (Spell Law 8.3).</p>`
@@ -239,7 +243,8 @@ export async function resolveBaseSpellAttack(caster, spellItem, target, opts = {
     const rangeMod = rangeModFor(opts.rangeFeet);
     const coverMod = opts.cover === "full" ? -20 : opts.cover === "partial" ? -10 : 0;
     const staticMod = opts.staticTarget ? 10 : 0;
-    const modified = natural + lvlBonus + rangeMod + coverMod + staticMod;
+    const modified = opts.sharedBar ? opts.sharedBar.modified
+        : natural + lvlBonus + rangeMod + coverMod + staticMod;
     const cell = lookupBAR(natural, modified, column);
     const barLine = `<strong>Base attack roll:</strong> ${natural}`
         + `${lvlBonus ? ` + ${lvlBonus} level` : ""}${rangeMod ? ` ${rangeMod > 0 ? "+" : ""}${rangeMod} range` : ""}`
