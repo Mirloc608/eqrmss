@@ -173,7 +173,11 @@ export async function resolveBallCast(caster, spellItem, targets, ball, opts = {
     }
     const lvlBonus = earLevelBonus(caster);
     const rangeMod = earRangeMod(opts.rangeFeet);
-    const modified = total + lvlBonus;
+    // Book EAR (printed on the ball tables): roll + level + range
+    // + cover + helmet - Qu (moving targets only) + 20 center.
+    // Helmet buckets: none (+5), normal (+0), full (-5). Shield
+    // mods do not apply to area spells (Spell Law 15.4).
+    const modified = total + lvlBonus + rangeMod;
     const rangeLine = `${lvlBonus ? ` + ${lvlBonus} level` : ""}${rangeMod ? ` ${rangeMod > 0 ? "+" : ""}${rangeMod} range` : ""}`;
     const earLine = `<strong>Elemental Attack Roll:</strong> ${dice.join(", ")} = ${total}${rangeLine} = <strong>${modified}</strong>`
         + ` → ${esc(ball.table)} (shared; user ruling 2026-10-05)`;
@@ -189,15 +193,17 @@ export async function resolveBallCast(caster, spellItem, targets, ball, opts = {
     for (const target of targets) {
         const tName = esc(target?.name ?? "target");
         // The table's helmet bucket defaults to "none worn" (+5);
-        // full helmets read -5. Moving targets add their Qu bonus.
+        // full helmets read -5. The book subtracts the target's Qu
+        // bonus for moving targets (stationary targets use cover
+        // instead); no movement state is plumbed yet, so quBonus
+        // arrives 0 until a caller supplies it.
         const helmetMod = Number(helmetMods[target?.id] ?? 5);
         const isCenter = centerId != null && target?.id === centerId;
-        const eff = modified - rangeMod - coverMod - helmetMod + quBonus + (isCenter ? 20 : 0);
+        const eff = modified + coverMod + helmetMod - quBonus + (isCenter ? 20 : 0);
         const parts = [];
-        if (rangeMod) parts.push(`${rangeMod > 0 ? "+" : ""}${rangeMod} range`);
         if (coverMod) parts.push(`${coverMod} cover`);
         if (helmetMod) parts.push(`${helmetMod > 0 ? "+" : ""}${helmetMod} helmet`);
-        if (quBonus) parts.push(`+${quBonus} Qu`);
+        if (quBonus) parts.push(`-${quBonus} Qu`);
         if (isCenter) parts.push("+20 center");
         const adjNote = parts.length ? ` (${parts.join(", ")})` : "";
 

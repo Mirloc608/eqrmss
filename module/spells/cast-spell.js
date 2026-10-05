@@ -56,6 +56,36 @@ function targetedActors() {
         .filter(a => a && a !== undefined);
 }
 
+/** Blast radius in feet, from the spell's damage effect. */
+function blastRadiusFt(spellItem) {
+    const effs = spellItem?.system?.effects ?? [];
+    const dmg = effs.find(e => e?.type === "damage" && Number(e?.radius) > 0);
+    return Number(dmg?.radius) || 0;
+}
+
+/** Everyone caught in a ball blast: every token within the
+ *  spell's radius of the aim point — not just targeted tokens.
+ *  Center-based measurement; returns null when the canvas is
+ *  unavailable so the caller keeps the targeted list. */
+function blastActors(aimActor, radiusFt) {
+    const placeables = globalThis.canvas?.tokens?.placeables ?? [];
+    const grid = globalThis.canvas?.grid;
+    if (!aimActor || !(radiusFt > 0) || !placeables.length || !grid?.measureDistance) return null;
+    const aimTok = placeables.find(t => t?.actor?.id === aimActor.id) ?? null;
+    if (!aimTok?.center) return null;
+    const seen = new Map();
+    for (const t of placeables) {
+        const a = t?.actor;
+        if (!a || seen.has(a.id)) continue;
+        let d = NaN;
+        try { d = grid.measureDistance(aimTok.center, t.center, { gridSpaces: false }); } catch { /* keep NaN */ }
+        if (Number.isFinite(d) && d <= radiusFt + 1e-6) seen.set(a.id, a);
+    }
+    // The aim point is always inside its own blast.
+    if (!seen.has(aimActor.id)) seen.set(aimActor.id, aimActor);
+    return seen.size ? [...seen.values()] : null;
+}
+
 /**
  * Cast a spell from an actor's spell item. Returns a small
  * summary object; posts chat for every outcome.
@@ -239,10 +269,16 @@ export async function castSpell(actor, spellItem, opts = {}) {
                     ${esfNote}`)
             });
         }
-        const res = await resolveBallCast(actor, spellItem, ballTargets, {
+        const aimActor = ballTargets[0] ?? null;
+        const centerId = opts.centerId ?? aimActor?.id ?? null;
+        // The blast catches everyone in the radius, not just the
+        // targeted tokens: sweep the canvas around the aim point.
+        const swept = blastActors(aimActor, blastRadiusFt(spellItem));
+        const blastList = swept ?? ballTargets;
+        const res = await resolveBallCast(actor, spellItem, blastList, {
             table: cls.attackTable, critType: cls.critType
         }, {
-            rangeFeet: opts.rangeFeet, centerId: opts.centerId ?? ballTargets[0]?.id ?? null,
+            rangeFeet: opts.rangeFeet, centerId,
             coverMod: opts.cover === "full" ? -60 : opts.cover === "partial" ? -30 : 0,
             rollD100: opts.rollD100
         });
@@ -254,7 +290,7 @@ export async function castSpell(actor, spellItem, opts = {}) {
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
             content: combatCard("Ball Spell", `
-                <h2>${esc(actor.name)} casts ${esc(name)} (${ballTargets.length} in the blast)</h2>
+                <h2>${esc(actor.name)} casts ${esc(name)} (${blastList.length} in the blast)</h2>
                 ${res.html}<p><em>${manaNote.trim()}</em></p>`)
         });
         return { ok: true, kind: "ball" };
