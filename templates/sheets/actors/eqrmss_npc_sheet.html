@@ -245,6 +245,50 @@
         <label>Swing Space</label>
         <select class="rac-select" data-key="weaponSpace"><option value=""{{#unless system.status.restrictedArea.weaponSpace}} selected{{/unless}}>Swing: full</option><option value="s75"{{#if (eq system.status.restrictedArea.weaponSpace "s75")}} selected{{/if}}>75% space (-10)</option><option value="s50"{{#if (eq system.status.restrictedArea.weaponSpace "s50")}} selected{{/if}}>50% space (-20)</option><option value="s25"{{#if (eq system.status.restrictedArea.weaponSpace "s25")}} selected{{/if}}>25% space (-45)</option><option value="s0"{{#if (eq system.status.restrictedArea.weaponSpace "s0")}} selected{{/if}}>No space (-80)</option></select>
       </div>
+      <div class="npc-ctl">
+        <label>Charge (§4.2)</label>
+        <select class="sit-select" data-key="charge"><option value=""{{#unless system.status.situational.charge}} selected{{/unless}}>No charge</option><option value="1.5"{{#if (eq system.status.situational.charge "1.5")}} selected{{/if}}>1.5x (+5)</option><option value="2"{{#if (eq system.status.situational.charge "2")}} selected{{/if}}>2.0x (+10)</option><option value="3"{{#if (eq system.status.situational.charge "3")}} selected{{/if}}>3.0x (+20)</option><option value="4"{{#if (eq system.status.situational.charge "4")}} selected{{/if}}>4.0x (+30)</option><option value="5"{{#if (eq system.status.situational.charge "5")}} selected{{/if}}>5.0x (+45)</option></select>
+      </div>
+      <div class="npc-ctl">
+        <label>Ground</label>
+        <select class="sit-select" data-key="ground"><option value=""{{#unless system.status.situational.ground}} selected{{/unless}}>Even</option><option value="higher"{{#if (eq system.status.situational.ground "higher")}} selected{{/if}}>Higher (+5)</option><option value="lower"{{#if (eq system.status.situational.ground "lower")}} selected{{/if}}>Lower (-5)</option></select>
+      </div>
+      <div class="npc-ctl">
+        <label>Weapon Length</label>
+        <select class="sit-select" data-key="weaponLength"><option value=""{{#unless system.status.situational.weaponLength}} selected{{/unless}}>Even</option><option value="longer"{{#if (eq system.status.situational.weaponLength "longer")}} selected{{/if}}>Longer (+5)</option><option value="shorter"{{#if (eq system.status.situational.weaponLength "shorter")}} selected{{/if}}>Shorter (-5)</option></select>
+      </div>
+      <div class="npc-ctl">
+        <label>Movement</label>
+        <select class="sit-select" data-key="advance"><option value=""{{#unless system.status.situational.advance}} selected{{/unless}}>Holding</option><option value="advancing"{{#if (eq system.status.situational.advance "advancing")}} selected{{/if}}>Advancing (+5)</option><option value="retreating"{{#if (eq system.status.situational.advance "retreating")}} selected{{/if}}>Retreating (-5)</option></select>
+      </div>
+      <div class="npc-ctl">
+        <label>Foes Alone</label>
+        <select class="sit-select" data-key="foesAlone"><option value=""{{#unless system.status.situational.foesAlone}} selected{{/unless}}>Not outnumbered</option><option value="2"{{#if (eq system.status.situational.foesAlone "2")}} selected{{/if}}>2 foes (-10)</option><option value="3"{{#if (eq system.status.situational.foesAlone "3")}} selected{{/if}}>3 foes (-15)</option><option value="4"{{#if (eq system.status.situational.foesAlone "4")}} selected{{/if}}>4 foes (-20)</option></select>
+      </div>
+      <div class="npc-ctl">
+        <label>Allies On Foe</label>
+        <select class="sit-select" data-key="alliesOnFoe"><option value=""{{#unless system.status.situational.alliesOnFoe}} selected{{/unless}}>None</option><option value="1"{{#if (eq system.status.situational.alliesOnFoe "1")}} selected{{/if}}>1 ally (+5)</option><option value="2"{{#if (eq system.status.situational.alliesOnFoe "2")}} selected{{/if}}>2 allies (+10)</option><option value="3"{{#if (eq system.status.situational.alliesOnFoe "3")}} selected{{/if}}>3 allies (+15)</option></select>
+      </div>
+      <div class="npc-ctl">
+        <label>Opportunity (+5)</label>
+        <input type="checkbox" class="sit-check" data-key="opportunity" {{checked system.status.situational.opportunity}}/>
+      </div>
+      <div class="npc-ctl">
+        <label>Unstable (-20)</label>
+        <input type="checkbox" class="sit-check" data-key="unstableGround" {{checked system.status.situational.unstableGround}}/>
+      </div>
+      <div class="npc-ctl">
+        <label>Extreme Temp (-35)</label>
+        <input type="checkbox" class="sit-check" data-key="temperature" {{checked system.status.situational.temperature}}/>
+      </div>
+      <div class="npc-ctl">
+        <label>Brawl (-20)</label>
+        <input type="checkbox" class="sit-check" data-key="brawlScuffle" {{checked system.status.situational.brawlScuffle}}/>
+      </div>
+      <div class="npc-ctl">
+        <label>Unbalanced</label>
+        <input type="checkbox" class="unbalanced-toggle" {{checked system.status.unbalanced}}/>
+      </div>
     </div>
   </div>
 

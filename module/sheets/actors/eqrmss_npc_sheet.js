@@ -104,6 +104,23 @@ export default class EQRMSSNPCSheet
             this.actor.update({ [`system.status.restrictedArea.${key}`]: ev.currentTarget.value || "" });
         }));
 
+        // Situational modifiers (§4.2): declared per combatant.
+        html.querySelectorAll(".sit-select").forEach(el => el.addEventListener("change", ev => {
+            const key = ev.currentTarget.dataset.key;
+            if (!["charge", "ground", "weaponLength", "advance", "foesAlone", "alliesOnFoe"].includes(key)) return;
+            this.actor.update({ [`system.status.situational.${key}`]: ev.currentTarget.value || "" });
+        }));
+
+        html.querySelectorAll(".sit-check").forEach(el => el.addEventListener("change", ev => {
+            const key = ev.currentTarget.dataset.key;
+            if (!["opportunity", "unstableGround", "temperature", "brawlScuffle"].includes(key)) return;
+            this.actor.update({ [`system.status.situational.${key}`]: !!ev.currentTarget.checked });
+        }));
+
+        html.querySelectorAll(".unbalanced-toggle").forEach(el => el.addEventListener("change", ev => {
+            this.actor.update({ "system.status.unbalanced": !!ev.currentTarget.checked });
+        }));
+
         if (!this._npcDropBound) {
             html.addEventListener("dragover", ev => ev.preventDefault());
             html.addEventListener("drop", ev => this._onDrop(ev));

@@ -116,6 +116,65 @@
   </div>
 
   <div class="panel">
+    <h4>Situational Modifiers (Arms Companion §4.2)</h4>
+    <p class="hint">Declared per combatant; exhaustion and bleeding penalties apply automatically. Charging and advancing are not cumulative (charge wins).</p>
+    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+      <label>Charge:
+        <select class="sit-select" data-key="charge">
+          <option value=""{{#unless system.status.situational.charge}} selected{{/unless}}>No charge</option>
+          <option value="1.5"{{#if (eq system.status.situational.charge "1.5")}} selected{{/if}}>1.5x pace (+5)</option>
+          <option value="2"{{#if (eq system.status.situational.charge "2")}} selected{{/if}}>2.0x pace (+10)</option>
+          <option value="3"{{#if (eq system.status.situational.charge "3")}} selected{{/if}}>3.0x pace (+20)</option>
+          <option value="4"{{#if (eq system.status.situational.charge "4")}} selected{{/if}}>4.0x pace (+30)</option>
+          <option value="5"{{#if (eq system.status.situational.charge "5")}} selected{{/if}}>5.0x pace (+45)</option>
+        </select>
+      </label>
+      <label>Ground:
+        <select class="sit-select" data-key="ground">
+          <option value=""{{#unless system.status.situational.ground}} selected{{/unless}}>Even ground</option>
+          <option value="higher"{{#if (eq system.status.situational.ground "higher")}} selected{{/if}}>Higher (+5)</option>
+          <option value="lower"{{#if (eq system.status.situational.ground "lower")}} selected{{/if}}>Lower (-5)</option>
+        </select>
+      </label>
+      <label>Weapon length:
+        <select class="sit-select" data-key="weaponLength">
+          <option value=""{{#unless system.status.situational.weaponLength}} selected{{/unless}}>Even</option>
+          <option value="longer"{{#if (eq system.status.situational.weaponLength "longer")}} selected{{/if}}>Mine is longer (+5)</option>
+          <option value="shorter"{{#if (eq system.status.situational.weaponLength "shorter")}} selected{{/if}}>Mine is shorter (-5)</option>
+        </select>
+      </label>
+      <label>Movement:
+        <select class="sit-select" data-key="advance">
+          <option value=""{{#unless system.status.situational.advance}} selected{{/unless}}>Holding</option>
+          <option value="advancing"{{#if (eq system.status.situational.advance "advancing")}} selected{{/if}}>Advancing (+5)</option>
+          <option value="retreating"{{#if (eq system.status.situational.advance "retreating")}} selected{{/if}}>Retreating (-5)</option>
+        </select>
+      </label>
+      <label>Foes faced alone:
+        <select class="sit-select" data-key="foesAlone">
+          <option value=""{{#unless system.status.situational.foesAlone}} selected{{/unless}}>Not outnumbered</option>
+          <option value="2"{{#if (eq system.status.situational.foesAlone "2")}} selected{{/if}}>2 foes (-10)</option>
+          <option value="3"{{#if (eq system.status.situational.foesAlone "3")}} selected{{/if}}>3 foes (-15)</option>
+          <option value="4"{{#if (eq system.status.situational.foesAlone "4")}} selected{{/if}}>4 foes (-20)</option>
+        </select>
+      </label>
+      <label>Allies on this foe:
+        <select class="sit-select" data-key="alliesOnFoe">
+          <option value=""{{#unless system.status.situational.alliesOnFoe}} selected{{/unless}}>None</option>
+          <option value="1"{{#if (eq system.status.situational.alliesOnFoe "1")}} selected{{/if}}>1 ally (+5)</option>
+          <option value="2"{{#if (eq system.status.situational.alliesOnFoe "2")}} selected{{/if}}>2 allies (+10)</option>
+          <option value="3"{{#if (eq system.status.situational.alliesOnFoe "3")}} selected{{/if}}>3 allies (+15)</option>
+        </select>
+      </label>
+      <label><input type="checkbox" class="sit-check" data-key="opportunity" {{checked system.status.situational.opportunity}}/> Opportunity strike (+5)</label>
+      <label><input type="checkbox" class="sit-check" data-key="unstableGround" {{checked system.status.situational.unstableGround}}/> Unstable ground (-20)</label>
+      <label><input type="checkbox" class="sit-check" data-key="temperature" {{checked system.status.situational.temperature}}/> Unbearable temperature (-35)</label>
+      <label><input type="checkbox" class="sit-check" data-key="brawlScuffle" {{checked system.status.situational.brawlScuffle}}/> Brawl/Scuffle this round (-20)</label>
+    </div>
+    <label><input type="checkbox" class="unbalanced-toggle" {{checked system.status.unbalanced}}/> This combatant is unbalanced or disoriented (attackers gain +10 against them)</label>
+  </div>
+
+  <div class="panel">
     <h4>Readied Weapons</h4>
     <table class="rmss-table">
       <thead><tr><th></th><th>Name</th><th>Attack Table</th><th>OB Mod</th><th>Crit</th><th>Fumble</th><th>Length</th></tr></thead>
