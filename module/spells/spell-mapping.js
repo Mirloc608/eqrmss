@@ -1,0 +1,87 @@
+// ============================================================
+// SPELL MAPPING (EQ content -> RMSS mechanics, user rulings
+// 2026-10-04): the EQ spell catalog stays the content; RMSS
+// Spell Law supplies resolution.
+//
+// - Resource: EQ mana (attributes.mana pool, EQ manaCost). No PP.
+// - Damage: PURE RMSS. EQ damage amounts are ignored; the bolt
+//   attack table plus the casting (Directed Spells) bonus produce
+//   all hits and crits.
+// - Element axes: fire -> Fire Bolt (Heat crits), cold -> Ice
+//   Bolt (Impact), electricity -> Lightning Bolt (Electricity +
+//   Impact compounds), magic/arcane -> Fire Bolt table with Mana
+//   crits substituted. Poison/disease direct damage routes to
+//   the base-spell/RR track (later stage), not bolts.
+// - Heal effects: direct healing (applyHealingSpell + hit
+//   restoration).
+//
+// Classification is rule-derived from the spell's FIRST damage
+// effect, else its heal effect. Payload comes from the item's
+// system.effects (finalizer preserves it for new grants); older
+// items fall back to the loaded EQ catalog (game.eqrmss.spells)
+// matched by class + name. A per-spell authored override field
+// (system.rmss) wins when present.
+// ============================================================
+
+// Element -> { attackTable, critType? }. critType forces the
+// crit table (Mana) regardless of the attack table's cell type.
+export const BOLT_BY_ELEMENT = {
+    fire: { attackTable: "Fire Bolt" },
+    cold: { attackTable: "Ice Bolt" },
+    electric: { attackTable: "Lightning Bolt" },
+    electricity: { attackTable: "Lightning Bolt" },
+    lightning: { attackTable: "Lightning Bolt" },
+    water: { attackTable: "Water Bolt" },
+    magic: { attackTable: "Fire Bolt", critType: "M" },
+    arcane: { attackTable: "Fire Bolt", critType: "M" }
+};
+
+function catalogEffectsFor(spellItem) {
+    const byClass = globalThis.game?.eqrmss?.spells ?? {};
+    const list = byClass[String(spellItem?.system?.spell_list ?? "").toLowerCase()] ?? [];
+    const hit = list.find(s => s.name === spellItem?.name);
+    return Array.isArray(hit?.system?.effects) ? hit.system.effects : null;
+}
+
+/** The spell's typed effect list, from its item payload or the catalog. */
+export function spellEffectsOf(spellItem) {
+    const own = spellItem?.system?.effects;
+    if (Array.isArray(own) && own.length) return own;
+    return catalogEffectsFor(spellItem) ?? (Array.isArray(own) ? own : []);
+}
+
+/**
+ * Classify a spell for cast resolution:
+ * { kind: "bolt", element, attackTable, critType|null }
+ * { kind: "heal", amount }
+ * { kind: "later", reason } — known-but-unbuilt track (Stage 4+)
+ * { kind: "none" } — no mechanical payload (announcement only)
+ */
+export function classifySpell(spellItem) {
+    const override = spellItem?.system?.rmss;
+    if (override?.kind === "bolt" && override.attackTable) {
+        return { kind: "bolt", element: override.element ?? "", attackTable: override.attackTable, critType: override.critType ?? null };
+    }
+    const effects = spellEffectsOf(spellItem);
+    const dmg = effects.find(e => e?.type === "damage");
+    if (dmg) {
+        const element = String(dmg.element ?? "").toLowerCase();
+        const bolt = BOLT_BY_ELEMENT[element];
+        if (bolt) return { kind: "bolt", element, attackTable: bolt.attackTable, critType: bolt.critType ?? null };
+        return { kind: "later", reason: `${element || "untyped"} damage resolves on the base-spell/RR track (later stage)` };
+    }
+    const heal = effects.find(e => e?.type === "heal");
+    if (heal) {
+        const amount = Number(heal.amount ?? heal.max ?? heal.min) || 0;
+        if (amount > 0) return { kind: "heal", amount };
+    }
+    if (effects.length) return { kind: "later", reason: "buffs, debuffs and DoTs land in a later stage" };
+    return { kind: "none" };
+}
+
+/** The caster's Directed Spells skill bonus (skill item), or 0. */
+export function directedSpellsBonus(actor) {
+    const items = [...(actor?.items?.contents ?? actor?.items ?? [])];
+    const skill = items.find(i => i?.type === "skill" && i.system?.slug === "directedSpells");
+    return Number(skill?.system?.bonus) || 0;
+}

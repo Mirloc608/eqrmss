@@ -382,6 +382,21 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }));
 
         // ------------------------------------------------------------
+        // Spells Tab: cast a spell (EQ mana; RMSS resolution)
+        // ------------------------------------------------------------
+        html.querySelectorAll(".cast-spell").forEach(el => el.addEventListener("click", async ev => {
+            const item = this.actor.items.get(ev.currentTarget.dataset.itemId);
+            if (!item) return;
+            try {
+                const { castSpell } = await import("../../spells/cast-spell.js");
+                await castSpell(this.actor, item);
+            } catch (e) {
+                console.error("EQRMSS | Cast spell failed", e);
+                ui.notifications.error(`Cast failed: ${e.message}`);
+            }
+        }));
+
+        // ------------------------------------------------------------
         // Combat Tab: Parry declarations (OB/DB split, Arms Law §4.3)
         // ------------------------------------------------------------
         html.querySelectorAll(".parry-declare").forEach(el => el.addEventListener("click", ev => {

@@ -402,7 +402,7 @@ function targetMissileParryDB(targetActor, missileAttack) {
     return Math.max(0, Number(targetActor.system?.status?.missileParryDB) || 0);
 }
 
-export async function rollWeaponAttack(actor, weaponItem) {
+export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     const sys = weaponItem.system ?? {};
     // Weapons granted before their template carried an attack table
     // have none baked into the item; resolve it through the composer
@@ -930,7 +930,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
                 }
             }
             if (severity !== null) {
-                const type = unusualStyle.critType ?? (sys.sollerets ? "P" : (crit.type ?? lookup.impliedCritType ?? null));
+                const type = options.forcedCritType ?? unusualStyle.critType ?? (sys.sollerets ? "P" : (crit.type ?? lookup.impliedCritType ?? null));
                 critLine = type
                     ? await resolveOneCrit(type, severity)
                     : `<strong>${esc(crit.raw)}</strong> — unusual result, GM adjudicates.`;

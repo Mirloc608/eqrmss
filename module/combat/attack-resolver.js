@@ -44,7 +44,9 @@ export const CRIT_TYPE_TO_TABLE_CODE = {
     "H": "H",   // Heat (Spell Law)
     "C": "C",   // Cold (Spell Law)
     "E": "E",   // Electricity (Spell Law)
-    "I": "I"    // Impact (Spell Law)
+    "I": "I",   // Impact (Spell Law)
+    "M": "M"    // Mana (Spell Law; reached only via the spell cast path's forced crit type —
+                // the "M" in MA Strikes codes is attack size, never a crit type)
 };
 
 export const NET_ROLL_CAP = 150; // §6.4: net attack rolls above 150 are treated as 150
