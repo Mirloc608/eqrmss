@@ -85,3 +85,37 @@ export function directedSpellsBonus(actor) {
     const skill = items.find(i => i?.type === "skill" && i.system?.slug === "directedSpells");
     return Number(skill?.system?.bonus) || 0;
 }
+
+// ------------------------------------------------------------
+// MANA POOL (user ruling 2026-10-04): max = character level x
+// primary casting stat bonus, class-aware (EQ flavor). Pure
+// melee classes have no pool. Rest/regen is not modeled.
+// ------------------------------------------------------------
+
+export const CASTING_STAT_BY_CLASS = {
+    // EQ INT casters -> RMSS Memory (class prime requisite),
+    // EQ WIS casters -> Empathy, bards -> Presence (no CHA stat code).
+    wizard: "ME", magician: "ME", enchanter: "ME", necromancer: "ME", shadowknight: "ME",
+    cleric: "EM", druid: "EM", shaman: "EM", paladin: "EM", ranger: "EM", beastlord: "EM",
+    bard: "PR"
+};
+
+/** RMSS stat bonus per the system's house pattern: a stored nonzero
+ *  basic bonus wins; otherwise floor((temp - 50) / 5); no temp, no bonus. */
+export function statBonusFor(actor, code) {
+    const st = actor?.system?.stats?.[code];
+    if (!st || typeof st !== "object") return 0;
+    const stored = st.basic_bonus ?? st.basicBonus ?? 0;
+    if (Number(stored) !== 0) return Number(stored);
+    if (st.temp == null) return 0;
+    return Math.floor((Number(st.temp) - 50) / 5);
+}
+
+/** Derived mana maximum for an actor (0 for non-casters). */
+export function manaMaxFor(actor) {
+    const classId = String(actor?.system?.fixed_info?.classId ?? actor?.system?.classId ?? "").toLowerCase();
+    const stat = CASTING_STAT_BY_CLASS[classId];
+    if (!stat) return 0;
+    const level = Math.max(1, Number(actor?.system?.character?.level) || 1);
+    return Math.max(0, level * statBonusFor(actor, stat));
+}

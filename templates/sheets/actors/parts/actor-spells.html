@@ -2,7 +2,7 @@
   <h3>Spell Lists</h3>
 
   <div class="panel">
-    <h4>Spells</h4>
+    <h4>Spells{{#if actor.system.derived.manaMax}} <span class="mana-pool">(Mana {{actor.system.attributes.mana.value}} / {{actor.system.derived.manaMax}})</span>{{/if}}</h4>
     <table class="rmss-table">
       <thead><tr><th></th><th>Name</th><th>Spell List</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
       <tbody>

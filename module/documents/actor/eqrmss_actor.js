@@ -31,6 +31,8 @@ import {
 }
 from "../../data/stats/rmss-derived-values.js";
 
+import { manaMaxFor } from "../../spells/spell-mapping.js";
+
 export class EQRMSSActor extends Actor
 {
 
@@ -295,6 +297,21 @@ export class EQRMSSActor extends Actor
             attributes.mana
             ??
             0;
+
+        // Mana pool (user ruling 2026-10-04): max = level x primary
+        // casting stat bonus, class-aware (EQ flavor). The stored
+        // pool lifts to the derived max — leveling tops the current
+        // value up by the delta; the max never lowers automatically.
+        const poolMax = manaMaxFor(this);
+        this.system.derived.manaMax = poolMax;
+
+        if (attributes.mana && typeof attributes.mana === "object" && poolMax > 0) {
+            const storedMax = Number(attributes.mana.max) || 0;
+            if (poolMax > storedMax) {
+                attributes.mana.max = poolMax;
+                attributes.mana.value = (Number(attributes.mana.value) || 0) + (poolMax - storedMax);
+            }
+        }
 
         this.system.derived.stamina =
 
