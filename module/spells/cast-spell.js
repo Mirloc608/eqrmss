@@ -1,16 +1,26 @@
 // ============================================================
-// CAST SPELL (Stage 2): the cast path from an actor's spell
+// CAST SPELL (Stages 2-3): the cast path from an actor's spell
 // item. Resource is EQ mana (attributes.mana, EQ manaCost;
 // ruling 2026-10-04). Directed (bolt) spells run through the
 // weapon-attack engine — the spell is presented as a synthetic
-// weapon carrying the derived attack table and the caster's
-// Directed Spells skill bonus as its OB modifier.
+// weapon carrying the derived attack table and the book's
+// Directed Spells OB (caster level + Agility bonus + Directed
+// Spells rank bonus).
 // Heal spells restore hits and trigger the healing-magic hook
 // (bleed stopped, death timer cleared).
+//
+// Stage 3 casting risk (Spell Law §10.9, full book modifier
+// set): before anything is spent, the ESF gate sums the
+// applicable modifications; a failed ESF roll sends the caster
+// to the Spell Failure Table (15.7) and the mana is never spent
+// (the book's "lose spell (but not pts.)" outcome). A passed
+// ESF roll is noted on the cast card. A bolt table "F" cell is
+// a natural failure, resolved inside the attack engine.
 // ============================================================
 
 import { combatCard } from "../combat/chat-card.js";
-import { classifySpell, directedSpellsBonus } from "./spell-mapping.js";
+import { classifySpell, directedSpellsOB } from "./spell-mapping.js";
+import { esfGate } from "./spell-failure.js";
 import { rollWeaponAttack } from "../combat/combat-rolls.js";
 import { applyHealingSpell, checkHitThresholds } from "../combat/crit-conditions.js";
 
@@ -26,8 +36,10 @@ function targetedActor() {
 /**
  * Cast a spell from an actor's spell item. Returns a small
  * summary object; posts chat for every outcome.
+ * opts: { prepRoundsShort } — preparation shortage for the ESF
+ * sum (the cast path assumes book-standard preparation).
  */
-export async function castSpell(actor, spellItem) {
+export async function castSpell(actor, spellItem, opts = {}) {
     if (!actor || !spellItem) return { ok: false, reason: "missing" };
     const name = spellItem.name ?? "spell";
     const cls = classifySpell(spellItem);
@@ -38,6 +50,17 @@ export async function castSpell(actor, spellItem) {
         ui.notifications?.warn(`${actor.name} cannot cast ${name}: needs ${cost} mana, has ${before}.`);
         return { ok: false, reason: "mana" };
     }
+
+    // ---- ESF gate (before the mana is spent) ----
+    const gate = await esfGate(actor, spellItem, {
+        attackSpell: cls.kind === "bolt",
+        prepRoundsShort: opts.prepRoundsShort
+    });
+    if (gate.required && !gate.passed) {
+        return { ok: false, reason: "esf", esf: gate.esf.total, failure: gate.failure?.entry ?? null };
+    }
+    const esfNote = gate.required ? `<p><em>${esc(gate.note)}</em></p>` : "";
+
     const spendMana = async () => {
         if (cost <= 0) return;
         // Persist the derived max with the spend: prepare only lifts
@@ -61,13 +84,21 @@ export async function castSpell(actor, spellItem) {
             system: {
                 type: "spell",
                 attackTable: cls.attackTable,
-                obMod: directedSpellsBonus(actor),
+                obMod: directedSpellsOB(actor),
                 damageMod: 0,
                 criticalType: cls.critType ?? "",
                 location: "equipped",
                 equipped: true
             }
         };
+        if (esfNote) {
+            await ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor }),
+                content: combatCard("Spellcasting", `
+                    <h2>${esc(actor.name)} casts ${esc(name)}</h2>
+                    ${esfNote}`)
+            });
+        }
         await rollWeaponAttack(actor, synthetic, { forcedCritType: cls.critType });
         return { ok: true, kind: "bolt", attackTable: cls.attackTable };
     }
@@ -93,7 +124,7 @@ export async function castSpell(actor, spellItem) {
             speaker: ChatMessage.getSpeaker({ actor }),
             content: combatCard("Spellcasting", `
                 <h2>${esc(actor.name)} casts ${esc(name)} on ${esc(target.name)}</h2>
-                ${healLine}<p><em>${manaNote.trim()}</em></p>`)
+                ${healLine}${esfNote}<p><em>${manaNote.trim()}</em></p>`)
         });
         return { ok: true, kind: "heal", amount: cls.amount };
     }
@@ -106,7 +137,7 @@ export async function castSpell(actor, spellItem) {
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            <p><em>Cast announced — ${note}.${manaNote}</em></p>`)
+            ${esfNote}<p><em>Cast announced — ${note}.${manaNote}</em></p>`)
     });
     return { ok: true, kind: cls.kind };
 }

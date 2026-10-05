@@ -46,6 +46,7 @@ import { restrictedAreaPenalty } from "./restricted-area.js";
 import { situationalOb, situationalAutoOb, situationalNote } from "./situational.js";
 import { rollHitLocation, calledShotLocation, lookupStructuralCrit, structuralPointsOf, applyStructuralDamage } from "./hit-locations.js";
 import { weaponUsePenalty } from "./weapon-use.js";
+import { resolveSpellFailure } from "../spells/spell-failure.js";
 import { actorAttackSpeed, speedScaledOb } from "./attack-speed.js";
 import { unusualStyleOf, shiftSeverity } from "./unusual-style.js";
 import { combatCard } from "./chat-card.js";
@@ -734,9 +735,23 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${skill ? "" : " (no skill)"}${obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${attackSpeed.pct}%)` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
+        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${attackSpeed.pct}%)` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
         + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
+
+    // Directed spells (Stage 3): an "F" cell on a bolt table is a
+    // natural spell failure (Spell Law 15.7): the spell is lost and
+    // the caster rolls on the Spell Failure Table, Attack section,
+    // with no ESF multiple. No damage reaches the target.
+    if (sys.type === "spell" && lookup.damageRaw != null && String(lookup.damageRaw).trim().toUpperCase() === "F") {
+        await resolveSpellFailure(actor, weaponItem, {
+            section: "attack",
+            esfTotal: 0,
+            rollD100: d100,
+            headerHtml: `<p>${arLine}</p><p><strong>${esc(tableName)} result: F — spell failure.</strong></p>`
+        });
+        return;
+    }
 
     if (lookup.error && lookup.miss) {
         await ChatMessage.create({

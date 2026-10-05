@@ -86,6 +86,24 @@ export function directedSpellsBonus(actor) {
     return Number(skill?.system?.bonus) || 0;
 }
 
+/** Live character level: the sheet's Level Up writes
+ *  system.attributes.level.value; system.character.level is a
+ *  legacy field that never advances. */
+export function casterLevelOf(actor) {
+    const sys = actor?.system ?? {};
+    return Math.max(1, Number(sys.attributes?.level?.value ?? sys.character?.level) || 1);
+}
+
+/** Directed Spells OB (Spell Law bolt-table formula, Stage 3):
+ *  caster level + Agility stat bonus + Directed Spells rank bonus.
+ *  With no skill item the aim is untrained: level + Agility only. */
+export function directedSpellsOB(actor) {
+    const items = [...(actor?.items?.contents ?? actor?.items ?? [])];
+    const skill = items.find(i => i?.type === "skill" && i.system?.slug === "directedSpells");
+    const ranks = Number(skill?.system?.rankBonus ?? skill?.system?.bonus) || 0;
+    return casterLevelOf(actor) + statBonusFor(actor, "AG") + ranks;
+}
+
 // ------------------------------------------------------------
 // MANA POOL (user ruling 2026-10-04): max = character level x
 // primary casting stat bonus, class-aware (EQ flavor). Pure
@@ -120,9 +138,7 @@ export function manaMaxFor(actor) {
     const classId = String(sys.origin?.classId ?? sys.fixed_info?.classId ?? sys.classId ?? "").toLowerCase();
     const stat = CASTING_STAT_BY_CLASS[classId];
     if (!stat) return 0;
-    // The sheet's Level Up writes system.attributes.level.value;
-    // system.character.level is a legacy field that never advances.
-    const level = Math.max(1, Number(sys.attributes?.level?.value ?? sys.character?.level) || 1);
+    const level = casterLevelOf(actor);
     // EQ scale (user ruling 2026-10-04): (level x bonus) +
     // (level x primary stat / 10), the stat being its temp value.
     const temp = Number(actor?.system?.stats?.[stat]?.temp) || 0;
