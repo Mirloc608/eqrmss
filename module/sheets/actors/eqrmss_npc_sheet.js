@@ -9,6 +9,8 @@
 import EQRMSSActorSheet
     from "./eqrmss_actor_sheet.js";
 
+import { structuralAreasFor, structuralDamageOf, structuralRating } from "../../combat/hit-locations.js";
+
 export default class EQRMSSNPCSheet
     extends EQRMSSActorSheet
 {
@@ -44,6 +46,22 @@ export default class EQRMSSNPCSheet
         }
 
     };
+
+    async _prepareContext(options) {
+        const context = await super._prepareContext(options);
+        const actor = this.document;
+        // Damage by Location (§4.15): structural damage per body area.
+        context.structuralAreas = structuralAreasFor(actor).map(a => {
+            const damage = structuralDamageOf(actor, a.key);
+            const sr = structuralRating(actor, a.bam);
+            return {
+                key: a.key, name: a.name, damage,
+                srLabel: sr == null ? "—" : String(sr),
+                inactive: sr != null && damage >= sr
+            };
+        });
+        return context;
+    }
 
     async _onRender(context, options) {
         await super._onRender(context, options);
@@ -119,6 +137,16 @@ export default class EQRMSSNPCSheet
 
         html.querySelectorAll(".unbalanced-toggle").forEach(el => el.addEventListener("change", ev => {
             this.actor.update({ "system.status.unbalanced": !!ev.currentTarget.checked });
+        }));
+
+        // Damage by Location (§4.15): attacker toggle + structural damage edits.
+        html.querySelectorAll(".hitloc-toggle").forEach(el => el.addEventListener("change", ev => {
+            this.actor.update({ "system.status.useHitLocations": !!ev.currentTarget.checked });
+        }));
+        html.querySelectorAll(".structural-input").forEach(el => el.addEventListener("change", ev => {
+            const key = ev.currentTarget.dataset.key;
+            if (!key) return;
+            this.actor.update({ [`system.status.structural.${key}`]: Math.max(0, Number(ev.currentTarget.value) || 0) });
         }));
 
         if (!this._npcDropBound) {

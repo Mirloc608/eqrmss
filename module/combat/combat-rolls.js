@@ -43,6 +43,7 @@ import { actorStance, stanceOBBonus, stanceRanks, defensiveCritCap, capCritSever
 import { isSubduing, subdueCritPoints, isExhausted, applySubdueExhaustion, rollExhaustionResistance } from "./subdue.js";
 import { restrictedAreaPenalty } from "./restricted-area.js";
 import { situationalOb, situationalAutoOb, situationalNote } from "./situational.js";
+import { rollHitLocation, calledShotLocation, lookupStructuralCrit, structuralPointsOf, applyStructuralDamage } from "./hit-locations.js";
 import { weaponUsePenalty } from "./weapon-use.js";
 import { actorAttackSpeed, speedScaledOb } from "./attack-speed.js";
 import { unusualStyleOf, shiftSeverity } from "./unusual-style.js";
@@ -620,6 +621,24 @@ export async function rollWeaponAttack(actor, weaponItem) {
         }
     }
 
+    // ---- Damage by Location (4.15): hit location ----
+    // Random mode (attacker toggle, 4.15.2): the location is rolled
+    // BEFORE the strike, and crits will resolve on the Strategic
+    // Targeting critical table instead of the directional tables.
+    // Called shots fix the location, and their structural roll is
+    // ADDITIVE to the normal crit (4.15.1).
+    let hitLocation = null;
+    let structuralMode = null; // "random" | "called"
+    if (targetActor) {
+        if (calledShot?.areaId) {
+            hitLocation = calledShotLocation(calledShot, targetActor, Math.random());
+            structuralMode = "called";
+        } else if (attackerStatus.useHitLocations === true) {
+            hitLocation = rollHitLocation(targetActor, await d100());
+            structuralMode = "random";
+        }
+    }
+
     // ---- Next-swing bonus (critical condition, consumed on use) ----
     // Placed after target determination so a cancelled prompt does not burn it.
     const swingBonus = await consumeNextSwingBonus(actor);
@@ -724,6 +743,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
             content: combatCard("Combat", `
                 <h2>${esc(actor.name)} attacks ${esc(targetName)} with ${esc(weaponItem.name)}</h2>
                 <p>${arLine}</p>
+                ${hitLocation ? `<p><strong>Hit location:</strong> ${esc(hitLocation.name)}${structuralMode === "random" ? " (rolled before the strike)" : ""}</p>` : ""}
                 <p><strong>Miss</strong> — ${esc(lookup.error)}</p>${ammoNote}`)
         });
         return;
@@ -741,6 +761,8 @@ export async function rollWeaponAttack(actor, weaponItem) {
     const subduing = isSubduing(actor, weaponType, MISSILE_WEAPON_TYPES);
     let subduePoints = 0;
     let critFired = false;
+    let structuralKnockout = false; // ST table "foe knocked out" (4.15)
+    const resolvedSeverities = []; // severities rolled (feeds 4.15.1)
     let condNote = ""; // critical-condition notes (stun pool, bleed, death timer, next swing, must parry)
     let crit = parseCritCode(lookup.critCode);
     // Defensive Stance (§4.16): the attacker's crit severity is
@@ -769,6 +791,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
         critBonus += critBonusHits(adjudicated.text);
         if (subduing) subduePoints += subdueCritPoints(severity);
         critFired = true;
+        resolvedSeverities.push(severity);
         // ---- Armor wear (§5.9): the crit also damages the armor;
         // prior wear of the same family leaks extra hits through.
         let wearNote = "";
@@ -783,7 +806,70 @@ export async function rollWeaponAttack(actor, weaponItem) {
         condNote += await applyCritConditions(targetActor, actor, adjudicated.text);
         return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critResult.text)}${adjudicated.note ? `<br><em>Conditional crit: ${esc(adjudicated.note)} — matching branch applied.</em>` : ""}${wearNote}`;
     }
-    if (crit && !crit.unparseable) {
+    // Resolve one Strategic Targeting critical (4.15): structural
+    // points land on the hit location; rider text (stun, bleed,
+    // knocked out) applies as conditions. Returns the chat fragment.
+    async function resolveOneStructuralCrit(severity) {
+        const cr = await d100();
+        const stRes = lookupStructuralCrit(tables.crits, severity, cr);
+        if (stRes.error) return `<strong>Strategic ${esc(severity)}</strong> — ${esc(stRes.error)} (GM adjudicates)`;
+        critFired = true;
+        if (subduing) subduePoints += subdueCritPoints(severity);
+        condNote += await applyCritConditions(targetActor, actor, stRes.text);
+        let line = `<strong>Strategic ${esc(severity)}</strong> → d100 ${cr} on the ${esc(stRes.table)} (${severity}): ${esc(stRes.text)}`;
+        const pts = structuralPointsOf(stRes.text);
+        if (pts > 0 && hitLocation) {
+            if (targetActor && (targetActor.isOwner || game.user?.isGM)) {
+                const applied = await applyStructuralDamage(targetActor, hitLocation, pts);
+                if (applied) line += `<br><em>${pts} structural points to the ${esc(applied.name)} (${applied.total}${applied.sr != null ? `/${applied.sr} SR` : ""})${applied.inactive ? ` — ${esc(applied.name)} inactive!` : ""}</em>`;
+            } else {
+                line += `<br><em>${pts} structural points to the ${esc(hitLocation.name)} (apply manually).</em>`;
+            }
+        }
+        if (/\bknocked out\b/i.test(stRes.text)) {
+            structuralKnockout = true;
+            line += `<br><em>${esc(targetName)} is knocked out.</em>`;
+        }
+        return line;
+    }
+    if (structuralMode === "random" && crit && !crit.unparseable) {
+        // 4.15.2 (book-literal): in random-location mode the Strategic
+        // Targeting table replaces the directional crit tables. Armor
+        // wear (5.9) still accrues from the crit as usual.
+        const sevList = [];
+        const wearNotes = [];
+        if (crit.severity === "F") {
+            const rule = lookup.fSeverityRule;
+            if (Array.isArray(rule) && rule.length) sevList.push(...rule.map(r => r.severity));
+            else critLine = `<strong>${esc(crit.raw)}</strong> — F-severity: no table rule transcribed, GM adjudicates.`;
+        } else {
+            let sev = crit.severity;
+            if (unusualStyle.severityShift) {
+                const shifted = shiftSeverity(sev, unusualStyle.severityShift);
+                if (shifted === null) {
+                    critLine = `<strong>${esc(lookup.critCode)}</strong> — unusual style (§4.13) reduces the critical below A: no critical.`;
+                    sev = null;
+                } else if (shifted !== sev) {
+                    wearNotes.push(`<em>Unusual style (§4.13): critical severity ${sev} → ${shifted}.</em>`);
+                    sev = shifted;
+                }
+            }
+            if (sev) sevList.push(sev);
+        }
+        const wearType = crit.type ?? lookup.impliedCritType ?? null;
+        const parts = [];
+        for (const sev of sevList) {
+            if (wearType && targetActor && (targetActor.isOwner || game.user?.isGM)) {
+                const wear = await applyArmorWear(targetActor, wearType, sev);
+                if (wear) {
+                    if (wear.leaked > 0) critBonus += wear.leaked;
+                    wearNotes.push(`<em>Armor wear (§5.9): ${esc(wear.piece.name)} ${ARMOR_WEAR_FAMILY_LABEL[wear.family]} wear ${wear.wear}${wear.leaked > 0 ? ` — weakened armor leaks +${wear.leaked} hits` : ""}.</em>`);
+                }
+            }
+            parts.push(await resolveOneStructuralCrit(sev));
+        }
+        if (sevList.length) critLine = [...parts, ...wearNotes].join("<br>");
+    } else if (crit && !crit.unparseable) {
         if (crit.severity === "F") {
             // Claw Law F-severity (AL&CL 11.1): two critical strikes, rolled
             // separately and applied cumulatively, per the attack table's rule.
@@ -830,6 +916,14 @@ export async function rollWeaponAttack(actor, weaponItem) {
         critLine = `<strong>${esc(crit.raw)}</strong> — unusual result, GM adjudicates.`;
     }
 
+    // 4.15.1: a called shot's Strategic Targeting roll is ADDITIVE —
+    // one structural roll per critical that resolved above.
+    if (structuralMode === "called" && resolvedSeverities.length) {
+        const extra = [];
+        for (const sev of resolvedSeverities) extra.push(await resolveOneStructuralCrit(sev));
+        critLine += `<br>${extra.join("<br>")}`;
+    }
+
     // ---- Damage ----
     const damageMod = Number(sys.damageMod) || 0;
     const tableDamage = lookup.damage ?? 0;
@@ -857,6 +951,9 @@ export async function rollWeaponAttack(actor, weaponItem) {
         appliedNote = `<p><em>${totalDamage} concussion hit${totalDamage === 1 ? "" : "s"} applied to ${esc(targetName)}.</em></p>`;
         // Concussion-hit thresholds — unconsciousness (§6.4.1), dying (§3.8).
         await checkHitThresholds(targetActor);
+        // The ST table's "foe knocked out" is a crit-blow knockout, not
+        // a hit-total threshold — it stands even under the hit max.
+        if (structuralKnockout) await targetActor.update({ "system.status.unconscious": true });
     } else if (targetActor && totalDamage > 0) {
         appliedNote = `<p><em>Damage not applied — you don't control ${esc(targetName)}.</em></p>`;
     } else if (!targetActor && totalDamage > 0) {
@@ -898,6 +995,7 @@ export async function rollWeaponAttack(actor, weaponItem) {
         content: combatCard("Combat", `
             <h2>${esc(actor.name)} attacks ${esc(targetName)} with ${esc(weaponItem.name)}</h2>
             <p>${arLine}</p>
+            ${hitLocation ? `<p><strong>Hit location:</strong> ${esc(hitLocation.name)}${structuralMode === "random" ? " (rolled before the strike)" : ""}</p>` : ""}
             <p><strong>${esc(lookup.table)}</strong> vs AT ${at}: <strong>${totalDamage} hits</strong> (${dmgParts.map(esc).join(", ")})</p>
             <p>${critLine}</p>
             ${appliedNote}${subdueNote}${condNote}${critCapNote}${procNote}${ammoNote}`)

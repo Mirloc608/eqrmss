@@ -175,6 +175,20 @@
   </div>
 
   <div class="panel">
+    <h4>Damage by Location (Arms Companion §4.15)</h4>
+    <p class="hint">Structural Rating = (CO &divide; 10) &times; BAM. An area at or past its SR is inactive.</p>
+    <label><input type="checkbox" class="hitloc-toggle" {{checked system.status.useHitLocations}}/> Roll random hit locations for my attacks — criticals resolve on the Strategic Targeting table (§4.15.2). Called shots add a structural roll (§4.15.1).</label>
+    <table class="rmss-table">
+      <thead><tr><th>Area</th><th>Damage</th><th>SR</th><th></th></tr></thead>
+      <tbody>
+        {{#each structuralAreas}}
+          <tr{{#if this.inactive}} style="font-weight: bold;"{{/if}}><td>{{this.name}}</td><td><input type="number" class="structural-input" data-key="{{this.key}}" value="{{this.damage}}" min="0" style="width: 64px;"/></td><td>{{this.srLabel}}</td><td>{{#if this.inactive}}Inactive{{/if}}</td></tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
     <h4>Readied Weapons</h4>
     <table class="rmss-table">
       <thead><tr><th></th><th>Name</th><th>Attack Table</th><th>OB Mod</th><th>Crit</th><th>Fumble</th><th>Length</th></tr></thead>

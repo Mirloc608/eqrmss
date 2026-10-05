@@ -4,6 +4,7 @@
 
 import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
 import { isWorn } from "../../utils/equipment/equipment-utils.js";
+import { structuralAreasFor, structuralDamageOf, structuralRating } from "../../combat/hit-locations.js";
 import { progressionManager } from "../../progression/progression-manager.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
@@ -84,6 +85,18 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         const readiedWeapons = (context.items?.weapons ?? []).filter(
             w => isWorn(w)
         );
+
+        // Damage by Location (§4.15): structural damage per body area
+        // against its Structural Rating ((CO/10) x BAM).
+        context.structuralAreas = structuralAreasFor(actor).map(a => {
+            const damage = structuralDamageOf(actor, a.key);
+            const sr = structuralRating(actor, a.bam);
+            return {
+                key: a.key, name: a.name, damage,
+                srLabel: sr == null ? "—" : String(sr),
+                inactive: sr != null && damage >= sr
+            };
+        });
 
         // ------------------------------------------------------------
         // Combat Context
@@ -415,6 +428,16 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }));
         html.querySelectorAll(".unbalanced-toggle").forEach(el => el.addEventListener("change", ev => {
             this.actor.update({ "system.status.unbalanced": !!ev.currentTarget.checked });
+        }));
+
+        // Damage by Location (§4.15): attacker toggle + structural damage edits.
+        html.querySelectorAll(".hitloc-toggle").forEach(el => el.addEventListener("change", ev => {
+            this.actor.update({ "system.status.useHitLocations": !!ev.currentTarget.checked });
+        }));
+        html.querySelectorAll(".structural-input").forEach(el => el.addEventListener("change", ev => {
+            const key = ev.currentTarget.dataset.key;
+            if (!key) return;
+            this.actor.update({ [`system.status.structural.${key}`]: Math.max(0, Number(ev.currentTarget.value) || 0) });
         }));
 
         // Shield formation (§5.6): GM-declared flank shields feeding DB.

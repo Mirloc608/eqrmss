@@ -292,5 +292,21 @@
     </div>
   </div>
 
+  <div class="npc-panel">
+    <h4>Damage by Location (§4.15)</h4>
+    <div class="npc-ctl">
+      <label>Random hit locations</label>
+      <input type="checkbox" class="hitloc-toggle" {{checked system.status.useHitLocations}}/>
+    </div>
+    <table class="rmss-table">
+      <thead><tr><th>Area</th><th>Damage</th><th>SR</th><th></th></tr></thead>
+      <tbody>
+        {{#each structuralAreas}}{{#if this.damage}}
+          <tr{{#if this.inactive}} style="font-weight: bold;"{{/if}}><td>{{this.name}}</td><td><input type="number" class="structural-input" data-key="{{this.key}}" value="{{this.damage}}" min="0" style="width: 56px;"/></td><td>{{this.srLabel}}</td><td>{{#if this.inactive}}Inactive{{/if}}</td></tr>
+        {{/if}}{{/each}}
+      </tbody>
+    </table>
+  </div>
+
   <div class="npc-drop-hint">Drop equipment here</div>
 </form>

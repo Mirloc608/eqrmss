@@ -170,6 +170,7 @@ export function parseStun(text) {
 }
 
 // "bleeds at 1 hit per round", "takes +3 hits per round" -> hits/round.
+// Strategic Targeting table rider: "bleed for 2/round".
 // Spell Law shorthand: "N!" bleeds N hits per round.
 export function parseBleed(text) {
     if (!text) return 0;
@@ -178,9 +179,11 @@ export function parseBleed(text) {
     const re1 = /bleeds?\s+at\s+(\d+)\s+hits?\s+per\s+round/gi;
     const re2 = /takes?\s+\+?(\d+)\s+hits\s+per\s+round/gi;
     const re3 = /(\d+)\s?!/g;
+    const re4 = /bleeds?\s+for\s+(\d+)\s*(?:hits?\s*)?\/?\s*round/gi;
     while ((m = re1.exec(text))) per += Number(m[1]);
     while ((m = re2.exec(text))) per += Number(m[1]);
     while ((m = re3.exec(text))) per += Number(m[1]);
+    while ((m = re4.exec(text))) per += Number(m[1]);
     return per;
 }
 
