@@ -6,6 +6,8 @@
 import { RMSS_STAT_KEYS, canonicalStatKey } from "../../../utils/actor/rmss-stats.js";
 import { RMSSDerivedValueEngine, calculateArmorAndDefenses } from "../../../data/stats/rmss-derived-values.js";
 import { visibleSpells, visibleSongs } from "../../../utils/item-visibility.js";
+import { getItemEffect } from "../../../data/item-effects/item-effect-loader.js";
+import { isWorn } from "../../../utils/equipment/equipment-utils.js";
 
 const STAT_LABELS = {
     ST: "Strength",
@@ -266,6 +268,21 @@ export class EQRMSSActorContextHelper {
             };
             if (effect.flags?.eqrmss?.category === "debuff") debuffs.push(entry);
             else buffs.push(entry);
+        }
+        // Worn item effects (e.g. Flowing Thought) — passive, tied to the
+        // item; shown read-only, no dismiss button. Unequip to remove.
+        for (const item of this.actor?.items ?? []) {
+            if (!isWorn(item)) continue;
+            const effectId = item.system?.wornEffect;
+            if (!effectId) continue;
+            const effect = getItemEffect(effectId);
+            if (!effect) continue;
+            buffs.push({
+                id: `worn-${item.id}`,
+                name: `${effect.name ?? effectId} (${item.name})`,
+                origin: null,
+                fromItem: true
+            });
         }
         context.buffs = buffs;
         context.debuffs = debuffs;
