@@ -334,6 +334,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
         return {
             ...context,
+            isGM: game?.user?.isGM ?? false,
             actor,
             system: {
                 ...system,

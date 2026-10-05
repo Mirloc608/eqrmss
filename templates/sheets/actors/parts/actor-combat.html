@@ -61,7 +61,7 @@
     <p class="hint">An adjacent shield-bearing ally on each flank adds DB by their shield type. Maximum: one ally per side.</p>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
       <label>Left flank shield:
-        <select class="formation-shield" data-side="left">
+        <select class="formation-shield" {{#unless isGM}}disabled{{/unless}} data-side="left">
           <option value=""{{#unless system.combat.formationLeft}} selected{{/unless}}>None</option>
           <option value="target"{{#if (eq system.combat.formationLeft "target")}} selected{{/if}}>Target (+5/+2)</option>
           <option value="normal"{{#if (eq system.combat.formationLeft "normal")}} selected{{/if}}>Normal (+10/+10)</option>
@@ -70,7 +70,7 @@
         </select>
       </label>
       <label>Right flank shield:
-        <select class="formation-shield" data-side="right">
+        <select class="formation-shield" {{#unless isGM}}disabled{{/unless}} data-side="right">
           <option value=""{{#unless system.combat.formationRight}} selected{{/unless}}>None</option>
           <option value="target"{{#if (eq system.combat.formationRight "target")}} selected{{/if}}>Target (+5/+2)</option>
           <option value="normal"{{#if (eq system.combat.formationRight "normal")}} selected{{/if}}>Normal (+10/+10)</option>
@@ -86,7 +86,7 @@
     <p class="hint">Confined-space OB penalties (cumulative); the Restricted Area Combat skill offsets them.</p>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
       <label>Ceiling:
-        <select class="rac-select" data-key="height">
+        <select class="rac-select" {{#unless isGM}}disabled{{/unless}} data-key="height">
           <option value=""{{#unless system.status.restrictedArea.height}} selected{{/unless}}>Full clearance</option>
           <option value="full"{{#if (eq system.status.restrictedArea.height "full")}} selected{{/if}}>Character's height (-10)</option>
           <option value="h75"{{#if (eq system.status.restrictedArea.height "h75")}} selected{{/if}}>75% of height (-20)</option>
@@ -95,7 +95,7 @@
         </select>
       </label>
       <label>Width:
-        <select class="rac-select" data-key="width">
+        <select class="rac-select" {{#unless isGM}}disabled{{/unless}} data-key="width">
           <option value=""{{#unless system.status.restrictedArea.width}} selected{{/unless}}>Arm's length to wall</option>
           <option value="w75"{{#if (eq system.status.restrictedArea.width "w75")}} selected{{/if}}>75% arm's length (-5)</option>
           <option value="w50"{{#if (eq system.status.restrictedArea.width "w50")}} selected{{/if}}>50% arm's length (-10)</option>
@@ -104,7 +104,7 @@
         </select>
       </label>
       <label>Weapon space:
-        <select class="rac-select" data-key="weaponSpace">
+        <select class="rac-select" {{#unless isGM}}disabled{{/unless}} data-key="weaponSpace">
           <option value=""{{#unless system.status.restrictedArea.weaponSpace}} selected{{/unless}}>Full swing room</option>
           <option value="s75"{{#if (eq system.status.restrictedArea.weaponSpace "s75")}} selected{{/if}}>75% weapon space (-10)</option>
           <option value="s50"{{#if (eq system.status.restrictedArea.weaponSpace "s50")}} selected{{/if}}>50% weapon space (-20)</option>
@@ -117,7 +117,7 @@
 
   <div class="panel">
     <h4>Situational Modifiers (Arms Companion §4.2)</h4>
-    <p class="hint">Declared per combatant; exhaustion and bleeding penalties apply automatically. Charging and advancing are not cumulative (charge wins).</p>
+    <p class="hint">Charge and advance are declared by the player; everything else here is set by the GM. Exhaustion and bleeding penalties apply automatically. Charging and advancing are not cumulative (charge wins).</p>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
       <label>Charge:
         <select class="sit-select" data-key="charge">
@@ -130,14 +130,14 @@
         </select>
       </label>
       <label>Ground:
-        <select class="sit-select" data-key="ground">
+        <select class="sit-select" data-key="ground" {{#unless isGM}}disabled{{/unless}}>
           <option value=""{{#unless system.status.situational.ground}} selected{{/unless}}>Even ground</option>
           <option value="higher"{{#if (eq system.status.situational.ground "higher")}} selected{{/if}}>Higher (+5)</option>
           <option value="lower"{{#if (eq system.status.situational.ground "lower")}} selected{{/if}}>Lower (-5)</option>
         </select>
       </label>
       <label>Weapon length:
-        <select class="sit-select" data-key="weaponLength">
+        <select class="sit-select" data-key="weaponLength" {{#unless isGM}}disabled{{/unless}}>
           <option value=""{{#unless system.status.situational.weaponLength}} selected{{/unless}}>Even</option>
           <option value="longer"{{#if (eq system.status.situational.weaponLength "longer")}} selected{{/if}}>Mine is longer (+5)</option>
           <option value="shorter"{{#if (eq system.status.situational.weaponLength "shorter")}} selected{{/if}}>Mine is shorter (-5)</option>
@@ -151,7 +151,7 @@
         </select>
       </label>
       <label>Foes faced alone:
-        <select class="sit-select" data-key="foesAlone">
+        <select class="sit-select" data-key="foesAlone" {{#unless isGM}}disabled{{/unless}}>
           <option value=""{{#unless system.status.situational.foesAlone}} selected{{/unless}}>Not outnumbered</option>
           <option value="2"{{#if (eq system.status.situational.foesAlone "2")}} selected{{/if}}>2 foes (-10)</option>
           <option value="3"{{#if (eq system.status.situational.foesAlone "3")}} selected{{/if}}>3 foes (-15)</option>
@@ -159,25 +159,25 @@
         </select>
       </label>
       <label>Allies on this foe:
-        <select class="sit-select" data-key="alliesOnFoe">
+        <select class="sit-select" data-key="alliesOnFoe" {{#unless isGM}}disabled{{/unless}}>
           <option value=""{{#unless system.status.situational.alliesOnFoe}} selected{{/unless}}>None</option>
           <option value="1"{{#if (eq system.status.situational.alliesOnFoe "1")}} selected{{/if}}>1 ally (+5)</option>
           <option value="2"{{#if (eq system.status.situational.alliesOnFoe "2")}} selected{{/if}}>2 allies (+10)</option>
           <option value="3"{{#if (eq system.status.situational.alliesOnFoe "3")}} selected{{/if}}>3 allies (+15)</option>
         </select>
       </label>
-      <label><input type="checkbox" class="sit-check" data-key="opportunity" {{checked system.status.situational.opportunity}}/> Opportunity strike (+5)</label>
-      <label><input type="checkbox" class="sit-check" data-key="unstableGround" {{checked system.status.situational.unstableGround}}/> Unstable ground (-20)</label>
-      <label><input type="checkbox" class="sit-check" data-key="temperature" {{checked system.status.situational.temperature}}/> Unbearable temperature (-35)</label>
-      <label><input type="checkbox" class="sit-check" data-key="brawlScuffle" {{checked system.status.situational.brawlScuffle}}/> Brawl/Scuffle this round (-20)</label>
+      <label><input type="checkbox" class="sit-check" data-key="opportunity" {{#unless isGM}}disabled{{/unless}} {{checked system.status.situational.opportunity}}/> Opportunity strike (+5)</label>
+      <label><input type="checkbox" class="sit-check" data-key="unstableGround" {{#unless isGM}}disabled{{/unless}} {{checked system.status.situational.unstableGround}}/> Unstable ground (-20)</label>
+      <label><input type="checkbox" class="sit-check" data-key="temperature" {{#unless isGM}}disabled{{/unless}} {{checked system.status.situational.temperature}}/> Unbearable temperature (-35)</label>
+      <label><input type="checkbox" class="sit-check" data-key="brawlScuffle" {{#unless isGM}}disabled{{/unless}} {{checked system.status.situational.brawlScuffle}}/> Brawl/Scuffle this round (-20)</label>
     </div>
-    <label><input type="checkbox" class="unbalanced-toggle" {{checked system.status.unbalanced}}/> This combatant is unbalanced or disoriented (attackers gain +10 against them)</label>
+    <label><input type="checkbox" class="unbalanced-toggle" {{#unless isGM}}disabled{{/unless}} {{checked system.status.unbalanced}}/> This combatant is unbalanced or disoriented (attackers gain +10 against them)</label>
   </div>
 
   <div class="panel">
     <h4>Damage by Location (Arms Companion §4.15)</h4>
     <p class="hint">Structural Rating = (CO &divide; 10) &times; BAM. An area at or past its SR is inactive.</p>
-    <label><input type="checkbox" class="hitloc-toggle" {{checked system.status.useHitLocations}}/> Roll random hit locations for my attacks — criticals resolve on the Strategic Targeting table (§4.15.2). Called shots add a structural roll (§4.15.1).</label>
+    <label><input type="checkbox" class="hitloc-toggle" {{#unless isGM}}disabled{{/unless}} {{checked system.status.useHitLocations}}/> Roll random hit locations for my attacks — criticals resolve on the Strategic Targeting table (§4.15.2). Called shots add a structural roll (§4.15.1).</label>
     <table class="rmss-table">
       <thead><tr><th>Area</th><th>Damage</th><th>SR</th><th></th></tr></thead>
       <tbody>
