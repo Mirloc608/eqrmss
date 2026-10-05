@@ -85,6 +85,12 @@
         <div class="eq-ring"><div class="eq-mval">{{system.hits.value}}</div><div class="eq-msub">of {{system.hits.max}}</div></div>
         <div class="eq-mlab">Hits Taken</div>
       </div>
+      {{#if system.derived.manaMax}}
+      <div class="eq-medal">
+        <div class="eq-ring"><div class="eq-mval">{{system.attributes.mana.value}}</div><div class="eq-msub">of {{system.attributes.mana.max}}</div></div>
+        <div class="eq-mlab">Mana</div>
+      </div>
+      {{/if}}
       <div class="eq-medal">
         <div class="eq-ring"><div class="eq-mval">{{system.combat.armorType}}</div></div>
         <div class="eq-mlab">Armor Type</div>
