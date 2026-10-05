@@ -130,7 +130,12 @@ export function lookupAttack(weaponTables, tableName, netRoll, at, attackSize) {
                  error: `Net roll ${net} is below the ${table.name} table — clean miss.` };
     }
     const row = (range.rows ?? []).find(x => Number(x.at) === Number(at));
-    if (!row) return { error: `AT ${at} is not on the ${table.name} table.` };
+    // A missing cell is a printed "0" on the source table (Spell Law
+    // bolt tables especially): no hits, no crit — the attack has no
+    // effect against that armor on so weak a roll. Not an error.
+    if (!row) return { table: table.name, netRoll: net, uncappedRoll: netRoll,
+                        capped, cap, attackSize: sizeKey || null,
+                        damage: 0, critCode: null, damageRaw: "", noEffect: true };
     const dmgStr = String(row.damage ?? "").trim();
     const damage = /^\d+$/.test(dmgStr) ? Number(dmgStr) : null;
     return {
