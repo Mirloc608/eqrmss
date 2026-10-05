@@ -435,7 +435,9 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     // ---- Stun / unconscious: no offensive action ----
     const stunState = activeStun(actor.system?.status?.stun);
     const unconscious = !!actor.system?.status?.unconscious;
-    if (stunState || unconscious || isExhausted(actor)) {
+    // Displaced spells go off despite the caster's fresh stun: the
+    // stun governs future actions, not the already-released spell.
+    if (!options.ignoreCasterState && (stunState || unconscious || isExhausted(actor))) {
         const why = unconscious ? "unconscious" : isExhausted(actor) ? "exhausted" : STUN_LABEL[stunState.type];
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
@@ -482,13 +484,14 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     const attackSpeed = missileAttack ? null : actorAttackSpeed(actor);
     const speedBaseOb = attackSpeed ? speedScaledOb(baseOb, attackSpeed.pct) : baseOb;
 
-    // ---- Target: first targeted token, else manual ----
+    // ---- Target: explicit token override (displaced spells),
+    // else first targeted token, else manual ----
     let targetActor = null;
     let targetName = "Target";
     let at = null;
     let db = 0;
     let shieldDefense = { db: 0, shieldDB: 0, shieldBlocked: false, shieldOpponentName: "", needsShieldAssignment: false };
-    const targeted = [...(game.user?.targets ?? [])][0];
+    const targeted = options.targetToken ?? [...(game.user?.targets ?? [])][0];
     if (targeted?.actor) {
         targetActor = targeted.actor;
         targetName = targeted.name ?? targetActor.name;

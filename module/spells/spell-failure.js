@@ -115,8 +115,8 @@ export const SPELL_FAILURE_TABLE = {
         { low: 76, high: 90, text: "Severe strain causes caster to misfire. Caster takes 5 hits, and is stunned for 3 rounds." },
         { low: 91, high: 95, text: "Extreme mental pressure causes caster to misfire and collapse to the ground. Caster takes 10 hits, and is stunned for 6 rnds." },
         { low: 96, high: 100, text: "Caster internalizes spell, takes 20 hits. Knocked out for 12 hrs." },
-        { low: 101, high: 125, text: "Spell strays and travels to a point 20 feet right of target. Roll on appropriate table for effect. Caster is stunned for 1 round and takes 10 hits." },
-        { low: 126, high: 150, text: "Spell strays and travels to a point 20 feet left of target. Roll on appropriate table for effect. Caster is stunned for 2 rounds and takes 5 hits." },
+        { low: 101, high: 125, displace: "right", text: "Spell strays and travels to a point 20 feet right of target. Roll on appropriate table for effect. Caster is stunned for 1 round and takes 10 hits." },
+        { low: 126, high: 150, displace: "left", text: "Spell strays and travels to a point 20 feet left of target. Roll on appropriate table for effect. Caster is stunned for 2 rounds and takes 5 hits." },
         { low: 151, high: 175, text: "Spell is cast in direction opposite to the intended line. Caster suffers mental collapse, takes 25 hits, and is unable to function for 6 hours." },
         { low: 176, high: 185, text: "Caster internalizes spell, takes 30 hits, and suffers nerve damage in brain. Unfortunate fool loses all spell casting ability for 1 wk, must operate at 50% of normal for 3 months (or until nerves are repaired, whichever period is shorter)." },
         { low: 186, high: 191, text: "Caster internalizes spell, loses all spell casting ability for 2 weeks, takes 35 hits, and falls into a coma for 1 week." },
@@ -405,6 +405,34 @@ export async function resolveSpellFailure(caster, spellItem, opts = {}) {
     const entry = lookupSpellFailure(section, rollTotal);
     const notes = await applySpellFailureEffects(caster, entry);
     const name = spellItem?.name ?? "the spell";
+    // Displaced attack spells: click-to-place landing (user ruling
+    // 2026-10-05). The book-directed start point is computed here
+    // while the target token is local to the casting client; the GM
+    // places the splash, either immediately (GM caster) or from the
+    // card button.
+    let displaceBtn = "";
+    let displaceCtx = null;
+    if (entry.displace && opts.displace?.targetToken) {
+        try {
+            const { displacementStartPoint } = await import("./displaced-spell.js");
+            const start = displacementStartPoint(
+                opts.displace.targetToken, opts.displace.casterToken ?? null, entry.displace);
+            displaceCtx = {
+                kind: opts.displace.kind,
+                direction: entry.displace,
+                targetName: opts.displace.targetToken?.name ?? "the target",
+                casterUuid: caster.uuid ?? "",
+                spellUuid: spellItem.uuid ?? "",
+                startX: Math.round(start.x), startY: Math.round(start.y)
+            };
+            const d = displaceCtx;
+            displaceBtn = `<p><button type="button" class="eqrmss-place-stray"`
+                + ` data-caster-uuid="${esc(d.casterUuid)}" data-spell-uuid="${esc(d.spellUuid)}"`
+                + ` data-kind="${esc(d.kind)}" data-direction="${esc(d.direction)}"`
+                + ` data-target-name="${esc(d.targetName)}"`
+                + ` data-x="${d.startX}" data-y="${d.startY}">Place the stray spell (GM)</button></p>`;
+        } catch (e) { console.warn("EQRMSS | stray-spell placement unavailable", e); }
+    }
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: caster }),
         content: combatCard("Spell Failure", `
@@ -412,8 +440,13 @@ export async function resolveSpellFailure(caster, spellItem, opts = {}) {
             <h2>${esc(caster.name)} — ${esc(name)} fails</h2>
             <p><strong>Failure roll:</strong> ${fr.rolls.join(" + ")}${fr.rolls.length > 1 ? ` = ${fr.total}` : ""}${esfTotal ? ` + ${esfTotal * 3} (triple ESF ${esfTotal})` : ""} = <strong>${rollTotal}</strong> on the Spell Failure Table (${section === "attack" ? "Attack" : "Non-Attack"} Spells)</p>
             <p>${esc(entry.text)}</p>
-            ${notes.length ? `<p><em>${notes.join("<br>")}</em></p>` : ""}`)
+            ${notes.length ? `<p><em>${notes.join("<br>")}</em></p>` : ""}
+            ${displaceBtn}`)
     });
+    if (displaceCtx && game.user?.isGM) {
+        const { openDisplacedCrosshair } = await import("./displaced-spell.js");
+        await openDisplacedCrosshair({ caster, spellItem, ...displaceCtx });
+    }
     return { entry, roll: rollTotal, section };
 }
 
@@ -440,6 +473,7 @@ export async function esfGate(caster, spellItem, opts = {}) {
         section: opts.attackSpell ? "attack" : "nonattack",
         esfTotal: esf.total,
         rollD100: opts.rollD100,
+        displace: opts.displace ?? null,
         headerHtml: `<p><strong>ESF roll:</strong> ${roll.rolls.join(" + ")}${roll.rolls.length > 1 ? ` = ${roll.total}` : ""} vs ESF ${esf.total} (${esc(partsText)}) — the spell fails.</p>`
     });
     return { required: true, passed: false, esf, roll: roll.total, failure };

@@ -15,6 +15,25 @@ export function registerEQRMSSHooks() {
     tickConditions(combat).catch(e => console.error("EQRMSS | Condition tick failed", e));
   });
 
+  // Displaced-spell landing (Table 15.7): the failure card's
+  // "Place the stray spell" button opens the GM crosshair.
+  Hooks.on("renderChatMessageHTML", (message, html) => {
+    const root = html instanceof HTMLElement ? html : html?.[0];
+    if (!root) return;
+    root.querySelectorAll(".eqrmss-place-stray").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        if (!game.user?.isGM) {
+          ui.notifications?.warn("Only the GM can place the stray spell.");
+          return;
+        }
+        try {
+          const { handlePlaceStrayButton } = await import("../spells/displaced-spell.js");
+          await handlePlaceStrayButton(btn.dataset);
+        } catch (e) { console.error("EQRMSS | stray-spell placement failed", e); }
+      });
+    });
+  });
+
   // NOTE: Templates are loaded once during "init" by the bootstrap
   // (eqrmss.js -> loadEQRMSSTemplates). The duplicate "ready" reload
   // that used to live here has been removed.

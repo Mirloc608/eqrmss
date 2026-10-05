@@ -57,7 +57,7 @@ function targetedActors() {
 }
 
 /** Blast radius in feet, from the spell's damage effect. */
-function blastRadiusFt(spellItem) {
+export function blastRadiusFt(spellItem) {
     const effs = spellItem?.system?.effects ?? [];
     const dmg = effs.find(e => e?.type === "damage" && Number(e?.radius) > 0);
     return Number(dmg?.radius) || 0;
@@ -91,6 +91,25 @@ function blastActors(aimActor, radiusFt) {
     // The aim point is always inside its own blast.
     if (!seen.has(aimActor.id)) seen.set(aimActor.id, aimActor);
     return seen.size ? [...seen.values()] : null;
+}
+
+/** The synthetic "weapon" a bolt cast rolls on the attack table. */
+export function syntheticBoltWeapon(actor, spellItem, cls) {
+    return {
+        _id: spellItem.id ?? spellItem._id ?? "cast-spell",
+        id: spellItem.id ?? spellItem._id ?? "cast-spell",
+        name: spellItem.name ?? "spell",
+        type: "weapon",
+        system: {
+            type: "spell",
+            attackTable: cls.attackTable,
+            obMod: directedSpellsOB(actor),
+            damageMod: 0,
+            criticalType: cls.critType ?? "",
+            location: "equipped",
+            equipped: true
+        }
+    };
 }
 
 /**
@@ -132,10 +151,23 @@ export async function castSpell(actor, spellItem, opts = {}) {
         }
     }
 
+    // Displaced-spell landing (Table 15.7): the failure path needs
+    // the target token for the book-directed start point.
+    let displaceCtx = null;
+    {
+        const casterTok = actor.getActiveTokens?.()?.[0] ?? null;
+        let targetTok = null;
+        if (cls.kind === "bolt") targetTok = [...(globalThis.game?.user?.targets ?? [])][0] ?? null;
+        else if (cls.kind === "base") targetTok = baseTargets[0]?.getActiveTokens?.()?.[0] ?? null;
+        else if (cls.kind === "ball") targetTok = ballTargets[0]?.getActiveTokens?.()?.[0] ?? null;
+        if (targetTok) displaceCtx = { kind: cls.kind, targetToken: targetTok, casterToken: casterTok };
+    }
+
     // ---- ESF gate (before the mana is spent) ----
     const gate = await esfGate(actor, spellItem, {
         attackSpell: cls.kind === "bolt" || cls.kind === "base" || cls.kind === "ball",
-        prepRoundsShort: opts.prepRoundsShort
+        prepRoundsShort: opts.prepRoundsShort,
+        displace: displaceCtx
     });
     if (gate.required && !gate.passed) {
         return { ok: false, reason: "esf", esf: gate.esf.total, failure: gate.failure?.entry ?? null };
@@ -157,21 +189,7 @@ export async function castSpell(actor, spellItem, opts = {}) {
 
     if (cls.kind === "bolt") {
         await spendMana();
-        const synthetic = {
-            _id: spellItem.id ?? spellItem._id ?? "cast-spell",
-            id: spellItem.id ?? spellItem._id ?? "cast-spell",
-            name,
-            type: "weapon",
-            system: {
-                type: "spell",
-                attackTable: cls.attackTable,
-                obMod: directedSpellsOB(actor),
-                damageMod: 0,
-                criticalType: cls.critType ?? "",
-                location: "equipped",
-                equipped: true
-            }
-        };
+        const synthetic = syntheticBoltWeapon(actor, spellItem, cls);
         if (esfNote) {
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor }),
