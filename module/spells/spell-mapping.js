@@ -113,7 +113,11 @@ export function statBonusFor(actor, code) {
 
 /** Derived mana maximum for an actor (0 for non-casters). */
 export function manaMaxFor(actor) {
-    const classId = String(actor?.system?.fixed_info?.classId ?? actor?.system?.classId ?? "").toLowerCase();
+    const sys = actor?.system ?? {};
+    // World actors carry their class at system.origin.classId
+    // (the wizard finalizer's origin block); keep the legacy spots
+    // as fallbacks.
+    const classId = String(sys.origin?.classId ?? sys.fixed_info?.classId ?? sys.classId ?? "").toLowerCase();
     const stat = CASTING_STAT_BY_CLASS[classId];
     if (!stat) return 0;
     const level = Math.max(1, Number(actor?.system?.character?.level) || 1);
