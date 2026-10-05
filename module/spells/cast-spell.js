@@ -39,7 +39,15 @@ export async function castSpell(actor, spellItem) {
         return { ok: false, reason: "mana" };
     }
     const spendMana = async () => {
-        if (cost > 0) await actor.update({ "system.attributes.mana.value": before - cost });
+        if (cost <= 0) return;
+        // Persist the derived max with the spend: prepare only lifts
+        // the in-memory pool, so without a stored max the lift would
+        // re-apply on top of the spent value at the next prepare.
+        const derivedMax = Number(actor.system?.derived?.manaMax) || Number(pool.max) || 0;
+        await actor.update({
+            "system.attributes.mana.value": before - cost,
+            "system.attributes.mana.max": Math.max(Number(pool.max) || 0, derivedMax)
+        });
     };
     const manaNote = cost > 0 ? ` Mana ${before} → ${before - cost}.` : "";
 
