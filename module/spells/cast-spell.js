@@ -29,11 +29,11 @@
 // ============================================================
 
 import { combatCard } from "../combat/chat-card.js";
-import { classifySpell, directedSpellsOB } from "./spell-mapping.js";
+import { classifySpell, directedSpellsOB, spellEffectsOf } from "./spell-mapping.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
     resolveBaseSpellAttack, applyBaseSpellEffect,
-    d100, barLevelBonus, rangeModFor
+    d100, barLevelBonus, rangeModFor, rollAmount, durationRounds
 } from "./base-spell.js";
 import { resolveBallCast } from "./ball-spell.js";
 import { rollWeaponAttack } from "../combat/combat-rolls.js";
@@ -110,6 +110,45 @@ export function syntheticBoltWeapon(actor, spellItem, cls) {
             equipped: true
         }
     };
+}
+
+/**
+ * Mana-regen buffs (Clarity, the beastlord purity line) land as
+ * timed regen entries ticking each round in tickConditions; a
+ * heal-over-time component lands as hits regen the same way.
+ * Other buff payloads stay announced-only.
+ */
+async function applyRegenBuff(caster, spellItem) {
+    const target = targetedActor() ?? caster;
+    if (!target) return "";
+    const canTouch = target.isOwner || globalThis.game?.user?.isGM;
+    const name = spellItem?.name ?? "spell";
+    const notes = [];
+    for (const eff of spellEffectsOf(spellItem)) {
+        if (!eff || typeof eff !== "object") continue;
+        const isManaRegen = eff.type === "regen" && (eff.stat === "mana" || eff.pool === "mana");
+        const isHot = eff.type === "heal" && Number(eff.duration) > 0;
+        if (!isManaRegen && !isHot) continue;
+        const amount = rollAmount(eff);
+        const rounds = durationRounds(eff.duration);
+        if (!(amount > 0) || rounds == null) continue;
+        if (!canTouch) {
+            notes.push(`Regen not applied — you don't control ${esc(target.name)}.`);
+            continue;
+        }
+        const list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
+        list.push({
+            kind: "regen",
+            pool: isManaRegen ? "mana" : "hits",
+            amount, roundsLeft: rounds,
+            label: name, source: "spell"
+        });
+        await target.update({ "system.status.spellEffects": list });
+        notes.push(isManaRegen
+            ? `${esc(target.name)} regenerates ${amount} mana/round for ${rounds} rounds (${esc(name)}).`
+            : `${esc(target.name)} regenerates ${amount} hits/round for ${rounds} rounds (${esc(name)}).`);
+    }
+    return notes.length ? `<p><em>${notes.join("<br>")}</em></p>` : "";
 }
 
 /**
@@ -324,12 +363,13 @@ export async function castSpell(actor, spellItem, opts = {}) {
     // Announced cast (buff/utilities and later-stage tracks land
     // their mechanics in later stages; the mana economy is live).
     await spendMana();
+    const regenNote = await applyRegenBuff(actor, spellItem);
     const note = cls.kind === "later" ? esc(cls.reason) : "no mechanical payload";
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}<p><em>Cast announced — ${note}.${manaNote}</em></p>`)
+            ${esfNote}${regenNote}<p><em>Cast announced — ${note}.${manaNote}</em></p>`)
     });
     return { ok: true, kind: cls.kind };
 }

@@ -77,6 +77,7 @@ import { WEAPON_TYPE_TO_SKILL_ID } from "./attack-resolver.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { roundExhaustionCost, exhaustionCurrent, exhaustionMaxFor } from "./subdue.js";
 import { combatCard } from "./chat-card.js";
+import { applyWornRoundEffects } from "../item-effects/worn-engine.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -670,11 +671,23 @@ export async function tickConditions(combat) {
             const remainingFx = [];
             for (const e of spellEffects) {
                 const songAlive = e.source === "song" && e.maintained && songStillActive(e);
-                if (e.kind === "regen" && Number(e.amount) > 0 && songAlive) {
-                    const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
-                    const healed = Math.max(0, cur - Number(e.amount));
-                    updates["system.hits.value"] = healed;
-                    notes.push(`${esc(actor.name)} regenerates ${Number(e.amount)} from ${esc(e.song || "a song")} (${cur} → ${healed} concussion hits).`);
+                const regenAlive = songAlive || e.source === "spell"
+                    || (typeof e.source === "string" && e.source.startsWith("triggered:"));
+                if (e.kind === "regen" && Number(e.amount) > 0 && regenAlive) {
+                    if (e.pool === "mana") {
+                        const mCur = Number(updates["system.attributes.mana.value"] ?? actor.system?.attributes?.mana?.value) || 0;
+                        const mMax = Number(actor.system?.attributes?.mana?.max) || 0;
+                        const mNext = Math.min(mMax, mCur + Number(e.amount));
+                        if (mNext > mCur) {
+                            updates["system.attributes.mana.value"] = mNext;
+                            notes.push(`${esc(actor.name)} regenerates ${mNext - mCur} mana from ${esc(e.label || e.song || "a spell")} (${mCur} → ${mNext}).`);
+                        }
+                    } else {
+                        const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
+                        const healed = Math.max(0, cur - Number(e.amount));
+                        updates["system.hits.value"] = healed;
+                        notes.push(`${esc(actor.name)} regenerates ${Number(e.amount)} from ${esc(e.song || e.label || "a song")} (${cur} → ${healed} concussion hits).`);
+                    }
                 }
                 if (e.roundsLeft == null) { remainingFx.push(e); continue; }
                 if (songAlive) { remainingFx.push(e); continue; }
@@ -684,6 +697,19 @@ export async function tickConditions(combat) {
             }
             updates["system.status.spellEffects"] = remainingFx;
         }
+
+        // Worn regen (Flowing Thought line etc.): once per round
+        // while the item is worn. The payload caps at the pool max.
+        try {
+            const wornRes = await applyWornRoundEffects(actor);
+            for (const wr of wornRes) {
+                for (const r of wr.results ?? []) {
+                    if (r?.type === "regen" && (r?.final ?? 0) > 0) {
+                        notes.push(`${esc(actor.name)} regenerates ${r.final} mana from ${esc(wr.item)} (worn).`);
+                    }
+                }
+            }
+        } catch (err) { console.warn("EQRMSS | worn round effects failed", err); }
 
         // Stun pool — total decreases by one; most severe type first.
         const pool = { stunned: 0, stunNoParry: 0, downOrOut: 0, ...(st.stun ?? {}) };

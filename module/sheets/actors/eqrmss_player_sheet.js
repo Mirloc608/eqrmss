@@ -5,6 +5,7 @@
 import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
 import { isWorn } from "../../utils/equipment/equipment-utils.js";
 import { structuralAreasFor, structuralDamageOf, structuralRating } from "../../combat/hit-locations.js";
+import { exhaustionMaxFor } from "../../combat/subdue.js";
 import { progressionManager } from "../../progression/progression-manager.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
@@ -415,6 +416,31 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         html.querySelectorAll(".cauterize-wound").forEach(el => el.addEventListener("click", ev => {
             ev.preventDefault();
             this._onCauterize();
+        }));
+        // Rest & Recovery (out of combat): restore mana and
+        // exhaustion points to full (user ruling 2026-10-05).
+        html.querySelectorAll(".rest-recover").forEach(el => el.addEventListener("click", async ev => {
+            ev.preventDefault();
+            const actor = this.actor;
+            const inCombat = (game.combat?.combatants ?? []).some?.(c => c.actor?.id === actor.id);
+            if (inCombat) {
+                ui.notifications?.warn(`${actor.name} cannot rest while in combat.`);
+                return;
+            }
+            const manaMax = Number(actor.system?.derived?.manaMax)
+                || Number(actor.system?.attributes?.mana?.max) || 0;
+            const exMax = exhaustionMaxFor(actor);
+            const updates = {};
+            if (manaMax > 0) updates["system.attributes.mana.value"] = manaMax;
+            updates["system.exhaustion.value"] = exMax;
+            updates["system.exhaustion.max"] = exMax;
+            if (actor.system?.status?.exhausted) updates["system.status.exhausted"] = false;
+            if (actor.system?.status?.subdueDoubled) updates["system.status.subdueDoubled"] = false;
+            await actor.update(updates);
+            await ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor }),
+                content: `<p><em>${actor.name} rests — mana and exhaustion restored.</em></p>`
+            });
         }));
         html.querySelectorAll(".stance-select").forEach(el => el.addEventListener("change", ev => {
             this.actor.update({ "system.status.stance": ev.currentTarget.value || "" });
