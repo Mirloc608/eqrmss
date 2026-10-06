@@ -83,6 +83,13 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
         const actor = this.document;
+        // Ensure derived data (incl. manaMax) is prepared: on page load
+        // for newly created actors the sheet can render before the
+        // actor's prepareDerivedData() has populated system.derived.
+        // This is idempotent (prepareDerivedData resets derived each run).
+        if (actor && actor.system?.derived?.manaMax === undefined) {
+            try { actor.prepareDerivedData(); } catch (e) { /* non-fatal */ }
+        }
         const system = actor.system ?? {};
 
         // Readied weapons = worn per the shared isWorn rule, for the Combat tab.
