@@ -7292,6 +7292,2228 @@
           "note": "Clicky: Strength of the Kunzar. Effect definition pending user ruling."
         }
       ]
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the Blade of Strategy's fury erupts, blasting the target with arcane force and leaving a searing wound. (Warrior epic 1.0, Kunark era.)",
+      "id": "proc-rage-of-vallon",
+      "kind": "proc",
+      "name": "Rage of Vallon",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 1800,
+          "min": 1200,
+          "type": "damage"
+        },
+        {
+          "damage-per-round": {
+            "max": 450,
+            "min": 300
+          },
+          "element": "magic",
+          "rounds": 3,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, Zek's rage lashes out through the blade, smiting the target with arcane force. (Warrior epic 1.0, Kunark era.)",
+      "id": "proc-rage-of-zek",
+      "kind": "proc",
+      "name": "Rage of Zek",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 1800,
+          "min": 1200,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, divine wrath smites the target for massive damage and staggers them. (Ivyshae Blade, Kunark era.)",
+      "id": "proc-divine-wrath",
+      "kind": "proc",
+      "name": "Divine Wrath",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 4500,
+          "min": 3000,
+          "type": "damage"
+        },
+        {
+          "rounds": 2,
+          "type": "stun"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a gale of poison rains down over the target's area in three choking waves. (Poison Wind Censer, Kunark era.)",
+      "id": "proc-gale-of-poison",
+      "kind": "proc",
+      "name": "Gale of Poison",
+      "payload": [
+        {
+          "area": "targeted-ae",
+          "element": "poison",
+          "max": 2196,
+          "min": 1464,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, spectral swords rain down over the target's area. (BladeStorm, Velious era.)",
+      "id": "proc-rain-of-swords",
+      "kind": "proc",
+      "name": "Rain of Swords",
+      "payload": [
+        {
+          "area": "targeted-ae",
+          "element": "physical",
+          "max": 5832,
+          "min": 3888,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a storm of lightning crashes down over the target's area. (Adamantite Bo Stick, classic/Velious era.)",
+      "id": "proc-lightning-storm",
+      "kind": "proc",
+      "name": "Lightning Storm",
+      "payload": [
+        {
+          "area": "targeted-ae",
+          "element": "electricity",
+          "max": 2070,
+          "min": 1380,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, fire rains down over the target's area. (Sword of Skyfire, classic era.)",
+      "id": "proc-rain-of-fire",
+      "kind": "proc",
+      "name": "Rain of Fire",
+      "payload": [
+        {
+          "area": "targeted-ae",
+          "element": "fire",
+          "max": 1350,
+          "min": 900,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a spiral of flame engulfs the target's area. (Mystical Laig Staff, classic era.)",
+      "id": "proc-fire-spiral-of-alkabor",
+      "kind": "proc",
+      "name": "Fire Spiral of Al'Kabor",
+      "payload": [
+        {
+          "area": "targeted-ae",
+          "element": "fire",
+          "max": 1620,
+          "min": 1080,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a bolt of lightning strikes the target's area. (Skydarkener, Kunark era.)",
+      "id": "proc-lightning-strike",
+      "kind": "proc",
+      "name": "Lightning Strike",
+      "payload": [
+        {
+          "area": "targeted-ae",
+          "element": "electricity",
+          "max": 3312,
+          "min": 2208,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, thunder strikes the target's area, leaving a crackling wound. (Thunder Runed Great Sword, Velious era.)",
+      "id": "proc-strike-of-thunder",
+      "kind": "proc",
+      "name": "Strike of Thunder",
+      "payload": [
+        {
+          "area": "targeted-ae",
+          "element": "electricity",
+          "max": 2250,
+          "min": 1500,
+          "type": "damage"
+        },
+        {
+          "damage-per-round": {
+            "max": 450,
+            "min": 300
+          },
+          "element": "electricity",
+          "rounds": 3,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a supernova detonates around the wielder, immolating everything nearby. (Spore-Covered Rod, Luclin era.)",
+      "id": "proc-supernova",
+      "kind": "proc",
+      "name": "Supernova",
+      "payload": [
+        {
+          "area": "pbae",
+          "element": "fire",
+          "max": 15372,
+          "min": 10248,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the ground heaves violently around the wielder. (Earthshaker, classic/Kunark era.)",
+      "id": "proc-earthquake",
+      "kind": "proc",
+      "name": "Earthquake",
+      "payload": [
+        {
+          "area": "pbae",
+          "element": "physical",
+          "max": 3870,
+          "min": 2580,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a word of power blasts outward, searing the souls of all nearby foes. (Tnor'Tesphi, Kunark era.)",
+      "id": "proc-word-of-souls",
+      "kind": "proc",
+      "name": "Word of Souls",
+      "payload": [
+        {
+          "area": "pbae",
+          "element": "magic",
+          "max": 2790,
+          "min": 1860,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, lightning arcs outward around the wielder. (Ebonsting, Kunark era.)",
+      "id": "proc-project-lightning",
+      "kind": "proc",
+      "name": "Project Lightning",
+      "payload": [
+        {
+          "area": "pbae",
+          "element": "electricity",
+          "max": 1296,
+          "min": 864,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, living shadow erupts around the wielder. (Mithril Dwarven War Pick, classic era.)",
+      "id": "proc-word-of-shadow",
+      "kind": "proc",
+      "name": "Word of Shadow",
+      "payload": [
+        {
+          "area": "pbae",
+          "element": "magic",
+          "max": 1044,
+          "min": 696,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a word of pure pain lances outward around the wielder. (Painbringer, classic era.)",
+      "id": "proc-word-of-pain",
+      "kind": "proc",
+      "name": "Word of Pain",
+      "payload": [
+        {
+          "area": "pbae",
+          "element": "magic",
+          "max": 522,
+          "min": 348,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, fingers of flame grasp outward around the wielder. (Blade of Fiery Lamentations, classic era.)",
+      "id": "proc-fingers-of-fire",
+      "kind": "proc",
+      "name": "Fingers of Fire",
+      "payload": [
+        {
+          "area": "pbae",
+          "element": "fire",
+          "max": 504,
+          "min": 336,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the blade drinks deep of the target's soul, wounding them and feeding the wielder. (Shadowknight epic 1.0, Kunark era.)",
+      "id": "proc-soul-consumption",
+      "kind": "proc",
+      "name": "Soul Consumption",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 1800,
+          "min": 1200,
+          "type": "damage"
+        },
+        {
+          "max": 900,
+          "min": 600,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon saps the target's life force, healing the wielder. (Rank I, late era.)",
+      "id": "proc-life-sap-i",
+      "kind": "proc",
+      "name": "Life Sap I",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 1800,
+          "min": 1200,
+          "type": "damage"
+        },
+        {
+          "max": 900,
+          "min": 600,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon saps the target's life force, healing the wielder. (Rank II, late era.)",
+      "id": "proc-life-sap-ii",
+      "kind": "proc",
+      "name": "Life Sap II",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 2250,
+          "min": 1500,
+          "type": "damage"
+        },
+        {
+          "max": 1125,
+          "min": 750,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon saps the target's life force, healing the wielder. (Rank III, late era.)",
+      "id": "proc-life-sap-iii",
+      "kind": "proc",
+      "name": "Life Sap III",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 2700,
+          "min": 1800,
+          "type": "damage"
+        },
+        {
+          "max": 1350,
+          "min": 900,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon saps the target's life force, healing the wielder. (Rank IV, late era.)",
+      "id": "proc-life-sap-iv",
+      "kind": "proc",
+      "name": "Life Sap IV",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 3150,
+          "min": 2100,
+          "type": "damage"
+        },
+        {
+          "max": 1575,
+          "min": 1050,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon strikes with vampiric hunger, draining life into the wielder. (Rank I, late era.)",
+      "id": "proc-vampiric-strike-i",
+      "kind": "proc",
+      "name": "Vampiric Strike I",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 2592,
+          "min": 1728,
+          "type": "damage"
+        },
+        {
+          "max": 1296,
+          "min": 864,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon strikes with vampiric hunger, draining life into the wielder. (Rank II, late era.)",
+      "id": "proc-vampiric-strike-ii",
+      "kind": "proc",
+      "name": "Vampiric Strike II",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 3024,
+          "min": 2016,
+          "type": "damage"
+        },
+        {
+          "max": 1512,
+          "min": 1008,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon strikes with vampiric hunger, draining life into the wielder. (Rank III, late era.)",
+      "id": "proc-vampiric-strike-iii",
+      "kind": "proc",
+      "name": "Vampiric Strike III",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 3456,
+          "min": 2304,
+          "type": "damage"
+        },
+        {
+          "max": 1728,
+          "min": 1152,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon strikes with vampiric hunger, draining life into the wielder. (Rank IV, late era.)",
+      "id": "proc-vampiric-strike-iv",
+      "kind": "proc",
+      "name": "Vampiric Strike IV",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 3888,
+          "min": 2592,
+          "type": "damage"
+        },
+        {
+          "max": 1944,
+          "min": 1296,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a vampiric touch drains the target's life into the wielder. (Planes of Power era and later.)",
+      "id": "proc-vampiric-touch",
+      "kind": "proc",
+      "name": "Vampiric Touch",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 1314,
+          "min": 876,
+          "type": "damage"
+        },
+        {
+          "max": 657,
+          "min": 438,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon's vampiric bite drains the target's life into the wielder. (Kunark/Velious era.)",
+      "id": "proc-vampire-kiss",
+      "kind": "proc",
+      "name": "Vampire Kiss",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 1350,
+          "min": 900,
+          "type": "damage"
+        },
+        {
+          "max": 675,
+          "min": 450,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon's vampiric bite drains the target's life into the wielder. (Kunark/Velious era.)",
+      "id": "proc-vampire-fangs",
+      "kind": "proc",
+      "name": "Vampire Fangs",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 1080,
+          "min": 720,
+          "type": "damage"
+        },
+        {
+          "max": 540,
+          "min": 360,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon's vampiric bite drains the target's life into the wielder. (Kunark/Velious era.)",
+      "id": "proc-vampire-talon",
+      "kind": "proc",
+      "name": "Vampire Talon",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 900,
+          "min": 600,
+          "type": "damage"
+        },
+        {
+          "max": 450,
+          "min": 300,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon's vampiric bite drains the target's life into the wielder. (Kunark/Velious era.)",
+      "id": "proc-vampire-claw",
+      "kind": "proc",
+      "name": "Vampire Claw",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 720,
+          "min": 480,
+          "type": "damage"
+        },
+        {
+          "max": 360,
+          "min": 240,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon rips at the target's soul, draining life into the wielder. (Velious era.)",
+      "id": "proc-drain-soul",
+      "kind": "proc",
+      "name": "Drain Soul",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 6084,
+          "min": 4056,
+          "type": "damage"
+        },
+        {
+          "max": 3042,
+          "min": 2028,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon drains the target's spirit, feeding the wielder. (Luclin era.)",
+      "id": "proc-drain-spirit",
+      "kind": "proc",
+      "name": "Drain Spirit",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 5652,
+          "min": 3768,
+          "type": "damage"
+        },
+        {
+          "max": 2826,
+          "min": 1884,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon siphons the target's life into the wielder. (Luclin era.)",
+      "id": "proc-siphon-life",
+      "kind": "proc",
+      "name": "Siphon Life",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 2700,
+          "min": 1800,
+          "type": "damage"
+        },
+        {
+          "max": 1350,
+          "min": 900,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon taps the target's spirit, restoring the wielder. (Soulbane, Kunark era.)",
+      "id": "proc-spirit-tap",
+      "kind": "proc",
+      "name": "Spirit Tap",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 2700,
+          "min": 1800,
+          "type": "damage"
+        },
+        {
+          "max": 1350,
+          "min": 900,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon draws a trickle of life from the target into the wielder. (Velious era.)",
+      "id": "proc-lifedraw",
+      "kind": "proc",
+      "name": "Lifedraw",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 810,
+          "min": 540,
+          "type": "damage"
+        },
+        {
+          "max": 405,
+          "min": 270,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, an ancient, terrible touch drains a vast draught of life into the wielder. (Kotiz's Staff of Necromancy, Luclin era.)",
+      "id": "proc-ancient-touch-of-orshilak",
+      "kind": "proc",
+      "name": "Ancient Touch of Orshilak",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 23400,
+          "min": 15600,
+          "type": "damage"
+        },
+        {
+          "max": 11700,
+          "min": 7800,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, Saryrn's kiss settles on the target, bleeding their life into the wielder over time. (Blades of Aphotic Rites, late era.)",
+      "id": "proc-saryrns-kiss",
+      "kind": "proc",
+      "name": "Saryrn's Kiss",
+      "payload": [
+        {
+          "damage-per-round": {
+            "max": 5400,
+            "min": 3600
+          },
+          "element": "magic",
+          "heal-per-round": {
+            "max": 2700,
+            "min": 1800
+          },
+          "rounds": 5,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a soul bond forms, leeching the target's life into the wielder over time. (Kunark/Velious era.)",
+      "id": "proc-soul-bond",
+      "kind": "proc",
+      "name": "Soul Bond",
+      "payload": [
+        {
+          "damage-per-round": {
+            "max": 1800,
+            "min": 1200
+          },
+          "element": "magic",
+          "heal-per-round": {
+            "max": 900,
+            "min": 600
+          },
+          "rounds": 5,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a vampiric curse takes hold, sipping the target's life into the wielder. (Claw of the Black, Velious era.)",
+      "id": "proc-vampiric-curse",
+      "kind": "proc",
+      "name": "Vampiric Curse",
+      "payload": [
+        {
+          "damage-per-round": {
+            "max": 378,
+            "min": 252
+          },
+          "element": "magic",
+          "heal-per-round": {
+            "max": 189,
+            "min": 126
+          },
+          "rounds": 5,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon fastens like a leech, slowly draining life into the wielder. (Soulfiend Lance, Kunark era.)",
+      "id": "proc-leech",
+      "kind": "proc",
+      "name": "Leech",
+      "payload": [
+        {
+          "damage-per-round": {
+            "max": 144,
+            "min": 96
+          },
+          "element": "magic",
+          "heal-per-round": {
+            "max": 72,
+            "min": 48
+          },
+          "rounds": 5,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon steals the target's very thoughts, restoring the wielder's mana. (Luclin/Planes of Power era.)",
+      "id": "proc-theft-of-thought",
+      "kind": "proc",
+      "name": "Theft of Thought",
+      "payload": [
+        {
+          "max": 7200,
+          "min": 4800,
+          "type": "mana-drain"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon taps the target's mind, restoring a measure of the wielder's mana. (Classic era.)",
+      "id": "proc-mind-tap",
+      "kind": "proc",
+      "name": "Mind Tap",
+      "payload": [
+        {
+          "max": 900,
+          "min": 600,
+          "type": "mana-drain"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon brushes the target's wandering mind, restoring a trickle of mana. (Velious era.)",
+      "id": "proc-wandering-mind",
+      "kind": "proc",
+      "name": "Wandering Mind",
+      "payload": [
+        {
+          "max": 108,
+          "min": 72,
+          "type": "mana-drain"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon steals the target's strength, leaving their blows feeble. (Dark Reaver, late era.)",
+      "id": "proc-theft-of-pain",
+      "kind": "proc",
+      "name": "Theft of Pain",
+      "payload": [
+        {
+          "effect": "strength",
+          "note": "Drains the target's Strength",
+          "type": "debuff",
+          "value": -10
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, creeping shadow saps the target's strength. (Kunark era.)",
+      "id": "proc-shadow-creep",
+      "kind": "proc",
+      "name": "Shadow Creep",
+      "payload": [
+        {
+          "effect": "strength",
+          "type": "debuff",
+          "value": -8
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a shroud of hate clouds the target's reflexes. (Kunark era.)",
+      "id": "proc-shroud-of-hate",
+      "kind": "proc",
+      "name": "Shroud of Hate",
+      "payload": [
+        {
+          "effect": "dexterity",
+          "type": "debuff",
+          "value": -8
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon's cruel edge stuns the target and tears a deep, bleeding wound. (Classic/Kunark era.)",
+      "id": "proc-ykesha",
+      "kind": "proc",
+      "name": "Ykesha",
+      "payload": [
+        {
+          "element": "physical",
+          "max": 1350,
+          "min": 900,
+          "type": "damage"
+        },
+        {
+          "rounds": 1,
+          "type": "stun"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, holy power shocks through the target, stunning them senseless. (Paladin epic 1.0, Kunark era.)",
+      "id": "proc-holy-shock",
+      "kind": "proc",
+      "name": "Holy Shock",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 1800,
+          "min": 1200,
+          "type": "damage"
+        },
+        {
+          "rounds": 1,
+          "type": "stun"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, an ethereal blow staggers the target. (LDoN era.)",
+      "id": "proc-ethereal-strike",
+      "kind": "proc",
+      "name": "Ethereal Strike",
+      "payload": [
+        {
+          "element": "magic",
+          "max": 900,
+          "min": 600,
+          "type": "damage"
+        },
+        {
+          "rounds": 1,
+          "type": "stun"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, ethereal force slams the target's senses, stunning them. (LDoN era.)",
+      "id": "proc-ethereal-stun",
+      "kind": "proc",
+      "name": "Ethereal Stun",
+      "payload": [
+        {
+          "rounds": 1,
+          "type": "stun"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a cloud of scintillating color bursts around the wielder, stunning nearby foes. (Luclin era.)",
+      "id": "proc-color-cloud",
+      "kind": "proc",
+      "name": "Color Cloud",
+      "payload": [
+        {
+          "area": "pbae",
+          "rounds": 8,
+          "type": "stun"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, shifting colors wash over nearby foes, stunning them. (Kunark era.)",
+      "id": "proc-color-shift",
+      "kind": "proc",
+      "name": "Color Shift",
+      "payload": [
+        {
+          "area": "pbae",
+          "rounds": 6,
+          "type": "stun"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the earth itself answers, grinding the target's limbs to a crawl and tearing at them. (Ranger epic 1.0, Kunark era.)",
+      "id": "proc-earthcall",
+      "kind": "proc",
+      "name": "Earthcall",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -35
+        },
+        {
+          "damage-per-round": {
+            "max": 360,
+            "min": 240
+          },
+          "element": "physical",
+          "rounds": 3,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a swarm of biting insects harries the target, slowing their attacks to a crawl. (Kunark era.)",
+      "id": "proc-togors-insects",
+      "kind": "proc",
+      "name": "Togor's Insects",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -35
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, stinging insects swarm the target, slowing their attacks. (Swarmcaller, Kunark era.)",
+      "id": "proc-tagars-insects",
+      "kind": "proc",
+      "name": "Tagar's Insects",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -25
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the beastlord's vengeance slows the target and worries at them like a predator. (Beastlord epic 1.0, Luclin era.)",
+      "id": "proc-shas-vengeance",
+      "kind": "proc",
+      "name": "Sha's Vengeance",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -18
+        },
+        {
+          "damage-per-round": {
+            "max": 360,
+            "min": 240
+          },
+          "element": "physical",
+          "rounds": 3,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon saps the target's vigor, slowing their attacks. (Willsapper, Kunark era.)",
+      "id": "proc-energy-sap",
+      "kind": "proc",
+      "name": "Energy Sap",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -28
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a numbing lethargy seeps into the target, slowing their attacks. (Truncheon of Doom, classic era.)",
+      "id": "proc-tepid-deeds",
+      "kind": "proc",
+      "name": "Tepid Deeds",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -25
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the target moves as though half-asleep, their attacks slowed. (Locustlure, Luclin era.)",
+      "id": "proc-walking-sleep",
+      "kind": "proc",
+      "name": "Walking Sleep",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -28
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, crushing waves slow the target and grind at them. (Kunark/Velious era.)",
+      "id": "proc-waves-of-the-deep-sea",
+      "kind": "proc",
+      "name": "Waves of the Deep Sea",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -8
+        },
+        {
+          "damage-per-round": {
+            "max": 360,
+            "min": 240
+          },
+          "element": "physical",
+          "rounds": 3,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the sea's cold breath slows the target and wears at them. (Wavecrasher, Kunark/Velious era.)",
+      "id": "proc-breath-of-the-sea",
+      "kind": "proc",
+      "name": "Breath of the Sea",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -8
+        },
+        {
+          "damage-per-round": {
+            "max": 360,
+            "min": 240
+          },
+          "element": "physical",
+          "rounds": 3,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, envenomed blood weakens the target's guard, sapping their attack strength. (LDoN era.)",
+      "id": "proc-assassins-blood",
+      "kind": "proc",
+      "name": "Assassin's Blood",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -15
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a fell spine drives deep, sapping the target's attack strength. (Planes of Power era.)",
+      "id": "proc-fellspine",
+      "kind": "proc",
+      "name": "Fellspine",
+      "payload": [
+        {
+          "effect": "attack-penalty",
+          "type": "debuff",
+          "value": -20
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the fury of the Vah Shir lends the wielder blinding speed while the blow lands hard. (Beastlord epic 1.0, Luclin era.)",
+      "id": "proc-fury-of-the-vah-shir",
+      "kind": "proc",
+      "name": "Fury of the Vah Shir",
+      "payload": [
+        {
+          "element": "physical",
+          "max": 1620,
+          "min": 1080,
+          "type": "damage"
+        },
+        {
+          "duration-rounds": 10,
+          "effect": "haste",
+          "type": "buff"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the blade dances on its own, quickening and guiding the wielder's hand. (Bard epic 1.0, Kunark era.)",
+      "id": "proc-dance-of-the-blade",
+      "kind": "proc",
+      "name": "Dance of the Blade",
+      "payload": [
+        {
+          "duration-rounds": 10,
+          "effect": "haste",
+          "type": "buff"
+        },
+        {
+          "duration-rounds": 10,
+          "effect": "attack",
+          "type": "buff"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the deep seas sing through the steel, quickening the wielder and turning blows aside. (Luclin era.)",
+      "id": "proc-song-of-the-deep-seas",
+      "kind": "proc",
+      "name": "Song of the Deep Seas",
+      "payload": [
+        {
+          "duration-rounds": 10,
+          "effect": "haste",
+          "type": "buff"
+        },
+        {
+          "duration-rounds": 10,
+          "effect": "armor",
+          "type": "buff"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon's edge blurs, quickening the wielder's strikes. (Classic era.)",
+      "id": "proc-haste",
+      "kind": "proc",
+      "name": "Haste",
+      "payload": [
+        {
+          "duration-rounds": 10,
+          "effect": "haste",
+          "type": "buff"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, an avatar's might surges through the wielder, strengthening every blow. (Primal Velium weapons, Velious era.)",
+      "id": "proc-avatar",
+      "kind": "proc",
+      "name": "Avatar",
+      "payload": [
+        {
+          "duration-rounds": 10,
+          "effect": "attack",
+          "type": "buff"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the predator's mark sharpens the wielder's killing instinct. (Staff of Assault, Luclin era.)",
+      "id": "proc-mark-of-the-predator",
+      "kind": "proc",
+      "name": "Mark of the Predator",
+      "payload": [
+        {
+          "duration-rounds": 10,
+          "effect": "attack",
+          "type": "buff"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, clinging shadows torment the target with lingering agony. (Necromancer epic 1.0, Kunark era.)",
+      "id": "proc-torment-of-shadows",
+      "kind": "proc",
+      "name": "Torment of Shadows",
+      "payload": [
+        {
+          "damage-per-round": {
+            "max": 720,
+            "min": 480
+          },
+          "element": "magic",
+          "rounds": 5,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a knight's blessing washes over the wielder, knitting their wounds. (Kunark era.)",
+      "id": "proc-knights-blessing",
+      "kind": "proc",
+      "name": "Knight's Blessing",
+      "payload": [
+        {
+          "max": 3240,
+          "min": 2160,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the Blackstar's blessing seals the wielder's wounds. (Velious era.)",
+      "id": "proc-blessing-of-the-blackstar",
+      "kind": "proc",
+      "name": "Blessing of the Blackstar",
+      "payload": [
+        {
+          "max": 3240,
+          "min": 2160,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, invigorating warmth floods the wielder, closing wounds. (Luclin era.)",
+      "id": "proc-invigorate",
+      "kind": "proc",
+      "name": "Invigorate",
+      "payload": [
+        {
+          "max": 2070,
+          "min": 1380,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, rejuvenating power floods the wielder, mending body and restoring mana. (The Lifeguide, classic era.)",
+      "id": "proc-rejuvenate",
+      "kind": "proc",
+      "name": "Rejuvenate",
+      "payload": [
+        {
+          "max": 10350,
+          "min": 6900,
+          "type": "heal"
+        },
+        {
+          "note": "Restores 575 mana to the wielder",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, potent healing magic surges through the wielder. (The Butcherblock Hammer, classic era.)",
+      "id": "proc-superior-healing",
+      "kind": "proc",
+      "name": "Superior Healing",
+      "payload": [
+        {
+          "max": 10800,
+          "min": 7200,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, strong healing magic knits the wielder's wounds. (Sporali Mace, Luclin era.)",
+      "id": "proc-greater-healing",
+      "kind": "proc",
+      "name": "Greater Healing",
+      "payload": [
+        {
+          "max": 6300,
+          "min": 4200,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, soothing magic closes the wielder's wounds. (Classic/Kunark era.)",
+      "id": "proc-healing",
+      "kind": "proc",
+      "name": "Healing",
+      "payload": [
+        {
+          "max": 3150,
+          "min": 2100,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a light touch of healing closes the wielder's lesser wounds. (Classic/Kunark era.)",
+      "id": "proc-light-healing",
+      "kind": "proc",
+      "name": "Light Healing",
+      "payload": [
+        {
+          "max": 1170,
+          "min": 780,
+          "type": "heal"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, twilight's blessing restores the wielder's mana. (Luclin era.)",
+      "id": "proc-blessing-of-twilight",
+      "kind": "proc",
+      "name": "Blessing of Twilight",
+      "payload": [
+        {
+          "note": "Restores 50 mana to the wielder",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the theurgist's blessing restores the wielder's mana. (Luclin era.)",
+      "id": "proc-blessing-of-the-theurgist",
+      "kind": "proc",
+      "name": "Blessing of the Theurgist",
+      "payload": [
+        {
+          "note": "Restores 75 mana to the wielder",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a celestial elixir courses through the wielder, healing them over time. (Late era.)",
+      "id": "proc-celestial-elixir",
+      "kind": "proc",
+      "name": "Celestial Elixir",
+      "payload": [
+        {
+          "heal-per-round": {
+            "max": 5400,
+            "min": 3600
+          },
+          "rounds": 5,
+          "type": "hot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a celestial remedy works through the wielder, healing them over time. (Late era.)",
+      "id": "proc-celestial-remedy",
+      "kind": "proc",
+      "name": "Celestial Remedy",
+      "payload": [
+        {
+          "heal-per-round": {
+            "max": 1170,
+            "min": 780
+          },
+          "rounds": 5,
+          "type": "hot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, cleansing light purges poison and disease while gently healing the wielder. (Shining Star of Light, classic era.)",
+      "id": "proc-cleanse",
+      "kind": "proc",
+      "name": "Cleanse",
+      "payload": [
+        {
+          "heal-per-round": {
+            "max": 90,
+            "min": 60
+          },
+          "rounds": 3,
+          "type": "hot"
+        },
+        {
+          "note": "Cures poison and disease on the wielder",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, grasping roots burst from the ground, holding the target fast. (Classic/Kunark era.)",
+      "id": "proc-root",
+      "kind": "proc",
+      "name": "Root",
+      "payload": [
+        {
+          "rounds": 3,
+          "type": "root"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, massive roots engulf the target, holding them fast and crushing them. (Classic/Kunark era.)",
+      "id": "proc-engulfing-roots",
+      "kind": "proc",
+      "name": "Engulfing Roots",
+      "payload": [
+        {
+          "rounds": 3,
+          "type": "root"
+        },
+        {
+          "element": "physical",
+          "max": 360,
+          "min": 240,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, snaring roots lash around the target, holding them fast and tearing at them. (Classic/Kunark era.)",
+      "id": "proc-ensnaring-roots",
+      "kind": "proc",
+      "name": "Ensnaring Roots",
+      "payload": [
+        {
+          "rounds": 3,
+          "type": "root"
+        },
+        {
+          "element": "physical",
+          "max": 360,
+          "min": 240,
+          "type": "damage"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the earth itself seizes the target, holding them fast. (Classic/Kunark era.)",
+      "id": "proc-paralyzing-earth",
+      "kind": "proc",
+      "name": "Paralyzing Earth",
+      "payload": [
+        {
+          "rounds": 4,
+          "type": "root"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, hungry earth rises to clutch at the target, holding them fast. (Classic/Kunark era.)",
+      "id": "proc-hungry-earth",
+      "kind": "proc",
+      "name": "Hungry Earth",
+      "payload": [
+        {
+          "rounds": 3,
+          "type": "root"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, roots envelop the target entirely, holding them fast. (Classic/Kunark era.)",
+      "id": "proc-enveloping-roots",
+      "kind": "proc",
+      "name": "Enveloping Roots",
+      "payload": [
+        {
+          "rounds": 3,
+          "type": "root"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, clinging magic slows the target's steps. (Classic era.)",
+      "id": "proc-snare",
+      "kind": "proc",
+      "name": "Snare",
+      "payload": [
+        {
+          "rounds": 5,
+          "type": "snare",
+          "value": -20
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, powerful magic ensnares the target, greatly slowing them. (Classic era.)",
+      "id": "proc-ensnare",
+      "kind": "proc",
+      "name": "Ensnare",
+      "payload": [
+        {
+          "rounds": 5,
+          "type": "snare",
+          "value": -25
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, dooming darkness settles on the target, slowing them and eating at their flesh. (Nightbringer, Kunark era.)",
+      "id": "proc-dooming-darkness",
+      "kind": "proc",
+      "name": "Dooming Darkness",
+      "payload": [
+        {
+          "rounds": 5,
+          "type": "snare",
+          "value": -25
+        },
+        {
+          "damage-per-round": {
+            "max": 360,
+            "min": 240
+          },
+          "element": "magic",
+          "rounds": 3,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, engulfing darkness slows the target's every step. (Classic era.)",
+      "id": "proc-engulfing-darkness",
+      "kind": "proc",
+      "name": "Engulfing Darkness",
+      "payload": [
+        {
+          "rounds": 5,
+          "type": "snare",
+          "value": -20
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, crushing weight slows the target's steps. (Classic era.)",
+      "id": "proc-granite-crush",
+      "kind": "proc",
+      "name": "Granite Crush",
+      "payload": [
+        {
+          "rounds": 5,
+          "type": "snare",
+          "value": -20
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, venom slows the target and burns in their veins. (Classic era.)",
+      "id": "proc-kylies-venom",
+      "kind": "proc",
+      "name": "Kylie's Venom",
+      "payload": [
+        {
+          "rounds": 5,
+          "type": "snare",
+          "value": -20
+        },
+        {
+          "damage-per-round": {
+            "max": 360,
+            "min": 240
+          },
+          "element": "poison",
+          "rounds": 3,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a clinging net of magic slows the target's steps. (Classic era.)",
+      "id": "proc-clinging-net",
+      "kind": "proc",
+      "name": "Clinging Net",
+      "payload": [
+        {
+          "rounds": 5,
+          "type": "snare",
+          "value": -20
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the kelpmaiden's embrace drags at the target's limbs. (Classic era.)",
+      "id": "proc-embrace-of-the-kelpmaiden",
+      "kind": "proc",
+      "name": "Embrace of the Kelpmaiden",
+      "payload": [
+        {
+          "rounds": 5,
+          "type": "snare",
+          "value": -20
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a vicious slice to the tendons slows the target's steps. (Tendonslicer, classic era.)",
+      "id": "proc-tendon-slice",
+      "kind": "proc",
+      "name": "Tendon Slice",
+      "payload": [
+        {
+          "rounds": 5,
+          "type": "snare",
+          "value": -20
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, spider venom slows the target and burns in their blood. (Classic era.)",
+      "id": "proc-arachnae-venom",
+      "kind": "proc",
+      "name": "Arachnae Venom",
+      "payload": [
+        {
+          "rounds": 5,
+          "type": "snare",
+          "value": -20
+        },
+        {
+          "damage-per-round": {
+            "max": 360,
+            "min": 240
+          },
+          "element": "poison",
+          "rounds": 3,
+          "type": "dot"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the spirit of the wolf lends the wielder swift feet. (Kunark era.)",
+      "id": "proc-spirit-of-wolf",
+      "kind": "proc",
+      "name": "Spirit of Wolf",
+      "payload": [
+        {
+          "duration-rounds": 20,
+          "effect": "run-speed",
+          "type": "buff"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the greater wolf's spirit lends the wielder great speed. (Lupine Dagger, Kunark era.)",
+      "id": "proc-greater-wolf-form",
+      "kind": "proc",
+      "name": "Greater Wolf Form",
+      "payload": [
+        {
+          "duration-rounds": 20,
+          "effect": "run-speed",
+          "type": "buff"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of battle summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-battle",
+      "kind": "proc",
+      "name": "Call of Battle",
+      "payload": [
+        {
+          "creature": "Swarm pet (Battle)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of faith summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-faith",
+      "kind": "proc",
+      "name": "Call of Faith",
+      "payload": [
+        {
+          "creature": "Swarm pet (Faith)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of rage summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-rage",
+      "kind": "proc",
+      "name": "Call of Rage",
+      "payload": [
+        {
+          "creature": "Swarm pet (Rage)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of beast summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-beast",
+      "kind": "proc",
+      "name": "Call of Beast",
+      "payload": [
+        {
+          "creature": "Swarm pet (Beast)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of wu summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-wu",
+      "kind": "proc",
+      "name": "Call of Wu",
+      "payload": [
+        {
+          "creature": "Swarm pet (Wu)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of mistwalker summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-mistwalker",
+      "kind": "proc",
+      "name": "Call of Mistwalker",
+      "payload": [
+        {
+          "creature": "Swarm pet (Mistwalker)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of rizlona summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-rizlona",
+      "kind": "proc",
+      "name": "Call of Rizlona",
+      "payload": [
+        {
+          "creature": "Swarm pet (Rizlona)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of assassin summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-assassin",
+      "kind": "proc",
+      "name": "Call of Assassin",
+      "payload": [
+        {
+          "creature": "Swarm pet (Assassin)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of time summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-time",
+      "kind": "proc",
+      "name": "Call of Time",
+      "payload": [
+        {
+          "creature": "Swarm pet (Time)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of tempest summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-tempest",
+      "kind": "proc",
+      "name": "Call of Tempest",
+      "payload": [
+        {
+          "creature": "Swarm pet (Tempest)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of the dark knight summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-call-of-the-dark-knight",
+      "kind": "proc",
+      "name": "Call of the Dark Knight",
+      "payload": [
+        {
+          "creature": "Swarm pet (Dark Knight)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, an ancient call summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-ancient-call",
+      "kind": "proc",
+      "name": "Ancient Call",
+      "payload": [
+        {
+          "creature": "Swarm pet (Ancient)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the trickster's calling summons a swarm of spectral allies to harry the target. (LDoN era.)",
+      "id": "proc-tricksters-calling",
+      "kind": "proc",
+      "name": "Trickster's Calling",
+      "payload": [
+        {
+          "creature": "Swarm pet (Trickster)",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a mistwalker answers the call, harrying the target before fading. (Scimitar of the Mistwalker, late era.)",
+      "id": "proc-mistwalker",
+      "kind": "proc",
+      "name": "Mistwalker",
+      "payload": [
+        {
+          "creature": "Mistwalker",
+          "duration-rounds": 5,
+          "type": "summon"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the call of bones wraps the wielder in a lich's hunger and a skeleton's guise. (Soul Defiler, Kunark era.)",
+      "id": "proc-call-of-bones",
+      "kind": "proc",
+      "name": "Call of Bones",
+      "payload": [
+        {
+          "note": "Lich: converts the wielder's health to mana; grants a skeleton illusion",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a lich's hunger takes the wielder, turning health to mana behind an undead guise. (Sword of the Undead Kings, Kunark era.)",
+      "id": "proc-lich",
+      "kind": "proc",
+      "name": "Lich",
+      "payload": [
+        {
+          "note": "Lich: converts the wielder's health to mana; grants an undead illusion",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon drinks the wielder's blood and returns it as mana. (Sacrifice, classic era.)",
+      "id": "proc-cannibalize-ii",
+      "kind": "proc",
+      "name": "Cannibalize II",
+      "payload": [
+        {
+          "note": "Converts the wielder's health to mana (cannibalize)",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, primal terror grips the target, sending them fleeing. (Classic era.)",
+      "id": "proc-invoke-fear",
+      "kind": "proc",
+      "name": "Invoke Fear",
+      "payload": [
+        {
+          "rounds": 3,
+          "type": "fear"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, terror seizes the target, sending them fleeing. (Polished Obsidian Great Axe, classic era.)",
+      "id": "proc-fear",
+      "kind": "proc",
+      "name": "Fear",
+      "payload": [
+        {
+          "rounds": 3,
+          "type": "fear"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a predator's terror sends the beast fleeing. (Partisan of Stampede, classic era.)",
+      "id": "proc-terrorize-animal",
+      "kind": "proc",
+      "name": "Terrorize Animal",
+      "payload": [
+        {
+          "rounds": 3,
+          "type": "fear"
+        },
+        {
+          "note": "Animals only",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, a befuddling melody charms the target into dreamy stillness. (Melodious Truncheon, Kunark era.)",
+      "id": "proc-melodious-befuddlement",
+      "kind": "proc",
+      "name": "Melodious Befuddlement",
+      "payload": [
+        {
+          "rounds": 3,
+          "type": "mez"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon conjures a foaming tankard of ale. (Classic/Kunark era.)",
+      "id": "proc-summon-ale",
+      "kind": "proc",
+      "name": "Summon Ale",
+      "payload": [
+        {
+          "note": "Summons ale",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon conjures fresh bandages. (Classic/Kunark era.)",
+      "id": "proc-summon-bandages",
+      "kind": "proc",
+      "name": "Summon Bandages",
+      "payload": [
+        {
+          "note": "Summons bandages",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon tears a rift, hurling the wielder across the world. (Worker Sledgemallet, Kunark era.)",
+      "id": "proc-overthere",
+      "kind": "proc",
+      "name": "Overthere",
+      "payload": [
+        {
+          "note": "Teleports the wielder to The Overthere",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, the weapon's lodestone heart reveals true north. (Magnetic Dirk of Distraction, classic era.)",
+      "id": "proc-distraction",
+      "kind": "proc",
+      "name": "Distraction",
+      "payload": [
+        {
+          "note": "True North: reveals true north to the wielder",
+          "type": "utility"
+        }
+      ],
+      "trigger": "onCrit"
     }
   ]
 }
