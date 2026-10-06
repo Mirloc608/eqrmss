@@ -48,7 +48,7 @@
 //   status.stun           { stunned, stunNoParry, downOrOut } (rounds)
 //   status.bleed          { perRound }
 //   status.deathTimer     number (rounds left)
-//   status.actionPenalty  { value, rounds } (rounds 0 = indefinite)
+//   status.actionPenalty  { value, rounds } (untimed now defaults to 3 rounds per 2026-10-06 ruling)
 //   status.mustParry      { rounds, penalty }
 //   status.nextSwingBonus number
 //   status.parrying       boolean (declared parry, cleared each round)
@@ -550,11 +550,15 @@ export async function applyCritConditions(targetActor, attackerActor, critText) 
     if (pen.value < 0) {
         if (canApply) {
             const cur = targetActor.system?.status?.actionPenalty ?? { value: 0, rounds: 0 };
+            // User ruling 2026-10-06 Option B: untimed penalties (rounds 0)
+            // expire after 3 rounds instead of persisting indefinitely.
+            const penRounds = (Number(pen.rounds) || 0) > 0 ? Number(pen.rounds) : 3;
             if (pen.value < (Number(cur.value) || 0)) {
-                await targetActor.update({ "system.status.actionPenalty": { value: pen.value, rounds: pen.rounds } });
+                await targetActor.update({ "system.status.actionPenalty": { value: pen.value, rounds: penRounds } });
             }
-            const eff = pen.value < (Number(cur.value) || 0) ? pen : cur;
-            notes.push(`${esc(tName)} is at ${eff.value} to all actions${eff.rounds > 0 ? ` for ${roundsWord(eff.rounds)}` : ""}.`);
+            const effRounds = pen.value < (Number(cur.value) || 0) ? penRounds : (Number(cur.rounds) || 0);
+            const effValue = pen.value < (Number(cur.value) || 0) ? pen.value : cur.value;
+            notes.push(`${esc(tName)} is at ${effValue} to all actions for ${roundsWord(effRounds)}.`);
         } else {
             notes.push(denied(`${esc(tName)} is at ${pen.value} to all actions`));
         }
