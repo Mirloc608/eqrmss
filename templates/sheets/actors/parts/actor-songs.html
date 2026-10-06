@@ -1,53 +1,18 @@
-<h2>
-    Bard Songs
-</h2>
-
-<div class="song-grid">
-
-{{#each items}}
-
-{{#if (eq type "song")}}
-
-<div class="song-card"
-     draggable="true"
-     data-item-id="{{id}}">
-
-    <div class="song-name">
-
-        {{name}}
-
+<div class="tab" data-group="primary" data-tab="songs">
+  <h3>Songs</h3>
+  <div class="panel">
+    <div class="song-grid">
+      {{#each items.songs}}
+      <div class="song-card" draggable="true" data-item-id="{{this.id}}">
+        <div class="song-name">{{this.name}}</div>
+        <div class="song-actions">
+          <button data-action="bardStart" data-song-id="{{this.id}}">Play</button>
+          <button data-action="bardStop" data-song-id="{{this.id}}">Stop</button>
+        </div>
+      </div>
+      {{else}}
+      <p style="opacity: 0.6;">No songs known.</p>
+      {{/each}}
     </div>
-
-    <div class="song-actions">
-
-        <button data-action="bardStart"
-                data-song-id="{{id}}">
-
-            Play
-
-        </button>
-
-        <button data-action="bardStop"
-                data-song-id="{{id}}">
-
-            Stop
-
-        </button>
-
-    </div>
-
-</div>
-
-{{/if}}
-
-{{else}}
-
-<div class="empty-state">
-
-No songs known.
-
-</div>
-
-{{/each}}
-
+  </div>
 </div>

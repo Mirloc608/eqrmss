@@ -63,6 +63,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         spells: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-spells.html"
         },
+        songs: {
+            template: "systems/eqrmss/templates/sheets/actors/parts/actor-songs.html"
+        },
         aa: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-aa.html"
         },
