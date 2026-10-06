@@ -106,7 +106,10 @@ export function computeWeaponOB(actor, weaponItem) {
         : null;
     const skillBonus = Number(skill?.system?.bonus) || 0;
     const obMod = Number(sys.obMod) || 0;
-    return { weaponType, skill, skillBonus, obMod, ob: skillBonus + obMod };
+    // Prone (user ruling 2026-10-06 Option B): -30 to actions
+    const proneRounds = Number(actor?.system?.status?.prone?.rounds) || 0;
+    const pronePenalty = proneRounds > 0 ? -30 : 0;
+    return { weaponType, skill, skillBonus, obMod, ob: skillBonus + obMod + pronePenalty, pronePenalty };
 }
 
 // ------------------------------------------------------------
@@ -120,6 +123,25 @@ export function computeWeaponOB(actor, weaponItem) {
 // clauses state the no-parry rounds INSIDE the stun total ("stunned
 // for 4 rounds and cannot parry for 2 rounds" = 2 stun-no-parry +
 // 2 plain stun); those are split first so nothing double-counts.
+/**
+ * Parse "down" / "knocked down" / "knocked out" / "prone" from critical text.
+ * Returns rounds of prone (1 if found, 0 if not). Per user ruling 2026-10-06
+ * Option B: prone is a separate status, -30 to actions, clears after 1 round
+ * (the round spent standing).
+ */
+export function parseProne(text) {
+    if (!text) return 0;
+    const t = String(text).toLowerCase();
+    // Match: "knocked down", "knocked out", "foe is down", "prone", "down"
+    // Avoid false positives like "knocked down to size" (not a thing) or
+    // "break down" — require word boundaries and combat context.
+    if (/\bknocked\s+(down|out)\b/i.test(t)) return 1;
+    if (/\bprone\b/i.test(t)) return 1;
+    // "foe is down", "target is down", "opponent down" — but not "lay down" or "sit down"
+    if (/\b(foe|target|opponent|enemy|victim)\s+(is\s+)?down\b/i.test(t)) return 1;
+    return 0;
+}
+
 export function parseStun(text) {
     const out = { stunned: 0, stunNoParry: 0, downOrOut: 0 };
     if (!text) return out;
@@ -475,12 +497,19 @@ export async function applyCritConditions(targetActor, attackerActor, critText) 
 
     const denied = suffix => `${suffix} — not applied, you don't control ${esc(tName)}.`;
 
-    if (stun.stunned > 0 || stun.stunNoParry > 0 || stun.downOrOut > 0) {
+    // Prone (Option B): separate from stun, -30 to actions, 1 round
+    const proneRounds = parseProne(critText);
+    if (proneRounds > 0 && canApply) {
+        await targetActor.update({ "system.status.prone": { rounds: proneRounds } });
+        notes.push(`${esc(tName)} is knocked prone (-30 to actions, must spend a round standing).`);
+    }
+
+    if (stun.stunned > 0 || stun.stunNoParry > 0) {
         if (canApply) {
-            const pool = { stunned: 0, stunNoParry: 0, downOrOut: 0, ...(targetActor.system?.status?.stun ?? {}) };
+            const pool = { stunned: 0, stunNoParry: 0, ...(targetActor.system?.status?.stun ?? {}) };
             pool.stunned += stun.stunned;
             pool.stunNoParry += stun.stunNoParry;
-            pool.downOrOut = (Number(pool.downOrOut) || 0) + stun.downOrOut;
+            
             await targetActor.update({ "system.status.stun": pool });
             const active = activeStun(pool);
             notes.push(`${esc(tName)} is ${STUN_LABEL[active.type]} (${roundsWord(active.rounds)}; ${stunTotal(pool)} total stun).`);
@@ -744,9 +773,12 @@ export async function tickConditions(combat) {
         } catch (err) { console.warn("EQRMSS | worn round effects failed", err); }
 
         // Stun pool — total decreases by one; most severe type first.
-        const pool = { stunned: 0, stunNoParry: 0, downOrOut: 0, ...(st.stun ?? {}) };
+        const pool = { stunned: 0, stunNoParry: 0, ...(st.stun ?? {}) };
+        // (downOrOut removed: now handled as separate prone status per 2026-10-06 ruling)
+        delete pool.downOrOut;
         if (stunTotal(pool) > 0) {
             for (const k of STUN_ORDER) {
+                if (k === "downOrOut") continue;
                 if (pool[k] > 0) { pool[k] -= 1; break; }
             }
             updates["system.status.stun"] = pool;
@@ -754,6 +786,19 @@ export async function tickConditions(combat) {
             notes.push(active
                 ? `${esc(actor.name)}: ${STUN_LABEL[active.type]} (${roundsWord(active.rounds)} left).`
                 : `${esc(actor.name)} recovers from stun.`);
+        }
+
+        // Prone (Option B): ticks down each round; when it clears, the
+        // actor has spent the round standing up.
+        const proneRounds = Number(st.prone?.rounds) || 0;
+        if (proneRounds > 0) {
+            const left = proneRounds - 1;
+            if (left > 0) {
+                updates["system.status.prone"] = { rounds: left };
+            } else {
+                updates["system.status.prone"] = null;
+                notes.push(`${esc(actor.name)} stands up from prone.`);
+            }
         }
 
         // Action penalty — timed penalties tick down; untimed persist.

@@ -469,7 +469,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     }
 
     // ---- OB: weapon skill bonus + weapon OB mod (shared with parry) ----
-    const { skill, skillBonus, obMod, ob: baseOb } = computeWeaponOB(actor, weaponItem);
+    const { skill, skillBonus, obMod, ob: baseOb, pronePenalty } = computeWeaponOB(actor, weaponItem);
 
     // ---- Attacker's own parry split (§4.3): OB allocated to DB with
     // this weapon is not available to its attack. A full-OB parry still
@@ -682,7 +682,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     const sitDeclared = situationalOb(actor, targetActor ?? null);
     const sitTotal = sitAuto.total + sitDeclared.total;
     const sitNote = situationalNote([...sitAuto.parts, ...sitDeclared.parts]);
-    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod + sitTotal;
+    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + actionPenalty + rangeMod - reloadPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod + sitTotal + (pronePenalty || 0);
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -760,7 +760,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${attackSpeed.pct}%)` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
+        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${attackSpeed.pct}%)` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
         + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
