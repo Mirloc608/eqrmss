@@ -8,6 +8,7 @@ import { RMSSDerivedValueEngine, calculateArmorAndDefenses } from "../../../data
 import { visibleSpells, visibleSongs } from "../../../utils/item-visibility.js";
 import { getItemEffect } from "../../../data/item-effects/item-effect-loader.js";
 import { isWorn } from "../../../utils/equipment/equipment-utils.js";
+import { dedupHighestRank } from "../../../item-effects/worn-engine.js";
 
 const STAT_LABELS = {
     ST: "Strength",
@@ -282,21 +283,7 @@ export class EQRMSSActorContextHelper {
             if (!effect) continue;
             wornEntries.push({ item, effect, effectId });
         }
-        const suppressedWorn = new Set();
-        const wornGroups = new Map();
-        for (const e of wornEntries) {
-            const key = e.effect.family ?? e.effect.id;
-            if (!wornGroups.has(key)) wornGroups.set(key, []);
-            wornGroups.get(key).push(e);
-        }
-        for (const list of wornGroups.values()) {
-            if (list[0].effect.stacking !== "highest" || list.length < 2) continue;
-            let best = list[0];
-            for (const e of list) {
-                if ((e.effect.rank ?? 0) > (best.effect.rank ?? 0)) best = e;
-            }
-            for (const e of list) if (e !== best) suppressedWorn.add(e.item);
-        }
+        const { suppressed: suppressedWorn } = dedupHighestRank(wornEntries);
         for (const { item, effect, effectId } of wornEntries) {
             if (suppressedWorn.has(item)) continue;
             buffs.push({
