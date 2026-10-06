@@ -306,6 +306,23 @@ export class EQRMSSActorContextHelper {
                 fromItem: true
             });
         }
+        // Timed spell/clicky/proc effects (HoTs, regen, buffs with
+        // durations) live in system.status.spellEffects — show them
+        // read-only alongside the other buffs.
+        const timed = this.actor?.system?.status?.spellEffects;
+        if (Array.isArray(timed)) {
+            for (const e of timed) {
+                const label = e?.name ?? e?.label ?? "Timed Effect";
+                const rounds = Number(e?.roundsLeft ?? e?.rounds ?? 0);
+                const roundsTxt = rounds > 0 ? ` (${rounds} rounds)` : "";
+                buffs.push({
+                    id: `timed-${e?.id ?? label}`,
+                    name: `${label}${roundsTxt}`,
+                    origin: e?.source ?? null,
+                    fromItem: false
+                });
+            }
+        }
         context.buffs = buffs;
         context.debuffs = debuffs;
     }
