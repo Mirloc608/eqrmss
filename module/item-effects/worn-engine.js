@@ -16,17 +16,18 @@ import { applyEffectPayload } from "./damage-pipeline.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 
 /**
- * Apply one round of worn effects for an actor (regen ticks etc.).
- * @returns {Array} per-item results
+ * Highest-rank-wins dedup for resolved worn effects. Shared by the
+ * per-round engine, the Status-tab Buffs display rule, and the
+ * cast engine (Phase 5).
+ *
+ * Group by family (effect.family ?? effect.id). Families flagged
+ * stacking: "highest" keep only the highest-ranked entry (ties:
+ * first found wins); every other family keeps every worn
+ * instance as before.
+ * @param {Array<{item, effect}>} resolved
+ * @returns {{ kept: Array<{item, effect}>, suppressed: Set }}
  */
-export async function applyWornRoundEffects(actor) {
-    const worn = (actor?.items ?? []).filter(i => isWorn(i) && i.system?.wornEffect);
-    // Resolve effects up front so non-stacking families can be deduplicated
-    // before anything is applied.
-    const resolved = worn.map(item => ({ item, effect: getItemEffect(item.system.wornEffect) }));
-    // Group by family (effect.family ?? effect.id). Families flagged
-    // stacking: "highest" keep only the highest-ranked entry (ties: first
-    // found wins); every other family applies every worn instance as before.
+export function dedupHighestRank(resolved) {
     const suppressed = new Set();
     const groups = new Map();
     for (const r of resolved) {
@@ -43,9 +44,21 @@ export async function applyWornRoundEffects(actor) {
         }
         for (const r of list) if (r !== best) suppressed.add(r.item);
     }
+    return { kept: resolved.filter(r => !suppressed.has(r.item)), suppressed };
+}
+
+/**
+ * Apply one round of worn effects for an actor (regen ticks etc.).
+ * @returns {Array} per-item results
+ */
+export async function applyWornRoundEffects(actor) {
+    const worn = (actor?.items ?? []).filter(i => isWorn(i) && i.system?.wornEffect);
+    // Resolve effects up front so non-stacking families can be deduplicated
+    // before anything is applied.
+    const resolved = worn.map(item => ({ item, effect: getItemEffect(item.system.wornEffect) }));
+    const { kept } = dedupHighestRank(resolved);
     const out = [];
-    for (const { item, effect } of resolved) {
-        if (suppressed.has(item)) continue;
+    for (const { item, effect } of kept) {
         if (!effect) { out.push({ item: item.name, applied: false, reason: "unknown-effect" }); continue; }
         if (effect.kind !== "worn") { out.push({ item: item.name, applied: false, reason: "not-a-worn-effect" }); continue; }
         const results = await applyEffectPayload({

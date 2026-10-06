@@ -26,10 +26,17 @@
 // attack tables with ONE shared Elemental Attack Roll per the
 // user's ruling (module/spells/ball-spell.js); area base
 // spells make one shared BAR cross-indexed per target.
+//
+// Phase 5: worn-effect focus modifiers (Mana Preservation,
+// Spell Haste, Extended Range, ...) from
+// module/spells/worn-cast-mods.js apply before the ESF gate
+// and the mana spend: the reduced cost is what's deducted,
+// and the applied modifiers are posted on the cast card.
 // ============================================================
 
 import { combatCard } from "../combat/chat-card.js";
 import { classifySpell, directedSpellsOB, spellEffectsOf } from "./spell-mapping.js";
+import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
     resolveBaseSpellAttack, applyBaseSpellEffect,
@@ -118,7 +125,7 @@ export function syntheticBoltWeapon(actor, spellItem, cls) {
  * heal-over-time component lands as hits regen the same way.
  * Other buff payloads stay announced-only.
  */
-async function applyRegenBuff(caster, spellItem) {
+async function applyRegenBuff(caster, spellItem, durationFactor = 1) {
     const target = targetedActor() ?? caster;
     if (!target) return "";
     const canTouch = target.isOwner || globalThis.game?.user?.isGM;
@@ -131,7 +138,10 @@ async function applyRegenBuff(caster, spellItem) {
         if (!isManaRegen && !isHot) continue;
         const amount = rollAmount(eff);
         const rounds = durationRounds(eff.duration);
-        if (!(amount > 0) || rounds == null) continue;
+        // Phase 5: Extended Enhancement stretches buff
+        // durations; with no worn effects this is rounds.
+        const effRounds = durationFactor === 1 ? rounds : Math.max(1, Math.round(rounds * durationFactor));
+        if (!(amount > 0) || effRounds == null) continue;
         if (!canTouch) {
             notes.push(`Regen not applied — you don't control ${esc(target.name)}.`);
             continue;
@@ -140,13 +150,13 @@ async function applyRegenBuff(caster, spellItem) {
         list.push({
             kind: "regen",
             pool: isManaRegen ? "mana" : "hits",
-            amount, roundsLeft: rounds,
+            amount, roundsLeft: effRounds,
             label: name, source: "spell"
         });
         await target.update({ "system.status.spellEffects": list });
         notes.push(isManaRegen
-            ? `${esc(target.name)} regenerates ${amount} mana/round for ${rounds} rounds (${esc(name)}).`
-            : `${esc(target.name)} regenerates ${amount} hits/round for ${rounds} rounds (${esc(name)}).`);
+            ? `${esc(target.name)} regenerates ${amount} mana/round for ${effRounds} rounds (${esc(name)}).`
+            : `${esc(target.name)} regenerates ${amount} hits/round for ${effRounds} rounds (${esc(name)}).`);
     }
     return notes.length ? `<p><em>${notes.join("<br>")}</em></p>` : "";
 }
@@ -157,11 +167,57 @@ async function applyRegenBuff(caster, spellItem) {
  * opts: { prepRoundsShort } — preparation shortage for the ESF
  * sum (the cast path assumes book-standard preparation).
  */
+/** One-line chat-card note of the worn focus modifiers that
+ *  applied to this cast, or "" when none did. Follows the
+ *  existing <p><em> note pattern. */
+function wornNoteFor(worn, spellItem, baseCost, cost) {
+    if (!worn.applied.length) return "";
+    const r2 = (n) => Math.round(n * 100) / 100;
+    const bits = [];
+    const seen = new Set();
+    for (const a of worn.applied) {
+        const key = `${a.family}:${a.axis}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        if (a.axis === "mana") bits.push(`${esc(a.name)} (mana ${baseCost} → ${cost})`);
+        else if (a.axis === "cast") {
+            const ct = Number(spellItem?.system?.castTime);
+            bits.push(Number.isFinite(ct)
+                ? `${esc(a.name)} (cast ${ct}s → ${r2(ct * worn.castFactor)}s)`
+                : `${esc(a.name)} (cast time ×${r2(worn.castFactor)})`);
+        }
+        else if (a.axis === "range") {
+            const r = Number(spellItem?.system?.range);
+            bits.push(Number.isFinite(r)
+                ? `${esc(a.name)} (range ${r} → ${Math.round(r * worn.rangeFactor)})`
+                : `${esc(a.name)} (range ×${r2(worn.rangeFactor)})`);
+        }
+        else if (a.axis === "duration") bits.push(`${esc(a.name)} (duration ×${r2(worn.durationFactor)})`);
+        else if (a.axis === "healing") bits.push(`${esc(a.name)} (healing ×${r2(worn.healingFactor)})`);
+    }
+    return `<p><em>Worn focus: ${bits.join("; ")}.</em></p>`;
+}
+
 export async function castSpell(actor, spellItem, opts = {}) {
     if (!actor || !spellItem) return { ok: false, reason: "missing" };
     const name = spellItem.name ?? "spell";
     const cls = classifySpell(spellItem);
-    const cost = Math.max(0, Number(spellItem.system?.manaCost) || 0);
+    // Phase 5: worn-effect focus modifiers (deduped
+    // highest-rank-wins per family) gather BEFORE the ESF gate
+    // and the mana spend, so the reduced cost is what the
+    // mana check and the spend below see. With no worn effects
+    // every factor is 1 and this block is a no-op.
+    const worn = gatherWornCastMods(actor, spellItem, cls);
+    const baseCost = Math.max(0, Number(spellItem.system?.manaCost) || 0);
+    const cost = worn.manaFactor === 1 ? baseCost : Math.max(0, Math.round(baseCost * worn.manaFactor));
+    const wornNote = wornNoteFor(worn, spellItem, baseCost, cost);
+    // Compact factor summary attached to the success returns so
+    // a future cast-timer / range check can consume it.
+    const mods = {
+        manaFactor: worn.manaFactor, castFactor: worn.castFactor,
+        rangeFactor: worn.rangeFactor, durationFactor: worn.durationFactor,
+        healingFactor: worn.healingFactor
+    };
     const pool = actor.system?.attributes?.mana ?? { value: 0, max: 0 };
     const before = Number(pool.value) || 0;
     if (cost > before) {
@@ -229,16 +285,19 @@ export async function castSpell(actor, spellItem, opts = {}) {
     if (cls.kind === "bolt") {
         await spendMana();
         const synthetic = syntheticBoltWeapon(actor, spellItem, cls);
-        if (esfNote) {
+        // Bolt casts have no final card of their own (the
+        // attack engine posts next), so the worn note rides the
+        // ESF pre-card, posted when either note is non-empty.
+        if (esfNote || wornNote) {
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor }),
                 content: combatCard("Spellcasting", `
                     <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-                    ${esfNote}`)
+                    ${esfNote}${wornNote}`)
             });
         }
         await rollWeaponAttack(actor, synthetic, { forcedCritType: cls.critType });
-        return { ok: true, kind: "bolt", attackTable: cls.attackTable };
+        return { ok: true, kind: "bolt", attackTable: cls.attackTable, mods };
     }
 
     if (cls.kind === "heal") {
@@ -246,12 +305,15 @@ export async function castSpell(actor, spellItem, opts = {}) {
         const target = targetedActor() ?? actor;
         const canTouch = target.isOwner || game.user?.isGM;
         let healLine = "";
+        // Phase 5: Improved Healing (and kin) scale the heal
+        // amount; with no worn effects this is exactly cls.amount.
+        const healAmount = worn.healingFactor === 1 ? cls.amount : Math.round(cls.amount * worn.healingFactor);
         if (canTouch) {
             // Per ruling, ANY direct healing magic stops bleeding and
             // clears the death timer; then hits are restored.
             await applyHealingSpell(target);
             const cur = Number(target.system?.hits?.value) || 0;
-            const restored = Math.min(cls.amount, cur);
+            const restored = Math.min(healAmount, cur);
             await target.update({ "system.hits.value": cur - restored });
             await checkHitThresholds(target);
             healLine = `<p><em>${esc(target.name)} recovers ${restored} hits (${cur} → ${cur - restored}).</em></p>`;
@@ -262,9 +324,9 @@ export async function castSpell(actor, spellItem, opts = {}) {
             speaker: ChatMessage.getSpeaker({ actor }),
             content: combatCard("Spellcasting", `
                 <h2>${esc(actor.name)} casts ${esc(name)} on ${esc(target.name)}</h2>
-                ${healLine}${esfNote}<p><em>${manaNote.trim()}</em></p>`)
+                ${healLine}${esfNote}${wornNote}<p><em>${manaNote.trim()}</em></p>`)
         });
-        return { ok: true, kind: "heal", amount: cls.amount };
+        return { ok: true, kind: "heal", amount: healAmount, mods };
     }
 
     if (cls.kind === "base") {
@@ -318,9 +380,9 @@ export async function castSpell(actor, spellItem, opts = {}) {
             speaker: ChatMessage.getSpeaker({ actor }),
             content: combatCard("Base Spell Attack", `
                 <h2>${esc(actor.name)} casts ${esc(name)}${baseTargets.length > 1 ? ` (${baseTargets.length} targets)` : ` on ${esc(baseTargets[0].name)}`}</h2>
-                ${body}<p><em>${manaNote.trim()}</em></p>`)
+                ${body}${wornNote}<p><em>${manaNote.trim()}</em></p>`)
         });
-        return { ok: true, kind: "base", targets: applied, resisted: baseTargets.length === 1 ? applied[0].resisted : undefined };
+        return { ok: true, kind: "base", targets: applied, resisted: baseTargets.length === 1 ? applied[0].resisted : undefined, mods };
     }
 
     if (cls.kind === "ball") {
@@ -355,21 +417,21 @@ export async function castSpell(actor, spellItem, opts = {}) {
             speaker: ChatMessage.getSpeaker({ actor }),
             content: combatCard("Ball Spell", `
                 <h2>${esc(actor.name)} casts ${esc(name)} (${blastList.length} in the blast)</h2>
-                ${res.html}<p><em>${manaNote.trim()}</em></p>`)
+                ${res.html}${wornNote}<p><em>${manaNote.trim()}</em></p>`)
         });
-        return { ok: true, kind: "ball" };
+        return { ok: true, kind: "ball", mods };
     }
 
     // Announced cast (buff/utilities and later-stage tracks land
     // their mechanics in later stages; the mana economy is live).
     await spendMana();
-    const regenNote = await applyRegenBuff(actor, spellItem);
+    const regenNote = await applyRegenBuff(actor, spellItem, worn.durationFactor);
     const note = cls.kind === "later" ? esc(cls.reason) : "no mechanical payload";
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${regenNote}<p><em>Cast announced — ${note}.${manaNote}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}<p><em>Cast announced — ${note}.${manaNote}</em></p>`)
     });
-    return { ok: true, kind: cls.kind };
+    return { ok: true, kind: cls.kind, mods };
 }
