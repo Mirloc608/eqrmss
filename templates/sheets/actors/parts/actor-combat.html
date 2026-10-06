@@ -78,6 +78,7 @@
     </table>
   </div>
 
+{{#if hasSpells}}
   <div class="panel">
     <h4>Spells</h4>
     <table class="rmss-table">
@@ -99,7 +100,9 @@
       </tbody>
     </table>
   </div>
+{{/if}}
 
+{{#if isBard}}
   {{#if items.songs}}
   <div class="panel">
     <h4>Songs</h4>
@@ -119,6 +122,7 @@
     </table>
   </div>
   {{/if}}
+{{/if}}
 
   <div class="panel">
     <h4>Shield Formation (Arms Companion §5.6)</h4>
