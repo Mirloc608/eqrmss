@@ -89,6 +89,11 @@ export function computeInitiative(input = {}) {
     const move = Math.max(0, Math.min(100, Number(movementPct) || 0));
     if (move > 0) add(`Moving (${move}% expended)`, -move);
 
+    // House rule (2026-10-06): d10 variation keeps re-rolls from
+    // being perfectly deterministic while preserving the §6.1 ordering.
+    const variation = Math.floor(Math.random() * 10) + 1;
+    breakdown.push({ label: "Variation (d10)", mod: variation });
+
     const total = breakdown.reduce((sum, b) => sum + b.mod, 0);
     return { total, breakdown };
 }
