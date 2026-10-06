@@ -146,7 +146,11 @@ export function calledShotModifier(areaMod, skillBonus, areaDB) {
  */
 export async function promptCalledShot(attacker, targetActor, targetName, skillBonus) {
     const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
-    if (!DialogV2?.prompt) return {};
+    // V14: DialogV2.prompt returns the button ID (string), not form data.
+    // DialogV2.input returns the form data object. Fall back to prompt
+    // for V13 compatibility.
+    const promptFn = DialogV2?.input ?? DialogV2?.prompt;
+    if (!promptFn) return {};
     const areas = calledShotAreas(targetActor);
     const options = areas.map(a => {
         const areaDB = areaDBFor(targetActor, a.id);
@@ -154,7 +158,7 @@ export async function promptCalledShot(attacker, targetActor, targetName, skillB
         return `<option value="${a.id}">${a.name} (${mod})</option>`;
     }).join("");
     try {
-        const fd = await DialogV2.prompt({
+        const fd = await promptFn.call(DialogV2, {
             window: { title: `Strategic Targeting vs ${targetName}` },
             content: `
                 <div class="form-group">
