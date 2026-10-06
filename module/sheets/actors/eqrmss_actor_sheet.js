@@ -180,7 +180,23 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
             ev.preventDefault();
             ev.stopPropagation();
             const effect = this.actor?.effects?.get(el.dataset.effectId);
-            if (effect) await effect.delete();
+            if (effect) { await effect.delete(); return; }
+            const timedId = el.dataset.timedId;
+            const timedSource = el.dataset.timedSource;
+            if (timedId || timedSource) {
+                const list = [...(this.actor?.system?.status?.spellEffects ?? [])];
+                const kept = list.filter(e => {
+                    const id = e?.id ?? e?.name ?? e?.label;
+                    if (timedId && id === timedId) return false;
+                    if (timedSource && e?.source === timedSource) return false;
+                    return true;
+                });
+                const removed = list.filter(e => !kept.includes(e));
+                if (removed.some(e => e?.category === "debuff" && e?.snareValue != null)) {
+                    await this.actor.update({ "system.movement.snarePenalty": 0 });
+                }
+                await this.actor.update({ "system.status.spellEffects": kept });
+            }
         }));
     }
 

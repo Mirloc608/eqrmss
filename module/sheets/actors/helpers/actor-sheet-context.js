@@ -315,12 +315,16 @@ export class EQRMSSActorContextHelper {
                 const label = e?.name ?? e?.label ?? "Timed Effect";
                 const rounds = Number(e?.roundsLeft ?? e?.rounds ?? 0);
                 const roundsTxt = rounds > 0 ? ` (${rounds} rounds)` : "";
-                buffs.push({
+                const entry = {
                     id: `timed-${e?.id ?? label}`,
                     name: `${label}${roundsTxt}`,
                     origin: e?.source ?? null,
-                    fromItem: false
-                });
+                    fromItem: false,
+                    timedId: e?.id ?? label,
+                    timedSource: e?.source ?? null
+                };
+                if (e?.category === "debuff") debuffs.push(entry);
+                else buffs.push(entry);
             }
         }
         context.buffs = buffs;

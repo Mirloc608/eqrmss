@@ -294,7 +294,9 @@ async function applySnare({ effect, target, source }) {
     await pushStatusList(target, "spellEffects", {
         label: `snared (−${value} move)`,
         roundsLeft: rounds > 0 ? rounds : null,
-        source
+        source,
+        category: "debuff",
+        snareValue: value
     });
     const notes = [`−${value} movement${rounds > 0 ? ` for ${rounds} rounds` : " (indefinite)"} — recorded on system.movement.snarePenalty; the §7.2.1 prepare does not consume it yet`];
     return { type: "snare", rolled: value, final: value, notes, source };
