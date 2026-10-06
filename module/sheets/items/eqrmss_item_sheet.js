@@ -52,7 +52,8 @@ export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(Document
     const enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(item.system.description ?? "", { async: true });
     return { ...context, item, system: item.system, type: item.type, config: CONFIG.eqrmss ?? {}, owner: item.isOwner, editable: this.isEditable, isGM: game?.user?.isGM ?? false, enrichedDescription,
       wornEffects: getItemEffectsByKind("worn"),
-      triggeredEffects: getItemEffectsByKind("triggered") };
+      triggeredEffects: getItemEffectsByKind("triggered"),
+      procEffects: getItemEffectsByKind("proc") };
   }
 
   async _onRender(context, options) {

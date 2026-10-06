@@ -446,6 +446,19 @@
                     </select>
 
                 </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Proc Effect
+                    </label>
+
+                    <select name="system.proc">
+                        <option value="">None</option>
+                        {{selectOptions procEffects selected=system.proc valueAttr="id" labelAttr="name"}}
+                    </select>
+
+                </div>
             </fieldset>
                 {{localize "eqrmss.item.description"}}
                 {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
