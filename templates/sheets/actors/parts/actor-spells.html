@@ -21,21 +21,4 @@
     </table>
   </div>
 
-  <div class="panel">
-    <h4>Songs</h4>
-    <table class="rmss-table">
-      <thead><tr><th>Name</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
-      <tbody>
-        {{#each items.songs}}
-          <tr data-item-id="{{this._id}}">
-            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
-            <td>{{this.system.level}}</td>
-            <td>{{this.system.type}}</td>
-            <td>{{this.system.range}}</td>
-            <td>{{this.system.duration}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
 </div>

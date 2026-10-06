@@ -152,7 +152,19 @@
     <div class="tab" data-group="primary" data-tab="songs">
       <h3>Songs</h3>
       <div class="panel">
-        {{> "systems/eqrmss/templates/sheets/actors/parts/actor-songs.html"}}
+        <div class="song-grid">
+          {{#each actor.items}}
+          {{#if (eq this.type "song")}}
+          <div class="song-card" draggable="true" data-item-id="{{this.id}}">
+            <div class="song-name">{{this.name}}</div>
+            <div class="song-actions">
+              <button data-action="bardStart" data-song-id="{{this.id}}">Play</button>
+              <button data-action="bardStop" data-song-id="{{this.id}}">Stop</button>
+            </div>
+          </div>
+          {{/if}}
+          {{/each}}
+        </div>
       </div>
     </div>
     {{/if}}
