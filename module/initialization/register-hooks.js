@@ -34,6 +34,37 @@ export function registerEQRMSSHooks() {
     });
   });
 
+  // Cast-time interruption (Option A) + damage tracking (Option B):
+  // preUpdateActor gives old (actor.system) vs new (changed) values.
+  // If hits.value increases → damage taken: mark damagedThisRound
+  // (Option B fizzle) and interrupt any pending delayed cast (Option A).
+  // If stun pool increases → interrupt pending cast.
+  // GM-only to avoid double-processing.
+  Hooks.on("preUpdateActor", async (actor, changed) => {
+    if (!game.user?.isGM) return;
+    try {
+        const oldHits = Number(actor.system?.hits?.value) || 0;
+        const newHits = Number(changed?.system?.hits?.value);
+        const tookDamage = Number.isFinite(newHits) && newHits > oldHits;
+        const oldStun = Number(actor.system?.hits?.stun) || 0;
+        const newStun = Number(changed?.system?.hits?.stun);
+        const gotStunned = Number.isFinite(newStun) && newStun > oldStun;
+
+        if (tookDamage || gotStunned) {
+            const { interruptPendingCast } = await import("../spells/cast-timing.js");
+            const reason = gotStunned ? "stun" : "damage";
+            await interruptPendingCast(actor, reason);
+        }
+        if (tookDamage) {
+            // Mark for Option B (cleared at round start in tickConditions).
+            // Use options to avoid recursion: set via changed, not a separate update.
+            changed.system = changed.system ?? {};
+            changed.system.status = changed.system.status ?? {};
+            changed.system.status.damagedThisRound = true;
+        }
+    } catch (e) { console.error("EQRMSS | damage/stun hook failed", e); }
+  });
+
   // NOTE: Templates are loaded once during "init" by the bootstrap
   // (eqrmss.js -> loadEQRMSSTemplates). The duplicate "ready" reload
   // that used to live here has been removed.

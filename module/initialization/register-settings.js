@@ -81,4 +81,22 @@ export function registerEQRMSSSettings() {
     type: Boolean,
     default: true
   });
+
+  // ==========================================================
+  // Spellcasting: Cast Time Enforcement
+  // ==========================================================
+
+  game.settings.register("eqrmss", "castTimeMode", {
+    name: "Cast Time Enforcement",
+    hint: "How EQ spell cast times are enforced. Rounds: spells take ceil(castTime/6) rounds, mana spent upfront, interruptible. Instant: spells fire immediately but fizzle if the caster took damage this round. Off: cast time has no mechanical effect (range still enforced).",
+    scope: "world",
+    config: true,
+    type: String,
+    default: "rounds",
+    choices: {
+      rounds: "Rounds (declare, wait, interruptible)",
+      instant: "Instant (fizzles if damaged this round)",
+      off: "Off (no cast-time enforcement)"
+    }
+  });
 }

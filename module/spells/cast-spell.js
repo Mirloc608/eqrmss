@@ -45,6 +45,10 @@ import {
 import { resolveBallCast } from "./ball-spell.js";
 import { rollWeaponAttack } from "../combat/combat-rolls.js";
 import { applyHealingSpell, checkHitThresholds } from "../combat/crit-conditions.js";
+import {
+    getCastTimeMode, waitRoundsFor, checkRange,
+    storePendingCast, clearPendingCast
+} from "./cast-timing.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -220,7 +224,18 @@ export async function castSpell(actor, spellItem, opts = {}) {
     };
     const pool = actor.system?.attributes?.mana ?? { value: 0, max: 0 };
     const before = Number(pool.value) || 0;
-    if (cost > before) {
+
+    // ---- Delayed fire (Option A): ESF passed and mana spent at declaration.
+    // Skip checks/gate/spend; resolve with stored targets.
+    let delayedTargets = null;
+    let skipToResolution = false;
+    if (opts._delayedFire) {
+        delayedTargets = Array.isArray(opts._delayedTargets) ? opts._delayedTargets : [];
+        // No-op the mana spend (already spent at declaration)
+        skipToResolution = true;
+    }
+
+    if (!skipToResolution && cost > before) {
         ui.notifications?.warn(`${actor.name} cannot cast ${name}: needs ${cost} mana, has ${before}.`);
         return { ok: false, reason: "mana" };
     }
@@ -231,7 +246,7 @@ export async function castSpell(actor, spellItem, opts = {}) {
     // and balls resolve against every targeted token.
     let baseTargets = [];
     if (cls.kind === "base") {
-        baseTargets = targetedActors().filter(t => t !== actor);
+        baseTargets = delayedTargets ?? targetedActors().filter(t => t !== actor);
         if (!baseTargets.length) {
             ui.notifications?.warn(`${actor.name} cannot cast ${name}: base spells need a target other than the caster.`);
             return { ok: false, reason: "target" };
@@ -239,7 +254,7 @@ export async function castSpell(actor, spellItem, opts = {}) {
     }
     let ballTargets = [];
     if (cls.kind === "ball") {
-        ballTargets = targetedActors();
+        ballTargets = delayedTargets ?? targetedActors();
         if (!ballTargets.length) {
             ui.notifications?.warn(`${actor.name} cannot cast ${name}: ball spells need at least one targeted token.`);
             return { ok: false, reason: "target" };
@@ -258,8 +273,24 @@ export async function castSpell(actor, spellItem, opts = {}) {
         if (targetTok) displaceCtx = { kind: cls.kind, targetToken: targetTok, casterToken: casterTok };
     }
 
+    // ---- Range check (before ESF: out-of-range never triggers a failure roll) ----
+    // (skipped for delayed fire — checked at declaration)
+    if (!skipToResolution) {
+        const rangeTargets = cls.kind === "base" ? baseTargets
+            : cls.kind === "ball" ? ballTargets
+            : cls.kind === "bolt" ? [targetedActor()].filter(Boolean)
+            : [targetedActor() ?? actor].filter(Boolean);
+        const rangeCheck = checkRange(actor, spellItem, rangeTargets, worn.rangeFactor);
+        if (!rangeCheck.ok) {
+            ui.notifications?.warn(`${actor.name} cannot cast ${name}: ${rangeCheck.detail}`);
+            return { ok: false, reason: "range", detail: rangeCheck.detail };
+        }
+    }
+
     // ---- ESF gate (before the mana is spent) ----
-    const gate = await esfGate(actor, spellItem, {
+    // (skipped for delayed fire — passed at declaration)
+    const gate = skipToResolution ? { required: false, passed: true }
+        : await esfGate(actor, spellItem, {
         attackSpell: cls.kind === "bolt" || cls.kind === "base" || cls.kind === "ball",
         prepRoundsShort: opts.prepRoundsShort,
         displace: displaceCtx
@@ -267,9 +298,55 @@ export async function castSpell(actor, spellItem, opts = {}) {
     if (gate.required && !gate.passed) {
         return { ok: false, reason: "esf", esf: gate.esf.total, failure: gate.failure?.entry ?? null };
     }
-    const esfNote = gate.required ? `<p><em>${esc(gate.note)}</em></p>` : "";
+    const esfNote = skipToResolution ? "" : (gate.required ? `<p><em>${esc(gate.note)}</em></p>` : "");
+
+    // ---- Cast time enforcement (GM setting: rounds / instant / off) ----
+    // (skipped for delayed fire — already handled at declaration)
+    const castMode = skipToResolution ? "off" : getCastTimeMode();
+    if (castMode === "instant") {
+        // Option B: fizzle if the caster took damage this round
+        if (actor.system?.status?.damagedThisRound) {
+            await ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor }),
+                content: `<p><em>${esc(actor.name)} tries to cast ${esc(name)} but is reeling from damage — the spell fizzles! (no mana spent)</em></p>`
+            });
+            return { ok: false, reason: "interrupted", mode: "instant" };
+        }
+    } else if (castMode === "rounds") {
+        // Option A: delayed casting for longer spells
+        const waitRounds = waitRoundsFor(spellItem, worn.castFactor);
+        if (waitRounds > 1) {
+            // Spend mana upfront, store pending, fire after (waitRounds - 1) full rounds
+            const delayRounds = waitRounds - 1;
+            const pendingTargetIds = (cls.kind === "base" ? baseTargets
+                : cls.kind === "ball" ? ballTargets
+                : [targetedActor()].filter(Boolean)
+            ).map(t => t.id).filter(Boolean);
+            // Spend mana now (duplicate of spendMana to avoid closure issues)
+            if (cost > 0) {
+                const derivedMax = Number(actor.system?.derived?.manaMax) || Number(pool.max) || 0;
+                await actor.update({
+                    "system.attributes.mana.value": before - cost,
+                    "system.attributes.mana.max": Math.max(Number(pool.max) || 0, derivedMax)
+                });
+            }
+            await storePendingCast(actor, spellItem, pendingTargetIds, opts, delayRounds);
+            const castSecs = (Number(spellItem.system?.castTime) || 0) * (worn.castFactor || 1);
+            await ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor }),
+                content: combatCard("Spellcasting", `
+                    <h2>${esc(actor.name)} begins casting ${esc(name)}</h2>
+                    ${esfNote}${wornNote}
+                    <p><em>Cast time ${Math.round(castSecs * 10) / 10}s — fires in ${delayRounds} round${delayRounds === 1 ? "" : "s"}. Mana ${before} → ${before - cost}.</em></p>`)
+            });
+            return { ok: true, kind: cls.kind, delayed: true, waitRounds: delayRounds, mods };
+        }
+        // waitRounds <= 1: cast immediately (fall through)
+    }
+    // mode "off": no cast-time enforcement (fall through)
 
     const spendMana = async () => {
+        if (skipToResolution) return; // already spent at declaration
         if (cost <= 0) return;
         // Persist the derived max with the spend: prepare only lifts
         // the in-memory pool, so without a stored max the lift would
@@ -280,7 +357,8 @@ export async function castSpell(actor, spellItem, opts = {}) {
             "system.attributes.mana.max": Math.max(Number(pool.max) || 0, derivedMax)
         });
     };
-    const manaNote = cost > 0 ? ` Mana ${before} → ${before - cost}.` : "";
+    const manaNote = skipToResolution ? " (mana spent at declaration)"
+        : cost > 0 ? ` Mana ${before} → ${before - cost}.` : "";
 
     if (cls.kind === "bolt") {
         await spendMana();
@@ -434,4 +512,32 @@ export async function castSpell(actor, spellItem, opts = {}) {
             ${esfNote}${wornNote}${regenNote}<p><em>Cast announced — ${note}.${manaNote}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
+}
+
+/**
+ * Fire a delayed (Option A) pending cast.
+ * The ESF gate passed and mana was spent at declaration time;
+ * this skips straight to resolution with the stored targets.
+ */
+export async function fireDelayedCast(actor, pending) {
+    if (!actor || !pending?.spellItemId) return { ok: false, reason: "missing" };
+    const spellItem = actor.items?.get(pending.spellItemId);
+    if (!spellItem) {
+        await globalThis.ChatMessage?.create({
+            speaker: globalThis.ChatMessage.getSpeaker({ actor }),
+            content: `<p><em>${actor.name}'s ${pending.spellName || "spell"} fizzles — the spell is gone!</em></p>`
+        });
+        return { ok: false, reason: "spell-gone" };
+    }
+    // Resolve stored target IDs to actors
+    const targetActors = (pending.targetIds ?? [])
+        .map(id => globalThis.game?.actors?.get(id))
+        .filter(Boolean);
+    // Re-invoke castSpell in "resolve-only" mode: skips target/range/
+    // ESF/mana (done at declaration), goes straight to the kind branch.
+    return castSpell(actor, spellItem, {
+        ...(pending.opts ?? {}),
+        _delayedFire: true,
+        _delayedTargets: targetActors
+    });
 }

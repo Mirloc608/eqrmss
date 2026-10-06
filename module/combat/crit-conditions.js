@@ -589,6 +589,9 @@ function songStillActive(entry) {
     return !!song?.system?.active;
 }
 
+// Cast-time pending casts (Option A) tick here on round change.
+import { clearPendingCast } from "../spells/cast-timing.js";
+
 export async function tickConditions(combat) {
     if (!combat) return;
     const notes = [];
@@ -627,6 +630,34 @@ export async function tickConditions(combat) {
             }
             updates["system.status.soulTimer"] = soul;
             notes.push(`${esc(actor.name)}: soul departs in ${roundsWord(soul)}.`);
+        }
+
+        // Pending delayed cast (Option A): tick down, fire at 0.
+        // Interruption (damage/stun) is handled by the updateActor hook.
+        const pending = st.pendingCast;
+        if (pending && typeof pending.roundsLeft === "number") {
+            const left = pending.roundsLeft - 1;
+            if (left <= 0) {
+                // Fire! Clear first, then resolve (re-entrant safe).
+                await clearPendingCast(actor);
+                notes.push(`<strong>${esc(actor.name)}</strong> completes ${esc(pending.spellName || "the spell")}!`);
+                // Fire the delayed spell (imports cast-spell dynamically to avoid cycles)
+                try {
+                    const { fireDelayedCast } = await import("../spells/cast-spell.js");
+                    await fireDelayedCast(actor, pending);
+                } catch (e) {
+                    console.error("EQRMSS | Delayed cast fire failed", e);
+                    notes.push(`<em>Delayed cast failed: ${esc(e.message)}</em>`);
+                }
+            } else {
+                updates["system.status.pendingCast.roundsLeft"] = left;
+                notes.push(`${esc(actor.name)}: ${esc(pending.spellName || "spell")} fires in ${left} round${left === 1 ? "" : "s"}.`);
+            }
+        }
+
+        // Clear the "damaged this round" flag (Option B) at round start.
+        if (st.damagedThisRound) {
+            updates["system.status.damagedThisRound"] = false;
         }
 
         // Bleed — hits until stopped (death, heal spell, first aid).
