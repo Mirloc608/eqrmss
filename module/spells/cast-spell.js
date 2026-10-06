@@ -287,12 +287,25 @@ export async function castSpell(actor, spellItem, opts = {}) {
         }
     }
 
+    // ---- Ready-spell check (user ruling 2026-10-06): spells not in
+    // the caster's ready list suffer the ESF short-preparation penalty
+    // (+25, 1 round short), regardless of cast time. Ready spells are
+    // managed on the Spells tab (out of combat only).
+    let prepRoundsShort = Number(opts.prepRoundsShort) || 0;
+    {
+        const spellId = spellItem.id ?? spellItem._id;
+        const readySpells = actor.system?.status?.readySpells ?? [];
+        if (spellId && !readySpells.includes(spellId)) {
+            prepRoundsShort = Math.max(prepRoundsShort, 1);
+        }
+    }
+
     // ---- ESF gate (before the mana is spent) ----
     // (skipped for delayed fire — passed at declaration)
     const gate = skipToResolution ? { required: false, passed: true }
         : await esfGate(actor, spellItem, {
         attackSpell: cls.kind === "bolt" || cls.kind === "base" || cls.kind === "ball",
-        prepRoundsShort: opts.prepRoundsShort,
+        prepRoundsShort,
         displace: displaceCtx
     });
     if (gate.required && !gate.passed) {

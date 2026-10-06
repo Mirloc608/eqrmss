@@ -97,6 +97,19 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             w => isWorn(w)
         );
 
+        // Ready spells (user ruling 2026-10-06): limited subset that casts
+        // without the ESF short-preparation penalty. Base 8 slots; AAs
+        // grant more via system.status.readySlotsBonus.
+        const readySpells = Array.isArray(system.status?.readySpells)
+            ? system.status.readySpells : [];
+        const readyMax = 8 + (Number(system.status?.readySlotsBonus) || 0);
+        context.readySpells = readySpells;
+        context.readyCount = readySpells.length;
+        context.readyMax = readyMax;
+        for (const sp of context.items?.spells ?? []) {
+            sp.isReady = readySpells.includes(sp._id ?? sp.id);
+        }
+
         // Damage by Location (§4.15): structural damage per body area
         // against its Structural Rating ((CO/10) x BAM).
         context.structuralAreas = structuralAreasFor(actor).map(a => {
@@ -396,6 +409,40 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // ------------------------------------------------------------
         // Spells Tab: cast a spell (EQ mana; RMSS resolution)
         // ------------------------------------------------------------
+        // ------------------------------------------------------------
+        // Spells Tab: Toggle ready spell (out of combat only).
+        // Ready spells cast without the ESF short-preparation penalty.
+        // ------------------------------------------------------------
+        html.querySelectorAll(".toggle-ready").forEach(el => el.addEventListener("click", async ev => {
+            ev.preventDefault();
+            const actor = this.actor;
+            const inCombat = (globalThis.game?.combat?.combatants ?? [])
+                .some(c => c.actor?.id === actor.id);
+            if (inCombat) {
+                ui.notifications?.warn(`${actor.name} cannot change ready spells during combat. Exit combat first.`);
+                return;
+            }
+            const spellId = ev.currentTarget.dataset.itemId;
+            const readySpells = Array.isArray(actor.system?.status?.readySpells)
+                ? [...actor.system.status.readySpells] : [];
+            const readyMax = 8 + (Number(actor.system?.status?.readySlotsBonus) || 0);
+            const idx = readySpells.indexOf(spellId);
+            if (idx >= 0) {
+                readySpells.splice(idx, 1);
+                ui.notifications?.info(`Removed from ready spells.`);
+            } else {
+                if (readySpells.length >= readyMax) {
+                    ui.notifications?.warn(`Ready spell slots full (${readyMax}). Remove one first.`);
+                    return;
+                }
+                readySpells.push(spellId);
+                const item = actor.items.get(spellId);
+                ui.notifications?.info(`${item?.name ?? "Spell"} is now ready.`);
+            }
+            await actor.update({ "system.status.readySpells": readySpells });
+            await this.render();
+        }));
+
         html.querySelectorAll(".cast-spell").forEach(el => el.addEventListener("click", async ev => {
             const item = this.actor.items.get(ev.currentTarget.dataset.itemId);
             if (!item) return;
