@@ -32,7 +32,7 @@
           {{#each actor.items}}
             {{#if (eq this.type "armor")}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a>{{#if this.system.triggeredEffect}} <button type="button" class="item-clicky" data-item-id="{{this._id}}" title="Use {{this.system.triggeredEffect}}">Use</button>{{/if}}</td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
                   <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
@@ -54,7 +54,7 @@
           {{#each actor.items}}
             {{#if (eq this.type "shield")}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a>{{#if this.system.triggeredEffect}} <button type="button" class="item-clicky" data-item-id="{{this._id}}" title="Use {{this.system.triggeredEffect}}">Use</button>{{/if}}</td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
                   <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
@@ -76,7 +76,7 @@
           {{#each actor.items}}
             {{#if (eq this.type "jewelry")}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a>{{#if this.system.triggeredEffect}} <button type="button" class="item-clicky" data-item-id="{{this._id}}" title="Use {{this.system.triggeredEffect}}">Use</button>{{/if}}</td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
                   <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>

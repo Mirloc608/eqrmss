@@ -519,6 +519,28 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         });
 
         // ------------------------------------------------------------
+        // Clicky ("Use") buttons on Equipment rows fire the item's
+        // triggered effect against the current targets (or self)
+        // ------------------------------------------------------------
+        html.querySelectorAll(".item-clicky").forEach(el => {
+            el.addEventListener("click", async ev => {
+                ev.preventDefault();
+                ev.stopPropagation();
+                const itemId = el.dataset.itemId;
+                const item = this.actor?.items?.get(itemId);
+                if (!item) return;
+                try {
+                    const eng = game?.eqrmss?.itemEffects;
+                    if (!eng?.activateClicky) {
+                        ui.notifications.warn("Item effects engine not loaded yet.");
+                        return;
+                    }
+                    await eng.activateClicky({ item });
+                } catch (e) { console.error("EQRMSS | clicky use failed", e); }
+            });
+        });
+
+        // ------------------------------------------------------------
         // Manual Drag & Drop binding (V13 ApplicationV2)
         // Use a flag to prevent duplicate bindings on re-render
         // ------------------------------------------------------------

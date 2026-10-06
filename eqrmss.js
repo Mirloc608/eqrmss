@@ -369,7 +369,8 @@ export async function initializeDataLoaders() {
             options: fxMod.getItemEffectOptions,
             fireProc: procEngine.fireWeaponProc,
             applyWornRound: wornEngine.applyWornRoundEffects,
-            fireTriggered: triggeredEngine.fireTriggeredEffect
+            fireTriggered: triggeredEngine.fireTriggeredEffect,
+            activateClicky: triggeredEngine.activateClicky
         };
         game.eqrmss._loadStatus.itemEffects = true;
         console.log(`EQRMSS | Item effects ready: ${fxMod.getItemEffectOptions().length} effects`);

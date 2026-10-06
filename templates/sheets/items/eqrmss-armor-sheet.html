@@ -443,6 +443,10 @@
         {{selectOptions triggeredEffects selected=system.triggeredEffect valueAttr="id" labelAttr="name"}}
     </select>
 
+    {{#if system.triggeredEffect}}
+    <button type="button" class="clicky-use-btn" title="Fire this item's triggered effect"><i class="fas fa-bolt"></i> Use</button>
+    {{/if}}
+
 </div>
 
         <div class="form-group" style="margin: 8px 0;">

@@ -80,6 +80,23 @@ export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(Document
         header.appendChild(btn);
       }
     } catch (e) { console.error('eqrmss | item header setup failed', e); }
+
+    // Clicky ("Use") button next to the Triggered Effect dropdown
+    try {
+      this.element?.querySelectorAll(".clicky-use-btn").forEach(btn => {
+        btn.addEventListener("click", async ev => {
+          ev.preventDefault();
+          try {
+            const eng = game?.eqrmss?.itemEffects;
+            if (!eng?.activateClicky) {
+              ui.notifications.warn("Item effects engine not loaded yet.");
+              return;
+            }
+            await eng.activateClicky({ item: this.document });
+          } catch (e) { console.error("EQRMSS | clicky use failed", e); }
+        });
+      });
+    } catch (e) { console.error('eqrmss | clicky button setup failed', e); }
   }
 
   async close(options = {}) { try { if (this.isEditable) { const form = this.element?.querySelector('form'); if (form) { const fd = new FormData(form); const obj = {}; for (const [k,v] of fd.entries()) obj[k]=v; await this._updateObject(undefined, obj); } } } catch(e){console.error('eqrmss | item close save failed', e);} return super.close(options); }

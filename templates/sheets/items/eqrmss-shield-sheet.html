@@ -394,6 +394,10 @@
               {{selectOptions triggeredEffects selected=system.triggeredEffect valueAttr="id" labelAttr="name"}}
           </select>
 
+          {{#if system.triggeredEffect}}
+          <button type="button" class="clicky-use-btn" title="Fire this item's triggered effect"><i class="fas fa-bolt"></i> Use</button>
+          {{/if}}
+
       </div>
       {{localize "eqrmss.item.description"}}
       {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
