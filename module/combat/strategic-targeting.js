@@ -166,11 +166,22 @@ export async function promptCalledShot(attacker, targetActor, targetName, skillB
                 </div>`,
             ok: { label: "Attack" }
         });
-        if (!fd) return null;
+        if (!fd) {
+            console.log("EQRMSS DEBUG | promptCalledShot: fd is null/undefined, returning null");
+            return null;
+        }
         const val = typeof fd.get === "function" ? fd.get("area") : fd.area;
-        if (!val) return {};
+        console.log("EQRMSS DEBUG | promptCalledShot: val =", JSON.stringify(val), "fd type:", typeof fd, "has get:", typeof fd?.get);
+        if (!val) {
+            console.log("EQRMSS DEBUG | promptCalledShot: empty val, returning {}");
+            return {};
+        }
         const area = areas.find(a => a.id === val);
-        if (!area) return {};
+        console.log("EQRMSS DEBUG | promptCalledShot: area found =", JSON.stringify(area?.id), "areas count:", areas.length);
+        if (!area) {
+            console.log("EQRMSS DEBUG | promptCalledShot: area not found for val", JSON.stringify(val));
+            return {};
+        }
         return {
             areaId: area.id,
             areaName: area.name,
