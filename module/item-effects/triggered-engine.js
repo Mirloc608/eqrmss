@@ -63,12 +63,9 @@ export async function activateClicky({ item }) {
         return { fired: false, reason: "no-owning-actor" };
     }
 
-    // Target: the user's current canvas targets; self when nothing is targeted.
-    let recipients = [];
-    try {
-        recipients = [...(game?.user?.targets ?? [])].map(t => t?.actor).filter(a => !!a);
-    } catch (e) { console.warn("EQRMSS | clicky target read failed, defaulting to self", e); }
-    if (!recipients.length) recipients = [actor];
+    // Target: always the wearer (ruling 2026-10-06). Clicky effects
+    // apply only to the item's wearer, never to canvas targets.
+    const recipients = [actor];
 
     // Clickies cost 0 mana — never deduct anything.
 
