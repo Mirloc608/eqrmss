@@ -8,9 +8,9 @@
 //   attack table plus the casting (Directed Spells) bonus produce
 //   all hits and crits.
 // - Element axes: fire -> Fire Bolt (Heat crits), cold -> Ice
-//   Bolt (Impact), electricity -> Lightning Bolt (Electricity +
-//   Impact compounds), magic/arcane -> Fire Bolt table with Mana
-//   crits substituted. Poison/disease direct damage routes to
+//   Bolt hits with Cold crits substituted (2026-10-06 Option B),
+//   electricity -> Lightning Bolt (Electricity + Impact compounds),
+//   magic/arcane -> Fire Bolt table with Mana crits substituted. Poison/disease direct damage routes to
 //   the base-spell/RR track (later stage), not bolts.
 // - Heal effects: direct healing (applyHealingSpell + hit
 //   restoration).
@@ -27,7 +27,9 @@
 // crit table (Mana) regardless of the attack table's cell type.
 export const BOLT_BY_ELEMENT = {
     fire: { attackTable: "Fire Bolt" },
-    cold: { attackTable: "Ice Bolt" },
+    // User ruling 2026-10-06 Option B: cold bolts use Ice Bolt for hits
+    // but substitute Cold crits (consistent with cold balls).
+    cold: { attackTable: "Ice Bolt", critType: "C" },
     electric: { attackTable: "Lightning Bolt" },
     electricity: { attackTable: "Lightning Bolt" },
     lightning: { attackTable: "Lightning Bolt" },
