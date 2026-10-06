@@ -177,8 +177,10 @@ export function manaMaxFor(actor) {
     const stat = CASTING_STAT_BY_CLASS[classId];
     if (!stat) return 0;
     const level = casterLevelOf(actor);
-    // EQ scale (user ruling 2026-10-04): (level x bonus) +
-    // (level x primary stat / 10), the stat being its temp value.
+    // EQ scale (user ruling 2026-10-04, rebalanced 2026-10-06):
+    // 20 + (level x bonus) + (level x primary stat / 10).
+    // The flat 20 gives level-1 casters a usable pool (previously
+    // 8-14 mana = 1-2 casts); scaling above level 1 is unchanged.
     const temp = Number(actor?.system?.stats?.[stat]?.temp) || 0;
-    return Math.max(0, level * statBonusFor(actor, stat) + level * Math.floor(temp / 10));
+    return Math.max(0, 20 + level * statBonusFor(actor, stat) + level * Math.floor(temp / 10));
 }
