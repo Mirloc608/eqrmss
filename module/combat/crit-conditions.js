@@ -672,7 +672,8 @@ export async function tickConditions(combat) {
             for (const e of spellEffects) {
                 const songAlive = e.source === "song" && e.maintained && songStillActive(e);
                 const regenAlive = songAlive || e.source === "spell"
-                    || (typeof e.source === "string" && e.source.startsWith("triggered:"));
+                    || (typeof e.source === "string" && (e.source.startsWith("triggered:")
+                        || e.source.startsWith("proc:") || e.source.startsWith("worn:")));
                 if (e.kind === "regen" && Number(e.amount) > 0 && regenAlive) {
                     if (e.pool === "mana") {
                         const mCur = Number(updates["system.attributes.mana.value"] ?? actor.system?.attributes?.mana?.value) || 0;

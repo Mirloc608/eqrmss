@@ -21,6 +21,29 @@
  * PLACEHOLDER: the resistance formula is pending the user's ruling on RMSS
  * resistance-roll mechanics. It currently subtracts flat; replace
  * applyResistance() when the RR rule lands.
+ *
+ * Supported payload types (Phase 3 — damage pipeline):
+ *   "damage"    -> immunity/weakness/resistance gate, then concussion hits
+ *   "regen"     -> restore a pool (default mana), capped at max
+ *   "buff"      -> stub (applied:false); payload shape not yet defined
+ *   "heal"      -> restore hits (system.hits.value), floored at 0
+ *   "mana-drain"-> reduce system.attributes.mana.value, floored at 0
+ *   "stun"      -> system.status.stun.stunned += rounds
+ *   "mez"       -> system.status.stun.downOrOut += rounds (spell-engine pattern)
+ *   "debuff"    -> worst-wins system.status.actionPenalty { value, rounds }
+ *                  + timed system.status.spellEffects label entry
+ *   "dot"       -> system.status.dots entry { name, element, min, max,
+ *                  roundsLeft } — the exact shape tickConditions ticks
+ *   "hot"       -> timed regen entry in system.status.spellEffects
+ *                  { kind: "regen", pool: "hits", amount, roundsLeft } —
+ *                  tickConditions heals non-mana regen pools each round
+ *   "root"      -> system.status.rooted { rounds } + timed spellEffects entry
+ *                  (no immobilization field exists yet; GM adjudicates)
+ *   "snare"     -> system.movement.snarePenalty { value } + timed entry
+ *   "fear"      -> system.status.fear { rounds } + timed spellEffects entry
+ *                  (no fear pool exists yet; GM adjudicates)
+ *   "summon"    -> chat note + GM prompt; never half-spawned
+ *   "utility"   -> payload note text logged to result notes; no mechanics
  */
 
 function rollRange(min, max) {
@@ -45,14 +68,50 @@ function applyResistance(rolled, resist) {
 }
 
 async function persistValue(target, path, value) {
+    if (!target) return;
     if (typeof target?.update === "function") {
         await target.update({ [path]: value });
     } else if (target?.system) {
         const parts = path.replace(/^system\./, "").split(".");
         let obj = target.system;
-        for (let i = 0; i < parts.length - 1; i++) obj = obj[parts[i]];
+        for (let i = 0; i < parts.length - 1; i++) obj = obj[parts[i]] ??= {};
         obj[parts[parts.length - 1]] = value;
     }
+}
+
+/** Defensive null-target guard: returns a note-only result, or null when usable. */
+function requireTarget(target, type, source) {
+    if (!target) return { type, rolled: 0, final: 0, notes: ["no target"], source };
+    return null;
+}
+
+/**
+ * Resolve the number of rounds for a timed payload. Precedence:
+ *   effect.rounds (number) -> effect.duration (number or "N rounds")
+ *   -> min/max roll -> fallback.
+ */
+function payloadRounds(effect, fallback = 1) {
+    const r = Number(effect?.rounds);
+    if (Number.isFinite(r) && r >= 0) return Math.floor(r);
+    const m = String(effect?.duration ?? "").match(/(\d+)/);
+    if (m) return Number(m[1]);
+    if (effect?.min != null || effect?.max != null) return rollRange(effect.min ?? 0, effect.max ?? 0);
+    return fallback;
+}
+
+/** Append one entry to a system.status list (dots / spellEffects). */
+async function pushStatusList(target, key, entry) {
+    const list = [...(Array.isArray(target?.system?.status?.[key]) ? target.system.status[key] : [])];
+    list.push(entry);
+    await persistValue(target, `system.status.${key}`, list);
+}
+
+/** Read-modify-write the stun pool; fn receives the merged pool to mutate. */
+async function withStunPool(target, fn) {
+    const pool = { stunned: 0, stunNoParry: 0, downOrOut: 0, ...(target?.system?.status?.stun ?? {}) };
+    fn(pool);
+    await persistValue(target, "system.status.stun", pool);
+    return pool;
 }
 
 async function applyDamage({ effect, target, source }) {
@@ -96,6 +155,216 @@ async function applyBuff({ effect, source }) {
     return { type: "buff", final: 0, notes: ["buff payloads not yet defined"], source, applied: false };
 }
 
+/** "heal" — restore concussion hits taken (system.hits.value), floored at 0. */
+async function applyHeal({ effect, target, source }) {
+    const miss = requireTarget(target, "heal", source);
+    if (miss) return miss;
+    const rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    const cur = Number(target.system?.hits?.value) || 0;
+    const next = Math.max(0, cur - rolled);
+    await persistValue(target, "system.hits.value", next);
+    const final = cur - next;
+    const notes = final < rolled ? [`capped at full health (${final} of ${rolled} applied)`] : [];
+    return { type: "heal", rolled, final, notes, source };
+}
+
+/** "mana-drain" — reduce the target's mana pool, floored at 0. */
+async function applyManaDrain({ effect, target, source }) {
+    const miss = requireTarget(target, "mana-drain", source);
+    if (miss) return miss;
+    const attr = target.system?.attributes?.mana;
+    if (!attr) return { type: "mana-drain", rolled: 0, final: 0, notes: ["no mana pool on target"], source };
+    const rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    const cur = Number(attr.value) || 0;
+    const next = Math.max(0, cur - rolled);
+    await persistValue(target, "system.attributes.mana.value", next);
+    return { type: "mana-drain", rolled, final: cur - next, notes: [], source };
+}
+
+/** "stun" — add rounds to system.status.stun.stunned (spell-engine path). */
+async function applyStun({ effect, target, source }) {
+    const miss = requireTarget(target, "stun", source);
+    if (miss) return miss;
+    const rounds = payloadRounds(effect);
+    const pool = await withStunPool(target, p => { p.stunned += rounds; });
+    return { type: "stun", rolled: rounds, final: pool.stunned, notes: [`stunned for ${rounds} rounds`], source };
+}
+
+/**
+ * "debuff" — payload carries { effect, value } and optional rounds/duration.
+ * The timed-modifier pattern the codebase has is system.status.actionPenalty
+ * { value, rounds } (negative = penalty to all actions; rounds 0 = indefinite;
+ * ticks down in tickConditions). Worst (most negative) wins, matching how
+ * crit-conditions applies penalties. A descriptive timed spellEffects entry
+ * records it for the GM, mirroring applyBaseSpellEffect's debuff branch.
+ */
+async function applyDebuff({ effect, target, source }) {
+    const miss = requireTarget(target, "debuff", source);
+    if (miss) return miss;
+    const magnitude = Math.abs(Number(effect?.value ?? effect?.amount ?? 0));
+    const rounds = payloadRounds(effect, 0);
+    const name = String(effect?.effect ?? effect?.stat ?? "debuff");
+    const pen = -magnitude;
+    const cur = target.system?.status?.actionPenalty ?? { value: 0, rounds: 0 };
+    if (pen < (Number(cur.value) || 0)) {
+        await persistValue(target, "system.status.actionPenalty", { value: pen, rounds });
+    }
+    await pushStatusList(target, "spellEffects", {
+        label: `${name} (${pen} to all actions)`,
+        roundsLeft: rounds > 0 ? rounds : null,
+        source
+    });
+    const notes = [`${name}: ${pen} to all actions${rounds > 0 ? ` for ${rounds} rounds` : " (indefinite)"}`];
+    return { type: "debuff", rolled: magnitude, final: pen, notes, source };
+}
+
+/**
+ * "dot" — add a damage-over-time entry to system.status.dots in the exact
+ * shape the spell engine's tickConditions expects:
+ * { name, element, min, max, roundsLeft } (source for attribution).
+ */
+async function applyDot({ effect, target, source }) {
+    const miss = requireTarget(target, "dot", source);
+    if (miss) return miss;
+    const rounds = payloadRounds(effect);
+    const rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    await pushStatusList(target, "dots", {
+        name: effect.name ?? source ?? "item effect",
+        element: String(effect.element ?? ""),
+        min: Number(effect.min ?? rolled) || 0,
+        max: Number(effect.max ?? rolled) || 0,
+        roundsLeft: rounds,
+        source
+    });
+    return { type: "dot", rolled, final: rolled, notes: [`${rolled} hits/round for ${rounds} rounds`], source };
+}
+
+/**
+ * "hot" — heal-over-time, mirroring the dot pattern for healing: a timed
+ * regen entry in system.status.spellEffects. tickConditions heals
+ * non-mana regen pools each round (hits clamped at 0 taken). A re-fired
+ * hot from the same source refreshes the entry instead of stacking.
+ */
+async function applyHot({ effect, target, source }) {
+    const miss = requireTarget(target, "hot", source);
+    if (miss) return miss;
+    const rounds = payloadRounds(effect);
+    const rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    const list = [...(Array.isArray(target?.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
+    const fresh = list.filter(e => !(e?.kind === "regen" && e?.pool === "hits" && e?.source === source));
+    fresh.push({
+        kind: "regen", pool: "hits", amount: rolled,
+        roundsLeft: rounds,
+        label: effect.name ?? source ?? "heal over time",
+        source
+    });
+    await persistValue(target, "system.status.spellEffects", fresh);
+    return { type: "hot", rolled, final: rolled, notes: [`${rolled} hits/round for ${rounds} rounds`], source };
+}
+
+/**
+ * "root" — immobilize for N rounds. The codebase has no immobilization
+ * field, so this uses a status flag (system.status.rooted { rounds }) plus
+ * a timed spellEffects entry the GM can see counting down.
+ */
+async function applyRoot({ effect, target, source }) {
+    const miss = requireTarget(target, "root", source);
+    if (miss) return miss;
+    const rounds = payloadRounds(effect);
+    await persistValue(target, "system.status.rooted", { rounds });
+    await pushStatusList(target, "spellEffects", { label: `rooted (${rounds} rounds)`, roundsLeft: rounds, source });
+    return {
+        type: "root", rolled: rounds, final: rounds,
+        notes: ["immobilized — no engine movement lock exists yet; GM adjudicates"], source
+    };
+}
+
+/**
+ * "snare" — movement penalty { value }. Movement lives at system.movement
+ * (baseRate is derived each prepare and does not consume penalties yet),
+ * so the penalty is recorded on that object plus a timed spellEffects
+ * entry; the note flags the pending engine hook.
+ */
+async function applySnare({ effect, target, source }) {
+    const miss = requireTarget(target, "snare", source);
+    if (miss) return miss;
+    const value = Math.abs(Number(effect?.value ?? effect?.amount ?? 0));
+    const rounds = payloadRounds(effect, 0);
+    await persistValue(target, "system.movement.snarePenalty", value);
+    await pushStatusList(target, "spellEffects", {
+        label: `snared (−${value} move)`,
+        roundsLeft: rounds > 0 ? rounds : null,
+        source
+    });
+    const notes = [`−${value} movement${rounds > 0 ? ` for ${rounds} rounds` : " (indefinite)"} — recorded on system.movement.snarePenalty; the §7.2.1 prepare does not consume it yet`];
+    return { type: "snare", rolled: value, final: value, notes, source };
+}
+
+/**
+ * "fear" — fear rounds (same pattern as stun). The engine has no fear pool,
+ * so this uses a status flag (system.status.fear { rounds }) plus a timed
+ * spellEffects entry; behavior is GM-adjudicated.
+ */
+async function applyFear({ effect, target, source }) {
+    const miss = requireTarget(target, "fear", source);
+    if (miss) return miss;
+    const rounds = payloadRounds(effect);
+    await persistValue(target, "system.status.fear", { rounds });
+    await pushStatusList(target, "spellEffects", { label: `feared (${rounds} rounds)`, roundsLeft: rounds, source });
+    return {
+        type: "fear", rolled: rounds, final: rounds,
+        notes: ["flees in fear — no engine fear behavior exists yet; GM adjudicates"], source
+    };
+}
+
+/** "mez" — mesmerize: the spell-engine pattern is down-or-out in the stun pool. */
+async function applyMez({ effect, target, source }) {
+    const miss = requireTarget(target, "mez", source);
+    if (miss) return miss;
+    const rounds = payloadRounds(effect);
+    const pool = await withStunPool(target, p => { p.downOrOut += rounds; });
+    return { type: "mez", rolled: rounds, final: pool.downOrOut, notes: [`mesmerized (down or out) for ${rounds} rounds`], source };
+}
+
+/**
+ * "summon" — never half-implemented: post a chat note + GM prompt with the
+ * creature name and duration. Safe to run headless (no ChatMessage global)
+ * and in Foundry (whispers the GM when the global exists).
+ */
+async function applySummon({ effect, caster, target, source }) {
+    const name = String(effect?.name ?? effect?.creature ?? "creature");
+    const rounds = payloadRounds(effect);
+    const who = caster?.name ?? "An effect";
+    const msg = `${who} summons ${name} for ${rounds} rounds — GM: place the token and resolve manually.`;
+    const notes = [msg];
+    if (typeof ChatMessage !== "undefined") {
+        try {
+            const gmIds = (typeof game !== "undefined" && game?.users)
+                ? [...game.users].filter(u => u.isGM).map(u => u.id)
+                : [];
+            await ChatMessage.create({
+                content: `<p><em>${msg}</em></p>`,
+                ...(gmIds.length ? { whisper: gmIds } : {})
+            });
+            notes.push("GM whisper posted");
+        } catch (e) {
+            notes.push("chat post failed — GM resolves manually");
+        }
+    } else {
+        notes.push("no chat available — GM resolves manually");
+    }
+    return { type: "summon", rolled: rounds, final: 0, notes, source };
+}
+
+/** "utility" — log the payload's note text to the result notes; no mechanics. */
+async function applyUtility({ effect, source }) {
+    return {
+        type: "utility", rolled: 0, final: 0,
+        notes: [String(effect?.note ?? effect?.text ?? "utility effect (no mechanical effect)")],
+        source
+    };
+}
+
 /**
  * Resolve one payload array against a target.
  * @param {object} args { payload, caster, target, source }
@@ -109,6 +378,18 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         if (effect.type === "damage") results.push(await applyDamage({ effect, caster, target, source }));
         else if (effect.type === "regen") results.push(await applyRegen({ effect, caster, target, source }));
         else if (effect.type === "buff") results.push(await applyBuff({ effect, source }));
+        else if (effect.type === "heal") results.push(await applyHeal({ effect, target, source }));
+        else if (effect.type === "mana-drain") results.push(await applyManaDrain({ effect, target, source }));
+        else if (effect.type === "stun") results.push(await applyStun({ effect, target, source }));
+        else if (effect.type === "debuff") results.push(await applyDebuff({ effect, target, source }));
+        else if (effect.type === "dot") results.push(await applyDot({ effect, target, source }));
+        else if (effect.type === "hot") results.push(await applyHot({ effect, target, source }));
+        else if (effect.type === "root") results.push(await applyRoot({ effect, target, source }));
+        else if (effect.type === "snare") results.push(await applySnare({ effect, target, source }));
+        else if (effect.type === "fear") results.push(await applyFear({ effect, target, source }));
+        else if (effect.type === "mez") results.push(await applyMez({ effect, target, source }));
+        else if (effect.type === "summon") results.push(await applySummon({ effect, caster, target, source }));
+        else if (effect.type === "utility") results.push(await applyUtility({ effect, source }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }
     return results;
