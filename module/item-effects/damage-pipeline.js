@@ -275,7 +275,7 @@ async function applyRoot({ effect, target, source }) {
     await pushStatusList(target, "spellEffects", { label: `rooted (${rounds} rounds)`, roundsLeft: rounds, source });
     return {
         type: "root", rolled: rounds, final: rounds,
-        notes: ["immobilized — no engine movement lock exists yet; GM adjudicates"], source
+        notes: ["immobilized — movement rate set to 0 while rooted"], source
     };
 }
 
@@ -315,7 +315,7 @@ async function applyFear({ effect, target, source }) {
     await pushStatusList(target, "spellEffects", { label: `feared (${rounds} rounds)`, roundsLeft: rounds, source });
     return {
         type: "fear", rolled: rounds, final: rounds,
-        notes: ["flees in fear — no engine fear behavior exists yet; GM adjudicates"], source
+        notes: ["feared — cannot make offensive attacks while feared"], source
     };
 }
 

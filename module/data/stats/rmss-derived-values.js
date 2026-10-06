@@ -368,11 +368,17 @@ export function calculateBaseMovementRate(actorData) {
 
     const encPenalty = Number(system.encumbrance?.penalty ?? 0);
 
-    const baseRate = chartBase + racialMod - armorApplied + strideMod + encPenalty;
+    // Snare: movement penalty from snare effects (e.g., Fungal Regrowth).
+    const snarePenalty = Math.abs(Number(system.movement?.snarePenalty ?? 0));
+
+    // Root: immobilized — no movement at all while rooted.
+    const rooted = Number(system.status?.rooted?.rounds ?? 0) > 0;
+
+    const baseRate = rooted ? 0 : chartBase + racialMod - armorApplied + strideMod + encPenalty - snarePenalty;
 
     return {
         quTotal, quBonus, chartBase, racialMod,
-        armorPen, armorApplied, strideMod, encPenalty, baseRate
+        armorPen, armorApplied, strideMod, encPenalty, snarePenalty, rooted, baseRate
     };
 }
 

@@ -420,6 +420,13 @@ function targetMissileParryDB(targetActor, missileAttack) {
 
 export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     const sys = weaponItem.system ?? {};
+    // Fear: a feared attacker cannot make offensive attacks — it flees.
+    if (Number(actor?.system?.status?.fear?.rounds ?? 0) > 0) {
+        const msg = `${actor?.name ?? "Attacker"} is feared and cannot attack!`;
+        if (typeof ui !== "undefined") ui.notifications?.warn(msg);
+        console.log(`EQRMSS | ${msg}`);
+        return { error: "feared", message: msg };
+    }
     // Weapons granted before their template carried an attack table
     // have none baked into the item; resolve it through the composer
     // from the stored template id so legacy items roll without a
