@@ -1,50 +1,5785 @@
 {
-    "effects": [
+  "effects": [
+    {
+      "castTime": "instant",
+      "description": "On a critical hit, shards of velium shear from the weapon, striking the target for bonus cold damage.",
+      "id": "velium-shards",
+      "kind": "proc",
+      "name": "Velium Shards",
+      "payload": [
         {
-            "castTime": "instant",
-            "description": "On a critical hit, shards of velium shear from the weapon, striking the target for bonus cold damage.",
-            "id": "velium-shards",
-            "kind": "proc",
-            "name": "Velium Shards",
-            "payload": [
-                {
-                    "element": "cold",
-                    "max": 156,
-                    "min": 96,
-                    "type": "damage"
-                }
-            ],
-            "trigger": "onCrit"
-        },
-        {
-            "description": "While worn, the bearer regenerates 1 mana per combat round (6-second tick).",
-            "family": "flowing-thought",
-            "id": "flowing-thought-1",
-            "kind": "worn",
-            "name": "Flowing Thought I",
-            "payload": [
-                {
-                    "amount": 1,
-                    "per": "round",
-                    "pool": "mana",
-                    "type": "regen"
-                }
-            ],
-            "rank": 1,
-            "stacking": "highest"
-        },
-        {
-            "castTime": "instant",
-            "description": "Triggered effect: grants the wearer Grim Aura. Payload to be defined.",
-            "id": "grim-aura",
-            "kind": "triggered",
-            "name": "Grim Aura",
-            "payload": [
-                {
-                    "note": "Effect definition pending user ruling.",
-                    "type": "buff"
-                }
-            ]
+          "element": "cold",
+          "max": 156,
+          "min": 96,
+          "type": "damage"
         }
-    ]
+      ],
+      "trigger": "onCrit"
+    },
+    {
+      "castTime": "instant",
+      "description": "Triggered effect: grants the wearer Grim Aura. Payload to be defined.",
+      "id": "grim-aura",
+      "kind": "triggered",
+      "name": "Grim Aura",
+      "payload": [
+        {
+          "note": "Effect definition pending user ruling.",
+          "type": "buff"
+        }
+      ]
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-1",
+      "kind": "worn",
+      "name": "Affliction Efficiency I",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-2",
+      "kind": "worn",
+      "name": "Affliction Efficiency II",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-3",
+      "kind": "worn",
+      "name": "Affliction Efficiency III",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-4",
+      "kind": "worn",
+      "name": "Affliction Efficiency IV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-5",
+      "kind": "worn",
+      "name": "Affliction Efficiency V",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-6",
+      "kind": "worn",
+      "name": "Affliction Efficiency VI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-7",
+      "kind": "worn",
+      "name": "Affliction Efficiency VII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-8",
+      "kind": "worn",
+      "name": "Affliction Efficiency VIII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-9",
+      "kind": "worn",
+      "name": "Affliction Efficiency IX",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-10",
+      "kind": "worn",
+      "name": "Affliction Efficiency X",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-11",
+      "kind": "worn",
+      "name": "Affliction Efficiency XI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 100,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 11,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-12",
+      "kind": "worn",
+      "name": "Affliction Efficiency XII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 105,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 12,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-13",
+      "kind": "worn",
+      "name": "Affliction Efficiency XIII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 110,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 13,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-14",
+      "kind": "worn",
+      "name": "Affliction Efficiency XIV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 115,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 14,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-15",
+      "kind": "worn",
+      "name": "Affliction Efficiency XV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 120,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 15,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-16",
+      "kind": "worn",
+      "name": "Affliction Efficiency XVI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 125,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 16,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 23%.",
+      "family": "affliction-efficiency",
+      "id": "affliction-efficiency-17",
+      "kind": "worn",
+      "name": "Affliction Efficiency XVII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -23,
+          "unit": "percent",
+          "maxSpellLevel": 130,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 17,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-1",
+      "kind": "worn",
+      "name": "Affliction Haste I",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-2",
+      "kind": "worn",
+      "name": "Affliction Haste II",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-3",
+      "kind": "worn",
+      "name": "Affliction Haste III",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-4",
+      "kind": "worn",
+      "name": "Affliction Haste IV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-5",
+      "kind": "worn",
+      "name": "Affliction Haste V",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-6",
+      "kind": "worn",
+      "name": "Affliction Haste VI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-7",
+      "kind": "worn",
+      "name": "Affliction Haste VII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-8",
+      "kind": "worn",
+      "name": "Affliction Haste VIII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-9",
+      "kind": "worn",
+      "name": "Affliction Haste IX",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-10",
+      "kind": "worn",
+      "name": "Affliction Haste X",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-11",
+      "kind": "worn",
+      "name": "Affliction Haste XI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 100,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 11,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-12",
+      "kind": "worn",
+      "name": "Affliction Haste XII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 105,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 12,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-13",
+      "kind": "worn",
+      "name": "Affliction Haste XIII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 110,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 13,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-14",
+      "kind": "worn",
+      "name": "Affliction Haste XIV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 115,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 14,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-15",
+      "kind": "worn",
+      "name": "Affliction Haste XV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 120,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 15,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-16",
+      "kind": "worn",
+      "name": "Affliction Haste XVI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 125,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 16,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 33%.",
+      "family": "affliction-haste",
+      "id": "affliction-haste-17",
+      "kind": "worn",
+      "name": "Affliction Haste XVII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -33,
+          "unit": "percent",
+          "maxSpellLevel": 130,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 17,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-1",
+      "kind": "worn",
+      "name": "Burning Affliction I",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-2",
+      "kind": "worn",
+      "name": "Burning Affliction II",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-3",
+      "kind": "worn",
+      "name": "Burning Affliction III",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-4",
+      "kind": "worn",
+      "name": "Burning Affliction IV",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-5",
+      "kind": "worn",
+      "name": "Burning Affliction V",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-6",
+      "kind": "worn",
+      "name": "Burning Affliction VI",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-7",
+      "kind": "worn",
+      "name": "Burning Affliction VII",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-8",
+      "kind": "worn",
+      "name": "Burning Affliction VIII",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-9",
+      "kind": "worn",
+      "name": "Burning Affliction IX",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-10",
+      "kind": "worn",
+      "name": "Burning Affliction X",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-11",
+      "kind": "worn",
+      "name": "Burning Affliction XI",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 100,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 11,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-12",
+      "kind": "worn",
+      "name": "Burning Affliction XII",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 105,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 12,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-13",
+      "kind": "worn",
+      "name": "Burning Affliction XIII",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 110,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 13,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-14",
+      "kind": "worn",
+      "name": "Burning Affliction XIV",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 115,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 14,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-15",
+      "kind": "worn",
+      "name": "Burning Affliction XV",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 120,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 15,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-16",
+      "kind": "worn",
+      "name": "Burning Affliction XVI",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 125,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 16,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 20%.",
+      "family": "burning-affliction",
+      "id": "burning-affliction-17",
+      "kind": "worn",
+      "name": "Burning Affliction XVII",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 130,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 17,
+      "stacking": "highest"
+    },
+    {
+      "description": "Grants enduring breath while worn.",
+      "family": "enduring-breath",
+      "id": "enduring-breath",
+      "kind": "worn",
+      "name": "Enduring Breath",
+      "payload": [
+        {
+          "modifier": "breath",
+          "type": "modifier",
+          "value": "enduring",
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-1",
+      "kind": "worn",
+      "name": "Enhancement Haste I",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-2",
+      "kind": "worn",
+      "name": "Enhancement Haste II",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-3",
+      "kind": "worn",
+      "name": "Enhancement Haste III",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-4",
+      "kind": "worn",
+      "name": "Enhancement Haste IV",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-5",
+      "kind": "worn",
+      "name": "Enhancement Haste V",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-6",
+      "kind": "worn",
+      "name": "Enhancement Haste VI",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-7",
+      "kind": "worn",
+      "name": "Enhancement Haste VII",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-8",
+      "kind": "worn",
+      "name": "Enhancement Haste VIII",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-9",
+      "kind": "worn",
+      "name": "Enhancement Haste IX",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-10",
+      "kind": "worn",
+      "name": "Enhancement Haste X",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-11",
+      "kind": "worn",
+      "name": "Enhancement Haste XI",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 100,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 11,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-12",
+      "kind": "worn",
+      "name": "Enhancement Haste XII",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 105,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 12,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-13",
+      "kind": "worn",
+      "name": "Enhancement Haste XIII",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 110,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 13,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-14",
+      "kind": "worn",
+      "name": "Enhancement Haste XIV",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 115,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 14,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-15",
+      "kind": "worn",
+      "name": "Enhancement Haste XV",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 120,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 15,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-16",
+      "kind": "worn",
+      "name": "Enhancement Haste XVI",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 125,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 16,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on beneficial spells.",
+      "family": "enhancement-haste",
+      "id": "enhancement-haste-17",
+      "kind": "worn",
+      "name": "Enhancement Haste XVII",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 130,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 17,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-1",
+      "kind": "worn",
+      "name": "Extended Enhancement I",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-2",
+      "kind": "worn",
+      "name": "Extended Enhancement II",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-3",
+      "kind": "worn",
+      "name": "Extended Enhancement III",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-4",
+      "kind": "worn",
+      "name": "Extended Enhancement IV",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-5",
+      "kind": "worn",
+      "name": "Extended Enhancement V",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-6",
+      "kind": "worn",
+      "name": "Extended Enhancement VI",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-7",
+      "kind": "worn",
+      "name": "Extended Enhancement VII",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-8",
+      "kind": "worn",
+      "name": "Extended Enhancement VIII",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-9",
+      "kind": "worn",
+      "name": "Extended Enhancement IX",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-10",
+      "kind": "worn",
+      "name": "Extended Enhancement X",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-11",
+      "kind": "worn",
+      "name": "Extended Enhancement XI",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 100,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 11,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-12",
+      "kind": "worn",
+      "name": "Extended Enhancement XII",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 105,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 12,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-13",
+      "kind": "worn",
+      "name": "Extended Enhancement XIII",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 110,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 13,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-14",
+      "kind": "worn",
+      "name": "Extended Enhancement XIV",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 115,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 14,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-15",
+      "kind": "worn",
+      "name": "Extended Enhancement XV",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 120,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 15,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-16",
+      "kind": "worn",
+      "name": "Extended Enhancement XVI",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 125,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 16,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 15% on beneficial spells.",
+      "family": "extended-enhancement",
+      "id": "extended-enhancement-17",
+      "kind": "worn",
+      "name": "Extended Enhancement XVII",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 130,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 17,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases the range of spells by 15%.",
+      "family": "extended-range",
+      "id": "extended-range-1",
+      "kind": "worn",
+      "name": "Extended Range I",
+      "payload": [
+        {
+          "modifier": "spellRange",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases the range of spells by 15%.",
+      "family": "extended-range",
+      "id": "extended-range-2",
+      "kind": "worn",
+      "name": "Extended Range II",
+      "payload": [
+        {
+          "modifier": "spellRange",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases the range of spells by 15%.",
+      "family": "extended-range",
+      "id": "extended-range-3",
+      "kind": "worn",
+      "name": "Extended Range III",
+      "payload": [
+        {
+          "modifier": "spellRange",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases the range of spells by 15%.",
+      "family": "extended-range",
+      "id": "extended-range-4",
+      "kind": "worn",
+      "name": "Extended Range IV",
+      "payload": [
+        {
+          "modifier": "spellRange",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases the range of spells by 15%.",
+      "family": "extended-range",
+      "id": "extended-range-5",
+      "kind": "worn",
+      "name": "Extended Range V",
+      "payload": [
+        {
+          "modifier": "spellRange",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases the range of spells by 15%.",
+      "family": "extended-range",
+      "id": "extended-range-6",
+      "kind": "worn",
+      "name": "Extended Range VI",
+      "payload": [
+        {
+          "modifier": "spellRange",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases the range of spells by 15%.",
+      "family": "extended-range",
+      "id": "extended-range-7",
+      "kind": "worn",
+      "name": "Extended Range VII",
+      "payload": [
+        {
+          "modifier": "spellRange",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases the range of spells by 15%.",
+      "family": "extended-range",
+      "id": "extended-range-8",
+      "kind": "worn",
+      "name": "Extended Range VIII",
+      "payload": [
+        {
+          "modifier": "spellRange",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases the range of spells by 15%.",
+      "family": "extended-range",
+      "id": "extended-range-9",
+      "kind": "worn",
+      "name": "Extended Range IX",
+      "payload": [
+        {
+          "modifier": "spellRange",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases the range of spells by 15%.",
+      "family": "extended-range",
+      "id": "extended-range-10",
+      "kind": "worn",
+      "name": "Extended Range X",
+      "payload": [
+        {
+          "modifier": "spellRange",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "While worn, the bearer regenerates 1 mana per combat round (6-second tick).",
+      "family": "flowing-thought",
+      "id": "flowing-thought-1",
+      "kind": "worn",
+      "name": "Flowing Thought I",
+      "payload": [
+        {
+          "amount": 1,
+          "per": "round",
+          "pool": "mana",
+          "type": "regen"
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "While worn, the bearer regenerates 2 mana per combat round (6-second tick).",
+      "family": "flowing-thought",
+      "id": "flowing-thought-2",
+      "kind": "worn",
+      "name": "Flowing Thought II",
+      "payload": [
+        {
+          "amount": 2,
+          "per": "round",
+          "pool": "mana",
+          "type": "regen"
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "While worn, the bearer regenerates 3 mana per combat round (6-second tick).",
+      "family": "flowing-thought",
+      "id": "flowing-thought-3",
+      "kind": "worn",
+      "name": "Flowing Thought III",
+      "payload": [
+        {
+          "amount": 3,
+          "per": "round",
+          "pool": "mana",
+          "type": "regen"
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "While worn, the bearer regenerates 4 mana per combat round (6-second tick).",
+      "family": "flowing-thought",
+      "id": "flowing-thought-4",
+      "kind": "worn",
+      "name": "Flowing Thought IV",
+      "payload": [
+        {
+          "amount": 4,
+          "per": "round",
+          "pool": "mana",
+          "type": "regen"
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "While worn, the bearer regenerates 5 mana per combat round (6-second tick).",
+      "family": "flowing-thought",
+      "id": "flowing-thought-5",
+      "kind": "worn",
+      "name": "Flowing Thought V",
+      "payload": [
+        {
+          "amount": 5,
+          "per": "round",
+          "pool": "mana",
+          "type": "regen"
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "While worn, the bearer regenerates 6 mana per combat round (6-second tick).",
+      "family": "flowing-thought",
+      "id": "flowing-thought-6",
+      "kind": "worn",
+      "name": "Flowing Thought VI",
+      "payload": [
+        {
+          "amount": 6,
+          "per": "round",
+          "pool": "mana",
+          "type": "regen"
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "While worn, the bearer regenerates 7 mana per combat round (6-second tick).",
+      "family": "flowing-thought",
+      "id": "flowing-thought-7",
+      "kind": "worn",
+      "name": "Flowing Thought VII",
+      "payload": [
+        {
+          "amount": 7,
+          "per": "round",
+          "pool": "mana",
+          "type": "regen"
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "While worn, the bearer regenerates 8 mana per combat round (6-second tick).",
+      "family": "flowing-thought",
+      "id": "flowing-thought-8",
+      "kind": "worn",
+      "name": "Flowing Thought VIII",
+      "payload": [
+        {
+          "amount": 8,
+          "per": "round",
+          "pool": "mana",
+          "type": "regen"
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "While worn, the bearer regenerates 9 mana per combat round (6-second tick).",
+      "family": "flowing-thought",
+      "id": "flowing-thought-9",
+      "kind": "worn",
+      "name": "Flowing Thought IX",
+      "payload": [
+        {
+          "amount": 9,
+          "per": "round",
+          "pool": "mana",
+          "type": "regen"
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "While worn, the bearer regenerates 10 mana per combat round (6-second tick).",
+      "family": "flowing-thought",
+      "id": "flowing-thought-10",
+      "kind": "worn",
+      "name": "Flowing Thought X",
+      "payload": [
+        {
+          "amount": 10,
+          "per": "round",
+          "pool": "mana",
+          "type": "regen"
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases healing by 20% on instant beneficial spells.",
+      "family": "improved-healing",
+      "id": "improved-healing-1",
+      "kind": "worn",
+      "name": "Improved Healing I",
+      "payload": [
+        {
+          "modifier": "healing",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "hitpoints-only",
+            "instant-only",
+            "beneficial-only",
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases healing by 20% on instant beneficial spells.",
+      "family": "improved-healing",
+      "id": "improved-healing-2",
+      "kind": "worn",
+      "name": "Improved Healing II",
+      "payload": [
+        {
+          "modifier": "healing",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "hitpoints-only",
+            "instant-only",
+            "beneficial-only",
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases healing by 20% on instant beneficial spells.",
+      "family": "improved-healing",
+      "id": "improved-healing-3",
+      "kind": "worn",
+      "name": "Improved Healing III",
+      "payload": [
+        {
+          "modifier": "healing",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "hitpoints-only",
+            "instant-only",
+            "beneficial-only",
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases healing by 20% on instant beneficial spells.",
+      "family": "improved-healing",
+      "id": "improved-healing-4",
+      "kind": "worn",
+      "name": "Improved Healing IV",
+      "payload": [
+        {
+          "modifier": "healing",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "hitpoints-only",
+            "instant-only",
+            "beneficial-only",
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases healing by 20% on instant beneficial spells.",
+      "family": "improved-healing",
+      "id": "improved-healing-5",
+      "kind": "worn",
+      "name": "Improved Healing V",
+      "payload": [
+        {
+          "modifier": "healing",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "hitpoints-only",
+            "instant-only",
+            "beneficial-only",
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases healing by 20% on instant beneficial spells.",
+      "family": "improved-healing",
+      "id": "improved-healing-6",
+      "kind": "worn",
+      "name": "Improved Healing VI",
+      "payload": [
+        {
+          "modifier": "healing",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "hitpoints-only",
+            "instant-only",
+            "beneficial-only",
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases healing by 20% on instant beneficial spells.",
+      "family": "improved-healing",
+      "id": "improved-healing-7",
+      "kind": "worn",
+      "name": "Improved Healing VII",
+      "payload": [
+        {
+          "modifier": "healing",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "hitpoints-only",
+            "instant-only",
+            "beneficial-only",
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases healing by 20% on instant beneficial spells.",
+      "family": "improved-healing",
+      "id": "improved-healing-8",
+      "kind": "worn",
+      "name": "Improved Healing VIII",
+      "payload": [
+        {
+          "modifier": "healing",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "hitpoints-only",
+            "instant-only",
+            "beneficial-only",
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases healing by 20% on instant beneficial spells.",
+      "family": "improved-healing",
+      "id": "improved-healing-9",
+      "kind": "worn",
+      "name": "Improved Healing IX",
+      "payload": [
+        {
+          "modifier": "healing",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "hitpoints-only",
+            "instant-only",
+            "beneficial-only",
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases healing by 20% on instant beneficial spells.",
+      "family": "improved-healing",
+      "id": "improved-healing-10",
+      "kind": "worn",
+      "name": "Improved Healing X",
+      "payload": [
+        {
+          "modifier": "healing",
+          "type": "modifier",
+          "value": 20,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "hitpoints-only",
+            "instant-only",
+            "beneficial-only",
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-1",
+      "kind": "worn",
+      "name": "Mana Preservation I",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-2",
+      "kind": "worn",
+      "name": "Mana Preservation II",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-3",
+      "kind": "worn",
+      "name": "Mana Preservation III",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-4",
+      "kind": "worn",
+      "name": "Mana Preservation IV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-5",
+      "kind": "worn",
+      "name": "Mana Preservation V",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-6",
+      "kind": "worn",
+      "name": "Mana Preservation VI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-7",
+      "kind": "worn",
+      "name": "Mana Preservation VII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-8",
+      "kind": "worn",
+      "name": "Mana Preservation VIII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-9",
+      "kind": "worn",
+      "name": "Mana Preservation IX",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-10",
+      "kind": "worn",
+      "name": "Mana Preservation X",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-11",
+      "kind": "worn",
+      "name": "Mana Preservation XI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 100,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 11,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-12",
+      "kind": "worn",
+      "name": "Mana Preservation XII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 105,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 12,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-13",
+      "kind": "worn",
+      "name": "Mana Preservation XIII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 110,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 13,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-14",
+      "kind": "worn",
+      "name": "Mana Preservation XIV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 115,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 14,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-15",
+      "kind": "worn",
+      "name": "Mana Preservation XV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 120,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 15,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-16",
+      "kind": "worn",
+      "name": "Mana Preservation XVI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 125,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 16,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 10%.",
+      "family": "mana-preservation",
+      "id": "mana-preservation-17",
+      "kind": "worn",
+      "name": "Mana Preservation XVII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -10,
+          "unit": "percent",
+          "maxSpellLevel": 130,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 17,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 13%.",
+      "family": "minor-affliction-efficiency",
+      "id": "minor-affliction-efficiency-1",
+      "kind": "worn",
+      "name": "Minor Affliction Efficiency I",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -13,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 13%.",
+      "family": "minor-affliction-efficiency",
+      "id": "minor-affliction-efficiency-2",
+      "kind": "worn",
+      "name": "Minor Affliction Efficiency II",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -13,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 13%.",
+      "family": "minor-affliction-efficiency",
+      "id": "minor-affliction-efficiency-3",
+      "kind": "worn",
+      "name": "Minor Affliction Efficiency III",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -13,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of detrimental spells by 13%.",
+      "family": "minor-affliction-efficiency",
+      "id": "minor-affliction-efficiency-4",
+      "kind": "worn",
+      "name": "Minor Affliction Efficiency IV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -13,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 16% on detrimental spells.",
+      "family": "minor-affliction-haste",
+      "id": "minor-affliction-haste-1",
+      "kind": "worn",
+      "name": "Minor Affliction Haste I",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 16,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 16% on detrimental spells.",
+      "family": "minor-affliction-haste",
+      "id": "minor-affliction-haste-2",
+      "kind": "worn",
+      "name": "Minor Affliction Haste II",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 16,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 16% on detrimental spells.",
+      "family": "minor-affliction-haste",
+      "id": "minor-affliction-haste-3",
+      "kind": "worn",
+      "name": "Minor Affliction Haste III",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 16,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 16% on detrimental spells.",
+      "family": "minor-affliction-haste",
+      "id": "minor-affliction-haste-4",
+      "kind": "worn",
+      "name": "Minor Affliction Haste IV",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 16,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-30s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 10%.",
+      "family": "minor-burning-affliction",
+      "id": "minor-burning-affliction-1",
+      "kind": "worn",
+      "name": "Minor Burning Affliction I",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 10,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 10%.",
+      "family": "minor-burning-affliction",
+      "id": "minor-burning-affliction-2",
+      "kind": "worn",
+      "name": "Minor Burning Affliction II",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 10,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 10%.",
+      "family": "minor-burning-affliction",
+      "id": "minor-burning-affliction-3",
+      "kind": "worn",
+      "name": "Minor Burning Affliction III",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 10,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell damage (before DoT crit) by 10%.",
+      "family": "minor-burning-affliction",
+      "id": "minor-burning-affliction-4",
+      "kind": "worn",
+      "name": "Minor Burning Affliction IV",
+      "payload": [
+        {
+          "modifier": "spellDamage",
+          "type": "modifier",
+          "value": 10,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "detrimental-only",
+            "min-duration-24s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 15% on beneficial spells.",
+      "family": "minor-enhancement-haste",
+      "id": "minor-enhancement-haste-1",
+      "kind": "worn",
+      "name": "Minor Enhancement Haste I",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 15% on beneficial spells.",
+      "family": "minor-enhancement-haste",
+      "id": "minor-enhancement-haste-2",
+      "kind": "worn",
+      "name": "Minor Enhancement Haste II",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 15% on beneficial spells.",
+      "family": "minor-enhancement-haste",
+      "id": "minor-enhancement-haste-3",
+      "kind": "worn",
+      "name": "Minor Enhancement Haste III",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 15% on beneficial spells.",
+      "family": "minor-enhancement-haste",
+      "id": "minor-enhancement-haste-4",
+      "kind": "worn",
+      "name": "Minor Enhancement Haste IV",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "min-duration-72s",
+            "min-cast-time-3s",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 7% on beneficial spells.",
+      "family": "minor-extended-enhancement",
+      "id": "minor-extended-enhancement-1",
+      "kind": "worn",
+      "name": "Minor Extended Enhancement I",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 7,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 7% on beneficial spells.",
+      "family": "minor-extended-enhancement",
+      "id": "minor-extended-enhancement-2",
+      "kind": "worn",
+      "name": "Minor Extended Enhancement II",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 7,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 7% on beneficial spells.",
+      "family": "minor-extended-enhancement",
+      "id": "minor-extended-enhancement-3",
+      "kind": "worn",
+      "name": "Minor Extended Enhancement III",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 7,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell duration by 7% on beneficial spells.",
+      "family": "minor-extended-enhancement",
+      "id": "minor-extended-enhancement-4",
+      "kind": "worn",
+      "name": "Minor Extended Enhancement IV",
+      "payload": [
+        {
+          "modifier": "spellDuration",
+          "type": "modifier",
+          "value": 7,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "beneficial-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 5%.",
+      "family": "minor-mana-preservation",
+      "id": "minor-mana-preservation-1",
+      "kind": "worn",
+      "name": "Minor Mana Preservation I",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -5,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 5%.",
+      "family": "minor-mana-preservation",
+      "id": "minor-mana-preservation-2",
+      "kind": "worn",
+      "name": "Minor Mana Preservation II",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -5,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 5%.",
+      "family": "minor-mana-preservation",
+      "id": "minor-mana-preservation-3",
+      "kind": "worn",
+      "name": "Minor Mana Preservation III",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -5,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of spells by 5%.",
+      "family": "minor-mana-preservation",
+      "id": "minor-mana-preservation-4",
+      "kind": "worn",
+      "name": "Minor Mana Preservation IV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -5,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "complete-heal-excluded",
+            "percentage-heal-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 5%.",
+      "family": "minor-reagent-conservation",
+      "id": "minor-reagent-conservation-1",
+      "kind": "worn",
+      "name": "Minor Reagent Conservation I",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -5,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 5%.",
+      "family": "minor-reagent-conservation",
+      "id": "minor-reagent-conservation-2",
+      "kind": "worn",
+      "name": "Minor Reagent Conservation II",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -5,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 5%.",
+      "family": "minor-reagent-conservation",
+      "id": "minor-reagent-conservation-3",
+      "kind": "worn",
+      "name": "Minor Reagent Conservation III",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -5,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 5%.",
+      "family": "minor-reagent-conservation",
+      "id": "minor-reagent-conservation-4",
+      "kind": "worn",
+      "name": "Minor Reagent Conservation IV",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -5,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 25%.",
+      "family": "minor-reanimation-efficiency",
+      "id": "minor-reanimation-efficiency-1",
+      "kind": "worn",
+      "name": "Minor Reanimation Efficiency I",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 25%.",
+      "family": "minor-reanimation-efficiency",
+      "id": "minor-reanimation-efficiency-2",
+      "kind": "worn",
+      "name": "Minor Reanimation Efficiency II",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 25%.",
+      "family": "minor-reanimation-efficiency",
+      "id": "minor-reanimation-efficiency-3",
+      "kind": "worn",
+      "name": "Minor Reanimation Efficiency III",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 25%.",
+      "family": "minor-reanimation-efficiency",
+      "id": "minor-reanimation-efficiency-4",
+      "kind": "worn",
+      "name": "Minor Reanimation Efficiency IV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 12%.",
+      "family": "minor-summoning-efficiency",
+      "id": "minor-summoning-efficiency-1",
+      "kind": "worn",
+      "name": "Minor Summoning Efficiency I",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 12%.",
+      "family": "minor-summoning-efficiency",
+      "id": "minor-summoning-efficiency-2",
+      "kind": "worn",
+      "name": "Minor Summoning Efficiency II",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 12%.",
+      "family": "minor-summoning-efficiency",
+      "id": "minor-summoning-efficiency-3",
+      "kind": "worn",
+      "name": "Minor Summoning Efficiency III",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 12%.",
+      "family": "minor-summoning-efficiency",
+      "id": "minor-summoning-efficiency-4",
+      "kind": "worn",
+      "name": "Minor Summoning Efficiency IV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 15% on pet summoning spells.",
+      "family": "minor-summoning-haste",
+      "id": "minor-summoning-haste-1",
+      "kind": "worn",
+      "name": "Minor Summoning Haste I",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 15% on pet summoning spells.",
+      "family": "minor-summoning-haste",
+      "id": "minor-summoning-haste-2",
+      "kind": "worn",
+      "name": "Minor Summoning Haste II",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 15% on pet summoning spells.",
+      "family": "minor-summoning-haste",
+      "id": "minor-summoning-haste-3",
+      "kind": "worn",
+      "name": "Minor Summoning Haste III",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 15% on pet summoning spells.",
+      "family": "minor-summoning-haste",
+      "id": "minor-summoning-haste-4",
+      "kind": "worn",
+      "name": "Minor Summoning Haste IV",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 15,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-1",
+      "kind": "worn",
+      "name": "Reagent Conservation I",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-2",
+      "kind": "worn",
+      "name": "Reagent Conservation II",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-3",
+      "kind": "worn",
+      "name": "Reagent Conservation III",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-4",
+      "kind": "worn",
+      "name": "Reagent Conservation IV",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-5",
+      "kind": "worn",
+      "name": "Reagent Conservation V",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-6",
+      "kind": "worn",
+      "name": "Reagent Conservation VI",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-7",
+      "kind": "worn",
+      "name": "Reagent Conservation VII",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-8",
+      "kind": "worn",
+      "name": "Reagent Conservation VIII",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-9",
+      "kind": "worn",
+      "name": "Reagent Conservation IX",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-10",
+      "kind": "worn",
+      "name": "Reagent Conservation X",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-11",
+      "kind": "worn",
+      "name": "Reagent Conservation XI",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 100,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 11,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-12",
+      "kind": "worn",
+      "name": "Reagent Conservation XII",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 105,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 12,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-13",
+      "kind": "worn",
+      "name": "Reagent Conservation XIII",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 110,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 13,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-14",
+      "kind": "worn",
+      "name": "Reagent Conservation XIV",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 115,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 14,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-15",
+      "kind": "worn",
+      "name": "Reagent Conservation XV",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 120,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 15,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-16",
+      "kind": "worn",
+      "name": "Reagent Conservation XVI",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 125,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 16,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the chance that spell reagents will be consumed by 15%.",
+      "family": "reagent-conservation",
+      "id": "reagent-conservation-17",
+      "kind": "worn",
+      "name": "Reagent Conservation XVII",
+      "payload": [
+        {
+          "modifier": "reagentConservation",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "maxSpellLevel": 130,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-item-excluded",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 17,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-1",
+      "kind": "worn",
+      "name": "Reanimation Efficiency I",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-2",
+      "kind": "worn",
+      "name": "Reanimation Efficiency II",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-3",
+      "kind": "worn",
+      "name": "Reanimation Efficiency III",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-4",
+      "kind": "worn",
+      "name": "Reanimation Efficiency IV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-5",
+      "kind": "worn",
+      "name": "Reanimation Efficiency V",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-6",
+      "kind": "worn",
+      "name": "Reanimation Efficiency VI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-7",
+      "kind": "worn",
+      "name": "Reanimation Efficiency VII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-8",
+      "kind": "worn",
+      "name": "Reanimation Efficiency VIII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-9",
+      "kind": "worn",
+      "name": "Reanimation Efficiency IX",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-10",
+      "kind": "worn",
+      "name": "Reanimation Efficiency X",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-11",
+      "kind": "worn",
+      "name": "Reanimation Efficiency XI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 100,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 11,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-12",
+      "kind": "worn",
+      "name": "Reanimation Efficiency XII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 105,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 12,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-13",
+      "kind": "worn",
+      "name": "Reanimation Efficiency XIII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 110,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 13,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-14",
+      "kind": "worn",
+      "name": "Reanimation Efficiency XIV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 115,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 14,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-15",
+      "kind": "worn",
+      "name": "Reanimation Efficiency XV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 120,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 15,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-16",
+      "kind": "worn",
+      "name": "Reanimation Efficiency XVI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 125,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 16,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of summon undead spells by 12%.",
+      "family": "reanimation-efficiency",
+      "id": "reanimation-efficiency-17",
+      "kind": "worn",
+      "name": "Reanimation Efficiency XVII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -12,
+          "unit": "percent",
+          "maxSpellLevel": 130,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-undead-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 17,
+      "stacking": "highest"
+    },
+    {
+      "description": "Grants see invisible while worn.",
+      "family": "see-invisible",
+      "id": "see-invisible",
+      "kind": "worn",
+      "name": "See Invisible",
+      "payload": [
+        {
+          "modifier": "vision",
+          "type": "modifier",
+          "value": "see-invisible",
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Grants infravision while worn.",
+      "family": "serpent-sight",
+      "id": "serpent-sight",
+      "kind": "worn",
+      "name": "Serpent Sight",
+      "payload": [
+        {
+          "modifier": "vision",
+          "type": "modifier",
+          "value": "infravision",
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the cast time of spells by 15%.",
+      "family": "spell-haste",
+      "id": "spell-haste-1",
+      "kind": "worn",
+      "name": "Spell Haste I",
+      "payload": [
+        {
+          "modifier": "castTime",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the cast time of spells by 15%.",
+      "family": "spell-haste",
+      "id": "spell-haste-2",
+      "kind": "worn",
+      "name": "Spell Haste II",
+      "payload": [
+        {
+          "modifier": "castTime",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the cast time of spells by 15%.",
+      "family": "spell-haste",
+      "id": "spell-haste-3",
+      "kind": "worn",
+      "name": "Spell Haste III",
+      "payload": [
+        {
+          "modifier": "castTime",
+          "type": "modifier",
+          "value": -15,
+          "unit": "percent",
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-1",
+      "kind": "worn",
+      "name": "Summoning Efficiency I",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-2",
+      "kind": "worn",
+      "name": "Summoning Efficiency II",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-3",
+      "kind": "worn",
+      "name": "Summoning Efficiency III",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-4",
+      "kind": "worn",
+      "name": "Summoning Efficiency IV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-5",
+      "kind": "worn",
+      "name": "Summoning Efficiency V",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-6",
+      "kind": "worn",
+      "name": "Summoning Efficiency VI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-7",
+      "kind": "worn",
+      "name": "Summoning Efficiency VII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-8",
+      "kind": "worn",
+      "name": "Summoning Efficiency VIII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-9",
+      "kind": "worn",
+      "name": "Summoning Efficiency IX",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-10",
+      "kind": "worn",
+      "name": "Summoning Efficiency X",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-11",
+      "kind": "worn",
+      "name": "Summoning Efficiency XI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 100,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 11,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-12",
+      "kind": "worn",
+      "name": "Summoning Efficiency XII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 105,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 12,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-13",
+      "kind": "worn",
+      "name": "Summoning Efficiency XIII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 110,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 13,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-14",
+      "kind": "worn",
+      "name": "Summoning Efficiency XIV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 115,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 14,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-15",
+      "kind": "worn",
+      "name": "Summoning Efficiency XV",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 120,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 15,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-16",
+      "kind": "worn",
+      "name": "Summoning Efficiency XVI",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 125,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 16,
+      "stacking": "highest"
+    },
+    {
+      "description": "Reduces the mana cost of pet summoning spells by 25%.",
+      "family": "summoning-efficiency",
+      "id": "summoning-efficiency-17",
+      "kind": "worn",
+      "name": "Summoning Efficiency XVII",
+      "payload": [
+        {
+          "modifier": "manaCost",
+          "type": "modifier",
+          "value": -25,
+          "unit": "percent",
+          "maxSpellLevel": 130,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 17,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-1",
+      "kind": "worn",
+      "name": "Summoning Haste I",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 20,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-2",
+      "kind": "worn",
+      "name": "Summoning Haste II",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 44,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 2,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-3",
+      "kind": "worn",
+      "name": "Summoning Haste III",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 60,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 3,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-4",
+      "kind": "worn",
+      "name": "Summoning Haste IV",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 65,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 4,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-5",
+      "kind": "worn",
+      "name": "Summoning Haste V",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 70,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 5,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-6",
+      "kind": "worn",
+      "name": "Summoning Haste VI",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 75,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 6,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-7",
+      "kind": "worn",
+      "name": "Summoning Haste VII",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 80,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 7,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-8",
+      "kind": "worn",
+      "name": "Summoning Haste VIII",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 85,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 8,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-9",
+      "kind": "worn",
+      "name": "Summoning Haste IX",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 90,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 9,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-10",
+      "kind": "worn",
+      "name": "Summoning Haste X",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 95,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 10,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-11",
+      "kind": "worn",
+      "name": "Summoning Haste XI",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 100,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 11,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-12",
+      "kind": "worn",
+      "name": "Summoning Haste XII",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 105,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 12,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-13",
+      "kind": "worn",
+      "name": "Summoning Haste XIII",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 110,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 13,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-14",
+      "kind": "worn",
+      "name": "Summoning Haste XIV",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 115,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 14,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-15",
+      "kind": "worn",
+      "name": "Summoning Haste XV",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 120,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 15,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-16",
+      "kind": "worn",
+      "name": "Summoning Haste XVI",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 125,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 16,
+      "stacking": "highest"
+    },
+    {
+      "description": "Increases spell haste by 30% on pet summoning spells.",
+      "family": "summoning-haste",
+      "id": "summoning-haste-17",
+      "kind": "worn",
+      "name": "Summoning Haste XVII",
+      "payload": [
+        {
+          "modifier": "spellHaste",
+          "type": "modifier",
+          "value": 30,
+          "unit": "percent",
+          "maxSpellLevel": 130,
+          "decayPerLevelOverCap": 5,
+          "limits": [
+            "summon-pet-only",
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 17,
+      "stacking": "highest"
+    },
+    {
+      "description": "Grants ultravision and see invisible while worn.",
+      "family": "truesight",
+      "id": "truesight",
+      "kind": "worn",
+      "name": "Truesight",
+      "payload": [
+        {
+          "modifier": "vision",
+          "type": "modifier",
+          "value": "ultravision,see-invisible",
+          "limits": [
+            "combat-skills-not-allowed"
+          ]
+        }
+      ],
+      "rank": 1,
+      "stacking": "highest"
+    }
+  ]
 }
