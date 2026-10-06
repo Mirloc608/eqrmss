@@ -18,14 +18,14 @@
     },
     {
       "castTime": "instant",
-      "description": "Triggered effect: grants the wearer Grim Aura. Payload to be defined.",
+      "description": "Triggered effect: Grim Aura grants +15 attack rating for 27 minutes (Shunken Goblin Skull Earring; classic ATK scales +5 at level 3 to +15 at level 11).",
       "id": "grim-aura",
       "kind": "triggered",
       "name": "Grim Aura",
       "payload": [
         {
-          "note": "Effect definition pending user ruling.",
-          "type": "buff"
+          "type": "utility",
+          "note": "Grants Grim Aura: +15 attack rating for 27 minutes (Shunken Goblin Skull Earring)"
         }
       ]
     },
@@ -5785,11 +5785,11 @@
       "id": "clicky-spirit-of-wolf",
       "kind": "triggered",
       "name": "Spirit of Wolf",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Spirit of Wolf grants +55% movement rate for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Spirit of Wolf. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Spirit of Wolf: +55% movement rate for 36 minutes"
         }
       ]
     },
@@ -5797,11 +5797,17 @@
       "id": "clicky-nivs-melody-of-preservation",
       "kind": "triggered",
       "name": "Niv's Melody of Preservation",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Niv's Melody of Preservation regenerates 6 hit points per tick (scaled: 72-108 per round over 3 rounds); also grants +10 strength and absorbs 10 magic damage for 18 seconds per classic values.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Niv's Melody of Preservation. Effect definition pending user ruling."
+          "type": "hot",
+          "min": 72,
+          "max": 108,
+          "rounds": 3
+        },
+        {
+          "type": "utility",
+          "note": "Also grants +10 strength and absorbs 10 magic damage for 18 seconds"
         }
       ]
     },
@@ -5809,11 +5815,11 @@
       "id": "clicky-illusion-dark-elf",
       "kind": "triggered",
       "name": "Illusion: Dark Elf",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Illusion - Dark Elf transforms you into a dark elf.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Illusion: Dark Elf. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Illusion: Dark Elf - you take the form of a dark elf"
         }
       ]
     },
@@ -5821,11 +5827,11 @@
       "id": "clicky-illusion-erudite",
       "kind": "triggered",
       "name": "Illusion: Erudite",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Illusion - Erudite transforms you into an erudite.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Illusion: Erudite. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Illusion: Erudite - you take the form of an erudite"
         }
       ]
     },
@@ -5833,11 +5839,11 @@
       "id": "clicky-illusion-high-elf",
       "kind": "triggered",
       "name": "Illusion: High Elf",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Illusion - High Elf transforms you into a high elf.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Illusion: High Elf. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Illusion: High Elf - you take the form of a high elf"
         }
       ]
     },
@@ -5845,11 +5851,11 @@
       "id": "clicky-illusion-iksar",
       "kind": "triggered",
       "name": "Illusion: Iksar",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Illusion - Iksar transforms you into an iksar.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Illusion: Iksar. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Illusion: Iksar - you take the form of an iksar"
         }
       ]
     },
@@ -5857,11 +5863,11 @@
       "id": "clicky-illusion-barbarian",
       "kind": "triggered",
       "name": "Illusion: Barbarian",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Illusion - Barbarian transforms you into a barbarian.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Illusion: Barbarian. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Illusion: Barbarian - you take the form of a barbarian"
         }
       ]
     },
@@ -5869,11 +5875,11 @@
       "id": "clicky-illusion-gnome",
       "kind": "triggered",
       "name": "Illusion: Gnome",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Illusion - Gnome transforms you into a gnome.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Illusion: Gnome. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Illusion: Gnome - you take the form of a gnome"
         }
       ]
     },
@@ -5881,11 +5887,11 @@
       "id": "clicky-illusion-water-elemental",
       "kind": "triggered",
       "name": "Illusion: Water Elemental",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Illusion - Water Elemental transforms you into a water elemental.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Illusion: Water Elemental. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Illusion: Water Elemental - you take the form of a water elemental"
         }
       ]
     },
@@ -5893,11 +5899,11 @@
       "id": "clicky-illusion-halfling",
       "kind": "triggered",
       "name": "Illusion: Halfling",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Illusion - Halfling transforms you into a halfling.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Illusion: Halfling. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Illusion: Halfling - you take the form of a halfling"
         }
       ]
     },
@@ -5905,11 +5911,11 @@
       "id": "clicky-illusion-skeleton",
       "kind": "triggered",
       "name": "Illusion: Skeleton",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Illusion - Skeleton transforms you into a skeleton.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Illusion: Skeleton. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Illusion: Skeleton - you take the form of a skeleton"
         }
       ]
     },
@@ -5917,11 +5923,11 @@
       "id": "clicky-illusion-troll",
       "kind": "triggered",
       "name": "Illusion: Troll",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Illusion - Troll transforms you into a troll.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Illusion: Troll. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Illusion: Troll - you take the form of a troll"
         }
       ]
     },
@@ -5929,11 +5935,11 @@
       "id": "clicky-shadow-step",
       "kind": "triggered",
       "name": "Shadow Step",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Shadow Step steps you through shadow, reappearing a short distance away.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Shadow Step. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Shadow Step: step through shadow, reappearing a short distance away"
         }
       ]
     },
@@ -5941,11 +5947,17 @@
       "id": "clicky-divine-wrath",
       "kind": "triggered",
       "name": "Divine Wrath",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Divine Wrath smites the target for 250 EQ damage (scaled x15: 3000-4500) and stuns for 4 seconds; element recorded as magic (pipeline has no holy element).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Divine Wrath. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "magic",
+          "min": 3000,
+          "max": 4500
+        },
+        {
+          "type": "stun",
+          "rounds": 1
         }
       ]
     },
@@ -5953,11 +5965,11 @@
       "id": "clicky-atone",
       "kind": "triggered",
       "name": "Atone",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Atone makes the target forget those that have harmed them (memblur).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Atone. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Atone: the target forgets those that have harmed them (memblur)"
         }
       ]
     },
@@ -5965,11 +5977,11 @@
       "id": "clicky-deadeye",
       "kind": "triggered",
       "name": "Deadeye",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Deadeye grants night vision (infravision) and see invisible for 27 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Deadeye. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Deadeye: infravision and see invisible for 27 minutes"
         }
       ]
     },
@@ -5977,11 +5989,11 @@
       "id": "clicky-fear",
       "kind": "triggered",
       "name": "Fear",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Fear makes the target flee in terror for 18 seconds (affects creatures up to level 52).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Fear. Effect definition pending user ruling."
+          "type": "fear",
+          "rounds": 3
         }
       ]
     },
@@ -5989,11 +6001,11 @@
       "id": "clicky-counteract-disease",
       "kind": "triggered",
       "name": "Counteract Disease",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Counteract Disease cures disease on the target.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Counteract Disease. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Counteract Disease: cures disease on the target"
         }
       ]
     },
@@ -6001,11 +6013,11 @@
       "id": "clicky-cure-disease",
       "kind": "triggered",
       "name": "Cure Disease",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Cure Disease cures disease on the target.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Cure Disease. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Cure Disease: cures disease on the target"
         }
       ]
     },
@@ -6013,11 +6025,13 @@
       "id": "clicky-bolt-of-karana",
       "kind": "triggered",
       "name": "Bolt of Karana",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Bolt of Karana strikes the target with lightning for 200 EQ damage (scaled x15: 2400-3600).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Bolt of Karana. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "electricity",
+          "min": 2400,
+          "max": 3600
         }
       ]
     },
@@ -6025,11 +6039,14 @@
       "id": "clicky-lightning-strike",
       "kind": "triggered",
       "name": "Lightning Strike",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Lightning Strike calls lightning down around the target for 70-184 EQ damage (scaled x15: 840-3312), targeted-AE, outdoors only.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Lightning Strike. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "electricity",
+          "min": 840,
+          "max": 3312,
+          "area": "targeted-ae"
         }
       ]
     },
@@ -6037,11 +6054,11 @@
       "id": "clicky-scale-of-wolf",
       "kind": "triggered",
       "name": "Scale of Wolf",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Scale of Wolf grants +70% movement rate for 45 minutes (breaks if you attack or cast).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Scale of Wolf. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Scale of Wolf: +70% movement rate for 45 minutes (breaks on attack or spellcast)"
         }
       ]
     },
@@ -6049,11 +6066,11 @@
       "id": "clicky-evacuate",
       "kind": "triggered",
       "name": "Evacuate",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Evacuate teleports the group to a relatively safe location in the current zone.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Evacuate. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Teleports the group to a relatively safe location in the current zone (Evacuate)"
         }
       ]
     },
@@ -6061,11 +6078,11 @@
       "id": "clicky-alliance",
       "kind": "triggered",
       "name": "Alliance",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Alliance improves the faction standing of the target's faction toward you by 100.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Alliance. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Improves the faction standing of the target's faction toward you by 100 (Alliance)"
         }
       ]
     },
@@ -6073,11 +6090,12 @@
       "id": "clicky-tashania",
       "kind": "triggered",
       "name": "Tashania",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Tashania lowers the target's magic resistance by 33.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Tashania. Effect definition pending user ruling."
+          "type": "debuff",
+          "effect": "resist-lower",
+          "value": -33
         }
       ]
     },
@@ -6085,11 +6103,12 @@
       "id": "clicky-insipid-weakness",
       "kind": "triggered",
       "name": "Insipid Weakness",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Insipid Weakness reduces the target's strength by 51.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Insipid Weakness. Effect definition pending user ruling."
+          "type": "debuff",
+          "effect": "strength",
+          "value": -51
         }
       ]
     },
@@ -6097,11 +6116,11 @@
       "id": "clicky-feedback",
       "kind": "triggered",
       "name": "Feedback",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Feedback wraps the target in chaotic energy, damaging attackers with an 11-point damage shield for 15 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Feedback. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Feedback: 11-point damage shield for 15 minutes"
         }
       ]
     },
@@ -6109,11 +6128,11 @@
       "id": "clicky-clarity",
       "kind": "triggered",
       "name": "Clarity",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Clarity grants +9 mana regen per tick for 27 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Clarity. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Clarity: +9 mana regen per tick for 27 minutes"
         }
       ]
     },
@@ -6121,11 +6140,13 @@
       "id": "clicky-cinder-bolt",
       "kind": "triggered",
       "name": "Cinder Bolt",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Cinder Bolt strikes for 166 EQ fire damage (scaled x15: 1992-2988).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Cinder Bolt. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "fire",
+          "min": 1992,
+          "max": 2988
         }
       ]
     },
@@ -6133,11 +6154,11 @@
       "id": "clicky-invisibility-versus-animal",
       "kind": "triggered",
       "name": "Invisibility Versus Animal",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Invisibility Versus Animal makes you invisible to animals.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Invisibility Versus Animal. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants invisibility versus animals"
         }
       ]
     },
@@ -6145,11 +6166,11 @@
       "id": "clicky-invisibility-versus-animals",
       "kind": "triggered",
       "name": "Invisibility versus Animals",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Invisibility versus Animals makes you invisible to animals.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Invisibility versus Animals. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants invisibility versus animals"
         }
       ]
     },
@@ -6157,11 +6178,12 @@
       "id": "clicky-eye-of-zomm",
       "kind": "triggered",
       "name": "Eye of Zomm",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Eye of Zomm summons a floating eye that lets you scout for 30 seconds (duration-rounds estimated; posts a GM note, no actor spawn).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Eye of Zomm. Effect definition pending user ruling."
+          "type": "summon",
+          "creature": "Eye of Zomm",
+          "duration-rounds": 5
         }
       ]
     },
@@ -6169,11 +6191,11 @@
       "id": "clicky-jonthans-whistling-warsong",
       "kind": "triggered",
       "name": "Jonthan's Whistling Warsong",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Jonthan's Whistling Warsong is a bard song granting 25% haste for 18 seconds.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Jonthan's Whistling Warsong. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Jonthan's Whistling Warsong: bard song granting 25% haste for 18 seconds"
         }
       ]
     },
@@ -6181,11 +6203,11 @@
       "id": "clicky-allure-of-death",
       "kind": "triggered",
       "name": "Allure of Death",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Allure of Death is a lich state - drains your hit points while regenerating mana each round (classic NEC/20: -6 HP / +4 mana per tick).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Allure of Death. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants the lich state of Allure of Death: drains hit points while regenerating mana each round"
         }
       ]
     },
@@ -6193,11 +6215,11 @@
       "id": "clicky-invoke-fear",
       "kind": "triggered",
       "name": "Invoke Fear",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Invoke Fear makes the target flee in terror for 42 seconds.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Invoke Fear. Effect definition pending user ruling."
+          "type": "fear",
+          "rounds": 7
         }
       ]
     },
@@ -6205,11 +6227,20 @@
       "id": "clicky-soul-well",
       "kind": "triggered",
       "name": "Soul Well",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Soul Well is a lifetap DoT draining increasingly more hit points over about a minute and healing you for the damage dealt (tick values estimated: 40-60 EQ per tick; no classic source gives exact numbers).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Soul Well. Effect definition pending user ruling."
+          "type": "dot",
+          "element": "magic",
+          "min": 600,
+          "max": 900,
+          "rounds": 10
+        },
+        {
+          "type": "hot",
+          "min": 600,
+          "max": 900,
+          "rounds": 10
         }
       ]
     },
@@ -6217,11 +6248,12 @@
       "id": "clicky-scent-of-darkness",
       "kind": "triggered",
       "name": "Scent of Darkness",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Scent of Darkness lowers the target's elemental resistances by 27.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Scent of Darkness. Effect definition pending user ruling."
+          "type": "debuff",
+          "effect": "resist-lower",
+          "value": -27
         }
       ]
     },
@@ -6229,11 +6261,11 @@
       "id": "clicky-dead-man-floating",
       "kind": "triggered",
       "name": "Dead Man Floating",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Dead Man Floating grants levitation, water breathing (enduring breath), see invisible, and +70 poison resist for 72 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Dead Man Floating. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Dead Man Floating: levitation, water breathing, see invisible, +70 poison resist for 72 minutes"
         }
       ]
     },
@@ -6241,11 +6273,11 @@
       "id": "clicky-reclaim-energy",
       "kind": "triggered",
       "name": "Reclaim Energy",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Reclaim Energy dismisses your pet, restoring 75% of the mana spent to summon it.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Reclaim Energy. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Reclaim Energy: dismisses your pet, restoring 75% of the mana spent to summon it"
         }
       ]
     },
@@ -6253,11 +6285,11 @@
       "id": "clicky-gather-shadows",
       "kind": "triggered",
       "name": "Gather Shadows",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Gather Shadows grants invisibility for up to 20 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Gather Shadows. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Gather Shadows: invisibility for up to 20 minutes"
         }
       ]
     },
@@ -6265,11 +6297,11 @@
       "id": "clicky-snare",
       "kind": "triggered",
       "name": "Snare",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Snare reduces the target's movement speed by 55% for up to 3.9 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Snare. Effect definition pending user ruling."
+          "type": "snare",
+          "value": -55
         }
       ]
     },
@@ -6277,11 +6309,11 @@
       "id": "clicky-primal-essence",
       "kind": "triggered",
       "name": "Primal Essence",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Primal Essence grants +20 stamina, agility, strength, and dexterity.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Primal Essence. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Primal Essence: +20 stamina, agility, strength, and dexterity"
         }
       ]
     },
@@ -6289,11 +6321,11 @@
       "id": "clicky-diamondskin",
       "kind": "triggered",
       "name": "Diamondskin",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Diamondskin absorbs 305-394 incoming damage (rune; values per the project's spell catalog).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Diamondskin. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Diamondskin: absorbs 305-394 incoming damage (rune)"
         }
       ]
     },
@@ -6301,11 +6333,11 @@
       "id": "clicky-nek-portal",
       "kind": "triggered",
       "name": "Nek Portal",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Nek Portal teleports the group to Nektulos Forest.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Nek Portal. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Teleports the group to Nektulos Forest (Nek Portal)"
         }
       ]
     },
@@ -6313,11 +6345,13 @@
       "id": "clicky-shock-of-ice",
       "kind": "triggered",
       "name": "Shock of Ice",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Shock of Ice strikes for 30 EQ cold damage (scaled x15: 360-540).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Shock of Ice. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "cold",
+          "min": 360,
+          "max": 540
         }
       ]
     },
@@ -6325,11 +6359,13 @@
       "id": "clicky-rend",
       "kind": "triggered",
       "name": "Rend",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Rend rips the target for 650 EQ arcane damage (scaled x15: 7800-11700); element recorded as magic (pipeline has no arcane element).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Rend. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "magic",
+          "min": 7800,
+          "max": 11700
         }
       ]
     },
@@ -6337,11 +6373,12 @@
       "id": "clicky-lower-element",
       "kind": "triggered",
       "name": "Lower Element",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Lower Element lowers the target's elemental resistances by 12 (value from the modern AA line; no classic value found).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Lower Element. Effect definition pending user ruling."
+          "type": "debuff",
+          "effect": "resist-lower",
+          "value": -12
         }
       ]
     },
@@ -6349,11 +6386,11 @@
       "id": "clicky-chill-sight",
       "kind": "triggered",
       "name": "Chill Sight",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Chill Sight grants ultravision for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Chill Sight. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Chill Sight: ultravision for 36 minutes"
         }
       ]
     },
@@ -6361,11 +6398,14 @@
       "id": "clicky-column-of-fire",
       "kind": "triggered",
       "name": "Column of Fire",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Column of Fire erupts around the target for 76 EQ fire damage (scaled x15: 912-1368), targeted-AE.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Column of Fire. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "fire",
+          "min": 912,
+          "max": 1368,
+          "area": "targeted-ae"
         }
       ]
     },
@@ -6373,11 +6413,11 @@
       "id": "clicky-turtle-skin",
       "kind": "triggered",
       "name": "Turtle Skin",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Turtle Skin grants +2-3 AC for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Turtle Skin. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Turtle Skin: +2-3 AC for 36 minutes"
         }
       ]
     },
@@ -6385,11 +6425,11 @@
       "id": "clicky-aura-of-battle",
       "kind": "triggered",
       "name": "Aura of Battle",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Aura of Battle grants +10 attack and +2 HP regen per tick (values from progression-era data; classic confirmation unverified).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Aura of Battle. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Aura of Battle: +10 attack and +2 HP regen per tick"
         }
       ]
     },
@@ -6397,11 +6437,11 @@
       "id": "clicky-journeyman-boots",
       "kind": "triggered",
       "name": "Journeyman Boots",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Journeyman Boots imbue your feet with speed: +35% movement rate for up to 18 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Journeyman Boots. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Journeyman Boots: +35% movement rate for up to 18 minutes"
         }
       ]
     },
@@ -6409,11 +6449,13 @@
       "id": "clicky-mana-convert",
       "kind": "triggered",
       "name": "Mana Convert",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Manastone's Mana Convert turns 60 hit points into 20 mana (scaled x15: 240-360 mana regen; the 60-HP cost is not yet modeled).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Mana Convert. Effect definition pending user ruling."
+          "type": "regen",
+          "pool": "mana",
+          "min": 240,
+          "max": 360
         }
       ]
     },
@@ -6421,11 +6463,11 @@
       "id": "clicky-levitation",
       "kind": "triggered",
       "name": "Levitation",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Levitation lets you float slightly off the ground for 20.5 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Levitation. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Levitation: float slightly off the ground for 20.5 minutes"
         }
       ]
     },
@@ -6433,11 +6475,11 @@
       "id": "clicky-levitate",
       "kind": "triggered",
       "name": "Levitate",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Levitate lets you float slightly off the ground for up to 20.5 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Levitate. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Levitate: float slightly off the ground for up to 20.5 minutes"
         }
       ]
     },
@@ -6445,11 +6487,11 @@
       "id": "clicky-identify",
       "kind": "triggered",
       "name": "Identify",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Identify reveals magical information about the item the target is holding.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Identify. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Identify: reveals magical information about the item the target is holding"
         }
       ]
     },
@@ -6457,11 +6499,11 @@
       "id": "clicky-telescope",
       "kind": "triggered",
       "name": "Telescope",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Telescope grants +55% magnification for 3 ticks.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Telescope. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Telescope: +55% magnification for 3 ticks"
         }
       ]
     },
@@ -6469,11 +6511,11 @@
       "id": "clicky-extinguish-fatigue",
       "kind": "triggered",
       "name": "Extinguish Fatigue",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Extinguish Fatigue renews endurance, decreasing stamina loss by 90.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Extinguish Fatigue. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Extinguish Fatigue: renews endurance, decreasing stamina loss by 90"
         }
       ]
     },
@@ -6481,11 +6523,17 @@
       "id": "clicky-fungal-regrowth",
       "kind": "triggered",
       "name": "Fungal Regrowth",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Fungal Regrowth regenerates 15 hit points per tick for 50 ticks (scaled: 180-270 per round over 50 rounds) while reducing movement speed by up to 20% (snare value estimated).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Fungal Regrowth. Effect definition pending user ruling."
+          "type": "hot",
+          "min": 180,
+          "max": 270,
+          "rounds": 50
+        },
+        {
+          "type": "snare",
+          "value": -20
         }
       ]
     },
@@ -6493,11 +6541,11 @@
       "id": "clicky-frostreavers-blessing",
       "kind": "triggered",
       "name": "Frostreaver's Blessing",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Frostreaver's Blessing grants +10 HP regen per tick, a 10-point damage shield, and +10 attack (values from a modern-era source; classic confirmation unverified).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Frostreaver's Blessing. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Frostreaver's Blessing: +10 HP regen per tick, 10-point damage shield, +10 attack"
         }
       ]
     },
@@ -6505,11 +6553,11 @@
       "id": "clicky-shield-of-the-eighth",
       "kind": "triggered",
       "name": "Shield of the Eighth",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Shield of the Eighth grants an 8-point damage shield (value from a modern-era source; classic confirmation unverified).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Shield of the Eighth. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Shield of the Eighth: 8-point damage shield"
         }
       ]
     },
@@ -6517,11 +6565,11 @@
       "id": "clicky-arch-shielding",
       "kind": "triggered",
       "name": "Arch Shielding",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Arch Shielding grants +150 HP, +6-8 AC, +20 magic resist for 72 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Arch Shielding. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Arch Shielding: +150 HP, +6-8 AC, +20 magic resist for 72 minutes"
         }
       ]
     },
@@ -6529,11 +6577,11 @@
       "id": "clicky-resist-cold",
       "kind": "triggered",
       "name": "Resist Cold",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Resist Cold grants +40 cold resistance for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Resist Cold. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Resist Cold: +40 cold resistance for 36 minutes"
         }
       ]
     },
@@ -6541,11 +6589,11 @@
       "id": "clicky-invigor",
       "kind": "triggered",
       "name": "Invigor",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Invigor restores endurance (35 stamina over 3 ticks).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Invigor. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Invigor: restores endurance (35 stamina over 3 ticks)"
         }
       ]
     },
@@ -6553,11 +6601,12 @@
       "id": "clicky-invigorate",
       "kind": "triggered",
       "name": "Invigorate",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Invigorate heals the target for 81-115 EQ hit points (scaled x15: 972-2070).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Invigorate. Effect definition pending user ruling."
+          "type": "heal",
+          "min": 972,
+          "max": 2070
         }
       ]
     },
@@ -6565,11 +6614,11 @@
       "id": "clicky-aura-of-blue-petals",
       "kind": "triggered",
       "name": "Aura of Blue Petals",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Aura of Blue Petals grants +50 magic resistance for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Aura of Blue Petals. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Aura of Blue Petals: +50 magic resistance for 36 minutes"
         }
       ]
     },
@@ -6577,11 +6626,11 @@
       "id": "clicky-aura-of-white-petals",
       "kind": "triggered",
       "name": "Aura of White Petals",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Aura of White Petals grants +50 cold resistance for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Aura of White Petals. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Aura of White Petals: +50 cold resistance for 36 minutes"
         }
       ]
     },
@@ -6589,11 +6638,11 @@
       "id": "clicky-aura-of-red-petals",
       "kind": "triggered",
       "name": "Aura of Red Petals",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Aura of Red Petals grants +50 fire resistance for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Aura of Red Petals. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Aura of Red Petals: +50 fire resistance for 36 minutes"
         }
       ]
     },
@@ -6601,11 +6650,11 @@
       "id": "clicky-aura-of-green-petals",
       "kind": "triggered",
       "name": "Aura of Green Petals",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Aura of Green Petals grants +50 poison resistance for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Aura of Green Petals. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Aura of Green Petals: +50 poison resistance for 36 minutes"
         }
       ]
     },
@@ -6613,11 +6662,11 @@
       "id": "clicky-aura-of-black-petals",
       "kind": "triggered",
       "name": "Aura of Black Petals",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Aura of Black Petals grants +50 disease resistance for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Aura of Black Petals. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Aura of Black Petals: +50 disease resistance for 36 minutes"
         }
       ]
     },
@@ -6625,11 +6674,11 @@
       "id": "clicky-captain-nalots-quickening",
       "kind": "triggered",
       "name": "Captain Nalot's Quickening",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Captain Nalot's Quickening grants 20% haste for 10 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Captain Nalot's Quickening. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Captain Nalot's Quickening: 20% haste for 10 minutes"
         }
       ]
     },
@@ -6637,11 +6686,11 @@
       "id": "clicky-see-invisible",
       "kind": "triggered",
       "name": "See Invisible",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: See Invisible lets you see invisible creatures for 27 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: See Invisible. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants See Invisible for 27 minutes"
         }
       ]
     },
@@ -6649,11 +6698,11 @@
       "id": "clicky-haste",
       "kind": "triggered",
       "name": "Haste",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Haste grants +50% attack speed (Dark Cloak of the Sky).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Haste. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Haste: +50% attack speed (Dark Cloak of the Sky)"
         }
       ]
     },
@@ -6661,11 +6710,13 @@
       "id": "clicky-careless-lightning",
       "kind": "triggered",
       "name": "Careless Lightning",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Careless Lightning strikes for 80-105 EQ damage (scaled x15: 960-1890).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Careless Lightning. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "electricity",
+          "min": 960,
+          "max": 1890
         }
       ]
     },
@@ -6673,11 +6724,11 @@
       "id": "clicky-strengthen",
       "kind": "triggered",
       "name": "Strengthen",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Strengthen grants +10 strength for 27 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Strengthen. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Strengthen: +10 strength for 27 minutes"
         }
       ]
     },
@@ -6685,11 +6736,11 @@
       "id": "clicky-summon-holy-ale-of-brell",
       "kind": "triggered",
       "name": "Summon Holy Ale of Brell",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Summon Holy Ale of Brell summons holy ale of Brell.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Summon Holy Ale of Brell. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Summons holy ale of Brell"
         }
       ]
     },
@@ -6697,11 +6748,12 @@
       "id": "clicky-hammer-of-wrath",
       "kind": "triggered",
       "name": "Hammer of Wrath",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Hammer of Wrath summons a magical hammer adept at smiting undead (summoned item; vanishes on logout - duration-rounds estimated; posts a GM note, no actor spawn).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Hammer of Wrath. Effect definition pending user ruling."
+          "type": "summon",
+          "creature": "Hammer of Wrath (summoned item)",
+          "duration-rounds": 100
         }
       ]
     },
@@ -6709,11 +6761,12 @@
       "id": "clicky-weaken",
       "kind": "triggered",
       "name": "Weaken",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Weaken reduces the target's strength by 15.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Weaken. Effect definition pending user ruling."
+          "type": "debuff",
+          "effect": "strength",
+          "value": -15
         }
       ]
     },
@@ -6721,11 +6774,12 @@
       "id": "clicky-siphon-strength",
       "kind": "triggered",
       "name": "Siphon Strength",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Siphon Strength reduces the target's strength by 10.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Siphon Strength. Effect definition pending user ruling."
+          "type": "debuff",
+          "effect": "strength",
+          "value": -10
         }
       ]
     },
@@ -6733,11 +6787,18 @@
       "id": "clicky-clinging-darkness",
       "kind": "triggered",
       "name": "Clinging Darkness",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Clinging Darkness deals 8 EQ damage per tick for 48 seconds (scaled: 96-144 per round over 8 rounds) and slows movement by 30%.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Clinging Darkness. Effect definition pending user ruling."
+          "type": "dot",
+          "element": "magic",
+          "min": 96,
+          "max": 144,
+          "rounds": 8
+        },
+        {
+          "type": "snare",
+          "value": -30
         }
       ]
     },
@@ -6745,11 +6806,20 @@
       "id": "clicky-disease-cloud",
       "kind": "triggered",
       "name": "Disease Cloud",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Disease Cloud strikes for 5 EQ damage, then 1 per tick for 6 minutes (scaled: 60-90 initial, 12-18 per round over 60 rounds).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Disease Cloud. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "disease",
+          "min": 60,
+          "max": 90
+        },
+        {
+          "type": "dot",
+          "element": "disease",
+          "min": 12,
+          "max": 18,
+          "rounds": 60
         }
       ]
     },
@@ -6757,11 +6827,11 @@
       "id": "clicky-shield-of-flame",
       "kind": "triggered",
       "name": "Shield of Flame",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Shield of Flame grants a 6-point fire damage shield and +15 fire resist for 15 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Shield of Flame. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Shield of Flame: 6-point fire damage shield and +15 fire resist for 15 minutes"
         }
       ]
     },
@@ -6769,11 +6839,11 @@
       "id": "clicky-summon-food",
       "kind": "triggered",
       "name": "Summon Food",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Summon Food summons an edible loaf of black bread.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Summon Food. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Summons an edible loaf of black bread"
         }
       ]
     },
@@ -6781,11 +6851,11 @@
       "id": "clicky-summon-drink",
       "kind": "triggered",
       "name": "Summon Drink",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Summon Drink summons a globe of pure drinking water.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Summon Drink. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Summons a globe of pure drinking water"
         }
       ]
     },
@@ -6793,11 +6863,11 @@
       "id": "clicky-yaulp-ii",
       "kind": "triggered",
       "name": "Yaulp II",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Yaulp II is a battle cry granting +20 strength and +2 AC for 24 seconds (values estimated; unverified).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Yaulp II. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Yaulp II: battle cry granting +20 strength and +2 AC for 24 seconds"
         }
       ]
     },
@@ -6805,11 +6875,12 @@
       "id": "clicky-complete-heal",
       "kind": "triggered",
       "name": "Complete Heal",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Complete Heal fully restores the target's hit points (modeled as min 8000 / max 12000).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Complete Heal. Effect definition pending user ruling."
+          "type": "heal",
+          "min": 8000,
+          "max": 12000
         }
       ]
     },
@@ -6817,11 +6888,11 @@
       "id": "clicky-valor",
       "kind": "triggered",
       "name": "Valor",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Valor grants +3-4 AC and +200 HP for 54 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Valor. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Valor: +3-4 AC, +200 HP for 54 minutes"
         }
       ]
     },
@@ -6829,11 +6900,11 @@
       "id": "clicky-pacify",
       "kind": "triggered",
       "name": "Pacify",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Pacify lowers the target's aggressiveness for 42 seconds (affects creatures up to level 55).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Pacify. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Pacify: lowers the target's aggressiveness for 42 seconds (affects creatures up to level 55)"
         }
       ]
     },
@@ -6841,11 +6912,11 @@
       "id": "clicky-armor-of-faith",
       "kind": "triggered",
       "name": "Armor of Faith",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Armor of Faith grants +6-7 AC for 63 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Armor of Faith. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Armor of Faith: +6-7 AC for 63 minutes"
         }
       ]
     },
@@ -6853,11 +6924,11 @@
       "id": "clicky-symbol-of-naltron",
       "kind": "triggered",
       "name": "Symbol of Naltron",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Symbol of Naltron grants +511 hit points for 54 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Symbol of Naltron. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Symbol of Naltron: +511 hit points for 54 minutes"
         }
       ]
     },
@@ -6865,11 +6936,14 @@
       "id": "clicky-tremor",
       "kind": "triggered",
       "name": "Tremor",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Tremor shakes the ground around the caster for 64-122 EQ damage (scaled x15: 768-2196), point-blank AE.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Tremor. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "magic",
+          "min": 768,
+          "max": 2196,
+          "area": "pbae"
         }
       ]
     },
@@ -6877,11 +6951,11 @@
       "id": "clicky-superior-camouflage",
       "kind": "triggered",
       "name": "Superior Camouflage",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Superior Camouflage grants a mystic cloak of invisibility.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Superior Camouflage. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Superior Camouflage: mystic cloak of invisibility"
         }
       ]
     },
@@ -6889,11 +6963,13 @@
       "id": "clicky-chloroplast",
       "kind": "triggered",
       "name": "Chloroplast",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Chloroplast regenerates 10 hit points per tick (scaled: 120-180 per round) for up to 12 minutes (duration estimated).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Chloroplast. Effect definition pending user ruling."
+          "type": "hot",
+          "min": 120,
+          "max": 180,
+          "rounds": 120
         }
       ]
     },
@@ -6901,11 +6977,14 @@
       "id": "clicky-drones-of-doom",
       "kind": "triggered",
       "name": "Drones of Doom",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Drones of Doom deals 116-156 EQ damage per tick for 48 seconds (scaled: 1392-2808 per round over 8 rounds).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Drones of Doom. Effect definition pending user ruling."
+          "type": "dot",
+          "element": "magic",
+          "min": 1392,
+          "max": 2808,
+          "rounds": 8
         }
       ]
     },
@@ -6913,11 +6992,11 @@
       "id": "clicky-share-wolf-form",
       "kind": "triggered",
       "name": "Share Wolf Form",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Share Wolf Form turns the group into wolves: +60% movement and +30 attack for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Share Wolf Form. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Share Wolf Form: group takes wolf form, +60% movement and +30 attack for 36 minutes"
         }
       ]
     },
@@ -6925,11 +7004,11 @@
       "id": "clicky-skin-like-diamond",
       "kind": "triggered",
       "name": "Skin Like Diamond",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Skin Like Diamond grants +3-4 AC and +200 HP for 54 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Skin Like Diamond. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Skin Like Diamond: +3-4 AC, +200 HP for 54 minutes"
         }
       ]
     },
@@ -6937,11 +7016,11 @@
       "id": "clicky-daring",
       "kind": "triggered",
       "name": "Daring",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Daring grants +2 AC and +97 hit points for 36 minutes (values per the project's spell catalog; classic confirmation unverified).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Daring. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Daring: +2 AC and +97 hit points for 36 minutes"
         }
       ]
     },
@@ -6949,11 +7028,11 @@
       "id": "clicky-symbol-of-pinzarn",
       "kind": "triggered",
       "name": "Symbol of Pinzarn",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Symbol of Pinzarn grants +307 hit points for 45 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Symbol of Pinzarn. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Symbol of Pinzarn: +307 hit points for 45 minutes"
         }
       ]
     },
@@ -6961,11 +7040,11 @@
       "id": "clicky-soothe",
       "kind": "triggered",
       "name": "Soothe",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Soothe lowers the target's aggressiveness for 2.5 minutes (affects creatures up to level 40).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Soothe. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Soothe: lowers the target's aggressiveness for 2.5 minutes (affects creatures up to level 40)"
         }
       ]
     },
@@ -6973,11 +7052,11 @@
       "id": "clicky-stun",
       "kind": "triggered",
       "name": "Stun",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Stun strikes with holy power, stunning the target for 4 seconds (works on creatures up to level 55).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Stun. Effect definition pending user ruling."
+          "type": "stun",
+          "rounds": 1
         }
       ]
     },
@@ -6985,11 +7064,11 @@
       "id": "clicky-cancel-magic",
       "kind": "triggered",
       "name": "Cancel Magic",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Cancel Magic removes one magical enchantment affecting the target (dispel).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Cancel Magic. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Cancel Magic: removes one magical enchantment affecting the target (dispel)"
         }
       ]
     },
@@ -6997,11 +7076,11 @@
       "id": "clicky-spirit-strength",
       "kind": "triggered",
       "name": "Spirit Strength",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Spirit Strength grants +18 strength for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Spirit Strength. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Spirit Strength: +18 strength for 36 minutes"
         }
       ]
     },
@@ -7009,11 +7088,11 @@
       "id": "clicky-endure-magic",
       "kind": "triggered",
       "name": "Endure Magic",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Endure Magic grants +20 magic resistance for 27 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Endure Magic. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Endure Magic: +20 magic resistance for 27 minutes"
         }
       ]
     },
@@ -7021,11 +7100,11 @@
       "id": "clicky-ring-of-faydark",
       "kind": "triggered",
       "name": "Ring of Faydark",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Ring of Faydark teleports the group to Lesser Faydark.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Ring of Faydark. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Teleports the group to Lesser Faydark (Ring of Faydark)"
         }
       ]
     },
@@ -7033,11 +7112,14 @@
       "id": "clicky-stinging-swarm",
       "kind": "triggered",
       "name": "Stinging Swarm",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Stinging Swarm deals 13 EQ damage per tick for 9 ticks (scaled: 156-234 per round over 9 rounds).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Stinging Swarm. Effect definition pending user ruling."
+          "type": "dot",
+          "element": "magic",
+          "min": 156,
+          "max": 234,
+          "rounds": 9
         }
       ]
     },
@@ -7045,11 +7127,11 @@
       "id": "clicky-summon-arrows",
       "kind": "triggered",
       "name": "Summon Arrows",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Summon Arrows summons a bundle of 100 arrows.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Summon Arrows. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Summons a bundle of 100 arrows"
         }
       ]
     },
@@ -7057,11 +7139,11 @@
       "id": "clicky-ultravision",
       "kind": "triggered",
       "name": "Ultravision",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Ultravision grants vastly improved night vision.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Ultravision. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Ultravision: vastly improved night vision"
         }
       ]
     },
@@ -7069,11 +7151,11 @@
       "id": "clicky-strength-of-earth",
       "kind": "triggered",
       "name": "Strength of Earth",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Strength of Earth grants +15 strength for 27 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Strength of Earth. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Strength of Earth: +15 strength for 27 minutes"
         }
       ]
     },
@@ -7081,11 +7163,11 @@
       "id": "clicky-summon-throwing-dagger",
       "kind": "triggered",
       "name": "Summon Throwing Dagger",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Summon Throwing Dagger summons a bundle of 100 throwing daggers.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Summon Throwing Dagger. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Summons a bundle of 100 throwing daggers"
         }
       ]
     },
@@ -7093,11 +7175,11 @@
       "id": "clicky-fade",
       "kind": "triggered",
       "name": "Fade",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Fade lets the rogue fade from sight and from their enemies' attention (invisibility + hate wipe; mechanics estimated from the clicky name - no classic spell data found).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Fade. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Fade: the rogue fades from sight and from their enemies' attention (invisibility + hate wipe)"
         }
       ]
     },
@@ -7105,11 +7187,11 @@
       "id": "clicky-major-shielding",
       "kind": "triggered",
       "name": "Major Shielding",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Major Shielding grants +75 HP, +4-5 AC, +14 magic resist for 45 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Major Shielding. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Major Shielding: +75 HP, +4-5 AC, +14 magic resist for 45 minutes"
         }
       ]
     },
@@ -7117,11 +7199,11 @@
       "id": "clicky-vampiric-embrace",
       "kind": "triggered",
       "name": "Vampiric Embrace",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Vampiric Embrace gives your attacks a vampiric property, stealing life for 7.5 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Vampiric Embrace. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Vampiric Embrace: attacks gain a vampiric property, stealing life for 7.5 minutes"
         }
       ]
     },
@@ -7129,11 +7211,18 @@
       "id": "clicky-engulfing-darkness",
       "kind": "triggered",
       "name": "Engulfing Darkness",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Engulfing Darkness deals 11 EQ damage per tick for 60 seconds (scaled: 132-198 per round over 10 rounds) and slows movement by 40% (project spell catalog's tick value conflicts with its damage field; the description value used).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Engulfing Darkness. Effect definition pending user ruling."
+          "type": "dot",
+          "element": "magic",
+          "min": 132,
+          "max": 198,
+          "rounds": 10
+        },
+        {
+          "type": "snare",
+          "value": -40
         }
       ]
     },
@@ -7141,11 +7230,11 @@
       "id": "clicky-feign-death",
       "kind": "triggered",
       "name": "Feign Death",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Feign Death makes you appear dead to most creatures.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Feign Death. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Feign Death: you appear dead to most creatures"
         }
       ]
     },
@@ -7153,11 +7242,11 @@
       "id": "clicky-glamour",
       "kind": "triggered",
       "name": "Glamour",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Glamour grants +10-42 charisma.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Glamour. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Glamour: +10-42 charisma"
         }
       ]
     },
@@ -7165,11 +7254,11 @@
       "id": "clicky-bramblecoat",
       "kind": "triggered",
       "name": "Bramblecoat",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Bramblecoat grants +4-5 AC and a 3-point damage shield for 3.25 hours.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Bramblecoat. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Bramblecoat: +4-5 AC and a 3-point damage shield for 3.25 hours"
         }
       ]
     },
@@ -7177,11 +7266,11 @@
       "id": "clicky-furious-strength",
       "kind": "triggered",
       "name": "Furious Strength",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Furious Strength grants +34 strength for 54 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Furious Strength. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Furious Strength: +34 strength for 54 minutes"
         }
       ]
     },
@@ -7189,11 +7278,13 @@
       "id": "clicky-winters-roar",
       "kind": "triggered",
       "name": "Winter's Roar",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Winter's Roar strikes for 170-246 EQ cold damage (scaled x15: 2040-4428).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Winter's Roar. Effect definition pending user ruling."
+          "type": "damage",
+          "element": "cold",
+          "min": 2040,
+          "max": 4428
         }
       ]
     },
@@ -7201,11 +7292,11 @@
       "id": "clicky-deftness",
       "kind": "triggered",
       "name": "Deftness",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Deftness grants +40 dexterity for 54 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Deftness. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Deftness: +40 dexterity for 54 minutes"
         }
       ]
     },
@@ -7213,11 +7304,11 @@
       "id": "clicky-health",
       "kind": "triggered",
       "name": "Health",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Health is a shaman stamina buff: +31 stamina for 54 minutes (not a heal).",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Health. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Health: +31 stamina for 54 minutes (shaman STA buff, not a heal)"
         }
       ]
     },
@@ -7225,11 +7316,11 @@
       "id": "clicky-nimble",
       "kind": "triggered",
       "name": "Nimble",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Nimble grants +16-52 agility.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Nimble. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Nimble: +16-52 agility"
         }
       ]
     },
@@ -7237,11 +7328,11 @@
       "id": "clicky-lesser-shielding",
       "kind": "triggered",
       "name": "Lesser Shielding",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Lesser Shielding grants +30 HP, +2 AC, +10 magic resist for 27 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Lesser Shielding. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Lesser Shielding: +30 HP, +2 AC, +10 magic resist for 27 minutes"
         }
       ]
     },
@@ -7249,11 +7340,11 @@
       "id": "clicky-shrink",
       "kind": "triggered",
       "name": "Shrink",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Shrink reduces the target's height by 34%.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Shrink. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Shrink: reduces the target's height by 34%"
         }
       ]
     },
@@ -7261,11 +7352,11 @@
       "id": "clicky-reckless-strength",
       "kind": "triggered",
       "name": "Reckless Strength",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Reckless Strength grants +19 strength in an intense burst decaying over 3 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Reckless Strength. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Reckless Strength: +19 strength in an intense burst decaying over 3 minutes"
         }
       ]
     },
@@ -7273,11 +7364,11 @@
       "id": "clicky-invisibility",
       "kind": "triggered",
       "name": "Invisibility",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Invisibility makes you invisible to most creatures for up to 20 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Invisibility. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Invisibility: invisible to most creatures for up to 20 minutes"
         }
       ]
     },
@@ -7285,11 +7376,11 @@
       "id": "clicky-strength-of-the-kunzar",
       "kind": "triggered",
       "name": "Strength of the Kunzar",
-      "description": "Clicky effect from EQ Archives. Spell definition pending user ruling.",
+      "description": "Triggered effect: Strength of the Kunzar grants +25 strength for 36 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "note": "Clicky: Strength of the Kunzar. Effect definition pending user ruling."
+          "type": "utility",
+          "note": "Grants Strength of the Kunzar: +25 strength for 36 minutes"
         }
       ]
     },
