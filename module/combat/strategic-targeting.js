@@ -166,22 +166,21 @@ export async function promptCalledShot(attacker, targetActor, targetName, skillB
                 </div>`,
             ok: { label: "Attack" }
         });
-        if (!fd) {
-            console.log("EQRMSS DEBUG | promptCalledShot: fd is null/undefined, returning null");
-            return null;
+        if (!fd) return null;
+        // DialogV2.prompt return shape varies by Foundry version:
+        // FormData (with .get), a raw string (the selected value),
+        // or a plain object {area: "..."}.
+        let val;
+        if (typeof fd === "string") {
+            val = fd;
+        } else if (typeof fd.get === "function") {
+            val = fd.get("area");
+        } else if (fd && typeof fd === "object") {
+            val = fd.area;
         }
-        const val = typeof fd.get === "function" ? fd.get("area") : fd.area;
-        console.log("EQRMSS DEBUG | promptCalledShot: val =", JSON.stringify(val), "fd type:", typeof fd, "has get:", typeof fd?.get);
-        if (!val) {
-            console.log("EQRMSS DEBUG | promptCalledShot: empty val, returning {}");
-            return {};
-        }
+        if (!val) return {};
         const area = areas.find(a => a.id === val);
-        console.log("EQRMSS DEBUG | promptCalledShot: area found =", JSON.stringify(area?.id), "areas count:", areas.length);
-        if (!area) {
-            console.log("EQRMSS DEBUG | promptCalledShot: area not found for val", JSON.stringify(val));
-            return {};
-        }
+        if (!area) return {};
         return {
             areaId: area.id,
             areaName: area.name,

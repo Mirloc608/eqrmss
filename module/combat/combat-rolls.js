@@ -638,13 +638,8 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         const stSkill = strategicTargetingSkill(actor);
         if (stSkill != null) {
             const pick = await promptCalledShot(actor, targetActor, targetName, stSkill);
-            console.log("EQRMSS DEBUG | combat-rolls: pick =", JSON.stringify(pick));
-            if (pick == null) {
-                console.log("EQRMSS DEBUG | combat-rolls: pick is null, cancelling attack");
-                return;
-            }
+            if (pick == null) return;
             if (pick.areaId) {
-                console.log("EQRMSS DEBUG | combat-rolls: setting calledShot, areaId =", pick.areaId, "modifier =", pick.modifier);
                 calledShot = pick;
                 calledShotMod = pick.modifier || 0;
                 // §4.7: the closer gains +30 to Strategic Targeting.
