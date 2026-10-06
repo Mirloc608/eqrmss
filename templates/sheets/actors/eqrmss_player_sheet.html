@@ -131,6 +131,7 @@
     </div>
 
     <!-- Tab 5: Spells & Magic -->
+    {{#if hasSpells}}
     <div class="tab" data-group="primary" data-tab="spells">
       <h3>Spell Lists &amp; Magic Items</h3>
       <div class="panel">
@@ -146,6 +147,15 @@
         </table>
       </div>
     </div>
+    {{/if}}
+    {{#if isBard}}
+    <div class="tab" data-group="primary" data-tab="songs">
+      <h3>Songs</h3>
+      <div class="panel">
+        {{> "systems/eqrmss/templates/sheets/actors/parts/actor-songs.html"}}
+      </div>
+    </div>
+    {{/if}}
 
     <!-- Tab 6: Logs -->
     <div class="tab" data-group="primary" data-tab="logs">

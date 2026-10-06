@@ -4,7 +4,8 @@
   <a class="item" data-tab="skills">Skills</a>
   <a class="item" data-tab="status">Status & Hits</a>
   <a class="item" data-tab="equipment">Equipment & Wealth</a>
-  <a class="item" data-tab="spells">Spells & Magic</a>
+  {{#if hasSpells}}<a class="item" data-tab="spells">Spells & Magic</a>{{/if}}
+  {{#if isBard}}<a class="item" data-tab="songs">Songs</a>{{/if}}
   <a class="item" data-tab="aa">AA</a>
   <a class="item" data-tab="logs">Logs</a>
   <a class="item" data-tab="background">Background</a>

@@ -316,5 +316,13 @@ export class EQRMSSActorContextHelper {
         }
         context.buffs = buffs;
         context.debuffs = debuffs;
+
+        // Class-based tab visibility: bards get Songs (not Spells);
+        // pure melee (warrior, rogue, monk, berserker) get neither.
+        const sys = this.actor?.system ?? {};
+        const classId = String(sys.origin?.classId ?? sys.fixed_info?.classId ?? "").toLowerCase();
+        const PURE_MELEE = new Set(["warrior", "rogue", "monk", "berserker"]);
+        context.isBard = classId === "bard";
+        context.hasSpells = classId !== "" && classId !== "bard" && !PURE_MELEE.has(classId);
     }
 }
