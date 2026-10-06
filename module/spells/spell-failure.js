@@ -279,6 +279,13 @@ function equipmentEsf(weights, realm) {
  * only the nonzero contributors (label feeds the chat card).
  */
 export function computeESF(actor, spellItem, opts = {}) {
+    // EQ hybrids (ruling 2026-10-05): no ESF penalties for casting —
+    // armor, weight, helm, overlevel, etc. are all ignored. Their
+    // spells are already the weaker trade.
+    const casterClass = classIdOf(actor);
+    if (HYBRID_CASTERS.has(casterClass)) {
+        return { total: 0, parts: [] };
+    }
     const realm = casterRealm(actor, spellItem);
     const parts = [];
     const add = (label, mod) => { if (mod > 0) parts.push({ label, mod }); };
@@ -293,7 +300,6 @@ export function computeESF(actor, spellItem, opts = {}) {
     // Non-standard spell list: the spell belongs to another class's
     // list than the caster's own.
     const spellClass = String(spellItem?.system?.spell_list ?? spellItem?.system?.class ?? "").toLowerCase();
-    const casterClass = classIdOf(actor);
     if (spellClass && casterClass && spellClass !== casterClass) {
         add("non-standard spell list", ESF_NONSTANDARD_LIST);
     }
