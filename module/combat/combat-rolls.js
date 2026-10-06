@@ -51,6 +51,7 @@ import { resolveSpellFailure } from "../spells/spell-failure.js";
 import { actorAttackSpeed, speedScaledOb } from "./attack-speed.js";
 import { unusualStyleOf, shiftSeverity } from "./unusual-style.js";
 import { combatCard } from "./chat-card.js";
+import { fireWeaponProc } from "../item-effects/proc-engine.js";
 
 async function d100() {
     return (await new Roll("1d100").evaluate()).total;
@@ -160,6 +161,19 @@ async function promptTarget(missileAttack = false, attackerActor = null) {
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+
+// Chat fragment for a fired weapon proc: the proc's catalog name plus
+// one line per resolved payload entry (damage / regen / buff).
+function procResultNote({ proc, results }) {
+    const lines = (results ?? []).map(r => {
+        const note = (r.notes ?? []).filter(Boolean).map(esc).join("; ");
+        const tail = note ? ` — ${note}` : "";
+        if (r.type === "damage") return `${r.final} ${esc(r.element ?? "untyped")} damage (rolled ${r.rolled})${tail}`;
+        if (r.type === "regen") return `${r.final} ${esc(r.pool ?? "mana")} restored${tail}`;
+        return `${esc(r.type ?? "effect")}${tail}`;
+    });
+    return `<p><strong>Weapon proc: ${esc(proc?.name ?? "unknown")}</strong><br>${lines.join("<br>")}</p>`;
 }
 
 const MISSILE_WEAPON_TYPES = new Set(["missile", "thrown"]);
@@ -1030,11 +1044,14 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     }
 
     // ---- Weapon proc on crit (already-ruled: procs fire onCrit) ----
+    // Weapon attacks only: spell bolts also resolve crits through this
+    // path, but their synthetic items carry system.type "spell" and
+    // never proc. No proc set => no behavior change at all.
     let procNote = "";
-    if (critFired && sys.proc && game.eqrmss?.itemEffects?.fireProc) {
+    if (critFired && sys.type !== "spell" && sys.proc) {
         try {
-            await game.eqrmss.itemEffects.fireProc({ wielder: actor, weapon: weaponItem, target: targetActor, event: "onCrit" });
-            procNote = `<p><em>Weapon proc fired.</em></p>`;
+            const procResult = await fireWeaponProc({ wielder: actor, weapon: weaponItem, target: targetActor, event: "onCrit" });
+            if (procResult.fired) procNote = procResultNote(procResult);
         } catch (e) {
             console.error("EQRMSS | Proc fire failed", e);
         }
