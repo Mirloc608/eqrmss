@@ -864,7 +864,27 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         if (pts > 0 && hitLocation) {
             if (targetActor && (targetActor.isOwner || game.user?.isGM)) {
                 const applied = await applyStructuralDamage(targetActor, hitLocation, pts);
-                if (applied) line += `<br><em>${pts} structural points to the ${esc(applied.name)} (${applied.total}${applied.sr != null ? `/${applied.sr} SR` : ""})${applied.inactive ? ` — ${esc(applied.name)} inactive!` : ""}</em>`;
+                if (applied) {
+                    line += `<br><em>${pts} structural points to the ${esc(applied.name)} (${applied.total}${applied.sr != null ? `/${applied.sr} SR` : ""})${applied.inactive ? ` — ${esc(applied.name)} inactive!` : ""}</em>`;
+                    // User ruling 2026-10-06 Option B: when SR hits zero,
+                    // roll an extra Strategic crit at +20 on the same table.
+                    // Only triggers on the hit that drops SR to zero (not
+                    // on subsequent hits to an already-inactive location).
+                    if (applied.inactive && (applied.before ?? 0) < (applied.sr ?? 0)) {
+                        const extraRoll = Math.min(100, (await d100()) + 20);
+                        const extraRes = lookupStructuralCrit(tables.crits, severity, extraRoll);
+                        if (!extraRes.error) {
+                            line += `<br><strong>SR Zero!</strong> ${esc(applied.name)} destroyed — extra Strategic ${esc(severity)} → d100 ${extraRoll} (with +20) on the ${esc(extraRes.table)}: ${esc(extraRes.text)}`;
+                            condNote += await applyCritConditions(targetActor, actor, extraRes.text);
+                            // Extra structural points from the bonus crit also apply
+                            const extraPts = structuralPointsOf(extraRes.text);
+                            if (extraPts > 0) {
+                                const extraApplied = await applyStructuralDamage(targetActor, hitLocation, extraPts);
+                                if (extraApplied) line += `<br><em>${extraPts} additional structural points to the ${esc(extraApplied.name)} (${extraApplied.total}/${extraApplied.sr} SR)</em>`;
+                            }
+                        }
+                    }
+                }
             } else {
                 line += `<br><em>${pts} structural points to the ${esc(hitLocation.name)} (apply manually).</em>`;
             }
