@@ -31,6 +31,23 @@
     </div>
   </div>
 
+  {{#if isPaladin}}
+  <div class="panel">
+    <h4>Signature Ability</h4>
+    <button type="button" data-action="layOnHands" {{#if system.status.layOnHandsUsed}}disabled{{/if}} title="Lay on Hands: Heal 15% + 10%/rank of max HP. Melee range. Once per combat.">
+      Lay on Hands {{#if system.status.layOnHandsUsed}}(Used){{/if}}
+    </button>
+  </div>
+  {{/if}}
+  {{#if isShadowknight}}
+  <div class="panel">
+    <h4>Signature Ability</h4>
+    <button type="button" data-action="harmTouch" {{#if system.status.harmTouchUsed}}disabled{{/if}} title="Harm Touch: (50 × rank) + (10 × level) damage. Disease RR at -20. Melee range. Once per combat.">
+      Harm Touch {{#if system.status.harmTouchUsed}}(Used){{/if}}
+    </button>
+  </div>
+  {{/if}}
+
   <div class="panel">
     <h4>Defense</h4>
     <table class="rmss-table">

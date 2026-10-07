@@ -350,6 +350,8 @@ export class EQRMSSActorContextHelper {
         const classId = String(sys.origin?.classId ?? sys.fixed_info?.classId ?? "").toLowerCase();
         const PURE_MELEE = new Set(["warrior", "rogue", "monk", "berserker"]);
         context.isBard = classId === "bard";
+        context.isPaladin = classId === "paladin";
+        context.isShadowknight = classId === "shadowknight";
         context.hasSpells = classId !== "" && classId !== "bard" && !PURE_MELEE.has(classId);
     }
 }

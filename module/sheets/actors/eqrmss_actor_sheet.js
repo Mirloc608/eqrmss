@@ -19,6 +19,7 @@ import { EQRMSSActorInventoryHelper } from "./helpers/actor-sheet-inventory.js";
 import { EQRMSSActorSkillsHelper } from "./helpers/actor-sheet-skills.js";
 import { EQRMSSActorSpellsHelper } from "./helpers/actor-sheet-spells.js";
 import { EQRMSSActorBardHelper } from "./helpers/actor-sheet-bard.js";
+import { EQRMSSActorSignatureHelper } from "./helpers/actor-sheet-signature.js";
 import { EQRMSSActorProgressionHelper } from "./helpers/actor-sheet-progression.js";
 
 // PETS
@@ -48,6 +49,7 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
         this.skillsHelper       = new EQRMSSActorSkillsHelper(this);
         this.spellsHelper       = new EQRMSSActorSpellsHelper(this);
         this.bardHelper         = new EQRMSSActorBardHelper(this);
+        this.signatureHelper    = new EQRMSSActorSignatureHelper(this);
         this.progressionHelper  = new EQRMSSActorProgressionHelper(this);
     }
 
@@ -113,6 +115,7 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
         this.skillsHelper.activate();
         this.spellsHelper.activate();
         this.bardHelper.activate();
+        this.signatureHelper?.activateListeners(html);
 
         // ------------------------------------------------------------
         // PET MANAGER BUTTON (header)
