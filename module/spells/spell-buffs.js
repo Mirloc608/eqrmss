@@ -65,8 +65,11 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
     const buffEffects = [];
     for (const eff of effects) {
         if (!eff || typeof eff !== "object") continue;
-        if (String(eff.type ?? "").toLowerCase() !== "buff") continue;
-        const stat = String(eff.stat ?? "").toLowerCase();
+        const effType = String(eff.type ?? "").toLowerCase();
+        // Movement effects (e.g., Spirit of Wolf) are buffs too (2026-10-07)
+        if (effType !== "buff" && effType !== "movement") continue;
+        // Movement type has no stat field — derive from type
+        const stat = effType === "movement" ? "movement" : String(eff.stat ?? "").toLowerCase();
         if (stat.endsWith("-cap")) continue;
         const rawValue = rollAmount(eff);
         if (!(rawValue > 0)) continue;
@@ -103,7 +106,8 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
 
     for (const { eff, stat, rawValue, scaled, stack } of buffEffects) {
         if (!eff || typeof eff !== "object") continue;
-        if (String(eff.type ?? "").toLowerCase() !== "buff") continue;
+        const effType2 = String(eff.type ?? "").toLowerCase();
+        if (effType2 !== "buff" && effType2 !== "movement") continue;
 
         // Stacking replace already checked; block handled in pre-check.
 

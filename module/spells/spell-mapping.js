@@ -115,7 +115,7 @@ export function classifySpell(spellItem) {
         const amount = Number(heal.amount ?? heal.max ?? heal.min) || 0;
         if (amount > 0) return { kind: "heal", amount };
     }
-    if (effects.length) return { kind: "later", reason: "buffs, debuffs and DoTs land in a later stage" };
+    if (effects.length) return { kind: "later", reason: "utility effect — no mechanical track yet" };
     return { kind: "none" };
 }
 
