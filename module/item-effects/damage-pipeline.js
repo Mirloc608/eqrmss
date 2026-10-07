@@ -229,6 +229,18 @@ async function applyBuff({ effect, target, source, caster }) {
         spellId: source ?? "clicky", scaledTarget, scaledStat, scaledValue, roundsLeft: duration,
     });
     await target.update({ "system.status.spellEffects": list });
+    // Hasted/slowed visual indicators (2026-10-07)
+    if (scaledTarget === "haste" && scaledValue > 0) {
+        try {
+            const { applyStatusEffect } = await import("../spells/status-wiring.js");
+            await applyStatusEffect(target, "hasted", `${label} (Clicky)`, duration, "icons/svg/lightning.svg", { source });
+        } catch (e) { /* ignore */ }
+    } else if (scaledTarget === "slow" && scaledValue > 0) {
+        try {
+            const { applyStatusEffect } = await import("../spells/status-wiring.js");
+            await applyStatusEffect(target, "slowed", `${label} (Clicky)`, duration, "icons/svg/clock.svg", { source });
+        } catch (e) { /* ignore */ }
+    }
     return { type: "buff", final: scaledValue, notes: [`${label} for ${duration} rounds`], source, applied: true };
 }
 
@@ -390,6 +402,11 @@ async function applyFear({ effect, target, source }) {
     const rounds = payloadRounds(effect);
     await persistValue(target, "system.status.fear", { rounds });
     await pushStatusList(target, "spellEffects", { label: `feared (${rounds} rounds)`, roundsLeft: rounds, source });
+    // Frightened visual (2026-10-07): Foundry core status.
+    try {
+        const { applyStatusEffect } = await import("../spells/status-wiring.js");
+        await applyStatusEffect(target, "frightened", "Feared", rounds, "icons/svg/terror.svg", { source });
+    } catch (e) { /* ignore */ }
     return {
         type: "fear", rolled: rounds, final: rounds,
         notes: ["feared — cannot make offensive attacks while feared"], source
@@ -402,6 +419,11 @@ async function applyMez({ effect, target, source }) {
     if (miss) return miss;
     const rounds = payloadRounds(effect);
     const pool = await withStunPool(target, p => { p.downOrOut += rounds; });
+    // Stunned visual (2026-10-07, user ruling): mez = conscious but unable to act.
+    try {
+        const { applyStatusEffect } = await import("../spells/status-wiring.js");
+        await applyStatusEffect(target, "stunned", "Mesmerized", rounds, "icons/svg/stunned.svg", { source });
+    } catch (e) { /* ignore */ }
     return { type: "mez", rolled: rounds, final: pool.downOrOut, notes: [`mesmerized (down or out) for ${rounds} rounds`], source };
 }
 

@@ -38,6 +38,7 @@ import { combatCard } from "../combat/chat-card.js";
 import { classifySpell, directedSpellsOB, spellEffectsOf } from "./spell-mapping.js";
 import { applySpellBuffs } from "./spell-buffs.js";
 import { applyInvisibility, invisTypeOf } from "./invisibility.js";
+import { applyLevitate } from "./levitate.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -532,18 +533,25 @@ export async function castSpell(actor, spellItem, opts = {}) {
         const rounds = durationRounds(eff.duration) ?? 200;
         invisNote += await applyInvisibility(buffTarget, name, itype, rounds);
     }
+    // Levitate (2026-10-07): wire to `flying` status.
+    let levNote = "";
+    for (const eff of spellEffectsOf(spellItem) ?? []) {
+        if (String(eff?.type ?? "").toLowerCase() !== "levitate") continue;
+        const rounds = durationRounds(eff.duration) ?? 200;
+        levNote += await applyLevitate(buffTarget, name, rounds);
+    }
     const note = cls.kind === "later" ? esc(cls.reason) : "no mechanical payload";
-    // Suppress the "announced" line if the buff/regen/invis pipeline already
+    // Suppress the "announced" line if the buff/regen/invis/levitate pipeline already
     // produced output (2026-10-07: redundant when buffs applied or were
     // blocked by stacking — the pipeline's own message says what happened).
-    const announcedLine = (regenNote || buffNote || invisNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }

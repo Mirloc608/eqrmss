@@ -711,6 +711,16 @@ export async function tickConditions(combat) {
         }
     }
 
+    // Tracker -> token marker sync (2026-10-07): stun/prone/bleed show on tokens.
+    try {
+        const { syncTrackerStatuses } = await import("../spells/status-wiring.js");
+        for (const c of list) {
+            const actor = c.actor;
+            if (!actor || actor.system?.status?.dead) continue;
+            await syncTrackerStatuses(actor);
+        }
+    } catch (e) { /* ignore */ }
+
     for (const c of list) {
         const actor = c.actor;
         if (!actor || actor.system?.status?.dead) continue;
@@ -840,7 +850,17 @@ export async function tickConditions(combat) {
                 if (songAlive) { remainingFx.push(e); continue; }
                 const left = (Number(e.roundsLeft) || 0) - 1;
                 if (left > 0) remainingFx.push({ ...e, roundsLeft: left });
-                else notes.push(`${esc(e.label || "A spell effect")} ends on ${esc(actor.name)}.`);
+                else {
+                    notes.push(`${esc(e.label || "A spell effect")} ends on ${esc(actor.name)}.`);
+                    // Remove hasted/slowed visual when the buff expires (2026-10-07).
+                    const st = String(e?.scaledTarget ?? "").toLowerCase();
+                    if (st === "haste" || st === "slow") {
+                        try {
+                            const { removeStatusEffect } = await import("../spells/status-wiring.js");
+                            await removeStatusEffect(actor, st === "haste" ? "hasted" : "slowed");
+                        } catch (err) { /* ignore */ }
+                    }
+                }
             }
             updates["system.status.spellEffects"] = remainingFx;
         }

@@ -16,6 +16,7 @@
 // ============================================================
 
 import { durationRounds } from "./base-spell.js";
+import { applyStatusEffect } from "./status-wiring.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -366,6 +367,13 @@ export async function applySong(bard, songItem, targets = []) {
                 }
                 fx.push(entry);
                 await target.update({ "system.status.spellEffects": fx });
+                // Hasted/slowed visual indicators (2026-10-07)
+                const effRounds = entry.roundsLeft ?? 2;
+                if (entry.scaledTarget === "haste" && entry.scaledValue > 0) {
+                    await applyStatusEffect(target, "hasted", `${name} (Haste)`, effRounds, "icons/svg/lightning.svg", { source: "song" });
+                } else if (entry.scaledTarget === "slow" && entry.scaledValue > 0) {
+                    await applyStatusEffect(target, "slowed", `${name} (Slow)`, effRounds, "icons/svg/clock.svg", { source: "song" });
+                }
                 notes += `<p><em>${tName}: ${esc(label)}.</em></p>`;
             }
         }

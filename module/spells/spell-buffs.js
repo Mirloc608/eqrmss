@@ -8,6 +8,7 @@
 import { scaleSongValue, checkBuffStacking } from "./songs.js";
 import { durationRounds, rollAmount } from "./base-spell.js";
 import { spellEffectsOf } from "./spell-mapping.js";
+import { applyStatusEffect } from "./status-wiring.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -167,6 +168,13 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
             spell: name
         });
         await target.update({ "system.status.spellEffects": list });
+
+        // Hasted/slowed visual indicators (2026-10-07): tie token marker to buff.
+        if (scaled.target === "haste" && scaled.value > 0) {
+            await applyStatusEffect(target, "hasted", `${name} (Haste)`, effRounds, "icons/svg/lightning.svg", { source: "spell" });
+        } else if (scaled.target === "slow" && scaled.value > 0) {
+            await applyStatusEffect(target, "slowed", `${name} (Slow)`, effRounds, "icons/svg/clock.svg", { source: "spell" });
+        }
 
         notes.push(`${esc(target.name)}: ${desc} for ${effRounds} rounds (${esc(name)}).`);
     }
