@@ -64,9 +64,9 @@ function effectLabel(name, eff) {
         return `${name} — ${stat.toUpperCase()} ${sign}${v}`;
     }
     if (type === "damage") {
-        const lo = Math.round((Number(eff?.min ?? eff?.amount) || 0) / 10);
-        const hi = Math.round((Number(eff?.max ?? eff?.amount ?? lo*10) || lo*10) / 10);
-        return `${name} — ${lo}${hi !== lo ? `-${hi}` : ""} ${String(eff?.element ?? "")} damage/round`.replace("  ", " ");
+        // Use effectValue() (reads value.base/max/min) and scale EQ÷10 (2026-10-07 fix).
+        const v = Math.round(effectValue(eff) / 10);
+        return `${name} — ${v} ${String(eff?.element ?? "")} damage/round`.replace("  ", " ");
     }
     if (type === "regen" || type === "heal") {
         const v = Math.round((effectValue(eff) || Number(eff?.amount) || 0) / 10);
@@ -246,9 +246,11 @@ export async function applySong(bard, songItem, targets = []) {
             const label = effectLabel(name, eff);
             if (type === "damage") {
                 const dots = [...(Array.isArray(target.system?.status?.dots) ? target.system.status.dots : [])];
+                // Scale EQ÷10 (2026-10-07 fix): was storing raw min/max from wrong fields.
+                const scaledDmg = Math.round(effectValue(eff) / 10);
                 dots.push({
                     name, element: String(eff?.element ?? ""),
-                    min: Number(eff?.min ?? eff?.amount) || 0, max: Number(eff?.max ?? eff?.amount) || 0,
+                    min: scaledDmg, max: scaledDmg,
                     source: "song", maintained: true,
                     casterId: bard?.id ?? "", songId: songIdOf(songItem),
                     roundsLeft: durationRounds(eff?.duration) ?? 2
@@ -257,7 +259,14 @@ export async function applySong(bard, songItem, targets = []) {
                 notes += `<p><em>${tName}: ${esc(label)}.</em></p>`;
             } else if (type === "regen" || type === "heal") {
                 const fx = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
-                fx.push(maintainedEntry(bard, songItem, label, eff, "regen", { amount: effectValue(eff) || Number(eff?.amount) || 0 }));
+                // Scale EQ÷10 and set pool (2026-10-07 fix): was storing raw amount,
+                // and mana regen had no pool so the tick healed HP instead of mana.
+                const regenStat = String(eff?.stat ?? "").toLowerCase();
+                const regenScaled = scaleSongValue(regenStat || "hp", effectValue(eff) || Number(eff?.amount) || 0);
+                fx.push(maintainedEntry(bard, songItem, label, eff, "regen", {
+                    amount: regenScaled.value,
+                    pool: regenScaled.target === "mana" ? "mana" : "hits"
+                }));
                 await target.update({ "system.status.spellEffects": fx });
                 notes += `<p><em>${tName}: ${esc(label)}.</em></p>`;
             } else {

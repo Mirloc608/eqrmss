@@ -46,7 +46,6 @@ import { isSubduing, subdueCritPoints, isExhausted, applySubdueExhaustion, rollE
 import { restrictedAreaPenalty } from "./restricted-area.js";
 import { situationalOb, situationalAutoOb, situationalNote } from "./situational.js";
 import { rollHitLocation, calledShotLocation, lookupStructuralCrit, structuralPointsOf, applyStructuralDamage } from "./hit-locations.js";
-import { getSongModifiers } from "../spells/songs.js";
 import { weaponUsePenalty } from "./weapon-use.js";
 import { resolveSpellFailure } from "../spells/spell-failure.js";
 import { actorAttackSpeed, speedScaledOb } from "./attack-speed.js";
@@ -331,11 +330,11 @@ function targetDefense(targetActor, missileAttack, attackerActor) {
 
     const combat = targetActor.system?.combat ?? {};
     const missileDB = Number(combat.totalMissileDB);
-    // Song DB (2026-10-06): AC modifiers scale 1:1 to DB (e.g., AC +2 → DB +2).
-    const songDB = getSongModifiers(targetActor).db || 0;
+    // Song DB is already included in totalDB via rmss-derived-values.js
+    // (2026-10-07 fix: was double-counted here).
     const rawDB = (missileAttack && Number.isFinite(missileDB)
         ? (missileDB || 0)
-        : (Number(combat.totalDB) || 0)) + songDB;
+        : (Number(combat.totalDB) || 0));
     const shieldDB = missileAttack
         ? (Number(combat.shieldMissileBonus ?? combat.shieldBonus) || 0)
         : (Number(combat.shieldBonus) || 0);
