@@ -13,6 +13,9 @@
 // the type is stored in flags.eqrmss.invisType for that work.
 // ============================================================
 
+import { hasStatusEffect, removeStatusEffect } from "./status-wiring.js";
+import { combatCard } from "../combat/chat-card.js";
+
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
     : String(s ?? "");
@@ -71,4 +74,30 @@ export async function applyInvisibility(target, name, invisType = "general", rou
     }
 
     return `<p><em>${esc(target.name)}: invisible${typeLabel} for ${r} rounds (${esc(name)}).</em></p>`;
+}
+/**
+ * Break invisibility on offensive action (user ruling 2026-10-07).
+ * Any offensive action — casting any spell, activating a clicky,
+ * making a melee/missile attack — immediately fades invisibility.
+ * Only the ACTOR taking the action is affected; targets keep theirs.
+ * @param {Actor} actor - the actor taking the action
+ * @param {string} reason - "casting" | "clicky" | "attack" (for logging)
+ * @returns {Promise<boolean>} true if invisibility was broken
+ */
+export async function breakInvisibility(actor, reason = "action") {
+    if (!actor) return false;
+    if (!hasStatusEffect(actor, "invisible")) return false;
+    const removed = await removeStatusEffect(actor, "invisible");
+    if (removed) {
+        const msg = `${esc(actor.name)}'s invisibility fades.`;
+        try {
+            ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor }),
+                content: combatCard("Invisibility", `<p><em>${msg}</em></p>`)
+            });
+        } catch (e) {
+            console.log(`EQRMSS | ${msg} (${reason})`);
+        }
+    }
+    return removed;
 }

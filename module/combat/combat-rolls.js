@@ -52,6 +52,7 @@ import { weaponUsePenalty } from "./weapon-use.js";
 import { resolveSpellFailure } from "../spells/spell-failure.js";
 import { actorAttackSpeed, speedScaledOb, hasteAdjustedPct } from "./attack-speed.js";
 import { getArmorTierPenalty } from "./armor-tier.js";
+import { breakInvisibility } from "../spells/invisibility.js";
 import { unusualStyleOf, shiftSeverity } from "./unusual-style.js";
 import { combatCard } from "./chat-card.js";
 import { fireWeaponProc } from "../item-effects/proc-engine.js";
@@ -451,6 +452,10 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         console.log(`EQRMSS | ${msg}`);
         return { error: "feared", message: msg };
     }
+    // Invisibility (2026-10-07): making a melee/missile attack
+    // breaks the attacker's invisibility before the attack resolves.
+    // (Placed after the fear check: a feared attacker takes no action.)
+    await breakInvisibility(actor, "attack");
     // Weapons granted before their template carried an attack table
     // have none baked into the item; resolve it through the composer
     // from the stored template id so legacy items roll without a

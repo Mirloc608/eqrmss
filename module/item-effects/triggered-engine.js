@@ -10,6 +10,7 @@
 import { getItemEffect } from "../data/item-effects/item-effect-loader.js";
 import { applyEffectPayload } from "./damage-pipeline.js";
 import { combatCard } from "../combat/chat-card.js";
+import { breakInvisibility } from "../spells/invisibility.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
@@ -131,6 +132,9 @@ function postClickyResult({ actor, item, effect, perTarget }) {
  * @returns {object} { fired, effect?, results?, reason? }
  */
 export async function fireTriggeredEffect({ user, item, target }) {
+    // Invisibility (2026-10-07): activating a clicky breaks the
+    // user's invisibility before the effect fires.
+    await breakInvisibility(user, "clicky");
     const effectId = item?.system?.triggeredEffect ?? null;
     if (!effectId) return { fired: false, reason: "no-triggered-effect" };
 

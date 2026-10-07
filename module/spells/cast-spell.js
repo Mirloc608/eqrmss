@@ -37,7 +37,7 @@
 import { combatCard } from "../combat/chat-card.js";
 import { classifySpell, directedSpellsOB, spellEffectsOf } from "./spell-mapping.js";
 import { applySpellBuffs } from "./spell-buffs.js";
-import { applyInvisibility, invisTypeOf } from "./invisibility.js";
+import { applyInvisibility, invisTypeOf, breakInvisibility } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
@@ -207,6 +207,10 @@ function wornNoteFor(worn, spellItem, baseCost, cost) {
 
 export async function castSpell(actor, spellItem, opts = {}) {
     if (!actor || !spellItem) return { ok: false, reason: "missing" };
+    // Invisibility (2026-10-07): casting any spell breaks the
+    // caster's invisibility BEFORE the action resolves — even if
+    // the cast later fails at the ESF gate or on mana.
+    await breakInvisibility(actor, "casting");
     const name = spellItem.name ?? "spell";
     const cls = classifySpell(spellItem);
     // Phase 5: worn-effect focus modifiers (deduped
