@@ -399,14 +399,15 @@ export async function castSpell(actor, spellItem, opts = {}) {
         let healLine = "";
         // Phase 5: Improved Healing (and kin) scale the heal
         // amount; with no worn effects this is exactly cls.amount.
-        const healAmount = worn.healingFactor === 1 ? cls.amount : Math.round(cls.amount * worn.healingFactor);
+        // Always round (2026-10-07 fix: fractional heals left float garbage).
+        const healAmount = Math.round(cls.amount * (worn.healingFactor || 1));
         if (canTouch) {
             // Per ruling, ANY direct healing magic stops bleeding and
             // clears the death timer; then hits are restored.
             await applyHealingSpell(target);
             const cur = Number(target.system?.hits?.value) || 0;
             const restored = Math.min(healAmount, cur);
-            await target.update({ "system.hits.value": cur - restored });
+            await target.update({ "system.hits.value": Math.round(cur - restored) });
             await checkHitThresholds(target);
             healLine = `<p><em>${esc(target.name)} recovers ${restored} hits (${cur} → ${cur - restored}).</em></p>`;
         } else {
