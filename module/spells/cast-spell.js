@@ -397,6 +397,8 @@ export async function castSpell(actor, spellItem, opts = {}) {
         const target = targetedActor() ?? actor;
         const canTouch = target.isOwner || game.user?.isGM;
         let healLine = "";
+        // Spells with both heal and buffs (e.g., Inner Fire) apply buffs too (2026-10-07 fix).
+        const healBuffNote = await applySpellBuffs(actor, spellItem, target, worn.durationFactor);
         // Phase 5: Improved Healing (and kin) scale the heal
         // amount; with no worn effects this is exactly cls.amount.
         // Always round (2026-10-07 fix: fractional heals left float garbage).
@@ -417,7 +419,7 @@ export async function castSpell(actor, spellItem, opts = {}) {
             speaker: ChatMessage.getSpeaker({ actor }),
             content: combatCard("Spellcasting", `
                 <h2>${esc(actor.name)} casts ${esc(name)} on ${esc(target.name)}</h2>
-                ${healLine}${esfNote}${wornNote}<p><em>${manaNote.trim()}</em></p>`)
+                ${healLine}${healBuffNote}${esfNote}${wornNote}<p><em>${manaNote.trim()}</em></p>`)
         });
         return { ok: true, kind: "heal", amount: healAmount, mods };
     }
