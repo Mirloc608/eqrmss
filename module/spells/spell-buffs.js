@@ -20,7 +20,7 @@ const esc = (s) => globalThis.foundry?.utils?.escapeHTML
  * Mirrors getSongModifiers() in songs.js.
  */
 export function getSpellModifiers(actor) {
-    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0, ob: 0 };
+    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0, ob: 0, haste: 0 };
     const fx = actor?.system?.status?.spellEffects;
     if (!Array.isArray(fx)) return out;
     for (const e of fx) {
@@ -38,6 +38,7 @@ export function getSpellModifiers(actor) {
         else if (target === "mana") out.mana += val;
         else if (target === "hits" || target === "hp") out.hits += val;
         else if (target === "ob") out.ob += val;
+        else if (target === "haste") out.haste += val;
     }
     return out;
 }
@@ -76,6 +77,12 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
             scaled.stat = "ob";
             scaled.value = Math.max(1, Math.round(rawValue / 10));
         }
+        // Haste (2026-10-07): percentage, used as-is (no scaling)
+        if (stat === "haste") {
+            scaled.target = "haste";
+            scaled.stat = "haste";
+            scaled.value = Math.max(1, Math.round(rawValue));
+        }
         const stack = checkBuffStacking(target, scaled.target, scaled.stat, scaled.value, _spellId);
         if (stack.action === "block") {
             let bdesc = stat.toUpperCase();
@@ -94,7 +101,7 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         // Skip stat caps (str-cap, dex-cap) — not buffs
         if (stat.endsWith("-cap")) continue;
         // Skip non-mechanical stats (handled as text only)
-        // Valid: str, sta, agi, dex, wis, int, cha, ac, hp, hp-max, mana, movement, atk
+        // Valid: str, sta, agi, dex, wis, int, cha, ac, hp, hp-max, mana, movement, atk, haste
         
         const rawValue = rollAmount(eff);
         if (!(rawValue > 0)) continue;
@@ -108,6 +115,12 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
             scaled.target = "ob";
             scaled.stat = "ob";
             scaled.value = Math.max(1, Math.round(rawValue / 10));
+        }
+        // Haste (2026-10-07): percentage, used as-is (no scaling)
+        if (stat === "haste") {
+            scaled.target = "haste";
+            scaled.stat = "haste";
+            scaled.value = Math.max(1, Math.round(rawValue));
         }
 
         // Stacking replace already checked; block handled in pre-check.

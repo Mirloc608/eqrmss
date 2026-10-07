@@ -162,6 +162,10 @@ async function applyBuff({ effect, target, source, caster }) {
         scaledTarget = "ob"; scaledStat = "ob";
         scaledValue = Math.max(1, Math.round(rawValue / 10));
         label = `Attack +${scaledValue}`;
+    } else if (stat === "haste") {
+        scaledTarget = "haste"; scaledStat = "haste";
+        scaledValue = Math.max(1, Math.round(rawValue));
+        label = `Haste +${scaledValue}%`;
     } else {
         return { type: "buff", final: 0, notes: [`unsupported buff stat: ${stat}`], source, applied: false };
     }

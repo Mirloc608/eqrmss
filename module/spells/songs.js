@@ -134,7 +134,7 @@ export function checkBuffStacking(target, scaledTarget, scaledStat, newValue, ex
 }
 
 export function getSongModifiers(actor) {
-    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0, ob: 0 };
+    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0, ob: 0, haste: 0 };
     const fx = actor?.system?.status?.spellEffects;
     if (!Array.isArray(fx)) return out;
     for (const e of fx) {
@@ -147,6 +147,7 @@ export function getSongModifiers(actor) {
             out.statBonuses[k] = (out.statBonuses[k] || 0) + val;
         } else if (target === "db") out.db += val;
         else if (target === "ob") out.ob += val;
+        else if (target === "haste") out.haste += val;
         else if (target === "movement") out.movement += val;
         else if (target === "mana") out.mana += val;
         else if (target === "hits" || target === "hp") out.hits += val;

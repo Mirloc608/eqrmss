@@ -50,7 +50,7 @@ import { situationalOb, situationalAutoOb, situationalNote } from "./situational
 import { rollHitLocation, calledShotLocation, lookupStructuralCrit, structuralPointsOf, applyStructuralDamage } from "./hit-locations.js";
 import { weaponUsePenalty } from "./weapon-use.js";
 import { resolveSpellFailure } from "../spells/spell-failure.js";
-import { actorAttackSpeed, speedScaledOb } from "./attack-speed.js";
+import { actorAttackSpeed, speedScaledOb, hasteAdjustedPct } from "./attack-speed.js";
 import { unusualStyleOf, shiftSeverity } from "./unusual-style.js";
 import { combatCard } from "./chat-card.js";
 import { fireWeaponProc } from "../item-effects/proc-engine.js";
@@ -526,7 +526,15 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     const missileAttack = isMissileAttack(weaponType);
     // Attack speed variance (§4.11): OB percentage by prep time, melee only.
     const attackSpeed = missileAttack ? null : actorAttackSpeed(actor);
-    const speedBaseOb = attackSpeed ? speedScaledOb(baseOb, attackSpeed.pct) : baseOb;
+    // Haste (2026-10-07): adds half its value to attack speed OB%
+    let hastePct = 0;
+    try {
+        const spellMods = getSpellModifiers(actor);
+        const songMods = getSongModifiers(actor);
+        hastePct = (spellMods?.haste || 0) + (songMods?.haste || 0);
+    } catch (e) { /* ignore */ }
+    const effectivePct = attackSpeed ? hasteAdjustedPct(attackSpeed.pct, hastePct) : 100;
+    const speedBaseOb = attackSpeed ? speedScaledOb(baseOb, effectivePct) : baseOb;
 
     // ---- Target: explicit token override (displaced spells),
     // else first targeted token, else manual ----
@@ -815,7 +823,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${pointBlankPenalty ? ` (${pointBlankPenalty} point-blank)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${attackSpeed.pct}%)` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
+        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${pointBlankPenalty ? ` (${pointBlankPenalty} point-blank)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${Math.round(effectivePct)}%${hastePct ? ` +${hastePct}% haste` : ""})` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
         + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 

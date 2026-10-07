@@ -25,3 +25,12 @@ export function actorAttackSpeed(actor) {
 export function speedScaledOb(baseOb, pct) {
     return Math.round(baseOb * pct / 100);
 }
+
+/**
+ * Haste-adjusted OB percentage (2026-10-07).
+ * Haste adds half its value to the attack speed OB%.
+ */
+export function hasteAdjustedPct(basePct, hastePct) {
+    const haste = Math.max(0, Number(hastePct) || 0);
+    return basePct + (haste / 2);
+}
