@@ -161,7 +161,10 @@ export async function toggleSong(bard, songItem, targets = []) {
         let playlist = songPlaylistOf(bard);
         // If already in the playlist, move to newest position.
         playlist = playlist.filter(id => id !== songId);
-        // If full, bump the oldest.
+        // If full, bump the oldest. Bumped songs have their
+        // effects removed immediately (unlike manual Stop, which
+        // lets them linger) — otherwise re-playing the song
+        // would stack duplicate entries.
         let bumpedName = "";
         while (playlist.length >= max && playlist.length > 0) {
             const oldestId = playlist.shift();
@@ -169,6 +172,21 @@ export async function toggleSong(bard, songItem, targets = []) {
             if (oldest) {
                 bumpedName = oldest.name;
                 await oldest.update({ "system.active": false });
+                // Clear the bumped song's maintained entries from all targets.
+                // Entries carry songId; remove those matching the bumped song.
+                for (const target of [bard, ...targets]) {
+                    if (!target || !(target.isOwner || globalThis.game?.user?.isGM)) continue;
+                    const fx = Array.isArray(target.system?.status?.spellEffects)
+                        ? target.system.status.spellEffects.filter(e => e?.songId !== oldestId)
+                        : [];
+                    const dots = Array.isArray(target.system?.status?.dots)
+                        ? target.system.status.dots.filter(d => d?.songId !== oldestId)
+                        : [];
+                    await target.update({
+                        "system.status.spellEffects": fx,
+                        "system.status.dots": dots
+                    });
+                }
             }
         }
         playlist.push(songId);
