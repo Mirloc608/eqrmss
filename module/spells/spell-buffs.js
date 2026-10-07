@@ -81,9 +81,20 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
             continue;
         }
         
+        // Human-readable description (2026-10-07: AC → Defense, not "AC buff")
+        let desc = "";
+        if (scaled.target === "db") desc = `Defense +${scaled.value}`;
+        else if (scaled.target === "movement") desc = `Movement +${scaled.value}`;
+        else if (scaled.target === "statBonus") {
+            const rmss = { str: "ST", sta: "CO", agi: "AG", dex: "QU", wis: "EM", int: "ME", cha: "PR" }[scaled.stat] ?? scaled.stat.toUpperCase();
+            desc = `${rmss} +${scaled.value}`;
+        } else if (scaled.target === "hp" || scaled.target === "hits") desc = `Max HP +${scaled.value}`;
+        else if (scaled.target === "mana") desc = `Max Mana +${scaled.value}`;
+        else desc = `${stat.toUpperCase()} +${scaled.value}`;
+        
         const list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
         list.push({
-            label: `${name} — ${stat.toUpperCase()} buff (spell)`,
+            label: `${name} — ${desc} (spell)`,
             source: "spell",
             kind: "buff",
             stat: stat,
@@ -96,17 +107,6 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
             spell: name
         });
         await target.update({ "system.status.spellEffects": list });
-        
-        // Human-readable note
-        let desc = "";
-        if (scaled.target === "db") desc = `DB +${scaled.value}`;
-        else if (scaled.target === "movement") desc = `Movement +${scaled.value}`;
-        else if (scaled.target === "statBonus") {
-            const rmss = { str: "ST", sta: "CO", agi: "AG", dex: "QU", wis: "EM", int: "ME", cha: "PR" }[scaled.stat] ?? scaled.stat.toUpperCase();
-            desc = `${rmss} +${scaled.value}`;
-        } else if (scaled.target === "hp" || scaled.target === "hits") desc = `Max HP +${scaled.value}`;
-        else if (scaled.target === "mana") desc = `Max Mana +${scaled.value}`;
-        else desc = `${stat.toUpperCase()} +${scaled.value}`;
         
         notes.push(`${esc(target.name)}: ${desc} for ${effRounds} rounds (${esc(name)}).`);
     }

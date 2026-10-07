@@ -52,7 +52,7 @@ function effectLabel(name, eff) {
         const v = scaled.value;
         const sign = v >= 0 ? "+" : "";
         if (scaled.target === "db") {
-            return `${name} — DB ${sign}${v}`;
+            return `${name} — Defense ${sign}${v}`;
         }
         if (scaled.target === "movement") {
             return `${name} — MOVEMENT ${sign}${v}`;
