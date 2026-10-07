@@ -67,12 +67,18 @@ function effectLabel(name, eff) {
     }
     if (type === "damage") {
         // Use effectValue() (reads value.base/max/min) and scale EQ÷10 (2026-10-07 fix).
-        const v = Math.round(effectValue(eff) / 10);
+        // Min-1 (2026-10-07 ruling): positive EQ values scale to at least 1.
+        const raw = effectValue(eff);
+        const v = raw > 0 ? Math.max(1, Math.round(raw / 10)) : Math.round(raw / 10);
         return `${name} — ${v} ${String(eff?.element ?? "")} damage/round`.replace("  ", " ");
     }
     if (type === "regen" || type === "heal") {
-        const v = Math.round((effectValue(eff) || Number(eff?.amount) || 0) / 10);
-        return `${name} — heals ${v}/round`;
+        // Route through scaleSongValue for min-1 (2026-10-07 ruling).
+        // Mana regen is labeled as mana, not heals (2026-10-07 fix).
+        const stat = String(eff?.stat ?? "hp").toLowerCase();
+        const scaled = scaleSongValue(stat, effectValue(eff) || Number(eff?.amount) || 0);
+        if (scaled.target === "mana") return `${name} — ${scaled.value} mana/round`;
+        return `${name} — heals ${scaled.value}/round`;
     }
     if (type === "cure") return `${name} — cures ${String(eff?.effect ?? eff?.stat ?? "condition")}`;
     if (type === "control") return `${name} — ${String(eff?.effect ?? "control")}`;
@@ -177,14 +183,17 @@ export function scaleSongValue(stat, eqValue) {
     const s = String(stat ?? "").toLowerCase();
     const v = Number(eqValue) || 0;
     if (s === "ac") return { target: "db", value: acToDefense(v) };
-    if (s === "movement") return { target: "movement", value: Math.round(v / 10) };
-    if (["hp", "hits", "mana"].includes(s)) return { target: s, value: Math.round(v / 10) };
+    // Min-1 (2026-10-07 ruling): positive EQ values scale to at least 1.
+    // Negatives are not floored (e.g., -4 ÷ 10 = 0, not 1).
+    const div10 = v > 0 ? Math.max(1, Math.round(v / 10)) : Math.round(v / 10);
+    if (s === "movement") return { target: "movement", value: div10 };
+    if (["hp", "hits", "mana"].includes(s)) return { target: s, value: div10 };
     // Haste/Slow (2026-10-07): percentages, used as-is (no EQ÷10), min 1.
     // Mirrors spell-buff logic so song haste reaches out.haste (not statBonuses).
     if (s === "haste") return { target: "haste", stat: "haste", value: Math.max(1, Math.round(v)) };
     if (s === "slow") return { target: "slow", stat: "slow", value: Math.max(1, Math.round(v)) };
     // Default: stats → bonus at ÷10
-    return { target: "statBonus", stat: s, value: Math.round(v / 10) };
+    return { target: "statBonus", stat: s, value: div10 };
 }
 
 function maintainedEntry(bard, songItem, label, eff, kind, extra = {}) {
