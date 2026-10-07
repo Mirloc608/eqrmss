@@ -33,18 +33,19 @@
     <h3>Statistics</h3>
     <table class="rmss-table">
       <thead>
-        <tr><th>Stat</th><th>Temp</th><th>Pot</th><th>Basic Bonus</th><th>Racial</th><th>Special</th><th>Total</th></tr>
+        <tr><th>Stat</th><th>Temp</th><th>Pot</th><th>Basic Bonus</th><th>Racial</th><th>Special</th><th>Song</th><th>Total</th></tr>
       </thead>
       <tbody>
-        {{#each derived.stats}}
+        {{#each rmssStats}}
         <tr>
-          <td><strong>{{@key}}</strong></td>
-          <td>{{this.temp}}</td>
-          <td>{{this.pot}}</td>
-          <td>{{this.basicBonus}}</td>
-          <td>{{this.racial}}</td>
-          <td>{{this.special}}</td>
-          <td><strong>{{this.total}}</strong></td>
+          <td><strong>{{abbr}}</strong></td>
+          <td>{{temporary}}</td>
+          <td>{{potential}}</td>
+          <td>{{basic_bonus}}</td>
+          <td>{{racial_bonus}}</td>
+          <td>{{special_bonus}}</td>
+          <td>{{song_bonus}}</td>
+          <td><strong>{{total}}</strong></td>
         </tr>
         {{/each}}
       </tbody>
