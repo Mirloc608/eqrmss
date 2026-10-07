@@ -291,6 +291,26 @@ export async function applySong(bard, songItem, targets = []) {
             notes += `<p><em>${tName} — song effects not applied (you don't control them).</em></p>`;
             continue;
         }
+        // Pre-check buffs: all-or-nothing (2026-10-07). If ANY buff is blocked,
+        // no buffs from this song apply to this target.
+        let songBlocked = false;
+        let blockReason = "";
+        for (const eff of effects) {
+            const type = String(eff?.type ?? "").toLowerCase();
+            if (type === "damage" || type === "regen" || type === "heal") continue;
+            // This is a buff (modifier) effect
+            const entry = maintainedEntry(bard, songItem, effectLabel(name, eff), eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
+            const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue);
+            if (stack.action === "block") {
+                songBlocked = true;
+                blockReason = `${effectLabel(name, eff)} blocked by stronger ${stack.blockedBy}`;
+                break;
+            }
+        }
+        if (songBlocked) {
+            notes += `<p><em>${tName}: ${esc(name)} blocked — ${esc(blockReason)} (entire song blocked).</em></p>`;
+            continue;
+        }
         for (const eff of effects) {
             const type = String(eff?.type ?? "").toLowerCase();
             const label = effectLabel(name, eff);
@@ -322,10 +342,7 @@ export async function applySong(bard, songItem, targets = []) {
             } else {
                 const entry = maintainedEntry(bard, songItem, label, eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
                 const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue);
-                if (stack.action === "block") {
-                    notes += `<p><em>${tName}: ${esc(label)} blocked by stronger ${esc(stack.blockedBy)}.</em></p>`;
-                    continue;
-                }
+                // Block handled by pre-check above; only replace applies here.
                 let fx = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
                 if (stack.action === "replace" && stack.replaceIds?.length) {
                     const idSet = new Set(stack.replaceIds);

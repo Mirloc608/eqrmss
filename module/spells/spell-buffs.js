@@ -55,7 +55,29 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
     // Get effects via spellEffectsOf (falls back to catalog)
     const effects = spellEffectsOf(spellItem) ?? [];
     
+    // Pre-check: all-or-nothing (2026-10-07). If ANY buff is blocked,
+    // the entire spell is blocked.
+    const buffEffects = [];
     for (const eff of effects) {
+        if (!eff || typeof eff !== "object") continue;
+        if (String(eff.type ?? "").toLowerCase() !== "buff") continue;
+        const stat = String(eff.stat ?? "").toLowerCase();
+        if (stat.endsWith("-cap")) continue;
+        const rawValue = rollAmount(eff);
+        if (!(rawValue > 0)) continue;
+        const scaleStat = stat === "hp-max" ? "hp" : stat;
+        const scaled = scaleSongValue(scaleStat, rawValue);
+        const stack = checkBuffStacking(target, scaled.target, scaled.stat, scaled.value);
+        if (stack.action === "block") {
+            let bdesc = stat.toUpperCase();
+            if (scaled.target === "db") bdesc = "Defense";
+            notes.push(`${esc(target.name)}: ${esc(name)} blocked by stronger ${esc(stack.blockedBy)} — entire spell blocked.`);
+            return notes.join("");
+        }
+        buffEffects.push({ eff, stat, rawValue, scaled, stack });
+    }
+    
+    for (const { eff, stat, rawValue, scaled, stack } of buffEffects) {
         if (!eff || typeof eff !== "object") continue;
         if (String(eff.type ?? "").toLowerCase() !== "buff") continue;
         
@@ -73,14 +95,7 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         const scaleStat = stat === "hp-max" ? "hp" : stat;
         const scaled = scaleSongValue(scaleStat, rawValue);
 
-        // Stacking (2026-10-07, Option A): per-stat highest wins
-        const stack = checkBuffStacking(target, scaled.target, scaled.stat, scaled.value);
-        if (stack.action === "block") {
-            let bdesc = stat.toUpperCase();
-            if (scaled.target === "db") bdesc = "Defense";
-            notes.push(`${esc(target.name)}: ${bdesc} +${scaled.value} blocked by stronger ${esc(stack.blockedBy)} (${esc(name)}).`);
-            continue;
-        }
+        // Stacking replace already checked; block handled in pre-check.
 
         const rounds = durationRounds(eff.duration) ?? 10;
         const effRounds = durationFactor === 1 ? rounds : Math.max(1, Math.round(rounds * durationFactor));
