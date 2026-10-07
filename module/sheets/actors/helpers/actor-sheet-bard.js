@@ -27,20 +27,30 @@ export class EQRMSSActorBardHelper {
     const html = this.sheet.element;
     if (!html) return;
 
-    // Toggle active (Stage 5: activation applies the song's
-    // effects to the currently-targeted actors; the round tick
-    // pulses them while the song stays active).
-    html.querySelectorAll("[data-action='bard-song-toggle']").forEach(btn => {
-      btn.addEventListener("click", async () => {
-        const entry = btn.closest(".eq-song-entry");
-        const id = entry.dataset.itemId;
-        const song = this.sheet.actor.items.get(id);
-        if (!song) return;
-
-        const targets = [...(game.user?.targets ?? [])].map(t => t.actor).filter(Boolean);
-        await toggleSong(this.sheet.actor, song, targets);
-        this.sheet.render();
-      });
+    // Play/Stop (Stage 5: activation applies the song's effects
+    // to the currently-targeted actors; the round tick pulses
+    // them while the song stays active. Twist playlist in songs.js
+    // handles FIFO bumping when the playlist is full.)
+    // Template uses data-action="bardStart"/"bardStop" with
+    // data-song-id (actor-songs.html).
+    const onSongButton = async (btn) => {
+      const id = btn.dataset.songId;
+      const song = id ? this.sheet.actor.items.get(id) : null;
+      if (!song) return;
+      const targets = [...(game.user?.targets ?? [])].map(t => t.actor).filter(Boolean);
+      const result = await toggleSong(this.sheet.actor, song, targets);
+      // Post the notes (bump messages, effect summaries) to chat.
+      if (result?.notes) {
+        const speaker = ChatMessage.getSpeaker({ actor: this.sheet.actor });
+        await ChatMessage.create({ speaker, content: result.notes });
+      }
+      this.sheet.render();
+    };
+    html.querySelectorAll("[data-action='bardStart']").forEach(btn => {
+      btn.addEventListener("click", () => onSongButton(btn));
+    });
+    html.querySelectorAll("[data-action='bardStop']").forEach(btn => {
+      btn.addEventListener("click", () => onSongButton(btn));
     });
 
     // Tier up/down
