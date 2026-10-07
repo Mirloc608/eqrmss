@@ -7,7 +7,7 @@
       <tbody>
         {{#each items.songs}}
           <tr data-item-id="{{this._id}}">
-            <td><button data-action="bardStart" data-song-id="{{this._id}}" title="Start playing this song">Play</button> <button data-action="bardStop" data-song-id="{{this._id}}" title="Stop playing this song">Stop</button></td>
+            <td>{{#if this.isPlaying}}<button data-action="bardStop" data-song-id="{{this._id}}" title="Stop playing this song">Stop</button>{{else}}<button data-action="bardStart" data-song-id="{{this._id}}" title="Start playing this song">Play</button>{{/if}}</td>
             <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
             <td>{{this.system.level}}</td>
             <td>{{this.system.type}}</td>
