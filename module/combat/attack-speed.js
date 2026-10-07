@@ -27,10 +27,13 @@ export function speedScaledOb(baseOb, pct) {
 }
 
 /**
- * Haste-adjusted OB percentage (2026-10-07).
- * Haste adds half its value to the attack speed OB%.
+ * Haste/Slow-adjusted OB percentage (2026-10-07).
+ * Haste adds half its value; Slow subtracts half its value.
+ * E.g., 25% haste on Half prep (40%): 40 + 12.5 = 52.5%
+ * E.g., 25% slow on Half prep (40%): 40 - 12.5 = 27.5%
  */
-export function hasteAdjustedPct(basePct, hastePct) {
+export function hasteAdjustedPct(basePct, hastePct, slowPct = 0) {
     const haste = Math.max(0, Number(hastePct) || 0);
-    return basePct + (haste / 2);
+    const slow = Math.max(0, Number(slowPct) || 0);
+    return basePct + (haste / 2) - (slow / 2);
 }
