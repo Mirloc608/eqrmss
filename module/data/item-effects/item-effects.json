@@ -18,14 +18,17 @@
     },
     {
       "castTime": "instant",
-      "description": "Triggered effect: Grim Aura grants +15 attack rating for 27 minutes (Shunken Goblin Skull Earring; classic ATK scales +5 at level 3 to +15 at level 11).",
+      "description": "Triggered effect: Grim Aura grants +10 attack rating for 27 minutes (matches the Grim Aura spell).",
       "id": "grim-aura",
       "kind": "triggered",
       "name": "Grim Aura",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Grim Aura: +15 attack rating for 27 minutes (Shunken Goblin Skull Earring)"
+          "type": "buff",
+          "stat": "atk",
+          "amount": 10,
+          "duration": 270,
+          "note": "Matches Grim Aura spell: +10 ATK for 27 minutes"
         }
       ]
     },

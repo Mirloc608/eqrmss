@@ -151,8 +151,38 @@ async function applyRegen({ effect, target, source }) {
     return { type: "regen", pool, final: next - before, notes: [], source };
 }
 
-async function applyBuff({ effect, source }) {
-    return { type: "buff", final: 0, notes: ["buff payloads not yet defined"], source, applied: false };
+async function applyBuff({ effect, target, source, caster }) {
+    const stat = String(effect?.stat ?? "").toLowerCase();
+    const rawValue = Number(effect?.amount) || 0;
+    if (!(rawValue > 0) || !target) {
+        return { type: "buff", final: 0, notes: ["invalid buff payload"], source, applied: false };
+    }
+    let scaledTarget = null, scaledStat = null, scaledValue = 0, label = "";
+    if (stat === "atk") {
+        scaledTarget = "ob"; scaledStat = "ob";
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        label = `Attack +${scaledValue}`;
+    } else {
+        return { type: "buff", final: 0, notes: [`unsupported buff stat: ${stat}`], source, applied: false };
+    }
+    const fx = target?.system?.status?.spellEffects;
+    if (Array.isArray(fx)) {
+        for (const e of fx) {
+            if (e?.scaledTarget !== scaledTarget) continue;
+            const eVal = Number(e?.scaledValue) || 0;
+            if (eVal >= scaledValue) {
+                return { type: "buff", final: 0, notes: [`${label} blocked by stronger ${e?.label ?? "existing buff"}`], source, applied: false };
+            }
+        }
+    }
+    const duration = Number(effect?.duration) || 10;
+    const list = [...(Array.isArray(fx) ? fx : [])];
+    list.push({
+        name: effect?.name ?? "Clicky Buff", label, kind: "buff", source: "spell",
+        spellId: source ?? "clicky", scaledTarget, scaledStat, scaledValue, roundsLeft: duration,
+    });
+    await target.update({ "system.status.spellEffects": list });
+    return { type: "buff", final: scaledValue, notes: [`${label} for ${duration} rounds`], source, applied: true };
 }
 
 /** "heal" — restore concussion hits taken (system.hits.value), floored at 0. */
@@ -379,7 +409,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
     for (const effect of payload ?? []) {
         if (effect.type === "damage") results.push(await applyDamage({ effect, caster, target, source }));
         else if (effect.type === "regen") results.push(await applyRegen({ effect, caster, target, source }));
-        else if (effect.type === "buff") results.push(await applyBuff({ effect, source }));
+        else if (effect.type === "buff") results.push(await applyBuff({ effect, target, source, caster }));
         else if (effect.type === "heal") results.push(await applyHeal({ effect, target, source }));
         else if (effect.type === "mana-drain") results.push(await applyManaDrain({ effect, target, source }));
         else if (effect.type === "stun") results.push(await applyStun({ effect, target, source }));

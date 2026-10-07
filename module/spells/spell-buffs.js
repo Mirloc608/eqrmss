@@ -20,7 +20,7 @@ const esc = (s) => globalThis.foundry?.utils?.escapeHTML
  * Mirrors getSongModifiers() in songs.js.
  */
 export function getSpellModifiers(actor) {
-    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0 };
+    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0, ob: 0 };
     const fx = actor?.system?.status?.spellEffects;
     if (!Array.isArray(fx)) return out;
     for (const e of fx) {
@@ -37,6 +37,7 @@ export function getSpellModifiers(actor) {
         else if (target === "movement") out.movement += val;
         else if (target === "mana") out.mana += val;
         else if (target === "hits" || target === "hp") out.hits += val;
+        else if (target === "ob") out.ob += val;
     }
     return out;
 }
@@ -69,6 +70,12 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         if (!(rawValue > 0)) continue;
         const scaleStat = stat === "hp-max" ? "hp" : stat;
         const scaled = scaleSongValue(scaleStat, rawValue);
+        // ATK (2026-10-07, Option A): EQ÷10 to OB
+        if (stat === "atk") {
+            scaled.target = "ob";
+            scaled.stat = "ob";
+            scaled.value = Math.max(1, Math.round(rawValue / 10));
+        }
         const stack = checkBuffStacking(target, scaled.target, scaled.stat, scaled.value, _spellId);
         if (stack.action === "block") {
             let bdesc = stat.toUpperCase();
@@ -87,7 +94,7 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         // Skip stat caps (str-cap, dex-cap) — not buffs
         if (stat.endsWith("-cap")) continue;
         // Skip non-mechanical stats (handled as text only)
-        // Valid: str, sta, agi, dex, wis, int, cha, ac, hp, hp-max, mana, movement
+        // Valid: str, sta, agi, dex, wis, int, cha, ac, hp, hp-max, mana, movement, atk
         
         const rawValue = rollAmount(eff);
         if (!(rawValue > 0)) continue;
@@ -96,6 +103,12 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         // Map hp-max to hp for scaling
         const scaleStat = stat === "hp-max" ? "hp" : stat;
         const scaled = scaleSongValue(scaleStat, rawValue);
+        // ATK (2026-10-07, Option A): EQ÷10 to OB
+        if (stat === "atk") {
+            scaled.target = "ob";
+            scaled.stat = "ob";
+            scaled.value = Math.max(1, Math.round(rawValue / 10));
+        }
 
         // Stacking replace already checked; block handled in pre-check.
 
