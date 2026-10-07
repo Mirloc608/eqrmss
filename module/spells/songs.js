@@ -201,9 +201,12 @@ function songAutoTargets(bard, songItem, effects) {
         if (distPx > rangePx + 1) continue; // Outside range (+1px tolerance)
 
         const disp = tok.disposition ?? 0;
-        // Allies: same token as bard, OR shared ownership, OR same disposition
+        // Allies: same token as bard, OR same disposition, OR shared ownership.
+        // Explicitly hostile (disp -1) vs non-hostile bard → never ally,
+        // even with shared GM ownership (2026-10-06 fix).
         let isAlly = tok.id === bardTok.id || disp === bardDisp;
-        if (!isAlly && bardOwners.size > 0) {
+        const explicitlyHostile = disp === -1 && bardDisp !== -1;
+        if (!isAlly && !explicitlyHostile && bardOwners.size > 0) {
             try {
                 const tokOwnership = tok.actor?.ownership ?? {};
                 for (const [userId, level] of Object.entries(tokOwnership)) {
