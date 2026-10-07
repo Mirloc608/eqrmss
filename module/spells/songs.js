@@ -17,6 +17,7 @@
 
 import { durationRounds } from "./base-spell.js";
 import { applyStatusEffect } from "./status-wiring.js";
+import { breakInvisibility } from "./invisibility.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -414,6 +415,10 @@ export async function toggleSong(bard, songItem, targets = []) {
     let notes = "";
 
     if (!nowActive) {
+        // Performing a song is an offensive action (user ruling
+        // 2026-10-07): the bard's invisibility fades. Targets keep
+        // theirs — only the performer breaks.
+        await breakInvisibility(bard, "song");
         // Playing: manage the FIFO playlist.
         const max = maxTwistSize(bard);
         let playlist = songPlaylistOf(bard);

@@ -647,8 +647,10 @@ async function syncBardPlaylist(bard) {
     // Dynamic import to avoid circular dependency
     // (songs.js -> base-spell.js -> crit-conditions.js).
     let applySong;
+    let breakInvisibility;
     try {
         ({ applySong } = await import("../spells/songs.js"));
+        ({ breakInvisibility } = await import("../spells/invisibility.js"));
     } catch (e) {
         console.error("EQRMSS | Bard playlist sync: failed to import songs.js", e);
         return;
@@ -680,9 +682,12 @@ async function syncBardPlaylist(bard) {
         }
 
         // No entries exist: apply the song to create them (auto-targets
-        // by range/disposition via songAutoTargets).
+        // by range/disposition via songAutoTargets). This is a new
+        // performance start (user ruling 2026-10-07): the bard's
+        // invisibility fades; targets keep theirs.
         if (!hasEntries) {
             try {
+                if (breakInvisibility) await breakInvisibility(bard, "song");
                 await applySong(bard, song, []);
             } catch (e) {
                 console.error("EQRMSS | Bard playlist sync: applySong failed for", song?.name, e);
