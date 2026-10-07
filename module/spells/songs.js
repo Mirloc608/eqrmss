@@ -67,12 +67,38 @@ function effectLabel(name, eff) {
     return `${name} — ${type || "effect"}`;
 }
 
+/**
+ * Scale EQ song values to EQRMSS (user ruling 2026-10-06):
+ * - Stats (str/dex/etc): EQ value ÷ 10 → bonus. STR +37 → +4.
+ * - Mana/HP: EQ value ÷ 10. 232/round → 23/round.
+ * - AC: 1:1 to DB (not AT). AC +2 → DB +2.
+ * - Movement: EQ value ÷ 10 → Base Move Rate. +65 → +6.
+ */
+export function scaleSongValue(stat, eqValue) {
+    const s = String(stat ?? "").toLowerCase();
+    const v = Number(eqValue) || 0;
+    if (s === "ac") return { target: "db", value: v }; // 1:1 to DB
+    if (s === "movement") return { target: "movement", value: Math.round(v / 10) };
+    if (["hp", "hits", "mana"].includes(s)) return { target: s, value: Math.round(v / 10) };
+    // Default: stats → bonus at ÷10
+    return { target: "statBonus", stat: s, value: Math.round(v / 10) };
+}
+
 function maintainedEntry(bard, songItem, label, eff, kind, extra = {}) {
+    const stat = String(eff?.stat ?? "").toLowerCase();
+    const eqVal = effectValue(eff);
+    const scaled = stat ? scaleSongValue(stat, eqVal) : null;
     return {
         label: `${label} (song, maintained)`,
         source: "song", kind, maintained: true,
         casterId: bard?.id ?? "", songId: songIdOf(songItem), song: songItem?.name ?? "song",
         roundsLeft: durationRounds(eff?.duration) ?? 2,
+        // Scaling (2026-10-06): raw EQ value + scaled EQRMSS value
+        stat: stat || null,
+        eqValue: eqVal,
+        scaledTarget: scaled?.target ?? null,
+        scaledStat: scaled?.stat ?? null,
+        scaledValue: scaled?.value ?? 0,
         ...extra
     };
 }
