@@ -124,18 +124,65 @@ export async function applySong(bard, songItem, targets = []) {
 }
 
 /**
+ * Base twist size: 3 songs. AAs can extend via
+ * system.status.twistBonus (user ruling 2026-10-06).
+ */
+export function maxTwistSize(bard) {
+    return 3 + (Number(bard?.system?.status?.twistBonus) || 0);
+}
+
+/** The bard's song playlist: array of song item IDs, oldest first. */
+export function songPlaylistOf(bard) {
+    const pl = bard?.system?.status?.songPlaylist;
+    return Array.isArray(pl) ? [...pl] : [];
+}
+
+/**
  * Toggle a song's active state from the bard sheet. Turning it
- * on applies the effects to the currently-targeted actors;
- * turning it off lets the entries linger out their recorded
- * duration (the tick stops refreshing them).
+ * on applies the effects to the currently-targeted actors and
+ * adds the song to the twist playlist (FIFO); turning it off
+ * removes it from the playlist and lets the entries linger out
+ * their recorded duration (the tick stops refreshing them).
+ *
+ * Twisting (user ruling 2026-10-06): the playlist holds at most
+ * maxTwistSize() songs. Playing a new song when full bumps the
+ * oldest song (its effects stop refreshing). Re-playing a song
+ * already in the playlist moves it to the newest position.
  */
 export async function toggleSong(bard, songItem, targets = []) {
     if (!bard || !songItem) return { ok: false };
+    const songId = songIdOf(songItem);
     const nowActive = !!songItem.system?.active;
-    await songItem.update({ "system.active": !nowActive });
     let notes = "";
+
     if (!nowActive) {
-        notes = await applySong(bard, songItem, targets);
+        // Playing: manage the FIFO playlist.
+        const max = maxTwistSize(bard);
+        let playlist = songPlaylistOf(bard);
+        // If already in the playlist, move to newest position.
+        playlist = playlist.filter(id => id !== songId);
+        // If full, bump the oldest.
+        let bumpedName = "";
+        while (playlist.length >= max && playlist.length > 0) {
+            const oldestId = playlist.shift();
+            const oldest = bard.items?.get?.(oldestId);
+            if (oldest) {
+                bumpedName = oldest.name;
+                await oldest.update({ "system.active": false });
+            }
+        }
+        playlist.push(songId);
+        await bard.update({ "system.status.songPlaylist": playlist });
+        await songItem.update({ "system.active": true });
+        if (bumpedName) {
+            notes += `<p><em>${esc(bumpedName)} is bumped from the twist — ${esc(songItem.name)} takes its place.</em></p>`;
+        }
+        notes += await applySong(bard, songItem, targets);
+    } else {
+        // Stopping: remove from the playlist.
+        const playlist = songPlaylistOf(bard).filter(id => id !== songId);
+        await bard.update({ "system.status.songPlaylist": playlist });
+        await songItem.update({ "system.active": false });
     }
     return { ok: true, active: !nowActive, notes };
 }
