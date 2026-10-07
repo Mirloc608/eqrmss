@@ -105,25 +105,14 @@ export function pickSplashPoint(startX, startY, radiusFt) {
         const veil = new PIXI.Graphics();
         // Full-scene invisible veil so the click never leaks
         // through to tokens or tools underneath.
-        // PIXI v8: rect()/fill(); PIXI v7: drawRect()/beginFill()/endFill().
-        if (typeof veil.rect === "function") {
-            veil.rect(-100000, -100000, 200000, 200000);
-            veil.fill({ color: 0x000000, alpha: 0 });
-        } else {
-            veil.beginFill(0x000000, 0);
-            veil.drawRect(-100000, -100000, 200000, 200000);
-            veil.endFill();
-        }
+        veil.rect(-100000, -100000, 200000, 200000);
+        veil.fill({ color: 0x000000, alpha: 0 });
         veil.eventMode = "static";
         veil.cursor = "crosshair";
         const draw = (x, y) => {
             marker.clear();
             const r = radiusFt > 0 ? radiusFt * ppf : 14;
-            if (typeof marker.circle === "function") {
-                marker.circle(x, y, r);
-            } else {
-                marker.drawCircle(x, y, r);
-            }
+            marker.circle(x, y, r);
             marker.stroke({ color: 0xff3020, width: 2 });
             marker.fill({ color: 0xff3020, alpha: 0.12 });
             marker.circle(x, y, 3);
