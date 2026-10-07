@@ -147,10 +147,69 @@ function maintainedEntry(bard, songItem, label, eff, kind, extra = {}) {
  * Targets default to the bard alone (beneficial songs with no
  * targets hit the bard; the player targets allies first).
  */
+/**
+ * Classify song effects: beneficial (buff/heal/regen/cure) vs harmful
+ * (damage/debuff/control). Returns "ally" if all beneficial, "opponent"
+ * if any harmful, else "ally" (default to buffing).
+ */
+function songTargetMode(effects) {
+    for (const eff of effects ?? []) {
+        const t = String(eff?.type ?? "").toLowerCase();
+        if (["damage", "debuff", "control", "fear", "root", "snare", "dot"].includes(t)) {
+            return "opponent";
+        }
+    }
+    return "ally";
+}
+
+/**
+ * Find tokens in the song's range (2026-10-06): beneficial songs affect
+ * all allies in range, harmful songs affect all opponents in range.
+ * Uses the bard token's position and the song's range (feet).
+ */
+function songAutoTargets(bard, songItem, effects) {
+    const mode = songTargetMode(effects);
+    const bardToks = bard?.getActiveTokens?.() ?? [];
+    const bardTok = bardToks[0];
+    if (!bardTok) return [bard]; // No token: just the bard
+
+    // Song range in feet (from item or catalog, default 30)
+    const rangeFt = Number(songItem?.system?.range) || 30;
+    const pxPerFt = canvas?.dimensions?.size / (canvas?.dimensions?.distance || 5) || 10;
+    const rangePx = rangeFt * pxPerFt;
+
+    const bx = bardTok.center?.x ?? bardTok.x;
+    const by = bardTok.center?.y ?? bardTok.y;
+    const bardDisp = bardTok.disposition ?? 1;
+
+    const out = [];
+    for (const tok of canvas?.tokens?.placeables ?? []) {
+        if (!tok?.actor) continue;
+        const dx = (tok.center?.x ?? tok.x) - bx;
+        const dy = (tok.center?.y ?? tok.y) - by;
+        const distPx = Math.hypot(dx, dy);
+        if (distPx > rangePx + 1) continue; // Outside range (+1px tolerance)
+
+        const disp = tok.disposition ?? 0;
+        // Allies: same disposition as bard (or bard themselves)
+        // Opponents: different disposition (hostile to bard)
+        const isAlly = tok.id === bardTok.id || disp === bardDisp;
+        const isOpponent = !isAlly && disp !== bardDisp;
+
+        if (mode === "ally" && isAlly) out.push(tok.actor);
+        else if (mode === "opponent" && isOpponent) out.push(tok.actor);
+    }
+    // Always include the bard for beneficial songs (even if token missing)
+    if (mode === "ally" && !out.includes(bard)) out.push(bard);
+    return out.length ? out : [bard];
+}
+
 export async function applySong(bard, songItem, targets = []) {
     const name = songItem?.name ?? "song";
     const effects = songEffectsOf(songItem);
-    const list = (targets?.length ? targets : [bard]).filter(Boolean);
+    // Auto-target by range/disposition if no explicit targets (2026-10-06).
+    // Manual targeting (user selected tokens) still overrides.
+    const list = (targets?.length ? targets : songAutoTargets(bard, songItem, effects)).filter(Boolean);
     let notes = "";
     for (const target of list) {
         const tName = esc(target.name);
