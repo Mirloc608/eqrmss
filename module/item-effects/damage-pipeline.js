@@ -435,8 +435,32 @@ async function applySummon({ effect, caster, target, source }) {
     return { type: "summon", rolled: rounds, final: 0, notes, source };
 }
 
-/** "utility" — log the payload's note text to the result notes; no mechanics. */
-async function applyUtility({ effect, source }) {
+/**
+ * "utility" — log the payload's note text to the result notes; no mechanics.
+ * Invisibility utilities (2026-10-07) are wired to Foundry's native
+ * `invisible` status instead of being chat-only.
+ */
+async function applyUtility({ effect, source, target, caster }) {
+    // Invisibility clickies -> Foundry `invisible` status.
+    const srcId = String(source ?? "").split(":").pop().toLowerCase();
+    const note = String(effect?.note ?? "").toLowerCase();
+    const isInvis = srcId.includes("invisib") || srcId.includes("gather-shadow")
+        || (note.includes("invisib") && !note.includes("see invis"));
+    if (isInvis && target) {
+        let itype = "general";
+        if (srcId.includes("animal") || note.includes("animal")) itype = "animals";
+        else if (srcId.includes("undead") || note.includes("undead")) itype = "undead";
+        // Clicky durations: Gather Shadows / Invisibility ~20 min = 200 rounds.
+        // Dynamic import: damage-pipeline is standalone (no static imports).
+        const { applyInvisibility } = await import("../spells/invisibility.js");
+        // Derive a display name from the effect ID (e.g., "clicky-gather-shadows" -> "Gather Shadows").
+        const rawId = String(source ?? "").split(":").pop().replace(/^clicky-/, "");
+        const dispName = effect?.name ?? (rawId.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Invisibility");
+        const html = await applyInvisibility(target, dispName, itype, 200);
+        // Strip HTML tags for the notes array (pipeline notes are plain text).
+        const text = html.replace(/<[^>]*>/g, "").trim();
+        return { type: "utility", rolled: 0, final: 0, notes: [text || "invisibility applied"], source };
+    }
     return {
         type: "utility", rolled: 0, final: 0,
         notes: [String(effect?.note ?? effect?.text ?? "utility effect (no mechanical effect)")],
@@ -468,7 +492,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "fear") results.push(await applyFear({ effect, target, source }));
         else if (effect.type === "mez") results.push(await applyMez({ effect, target, source }));
         else if (effect.type === "summon") results.push(await applySummon({ effect, caster, target, source }));
-        else if (effect.type === "utility") results.push(await applyUtility({ effect, source }));
+        else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }
     return results;

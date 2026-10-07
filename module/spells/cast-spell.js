@@ -37,6 +37,7 @@
 import { combatCard } from "../combat/chat-card.js";
 import { classifySpell, directedSpellsOB, spellEffectsOf } from "./spell-mapping.js";
 import { applySpellBuffs } from "./spell-buffs.js";
+import { applyInvisibility, invisTypeOf } from "./invisibility.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -523,18 +524,26 @@ export async function castSpell(actor, spellItem, opts = {}) {
     const regenNote = await applyRegenBuff(actor, spellItem, worn.durationFactor);
     const buffTarget = targetedActor() ?? actor;
     const buffNote = await applySpellBuffs(actor, spellItem, buffTarget, worn.durationFactor);
+    // Invisibility (2026-10-07): wire to Foundry's native `invisible` status.
+    let invisNote = "";
+    for (const eff of spellEffectsOf(spellItem) ?? []) {
+        if (String(eff?.type ?? "").toLowerCase() !== "invisibility") continue;
+        const itype = invisTypeOf(eff);
+        const rounds = durationRounds(eff.duration) ?? 200;
+        invisNote += await applyInvisibility(buffTarget, name, itype, rounds);
+    }
     const note = cls.kind === "later" ? esc(cls.reason) : "no mechanical payload";
-    // Suppress the "announced" line if the buff/regen pipeline already
+    // Suppress the "announced" line if the buff/regen/invis pipeline already
     // produced output (2026-10-07: redundant when buffs applied or were
     // blocked by stacking — the pipeline's own message says what happened).
-    const announcedLine = (regenNote || buffNote)
+    const announcedLine = (regenNote || buffNote || invisNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }
