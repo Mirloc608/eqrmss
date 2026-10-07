@@ -5808,7 +5808,10 @@
           "max": 108,
           "rounds": 3
         },
-        {"type": "buff", "stat": "str", "amount": 10, "duration": 3, "note": "Niv's Melody: +10 strength for 18 seconds"}, {"type": "absorb", "amount": 10, "duration": 3, "note": "Niv's Melody: absorbs 10 magic damage for 18 seconds"}
+        {
+          "type": "utility",
+          "note": "Also grants +10 strength and absorbs 10 magic damage for 18 seconds"
+        }
       ]
     },
     {
@@ -6269,7 +6272,8 @@
         {
           "type": "utility",
           "note": "Grants Dead Man Floating: levitation, water breathing, see invisible, +70 poison resist for 72 minutes"
-        }, {"type": "buff", "stat": "resist-poison", "amount": 70, "duration": 720, "note": "Dead Man Floating: +70 poison resist for 72 minutes"}]
+        }
+      ]
     },
     {
       "id": "clicky-reclaim-energy",
@@ -6325,7 +6329,10 @@
       "name": "Diamondskin",
       "description": "Triggered effect: Diamondskin absorbs 305-394 incoming damage (rune; values per the project's spell catalog).",
       "payload": [
-        {"type": "absorb", "min": 305, "max": 394, "duration": 60, "note": "Diamondskin: absorbs 305-394 incoming damage (rune)"}
+        {
+          "type": "utility",
+          "note": "Grants Diamondskin: absorbs 305-394 incoming damage (rune)"
+        }
       ]
     },
     {
@@ -6567,25 +6574,8 @@
       "description": "Triggered effect: Arch Shielding grants +150 HP, +6-8 AC, +20 magic resist for 72 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "stat": "hp",
-          "amount": 150,
-          "duration": 720,
-          "note": "Arch Shielding: +150 HP for 72 minutes"
-        },
-        {
-          "type": "buff",
-          "stat": "ac",
-          "amount": 7,
-          "duration": 720,
-          "note": "Arch Shielding: +7 AC for 72 minutes"
-        },
-        {
-          "type": "buff",
-          "stat": "resist-magic",
-          "amount": 20,
-          "duration": 720,
-          "note": "Arch Shielding: +20 magic resist for 72 minutes"
+          "type": "utility",
+          "note": "Grants Arch Shielding: +150 HP, +6-8 AC, +20 magic resist for 72 minutes"
         }
       ]
     },
@@ -6595,7 +6585,10 @@
       "name": "Resist Cold",
       "description": "Triggered effect: Resist Cold grants +40 cold resistance for 36 minutes.",
       "payload": [
-        {"type": "buff", "stat": "resist-cold", "amount": 40, "duration": 360, "note": "Resist Cold: +40 cold resistance for 36 minutes"}
+        {
+          "type": "utility",
+          "note": "Grants Resist Cold: +40 cold resistance for 36 minutes"
+        }
       ]
     },
     {
@@ -6629,7 +6622,10 @@
       "name": "Aura of Blue Petals",
       "description": "Triggered effect: Aura of Blue Petals grants +50 magic resistance for 36 minutes.",
       "payload": [
-        {"type": "buff", "stat": "resist-magic", "amount": 50, "duration": 360, "note": "Aura of Blue Petals: +50 magic resistance for 36 minutes"}
+        {
+          "type": "utility",
+          "note": "Grants Aura of Blue Petals: +50 magic resistance for 36 minutes"
+        }
       ]
     },
     {
@@ -6638,7 +6634,10 @@
       "name": "Aura of White Petals",
       "description": "Triggered effect: Aura of White Petals grants +50 cold resistance for 36 minutes.",
       "payload": [
-        {"type": "buff", "stat": "resist-cold", "amount": 50, "duration": 360, "note": "Aura of White Petals: +50 cold resistance for 36 minutes"}
+        {
+          "type": "utility",
+          "note": "Grants Aura of White Petals: +50 cold resistance for 36 minutes"
+        }
       ]
     },
     {
@@ -6647,7 +6646,10 @@
       "name": "Aura of Red Petals",
       "description": "Triggered effect: Aura of Red Petals grants +50 fire resistance for 36 minutes.",
       "payload": [
-        {"type": "buff", "stat": "resist-fire", "amount": 50, "duration": 360, "note": "Aura of Red Petals: +50 fire resistance for 36 minutes"}
+        {
+          "type": "utility",
+          "note": "Grants Aura of Red Petals: +50 fire resistance for 36 minutes"
+        }
       ]
     },
     {
@@ -6656,7 +6658,10 @@
       "name": "Aura of Green Petals",
       "description": "Triggered effect: Aura of Green Petals grants +50 poison resistance for 36 minutes.",
       "payload": [
-        {"type": "buff", "stat": "resist-poison", "amount": 50, "duration": 360, "note": "Aura of Green Petals: +50 poison resistance for 36 minutes"}
+        {
+          "type": "utility",
+          "note": "Grants Aura of Green Petals: +50 poison resistance for 36 minutes"
+        }
       ]
     },
     {
@@ -6665,7 +6670,10 @@
       "name": "Aura of Black Petals",
       "description": "Triggered effect: Aura of Black Petals grants +50 disease resistance for 36 minutes.",
       "payload": [
-        {"type": "buff", "stat": "resist-disease", "amount": 50, "duration": 360, "note": "Aura of Black Petals: +50 disease resistance for 36 minutes"}
+        {
+          "type": "utility",
+          "note": "Grants Aura of Black Petals: +50 disease resistance for 36 minutes"
+        }
       ]
     },
     {
@@ -7088,7 +7096,10 @@
       "name": "Endure Magic",
       "description": "Triggered effect: Endure Magic grants +20 magic resistance for 27 minutes.",
       "payload": [
-        {"type": "buff", "stat": "resist-magic", "amount": 20, "duration": 270, "note": "Endure Magic: +20 magic resistance for 27 minutes"}
+        {
+          "type": "utility",
+          "note": "Grants Endure Magic: +20 magic resistance for 27 minutes"
+        }
       ]
     },
     {
@@ -7185,25 +7196,8 @@
       "description": "Triggered effect: Major Shielding grants +75 HP, +4-5 AC, +14 magic resist for 45 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "stat": "hp",
-          "amount": 75,
-          "duration": 450,
-          "note": "Major Shielding: +75 HP for 45 minutes"
-        },
-        {
-          "type": "buff",
-          "stat": "ac",
-          "amount": 4,
-          "duration": 450,
-          "note": "Major Shielding: +4 AC for 45 minutes"
-        },
-        {
-          "type": "buff",
-          "stat": "resist-magic",
-          "amount": 14,
-          "duration": 450,
-          "note": "Major Shielding: +14 magic resist for 45 minutes"
+          "type": "utility",
+          "note": "Grants Major Shielding: +75 HP, +4-5 AC, +14 magic resist for 45 minutes"
         }
       ]
     },
@@ -7343,25 +7337,8 @@
       "description": "Triggered effect: Lesser Shielding grants +30 HP, +2 AC, +10 magic resist for 27 minutes.",
       "payload": [
         {
-          "type": "buff",
-          "stat": "hp",
-          "amount": 30,
-          "duration": 270,
-          "note": "Lesser Shielding: +30 HP for 27 minutes"
-        },
-        {
-          "type": "buff",
-          "stat": "ac",
-          "amount": 2,
-          "duration": 270,
-          "note": "Lesser Shielding: +2 AC for 27 minutes"
-        },
-        {
-          "type": "buff",
-          "stat": "resist-magic",
-          "amount": 10,
-          "duration": 270,
-          "note": "Lesser Shielding: +10 magic resist for 27 minutes"
+          "type": "utility",
+          "note": "Grants Lesser Shielding: +30 HP, +2 AC, +10 magic resist for 27 minutes"
         }
       ]
     },
