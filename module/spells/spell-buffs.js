@@ -67,31 +67,41 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         if (!eff || typeof eff !== "object") continue;
         const effType = String(eff.type ?? "").toLowerCase();
         // Movement effects (e.g., Spirit of Wolf) are buffs too (2026-10-07)
-        if (effType !== "buff" && effType !== "movement") continue;
+        // Debuffs alongside buffs (e.g., Berserker Strength AGI tradeoff)
+        // are applied as negative buffs, not hostile attacks (2026-10-07)
+        if (effType !== "buff" && effType !== "movement" && effType !== "debuff") continue;
         // Movement type has no stat field — derive from type
         const stat = effType === "movement" ? "movement" : String(eff.stat ?? "").toLowerCase();
         if (stat.endsWith("-cap")) continue;
         const rawValue = rollAmount(eff);
-        if (!(rawValue > 0)) continue;
+        if (!Number.isFinite(rawValue) || rawValue === 0) continue;
         const scaleStat = stat === "hp-max" ? "hp" : stat;
         const scaled = scaleSongValue(scaleStat, rawValue);
+        // Debuffs (2026-10-07): preserve negative sign, min magnitude 1.
+        // scaleSongValue can return 0 for small negatives (e.g., -4 ÷ 10).
+        if (rawValue < 0 && scaled.value >= 0) {
+            scaled.value = -1;
+        }
         // ATK (2026-10-07, Option A): EQ÷10 to OB
         if (stat === "atk") {
             scaled.target = "ob";
             scaled.stat = "ob";
-            scaled.value = Math.max(1, Math.round(rawValue / 10));
+            const v = Math.round(rawValue / 10);
+            scaled.value = v === 0 ? (rawValue < 0 ? -1 : 1) : v;
         }
         // Haste (2026-10-07): percentage, used as-is (no scaling)
         if (stat === "haste") {
             scaled.target = "haste";
             scaled.stat = "haste";
-            scaled.value = Math.max(1, Math.round(rawValue));
+            const v = Math.round(rawValue);
+            scaled.value = v === 0 ? (rawValue < 0 ? -1 : 1) : v;
         }
         // Slow (2026-10-07): percentage, used as-is (opposes haste)
         if (stat === "slow") {
             scaled.target = "slow";
             scaled.stat = "slow";
-            scaled.value = Math.max(1, Math.round(rawValue));
+            const v = Math.round(rawValue);
+            scaled.value = v === 0 ? (rawValue < 0 ? -1 : 1) : v;
         }
 
         const stack = checkBuffStacking(target, scaled.target, scaled.stat, scaled.value, _spellId);
@@ -107,7 +117,7 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
     for (const { eff, stat, rawValue, scaled, stack } of buffEffects) {
         if (!eff || typeof eff !== "object") continue;
         const effType2 = String(eff.type ?? "").toLowerCase();
-        if (effType2 !== "buff" && effType2 !== "movement") continue;
+        if (effType2 !== "buff" && effType2 !== "movement" && effType2 !== "debuff") continue;
 
         // Stacking replace already checked; block handled in pre-check.
 
@@ -120,17 +130,19 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         }
 
         // Human-readable description (2026-10-07: AC → Defense, not "AC buff")
+        // Sign helper: negatives show "-1", positives show "+1" (2026-10-07)
+        const sgn = (v) => `${v < 0 ? "−" : "+"}${Math.abs(v)}`;
         let desc = "";
-        if (scaled.target === "db") desc = `Defense +${scaled.value}`;
-        else if (scaled.target === "movement") desc = `Movement +${scaled.value}`;
+        if (scaled.target === "db") desc = `Defense ${sgn(scaled.value)}`;
+        else if (scaled.target === "movement") desc = `Movement ${sgn(scaled.value)}`;
         else if (scaled.target === "statBonus") {
             const rmss = { str: "ST", sta: "CO", agi: "AG", dex: "QU", wis: "EM", int: "ME", cha: "PR" }[scaled.stat] ?? scaled.stat.toUpperCase();
-            desc = `${rmss} +${scaled.value}`;
-        } else if (scaled.target === "hp" || scaled.target === "hits") desc = `Max HP +${scaled.value}`;
-        else if (scaled.target === "mana") desc = `Max Mana +${scaled.value}`;
-        else if (scaled.target === "haste") desc = `Haste +${scaled.value}%`;
-        else if (scaled.target === "slow") desc = `Slow +${scaled.value}%`;
-        else desc = `${stat.toUpperCase()} +${scaled.value}`;
+            desc = `${rmss} ${sgn(scaled.value)}`;
+        } else if (scaled.target === "hp" || scaled.target === "hits") desc = `Max HP ${sgn(scaled.value)}`;
+        else if (scaled.target === "mana") desc = `Max Mana ${sgn(scaled.value)}`;
+        else if (scaled.target === "haste") desc = `Haste ${sgn(scaled.value)}%`;
+        else if (scaled.target === "slow") desc = `Slow ${sgn(scaled.value)}%`;
+        else desc = `${stat.toUpperCase()} ${sgn(scaled.value)}`;
 
         let list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
         if (stack.action === "replace" && stack.replaceIds?.length) {

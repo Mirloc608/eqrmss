@@ -106,7 +106,14 @@ export function classifySpell(spellItem) {
     // Base-spell track (Stage 4): the first hostile effect that
     // is not a directed bolt — poison/disease damage, DoTs,
     // controls, debuffs, lifetaps — resolves by BAR + RR.
-    const hostile = effects.find(e => e && ["damage", "dot", "control", "debuff", "lifetap"].includes(e.type));
+    // Mixed buff/debuff (2026-10-07): a debuff alongside buffs is a
+    // tradeoff (e.g., Berserker Strength AGI penalty), not a hostile
+    // attack — exclude debuff from the hostile check when buffs exist.
+    const hasBuff = effects.some(e => e && e.type === "buff");
+    const hostileTypes = hasBuff
+        ? ["damage", "dot", "control", "lifetap"]
+        : ["damage", "dot", "control", "debuff", "lifetap"];
+    const hostile = effects.find(e => e && hostileTypes.includes(e.type));
     if (hostile) {
         return { kind: "base", subtype: hostile.type, effect: hostile, element: String(hostile.element ?? "").toLowerCase() };
     }
