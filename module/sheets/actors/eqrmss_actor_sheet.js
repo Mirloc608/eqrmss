@@ -115,12 +115,13 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
         this.skillsHelper.activate();
         this.spellsHelper.activate();
         this.bardHelper.activate();
-        this.signatureHelper?.activateListeners(html);
 
         // ------------------------------------------------------------
         // PET MANAGER BUTTON (header)
         // ------------------------------------------------------------
         const html = this.element;
+            this.signatureHelper?.activateListeners(html);
+
 
         html.querySelectorAll(".pet-manager-open").forEach(el => el.addEventListener("click", ev => {
             ev.preventDefault();
