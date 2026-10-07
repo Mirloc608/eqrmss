@@ -248,8 +248,18 @@ export function calculateArmorAndDefenses(actorData) {
     // full against melee and at half against missile attacks (§4.4.3).
     const naturalDB = chartDB ?? quicknessBonus;
     const stanceDB = stanceDBBonus(actorData);
-    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB + mixedArmorDB + stanceDB + helmetDF;
-    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB + stanceDB + helmetDF + enhMissilePenalty;
+    // Song DB (2026-10-06): AC modifiers scale 1:1 to DB.
+    let songDB = 0;
+    const songFx = actorData?.system?.status?.spellEffects;
+    if (Array.isArray(songFx)) {
+        for (const e of songFx) {
+            if (e?.source === "song" && e?.scaledTarget === "db") {
+                songDB += Number(e?.scaledValue) || 0;
+            }
+        }
+    }
+    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB + mixedArmorDB + stanceDB + helmetDF + songDB;
+    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB + stanceDB + helmetDF + enhMissilePenalty + songDB;
 
     return {
         derived: derivedStats,
