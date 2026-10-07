@@ -74,6 +74,31 @@ function effectLabel(name, eff) {
  * - AC: 1:1 to DB (not AT). AC +2 → DB +2.
  * - Movement: EQ value ÷ 10 → Base Move Rate. +65 → +6.
  */
+/**
+ * Sum active song modifiers for an actor (2026-10-06 wiring).
+ * Reads system.status.spellEffects entries with source "song".
+ * Returns { statBonuses: {str: 4}, db: 2, movement: 6, mana: 0, hits: 0 }.
+ */
+export function getSongModifiers(actor) {
+    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0 };
+    const fx = actor?.system?.status?.spellEffects;
+    if (!Array.isArray(fx)) return out;
+    for (const e of fx) {
+        if (e?.source !== "song") continue;
+        const target = e?.scaledTarget;
+        const val = Number(e?.scaledValue) || 0;
+        if (!target || !val) continue;
+        if (target === "statBonus" && e?.scaledStat) {
+            const k = String(e.scaledStat).toLowerCase();
+            out.statBonuses[k] = (out.statBonuses[k] || 0) + val;
+        } else if (target === "db") out.db += val;
+        else if (target === "movement") out.movement += val;
+        else if (target === "mana") out.mana += val;
+        else if (target === "hits" || target === "hp") out.hits += val;
+    }
+    return out;
+}
+
 export function scaleSongValue(stat, eqValue) {
     const s = String(stat ?? "").toLowerCase();
     const v = Number(eqValue) || 0;

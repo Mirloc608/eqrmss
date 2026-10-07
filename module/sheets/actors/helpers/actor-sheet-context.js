@@ -5,6 +5,7 @@
 // helpers/ is three levels below module/, hence ../../../
 import { RMSS_STAT_KEYS, canonicalStatKey } from "../../../utils/actor/rmss-stats.js";
 import { RMSSDerivedValueEngine, calculateArmorAndDefenses } from "../../../data/stats/rmss-derived-values.js";
+import { getSongModifiers } from "../../../spells/songs.js";
 import { visibleSpells, visibleSongs } from "../../../utils/item-visibility.js";
 import { getItemEffect } from "../../../data/item-effects/item-effect-loader.js";
 import { isWorn } from "../../../utils/equipment/equipment-utils.js";
@@ -119,6 +120,20 @@ export class EQRMSSActorContextHelper {
         const rawStats =
             this.#resolveStatSource();
 
+        // Song modifiers (2026-10-06): EQ stat -> RMSS key
+        const songMods = getSongModifiers(this.actor);
+        const EQ_TO_RMSS = {
+            str: "ST", sta: "CO", agi: "AG", dex: "QU",
+            wis: "EM", int: "ME", cha: "PR"
+        };
+        const songBonusFor = (rmssKey) => {
+            let total = 0;
+            for (const [eqStat, bonus] of Object.entries(songMods.statBonuses)) {
+                if (EQ_TO_RMSS[eqStat] === rmssKey) total += bonus;
+            }
+            return total;
+        };
+
         context.rmssStats = RMSS_STAT_KEYS.map(key => {
             const foundKey = Object.keys(rawStats).find(
                 k => String(k).toUpperCase() === key
@@ -132,8 +147,9 @@ export class EQRMSSActorContextHelper {
             const racial_bonus = Number(statData.racial_bonus ?? statData.racial ?? 0);
             const special_bonus = Number(statData.special_bonus ?? statData.special ?? 0);
 
-            // Total temporary value: Temp + Basic + Racial + Special bonuses
-            const total = temp + basic_bonus + racial_bonus + special_bonus;
+            // Total temporary value: Temp + Basic + Racial + Special + Song bonuses
+            const song_bonus = songBonusFor(key);
+            const total = temp + basic_bonus + racial_bonus + special_bonus + song_bonus;
 
             return {
                 key,
@@ -145,6 +161,7 @@ export class EQRMSSActorContextHelper {
                 basic_bonus,
                 racial_bonus,
                 special_bonus,
+                song_bonus,
                 total
             };
         });
