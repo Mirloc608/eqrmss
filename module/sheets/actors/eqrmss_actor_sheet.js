@@ -183,12 +183,21 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
             if (effect) { await effect.delete(); return; }
             const timedId = el.dataset.timedId;
             const timedSource = el.dataset.timedSource;
-            if (timedId || timedSource) {
+            const groupId = el.dataset.groupId;
+            if (timedId || timedSource || groupId) {
                 const list = [...(this.actor?.system?.status?.spellEffects ?? [])];
                 const kept = list.filter(e => {
+                    // Group dismiss (2026-10-07): remove all effects from the
+                    // same spell/song, not just the clicked entry.
+                    if (groupId) {
+                        const eGroup = e?.spellId ?? e?.songId ?? null;
+                        if (eGroup && eGroup === groupId) return false;
+                    }
                     const id = e?.id ?? e?.name ?? e?.label;
                     if (timedId && id === timedId) return false;
-                    if (timedSource && e?.source === timedSource) return false;
+                    // Only use timedSource as fallback when no groupId
+                    // (prevents removing all spells when dismissing one).
+                    if (!groupId && timedSource && e?.source === timedSource) return false;
                     return true;
                 });
                 const removed = list.filter(e => !kept.includes(e));

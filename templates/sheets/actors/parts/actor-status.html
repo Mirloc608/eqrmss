@@ -57,7 +57,7 @@
           <li style="display: flex; justify-content: space-between; align-items: center; padding: 2px 0;">
             <a class="buff-debuff-open" data-effect-id="{{this.id}}" data-origin="{{this.origin}}" title="Open source">{{this.name}}</a>
             {{#unless this.fromItem}}
-            <button type="button" class="buff-remove" data-effect-id="{{this.id}}"{{#if this.timedId}} data-timed-id="{{this.timedId}}"{{/if}}{{#if this.timedSource}} data-timed-source="{{this.timedSource}}"{{/if}} title="Dismiss buff" style="cursor: pointer;">✕</button>
+            <button type="button" class="buff-remove" data-effect-id="{{this.id}}"{{#if this.timedId}} data-timed-id="{{this.timedId}}"{{/if}}{{#if this.timedSource}} data-timed-source="{{this.timedSource}}"{{/if}}{{#if this.groupId}} data-group-id="{{this.groupId}}"{{/if}} title="Dismiss buff" style="cursor: pointer;">✕</button>
             {{/unless}}
           </li>
           {{/each}}

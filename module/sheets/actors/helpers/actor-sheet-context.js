@@ -325,13 +325,17 @@ export class EQRMSSActorContextHelper {
                 const label = e?.name ?? e?.label ?? "Timed Effect";
                 const rounds = Number(e?.roundsLeft ?? e?.rounds ?? 0);
                 const roundsTxt = rounds > 0 ? ` (${rounds} rounds)` : "";
+                // Group ID for dismiss: spellId/songId groups all effects from
+                // the same spell/song (2026-10-07). Clicking X removes the whole group.
+                const groupId = e?.spellId ?? e?.songId ?? null;
                 const entry = {
                     id: `timed-${e?.id ?? label}`,
                     name: `${label}${roundsTxt}`,
                     origin: e?.source ?? null,
                     fromItem: false,
                     timedId: e?.id ?? label,
-                    timedSource: e?.source ?? null
+                    timedSource: e?.source ?? null,
+                    groupId: groupId
                 };
                 if (e?.category === "debuff") debuffs.push(entry);
                 else buffs.push(entry);
