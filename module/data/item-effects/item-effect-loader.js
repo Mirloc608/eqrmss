@@ -34,8 +34,11 @@ export function getItemEffect(id) {
  * Get all effects of one kind: "proc", "worn", or "triggered".
  */
 export function getItemEffectsByKind(kind) {
-    return Object.values(EFFECTS).filter(e => e.kind === kind);
+    return Object.values(EFFECTS)
+        .filter(e => e.kind === kind)
+        .sort((a, b) => String(a.name ?? "").localeCompare(String(b.name ?? "")));
 }
+
 
 /**
  * Get all effects, for UI dropdowns.
