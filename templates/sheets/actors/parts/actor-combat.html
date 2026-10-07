@@ -1,36 +1,6 @@
 <div class="tab" data-group="primary" data-tab="combat">
   <h3>Combat</h3>
 
-  <div class="panel">
-    <h4>Active Conditions</h4>
-    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
-      <span><strong>Next Swing:</strong> {{#if system.status.nextSwingBonus}}+{{system.status.nextSwingBonus}}{{else}}&mdash;{{/if}}</span>
-      <span><strong>Parrying:</strong> {{#if system.status.parrying}}+{{system.status.parryDB}} DB{{#if system.status.parryWeaponName}} ({{system.status.parryWeaponName}}){{/if}}{{#if system.status.parryTargetName}} vs {{system.status.parryTargetName}}{{else}} (no foe yet){{/if}}{{else}}&mdash;{{/if}}</span>
-      {{#if system.status.missileParryDB}}<span><strong>Missile Parry:</strong> +{{system.status.missileParryDB}} DB (next missile attack)</span>{{/if}}
-      <span><strong>Shield vs:</strong> {{#if system.status.shieldOpponentName}}{{system.status.shieldOpponentName}}{{else}}&mdash;{{/if}}</span>
-      <span><strong>Close Qtrs:</strong> {{#if system.status.cqcTargetName}}{{system.status.cqcTargetName}}{{else}}&mdash;{{/if}} <button type="button" class="cqc-toggle" title="Toggle Close Quarters Combat against the targeted foe (Arms Companion §4.7)">{{#if system.status.cqcTargetId}}Disengage{{else}}Close{{/if}}</button></span>
-      <span><button type="button" class="cauterize-wound" title="Cauterize this character's bleeding wound (Arms Companion §4.5)">Cauterize Wound</button></span>
-      <span><strong>Stance (§4.16):</strong> <select class="stance-select" title="Declared stance (Arms Companion §4.16)">
-        <option value=""{{#if (eq system.status.stance "")}} selected{{/if}}>None</option>
-        <option value="offensive"{{#if (eq system.status.stance "offensive")}} selected{{/if}}>Offensive</option>
-        <option value="movement"{{#if (eq system.status.stance "movement")}} selected{{/if}}>Movement</option>
-        <option value="defensive"{{#if (eq system.status.stance "defensive")}} selected{{/if}}>Defensive</option>
-      </select></span>
-      <span><strong>Attack Speed (§4.11):</strong> <select class="attack-speed-select" title="Attack speed variance (Arms Companion §4.11) — melee only">
-        <option value=""{{#unless system.status.attackSpeed}} selected{{/unless}}>Full prep (100%)</option>
-        <option value="half"{{#if (eq system.status.attackSpeed "half")}} selected{{/if}}>Half prep (40% OB, 2/round)</option>
-        <option value="threeQuarter"{{#if (eq system.status.attackSpeed "threeQuarter")}} selected{{/if}}>3/4 prep (65% OB)</option>
-        <option value="plusQuarter"{{#if (eq system.status.attackSpeed "plusQuarter")}} selected{{/if}}>Full + 1/4 (125% OB)</option>
-        <option value="plusHalf"{{#if (eq system.status.attackSpeed "plusHalf")}} selected{{/if}}>Full + 1/2 (150% OB)</option>
-      </select></span>
-      <span><strong>Subduing (§4.10):</strong> <input type="checkbox" class="subdue-toggle" title="Subduing strikes (Arms Companion §4.10): half hits, crits cost the foe Exhaustion Points" {{checked system.status.subduing}}/> <label>subdue (melee)</label></span>
-      <span><strong>Exhausted:</strong> {{#if system.status.exhausted}}<strong style="color: #b00;">Yes</strong>{{else}}&mdash;{{/if}}</span>
-      <span><strong>Stun:</strong> {{#if (add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut)}}{{add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</span>
-      <span><strong>Action Penalty:</strong> {{#if system.status.actionPenalty.value}}-{{system.status.actionPenalty.value}} ({{system.status.actionPenalty.rounds}} rnd){{else}}&mdash;{{/if}}</span>
-      <span><strong>Unconscious:</strong> {{#if system.status.unconscious}}<strong style="color: #b00;">Yes</strong>{{else}}&mdash;{{/if}}</span>
-    </div>
-  </div>
-
   {{#if isPaladin}}
   <div class="panel">
     <h4>Signature Ability</h4>
@@ -39,6 +9,7 @@
     </button>
   </div>
   {{/if}}
+
   {{#if isShadowknight}}
   <div class="panel">
     <h4>Signature Ability</h4>
@@ -47,31 +18,6 @@
     </button>
   </div>
   {{/if}}
-
-  <div class="panel">
-    <h4>Defense</h4>
-    <table class="rmss-table">
-      <thead><tr><th>AT</th><th>DB (Melee)</th><th>DB (Missile)</th><th>Shield</th><th>Adrenal</th><th>Armor DB</th><th>Formation</th><th>APAC</th><th>Stance DB</th><th>Helm DF</th><th>Other DB</th><th>MMP</th><th>Quickness</th><th>Initiative</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>{{system.combat.armorType}}</td>
-          <td>{{system.combat.totalDB}}</td>
-          <td>{{system.combat.totalMissileDB}}</td>
-          <td>{{system.combat.shieldBonus}} / {{system.combat.shieldMissileBonus}}</td>
-          <td>{{system.combat.adrenalEffective}}{{#if system.combat.adrenalBlockedByArmor}} <span title="Adrenal Defense does not work while wearing armor">(blocked: armor)</span>{{/if}}</td>
-          <td>{{system.combat.armorDBTotal}}</td>
-          <td>{{system.combat.formationDB}} / {{system.combat.formationMissileDB}}</td>
-          <td>{{system.combat.mixedArmorDB}}</td>
-          <td>{{system.combat.stanceDB}}</td>
-          <td>{{system.combat.helmetDF}}</td>
-          <td>{{system.combat.otherDB}}</td>
-          <td>{{system.combat.mmp}}</td>
-          <td>{{system.combat.quicknessBonus}}</td>
-          <td>{{derived.initiative}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
   <div class="panel">
     <h4>Readied Weapons</h4>
@@ -101,7 +47,7 @@
     <table class="rmss-table">
       <thead><tr><th></th><th>Name</th><th>Spell List</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
       <tbody>
-        {{#each items.spells}}
+        {{#each readiedSpells}}
           <tr data-item-id="{{this._id}}">
             <td><button class="cast-spell" data-item-id="{{this._id}}" title="Cast spell (EQ mana cost; RMSS resolution)">Cast</button></td>
             <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
@@ -112,21 +58,20 @@
             <td>{{this.system.duration}}</td>
           </tr>
         {{else}}
-          <tr><td colspan="7"><em>No spells known.</em></td></tr>
+          <tr><td colspan="7"><em>No spells readied — ready spells on the Spells tab.</em></td></tr>
         {{/each}}
       </tbody>
     </table>
   </div>
 {{/if}}
 
-{{#if isBard}}
   {{#if items.songs}}
   <div class="panel">
     <h4>Songs</h4>
     <table class="rmss-table">
       <thead><tr><th></th><th>Name</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
       <tbody>
-        {{#each items.songs}}
+        {{#each readiedSongs}}
           <tr data-item-id="{{this._id}}">
             <td><button data-action="bardStart" data-song-id="{{this._id}}" title="Start playing this song">Play</button> <button data-action="bardStop" data-song-id="{{this._id}}" title="Stop playing this song">Stop</button></td>
             <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
@@ -135,12 +80,43 @@
             <td>{{this.system.range}}</td>
             <td>{{this.system.duration}}</td>
           </tr>
+        {{else}}
+          <tr><td colspan="6"><em>No songs in playlist — play songs from the Songs tab.</em></td></tr>
         {{/each}}
       </tbody>
     </table>
   </div>
   {{/if}}
-{{/if}}
+
+  <div class="panel">
+    <h4>Active Conditions</h4>
+    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+      <span><strong>Next Swing:</strong> {{#if system.status.nextSwingBonus}}+{{system.status.nextSwingBonus}}{{else}}&mdash;{{/if}}</span>
+      <span><strong>Parrying:</strong> {{#if system.status.parrying}}+{{system.status.parryDB}} DB{{#if system.status.parryWeaponName}} ({{system.status.parryWeaponName}}){{/if}}{{#if system.status.parryTargetName}} vs {{system.status.parryTargetName}}{{else}} (no foe yet){{/if}}{{else}}&mdash;{{/if}}</span>
+      {{#if system.status.missileParryDB}}<span><strong>Missile Parry:</strong> +{{system.status.missileParryDB}} DB (next missile attack)</span>{{/if}}
+      <span><strong>Shield vs:</strong> {{#if system.status.shieldOpponentName}}{{system.status.shieldOpponentName}}{{else}}&mdash;{{/if}}</span>
+      <span><strong>Close Qtrs:</strong> {{#if system.status.cqcTargetName}}{{system.status.cqcTargetName}}{{else}}&mdash;{{/if}} <button type="button" class="cqc-toggle" title="Toggle Close Quarters Combat against the targeted foe (Arms Companion §4.7)">{{#if system.status.cqcTargetId}}Disengage{{else}}Close{{/if}}</button></span>
+      <span><button type="button" class="cauterize-wound" title="Cauterize this character's bleeding wound (Arms Companion §4.5)">Cauterize Wound</button></span>
+      <span><strong>Stance (§4.16):</strong> <select class="stance-select" title="Declared stance (Arms Companion §4.16)">
+        <option value=""{{#if (eq system.status.stance "")}} selected{{/if}}>None</option>
+        <option value="offensive"{{#if (eq system.status.stance "offensive")}} selected{{/if}}>Offensive</option>
+        <option value="movement"{{#if (eq system.status.stance "movement")}} selected{{/if}}>Movement</option>
+        <option value="defensive"{{#if (eq system.status.stance "defensive")}} selected{{/if}}>Defensive</option>
+      </select></span>
+      <span><strong>Attack Speed (§4.11):</strong> <select class="attack-speed-select" title="Attack speed variance (Arms Companion §4.11) — melee only">
+        <option value=""{{#unless system.status.attackSpeed}} selected{{/unless}}>Full prep (100%)</option>
+        <option value="half"{{#if (eq system.status.attackSpeed "half")}} selected{{/if}}>Half prep (40% OB, 2/round)</option>
+        <option value="threeQuarter"{{#if (eq system.status.attackSpeed "threeQuarter")}} selected{{/if}}>3/4 prep (65% OB)</option>
+        <option value="plusQuarter"{{#if (eq system.status.attackSpeed "plusQuarter")}} selected{{/if}}>Full + 1/4 (125% OB)</option>
+        <option value="plusHalf"{{#if (eq system.status.attackSpeed "plusHalf")}} selected{{/if}}>Full + 1/2 (150% OB)</option>
+      </select></span>
+      <span><strong>Subduing (§4.10):</strong> <input type="checkbox" class="subdue-toggle" title="Subduing strikes (Arms Companion §4.10): half hits, crits cost the foe Exhaustion Points" {{checked system.status.subduing}}/> <label>subdue (melee)</label></span>
+      <span><strong>Exhausted:</strong> {{#if system.status.exhausted}}<strong style="color: #b00;">Yes</strong>{{else}}&mdash;{{/if}}</span>
+      <span><strong>Stun:</strong> {{#if (add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut)}}{{add (add system.status.stun.stunned system.status.stun.stunNoParry) system.status.stun.downOrOut}} round(s){{else}}&mdash;{{/if}}</span>
+      <span><strong>Action Penalty:</strong> {{#if system.status.actionPenalty.value}}-{{system.status.actionPenalty.value}} ({{system.status.actionPenalty.rounds}} rnd){{else}}&mdash;{{/if}}</span>
+      <span><strong>Unconscious:</strong> {{#if system.status.unconscious}}<strong style="color: #b00;">Yes</strong>{{else}}&mdash;{{/if}}</span>
+    </div>
+  </div>
 
   <div class="panel">
     <h4>Shield Formation (Arms Companion §5.6)</h4>
@@ -273,4 +249,5 @@
       </tbody>
     </table>
   </div>
+
 </div>

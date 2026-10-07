@@ -110,6 +110,18 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             sp.isReady = readySpells.includes(sp._id ?? sp.id);
         }
 
+        // Readied spells/songs for the Combat tab (2026-10-07):
+        // only the readied subset, not all known.
+        context.readiedSpells = (context.items?.spells ?? []).filter(
+            sp => readySpells.includes(sp._id ?? sp.id)
+        );
+        // Bard: "readied" songs = twist playlist (songs currently queued).
+        const songPlaylist = Array.isArray(system.status?.songPlaylist)
+            ? system.status.songPlaylist : [];
+        context.readiedSongs = (context.items?.songs ?? []).filter(
+            sg => songPlaylist.includes(sg._id ?? sg.id)
+        );
+
         // Damage by Location (§4.15): structural damage per body area
         // against its Structural Rating ((CO/10) x BAM).
         context.structuralAreas = structuralAreasFor(actor).map(a => {
