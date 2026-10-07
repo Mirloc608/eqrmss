@@ -77,12 +77,15 @@ export async function layOnHands(actor, target) {
     const healAmount = Math.floor(maxHp * percent / 100);
     const hitsTaken = Number(target.system?.hits?.taken) || 0;
     const newTaken = Math.max(0, hitsTaken - healAmount);
-    await target.update({ "system.hits.taken": newTaken });
+    await target.update({ 
+        "system.hits.taken": newTaken,
+        "system.status.bleed": { perRound: 0 }
+    });
     await actor.update({ "system.status.layOnHandsUsed": true });
     const actualHealed = hitsTaken - newTaken;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content: `<h2>${esc(name)}</h2><p><em>${esc(actor.name)} lays hands on ${esc(target.name)}, restoring ${actualHealed} hits (${percent}% of max).</em></p>`
+        content: `<h2>${esc(name)}</h2><p><em>${esc(actor.name)} lays hands on ${esc(target.name)}, restoring ${actualHealed} hits (${percent}% of max) and halting bleeding.</em></p>`
     });
     return { ok: true, healed: actualHealed };
 }
