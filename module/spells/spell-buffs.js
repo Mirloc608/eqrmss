@@ -55,6 +55,8 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
     // Get effects via spellEffectsOf (falls back to catalog)
     const effects = spellEffectsOf(spellItem) ?? [];
     
+    const _spellId = spellItem?.id ?? spellItem?._id ?? "";
+    
     // Pre-check: all-or-nothing (2026-10-07). If ANY buff is blocked,
     // the entire spell is blocked.
     const buffEffects = [];
@@ -67,7 +69,7 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         if (!(rawValue > 0)) continue;
         const scaleStat = stat === "hp-max" ? "hp" : stat;
         const scaled = scaleSongValue(scaleStat, rawValue);
-        const stack = checkBuffStacking(target, scaled.target, scaled.stat, scaled.value);
+        const stack = checkBuffStacking(target, scaled.target, scaled.stat, scaled.value, _spellId);
         if (stack.action === "block") {
             let bdesc = stat.toUpperCase();
             if (scaled.target === "db") bdesc = "Defense";

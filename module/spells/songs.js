@@ -100,7 +100,7 @@ function effectLabel(name, eff) {
  *         { action: "block", blockedBy: "Name" } (weaker than existing),
  *         { action: "replace", replaces: [...] } (stronger than existing).
  */
-export function checkBuffStacking(target, scaledTarget, scaledStat, newValue) {
+export function checkBuffStacking(target, scaledTarget, scaledStat, newValue, excludeId = null) {
     if (!target || !scaledTarget || !(newValue > 0)) return { action: "apply" };
     const fx = target?.system?.status?.spellEffects;
     if (!Array.isArray(fx)) return { action: "apply" };
@@ -109,6 +109,11 @@ export function checkBuffStacking(target, scaledTarget, scaledStat, newValue) {
     for (const e of fx) {
         if (e?.kind === "regen") continue;
         if (e?.source !== "spell" && e?.source !== "song") continue;
+        // Skip entries from the same source (refresh, not conflict)
+        if (excludeId) {
+            const eid = e?.spellId ?? e?.songId ?? null;
+            if (eid && eid === excludeId) continue;
+        }
         if (e?.scaledTarget !== scaledTarget) continue;
         const eStat = String(e?.scaledStat ?? "").toLowerCase();
         if (statKey !== eStat) continue;
@@ -300,7 +305,7 @@ export async function applySong(bard, songItem, targets = []) {
             if (type === "damage" || type === "regen" || type === "heal") continue;
             // This is a buff (modifier) effect
             const entry = maintainedEntry(bard, songItem, effectLabel(name, eff), eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
-            const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue);
+            const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue, entry.songId);
             if (stack.action === "block") {
                 songBlocked = true;
                 blockReason = `${effectLabel(name, eff)} blocked by stronger ${stack.blockedBy}`;
@@ -341,7 +346,7 @@ export async function applySong(bard, songItem, targets = []) {
                 notes += `<p><em>${tName}: ${esc(label)}.</em></p>`;
             } else {
                 const entry = maintainedEntry(bard, songItem, label, eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
-                const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue);
+                const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue, entry.songId);
                 // Block handled by pre-check above; only replace applies here.
                 let fx = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
                 if (stack.action === "replace" && stack.replaceIds?.length) {
