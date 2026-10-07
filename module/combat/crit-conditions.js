@@ -617,9 +617,78 @@ function deathCleanup() {
  *  song item is still toggled active. */
 function songStillActive(entry) {
     const bard = globalThis.game?.actors?.get?.(entry?.casterId);
+    if (!bard) return false;
+    // Playlist membership is the source of truth (2026-10-07): a song
+    // in the bard's twist playlist counts as actively playing, even if
+    // the song item's active flag wasn't set (e.g., playlist seeded
+    // programmatically without toggleSong).
+    const playlist = Array.isArray(bard.system?.status?.songPlaylist)
+        ? bard.system.status.songPlaylist : [];
+    if (playlist.includes(entry?.songId)) return true;
+    // Fallback: check the song item's active flag.
     const items = bard?.items?.get ? [bard.items.get(entry.songId)] : [...(bard?.items?.contents ?? bard?.items ?? [])];
     const song = bard?.items?.get ? items[0] : items.find(i => (i.id ?? i._id) === entry.songId);
     return !!song?.system?.active;
+}
+
+/**
+ * Bard playlist sync (2026-10-07, user ruling): songs in the twist
+ * playlist should be actively playing with maintained effects. If a
+ * playlist song isn't marked active (e.g., playlist was seeded without
+ * toggleSong), activate it and ensure its maintained effects exist on
+ * targets. Called from tickConditions before the maintained-song
+ * refresh logic.
+ */
+async function syncBardPlaylist(bard) {
+    const playlist = Array.isArray(bard?.system?.status?.songPlaylist)
+        ? bard.system.status.songPlaylist : [];
+    if (!playlist.length || !bard?.items) return;
+
+    // Dynamic import to avoid circular dependency
+    // (songs.js -> base-spell.js -> crit-conditions.js).
+    let applySong;
+    try {
+        ({ applySong } = await import("../spells/songs.js"));
+    } catch (e) {
+        console.error("EQRMSS | Bard playlist sync: failed to import songs.js", e);
+        return;
+    }
+
+    for (const songId of playlist) {
+        const song = bard.items.get?.(songId);
+        if (!song) continue;
+
+        // Ensure the song item is marked active.
+        if (!song.system?.active) {
+            try {
+                await song.update({ "system.active": true });
+            } catch (e) { /* non-fatal */ }
+        }
+
+        // Check if maintained entries exist for this song on any actor.
+        // Entries carry songId + source "song" (both spellEffects and dots).
+        let hasEntries = false;
+        const actors = globalThis.game?.actors?.contents ?? [];
+        for (const a of actors) {
+            const fx = a?.system?.status?.spellEffects ?? [];
+            const dots = a?.system?.status?.dots ?? [];
+            if (fx.some(e => e?.songId === songId && e?.source === "song") ||
+                dots.some(d => d?.songId === songId && d?.source === "song")) {
+                hasEntries = true;
+                break;
+            }
+        }
+
+        // No entries exist: apply the song to create them (auto-targets
+        // by range/disposition via songAutoTargets).
+        if (!hasEntries) {
+            try {
+                await applySong(bard, song, []);
+            } catch (e) {
+                console.error("EQRMSS | Bard playlist sync: applySong failed for", song?.name, e);
+            }
+        }
+    }
 }
 
 // Cast-time pending casts (Option A) tick here on round change.
@@ -629,6 +698,19 @@ export async function tickConditions(combat) {
     if (!combat) return;
     const notes = [];
     const list = combat.combatants?.contents ?? [...(combat.combatants ?? [])];
+
+    // Bard playlist sync (2026-10-07): ensure playlist songs are active
+    // with maintained effects BEFORE the refresh logic below runs.
+    // This handles playlists seeded without toggleSong (e.g., by macro).
+    for (const c of list) {
+        const actor = c.actor;
+        if (!actor || actor.system?.status?.dead) continue;
+        const playlist = actor.system?.status?.songPlaylist;
+        if (Array.isArray(playlist) && playlist.length > 0) {
+            await syncBardPlaylist(actor);
+        }
+    }
+
     for (const c of list) {
         const actor = c.actor;
         if (!actor || actor.system?.status?.dead) continue;
