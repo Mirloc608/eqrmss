@@ -113,10 +113,25 @@ export function getSongModifiers(actor) {
     return out;
 }
 
+/**
+ * AC to Defense curve (2026-10-07): diminishing returns for high AC.
+ * EQ high-level spells give hundreds of AC; 1:1 would be game-breaking.
+ * Tiers: 1-10 → 1:1, 11-30 → 2:1, 31-70 → 4:1, 71-150 → 8:1, 151+ → 16:1.
+ * Examples: AC 10 → DB 10, AC 30 → DB 20, AC 70 → DB 30, AC 150 → DB 40, AC 319 → DB 51.
+ */
+function acToDefense(ac) {
+    if (ac <= 0) return 0;
+    if (ac <= 10) return Math.round(ac);
+    if (ac <= 30) return 10 + Math.round((ac - 10) / 2);
+    if (ac <= 70) return 20 + Math.round((ac - 30) / 4);
+    if (ac <= 150) return 30 + Math.round((ac - 70) / 8);
+    return 40 + Math.round((ac - 150) / 16);
+}
+
 export function scaleSongValue(stat, eqValue) {
     const s = String(stat ?? "").toLowerCase();
     const v = Number(eqValue) || 0;
-    if (s === "ac") return { target: "db", value: v }; // 1:1 to DB
+    if (s === "ac") return { target: "db", value: acToDefense(v) };
     if (s === "movement") return { target: "movement", value: Math.round(v / 10) };
     if (["hp", "hits", "mana"].includes(s)) return { target: s, value: Math.round(v / 10) };
     // Default: stats → bonus at ÷10
