@@ -374,11 +374,23 @@ export function calculateBaseMovementRate(actorData) {
     // Root: immobilized — no movement at all while rooted.
     const rooted = Number(system.status?.rooted?.rounds ?? 0) > 0;
 
-    const baseRate = rooted ? 0 : chartBase + racialMod - armorApplied + strideMod + encPenalty - snarePenalty;
+    // Song movement (2026-10-06): EQ ÷10, e.g., Selo's +65 → +6.
+    // Read directly from spellEffects (actorData may not be a full actor).
+    let songMove = 0;
+    const songFx = system.status?.spellEffects;
+    if (Array.isArray(songFx)) {
+        for (const e of songFx) {
+            if (e?.source === "song" && e?.scaledTarget === "movement") {
+                songMove += Number(e?.scaledValue) || 0;
+            }
+        }
+    }
+
+    const baseRate = rooted ? 0 : chartBase + racialMod - armorApplied + strideMod + encPenalty - snarePenalty + songMove;
 
     return {
         quTotal, quBonus, chartBase, racialMod,
-        armorPen, armorApplied, strideMod, encPenalty, snarePenalty, rooted, baseRate
+        armorPen, armorApplied, strideMod, encPenalty, snarePenalty, songMove, rooted, baseRate
     };
 }
 
