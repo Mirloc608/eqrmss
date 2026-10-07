@@ -182,6 +182,25 @@ const MISSILE_WEAPON_TYPES = new Set(["missile", "thrown"]);
 const WEAPON_AS_SHIELD_TYPES = new Set(["one-handed-edged", "one-handed-crushing", "two-handed", "polearm"]);
 const ONE_HANDED_WEAPON_TYPES = new Set(["one-handed-edged", "one-handed-crushing"]);
 
+/**
+ * Distance in feet between two tokens (center to center).
+ * Returns null if tokens can't be measured.
+ */
+function tokenDistanceFt(fromTok, toTok) {
+    const canvas = globalThis.canvas;
+    const size = Number(canvas?.dimensions?.size) || 0;
+    const dist = Number(canvas?.dimensions?.distance) || 0;
+    if (!(size > 0) || !(dist > 0)) return null;
+    const a = fromTok?.center, b = toTok?.center;
+    if (!a || !b) return null;
+    return Math.hypot(b.x - a.x, b.y - a.y) / size * dist;
+}
+
+// Point-blank penalty for missile weapons at adjacent range (2026-10-07, Option B).
+// A future Ranger AA will negate this penalty.
+const POINT_BLANK_PENALTY = -30;
+const MELEE_REACH_FT = 5;
+
 function isMissileAttack(weaponType) {
     return MISSILE_WEAPON_TYPES.has(weaponType);
 }
@@ -604,6 +623,31 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     // Prompted after target determination; cancelling aborts the shot
     // without consuming anything. Crossbows cannot fire with zero
     // preparation rounds.
+    // Range enforcement (2026-10-07, Option C):
+    // - Melee: blocked if target not adjacent (>5 ft)
+    // - Missile: -30 OB at point-blank (adjacent), future Ranger AA negates
+    let pointBlankPenalty = 0;
+    {
+        const attackerTok = actor.getActiveTokens?.()?.[0] ?? null;
+        const targetTok = targeted ?? null;
+        if (attackerTok && targetTok) {
+            const feet = tokenDistanceFt(attackerTok, targetTok);
+            if (feet !== null) {
+                const adjacent = feet <= MELEE_REACH_FT + 1e-6;
+                if (!missileAttack && !adjacent) {
+                    await ChatMessage.create({
+                        speaker: ChatMessage.getSpeaker({ actor }),
+                        content: `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2><p><em>${esc(targetName)} is ${Math.round(feet)} ft away — out of melee reach.</em></p>`
+                    });
+                    return;
+                }
+                if (missileAttack && adjacent) {
+                    // TODO: Check for Ranger Point Blank AA when implemented
+                    pointBlankPenalty = POINT_BLANK_PENALTY;
+                }
+            }
+        }
+    }
     let rangeMod = 0;
     let reloadPenalty = 0;
     let ammoNote = "";
@@ -693,7 +737,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         const songMods = getSongModifiers(actor);
         buffOb = (spellMods?.ob || 0) + (songMods?.ob || 0);
     } catch (e) { /* ignore */ }
-    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + buffOb + actionPenalty + rangeMod - reloadPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod + sitTotal + (pronePenalty || 0);
+    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + pointBlankPenalty + buffOb + actionPenalty + rangeMod - reloadPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod + sitTotal + (pronePenalty || 0);
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -771,7 +815,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${attackSpeed.pct}%)` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
+        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${pointBlankPenalty ? ` (${pointBlankPenalty} point-blank)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${attackSpeed.pct}%)` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
         + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
