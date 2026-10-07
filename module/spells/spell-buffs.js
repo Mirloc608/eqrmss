@@ -102,10 +102,13 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         else desc = `${stat.toUpperCase()} +${scaled.value}`;
         
         let list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
-        if (stack.action === "replace") {
-            const toRemove = new Set(stack.replaces);
-            list = list.filter(e => !toRemove.has(e));
-            notes.push(`${esc(target.name)}: replaces weaker buff for ${esc(stat.toUpperCase())} (${esc(name)}).`);
+        if (stack.action === "replace" && stack.replaceIds?.length) {
+            const idSet = new Set(stack.replaceIds);
+            list = list.filter(e => {
+                const eid = e?.spellId ?? e?.songId ?? null;
+                return !(eid && idSet.has(eid));
+            });
+            notes.push(`${esc(target.name)}: replaces entire buff source (${esc(name)}).`);
         }
         list.push({
             label: `${name} — ${desc} (spell)`,

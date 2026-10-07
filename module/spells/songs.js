@@ -121,7 +121,10 @@ export function checkBuffStacking(target, scaledTarget, scaledStat, newValue) {
     if (newValue <= strongest.value) {
         return { action: "block", blockedBy: strongest.label, blockedValue: strongest.value };
     } else {
-        return { action: "replace", replaces: conflicts.map(c => c.entry) };
+        // Replace ENTIRE source(s), not just the stat (2026-10-07 ruling).
+        // Collect songId/spellId from conflicts.
+        const ids = [...new Set(conflicts.map(c => c.entry?.spellId ?? c.entry?.songId ?? null).filter(Boolean))];
+        return { action: "replace", replaceIds: ids, replaces: conflicts.map(c => c.entry) };
     }
 }
 
@@ -324,10 +327,13 @@ export async function applySong(bard, songItem, targets = []) {
                     continue;
                 }
                 let fx = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
-                if (stack.action === "replace") {
-                    const toRemove = new Set(stack.replaces);
-                    fx = fx.filter(e => !toRemove.has(e));
-                    notes += `<p><em>${tName}: ${esc(label)} replaces weaker buff.</em></p>`;
+                if (stack.action === "replace" && stack.replaceIds?.length) {
+                    const idSet = new Set(stack.replaceIds);
+                    fx = fx.filter(e => {
+                        const eid = e?.spellId ?? e?.songId ?? null;
+                        return !(eid && idSet.has(eid));
+                    });
+                    notes += `<p><em>${tName}: ${esc(label)} replaces entire buff source.</em></p>`;
                 }
                 fx.push(entry);
                 await target.update({ "system.status.spellEffects": fx });
