@@ -93,6 +93,38 @@ function effectLabel(name, eff) {
  * Reads system.status.spellEffects entries with source "song".
  * Returns { statBonuses: {str: 4}, db: 2, movement: 6, mana: 0, hits: 0 }.
  */
+/**
+ * Check stacking for a new buff (2026-10-07, Option A).
+ * Per-stat highest wins across spells and songs.
+ * Returns { action: "apply" } (no conflict),
+ *         { action: "block", blockedBy: "Name" } (weaker than existing),
+ *         { action: "replace", replaces: [...] } (stronger than existing).
+ */
+export function checkBuffStacking(target, scaledTarget, scaledStat, newValue) {
+    if (!target || !scaledTarget || !(newValue > 0)) return { action: "apply" };
+    const fx = target?.system?.status?.spellEffects;
+    if (!Array.isArray(fx)) return { action: "apply" };
+    const statKey = String(scaledStat ?? "").toLowerCase();
+    const conflicts = [];
+    for (const e of fx) {
+        if (e?.kind === "regen") continue;
+        if (e?.source !== "spell" && e?.source !== "song") continue;
+        if (e?.scaledTarget !== scaledTarget) continue;
+        const eStat = String(e?.scaledStat ?? "").toLowerCase();
+        if (statKey !== eStat) continue;
+        const eVal = Number(e?.scaledValue) || 0;
+        if (eVal > 0) conflicts.push({ entry: e, value: eVal, label: e?.label ?? e?.name ?? "buff" });
+    }
+    if (!conflicts.length) return { action: "apply" };
+    conflicts.sort((a, b) => b.value - a.value);
+    const strongest = conflicts[0];
+    if (newValue <= strongest.value) {
+        return { action: "block", blockedBy: strongest.label, blockedValue: strongest.value };
+    } else {
+        return { action: "replace", replaces: conflicts.map(c => c.entry) };
+    }
+}
+
 export function getSongModifiers(actor) {
     const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0 };
     const fx = actor?.system?.status?.spellEffects;
@@ -285,8 +317,19 @@ export async function applySong(bard, songItem, targets = []) {
                 await target.update({ "system.status.spellEffects": fx });
                 notes += `<p><em>${tName}: ${esc(label)}.</em></p>`;
             } else {
-                const fx = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
-                fx.push(maintainedEntry(bard, songItem, label, eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) }));
+                const entry = maintainedEntry(bard, songItem, label, eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
+                const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue);
+                if (stack.action === "block") {
+                    notes += `<p><em>${tName}: ${esc(label)} blocked by stronger ${esc(stack.blockedBy)}.</em></p>`;
+                    continue;
+                }
+                let fx = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
+                if (stack.action === "replace") {
+                    const toRemove = new Set(stack.replaces);
+                    fx = fx.filter(e => !toRemove.has(e));
+                    notes += `<p><em>${tName}: ${esc(label)} replaces weaker buff.</em></p>`;
+                }
+                fx.push(entry);
                 await target.update({ "system.status.spellEffects": fx });
                 notes += `<p><em>${tName}: ${esc(label)}.</em></p>`;
             }

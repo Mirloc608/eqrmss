@@ -5,7 +5,7 @@
 // AC 1:1 to DB). Mirrors module/spells/songs.js getSongModifiers.
 // ============================================================
 
-import { scaleSongValue } from "./songs.js";
+import { scaleSongValue, checkBuffStacking } from "./songs.js";
 import { durationRounds, rollAmount } from "./base-spell.js";
 import { spellEffectsOf } from "./spell-mapping.js";
 
@@ -72,7 +72,16 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         // Map hp-max to hp for scaling
         const scaleStat = stat === "hp-max" ? "hp" : stat;
         const scaled = scaleSongValue(scaleStat, rawValue);
-        
+
+        // Stacking (2026-10-07, Option A): per-stat highest wins
+        const stack = checkBuffStacking(target, scaled.target, scaled.stat, scaled.value);
+        if (stack.action === "block") {
+            let bdesc = stat.toUpperCase();
+            if (scaled.target === "db") bdesc = "Defense";
+            notes.push(`${esc(target.name)}: ${bdesc} +${scaled.value} blocked by stronger ${esc(stack.blockedBy)} (${esc(name)}).`);
+            continue;
+        }
+
         const rounds = durationRounds(eff.duration) ?? 10;
         const effRounds = durationFactor === 1 ? rounds : Math.max(1, Math.round(rounds * durationFactor));
         
@@ -92,7 +101,12 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         else if (scaled.target === "mana") desc = `Max Mana +${scaled.value}`;
         else desc = `${stat.toUpperCase()} +${scaled.value}`;
         
-        const list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
+        let list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
+        if (stack.action === "replace") {
+            const toRemove = new Set(stack.replaces);
+            list = list.filter(e => !toRemove.has(e));
+            notes.push(`${esc(target.name)}: replaces weaker buff for ${esc(stat.toUpperCase())} (${esc(name)}).`);
+        }
         list.push({
             label: `${name} — ${desc} (spell)`,
             source: "spell",
