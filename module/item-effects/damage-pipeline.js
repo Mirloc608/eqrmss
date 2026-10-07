@@ -151,13 +151,27 @@ async function applyRegen({ effect, target, source }) {
     return { type: "regen", pool, final: next - before, notes: [], source };
 }
 
+// AC to Defense curve (mirrors songs.js acToDefense, 2026-10-07).
+function clickyAcToDefense(ac) {
+    if (ac <= 0) return 0;
+    if (ac <= 10) return Math.round(ac);
+    if (ac <= 30) return 10 + Math.round((ac - 10) / 2);
+    if (ac <= 70) return 20 + Math.round((ac - 30) / 4);
+    if (ac <= 150) return 30 + Math.round((ac - 70) / 8);
+    return 40 + Math.round((ac - 150) / 16);
+}
+
 async function applyBuff({ effect, target, source, caster }) {
-    const stat = String(effect?.stat ?? "").toLowerCase();
+    // Support both "stat" and legacy "effect" field names
+    const stat = String(effect?.stat ?? effect?.effect ?? "").toLowerCase();
     const rawValue = Number(effect?.amount) || 0;
     if (!(rawValue > 0) || !target) {
         return { type: "buff", final: 0, notes: ["invalid buff payload"], source, applied: false };
     }
+    // Port of spell-buff scaling (2026-10-07): EQ÷10, min 1, AC via curve.
+    // Mirrors scaleSongValue() in songs.js + atk/haste/slow special cases.
     let scaledTarget = null, scaledStat = null, scaledValue = 0, label = "";
+    const rmssStat = { str: "ST", sta: "CO", agi: "AG", dex: "QU", wis: "EM", int: "ME", cha: "PR" };
     if (stat === "atk") {
         scaledTarget = "ob"; scaledStat = "ob";
         scaledValue = Math.max(1, Math.round(rawValue / 10));
@@ -166,6 +180,30 @@ async function applyBuff({ effect, target, source, caster }) {
         scaledTarget = "haste"; scaledStat = "haste";
         scaledValue = Math.max(1, Math.round(rawValue));
         label = `Haste +${scaledValue}%`;
+    } else if (stat === "slow") {
+        scaledTarget = "slow"; scaledStat = "slow";
+        scaledValue = Math.max(1, Math.round(rawValue));
+        label = `Slow +${scaledValue}%`;
+    } else if (stat === "ac" || stat === "armor") {
+        scaledTarget = "db"; scaledStat = null;
+        scaledValue = Math.max(1, clickyAcToDefense(rawValue));
+        label = `Defense +${scaledValue}`;
+    } else if (stat === "movement" || stat === "run-speed" || stat === "runspeed") {
+        scaledTarget = "movement"; scaledStat = null;
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        label = `Movement +${scaledValue}`;
+    } else if (stat === "hp" || stat === "hp-max" || stat === "hits") {
+        scaledTarget = "hits"; scaledStat = null;
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        label = `Max HP +${scaledValue}`;
+    } else if (stat === "mana") {
+        scaledTarget = "mana"; scaledStat = null;
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        label = `Max Mana +${scaledValue}`;
+    } else if (rmssStat[stat]) {
+        scaledTarget = "statBonus"; scaledStat = stat;
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        label = `${rmssStat[stat]} +${scaledValue}`;
     } else {
         return { type: "buff", final: 0, notes: [`unsupported buff stat: ${stat}`], source, applied: false };
     }
@@ -179,7 +217,7 @@ async function applyBuff({ effect, target, source, caster }) {
             }
         }
     }
-    const duration = Number(effect?.duration) || 10;
+    const duration = Number(effect?.duration ?? effect?.["duration-rounds"]) || 10;
     const list = [...(Array.isArray(fx) ? fx : [])];
     list.push({
         name: (() => {

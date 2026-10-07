@@ -134,7 +134,7 @@ export function checkBuffStacking(target, scaledTarget, scaledStat, newValue, ex
 }
 
 export function getSongModifiers(actor) {
-    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0, ob: 0, haste: 0 };
+    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0, ob: 0, haste: 0, slow: 0 };
     const fx = actor?.system?.status?.spellEffects;
     if (!Array.isArray(fx)) return out;
     for (const e of fx) {
@@ -148,6 +148,7 @@ export function getSongModifiers(actor) {
         } else if (target === "db") out.db += val;
         else if (target === "ob") out.ob += val;
         else if (target === "haste") out.haste += val;
+        else if (target === "slow") out.slow += val;
         else if (target === "movement") out.movement += val;
         else if (target === "mana") out.mana += val;
         else if (target === "hits" || target === "hp") out.hits += val;
@@ -176,6 +177,10 @@ export function scaleSongValue(stat, eqValue) {
     if (s === "ac") return { target: "db", value: acToDefense(v) };
     if (s === "movement") return { target: "movement", value: Math.round(v / 10) };
     if (["hp", "hits", "mana"].includes(s)) return { target: s, value: Math.round(v / 10) };
+    // Haste/Slow (2026-10-07): percentages, used as-is (no EQ÷10), min 1.
+    // Mirrors spell-buff logic so song haste reaches out.haste (not statBonuses).
+    if (s === "haste") return { target: "haste", stat: "haste", value: Math.max(1, Math.round(v)) };
+    if (s === "slow") return { target: "slow", stat: "slow", value: Math.max(1, Math.round(v)) };
     // Default: stats → bonus at ÷10
     return { target: "statBonus", stat: s, value: Math.round(v / 10) };
 }
