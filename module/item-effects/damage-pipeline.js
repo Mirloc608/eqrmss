@@ -55,10 +55,22 @@ function getTargetModifiers(target, element) {
     const immunities = sys.immunities ?? [];
     const weaknesses = sys.weaknesses ?? {};
     const resistances = sys.resistances ?? {};
+    // Sum resist buffs from spellEffects (2026-10-07): entries with
+    // scaledTarget "resist-fire" etc. contribute to flat damage reduction.
+    let buffResist = 0;
+    const fx = sys.status?.spellEffects;
+    if (Array.isArray(fx) && element) {
+        const key = `resist-${String(element).toLowerCase()}`;
+        for (const e of fx) {
+            if (String(e?.scaledTarget ?? "").toLowerCase() === key) {
+                buffResist += Number(e?.scaledValue) || 0;
+            }
+        }
+    }
     return {
         immune: Array.isArray(immunities) && immunities.includes(element),
         weaknessMult: weaknesses[element] ?? 1,
-        resist: resistances[element] ?? 0
+        resist: (resistances[element] ?? 0) + buffResist
     };
 }
 
@@ -204,6 +216,14 @@ async function applyBuff({ effect, target, source, caster }) {
         scaledTarget = "statBonus"; scaledStat = stat;
         scaledValue = Math.max(1, Math.round(rawValue / 10));
         label = `${rmssStat[stat]} +${scaledValue}`;
+    } else if (stat.startsWith("resist-")) {
+        // Resist buffs (2026-10-07): EQ÷10, min 1. Feed into getTargetModifiers
+        // via spellEffects entries with scaledTarget "resist-<element>".
+        const elem = stat.slice(7);
+        scaledTarget = `resist-${elem}`; scaledStat = null;
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        const elemLabel = elem.charAt(0).toUpperCase() + elem.slice(1);
+        label = `Resist ${elemLabel} +${scaledValue}`;
     } else {
         return { type: "buff", final: 0, notes: [`unsupported buff stat: ${stat}`], source, applied: false };
     }
@@ -271,6 +291,39 @@ async function applyDamageShield({ effect, target, source }) {
         source: dispName
     });
     return { type: "damageshield", final: amount, notes: [`${amount}-point damage shield for ${duration} rounds (${dispName})`], source, applied: true };
+}
+
+/**
+ * "absorb" — rune/absorb pool (2026-10-07). Absorbs incoming damage before
+ * it hits HP. Highest wins (EQ rule). Supports min/max ranges or flat amount.
+ * Stored at system.status.absorb = { amount, roundsLeft, source }.
+ */
+async function applyAbsorb({ effect, target, source }) {
+    const miss = requireTarget(target, "absorb", source);
+    if (miss) return miss;
+    let amount = 0;
+    if (effect?.min != null || effect?.max != null) {
+        amount = rollRange(Number(effect.min) || 0, Number(effect.max) || 0);
+    } else {
+        amount = Math.max(1, Math.round(Number(effect?.amount) || 0));
+    }
+    if (!(amount > 0)) {
+        return { type: "absorb", final: 0, notes: ["invalid absorb payload"], source, applied: false };
+    }
+    const duration = payloadRounds(effect, 10);
+    const existing = target?.system?.status?.absorb;
+    const existingAmount = Number(existing?.amount) || 0;
+    // Highest wins: do not replace a stronger absorb pool.
+    if (existingAmount >= amount) {
+        return { type: "absorb", final: existingAmount, notes: [`absorb blocked by stronger existing pool (${existingAmount})`], source, applied: false };
+    }
+    const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Absorb";
+    await persistValue(target, "system.status.absorb", {
+        amount,
+        roundsLeft: duration,
+        source: dispName
+    });
+    return { type: "absorb", final: amount, notes: [`absorbs ${amount} damage for ${duration} rounds (${dispName})`], source, applied: true };
 }
 
 /** "heal" — restore concussion hits taken (system.hits.value), floored at 0. */
@@ -544,6 +597,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "mez") results.push(await applyMez({ effect, target, source }));
         else if (effect.type === "summon") results.push(await applySummon({ effect, caster, target, source }));
         else if (effect.type === "damageshield") results.push(await applyDamageShield({ effect, target, source }));
+        else if (effect.type === "absorb") results.push(await applyAbsorb({ effect, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }

@@ -21,7 +21,7 @@ const esc = (s) => globalThis.foundry?.utils?.escapeHTML
  * Mirrors getSongModifiers() in songs.js.
  */
 export function getSpellModifiers(actor) {
-    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0, ob: 0, haste: 0, slow: 0 };
+    const out = { statBonuses: {}, db: 0, movement: 0, mana: 0, hits: 0, ob: 0, haste: 0, slow: 0, resists: {} };
     const fx = actor?.system?.status?.spellEffects;
     if (!Array.isArray(fx)) return out;
     for (const e of fx) {
@@ -41,6 +41,10 @@ export function getSpellModifiers(actor) {
         else if (target === "ob") out.ob += val;
         else if (target === "haste") out.haste += val;
         else if (target === "slow") out.slow += val;
+        else if (target.startsWith("resist-")) {
+            const elem = target.slice(7);
+            out.resists[elem] = (out.resists[elem] || 0) + val;
+        }
     }
     return out;
 }
@@ -104,6 +108,20 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
             const v = Math.round(rawValue);
             scaled.value = v === 0 ? (rawValue < 0 ? -1 : 1) : v;
         }
+        // Absorb (2026-10-07): flat pool, NO EQ÷10 scaling. Creates
+        // system.status.absorb instead of a spellEffects entry.
+        if (stat === "absorb") {
+            scaled.target = "absorb";
+            scaled.stat = null;
+            scaled.value = Math.max(1, Math.round(rawValue));
+        }
+        // Resists (2026-10-07): EQ÷10, min 1. Creates spellEffects entries
+        // with scaledTarget "resist-<element>", read by getTargetModifiers.
+        if (stat.startsWith("resist-")) {
+            scaled.target = stat;
+            scaled.stat = null;
+            scaled.value = Math.max(1, Math.round(rawValue / 10));
+        }
 
         const stack = checkBuffStacking(target, scaled.target, scaled.stat, scaled.value, _spellId);
         if (stack.action === "block") {
@@ -143,8 +161,34 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         else if (scaled.target === "mana") desc = `Max Mana ${sgn(scaled.value)}`;
         else if (scaled.target === "haste") desc = `Haste ${sgn(scaled.value)}%`;
         else if (scaled.target === "slow") desc = `Slow ${sgn(scaled.value)}%`;
+        else if (scaled.target?.startsWith("resist-")) {
+            const elem = scaled.target.slice(7);
+            desc = `Resist ${elem.charAt(0).toUpperCase() + elem.slice(1)} ${sgn(scaled.value)}`;
+        }
         else desc = `${stat.toUpperCase()} ${sgn(scaled.value)}`;
 
+        // Absorb creates system.status.absorb pool, not a spellEffects entry
+        if (scaled.target === "absorb") {
+            const existing = target.system?.status?.absorb;
+            const existingAmount = Number(existing?.amount) || 0;
+            if (existingAmount >= scaled.value) {
+                notes.push(`${esc(target.name)}: absorb blocked by stronger existing pool (${existingAmount}).`);
+                continue;
+            }
+            const rounds = durationRounds(eff.duration) ?? 10;
+            const effRounds = durationFactor === 1 ? rounds : Math.max(1, Math.round(rounds * durationFactor));
+            if (!canTouch) {
+                notes.push(`Buff not applied — you don't control ${esc(target.name)}.`);
+                continue;
+            }
+            await target.update({ "system.status.absorb": {
+                amount: scaled.value,
+                roundsLeft: effRounds,
+                source: name
+            }});
+            notes.push(`${esc(target.name)}: absorbs ${scaled.value} damage for ${effRounds} rounds (${esc(name)}).`);
+            continue;
+        }
         let list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
         if (stack.action === "replace" && stack.replaceIds?.length) {
             const idSet = new Set(stack.replaceIds);

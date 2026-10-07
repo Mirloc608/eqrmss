@@ -1103,6 +1103,22 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
 
     let appliedNote = "";
     if (targetActor && totalDamage > 0 && (targetActor.isOwner || game.user?.isGM)) {
+        // Absorb (rune) hook (2026-10-07): deplete absorb pool before HP.
+        const ab = targetActor.system?.status?.absorb;
+        const abAmount = Number(ab?.amount) || 0;
+        if (abAmount > 0) {
+            const absorbed = Math.min(totalDamage, abAmount);
+            const abLeft = abAmount - absorbed;
+            totalDamage -= absorbed;
+            const abName = String(ab?.source ?? "absorb");
+            if (abLeft > 0) {
+                await targetActor.update({ "system.status.absorb.amount": abLeft });
+                appliedNote += `<p><em>${esc(targetName)}'s ${esc(abName)} absorbs ${absorbed} damage (${abLeft} remaining).</em></p>`;
+            } else {
+                await targetActor.update({ "system.status.absorb": null });
+                appliedNote += `<p><em>${esc(targetName)}'s ${esc(abName)} absorbs ${absorbed} damage and is depleted.</em></p>`;
+            }
+        }
         const cur = Number(targetActor.system?.hits?.value) || 0;
         await targetActor.update({ "system.hits.value": cur + totalDamage });
         // Being subdued doubles the victim's exhaustion costs (§4.10).

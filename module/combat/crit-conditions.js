@@ -738,6 +738,23 @@ export async function tickConditions(combat) {
         }
     }
 
+    // Absorb (rune) tick (2026-10-07): decrement roundsLeft, expire at 0.
+    for (const c of list) {
+        const actor = c.actor;
+        if (!actor || actor.system?.status?.dead) continue;
+        if (!(actor.isOwner || globalThis.game?.user?.isGM)) continue;
+        const ab = actor.system?.status?.absorb;
+        if (!ab || typeof ab !== "object") continue;
+        const left = (Number(ab.roundsLeft) || 0) - 1;
+        if (left > 0) {
+            await actor.update({ "system.status.absorb.roundsLeft": left });
+        } else {
+            const abName = String(ab.source ?? "absorb");
+            await actor.update({ "system.status.absorb": null });
+            notes.push(`<em>${esc(actor.name)}'s ${esc(abName)} absorb fades.</em>`);
+        }
+    }
+
     for (const c of list) {
         const actor = c.actor;
         if (!actor || actor.system?.status?.dead) continue;
