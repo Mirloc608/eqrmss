@@ -181,6 +181,16 @@ function songAutoTargets(bard, songItem, effects) {
     const bx = bardTok.center?.x ?? bardTok.x;
     const by = bardTok.center?.y ?? bardTok.y;
     const bardDisp = bardTok.disposition ?? 1;
+    // Owners of the bard (user IDs with ownership) — allies share ownership
+    // (2026-10-06: user reported Harness characters owned by same player
+    // weren't detected as allies via disposition alone).
+    const bardOwners = new Set();
+    try {
+        const ownership = bard?.ownership ?? {};
+        for (const [userId, level] of Object.entries(ownership)) {
+            if (Number(level) >= 2) bardOwners.add(userId); // 2=limited, 3=owner
+        }
+    } catch { /* ignore */ }
 
     const out = [];
     for (const tok of canvas?.tokens?.placeables ?? []) {
@@ -191,10 +201,21 @@ function songAutoTargets(bard, songItem, effects) {
         if (distPx > rangePx + 1) continue; // Outside range (+1px tolerance)
 
         const disp = tok.disposition ?? 0;
-        // Allies: same disposition as bard (or bard themselves)
-        // Opponents: different disposition (hostile to bard)
-        const isAlly = tok.id === bardTok.id || disp === bardDisp;
-        const isOpponent = !isAlly && disp !== bardDisp;
+        // Allies: same token as bard, OR shared ownership, OR same disposition
+        let isAlly = tok.id === bardTok.id || disp === bardDisp;
+        if (!isAlly && bardOwners.size > 0) {
+            try {
+                const tokOwnership = tok.actor?.ownership ?? {};
+                for (const [userId, level] of Object.entries(tokOwnership)) {
+                    if (Number(level) >= 2 && bardOwners.has(userId)) {
+                        isAlly = true;
+                        break;
+                    }
+                }
+            } catch { /* ignore */ }
+        }
+        // Opponents: hostile disposition, or (if bard is friendly) not allied
+        const isOpponent = !isAlly && (disp === -1 || (bardDisp === 1 && disp !== 1));
 
         if (mode === "ally" && isAlly) out.push(tok.actor);
         else if (mode === "opponent" && isOpponent) out.push(tok.actor);
