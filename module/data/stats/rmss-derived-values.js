@@ -249,17 +249,20 @@ export function calculateArmorAndDefenses(actorData) {
     const naturalDB = chartDB ?? quicknessBonus;
     const stanceDB = stanceDBBonus(actorData);
     // Song DB (2026-10-06): AC modifiers scale 1:1 to DB.
+    // Spell DB (2026-10-07): same scaling, stacks with song.
     let songDB = 0;
+    let spellDB = 0;
     const songFx = actorData?.system?.status?.spellEffects;
     if (Array.isArray(songFx)) {
         for (const e of songFx) {
-            if (e?.source === "song" && e?.scaledTarget === "db") {
-                songDB += Number(e?.scaledValue) || 0;
+            if (e?.scaledTarget === "db") {
+                if (e?.source === "song") songDB += Number(e?.scaledValue) || 0;
+                else if (e?.source === "spell" && e?.kind !== "regen") spellDB += Number(e?.scaledValue) || 0;
             }
         }
     }
-    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB + mixedArmorDB + stanceDB + helmetDF + songDB;
-    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB + stanceDB + helmetDF + enhMissilePenalty + songDB;
+    const totalDB = naturalDB + adrenalEffective + shieldBonus + otherDB + armorDB + enhancedArmorDB + formationDB + mixedArmorDB + stanceDB + helmetDF + songDB + spellDB;
+    const totalMissileDB = naturalDB + (adrenalEffective / 2) + shieldMissileBonus + otherDB + armorDB + enhancedArmorDB + formationMissileDB + mixedArmorDB + stanceDB + helmetDF + enhMissilePenalty + songDB + spellDB;
 
     return {
         derived: derivedStats,

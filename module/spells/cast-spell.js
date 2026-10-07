@@ -36,6 +36,7 @@
 
 import { combatCard } from "../combat/chat-card.js";
 import { classifySpell, directedSpellsOB, spellEffectsOf } from "./spell-mapping.js";
+import { applySpellBuffs } from "./spell-buffs.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -517,12 +518,14 @@ export async function castSpell(actor, spellItem, opts = {}) {
     // their mechanics in later stages; the mana economy is live).
     await spendMana();
     const regenNote = await applyRegenBuff(actor, spellItem, worn.durationFactor);
+    const buffTarget = targetedActor() ?? actor;
+    const buffNote = await applySpellBuffs(actor, spellItem, buffTarget, worn.durationFactor);
     const note = cls.kind === "later" ? esc(cls.reason) : "no mechanical payload";
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}<p><em>Cast announced — ${note}.${manaNote}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}<p><em>Cast announced — ${note}.${manaNote}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }
