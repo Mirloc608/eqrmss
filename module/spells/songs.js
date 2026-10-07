@@ -47,16 +47,30 @@ function effectValue(eff) {
 function effectLabel(name, eff) {
     const type = String(eff?.type ?? "").toLowerCase();
     if (type === "modifier") {
-        const val = effectValue(eff);
-        return `${name} — ${String(eff.stat ?? "stat").toUpperCase()} ${val >= 0 ? "+" : ""}${val}`;
+        const stat = String(eff.stat ?? "stat").toLowerCase();
+        const scaled = scaleSongValue(stat, effectValue(eff));
+        const v = scaled.value;
+        const sign = v >= 0 ? "+" : "";
+        if (scaled.target === "db") {
+            return `${name} — DB ${sign}${v}`;
+        }
+        if (scaled.target === "movement") {
+            return `${name} — MOVEMENT ${sign}${v}`;
+        }
+        if (scaled.target === "statBonus") {
+            const rmss = { str: "ST", sta: "CO", agi: "AG", dex: "QU", wis: "EM", int: "ME", cha: "PR" }[stat] ?? stat.toUpperCase();
+            return `${name} — ${rmss} ${sign}${v} bonus`;
+        }
+        return `${name} — ${stat.toUpperCase()} ${sign}${v}`;
     }
     if (type === "damage") {
-        const lo = Number(eff?.min ?? eff?.amount) || 0;
-        const hi = Number(eff?.max ?? eff?.amount ?? lo) || lo;
+        const lo = Math.round((Number(eff?.min ?? eff?.amount) || 0) / 10);
+        const hi = Math.round((Number(eff?.max ?? eff?.amount ?? lo*10) || lo*10) / 10);
         return `${name} — ${lo}${hi !== lo ? `-${hi}` : ""} ${String(eff?.element ?? "")} damage/round`.replace("  ", " ");
     }
     if (type === "regen" || type === "heal") {
-        return `${name} — heals ${effectValue(eff) || Number(eff?.amount) || 0}/round`;
+        const v = Math.round((effectValue(eff) || Number(eff?.amount) || 0) / 10);
+        return `${name} — heals ${v}/round`;
     }
     if (type === "cure") return `${name} — cures ${String(eff?.effect ?? eff?.stat ?? "condition")}`;
     if (type === "control") return `${name} — ${String(eff?.effect ?? "control")}`;
