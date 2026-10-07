@@ -524,11 +524,17 @@ export async function castSpell(actor, spellItem, opts = {}) {
     const buffTarget = targetedActor() ?? actor;
     const buffNote = await applySpellBuffs(actor, spellItem, buffTarget, worn.durationFactor);
     const note = cls.kind === "later" ? esc(cls.reason) : "no mechanical payload";
+    // Suppress the "announced" line if the buff/regen pipeline already
+    // produced output (2026-10-07: redundant when buffs applied or were
+    // blocked by stacking — the pipeline's own message says what happened).
+    const announcedLine = (regenNote || buffNote)
+        ? ""
+        : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}<p><em>Cast announced — ${note}.${manaNote}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }
