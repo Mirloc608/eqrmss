@@ -180,7 +180,7 @@ function songAutoTargets(bard, songItem, effects) {
 
     const bx = bardTok.center?.x ?? bardTok.x;
     const by = bardTok.center?.y ?? bardTok.y;
-    const bardDisp = bardTok.disposition ?? 1;
+    const bardDisp = bardTok.document?.disposition ?? bardTok.disposition ?? 1;
     // Owners of the bard (user IDs with ownership) — allies share ownership
     // (2026-10-06: user reported Harness characters owned by same player
     // weren't detected as allies via disposition alone).
@@ -200,7 +200,7 @@ function songAutoTargets(bard, songItem, effects) {
         const distPx = Math.hypot(dx, dy);
         if (distPx > rangePx + 1) continue; // Outside range (+1px tolerance)
 
-        const disp = tok.disposition ?? 0;
+        const disp = tok.document?.disposition ?? tok.disposition ?? 0;
         // Allies: same token as bard, OR same disposition, OR shared ownership.
         // Explicitly hostile (disp -1) vs non-hostile bard → never ally,
         // even with shared GM ownership (2026-10-06 fix).
