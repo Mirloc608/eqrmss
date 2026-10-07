@@ -178,7 +178,12 @@ async function applyBuff({ effect, target, source, caster }) {
     const duration = Number(effect?.duration) || 10;
     const list = [...(Array.isArray(fx) ? fx : [])];
     list.push({
-        name: effect?.name ?? "Clicky Buff", label, kind: "buff", source: "spell",
+        name: (() => {
+          if (effect?.name) return effect.name;
+            const m = String(source ?? "").match(/^(?:triggered|worn|proc):(.+)$/);
+            if (m) return m[1].split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            return "Clicky Buff";
+        })(), label, kind: "buff", source: "spell",
         spellId: source ?? "clicky", scaledTarget, scaledStat, scaledValue, roundsLeft: duration,
     });
     await target.update({ "system.status.spellEffects": list });

@@ -199,7 +199,7 @@ function tokenDistanceFt(fromTok, toTok) {
 // Point-blank penalty for missile weapons at adjacent range (2026-10-07, Option B).
 // A future Ranger AA will negate this penalty.
 const POINT_BLANK_PENALTY = -30;
-const MELEE_REACH_FT = 5;
+const MELEE_REACH_FT = 8;
 
 function isMissileAttack(weaponType) {
     return MISSILE_WEAPON_TYPES.has(weaponType);
