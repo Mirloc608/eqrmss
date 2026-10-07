@@ -77,6 +77,10 @@ export function freeHandEsf(realm) {
 // weaker trade — so they ignore the free-hand ESF channel
 // entirely. (Bard is not an EQ hybrid class.)
 export const HYBRID_CASTERS = new Set(["paladin", "ranger", "shadowknight", "beastlord"]);
+// Divine casters (ruling 2026-10-06): ignore armor AT, helmet, and
+// carried-weight ESF channels. They retain overlevel, non-standard
+// list, free-hand, and preparation penalties.
+export const DIVINE_CASTERS = new Set(["cleric", "druid", "shaman"]);
 
 export const ESF_NONSTANDARD_LIST = 20;
 
@@ -305,18 +309,22 @@ export function computeESF(actor, spellItem, opts = {}) {
     }
 
     // Worn armor type (no Mentalism column in the book).
-    const at = wornArmorAt(actor);
-    if (at != null && realm !== "mentalism") {
-        const row = ESF_ARMOR[at];
-        if (row) add(`armor AT ${at}`, realm === "essence" ? row[0] : row[1]);
-    }
+    // Divine casters ignore this channel (ruling 2026-10-06).
+    const isDivine = DIVINE_CASTERS.has(casterClass);
+    if (!isDivine) {
+        const at = wornArmorAt(actor);
+        if (at != null && realm !== "mentalism") {
+            const row = ESF_ARMOR[at];
+            if (row) add(`armor AT ${at}`, realm === "essence" ? row[0] : row[1]);
+        }
 
-    // Helmet worn.
-    const helm = headPiece(actor);
-    if (helm) {
-        const kind = helmetKind(helm);
-        const row = ESF_HELMET[kind];
-        if (row) add(`helmet (${kind === "leatherMetal" ? "leather/metal" : kind})`, row[realm] ?? 0);
+        // Helmet worn.
+        const helm = headPiece(actor);
+        if (helm) {
+            const kind = helmetKind(helm);
+            const row = ESF_HELMET[kind];
+            if (row) add(`helmet (${kind === "leatherMetal" ? "leather/metal" : kind})`, row[realm] ?? 0);
+        }
     }
 
     // Free hand status. EQ hybrids ignore this channel
@@ -326,15 +334,17 @@ export function computeESF(actor, spellItem, opts = {}) {
         add("no free hand", freeHandEsf(realm));
     }
 
-    // Carried equipment weight.
-    const weights = carriedEquipmentWeights(actor);
-    const eqMod = equipmentEsf(weights, realm);
-    if (eqMod > 0) {
-        const bits = [];
-        if (weights.organicNonliving > 0) bits.push(`${Math.ceil(weights.organicNonliving)} lb organic`);
-        if (weights.inorganic > 0) bits.push(`${Math.ceil(weights.inorganic)} lb inorganic`);
-        if (weights.organicLiving > 0) bits.push(`${weights.organicLiving} lb living organic`);
-        add(`carried equipment (${bits.join(", ")})`, eqMod);
+    // Carried equipment weight. Divine casters ignore (ruling 2026-10-06).
+    if (!isDivine) {
+        const weights = carriedEquipmentWeights(actor);
+        const eqMod = equipmentEsf(weights, realm);
+        if (eqMod > 0) {
+            const bits = [];
+            if (weights.organicNonliving > 0) bits.push(`${Math.ceil(weights.organicNonliving)} lb organic`);
+            if (weights.inorganic > 0) bits.push(`${Math.ceil(weights.inorganic)} lb inorganic`);
+            if (weights.organicLiving > 0) bits.push(`${weights.organicLiving} lb living organic`);
+            add(`carried equipment (${bits.join(", ")})`, eqMod);
+        }
     }
 
     // Preparation rounds. The cast path assumes book-standard
