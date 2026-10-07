@@ -7,6 +7,7 @@
 
 import { scaleSongValue } from "./songs.js";
 import { durationRounds, rollAmount } from "./base-spell.js";
+import { spellEffectsOf } from "./spell-mapping.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -51,8 +52,8 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
     const name = spellItem?.name ?? "spell";
     const notes = [];
     
-    // Get effects from spell item
-    const effects = spellItem?.system?.effects ?? [];
+    // Get effects via spellEffectsOf (falls back to catalog)
+    const effects = spellEffectsOf(spellItem) ?? [];
     
     for (const eff of effects) {
         if (!eff || typeof eff !== "object") continue;
