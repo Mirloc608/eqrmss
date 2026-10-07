@@ -1110,6 +1110,19 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         appliedNote = `<p><em>${totalDamage} concussion hit${totalDamage === 1 ? "" : "s"} applied to ${esc(targetName)}.</em></p>`;
         // Concussion-hit thresholds — unconsciousness (§6.4.1), dying (§3.8).
         await checkHitThresholds(targetActor);
+        // Damage shield (2026-10-07): melee attackers take flat DS damage
+        // when they land a hit. Not on misses, not vs missiles.
+        if (!missileAttack && totalDamage > 0) {
+            const ds = targetActor.system?.status?.damageShield;
+            const dsAmount = Number(ds?.amount) || 0;
+            if (dsAmount > 0 && actor && (actor.isOwner || game.user?.isGM)) {
+                const dsSource = String(ds?.source ?? "damage shield");
+                const aCur = Number(actor.system?.hits?.value) || 0;
+                await actor.update({ "system.hits.value": aCur + dsAmount });
+                appliedNote += `<p><em>${esc(actor.name)} takes ${dsAmount} damage from ${esc(dsSource)} damage shield.</em></p>`;
+                await checkHitThresholds(actor);
+            }
+        }
         // The ST table's "foe knocked out" is a crit-blow knockout, not
         // a hit-total threshold — it stands even under the hit max.
         if (structuralKnockout) await targetActor.update({ "system.status.unconscious": true });

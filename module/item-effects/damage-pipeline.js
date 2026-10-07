@@ -244,6 +244,35 @@ async function applyBuff({ effect, target, source, caster }) {
     return { type: "buff", final: scaledValue, notes: [`${label} for ${duration} rounds`], source, applied: true };
 }
 
+/**
+ * "damageshield" — damage shield (2026-10-07). Melee attackers take flat
+ * damage when they hit the shielded defender. Highest wins (EQ rule):
+ * a weaker DS does not replace a stronger one.
+ * Stored at system.status.damageShield = { amount, roundsLeft, source }.
+ */
+async function applyDamageShield({ effect, target, source }) {
+    const miss = requireTarget(target, "damageshield", source);
+    if (miss) return miss;
+    const amount = Math.max(1, Math.round(Number(effect?.amount) || 0));
+    if (!(amount > 0)) {
+        return { type: "damageshield", final: 0, notes: ["invalid damage shield payload"], source, applied: false };
+    }
+    const duration = payloadRounds(effect, 10);
+    const existing = target?.system?.status?.damageShield;
+    const existingAmount = Number(existing?.amount) || 0;
+    // Highest wins: do not replace a stronger shield.
+    if (existingAmount >= amount) {
+        return { type: "damageshield", final: existingAmount, notes: [`damage shield blocked by stronger existing shield (${existingAmount})`], source, applied: false };
+    }
+    const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Damage Shield";
+    await persistValue(target, "system.status.damageShield", {
+        amount,
+        roundsLeft: duration,
+        source: dispName
+    });
+    return { type: "damageshield", final: amount, notes: [`${amount}-point damage shield for ${duration} rounds (${dispName})`], source, applied: true };
+}
+
 /** "heal" — restore concussion hits taken (system.hits.value), floored at 0. */
 async function applyHeal({ effect, target, source }) {
     const miss = requireTarget(target, "heal", source);
@@ -514,6 +543,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "fear") results.push(await applyFear({ effect, target, source }));
         else if (effect.type === "mez") results.push(await applyMez({ effect, target, source }));
         else if (effect.type === "summon") results.push(await applySummon({ effect, caster, target, source }));
+        else if (effect.type === "damageshield") results.push(await applyDamageShield({ effect, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }

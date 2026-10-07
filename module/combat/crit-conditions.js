@@ -721,6 +721,23 @@ export async function tickConditions(combat) {
         }
     } catch (e) { /* ignore */ }
 
+    // Damage shield tick (2026-10-07): decrement rounds, expire at 0.
+    for (const c of list) {
+        const actor = c.actor;
+        if (!actor || actor.system?.status?.dead) continue;
+        if (!(actor.isOwner || globalThis.game?.user?.isGM)) continue;
+        const ds = actor.system?.status?.damageShield;
+        if (!ds || typeof ds !== "object") continue;
+        const left = (Number(ds.roundsLeft) || 0) - 1;
+        if (left > 0) {
+            await actor.update({ "system.status.damageShield.roundsLeft": left });
+        } else {
+            const dsName = String(ds.source ?? "damage shield");
+            await actor.update({ "system.status.damageShield": null });
+            notes.push(`<em>${esc(actor.name)}'s ${esc(dsName)} damage shield ends.</em>`);
+        }
+    }
+
     for (const c of list) {
         const actor = c.actor;
         if (!actor || actor.system?.status?.dead) continue;
