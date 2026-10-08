@@ -674,9 +674,25 @@
 .application.sheet.eqrmss.actor.pet-sheet .tab[data-group="primary"] {
   padding: 8px 10px;
 }
-/* Shorter sheet (2026-10-08): tab content scrolls instead of stretching */
+/* Shorter sheet (2026-10-08): tab content scrolls instead of stretching.
+   Tab scrolling (2026-10-08): the form must be a flex column so the tab
+   body gets a constrained height; each active tab then scrolls
+   independently via the .tab[data-group="primary"].active rule. */
+.application.sheet.eqrmss.actor.pet-sheet .window-content > form {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+}
+.application.sheet.eqrmss.actor.pet-sheet .window-content > form > .sheet-header,
+.application.sheet.eqrmss.actor.pet-sheet .window-content > form > .sheet-tabs {
+  flex-shrink: 0 !important;
+}
 .application.sheet.eqrmss.actor.pet-sheet .sheet-body {
-  overflow-y: auto !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
   padding: 6px !important;
 }
 
