@@ -815,6 +815,28 @@ export async function tickConditions(combat) {
         }
     }
 
+// Levitate tick (2026-10-07): decrement roundsLeft, expire at 0.
+// On expiry also removes the `flying` ActiveEffect status.
+    for (const c of list) {
+        const actor = c.actor;
+        if (!actor || actor.system?.status?.dead) continue;
+        if (!(actor.isOwner || globalThis.game?.user?.isGM)) continue;
+        const lv = actor.system?.status?.levitate;
+        if (lv && typeof lv === "object") {
+            const left = (Number(lv.roundsLeft) || 0) - 1;
+            if (left > 0) {
+                await actor.update({ "system.status.levitate.roundsLeft": left });
+            } else {
+                await actor.update({ "system.status.levitate": null });
+                try {
+                    const { removeStatusEffect } = await import("../spells/status-wiring.js");
+                    await removeStatusEffect(actor, "flying");
+                } catch (e) { /* ignore */ }
+                notes.push(`<em>${esc(actor.name)} floats gently back to the ground.</em>`);
+            }
+        }
+    }
+
     for (const c of list) {
         const actor = c.actor;
         if (!actor || actor.system?.status?.dead) continue;

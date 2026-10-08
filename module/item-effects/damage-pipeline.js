@@ -411,6 +411,28 @@ export async function applyUltravision({ effect, target, source }) {
 }
 
 /**
+ * "levitate" — EQ Levitate (2026-10-07). Grants the `flying` status;
+ * the Bearer <redacted> passes through difficult or otherwise impossible
+ * terrain as normal ground (user ruling). Delegates to
+ * module/spells/levitate.js via dynamic import (avoids cycles).
+ * Payload shape: { type: "levitate", duration: <rounds> }
+ */
+export async function applyLevitatePayload({ effect, target, source }) {
+    const miss = requireTarget(target, "levitate", source);
+    if (miss) return miss;
+    const duration = payloadRounds(effect, 205);
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Levitate";
+    try {
+        const { applyLevitate } = await import("../spells/levitate.js");
+        const note = await applyLevitate(target, dispName, duration);
+        const applied = !/not applied|failed/i.test(note);
+        return { type: "levitate", final: applied ? 1 : 0, notes: [note.replace(/<[^>]+>/g, "")], source, applied };
+    } catch (e) {
+        return { type: "levitate", final: 0, notes: [`levitate failed: ${e?.message ?? e}`], source, applied: false };
+    }
+}
+
+/**
  * "teleport" — EQ teleport mechanics for clickies.
  * Delegates to module/spells/teleport.js via dynamic import (avoids cycles).
  * Payload shape: { type: "teleport", effect: "<teleport-kind>", destination: "<dest-id>" }
@@ -790,6 +812,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "see-invisible") results.push(await applySeeInvisible({ effect, target, source }));
         else if (effect.type === "infravision") results.push(await applyInfravision({ effect, target, source }));
         else if (effect.type === "ultravision") results.push(await applyUltravision({ effect, target, source }));
+        else if (effect.type === "levitate") results.push(await applyLevitatePayload({ effect, target, source }));
         else if (effect.type === "teleport") results.push(await applyTeleportPayload({ effect, caster, target, source }));
         else if (effect.type === "summon-item") results.push(await applySummonItem({ effect, caster, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));

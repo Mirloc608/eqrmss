@@ -18,6 +18,7 @@
 import { durationRounds } from "./base-spell.js";
 import { applyStatusEffect } from "./status-wiring.js";
 import { breakInvisibility } from "./invisibility.js";
+import { applyLevitate } from "./levitate.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -321,6 +322,8 @@ export async function applySong(bard, songItem, targets = []) {
         for (const eff of effects) {
             const type = String(eff?.type ?? "").toLowerCase();
             if (type === "damage" || type === "regen" || type === "heal") continue;
+            // Levitate is not a buff — handled separately via applyLevitate (2026-10-07).
+            if (type === "levitate" || String(eff?.effect ?? "").toLowerCase() === "levitate") continue;
             // This is a buff (modifier) effect
             const entry = maintainedEntry(bard, songItem, effectLabel(name, eff), eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
             const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue, entry.songId);
@@ -362,6 +365,10 @@ export async function applySong(bard, songItem, targets = []) {
                 }));
                 await target.update({ "system.status.spellEffects": fx });
                 notes += `<p><em>${tName}: ${esc(label)}.</em></p>`;
+            } else if (type === "levitate" || String(eff?.effect ?? "").toLowerCase() === "levitate") {
+                // Levitate (2026-10-07): wire to `flying` status via applyLevitate.
+                const levRounds = durationRounds(eff?.duration) ?? 200;
+                notes += await applyLevitate(target, name, levRounds);
             } else {
                 const entry = maintainedEntry(bard, songItem, label, eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
                 const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue, entry.songId);

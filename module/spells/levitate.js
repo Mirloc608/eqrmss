@@ -2,13 +2,13 @@
 // LEVITATE (2026-10-07). Wires EQ levitate spells to Foundry's
 // `flying` status effect (custom icon — not in Foundry core).
 //
-// Levitate allows the bearer to pass through difficult or
+// Levitate allows the Bearer <redacted> pass through difficult or
 // impossible terrain as if normal ground (user ruling 2026-10-07).
-// The `flying` status provides the token marker; the movement
-// rules integration is future work.
+// The `flying` status provides the token marker; use isLevitating()
+// to check for the difficult-terrain bypass in movement code.
 // ============================================================
 
-import { applyStatusEffect } from "./status-wiring.js";
+import { applyStatusEffect, hasStatusEffect, removeStatusEffect } from "./status-wiring.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -16,6 +16,8 @@ const esc = (s) => globalThis.foundry?.utils?.escapeHTML
 
 /**
  * Apply the `flying` status to a target via ActiveEffect.
+ * Also stores system.status.levitate = { roundsLeft, source } for
+ * tick-based expiry with chat note (see tickConditions).
  * @param {Actor} target - the actor gaining levitation
  * @param {string} name - display name (spell name)
  * @param {number} rounds - duration in combat rounds
@@ -36,5 +38,42 @@ export async function applyLevitate(target, name, rounds = 200) {
         { source: "spell", category: "buff" }
     );
     if (!ok) return `<p><em>Levitate failed.</em></p>`;
+    try {
+        await target.update({
+            "system.status.levitate": { roundsLeft: r, source: String(name ?? "Levitate") }
+        });
+    } catch (e) { /* non-fatal */ }
     return `<p><em>${esc(target.name)} levitates for ${r} rounds (${esc(name)}).</em></p>`;
+}
+
+/**
+ * Check if an actor is currently levitating (has the `flying` status).
+ * Movement code should call this to bypass difficult/impossible terrain:
+ * levitating characters treat all terrain as normal ground.
+ * @param {Actor} actor - the actor to check
+ * @returns {boolean}
+ */
+export function isLevitating(actor) {
+    return hasStatusEffect(actor, "flying");
+}
+
+/**
+ * Remove levitation: clears the `flying` status and the
+ * system.status.levitate tracker. Used on tick expiry.
+ * @param {Actor} actor - the actor losing levitation
+ * @returns {Promise<boolean>} true if anything was removed
+ */
+export async function removeLevitate(actor) {
+    if (!actor) return false;
+    let removed = false;
+    try {
+        if (await removeStatusEffect(actor, "flying")) removed = true;
+    } catch (e) { /* ignore */ }
+    try {
+        if (actor.system?.status?.levitate) {
+            await actor.update({ "system.status.levitate": null });
+            removed = true;
+        }
+    } catch (e) { /* ignore */ }
+    return removed;
 }

@@ -6315,8 +6315,18 @@
       "description": "Triggered effect: Dead Man Floating grants levitation, water breathing (enduring breath), see invisible, and +70 poison resist for 72 minutes.",
       "payload": [
         {
+          "type": "levitate",
+          "duration": 720,
+          "note": "Dead Man Floating: levitation for 72 minutes (720 rounds)"
+        },
+        {
+          "type": "see-invisible",
+          "duration": 720,
+          "note": "Dead Man Floating: see invisible for 72 minutes (720 rounds)"
+        },
+        {
           "type": "utility",
-          "note": "Grants Dead Man Floating: levitation, water breathing, see invisible, +70 poison resist for 72 minutes"
+          "note": "Dead Man Floating: water breathing (enduring breath) \u2014 no mechanical system yet"
         },
         {
           "type": "buff",
@@ -6561,8 +6571,9 @@
       "description": "Triggered effect: Levitation lets you float slightly off the ground for 20.5 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Levitation: float slightly off the ground for 20.5 minutes"
+          "type": "levitate",
+          "duration": 205,
+          "note": "Levitation: float slightly off the ground for 20.5 minutes (205 rounds)"
         }
       ]
     },
@@ -6573,8 +6584,9 @@
       "description": "Triggered effect: Levitate lets you float slightly off the ground for up to 20.5 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Levitate: float slightly off the ground for up to 20.5 minutes"
+          "type": "levitate",
+          "duration": 205,
+          "note": "Levitate: float slightly off the ground for up to 20.5 minutes (205 rounds)"
         }
       ]
     },
