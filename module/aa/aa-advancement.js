@@ -144,6 +144,10 @@ export class EQRMSSAAAdvancement {
                 const check = this.checkEligibility(actor, def);
                 const currentRank = this.getPurchasedRank(actor, def.id);
                 const cost = check.ok ? this.getCost(def, check.currentRank) : null;
+                // AA descriptions (2026-10-08): pass through for sheet display.
+                // nextRank = the rank being purchased (0-indexed by currentRank).
+                const ranks = def.system?.ranks ?? [];
+                const nextRankDef = ranks[currentRank] ?? null;
                 return {
                     id: def.id,
                     name: def.name,
@@ -154,7 +158,13 @@ export class EQRMSSAAAdvancement {
                     cost,
                     eligible: check.ok,
                     affordable: check.ok && cost > 0 && state.points >= cost,
-                    reason: check.reason ?? null
+                    reason: check.reason ?? null,
+                    description: def.system?.description ?? "",
+                    nextRank: nextRankDef ? {
+                        rank: Number(nextRankDef.rank ?? currentRank + 1),
+                        description: nextRankDef.description ?? "",
+                        effects: Array.isArray(nextRankDef.effects) ? nextRankDef.effects : []
+                    } : null
                 };
             })
             .sort((a, b) =>
@@ -166,13 +176,22 @@ export class EQRMSSAAAdvancement {
     static getPurchasedAAs(actor) {
         return this.getAAState(actor).abilities.map(entry => {
             const def = this.getAADef(entry.id);
+            // AA descriptions (2026-10-08): rankInfo = current rank's data.
+            const ranks = def?.system?.ranks ?? [];
+            const rankDef = ranks[Math.max(0, entry.rank - 1)] ?? null;
             return {
                 id: entry.id,
                 rank: entry.rank,
                 name: def?.name ?? entry.id,
                 category: def?.system?.category ?? "",
                 maxRanks: Math.max(1, Math.floor(Number(def?.system?.maxRanks ?? 1))),
-                levelRequired: Number(def?.system?.levelRequired ?? 1)
+                levelRequired: Number(def?.system?.levelRequired ?? 1),
+                description: def?.system?.description ?? "",
+                rankInfo: rankDef ? {
+                    rank: Number(rankDef.rank ?? entry.rank),
+                    description: rankDef.description ?? "",
+                    effects: Array.isArray(rankDef.effects) ? rankDef.effects : []
+                } : null
             };
         });
     }

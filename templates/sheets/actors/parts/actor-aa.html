@@ -19,7 +19,23 @@
   {{#if aa.purchased.length}}
   <ul class="aa-purchased">
     {{#each aa.purchased}}
-    <li>{{this.name}} — Rank {{this.rank}}/{{this.maxRanks}}</li>
+    <li class="aa-row" data-aa-id="{{this.id}}">
+      <button type="button" class="aa-toggle" data-action="toggleAA" data-aa-id="{{this.id}}" title="Show details">▸</button>
+      <span class="aa-name">{{this.name}} — Rank {{this.rank}}/{{this.maxRanks}}</span>
+      <div class="aa-details is-hidden" data-aa-details="{{this.id}}">
+        {{#if this.description}}<p class="aa-desc">{{this.description}}</p>{{/if}}
+        {{#if this.rankInfo}}
+        <p class="aa-rank"><strong>Rank {{this.rankInfo.rank}}:</strong> {{this.rankInfo.description}}</p>
+        {{#if this.rankInfo.effects.length}}
+        <ul class="aa-effects">
+          {{#each this.rankInfo.effects}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+        {{/if}}
+      </div>
+    </li>
     {{/each}}
   </ul>
   {{else}}
@@ -30,7 +46,8 @@
   {{#if aa.available.length}}
   <ul class="aa-available">
     {{#each aa.available}}
-    <li>
+    <li class="aa-row" data-aa-id="{{this.id}}">
+      <button type="button" class="aa-toggle" data-action="toggleAA" data-aa-id="{{this.id}}" title="Show details">▸</button>
       <strong>{{this.name}}</strong>
       <span class="aa-meta">(Level {{this.levelRequired}} · Rank {{this.currentRank}}/{{this.maxRanks}})</span>
       {{#if this.eligible}}
@@ -44,6 +61,19 @@
       {{else}}
         <span class="aa-locked">{{this.reason}}</span>
       {{/if}}
+      <div class="aa-details is-hidden" data-aa-details="{{this.id}}">
+        {{#if this.description}}<p class="aa-desc">{{this.description}}</p>{{/if}}
+        {{#if this.nextRank}}
+        <p class="aa-rank"><strong>Next rank ({{this.nextRank.rank}}):</strong> {{this.nextRank.description}}</p>
+        {{#if this.nextRank.effects.length}}
+        <ul class="aa-effects">
+          {{#each this.nextRank.effects}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+        {{/if}}
+      </div>
     </li>
     {{/each}}
   </ul>

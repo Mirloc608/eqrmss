@@ -31,6 +31,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             rollStat: EQRMSSPlayerSheet.prototype.rollStat,
             purchaseAA: EQRMSSPlayerSheet.prototype.purchaseAA,
             grantAAPoints: EQRMSSPlayerSheet.prototype.grantAAPoints,
+            toggleAA: EQRMSSPlayerSheet.prototype.toggleAA,
             awardXP: EQRMSSPlayerSheet.prototype.awardXP,
             addLogEntry: EQRMSSPlayerSheet.prototype.addLogEntry
         }
@@ -771,6 +772,35 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
         await EQRMSSAAAdvancement.purchaseRank(actor, aaId);
         await this.render();
+    }
+
+    // ------------------------------------------------------------
+    // AA description expander (2026-10-08): toggles the details
+    // div without re-rendering, so scroll position and other
+    // expanders stay put. Collapsed by default for performance
+    // with hundreds of rows.
+    // ------------------------------------------------------------
+    toggleAA(event, target) {
+        event.preventDefault();
+        const aaId = target?.dataset?.aaId;
+        if (!aaId) return;
+
+        const root = this.element ?? document;
+        // CSS.escape handles AA IDs with special characters.
+        const details = root.querySelector(
+            `[data-aa-details="${CSS.escape(aaId)}"]`
+        );
+        if (!details) return;
+
+        const isHidden = details.classList.toggle("is-hidden");
+        // Update all toggle buttons for this AA (purchased + available lists).
+        const buttons = root.querySelectorAll(
+            `.aa-toggle[data-aa-id="${CSS.escape(aaId)}"]`
+        );
+        buttons.forEach(btn => {
+            btn.textContent = isHidden ? "▸" : "▾";
+            btn.title = isHidden ? "Show details" : "Hide details";
+        });
     }
 
     async grantAAPoints(event, target) {
