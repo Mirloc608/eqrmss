@@ -17,6 +17,7 @@
 // Pet ID formats:
 // - Magician: "elementalkin-fire", "aspect-of-fire" -> fire-elemental (pet level = SPELL level)
 // - Necro: "cavorting-bones", "bone-walk" -> skeleton (pet level = SPELL level)
+// - Necro (ID): "PCPetNecS02L008Skel2Ice" -> skeleton, level 8 (decoded from ID)
 // - Shaman: "PCPetShmS07L032WolfGhoRk1" -> wolf, level 32 (decoded from ID)
 // - Beastlord: "s02-l008-warder" -> wolf (pet level = BEASTLORD level, levels with owner)
 // - Enchanter: "pendrils-animation-pet" -> golem (pet level = SPELL level)
@@ -53,6 +54,23 @@ export function decodeShamanPetId(petId) {
 }
 
 /**
+ * Decode a Necromancer pet ID: "PCPetNecS02L008Skel2Ice" ->
+ * { spellLevel: 2, petLevel: 8, type: "Skel2Ice" }.
+ * Format: PCPetNecS<spell>L<level><type>
+ * Type prefixes: "Skel" = skeleton (variant number + element suffix
+ * like "Ice" are visual-only); "Spect"/"Spectre" = spectre if present.
+ */
+export function decodeNecromancerPetId(petId) {
+    const m = /^PCPetNecS(\d+)L(\d+)([A-Za-z0-9]+)$/i.exec(String(petId ?? ""));
+    if (!m) return null;
+    return {
+        spellLevel: Number(m[1]),
+        petLevel: Number(m[2]),
+        type: m[3],
+    };
+}
+
+/**
  * Check if a pet ID is a swarm pet (DoT, not a real pet).
  * Swarm IDs start with "swarm-" (e.g., "swarm-s21-l105-warder").
  */
@@ -65,7 +83,7 @@ export function isSwarmPet(petId) {
  *
  * Pet level rules (2026-10-08):
  * - Magician/Enchanter/Necro: pet level = SPELL level (not caster level)
- * - Shaman: decoded from pet ID (e.g., L032)
+ * - Shaman/Necro (coded IDs): decoded from pet ID (e.g., L032 / L008)
  * - Beastlord warder: levels WITH the beastlord = caster level
  *
  * @param {string} petId - The pet ID from spell data
@@ -94,6 +112,26 @@ export function resolvePetCreature(petId, casterLevel, spellLevel) {
                 petLevel: sLevel,
                 petName: creature.name ?? `${cap(element)} Elemental`,
                 family: "elemental",
+            };
+        }
+    }
+
+    // --- Necromancer (coded ID): "PCPetNecS02L008Skel2Ice" -> skeleton ---
+    // Pet level decoded from ID (like Shaman). "Skel" = skeleton;
+    // variant number + element suffix ("2Ice") are visual-only.
+    const nec = decodeNecromancerPetId(petId);
+    if (nec) {
+        const t = String(nec.type ?? "").toLowerCase();
+        // All coded necro pets in data are skeletons ("Skel2", "Skel2Ice");
+        // keep the spectre branch for future variants.
+        const cid = t.startsWith("spect") ? "spectre" : "skeleton";
+        const creature = findCreature(cid);
+        if (creature) {
+            return {
+                creature, creatureId: cid,
+                petLevel: nec.petLevel,
+                petName: creature.name ?? "Skeleton",
+                family: "undead",
             };
         }
     }
