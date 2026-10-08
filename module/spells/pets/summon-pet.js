@@ -391,6 +391,7 @@ export async function summonPet(caster, petId, spellName, spellManaCost, spellLe
     }
 
     // Create token adjacent to caster on the caster's scene
+    let petTokenDoc = null;
     try {
         const casterToken = caster.getActiveTokens?.()?.[0] ?? null;
         const scene = casterToken?.scene ?? globalThis.game?.scenes?.active ?? null;
@@ -406,13 +407,84 @@ export async function summonPet(caster, petId, spellName, spellManaCost, spellLe
                 y: cy,
                 disposition: casterToken.document?.disposition ?? 1,
             };
-            await scene.createEmbeddedDocuments("Token", [tokenData]);
+            const created = await scene.createEmbeddedDocuments("Token", [tokenData]);
+            petTokenDoc = created?.[0] ?? null;
         }
     } catch (err) {
         console.warn("EQRMSS | summonPet: token creation failed:", err);
     }
 
+    // Initiative inheritance (2026-10-08): pet acts immediately after the owner.
+    await addPetToCombat(caster, petActor, petTokenDoc);
+
     return `${dismissNote}<p><em>${escFn(caster.name)} summons ${escFn(petName)} (level ${petLevel}).</em></p>`;
+}
+
+/**
+ * Add a summoned pet to the caster's combat, inheriting initiative.
+ *
+ * Per user decision (2026-10-08): "Pets will act on the same turn, after
+ * the owner." The pet joins the same combat as the caster with initiative
+ * set just below the caster's, so it sorts immediately after the owner in
+ * the tracker. Non-fatal: any failure is logged and the summon still stands.
+ *
+ * If the caster is in combat but has no initiative yet, the pet still joins
+ * the combat (unrolled, goes last). Pets summoned outside combat get no
+ * combat entry; they join normally when combat starts.
+ *
+ * @param {object} caster - Caster actor
+ * @param {object} petActor - Newly created pet actor
+ * @param {object|null} petTokenDoc - Newly created pet token document
+ * @returns {Promise<void>}
+ */
+export async function addPetToCombat(caster, petActor, petTokenDoc) {
+    try {
+        const game = globalThis.game;
+        if (!game?.combats || !petActor || !petTokenDoc) return;
+
+        const casterToken = caster?.getActiveTokens?.()?.[0] ?? null;
+        if (!casterToken) return;
+        const sceneId = casterToken.scene?.id ?? casterToken.parent?.id ?? null;
+        if (!sceneId) return;
+
+        // Find the combat running on the caster's scene (prefer the active one)
+        const combats = game.combats?.contents ?? [];
+        const combat =
+            (game.combat?.scene?.id === sceneId ? game.combat : null) ??
+            combats.find((c) => c.scene?.id === sceneId) ??
+            null;
+        if (!combat) return; // summoned outside combat: no entry needed
+
+        const casterCombatant =
+            combat.combatants?.find((c) => c.tokenId === casterToken.id) ?? null;
+        if (!casterCombatant) return; // caster not in this combat
+
+        const rawInit = casterCombatant.initiative;
+        // Note: Number(null) === 0, so check null/undefined explicitly —
+        // an unrolled combatant has initiative null, not 0.
+        const petInit =
+            rawInit === null || rawInit === undefined || !Number.isFinite(Number(rawInit))
+                ? null
+                : Number(rawInit) - 0.01;
+
+        // Already in combat? Just fix the initiative.
+        const existing = combat.combatants?.find((c) => c.tokenId === petTokenDoc.id) ?? null;
+        if (existing) {
+            if (petInit !== null && existing.initiative !== petInit) {
+                await existing.update({ initiative: petInit });
+            }
+            return;
+        }
+
+        const combatantData = {
+            tokenId: petTokenDoc.id,
+            actorId: petActor.id,
+        };
+        if (petInit !== null) combatantData.initiative = petInit;
+        await combat.createEmbeddedDocuments("Combatant", [combatantData]);
+    } catch (err) {
+        console.warn("EQRMSS | addPetToCombat failed:", err);
+    }
 }
 
 /**
