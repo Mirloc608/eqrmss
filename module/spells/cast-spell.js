@@ -46,7 +46,7 @@ import { summonItem } from "./summon.js";
 import { applyMemblur } from "./memblur.js";
 import { applyPacify } from "./pacify.js";
 import { applyFeignDeath, breakFeignDeath } from "./feign-death.js";
-import { summonPet, swarmPetAsDot, isSwarmPet } from "./pets/summon-pet.js";
+import { summonPet, swarmPetAsDot, isSwarmPet, findCasterPet, dismissPet } from "./pets/summon-pet.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -851,18 +851,44 @@ export async function castSpell(actor, spellItem, opts = {}) {
             }
         }
     }
+    // Reclaim Energy (2026-10-08): { type: "utility", effect: "reclaim-pet-mana" }.
+    // Restores 75% of the mana cost spent to summon the caster's active pet,
+    // then dismisses the pet. Warder/summon-cost-0 pets still dissipate.
+    let reclaimNote = "";
+    const reclaimEffs = (spellEffectsOf(spellItem) ?? []).filter(e =>
+        String(e?.type ?? "").toLowerCase() === "utility" &&
+        String(e?.effect ?? "").toLowerCase() === "reclaim-pet-mana");
+    if (reclaimEffs.length) {
+        const pet = findCasterPet(actor);
+        if (!pet) {
+            reclaimNote = `<p><em>${esc(actor.name)} has no pet to reclaim energy from.</em></p>`;
+        } else {
+            const cost = Number(pet?.system?.pet?.summonManaCost) || 0;
+            const restored = Math.floor(cost * 0.75);
+            const pool = actor?.system?.attributes?.mana ?? {};
+            const before = Number(pool.value) || 0;
+            const max = Number(pool.max) || 0;
+            try {
+                await actor.update({ "system.attributes.mana.value": Math.min(max, before + restored) });
+            } catch (err) {
+                console.warn("EQRMSS | reclaim-pet-mana: mana restore failed:", err);
+            }
+            const dismissNote = await dismissPet(pet, "dissipates as its energy is reclaimed");
+            reclaimNote = `${dismissNote}<p><em>${esc(actor.name)} reclaims ${restored} mana from ${esc(pet.name)} (75% of ${cost}).</em></p>`;
+        }
+    }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
     // teleport/summon/vision/memblur/pacify/faction/dispel/feign/vampiric/identify/shrink/pet pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote || identifyNote || shrinkNote || warderNote || petNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote || identifyNote || shrinkNote || warderNote || petNote || reclaimNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${identifyNote}${shrinkNote}${warderNote}${petNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${identifyNote}${shrinkNote}${warderNote}${petNote}${reclaimNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }
