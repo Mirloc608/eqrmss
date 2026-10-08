@@ -130,39 +130,6 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
         }));
 
         // ------------------------------------------------------------
-        // PET SUMMON / DISMISS BUTTONS (main tab)
-        // ------------------------------------------------------------
-        html.querySelectorAll(".pet-summon-main").forEach(el => el.addEventListener("click", async () => {
-            const pets = game.actors.filter(a =>
-                a.type === "pet" &&
-                a.getFlag("eqrmss", "ownerId") === this.actor.id
-            );
-
-            if (!pets.length) {
-                return ui.notifications.warn("No pets linked to this character.");
-            }
-
-            const pet = pets[0];
-            await pet.update({ "system.active": true });
-            ui.notifications.info(`${pet.name} has been summoned.`);
-        }));
-
-        html.querySelectorAll(".pet-dismiss-main").forEach(el => el.addEventListener("click", async () => {
-            const pets = game.actors.filter(a =>
-                a.type === "pet" &&
-                a.getFlag("eqrmss", "ownerId") === this.actor.id
-            );
-
-            if (!pets.length) {
-                return ui.notifications.warn("No pets linked to this character.");
-            }
-
-            const pet = pets[0];
-            await pet.update({ "system.active": false });
-            ui.notifications.info(`${pet.name} has been dismissed.`);
-        }));
-
-        // ------------------------------------------------------------
         // BUFFS & DEBUFFS (Status tab)
         // ------------------------------------------------------------
         // Name links back to the originating spell; buffs can be
