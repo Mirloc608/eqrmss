@@ -543,6 +543,14 @@ Hooks.once("ready", async function () {
         };
         console.log("EQRMSS v4.15 | openNPCWizard registered");
 
+        // Summon Warder — Beastlord signature ability (2026-10-08).
+        // Macro/console access: game.eqrmss.useSummonWarder(actor)
+        try {
+            const { useSummonWarder, isBeastlord } = await import("./module/spells/pets/summon-warder.js");
+            game.eqrmss.useSummonWarder = useSummonWarder;
+            game.eqrmss.isBeastlord = isBeastlord;
+        } catch (e) { console.warn("EQRMSS | Summon Warder API registration failed", e); }
+
         console.log("EQRMSS v4.15 | Ready - Wizard:", !!globalThis.EQRMSSCharacterCreationWizard, "Races:", Object.keys(game.eqrmss?.races||{}).length);
     } catch (error) { console.error("EQRMSS | Ready failed", error); }
 });

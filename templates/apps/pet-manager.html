@@ -1,6 +1,13 @@
 <section class="pet-manager">
     <h2>{{actor.name}} — Pets</h2>
 
+    {{#if isBeastlord}}
+    <div class="warder-ability">
+        <button class="warder-summon" type="button">Summon Warder</button>
+        <span class="hint">Beastlord signature ability — calls your bonded warder (level {{actor.system.attributes.level.value}}).</span>
+    </div>
+    {{/if}}
+
     {{#if pets.length}}
     <table class="rmss-table">
         <thead>
