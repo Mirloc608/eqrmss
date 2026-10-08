@@ -37,7 +37,7 @@
 import { combatCard } from "../combat/chat-card.js";
 import { classifySpell, directedSpellsOB, spellEffectsOf } from "./spell-mapping.js";
 import { applySpellBuffs } from "./spell-buffs.js";
-import { applyInvisibility, invisTypeOf, breakInvisibility } from "./invisibility.js";
+import { applyInvisibility, invisTypeOf, breakInvisibility, canSenseTarget } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
 import { applyVampiric } from "./vampiric.js";
 import { applyIllusion, applySeeInvisible, applyInfravision, applyUltravision } from "../item-effects/damage-pipeline.js";
@@ -280,6 +280,36 @@ export async function castSpell(actor, spellItem, opts = {}) {
         if (!ballTargets.length) {
             ui.notifications?.warn(`${actor.name} cannot cast ${name}: ball spells need at least one targeted token.`);
             return { ok: false, reason: "target" };
+        }
+    }
+
+    // ---- Vision check (2026-10-08): targeted attack spells go through
+    // canSenseTarget() — a target the caster cannot sense (invisible and
+    // fooled by type, with no see-invisible) cannot be aimed at.
+    // Unsensible targets are dropped; if none remain the cast is refused
+    // here, before the ESF gate (no roll, no mana), mirroring the melee
+    // invisibility rule in combat-rolls.
+    // (skipped for delayed fire — targets locked at declaration)
+    if (!skipToResolution) {
+        const unsensible = (t) => !!t && !canSenseTarget(actor, t);
+        if (cls.kind === "bolt") {
+            const tgt = targetedActor();
+            if (unsensible(tgt)) {
+                ui.notifications?.warn(`${actor.name} cannot see ${tgt.name} (invisible).`);
+                return { ok: false, reason: "sense" };
+            }
+        } else if (cls.kind === "base") {
+            baseTargets = baseTargets.filter(t => !unsensible(t));
+            if (!baseTargets.length) {
+                ui.notifications?.warn(`${actor.name} cannot see the target (invisible).`);
+                return { ok: false, reason: "sense" };
+            }
+        } else if (cls.kind === "ball") {
+            ballTargets = ballTargets.filter(t => !unsensible(t));
+            if (!ballTargets.length) {
+                ui.notifications?.warn(`${actor.name} cannot see the target (invisible).`);
+                return { ok: false, reason: "sense" };
+            }
         }
     }
 
