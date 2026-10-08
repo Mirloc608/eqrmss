@@ -344,7 +344,7 @@ function currentShieldRoundKey() {
 // component; resolution subtracts it when that opponent is not the one
 // the shield is currently assigned to. The assignment is recorded on
 // the defender's status and lapses at the round tick.
-function targetDefense(targetActor, missileAttack, attackerActor) {
+export function targetDefense(targetActor, missileAttack, attackerActor) {
     if (!targetActor) return { db: 0, shieldDB: 0, shieldBlocked: false, shieldOpponentName: "", needsShieldAssignment: false };
     // An unconscious defender has no derived DB at all (user ruling
     // 2026-10-02) — the whole derivation is negated, not just Adrenal.

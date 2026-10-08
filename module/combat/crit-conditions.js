@@ -994,6 +994,27 @@ export async function tickConditions(combat) {
         if (dots.length) {
             const remainingDots = [];
             for (const d of dots) {
+                // Swarm pets (Option A, 2026-10-08): the DoT is a carrier —
+                // each tick resolves one real RMSS attack per swarm pet.
+                if (d?.isSwarm) {
+                    if (actor.system?.status?.dead) {
+                        notes.push(`${esc(d.name || "A swarm")} disperses — ${esc(actor.name)} is dead.`);
+                        continue;
+                    }
+                    const { resolveSwarmTick } = await import("../spells/pets/swarm-combat.js");
+                    const res = await resolveSwarmTick(actor, d);
+                    if (res.total > 0) {
+                        const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
+                        updates["system.hits.value"] = cur + res.total;
+                        notes.push(`${esc(actor.name)} is swarmed (${res.count} attacks: ${res.details.join("; ")}) — ${res.total} hits (${cur} → ${cur + res.total} concussion hits).`);
+                    } else {
+                        notes.push(`${esc(actor.name)}'s swarm attacks miss (${res.count} attacks: ${res.details.join("; ")}).`);
+                    }
+                    const left = (Number(d.roundsLeft) || 1) - 1;
+                    if (left > 0) remainingDots.push({ ...d, roundsLeft: left });
+                    else notes.push(`${esc(d.name || "A swarm")} disperses.`);
+                    continue;
+                }
                 const lo = Number(d.min) || 0;
                 const hi = Number(d.max) || lo;
                 const dmg = hi > lo ? lo + Math.floor(Math.random() * (hi - lo + 1)) : lo;

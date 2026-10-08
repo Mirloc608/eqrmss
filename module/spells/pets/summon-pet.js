@@ -848,37 +848,59 @@ export async function addPetToCombat(caster, petActor, petTokenDoc) {
  * Handle a swarm pet effect as a DoT (NOT a pet actor).
  *
  * Per user decision (2026-10-08): "Swarm pets are basically just dots."
- * Creates a DoT entry on the target instead of a pet actor.
+ * Creates a DoT entry on the target instead of a pet actor. Damage is
+ * NOT a flat placeholder: each tick resolves one real RMSS attack per
+ * swarm pet (Option A, 2026-10-08) — see swarm-combat.js.
+ *
+ * Per EQ behavior (2026-10-08): swarm abilities require a valid target;
+ * with no target the summon fails.
  *
  * @param {object} caster - Caster actor
- * @param {object} target - Target actor
+ * @param {object|null} target - Target actor (required)
  * @param {string} petId - Swarm pet ID (e.g., "swarm-s21-l105-warder")
  * @param {number} duration - Duration in rounds
  * @param {string} spellName - Spell name
+ * @param {number} [spellLevel=1] - Spell level (pet-level fallback)
  * @returns {Promise<string>} HTML chat note
  */
-export async function swarmPetAsDot(caster, target, petId, duration, spellName) {
-    const tgt = target ?? caster;
-    if (!tgt) return `<p><em>Swarm failed: no target.</em></p>`;
+export async function swarmPetAsDot(caster, target, petId, duration, spellName, spellLevel = 1) {
+    if (!target) return `<p><em>Swarm failed: no valid target.</em></p>`;
+    const tgt = target;
 
-    // Extract level from ID for damage scaling (e.g., l105 -> 105)
-    let petLevel = 1;
-    const lm = /l(\d+)/i.exec(String(petId ?? ""));
+    // Pet level: decode from the ID (l105, or swarm-101-r1), else fall
+    // back to the spell level (mag/ench/necro pets = spell level,
+    // 2026-10-08 ruling).
+    let petLevel = Math.max(1, Number(spellLevel) || 1);
+    const id = String(petId ?? "");
+    const lm = /l(\d+)/i.exec(id) ?? /swarm-(\d+)/i.exec(id);
     if (lm) petLevel = Math.max(1, Number(lm[1]));
 
-    // DoT damage: pet level / 5 per round (placeholder, clearly marked)
-    // TODO(EQ canon): get real swarm pet DPS values
-    const dmgPerRound = Math.max(1, Math.round(petLevel / 5));
+    // 3-5 swarm pets per cast (user ruling 2026-10-08).
+    const count = 3 + Math.floor(Math.random() * 3);
+
+    // Swarm family: match a known creature family in the pet ID; small
+    // biting creatures (Bite table) otherwise.
+    const idLow = id.toLowerCase();
+    const families = ["elemental", "undead", "animal", "construct", "dragon", "insect", "plant"];
+    let family = "animal";
+    if (idLow.includes("warder")) family = "animal";
+    else for (const f of families) {
+        if (f !== "animal" && idLow.includes(f)) { family = f; break; }
+    }
+
     const rounds = Math.max(1, Number(duration) || 3);
 
+    // The DoT is a carrier for the swarm — the tick handler resolves
+    // the attacks (swarm-combat.js). No flat min/max damage.
     const dot = {
         name: spellName ?? "Swarm",
         element: "physical",
-        min: dmgPerRound,
-        max: dmgPerRound,
-        roundsLeft: rounds,
         source: "spell",
         isSwarm: true,
+        swarmLevel: petLevel,
+        swarmCount: count,
+        swarmFamily: family,
+        roundsLeft: rounds,
     };
 
     try {
@@ -890,7 +912,7 @@ export async function swarmPetAsDot(caster, target, petId, duration, spellName) 
         return `<p><em>Swarm failed: ${esc(err?.message ?? "unknown error")}.</em></p>`;
     }
 
-    return `<p><em>${esc(tgt.name)} is swarmed (${dmgPerRound}/round for ${rounds} rounds).</em></p>`;
+    return `<p><em>${esc(tgt.name)} is swarmed by ${count} creatures (level ${petLevel}, ${rounds} rounds).</em></p>`;
 }
 
 // ----------------------------------------------------------------

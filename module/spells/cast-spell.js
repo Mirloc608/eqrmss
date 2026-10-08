@@ -888,10 +888,11 @@ export async function castSpell(actor, spellItem, opts = {}) {
                 continue;
             }
             if (isSwarmPet(petId)) {
-                // Swarm pets are DoTs, not pet actors
-                const swarmTarget = targetedActor() ?? actor;
+                // Swarm pets are DoTs, not pet actors — and require a
+                // valid target (EQ behavior, 2026-10-08).
+                const swarmTarget = targetedActor();
                 const swarmDuration = Number(eff?.duration) || 3;
-                petNote += await swarmPetAsDot(actor, swarmTarget, petId, swarmDuration, name);
+                petNote += await swarmPetAsDot(actor, swarmTarget, petId, swarmDuration, name, spellLevel);
             } else {
                 petNote += await summonPet(actor, petId, name, manaCost, spellLevel);
             }
