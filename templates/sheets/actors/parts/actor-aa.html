@@ -42,7 +42,13 @@
   <p class="aa-empty">No AAs purchased yet.</p>
   {{/if}}
 
-  <h4>Available AAs</h4>
+  <div class="aa-list-head">
+    <h4>Available AAs</h4>
+    <div class="aa-list-controls">
+      <button type="button" data-action="expandAllAAGroups">Expand all</button>
+      <button type="button" data-action="collapseAllAAGroups">Collapse all</button>
+    </div>
+  </div>
   {{#each aa.groups}}
   <div class="aa-group" data-aa-group="{{this.name}}">
     <h5 class="aa-group-header">

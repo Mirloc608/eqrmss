@@ -33,6 +33,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             grantAAPoints: EQRMSSPlayerSheet.prototype.grantAAPoints,
             toggleAA: EQRMSSPlayerSheet.prototype.toggleAA,
             toggleAAGroup: EQRMSSPlayerSheet.prototype.toggleAAGroup,
+            expandAllAAGroups: EQRMSSPlayerSheet.prototype.expandAllAAGroups,
+            collapseAllAAGroups: EQRMSSPlayerSheet.prototype.collapseAllAAGroups,
             awardXP: EQRMSSPlayerSheet.prototype.awardXP,
             addLogEntry: EQRMSSPlayerSheet.prototype.addLogEntry
         }
@@ -838,6 +840,33 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         target.title = isHidden
             ? `Expand ${groupName}`
             : `Collapse ${groupName}`;
+    }
+
+    // AA display groups: expand/collapse all (2026-10-08). Direct DOM
+    // toggling like toggleAAGroup — no re-render, no scroll jump.
+    // ------------------------------------------------------------
+    expandAllAAGroups(event, target) {
+        event.preventDefault();
+        const root = this.element ?? document;
+        root.querySelectorAll('[data-aa-group-list]').forEach(list =>
+            list.classList.remove("is-hidden")
+        );
+        root.querySelectorAll(".aa-group-toggle").forEach(btn => {
+            btn.textContent = "▾";
+            btn.title = `Collapse ${btn.dataset.group}`;
+        });
+    }
+
+    collapseAllAAGroups(event, target) {
+        event.preventDefault();
+        const root = this.element ?? document;
+        root.querySelectorAll('[data-aa-group-list]').forEach(list =>
+            list.classList.add("is-hidden")
+        );
+        root.querySelectorAll(".aa-group-toggle").forEach(btn => {
+            btn.textContent = "▸";
+            btn.title = `Expand ${btn.dataset.group}`;
+        });
     }
 
     async grantAAPoints(event, target) {

@@ -926,12 +926,25 @@ tr.spell-group-rank.is-hidden {
    Mirrors the spell tab's functional categories: collapsible
    group headers, numbered rows within each group.
    ------------------------------------------------------------ */
+.aa-list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.aa-list-head h4 {
+  margin: 0.5em 0;
+}
+.aa-list-controls button {
+  margin-left: 0.4em;
+  font-size: 0.85em;
+}
 .aa-group {
   margin-bottom: 0.8em;
 }
 .aa-group-header {
   margin: 0.6em 0 0.3em 0;
   font-size: 1.05em;
+  color: #4a3b28;
 }
 .aa-group-toggle {
   background: none;
