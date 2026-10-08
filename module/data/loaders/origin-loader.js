@@ -30,7 +30,8 @@ const ORIGIN_FILES = {
   continents: `${ORIGIN_ROOT}/origins/continents.json`,
   regions:   `${ORIGIN_ROOT}/origins/regions.json`,
   settlements: `${ORIGIN_ROOT}/origins/settlements.json`,
-  raceAvailability: `${ORIGIN_ROOT}/race_city_availability.json`
+  raceAvailability: `${ORIGIN_ROOT}/race_city_availability.json`,
+  factionReputations: `${ORIGIN_ROOT}/faction_reputations.json`
 };
 
 // ------------------------------------------------------------
@@ -154,6 +155,17 @@ export class OriginDataLoader {
       console.error("EQRMSS | Failed to load race availability", e);
     }
 
+    // faction_reputations.json is a plain { cityName: { factionName: value } }
+    // map, NOT a collection — load it raw like raceAvailability.
+    let factionReputations = {};
+    try {
+      const repResp = await fetch(ORIGIN_FILES.factionReputations);
+      if (repResp.ok) factionReputations = await repResp.json();
+      else console.warn(`EQRMSS | Origin data missing: ${ORIGIN_FILES.factionReputations}`);
+    } catch (e) {
+      console.error("EQRMSS | Failed to load faction reputations", e);
+    }
+
     const origin = {
       cities,
       deities,
@@ -164,6 +176,9 @@ export class OriginDataLoader {
       settlements,
       raceAvailability: (raceAvailability && typeof raceAvailability === "object" && !Array.isArray(raceAvailability))
         ? raceAvailability
+        : {},
+      factionReputations: (factionReputations && typeof factionReputations === "object" && !Array.isArray(factionReputations))
+        ? factionReputations
         : {}
     };
 

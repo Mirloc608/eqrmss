@@ -134,9 +134,14 @@ export function getFactionLevel(value)
 
 /**
  * Get an actor's numeric standing with a faction.
- * Falls back to 0 (Indifferent) when no stored value exists.
+ * Lookup chain (2026-10-08):
+ *   1. Stored value at system.factions[factionId] (player-modified via
+ *      Alliance, quests, kills, etc.)
+ *   2. Starting reputation from faction_reputations.json for the actor's
+ *      race starting city (lazy — no character-creation changes needed)
+ *   3. 0 (Indifferent)
  * @param {Actor} actor
- * @param {string} factionId
+ * @param {string} factionId - slugified faction id (see slugifyFactionName)
  * @returns {number}
  */
 export function getFactionValue(actor, factionId)
@@ -145,7 +150,149 @@ export function getFactionValue(actor, factionId)
     const stored = actor.system?.factions?.[factionId];
     if (stored !== undefined && stored !== null)
         return clampFaction(stored);
+    const starting = getStartingFactionValue(actor, factionId);
+    if (starting !== null)
+        return clampFaction(starting);
     return 0;
+}
+
+// ============================================================
+// FACTION DATA REGISTRY (2026-10-08)
+//
+// Wires module/data/origin/factions.json (full EQ faction list)
+// and faction_reputations.json (city-based starting values) to
+// the runtime. Data is lazy-loaded from game.eqrmss.origin and
+// cached; no character-creation changes needed.
+// ============================================================
+
+let _factionRegistry = null;
+let _factionRegistryKey = null;
+
+/**
+ * Slugify a faction name into a stable ID.
+ * "Guards of Qeynos" -> "guards-of-qeynos"
+ * @param {string} name
+ * @returns {string}
+ */
+export function slugifyFactionName(name)
+{
+    return String(name ?? "")
+        .toLowerCase()
+        .replace(/['']/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * Build (and cache) the faction registry from loaded origin data.
+ * @returns {{ bySlug: Map, byName: Map, reputations: object, raceAvailability: object }|null}
+ */
+export function getFactionRegistry()
+{
+    const origin = globalThis.game?.eqrmss?.origin ?? null;
+    const factions = origin?.factions ?? [];
+    const reputations = origin?.factionReputations ?? {};
+    const raceAvailability = origin?.raceAvailability ?? {};
+    const key = `${factions.length}:${Object.keys(reputations).length}`;
+    if (_factionRegistry && _factionRegistryKey === key)
+        return _factionRegistry;
+
+    const bySlug = new Map();
+    const byName = new Map();
+    for (const f of factions)
+    {
+        if (!f || !f.name) continue;
+        const slug = slugifyFactionName(f.name);
+        if (!slug || bySlug.has(slug)) continue;
+        bySlug.set(slug, f);
+        byName.set(String(f.name).toLowerCase(), slug);
+    }
+
+    _factionRegistry = { bySlug, byName, reputations, raceAvailability };
+    _factionRegistryKey = key;
+    return _factionRegistry;
+}
+
+/** Clear the cached faction registry (e.g., after data reload). */
+export function clearFactionRegistry()
+{
+    _factionRegistry = null;
+    _factionRegistryKey = null;
+}
+
+/**
+ * Resolve a faction slug to its display name from factions.json.
+ * Returns the slug itself if not found.
+ * @param {string} factionId
+ * @returns {string}
+ */
+export function getFactionDisplayName(factionId)
+{
+    if (!factionId) return "";
+    const reg = getFactionRegistry();
+    const entry = reg?.bySlug?.get(String(factionId));
+    return entry?.name ?? String(factionId);
+}
+
+/**
+ * Convert a race id ("dark-elf") to the display name used in
+ * race_city_availability.json ("Dark Elf").
+ * @param {string|null} raceId
+ * @returns {string|null}
+ */
+export function raceIdToDisplayName(raceId)
+{
+    if (!raceId) return null;
+    return String(raceId)
+        .split(/[-_]+/)
+        .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+        .join(" ");
+}
+
+/**
+ * Get the starting city for a race (first entry in race_city_availability).
+ * @param {string|null} raceId
+ * @returns {string|null} city name, or null
+ */
+export function getStartingCityForRace(raceId)
+{
+    const displayName = raceIdToDisplayName(raceId);
+    if (!displayName) return null;
+    const reg = getFactionRegistry();
+    const cities = reg?.raceAvailability?.[displayName];
+    if (Array.isArray(cities) && cities.length)
+        return cities[0];
+    return null;
+}
+
+/**
+ * Look up the starting reputation value for an actor with a faction,
+ * based on the actor's race starting city.
+ * @param {Actor} actor
+ * @param {string} factionId - slugified faction id
+ * @returns {number|null} starting value, or null if no data
+ */
+export function getStartingFactionValue(actor, factionId)
+{
+    if (!actor || !factionId) return null;
+    const reg = getFactionRegistry();
+    if (!reg) return null;
+
+    const effectiveRace = getEffectiveRace(actor);
+    const city = getStartingCityForRace(effectiveRace);
+    if (!city) return null;
+
+    const cityReps = reg.reputations?.[city];
+    if (!cityReps || typeof cityReps !== "object") return null;
+
+    // Match by slug: reputation keys are display names ("Guards of Qeynos")
+    const targetSlug = String(factionId).toLowerCase();
+    for (const [repName, value] of Object.entries(cityReps))
+    {
+        if (slugifyFactionName(repName) === targetSlug)
+            return Number(value) || 0;
+    }
+    return null;
 }
 
 /**
@@ -182,6 +329,7 @@ export function getViewerFactionStanding(viewer, target)
     const value = getFactionValue(viewer, factionId);
     return {
         faction: factionId,
+        factionName: getFactionDisplayName(factionId),
         value,
         level: getFactionLevel(value),
         viaIllusion,
@@ -212,7 +360,8 @@ export async function modifyFaction(actor, factionId, amount)
     const beforeLabel = getFactionLevel(before).label;
     const afterLabel = getFactionLevel(after).label;
     const dir = amt >= 0 ? "improves" : "worsens";
-    let note = `${actor.name}'s standing with ${factionId} ${dir} by ${Math.abs(amt)} (${before} to ${after}, ${afterLabel}).`;
+    const displayName = getFactionDisplayName(factionId);
+    let note = `${actor.name}'s standing with ${displayName} ${dir} by ${Math.abs(amt)} (${before} to ${after}, ${afterLabel}).`;
     if (beforeLabel !== afterLabel)
         note += ` [${beforeLabel} -> ${afterLabel}]`;
     return note;
