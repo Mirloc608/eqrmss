@@ -7,6 +7,7 @@
  */
 
 import { rrTargetNumber, rrOpenEnded } from "../spells/base-spell.js";
+import { EQRMSSAAAdvancement } from "../aa/aa-advancement.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
@@ -24,8 +25,22 @@ function tokenDistanceFt(fromTok, toTok) {
 
 const MELEE_REACH_FT = 8;
 
+// Signature ability -> AA id mapping (2026-10-07): ranks come from the
+// actor's purchased AA ranks in system.aa.abilities [{id, rank}].
+const SIGNATURE_AA_IDS = {
+    "lay-on-hands": "aa-lay-on-hands",
+    "harm-touch": "aa-harm-touch"
+};
+
 function getSignatureRank(actor, abilityId) {
-    return 1;
+    const aaId = SIGNATURE_AA_IDS[abilityId];
+    if (!aaId) return 1;
+    try {
+        const rank = EQRMSSAAAdvancement.getPurchasedRank(actor, aaId);
+        return Math.max(1, rank);
+    } catch {
+        return 1;
+    }
 }
 
 async function checkUsable(actor, target, abilityName) {
