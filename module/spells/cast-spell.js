@@ -822,6 +822,8 @@ export async function castSpell(actor, spellItem, opts = {}) {
     });
     if (petEffs.length) {
         const manaCost = Number(spellItem?.system?.manaCost) || 0;
+        // Pet level = spell level for mag/ench/necro (2026-10-08 ruling)
+        const spellLevel = Number(spellItem?.system?.level) || 1;
         for (const eff of petEffs) {
             const petId = eff?.pet;
             if (!petId) {
@@ -834,7 +836,7 @@ export async function castSpell(actor, spellItem, opts = {}) {
                 const swarmDuration = Number(eff?.duration) || 3;
                 petNote += await swarmPetAsDot(actor, swarmTarget, petId, swarmDuration, name);
             } else {
-                petNote += await summonPet(actor, petId, name, manaCost);
+                petNote += await summonPet(actor, petId, name, manaCost, spellLevel);
             }
         }
     }

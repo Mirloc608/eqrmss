@@ -15,11 +15,11 @@
 //    with the beastlord (class companion, not a summon)
 //
 // Pet ID formats:
-// - Magician: "elementalkin-fire", "elemental-fire" -> fire-elemental
-// - Necro: "cavorting-bones", "bone-walk" -> skeleton
-// - Shaman: "PCPetShmS07L032WolfGhoRk1" -> wolf, level 32
-// - Beastlord: "s02-l008-warder" -> wolf, level 8
-// - Enchanter: "pendrils-animation-pet" -> golem
+// - Magician: "elementalkin-fire", "aspect-of-fire" -> fire-elemental (pet level = SPELL level)
+// - Necro: "cavorting-bones", "bone-walk" -> skeleton (pet level = SPELL level)
+// - Shaman: "PCPetShmS07L032WolfGhoRk1" -> wolf, level 32 (decoded from ID)
+// - Beastlord: "s02-l008-warder" -> wolf (pet level = BEASTLORD level, levels with owner)
+// - Enchanter: "pendrils-animation-pet" -> golem (pet level = SPELL level)
 // - Swarm: "swarm-*" -> DoT, NOT a pet actor
 // ============================================================
 
@@ -63,27 +63,35 @@ export function isSwarmPet(petId) {
 /**
  * Resolve a pet ID to a creature registry entry + pet level.
  *
+ * Pet level rules (2026-10-08):
+ * - Magician/Enchanter/Necro: pet level = SPELL level (not caster level)
+ * - Shaman: decoded from pet ID (e.g., L032)
+ * - Beastlord warder: levels WITH the beastlord = caster level
+ *
  * @param {string} petId - The pet ID from spell data
- * @param {number} casterLevel - Caster's level (fallback for pet level)
+ * @param {number} casterLevel - Caster's level (warder + fallback)
+ * @param {number} spellLevel - Spell's level (mag/ench/necro pet level)
  * @returns {{ creature, creatureId, petLevel, petName, family } | null}
  */
-export function resolvePetCreature(petId, casterLevel) {
+export function resolvePetCreature(petId, casterLevel, spellLevel) {
     const id = String(petId ?? "").toLowerCase();
     const races = globalThis.game?.eqrmss?.races ?? {};
-    const level = Math.max(1, Number(casterLevel) || 1);
+    const cLevel = Math.max(1, Number(casterLevel) || 1);
+    const sLevel = Math.max(1, Number(spellLevel) || cLevel);
 
     // Helper: find creature by ID in the registry
     const findCreature = (cid) => races[cid] ?? null;
 
-    // --- Magician elementals: "elementalkin-fire", "elemental-fire" ---
-    let m = /^(elementalkin|elemental|child|conjuration|construct|conscription|convocation|aspect)-(\w+)$/.exec(id);
+    // --- Magician elementals: "elementalkin-fire", "aspect-of-fire" ---
+    // Pet level = SPELL level (2026-10-08: not caster level)
+    let m = /^(elementalkin|elementaling|elemental|child|conjuration|greater-conjuration|construct|conscription|convocation|aspect)-(?:of-)?(\w+)$/.exec(id);
     if (m) {
         const element = m[2]; // fire, water, earth, air
         const creature = findCreature(`${element}-elemental`);
         if (creature) {
             return {
                 creature, creatureId: `${element}-elemental`,
-                petLevel: level,
+                petLevel: sLevel,
                 petName: creature.name ?? `${cap(element)} Elemental`,
                 family: "elemental",
             };
@@ -102,13 +110,14 @@ export function resolvePetCreature(petId, casterLevel) {
         "dark-assassin": "shade",
     };
     // Also try fuzzy: if ID contains "skeleton" or "bone" or "corpse"
+    // Pet level = SPELL level (2026-10-08)
     if (necroMap[id] || /skeleton|bone|corpse|zombie/.test(id)) {
         const cid = necroMap[id] ?? (/shade|assassin|wraith/.test(id) ? "shade" : "skeleton");
         const creature = findCreature(cid);
         if (creature) {
             return {
                 creature, creatureId: cid,
-                petLevel: level,
+                petLevel: sLevel,
                 petName: creature.name ?? "Skeleton",
                 family: "undead",
             };
@@ -129,14 +138,15 @@ export function resolvePetCreature(petId, casterLevel) {
         }
     }
 
-    // --- Beastlord: s02-l008-warder -> wolf (warder levels with beastlord) ---
+    // --- Beastlord: s02-l008-warder -> wolf ---
+    // Warder levels WITH the beastlord (user ruling 2026-10-08) = caster level
     const warder = decodeWarderId(petId);
     if (warder) {
         const creature = findCreature("wolf");
         if (creature) {
             return {
                 creature, creatureId: "wolf",
-                petLevel: warder.petLevel,
+                petLevel: cLevel,
                 petName: creature.name ?? "Warder",
                 family: "animal",
                 isWarder: true,
@@ -145,13 +155,14 @@ export function resolvePetCreature(petId, casterLevel) {
     }
 
     // --- Enchanter: "<name>s-animation-pet" -> golem/construct ---
+    // Pet level = SPELL level (2026-10-08)
     m = /^(\w+)s-animation-pet$/.exec(id);
     if (m) {
         const creature = findCreature("golem") ?? findCreature("clockwork-gnome");
         if (creature) {
             return {
                 creature, creatureId: creature.id ?? "golem",
-                petLevel: level,
+                petLevel: sLevel,
                 petName: `${cap(m[1])}'s Animation`,
                 family: "construct",
             };
@@ -159,11 +170,12 @@ export function resolvePetCreature(petId, casterLevel) {
     }
 
     // --- Fallback: try the pet ID directly as a creature ID ---
+    // Pet level = SPELL level (2026-10-08)
     const direct = findCreature(id);
     if (direct) {
         return {
             creature: direct, creatureId: id,
-            petLevel: level,
+            petLevel: sLevel,
             petName: direct.name ?? id,
             family: direct.creatureType ?? "animal",
         };
@@ -255,9 +267,10 @@ export async function dismissPet(petActor, reason = "dismissed") {
  * @param {string} petId - Pet ID from spell data
  * @param {string} spellName - Name of the summoning spell
  * @param {number} spellManaCost - Mana cost (stored for Reclaim Energy)
+ * @param {number} spellLevel - Spell's level (pet level for mag/ench/necro, 2026-10-08)
  * @returns {Promise<string>} HTML chat note
  */
-export async function summonPet(caster, petId, spellName, spellManaCost) {
+export async function summonPet(caster, petId, spellName, spellManaCost, spellLevel) {
     const escFn = esc;
     if (!caster) return `<p><em>Pet summon failed: no caster.</em></p>`;
 
@@ -269,8 +282,8 @@ export async function summonPet(caster, petId, spellName, spellManaCost) {
 
     const casterLevel = Number(caster?.system?.attributes?.level?.value) || 1;
 
-    // Resolve pet ID -> creature
-    const resolved = resolvePetCreature(petId, casterLevel);
+    // Resolve pet ID -> creature (pet level from spell level per 2026-10-08)
+    const resolved = resolvePetCreature(petId, casterLevel, spellLevel);
     if (!resolved) {
         return `<p><em>Pet summon failed: unknown pet "${escFn(petId)}".</em></p>`;
     }
