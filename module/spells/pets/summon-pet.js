@@ -422,34 +422,66 @@ export async function summonPet(caster, petId, spellName, spellManaCost, spellLe
         console.warn("EQRMSS | summonPet: ownership update failed:", err);
     }
 
-    // Create token adjacent to caster on the caster's scene
+    // Create token adjacent to the caster when the caster has a token on the
+    // viewed scene; otherwise fall back to the viewed scene's center with a
+    // visible warning. Prefer the viewed scene so the token always lands
+    // where the user can see it (2026-10-08: silent-failure fix).
     let petTokenDoc = null;
+    let tokenWarnNote = "";
     try {
+        const game = globalThis.game;
         const casterToken = caster.getActiveTokens?.()?.[0] ?? null;
-        const scene = casterToken?.scene ?? globalThis.game?.scenes?.active ?? null;
-        if (scene && casterToken) {
-            const cx = casterToken.document?.x ?? casterToken.x ?? 0;
-            const cy = casterToken.document?.y ?? casterToken.y ?? 0;
+        const viewedScene =
+            game?.scenes?.viewed ?? globalThis.canvas?.scene ?? game?.scenes?.active ?? null;
+        const scene = casterToken?.scene ?? viewedScene;
+        if (!scene) {
+            tokenWarnNote = `<p><em>Pet token not created: no scene available.</em></p>`;
+        } else {
             const grid = scene.grid?.size ?? 100;
-            // Place to the right of the caster
+            let tx;
+            let ty;
+            let disp = 1;
+            if (casterToken) {
+                const cx = casterToken.document?.x ?? casterToken.x ?? 0;
+                const cy = casterToken.document?.y ?? casterToken.y ?? 0;
+                // Place to the right of the caster
+                tx = cx + grid;
+                ty = cy;
+                disp = casterToken.document?.disposition ?? 1;
+            } else {
+                // Fallback: scene center, grid-snapped
+                const dim = scene.dimensions ?? {};
+                const cx = (dim.sceneX ?? 0) + (dim.sceneWidth ?? 0) / 2;
+                const cy = (dim.sceneY ?? 0) + (dim.sceneHeight ?? 0) / 2;
+                tx = Math.round(cx / grid) * grid;
+                ty = Math.round(cy / grid) * grid;
+                tokenWarnNote = `<p><em>Note: ${escFn(caster.name)} has no token on the viewed scene — ${escFn(petName)} placed at scene center.</em></p>`;
+            }
             const tokenData = {
                 name: petName,
                 actorId: petActor.id,
-                x: cx + grid,
-                y: cy,
-                disposition: casterToken.document?.disposition ?? 1,
+                x: tx,
+                y: ty,
+                disposition: disp,
             };
             const created = await scene.createEmbeddedDocuments("Token", [tokenData]);
             petTokenDoc = created?.[0] ?? null;
+            if (!petTokenDoc) {
+                tokenWarnNote += `<p><em>Pet token creation failed: the scene returned no token.</em></p>`;
+            }
         }
     } catch (err) {
         console.warn("EQRMSS | summonPet: token creation failed:", err);
+        tokenWarnNote += `<p><em>Pet token creation failed: ${escFn(err?.message ?? "unknown error")}.</em></p>`;
     }
 
     // Initiative inheritance (2026-10-08): pet acts immediately after the owner.
     await addPetToCombat(caster, petActor, petTokenDoc);
 
-    return `${dismissNote}<p><em>${escFn(caster.name)} summons ${escFn(petName)} (level ${petLevel}).</em></p>`;
+    const summonNote = petTokenDoc
+        ? `<p><em>${escFn(caster.name)} summons ${escFn(petName)} (level ${petLevel}).</em></p>`
+        : `<p><em>${escFn(caster.name)} summons ${escFn(petName)} (level ${petLevel}), but the pet token could not be placed.</em></p>`;
+    return `${dismissNote}${summonNote}${tokenWarnNote}`;
 }
 
 /**
@@ -472,7 +504,12 @@ export async function summonPet(caster, petId, spellName, spellManaCost, spellLe
 export async function addPetToCombat(caster, petActor, petTokenDoc) {
     try {
         const game = globalThis.game;
-        if (!game?.combats || !petActor || !petTokenDoc) return;
+        if (!game?.combats || !petActor) return;
+        if (!petTokenDoc) {
+            // 2026-10-08: don't silently skip — the caller now reports this in chat.
+            console.warn("EQRMSS | addPetToCombat: no pet token document; skipping combat entry.");
+            return;
+        }
 
         const casterToken = caster?.getActiveTokens?.()?.[0] ?? null;
         if (!casterToken) return;
