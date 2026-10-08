@@ -804,3 +804,58 @@
 .application.sheet.eqrmss.actor.pet-sheet .effect-list li {
   padding: 2px 0;
 }
+
+/* ------------------------------------------------------------
+ * Spell-line grouping (Spells tab)
+ * ------------------------------------------------------------ */
+.spell-list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.spell-list-head h4 {
+  margin: 0.5em 0;
+}
+.spell-list-controls button {
+  margin-left: 0.4em;
+  font-size: 0.85em;
+}
+table.spell-groups .col-toggle {
+  width: 2em;
+}
+.spell-group-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0 4px;
+  color: inherit;
+}
+tr.spell-group-header {
+  background: rgba(0, 0, 0, 0.04);
+}
+.spell-group-icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.rank-badge {
+  font-size: 0.75em;
+  background: #5a7d3a;
+  color: #fff;
+  border-radius: 8px;
+  padding: 1px 7px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.rank-tag {
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+tr.spell-group-rank td.spell-rank-cell {
+  padding-left: 2.2em;
+}
+tr.spell-group-rank.is-hidden {
+  display: none;
+}

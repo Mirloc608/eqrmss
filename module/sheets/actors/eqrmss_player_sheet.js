@@ -9,6 +9,7 @@ import { exhaustionMaxFor } from "../../combat/subdue.js";
 import { progressionManager } from "../../progression/progression-manager.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
+import { groupSpellsByLine } from "./helpers/actor-sheet-spells.js";
 
 export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
@@ -109,6 +110,14 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         for (const sp of context.items?.spells ?? []) {
             sp.isReady = readySpells.includes(sp._id ?? sp.id);
         }
+        // Spell-line grouping for the Spells tab (2026-10-08): one row per
+        // spell family showing the highest known rank; expander reveals all
+        // ranks. Built here (after the isReady annotation above) so each
+        // rank row carries its ready state for the ⭐ toggle.
+        context.spellGroups = groupSpellsByLine(
+            context.items?.spells,
+            this.spellsHelper?.expandedGroups
+        );
 
         // Readied spells/songs for the Combat tab (2026-10-07):
         // only the readied subset, not all known.
