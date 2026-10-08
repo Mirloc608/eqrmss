@@ -35,6 +35,15 @@ export function registerEQRMSSHooks() {
     resetSignaturesFor(combat, "end");
   });
 
+  // Summoned items (2026-10-07): expire after 1 day of game time.
+  // GM-only to avoid double-processing.
+  Hooks.on("updateWorldTime", (worldTime) => {
+    if (!game.user?.isGM) return;
+    import("../spells/summon.js")
+      .then(m => m.expireSummonedItems(worldTime))
+      .catch(e => console.error("EQRMSS | summoned item expiry failed", e));
+  });
+
   // Displaced-spell landing (Table 15.7): the failure card's
   // "Place the stray spell" button opens the GM crosshair.
   Hooks.on("renderChatMessageHTML", (message, html) => {

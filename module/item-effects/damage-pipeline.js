@@ -372,6 +372,30 @@ async function applyTeleportPayload({ effect, caster, target, source }) {
     }
 }
 
+/**
+ * "summon-item" — EQ summoned item mechanics for clickies.
+ * Delegates to module/spells/summon.js via dynamic import (avoids cycles).
+ * Payload shape: { type: "summon-item", item: "<item-id>", quantity: N }
+ */
+async function applySummonItem({ effect, caster, target, source }) {
+    try {
+        const { summonItem } = await import("../spells/summon.js");
+        const note = await summonItem({
+            caster: target ?? caster,
+            itemId: effect.item,
+            quantity: effect.quantity,
+            intoBag: effect.intoBag,
+            spellName: source ?? "Summon Item",
+        });
+        // Strip HTML tags for the notes array
+        const text = String(note).replace(/<[^>]+>/g, "").trim();
+        return { type: "summon-item", final: 1, notes: [text], source, applied: true };
+    } catch (err) {
+        console.error("eqrmss summon-item payload failed:", err);
+        return { type: "summon-item", final: 0, notes: [`summon-item failed: ${err?.message ?? "unknown error"}`], source, applied: false };
+    }
+}
+
 /** "heal" — restore concussion hits taken (system.hits.value), floored at 0. */
 async function applyHeal({ effect, target, source }) {
     const miss = requireTarget(target, "heal", source);
@@ -708,6 +732,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "absorb") results.push(await applyAbsorb({ effect, target, source }));
         else if (effect.type === "illusion") results.push(await applyIllusion({ effect, target, source }));
         else if (effect.type === "teleport") results.push(await applyTeleportPayload({ effect, caster, target, source }));
+        else if (effect.type === "summon-item") results.push(await applySummonItem({ effect, caster, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }

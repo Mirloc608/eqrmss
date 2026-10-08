@@ -41,6 +41,7 @@ import { applyInvisibility, invisTypeOf, breakInvisibility } from "./invisibilit
 import { applyLevitate } from "./levitate.js";
 import { applyIllusion } from "../item-effects/damage-pipeline.js";
 import { applyTeleport } from "./teleport.js";
+import { summonItem } from "./summon.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -579,19 +580,35 @@ export async function castSpell(actor, spellItem, opts = {}) {
             teleportNote += await applyTeleport({ effect: eff, caster: actor, target: buffTarget, spellName: name });
         }
     }
+    // Summon Item (2026-10-07): EQ summon-item spells create Item documents
+    // on the caster. Spell data uses effect: "summon-item" with item/quantity.
+    let summonNote = "";
+    const summonEffs = (spellEffectsOf(spellItem) ?? []).filter(e =>
+        String(e?.effect ?? "").toLowerCase() === "summon-item");
+    if (summonEffs.length) {
+        for (const eff of summonEffs) {
+            summonNote += await summonItem({
+                caster: buffTarget,
+                itemId: eff.item,
+                quantity: eff.quantity,
+                intoBag: eff.intoBag,
+                spellName: name,
+            });
+        }
+    }
     const note = cls.kind === "later" ? esc(cls.reason) : "no mechanical payload";
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
-    // teleport pipeline already produced output (2026-10-07: redundant when buffs
+    // teleport/summon pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }
