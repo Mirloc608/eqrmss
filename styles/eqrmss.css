@@ -586,3 +586,197 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+/* ============================================================
+   Pet Sheet — parchment theme matching the character sheet
+   (2026-10-08: tabbed pet sheet — Stats/Equipment/Combat/Affected By)
+   ============================================================ */
+.application.sheet.eqrmss.actor.pet-sheet {
+  background: linear-gradient(165deg, #efe0b0 0%, #e2cc94 60%, #d4b87f 100%);
+  color: #3a2a18;
+}
+
+/* Pet header: reuse the character sheet's parchment header look */
+.application.sheet.eqrmss.actor.pet-sheet .eq-header {
+  display: flex; gap: 14px; align-items: stretch; padding: 10px 14px;
+  color: #3a2a18; flex-shrink: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,250,230,.85), rgba(255,250,230,0) 60%),
+    linear-gradient(160deg, #efdfae 0%, #e3cc96 55%, #d3b77e 100%);
+  border-bottom: 3px double #5f4a2f;
+  box-shadow: inset 0 0 24px rgba(90,70,40,.35);
+}
+.application.sheet.eqrmss.actor.pet-sheet .eq-portrait {
+  width: 80px; height: 80px; flex: 0 0 auto; align-self: center; border-radius: 50%;
+  padding: 4px;
+  background: radial-gradient(circle at 35% 30%, #f7efdb, #e2d3ab 55%, #bfa878 100%);
+  border: 3px solid #5f4a2f;
+  box-shadow: inset 0 0 0 3px #fbf6e6, inset 0 0 12px rgba(90,70,40,.5), 0 2px 6px rgba(40,25,10,.5);
+}
+.application.sheet.eqrmss.actor.pet-sheet .eq-portrait img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  border: 1px solid rgba(95,74,47,.6);
+}
+.application.sheet.eqrmss.actor.pet-sheet .eq-headmain {
+  flex: 1 1 auto; display: flex; flex-direction: column; min-width: 0; justify-content: center;
+}
+.application.sheet.eqrmss.actor.pet-sheet .eq-eyebrow {
+  font-family: Georgia, "Times New Roman", serif; font-size: 10px;
+  letter-spacing: 4px; text-transform: uppercase; color: #7a5a30;
+}
+.application.sheet.eqrmss.actor.pet-sheet .eq-name { margin: 0 0 4px; }
+.application.sheet.eqrmss.actor.pet-sheet .eq-name input {
+  width: 100%; background: transparent; border: none;
+  font-family: Georgia, serif; font-size: 1.4rem; color: #3a2a18; padding: 0;
+}
+.application.sheet.eqrmss.actor.pet-sheet .eq-subinfo {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px 20px;
+  font-size: 0.85rem; color: #3a2a18;
+}
+.application.sheet.eqrmss.actor.pet-sheet .eq-subinfo strong { color: #5f4a2f; }
+.application.sheet.eqrmss.actor.pet-sheet .pet-command-label { text-transform: capitalize; }
+
+/* Pet tabs: same parchment tab bar as the character sheet */
+.application.sheet.eqrmss.actor.pet-sheet .sheet-tabs {
+  background: linear-gradient(180deg, #7d6540, #5d4827);
+  border-bottom: 3px double #3c2c14;
+  padding: 6px 12px 0;
+  gap: 4px;
+  box-shadow: 0 2px 5px rgba(40,25,10,.35);
+}
+.application.sheet.eqrmss.actor.pet-sheet .sheet-tabs .item {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  font-size: 0.95em;
+  color: #d9c08f;
+  padding: 5px 12px 7px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 7px 7px 0 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+.application.sheet.eqrmss.actor.pet-sheet .sheet-tabs .item:hover {
+  color: #fff3cf;
+}
+.application.sheet.eqrmss.actor.pet-sheet .sheet-tabs .item.active {
+  color: #3a2a18;
+  background: linear-gradient(180deg, #f7eed3, #ecd9ab);
+  border-color: #3c2c14;
+  border-bottom: 1px solid #ecd9ab;
+  font-weight: bold;
+  box-shadow: inset 0 0 8px rgba(95,74,47,.25);
+}
+.application.sheet.eqrmss.actor.pet-sheet .tab[data-group="primary"] {
+  padding: 10px 12px;
+}
+
+/* Pet panels, tables, headings: character-sheet parchment look */
+.application.sheet.eqrmss.actor.pet-sheet .panel {
+  background: rgba(255,250,232,.5);
+  border: 2px solid rgba(95,74,47,.6);
+  border-radius: 8px;
+  box-shadow: inset 0 0 12px rgba(95,74,47,.2);
+  padding: 10px 12px;
+  color: #3a2a18;
+  margin-bottom: 10px;
+}
+.application.sheet.eqrmss.actor.pet-sheet .panel h3,
+.application.sheet.eqrmss.actor.pet-sheet .tab h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 2px;
+  color: #4a3517;
+  border-bottom: 2px solid rgba(95,74,47,.5);
+  padding-bottom: 3px;
+  margin-top: 0;
+}
+.application.sheet.eqrmss.actor.pet-sheet .panel h4,
+.application.sheet.eqrmss.actor.pet-sheet .tab h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-variant: small-caps;
+  letter-spacing: 1.5px;
+  color: #5f4a2f;
+  border-bottom: 1px dashed rgba(95,74,47,.45);
+  padding-bottom: 2px;
+}
+.application.sheet.eqrmss.actor.pet-sheet .rmss-table {
+  border-collapse: collapse;
+  width: 100%;
+  color: #3a2a18;
+}
+.application.sheet.eqrmss.actor.pet-sheet .rmss-table th {
+  background: linear-gradient(180deg, #6d5433, #4e3a20);
+  color: #f4e8c8;
+  font-family: Georgia, serif;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  font-weight: bold;
+  padding: 4px 6px;
+  border: 1px solid #3c2c14;
+  text-align: left;
+}
+.application.sheet.eqrmss.actor.pet-sheet .rmss-table td {
+  padding: 3px 6px;
+  border-bottom: 1px dashed rgba(95,74,47,.4);
+}
+.application.sheet.eqrmss.actor.pet-sheet .rmss-table tbody tr:hover td {
+  background: rgba(255,246,218,.55);
+}
+.application.sheet.eqrmss.actor.pet-sheet input[type="text"],
+.application.sheet.eqrmss.actor.pet-sheet input[type="number"] {
+  background: rgba(255,252,240,.75);
+  border: 1px solid rgba(107,84,58,.65);
+  border-radius: 4px;
+  color: #3a2a18;
+}
+
+/* Pet buttons: character-sheet parchment look */
+.application.sheet.eqrmss.actor.pet-sheet button {
+  background: linear-gradient(180deg, #f1e4bd, #d9c08f);
+  border: 1px solid #6b543a;
+  border-radius: 5px;
+  color: #3a2a18;
+  box-shadow: 0 1px 3px rgba(40,25,10,.3);
+  cursor: pointer;
+  padding: 3px 10px;
+}
+.application.sheet.eqrmss.actor.pet-sheet button:hover {
+  background: linear-gradient(180deg, #fff3cf, #e8d09c);
+  color: #8a3b1e;
+}
+.application.sheet.eqrmss.actor.pet-sheet button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.application.sheet.eqrmss.actor.pet-sheet .pet-dismiss {
+  margin-left: auto;
+}
+.application.sheet.eqrmss.actor.pet-sheet .pet-commands {
+  display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+}
+.application.sheet.eqrmss.actor.pet-sheet .command-desc {
+  color: #5f4a2f; font-size: 0.85rem; margin: 8px 0 0;
+}
+.application.sheet.eqrmss.actor.pet-sheet .empty-slot {
+  opacity: 0.6; font-size: 0.85rem; color: #5f4a2f;
+}
+.application.sheet.eqrmss.actor.pet-sheet .item-type {
+  color: #7a5a30; font-size: 0.85rem;
+}
+.application.sheet.eqrmss.actor.pet-sheet .action-cell {
+  text-align: right;
+}
+.application.sheet.eqrmss.actor.pet-sheet .hint {
+  color: #7a5a30; font-size: 0.8rem; margin: 6px 0 0;
+}
+.application.sheet.eqrmss.actor.pet-sheet .buff-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.application.sheet.eqrmss.actor.pet-sheet .effect-list {
+  list-style: none; margin: 0; padding: 0; color: #3a2a18;
+}
+.application.sheet.eqrmss.actor.pet-sheet .effect-list li {
+  padding: 2px 0;
+}

@@ -11,7 +11,9 @@ import {
     unequipPetItem,
     getPetDefense,
     getPetOB,
+    getPetWeapon,
 } from "../../spells/pets/pet-equipment.js";
+import { PET_ATTACK_TABLES } from "../../spells/pets/pet-combat.js";
 
 const { HandlebarsApplicationMixin, DocumentSheetV2 } = foundry.applications.api;
 
@@ -125,7 +127,61 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
             debuffs,
             equipSlots: slots,
             equipInventory: inventory,
+            attackForms: this._buildAttackForms(scaling, pet),
         };
+    }
+
+    /**
+     * Build the attack-forms list for the Combat tab: one row for the
+     * natural attack plus the equipped weapon (if any). Mirrors the
+     * resolution logic in pet-combat.js syntheticPetWeapon() (display only).
+     */
+    _buildAttackForms(scaling, pet) {
+        const forms = [];
+        const actor = this.actor;
+        const family = pet?.family ?? actor?.system?.details?.creatureType ?? "animal";
+        const buffs = pet?.buffs ?? {};
+        const ob = Number(scaling?.ob) || 0;
+        const critSteps = Number(buffs.critSteps) || 0;
+        const bonusAttacks = Number(buffs.bonusAttacks) || 0;
+        const isMagical = pet?.isMagical ?? true;
+
+        // Natural attack (family table)
+        const tableName = PET_ATTACK_TABLES[family] ?? "Armored Fist";
+        const notes = [];
+        if (isMagical) notes.push("Magical");
+        if (critSteps > 0) notes.push(`Crit +${critSteps}`);
+        forms.push({
+            name: `${actor?.name ?? "Pet"}'s Attack`,
+            kind: "Natural",
+            ob,
+            table: tableName,
+            attacks: 1 + bonusAttacks,
+            notes: notes.join(", ") || "—",
+        });
+
+        // Equipped weapon (pet-equipment.js)
+        try {
+            const equipped = getPetWeapon(actor);
+            if (equipped) {
+                const sys = equipped.system ?? {};
+                const bonuses = sys.bonuses ?? {};
+                const wNotes = [];
+                if (isMagical) wNotes.push("Magical");
+                if (critSteps > 0) wNotes.push(`Crit +${critSteps}`);
+                if (Number(bonuses.damageBonus)) wNotes.push(`Dmg +${bonuses.damageBonus}`);
+                forms.push({
+                    name: equipped.name ?? "Weapon",
+                    kind: "Weapon",
+                    ob: ob + (Number(bonuses.attackBonus) || 0),
+                    table: sys.attackTable ?? tableName,
+                    attacks: 1 + bonusAttacks,
+                    notes: wNotes.join(", ") || "—",
+                });
+            }
+        } catch { /* display-only; ignore */ }
+
+        return forms;
     }
 
     async _onRender(context, options) {

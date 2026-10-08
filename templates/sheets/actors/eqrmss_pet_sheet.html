@@ -1,132 +1,175 @@
 <form class="eqrmss sheet actor pet-sheet" autocomplete="off">
-<header class="sheet-header" style="display:flex;gap:15px;align-items:center;padding:10px;background:#181818;border-bottom:1px solid #333;">
-  <div style="width:80px;height:80px;border:1px solid #444;border-radius:4px;overflow:hidden;">
-    <img src="{{actor.img}}" data-edit="img" alt="{{actor.name}}" style="width:100%;height:100%;object-fit:cover;">
+<header class="sheet-header eq-header pet-header">
+  <div class="eq-portrait">
+    <img src="{{actor.img}}" data-edit="img" alt="{{actor.name}}">
   </div>
-  <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
-    <h1 style="margin:0;font-size:1.2rem;color:#fff;">
-      <input name="name" type="text" value="{{actor.name}}" style="background:transparent;border:none;border-bottom:1px solid #444;color:#fff;width:100%;padding:2px 0;">
+  <div class="eq-headmain">
+    <div class="eq-eyebrow">EverQuest &middot; Rolemaster</div>
+    <h1 class="eq-name">
+      <input name="name" type="text" value="{{actor.name}}">
     </h1>
-    <div style="font-size:0.85rem;color:#ccc;display:grid;grid-template-columns:repeat(2,1fr);gap:4px 20px;">
+    <div class="eq-subinfo">
       <div><strong>Owner:</strong> <span>{{ownerName}}</span></div>
       <div><strong>Family:</strong> <span>{{pet.family}}</span></div>
       <div><strong>Level:</strong> <span>{{petLevel}}</span></div>
-      <div><strong>Command:</strong> <span style="text-transform:capitalize;">{{pet.command}}</span></div>
+      <div><strong>Command:</strong> <span class="pet-command-label">{{pet.command}}</span></div>
     </div>
   </div>
 </header>
 
-<section class="sheet-body" style="padding:10px;display:flex;flex-direction:column;gap:12px;">
-  <div class="panel">
-    <h3>Statistics</h3>
-    <table class="rmss-table">
-      <thead>
-        <tr><th>Stat</th><th>Value</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Hits Taken</td><td>{{hitsTaken}} / {{hitsMax}}</td></tr>
-        <tr><td>Defense (DB)</td><td>{{petDefense}}</td></tr>
-        <tr><td>Offensive Bonus (OB)</td><td>{{petOB}}</td></tr>
-        <tr><td>Creature Type</td><td>{{creatureType}}</td></tr>
-        {{#if pet.summonSpell}}
-        <tr><td>Summoned By</td><td>{{pet.summonSpell}}</td></tr>
-        {{/if}}
-      </tbody>
-    </table>
-  </div>
+<nav class="sheet-tabs tabs" data-group="primary">
+  <a class="item active" data-tab="stats">Stats</a>
+  <a class="item" data-tab="equipment">Equipment</a>
+  <a class="item" data-tab="combat">Combat</a>
+  <a class="item" data-tab="affected">Affected By</a>
+</nav>
 
-  <div class="panel">
-    <h3>Equipment</h3>
-    <table class="rmss-table">
-      <thead>
-        <tr><th>Slot</th><th>Item</th><th></th></tr>
-      </thead>
-      <tbody>
-        {{#each equipSlots}}
-        <tr>
-          <td>{{this.label}}</td>
-          <td>{{#if this.item}}{{this.item.name}}{{else}}<span style="opacity:0.6;">Empty</span>{{/if}}</td>
-          <td style="text-align:right;">
-            {{#if this.item}}
-            <button type="button" class="pet-unequip" data-item-id="{{this.item.id}}">Unequip</button>
-            {{/if}}
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-    {{#if equipInventory.length}}
-    <h4 style="margin:8px 0 4px;color:#fff;">Inventory</h4>
-    <table class="rmss-table">
-      <tbody>
-        {{#each equipInventory}}
-        <tr>
-          <td>{{this.name}}</td>
-          <td style="color:#999;font-size:0.85rem;">{{this.type}}</td>
-          <td style="text-align:right;">
-            {{#if this.canEquip}}
-            <button type="button" class="pet-equip" data-item-id="{{this.id}}" data-slot-id="{{this.slotId}}">Equip ({{this.slotLabel}})</button>
-            {{else}}
-            <span style="opacity:0.6;font-size:0.85rem;">Cannot equip</span>
-            {{/if}}
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-    {{/if}}
-    <p style="color:#999;font-size:0.8rem;margin:6px 0 0;">Drag items from the Items directory onto this sheet to add them.</p>
-  </div>
-
-  <div class="panel">
-    <h3>Commands</h3>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button type="button" class="pet-command" data-command="attack" {{#if (eq pet.command "attack")}}disabled{{/if}}>
-        <i class="fas fa-crosshairs"></i> Attack
-      </button>
-      <button type="button" class="pet-command" data-command="guard" {{#if (eq pet.command "guard")}}disabled{{/if}}>
-        <i class="fas fa-shield-alt"></i> Guard
-      </button>
-      <button type="button" class="pet-command" data-command="follow" {{#if (eq pet.command "follow")}}disabled{{/if}}>
-        <i class="fas fa-walking"></i> Follow
-      </button>
-      <button type="button" class="pet-dismiss" style="margin-left:auto;color:#e88;">
-        <i class="fas fa-times"></i> Dismiss
-      </button>
+<section class="sheet-body">
+  <!-- Tab 1: Stats -->
+  <div class="tab active" data-group="primary" data-tab="stats">
+    <div class="panel">
+      <h3>Statistics</h3>
+      <table class="rmss-table">
+        <thead>
+          <tr><th>Stat</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Hits Taken</td><td>{{hitsTaken}} / {{hitsMax}}</td></tr>
+          <tr><td>Defense (DB)</td><td>{{petDefense}}</td></tr>
+          <tr><td>Offensive Bonus (OB)</td><td>{{petOB}}</td></tr>
+          <tr><td>Creature Type</td><td>{{creatureType}}</td></tr>
+          {{#if pet.summonSpell}}
+          <tr><td>Summoned By</td><td>{{pet.summonSpell}}</td></tr>
+          {{/if}}
+          {{#if pet.isMagical}}
+          <tr><td>Attacks</td><td>Magical</td></tr>
+          {{/if}}
+        </tbody>
+      </table>
     </div>
-    {{#if (eq pet.command "attack")}}
-    <p style="color:#ccc;font-size:0.85rem;">Currently <strong>attacking</strong> — engages the owner's target.</p>
-    {{/if}}
-    {{#if (eq pet.command "guard")}}
-    <p style="color:#ccc;font-size:0.85rem;">Currently <strong>guarding</strong> — attacks anything that harms the owner or the pet.</p>
-    {{/if}}
-    {{#if (eq pet.command "follow")}}
-    <p style="color:#ccc;font-size:0.85rem;">Currently <strong>following</strong> — stays near the owner, does not engage.</p>
-    {{/if}}
   </div>
 
-  <div class="panel">
-    <h3>Buffs &amp; Debuffs</h3>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-      <div>
-        <h4 style="margin:0 0 4px;color:#fff;">BUFFS</h4>
-        {{#if buffs.length}}
-        <ul style="list-style:none;margin:0;padding:0;color:#ccc;">
-          {{#each buffs}}<li style="padding:2px 0;">{{this.name}}</li>{{/each}}
-        </ul>
-        {{else}}
-        <p style="opacity:0.6;margin:0;color:#ccc;">None</p>
-        {{/if}}
+  <!-- Tab 2: Equipment -->
+  <div class="tab" data-group="primary" data-tab="equipment">
+    <div class="panel">
+      <h3>Equipment</h3>
+      <table class="rmss-table">
+        <thead>
+          <tr><th>Slot</th><th>Item</th><th></th></tr>
+        </thead>
+        <tbody>
+          {{#each equipSlots}}
+          <tr>
+            <td>{{this.label}}</td>
+            <td>{{#if this.item}}{{this.item.name}}{{else}}<span class="empty-slot">Empty</span>{{/if}}</td>
+            <td class="action-cell">
+              {{#if this.item}}
+              <button type="button" class="pet-unequip" data-item-id="{{this.item.id}}">Unequip</button>
+              {{/if}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{#if equipInventory.length}}
+      <h4>Inventory</h4>
+      <table class="rmss-table">
+        <tbody>
+          {{#each equipInventory}}
+          <tr>
+            <td>{{this.name}}</td>
+            <td class="item-type">{{this.type}}</td>
+            <td class="action-cell">
+              {{#if this.canEquip}}
+              <button type="button" class="pet-equip" data-item-id="{{this.id}}" data-slot-id="{{this.slotId}}">Equip ({{this.slotLabel}})</button>
+              {{else}}
+              <span class="empty-slot">Cannot equip</span>
+              {{/if}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{/if}}
+      <p class="hint">Drag items from the Items directory onto this sheet to add them.</p>
+    </div>
+  </div>
+
+  <!-- Tab 3: Combat -->
+  <div class="tab" data-group="primary" data-tab="combat">
+    <div class="panel">
+      <h3>Stance</h3>
+      <div class="pet-commands">
+        <button type="button" class="pet-command" data-command="attack" {{#if (eq pet.command "attack")}}disabled{{/if}}>
+          <i class="fas fa-crosshairs"></i> Attack
+        </button>
+        <button type="button" class="pet-command" data-command="guard" {{#if (eq pet.command "guard")}}disabled{{/if}}>
+          <i class="fas fa-shield-alt"></i> Guard
+        </button>
+        <button type="button" class="pet-command" data-command="follow" {{#if (eq pet.command "follow")}}disabled{{/if}}>
+          <i class="fas fa-walking"></i> Follow
+        </button>
+        <button type="button" class="pet-dismiss">
+          <i class="fas fa-times"></i> Dismiss
+        </button>
       </div>
-      <div>
-        <h4 style="margin:0 0 4px;color:#fff;">DEBUFFS</h4>
-        {{#if debuffs.length}}
-        <ul style="list-style:none;margin:0;padding:0;color:#ccc;">
-          {{#each debuffs}}<li style="padding:2px 0;">{{this.name}}</li>{{/each}}
-        </ul>
-        {{else}}
-        <p style="opacity:0.6;margin:0;color:#ccc;">None</p>
-        {{/if}}
+      {{#if (eq pet.command "attack")}}
+      <p class="command-desc">Currently <strong>attacking</strong> &mdash; engages the owner's target.</p>
+      {{/if}}
+      {{#if (eq pet.command "guard")}}
+      <p class="command-desc">Currently <strong>guarding</strong> &mdash; attacks anything that harms the owner or the pet.</p>
+      {{/if}}
+      {{#if (eq pet.command "follow")}}
+      <p class="command-desc">Currently <strong>following</strong> &mdash; stays near the owner, does not engage.</p>
+      {{/if}}
+    </div>
+
+    <div class="panel">
+      <h3>Attack Forms</h3>
+      <table class="rmss-table">
+        <thead>
+          <tr><th>Attack</th><th>Type</th><th>OB</th><th>Table</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          {{#each attackForms}}
+          <tr>
+            <td><strong>{{this.name}}</strong>{{#if (gt this.attacks 1)}} &times;{{this.attacks}}{{/if}}</td>
+            <td>{{this.kind}}</td>
+            <td>{{this.ob}}</td>
+            <td>{{this.table}}</td>
+            <td class="item-type">{{this.notes}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Tab 4: Affected By -->
+  <div class="tab" data-group="primary" data-tab="affected">
+    <div class="panel">
+      <h3>Affected By</h3>
+      <div class="buff-grid">
+        <div>
+          <h4>Buffs</h4>
+          {{#if buffs.length}}
+          <ul class="effect-list">
+            {{#each buffs}}<li>{{this.name}}</li>{{/each}}
+          </ul>
+          {{else}}
+          <p class="empty-slot">None</p>
+          {{/if}}
+        </div>
+        <div>
+          <h4>Debuffs</h4>
+          {{#if debuffs.length}}
+          <ul class="effect-list">
+            {{#each debuffs}}<li>{{this.name}}</li>{{/each}}
+          </ul>
+          {{else}}
+          <p class="empty-slot">None</p>
+          {{/if}}
+        </div>
       </div>
     </div>
   </div>
