@@ -7,35 +7,57 @@
       <input name="name" type="text" value="{{actor.name}}" style="background:transparent;border:none;border-bottom:1px solid #444;color:#fff;width:100%;padding:2px 0;">
     </h1>
     <div style="font-size:0.85rem;color:#ccc;display:grid;grid-template-columns:repeat(2,1fr);gap:4px 20px;">
-      <div><strong>Owner:</strong> <span>{{owner.name}}</span></div>
-      <div><strong>Role:</strong> <span>{{system.role}}</span></div>
-      <div><strong>Level:</strong> <span>{{system.level}}</span></div>
-      <div><strong>XP:</strong> <span>{{system.xp}} / {{system.nextLevelXp}}</span></div>
+      <div><strong>Owner:</strong> <span>{{ownerName}}</span></div>
+      <div><strong>Family:</strong> <span>{{pet.family}}</span></div>
+      <div><strong>Level:</strong> <span>{{petLevel}}</span></div>
+      <div><strong>Command:</strong> <span style="text-transform:capitalize;">{{pet.command}}</span></div>
     </div>
   </div>
 </header>
 
-<section class="sheet-body" style="padding:10px;">
+<section class="sheet-body" style="padding:10px;display:flex;flex-direction:column;gap:12px;">
   <div class="panel">
-    <h3>Pet Statistics</h3>
+    <h3>Statistics</h3>
     <table class="rmss-table">
       <thead>
         <tr><th>Stat</th><th>Value</th></tr>
       </thead>
       <tbody>
-        <tr><td>HP</td><td>{{system.hp}}</td></tr>
-        <tr><td>AC</td><td>{{system.ac}}</td></tr>
-        <tr><td>Attack Bonus</td><td>{{system.attackBonus}}</td></tr>
-        <tr><td>Damage</td><td>{{system.damage}}</td></tr>
-        <tr><td>Move Rate</td><td>{{system.moveRate}}</td></tr>
+        <tr><td>Hits Taken</td><td>{{hitsTaken}} / {{hitsMax}}</td></tr>
+        <tr><td>Defense (DB)</td><td>{{petDefense}}</td></tr>
+        <tr><td>Offensive Bonus (OB)</td><td>{{petOB}}</td></tr>
+        <tr><td>Creature Type</td><td>{{creatureType}}</td></tr>
+        {{#if pet.summonSpell}}
+        <tr><td>Summoned By</td><td>{{pet.summonSpell}}</td></tr>
+        {{/if}}
       </tbody>
     </table>
   </div>
 
   <div class="panel">
     <h3>Commands</h3>
-    <button class="pet-command-attack"><i class="fas fa-crosshairs"></i> Attack</button>
-    <button class="pet-command-guard"><i class="fas fa-shield-alt"></i> Guard</button>
-    <button class="pet-command-follow"><i class="fas fa-walking"></i> Follow</button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button type="button" class="pet-command" data-command="attack" {{#if (eq pet.command "attack")}}disabled{{/if}}>
+        <i class="fas fa-crosshairs"></i> Attack
+      </button>
+      <button type="button" class="pet-command" data-command="guard" {{#if (eq pet.command "guard")}}disabled{{/if}}>
+        <i class="fas fa-shield-alt"></i> Guard
+      </button>
+      <button type="button" class="pet-command" data-command="follow" {{#if (eq pet.command "follow")}}disabled{{/if}}>
+        <i class="fas fa-walking"></i> Follow
+      </button>
+      <button type="button" class="pet-dismiss" style="margin-left:auto;color:#e88;">
+        <i class="fas fa-times"></i> Dismiss
+      </button>
+    </div>
+    {{#if (eq pet.command "attack")}}
+    <p style="color:#ccc;font-size:0.85rem;">Currently <strong>attacking</strong> — engages the owner's target.</p>
+    {{/if}}
+    {{#if (eq pet.command "guard")}}
+    <p style="color:#ccc;font-size:0.85rem;">Currently <strong>guarding</strong> — attacks anything that harms the owner or the pet.</p>
+    {{/if}}
+    {{#if (eq pet.command "follow")}}
+    <p style="color:#ccc;font-size:0.85rem;">Currently <strong>following</strong> — stays near the owner, does not engage.</p>
+    {{/if}}
   </div>
 </section>

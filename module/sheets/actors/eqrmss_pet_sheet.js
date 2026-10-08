@@ -10,7 +10,7 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
 
     static DEFAULT_OPTIONS = {
         classes: ["eqrmss", "sheet", "actor", "pet-sheet"],
-        position: { width: 800, height: 700 },
+        position: { width: 560, height: 560 },
         form: {
             closeOnSubmit: false,
             submitOnChange: true
@@ -30,12 +30,32 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
         const system = this.actor.system ?? {};
+        const pet = system.pet ?? {};
+        const scaling = pet.scaling ?? {};
+
+        // Owner name from flag (summonPet stores flags.eqrmss.ownerId)
+        let ownerName = "—";
+        try {
+            const ownerId = pet.owner ?? this.actor.getFlag("eqrmss", "ownerId");
+            const owner = ownerId ? game.actors.get(ownerId) : null;
+            if (owner) ownerName = owner.name;
+        } catch { /* ignore */ }
+
+        const hitsMax = Number(system.hits?.max) || 0;
+        const hitsTaken = Number(system.hits?.value) || 0;
 
         return {
             ...context,
             actor: this.actor,
             system,
-            owner: game.actors.get(this.actor.getFlag("eqrmss", "ownerId") ?? null)
+            pet,
+            ownerName,
+            petLevel: Number(system.attributes?.level?.value) || 1,
+            hitsTaken,
+            hitsMax,
+            petDefense: Number(scaling.defense) || 0,
+            petOB: Number(scaling.ob) || 0,
+            creatureType: system.details?.creatureType ?? pet.family ?? "—"
         };
     }
 
@@ -43,20 +63,39 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
         await super._onRender(context, options);
 
         const html = this.element;
+        const actor = this.actor;
 
-        html.querySelectorAll(".pet-command-attack").forEach(el => el.addEventListener("click", ev => {
+        // Command buttons: Attack / Guard / Follow
+        html.querySelectorAll(".pet-command").forEach(el => el.addEventListener("click", async ev => {
             ev.preventDefault();
-            ui.notifications.info(`${this.actor.name} commanded to attack.`);
+            const command = el.dataset.command;
+            if (!command) return;
+            try {
+                await actor.update({ "system.pet.command": command });
+                ui.notifications.info(`${actor.name} commanded to ${command}.`);
+            } catch (err) {
+                console.warn("EQRMSS | pet command failed:", err);
+                ui.notifications.warn(`Could not command ${actor.name}.`);
+            }
         }));
 
-        html.querySelectorAll(".pet-command-guard").forEach(el => el.addEventListener("click", ev => {
+        // Dismiss button: delete the pet actor
+        html.querySelectorAll(".pet-dismiss").forEach(el => el.addEventListener("click", async ev => {
             ev.preventDefault();
-            ui.notifications.info(`${this.actor.name} commanded to guard.`);
-        }));
-
-        html.querySelectorAll(".pet-command-follow").forEach(el => el.addEventListener("click", ev => {
-            ev.preventDefault();
-            ui.notifications.info(`${this.actor.name} commanded to follow.`);
+            const confirmed = await foundry.applications.api.DialogV2.confirm({
+                window: { title: "Dismiss Pet" },
+                content: `<p>Dismiss <strong>${actor.name}</strong>? This cannot be undone.</p>`
+            });
+            if (!confirmed) return;
+            try {
+                const ownerId = actor.system?.pet?.owner ?? actor.getFlag("eqrmss", "ownerId");
+                await actor.delete();
+                ui.notifications.info(`${actor.name} dismissed.`);
+                void ownerId;
+            } catch (err) {
+                console.warn("EQRMSS | pet dismiss failed:", err);
+                ui.notifications.warn(`Could not dismiss ${actor.name}.`);
+            }
         }));
     }
 }

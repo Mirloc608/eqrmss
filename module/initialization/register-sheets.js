@@ -15,6 +15,7 @@ import EQRMSSSpellSheet from "../sheets/spells/eqrmss_spell_sheet.js";
 import EQRMSSSongSheet from "../sheets/songs/eqrmss_song_sheet.js";
 import EQRMSSSkillCategorySheet from "../sheets/skills/eqrmss_skill_category_sheet.js";
 import EQRMSSSkillSheet from "../sheets/skills/eqrmss_skill_sheet.js";
+import EQRMSSPetSheet from "../sheets/actors/eqrmss_pet_sheet.js";
 
 export function registerEQRMSSSheets() {
     console.log("EQRMSS | Registering sheets");
@@ -31,6 +32,12 @@ export function registerEQRMSSSheets() {
     DocumentSheetConfig.registerSheet(Actor, "eqrmss", EQRMSSNPCSheet, {
         types: ["npc"],
         label: "eqrmss.entity_sheet.npc",
+        makeDefault: true
+    });
+
+    DocumentSheetConfig.registerSheet(Actor, "eqrmss", EQRMSSPetSheet, {
+        types: ["pet"],
+        label: "eqrmss.entity_sheet.pet",
         makeDefault: true
     });
 
