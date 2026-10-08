@@ -55,7 +55,12 @@ export class EQRMSSActorTabsHelper {
             });
         });
 
-        show(this.sheet._lastActiveTab || "main");
+        // Initial tab: prefer the sheet's saved tab if it exists in this
+        // nav; otherwise the first tab. (The pet sheet has no "main" tab,
+        // so a hardcoded "main" default blanked it on first render.)
+        const availableTabs = [...nav.querySelectorAll("[data-tab]")].map(b => b.dataset.tab);
+        const savedTab = this.sheet._lastActiveTab;
+        show(savedTab && availableTabs.includes(savedTab) ? savedTab : (availableTabs[0] ?? "main"));
     }
 
     // =========================================================================
