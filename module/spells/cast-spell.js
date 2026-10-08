@@ -42,6 +42,7 @@ import { applyLevitate } from "./levitate.js";
 import { applyIllusion, applySeeInvisible, applyInfravision, applyUltravision } from "../item-effects/damage-pipeline.js";
 import { applyTeleport } from "./teleport.js";
 import { summonItem } from "./summon.js";
+import { applyMemblur } from "./memblur.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -617,18 +618,30 @@ export async function castSpell(actor, spellItem, opts = {}) {
             }
         }
     }
+    // Memblur (2026-10-07): EQ memory-blur. Spell data uses
+    // { type: "control", effect: "memory-blur", amount: <chance %> }.
+    // On success the target forgets the caster (removed from aggro).
+    let memblurNote = "";
+    const memblurEffs = (spellEffectsOf(spellItem) ?? []).filter(e =>
+        String(e?.effect ?? "").toLowerCase() === "memory-blur");
+    if (memblurEffs.length) {
+        for (const eff of memblurEffs) {
+            const chance = Number(eff?.amount) || 50;
+            memblurNote += await applyMemblur(actor, buffTarget, chance, name);
+        }
+    }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
-    // teleport/summon/vision pipeline already produced output (2026-10-07: redundant when buffs
+    // teleport/summon/vision/memblur pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }

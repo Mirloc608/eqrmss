@@ -1139,6 +1139,14 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         }
         const cur = Number(targetActor.system?.hits?.value) || 0;
         await targetActor.update({ "system.hits.value": cur + totalDamage });
+        // Aggro (2026-10-07): record the attacker on the target's offense
+        // record. Powers memblur ("remove the caster from memory").
+        if (totalDamage > 0 && actor && targetActor) {
+            try {
+                const { recordAggro } = await import("../spells/memblur.js");
+                await recordAggro(targetActor, actor, { damage: totalDamage });
+            } catch (e) { /* non-fatal */ }
+        }
         // Being subdued doubles the victim's exhaustion costs (§4.10).
         if (subduing) await targetActor.update({ "system.status.subdueDoubled": true });
         appliedNote = `<p><em>${totalDamage} concussion hit${totalDamage === 1 ? "" : "s"} applied to ${esc(targetName)}.</em></p>`;

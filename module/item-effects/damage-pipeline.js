@@ -781,6 +781,27 @@ async function applyUtility({ effect, source, target, caster }) {
 }
 
 /**
+ * "memblur" — EQ Memory Blur (2026-10-07). The target has a chance to
+ * forget the caster (removed from the target's aggro record).
+ * Delegates to module/spells/memblur.js via dynamic import (avoids cycles).
+ * Payload shape: { type: "memblur", chance: <0-100> }
+ */
+export async function applyMemblurPayload({ effect, caster, target, source }) {
+    const miss = requireTarget(target, "memblur", source);
+    if (miss) return miss;
+    const chance = Number(effect?.chance) || 100;
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Memory Blur";
+    try {
+        const { applyMemblur } = await import("../spells/memblur.js");
+        const note = await applyMemblur(caster, target, chance, dispName);
+        const applied = !/not applied|resists/i.test(note);
+        return { type: "memblur", final: applied ? 1 : 0, notes: [note.replace(/<[^>]+>/g, "")], source, applied };
+    } catch (e) {
+        return { type: "memblur", final: 0, notes: [`memblur failed: ${e?.message ?? e}`], source, applied: false };
+    }
+}
+
+/**
  * Resolve one payload array against a target.
  * @param {object} args { payload, caster, target, source }
  *   caster: the actor the effect is "as if cast by" (wielder / wearer / user)
@@ -815,6 +836,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "levitate") results.push(await applyLevitatePayload({ effect, target, source }));
         else if (effect.type === "teleport") results.push(await applyTeleportPayload({ effect, caster, target, source }));
         else if (effect.type === "summon-item") results.push(await applySummonItem({ effect, caster, target, source }));
+        else if (effect.type === "memblur") results.push(await applyMemblurPayload({ effect, caster, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }

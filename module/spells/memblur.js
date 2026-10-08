@@ -1,0 +1,140 @@
+// ============================================================
+// MEMBLUR (2026-10-07). EQ memory-blur mechanics.
+//
+// Memblur removes the caster from the target's "memory" — the
+// target forgets that the caster harmed them.
+//
+// This builds on a minimal aggro/offense record stored at
+// system.status.aggro, keyed by attacker actor ID:
+//   { <attackerId>: { damage: <total>, debuffs: <count>, lastRound: <n> } }
+//
+// This is the foundation for the user's planned "offense record on
+// NPC cards" (damage to the target, debuffs on the target, healing
+// someone attacking the target). Healing-aggro is not yet tracked.
+//
+// User ruling (2026-10-07): "Memblur: Remove the caster from the
+// NPC/PC's 'memory.'"
+// ============================================================
+
+const esc = (s) => globalThis.foundry?.utils?.escapeHTML
+    ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
+    : String(s ?? "");
+
+/**
+ * Get the current combat round for aggro timestamps.
+ * @returns {number} combat round, or 0 if not in combat
+ */
+function currentRound() {
+    try {
+        return Number(globalThis.game?.combat?.round) || 0;
+    } catch (e) {
+        return 0;
+    }
+}
+
+/**
+ * Record an offensive action against a target. Called when an actor
+ * damages or debuffs another actor.
+ *
+ * @param {Actor} target - the actor that was harmed
+ * @param {Actor} attacker - the actor doing the harming
+ * @param {object} opts - { damage = 0, debuffs = 0 }
+ * @returns {Promise<void>}
+ */
+export async function recordAggro(target, attacker, { damage = 0, debuffs = 0 } = {}) {
+    if (!target || !attacker) return;
+    // Don't record self-inflicted damage as aggro
+    if (target.id === attacker.id) return;
+    const dmg = Number(damage) || 0;
+    const deb = Number(debuffs) || 0;
+    if (dmg <= 0 && deb <= 0) return;
+
+    let aggro = {};
+    try {
+        aggro = { ...(target.system?.status?.aggro ?? {}) };
+    } catch (e) { /* ignore */ }
+
+    const key = String(attacker.id);
+    const existing = aggro[key] ?? { damage: 0, debuffs: 0, lastRound: 0, name: String(attacker.name ?? "unknown") };
+    aggro[key] = {
+        damage: (Number(existing.damage) || 0) + dmg,
+        debuffs: (Number(existing.debuffs) || 0) + deb,
+        lastRound: currentRound(),
+        name: String(attacker.name ?? existing.name ?? "unknown")
+    };
+
+    try {
+        await target.update({ "system.status.aggro": aggro });
+    } catch (e) { /* non-fatal */ }
+}
+
+/**
+ * Get the aggro record for a target.
+ * @param {Actor} target
+ * @returns {object} aggro record keyed by attacker ID
+ */
+export function getAggro(target) {
+    try {
+        return { ...(target?.system?.status?.aggro ?? {}) };
+    } catch (e) {
+        return {};
+    }
+}
+
+/**
+ * Remove one attacker's entry from a target's aggro record.
+ * @param {Actor} target - the actor forgetting
+ * @param {string} attackerId - the actor ID to forget
+ * @returns {Promise<boolean>} true if an entry was removed
+ */
+export async function clearAggro(target, attackerId) {
+    if (!target || !attackerId) return false;
+    let aggro = {};
+    try {
+        aggro = { ...(target.system?.status?.aggro ?? {}) };
+    } catch (e) { /* ignore */ }
+    const key = String(attackerId);
+    if (!(key in aggro)) return false;
+    delete aggro[key];
+    try {
+        await target.update({ "system.status.aggro": aggro });
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+/**
+ * Apply memblur: the target has a chance to forget the caster.
+ *
+ * @param {Actor} caster - the actor casting memblur (will be forgotten)
+ * @param {Actor} target - the actor whose memory is blurred
+ * @param {number} chancePct - % chance of success (0-100)
+ * @param {string} sourceName - spell/clicky/song name for messages
+ * @returns {Promise<string>} HTML note for the chat card
+ */
+export async function applyMemblur(caster, target, chancePct = 50, sourceName = "Memory Blur") {
+    if (!target) return "";
+    const canTouch = target.isOwner || globalThis.game?.user?.isGM;
+    if (!canTouch) return `<p><em>Memblur not applied — you don't control ${esc(target.name)}.</em></p>`;
+
+    const chance = Math.max(0, Math.min(100, Number(chancePct) || 0));
+    const roll = Math.ceil(Math.random() * 100);
+
+    if (roll > chance) {
+        return `<p><em>${esc(target.name)} resists the memory blur (${esc(sourceName)}: ${roll} vs ${chance}%).</em></p>`;
+    }
+
+    const casterId = caster ? String(caster.id) : null;
+    const casterName = caster ? String(caster.name ?? "unknown") : "unknown";
+    let forgot = false;
+    if (casterId) {
+        forgot = await clearAggro(target, casterId);
+    }
+
+    if (forgot) {
+        return `<p><em>${esc(target.name)} forgets ${esc(casterName)} (${esc(sourceName)}).</em></p>`;
+    }
+    // Success but the caster had no aggro on the target — nothing to forget
+    return `<p><em>${esc(target.name)}'s memory blurs, but ${esc(casterName)} had done them no harm (${esc(sourceName)}).</em></p>`;
+}

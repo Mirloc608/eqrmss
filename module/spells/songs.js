@@ -19,6 +19,7 @@ import { durationRounds } from "./base-spell.js";
 import { applyStatusEffect } from "./status-wiring.js";
 import { breakInvisibility } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
+import { applyMemblur } from "./memblur.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -324,6 +325,9 @@ export async function applySong(bard, songItem, targets = []) {
             if (type === "damage" || type === "regen" || type === "heal") continue;
             // Levitate is not a buff — handled separately via applyLevitate (2026-10-07).
             if (type === "levitate" || String(eff?.effect ?? "").toLowerCase() === "levitate") continue;
+            // Memblur is not a buff — handled separately via applyMemblur (2026-10-07).
+            // Song data uses { type: "control", condition: "memory-blur" }.
+            if (String(eff?.condition ?? "").toLowerCase() === "memory-blur") continue;
             // This is a buff (modifier) effect
             const entry = maintainedEntry(bard, songItem, effectLabel(name, eff), eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
             const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue, entry.songId);
@@ -369,6 +373,10 @@ export async function applySong(bard, songItem, targets = []) {
                 // Levitate (2026-10-07): wire to `flying` status via applyLevitate.
                 const levRounds = durationRounds(eff?.duration) ?? 200;
                 notes += await applyLevitate(target, name, levRounds);
+            } else if (String(eff?.condition ?? "").toLowerCase() === "memory-blur") {
+                // Memblur (2026-10-07): song data doesn't specify a chance;
+                // use 50% (matches the mid-range spell values).
+                notes += await applyMemblur(bard, target, 50, name);
             } else {
                 const entry = maintainedEntry(bard, songItem, label, eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
                 const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue, entry.songId);
