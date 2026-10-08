@@ -13,36 +13,47 @@
     <table class="rmss-table spell-groups">
       <thead><tr><th class="col-toggle"></th><th></th><th>Ready</th><th>Name</th><th>Spell List</th><th>Level</th><th>Mana</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
       <tbody>
-        {{#each spellGroups}}
-          <tr class="spell-group-header" data-group="{{name}}" data-item-id="{{highestId}}">
-            <td>{{#if multi}}<button type="button" class="spell-group-toggle" data-group="{{name}}" title="{{#if expanded}}Collapse{{else}}Expand{{/if}} ranks">{{#if expanded}}▾{{else}}▸{{/if}}</button>{{/if}}</td>
-            <td><button class="cast-spell" data-item-id="{{highestId}}" title="Cast {{name}} (highest known rank; EQ mana cost; RMSS resolution)">Cast</button></td>
-            <td style="text-align: center;"><a class="toggle-ready" data-item-id="{{highestId}}" title="{{#if highest.isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if highest.isReady}}⭐{{else}}☆{{/if}}</a></td>
-            <td>
-              <a class="item-open" data-item-id="{{highestId}}"><strong>{{name}}</strong></a>
-              {{#if multi}}<span class="rank-badge">{{count}} ranks</span>{{/if}}
+        {{#each spellCategories}}
+          <tr class="spell-category-header" data-category="{{name}}">
+            <td><button type="button" class="spell-category-toggle" data-category="{{name}}" title="{{#if expanded}}Collapse{{else}}Expand{{/if}} {{name}}">{{#if expanded}}▾{{else}}▸{{/if}}</button></td>
+            <td colspan="9">
+              <strong>{{name}}</strong>
+              <span class="category-badge">{{lineCount}} lines</span>
             </td>
-            <td>{{highest.spellList}}</td>
-            <td>{{highest.level}}</td>
-            <td>{{highest.manaCost}}</td>
-            <td>{{highest.type}}</td>
-            <td>{{highest.range}}</td>
-            <td>{{highest.duration}}</td>
           </tr>
-          {{#if multi}}
-            {{#each ranks}}
-            <tr class="spell-group-rank{{#unless ../expanded}} is-hidden{{/unless}}" data-item-id="{{id}}">
-              <td></td>
-              <td><button class="cast-spell" data-item-id="{{id}}" title="Cast {{name}} (Rk. {{rankRoman}}; EQ mana cost; RMSS resolution)">Cast</button></td>
-              <td style="text-align: center;"><a class="toggle-ready" data-item-id="{{id}}" title="{{#if isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if isReady}}⭐{{else}}☆{{/if}}</a></td>
-              <td class="spell-rank-cell"><a class="item-open" data-item-id="{{id}}">{{name}} <span class="rank-tag">Rk. {{rankRoman}}</span></a></td>
-              <td>{{spellList}}</td>
-              <td>{{level}}</td>
-              <td>{{manaCost}}</td>
-              <td>{{type}}</td>
-              <td>{{range}}</td>
-              <td>{{duration}}</td>
-            </tr>
+          {{#if expanded}}
+            {{#each groups}}
+              <tr class="spell-group-header" data-group="{{name}}" data-item-id="{{highestId}}">
+                <td>{{#if multi}}<button type="button" class="spell-group-toggle" data-group="{{name}}" title="{{#if expanded}}Collapse{{else}}Expand{{/if}} ranks">{{#if expanded}}▾{{else}}▸{{/if}}</button>{{/if}}</td>
+                <td><button class="cast-spell" data-item-id="{{highestId}}" title="Cast {{name}} (highest known rank; EQ mana cost; RMSS resolution)">Cast</button></td>
+                <td style="text-align: center;"><a class="toggle-ready" data-item-id="{{highestId}}" title="{{#if highest.isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if highest.isReady}}⭐{{else}}☆{{/if}}</a></td>
+                <td>
+                  <a class="item-open" data-item-id="{{highestId}}"><strong>{{name}}</strong></a>
+                  {{#if multi}}<span class="rank-badge">{{count}} ranks</span>{{/if}}
+                </td>
+                <td>{{highest.spellList}}</td>
+                <td>{{highest.level}}</td>
+                <td>{{highest.manaCost}}</td>
+                <td>{{highest.type}}</td>
+                <td>{{highest.range}}</td>
+                <td>{{highest.duration}}</td>
+              </tr>
+              {{#if multi}}
+                {{#each ranks}}
+                <tr class="spell-group-rank{{#unless ../expanded}} is-hidden{{/unless}}" data-item-id="{{id}}">
+                  <td></td>
+                  <td><button class="cast-spell" data-item-id="{{id}}" title="Cast {{name}} (Rk. {{rankRoman}}; EQ mana cost; RMSS resolution)">Cast</button></td>
+                  <td style="text-align: center;"><a class="toggle-ready" data-item-id="{{id}}" title="{{#if isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if isReady}}⭐{{else}}☆{{/if}}</a></td>
+                  <td class="spell-rank-cell"><a class="item-open" data-item-id="{{id}}">{{name}} <span class="rank-tag">Rk. {{rankRoman}}</span></a></td>
+                  <td>{{spellList}}</td>
+                  <td>{{level}}</td>
+                  <td>{{manaCost}}</td>
+                  <td>{{type}}</td>
+                  <td>{{range}}</td>
+                  <td>{{duration}}</td>
+                </tr>
+                {{/each}}
+              {{/if}}
             {{/each}}
           {{/if}}
         {{/each}}

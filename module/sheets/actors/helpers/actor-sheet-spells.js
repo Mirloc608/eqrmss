@@ -52,6 +52,89 @@ export function spellRankNumber(item) {
   return 1;
 }
 
+// ------------------------------------------------------------
+// Functional category grouping (2026-10-08)
+// Spells are grouped by functional category derived from their
+// primary effect type. Categories render as collapsible sections
+// on the Spells tab, each containing spell-line groups.
+// ------------------------------------------------------------
+
+/** Maps system.effects[].type -> display category. Unmapped -> "Utility". */
+const EFFECT_TYPE_TO_CATEGORY = {
+  buff: "Buff",
+  debuff: "Debuff",
+  "summon-pet": "Pet",
+  damage: "Direct Damage",
+  dot: "Damage Over Time",
+  "damage-over-time": "Damage Over Time",
+  heal: "Heals",
+  regen: "Heals",
+  cure: "Heals",
+  restore: "Heals",
+  control: "Crowd Control",
+  hate: "Hate",
+  "hate-modifier": "Hate",
+  "hate-mod": "Hate",
+  movement: "Travel",
+  levitate: "Travel",
+  lifetap: "Lifetap",
+  "lifetap-over-time": "Lifetap",
+};
+
+/** Display order for categories on the Spells tab. */
+const CATEGORY_ORDER = [
+  "Direct Damage",
+  "Damage Over Time",
+  "Lifetap",
+  "Heals",
+  "Buff",
+  "Debuff",
+  "Crowd Control",
+  "Hate",
+  "Pet",
+  "Travel",
+  "Utility",
+];
+
+/**
+ * Effect types that describe mechanics, not function — skipped when
+ * determining a spell's primary category.
+ */
+const META_EFFECT_TYPES = new Set(["stacking", "stack-block", "persistent", "proc"]);
+
+/**
+ * Name patterns for travel spells. Teleport/gate spells use generic
+ * "utility" effects, so they're detected by name instead.
+ */
+const TRAVEL_NAME_RE = /teleport|evacuate|\bgate\b|circle of/i;
+
+/**
+ * Functional category for a spell item, from its primary effect type.
+ * Teleport/gate spells use generic "utility" effects, so they're detected
+ * by name — but only when the effect type doesn't already give a clear
+ * category (e.g. "Circle of Winter" is a buff, not a teleport).
+ * @param {object} item - spell item/document
+ * @returns {string} category display name
+ */
+export function spellCategory(item) {
+  const name = item?.name ?? "";
+  const effects = item?.system?.effects ?? [];
+  let primary = null;
+  for (const e of effects) {
+    const t = e?.type;
+    if (!t || META_EFFECT_TYPES.has(t)) continue;
+    primary = t;
+    break;
+  }
+  if (primary && EFFECT_TYPE_TO_CATEGORY[primary]) {
+    return EFFECT_TYPE_TO_CATEGORY[primary];
+  }
+  // Unmapped or no effects: check travel name patterns before falling
+  // back to Utility (teleport/gate spells use generic utility effects).
+  if (TRAVEL_NAME_RE.test(name)) return "Travel";
+  return "Utility";
+}
+
 function spellRow(item) {
   const s = item?.system ?? {};
   return {
@@ -103,12 +186,48 @@ export function groupSpellsByLine(spells, expandedNames) {
   return groups;
 }
 
+/**
+ * Group a flat spell list by functional category, then by spell line
+ * within each category.
+ * @param {Array} spells - spell items/documents
+ * @param {Set<string>} [expandedGroups] - spell-line names currently expanded
+ * @param {Set<string>} [collapsedCategories] - category names currently collapsed
+ * @returns {Array} categories in CATEGORY_ORDER; each has name, groups
+ *   (from groupSpellsByLine), lineCount, spellCount, and expanded flag.
+ *   Empty categories are omitted.
+ */
+export function groupSpellsByCategory(spells, expandedGroups, collapsedCategories) {
+  const byCategory = new Map();
+  for (const item of spells ?? []) {
+    if (!item?.name) continue;
+    const cat = spellCategory(item);
+    if (!byCategory.has(cat)) byCategory.set(cat, []);
+    byCategory.get(cat).push(item);
+  }
+
+  const categories = [];
+  for (const [name, items] of byCategory) {
+    const groups = groupSpellsByLine(items, expandedGroups);
+    categories.push({
+      name,
+      groups,
+      lineCount: groups.length,
+      spellCount: items.length,
+      expanded: !collapsedCategories?.has(name),
+    });
+  }
+  categories.sort((a, b) => CATEGORY_ORDER.indexOf(a.name) - CATEGORY_ORDER.indexOf(b.name));
+  return categories;
+}
+
 export class EQRMSSActorSpellsHelper {
   constructor(sheet) {
     this.sheet = sheet;
     // Spell-group expander state; persists across re-renders because the
     // helper instance is constructed once per sheet.
     this.expandedGroups = new Set();
+    // Collapsed category sections (categories default to expanded).
+    this.collapsedCategories = new Set();
   }
 
   prepare(context) {
@@ -126,6 +245,18 @@ export class EQRMSSActorSpellsHelper {
     const html = this.sheet.element;
     if (!html) return;
 
+    // Spell-category expand/collapse
+    html.querySelectorAll(".spell-category-toggle").forEach(el => {
+      el.addEventListener("click", ev => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const name = el.dataset.category;
+        if (this.collapsedCategories.has(name)) this.collapsedCategories.delete(name);
+        else this.collapsedCategories.add(name);
+        this.sheet.render();
+      });
+    });
+
     // Spell-group expand/collapse
     html.querySelectorAll(".spell-group-toggle").forEach(el => {
       el.addEventListener("click", ev => {
@@ -138,19 +269,24 @@ export class EQRMSSActorSpellsHelper {
       });
     });
 
-    // Expand / collapse all spell groups
+    // Expand all: categories and spell groups
     html.querySelectorAll(".spell-expand-all").forEach(el => {
       el.addEventListener("click", ev => {
         ev.preventDefault();
+        this.collapsedCategories.clear();
         html.querySelectorAll(".spell-group-header[data-group]").forEach(h => {
           this.expandedGroups.add(h.dataset.group);
         });
         this.sheet.render();
       });
     });
+    // Collapse all: categories and spell groups
     html.querySelectorAll(".spell-collapse-all").forEach(el => {
       el.addEventListener("click", ev => {
         ev.preventDefault();
+        html.querySelectorAll(".spell-category-header[data-category]").forEach(h => {
+          this.collapsedCategories.add(h.dataset.category);
+        });
         this.expandedGroups.clear();
         this.sheet.render();
       });
