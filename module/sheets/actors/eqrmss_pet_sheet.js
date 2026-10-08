@@ -4,6 +4,14 @@
 
 import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
 import { dismissPet } from "../../spells/pets/summon-pet.js";
+import {
+    getPetSlots,
+    getSlotForItem,
+    equipPetItem,
+    unequipPetItem,
+    getPetDefense,
+    getPetOB,
+} from "../../spells/pets/pet-equipment.js";
 
 const { HandlebarsApplicationMixin, DocumentSheetV2 } = foundry.applications.api;
 
@@ -76,6 +84,31 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
             }
         }
 
+        // Equipment (2026-10-08): simple slot-based inventory.
+        const slots = getPetSlots(this.actor).map((slot) => {
+            const equipped = [...(this.actor.items ?? [])].find(
+                (i) => i.system?.equipped === true && i.system?.petSlot === slot.id
+            ) ?? null;
+            return {
+                ...slot,
+                item: equipped ? { id: equipped.id, name: equipped.name, img: equipped.img } : null,
+            };
+        });
+        const inventory = [...(this.actor.items ?? [])]
+            .filter((i) => i.system?.equipped !== true)
+            .map((i) => {
+                const slot = getSlotForItem(this.actor, i);
+                return {
+                    id: i.id,
+                    name: i.name,
+                    img: i.img,
+                    type: i.type,
+                    slotId: slot?.id ?? null,
+                    slotLabel: slot?.label ?? null,
+                    canEquip: !!slot,
+                };
+            });
+
         return {
             ...context,
             actor: this.actor,
@@ -85,11 +118,13 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
             petLevel: Number(system.attributes?.level?.value) || 1,
             hitsTaken,
             hitsMax,
-            petDefense: Number(scaling.defense) || 0,
-            petOB: Number(scaling.ob) || 0,
+            petDefense: getPetDefense(this.actor),
+            petOB: getPetOB(this.actor),
             creatureType: system.details?.creatureType ?? pet.family ?? "—",
             buffs,
-            debuffs
+            debuffs,
+            equipSlots: slots,
+            equipInventory: inventory,
         };
     }
 
@@ -130,5 +165,50 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
                 ui.notifications.warn(`Could not dismiss ${actor.name}.`);
             }
         }));
+
+        // Equipment: equip / unequip buttons
+        html.querySelectorAll(".pet-equip").forEach(el => el.addEventListener("click", async ev => {
+            ev.preventDefault();
+            const itemId = el.dataset.itemId;
+            const slotId = el.dataset.slotId || null;
+            if (!itemId) return;
+            await equipPetItem(actor, itemId, slotId);
+        }));
+        html.querySelectorAll(".pet-unequip").forEach(el => el.addEventListener("click", async ev => {
+            ev.preventDefault();
+            const itemId = el.dataset.itemId;
+            if (!itemId) return;
+            await unequipPetItem(actor, itemId);
+        }));
+
+        // Drag & drop: drop an Item onto the sheet to add it to the pet
+        if (!this._petDropBound) {
+            html.addEventListener("dragover", ev => ev.preventDefault());
+            html.addEventListener("drop", ev => this._onPetDrop(ev));
+            this._petDropBound = true;
+        }
+    }
+
+    async _onPetDrop(event) {
+        event.preventDefault();
+        const actor = this.document;
+        if (!actor) return;
+        try {
+            const dt = event.dataTransfer;
+            const raw = dt?.getData("text/plain") ?? "";
+            if (!raw) return;
+            const data = JSON.parse(raw);
+            if (data?.type !== "Item" || !data?.uuid) return;
+            const item = await fromUuid(data.uuid);
+            if (!item) return;
+            // Copy onto the pet (don't move from another actor)
+            if (item.parent !== actor) {
+                const itemData = item.toObject();
+                await actor.createEmbeddedDocuments("Item", [itemData]);
+                ui.notifications.info(`${item.name} added to ${actor.name}.`);
+            }
+        } catch (err) {
+            console.warn("EQRMSS | pet drop failed:", err);
+        }
     }
 }

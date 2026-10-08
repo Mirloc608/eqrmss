@@ -11,6 +11,8 @@
 // owner's attack resolves, petActAfterOwner() runs the pet's action.
 // ============================================================
 
+import { getPetWeapon } from "./pet-equipment.js";
+
 /**
  * Attack table per pet family (natural attacks).
  * Names must match module/data/combat/weapon-tables.json.
@@ -152,8 +154,13 @@ export function resolvePetTarget(pet, owner, ownerTarget) {
  * Follows the syntheticBoltWeapon pattern from cast-spell.js.
  *
  * Warder buffs (system.pet.buffs) modify the weapon:
- * - attackUpgrade: improves the attack table
- * - critSteps: expands the critical range (handled in rollWeaponAttack via critMod)
+ * Build a synthetic natural-attack weapon for the pet.
+ * Follows the syntheticBoltWeapon pattern from cast-spell.js.
+ *
+ * If the pet has an equipped weapon (pet inventory, 2026-10-08), use it:
+ * the weapon's attack table (or the family natural table as fallback) with
+ * the pet's OB plus the weapon's attack bonus. Weapon type restrictions are
+ * ignored for pets (user ruling — e.g. animals use summoned weapons).
  *
  * All pets are magical attackers (system.pet.isMagical = true).
  * HOOK: If creatures gain a "requires magic weapon" immunity, check
@@ -174,6 +181,35 @@ function syntheticPetWeapon(pet) {
     const ob = Number(scaling.ob) || 0;
     const petName = pet?.name ?? "Pet";
     const critSteps = Number(buffs.critSteps) || 0;
+
+    // Equipped weapon (pet-equipment.js): prefer it over natural attacks.
+    try {
+        const equipped = getPetWeapon(pet);
+        if (equipped) {
+            const sys = equipped.system ?? {};
+            const bonuses = sys.bonuses ?? {};
+            return {
+                _id: equipped.id,
+                id: equipped.id,
+                name: equipped.name,
+                type: "weapon",
+                system: {
+                    type: sys.weaponType ?? "melee",
+                    attackTable: sys.attackTable ?? tableName,
+                    obMod: ob + (Number(bonuses.attackBonus) || 0),
+                    damageMod: Number(bonuses.damageBonus) || 0,
+                    criticalType: sys.criticalType ?? "",
+                    // Magical attacker: bypasses "requires magic weapon" immunities
+                    isMagical: pet?.system?.pet?.isMagical ?? true,
+                    // Crit range expansion from warder buffs
+                    critRangeMod: critSteps,
+                    location: "equipped",
+                    equipped: true,
+                },
+            };
+        }
+    } catch { /* fall through to natural attack */ }
+
     return {
         _id: `pet-attack-${pet?.id ?? "x"}`,
         id: `pet-attack-${pet?.id ?? "x"}`,

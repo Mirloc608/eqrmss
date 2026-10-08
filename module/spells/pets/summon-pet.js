@@ -595,6 +595,15 @@ export async function summonPet(caster, petId, spellName, spellManaCost, spellLe
         tokenWarnNote += `<p><em>Pet token creation failed: ${escFn(err?.message ?? "unknown error")}.</em></p>`;
     }
 
+    // Combat stats (2026-10-08): set system.combat.totalDB from scaling so
+    // the pet defends with its real DB (previously defended at 0).
+    try {
+        const { syncPetCombatStats } = await import("./pet-equipment.js");
+        await syncPetCombatStats(petActor);
+    } catch (err) {
+        console.warn("EQRMSS | summonPet: combat stat sync failed:", err);
+    }
+
     // Initiative inheritance (2026-10-08): pet acts immediately after the owner.
     await addPetToCombat(caster, petActor, petTokenDoc);
 

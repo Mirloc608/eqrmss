@@ -36,6 +36,49 @@
   </div>
 
   <div class="panel">
+    <h3>Equipment</h3>
+    <table class="rmss-table">
+      <thead>
+        <tr><th>Slot</th><th>Item</th><th></th></tr>
+      </thead>
+      <tbody>
+        {{#each equipSlots}}
+        <tr>
+          <td>{{this.label}}</td>
+          <td>{{#if this.item}}{{this.item.name}}{{else}}<span style="opacity:0.6;">Empty</span>{{/if}}</td>
+          <td style="text-align:right;">
+            {{#if this.item}}
+            <button type="button" class="pet-unequip" data-item-id="{{this.item.id}}">Unequip</button>
+            {{/if}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{#if equipInventory.length}}
+    <h4 style="margin:8px 0 4px;color:#fff;">Inventory</h4>
+    <table class="rmss-table">
+      <tbody>
+        {{#each equipInventory}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td style="color:#999;font-size:0.85rem;">{{this.type}}</td>
+          <td style="text-align:right;">
+            {{#if this.canEquip}}
+            <button type="button" class="pet-equip" data-item-id="{{this.id}}" data-slot-id="{{this.slotId}}">Equip ({{this.slotLabel}})</button>
+            {{else}}
+            <span style="opacity:0.6;font-size:0.85rem;">Cannot equip</span>
+            {{/if}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/if}}
+    <p style="color:#999;font-size:0.8rem;margin:6px 0 0;">Drag items from the Items directory onto this sheet to add them.</p>
+  </div>
+
+  <div class="panel">
     <h3>Commands</h3>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
       <button type="button" class="pet-command" data-command="attack" {{#if (eq pet.command "attack")}}disabled{{/if}}>
