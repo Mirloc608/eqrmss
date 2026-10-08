@@ -760,6 +760,23 @@ export async function tickConditions(combat) {
         }
     }
 
+    // Vampiric Embrace tick (2026-10-08): decrement roundsLeft, expire at 0.
+    for (const c of list) {
+        const actor = c.actor;
+        if (!actor || actor.system?.status?.dead) continue;
+        if (!(actor.isOwner || globalThis.game?.user?.isGM)) continue;
+        const v = actor.system?.status?.vampiric;
+        if (!v || typeof v !== "object") continue;
+        const left = (Number(v.roundsLeft) || 0) - 1;
+        if (left > 0) {
+            await actor.update({ "system.status.vampiric.roundsLeft": left });
+        } else {
+            const vName = String(v.source ?? "Vampiric Embrace");
+            await actor.update({ "system.status.vampiric": null });
+            notes.push(`<em>${esc(actor.name)}'s ${esc(vName)} fades.</em>`);
+        }
+    }
+
 // Illusion tick (2026-10-07): decrement roundsLeft, expire at 0.
     for (const c of list) {
         const actor = c.actor;

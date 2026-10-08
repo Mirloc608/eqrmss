@@ -7439,8 +7439,12 @@
       "description": "Triggered effect: Vampiric Embrace gives your attacks a vampiric property, stealing life for 7.5 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Vampiric Embrace: attacks gain a vampiric property, stealing life for 7.5 minutes"
+          "type": "vampiric",
+          "procChance": 15,
+          "amount": 30,
+          "percent": 100,
+          "duration": 75,
+          "note": "Vampiric Embrace: melee hits have a 15% chance to drain 30 life, healing the attacker (7.5 min). Values are mechanical placeholders pending EQ canon review."
         }
       ]
     },

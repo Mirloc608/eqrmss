@@ -327,6 +327,32 @@ async function applyAbsorb({ effect, target, source }) {
 }
 
 /**
+ * "vampiric" — Vampiric Embrace (2026-10-08). Melee lifetap proc buff:
+ * successful melee hits have a chance to drain life, healing the attacker.
+ * Re-casting refreshes. Clickies target the wearer (ruling 2026-10-06).
+ * Stored at system.status.vampiric = { procChance, amount, percent,
+ * roundsLeft, source }.
+ * NOTE: procChance/amount/percent are not in the source data; defaults are
+ * mechanical placeholders (see module/spells/vampiric.js), flagged for
+ * EQ canon review.
+ */
+async function applyVampiric({ effect, target, source }) {
+    const miss = requireTarget(target, "vampiric", source);
+    if (miss) return miss;
+    const { applyVampiric: applyVamp } = await import("../spells/vampiric.js");
+    const duration = payloadRounds(effect, 75);
+    const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Vampiric Embrace";
+    const note = await applyVamp(target, {
+        procChance: effect?.procChance,
+        amount: effect?.amount,
+        percent: effect?.percent,
+        rounds: duration,
+        sourceName: dispName
+    });
+    return { type: "vampiric", final: 1, notes: [note], source, applied: true };
+}
+
+/**
  * "illusion" — racial appearance illusion (2026-10-07). Grants the APPEARANCE
  * of another race only: no stat benefits/penalties. The `race` field stores
  * the illusory race id (e.g. "dark-elf", "skeleton") for the future faction
@@ -929,6 +955,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "faction") results.push(await applyFactionPayload({ effect, caster, target, source }));
         else if (effect.type === "dispel") results.push(await applyDispelPayload({ effect, caster, target, source }));
         else if (effect.type === "feign") results.push(await applyFeignDeathPayload({ effect, caster, target, source }));
+        else if (effect.type === "vampiric") results.push(await applyVampiric({ effect, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }

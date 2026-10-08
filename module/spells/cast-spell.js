@@ -39,6 +39,7 @@ import { classifySpell, directedSpellsOB, spellEffectsOf } from "./spell-mapping
 import { applySpellBuffs } from "./spell-buffs.js";
 import { applyInvisibility, invisTypeOf, breakInvisibility } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
+import { applyVampiric } from "./vampiric.js";
 import { applyIllusion, applySeeInvisible, applyInfravision, applyUltravision } from "../item-effects/damage-pipeline.js";
 import { applyTeleport } from "./teleport.js";
 import { summonItem } from "./summon.js";
@@ -569,6 +570,32 @@ export async function castSpell(actor, spellItem, opts = {}) {
         const rounds = durationRounds(eff.duration) ?? 200;
         levNote += await applyLevitate(buffTarget, name, rounds);
     }
+    // Vampiric Embrace (2026-10-08): melee lifetap proc buff. Necro data:
+    // {type:"utility", effect:"melee-proc-vampiric-embrace", duration:450s}.
+    // SK data: {type:"proc", name:"Vampiric Embrace"}. Durations are
+    // seconds — convert to rounds. NOTE: procChance/amount/percent are
+    // not in the source data; defaults are placeholders (see
+    // module/spells/vampiric.js), flagged for EQ canon review.
+    let vampiricNote = "";
+    const vampiricEffs = (spellEffectsOf(spellItem) ?? []).filter(e => {
+        const k = String(e?.effect ?? "").toLowerCase();
+        if (k === "melee-proc-vampiric-embrace") return true;
+        if (String(e?.type ?? "").toLowerCase() === "proc" && /vampiric/i.test(String(e?.name ?? ""))) return true;
+        return false;
+    });
+    if (vampiricEffs.length) {
+        if (!(buffTarget.isOwner || globalThis.game?.user?.isGM)) {
+            vampiricNote = `<p><em>Vampiric Embrace not applied — you don't control ${esc(buffTarget.name)}.</em></p>`;
+        } else {
+            for (const eff of vampiricEffs) {
+                const rounds = durationRounds(eff.duration) ?? 75;
+                vampiricNote += `<p><em>${esc(await applyVampiric(buffTarget, {
+                    procChance: eff?.procChance, amount: eff?.amount, percent: eff?.percent,
+                    rounds, sourceName: name
+                }))}</em></p>`;
+            }
+        }
+    }
     // Illusion (2026-10-07): racial appearance illusion, same mechanics
     // as illusion clickies. Spell durations are seconds — convert to rounds.
     let illusionNote = "";
@@ -721,17 +748,17 @@ export async function castSpell(actor, spellItem, opts = {}) {
         }
     }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
-    // teleport/summon/vision/memblur/pacify/faction/dispel/feign pipeline already produced output (2026-10-07: redundant when buffs
+    // teleport/summon/vision/memblur/pacify/faction/dispel/feign/vampiric pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }

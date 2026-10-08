@@ -1170,6 +1170,31 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
                 await checkHitThresholds(actor);
             }
         }
+        // Vampiric Embrace (2026-10-08): melee lifetap proc. On a
+        // successful melee hit the attacker rolls d100 vs procChance;
+        // on success the target takes bonus magic damage and the
+        // attacker heals a percentage of it. Not on misses, not vs
+        // missiles. NOTE: procChance/amount/percent defaults are
+        // placeholders (see module/spells/vampiric.js), flagged for
+        // EQ canon review.
+        if (!missileAttack && totalDamage > 0) {
+            const vamp = actor.system?.status?.vampiric;
+            if (vamp && typeof vamp === "object" && actor && (actor.isOwner || game.user?.isGM)) {
+                const { vampiricProcFor } = await import("../spells/vampiric.js");
+                const proc = vampiricProcFor(vamp);
+                if (proc) {
+                    const tCur = Number(targetActor.system?.hits?.value) || 0;
+                    await targetActor.update({ "system.hits.value": tCur + proc.damage });
+                    const aCur = Number(actor.system?.hits?.value) || 0;
+                    const healed = Math.max(0, aCur - proc.heal);
+                    await actor.update({ "system.hits.value": healed });
+                    const vampSource = String(vamp?.source ?? "Vampiric Embrace");
+                    appliedNote += `<p><em>${esc(actor.name)}'s ${esc(vampSource)} drains ${proc.damage} life from ${esc(targetName)}, healing ${aCur - healed}.</em></p>`;
+                    await checkHitThresholds(targetActor);
+                    await checkHitThresholds(actor);
+                }
+            }
+        }
         // The ST table's "foe knocked out" is a crit-blow knockout, not
         // a hit-total threshold — it stands even under the hit max.
         if (structuralKnockout) await targetActor.update({ "system.status.unconscious": true });
