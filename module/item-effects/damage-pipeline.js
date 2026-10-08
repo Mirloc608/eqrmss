@@ -846,6 +846,28 @@ export async function applyFactionPayload({ effect, caster, target, source }) {
 }
 
 /**
+ * "dispel" — EQ Cancel Magic / dispel (2026-10-07). Removes magical
+ * buffs/debuffs from the target. Delegates to module/spells/dispel.js
+ * via dynamic import.
+ * Payload shape: { type: "dispel", count: <n>, mode: "all"|"beneficial"|"detrimental" }
+ */
+export async function applyDispelPayload({ effect, caster, target, source }) {
+    const miss = requireTarget(target, "dispel", source);
+    if (miss) return miss;
+    const count = Number(effect?.count) || 1;
+    const mode = String(effect?.mode ?? "all").toLowerCase();
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Cancel Magic";
+    try {
+        const { applyDispel } = await import("../spells/dispel.js");
+        const note = await applyDispel(caster, target, { count, mode, sourceName: dispName });
+        const applied = !/no dispellable/i.test(note);
+        return { type: "dispel", final: applied ? 1 : 0, notes: [note.replace(/<[^>]+>/g, "")], source, applied };
+    } catch (e) {
+        return { type: "dispel", final: 0, notes: [`dispel failed: ${e?.message ?? e}`], source, applied: false };
+    }
+}
+
+/**
  * Resolve one payload array against a target.
  * @param {object} args { payload, caster, target, source }
  *   caster: the actor the effect is "as if cast by" (wielder / wearer / user)
@@ -883,6 +905,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "memblur") results.push(await applyMemblurPayload({ effect, caster, target, source }));
         else if (effect.type === "pacify") results.push(await applyPacifyPayload({ effect, caster, target, source }));
         else if (effect.type === "faction") results.push(await applyFactionPayload({ effect, caster, target, source }));
+        else if (effect.type === "dispel") results.push(await applyDispelPayload({ effect, caster, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }

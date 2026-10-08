@@ -675,18 +675,41 @@ export async function castSpell(actor, spellItem, opts = {}) {
             }
         }
     }
+    // Dispel (2026-10-07): EQ Cancel Magic / dispel. Spell data uses
+    // { type: "utility", effect: "dispel", amount: <n> },
+    // { type: "utility", effect: "dispel-magic", amount: <n> },
+    // { type: "utility", effect: "cancel-magic", rank: <n> },
+    // { type: "utility", effect: "dispel-beneficial", amount: <n> },
+    // { type: "utility", effect: "dispel-detrimental", amount: <n> }.
+    // Removes magical effects from the target.
+    let dispelNote = "";
+    const dispelEffs = (spellEffectsOf(spellItem) ?? []).filter(e => {
+        const fx = String(e?.effect ?? "").toLowerCase();
+        return fx === "dispel" || fx === "dispel-magic" || fx === "cancel-magic"
+            || fx === "dispel-beneficial" || fx === "dispel-detrimental";
+    });
+    if (dispelEffs.length) {
+        const { applyDispel } = await import("./dispel.js");
+        for (const eff of dispelEffs) {
+            const fx = String(eff?.effect ?? "").toLowerCase();
+            const count = Number(eff?.amount) || Number(eff?.strength) || Number(eff?.rank) || 1;
+            const mode = fx === "dispel-beneficial" ? "beneficial"
+                : fx === "dispel-detrimental" ? "detrimental" : "all";
+            dispelNote += await applyDispel(actor, buffTarget, { count, mode, sourceName: name });
+        }
+    }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
-    // teleport/summon/vision/memblur/pacify/faction pipeline already produced output (2026-10-07: redundant when buffs
+    // teleport/summon/vision/memblur/pacify/faction/dispel pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }
