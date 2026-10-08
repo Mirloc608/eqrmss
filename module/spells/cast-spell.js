@@ -55,7 +55,7 @@ import {
 } from "./base-spell.js";
 import { resolveBallCast } from "./ball-spell.js";
 import { rollWeaponAttack } from "../combat/combat-rolls.js";
-import { applyHealingSpell, checkHitThresholds } from "../combat/crit-conditions.js";
+import { applyHealingSpell, checkHitThresholds, activeStun } from "../combat/crit-conditions.js";
 import {
     getCastTimeMode, waitRoundsFor, checkRange,
     storePendingCast, clearPendingCast
@@ -319,6 +319,21 @@ export async function castSpell(actor, spellItem, opts = {}) {
         const readySpells = actor.system?.status?.readySpells ?? [];
         if (spellId && !readySpells.includes(spellId)) {
             prepRoundsShort = Math.max(prepRoundsShort, 1);
+        }
+    }
+
+    // ---- Cast-while-stunned (user ruling 2026-10-05): a stunned
+    // caster refuses attack spells BEFORE the ESF gate — no roll,
+    // no mana spent. Non-attack spells (buffs, heals, utility) are
+    // still allowed while stunned.
+    // (skipped for delayed fire — a stun that lands while waiting
+    // interrupts the pending cast via cast-timing instead)
+    if (!skipToResolution) {
+        const stun = activeStun(actor.system?.status?.stun);
+        const isAttackSpell = cls.kind === "bolt" || cls.kind === "base" || cls.kind === "ball";
+        if (stun && isAttackSpell) {
+            ui.notifications?.warn(`${actor.name} is stunned and cannot cast ${name}.`);
+            return { ok: false, reason: "stun" };
         }
     }
 
