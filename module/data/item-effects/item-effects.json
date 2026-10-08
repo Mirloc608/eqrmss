@@ -6255,11 +6255,31 @@
       "id": "clicky-allure-of-death",
       "kind": "triggered",
       "name": "Allure of Death",
-      "description": "Triggered effect: Allure of Death is a lich state - drains your hit points while regenerating mana each round (classic NEC/20: -6 HP / +4 mana per tick).",
+      "description": "Triggered effect: Allure of Death is a lich state - skeletal illusion, +20 mana/tick, ultravision, -22 HP/tick (Live values).",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants the lich state of Allure of Death: drains hit points while regenerating mana each round"
+          "type": "illusion",
+          "race": "skeleton",
+          "displayName": "Skeleton",
+          "duration": 600
+        },
+        {
+          "type": "manaregen",
+          "amount": 20,
+          "pool": "mana",
+          "duration": 600
+        },
+        {
+          "type": "ultravision",
+          "duration": 600
+        },
+        {
+          "type": "dot",
+          "element": "magic",
+          "name": "Allure of Death",
+          "min": 22,
+          "max": 22,
+          "duration": 600
         }
       ]
     },

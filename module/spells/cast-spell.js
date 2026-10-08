@@ -602,15 +602,35 @@ export async function castSpell(actor, spellItem, opts = {}) {
     }
     // Illusion (2026-10-07): racial appearance illusion, same mechanics
     // as illusion clickies. Spell durations are seconds — convert to rounds.
+    // Lich (2026-10-08): also handles necromancer skeletal/specter form
+    // utility effects (cast-skeletal-form, cast-specter-form, etc.),
+    // mapping them to the skeleton/specter illusion.
     let illusionNote = "";
-    const illusionEffs = (spellEffectsOf(spellItem) ?? []).filter(e => String(e?.type ?? "").toLowerCase() === "illusion");
+    const illusionEffs = (spellEffectsOf(spellItem) ?? []).filter(e => {
+        const t = String(e?.type ?? "").toLowerCase();
+        if (t === "illusion") return true;
+        const fx = String(e?.effect ?? "").toLowerCase();
+        return t === "utility" && fx.startsWith("cast-") && fx.endsWith("-form");
+    });
     if (illusionEffs.length) {
         if (!(buffTarget.isOwner || globalThis.game?.user?.isGM)) {
             illusionNote = `<p><em>Illusion not applied — you don't control ${esc(buffTarget.name)}.</em></p>`;
         } else {
             for (const eff of illusionEffs) {
                 const rounds = durationRounds(eff.duration) ?? 360;
-                const res = await applyIllusion({ effect: { ...eff, rounds }, target: buffTarget, source: name });
+                const fx = String(eff?.effect ?? "").toLowerCase();
+                let race = eff.race ?? eff.form;
+                let displayName = eff.displayName;
+                if (!race && fx.startsWith("cast-") && fx.endsWith("-form")) {
+                    // Necromancer lich forms: specter vs skeletal variants.
+                    if (fx.includes("specter")) {
+                        race = "specter";
+                    } else {
+                        race = "skeleton";
+                    }
+                    displayName = displayName ?? (race === "specter" ? "Specter" : "Skeleton");
+                }
+                const res = await applyIllusion({ effect: { ...eff, race, displayName, rounds }, target: buffTarget, source: name });
                 illusionNote += `<p><em>${esc(buffTarget.name)}: ${esc(res.notes.join(" "))}</em></p>`;
             }
         }
