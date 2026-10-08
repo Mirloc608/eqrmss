@@ -22,7 +22,7 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
 
     static DEFAULT_OPTIONS = {
         classes: ["eqrmss", "sheet", "actor", "pet-sheet"],
-        position: { width: 560, height: 480 },
+        position: { width: 560, height: 400 },
         form: {
             closeOnSubmit: false,
             submitOnChange: true
