@@ -332,17 +332,19 @@ async function applyAbsorb({ effect, target, source }) {
  * the illusory race id (e.g. "dark-elf", "skeleton") for the future faction
  * system to consult. Replaces any existing illusion.
  * Stored at system.status.illusion = { race, displayName, roundsLeft, source }.
+ * Spell effects use `form` instead of `race`; both are accepted (2026-10-07).
  */
-async function applyIllusion({ effect, target, source }) {
+export async function applyIllusion({ effect, target, source }) {
     const miss = requireTarget(target, "illusion", source);
     if (miss) return miss;
-    const race = String(effect?.race || "").trim().toLowerCase();
-    const displayName = String(effect?.displayName || race || "unknown form");
+    const race = String(effect?.race ?? effect?.form ?? "").trim().toLowerCase();
+    const pretty = (s) => String(s ?? "").split("-").map(w => w ? w.charAt(0).toUpperCase() + w.slice(1) : w).join(" ");
+    const displayName = String(effect?.displayName || (race ? pretty(race) : "") || "unknown form");
     if (!race) {
         return { type: "illusion", final: 0, notes: ["invalid illusion payload"], source, applied: false };
     }
     const duration = payloadRounds(effect, 360);
-    const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Illusion";
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Illusion";
     await persistValue(target, "system.status.illusion", {
         race,
         displayName,

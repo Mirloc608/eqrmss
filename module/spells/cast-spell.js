@@ -39,6 +39,7 @@ import { classifySpell, directedSpellsOB, spellEffectsOf } from "./spell-mapping
 import { applySpellBuffs } from "./spell-buffs.js";
 import { applyInvisibility, invisTypeOf, breakInvisibility } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
+import { applyIllusion } from "../item-effects/damage-pipeline.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -544,18 +545,34 @@ export async function castSpell(actor, spellItem, opts = {}) {
         const rounds = durationRounds(eff.duration) ?? 200;
         levNote += await applyLevitate(buffTarget, name, rounds);
     }
+    // Illusion (2026-10-07): racial appearance illusion, same mechanics
+    // as illusion clickies. Spell durations are seconds — convert to rounds.
+    let illusionNote = "";
+    const illusionEffs = (spellEffectsOf(spellItem) ?? []).filter(e => String(e?.type ?? "").toLowerCase() === "illusion");
+    if (illusionEffs.length) {
+        if (!(buffTarget.isOwner || globalThis.game?.user?.isGM)) {
+            illusionNote = `<p><em>Illusion not applied — you don't control ${esc(buffTarget.name)}.</em></p>`;
+        } else {
+            for (const eff of illusionEffs) {
+                const rounds = durationRounds(eff.duration) ?? 360;
+                const res = await applyIllusion({ effect: { ...eff, rounds }, target: buffTarget, source: name });
+                illusionNote += `<p><em>${esc(buffTarget.name)}: ${esc(res.notes.join(" "))}</em></p>`;
+            }
+        }
+    }
     const note = cls.kind === "later" ? esc(cls.reason) : "no mechanical payload";
-    // Suppress the "announced" line if the buff/regen/invis/levitate pipeline already
-    // produced output (2026-10-07: redundant when buffs applied or were
-    // blocked by stacking — the pipeline's own message says what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote)
+    // Suppress the "announced" line if the buff/regen/invis/levitate/illusion
+    // pipeline already produced output (2026-10-07: redundant when buffs
+    // applied or were blocked by stacking — the pipeline's own message says
+    // what happened).
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }
