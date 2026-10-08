@@ -355,6 +355,7 @@ export class EQRMSSActorContextHelper {
         context.isBard = classId === "bard";
         context.isPaladin = classId === "paladin";
         context.isShadowknight = classId === "shadowknight";
+        context.isBeastlord = classId === "beastlord";
         context.hasSpells = classId !== "" && classId !== "bard" && !PURE_MELEE.has(classId);
     }
 

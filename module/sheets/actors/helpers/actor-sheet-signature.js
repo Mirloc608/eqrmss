@@ -1,7 +1,9 @@
 /**
- * Signature Ability sheet helper: Lay on Hands (Paladin), Harm Touch (Shadowknight)
+ * Signature Ability sheet helper: Lay on Hands (Paladin), Harm Touch (Shadowknight),
+ * Summon Warder (Beastlord)
  */
 import { layOnHands, harmTouch } from "../../../combat/signature-abilities.js";
+import { useSummonWarder } from "../../../spells/pets/summon-warder.js";
 
 export class EQRMSSActorSignatureHelper {
     constructor(sheet) {
@@ -31,6 +33,14 @@ export class EQRMSSActorSignatureHelper {
                     return;
                 }
                 await harmTouch(actor, targeted.actor);
+                this.sheet.render(false);
+            });
+        });
+
+        html.querySelectorAll('[data-action="summonWarder"]').forEach(el => {
+            el.addEventListener("click", async (ev) => {
+                ev.preventDefault();
+                await useSummonWarder(actor);
                 this.sheet.render(false);
             });
         });

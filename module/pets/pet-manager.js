@@ -74,15 +74,9 @@ export class EQRMSSPetManager extends HandlebarsApplicationMixin(ApplicationV2) 
      * @returns {Promise<object>} Application rendering context.
      */
     async _prepareContext() {
-        let isBeastlord = false;
-        try {
-            const { isBeastlord: check } = await import("../spells/pets/summon-warder.js");
-            isBeastlord = check(this.actor);
-        } catch { /* warder module unavailable */ }
         return {
             actor: this.actor,
-            pets: this.pets,
-            isBeastlord
+            pets: this.pets
         };
     }
 
@@ -118,17 +112,6 @@ export class EQRMSSPetManager extends HandlebarsApplicationMixin(ApplicationV2) 
         html.querySelectorAll(".pet-dismiss").forEach(el => el.addEventListener("click", ev => {
             const petId = ev.currentTarget.dataset.petId;
             this._dismissPet(petId);
-        }));
-
-        html.querySelectorAll(".warder-summon").forEach(el => el.addEventListener("click", async ev => {
-            ev.preventDefault();
-            try {
-                const { useSummonWarder } = await import("../spells/pets/summon-warder.js");
-                await useSummonWarder(this.actor);
-                this.render();
-            } catch (err) {
-                console.error("EQRMSS | Summon Warder failed:", err);
-            }
         }));
     }
 
