@@ -194,6 +194,45 @@
     {{#unless system.status.dead}}{{#unless system.status.exhausted}}{{#unless system.status.unconscious}}{{#unless system.status.stun.downOrOut}}{{#unless system.status.stun.stunNoParry}}{{#unless system.status.stun.stunned}}{{#unless system.status.bleed.perRound}}{{#unless system.status.actionPenalty.value}}{{#unless system.status.parrying}}{{#unless system.status.missileParryDB}}{{#unless system.status.cqcTargetName}}<span class="npc-chip dim">No conditions</span>{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}
   </div>
 
+  <div class="npc-panel">
+    <div class="npc-panel-head">Factions</div>
+    <div style="padding: 6px 10px;">
+      {{#if factions.length}}
+        {{#each factions}}
+        <div style="display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px dashed rgba(95,74,47,.3);">
+          <span>{{this.name}}</span>
+          <span><strong style="color: {{this.color}};">{{this.level}}</strong> <span style="opacity: 0.6;">({{this.value}})</span></span>
+        </div>
+        {{/each}}
+      {{else}}
+        <div class="npc-none">No faction standings recorded</div>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="npc-panel">
+    <div class="npc-panel-head">Hate List</div>
+    <div style="padding: 6px 10px;">
+      {{#if hateList.length}}
+      <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+        <thead><tr style="text-align: left; color: #6d5228;"><th>Attacker</th><th style="text-align: right;">Damage</th><th style="text-align: right;">Debuffs</th><th style="text-align: right;">Last Rnd</th></tr></thead>
+        <tbody>
+          {{#each hateList}}
+          <tr style="border-top: 1px dashed rgba(95,74,47,.3);">
+            <td>{{this.name}}</td>
+            <td style="text-align: right;">{{this.damage}}</td>
+            <td style="text-align: right;">{{this.debuffs}}</td>
+            <td style="text-align: right;">{{this.lastRound}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{else}}
+        <div class="npc-none">No grudges held</div>
+      {{/if}}
+    </div>
+  </div>
+
   <div class="npc-panel npc-panel-attacks">
     <div class="npc-panel-head">Weapons &amp; Attacks</div>
     <div class="npc-attacks">

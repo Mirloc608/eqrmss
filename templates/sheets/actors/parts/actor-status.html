@@ -83,4 +83,41 @@
       </div>
     </div>
   </div>
+
+  <div class="panel" style="margin-top: 10px;">
+    <h3>Factions</h3>
+    {{#if factions.length}}
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px;">
+      {{#each factions}}
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 2px 0;">
+        <span>{{this.name}}</span>
+        <span><strong style="color: {{this.color}};">{{this.level}}</strong> <span style="opacity: 0.6;">({{this.value}})</span></span>
+      </div>
+      {{/each}}
+    </div>
+    {{else}}
+    <p style="opacity: 0.6; margin: 0;">No faction standings recorded.</p>
+    {{/if}}
+  </div>
+
+  <div class="panel" style="margin-top: 10px;">
+    <h3>Hate List</h3>
+    {{#if hateList.length}}
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.95em;">
+      <thead><tr style="text-align: left; opacity: 0.7;"><th>Attacker</th><th style="text-align: right;">Damage</th><th style="text-align: right;">Debuffs</th><th style="text-align: right;">Last Round</th></tr></thead>
+      <tbody>
+        {{#each hateList}}
+        <tr style="border-top: 1px solid rgba(0,0,0,0.1);">
+          <td>{{this.name}}</td>
+          <td style="text-align: right;">{{this.damage}}</td>
+          <td style="text-align: right;">{{this.debuffs}}</td>
+          <td style="text-align: right;">{{this.lastRound}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{else}}
+    <p style="opacity: 0.6; margin: 0;">No one holds a grudge.</p>
+    {{/if}}
+  </div>
 </div>

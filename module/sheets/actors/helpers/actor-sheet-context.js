@@ -11,6 +11,7 @@ import { visibleSpells, visibleSongs } from "../../../utils/item-visibility.js";
 import { getItemEffect } from "../../../data/item-effects/item-effect-loader.js";
 import { isWorn } from "../../../utils/equipment/equipment-utils.js";
 import { dedupHighestRank } from "../../../item-effects/worn-engine.js";
+import { getFactionLevel, getFactionDisplayName } from "../../../utils/faction/faction.js";
 
 const STAT_LABELS = {
     ST: "Strength",
@@ -60,6 +61,8 @@ export class EQRMSSActorContextHelper {
         this._categorizeItems(context);
         this._buildProgression(context);
         this._buildBuffsDebuffs(context);
+        this._buildFactions(context);
+        this._buildHateList(context);
 
         context.data ??= {};
         context.data.name = this.actor.name ?? "";
@@ -353,5 +356,62 @@ export class EQRMSSActorContextHelper {
         context.isPaladin = classId === "paladin";
         context.isShadowknight = classId === "shadowknight";
         context.hasSpells = classId !== "" && classId !== "bard" && !PURE_MELEE.has(classId);
+    }
+
+    // ------------------------------------------------------------
+    // FACTIONS (Status tab / NPC sheet)
+    //
+    // Reads system.factions = { "<faction-id>": <value> } and builds
+    // a display list with resolved names, level labels, and colors.
+    // Only factions with explicitly stored values are shown.
+    // ------------------------------------------------------------
+    _buildFactions(context) {
+        const FACTION_COLORS = {
+            ally: "#2e7d32", warmly: "#43a047", kindly: "#66bb6a",
+            amiable: "#9e9d24", indifferent: "#757575",
+            apprehensive: "#ef6c00", dubious: "#e65100",
+            threatening: "#d84315", scowls: "#b71c1c"
+        };
+        const stored = this.system?.factions ?? {};
+        const list = [];
+        for (const [factionId, rawValue] of Object.entries(stored)) {
+            const value = Number(rawValue) || 0;
+            const level = getFactionLevel(value);
+            list.push({
+                id: factionId,
+                name: getFactionDisplayName(factionId),
+                value,
+                level: level.label,
+                levelKey: level.key,
+                color: FACTION_COLORS[level.key] ?? "#757575"
+            });
+        }
+        // Most hostile first, then alphabetical
+        list.sort((a, b) => a.value - b.value || a.name.localeCompare(b.name));
+        context.factions = list;
+    }
+
+    // ------------------------------------------------------------
+    // HATE LIST (Status tab / NPC sheet)
+    //
+    // Reads system.status.aggro = { "<attackerId>": { damage,
+    // debuffs, lastRound, name } } (memblur system) and builds a
+    // threat-sorted display list.
+    // ------------------------------------------------------------
+    _buildHateList(context) {
+        const aggro = this.system?.status?.aggro ?? {};
+        const list = [];
+        for (const [attackerId, entry] of Object.entries(aggro)) {
+            list.push({
+                id: attackerId,
+                name: entry?.name ?? "Unknown",
+                damage: Number(entry?.damage) || 0,
+                debuffs: Number(entry?.debuffs) || 0,
+                lastRound: Number(entry?.lastRound) || 0
+            });
+        }
+        // Highest threat first
+        list.sort((a, b) => b.damage - a.damage || b.debuffs - a.debuffs);
+        context.hateList = list;
     }
 }
