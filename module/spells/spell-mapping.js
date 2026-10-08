@@ -113,7 +113,11 @@ export function classifySpell(spellItem) {
     const hostileTypes = hasBuff
         ? ["damage", "dot", "control", "lifetap"]
         : ["damage", "dot", "control", "debuff", "lifetap"];
-    const hostile = effects.find(e => e && hostileTypes.includes(e.type));
+    // Feign Death (2026-10-07): a self-targeted control, not a hostile
+    // attack — exclude it so feign spells fall through to the
+    // announced-cast path instead of demanding a non-caster target.
+    const hostile = effects.find(e => e && hostileTypes.includes(e.type)
+        && String(e?.effect ?? "").toLowerCase() !== "feign-death");
     if (hostile) {
         return { kind: "base", subtype: hostile.type, effect: hostile, element: String(hostile.element ?? "").toLowerCase() };
     }

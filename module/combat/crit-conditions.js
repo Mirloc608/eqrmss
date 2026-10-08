@@ -1030,8 +1030,12 @@ export async function tickConditions(combat) {
 
         // Prone (Option B): ticks down each round; when it clears, the
         // actor has spent the round standing up.
+        // Feign Death (2026-10-07): a feigning actor stays prone until
+        // they take an action — the prone timer does not tick down
+        // while system.status.feigned is set.
         const proneRounds = Number(st.prone?.rounds) || 0;
-        if (proneRounds > 0) {
+        const feigning = !!st.feigned;
+        if (proneRounds > 0 && !feigning) {
             const left = proneRounds - 1;
             if (left > 0) {
                 updates["system.status.prone"] = { rounds: left };

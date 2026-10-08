@@ -868,6 +868,28 @@ export async function applyDispelPayload({ effect, caster, target, source }) {
 }
 
 /**
+ * "feign" — EQ Feign Death (2026-10-07). The user falls prone and
+ * appears dead; wiped from every actor's aggro record. Delegates to
+ * module/spells/feign-death.js via dynamic import.
+ * Payload shape: { type: "feign", chance: <0-100> }
+ */
+export async function applyFeignDeathPayload({ effect, caster, target, source }) {
+    // Feign Death is always self-targeted: the user feigns.
+    const user = caster ?? target;
+    if (!user) return { type: "feign", final: 0, notes: ["feign death failed: no actor"], source, applied: false };
+    const chance = Number(effect?.chance) || 95;
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Feign Death";
+    try {
+        const { applyFeignDeath } = await import("../spells/feign-death.js");
+        const note = await applyFeignDeath(user, { chance, sourceName: dispName });
+        const applied = !/not applied|fails/i.test(note);
+        return { type: "feign", final: applied ? 1 : 0, notes: [note.replace(/<[^>]+>/g, "")], source, applied };
+    } catch (e) {
+        return { type: "feign", final: 0, notes: [`feign death failed: ${e?.message ?? e}`], source, applied: false };
+    }
+}
+
+/**
  * Resolve one payload array against a target.
  * @param {object} args { payload, caster, target, source }
  *   caster: the actor the effect is "as if cast by" (wielder / wearer / user)
@@ -906,6 +928,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "pacify") results.push(await applyPacifyPayload({ effect, caster, target, source }));
         else if (effect.type === "faction") results.push(await applyFactionPayload({ effect, caster, target, source }));
         else if (effect.type === "dispel") results.push(await applyDispelPayload({ effect, caster, target, source }));
+        else if (effect.type === "feign") results.push(await applyFeignDeathPayload({ effect, caster, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }

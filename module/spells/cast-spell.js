@@ -44,6 +44,7 @@ import { applyTeleport } from "./teleport.js";
 import { summonItem } from "./summon.js";
 import { applyMemblur } from "./memblur.js";
 import { applyPacify } from "./pacify.js";
+import { applyFeignDeath, breakFeignDeath } from "./feign-death.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -212,6 +213,13 @@ function wornNoteFor(worn, spellItem, baseCost, cost) {
 
 export async function castSpell(actor, spellItem, opts = {}) {
     if (!actor || !spellItem) return { ok: false, reason: "missing" };
+    // Feign Death (2026-10-07): taking any action breaks the feign —
+    // the character stands up to act, then the action proceeds.
+    // (Skipped when the spell being cast IS Feign Death: re-feigning
+    // while already down is a no-op handled by applyFeignDeath.)
+    const isFeignSpell = (spellEffectsOf(spellItem) ?? []).some(e =>
+        String(e?.effect ?? "").toLowerCase() === "feign-death");
+    if (!isFeignSpell) await breakFeignDeath(actor, "casting");
     // Invisibility (2026-10-07): casting any spell breaks the
     // caster's invisibility BEFORE the action resolves — even if
     // the cast later fails at the ESF gate or on mana.
@@ -656,6 +664,20 @@ export async function castSpell(actor, spellItem, opts = {}) {
             pacifyNote += await applyPacify(actor, buffTarget, { rounds, sourceName: name });
         }
     }
+    // Feign Death (2026-10-07): EQ Feign Death. Spell data uses
+    // { type: "control", effect: "feign-death", amount: <chance %> }
+    // (necromancer) or { type: "utility", effect: "feign-death",
+    // successRate: <n> } (shadowknight). Always self-targeted: the
+    // caster falls prone and is wiped from every aggro record.
+    let feignNote = "";
+    const feignEffs = (spellEffectsOf(spellItem) ?? []).filter(e =>
+        String(e?.effect ?? "").toLowerCase() === "feign-death");
+    if (feignEffs.length) {
+        for (const eff of feignEffs) {
+            const chance = Number(eff?.amount) || Number(eff?.successRate) || 87;
+            feignNote += await applyFeignDeath(actor, { chance, sourceName: name });
+        }
+    }
     // Faction (2026-10-07): Enchanter Alliance line. Spell data uses
     // { type: "utility", effect: "increase-faction", amount: <n> }.
     // Improves the caster's standing with the target's faction.
@@ -699,17 +721,17 @@ export async function castSpell(actor, spellItem, opts = {}) {
         }
     }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
-    // teleport/summon/vision/memblur/pacify/faction/dispel pipeline already produced output (2026-10-07: redundant when buffs
+    // teleport/summon/vision/memblur/pacify/faction/dispel/feign pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }

@@ -53,6 +53,7 @@ import { resolveSpellFailure } from "../spells/spell-failure.js";
 import { actorAttackSpeed, speedScaledOb, hasteAdjustedPct } from "./attack-speed.js";
 import { getArmorTierPenalty } from "./armor-tier.js";
 import { breakInvisibility, canSenseTarget } from "../spells/invisibility.js";
+import { breakFeignDeath } from "../spells/feign-death.js";
 import { unusualStyleOf, shiftSeverity } from "./unusual-style.js";
 import { combatCard } from "./chat-card.js";
 import { fireWeaponProc } from "../item-effects/proc-engine.js";
@@ -452,6 +453,10 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         console.log(`EQRMSS | ${msg}`);
         return { error: "feared", message: msg };
     }
+    // Feign Death (2026-10-07): taking any action breaks the feign —
+    // the character stands up to act, then the attack proceeds.
+    // (Placed after the fear check: a feared attacker takes no action.)
+    await breakFeignDeath(actor, "attack");
     // Invisibility (2026-10-07): making a melee/missile attack
     // breaks the attacker's invisibility before the attack resolves.
     // (Placed after the fear check: a feared attacker takes no action.)
