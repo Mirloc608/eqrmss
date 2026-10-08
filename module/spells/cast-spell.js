@@ -642,18 +642,37 @@ export async function castSpell(actor, spellItem, opts = {}) {
             memblurNote += await applyMemblur(actor, buffTarget, chance, name);
         }
     }
+    // Faction (2026-10-07): Enchanter Alliance line. Spell data uses
+    // { type: "utility", effect: "increase-faction", amount: <n> }.
+    // Improves the caster's standing with the target's faction.
+    let factionNote = "";
+    const factionEffs = (spellEffectsOf(spellItem) ?? []).filter(e =>
+        String(e?.effect ?? "").toLowerCase() === "increase-faction");
+    if (factionEffs.length) {
+        const { modifyFaction } = await import("../utils/faction/faction.js");
+        for (const eff of factionEffs) {
+            const amount = Number(eff?.amount) || 100;
+            const factionId = buffTarget?.system?.npc?.faction ?? null;
+            if (!factionId) {
+                factionNote += `<p><em>${esc(buffTarget?.name ?? "Target")} has no faction.</em></p>`;
+            } else {
+                const note = await modifyFaction(actor, factionId, amount);
+                factionNote += `<p><em>${esc(note)} (${esc(name)})</em></p>`;
+            }
+        }
+    }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
-    // teleport/summon/vision/memblur pipeline already produced output (2026-10-07: redundant when buffs
+    // teleport/summon/vision/memblur/faction pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || factionNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${factionNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }

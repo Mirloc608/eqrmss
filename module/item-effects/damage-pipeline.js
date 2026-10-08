@@ -802,6 +802,28 @@ export async function applyMemblurPayload({ effect, caster, target, source }) {
 }
 
 /**
+ * Faction (2026-10-07): Alliance-style effects improve the caster's
+ * standing with the target's faction. Effect shape:
+ *   { type: "faction", amount: <n> }  (default +100)
+ * The target's faction comes from target.system.npc.faction.
+ */
+export async function applyFactionPayload({ effect, caster, target, source }) {
+    const miss = requireTarget(target, "faction", source);
+    if (miss) return miss;
+    const amount = Number(effect?.amount) || 100;
+    const factionId = target?.system?.npc?.faction ?? null;
+    if (!factionId)
+        return { type: "faction", final: 0, notes: ["target has no faction"], source, applied: false };
+    try {
+        const { modifyFaction } = await import("../utils/faction/faction.js");
+        const note = await modifyFaction(caster, factionId, amount);
+        return { type: "faction", final: 1, notes: [note.replace(/<[^>]+>/g, "")], source, applied: true };
+    } catch (e) {
+        return { type: "faction", final: 0, notes: [`faction failed: ${e?.message ?? e}`], source, applied: false };
+    }
+}
+
+/**
  * Resolve one payload array against a target.
  * @param {object} args { payload, caster, target, source }
  *   caster: the actor the effect is "as if cast by" (wielder / wearer / user)
@@ -837,6 +859,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "teleport") results.push(await applyTeleportPayload({ effect, caster, target, source }));
         else if (effect.type === "summon-item") results.push(await applySummonItem({ effect, caster, target, source }));
         else if (effect.type === "memblur") results.push(await applyMemblurPayload({ effect, caster, target, source }));
+        else if (effect.type === "faction") results.push(await applyFactionPayload({ effect, caster, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }
