@@ -43,9 +43,14 @@
   {{/if}}
 
   <h4>Available AAs</h4>
-  {{#if aa.available.length}}
-  <ul class="aa-available">
-    {{#each aa.available}}
+  {{#each aa.groups}}
+  <div class="aa-group" data-aa-group="{{this.name}}">
+    <h5 class="aa-group-header">
+      <button type="button" class="aa-group-toggle" data-action="toggleAAGroup" data-group="{{this.name}}" title="Collapse {{this.name}}">▾</button>
+      {{this.name}} <span class="aa-group-count">({{this.count}})</span>
+    </h5>
+    <ol class="aa-available" data-aa-group-list="{{this.name}}">
+    {{#each this.items}}
     <li class="aa-row" data-aa-id="{{this.id}}">
       <button type="button" class="aa-toggle" data-action="toggleAA" data-aa-id="{{this.id}}" title="Show details">▸</button>
       <strong>{{this.name}}</strong>
@@ -76,8 +81,9 @@
       </div>
     </li>
     {{/each}}
-  </ul>
+    </ol>
+  </div>
   {{else}}
   <p class="aa-empty">No AAs available. AA data may still be loading, or none are unlocked for this class and expansion.</p>
-  {{/if}}
+  {{/each}}
 </div>

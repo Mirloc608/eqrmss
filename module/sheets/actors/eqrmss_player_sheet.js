@@ -32,6 +32,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             purchaseAA: EQRMSSPlayerSheet.prototype.purchaseAA,
             grantAAPoints: EQRMSSPlayerSheet.prototype.grantAAPoints,
             toggleAA: EQRMSSPlayerSheet.prototype.toggleAA,
+            toggleAAGroup: EQRMSSPlayerSheet.prototype.toggleAAGroup,
             awardXP: EQRMSSPlayerSheet.prototype.awardXP,
             addLogEntry: EQRMSSPlayerSheet.prototype.addLogEntry
         }
@@ -368,6 +369,18 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         } catch (err) {
             console.warn("EQRMSS | AA context build failed", err);
         }
+        // AA tab display groups (2026-10-08): available AAs grouped like
+        // the spell tab's functional categories (General, Archetype,
+        // Class, Special, Focus, Clickies, Tradeskill). Empty groups are
+        // omitted; rows are numbered within each group by the template.
+        aaContext.groups = EQRMSSAAAdvancement.AA_DISPLAY_GROUPS
+            .map(groupName => {
+                const items = aaContext.available.filter(
+                    a => (a.displayGroup ?? "General") === groupName
+                );
+                return { name: groupName, count: items.length, items };
+            })
+            .filter(g => g.count > 0);
 
         // ------------------------------------------------------------
         // Logs / XP Context
@@ -803,6 +816,28 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             btn.textContent = isHidden ? "▸" : "▾";
             btn.title = isHidden ? "Show details" : "Hide details";
         });
+    }
+
+    // AA display-group expander (2026-10-08): toggles the group's
+    // AA list without re-rendering, so scroll position and other
+    // expanders stay put. Groups default to expanded.
+    // ------------------------------------------------------------
+    toggleAAGroup(event, target) {
+        event.preventDefault();
+        const groupName = target?.dataset?.group;
+        if (!groupName) return;
+
+        const root = this.element ?? document;
+        const list = root.querySelector(
+            `[data-aa-group-list="${CSS.escape(groupName)}"]`
+        );
+        if (!list) return;
+
+        const isHidden = list.classList.toggle("is-hidden");
+        target.textContent = isHidden ? "▸" : "▾";
+        target.title = isHidden
+            ? `Expand ${groupName}`
+            : `Collapse ${groupName}`;
     }
 
     async grantAAPoints(event, target) {

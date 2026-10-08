@@ -920,3 +920,45 @@ tr.spell-group-rank.is-hidden {
 .aa-details .aa-effects li {
   margin-bottom: 0.2em;
 }
+
+/* ------------------------------------------------------------
+   AA tab: display groups (2026-10-08)
+   Mirrors the spell tab's functional categories: collapsible
+   group headers, numbered rows within each group.
+   ------------------------------------------------------------ */
+.aa-group {
+  margin-bottom: 0.8em;
+}
+.aa-group-header {
+  margin: 0.6em 0 0.3em 0;
+  font-size: 1.05em;
+}
+.aa-group-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9em;
+  padding: 0 4px;
+  color: inherit;
+  vertical-align: baseline;
+}
+.aa-group-toggle:hover {
+  opacity: 0.7;
+}
+.aa-group-count {
+  font-weight: normal;
+  font-size: 0.85em;
+  opacity: 0.75;
+}
+ol.aa-available {
+  list-style: decimal;
+  padding-left: 2em;
+  margin: 0.3em 0 0.6em 0;
+}
+ol.aa-available.is-hidden {
+  display: none;
+}
+ol.aa-available .aa-row::marker {
+  font-size: 0.9em;
+  opacity: 0.8;
+}

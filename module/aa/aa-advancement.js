@@ -91,6 +91,54 @@ export class EQRMSSAAAdvancement {
     }
 
     // ========================================================
+    // DISPLAY GROUPING (AA tab, mirrors the spell tab's
+    // functional categories: collapsible groups, numbered rows)
+    // ========================================================
+
+    /**
+     * AA tab display groups, in presentation order. Assignment is
+     * first-match-wins via getAADisplayGroup(); empty groups are
+     * omitted from the sheet.
+     */
+    static AA_DISPLAY_GROUPS = [
+        "General",
+        "Archetype",
+        "Class",
+        "Special",
+        "Focus",
+        "Clickies",
+        "Tradeskill"
+    ];
+
+    /**
+     * Assign an AA definition to one display group.
+     * - Tradeskill: tradeskill-skill AAs (any category).
+     * - Focus: spell-focus AAs, matched by name.
+     * - Clickies: activated AAs with a direct "Cast:" effect line
+     *   (proc lines like "Cast: X on Spell Use" do not count).
+     * - Special: mercenary AAs (special-purpose, non-player).
+     * - General / Archetype / Class: by data category.
+     */
+    static getAADisplayGroup(def) {
+        const sys = def?.system ?? {};
+        const name = def?.name ?? "";
+        if (/alchemy|baking|blacksmith|brew|fletch|jewel|pottery|tailor|tinker|salvage|research/i.test(name))
+            return "Tradeskill";
+        if (/focus/i.test(name)) return "Focus";
+        const fxLines = (sys.ranks ?? []).flatMap(r =>
+            Array.isArray(r?.effects) ? r.effects : []
+        );
+        const isClicky = (sys.activation === "activated") &&
+            fxLines.some(l => /^Cast: /i.test(l) && !/on Spell Use/i.test(l));
+        if (isClicky) return "Clickies";
+        if ((sys.category ?? "") === "mercenary") return "Special";
+        const cat = (sys.category ?? "").toLowerCase();
+        if (cat === "archetype") return "Archetype";
+        if (cat === "class") return "Class";
+        return "General";
+    }
+
+    // ========================================================
     // ELIGIBILITY
     // ========================================================
 
@@ -152,6 +200,7 @@ export class EQRMSSAAAdvancement {
                     id: def.id,
                     name: def.name,
                     category: def.system?.category ?? "",
+                    displayGroup: this.getAADisplayGroup(def),
                     levelRequired: Number(def.system?.levelRequired ?? 1),
                     maxRanks: Math.max(1, Math.floor(Number(def.system?.maxRanks ?? 1))),
                     currentRank,
@@ -184,6 +233,7 @@ export class EQRMSSAAAdvancement {
                 rank: entry.rank,
                 name: def?.name ?? entry.id,
                 category: def?.system?.category ?? "",
+                displayGroup: def ? this.getAADisplayGroup(def) : "General",
                 maxRanks: Math.max(1, Math.floor(Number(def?.system?.maxRanks ?? 1))),
                 levelRequired: Number(def?.system?.levelRequired ?? 1),
                 description: def?.system?.description ?? "",
