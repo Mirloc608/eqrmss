@@ -3,6 +3,7 @@
 // ============================================================
 
 import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
+import { EQRMSSActorTabsHelper } from "./helpers/actor-sheet-tabs.js";
 import { dismissPet } from "../../spells/pets/summon-pet.js";
 import {
     getPetSlots,
@@ -186,6 +187,15 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
 
     async _onRender(context, options) {
         await super._onRender(context, options);
+
+        // Tabs (2026-10-08): the pet sheet extends DocumentSheetV2 directly
+        // (not EQRMSSActorSheet), so the shared tabs helper must be wired
+        // here explicitly. Without this, tab clicks are never bound.
+        try {
+            new EQRMSSActorTabsHelper(this).activate();
+        } catch (err) {
+            console.warn("EQRMSS | pet sheet tabs failed:", err);
+        }
 
         const html = this.element;
         const actor = this.actor;
