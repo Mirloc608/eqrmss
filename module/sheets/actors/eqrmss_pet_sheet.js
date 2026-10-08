@@ -119,6 +119,8 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
             pet,
             ownerName,
             petLevel: Number(system.attributes?.level?.value) || 1,
+            // 2026-10-08 (familiars): non-combat pets hide the Combat tab.
+            isFamiliar: pet.petType === "familiar",
             hitsTaken,
             hitsMax,
             petDefense: getPetDefense(this.actor),
@@ -138,6 +140,8 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
      * resolution logic in pet-combat.js syntheticPetWeapon() (display only).
      */
     _buildAttackForms(scaling, pet) {
+        // 2026-10-08 (familiars): no combat skills — no attack forms.
+        if (pet?.petType === "familiar") return [];
         const forms = [];
         const actor = this.actor;
         const family = pet?.family ?? actor?.system?.details?.creatureType ?? "animal";
@@ -205,6 +209,8 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
         // Command buttons: Attack / Guard / Follow
         html.querySelectorAll(".pet-command").forEach(el => el.addEventListener("click", async ev => {
             ev.preventDefault();
+            // 2026-10-08 (familiars): no stance controls.
+            if (actor?.system?.pet?.petType === "familiar") return;
             const command = el.dataset.command;
             if (!command) return;
             try {
@@ -240,6 +246,11 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
         // nearest hostile, guard → biggest threat).
         html.querySelectorAll(".pet-attack-btn").forEach(el => el.addEventListener("click", async ev => {
             ev.preventDefault();
+            // 2026-10-08 (familiars): no combat skills.
+            if (actor?.system?.pet?.petType === "familiar") {
+                ui.notifications?.warn(`${actor.name} is a familiar and cannot attack.`);
+                return;
+            }
             const attackKind = el.dataset.attackKind ?? "natural";
             let targetActor = null;
             try {

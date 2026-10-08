@@ -49,6 +49,8 @@ export function findOwnerPet(owner) {
     try {
         const pets = (globalThis.game?.actors ?? []).filter(a =>
             a?.type === "pet" &&
+            // 2026-10-08 (familiars): only combat pets act — familiars have no turn.
+            a?.system?.pet?.petType !== "familiar" &&
             (a?.system?.pet?.owner === ownerId || a?.getFlag("eqrmss", "ownerId") === ownerId)
         );
         return pets[0] ?? null;

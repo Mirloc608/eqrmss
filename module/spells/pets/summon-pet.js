@@ -378,13 +378,16 @@ export function scalePetStats(creature, petLevel) {
  * @param {object} caster - Caster actor
  * @returns {object|null} Pet actor or null
  */
-export function findCasterPet(caster) {
+export function findCasterPet(caster, petType = null) {
     if (!caster) return null;
     const casterId = caster.id;
     try {
         const pets = (globalThis.game?.actors ?? []).filter(a =>
             a?.type === "pet" &&
-            (a?.system?.pet?.owner === casterId || a?.getFlag(MODULE_ID, "ownerId") === casterId)
+            (a?.system?.pet?.owner === casterId || a?.getFlag(MODULE_ID, "ownerId") === casterId) &&
+            // 2026-10-08 (familiars): optional petType filter. Familiars do NOT
+            // count against the one-combat-pet limit — each type has its own slot.
+            (!petType || a?.system?.pet?.petType === petType)
         );
         return pets[0] ?? null;
     } catch { return null; }
@@ -456,7 +459,49 @@ export async function dismissPet(petActor, reason = "dismissed") {
  * @param {number} spellLevel - Spell's level (pet level for mag/ench/necro, 2026-10-08)
  * @returns {Promise<string>} HTML chat note
  */
-export async function summonPet(caster, petId, spellName, spellManaCost, spellLevel) {
+// --- Familiars (2026-10-08) ---
+// Wizard familiar tiers -> small registry creatures. Familiars are non-combat
+// pets (petType "familiar"): no combat turn, no initiative, no stance controls.
+// They do NOT count against the one-combat-pet limit — a caster may have one
+// combat pet AND one familiar. The familiar's buffs come from the spell's own
+// buff effects (resist-all, mana-regen, etc.), applied to the caster by the
+// standard spell-buff pipeline; the familiar actor is mainly a visible,
+// killable companion.
+const FAMILIAR_CREATURES = {
+    minor: "rat",
+    lesser: "bat",
+    standard: "imp",
+    greater: "imp",
+};
+const FAMILIAR_ICONS = {
+    minor: "systems/eqrmss/assets/Icons/pets/cat-familiar.png",
+    lesser: "systems/eqrmss/assets/Icons/pets/cat-familiar.png",
+    standard: "systems/eqrmss/assets/Icons/pets/imp-familiar.png",
+    greater: "systems/eqrmss/assets/Icons/pets/imp-familiar.png",
+};
+const FAMILIAR_NAMES = {
+    minor: "Minor Familiar",
+    lesser: "Lesser Familiar",
+    standard: "Familiar",
+    greater: "Greater Familiar",
+};
+
+/**
+ * Summon a wizard familiar. Thin wrapper over summonPet with petType
+ * "familiar", an explicit registry creature, and a familiar icon.
+ */
+export async function summonFamiliar(caster, tier, spellName, spellManaCost, spellLevel) {
+    const t = String(tier ?? "standard").toLowerCase();
+    const creatureId = FAMILIAR_CREATURES[t] ?? FAMILIAR_CREATURES.standard;
+    return summonPet(caster, `familiar:${t}`, spellName, spellManaCost, spellLevel, {
+        petType: "familiar",
+        creatureId,
+        icon: FAMILIAR_ICONS[t] ?? FAMILIAR_ICONS.standard,
+        displayName: FAMILIAR_NAMES[t] ?? FAMILIAR_NAMES.standard,
+    });
+}
+
+export async function summonPet(caster, petId, spellName, spellManaCost, spellLevel, opts = {}) {
     const escFn = esc;
     if (!caster) return `<p><em>Pet summon failed: no caster.</em></p>`;
 
@@ -468,33 +513,56 @@ export async function summonPet(caster, petId, spellName, spellManaCost, spellLe
 
     const casterLevel = Number(caster?.system?.attributes?.level?.value) || 1;
 
-    // Resolve pet ID -> creature (pet level from spell level per 2026-10-08)
-    const resolved = resolvePetCreature(petId, casterLevel, spellLevel);
-    if (!resolved) {
-        return `<p><em>Pet summon failed: unknown pet "${escFn(petId)}".</em></p>`;
+    // 2026-10-08 (familiars): petType "familiar" resolves an explicit registry
+    // creature instead of going through the pet-ID decoders.
+    const petType = opts.petType ?? "combat";
+    let resolved;
+    if (petType === "familiar" && opts.creatureId) {
+        const races = globalThis.game?.eqrmss?.races ?? {};
+        const creature = races[opts.creatureId] ?? null;
+        if (!creature) {
+            return `<p><em>Pet summon failed: unknown familiar creature "${escFn(opts.creatureId)}".</em></p>`;
+        }
+        resolved = {
+            creature,
+            creatureId: opts.creatureId,
+            // Familiar level = spell level (same convention as mag/ench/necro).
+            petLevel: Math.max(1, Number(spellLevel) || 1),
+            petName: opts.displayName ?? creature.name ?? "Familiar",
+            family: creature.creatureType ?? "animal",
+        };
+    } else {
+        // Resolve pet ID -> creature (pet level from spell level per 2026-10-08)
+        resolved = resolvePetCreature(petId, casterLevel, spellLevel);
+        if (!resolved) {
+            return `<p><em>Pet summon failed: unknown pet "${escFn(petId)}".</em></p>`;
+        }
     }
 
     const { creature, petLevel, petName, family } = resolved;
     const stats = scalePetStats(creature, petLevel);
 
-    // One-pet limit: dismiss existing pet first
+    // One-pet limit: dismiss existing pet of the SAME TYPE first.
+    // Familiars have their own slot and never displace (or get displaced by)
+    // combat pets.
     let dismissNote = "";
-    const existing = findCasterPet(caster);
+    const existing = findCasterPet(caster, petType);
     if (existing) {
         dismissNote = await dismissPet(existing, "is dismissed to make way for a new companion");
     }
 
     // Build pet actor data
+    const petImg = opts.icon ?? (creature.img && creature.img !== "PLACEHOLDER" ? creature.img : "icons/svg/pawprint.svg");
     const petData = {
         name: petName,
         type: "pet",
-        img: creature.img && creature.img !== "PLACEHOLDER" ? creature.img : "icons/svg/pawprint.svg",
+        img: petImg,
         system: {
             hits: { base: stats.hits, value: 0, max: stats.hits },
             attributes: { level: { value: petLevel } },
             details: { creatureType: creature.creatureType ?? family },
             pet: {
-                petType: "combat",
+                petType,
                 family,
                 owner: caster.id,
                 ownerLevel: casterLevel,
@@ -634,6 +702,9 @@ export async function addPetToCombat(caster, petActor, petTokenDoc) {
     try {
         const game = globalThis.game;
         if (!game?.combats || !petActor) return;
+        // 2026-10-08 (familiars): familiars never join combat — no initiative,
+        // no combat turn.
+        if (petActor?.system?.pet?.petType === "familiar") return;
         if (!petTokenDoc) {
             // 2026-10-08: don't silently skip — the caller now reports this in chat.
             console.warn("EQRMSS | addPetToCombat: no pet token document; skipping combat entry.");

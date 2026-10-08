@@ -40,7 +40,8 @@ export function getPetOwnerId(petActor) {
  */
 export function isPetCombatant(combatant) {
     const actor = combatant?.actor ?? globalThis.game?.actors?.get(combatant?.actorId);
-    return actor?.type === "pet";
+    // 2026-10-08 (familiars): familiars never take combat turns — excluded.
+    return actor?.type === "pet" && actor?.system?.pet?.petType !== "familiar";
 }
 
 /**
