@@ -46,6 +46,7 @@ import { summonItem } from "./summon.js";
 import { applyMemblur } from "./memblur.js";
 import { applyPacify } from "./pacify.js";
 import { applyFeignDeath, breakFeignDeath } from "./feign-death.js";
+import { summonPet, swarmPetAsDot, isSwarmPet } from "./pets/summon-pet.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -808,18 +809,47 @@ export async function castSpell(actor, spellItem, opts = {}) {
             }
         }
     }
+    // Pet Summoning (2026-10-08): summon-pet spells create pet actors.
+    // Two shapes: {type:"summon-pet", pet:"<id>"} (magician/necro/beastlord/
+    // enchanter) and {type:"utility", effect:"summon-pet", pet:"<id>"}
+    // (shaman). Swarm pets (pet ID starts with "swarm-") are DoTs, not
+    // pet actors, per user decision 2026-10-08.
+    let petNote = "";
+    const petEffs = (spellEffectsOf(spellItem) ?? []).filter(e => {
+        if (String(e?.type ?? "").toLowerCase() === "summon-pet") return true;
+        return String(e?.type ?? "").toLowerCase() === "utility" &&
+            String(e?.effect ?? "").toLowerCase() === "summon-pet";
+    });
+    if (petEffs.length) {
+        const manaCost = Number(spellItem?.system?.manaCost) || 0;
+        for (const eff of petEffs) {
+            const petId = eff?.pet;
+            if (!petId) {
+                petNote += `<p><em>Pet summon failed: no pet ID in spell data.</em></p>`;
+                continue;
+            }
+            if (isSwarmPet(petId)) {
+                // Swarm pets are DoTs, not pet actors
+                const swarmTarget = targetedActor() ?? actor;
+                const swarmDuration = Number(eff?.duration) || 3;
+                petNote += await swarmPetAsDot(actor, swarmTarget, petId, swarmDuration, name);
+            } else {
+                petNote += await summonPet(actor, petId, name, manaCost);
+            }
+        }
+    }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
-    // teleport/summon/vision/memblur/pacify/faction/dispel/feign/vampiric/identify/shrink pipeline already produced output (2026-10-07: redundant when buffs
+    // teleport/summon/vision/memblur/pacify/faction/dispel/feign/vampiric/identify/shrink/pet pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote || identifyNote || shrinkNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote || identifyNote || shrinkNote || petNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${identifyNote}${shrinkNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${identifyNote}${shrinkNote}${petNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }
