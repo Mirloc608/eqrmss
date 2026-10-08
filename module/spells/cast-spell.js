@@ -771,18 +771,33 @@ export async function castSpell(actor, spellItem, opts = {}) {
             dispelNote += await applyDispel(actor, buffTarget, { count, mode, sourceName: name });
         }
     }
+    // Identify (2026-10-08): EQ Identify. Spell data uses
+    // { type: "utility", effect: "identify" } or
+    // { type: "utility", effect: "identify-item" }.
+    // Reveals magical information about the item the target is holding.
+    let identifyNote = "";
+    const identifyEffs = (spellEffectsOf(spellItem) ?? []).filter(e => {
+        const fx = String(e?.effect ?? "").toLowerCase();
+        return fx === "identify" || fx === "identify-item";
+    });
+    if (identifyEffs.length) {
+        const { applyIdentify } = await import("./identify.js");
+        for (const eff of identifyEffs) {
+            identifyNote += await applyIdentify(actor, buffTarget, { sourceName: name });
+        }
+    }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
-    // teleport/summon/vision/memblur/pacify/faction/dispel/feign/vampiric pipeline already produced output (2026-10-07: redundant when buffs
+    // teleport/summon/vision/memblur/pacify/faction/dispel/feign/vampiric/identify pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote || identifyNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${identifyNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }

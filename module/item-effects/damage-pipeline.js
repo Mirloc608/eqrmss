@@ -920,6 +920,24 @@ export async function applyFeignDeathPayload({ effect, caster, target, source })
 }
 
 /**
+ * "identify" — EQ Identify (2026-10-08). Reveals magical information about
+ * the item the target is holding. Delegates to module/spells/identify.js
+ * via dynamic import.
+ * Payload shape: { type: "identify" }
+ */
+export async function applyIdentifyPayload({ effect, caster, target, source }) {
+    const miss = requireTarget(target, "identify", source);
+    if (miss) return miss;
+    try {
+        const { applyIdentify } = await import("../spells/identify.js");
+        const note = await applyIdentify(caster, target, { sourceName: "Identify" });
+        return { type: "identify", final: 1, notes: [note.replace(/<[^>]+>/g, " ")], source, applied: true };
+    } catch (e) {
+        return { type: "identify", final: 0, notes: [`identify failed: ${e?.message ?? e}`], source, applied: false };
+    }
+}
+
+/**
  * Resolve one payload array against a target.
  * @param {object} args { payload, caster, target, source }
  *   caster: the actor the effect is "as if cast by" (wielder / wearer / user)
@@ -960,6 +978,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "dispel") results.push(await applyDispelPayload({ effect, caster, target, source }));
         else if (effect.type === "feign") results.push(await applyFeignDeathPayload({ effect, caster, target, source }));
         else if (effect.type === "vampiric") results.push(await applyVampiric({ effect, target, source }));
+        else if (effect.type === "identify") results.push(await applyIdentifyPayload({ effect, caster, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }
