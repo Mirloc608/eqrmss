@@ -270,7 +270,7 @@ export async function petAttack(pet, targetActor, attackKind = null) {
 
     let lastResult = null;
     try {
-        const { rollWeaponAttack } = await import("../combat/combat-rolls.js");
+        const { rollWeaponAttack } = await import("../../combat/combat-rolls.js");
         for (let i = 0; i < totalAttacks; i++) {
             lastResult = await rollWeaponAttack(pet, synthetic, {
                 targetToken,
