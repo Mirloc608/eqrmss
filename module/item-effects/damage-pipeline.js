@@ -441,6 +441,28 @@ export async function applyUltravision({ effect, target, source }) {
 }
 
 /**
+ * "telescope" — EQ Telescope (2026-10-08). +55% magnification: the bearer
+ * sees farther for the duration. Stored at
+ * system.status.telescope = { magnification, roundsLeft, source }.
+ * Foundry token-vision range integration is future work; the status is the
+ * mechanical record (same as the vision payloads).
+ * Payload shape: { type: "telescope", magnification: <pct>, duration: <rounds> }
+ */
+export async function applyTelescope({ effect, target, source }) {
+    const miss = requireTarget(target, "telescope", source);
+    if (miss) return miss;
+    const duration = payloadRounds(effect, 3);
+    const magnification = Number(effect?.magnification) || 55;
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Telescope";
+    await persistValue(target, "system.status.telescope", {
+        magnification,
+        roundsLeft: duration,
+        source: dispName
+    });
+    return { type: "telescope", final: 1, notes: [`+${magnification}% magnification for ${duration} rounds (${dispName})`], source, applied: true };
+}
+
+/**
  * "levitate" — EQ Levitate (2026-10-07). Grants the `flying` status;
  * the Bearer <redacted> passes through difficult or otherwise impossible
  * terrain as normal ground (user ruling). Delegates to
@@ -969,6 +991,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "see-invisible") results.push(await applySeeInvisible({ effect, target, source }));
         else if (effect.type === "infravision") results.push(await applyInfravision({ effect, target, source }));
         else if (effect.type === "ultravision") results.push(await applyUltravision({ effect, target, source }));
+        else if (effect.type === "telescope") results.push(await applyTelescope({ effect, target, source }));
         else if (effect.type === "levitate") results.push(await applyLevitatePayload({ effect, target, source }));
         else if (effect.type === "teleport") results.push(await applyTeleportPayload({ effect, caster, target, source }));
         else if (effect.type === "summon-item") results.push(await applySummonItem({ effect, caster, target, source }));

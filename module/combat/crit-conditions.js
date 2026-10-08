@@ -830,6 +830,16 @@ export async function tickConditions(combat) {
                 notes.push(`<em>${esc(actor.name)}'s ultravision fades.</em>`);
             }
         }
+        const ts = actor.system?.status?.telescope;
+        if (ts && typeof ts === "object") {
+            const left = (Number(ts.roundsLeft) || 0) - 1;
+            if (left > 0) {
+                await actor.update({ "system.status.telescope.roundsLeft": left });
+            } else {
+                await actor.update({ "system.status.telescope": null });
+                notes.push(`<em>${esc(actor.name)}'s telescope magnification fades.</em>`);
+            }
+        }
     }
 
 // Levitate tick (2026-10-07): decrement roundsLeft, expire at 0.
