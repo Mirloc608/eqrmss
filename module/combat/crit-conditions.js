@@ -777,6 +777,44 @@ export async function tickConditions(combat) {
         }
     }
 
+// Vision ticks (2026-10-07): see-invisible, infravision, ultravision —
+// decrement roundsLeft, expire at 0.
+    for (const c of list) {
+        const actor = c.actor;
+        if (!actor || actor.system?.status?.dead) continue;
+        if (!(actor.isOwner || globalThis.game?.user?.isGM)) continue;
+        const sv = actor.system?.status?.seeInvisible;
+        if (sv && typeof sv === "object") {
+            const left = (Number(sv.roundsLeft) || 0) - 1;
+            if (left > 0) {
+                await actor.update({ "system.status.seeInvisible.roundsLeft": left });
+            } else {
+                await actor.update({ "system.status.seeInvisible": null });
+                notes.push(`<em>${esc(actor.name)}'s see invisible fades.</em>`);
+            }
+        }
+        const iv = actor.system?.status?.infravision;
+        if (iv && typeof iv === "object") {
+            const left = (Number(iv.roundsLeft) || 0) - 1;
+            if (left > 0) {
+                await actor.update({ "system.status.infravision.roundsLeft": left });
+            } else {
+                await actor.update({ "system.status.infravision": null });
+                notes.push(`<em>${esc(actor.name)}'s infravision fades.</em>`);
+            }
+        }
+        const uv = actor.system?.status?.ultravision;
+        if (uv && typeof uv === "object") {
+            const left = (Number(uv.roundsLeft) || 0) - 1;
+            if (left > 0) {
+                await actor.update({ "system.status.ultravision.roundsLeft": left });
+            } else {
+                await actor.update({ "system.status.ultravision": null });
+                notes.push(`<em>${esc(actor.name)}'s ultravision fades.</em>`);
+            }
+        }
+    }
+
     for (const c of list) {
         const actor = c.actor;
         if (!actor || actor.system?.status?.dead) continue;

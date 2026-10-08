@@ -6016,8 +6016,12 @@
       "description": "Triggered effect: Deadeye grants night vision (infravision) and see invisible for 27 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Deadeye: infravision and see invisible for 27 minutes"
+          "type": "infravision",
+          "duration": 270
+        },
+        {
+          "type": "see-invisible",
+          "duration": 270
         }
       ]
     },
@@ -6468,8 +6472,8 @@
       "description": "Triggered effect: Chill Sight grants ultravision for 36 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Chill Sight: ultravision for 36 minutes"
+          "type": "ultravision",
+          "duration": 360
         }
       ]
     },
@@ -6821,8 +6825,8 @@
       "description": "Triggered effect: See Invisible lets you see invisible creatures for 27 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants See Invisible for 27 minutes"
+          "type": "see-invisible",
+          "duration": 270
         }
       ]
     },
@@ -7338,8 +7342,8 @@
       "description": "Triggered effect: Ultravision grants vastly improved night vision.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Ultravision: vastly improved night vision"
+          "type": "ultravision",
+          "duration": 600
         }
       ]
     },

@@ -355,6 +355,62 @@ export async function applyIllusion({ effect, target, source }) {
 }
 
 /**
+ * "see-invisible" — EQ See Invisible (2026-10-07). The bearer can sense
+ * invisible creatures, bypassing all invisibility types (general/undead/
+ * animals). Checked by canSenseTarget() in module/spells/invisibility.js.
+ * Stored at system.status.seeInvisible = { roundsLeft, source }.
+ */
+export async function applySeeInvisible({ effect, target, source }) {
+    const miss = requireTarget(target, "see-invisible", source);
+    if (miss) return miss;
+    const duration = payloadRounds(effect, 270);
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "See Invisible";
+    await persistValue(target, "system.status.seeInvisible", {
+        roundsLeft: duration,
+        source: dispName
+    });
+    return { type: "see-invisible", final: 1, notes: [`can see invisible for ${duration} rounds (${dispName})`], source, applied: true };
+}
+
+/**
+ * "infravision" — EQ Infravision (2026-10-07). Heat-based night vision;
+ * see in darkness (lesser than ultravision). Stored at
+ * system.status.infravision = { roundsLeft, source }. Foundry token-vision
+ * integration (sight range/mode) is future work; the status is the
+ * mechanical record.
+ */
+export async function applyInfravision({ effect, target, source }) {
+    const miss = requireTarget(target, "infravision", source);
+    if (miss) return miss;
+    const duration = payloadRounds(effect, 270);
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Infravision";
+    await persistValue(target, "system.status.infravision", {
+        roundsLeft: duration,
+        source: dispName
+    });
+    return { type: "infravision", final: 1, notes: [`infravision for ${duration} rounds (${dispName})`], source, applied: true };
+}
+
+/**
+ * "ultravision" — EQ Ultravision (2026-10-07). See in darkness as if
+ * daylight; superior to infravision. Stored at
+ * system.status.ultravision = { roundsLeft, source }. Foundry token-vision
+ * integration (sight range/mode) is future work; the status is the
+ * mechanical record.
+ */
+export async function applyUltravision({ effect, target, source }) {
+    const miss = requireTarget(target, "ultravision", source);
+    if (miss) return miss;
+    const duration = payloadRounds(effect, 360);
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Ultravision";
+    await persistValue(target, "system.status.ultravision", {
+        roundsLeft: duration,
+        source: dispName
+    });
+    return { type: "ultravision", final: 1, notes: [`ultravision for ${duration} rounds (${dispName})`], source, applied: true };
+}
+
+/**
  * "teleport" — EQ teleport mechanics for clickies.
  * Delegates to module/spells/teleport.js via dynamic import (avoids cycles).
  * Payload shape: { type: "teleport", effect: "<teleport-kind>", destination: "<dest-id>" }
@@ -731,6 +787,9 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "damageshield") results.push(await applyDamageShield({ effect, target, source }));
         else if (effect.type === "absorb") results.push(await applyAbsorb({ effect, target, source }));
         else if (effect.type === "illusion") results.push(await applyIllusion({ effect, target, source }));
+        else if (effect.type === "see-invisible") results.push(await applySeeInvisible({ effect, target, source }));
+        else if (effect.type === "infravision") results.push(await applyInfravision({ effect, target, source }));
+        else if (effect.type === "ultravision") results.push(await applyUltravision({ effect, target, source }));
         else if (effect.type === "teleport") results.push(await applyTeleportPayload({ effect, caster, target, source }));
         else if (effect.type === "summon-item") results.push(await applySummonItem({ effect, caster, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));

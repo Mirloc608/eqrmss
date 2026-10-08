@@ -52,7 +52,7 @@ import { weaponUsePenalty } from "./weapon-use.js";
 import { resolveSpellFailure } from "../spells/spell-failure.js";
 import { actorAttackSpeed, speedScaledOb, hasteAdjustedPct } from "./attack-speed.js";
 import { getArmorTierPenalty } from "./armor-tier.js";
-import { breakInvisibility } from "../spells/invisibility.js";
+import { breakInvisibility, canSenseTarget } from "../spells/invisibility.js";
 import { unusualStyleOf, shiftSeverity } from "./unusual-style.js";
 import { combatCard } from "./chat-card.js";
 import { fireWeaponProc } from "../item-effects/proc-engine.js";
@@ -577,6 +577,19 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             at = manual.at;
             db = manual.db;
         }
+    }
+
+    // ---- Invisibility sensing (2026-10-07): if the attacker cannot
+    // sense the target (invisible, no see-invisible, fooled by type),
+    // the attack cannot be aimed at them.
+    if (targetActor && !canSenseTarget(actor, targetActor)) {
+        const msg = `${actor?.name ?? "Attacker"} cannot see ${targetActor.name} (invisible).`;
+        await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor }),
+            content: combatCard("Combat", `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>`
+                + `<p><em>${esc(msg)}</em></p>`)
+        });
+        return { error: "cannot-see", message: msg };
     }
 
     // ---- Target parry: the defender's allocated OB adds to DB

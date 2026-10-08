@@ -39,7 +39,7 @@ import { classifySpell, directedSpellsOB, spellEffectsOf } from "./spell-mapping
 import { applySpellBuffs } from "./spell-buffs.js";
 import { applyInvisibility, invisTypeOf, breakInvisibility } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
-import { applyIllusion } from "../item-effects/damage-pipeline.js";
+import { applyIllusion, applySeeInvisible, applyInfravision, applyUltravision } from "../item-effects/damage-pipeline.js";
 import { applyTeleport } from "./teleport.js";
 import { summonItem } from "./summon.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
@@ -597,18 +597,38 @@ export async function castSpell(actor, spellItem, opts = {}) {
         }
     }
     const note = cls.kind === "later" ? esc(cls.reason) : "no mechanical payload";
+    // Vision (2026-10-07): see-invisible, infravision, ultravision.
+    // Spell data uses type "vision" or type "utility" with an effect field;
+    // durations are seconds — convert to rounds.
+    let visionNote = "";
+    const visionEffs = (spellEffectsOf(spellItem) ?? []).filter(e =>
+        ["see-invisible", "infravision", "ultravision"].includes(String(e?.effect ?? "").toLowerCase()));
+    if (visionEffs.length) {
+        if (!(buffTarget.isOwner || globalThis.game?.user?.isGM)) {
+            visionNote = `<p><em>Vision not applied — you don't control ${esc(buffTarget.name)}.</em></p>`;
+        } else {
+            for (const eff of visionEffs) {
+                const rounds = durationRounds(eff.duration) ?? 270;
+                const vtype = String(eff.effect ?? "").toLowerCase();
+                const handler = vtype === "see-invisible" ? applySeeInvisible
+                    : vtype === "infravision" ? applyInfravision : applyUltravision;
+                const res = await handler({ effect: { ...eff, rounds }, target: buffTarget, source: name });
+                visionNote += `<p><em>${esc(buffTarget.name)}: ${esc(res.notes.join(" "))}</em></p>`;
+            }
+        }
+    }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
-    // teleport/summon pipeline already produced output (2026-10-07: redundant when buffs
+    // teleport/summon/vision pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }
