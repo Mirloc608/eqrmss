@@ -97,7 +97,17 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
 
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
-        return await this.contextHelper.prepare(context);
+        const prepared = await this.contextHelper.prepare(context);
+        // Paw icon visibility: only show when the character has an active pet.
+        // (Same ownership query as the paw click handler below.)
+        try {
+            const actorId = this.actor?.id;
+            prepared.hasPet = !!actorId && game.actors.some(a =>
+                a?.type === "pet" &&
+                (a?.system?.pet?.owner === actorId || a?.getFlag("eqrmss", "ownerId") === actorId)
+            );
+        } catch (err) { prepared.hasPet = false; }
+        return prepared;
     }
 
     // ============================================================

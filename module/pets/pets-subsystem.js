@@ -87,6 +87,14 @@ function wirePetHooks() {
 
             if (header.querySelector(".eqrmss-pet-button")) return;
 
+            // Only show the paw when the character has an active pet.
+            const ownerId = sheet.actor?.id;
+            const hasPet = !!ownerId && game.actors.some(a =>
+                a?.type === "pet" &&
+                (a?.system?.pet?.owner === ownerId || a?.getFlag(MODULE_ID, "ownerId") === ownerId)
+            );
+            if (!hasPet) return;
+
             const btn = document.createElement("a");
             btn.className = "eqrmss-pet-button";
             btn.title = "Open Pet Sheet";
@@ -117,6 +125,20 @@ function wirePetHooks() {
             console.log(`EQRMSS | Pets subsystem | Pet ${actor.name} is now ${active ? "active" : "inactive"}`);
         }
     });
+
+    // Re-render the owner's sheet when a pet is created or deleted so the
+    // paw icon visibility (hasPet) stays current without manual refresh.
+    const refreshOwnerSheet = (petActor) => {
+        try {
+            if (petActor?.type !== "pet") return;
+            const ownerId = petActor?.system?.pet?.owner ?? petActor?.getFlag(MODULE_ID, "ownerId");
+            if (!ownerId) return;
+            const owner = game.actors.get(ownerId);
+            owner?.sheet?.render(false);
+        } catch (err) { /* non-fatal */ }
+    };
+    Hooks.on("createActor", refreshOwnerSheet);
+    Hooks.on("deleteActor", refreshOwnerSheet);
 }
 
 /**
