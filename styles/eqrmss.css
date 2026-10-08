@@ -594,6 +594,9 @@
 .application.sheet.eqrmss.actor.pet-sheet {
   background: linear-gradient(165deg, #efe0b0 0%, #e2cc94 60%, #d4b87f 100%);
   color: #3a2a18;
+  /* 2026-10-08: force compact card — Foundry remembers window size per user,
+     so the JS `position` option alone cannot shrink an already-tall sheet. */
+  max-height: 400px !important;
 }
 
 /* Pet header: reuse the character sheet's parchment header look */
