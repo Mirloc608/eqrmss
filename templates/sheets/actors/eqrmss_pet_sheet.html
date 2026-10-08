@@ -61,5 +61,31 @@
     <p style="color:#ccc;font-size:0.85rem;">Currently <strong>following</strong> — stays near the owner, does not engage.</p>
     {{/if}}
   </div>
+
+  <div class="panel">
+    <h3>Buffs &amp; Debuffs</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div>
+        <h4 style="margin:0 0 4px;color:#fff;">BUFFS</h4>
+        {{#if buffs.length}}
+        <ul style="list-style:none;margin:0;padding:0;color:#ccc;">
+          {{#each buffs}}<li style="padding:2px 0;">{{this.name}}</li>{{/each}}
+        </ul>
+        {{else}}
+        <p style="opacity:0.6;margin:0;color:#ccc;">None</p>
+        {{/if}}
+      </div>
+      <div>
+        <h4 style="margin:0 0 4px;color:#fff;">DEBUFFS</h4>
+        {{#if debuffs.length}}
+        <ul style="list-style:none;margin:0;padding:0;color:#ccc;">
+          {{#each debuffs}}<li style="padding:2px 0;">{{this.name}}</li>{{/each}}
+        </ul>
+        {{else}}
+        <p style="opacity:0.6;margin:0;color:#ccc;">None</p>
+        {{/if}}
+      </div>
+    </div>
+  </div>
 </section>
 </form>

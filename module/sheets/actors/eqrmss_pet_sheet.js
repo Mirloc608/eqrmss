@@ -44,6 +44,37 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
         const hitsMax = Number(system.hits?.max) || 0;
         const hitsTaken = Number(system.hits?.value) || 0;
 
+        // Buffs & Debuffs (2026-10-08): same sources as the PC Status
+        // tab — ActiveEffects + timed spellEffects + DoTs. Read-only
+        // display (no dismiss buttons on the pet sheet).
+        const buffs = [];
+        const debuffs = [];
+        for (const effect of this.actor?.effects ?? []) {
+            if (effect.disabled) continue;
+            const entry = { name: effect.name ?? "Unnamed Effect" };
+            if (effect.flags?.eqrmss?.category === "debuff") debuffs.push(entry);
+            else buffs.push(entry);
+        }
+        const timed = system.status?.spellEffects;
+        if (Array.isArray(timed)) {
+            for (const e of timed) {
+                const label = e?.name ?? e?.label ?? "Timed Effect";
+                const rounds = Number(e?.roundsLeft ?? e?.rounds ?? 0);
+                const roundsTxt = rounds > 0 ? ` (${rounds} rounds)` : "";
+                const entry = { name: `${label}${roundsTxt}` };
+                if (e?.category === "debuff") debuffs.push(entry);
+                else buffs.push(entry);
+            }
+        }
+        const dots = system.status?.dots;
+        if (Array.isArray(dots)) {
+            for (const d of dots) {
+                const dmg = d?.max ?? d?.min ?? 0;
+                const rounds = Number(d?.roundsLeft ?? 0);
+                debuffs.push({ name: `${d?.name ?? "Damage over time"} (${dmg}/round${rounds > 0 ? `, ${rounds} rounds` : ""})` });
+            }
+        }
+
         return {
             ...context,
             actor: this.actor,
@@ -55,7 +86,9 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
             hitsMax,
             petDefense: Number(scaling.defense) || 0,
             petOB: Number(scaling.ob) || 0,
-            creatureType: system.details?.creatureType ?? pet.family ?? "—"
+            creatureType: system.details?.creatureType ?? pet.family ?? "—",
+            buffs,
+            debuffs
         };
     }
 

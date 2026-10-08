@@ -1247,4 +1247,15 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             <p>${critLine}</p>
             ${appliedNote}${subdueNote}${condNote}${critCapNote}${procNote}${ammoNote}`)
     });
+
+    // Pet acts after owner (2026-10-08): if the attacker has a pet
+    // with attack/guard command, the pet acts now on the same turn.
+    // Skipped for pets themselves (no recursion) and when the caller
+    // opts out (pet's own attack sets skipPetFollowup).
+    if (actor?.type !== "pet" && !options.skipPetFollowup) {
+        try {
+            const { petActAfterOwner } = await import("../spells/pets/pet-combat.js");
+            await petActAfterOwner(actor, targetActor);
+        } catch (e) { /* non-fatal: pet action must never break the owner's attack */ }
+    }
 }
