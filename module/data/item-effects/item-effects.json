@@ -7077,8 +7077,9 @@
       "description": "Triggered effect: Pacify lowers the target's aggressiveness for 42 seconds (affects creatures up to level 55).",
       "payload": [
         {
-          "type": "utility",
-          "note": "Pacify: lowers the target's aggressiveness for 42 seconds (affects creatures up to level 55)"
+          "type": "pacify",
+          "rounds": 7,
+          "levelCap": 55
         }
       ]
     },
@@ -7247,8 +7248,9 @@
       "description": "Triggered effect: Soothe lowers the target's aggressiveness for 2.5 minutes (affects creatures up to level 40).",
       "payload": [
         {
-          "type": "utility",
-          "note": "Soothe: lowers the target's aggressiveness for 2.5 minutes (affects creatures up to level 40)"
+          "type": "pacify",
+          "rounds": 25,
+          "levelCap": 40
         }
       ]
     },

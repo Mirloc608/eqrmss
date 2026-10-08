@@ -802,6 +802,28 @@ export async function applyMemblurPayload({ effect, caster, target, source }) {
 }
 
 /**
+ * "pacify" — EQ Pacify/Soothe (2026-10-07). Lowers the target's
+ * aggressiveness: halves existing aggro and blocks new aggro while
+ * active. Delegates to module/spells/pacify.js via dynamic import.
+ * Payload shape: { type: "pacify", rounds: <n>, levelCap: <n> }
+ */
+export async function applyPacifyPayload({ effect, caster, target, source }) {
+    const miss = requireTarget(target, "pacify", source);
+    if (miss) return miss;
+    const rounds = Number(effect?.rounds) || 7;
+    const levelCap = Number(effect?.levelCap) || 55;
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Pacify";
+    try {
+        const { applyPacify } = await import("../spells/pacify.js");
+        const note = await applyPacify(caster, target, { rounds, levelCap, sourceName: dispName });
+        const applied = !/too powerful|not applied/i.test(note);
+        return { type: "pacify", final: applied ? 1 : 0, notes: [note.replace(/<[^>]+>/g, "")], source, applied };
+    } catch (e) {
+        return { type: "pacify", final: 0, notes: [`pacify failed: ${e?.message ?? e}`], source, applied: false };
+    }
+}
+
+/**
  * Faction (2026-10-07): Alliance-style effects improve the caster's
  * standing with the target's faction. Effect shape:
  *   { type: "faction", amount: <n> }  (default +100)
@@ -859,6 +881,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "teleport") results.push(await applyTeleportPayload({ effect, caster, target, source }));
         else if (effect.type === "summon-item") results.push(await applySummonItem({ effect, caster, target, source }));
         else if (effect.type === "memblur") results.push(await applyMemblurPayload({ effect, caster, target, source }));
+        else if (effect.type === "pacify") results.push(await applyPacifyPayload({ effect, caster, target, source }));
         else if (effect.type === "faction") results.push(await applyFactionPayload({ effect, caster, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });

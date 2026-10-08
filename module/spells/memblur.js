@@ -45,6 +45,11 @@ export async function recordAggro(target, attacker, { damage = 0, debuffs = 0 } 
     if (!target || !attacker) return;
     // Don't record self-inflicted damage as aggro
     if (target.id === attacker.id) return;
+    // Pacified targets ignore new offenses while the effect lasts (2026-10-07).
+    try {
+        const p = target.system?.status?.pacified;
+        if (p && typeof p === "object" && (Number(p.roundsLeft) || 0) > 0) return;
+    } catch (e) { /* ignore */ }
     const dmg = Number(damage) || 0;
     const deb = Number(debuffs) || 0;
     if (dmg <= 0 && deb <= 0) return;

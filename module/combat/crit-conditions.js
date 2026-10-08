@@ -837,6 +837,24 @@ export async function tickConditions(combat) {
         }
     }
 
+// Pacify tick (2026-10-07): decrement roundsLeft, expire at 0.
+    for (const c of list) {
+        const actor = c.actor;
+        if (!actor || actor.system?.status?.dead) continue;
+        if (!(actor.isOwner || globalThis.game?.user?.isGM)) continue;
+        const pc = actor.system?.status?.pacified;
+        if (pc && typeof pc === "object") {
+            const left = (Number(pc.roundsLeft) || 0) - 1;
+            if (left > 0) {
+                await actor.update({ "system.status.pacified.roundsLeft": left });
+            } else {
+                const pcName = String(pc.source ?? "pacify");
+                await actor.update({ "system.status.pacified": null });
+                notes.push(`<em>${esc(actor.name)}'s ${esc(pcName)} wears off — no longer pacified.</em>`);
+            }
+        }
+    }
+
     for (const c of list) {
         const actor = c.actor;
         if (!actor || actor.system?.status?.dead) continue;
