@@ -95,7 +95,8 @@ export function isSwarmPet(petId) {
  * @param {string} petId - The pet ID from spell data
  * @param {number} casterLevel - Caster's level (warder + fallback)
  * @param {number} spellLevel - Spell's level (mag/ench/necro pet level)
- * @returns {{ creature, creatureId, petLevel, petName, family } | null}
+ * @returns {{ creature, creatureId, petLevel, petName, family } | { skip: true, petId } | null}
+ *   skip: true means "no pet summoned, no error" (visual-only IDs, 2026-10-08).
  */
 export function resolvePetCreature(petId, casterLevel, spellLevel) {
     const id = String(petId ?? "").toLowerCase();
@@ -105,6 +106,88 @@ export function resolvePetCreature(petId, casterLevel, spellLevel) {
 
     // Helper: find creature by ID in the registry
     const findCreature = (cid) => races[cid] ?? null;
+
+    // --- Final rulings (2026-10-08): skip IDs ---
+    // These summon nothing and report no error (visual-only or
+    // non-summon spells).
+    const SKIP_PET_IDS = new Set([
+        "scapegoat",             // Necro: transfers aggro in EQ, no pet
+        "dyzils-deafening-decoy", // Magician: decoy, no pet
+        "healing-swarm",         // Cleric Issuance line: visual only
+    ]);
+    if (SKIP_PET_IDS.has(id)) {
+        return { skip: true, petId };
+    }
+
+    // --- Final rulings (2026-10-08): explicit creature mappings ---
+    // Placed first so no fuzzy/coverage rule can claim these IDs.
+    // Pet level = SPELL level (same convention as mag/ench/necro).
+    const finalRulings = {
+        // Necromancer
+        "child-of-bertoxxulous": { cid: "spectre", family: "undead" },
+        "lost-soul": { cid: "shade", family: "undead" },
+        "conscripted-sacrifice": { cid: "skeleton", family: "undead" },
+        "unwitting-sacrifice": { cid: "skeleton", family: "undead" },
+        "legacy-of-zek": { cid: "skeleton", family: "undead" },
+        "luclins-conqueror": { cid: "skeleton", family: "undead" },
+        "unliving-murderer": { cid: "skeleton", family: "undead" },
+        // Magician
+        "child-of-ro": { cid: "fire-elemental", family: "elemental" },
+        "child-of-wind": { cid: "air-elemental", family: "elemental" },
+        "ward-of-xegony": { cid: "air-elemental", family: "elemental" },
+        "rathes-son": { cid: "water-elemental", family: "elemental" },
+        "rage-of-zomm": { cid: "earth-elemental", family: "elemental" },
+        "manifest-elements": { cid: "elemental", family: "elemental" },
+    };
+    const ruling = finalRulings[id];
+    if (ruling) {
+        const creature = findCreature(ruling.cid);
+        if (creature) {
+            return {
+                creature, creatureId: ruling.cid,
+                petLevel: sLevel,
+                petName: creature.name ?? ruling.cid,
+                family: ruling.family,
+            };
+        }
+    }
+
+    // --- Monster Summoning: random creature (2026-10-08 ruling) ---
+    // Magician Monster Summoning I-XV summons a random monster in EQ.
+    // Pet level = CASTER level (not spell level).
+    // HOOK: zone-specific tables can be registered at
+    //   game.eqrmss.monsterSummonTables[<zoneName>] = { low: [...], mid: [...], high: [...] }
+    // where <zoneName> is the viewed scene's name. Falls back to the
+    // generic table below when no zone table is registered.
+    const ROMAN_TIERS = { i: 1, ii: 2, iii: 3, iv: 4, v: 5, vi: 6, vii: 7, viii: 8, ix: 9, x: 10, xi: 11, xii: 12, xiii: 13, xiv: 14, xv: 15 };
+    const msMatch = /^monster-summoning-(i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv)$/.exec(id);
+    if (msMatch) {
+        const tier = ROMAN_TIERS[msMatch[1]] ?? 1;
+        const MONSTER_SUMMON_GENERIC = {
+            // Tiers I-V (spells L30-75): low/mid creatures
+            low: ["rat", "snake", "spider", "bat", "beetle", "wolf", "kobold", "goblin", "orc", "gnoll", "skeleton", "zombie"],
+            // Tiers VI-X (spells L80-100): mid/high creatures
+            mid: ["bear", "worg", "tiger", "lion", "scorpion", "owlbear", "basilisk", "ogre", "troll", "ghoul", "mummy", "gargoyle", "minotaur"],
+            // Tiers XI-XV (spells L105-125): high creatures
+            high: ["sphinx", "manticore", "drake", "wyvern", "wurm", "dragon", "giant", "vampire"],
+        };
+        const zoneName = globalThis.game?.scenes?.viewed?.name ?? globalThis.canvas?.scene?.name ?? null;
+        const zoneTable = zoneName ? globalThis.game?.eqrmss?.monsterSummonTables?.[zoneName] : null;
+        const table = zoneTable ?? MONSTER_SUMMON_GENERIC;
+        const band = tier <= 5 ? "low" : tier <= 10 ? "mid" : "high";
+        const pool = (table[band] && table[band].length ? table[band] : MONSTER_SUMMON_GENERIC[band]);
+        const pick = pool[Math.floor(Math.random() * pool.length)];
+        const creature = findCreature(pick);
+        if (creature) {
+            return {
+                creature, creatureId: pick,
+                petLevel: cLevel,
+                petName: creature.name ?? pick,
+                family: creature.creatureType ?? "animal",
+                isMonsterSummon: true,
+            };
+        }
+    }
 
     // --- Magician elementals: match the ELEMENT SUFFIX ---
     // "lesser-summoning-air", "greater-vocaration-of-fire", "aspect-fire",
@@ -536,6 +619,11 @@ export async function summonPet(caster, petId, spellName, spellManaCost, spellLe
         resolved = resolvePetCreature(petId, casterLevel, spellLevel);
         if (!resolved) {
             return `<p><em>Pet summon failed: unknown pet "${escFn(petId)}".</em></p>`;
+        }
+        if (resolved.skip) {
+            // Visual-only / no-summon pet ID (user ruling 2026-10-08):
+            // nothing summoned, no error.
+            return "";
         }
     }
 
