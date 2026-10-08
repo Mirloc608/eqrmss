@@ -331,22 +331,26 @@ async function applyAbsorb({ effect, target, source }) {
  * successful melee hits have a chance to drain life, healing the attacker.
  * Re-casting refreshes. Clickies target the wearer (ruling 2026-10-06).
  * Stored at system.status.vampiric = { procChance, amount, percent,
- * roundsLeft, source }.
- * NOTE: procChance/amount/percent are not in the source data; defaults are
- * mechanical placeholders (see module/spells/vampiric.js), flagged for
- * EQ canon review.
+ * roundsLeft, source }. Duration is level-scaled per EQ (17 rounds @L7 →
+ * 75 @L65); the wearer's level is passed and the payload duration acts
+ * as a cap.
+ * NOTE: procChance is not in the source data (EQ only says "a chance");
+ * it remains a mechanical placeholder (see module/spells/vampiric.js),
+ * flagged for EQ canon review. amount (12) is real EQ data.
  */
 async function applyVampiric({ effect, target, source }) {
     const miss = requireTarget(target, "vampiric", source);
     if (miss) return miss;
     const { applyVampiric: applyVamp } = await import("../spells/vampiric.js");
     const duration = payloadRounds(effect, 75);
+    const wearerLevel = Number(target?.system?.attributes?.level?.value) || 1;
     const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Vampiric Embrace";
     const note = await applyVamp(target, {
         procChance: effect?.procChance,
         amount: effect?.amount,
         percent: effect?.percent,
         rounds: duration,
+        casterLevel: wearerLevel,
         sourceName: dispName
     });
     return { type: "vampiric", final: 1, notes: [note], source, applied: true };

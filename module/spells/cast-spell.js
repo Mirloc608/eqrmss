@@ -573,9 +573,12 @@ export async function castSpell(actor, spellItem, opts = {}) {
     // Vampiric Embrace (2026-10-08): melee lifetap proc buff. Necro data:
     // {type:"utility", effect:"melee-proc-vampiric-embrace", duration:450s}.
     // SK data: {type:"proc", name:"Vampiric Embrace"}. Durations are
-    // seconds — convert to rounds. NOTE: procChance/amount/percent are
-    // not in the source data; defaults are placeholders (see
-    // module/spells/vampiric.js), flagged for EQ canon review.
+    // seconds — convert to rounds; the EQ duration curve is level-scaled
+    // (17 rounds @L7 → 75 @L65), so the caster's level is passed and the
+    // spell-data duration acts as a cap. NOTE: procChance is not in the
+    // source data (EQ only says "a chance"); amount (12) is real EQ data
+    // (see module/spells/vampiric.js), procChance remains a placeholder
+    // flagged for EQ canon review.
     let vampiricNote = "";
     const vampiricEffs = (spellEffectsOf(spellItem) ?? []).filter(e => {
         const k = String(e?.effect ?? "").toLowerCase();
@@ -587,11 +590,12 @@ export async function castSpell(actor, spellItem, opts = {}) {
         if (!(buffTarget.isOwner || globalThis.game?.user?.isGM)) {
             vampiricNote = `<p><em>Vampiric Embrace not applied — you don't control ${esc(buffTarget.name)}.</em></p>`;
         } else {
+            const vampiricCasterLevel = Number(actor?.system?.attributes?.level?.value) || 1;
             for (const eff of vampiricEffs) {
                 const rounds = durationRounds(eff.duration) ?? 75;
                 vampiricNote += `<p><em>${esc(await applyVampiric(buffTarget, {
                     procChance: eff?.procChance, amount: eff?.amount, percent: eff?.percent,
-                    rounds, sourceName: name
+                    rounds, casterLevel: vampiricCasterLevel, sourceName: name
                 }))}</em></p>`;
             }
         }

@@ -7436,15 +7436,15 @@
       "id": "clicky-vampiric-embrace",
       "kind": "triggered",
       "name": "Vampiric Embrace",
-      "description": "Triggered effect: Vampiric Embrace gives your attacks a vampiric property, stealing life for 7.5 minutes.",
+      "description": "Triggered effect: Vampiric Embrace gives your attacks a vampiric property, stealing life (duration scales with level: 1.7 min @L7 → 7.5 min @L65).",
       "payload": [
         {
           "type": "vampiric",
           "procChance": 15,
-          "amount": 30,
+          "amount": 12,
           "percent": 100,
           "duration": 75,
-          "note": "Vampiric Embrace: melee hits have a 15% chance to drain 30 life, healing the attacker (7.5 min). Values are mechanical placeholders pending EQ canon review."
+          "note": "Vampiric Embrace: melee hits have a 15% chance to drain 12 life, healing the attacker (duration level-scaled: 17 rounds @L7 → 75 @L65). Proc chance is a mechanical placeholder pending EQ canon review; 12 damage is real EQ data."
         }
       ]
     },
