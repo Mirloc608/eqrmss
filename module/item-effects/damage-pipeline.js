@@ -485,6 +485,30 @@ export async function applyLevitatePayload({ effect, target, source }) {
 }
 
 /**
+ * "shrink" — EQ Shrink (2026-10-08). Reduces the target's physical
+ * size (token scale); restored on expiry. Delegates to
+ * module/spells/shrink.js via dynamic import (avoids cycles).
+ * Payload shape: { type: "shrink", percent: <n>|amount: <n>, duration: <rounds> }
+ * (amount may be negative in spell data — the magnitude is used).
+ */
+export async function applyShrinkPayload({ effect, target, source }) {
+    const miss = requireTarget(target, "shrink", source);
+    if (miss) return miss;
+    const duration = payloadRounds(effect, 270);
+    const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Shrink";
+    try {
+        const { applyShrink } = await import("../spells/shrink.js");
+        const note = await applyShrink(target, {
+            scalePct: effect?.amount ?? effect?.percent ?? 34,
+            rounds: duration, sourceName: dispName
+        });
+        const applied = !/not applied|failed/i.test(note);
+        return { type: "shrink", final: applied ? 1 : 0, notes: [note.replace(/<[^>]+>/g, "")], source, applied };
+    } catch (e) {
+        return { type: "shrink", final: 0, notes: [`shrink failed: ${e?.message ?? e}`], source, applied: false };
+    }
+}
+/**
  * "teleport" — EQ teleport mechanics for clickies.
  * Delegates to module/spells/teleport.js via dynamic import (avoids cycles).
  * Payload shape: { type: "teleport", effect: "<teleport-kind>", destination: "<dest-id>" }
@@ -1002,6 +1026,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "feign") results.push(await applyFeignDeathPayload({ effect, caster, target, source }));
         else if (effect.type === "vampiric") results.push(await applyVampiric({ effect, target, source }));
         else if (effect.type === "identify") results.push(await applyIdentifyPayload({ effect, caster, target, source }));
+        else if (effect.type === "shrink") results.push(await applyShrinkPayload({ effect, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }

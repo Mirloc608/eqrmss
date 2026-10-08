@@ -864,6 +864,27 @@ export async function tickConditions(combat) {
         }
     }
 
+// Shrink tick (2026-10-08): decrement roundsLeft, expire at 0.
+// On expiry also restores the token scale to 1.
+    for (const c of list) {
+        const actor = c.actor;
+        if (!actor || actor.system?.status?.dead) continue;
+        if (!(actor.isOwner || globalThis.game?.user?.isGM)) continue;
+        const sh = actor.system?.status?.shrink;
+        if (sh && typeof sh === "object") {
+            const left = (Number(sh.roundsLeft) || 0) - 1;
+            if (left > 0) {
+                await actor.update({ "system.status.shrink.roundsLeft": left });
+            } else {
+                try {
+                    const { removeShrink } = await import("../spells/shrink.js");
+                    await removeShrink(actor);
+                } catch (e) { /* ignore */ }
+                notes.push(`<em>${esc(actor.name)} returns to normal size.</em>`);
+            }
+        }
+    }
+
 // Pacify tick (2026-10-07): decrement roundsLeft, expire at 0.
     for (const c of list) {
         const actor = c.actor;

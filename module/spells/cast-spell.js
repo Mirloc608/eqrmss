@@ -786,18 +786,40 @@ export async function castSpell(actor, spellItem, opts = {}) {
             identifyNote += await applyIdentify(actor, buffTarget, { sourceName: name });
         }
     }
+    // Shrink (2026-10-08): EQ size reduction. Spell data uses
+    // { type: "utility", effect: "shrink", amount: <pct> } (amount may be
+    // negative in some files — the magnitude is the reduction percent).
+    // Reduces the target's token scale; restored on expiry.
+    let shrinkNote = "";
+    const shrinkEffs = (spellEffectsOf(spellItem) ?? []).filter(e =>
+        String(e?.type ?? "").toLowerCase() === "utility" &&
+        String(e?.effect ?? "").toLowerCase() === "shrink");
+    if (shrinkEffs.length) {
+        if (!(buffTarget.isOwner || globalThis.game?.user?.isGM)) {
+            shrinkNote = `<p><em>Shrink not applied — you don't control ${esc(buffTarget.name)}.</em></p>`;
+        } else {
+            const { applyShrink } = await import("./shrink.js");
+            for (const eff of shrinkEffs) {
+                const rounds = durationRounds(eff.duration) ?? 270;
+                shrinkNote += await applyShrink(buffTarget, {
+                    scalePct: eff?.amount ?? eff?.percent ?? 34,
+                    rounds, sourceName: name
+                });
+            }
+        }
+    }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
-    // teleport/summon/vision/memblur/pacify/faction/dispel/feign/vampiric/identify pipeline already produced output (2026-10-07: redundant when buffs
+    // teleport/summon/vision/memblur/pacify/faction/dispel/feign/vampiric/identify/shrink pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote || identifyNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote || identifyNote || shrinkNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${identifyNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${identifyNote}${shrinkNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }
