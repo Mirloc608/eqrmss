@@ -341,6 +341,21 @@ export async function applySong(bard, songItem, targets = []) {
             notes += `<p><em>${tName}: ${esc(name)} blocked — ${esc(blockReason)} (entire song blocked).</em></p>`;
             continue;
         }
+        // Deduplication (2026-10-08): remove existing entries from this
+        // song before re-applying. Makes applySong idempotent — re-playing
+        // or re-syncing an active song refreshes instead of duplicating.
+        // Runs after the block check so a blocked song leaves old entries alone.
+        {
+            const sid = songIdOf(songItem);
+            const cleanFx = (Array.isArray(target.system?.status?.spellEffects)
+                ? target.system.status.spellEffects : []).filter(e => e?.songId !== sid);
+            const cleanDots = (Array.isArray(target.system?.status?.dots)
+                ? target.system.status.dots : []).filter(d => d?.songId !== sid);
+            await target.update({
+                "system.status.spellEffects": cleanFx,
+                "system.status.dots": cleanDots
+            });
+        }
         for (const eff of effects) {
             const type = String(eff?.type ?? "").toLowerCase();
             const label = effectLabel(name, eff);
