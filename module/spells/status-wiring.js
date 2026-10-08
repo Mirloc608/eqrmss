@@ -23,6 +23,20 @@ export async function applyStatusEffect(target, statusId, name, rounds = 10, img
     if (!canTouch) return false;
     const r = Math.max(1, Math.round(Number(rounds) || 10));
     try {
+        // Idempotent (2026-10-08): remove existing effects with the same
+        // statusId before creating the new one. Prevents duplicate
+        // "X (Haste)" ActiveEffects when songs/spells re-apply each round.
+        const existing = [...(target.effects?.contents ?? target.effects ?? [])];
+        const toDelete = existing
+            .filter(e => {
+                const statuses = e.statuses ?? e.system?.statuses ?? [];
+                return [...statuses].includes(statusId);
+            })
+            .map(e => e.id ?? e._id)
+            .filter(Boolean);
+        if (toDelete.length) {
+            await target.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+        }
         await target.createEmbeddedDocuments("ActiveEffect", [{
             name: `${name}`,
             img,
