@@ -19,7 +19,6 @@
             <td><button class="cast-spell" data-item-id="{{highestId}}" title="Cast {{name}} (highest known rank; EQ mana cost; RMSS resolution)">Cast</button></td>
             <td style="text-align: center;"><a class="toggle-ready" data-item-id="{{highestId}}" title="{{#if highest.isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if highest.isReady}}⭐{{else}}☆{{/if}}</a></td>
             <td>
-              <img src="{{img}}" class="spell-group-icon" alt="" />
               <a class="item-open" data-item-id="{{highestId}}"><strong>{{name}}</strong></a>
               {{#if multi}}<span class="rank-badge">{{count}} ranks</span>{{/if}}
             </td>
