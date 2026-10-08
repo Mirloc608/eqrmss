@@ -699,6 +699,36 @@ async function syncBardPlaylist(bard) {
 // Cast-time pending casts (Option A) tick here on round change.
 import { clearPendingCast } from "../spells/cast-timing.js";
 
+/**
+ * Tick one actor's pending delayed cast (Option A): decrement
+ * roundsLeft, fire the spell at 0.
+ * The decrement goes into `updates` (batched by the caller); the
+ * fire path clears + resolves immediately (re-entrant safe).
+ * Interruption (damage/stun) is handled by the preUpdateActor hook.
+ * Shared by the combatant loop and the non-combatant sweep below.
+ */
+async function tickPendingCast(actor, st, updates, notes) {
+    const pending = st.pendingCast;
+    if (!pending || typeof pending.roundsLeft !== "number") return;
+    const left = pending.roundsLeft - 1;
+    if (left <= 0) {
+        // Fire! Clear first, then resolve (re-entrant safe).
+        await clearPendingCast(actor);
+        notes.push(`<strong>${esc(actor.name)}</strong> completes ${esc(pending.spellName || "the spell")}!`);
+        // Fire the delayed spell (imports cast-spell dynamically to avoid cycles)
+        try {
+            const { fireDelayedCast } = await import("../spells/cast-spell.js");
+            await fireDelayedCast(actor, pending);
+        } catch (e) {
+            console.error("EQRMSS | Delayed cast fire failed", e);
+            notes.push(`<em>Delayed cast failed: ${esc(e.message)}</em>`);
+        }
+    } else {
+        updates["system.status.pendingCast.roundsLeft"] = left;
+        notes.push(`${esc(actor.name)}: ${esc(pending.spellName || "spell")} fires in ${left} round${left === 1 ? "" : "s"}.`);
+    }
+}
+
 export async function tickConditions(combat) {
     if (!combat) return;
     const notes = [];
@@ -941,26 +971,7 @@ export async function tickConditions(combat) {
 
         // Pending delayed cast (Option A): tick down, fire at 0.
         // Interruption (damage/stun) is handled by the updateActor hook.
-        const pending = st.pendingCast;
-        if (pending && typeof pending.roundsLeft === "number") {
-            const left = pending.roundsLeft - 1;
-            if (left <= 0) {
-                // Fire! Clear first, then resolve (re-entrant safe).
-                await clearPendingCast(actor);
-                notes.push(`<strong>${esc(actor.name)}</strong> completes ${esc(pending.spellName || "the spell")}!`);
-                // Fire the delayed spell (imports cast-spell dynamically to avoid cycles)
-                try {
-                    const { fireDelayedCast } = await import("../spells/cast-spell.js");
-                    await fireDelayedCast(actor, pending);
-                } catch (e) {
-                    console.error("EQRMSS | Delayed cast fire failed", e);
-                    notes.push(`<em>Delayed cast failed: ${esc(e.message)}</em>`);
-                }
-            } else {
-                updates["system.status.pendingCast.roundsLeft"] = left;
-                notes.push(`${esc(actor.name)}: ${esc(pending.spellName || "spell")} fires in ${left} round${left === 1 ? "" : "s"}.`);
-            }
-        }
+        await tickPendingCast(actor, st, updates, notes);
 
         // Clear the "damaged this round" flag (Option B) at round start.
         if (st.damagedThisRound) {
@@ -1172,6 +1183,27 @@ export async function tickConditions(combat) {
         // concussion-hit threshold — unconsciousness / dying.
         if (!actor.system?.status?.dead) await checkHitThresholds(actor);
     }
+
+    // Non-combatant sweep (2026-10-08): delayed casts live on the actor
+    // (system.status.pendingCast), but the loop above only visits combat
+    // tracker combatants. A caster who isn't in the tracker would spend
+    // the mana and never have the spell fire. Sweep world actors for
+    // stray pending casts and tick those too.
+    const combatantActorIds = new Set(list.map(c => c.actor?.id).filter(Boolean));
+    try {
+        for (const actor of game.actors ?? []) {
+            if (!actor || combatantActorIds.has(actor.id)) continue;
+            if (actor.system?.status?.dead) continue;
+            const st = actor.system?.status ?? {};
+            if (!st.pendingCast || typeof st.pendingCast.roundsLeft !== "number") continue;
+            const updates = {};
+            await tickPendingCast(actor, st, updates, notes);
+            if (Object.keys(updates).length) await actor.update(updates);
+        }
+    } catch (e) {
+        console.error("EQRMSS | Non-combatant pending-cast sweep failed", e);
+    }
+
     if (notes.length) {
         await ChatMessage.create({
             content: combatCard("Conditions", `<p><em>Condition tick — round ${combat.round}.</em></p><p>${notes.join("<br>")}</p>`)

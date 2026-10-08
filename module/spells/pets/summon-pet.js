@@ -145,6 +145,7 @@ export function resolvePetCreature(petId, casterLevel, spellLevel) {
         "cackling-bones": "skeleton",
         "call-skeleton": "skeleton",
         "animate-dead": "skeleton",
+        "restless-bones": "skeleton",
         "dark-assassin": "shade",
     };
     // Also try fuzzy: if ID contains "skeleton" or "bone" or "corpse"
