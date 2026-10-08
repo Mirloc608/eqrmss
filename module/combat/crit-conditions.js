@@ -760,6 +760,23 @@ export async function tickConditions(combat) {
         }
     }
 
+// Illusion tick (2026-10-07): decrement roundsLeft, expire at 0.
+    for (const c of list) {
+        const actor = c.actor;
+        if (!actor || actor.system?.status?.dead) continue;
+        if (!(actor.isOwner || globalThis.game?.user?.isGM)) continue;
+        const il = actor.system?.status?.illusion;
+        if (!il || typeof il !== "object") continue;
+        const left = (Number(il.roundsLeft) || 0) - 1;
+        if (left > 0) {
+            await actor.update({ "system.status.illusion.roundsLeft": left });
+        } else {
+            const ilName = String(il.displayName ?? "illusion");
+            await actor.update({ "system.status.illusion": null });
+            notes.push(`<em>${esc(actor.name)}'s ${esc(ilName)} illusion fades.</em>`);
+        }
+    }
+
     for (const c of list) {
         const actor = c.actor;
         if (!actor || actor.system?.status?.dead) continue;

@@ -326,6 +326,32 @@ async function applyAbsorb({ effect, target, source }) {
     return { type: "absorb", final: amount, notes: [`absorbs ${amount} damage for ${duration} rounds (${dispName})`], source, applied: true };
 }
 
+/**
+ * "illusion" — racial appearance illusion (2026-10-07). Grants the APPEARANCE
+ * of another race only: no stat benefits/penalties. The `race` field stores
+ * the illusory race id (e.g. "dark-elf", "skeleton") for the future faction
+ * system to consult. Replaces any existing illusion.
+ * Stored at system.status.illusion = { race, displayName, roundsLeft, source }.
+ */
+async function applyIllusion({ effect, target, source }) {
+    const miss = requireTarget(target, "illusion", source);
+    if (miss) return miss;
+    const race = String(effect?.race || "").trim().toLowerCase();
+    const displayName = String(effect?.displayName || race || "unknown form");
+    if (!race) {
+        return { type: "illusion", final: 0, notes: ["invalid illusion payload"], source, applied: false };
+    }
+    const duration = payloadRounds(effect, 360);
+    const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Illusion";
+    await persistValue(target, "system.status.illusion", {
+        race,
+        displayName,
+        roundsLeft: duration,
+        source: dispName
+    });
+    return { type: "illusion", final: 1, notes: [`takes the form of ${displayName} for ${duration} rounds (${dispName})`], source, applied: true };
+}
+
 /** "heal" — restore concussion hits taken (system.hits.value), floored at 0. */
 async function applyHeal({ effect, target, source }) {
     const miss = requireTarget(target, "heal", source);
@@ -660,6 +686,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "summon") results.push(await applySummon({ effect, caster, target, source }));
         else if (effect.type === "damageshield") results.push(await applyDamageShield({ effect, target, source }));
         else if (effect.type === "absorb") results.push(await applyAbsorb({ effect, target, source }));
+        else if (effect.type === "illusion") results.push(await applyIllusion({ effect, target, source }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }
