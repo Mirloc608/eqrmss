@@ -22,9 +22,6 @@ import { EQRMSSActorBardHelper } from "./helpers/actor-sheet-bard.js";
 import { EQRMSSActorSignatureHelper } from "./helpers/actor-sheet-signature.js";
 import { EQRMSSActorProgressionHelper } from "./helpers/actor-sheet-progression.js";
 
-// PETS
-import { EQRMSSPetManager } from "../../pets/pet-manager.js";
-
 // Ensure required Handlebars helpers exist (fallback)
 if (typeof Handlebars !== "undefined") {
   if (!Handlebars.helpers?.add) Handlebars.registerHelper("add", (a,b)=>(Number(a)||0)+(Number(b)||0));
@@ -117,7 +114,7 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
         this.bardHelper.activate();
 
         // ------------------------------------------------------------
-        // PET MANAGER BUTTON (header)
+        // PET BUTTON (header) — opens the character's active pet sheet
         // ------------------------------------------------------------
         const html = this.element;
             this.signatureHelper?.activateListeners(html);
@@ -125,8 +122,12 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
 
         html.querySelectorAll(".pet-manager-open").forEach(el => el.addEventListener("click", ev => {
             ev.preventDefault();
-            const mgr = new EQRMSSPetManager(this.actor);
-            mgr.render(true);
+            const pet = game.actors.find(a =>
+                a?.type === "pet" &&
+                (a?.system?.pet?.owner === this.actor.id || a?.getFlag("eqrmss", "ownerId") === this.actor.id)
+            );
+            if (pet) pet.sheet.render(true);
+            else ui.notifications.info("No active pet.");
         }));
 
         // ------------------------------------------------------------

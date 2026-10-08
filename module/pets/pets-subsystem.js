@@ -6,8 +6,6 @@
 const MODULE_ID = "eqrmss";
 const PETS_SETTINGS_NAMESPACE = "pets";
 
-import { EQRMSSPetManager } from "./pet-manager.js";
-
 /**
  * Register all pet-related settings.
  * Uses game.settings.register (V10+ API).
@@ -91,14 +89,17 @@ function wirePetHooks() {
 
             const btn = document.createElement("a");
             btn.className = "eqrmss-pet-button";
-            btn.title = "Manage Pets";
+            btn.title = "Open Pet Sheet";
             btn.innerHTML = '<i class="fas fa-paw"></i>';
 
             btn.addEventListener("click", ev => {
                 ev.preventDefault();
-                console.log(`EQRMSS | Pets subsystem | Pet button clicked for ${sheet.actor.name}`);
-                const mgr = new EQRMSSPetManager(sheet.actor);
-                mgr.render(true);
+                const pet = game.actors.find(a =>
+                    a?.type === "pet" &&
+                    (a?.system?.pet?.owner === sheet.actor.id || a?.getFlag(MODULE_ID, "ownerId") === sheet.actor.id)
+                );
+                if (pet) pet.sheet.render(true);
+                else ui.notifications.info("No active pet.");
             });
 
             header.append(btn);
