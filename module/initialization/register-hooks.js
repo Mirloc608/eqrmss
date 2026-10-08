@@ -146,5 +146,53 @@ export function registerEQRMSSHooks() {
       .catch(e => console.error("EQRMSS | pet initiative on updateCombatant failed", e));
   });
 
+  // Pet lifecycle Phase 5 (2026-10-08):
+  // - Caster death: pets ALWAYS poof (persistence AA does not save them).
+  // - Owner logout: pets poof UNLESS owner has Persistent Minion AA
+  //   (aa-persistent-minion). Foundry has no user-disconnect hook, so
+  //   logout is a GM-side poll (see startLogoutPoll).
+  // GM-only to avoid double-processing.
+  Hooks.on("updateActor", async (actor, changed) => {
+    if (!game.user?.isGM) return;
+    try {
+      // Detect death: system.status.dead transitioning to true.
+      // (actor is pre-update state; changed is the delta.)
+      const died = changed?.system?.status?.dead === true;
+      if (!died) return;
+      if (actor?.system?.status?.dead) return; // already dead — skip
+      if (actor?.type === "pet") return; // pets don't have pets
+      const { poofPetsOfOwner } = await import("../spells/pets/pet-lifecycle.js");
+      const notes = await poofPetsOfOwner(actor, "dissipates as its master falls");
+      if (notes) {
+        await ChatMessage.create({
+          content: `<h2>Death</h2>${notes}`,
+          speaker: ChatMessage.getSpeaker({ actor })
+        });
+      }
+    } catch (e) { console.error("EQRMSS | pet death-poof failed", e); }
+  });
+
+  // Logout poll + manual GM trigger. Started on ready (GM only).
+  Hooks.on("ready", () => {
+    if (!game.user?.isGM) return;
+    import("../spells/pets/pet-lifecycle.js")
+      .then(m => {
+        m.startLogoutPoll(60000);
+        // Manual GM trigger: game.eqrmss.poofOrphanedPets()
+        game.eqrmss = game.eqrmss ?? {};
+        game.eqrmss.poofOrphanedPets = async () => {
+          const notes = await m.checkOrphanedPets();
+          if (notes) {
+            await ChatMessage.create({
+              content: `<h2>Pets</h2>${notes}`,
+              speaker: { alias: "EQRMSS" }
+            });
+          }
+          return notes || "No orphaned pets found.";
+        };
+      })
+      .catch(e => console.error("EQRMSS | pet lifecycle init failed", e));
+  });
+
 }
 
