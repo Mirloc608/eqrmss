@@ -124,5 +124,27 @@ export function registerEQRMSSHooks() {
     target.appendChild(npcButton);
   });
 
+  // Pet initiative inheritance (2026-10-08): pets act on the same turn,
+  // immediately after their owner. Covers combat starting after the
+  // summon, initiative (re-)rolls, and manual combatant adds.
+  // GM-only to avoid double-processing.
+  Hooks.on("createCombatant", (combatant) => {
+    if (!game.user?.isGM) return;
+    try {
+      const actor = combatant?.actor ?? game.actors?.get(combatant?.actorId);
+      if (actor?.type !== "pet") return;
+      import("../spells/pets/pet-initiative.js")
+        .then(m => m.inheritPetInitiative(combatant))
+        .catch(e => console.error("EQRMSS | pet initiative on createCombatant failed", e));
+    } catch (e) { console.error("EQRMSS | pet initiative createCombatant guard failed", e); }
+  });
+  Hooks.on("updateCombatant", (combatant, changed) => {
+    if (!game.user?.isGM) return;
+    if (!changed || !("initiative" in changed)) return;
+    import("../spells/pets/pet-initiative.js")
+      .then(m => m.syncPetInitiatives(combatant?.parent, combatant))
+      .catch(e => console.error("EQRMSS | pet initiative on updateCombatant failed", e));
+  });
+
 }
 
