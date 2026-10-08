@@ -393,15 +393,47 @@ export function findCasterPet(caster) {
 /**
  * Dismiss a pet (delete the actor + its tokens).
  *
- * @param {object} petActor - Pet actor to dismiss
+ * Handles both base actors and synthetic token actors: token documents are
+ * deleted first (which cascades their combatants and synthetic actors), then
+ * the base actor. Non-fatal — a failure to delete one document never blocks
+ * the rest, so a dismiss can never leave the game in a half-broken state.
+ *
+ * @param {object} petActor - Pet actor to dismiss (base or synthetic token actor)
  * @param {string} reason - Reason for dismissal (for chat)
  * @returns {Promise<string>} Chat note
  */
 export async function dismissPet(petActor, reason = "dismissed") {
     if (!petActor) return "";
     const name = petActor.name ?? "Pet";
+    const game = globalThis.game;
     try {
-        await petActor.delete();
+        // Synthetic token actors (sheet opened from a token) cannot be
+        // deleted directly — their parent is the TokenDocument, and deleting
+        // the actor throws "ActorDelta ... does not exist".
+        let baseActor = petActor;
+        const tokenDocs = [];
+        if (petActor.isToken) {
+            const tok = petActor.parent ?? null;
+            if (tok && !tokenDocs.includes(tok)) tokenDocs.push(tok);
+            baseActor = game?.actors?.get(petActor.id) ?? null;
+        }
+        // Sweep every scene for tokens linked to the pet actor.
+        const actorId = baseActor?.id ?? petActor.id;
+        for (const scene of game?.scenes ?? []) {
+            for (const tok of scene.tokens ?? []) {
+                if (tok.actorId === actorId && !tokenDocs.includes(tok)) tokenDocs.push(tok);
+            }
+        }
+        // Delete tokens first (cascades combatants + synthetic actors).
+        for (const tok of tokenDocs) {
+            try { await tok.delete(); }
+            catch (err) { console.warn("EQRMSS | dismissPet: token delete failed:", err); }
+        }
+        // Then delete the base actor.
+        if (baseActor && !baseActor.isToken) {
+            try { await baseActor.delete(); }
+            catch (err) { console.warn("EQRMSS | dismissPet: actor delete failed:", err); }
+        }
     } catch (err) {
         console.warn("EQRMSS | dismissPet failed:", err);
     }
