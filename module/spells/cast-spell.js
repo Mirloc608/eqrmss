@@ -392,7 +392,8 @@ export async function castSpell(actor, spellItem, opts = {}) {
             "system.attributes.mana.max": Math.max(Number(pool.max) || 0, derivedMax)
         });
     };
-    const manaNote = skipToResolution ? " (mana spent at declaration)"
+    // Reclaim Energy appends the restored amount below, so this is let.
+    let manaNote = skipToResolution ? " (mana spent at declaration)"
         : cost > 0 ? ` Mana ${before} → ${before - cost}.` : "";
 
     if (cls.kind === "bolt") {
@@ -863,18 +864,28 @@ export async function castSpell(actor, spellItem, opts = {}) {
         if (!pet) {
             reclaimNote = `<p><em>${esc(actor.name)} has no pet to reclaim energy from.</em></p>`;
         } else {
-            const cost = Number(pet?.system?.pet?.summonManaCost) || 0;
-            const restored = Math.floor(cost * 0.75);
-            const pool = actor?.system?.attributes?.mana ?? {};
-            const before = Number(pool.value) || 0;
-            const max = Number(pool.max) || 0;
+            const petCost = Number(pet?.system?.pet?.summonManaCost) || 0;
+            const restored = Math.floor(petCost * 0.75);
+            // Fresh read: the `pool`/`before` captured at the top of
+            // castSpell predate spendMana(), so they are stale here.
+            // (2026-10-08: the old code clamped with Math.min(max, ...)
+            // where max could read as 0, silently zeroing the restore.)
+            const manaSys = actor?.system?.attributes?.mana ?? {};
+            const curValue = Number(manaSys?.value) || 0;
+            const storedMax = Number(manaSys?.max) || 0;
+            const derivedMax = Number(actor?.system?.derived?.manaMax) || 0;
+            const effMax = storedMax > 0 ? storedMax : derivedMax;
+            const target = effMax > 0 ? Math.min(effMax, curValue + restored) : curValue + restored;
+            console.log(`EQRMSS | reclaim-pet-mana: ${actor?.name} cur=${curValue} storedMax=${storedMax} derivedMax=${derivedMax} restored=${restored} -> target=${target}`);
             try {
-                await actor.update({ "system.attributes.mana.value": Math.min(max, before + restored) });
+                await actor.update({ "system.attributes.mana.value": target });
+                console.log(`EQRMSS | reclaim-pet-mana: post-update value=${actor?.system?.attributes?.mana?.value}`);
             } catch (err) {
                 console.warn("EQRMSS | reclaim-pet-mana: mana restore failed:", err);
             }
             const dismissNote = await dismissPet(pet, "dissipates as its energy is reclaimed");
-            reclaimNote = `${dismissNote}<p><em>${esc(actor.name)} reclaims ${restored} mana from ${esc(pet.name)} (75% of ${cost}).</em></p>`;
+            reclaimNote = `${dismissNote}<p><em>${esc(actor.name)} reclaims ${restored} mana from ${esc(pet.name)} (75% of ${petCost}).</em></p>`;
+            manaNote += ` Reclaimed ${restored} mana (now ${target}).`;
         }
     }
     // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
