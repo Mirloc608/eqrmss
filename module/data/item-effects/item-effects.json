@@ -5791,8 +5791,10 @@
       "description": "Triggered effect: Spirit of Wolf grants +55% movement rate for 36 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Spirit of Wolf: +55% movement rate for 36 minutes"
+          "type": "buff",
+          "stat": "movement",
+          "amount": 55,
+          "duration": 360
         }
       ]
     },
@@ -6016,8 +6018,8 @@
       "description": "Triggered effect: Counteract Disease cures disease on the target.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Counteract Disease: cures disease on the target"
+          "type": "cure",
+          "condition": "disease"
         }
       ]
     },
@@ -6028,8 +6030,8 @@
       "description": "Triggered effect: Cure Disease cures disease on the target.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Cure Disease: cures disease on the target"
+          "type": "cure",
+          "condition": "disease"
         }
       ]
     },
@@ -6069,8 +6071,10 @@
       "description": "Triggered effect: Scale of Wolf grants +70% movement rate for 45 minutes (breaks if you attack or cast).",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Scale of Wolf: +70% movement rate for 45 minutes (breaks on attack or spellcast)"
+          "type": "buff",
+          "stat": "movement",
+          "amount": 70,
+          "duration": 450
         }
       ]
     },
@@ -6145,8 +6149,10 @@
       "description": "Triggered effect: Clarity grants +9 mana regen per tick for 27 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Clarity: +9 mana regen per tick for 27 minutes"
+          "type": "manaregen",
+          "pool": "mana",
+          "amount": 9,
+          "duration": 270
         }
       ]
     },
@@ -6336,8 +6342,28 @@
       "description": "Triggered effect: Primal Essence grants +20 stamina, agility, strength, and dexterity.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Primal Essence: +20 stamina, agility, strength, and dexterity"
+          "type": "buff",
+          "stat": "sta",
+          "amount": 20,
+          "duration": 360
+        },
+        {
+          "type": "buff",
+          "stat": "agi",
+          "amount": 20,
+          "duration": 360
+        },
+        {
+          "type": "buff",
+          "stat": "str",
+          "amount": 20,
+          "duration": 360
+        },
+        {
+          "type": "buff",
+          "stat": "dex",
+          "amount": 20,
+          "duration": 360
         }
       ]
     },
@@ -6443,8 +6469,10 @@
       "description": "Triggered effect: Turtle Skin grants +2-3 AC for 36 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Turtle Skin: +2-3 AC for 36 minutes"
+          "type": "buff",
+          "stat": "ac",
+          "amount": 3,
+          "duration": 360
         }
       ]
     },
@@ -6455,8 +6483,16 @@
       "description": "Triggered effect: Aura of Battle grants +10 attack and +2 HP regen per tick (values from progression-era data; classic confirmation unverified).",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Aura of Battle: +10 attack and +2 HP regen per tick"
+          "type": "buff",
+          "stat": "atk",
+          "amount": 10,
+          "duration": 360
+        },
+        {
+          "type": "manaregen",
+          "pool": "hits",
+          "amount": 2,
+          "duration": 360
         }
       ]
     },
@@ -6467,8 +6503,10 @@
       "description": "Triggered effect: Journeyman Boots imbue your feet with speed: +35% movement rate for up to 18 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Journeyman Boots: +35% movement rate for up to 18 minutes"
+          "type": "buff",
+          "stat": "movement",
+          "amount": 35,
+          "duration": 180
         }
       ]
     },
@@ -6743,8 +6781,10 @@
       "description": "Triggered effect: Captain Nalot's Quickening grants 20% haste for 10 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Captain Nalot's Quickening: 20% haste for 10 minutes"
+          "type": "buff",
+          "stat": "haste",
+          "amount": 20,
+          "duration": 100
         }
       ]
     },
@@ -6767,8 +6807,10 @@
       "description": "Triggered effect: Haste grants +50% attack speed (Dark Cloak of the Sky).",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Haste: +50% attack speed (Dark Cloak of the Sky)"
+          "type": "buff",
+          "stat": "haste",
+          "amount": 50,
+          "duration": 360
         }
       ]
     },
@@ -6793,8 +6835,10 @@
       "description": "Triggered effect: Strengthen grants +10 strength for 27 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Strengthen: +10 strength for 27 minutes"
+          "type": "buff",
+          "stat": "str",
+          "amount": 10,
+          "duration": 270
         }
       ]
     },
@@ -6934,8 +6978,16 @@
       "description": "Triggered effect: Yaulp II is a battle cry granting +20 strength and +2 AC for 24 seconds (values estimated; unverified).",
       "payload": [
         {
-          "type": "utility",
-          "note": "Yaulp II: battle cry granting +20 strength and +2 AC for 24 seconds"
+          "type": "buff",
+          "stat": "str",
+          "amount": 20,
+          "duration": 4
+        },
+        {
+          "type": "buff",
+          "stat": "ac",
+          "amount": 2,
+          "duration": 4
         }
       ]
     },
@@ -6959,8 +7011,16 @@
       "description": "Triggered effect: Valor grants +3-4 AC and +200 HP for 54 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Valor: +3-4 AC, +200 HP for 54 minutes"
+          "type": "buff",
+          "stat": "ac",
+          "amount": 4,
+          "duration": 540
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 200,
+          "duration": 540
         }
       ]
     },
@@ -6983,8 +7043,10 @@
       "description": "Triggered effect: Armor of Faith grants +6-7 AC for 63 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Armor of Faith: +6-7 AC for 63 minutes"
+          "type": "buff",
+          "stat": "ac",
+          "amount": 7,
+          "duration": 630
         }
       ]
     },
@@ -6995,8 +7057,10 @@
       "description": "Triggered effect: Symbol of Naltron grants +511 hit points for 54 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Symbol of Naltron: +511 hit points for 54 minutes"
+          "type": "buff",
+          "stat": "hp",
+          "amount": 511,
+          "duration": 540
         }
       ]
     },
@@ -7063,8 +7127,16 @@
       "description": "Triggered effect: Share Wolf Form turns the group into wolves: +60% movement and +30 attack for 36 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Share Wolf Form: group takes wolf form, +60% movement and +30 attack for 36 minutes"
+          "type": "buff",
+          "stat": "movement",
+          "amount": 60,
+          "duration": 360
+        },
+        {
+          "type": "buff",
+          "stat": "atk",
+          "amount": 30,
+          "duration": 360
         }
       ]
     },
@@ -7075,8 +7147,16 @@
       "description": "Triggered effect: Skin Like Diamond grants +3-4 AC and +200 HP for 54 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Skin Like Diamond: +3-4 AC, +200 HP for 54 minutes"
+          "type": "buff",
+          "stat": "ac",
+          "amount": 4,
+          "duration": 540
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 200,
+          "duration": 540
         }
       ]
     },
@@ -7087,8 +7167,16 @@
       "description": "Triggered effect: Daring grants +2 AC and +97 hit points for 36 minutes (values per the project's spell catalog; classic confirmation unverified).",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Daring: +2 AC and +97 hit points for 36 minutes"
+          "type": "buff",
+          "stat": "ac",
+          "amount": 2,
+          "duration": 360
+        },
+        {
+          "type": "buff",
+          "stat": "hp",
+          "amount": 97,
+          "duration": 360
         }
       ]
     },
@@ -7099,8 +7187,10 @@
       "description": "Triggered effect: Symbol of Pinzarn grants +307 hit points for 45 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Symbol of Pinzarn: +307 hit points for 45 minutes"
+          "type": "buff",
+          "stat": "hp",
+          "amount": 307,
+          "duration": 450
         }
       ]
     },
@@ -7147,8 +7237,10 @@
       "description": "Triggered effect: Spirit Strength grants +18 strength for 36 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Spirit Strength: +18 strength for 36 minutes"
+          "type": "buff",
+          "stat": "str",
+          "amount": 18,
+          "duration": 360
         }
       ]
     },
@@ -7225,8 +7317,10 @@
       "description": "Triggered effect: Strength of Earth grants +15 strength for 27 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Strength of Earth: +15 strength for 27 minutes"
+          "type": "buff",
+          "stat": "str",
+          "amount": 15,
+          "duration": 270
         }
       ]
     },
@@ -7333,8 +7427,10 @@
       "description": "Triggered effect: Glamour grants +10-42 charisma.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Glamour: +10-42 charisma"
+          "type": "buff",
+          "stat": "cha",
+          "amount": 26,
+          "duration": 360
         }
       ]
     },
@@ -7359,8 +7455,10 @@
       "description": "Triggered effect: Furious Strength grants +34 strength for 54 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Furious Strength: +34 strength for 54 minutes"
+          "type": "buff",
+          "stat": "str",
+          "amount": 34,
+          "duration": 540
         }
       ]
     },
@@ -7385,8 +7483,10 @@
       "description": "Triggered effect: Deftness grants +40 dexterity for 54 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Deftness: +40 dexterity for 54 minutes"
+          "type": "buff",
+          "stat": "dex",
+          "amount": 40,
+          "duration": 540
         }
       ]
     },
@@ -7397,8 +7497,10 @@
       "description": "Triggered effect: Health is a shaman stamina buff: +31 stamina for 54 minutes (not a heal).",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Health: +31 stamina for 54 minutes (shaman STA buff, not a heal)"
+          "type": "buff",
+          "stat": "sta",
+          "amount": 31,
+          "duration": 540
         }
       ]
     },
@@ -7409,8 +7511,10 @@
       "description": "Triggered effect: Nimble grants +16-52 agility.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Nimble: +16-52 agility"
+          "type": "buff",
+          "stat": "agi",
+          "amount": 34,
+          "duration": 360
         }
       ]
     },
@@ -7462,8 +7566,10 @@
       "description": "Triggered effect: Reckless Strength grants +19 strength in an intense burst decaying over 3 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Reckless Strength: +19 strength in an intense burst decaying over 3 minutes"
+          "type": "buff",
+          "stat": "str",
+          "amount": 19,
+          "duration": 30
         }
       ]
     },
@@ -7486,8 +7592,10 @@
       "description": "Triggered effect: Strength of the Kunzar grants +25 strength for 36 minutes.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Grants Strength of the Kunzar: +25 strength for 36 minutes"
+          "type": "buff",
+          "stat": "str",
+          "amount": 25,
+          "duration": 360
         }
       ]
     },

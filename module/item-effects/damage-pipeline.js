@@ -352,6 +352,65 @@ async function applyManaDrain({ effect, target, source }) {
     return { type: "mana-drain", rolled, final: cur - next, notes: [], source };
 }
 
+/**
+ * "manaregen" — timed mana/HP regen as a spellEffects entry (2026-10-08).
+ * Unlike "regen" (instant restore), this creates a per-round tick entry that
+ * tickConditions processes: { kind: "regen", pool: "mana"|"hits", amount }.
+ * Used by Clarity (+9 mana/round) and Aura of Battle (+2 HP/round).
+ */
+async function applyManaRegen({ effect, target, source }) {
+    const miss = requireTarget(target, "manaregen", source);
+    if (miss) return miss;
+    const amount = Number(effect?.amount) || 0;
+    const pool = String(effect?.pool ?? "mana").toLowerCase();
+    if (!(amount > 0)) {
+        return { type: "manaregen", final: 0, notes: ["invalid manaregen payload"], source, applied: false };
+    }
+    const duration = Number(effect?.duration ?? effect?.["duration-rounds"]) || 10;
+    const fx = target?.system?.status?.spellEffects;
+    const list = [...(Array.isArray(fx) ? fx : [])];
+    // Refresh existing entry from the same source instead of stacking.
+    const srcKey = source ?? "clicky";
+    const existingIdx = list.findIndex(e => e?.kind === "regen" && e?.pool === pool && String(e?.source ?? "") === String(srcKey));
+    const entry = {
+        name: effect?.name ?? (() => {
+            const m = String(source ?? "").match(/^(?:triggered|worn|proc):(.+)$/);
+            if (m) return m[1].split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            return "Clicky Regen";
+        })(),
+        label: pool === "mana" ? `Mana +${amount}/round` : `HP +${amount}/round`,
+        kind: "regen", pool, amount, source: srcKey, roundsLeft: duration,
+    };
+    if (existingIdx >= 0) list[existingIdx] = entry;
+    else list.push(entry);
+    await target.update({ "system.status.spellEffects": list });
+    return { type: "manaregen", final: amount, notes: [`${entry.label} for ${duration} rounds`], source, applied: true };
+}
+
+/**
+ * "cure" — remove disease/poison DoTs from the target (2026-10-08).
+ * Removes entries in system.status.dots whose element matches the
+ * payload's condition ("disease", "poison"). Used by Cure Disease etc.
+ */
+async function applyCure({ effect, target, source }) {
+    const miss = requireTarget(target, "cure", source);
+    if (miss) return miss;
+    const condition = String(effect?.condition ?? "").toLowerCase();
+    if (!condition) {
+        return { type: "cure", final: 0, notes: ["invalid cure payload (no condition)"], source, applied: false };
+    }
+    const dots = Array.isArray(target?.system?.status?.dots) ? target.system.status.dots : [];
+    const remaining = dots.filter(d => String(d?.element ?? "").toLowerCase() !== condition);
+    const removed = dots.length - remaining.length;
+    if (removed > 0) {
+        await target.update({ "system.status.dots": remaining });
+    }
+    const notes = removed > 0
+        ? [`cured ${removed} ${condition} effect(s)`]
+        : [`no ${condition} effects to cure`];
+    return { type: "cure", final: removed, notes, source, applied: removed > 0 };
+}
+
 /** "stun" — add rounds to system.status.stun.stunned (spell-engine path). */
 async function applyStun({ effect, target, source }) {
     const miss = requireTarget(target, "stun", source);
@@ -549,6 +608,7 @@ async function applyUtility({ effect, source, target, caster }) {
     const srcId = String(source ?? "").split(":").pop().toLowerCase();
     const note = String(effect?.note ?? "").toLowerCase();
     const isInvis = srcId.includes("invisib") || srcId.includes("gather-shadow")
+        || srcId.includes("fade")
         || (note.includes("invisib") && !note.includes("see invis"));
     if (isInvis && target) {
         let itype = "general";
@@ -587,6 +647,8 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "buff") results.push(await applyBuff({ effect, target, source, caster }));
         else if (effect.type === "heal") results.push(await applyHeal({ effect, target, source }));
         else if (effect.type === "mana-drain") results.push(await applyManaDrain({ effect, target, source }));
+        else if (effect.type === "manaregen") results.push(await applyManaRegen({ effect, target, source }));
+        else if (effect.type === "cure") results.push(await applyCure({ effect, target, source }));
         else if (effect.type === "stun") results.push(await applyStun({ effect, target, source }));
         else if (effect.type === "debuff") results.push(await applyDebuff({ effect, target, source }));
         else if (effect.type === "dot") results.push(await applyDot({ effect, target, source }));
