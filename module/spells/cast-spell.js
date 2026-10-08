@@ -809,6 +809,17 @@ export async function castSpell(actor, spellItem, opts = {}) {
             }
         }
     }
+    // Warder Buffs (2026-10-08): Beastlord "Spirit of X" and "X at the Moon"
+    // spells buff the active warder instead of summoning.
+    let warderNote = "";
+    const warderEffs = (spellEffectsOf(spellItem) ?? []).filter(e =>
+        String(e?.type ?? "").toLowerCase() === "warder-buff");
+    if (warderEffs.length) {
+        const { applyWarderBuff } = await import("./pets/warder-buff.js");
+        for (const eff of warderEffs) {
+            warderNote += await applyWarderBuff(actor, eff, name);
+        }
+    }
     // Pet Summoning (2026-10-08): summon-pet spells create pet actors.
     // Two shapes: {type:"summon-pet", pet:"<id>"} (magician/necro/beastlord/
     // enchanter) and {type:"utility", effect:"summon-pet", pet:"<id>"}
@@ -844,14 +855,14 @@ export async function castSpell(actor, spellItem, opts = {}) {
     // teleport/summon/vision/memblur/pacify/faction/dispel/feign/vampiric/identify/shrink/pet pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote || identifyNote || shrinkNote || petNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote || summonNote || visionNote || memblurNote || pacifyNote || factionNote || dispelNote || feignNote || vampiricNote || identifyNote || shrinkNote || warderNote || petNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${identifyNote}${shrinkNote}${petNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${identifyNote}${shrinkNote}${warderNote}${petNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }

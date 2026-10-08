@@ -26,6 +26,17 @@ export const PET_ATTACK_TABLES = {
 };
 
 /**
+ * Upgraded attack tables for warder-buffed pets (Tier 5).
+ * Maps base table -> improved table.
+ */
+export const PET_ATTACK_UPGRADES = {
+    "Bite": "Claw/Talon",
+    "Claw/Talon": "Claw/Talon", // Already top tier
+    "Armored Fist": "Claw/Talon",
+    "Grapple/Swallow": "Claw/Talon",
+};
+
+/**
  * Find the owner's active pet (one-pet limit).
  * @param {object} owner - Owner actor
  * @returns {object|null} Pet actor or null
@@ -139,15 +150,30 @@ export function resolvePetTarget(pet, owner, ownerTarget) {
 /**
  * Build a synthetic natural-attack weapon for the pet.
  * Follows the syntheticBoltWeapon pattern from cast-spell.js.
+ *
+ * Warder buffs (system.pet.buffs) modify the weapon:
+ * - attackUpgrade: improves the attack table
+ * - critSteps: expands the critical range (handled in rollWeaponAttack via critMod)
+ *
+ * All pets are magical attackers (system.pet.isMagical = true).
+ * HOOK: If creatures gain a "requires magic weapon" immunity, check
+ * pet.system.pet.isMagical in the attack resolution pipeline to bypass it.
+ *
  * @param {object} pet - Pet actor
  * @returns {object} Synthetic weapon item
  */
 function syntheticPetWeapon(pet) {
     const scaling = pet?.system?.pet?.scaling ?? {};
+    const buffs = pet?.system?.pet?.buffs ?? {};
     const family = pet?.system?.pet?.family ?? pet?.system?.details?.creatureType ?? "animal";
-    const tableName = PET_ATTACK_TABLES[family] ?? "Armored Fist";
+    let tableName = PET_ATTACK_TABLES[family] ?? "Armored Fist";
+    // Tier 5 warder buff: upgrade the attack table
+    if (buffs.attackUpgrade) {
+        tableName = PET_ATTACK_UPGRADES[tableName] ?? tableName;
+    }
     const ob = Number(scaling.ob) || 0;
     const petName = pet?.name ?? "Pet";
+    const critSteps = Number(buffs.critSteps) || 0;
     return {
         _id: `pet-attack-${pet?.id ?? "x"}`,
         id: `pet-attack-${pet?.id ?? "x"}`,
@@ -159,6 +185,12 @@ function syntheticPetWeapon(pet) {
             obMod: ob,
             damageMod: 0,
             criticalType: "",
+            // Magical attacker: bypasses "requires magic weapon" immunities
+            // (hook point for future creature immunity mechanics)
+            isMagical: pet?.system?.pet?.isMagical ?? true,
+            // Crit range expansion: each step widens the crit threshold
+            // (handled by the combat engine if it reads critRangeMod)
+            critRangeMod: critSteps,
             location: "equipped",
             equipped: true,
         },
@@ -167,9 +199,10 @@ function syntheticPetWeapon(pet) {
 
 /**
  * Have the pet attack a target.
+ * Warder buffs may grant bonus attacks (system.pet.buffs.bonusAttacks).
  * @param {object} pet - Pet actor
  * @param {object} targetActor - Target actor
- * @returns {Promise<object>} Result from rollWeaponAttack
+ * @returns {Promise<object>} Result from rollWeaponAttack (last attack)
  */
 export async function petAttack(pet, targetActor) {
     if (!pet || !targetActor) return { error: "no-target" };
@@ -187,12 +220,21 @@ export async function petAttack(pet, targetActor) {
     } catch { /* ignore */ }
 
     const synthetic = syntheticPetWeapon(pet);
+    const bonusAttacks = Number(pet?.system?.pet?.buffs?.bonusAttacks) || 0;
+    const totalAttacks = 1 + bonusAttacks;
+
+    let lastResult = null;
     try {
         const { rollWeaponAttack } = await import("../combat/combat-rolls.js");
-        return await rollWeaponAttack(pet, synthetic, {
-            targetToken,
-            skipPetFollowup: true, // Prevent recursion
-        });
+        for (let i = 0; i < totalAttacks; i++) {
+            lastResult = await rollWeaponAttack(pet, synthetic, {
+                targetToken,
+                skipPetFollowup: true, // Prevent recursion
+            });
+            // Stop if the target died mid-sequence
+            if (targetActor.system?.status?.dead) break;
+        }
+        return lastResult ?? { error: "no-attacks" };
     } catch (err) {
         console.warn("EQRMSS | petAttack failed:", err);
         return { error: "attack-failed", message: err?.message };

@@ -501,6 +501,11 @@ export async function summonPet(caster, petId, spellName, spellManaCost, spellLe
                 summonSpell: spellName ?? "",
                 summonManaCost: Number(spellManaCost) || 0,
                 command: "follow",
+                // All pets count as magical attackers (user decision 2026-10-08).
+                // They can hit creatures requiring magic weapons.
+                // HOOK: If a "requires magic weapon" creature mechanic is added,
+                // check this flag in the attack resolution pipeline.
+                isMagical: true,
                 scaling: {
                     hits: stats.hits,
                     defense: stats.defense,
