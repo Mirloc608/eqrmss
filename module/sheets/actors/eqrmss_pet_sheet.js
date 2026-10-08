@@ -3,6 +3,7 @@
 // ============================================================
 
 import EQRMSSActorSheet from "./eqrmss_actor_sheet.js";
+import { dismissPet } from "../../spells/pets/summon-pet.js";
 
 const { HandlebarsApplicationMixin, DocumentSheetV2 } = foundry.applications.api;
 
@@ -112,7 +113,7 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
             }
         }));
 
-        // Dismiss button: delete the pet actor
+        // Dismiss button: delete the pet actor and its tokens
         html.querySelectorAll(".pet-dismiss").forEach(el => el.addEventListener("click", async ev => {
             ev.preventDefault();
             const confirmed = await foundry.applications.api.DialogV2.confirm({
@@ -121,10 +122,9 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
             });
             if (!confirmed) return;
             try {
-                const ownerId = actor.system?.pet?.owner ?? actor.getFlag("eqrmss", "ownerId");
-                await actor.delete();
-                ui.notifications.info(`${actor.name} dismissed.`);
-                void ownerId;
+                const petName = actor.name;
+                await dismissPet(actor, "has been dismissed");
+                ui.notifications.info(`${petName} dismissed.`);
             } catch (err) {
                 console.warn("EQRMSS | pet dismiss failed:", err);
                 ui.notifications.warn(`Could not dismiss ${actor.name}.`);
