@@ -14,7 +14,7 @@ import {
     getPetOB,
     getPetWeapon,
 } from "../../spells/pets/pet-equipment.js";
-import { PET_ATTACK_TABLES } from "../../spells/pets/pet-combat.js";
+import { PET_ATTACK_TABLES, petAttack, resolvePetTarget } from "../../spells/pets/pet-combat.js";
 
 const { HandlebarsApplicationMixin, DocumentSheetV2 } = foundry.applications.api;
 
@@ -22,7 +22,7 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
 
     static DEFAULT_OPTIONS = {
         classes: ["eqrmss", "sheet", "actor", "pet-sheet"],
-        position: { width: 560, height: 560 },
+        position: { width: 560, height: 480 },
         form: {
             closeOnSubmit: false,
             submitOnChange: true
@@ -155,6 +155,7 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
         forms.push({
             name: `${actor?.name ?? "Pet"}'s Attack`,
             kind: "Natural",
+            attackKind: "natural",
             ob,
             table: tableName,
             attacks: 1 + bonusAttacks,
@@ -174,6 +175,7 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
                 forms.push({
                     name: equipped.name ?? "Weapon",
                     kind: "Weapon",
+                    attackKind: "weapon",
                     ob: ob + (Number(bonuses.attackBonus) || 0),
                     table: sys.attackTable ?? tableName,
                     attacks: 1 + bonusAttacks,
@@ -229,6 +231,37 @@ export default class EQRMSSPetSheet extends HandlebarsApplicationMixin(DocumentS
             } catch (err) {
                 console.warn("EQRMSS | pet dismiss failed:", err);
                 ui.notifications.warn(`Could not dismiss ${actor.name}.`);
+            }
+        }));
+
+        // Attack buttons (Combat tab): roll the selected attack form.
+        // Target: the user's currently targeted token first; otherwise
+        // fall back to command-based resolution (attack → owner's target /
+        // nearest hostile, guard → biggest threat).
+        html.querySelectorAll(".pet-attack-btn").forEach(el => el.addEventListener("click", async ev => {
+            ev.preventDefault();
+            const attackKind = el.dataset.attackKind ?? "natural";
+            let targetActor = null;
+            try {
+                const targeted = [...(globalThis.game?.user?.targets ?? [])][0] ?? null;
+                if (targeted?.actor && !targeted.actor.system?.status?.dead) targetActor = targeted.actor;
+            } catch { /* ignore */ }
+            if (!targetActor) {
+                try {
+                    const ownerId = actor.system?.pet?.owner ?? actor.getFlag("eqrmss", "ownerId");
+                    const owner = ownerId ? globalThis.game?.actors?.get(ownerId) : null;
+                    targetActor = resolvePetTarget(actor, owner, null);
+                } catch { /* ignore */ }
+            }
+            if (!targetActor) {
+                ui.notifications?.warn(`${actor.name} has no target — target a token first or set stance to Attack.`);
+                return;
+            }
+            try {
+                await petAttack(actor, targetActor, attackKind);
+            } catch (err) {
+                console.warn("EQRMSS | pet attack button failed:", err);
+                ui.notifications?.warn(`Could not attack with ${actor.name}.`);
             }
         }));
 

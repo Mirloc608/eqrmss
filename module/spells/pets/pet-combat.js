@@ -167,9 +167,12 @@ export function resolvePetTarget(pet, owner, ownerTarget) {
  * pet.system.pet.isMagical in the attack resolution pipeline to bypass it.
  *
  * @param {object} pet - Pet actor
+ * @param {string|null} [attackKind] - "natural" forces the natural attack
+ *   (skips the equipped-weapon branch); anything else prefers the
+ *   equipped weapon when one exists.
  * @returns {object} Synthetic weapon item
  */
-function syntheticPetWeapon(pet) {
+function syntheticPetWeapon(pet, attackKind = null) {
     const scaling = pet?.system?.pet?.scaling ?? {};
     const buffs = pet?.system?.pet?.buffs ?? {};
     const family = pet?.system?.pet?.family ?? pet?.system?.details?.creatureType ?? "animal";
@@ -182,7 +185,10 @@ function syntheticPetWeapon(pet) {
     const petName = pet?.name ?? "Pet";
     const critSteps = Number(buffs.critSteps) || 0;
 
-    // Equipped weapon (pet-equipment.js): prefer it over natural attacks.
+    // Equipped weapon (pet-equipment.js): prefer it over natural attacks,
+    // unless the caller explicitly asked for the natural form (e.g. the
+    // pet sheet's per-form Attack buttons).
+    if (attackKind !== "natural") {
     try {
         const equipped = getPetWeapon(pet);
         if (equipped) {
@@ -209,6 +215,7 @@ function syntheticPetWeapon(pet) {
             };
         }
     } catch { /* fall through to natural attack */ }
+    }
 
     return {
         _id: `pet-attack-${pet?.id ?? "x"}`,
@@ -238,9 +245,11 @@ function syntheticPetWeapon(pet) {
  * Warder buffs may grant bonus attacks (system.pet.buffs.bonusAttacks).
  * @param {object} pet - Pet actor
  * @param {object} targetActor - Target actor
+ * @param {string|null} [attackKind] - "natural" forces the natural attack
+ *   form; otherwise the equipped weapon is preferred when present.
  * @returns {Promise<object>} Result from rollWeaponAttack (last attack)
  */
-export async function petAttack(pet, targetActor) {
+export async function petAttack(pet, targetActor, attackKind = null) {
     if (!pet || !targetActor) return { error: "no-target" };
     if (!petCanAct(pet)) return { error: "cannot-act" };
 
@@ -255,7 +264,7 @@ export async function petAttack(pet, targetActor) {
         targetToken = tokens[0] ?? null;
     } catch { /* ignore */ }
 
-    const synthetic = syntheticPetWeapon(pet);
+    const synthetic = syntheticPetWeapon(pet, attackKind);
     const bonusAttacks = Number(pet?.system?.pet?.buffs?.bonusAttacks) || 0;
     const totalAttacks = 1 + bonusAttacks;
 

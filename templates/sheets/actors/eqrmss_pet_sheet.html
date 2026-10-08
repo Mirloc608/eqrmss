@@ -128,7 +128,7 @@
       <h3>Attack Forms</h3>
       <table class="rmss-table">
         <thead>
-          <tr><th>Attack</th><th>Type</th><th>OB</th><th>Table</th><th>Notes</th></tr>
+          <tr><th>Attack</th><th>Type</th><th>OB</th><th>Table</th><th>Notes</th><th></th></tr>
         </thead>
         <tbody>
           {{#each attackForms}}
@@ -138,6 +138,11 @@
             <td>{{this.ob}}</td>
             <td>{{this.table}}</td>
             <td class="item-type">{{this.notes}}</td>
+            <td class="action-cell">
+              <button type="button" class="pet-attack-btn" data-attack-kind="{{this.attackKind}}" title="Roll attack vs targeted token">
+                <i class="fas fa-dice-d20"></i> Attack
+              </button>
+            </td>
           </tr>
           {{/each}}
         </tbody>
