@@ -120,9 +120,10 @@ export async function applyMemblur(caster, target, chancePct = 50, sourceName = 
 
     const chance = Math.max(0, Math.min(100, Number(chancePct) || 0));
     const roll = Math.ceil(Math.random() * 100);
+    const rollStr = `${roll} vs ${chance}%`;
 
     if (roll > chance) {
-        return `<p><em>${esc(target.name)} resists the memory blur (${esc(sourceName)}: ${roll} vs ${chance}%).</em></p>`;
+        return `<p><em>Memblur: ${rollStr} — resisted, ${esc(target.name)} remembers (${esc(sourceName)}).</em></p>`;
     }
 
     const casterId = caster ? String(caster.id) : null;
@@ -133,8 +134,8 @@ export async function applyMemblur(caster, target, chancePct = 50, sourceName = 
     }
 
     if (forgot) {
-        return `<p><em>${esc(target.name)} forgets ${esc(casterName)} (${esc(sourceName)}).</em></p>`;
+        return `<p><em>Memblur: ${rollStr} — ${esc(target.name)} forgets about ${esc(casterName)} (${esc(sourceName)}).</em></p>`;
     }
     // Success but the caster had no aggro on the target — nothing to forget
-    return `<p><em>${esc(target.name)}'s memory blurs, but ${esc(casterName)} had done them no harm (${esc(sourceName)}).</em></p>`;
+    return `<p><em>Memblur: ${rollStr} — ${esc(target.name)}'s memory blurs, but ${esc(casterName)} had done them no harm (${esc(sourceName)}).</em></p>`;
 }

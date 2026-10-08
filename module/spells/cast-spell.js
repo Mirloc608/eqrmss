@@ -477,6 +477,18 @@ export async function castSpell(actor, spellItem, opts = {}) {
                 effectNote = (baseTarget.isOwner || game.user?.isGM)
                     ? await applyBaseSpellEffect(actor, baseTarget, cls, spellItem)
                     : `<p><em>Effect not applied — you don't control ${esc(baseTarget.name)}.</em></p>`;
+                // Memblur secondary (2026-10-07): base spells (e.g., mez) with a
+                // memory-blur effect apply it after the primary effect resolves.
+                // Base spells return early and never reach the announced-cast
+                // fallthrough, so this must be handled here.
+                if (baseTarget.isOwner || game.user?.isGM) {
+                    const memblurEffs = (spellEffectsOf(spellItem) ?? []).filter(e =>
+                        String(e?.effect ?? "").toLowerCase() === "memory-blur");
+                    for (const eff of memblurEffs) {
+                        const chance = Number(eff?.amount) || 50;
+                        effectNote += await applyMemblur(actor, baseTarget, chance, name);
+                    }
+                }
             }
             body += `<h3>${esc(baseTarget.name)}</h3>${res.html}${effectNote}`;
             applied.push({ target: baseTarget.name, resisted: res.resisted });
