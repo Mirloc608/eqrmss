@@ -15,9 +15,15 @@
 //    with the beastlord (class companion, not a summon)
 //
 // Pet ID formats:
-// - Magician: "elementalkin-fire", "aspect-of-fire" -> fire-elemental (pet level = SPELL level)
+// - Magician: element SUFFIX ("lesser-summoning-air", "aspect-of-fire") ->
+//   <element>-elemental (pet level = SPELL level). Excludes monster-summoning-*.
+// - Magician servants ("raging-servant", "summon-servant-*") -> earth-elemental
 // - Necro: "cavorting-bones", "bone-walk" -> skeleton (pet level = SPELL level)
 // - Necro (ID): "PCPetNecS02L008Skel2Ice" -> skeleton, level 8 (decoded from ID)
+// - Necro/Shade: "*shade*", "*assassin*", "*shadow*" -> shade
+// - Necro/SK: "minion*", undead keywords -> skeleton
+// - Wizard: "*blade*", "*sword*" -> animated-armor
+// - Aliases: spore -> sporali; companion -> golem; hammer-of-wrath -> animated-armor
 // - Shaman: "PCPetShmS07L032WolfGhoRk1" -> wolf, level 32 (decoded from ID)
 // - Beastlord: "s02-l008-warder" -> wolf (pet level = BEASTLORD level, levels with owner)
 // - Enchanter: "pendrils-animation-pet" -> golem (pet level = SPELL level)
@@ -100,11 +106,17 @@ export function resolvePetCreature(petId, casterLevel, spellLevel) {
     // Helper: find creature by ID in the registry
     const findCreature = (cid) => races[cid] ?? null;
 
-    // --- Magician elementals: "elementalkin-fire", "aspect-of-fire" ---
-    // Pet level = SPELL level (2026-10-08: not caster level)
-    let m = /^(elementalkin|elementaling|elemental|child|conjuration|greater-conjuration|construct|conscription|convocation|aspect)-(?:of-)?(\w+)$/.exec(id);
+    // --- Magician elementals: match the ELEMENT SUFFIX ---
+    // "lesser-summoning-air", "greater-vocaration-of-fire", "aspect-fire",
+    // "core-of-water", "embodiment-of-earth", ...
+    // Pet level = SPELL level (2026-10-08: not caster level).
+    // Excludes monster-summoning-* (random monsters, different mechanic).
+    let m = null;
+    if (!id.startsWith("monster-summoning")) {
+        m = /-(?:of-)?(air|earth|fire|water)$/.exec(id);
+    }
     if (m) {
-        const element = m[2]; // fire, water, earth, air
+        const element = m[1]; // fire, water, earth, air
         const creature = findCreature(`${element}-elemental`);
         if (creature) {
             return {
@@ -159,6 +171,109 @@ export function resolvePetCreature(petId, casterLevel, spellLevel) {
                 petLevel: sLevel,
                 petName: creature.name ?? "Skeleton",
                 family: "undead",
+            };
+        }
+    }
+
+    // --- Pet-ID coverage rules (2026-10-08) ---
+    // Ordered AFTER the necro branch. Undead servants must resolve as
+    // skeletons, not get swept into the mage-earth servant rule below.
+    {
+        // 1. Alias map (EQ pet -> creature). "companion" also matches as a
+        //    substring (saryrns-companion).
+        const aliasMap = {
+            "spore": { cid: "sporali", family: "plant" },
+            "companion": { cid: "golem", family: "construct" },
+            "summon-companion": { cid: "golem", family: "construct" },
+            "hammer-of-wrath": { cid: "animated-armor", family: "construct" },
+        };
+        const alias = aliasMap[id] ??
+            (id.includes("companion") ? { cid: "golem", family: "construct" } : null);
+        if (alias) {
+            const creature = findCreature(alias.cid);
+            if (creature) {
+                return {
+                    creature, creatureId: alias.cid,
+                    petLevel: sLevel,
+                    petName: creature.name ?? alias.cid,
+                    family: alias.family,
+                };
+            }
+        }
+    }
+
+    // 2. Undead keywords -> skeleton. Must precede the servant rule so
+    //    noxious-servant / putrescent-servant stay undead. The "skelet"
+    //    substring catches skeletal-servant (shadowknight).
+    {
+        const undeadIds = new Set([
+            "summon-dead", "malignant-dead", "invoke-death",
+            "son-of-decay", "emissary-of-thule",
+            "noxious-servant", "putrescent-servant",
+        ]);
+        if (undeadIds.has(id) || id.includes("skelet")) {
+            const creature = findCreature("skeleton");
+            if (creature) {
+                return {
+                    creature, creatureId: "skeleton",
+                    petLevel: sLevel,
+                    petName: creature.name ?? "Skeleton",
+                    family: "undead",
+                };
+            }
+        }
+    }
+
+    // 3. Servants -> earth-elemental. In EQ, magician servant pets are
+    //    earth elementals. (Undead servants were caught by rule 2 above;
+    //    every remaining *servant* ID is magician.)
+    if (id.includes("servant")) {
+        const creature = findCreature("earth-elemental");
+        if (creature) {
+            return {
+                creature, creatureId: "earth-elemental",
+                petLevel: sLevel,
+                petName: creature.name ?? "Earth Elemental",
+                family: "elemental",
+            };
+        }
+    }
+
+    // 4. Shades / assassins / shadows -> shade
+    if (/shade|assassin|shadow/.test(id)) {
+        const creature = findCreature("shade");
+        if (creature) {
+            return {
+                creature, creatureId: "shade",
+                petLevel: sLevel,
+                petName: creature.name ?? "Shade",
+                family: "undead",
+            };
+        }
+    }
+
+    // 5. Minions -> skeleton
+    if (id.includes("minion")) {
+        const creature = findCreature("skeleton");
+        if (creature) {
+            return {
+                creature, creatureId: "skeleton",
+                petLevel: sLevel,
+                petName: creature.name ?? "Skeleton",
+                family: "undead",
+            };
+        }
+    }
+
+    // 6. Animated blades / swords (wizard sword pets) -> animated-armor
+    if (id.includes("blade") || id.includes("sword")) {
+        const creature = findCreature("animated-armor");
+        if (creature) {
+            return {
+                creature, creatureId: "animated-armor",
+                petLevel: sLevel,
+                petName: creature.name ?? "Animated Armor",
+                family: "construct",
             };
         }
     }
@@ -278,47 +393,15 @@ export function findCasterPet(caster) {
 /**
  * Dismiss a pet (delete the actor + its tokens).
  *
- * Handles both base actors and synthetic token actors: token documents are
- * deleted first (which cascades their combatants and synthetic actors), then
- * the base actor. Non-fatal — a failure to delete one document never blocks
- * the rest, so a dismiss can never leave the game in a half-broken state.
- *
- * @param {object} petActor - Pet actor to dismiss (base or synthetic token actor)
+ * @param {object} petActor - Pet actor to dismiss
  * @param {string} reason - Reason for dismissal (for chat)
  * @returns {Promise<string>} Chat note
  */
 export async function dismissPet(petActor, reason = "dismissed") {
     if (!petActor) return "";
     const name = petActor.name ?? "Pet";
-    const game = globalThis.game;
     try {
-        // Synthetic token actors (sheet opened from a token) cannot be
-        // deleted directly — their parent is the TokenDocument, and deleting
-        // the actor throws "ActorDelta ... does not exist".
-        let baseActor = petActor;
-        const tokenDocs = [];
-        if (petActor.isToken) {
-            const tok = petActor.parent ?? null;
-            if (tok && !tokenDocs.includes(tok)) tokenDocs.push(tok);
-            baseActor = game?.actors?.get(petActor.id) ?? null;
-        }
-        // Sweep every scene for tokens linked to the pet actor.
-        const actorId = baseActor?.id ?? petActor.id;
-        for (const scene of game?.scenes ?? []) {
-            for (const tok of scene.tokens ?? []) {
-                if (tok.actorId === actorId && !tokenDocs.includes(tok)) tokenDocs.push(tok);
-            }
-        }
-        // Delete tokens first (cascades combatants + synthetic actors).
-        for (const tok of tokenDocs) {
-            try { await tok.delete(); }
-            catch (err) { console.warn("EQRMSS | dismissPet: token delete failed:", err); }
-        }
-        // Then delete the base actor.
-        if (baseActor && !baseActor.isToken) {
-            try { await baseActor.delete(); }
-            catch (err) { console.warn("EQRMSS | dismissPet: actor delete failed:", err); }
-        }
+        await petActor.delete();
     } catch (err) {
         console.warn("EQRMSS | dismissPet failed:", err);
     }
