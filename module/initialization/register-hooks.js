@@ -15,6 +15,26 @@ export function registerEQRMSSHooks() {
     tickConditions(combat).catch(e => console.error("EQRMSS | Condition tick failed", e));
   });
 
+  // Signature abilities (Lay on Hands / Harm Touch): once per combat —
+  // reset on combat start and combat end for all combatants (2026-10-07).
+  // GM-only to avoid double-processing.
+  async function resetSignaturesFor(combat, label) {
+    try {
+      const { resetSignatureAbilities } = await import("../combat/signature-abilities.js");
+      for (const c of combat?.combatants ?? []) {
+        if (c.actor) await resetSignatureAbilities(c.actor);
+      }
+    } catch (e) { console.error(`EQRMSS | signature reset on combat ${label} failed`, e); }
+  }
+  Hooks.on("createCombat", (combat) => {
+    if (!game.user?.isGM) return;
+    resetSignaturesFor(combat, "start");
+  });
+  Hooks.on("deleteCombat", (combat) => {
+    if (!game.user?.isGM) return;
+    resetSignaturesFor(combat, "end");
+  });
+
   // Displaced-spell landing (Table 15.7): the failure card's
   // "Place the stray spell" button opens the GM crosshair.
   Hooks.on("renderChatMessageHTML", (message, html) => {

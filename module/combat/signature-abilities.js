@@ -6,6 +6,8 @@
  * Harm Touch: Damage = (50 × rank) + (10 × level). Melee range. Disease RR at -20. Once per combat. Free.
  */
 
+import { rrTargetNumber, rrOpenEnded } from "../spells/base-spell.js";
+
 function esc(s) {
     return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
 }
@@ -39,29 +41,6 @@ async function checkUsable(actor, target, abilityName) {
         }
     }
     return { ok: true };
-}
-
-/**
- * Open-ended d100 roll.
- */
-async function d100Open() {
-    let total = 0;
-    let roll;
-    do {
-        roll = Math.floor(Math.random() * 100) + 1;
-        total += roll;
-    } while (roll >= 96); // Open-ended on 96+
-    return total;
-}
-
-/**
- * Level factor for RR target number (from base-spell.js).
- */
-function levelFactor(level) {
-    const l = Number(level) || 1;
-    if (l <= 10) return l * 3;
-    if (l <= 20) return 30 + (l - 10) * 2;
-    return 50 + (l - 20);
 }
 
 export async function layOnHands(actor, target) {
@@ -101,17 +80,18 @@ export async function harmTouch(actor, target) {
     const level = Number(actor.system?.attributes?.level?.value) || 1;
     const damage = (50 * rank) + (10 * level);
     
-    // Disease-based RR at -20 (2026-10-07)
+    // Disease-based RR at -20 (2026-10-07): canonical Table 15.5
+    // target number and open-ended-both-ways RR from base-spell.js.
     const attackLevel = level;
     const targetLevel = Number(target.system?.attributes?.level?.value) || 1;
-    const need = 50 + levelFactor(attackLevel) - levelFactor(targetLevel);
-    const rrRoll = await d100Open();
+    const need = rrTargetNumber(attackLevel, targetLevel);
+    const rr = await rrOpenEnded();
     const diseaseResist = Number(target.system?.resistance_rolls?.poison_disease?.total) || 0;
-    const rrTotal = rrRoll + diseaseResist - 20; // -20 penalty (difficult to resist)
+    const rrTotal = rr.total + diseaseResist - 20; // -20 penalty (difficult to resist)
     const resisted = rrTotal >= need;
     
     let html = `<h2>${esc(name)}</h2>`;
-    html += `<p><strong>Disease resistance roll (${esc(target.name)}):</strong> ${rrRoll} + ${diseaseResist} disease - 20 penalty = <strong>${rrTotal}</strong> vs ${need} (levels ${attackLevel} vs ${targetLevel}) — ${resisted ? "RESISTED" : "takes full effect"}</p>`;
+    html += `<p><strong>Disease resistance roll (${esc(target.name)}):</strong> ${rr.rolls.join(", ")} = ${rr.total} + ${diseaseResist} disease - 20 penalty = <strong>${rrTotal}</strong> vs ${need} (levels ${attackLevel} vs ${targetLevel}) — ${resisted ? "RESISTED" : "takes full effect"}</p>`;
     
     if (resisted) {
         await actor.update({ "system.status.harmTouchUsed": true });

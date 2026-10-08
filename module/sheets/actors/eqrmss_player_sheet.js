@@ -505,8 +505,6 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             updates["system.exhaustion.max"] = exMax;
             if (actor.system?.status?.exhausted) updates["system.status.exhausted"] = false;
             if (actor.system?.status?.subdueDoubled) updates["system.status.subdueDoubled"] = false;
-            updates["system.status.layOnHandsUsed"] = false;
-            updates["system.status.harmTouchUsed"] = false;
             await actor.update(updates);
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor }),
