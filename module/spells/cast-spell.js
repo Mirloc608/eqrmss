@@ -40,6 +40,7 @@ import { applySpellBuffs } from "./spell-buffs.js";
 import { applyInvisibility, invisTypeOf, breakInvisibility } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
 import { applyIllusion } from "../item-effects/damage-pipeline.js";
+import { applyTeleport } from "./teleport.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -560,19 +561,37 @@ export async function castSpell(actor, spellItem, opts = {}) {
             }
         }
     }
+    // Teleport (2026-10-07): EQ teleport/gate/translocate/evac/bind mechanics.
+    // Spell data uses effect names: teleport-self, teleport, teleport-group,
+    // teleport-anchor, teleport-to-caster, translocate, translocate-bind,
+    // translocate-bind-group, evacuate-group, evacuate-self, evacuate-single,
+    // gate, bind, bind-affinity.
+    let teleportNote = "";
+    const teleportEffs = (spellEffectsOf(spellItem) ?? []).filter(e => {
+        const k = String(e?.effect ?? "").toLowerCase();
+        return ["teleport-self", "teleport", "teleport-group", "teleport-anchor",
+            "teleport-to-caster", "translocate", "translocate-bind",
+            "translocate-bind-group", "evacuate-group", "evacuate-self",
+            "evacuate-single", "gate", "bind", "bind-affinity"].includes(k);
+    });
+    if (teleportEffs.length) {
+        for (const eff of teleportEffs) {
+            teleportNote += await applyTeleport({ effect: eff, caster: actor, target: buffTarget, spellName: name });
+        }
+    }
     const note = cls.kind === "later" ? esc(cls.reason) : "no mechanical payload";
-    // Suppress the "announced" line if the buff/regen/invis/levitate/illusion
-    // pipeline already produced output (2026-10-07: redundant when buffs
+    // Suppress the "announced" line if the buff/regen/invis/levitate/illusion/
+    // teleport pipeline already produced output (2026-10-07: redundant when buffs
     // applied or were blocked by stacking — the pipeline's own message says
     // what happened).
-    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote)
+    const announcedLine = (regenNote || buffNote || invisNote || levNote || illusionNote || teleportNote)
         ? ""
         : `<p><em>Cast announced — ${note}.</em></p>`;
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Spellcasting", `
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
-            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
+            ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
     return { ok: true, kind: cls.kind, mods };
 }

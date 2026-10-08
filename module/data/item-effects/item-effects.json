@@ -5972,7 +5972,9 @@
       "description": "Triggered effect: Shadow Step steps you through shadow, reappearing a short distance away.",
       "payload": [
         {
-          "type": "utility",
+          "type": "teleport",
+          "effect": "teleport-self",
+          "destination": "shadow-step",
           "note": "Shadow Step: step through shadow, reappearing a short distance away"
         }
       ]
@@ -6105,8 +6107,10 @@
       "description": "Triggered effect: Evacuate teleports the group to a relatively safe location in the current zone.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Teleports the group to a relatively safe location in the current zone (Evacuate)"
+          "type": "teleport",
+          "effect": "evacuate-group",
+          "destination": "current-zone",
+          "note": "Evacuate: teleports the group to a relatively safe location in the current zone"
         }
       ]
     },
@@ -6409,8 +6413,10 @@
       "description": "Triggered effect: Nek Portal teleports the group to Nektulos Forest.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Teleports the group to Nektulos Forest (Nek Portal)"
+          "type": "teleport",
+          "effect": "teleport-group",
+          "destination": "nektulos",
+          "note": "Nek Portal: teleports the group to Nektulos Forest"
         }
       ]
     },
@@ -7286,8 +7292,10 @@
       "description": "Triggered effect: Ring of Faydark teleports the group to Lesser Faydark.",
       "payload": [
         {
-          "type": "utility",
-          "note": "Teleports the group to Lesser Faydark (Ring of Faydark)"
+          "type": "teleport",
+          "effect": "teleport-group",
+          "destination": "lesser-faydark",
+          "note": "Ring of Faydark: teleports the group to Lesser Faydark"
         }
       ]
     },
