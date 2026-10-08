@@ -12,6 +12,8 @@
  * ============================================================
  */
 
+import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
+
 const AA_BASE_PATH = "systems/eqrmss/module/data/aas";
 const DEFAULT_AA_EXPANSION = "luclin";
 
@@ -38,20 +40,33 @@ function isValidAA(j) {
     return true;
 }
 
-function getExpansionManager() {
-    return game?.eqrmss?.expansions || null;
+/**
+ * The gate authority is the EQRMSSExpansionManager static class, imported
+ * directly. (game.eqrmss.expansions is only the raw data loader object and
+ * is never populated on the registry boot path, so it cannot be used here.)
+ * Initialized lazily and exactly once; the promise is cached so reloads
+ * reuse the already-initialized manager.
+ */
+let _expansionManagerPromise = null;
+let _expansionUnavailableWarned = false;
+
+async function getExpansionManager() {
+    if (!_expansionManagerPromise) {
+        _expansionManagerPromise = EQRMSSExpansionManager.initialize().catch(err => {
+            console.warn("EQRMSS | AA Loader | expansion manager init failed, gating disabled", err);
+            return null;
+        });
+    }
+    return _expansionManagerPromise;
 }
 
 /**
  * Expansion gate for a single AA. Returns true when the AA may be used
- * under the currently active expansion.
+ * under the currently active expansion. `manager` is resolved once per
+ * load() call; a null manager fails open (the caller warns once).
  */
-function isAAUnlocked(aa) {
-    const manager = getExpansionManager();
-    if (!manager) {
-        console.warn("EQRMSS | AA Loader | expansion manager unavailable, gating disabled");
-        return true;
-    }
+function isAAUnlocked(aa, manager) {
+    if (!manager) return true;
     try {
         if (typeof manager.hasAAs === "function" && !manager.hasAAs()) return false;
         const required = aa?.system?.expansion || DEFAULT_AA_EXPANSION;
@@ -99,6 +114,14 @@ export const EQRMSSAALoader = {
                 return this._store(byId, byClass, byCategory);
             }
 
+            // Resolve the expansion manager once for this load; warn at most once
+            // when gating is unavailable instead of once per AA file.
+            const manager = await getExpansionManager();
+            if (!manager && !_expansionUnavailableWarned) {
+                _expansionUnavailableWarned = true;
+                console.warn("EQRMSS | AA Loader | expansion manager unavailable, gating disabled");
+            }
+
             const root = await FilePickerImpl.browse("data", AA_BASE_PATH).catch(() => ({ dirs: [], files: [] }));
             const dirs = [...(root.dirs || [])];
 
@@ -111,7 +134,7 @@ export const EQRMSSAALoader = {
                     j = await fetchJson(file);
                 } catch { invalid++; return; }
                 if (!isValidAA(j)) { invalid++; return; }
-                if (!isAAUnlocked(j)) { gated++; return; }
+                if (!isAAUnlocked(j, manager)) { gated++; return; }
                 const id = j.id;
                 if (byId[id]) {
                     console.warn(`EQRMSS | AA Loader | duplicate id "${id}" in ${file}, keeping first`);
