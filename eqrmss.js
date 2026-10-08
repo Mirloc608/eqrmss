@@ -90,8 +90,8 @@ import { initializeSkillEngine } from "./module/utils/skills/index.js";
 // ---------- Part 2: v4.14 data loader (unchanged) ----------
 console.log("EQRMSS | Initialize Data Loaders v4.14 | Starting - Wizard+Sheet+LazyGeo fix - NO TLA");
 
-let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null, SongModule = null;
-let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null, SongLoader = null;
+let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null, SongModule = null, AAModule = null;
+let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null, SongLoader = null, AALoader = null;
 let modulesLoaded = false;
 
 async function tryImport(paths) {
@@ -130,12 +130,14 @@ async function loadModules() {
     RaceModule = await tryImport(['./module/data/loaders/race-loader.js']);
     SkillModule = await tryImport(['./module/data/skills/skill-loader.js', './module/data/loaders/skill-loader.js']);
     SongModule = await tryImport(['./module/data/loaders/song-loader.js']);
+    AAModule = await tryImport(['./module/data/loaders/aa-loader.js']);
     AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
     ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
     SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
     RaceLoader = resolveLoader(RaceModule, 'RaceLoader','EQRMSSRaceLoader','EQRMSS_RACE_LOADER','RacesLoader');
     SkillLoader = resolveLoader(SkillModule, 'SkillLoader','EQRMSSSkillLoader','EQRMSS_SKILL_LOADER');
     SongLoader = resolveLoader(SongModule, 'SongLoader','EQRMSSSongLoader','EQRMSS_SONG_LOADER');
+    AALoader = resolveLoader(AAModule, 'AALoader','EQRMSSAALoader');
     modulesLoaded = true;
 }
 
@@ -227,7 +229,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, weapons:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
 
     if (ClassLoader) {
         try {
@@ -267,6 +269,14 @@ export async function initializeDataLoaders() {
         } catch (e) { console.error("Ability load failed", e); }
     }
 
+    if (AALoader) {
+        try {
+            if (typeof AALoader.load === 'function') await AALoader.load();
+            game.eqrmss._loadStatus.aas = true;
+            console.log(`EQRMSS | AAs ready: ${Object.keys(game.eqrmss.aas?.byId || {}).length} AAs`);
+        } catch (e) { console.error("AA load failed", e); }
+    }
+
     if (SpellLoader) {
         try {
             if (typeof SpellLoader.load === 'function') await SpellLoader.load();
@@ -301,6 +311,7 @@ export async function initializeDataLoaders() {
     if (!game.eqrmss.spells) game.eqrmss.spells = {};
     if (!game.eqrmss.abilities) game.eqrmss.abilities = {};
     if (!game.eqrmss.skills) game.eqrmss.skills = {};
+    if (!game.eqrmss.aas) game.eqrmss.aas = { byId: {}, byClass: {}, byCategory: {} };
 
     // Weapons (template + material + condition composer)
     try {
@@ -481,9 +492,10 @@ export function getClassLoader() { return ClassLoader; }
 export function getSpellLoader() { return SpellLoader; }
 export function getRaceLoader() { return RaceLoader; }
 export function getSkillLoader() { return SkillLoader; }
+export function getAALoader() { return AALoader; }
 
-export { AbilityLoader, ClassLoader, SpellLoader, RaceLoader, SkillLoader };
-export default { initializeDataLoaders, initializeEQRMSSDataLoaders: initializeDataLoaders, get AbilityLoader() { return AbilityLoader; }, get ClassLoader() { return ClassLoader; }, get SpellLoader() { return SpellLoader; }, get RaceLoader() { return RaceLoader; } };
+export { AbilityLoader, ClassLoader, SpellLoader, RaceLoader, SkillLoader, AALoader };
+export default { initializeDataLoaders, initializeEQRMSSDataLoaders: initializeDataLoaders, get AbilityLoader() { return AbilityLoader; }, get ClassLoader() { return ClassLoader; }, get SpellLoader() { return SpellLoader; }, get RaceLoader() { return RaceLoader; }, get AALoader() { return AALoader; } };
 
 
 // ---------- Part 3: init/ready pipeline ----------

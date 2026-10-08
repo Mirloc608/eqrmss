@@ -7,6 +7,7 @@ async function loadRaces() { return await loadEQRMSSRaces(); }
 async function loadSpells() { return await loadEQRMSSpells(); }
 async function loadSongs() { return await loadEQRMSSSongs(); }
 async function loadAbilities() { return await AbilityLoader.load(); }
+async function loadAAs() { return await AALoader.load(); }
 async function loadSkills() { return await SkillLoader.load(); }
 async function loadFeaturesRegistry() { return await loadFeatures(); }
 async function loadProgressionRegistry() { return await loadProgression(); }
@@ -29,6 +30,7 @@ export const EQRMSS_DATA_LOADERS = [
     { name: "songs", loader: loadSongs },
 
     { name: "abilities", loader: loadAbilities },
+    { name: "aas", loader: loadAAs },
     { name: "skills", loader: loadSkills },
     { name: "features", loader: loadFeaturesRegistry },
 
