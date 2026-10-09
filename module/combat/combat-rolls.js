@@ -1148,9 +1148,11 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     let appliedNote = "";
     if (targetActor && totalDamage > 0 && (targetActor.isOwner || game.user?.isGM)) {
         // Absorb (rune) hook (2026-10-07): deplete absorb pool before HP.
+        // Spell-only absorbs (2026-10-09, e.g. Geomantra) skip melee damage.
         const ab = targetActor.system?.status?.absorb;
         const abAmount = Number(ab?.amount) || 0;
-        if (abAmount > 0) {
+        const isSpellDamage = String(weaponType ?? "").toLowerCase() === "spell";
+        if (abAmount > 0 && !(ab?.spellOnly && !isSpellDamage)) {
             const absorbed = Math.min(totalDamage, abAmount);
             const abLeft = abAmount - absorbed;
             totalDamage -= absorbed;

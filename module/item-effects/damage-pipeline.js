@@ -321,9 +321,11 @@ async function applyAbsorb({ effect, target, source }) {
     await persistValue(target, "system.status.absorb", {
         amount,
         roundsLeft: duration,
-        source: dispName
+        source: dispName,
+        spellOnly: !!effect?.spellOnly
     });
-    return { type: "absorb", final: amount, notes: [`absorbs ${amount} damage for ${duration} rounds (${dispName})`], source, applied: true };
+    const scopeNote = effect?.spellOnly ? " (spell damage only)" : "";
+    return { type: "absorb", final: amount, notes: [`absorbs ${amount} damage for ${duration} rounds${scopeNote} (${dispName})`], source, applied: true };
 }
 
 /**
