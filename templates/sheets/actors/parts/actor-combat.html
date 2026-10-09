@@ -35,7 +35,7 @@
     {{#each capstones}}
     <div class="capstone-entry">
       <button type="button" data-action="activateCapstone" data-capstone-id="{{this.id}}" {{#if this.onCooldown}}disabled{{/if}} title="{{this.name}} (Level {{this.level}}): {{this.effect}} Cooldown: {{this.cooldown}}">
-        {{this.name}} ({{this.level}}){{#if this.onCooldown}} ({{this.remainingMins}}m){{/if}}
+        {{this.name}} ({{this.level}}){{#if this.onCooldown}} (Used){{/if}}
       </button>
       <span class="capstone-desc">{{this.description}}</span>
     </div>
