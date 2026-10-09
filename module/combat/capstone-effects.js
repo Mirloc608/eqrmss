@@ -293,6 +293,42 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
             notes.push(`<em>${esc(capstone.name)}: Special mechanics not yet implemented.</em>`);
             // TODO: Implement Headshot, Decapitation, etc.
             break;
+
+        case "equalize": {
+            // Balance group's HP: set all to average HP%, with a minimum floor.
+            const combatants = game.combat?.combatants ?? [];
+            const allies = combatants
+                .filter(c => c.actor)
+                .map(c => c.actor);
+            if (!allies.includes(caster)) allies.unshift(caster);
+
+            // Calculate average HP%
+            let totalPct = 0;
+            const hpData = [];
+            for (const a of allies) {
+                const max = Number(a.system?.hits?.max) || 1;
+                const cur = max - (Number(a.system?.hits?.value) || 0);
+                const pct = (cur / max) * 100;
+                totalPct += pct;
+                hpData.push({ actor: a, max });
+            }
+            const avgPct = totalPct / hpData.length;
+            const minFloor = mech.minFloorPct || 50;
+            const targetPct = Math.max(avgPct, minFloor);
+
+            // Set all to target HP%
+            for (const { actor: a, max } of hpData) {
+                const newCur = Math.round((targetPct / 100) * max);
+                const newValue = max - newCur; // hits.value is damage taken
+                await a.update({ "system.hits.value": Math.max(0, newValue) });
+            }
+            if (targetPct > avgPct) {
+                notes.push(`Group HP balanced to ${Math.round(avgPct)}%, then healed to ${minFloor}% floor.`);
+            } else {
+                notes.push(`Group HP balanced to ${Math.round(avgPct)}%.`);
+            }
+            break;
+        }
             
         default:
             notes.push(`<em>Unknown mechanics type: ${esc(mech.type)}</em>`);

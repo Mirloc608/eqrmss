@@ -174,10 +174,14 @@
       "class": "cleric",
       "level": 70,
       "expansion": "OoW",
-      "effect": "Balance the group's HP: all members set to the average HP%. Heal the lowest to 50% if below.",
+      "effect": "Balance the group's HP: all members set to the average HP%. If below 50%, heal group to 50%.",
       "cooldown": "20 minutes",
       "description": "Divine judgment balances the scales of life.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "equalize",
+        "minFloorPct": 50
+      }
     },
     {
       "id": "capstone-druid-nature-s-fury-70",
