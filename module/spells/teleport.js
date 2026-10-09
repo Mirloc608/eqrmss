@@ -49,7 +49,15 @@ async function loadDestinations() {
 export async function getDestination(destId) {
     if (!destId) return null;
     const dests = await loadDestinations();
-    return dests[destId] ?? null;
+    // Case-insensitive lookup (2026-10-08): spell data has Barindu/barindu variants.
+    // Skip the _meta key.
+    if (dests[destId] && !destId.startsWith("_")) return dests[destId];
+    const lower = String(destId).toLowerCase();
+    for (const [key, val] of Object.entries(dests)) {
+        if (key.startsWith("_")) continue;
+        if (key.toLowerCase() === lower) return val;
+    }
+    return null;
 }
 
 // ----------------------------------------------------------------
