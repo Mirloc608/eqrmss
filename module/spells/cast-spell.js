@@ -46,7 +46,7 @@ import { summonItem } from "./summon.js";
 import { applyMemblur } from "./memblur.js";
 import { applyPacify } from "./pacify.js";
 import { applyFeignDeath, breakFeignDeath } from "./feign-death.js";
-import { summonPet, swarmPetAsDot, isSwarmPet, findCasterPet, dismissPet, summonFamiliar } from "./pets/summon-pet.js";
+import { summonPet, swarmPetAsDot, isSwarmPet, isSwarmEffect, findCasterPet, dismissPet, summonFamiliar } from "./pets/summon-pet.js";
 import { gatherWornCastMods } from "./worn-cast-mods.js";
 import { esfGate, resolveSpellFailure } from "./spell-failure.js";
 import {
@@ -904,12 +904,15 @@ async function castSpellInner(actor, spellItem, opts = {}) {
                 petNote += `<p><em>Pet summon failed: no pet ID in spell data.</em></p>`;
                 continue;
             }
-            if (isSwarmPet(petId)) {
+            if (isSwarmEffect(eff)) {
                 // Swarm pets are DoTs, not pet actors — and require a
-                // valid target (EQ behavior, 2026-10-08).
+                // valid target (EQ behavior, 2026-10-08). Data duration
+                // is seconds; count is explicit per spell (Rage of Zomm
+                // x1) or 3-5 random.
                 const swarmTarget = targetedActor();
-                const swarmDuration = Number(eff?.duration) || 3;
-                petNote += await swarmPetAsDot(actor, swarmTarget, petId, swarmDuration, name, spellLevel);
+                const swarmDuration = durationRounds(eff?.duration) ?? 3;
+                const swarmCount = eff?.count != null ? Number(eff.count) : null;
+                petNote += await swarmPetAsDot(actor, swarmTarget, petId, swarmDuration, name, spellLevel, swarmCount);
             } else {
                 petNote += await summonPet(actor, petId, name, manaCost, spellLevel);
             }

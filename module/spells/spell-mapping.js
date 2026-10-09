@@ -91,7 +91,14 @@ export function classifySpell(spellItem) {
     }
     const effects = spellEffectsOf(spellItem);
     const target = String(spellItem?.system?.target ?? "").toLowerCase();
-    const dmg = effects.find(e => e?.type === "damage");
+    // A summon alongside a trivial damage tag (≤1, e.g. Rage of Zomm's
+    // "Decrease Hitpoints by 1") is a pet spell, not an attack — the
+    // tag must not hijack classification onto the bolt/base tracks.
+    const hasSummon = effects.some(e => e?.type === "summon-pet"
+        || (String(e?.type ?? "").toLowerCase() === "utility"
+            && String(e?.effect ?? "").toLowerCase() === "summon-pet"));
+    const incidental = e => hasSummon && (Number(e?.amount) || 0) <= 1;
+    const dmg = effects.find(e => e?.type === "damage" && !incidental(e));
     if (dmg) {
         const element = String(dmg.element ?? "").toLowerCase();
         // Stage 5: area-target elemental damage resolves on the
@@ -117,6 +124,7 @@ export function classifySpell(spellItem) {
     // attack — exclude it so feign spells fall through to the
     // announced-cast path instead of demanding a non-caster target.
     const hostile = effects.find(e => e && hostileTypes.includes(e.type)
+        && !incidental(e)
         && String(e?.effect ?? "").toLowerCase() !== "feign-death");
     if (hostile) {
         return { kind: "base", subtype: hostile.type, effect: hostile, element: String(hostile.element ?? "").toLowerCase() };

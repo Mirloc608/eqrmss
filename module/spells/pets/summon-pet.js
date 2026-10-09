@@ -85,6 +85,16 @@ export function isSwarmPet(petId) {
 }
 
 /**
+ * Check if a summon-pet EFFECT is a swarm (DoT, not a real pet).
+ * Timed summons (duration present) are swarms; permanent pets carry
+ * no duration (e.g., Rage of Zomm: {pet:"rage-of-zomm",count:1,duration:18}).
+ */
+export function isSwarmEffect(eff) {
+    if (isSwarmPet(eff?.pet)) return true;
+    return Number(eff?.duration) > 0;
+}
+
+/**
  * Resolve a pet ID to a creature registry entry + pet level.
  *
  * Pet level rules (2026-10-08):
@@ -863,7 +873,7 @@ export async function addPetToCombat(caster, petActor, petTokenDoc) {
  * @param {number} [spellLevel=1] - Spell level (pet-level fallback)
  * @returns {Promise<string>} HTML chat note
  */
-export async function swarmPetAsDot(caster, target, petId, duration, spellName, spellLevel = 1) {
+export async function swarmPetAsDot(caster, target, petId, duration, spellName, spellLevel = 1, count = null) {
     if (!target) return `<p><em>Swarm failed: no valid target.</em></p>`;
     const tgt = target;
 
@@ -875,8 +885,9 @@ export async function swarmPetAsDot(caster, target, petId, duration, spellName, 
     const lm = /l(\d+)/i.exec(id) ?? /swarm-(\d+)/i.exec(id);
     if (lm) petLevel = Math.max(1, Number(lm[1]));
 
-    // 3-5 swarm pets per cast (user ruling 2026-10-08).
-    const count = 3 + Math.floor(Math.random() * 3);
+    // Swarm count: explicit data count wins (e.g., Rage of Zomm x1);
+    // otherwise 3-5 per cast (user ruling 2026-10-08).
+    const swarmCount = Math.max(1, Number(count) || (3 + Math.floor(Math.random() * 3)));
 
     // Swarm family: match a known creature family in the pet ID; small
     // biting creatures (Bite table) otherwise.
@@ -901,7 +912,7 @@ export async function swarmPetAsDot(caster, target, petId, duration, spellName, 
         summoned: true,
         casterId: caster?.id ?? null,
         swarmLevel: petLevel,
-        swarmCount: count,
+        swarmCount,
         swarmFamily: family,
         roundsLeft: rounds,
     };
@@ -915,7 +926,7 @@ export async function swarmPetAsDot(caster, target, petId, duration, spellName, 
         return `<p><em>Swarm failed: ${esc(err?.message ?? "unknown error")}.</em></p>`;
     }
 
-    return `<p><em>${esc(tgt.name)} is swarmed by ${count} creatures (level ${petLevel}, ${rounds} rounds).</em></p>`;
+    return `<p><em>${esc(tgt.name)} is swarmed by ${swarmCount} creatures (level ${petLevel}, ${rounds} rounds).</em></p>`;
 }
 
 // ----------------------------------------------------------------
