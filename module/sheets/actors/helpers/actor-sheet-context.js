@@ -65,12 +65,12 @@ export class EQRMSSActorContextHelper {
         this._buildHateList(context);
 
         context.data ??= {};
-        context.data.name = this.actor.name ?? "";
+        context.data.name = actor.name ?? "";
 
         // Sheet header "Player" field: resolved live from the ownership
         // map so GM re-assignments show up without manual edits. Falls
         // back to any stored playerName, then to the owning user's name.
-        const ownerUserId = Object.entries(this.actor.ownership ?? {})
+        const ownerUserId = Object.entries(actor.ownership ?? {})
             .find(([uid, level]) =>
                 uid !== "default" &&
                 Number(level) === (CONST.DOCUMENT_OWNERSHIP_LEVELS?.OWNER ?? 3)
@@ -126,8 +126,8 @@ export class EQRMSSActorContextHelper {
 
         // Song modifiers (2026-10-06): EQ stat -> RMSS key
         // Spell modifiers (2026-10-07): same scaling, stacks with song
-        const songMods = getSongModifiers(this.actor);
-        const spellMods = getSpellModifiers(this.actor);
+        const songMods = getSongModifiers(actor);
+        const spellMods = getSpellModifiers(actor);
         const EQ_TO_RMSS = {
             str: "ST", sta: "CO", agi: "AG", dex: "QU",
             wis: "EM", int: "ME", cha: "PR"
@@ -190,14 +190,14 @@ export class EQRMSSActorContextHelper {
         context.system.derived = derivedEngine.compute(engineStatsMap);
 
         // Calculate and apply armor, MMP, penalties, quickness bonus, and total DB
-        const combatDefenses = calculateArmorAndDefenses(this.actor);
+        const combatDefenses = calculateArmorAndDefenses(actor);
         context.system.combat = Object.assign(context.system.combat || {}, combatDefenses);
         // --------------------------------------------------------------------
 
-        context.actor = this.actor;
-        context.rawItems = this.actor.items?.contents ?? [];
+        context.actor = actor;
+        context.rawItems = actor.items?.contents ?? [];
         context.level = Number(this.system?.level?.value ?? this.system?.level ?? 1);
-        context.name = this.actor.name ?? "";
+        context.name = actor.name ?? "";
         context.raceName = context.data.raceName;
         context.professionName = context.data.professionName;
         context.realm = context.data.realm;
@@ -286,7 +286,12 @@ export class EQRMSSActorContextHelper {
     _buildBuffsDebuffs(context) {
         const buffs = [];
         const debuffs = [];
-        for (const effect of this.actor?.effects ?? []) {
+        // Unlinked tokens (2026-10-09): read from base actor, matching the
+        // buff-apply fix. Synthetic token actors don't have the spellEffects.
+        const actor = this.actor?.isToken
+            ? (globalThis.game?.actors?.get(this.actor?.token?.actorId) ?? this.actor)
+            : this.actor;
+        for (const effect of actor?.effects ?? []) {
             if (effect.disabled) continue;
             const entry = {
                 id: effect.id,
