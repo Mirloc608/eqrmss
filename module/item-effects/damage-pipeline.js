@@ -81,11 +81,16 @@ function applyResistance(rolled, resist) {
 
 async function persistValue(target, path, value) {
     if (!target) return;
-    if (typeof target?.update === "function") {
-        await target.update({ [path]: value });
-    } else if (target?.system) {
+    // Unlinked tokens (2026-10-09): persist to the base actor so
+    // status effects are visible to ticks and hooks sweeping game.actors.
+    const baseTarget = target?.isToken
+        ? (globalThis.game?.actors?.get(target?.token?.actorId) ?? target)
+        : target;
+    if (typeof baseTarget?.update === "function") {
+        await baseTarget.update({ [path]: value });
+    } else if (baseTarget?.system) {
         const parts = path.replace(/^system\./, "").split(".");
-        let obj = target.system;
+        let obj = baseTarget.system;
         for (let i = 0; i < parts.length - 1; i++) obj = obj[parts[i]] ??= {};
         obj[parts[parts.length - 1]] = value;
     }
