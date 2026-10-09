@@ -7458,7 +7458,7 @@
       "id": "clicky-vampiric-embrace",
       "kind": "triggered",
       "name": "Vampiric Embrace",
-      "description": "Triggered effect: Vampiric Embrace gives your attacks a vampiric property, stealing life (duration scales with level: 1.7 min @L7 → 7.5 min @L65).",
+      "description": "Triggered effect: Vampiric Embrace gives your attacks a vampiric property, stealing life (duration scales with level: 1.7 min @L7 \u2192 7.5 min @L65).",
       "payload": [
         {
           "type": "vampiric",
@@ -7466,7 +7466,7 @@
           "amount": 12,
           "percent": 100,
           "duration": 75,
-          "note": "Vampiric Embrace: melee hits have a 15% chance to drain 12 life, healing the attacker (duration level-scaled: 17 rounds @L7 → 75 @L65). Proc chance is a mechanical placeholder pending EQ canon review; 12 damage is real EQ data."
+          "note": "Vampiric Embrace: melee hits have a 15% chance to drain 12 life, healing the attacker (duration level-scaled: 17 rounds @L7 \u2192 75 @L65). Proc chance is a mechanical placeholder pending EQ canon review; 12 damage is real EQ data."
         }
       ]
     },
@@ -9912,6 +9912,369 @@
         }
       ],
       "trigger": "onCrit"
+    },
+    {
+      "description": "Triggered effect: Dragoste. Increase AGI by 30; Increase CHA by 30; Increase STR by 30; Increase DEX by 30",
+      "id": "clicky-dragoste",
+      "kind": "triggered",
+      "name": "Dragoste",
+      "payload": [
+        {
+          "type": "buff",
+          "stat": "ag",
+          "amount": 3,
+          "duration": 60
+        },
+        {
+          "type": "buff",
+          "stat": "pr",
+          "amount": 3,
+          "duration": 60
+        },
+        {
+          "type": "buff",
+          "stat": "st",
+          "amount": 3,
+          "duration": 60
+        },
+        {
+          "type": "buff",
+          "stat": "qu",
+          "amount": 3,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Form of Defense V. Increase AC by 30 to 39, Based on Class",
+      "id": "clicky-form-of-defense-5",
+      "kind": "triggered",
+      "name": "Form of Defense V",
+      "payload": [
+        {
+          "type": "buff",
+          "stat": "db",
+          "amount": 30,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Form of Defense XIX. Increase AC by 107 to 142, Based on Class",
+      "id": "clicky-form-of-defense-19",
+      "kind": "triggered",
+      "name": "Form of Defense XIX",
+      "payload": [
+        {
+          "type": "buff",
+          "stat": "db",
+          "amount": 107,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Form of Defense XXXII. Increase AC by 178 to 234, Based on Class",
+      "id": "clicky-form-of-defense-32",
+      "kind": "triggered",
+      "name": "Form of Defense XXXII",
+      "payload": [
+        {
+          "type": "buff",
+          "stat": "db",
+          "amount": 178,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Geomantra II. Absorb Spell Damage: 25%, Total: 700; Decrease Current Mana by 3 per tick; Decrease Current Endurance by 3 per tick",
+      "id": "clicky-geomantra-2",
+      "kind": "triggered",
+      "name": "Geomantra II",
+      "payload": [
+        {
+          "type": "absorb",
+          "percent": 25,
+          "total": 70
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Geomantra III. Absorb Spell Damage: 30%, Total: 1000; Decrease Current Mana by 4 per tick; Decrease Current Endurance by 4 per tick",
+      "id": "clicky-geomantra-3",
+      "kind": "triggered",
+      "name": "Geomantra III",
+      "payload": [
+        {
+          "type": "absorb",
+          "percent": 30,
+          "total": 100
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Geomantra XVIII. Absorb Spell Damage: 30%, Total: 12500; Decrease Current Mana by 30 per tick; Decrease Current Endurance by 30 per tick",
+      "id": "clicky-geomantra-18",
+      "kind": "triggered",
+      "name": "Geomantra XVIII",
+      "payload": [
+        {
+          "type": "absorb",
+          "percent": 30,
+          "total": 1250
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Geomantra XXIV. Absorb Spell Damage: 30%, Total: 25000; Decrease Current Mana by 50 per tick; Decrease Current Endurance by 50 per tick",
+      "id": "clicky-geomantra-24",
+      "kind": "triggered",
+      "name": "Geomantra XXIV",
+      "payload": [
+        {
+          "type": "absorb",
+          "percent": 30,
+          "total": 2500
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Geomantra XXV. Absorb Spell Damage: 30%, Total: 28000; Decrease Current Mana by 50 per tick; Decrease Current Endurance by 50 per tick",
+      "id": "clicky-geomantra-25",
+      "kind": "triggered",
+      "name": "Geomantra XXV",
+      "payload": [
+        {
+          "type": "absorb",
+          "percent": 30,
+          "total": 2800
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Geomantra XXVI. Absorb Spell Damage: 30%, Total: 30000; Decrease Current Mana by 50 per tick; Decrease Current Endurance by 50 per tick",
+      "id": "clicky-geomantra-26",
+      "kind": "triggered",
+      "name": "Geomantra XXVI",
+      "payload": [
+        {
+          "type": "absorb",
+          "percent": 30,
+          "total": 3000
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Geomantra XXVII. Absorb Spell Damage: 30%, Total: 32000; Decrease Current Mana by 50 per tick; Decrease Current Endurance by 50 per tick",
+      "id": "clicky-geomantra-27",
+      "kind": "triggered",
+      "name": "Geomantra XXVII",
+      "payload": [
+        {
+          "type": "absorb",
+          "percent": 30,
+          "total": 3200
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Knowledge of the Past III. Increase Current Mana by 17 per tick; Increase Current HP by 13 per tick",
+      "id": "clicky-knowledge-of-the-past-3",
+      "kind": "triggered",
+      "name": "Knowledge of the Past III",
+      "payload": [
+        {
+          "type": "manaregen",
+          "amount": 1,
+          "duration": 60
+        },
+        {
+          "type": "regen",
+          "amount": 1,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Knowledge of the Past XV. Increase Current Mana by 77 per tick; Increase Current HP by 73 per tick",
+      "id": "clicky-knowledge-of-the-past-15",
+      "kind": "triggered",
+      "name": "Knowledge of the Past XV",
+      "payload": [
+        {
+          "type": "manaregen",
+          "amount": 7,
+          "duration": 60
+        },
+        {
+          "type": "regen",
+          "amount": 7,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Knowledge of the Past XVII. Increase Current Mana by 87 per tick; Increase Current HP by 83 per tick",
+      "id": "clicky-knowledge-of-the-past-17",
+      "kind": "triggered",
+      "name": "Knowledge of the Past XVII",
+      "payload": [
+        {
+          "type": "manaregen",
+          "amount": 8,
+          "duration": 60
+        },
+        {
+          "type": "regen",
+          "amount": 8,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Knowledge of the Past XXIX. Increase Current Mana by 147 per tick; Increase Current HP by 138 per tick",
+      "id": "clicky-knowledge-of-the-past-29",
+      "kind": "triggered",
+      "name": "Knowledge of the Past XXIX",
+      "payload": [
+        {
+          "type": "manaregen",
+          "amount": 14,
+          "duration": 60
+        },
+        {
+          "type": "regen",
+          "amount": 13,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Knowledge of the Past XXXI. Increase Current Mana by 157 per tick; Increase Current HP by 144 per tick",
+      "id": "clicky-knowledge-of-the-past-31",
+      "kind": "triggered",
+      "name": "Knowledge of the Past XXXI",
+      "payload": [
+        {
+          "type": "manaregen",
+          "amount": 15,
+          "duration": 60
+        },
+        {
+          "type": "regen",
+          "amount": 14,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Might of Stone IV. Increase ATK by 75",
+      "id": "clicky-might-of-stone-4",
+      "kind": "triggered",
+      "name": "Might of Stone IV",
+      "payload": [
+        {
+          "type": "buff",
+          "stat": "ob",
+          "amount": 7,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Might of Stone XVII. Increase ATK by 410",
+      "id": "clicky-might-of-stone-17",
+      "kind": "triggered",
+      "name": "Might of Stone XVII",
+      "payload": [
+        {
+          "type": "buff",
+          "stat": "ob",
+          "amount": 41,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Seawater Blast. Decrease Current HP by 3251; Decrease Melee Haste by 5% (v371, Incremental)",
+      "id": "clicky-seawater-blast",
+      "kind": "triggered",
+      "name": "Seawater Blast",
+      "payload": [
+        {
+          "type": "damage",
+          "amount": 325
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Soothing Breath XVI. Increase Current Mana by 95 per tick; Increase Current HP by 95 per tick",
+      "id": "clicky-soothing-breath-16",
+      "kind": "triggered",
+      "name": "Soothing Breath XVI",
+      "payload": [
+        {
+          "type": "manaregen",
+          "amount": 9,
+          "duration": 60
+        },
+        {
+          "type": "regen",
+          "amount": 9,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Soothing Breath XX. Increase Current Mana by 115 per tick; Increase Current HP by 115 per tick",
+      "id": "clicky-soothing-breath-20",
+      "kind": "triggered",
+      "name": "Soothing Breath XX",
+      "payload": [
+        {
+          "type": "manaregen",
+          "amount": 11,
+          "duration": 60
+        },
+        {
+          "type": "regen",
+          "amount": 11,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Soothing Puff of Breath II. Increase Current Mana by 15 per tick; Increase Current HP by 15 per tick",
+      "id": "clicky-soothing-puff-of-breath-2",
+      "kind": "triggered",
+      "name": "Soothing Puff of Breath II",
+      "payload": [
+        {
+          "type": "manaregen",
+          "amount": 1,
+          "duration": 60
+        },
+        {
+          "type": "regen",
+          "amount": 1,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "description": "Triggered effect: Tiny Companion. Decrease Pet Size by 50%",
+      "id": "clicky-tiny-companion",
+      "kind": "triggered",
+      "name": "Tiny Companion",
+      "payload": [
+        {
+          "type": "utility",
+          "effect": "shrink-pet",
+          "percent": 50,
+          "duration": 60
+        }
+      ]
     }
   ]
 }
