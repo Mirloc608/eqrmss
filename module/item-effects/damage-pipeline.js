@@ -206,6 +206,11 @@ async function applyBuff({ effect, target, source, caster }) {
     if (!(rawValue > 0) || !target) {
         return { type: "buff", final: 0, notes: ["invalid buff payload"], source, applied: false };
     }
+    // Unlinked tokens (2026-10-09): resolve to base actor for spellEffects,
+    // matching the absorb (266d1f38) and pending-cast (e0359c44) fixes.
+    const baseTarget = target?.isToken
+        ? (globalThis.game?.actors?.get(target?.token?.actorId) ?? target)
+        : target;
     // Port of spell-buff scaling (2026-10-07): EQ÷10, min 1, AC via curve.
     // Mirrors scaleSongValue() in songs.js + atk/haste/slow special cases.
     let scaledTarget = null, scaledStat = null, scaledValue = 0, label = "";
@@ -253,7 +258,7 @@ async function applyBuff({ effect, target, source, caster }) {
     } else {
         return { type: "buff", final: 0, notes: [`unsupported buff stat: ${stat}`], source, applied: false };
     }
-    const fx = target?.system?.status?.spellEffects;
+    const fx = baseTarget?.system?.status?.spellEffects;
     if (Array.isArray(fx)) {
         for (const e of fx) {
             if (e?.scaledTarget !== scaledTarget) continue;
@@ -276,17 +281,17 @@ async function applyBuff({ effect, target, source, caster }) {
         // Slow is harmful — show in Debuffs (2026-10-09).
         ...(scaledTarget === "slow" ? { category: "debuff" } : {}),
     });
-    await target.update({ "system.status.spellEffects": list });
+    await baseTarget.update({ "system.status.spellEffects": list });
     // Hasted/slowed visual indicators (2026-10-07)
     if (scaledTarget === "haste" && scaledValue > 0) {
         try {
             const { applyStatusEffect } = await import("../spells/status-wiring.js");
-            await applyStatusEffect(target, "hasted", `${label} (Clicky)`, duration, "icons/svg/lightning.svg", { source });
+            await applyStatusEffect(baseTarget, "hasted", `${label} (Clicky)`, duration, "icons/svg/lightning.svg", { source });
         } catch (e) { /* ignore */ }
     } else if (scaledTarget === "slow" && scaledValue > 0) {
         try {
             const { applyStatusEffect } = await import("../spells/status-wiring.js");
-            await applyStatusEffect(target, "slowed", `${label} (Clicky)`, duration, "icons/svg/downgrade.svg", { source });
+            await applyStatusEffect(baseTarget, "slowed", `${label} (Clicky)`, duration, "icons/svg/downgrade.svg", { source });
         } catch (e) { /* ignore */ }
     }
     return { type: "buff", final: scaledValue, notes: [`${label} for ${duration} rounds`], source, applied: true };
@@ -634,7 +639,7 @@ async function applyManaRegen({ effect, target, source }) {
         return { type: "manaregen", final: 0, notes: ["invalid manaregen payload"], source, applied: false };
     }
     const duration = Number(effect?.duration ?? effect?.["duration-rounds"]) || 10;
-    const fx = target?.system?.status?.spellEffects;
+    const fx = baseTarget?.system?.status?.spellEffects;
     const list = [...(Array.isArray(fx) ? fx : [])];
     // Refresh existing entry from the same source instead of stacking.
     const srcKey = source ?? "clicky";
@@ -650,7 +655,7 @@ async function applyManaRegen({ effect, target, source }) {
     };
     if (existingIdx >= 0) list[existingIdx] = entry;
     else list.push(entry);
-    await target.update({ "system.status.spellEffects": list });
+    await baseTarget.update({ "system.status.spellEffects": list });
     return { type: "manaregen", final: amount, notes: [`${entry.label} for ${duration} rounds`], source, applied: true };
 }
 
