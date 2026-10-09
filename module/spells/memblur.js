@@ -41,7 +41,7 @@ function currentRound() {
  * @param {object} opts - { damage = 0, debuffs = 0 }
  * @returns {Promise<void>}
  */
-export async function recordAggro(target, attacker, { damage = 0, debuffs = 0 } = {}) {
+export async function recordAggro(target, attacker, { damage = 0, debuffs = 0, heal = 0 } = {}) {
     if (!target || !attacker) return;
     // Don't record self-inflicted damage as aggro
     if (target.id === attacker.id) return;
@@ -52,7 +52,8 @@ export async function recordAggro(target, attacker, { damage = 0, debuffs = 0 } 
     } catch (e) { /* ignore */ }
     const dmg = Number(damage) || 0;
     const deb = Number(debuffs) || 0;
-    if (dmg <= 0 && deb <= 0) return;
+    const hl = Number(heal) || 0;
+    if (dmg <= 0 && deb <= 0 && hl <= 0) return;
 
     let aggro = {};
     try {
@@ -60,10 +61,11 @@ export async function recordAggro(target, attacker, { damage = 0, debuffs = 0 } 
     } catch (e) { /* ignore */ }
 
     const key = String(attacker.id);
-    const existing = aggro[key] ?? { damage: 0, debuffs: 0, lastRound: 0, name: String(attacker.name ?? "unknown") };
+    const existing = aggro[key] ?? { damage: 0, debuffs: 0, heal: 0, lastRound: 0, name: String(attacker.name ?? "unknown") };
     aggro[key] = {
         damage: (Number(existing.damage) || 0) + dmg,
         debuffs: (Number(existing.debuffs) || 0) + deb,
+        heal: (Number(existing.heal) || 0) + hl,
         lastRound: currentRound(),
         name: String(attacker.name ?? existing.name ?? "unknown")
     };
@@ -71,6 +73,28 @@ export async function recordAggro(target, attacker, { damage = 0, debuffs = 0 } 
     try {
         await target.update({ "system.status.aggro": aggro });
     } catch (e) { /* non-fatal */ }
+}
+
+/**
+ * Record healing aggro (2026-10-08). When a healer restores hits on a
+ * target, mobs with the target on their hate list gain hate towards
+ * the healer. Amount is the hits restored (1:1).
+ */
+export async function recordHealAggro(healer, healTarget, healAmount) {
+    const amt = Math.max(0, Math.round(Number(healAmount) || 0));
+    if (amt <= 0 || !healer || !healTarget) return;
+    if (healer.id === healTarget.id) return; // self-heals: no new aggro
+    let actors = [];
+    try {
+        actors = [...(globalThis.game?.actors?.contents ?? [])];
+    } catch (e) { return; }
+    for (const mob of actors) {
+        if (!mob || mob.id === healer.id || mob.id === healTarget.id) continue;
+        const aggro = mob.system?.status?.aggro ?? {};
+        if (aggro[healTarget.id]) {
+            await recordAggro(mob, healer, { heal: amt });
+        }
+    }
 }
 
 /**

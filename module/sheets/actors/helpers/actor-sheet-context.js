@@ -396,7 +396,7 @@ export class EQRMSSActorContextHelper {
     // HATE LIST (Status tab / NPC sheet)
     //
     // Reads system.status.aggro = { "<attackerId>": { damage,
-    // debuffs, lastRound, name } } (memblur system) and builds a
+    // debuffs, heal, lastRound, name } } (memblur system) and builds a
     // threat-sorted display list.
     // ------------------------------------------------------------
     _buildHateList(context) {
@@ -408,11 +408,12 @@ export class EQRMSSActorContextHelper {
                 name: entry?.name ?? "Unknown",
                 damage: Number(entry?.damage) || 0,
                 debuffs: Number(entry?.debuffs) || 0,
+                heal: Number(entry?.heal) || 0,
                 lastRound: Number(entry?.lastRound) || 0
             });
         }
-        // Highest threat first
-        list.sort((a, b) => b.damage - a.damage || b.debuffs - a.debuffs);
+        // Highest threat first (damage + heal, then debuffs)
+        list.sort((a, b) => (b.damage + b.heal) - (a.damage + a.heal) || b.debuffs - a.debuffs);
         context.hateList = list;
     }
 }

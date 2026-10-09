@@ -508,6 +508,14 @@ async function castSpellInner(actor, spellItem, opts = {}) {
             await target.update({ "system.hits.value": Math.round(cur - restored) });
             await checkHitThresholds(target);
             healLine = `<p><em>${esc(target.name)} recovers ${restored} hits (${cur} → ${cur - restored}).</em></p>`;
+            // Healing aggro (2026-10-08): mobs with the heal target on
+            // their hate list gain hate towards the healer.
+            if (restored > 0 && target.id !== actor.id) {
+                try {
+                    const { recordHealAggro } = await import("./memblur.js");
+                    await recordHealAggro(actor, target, restored);
+                } catch (e) { /* non-fatal */ }
+            }
         } else {
             healLine = `<p><em>Healing not applied — you don't control ${esc(target.name)}.</em></p>`;
         }
@@ -563,6 +571,13 @@ async function castSpellInner(actor, spellItem, opts = {}) {
                 effectNote = (baseTarget.isOwner || game.user?.isGM)
                     ? await applyBaseSpellEffect(actor, baseTarget, cls, spellItem)
                     : `<p><em>Effect not applied — you don't control ${esc(baseTarget.name)}.</em></p>`;
+                // Debuff aggro (2026-10-08): hostile debuffs record hate.
+                if (cls.subtype === "debuff" && baseTarget.id !== actor.id) {
+                    try {
+                        const { recordAggro } = await import("./memblur.js");
+                        await recordAggro(baseTarget, actor, { debuffs: 1 });
+                    } catch (e) { /* non-fatal */ }
+                }
                 // Memblur secondary (2026-10-07): base spells (e.g., mez) with a
                 // memory-blur effect apply it after the primary effect resolves.
                 // Base spells return early and never reach the announced-cast
@@ -631,6 +646,18 @@ async function castSpellInner(actor, spellItem, opts = {}) {
     const regenNote = await applyRegenBuff(actor, spellItem, worn.durationFactor);
     const buffTarget = targetedActor() ?? actor;
     const buffNote = await applySpellBuffs(actor, spellItem, buffTarget, worn.durationFactor);
+    // Debuff aggro (2026-10-08): hostile debuffs via the announced path
+    // record hate (self-buffs with tradeoff debuffs do not).
+    if (buffTarget.id !== actor.id) {
+        const hasDebuff = (spellEffectsOf(spellItem) ?? []).some(e =>
+            String(e?.type ?? "").toLowerCase() === "debuff");
+        if (hasDebuff) {
+            try {
+                const { recordAggro } = await import("./memblur.js");
+                await recordAggro(buffTarget, actor, { debuffs: 1 });
+            } catch (e) { /* non-fatal */ }
+        }
+    }
     // Invisibility (2026-10-07): wire to Foundry's native `invisible` status.
     let invisNote = "";
     for (const eff of spellEffectsOf(spellItem) ?? []) {

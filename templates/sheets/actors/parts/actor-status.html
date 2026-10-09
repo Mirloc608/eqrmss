@@ -104,13 +104,14 @@
     <h3>Hate List</h3>
     {{#if hateList.length}}
     <table style="width: 100%; border-collapse: collapse; font-size: 0.95em;">
-      <thead><tr style="text-align: left; opacity: 0.7;"><th>Attacker</th><th style="text-align: right;">Damage</th><th style="text-align: right;">Debuffs</th><th style="text-align: right;">Last Round</th></tr></thead>
+      <thead><tr style="text-align: left; opacity: 0.7;"><th>Attacker</th><th style="text-align: right;">Damage</th><th style="text-align: right;">Debuffs</th><th style="text-align: right;">Heal</th><th style="text-align: right;">Last Round</th></tr></thead>
       <tbody>
         {{#each hateList}}
         <tr style="border-top: 1px solid rgba(0,0,0,0.1);">
           <td>{{this.name}}</td>
           <td style="text-align: right;">{{this.damage}}</td>
           <td style="text-align: right;">{{this.debuffs}}</td>
+          <td style="text-align: right;">{{this.heal}}</td>
           <td style="text-align: right;">{{this.lastRound}}</td>
         </tr>
         {{/each}}
