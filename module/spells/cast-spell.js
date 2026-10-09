@@ -298,6 +298,18 @@ async function castSpellInner(actor, spellItem, opts = {}) {
         }
     }
 
+    // Swarm spells (2026-10-08): require a valid target up front, before
+    // the ESF gate and mana spend — a misclick refuses the cast instead
+    // of burning mana on a swarm that cannot be summoned.
+    const hasSwarm = (spellEffectsOf(spellItem) ?? []).some(e => isSwarmEffect(e));
+    if (hasSwarm && !skipToResolution) {
+        const swarmTgt = (delayedTargets ?? targetedActors())[0] ?? targetedActor();
+        if (!swarmTgt) {
+            ui.notifications?.warn(`${actor.name} cannot cast ${name}: swarm spells need a target.`);
+            return { ok: false, reason: "target" };
+        }
+    }
+
     // ---- Vision check (2026-10-08): targeted attack spells go through
     // canSenseTarget() — a target the caster cannot sense (invisible and
     // fooled by type, with no see-invisible) cannot be aimed at.
