@@ -56,6 +56,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         combat: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-combat.html"
         },
+        disciplines: {
+            template: "systems/eqrmss/templates/sheets/actors/parts/actor-disciplines.html"
+        },
         skills: {
             template: "systems/eqrmss/templates/sheets/actors/parts/actor-skills.html"
         },

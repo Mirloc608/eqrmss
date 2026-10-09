@@ -1,0 +1,31 @@
+<div class="tab disciplines" data-group="primary" data-tab="disciplines">
+  {{#if disciplines}}
+  <div class="panel">
+    <h4>Disciplines</h4>
+    <p><em>Trained combat disciplines.</em></p>
+    {{#each disciplines}}
+    <div class="discipline-entry">
+      <button type="button" data-action="activateDiscipline" data-discipline-id="{{this.id}}" title="{{this.name}} (Level {{this.level}})">
+        {{this.name}} ({{this.level}})
+      </button>
+      <span class="discipline-desc">{{this.description}}</span>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+
+  {{#if capstones}}
+  <div class="panel">
+    <h4>Era Capstones</h4>
+    <p><em>Hand-designed abilities earned at level cap increases.</em></p>
+    {{#each capstones}}
+    <div class="capstone-entry">
+      <button type="button" data-action="activateCapstone" data-capstone-id="{{this.id}}" {{#if this.onCooldown}}disabled{{/if}} title="{{this.name}} (Level {{this.level}}): {{this.effect}} Cooldown: {{this.cooldown}}">
+        {{this.name}} ({{this.level}}){{#if this.onCooldown}} (Used){{/if}}
+      </button>
+      <span class="capstone-desc">{{this.description}}</span>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>

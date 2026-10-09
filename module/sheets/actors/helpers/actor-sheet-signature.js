@@ -61,5 +61,23 @@ export class EQRMSSActorSignatureHelper {
                 this.sheet.render(false);
             });
         });
+
+        // Disciplines (2026-10-09): descriptive activation (mechanical effects future work)
+        html.querySelectorAll('[data-action="activateDiscipline"]').forEach(el => {
+            el.addEventListener("click", async (ev) => {
+                ev.preventDefault();
+                const discId = el.dataset.disciplineId;
+                if (!discId) return;
+                const discs = context.disciplines || [];
+                const disc = discs.find(d => d.id === discId);
+                if (!disc) return;
+                const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
+                const fxList = (disc.effects || []).map(e => `${esc(e.type)}: ${esc(e.value)}`).join("<br>");
+                await ChatMessage.create({
+                    speaker: ChatMessage.getSpeaker({ actor }),
+                    content: `<div class="eqrmss-discipline"><h3>${esc(disc.name)}</h3><p><strong>${esc(actor.name)}</strong> uses <strong>${esc(disc.name)}</strong>!</p><p>Duration: ${disc.durationRounds} rounds</p><p>${fxList}</p></div>`
+                });
+            });
+        });
     }
 }

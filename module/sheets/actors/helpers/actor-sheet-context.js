@@ -363,7 +363,7 @@ export class EQRMSSActorContextHelper {
         context.isBeastlord = classId === "beastlord";
         context.hasSpells = classId !== "" && classId !== "bard" && !PURE_MELEE.has(classId);
 
-        // Era Capstones (2026-10-09, refresh tiers 2026-10-09): available capstones for the Combat tab.
+        // Era Capstones (2026-10-09, refresh tiers 2026-10-09): available capstones for the Disciplines tab.
         // Uses game.eqrmss.capstones populated by the capstone loader at boot.
         // Refresh tiers: "combat" (end of combat), "rest" (end of rest), "day" (end of day).
         try {
@@ -384,6 +384,30 @@ export class EQRMSSActorContextHelper {
             }
         } catch (err) {
             context.capstones = [];
+        }
+
+        // Disciplines (2026-10-09): class disciplines for the Disciplines tab.
+        // Loaded by DisciplineLoader into CONFIG.EQRMSS.data.results.disciplines at boot.
+        try {
+            const discData = globalThis.CONFIG?.EQRMSS?.data?.results?.disciplines;
+            const actorLevel = Number(sys.attributes?.level?.value) || 1;
+            if (discData && classId) {
+                // disciplines is keyed by class or is an array
+                let classDiscs = [];
+                if (Array.isArray(discData)) {
+                    classDiscs = discData.filter(d => d.class === classId || d.classId === classId);
+                } else if (discData[classId]) {
+                    const cd = discData[classId];
+                    classDiscs = Array.isArray(cd) ? cd : (cd.disciplines || []);
+                }
+                context.disciplines = classDiscs
+                    .filter(d => (Number(d.level) || 1) <= actorLevel)
+                    .sort((a, b) => (Number(a.level) || 0) - (Number(b.level) || 0));
+            } else {
+                context.disciplines = [];
+            }
+        } catch (err) {
+            context.disciplines = [];
         }
     }
 
