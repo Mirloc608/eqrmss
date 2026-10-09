@@ -76,10 +76,24 @@
       "class": "rogue",
       "level": 70,
       "expansion": "OoW",
-      "effect": "For 90 seconds, +35% melee damage, +20% accuracy, +10% crit chance.",
+      "effect": "For 15 rounds, +35% melee damage, +20% accuracy, +10% crit chance.",
       "cooldown": "15 minutes",
       "description": "The rogue unleashes controlled fury.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 6
+          },
+          {
+            "target": "crit-bonus",
+            "value": 10
+          }
+        ]
+      }
     },
     {
       "id": "capstone-berserker-juggernaut-surge-70",
