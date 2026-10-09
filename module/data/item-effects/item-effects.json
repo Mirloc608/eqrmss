@@ -10263,16 +10263,16 @@
       ]
     },
     {
-      "description": "Triggered effect: Tiny Companion. Decrease Pet Size by 50%",
+      "description": "Triggered effect: Tiny Companion. Shrink cast on the caster's pet (50% size reduction).",
       "id": "clicky-tiny-companion",
       "kind": "triggered",
       "name": "Tiny Companion",
       "payload": [
         {
-          "type": "utility",
-          "effect": "shrink-pet",
+          "type": "shrink",
+          "target": "pet",
           "percent": 50,
-          "duration": 60
+          "duration": 270
         }
       ]
     }

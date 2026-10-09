@@ -644,7 +644,15 @@ async function castSpellInner(actor, spellItem, opts = {}) {
     // their mechanics in later stages; the mana economy is live).
     await spendMana();
     const regenNote = await applyRegenBuff(actor, spellItem, worn.durationFactor);
-    const buffTarget = targetedActor() ?? actor;
+    let buffTarget = targetedActor() ?? actor;
+    // Pet-targeted spells (2026-10-09): Tiny Companion and similar declare
+    // "target": "pet" — redirect to the caster's active pet.
+    if (String(spellItem?.system?.target ?? "").toLowerCase() === "pet") {
+        try {
+            const { findCasterPet } = await import("./pets/summon-pet.js");
+            buffTarget = findCasterPet(actor) ?? buffTarget;
+        } catch { /* fall back to targeted/caster */ }
+    }
     const buffNote = await applySpellBuffs(actor, spellItem, buffTarget, worn.durationFactor);
     // Debuff aggro (2026-10-08): hostile debuffs via the announced path
     // record hate (self-buffs with tradeoff debuffs do not).

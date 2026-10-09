@@ -488,17 +488,30 @@ export async function applyLevitatePayload({ effect, target, source }) {
  * "shrink" — EQ Shrink (2026-10-08). Reduces the target's physical
  * size (token scale); restored on expiry. Delegates to
  * module/spells/shrink.js via dynamic import (avoids cycles).
- * Payload shape: { type: "shrink", percent: <n>|amount: <n>, duration: <rounds> }
+ * Payload shape: { type: "shrink", percent: <n>|amount: <n>, duration: <rounds>, target: "pet"|undefined }
  * (amount may be negative in spell data — the magnitude is used).
+ * target: "pet" (2026-10-09) redirects to the caster's active pet
+ * (Tiny Companion) instead of the clicky wearer.
  */
-export async function applyShrinkPayload({ effect, target, source }) {
-    const miss = requireTarget(target, "shrink", source);
+export async function applyShrinkPayload({ effect, target, source, caster }) {
+    let finalTarget = target;
+    // Tiny Companion: shrink the caster's pet, not the caster
+    if (effect?.target === "pet") {
+        try {
+            const { findCasterPet } = await import("../spells/pets/summon-pet.js");
+            finalTarget = findCasterPet(caster ?? target);
+        } catch { finalTarget = null; }
+        if (!finalTarget) {
+            return { type: "shrink", final: 0, notes: ["no active pet to shrink"], source, applied: false };
+        }
+    }
+    const miss = requireTarget(finalTarget, "shrink", source);
     if (miss) return miss;
     const duration = payloadRounds(effect, 270);
     const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Shrink";
     try {
         const { applyShrink } = await import("../spells/shrink.js");
-        const note = await applyShrink(target, {
+        const note = await applyShrink(finalTarget, {
             scalePct: effect?.amount ?? effect?.percent ?? 34,
             rounds: duration, sourceName: dispName
         });
@@ -1026,7 +1039,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "feign") results.push(await applyFeignDeathPayload({ effect, caster, target, source }));
         else if (effect.type === "vampiric") results.push(await applyVampiric({ effect, target, source }));
         else if (effect.type === "identify") results.push(await applyIdentifyPayload({ effect, caster, target, source }));
-        else if (effect.type === "shrink") results.push(await applyShrinkPayload({ effect, target, source }));
+        else if (effect.type === "shrink") results.push(await applyShrinkPayload({ effect, target, source, caster }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
         else results.push({ type: effect.type ?? "unknown", final: 0, notes: ["unknown payload type"], source });
     }
