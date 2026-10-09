@@ -64,9 +64,18 @@ export async function activateClicky({ item }) {
         return { fired: false, reason: "no-owning-actor" };
     }
 
-    // Target: always the wearer (ruling 2026-10-06). Clicky effects
-    // apply only to the item's wearer, never to canvas targets.
-    const recipients = [actor];
+    // Target: wearer for beneficial clickies (ruling 2026-10-06), but
+    // offensive clickies (damage payload) target the current canvas
+    // targets instead (2026-10-09: Seawater Blast hit the wearer).
+    const isOffensive = Array.isArray(effect?.payload) &&
+        effect.payload.some(p => p?.type === "damage");
+    let recipients = [actor];
+    if (isOffensive) {
+        const canvasTargets = [...(game?.user?.targets ?? [])]
+            .map(t => t?.actor)
+            .filter(a => a && a?.id !== actor?.id);
+        if (canvasTargets.length > 0) recipients = canvasTargets;
+    }
 
     // Clickies cost 0 mana — never deduct anything.
 
