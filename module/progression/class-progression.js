@@ -10,7 +10,12 @@
 // Does NOT grant abilities.
 // progression-manager consumes this.
 //
+// AA grants (Phase 2, 2026-10-08): per-class per-level AA slugs
+// from module/data/progressions/aa-grants.js, merged by
+// getLevelProgression() as `aaGrants`.
 // ============================================================
+
+import { AA_GRANTS } from "../data/progressions/aa-grants.js";
 
 const LEVELS =
     Array.from(
@@ -740,11 +745,17 @@ level
 )
 {
 
-    return EQRMSS_CLASS_PROGRESSIONS[profession]
+    const base = EQRMSS_CLASS_PROGRESSIONS[profession]
         ?.levels
         ?. [level]
         ??
         null;
+    if (!base) return null;
+    // Phase 2 (2026-10-08): merge AA grants for this class/level.
+    const grants = AA_GRANTS[String(profession ?? "").toLowerCase()]
+        ?. [String(level)]
+        ?? [];
+    return { ...base, aaGrants: grants };
 
 }
 
