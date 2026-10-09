@@ -1001,6 +1001,14 @@ export async function tickConditions(combat) {
                         notes.push(`${esc(d.name || "A swarm")} disperses — ${esc(actor.name)} is dead.`);
                         continue;
                     }
+                    // EQ: swarm pets die instantly if their master dies.
+                    if (d.casterId) {
+                        const master = globalThis.game?.actors?.get(d.casterId);
+                        if (master && master.system?.status?.dead) {
+                            notes.push(`${esc(d.name || "A swarm")} disperses — its master is dead.`);
+                            continue;
+                        }
+                    }
                     const { resolveSwarmTick } = await import("../spells/pets/swarm-combat.js");
                     const res = await resolveSwarmTick(actor, d);
                     if (res.total > 0) {
