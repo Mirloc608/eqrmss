@@ -125,6 +125,50 @@ export async function getDestinationsByModule(moduleName) {
         .filter(d => d.module === moduleName);
 }
 
+// Runtime safe-spot registry: scene ID → { x, y, module }.
+// Evacuate moves targets to the safe spot on their CURRENT scene.
+// World modules register these; fallback is scene center.
+const _safeSpots = new Map();
+
+/**
+ * Register a safe spot (evacuation point) for a scene.
+ * Called by world modules at init, or by the GM for custom maps.
+ * @param {string} sceneId - Foundry scene ID or name
+ * @param {number} x - X coordinate (pixels)
+ * @param {number} y - Y coordinate (pixels)
+ * @param {string} moduleName - World module name (for logging)
+ */
+export function registerSafeSpot(sceneId, x, y, moduleName = "unknown") {
+    if (!sceneId) {
+        console.warn(`EQRMSS | Teleport | registerSafeSpot: missing sceneId`);
+        return false;
+    }
+    _safeSpots.set(sceneId, { x: x ?? null, y: y ?? null, module: moduleName });
+    console.log(`EQRMSS | Teleport | safe spot: ${sceneId} (${moduleName})`);
+    return true;
+}
+
+/**
+ * Get the safe spot for a scene.
+ * Checks runtime registry first, falls back to scene center.
+ * @param {string} sceneId - Foundry scene ID
+ * @returns {object|null} { x, y, source } or null if scene not found
+ */
+export function getSafeSpot(sceneId) {
+    const scene = globalThis.game?.scenes?.find(s => s.name === sceneId || s.id === sceneId);
+    if (!scene) return null;
+    if (_safeSpots.has(sceneId) || _safeSpots.has(scene.id) || _safeSpots.has(scene.name)) {
+        const s = _safeSpots.get(sceneId) ?? _safeSpots.get(scene.id) ?? _safeSpots.get(scene.name);
+        return {
+            x: s.x ?? (scene.width / 2),
+            y: s.y ?? (scene.height / 2),
+            source: `safe spot (${s.module})`
+        };
+    }
+    // Fallback: scene center
+    return { x: scene.width / 2, y: scene.height / 2, source: "scene center (no safe spot registered)" };
+}
+
 // Expose on game.eqrmss for world modules
 if (typeof game !== "undefined") {
     game.eqrmss = game.eqrmss || {};
@@ -133,6 +177,8 @@ if (typeof game !== "undefined") {
         getSceneBinding,
         getDestination,
         getDestinationsByModule,
+        registerSafeSpot,
+        getSafeSpot,
     };
 }
 
@@ -417,6 +463,70 @@ export async function gateToBind(caster, spellName = "Gate") {
 // ----------------------------------------------------------------
 
 /**
+ * Evacuate to the safe spot on the caster's current scene (2026-10-09).
+ * Does not change zones — moves target(s) to safety within the same scene.
+ * @param {object} caster - the evacuating caster
+ * @param {object|null} target - for "single": the target; otherwise null
+ * @param {string} spellName - display name
+ * @param {string} mode - "self", "single", or "group"
+ * @returns {Promise<string>} chat note HTML
+ */
+async function evacuateToSafeSpot(caster, target, spellName = "Evacuate", mode = "self") {
+    const casterTok = activeTokenOf(caster);
+    if (!casterTok) {
+        return `<p><em>${esc(caster?.name ?? "Caster")} tries to evacuate, but has no token on the scene.</em></p>`;
+    }
+    const scene = casterTok.parent;
+    const sceneId = scene?.id;
+    if (!sceneId) {
+        return `<p><em>${esc(caster?.name ?? "Caster")} tries to evacuate, but is not on a scene.</em></p>`;
+    }
+
+    const spot = getSafeSpot(sceneId);
+    if (!spot) {
+        return `<p><em>${esc(caster?.name ?? "Caster")} casts ${esc(spellName)}, but the current scene is not available.</em></p>`;
+    }
+
+    // Determine who moves
+    let movers = [];
+    if (mode === "self") {
+        movers = [caster];
+    } else if (mode === "single") {
+        movers = target ? [target] : [caster];
+    } else {
+        // group: caster + allies on the same scene
+        movers = [caster];
+        try {
+            const { getAlliesInRange } = await import("./songs.js").catch(() => ({}));
+            if (getAlliesInRange) {
+                const allies = await getAlliesInRange(caster, 100) ?? [];
+                for (const a of allies) {
+                    if (a?.id !== caster?.id && !movers.some(m => m?.id === a?.id)) movers.push(a);
+                }
+            }
+        } catch { /* allies unavailable: just the caster */ }
+    }
+
+    let moved = 0;
+    for (const m of movers) {
+        if (!m || !canControl(m)) continue;
+        const tok = activeTokenOf(m);
+        if (!tok || tok.parent?.id !== sceneId) continue; // must be on the same scene
+        try {
+            await tok.document.update({ x: spot.x, y: spot.y });
+            moved++;
+        } catch { /* skip failures */ }
+    }
+
+    const who = mode === "group" ? "the group" : esc(movers[0]?.name ?? "Caster");
+    if (moved === 0) {
+        return `<p><em>${who} tries to evacuate, but no tokens could be moved.</em></p>`;
+    }
+    const spotNote = spot.source.includes("no safe spot") ? " (GM: no safe spot registered for this scene — used center)" : "";
+    return `<p><em>${mode === "group" ? esc(caster?.name ?? "Caster") + " evacuates the group" : who + " evacuates"} to a safe spot${spotNote}.</em></p>`;
+}
+
+/**
  * Handle a teleport-type spell effect.
  * @param {object} opts - { effect, caster, target, spellName }
  * @returns {Promise<string>} chat note HTML
@@ -506,21 +616,20 @@ export async function applyTeleport({ effect, caster, target, spellName }) {
 
         case "evacuate-group":
             if (dest === "current-zone" || !dest) {
-                // Evac to safe point in current zone — move group to scene default
-                // For now, teleport group to scene center (GM should configure)
-                return `<p><em>${esc(caster?.name ?? "Caster")} evacuates the group to a safe point. (GM: configure evacuation points per scene.)</em></p>`;
+                // Evac to safe spot on the caster's CURRENT scene (2026-10-09).
+                return await evacuateToSafeSpot(caster, null, spellName, "group");
             }
             return await teleportGroup(caster, dest, spellName);
 
         case "evacuate-self":
             if (!dest) {
-                return `<p><em>${esc(caster?.name ?? "Caster")} evacuates to a safe point. (GM: configure evacuation points per scene.)</em></p>`;
+                return await evacuateToSafeSpot(caster, null, spellName, "self");
             }
             return await teleportActor(caster, dest, spellName);
 
         case "evacuate-single":
             if (!dest) {
-                return `<p><em>${esc(target?.name ?? "Target")} evacuates to a safe point. (GM: configure evacuation points per scene.)</em></p>`;
+                return await evacuateToSafeSpot(caster, target, spellName, "single");
             }
             return await teleportActor(target, dest, spellName);
 
