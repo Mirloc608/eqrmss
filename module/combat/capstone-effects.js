@@ -342,6 +342,44 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
             }
             break;
         }
+
+        case "group-heal": {
+            // Heal group for % of max HP + cure detrimental effects.
+            const pct = mech.healPct || 50;
+            const combatants = game.combat?.combatants ?? [];
+            const allies = combatants
+                .filter(c => c.actor)
+                .map(c => c.actor);
+            if (!allies.includes(caster)) allies.unshift(caster);
+
+            for (const a of allies) {
+                const max = Number(a.system?.hits?.max) || 1;
+                const healAmount = Math.round((pct / 100) * max);
+                const cur = Number(a.system?.hits?.value) || 0;
+                await a.update({ "system.hits.value": Math.max(0, cur - healAmount) });
+                notes.push(`${esc(a.name)} recovers ${healAmount} hits.`);
+
+                // Cure detrimental effects if requested
+                if (mech.cure) {
+                    const dots = [...(a.system?.status?.dots || [])];
+                    const spellEffects = [...(a.system?.status?.spellEffects || [])];
+                    // Remove dots and debuffs from enemies (negative effects)
+                    const cleanDots = dots.filter(d => d.source !== "enemy" && d.source !== "spell");
+                    const cleanEffects = spellEffects.filter(e => {
+                        // Keep buffs, remove debuffs
+                        return e.source === "capstone" || e.source === "spell-buff" || !e.modifiers?.some(m => m.value < 0);
+                    });
+                    if (cleanDots.length !== dots.length || cleanEffects.length !== spellEffects.length) {
+                        await a.update({
+                            "system.status.dots": cleanDots,
+                            "system.status.spellEffects": cleanEffects
+                        });
+                        notes.push(`${esc(a.name)}: detrimental effects cured.`);
+                    }
+                }
+            }
+            break;
+        }
             
         default:
             notes.push(`<em>Unknown mechanics type: ${esc(mech.type)}</em>`);

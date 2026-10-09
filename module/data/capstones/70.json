@@ -18,10 +18,15 @@
       "class": "paladin",
       "level": 70,
       "expansion": "OoW",
-      "effect": "Group heal for 1000 + cure all detrimental effects. Cannot be interrupted.",
+      "effect": "Heal group for 50% of max HP and cure all detrimental effects. Cannot be interrupted.",
       "cooldown": "15 minutes",
       "description": "Mithaniel Marr's blessing washes over the faithful.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "group-heal",
+        "healPct": 50,
+        "cure": true
+      }
     },
     {
       "id": "capstone-shadowknight-visage-of-death-70",
