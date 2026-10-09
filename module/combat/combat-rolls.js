@@ -667,7 +667,10 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             const feet = tokenDistanceFt(attackerTok, targetTok);
             if (feet !== null) {
                 const adjacent = feet <= MELEE_REACH_FT + 1e-6;
-                if (!missileAttack && !adjacent) {
+                // Spells (2026-10-09): synthetic bolt weapons do their own
+                // range check in cast-spell.js; skip the melee reach gate.
+                const isSpellWeapon = String(weaponType ?? "").toLowerCase() === "spell";
+                if (!missileAttack && !adjacent && !isSpellWeapon) {
                     await ChatMessage.create({
                         speaker: ChatMessage.getSpeaker({ actor }),
                         content: `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2><p><em>${esc(targetName)} is ${Math.round(feet)} ft away — out of melee reach.</em></p>`
