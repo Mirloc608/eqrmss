@@ -274,7 +274,13 @@ async function applyBuff({ effect, target, source, caster }) {
         name: (() => {
           if (effect?.name) return effect.name;
             const m = String(source ?? "").match(/^(?:triggered|worn|proc):(.+)$/);
-            if (m) return m[1].split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            if (m) {
+                // Strip "clicky-" prefix from effect IDs (2026-10-09):
+                // "clicky-form-of-defense-5" -> "Form Of Defense 5", not
+                // "Clicky Form Of Defense 5".
+                let slug = m[1].replace(/^clicky-/, '');
+                return slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            }
             return "Clicky Buff";
         })(), label, kind: "buff", source: "spell",
         spellId: source ?? "clicky", scaledTarget, scaledStat, scaledValue, roundsLeft: duration,
