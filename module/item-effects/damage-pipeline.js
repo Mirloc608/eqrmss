@@ -273,6 +273,8 @@ async function applyBuff({ effect, target, source, caster }) {
             return "Clicky Buff";
         })(), label, kind: "buff", source: "spell",
         spellId: source ?? "clicky", scaledTarget, scaledStat, scaledValue, roundsLeft: duration,
+        // Slow is harmful — show in Debuffs (2026-10-09).
+        ...(scaledTarget === "slow" ? { category: "debuff" } : {}),
     });
     await target.update({ "system.status.spellEffects": list });
     // Hasted/slowed visual indicators (2026-10-07)
@@ -284,7 +286,7 @@ async function applyBuff({ effect, target, source, caster }) {
     } else if (scaledTarget === "slow" && scaledValue > 0) {
         try {
             const { applyStatusEffect } = await import("../spells/status-wiring.js");
-            await applyStatusEffect(target, "slowed", `${label} (Clicky)`, duration, "icons/svg/clock.svg", { source });
+            await applyStatusEffect(target, "slowed", `${label} (Clicky)`, duration, "icons/svg/downgrade.svg", { source });
         } catch (e) { /* ignore */ }
     }
     return { type: "buff", final: scaledValue, notes: [`${label} for ${duration} rounds`], source, applied: true };
