@@ -15,6 +15,16 @@
  * - defensive: Immunities and damage reduction
  * - utility: Teleport, invis, feign death, etc.
  * - special: Unique mechanics handled individually
+ * - triggered: Conditional effects (when X happens, apply Y)
+ *
+ * Triggered mechanics schema:
+ * {
+ *   "type": "triggered",
+ *   "durationRounds": 20,
+ *   "trigger": { "event": "spellCast", "spellTypes": ["mez", "stun"], "chance": 100 },
+ *   "effect": { "type": "buff", "target": "group", "durationRounds": 5,
+ *               "modifiers": [{"target": "ob", "value": 2}] }
+ * }
  *
  * RMSS mapping: EQ percentages ÷10 for stats (min 1), AC 1:1 to DB.
  * Damage formulas use "level" variable (caster level).
@@ -260,6 +270,22 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
             notes.push(`<em>${esc(capstone.name)}: ${esc(mech.description || "Utility effect.")}</em>`);
             // TODO: Implement specific utility actions (teleport, invis, feign)
             break;
+
+        case "triggered": {
+            const duration = mech.durationRounds || 20;
+            const triggers = [...(caster.system?.status?.triggers || [])];
+            triggers.push({
+                source: "capstone",
+                capstoneId: capstone.id,
+                capstoneName: capstone.name,
+                trigger: mech.trigger || {},
+                effect: mech.effect || {},
+                expiresRound: (game.combat?.round ?? 0) + duration,
+            });
+            await caster.update({ "system.status.triggers": triggers });
+            notes.push(`${esc(caster.name)}: ${esc(capstone.name)} trigger active for ${duration} rounds.`);
+            break;
+        }
             
         case "special":
             notes.push(`<em>${esc(capstone.name)}: Special mechanics not yet implemented.</em>`);
@@ -268,6 +294,100 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
             
         default:
             notes.push(`<em>Unknown mechanics type: ${esc(mech.type)}</em>`);
+    }
+    
+    return notes;
+}
+
+/**
+ * Check and fire triggers for an actor on a game event.
+ * @param {Actor} actor - The actor to check triggers for
+ * @param {string} event - Event name (e.g., "spellCast")
+ * @param {Object} data - Event data (e.g., {spellType: "mez", spell: spellItem})
+ * @returns {string[]} - Notes for chat
+ */
+export async function checkCapstoneTriggers(actor, event, data = {}) {
+    const notes = [];
+    const triggers = [...(actor.system?.status?.triggers || [])];
+    if (!triggers.length) return notes;
+    
+    const currentRound = game.combat?.round ?? 0;
+    const remaining = [];
+    let fired = false;
+    
+    for (const t of triggers) {
+        // Expire old triggers
+        if (t.expiresRound && currentRound > t.expiresRound) continue;
+        if (t.source !== "capstone") {
+            remaining.push(t);
+            continue;
+        }
+        
+        const trig = t.trigger || {};
+        // Check event match
+        if (trig.event !== event) {
+            remaining.push(t);
+            continue;
+        }
+        
+        // Check spell type match (for spellCast events)
+        if (event === "spellCast" && trig.spellTypes?.length) {
+            const spellType = String(data.spellType || "").toLowerCase();
+            const matched = trig.spellTypes.some(st => spellType.includes(st.toLowerCase()));
+            if (!matched) {
+                remaining.push(t);
+                continue;
+            }
+        }
+        
+        // Check chance
+        const chance = Number(trig.chance) || 100;
+        if (chance < 100 && Math.random() * 100 >= chance) {
+            remaining.push(t);
+            continue;
+        }
+        
+        // Fire the trigger!
+        fired = true;
+        const effect = t.effect || {};
+        const targetType = effect.target || "self";
+        
+        // Determine targets
+        let targets = [actor];
+        if (targetType === "group") {
+            // Group = all allies (for now, just the caster's allies in combat)
+            // TODO: Proper group detection
+            const combatants = game.combat?.combatants ?? [];
+            targets = combatants
+                .filter(c => c.actor && c.actor.id !== actor.id)
+                .map(c => c.actor);
+            targets.unshift(actor); // Include caster
+        }
+        
+        // Apply the effect to each target
+        for (const tgt of targets) {
+            if (effect.type === "buff" && effect.modifiers?.length) {
+                const duration = effect.durationRounds || 5;
+                // Create a pseudo-capstone for the buff application
+                const pseudoCap = { id: t.capstoneId, name: t.capstoneName };
+                const tNotes = [];
+                await applyCapstoneBuff(tgt, pseudoCap, effect.modifiers, duration, tNotes);
+                notes.push(...tNotes);
+            }
+        }
+        
+        if (trig.consumes !== false) {
+            // Trigger is consumed after firing (default)
+            // Don't add back to remaining
+        } else {
+            remaining.push(t);
+        }
+        
+        notes.push(`<em>${esc(t.capstoneName)} triggers!</em>`);
+    }
+    
+    if (fired || remaining.length !== triggers.length) {
+        await actor.update({ "system.status.triggers": remaining });
     }
     
     return notes;

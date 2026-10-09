@@ -236,7 +236,35 @@
       "effect": "For 2 minutes, whenever the enchanter casts mez/stun/charm, group gains +25% spell damage and +15% melee damage for 30 sec.",
       "cooldown": "15 minutes",
       "description": "The beguiler's mastery deepens \u2014 control becomes carnage.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "triggered",
+        "durationRounds": 20,
+        "trigger": {
+          "event": "spellCast",
+          "spellTypes": [
+            "mez",
+            "stun",
+            "charm"
+          ],
+          "chance": 100
+        },
+        "effect": {
+          "type": "buff",
+          "target": "group",
+          "durationRounds": 5,
+          "modifiers": [
+            {
+              "target": "ob",
+              "value": 3
+            },
+            {
+              "target": "mana",
+              "value": 2
+            }
+          ]
+        }
+      }
     },
     {
       "id": "capstone-magician-virulent-talon-110",

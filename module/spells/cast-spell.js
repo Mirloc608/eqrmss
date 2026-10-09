@@ -1030,6 +1030,27 @@ async function castSpellInner(actor, spellItem, opts = {}) {
             <h2>${esc(actor.name)} casts ${esc(name)}</h2>
             ${esfNote}${wornNote}${regenNote}${buffNote}${invisNote}${levNote}${illusionNote}${teleportNote}${summonNote}${visionNote}${memblurNote}${pacifyNote}${factionNote}${dispelNote}${feignNote}${vampiricNote}${identifyNote}${shrinkNote}${warderNote}${petNote}${familiarNote}${reclaimNote}${announcedLine}<p><em>${manaNote.trim()}</em></p>`)
     });
+    // Era Capstones (2026-10-09): check triggered capstone effects on spell cast.
+    // Detects mez/stun/charm from spell name and effect text.
+    try {
+        const { checkCapstoneTriggers } = await import("../combat/capstone-effects.js");
+        const spellName = String(name || "").toLowerCase();
+        const spellText = String(spellItem?.system?.description || "").toLowerCase();
+        const combined = spellName + " " + spellText;
+        let spellType = "";
+        if (combined.includes("mez") || combined.includes("mesmer")) spellType = "mez";
+        else if (combined.includes("stun")) spellType = "stun";
+        else if (combined.includes("charm")) spellType = "charm";
+        if (spellType) {
+            const triggerNotes = await checkCapstoneTriggers(actor, "spellCast", { spellType, spell: spellItem });
+            if (triggerNotes.length) {
+                await ChatMessage.create({
+                    speaker: ChatMessage.getSpeaker({ actor }),
+                    content: `<div class="eqrmss-trigger">${triggerNotes.join("<br>")}</div>`
+                });
+            }
+        }
+    } catch (e) { console.error("EQRMSS | capstone trigger check failed", e); }
     return { ok: true, kind: cls.kind, mods };
 }
 

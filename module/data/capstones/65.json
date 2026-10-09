@@ -272,7 +272,30 @@
       "effect": "For 2 minutes, whenever the enchanter casts a mez or stun, the group gains +15% spell damage for 30 seconds.",
       "cooldown": "15 minutes",
       "description": "The enchanter's control magic empowers allies' destruction.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "triggered",
+        "durationRounds": 20,
+        "trigger": {
+          "event": "spellCast",
+          "spellTypes": [
+            "mez",
+            "stun"
+          ],
+          "chance": 100
+        },
+        "effect": {
+          "type": "buff",
+          "target": "group",
+          "durationRounds": 5,
+          "modifiers": [
+            {
+              "target": "ob",
+              "value": 2
+            }
+          ]
+        }
+      }
     },
     {
       "id": "capstone-magician-host-of-the-elements-65",
