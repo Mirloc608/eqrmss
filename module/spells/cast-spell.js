@@ -213,7 +213,22 @@ function wornNoteFor(worn, spellItem, baseCost, cost) {
     return `<p><em>Worn focus: ${bits.join("; ")}.</em></p>`;
 }
 
+/**
+ * Public cast entry: runs the cast, then fires trigger-cast sub-spells
+ * on a successful, non-delayed cast. Delayed-fire casts fire their
+ * triggers at resolution (fireDelayedCast routes through this wrapper).
+ */
 export async function castSpell(actor, spellItem, opts = {}) {
+    const res = await castSpellInner(actor, spellItem, opts);
+    const depth = Number(opts?.triggerDepth) || 0;
+    if (res?.ok && !res?.delayed && depth < 3) {
+        const { fireTriggers } = await import("./trigger-cast.js");
+        await fireTriggers(actor, spellItem, opts);
+    }
+    return res;
+}
+
+async function castSpellInner(actor, spellItem, opts = {}) {
     if (!actor || !spellItem) return { ok: false, reason: "missing" };
     // Feign Death (2026-10-07): taking any action breaks the feign —
     // the character stands up to act, then the action proceeds.
@@ -438,7 +453,9 @@ export async function castSpell(actor, spellItem, opts = {}) {
         });
     };
     // Reclaim Energy appends the restored amount below, so this is let.
-    let manaNote = skipToResolution ? " (mana spent at declaration)"
+    // Triggered sub-casts cost no mana (the parent cast paid).
+    let manaNote = opts._triggered ? ""
+        : skipToResolution ? " (mana spent at declaration)"
         : cost > 0 ? ` Mana ${before} → ${before - cost}.` : "";
 
     if (cls.kind === "bolt") {

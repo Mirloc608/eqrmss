@@ -126,7 +126,12 @@ export function classifySpell(spellItem) {
         const amount = Number(heal.amount ?? heal.max ?? heal.min) || 0;
         if (amount > 0) return { kind: "heal", amount };
     }
-    if (effects.length) return { kind: "later", reason: "utility effect — no mechanical track yet" };
+    if (effects.length) {
+        const hasTrigger = effects.some(e =>
+            String(e?.type ?? "").toLowerCase() === "utility" &&
+            String(e?.effect ?? "").toLowerCase() === "trigger-cast");
+        return { kind: "later", reason: hasTrigger ? "utility effect — triggers sub-spell" : "utility effect — no mechanical track yet" };
+    }
     return { kind: "none" };
 }
 
