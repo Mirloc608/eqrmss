@@ -147,6 +147,27 @@ async function applyDamage({ effect, target, source }) {
         }
     }
 
+    // Absorb hook (2026-10-09): item-effect damage (procs, worn,
+    // triggered) counts as spell damage for spell-only absorbs.
+    if (final > 0 && target) {
+        const ab = target?.system?.status?.absorb;
+        const abAmount = Number(ab?.amount) || 0;
+        // Pipeline damage is always spell-like (proc/worn/triggered),
+        // so spell-only absorbs apply; all-damage absorbs apply too.
+        if (abAmount > 0) {
+            const absorbed = Math.min(final, abAmount);
+            const abLeft = abAmount - absorbed;
+            final -= absorbed;
+            const abName = String(ab?.source ?? "absorb");
+            if (abLeft > 0) {
+                await persistValue(target, "system.status.absorb.amount", abLeft);
+                notes.push(`${abName} absorbs ${absorbed} damage (${abLeft} remaining)`);
+            } else {
+                await persistValue(target, "system.status.absorb", null);
+                notes.push(`${abName} absorbs ${absorbed} damage and is depleted`);
+            }
+        }
+    }
     const taken = (target?.system?.hits?.value ?? 0) + final;
     await persistValue(target, "system.hits.value", taken);
 
