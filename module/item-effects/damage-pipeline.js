@@ -291,7 +291,7 @@ async function applyBuff({ effect, target, source, caster }) {
     } else if (scaledTarget === "slow" && scaledValue > 0) {
         try {
             const { applyStatusEffect } = await import("../spells/status-wiring.js");
-            await applyStatusEffect(baseTarget, "slowed", `${label} (Clicky)`, duration, "icons/svg/downgrade.svg", { source });
+            await applyStatusEffect(baseTarget, "slowed", `${label} (Clicky)`, duration, "icons/svg/downgrade.svg", { source, category: "debuff" });
         } catch (e) { /* ignore */ }
     }
     return { type: "buff", final: scaledValue, notes: [`${label} for ${duration} rounds`], source, applied: true };
