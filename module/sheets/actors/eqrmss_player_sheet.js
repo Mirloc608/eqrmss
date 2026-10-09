@@ -9,7 +9,7 @@ import { exhaustionMaxFor } from "../../combat/subdue.js";
 import { progressionManager } from "../../progression/progression-manager.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
-import { groupSpellsByCategory } from "./helpers/actor-sheet-spells.js";
+import { groupSpellsByCategory, spellBaseName, spellRankNumber } from "./helpers/actor-sheet-spells.js";
 
 export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
@@ -127,9 +127,25 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
         // Readied spells/songs for the Combat tab (2026-10-07):
         // only the readied subset, not all known.
-        context.readiedSpells = (context.items?.spells ?? []).filter(
+        // Deduplicated by base name (2026-10-09): highest rank wins;
+        // duplicate item copies of the same rank collapse to one row.
+        const readied = (context.items?.spells ?? []).filter(
             sp => readySpells.includes(sp._id ?? sp.id)
         );
+        const byBase = new Map();
+        for (const sp of readied) {
+            const base = spellBaseName(sp.name ?? "");
+            const rank = spellRankNumber(sp);
+            const existing = byBase.get(base);
+            if (!existing || rank > existing.rank) {
+                byBase.set(base, { item: sp, rank });
+            }
+            // Same rank duplicate: keep the first (ignore the copy).
+        }
+        context.readiedSpells = [...byBase.values()].map(({ item, rank }) => ({
+            ...item,
+            rankDisplay: rank > 1 ? `Rank ${rank}` : ""
+        }));
         // Bard: "readied" songs = twist playlist (songs currently queued).
         const songPlaylist = Array.isArray(system.status?.songPlaylist)
             ? system.status.songPlaylist : [];

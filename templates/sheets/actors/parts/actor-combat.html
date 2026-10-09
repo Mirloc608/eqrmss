@@ -54,12 +54,13 @@
   <div class="panel">
     <h4>Spells</h4>
     <table class="rmss-table">
-      <thead><tr><th></th><th>Name</th><th>Spell List</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
+      <thead><tr><th></th><th>Name</th><th>Rank</th><th>Spell List</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
       <tbody>
         {{#each readiedSpells}}
           <tr data-item-id="{{this._id}}">
             <td><button class="cast-spell" data-item-id="{{this._id}}" title="Cast spell (EQ mana cost; RMSS resolution)">Cast</button></td>
             <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+            <td>{{this.rankDisplay}}</td>
             <td>{{this.system.spell_list}}</td>
             <td>{{this.system.level}}</td>
             <td>{{this.system.type}}</td>
@@ -67,7 +68,7 @@
             <td>{{this.system.duration}}</td>
           </tr>
         {{else}}
-          <tr><td colspan="7"><em>No spells readied — ready spells on the Spells tab.</em></td></tr>
+          <tr><td colspan="8"><em>No spells readied — ready spells on the Spells tab.</em></td></tr>
         {{/each}}
       </tbody>
     </table>
