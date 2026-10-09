@@ -250,7 +250,22 @@ async function castSpellInner(actor, spellItem, opts = {}) {
     // every factor is 1 and this block is a no-op.
     const worn = gatherWornCastMods(actor, spellItem, cls);
     const baseCost = Math.max(0, Number(spellItem.system?.manaCost) || 0);
-    const cost = worn.manaFactor === 1 ? baseCost : Math.max(0, Math.round(baseCost * worn.manaFactor));
+    let cost = worn.manaFactor === 1 ? baseCost : Math.max(0, Math.round(baseCost * worn.manaFactor));
+    // Era Capstones (2026-10-09): apply mana efficiency from active capstone buffs.
+    // Modifier target "mana-efficiency" with value = % reduction (e.g., 20 = -20% cost).
+    try {
+        const effects = actor.system?.status?.spellEffects || [];
+        let efficiency = 0;
+        for (const e of effects) {
+            if (e.source !== "capstone") continue;
+            for (const m of (e.modifiers || [])) {
+                if (m.target === "mana-efficiency") efficiency += Number(m.value) || 0;
+            }
+        }
+        if (efficiency > 0 && cost > 0) {
+            cost = Math.max(0, Math.round(cost * (1 - efficiency / 100)));
+        }
+    } catch (e) { /* non-fatal */ }
     const wornNote = wornNoteFor(worn, spellItem, baseCost, cost);
     // Compact factor summary attached to the success returns so
     // a future cast-timer / range check can consume it.

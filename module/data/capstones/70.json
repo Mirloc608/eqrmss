@@ -189,10 +189,24 @@
       "class": "druid",
       "level": 70,
       "expansion": "OoW",
-      "effect": "For 2 minutes, spell damage +40%, mana cost -20%.",
+      "effect": "For 20 rounds, spell damage +40%, mana cost -20%.",
       "cooldown": "15 minutes",
       "description": "Nature's fury flows through the druid.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          },
+          {
+            "target": "mana-efficiency",
+            "value": 20
+          }
+        ]
+      }
     },
     {
       "id": "capstone-shaman-spirit-of-the-rhino-70",
