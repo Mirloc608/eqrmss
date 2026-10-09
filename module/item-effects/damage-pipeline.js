@@ -264,6 +264,8 @@ async function applyBuff({ effect, target, source, caster }) {
     if (Array.isArray(fx)) {
         for (const e of fx) {
             if (e?.scaledTarget !== scaledTarget) continue;
+            // For stat buffs, also match the specific stat (2026-10-09): AG/PR/ST/QU are different stats.
+            if (scaledTarget === "statBonus" && e?.scaledStat !== scaledStat) continue;
             const eVal = Number(e?.scaledValue) || 0;
             if (eVal >= scaledValue) {
                 return { type: "buff", final: 0, notes: [`${label} blocked by stronger ${e?.label ?? "existing buff"}`], source, applied: false };
