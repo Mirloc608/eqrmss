@@ -600,6 +600,27 @@ async function castSpellInner(actor, spellItem, opts = {}) {
                 <h2>${esc(actor.name)} casts ${esc(name)}${baseTargets.length > 1 ? ` (${baseTargets.length} targets)` : ` on ${esc(baseTargets[0].name)}`}</h2>
                 ${body}${wornNote}<p><em>${manaNote.trim()}</em></p>`)
         });
+        // Era Capstones (2026-10-09): check triggered capstone effects on base spell cast.
+        try {
+            const { checkCapstoneTriggers } = await import("../combat/capstone-effects.js");
+            const spellName = String(name || "").toLowerCase();
+            const spellText = String(spellItem?.system?.description || "").toLowerCase();
+            const combined = spellName + " " + spellText;
+            let spellType = "";
+            if (combined.includes("mez") || combined.includes("mesmer")) spellType = "mez";
+            else if (combined.includes("stun")) spellType = "stun";
+            else if (combined.includes("charm")) spellType = "charm";
+            console.log(`EQRMSS | Trigger check: spell="${name}", detected type="${spellType}", triggers on actor:`, actor.system?.status?.triggers?.length || 0);
+            if (spellType) {
+                const triggerNotes = await checkCapstoneTriggers(actor, "spellCast", { spellType, spell: spellItem });
+                if (triggerNotes.length) {
+                    await ChatMessage.create({
+                        speaker: ChatMessage.getSpeaker({ actor }),
+                        content: `<div class="eqrmss-trigger">${triggerNotes.join("<br>")}</div>`
+                    });
+                }
+            }
+        } catch (e) { console.error("EQRMSS | capstone trigger check failed", e); }
         return { ok: true, kind: "base", targets: applied, resisted: baseTargets.length === 1 ? applied[0].resisted : undefined, mods };
     }
 
