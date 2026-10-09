@@ -1021,6 +1021,16 @@ export async function tickConditions(combat) {
                         const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
                         updates["system.hits.value"] = cur + res.total;
                         notes.push(`${esc(actor.name)} is swarmed (${res.count} attacks: ${res.details.join("; ")}) — ${res.total} hits (${cur} → ${cur + res.total} concussion hits).`);
+                        // Hate (2026-10-09): swarm damage records aggro on the caster.
+                        if (d.casterId) {
+                            try {
+                                const caster = globalThis.game?.actors?.get(d.casterId);
+                                if (caster) {
+                                    const { recordAggro } = await import("../spells/memblur.js");
+                                    await recordAggro(actor, caster, { damage: res.total });
+                                }
+                            } catch { /* hate is GM-facing; never break the tick */ }
+                        }
                     } else if (res) {
                         notes.push(`${esc(actor.name)}'s swarm attacks miss (${res.count} attacks: ${res.details.join("; ")}).`);
                     }
