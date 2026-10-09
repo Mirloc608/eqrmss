@@ -187,6 +187,7 @@ export class EQRMSSAAAdvancement {
     static getAvailableAAs(actor) {
         const profession = this.getProfession(actor);
         const state = this.getAAState(actor);
+        const actorLevel = this.getLevel(actor);
         return this.getClassAAs(profession)
             .map(def => {
                 const check = this.checkEligibility(actor, def);
@@ -216,6 +217,9 @@ export class EQRMSSAAAdvancement {
                     } : null
                 };
             })
+            // Hide AAs above the actor's level (2026-10-08): a level 20
+            // should not see 50 level-55 AAs. Purchased AAs stay visible.
+            .filter(aa => aa.currentRank > 0 || aa.levelRequired <= actorLevel)
             .sort((a, b) =>
                 (a.levelRequired - b.levelRequired) ||
                 a.name.localeCompare(b.name)
