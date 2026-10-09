@@ -269,7 +269,7 @@
       "class": "enchanter",
       "level": 65,
       "expansion": "PoP",
-      "effect": "For 2 minutes, whenever the enchanter casts a mez or stun, the group gains +15% spell damage for 30 seconds.",
+      "effect": "For 20 rounds, whenever the enchanter casts a mez or stun, the group gains +15% spell damage for 5 rounds.",
       "cooldown": "15 minutes",
       "description": "The enchanter's control magic empowers allies' destruction.",
       "refresh": "combat",
@@ -282,7 +282,8 @@
             "mez",
             "stun"
           ],
-          "chance": 100
+          "chance": 100,
+          "consumes": false
         },
         "effect": {
           "type": "buff",

@@ -233,7 +233,7 @@
       "class": "enchanter",
       "level": 110,
       "expansion": "RoS",
-      "effect": "For 2 minutes, whenever the enchanter casts mez/stun/charm, group gains +25% spell damage and +15% melee damage for 30 sec.",
+      "effect": "For 20 rounds, whenever the enchanter casts mez/stun/charm, the group gains +25% spell damage and +15% mana for 5 rounds.",
       "cooldown": "15 minutes",
       "description": "The beguiler's mastery deepens \u2014 control becomes carnage.",
       "refresh": "combat",
@@ -247,7 +247,8 @@
             "stun",
             "charm"
           ],
-          "chance": 100
+          "chance": 100,
+          "consumes": false
         },
         "effect": {
           "type": "buff",
