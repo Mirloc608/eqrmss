@@ -167,7 +167,12 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
             const timedSource = el.dataset.timedSource;
             const groupId = el.dataset.groupId;
             if (timedId || timedSource || groupId) {
-                const list = [...(this.actor?.system?.status?.spellEffects ?? [])];
+                // Unlinked tokens (2026-10-09): resolve to base actor where
+                // spellEffects are stored (matches applyBuff fix).
+                const baseActor = this.actor?.isToken
+                    ? (globalThis.game?.actors?.get(this.actor?.token?.actorId) ?? this.actor)
+                    : this.actor;
+                const list = [...(baseActor?.system?.status?.spellEffects ?? [])];
                 const kept = list.filter(e => {
                     // Group dismiss (2026-10-07): remove all effects from the
                     // same spell/song, not just the clicked entry.
@@ -184,9 +189,9 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
                 });
                 const removed = list.filter(e => !kept.includes(e));
                 if (removed.some(e => e?.category === "debuff" && e?.snareValue != null)) {
-                    await this.actor.update({ "system.movement.snarePenalty": 0 });
+                    await baseActor.update({ "system.movement.snarePenalty": 0 });
                 }
-                await this.actor.update({ "system.status.spellEffects": kept });
+                await baseActor.update({ "system.status.spellEffects": kept });
             }
         }));
     }
