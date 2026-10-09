@@ -1009,13 +1009,19 @@ export async function tickConditions(combat) {
                             continue;
                         }
                     }
-                    const { resolveSwarmTick } = await import("../spells/pets/swarm-combat.js");
-                    const res = await resolveSwarmTick(actor, d);
-                    if (res.total > 0) {
+                    let res = null;
+                    try {
+                        const { resolveSwarmTick } = await import("../spells/pets/swarm-combat.js");
+                        res = await resolveSwarmTick(actor, d);
+                    } catch (err) {
+                        console.error("EQRMSS | Swarm tick failed:", err);
+                        notes.push(`<em>${esc(d.name || "A swarm")} fails to attack (see console).</em>`);
+                    }
+                    if (res && res.total > 0) {
                         const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
                         updates["system.hits.value"] = cur + res.total;
                         notes.push(`${esc(actor.name)} is swarmed (${res.count} attacks: ${res.details.join("; ")}) — ${res.total} hits (${cur} → ${cur + res.total} concussion hits).`);
-                    } else {
+                    } else if (res) {
                         notes.push(`${esc(actor.name)}'s swarm attacks miss (${res.count} attacks: ${res.details.join("; ")}).`);
                     }
                     const left = (Number(d.roundsLeft) || 1) - 1;
