@@ -1520,5 +1520,53 @@
       ],
       "description": "Increases your warder's dexterity, as well as providing them a chance to perform a slowing attack."
     }
+  },
+  {
+    "_id": "bst-bark-at-the-moon-call-75-r1",
+    "name": "Bark at the Moon Call",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-ringed-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 75,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "bark-at-the-moon-call",
+          "count": 1,
+          "duration": 18
+        }
+      ],
+      "description": "A denizen of the wild heeds the call and attacks the target for 18 seconds."
+    }
+  },
+  {
+    "_id": "bst-howling-at-the-moon-75-r1",
+    "name": "Howling at the Moon",
+    "type": "spell",
+    "img": "icons/magic/perception/eye-ringed-green.webp",
+    "system": {
+      "class": "beastlord",
+      "level": 75,
+      "school": "conjuration",
+      "target": "single",
+      "range": 150,
+      "castTime": 0,
+      "manaCost": 0,
+      "effects": [
+        {
+          "type": "summon-pet",
+          "pet": "howling-at-the-moon",
+          "count": 2,
+          "duration": 18
+        }
+      ],
+      "description": "Two denizens of the wild heed the call and attack the target for 18 seconds."
+    }
   }
 ]

@@ -889,14 +889,22 @@ export async function swarmPetAsDot(caster, target, petId, duration, spellName, 
     // otherwise 3-5 per cast (user ruling 2026-10-08).
     const swarmCount = Math.max(1, Number(count) || (3 + Math.floor(Math.random() * 3)));
 
-    // Swarm family: match a known creature family in the pet ID; small
-    // biting creatures (Bite table) otherwise.
+    // Swarm family: known pet-ID mappings first (e.g., Rage of Zomm is
+    // an earth elemental, not a biting animal); then match a known
+    // creature family in the pet ID; small biting creatures (Bite
+    // table) otherwise.
     const idLow = id.toLowerCase();
     const families = ["elemental", "undead", "animal", "construct", "dragon", "insect", "plant"];
-    let family = "animal";
-    if (idLow.includes("warder")) family = "animal";
-    else for (const f of families) {
-        if (f !== "animal" && idLow.includes(f)) { family = f; break; }
+    // Pet IDs with a known elemental/creature family (2026-10-09).
+    const knownFamilies = {
+        "rage-of-zomm": "elemental",
+    };
+    let family = knownFamilies[idLow] ?? "animal";
+    if (!knownFamilies[idLow]) {
+        if (idLow.includes("warder")) family = "animal";
+        else for (const f of families) {
+            if (f !== "animal" && idLow.includes(f)) { family = f; break; }
+        }
     }
 
     const rounds = Math.max(1, Number(duration) || 3);
@@ -926,7 +934,7 @@ export async function swarmPetAsDot(caster, target, petId, duration, spellName, 
         return `<p><em>Swarm failed: ${esc(err?.message ?? "unknown error")}.</em></p>`;
     }
 
-    return `<p><em>${esc(tgt.name)} is swarmed by ${swarmCount} creatures (level ${petLevel}, ${rounds} rounds).</em></p>`;
+    return `<p><em>${esc(tgt.name)} is swarmed by ${swarmCount} ${swarmCount === 1 ? "creature" : "creatures"} (level ${petLevel}, ${rounds} rounds).</em></p>`;
 }
 
 // ----------------------------------------------------------------
