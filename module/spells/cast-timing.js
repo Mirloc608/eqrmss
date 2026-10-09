@@ -111,13 +111,21 @@ export async function storePendingCast(actor, spellItem, targetIds, opts, waitRo
         roundsLeft: waitRounds,
         totalRounds: waitRounds
     };
-    await actor.update({ "system.status.pendingCast": pending });
+    // Unlinked tokens (2026-10-09): store on the base actor so the
+    // tick sweep (which iterates game.actors) can find it.
+    const baseActor = actor?.isToken
+        ? (globalThis.game?.actors?.get(actor?.token?.actorId) ?? actor)
+        : actor;
+    await baseActor.update({ "system.status.pendingCast": pending });
 }
 
 /** Clear a pending cast (fired or interrupted). */
 export async function clearPendingCast(actor) {
-    if (actor.system?.status?.pendingCast) {
-        await actor.update({ "system.status.pendingCast": null });
+    const baseActor = actor?.isToken
+        ? (globalThis.game?.actors?.get(actor?.token?.actorId) ?? actor)
+        : actor;
+    if (baseActor.system?.status?.pendingCast) {
+        await baseActor.update({ "system.status.pendingCast": null });
     }
 }
 
