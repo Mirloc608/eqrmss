@@ -2,7 +2,7 @@
   "level": 85,
   "capstones": [
     {
-      "id": "capstone-brutal-onslaught-discipline-85",
+      "id": "capstone-warrior-brutal-onslaught-discipline-85",
       "name": "Brutal Onslaught Discipline",
       "class": "warrior",
       "level": 85,
@@ -10,10 +10,24 @@
       "effect": "For 90 seconds, +40% damage, +20% attack speed, +15% accuracy. Cannot be disarmed.",
       "cooldown": "15 minutes",
       "description": "The warrior's onslaught is brutal and unrelenting.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 6
+          },
+          {
+            "target": "haste",
+            "value": 20
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-valorous-rage-85",
+      "id": "capstone-paladin-valorous-rage-85",
       "name": "Valorous Rage",
       "class": "paladin",
       "level": 85,
@@ -21,10 +35,24 @@
       "effect": "For 90 seconds, +35% damage vs undead/evils, +20% attack speed, immune to fear.",
       "cooldown": "15 minutes",
       "description": "Valorous rage consumes the paladin.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          },
+          {
+            "target": "haste",
+            "value": 20
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-unholy-aura-discipline-85",
+      "id": "capstone-shadowknight-unholy-aura-discipline-85",
       "name": "Unholy Aura Discipline",
       "class": "shadowknight",
       "level": 85,
@@ -35,7 +63,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-crane-stance-85",
+      "id": "capstone-monk-crane-stance-85",
       "name": "Crane Stance",
       "class": "monk",
       "level": 85,
@@ -43,10 +71,24 @@
       "effect": "For 2 minutes, +30% damage, +25% dodge, attacks cannot be riposted.",
       "cooldown": "15 minutes",
       "description": "The monk assumes the crane stance \u2014 untouchable.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "db",
+            "value": 3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-knifeplay-discipline-85",
+      "id": "capstone-rogue-knifeplay-discipline-85",
       "name": "Knifeplay Discipline",
       "class": "rogue",
       "level": 85,
@@ -54,10 +96,20 @@
       "effect": "For 90 seconds, thrown damage +50%, melee +25%, +20% chance to double attack.",
       "cooldown": "15 minutes",
       "description": "The rogue's knifeplay is a deadly art.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 8
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-blinding-fury-85",
+      "id": "capstone-berserker-blinding-fury-85",
       "name": "Blinding Fury",
       "class": "berserker",
       "level": 85,
@@ -65,10 +117,28 @@
       "effect": "For 60 seconds, +70% damage, +30% attack speed. Blind to defense (take +30% damage).",
       "cooldown": "20 minutes",
       "description": "Blinding fury \u2014 offense is the only defense.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 10,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 7
+          },
+          {
+            "target": "haste",
+            "value": 30
+          },
+          {
+            "target": "db",
+            "value": -3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-guardian-of-the-forest-85",
+      "id": "capstone-ranger-guardian-of-the-forest-85",
       "name": "Guardian of the Forest",
       "class": "ranger",
       "level": 85,
@@ -76,10 +146,24 @@
       "effect": "For 3 minutes, +25% mitigation, +20% damage, track shows all enemies. Forest protects.",
       "cooldown": "15 minutes",
       "description": "The forest itself guards the ranger.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "db",
+            "value": 3
+          },
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-roar-of-thunder-85",
+      "id": "capstone-beastlord-roar-of-thunder-85",
       "name": "Roar of Thunder",
       "class": "beastlord",
       "level": 85,
@@ -87,10 +171,23 @@
       "effect": "AE: 800 + (level \u00d7 8) sonic damage, -30% attack speed debuff for 1 minute, de-aggro 50%.",
       "cooldown": "10 minutes",
       "description": "The beastlord's roar is thunder incarnate.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 10,
+        "aoe": true,
+        "modifiers": [
+          {
+            "target": "slow",
+            "value": 30,
+            "pct": true
+          }
+        ],
+        "notes": "50% de-aggro is threat/utility. Sonic damage 800+(levelx8) to damage author.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-song-of-stone-85",
+      "id": "capstone-bard-song-of-stone-85",
       "name": "Song of Stone",
       "class": "bard",
       "level": 85,
@@ -98,10 +195,18 @@
       "effect": "Group buff (5 min): 1000 HP damage absorb shield. Refreshes every 30 seconds.",
       "cooldown": "15 minutes",
       "description": "The bard's song turns flesh to stone \u2014 unbreakable.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 50,
+        "group": true,
+        "absorb": 1000,
+        "absorbRefreshRounds": 5,
+        "notes": "Rune refreshes every 30s (5 rounds) while active.",
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-sanctified-blessing-85",
+      "id": "capstone-cleric-sanctified-blessing-85",
       "name": "Sanctified Blessing",
       "class": "cleric",
       "level": 85,
@@ -109,10 +214,21 @@
       "effect": "For 2 minutes, heals have 25% chance to also cure all effects and grant 300 HP shield.",
       "cooldown": "15 minutes",
       "description": "Sanctified blessings flow through the cleric's hands.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 20,
+        "proc": {
+          "chance": 25,
+          "trigger": "healCast",
+          "effect": "rune"
+        },
+        "absorb": 300,
+        "notes": "Cure-all on proc is utility/cure. Shield is instant 300 HP rune (no duration stated).",
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-group-spirit-of-the-black-wolf-85",
+      "id": "capstone-druid-group-spirit-of-the-black-wolf-85",
       "name": "Group Spirit of the Black Wolf",
       "class": "druid",
       "level": 85,
@@ -120,10 +236,24 @@
       "effect": "Group buff (10 min): +50% run speed, +20% attack, see invisible. The black wolf's gift.",
       "cooldown": "15 minutes",
       "description": "The black wolf's spirit carries the group swiftly.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 100,
+        "modifiers": [
+          {
+            "target": "movement",
+            "value": 50
+          },
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-languid-bite-85",
+      "id": "capstone-shaman-languid-bite-85",
       "name": "Languid Bite",
       "class": "shaman",
       "level": 85,
@@ -131,10 +261,22 @@
       "effect": "Target: 60% slow + 300/tick poison DoT for 2 minutes. Cannot be resisted.",
       "cooldown": "10 minutes",
       "description": "The shaman's bite is languid but lethal.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "slow",
+            "value": 60,
+            "pct": true
+          }
+        ],
+        "notes": "Cannot be resisted. Poison DoT 300/tick belongs to damage author.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-haze-85",
+      "id": "capstone-enchanter-haze-85",
       "name": "Haze",
       "class": "enchanter",
       "level": 85,
@@ -142,10 +284,34 @@
       "effect": "AE: -35% accuracy, -20% attack speed for 90 seconds. 15% chance to mez on hit.",
       "cooldown": "12 minutes",
       "description": "A haze of enchantment confuses the enemy.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 15,
+        "aoe": true,
+        "modifiers": [
+          {
+            "target": "accuracy",
+            "value": 35,
+            "pct": true
+          },
+          {
+            "target": "slow",
+            "value": 20,
+            "pct": true
+          }
+        ],
+        "proc": {
+          "chance": 15,
+          "trigger": "onHit",
+          "effect": "mez",
+          "mezRounds": 1
+        },
+        "notes": "Mez-on-hit proc: when a debuffed enemy is hit, 15% chance to mez for ~1 round.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-heart-of-ice-85",
+      "id": "capstone-magician-heart-of-ice-85",
       "name": "Heart of Ice",
       "class": "magician",
       "level": 85,
@@ -153,10 +319,19 @@
       "effect": "Aura (3 min): +300 cold damage per hit for self + pet. Cold immune. Enemies take 100/tick cold.",
       "cooldown": "18 minutes",
       "description": "The magician's heart is ice \u2014 beautiful and deadly.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 30,
+        "appliesTo": "self+pet",
+        "immunities": [
+          "cold"
+        ],
+        "notes": "HYBRID: +300 cold/hit aura and 100/tick enemy cold \u2014 buff/damage authors.",
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-deaths-malaise-85",
+      "id": "capstone-necromancer-death-s-malaise-85",
       "name": "Death's Malaise",
       "class": "necromancer",
       "level": 85,
@@ -167,7 +342,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-silent-casting-85",
+      "id": "capstone-wizard-silent-casting-85",
       "name": "Silent Casting",
       "class": "wizard",
       "level": 85,

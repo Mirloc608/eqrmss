@@ -2,7 +2,7 @@
   "level": 70,
   "capstones": [
     {
-      "id": "capstone-warlords-tenacity-70",
+      "id": "capstone-warrior-warlord-s-tenacity-70",
       "name": "Warlord's Tenacity",
       "class": "warrior",
       "level": 70,
@@ -13,7 +13,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-marrs-salvation-70",
+      "id": "capstone-paladin-marr-s-salvation-70",
       "name": "Marr's Salvation",
       "class": "paladin",
       "level": 70,
@@ -24,7 +24,7 @@
       "refresh": "rest"
     },
     {
-      "id": "capstone-visage-of-death-70",
+      "id": "capstone-shadowknight-visage-of-death-70",
       "name": "Visage of Death",
       "class": "shadowknight",
       "level": 70,
@@ -32,10 +32,20 @@
       "effect": "For 2 minutes, take on a deathly visage: +25% lifetap effectiveness, +15% melee damage, fear immunity.",
       "cooldown": "20 minutes",
       "description": "The shadowknight wears death itself as a mask.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-ironfist-70",
+      "id": "capstone-monk-ironfist-70",
       "name": "Ironfist",
       "class": "monk",
       "level": 70,
@@ -43,10 +53,20 @@
       "effect": "For 2 minutes, fist damage +40%, chance to stun on hit +10%.",
       "cooldown": "15 minutes",
       "description": "The monk's fists become as iron.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-rogues-fury-70",
+      "id": "capstone-rogue-rogue-s-fury-70",
       "name": "Rogue's Fury",
       "class": "rogue",
       "level": 70,
@@ -57,7 +77,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-juggernaut-surge-70",
+      "id": "capstone-berserker-juggernaut-surge-70",
       "name": "Juggernaut Surge",
       "class": "berserker",
       "level": 70,
@@ -65,10 +85,24 @@
       "effect": "For 90 seconds, +50% melee damage, immune to stun, cannot be slowed. Take +10% damage.",
       "cooldown": "20 minutes",
       "description": "The berserker becomes an unstoppable juggernaut.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          },
+          {
+            "target": "db",
+            "value": -1
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-auspice-of-the-hunter-70",
+      "id": "capstone-ranger-auspice-of-the-hunter-70",
       "name": "Auspice of the Hunter",
       "class": "ranger",
       "level": 70,
@@ -76,10 +110,20 @@
       "effect": "Group buff (5 min): +20% crit chance, +15% accuracy, +10% damage.",
       "cooldown": "15 minutes",
       "description": "The ranger invokes the hunter's auspice over the group.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 50,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-frenzy-of-spirit-70",
+      "id": "capstone-beastlord-frenzy-of-spirit-70",
       "name": "Frenzy of Spirit",
       "class": "beastlord",
       "level": 70,
@@ -87,10 +131,20 @@
       "effect": "For 90 seconds, beastlord attack speed +40%, warder damage +50%.",
       "cooldown": "15 minutes",
       "description": "Spirit frenzy consumes both master and warder.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "haste",
+            "value": 40
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-quick-time-70",
+      "id": "capstone-bard-quick-time-70",
       "name": "Quick Time",
       "class": "bard",
       "level": 70,
@@ -98,10 +152,24 @@
       "effect": "For 90 seconds, group gains +30% spell haste, +20% melee haste, +15% damage.",
       "cooldown": "15 minutes",
       "description": "The bard quickens time itself for the group.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "haste",
+            "value": 20
+          },
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-divine-arbitration-70",
+      "id": "capstone-cleric-divine-arbitration-70",
       "name": "Divine Arbitration",
       "class": "cleric",
       "level": 70,
@@ -112,7 +180,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-natures-fury-70",
+      "id": "capstone-druid-nature-s-fury-70",
       "name": "Nature's Fury",
       "class": "druid",
       "level": 70,
@@ -123,7 +191,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-spirit-of-the-rhino-70",
+      "id": "capstone-shaman-spirit-of-the-rhino-70",
       "name": "Spirit of the Rhino",
       "class": "shaman",
       "level": 70,
@@ -131,10 +199,24 @@
       "effect": "Group buff (10 min): +30% melee damage, +200 HP, knockback resistance.",
       "cooldown": "15 minutes",
       "description": "The rhino spirit's strength fills the group.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 100,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "hits",
+            "value": 20
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-mind-crash-70",
+      "id": "capstone-enchanter-mind-crash-70",
       "name": "Mind Crash",
       "class": "enchanter",
       "level": 70,
@@ -145,7 +227,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-elemental-union-70",
+      "id": "capstone-magician-elemental-union-70",
       "name": "Elemental Union",
       "class": "magician",
       "level": 70,
@@ -153,10 +235,20 @@
       "effect": "For 2 minutes, magician and pet both gain +35% damage, pet takes -25% damage.",
       "cooldown": "15 minutes",
       "description": "Caster and elemental fight in perfect union.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-swarm-of-decay-70",
+      "id": "capstone-necromancer-swarm-of-decay-70",
       "name": "Swarm of Decay",
       "class": "necromancer",
       "level": 70,
@@ -164,10 +256,14 @@
       "effect": "Summon 6 disease-based swarm pets for 45 seconds. Each applies a stacking DoT.",
       "cooldown": "15 minutes",
       "description": "Decay given form swarms the enemy.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "utility",
+        "description": "Summons 6 disease-based swarm pets for 45 seconds. Each applies a stacking disease DoT."
+      }
     },
     {
-      "id": "capstone-frenzied-devastation-70",
+      "id": "capstone-wizard-frenzied-devastation-70",
       "name": "Frenzied Devastation",
       "class": "wizard",
       "level": 70,

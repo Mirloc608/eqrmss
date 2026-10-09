@@ -2,7 +2,7 @@
   "level": 80,
   "capstones": [
     {
-      "id": "capstone-spire-of-the-warlord-80",
+      "id": "capstone-warrior-spire-of-the-warlord-80",
       "name": "Spire of the Warlord",
       "class": "warrior",
       "level": 80,
@@ -10,10 +10,59 @@
       "effect": "For 2 minutes, +20% to all stats, +15% damage, +15% mitigation. The warlord's spire.",
       "cooldown": "20 minutes",
       "description": "The warlord ascends the spire of command.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "stat",
+            "stat": "st",
+            "value": 2
+          },
+          {
+            "target": "stat",
+            "stat": "co",
+            "value": 2
+          },
+          {
+            "target": "stat",
+            "stat": "ag",
+            "value": 2
+          },
+          {
+            "target": "stat",
+            "stat": "qu",
+            "value": 2
+          },
+          {
+            "target": "stat",
+            "stat": "em",
+            "value": 2
+          },
+          {
+            "target": "stat",
+            "stat": "me",
+            "value": 2
+          },
+          {
+            "target": "stat",
+            "stat": "pr",
+            "value": 2
+          },
+          {
+            "target": "ob",
+            "value": 2
+          },
+          {
+            "target": "db",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-holiness-80",
+      "id": "capstone-paladin-spire-of-holiness-80",
       "name": "Spire of Holiness",
       "class": "paladin",
       "level": 80,
@@ -21,10 +70,24 @@
       "effect": "For 2 minutes, +20% healing, +15% damage vs undead, group gains +10% mitigation.",
       "cooldown": "20 minutes",
       "description": "Holiness radiates from the paladin's spire.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 2
+          },
+          {
+            "target": "db",
+            "value": 1
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-darkness-80",
+      "id": "capstone-shadowknight-spire-of-darkness-80",
       "name": "Spire of Darkness",
       "class": "shadowknight",
       "level": 80,
@@ -32,10 +95,20 @@
       "effect": "For 2 minutes, +25% lifetap damage, +15% melee damage, fear procs on hits.",
       "cooldown": "20 minutes",
       "description": "Darkness coils around the shadowknight's spire.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-the-sensei-80",
+      "id": "capstone-monk-spire-of-the-sensei-80",
       "name": "Spire of the Sensei",
       "class": "monk",
       "level": 80,
@@ -43,10 +116,24 @@
       "effect": "For 2 minutes, +25% fist damage, +20% dodge, +15% accuracy.",
       "cooldown": "20 minutes",
       "description": "The sensei's spire perfects the monk's form.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          },
+          {
+            "target": "db",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-the-assassin-80",
+      "id": "capstone-rogue-spire-of-the-assassin-80",
       "name": "Spire of the Assassin",
       "class": "rogue",
       "level": 80,
@@ -54,10 +141,20 @@
       "effect": "For 2 minutes, +30% backstab damage, +20% crit chance, +15% accuracy.",
       "cooldown": "20 minutes",
       "description": "The assassin's spire sharpens every blade.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-savagery-80",
+      "id": "capstone-berserker-spire-of-savagery-80",
       "name": "Spire of Savagery",
       "class": "berserker",
       "level": 80,
@@ -65,10 +162,28 @@
       "effect": "For 2 minutes, +30% damage, +20% attack speed, +10% crit. Take +10% damage.",
       "cooldown": "20 minutes",
       "description": "Savagery incarnate atop the spire.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "haste",
+            "value": 20
+          },
+          {
+            "target": "db",
+            "value": -1
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-the-predator-80",
+      "id": "capstone-ranger-spire-of-the-predator-80",
       "name": "Spire of the Predator",
       "class": "ranger",
       "level": 80,
@@ -76,10 +191,20 @@
       "effect": "For 2 minutes, +25% ranged damage, +20% crit chance, track range doubled.",
       "cooldown": "20 minutes",
       "description": "The predator's spire heightens every sense.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-the-beast-80",
+      "id": "capstone-beastlord-spire-of-the-beast-80",
       "name": "Spire of the Beast",
       "class": "beastlord",
       "level": 80,
@@ -87,10 +212,24 @@
       "effect": "For 2 minutes, beastlord + warder gain +25% damage, +15% attack speed.",
       "cooldown": "20 minutes",
       "description": "Beast and master ascend the spire together.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "haste",
+            "value": 15
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-the-minstrel-80",
+      "id": "capstone-bard-spire-of-the-minstrel-80",
       "name": "Spire of the Minstrel",
       "class": "bard",
       "level": 80,
@@ -98,10 +237,51 @@
       "effect": "For 2 minutes, songs +25% effectiveness, +20% duration. Group gains +10% to all stats.",
       "cooldown": "20 minutes",
       "description": "The minstrel's spire amplifies every note.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "stat",
+            "stat": "st",
+            "value": 1
+          },
+          {
+            "target": "stat",
+            "stat": "co",
+            "value": 1
+          },
+          {
+            "target": "stat",
+            "stat": "ag",
+            "value": 1
+          },
+          {
+            "target": "stat",
+            "stat": "qu",
+            "value": 1
+          },
+          {
+            "target": "stat",
+            "stat": "em",
+            "value": 1
+          },
+          {
+            "target": "stat",
+            "stat": "me",
+            "value": 1
+          },
+          {
+            "target": "stat",
+            "stat": "pr",
+            "value": 1
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-divinity-80",
+      "id": "capstone-cleric-spire-of-divinity-80",
       "name": "Spire of Divinity",
       "class": "cleric",
       "level": 80,
@@ -112,7 +292,7 @@
       "refresh": "rest"
     },
     {
-      "id": "capstone-spire-of-nature-80",
+      "id": "capstone-druid-spire-of-nature-80",
       "name": "Spire of Nature",
       "class": "druid",
       "level": 80,
@@ -120,10 +300,24 @@
       "effect": "For 2 minutes, +25% spell damage, +20% healing, +15% mana regen.",
       "cooldown": "20 minutes",
       "description": "Nature's spire channels primal power.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "mana",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-the-ancestors-80",
+      "id": "capstone-shaman-spire-of-the-ancestors-80",
       "name": "Spire of the Ancestors",
       "class": "shaman",
       "level": 80,
@@ -131,10 +325,20 @@
       "effect": "For 2 minutes, +25% healing, +20% DoT damage, +15% slow effectiveness.",
       "cooldown": "20 minutes",
       "description": "The ancestors' spire empowers the shaman.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-the-enchanter-80",
+      "id": "capstone-enchanter-spire-of-the-enchanter-80",
       "name": "Spire of the Enchanter",
       "class": "enchanter",
       "level": 80,
@@ -142,10 +346,20 @@
       "effect": "For 2 minutes, +25% mez duration, +20% charm power, +15% mana regen.",
       "cooldown": "20 minutes",
       "description": "The enchanter's spire dominates all minds.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "mana",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-elements-80",
+      "id": "capstone-magician-spire-of-elements-80",
       "name": "Spire of Elements",
       "class": "magician",
       "level": 80,
@@ -153,10 +367,20 @@
       "effect": "For 2 minutes, pet +30% damage, +25% HP, +20% resists. Caster +15% spell damage.",
       "cooldown": "20 minutes",
       "description": "The elements converge at the magician's spire.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-death-80",
+      "id": "capstone-necromancer-spire-of-death-80",
       "name": "Spire of Death",
       "class": "necromancer",
       "level": 80,
@@ -164,10 +388,20 @@
       "effect": "For 2 minutes, +30% DoT damage, +25% lifetap effectiveness, +20% mana from lich.",
       "cooldown": "20 minutes",
       "description": "Death itself rises from the necromancer's spire.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-spire-of-arcanum-80",
+      "id": "capstone-wizard-spire-of-arcanum-80",
       "name": "Spire of Arcanum",
       "class": "wizard",
       "level": 80,
@@ -175,7 +409,17 @@
       "effect": "For 2 minutes, +30% spell damage, +20% crit chance, -20% mana cost.",
       "cooldown": "20 minutes",
       "description": "Arcane power peaks at the wizard's spire.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          }
+        ]
+      }
     }
   ]
 }

@@ -2,7 +2,7 @@
   "level": 125,
   "capstones": [
     {
-      "id": "capstone-rage-of-rallos-zek-125",
+      "id": "capstone-warrior-rage-of-rallos-zek-125",
       "name": "Rage of Rallos Zek",
       "class": "warrior",
       "level": 125,
@@ -10,10 +10,24 @@
       "effect": "For 2 minutes, +50% damage, +30% attack speed, immune to all control effects. The god of war's rage.",
       "cooldown": "30 minutes",
       "description": "Rallos Zek's own rage fills the warrior. None can stand before it.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          },
+          {
+            "target": "haste",
+            "value": 30
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-repel-the-wicked-125",
+      "id": "capstone-paladin-repel-the-wicked-125",
       "name": "Repel the Wicked",
       "class": "paladin",
       "level": 125,
@@ -21,10 +35,17 @@
       "effect": "Massive AE: 2000 + (level \u00d7 15) damage to all undead/evils in range. Knockback. Stun for 6 seconds.",
       "cooldown": "20 minutes",
       "description": "The paladin repels the wicked with divine force.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 1,
+        "stunRounds": 1,
+        "aoe": true,
+        "notes": "RIDER on Repel the Wicked AE (2000+(levelx15) vs undead/evils, damage author). Stun 6s ~1 round. Knockback via combat engine.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-dying-grasp-125",
+      "id": "capstone-shadowknight-dying-grasp-125",
       "name": "Dying Grasp",
       "class": "shadowknight",
       "level": 125,
@@ -32,10 +53,20 @@
       "effect": "Execute: if target is below 15% HP, instantly kill (no resist). Deals 3000 damage otherwise.",
       "cooldown": "15 minutes",
       "description": "The shadowknight's grasp claims the dying.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "damage",
+        "formula": "3000",
+        "damageType": "magic",
+        "resistable": true,
+        "condition": "target below 15% HP",
+        "instantKillBelowHPPercent": 15,
+        "instantKillResistable": false,
+        "notes": "Execute: if target is below 15% HP, instantly kill (no resist). Otherwise deals 3000 damage."
+      }
     },
     {
-      "id": "capstone-torrent-of-fists-125",
+      "id": "capstone-monk-torrent-of-fists-125",
       "name": "Torrent of Fists",
       "class": "monk",
       "level": 125,
@@ -46,7 +77,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-escape-125",
+      "id": "capstone-rogue-escape-125",
       "name": "Escape",
       "class": "rogue",
       "level": 125,
@@ -54,10 +85,20 @@
       "effect": "Instant: drop all aggro, become invisible (improved), +50% run speed for 30 seconds. Cannot be seen.",
       "cooldown": "10 minutes",
       "description": "The rogue vanishes completely \u2014 the perfect escape.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 5,
+        "modifiers": [
+          {
+            "target": "movement",
+            "value": 50
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-decapitation-125",
+      "id": "capstone-berserker-decapitation-125",
       "name": "Decapitation",
       "class": "berserker",
       "level": 125,
@@ -65,10 +106,14 @@
       "effect": "Passive: 8% chance on hit to instantly kill humanoid targets below 25% HP. Works on most humanoids.",
       "cooldown": "Passive (always on)",
       "description": "The berserker's axe seeks the neck. Heads roll.",
-      "refresh": "day"
+      "refresh": "day",
+      "mechanics": {
+        "type": "special",
+        "description": "Passive: 8% chance on hit to instantly kill humanoid targets below 25% HP. Works on most humanoids."
+      }
     },
     {
-      "id": "capstone-frost-arrows-125",
+      "id": "capstone-ranger-frost-arrows-125",
       "name": "Frost Arrows",
       "class": "ranger",
       "level": 125,
@@ -76,10 +121,27 @@
       "effect": "For 5 minutes, bow attacks deal +400 cold damage and slow target by 30% for 6 seconds.",
       "cooldown": "15 minutes",
       "description": "The ranger's arrows carry winter's bite.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 1,
+        "modifiers": [
+          {
+            "target": "slow",
+            "value": 30,
+            "pct": true
+          }
+        ],
+        "proc": {
+          "chance": 100,
+          "trigger": "bowHit",
+          "effect": "slow"
+        },
+        "notes": "HYBRID: self buff (+400 cold bow dmg) is buff author's. Slow applies on every bow hit, 1 round.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-chameleon-strike-125",
+      "id": "capstone-beastlord-chameleon-strike-125",
       "name": "Chameleon Strike",
       "class": "beastlord",
       "level": 125,
@@ -90,7 +152,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-dance-of-blades-125",
+      "id": "capstone-bard-dance-of-blades-125",
       "name": "Dance of Blades",
       "class": "bard",
       "level": 125,
@@ -98,10 +160,20 @@
       "effect": "Aura (2 min): enemies take -25% weapon speed, -30 to resists. Allies gain +20% damage.",
       "cooldown": "15 minutes",
       "description": "The bard's blade-dance cuts enemy effectiveness.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-sanctified-blessing-125",
+      "id": "capstone-cleric-sanctified-blessing-125",
       "name": "Sanctified Blessing",
       "class": "cleric",
       "level": 125,
@@ -109,10 +181,21 @@
       "effect": "For 3 minutes, 40% chance for heals to grant a divine blessing: +500 HP shield for 30 seconds.",
       "cooldown": "20 minutes",
       "description": "Sanctified blessings protect the healed.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 30,
+        "proc": {
+          "chance": 40,
+          "trigger": "healCast",
+          "effect": "rune"
+        },
+        "absorb": 500,
+        "absorbDurationRounds": 5,
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-spirits-of-nature-125",
+      "id": "capstone-druid-spirits-of-nature-125",
       "name": "Spirits of Nature",
       "class": "druid",
       "level": 125,
@@ -120,10 +203,14 @@
       "effect": "Summon 4 nature spirits for 2 minutes: one heals, one nukes, one slows, one buffs. Each is powerful.",
       "cooldown": "30 minutes",
       "description": "The full spirits of nature answer the druid's call.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "utility",
+        "description": "Summons 4 nature spirits for 2 minutes: one heals, one nukes, one slows, one buffs. Each is powerful."
+      }
     },
     {
-      "id": "capstone-tigirs-insects-125",
+      "id": "capstone-shaman-tigir-s-insects-125",
       "name": "Tigir's Insects",
       "class": "shaman",
       "level": 125,
@@ -134,7 +221,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-haze-125",
+      "id": "capstone-enchanter-haze-125",
       "name": "Haze",
       "class": "enchanter",
       "level": 125,
@@ -142,10 +229,34 @@
       "effect": "AE debuff: -40% accuracy, -25% attack speed, 20% chance to stun on cast for 2 minutes.",
       "cooldown": "15 minutes",
       "description": "A haze of confusion cripples the enemy.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 20,
+        "aoe": true,
+        "modifiers": [
+          {
+            "target": "accuracy",
+            "value": 40,
+            "pct": true
+          },
+          {
+            "target": "slow",
+            "value": 25,
+            "pct": true
+          }
+        ],
+        "proc": {
+          "chance": 20,
+          "trigger": "enemyCast",
+          "effect": "stun",
+          "stunRounds": 1
+        },
+        "notes": "Stun-on-cast proc: when a debuffed enemy casts, 20% chance to stun ~1 round.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-heart-of-flames-125",
+      "id": "capstone-magician-heart-of-flames-125",
       "name": "Heart of Flames",
       "class": "magician",
       "level": 125,
@@ -153,10 +264,19 @@
       "effect": "Aura (3 min): self + pet deal +400 fire damage per hit. Immune to fire. Enemies take 150/tick fire aura.",
       "cooldown": "20 minutes",
       "description": "The magician's heart burns with elemental flame.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 30,
+        "appliesTo": "self+pet",
+        "immunities": [
+          "fire"
+        ],
+        "notes": "HYBRID: +400 fire/hit aura \u2014 buff/damage authors.",
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-embalmers-carapace-125",
+      "id": "capstone-necromancer-embalmer-s-carapace-125",
       "name": "Embalmer's Carapace",
       "class": "necromancer",
       "level": 125,
@@ -167,7 +287,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-fury-of-ro-125",
+      "id": "capstone-wizard-fury-of-ro-125",
       "name": "Fury of Ro",
       "class": "wizard",
       "level": 125,
@@ -175,7 +295,17 @@
       "effect": "For 2 minutes, fire spells +60% damage, +30% crit chance, +20% mana efficiency. The Tyrant of Fire's fury.",
       "cooldown": "20 minutes",
       "description": "Ro's fury consumes the wizard's enemies in flame.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 6
+          }
+        ]
+      }
     }
   ]
 }

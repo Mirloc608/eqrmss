@@ -2,7 +2,7 @@
   "level": 105,
   "capstones": [
     {
-      "id": "capstone-warlords-bravery-105",
+      "id": "capstone-warrior-warlord-s-bravery-105",
       "name": "Warlord's Bravery",
       "class": "warrior",
       "level": 105,
@@ -13,7 +13,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-repel-the-wicked-105",
+      "id": "capstone-paladin-repel-the-wicked-105",
       "name": "Repel the Wicked",
       "class": "paladin",
       "level": 105,
@@ -21,10 +21,17 @@
       "effect": "Knock back all undead within 30 feet. Deal 2000 + (level \u00d7 15) holy damage to undead. Stun undead 6 seconds.",
       "cooldown": "15 minutes",
       "description": "The wicked \u2014 living or dead \u2014 are repelled by righteous might.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 1,
+        "stunRounds": 1,
+        "aoe": true,
+        "notes": "RIDER on Repel the Wicked AE (2000+(levelx15) holy vs undead, damage author). Undead-only stun 6s ~1 round. Knockback via combat engine.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-soul-abrasion-105",
+      "id": "capstone-shadowknight-soul-abrasion-105",
       "name": "Soul Abrasion",
       "class": "shadowknight",
       "level": 105,
@@ -32,10 +39,22 @@
       "effect": "Lifetap strike: 2500 + (level \u00d7 15) damage, heal for 125% of damage dealt. Applies -20 to target's resists for 1 minute.",
       "cooldown": "15 minutes",
       "description": "The shadowknight abrades the victim's very soul.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "lifetap",
+        "damageFormula": "2500 + (level * 15)",
+        "healPercent": 125,
+        "damageType": "magic",
+        "resistable": true,
+        "applyResistDebuff": {
+          "amount": -20,
+          "durationRounds": 10
+        },
+        "notes": "Applies -20 to target's resists for 1 minute (10 rounds) in addition to the lifetap."
+      }
     },
     {
-      "id": "capstone-crane-stance-105",
+      "id": "capstone-monk-crane-stance-105",
       "name": "Crane Stance",
       "class": "monk",
       "level": 105,
@@ -43,10 +62,24 @@
       "effect": "For 2 minutes, +35% damage, +15% dodge, attacks cannot be parried.",
       "cooldown": "15 minutes",
       "description": "The crane stance \u2014 balance, precision, and unstoppable strikes.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          },
+          {
+            "target": "db",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-assassin-discipline-105",
+      "id": "capstone-rogue-assassin-discipline-105",
       "name": "Assassin Discipline",
       "class": "rogue",
       "level": 105,
@@ -54,10 +87,20 @@
       "effect": "For 90 seconds, assassination chance +20%, backstab damage +40%.",
       "cooldown": "15 minutes",
       "description": "The rogue becomes death itself \u2014 the perfect assassin.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-blinding-fury-105",
+      "id": "capstone-berserker-blinding-fury-105",
       "name": "Blinding Fury",
       "class": "berserker",
       "level": 105,
@@ -65,10 +108,22 @@
       "effect": "Burst: 5 instant axe strikes at +60% damage each. Blinds target (-30 accuracy) for 30 seconds.",
       "cooldown": "15 minutes",
       "description": "Fury so blinding the enemy cannot see the axes coming.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 5,
+        "modifiers": [
+          {
+            "target": "accuracy",
+            "value": 30,
+            "pct": false
+          }
+        ],
+        "notes": "Rider on 5-axe-strike burst (damage author). '-30 accuracy' read as flat.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-frost-arrows-105",
+      "id": "capstone-ranger-frost-arrows-105",
       "name": "Frost Arrows",
       "class": "ranger",
       "level": 105,
@@ -76,10 +131,20 @@
       "effect": "For 5 minutes, bow attacks deal +40% damage as cold. 20% chance to proc a 500-point cold strike and snare.",
       "cooldown": "15 minutes",
       "description": "The ranger's arrows carry the chill of ancient Kunark.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 50,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-chameleon-strike-105",
+      "id": "capstone-beastlord-chameleon-strike-105",
       "name": "Chameleon Strike",
       "class": "beastlord",
       "level": 105,
@@ -90,7 +155,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-dance-of-blades-105",
+      "id": "capstone-bard-dance-of-blades-105",
       "name": "Dance of Blades",
       "class": "bard",
       "level": 105,
@@ -98,10 +163,20 @@
       "effect": "Aura (2 min): enemies within 20 feet take -20% weapon speed, -15 to resists. Allies gain +10% attack speed.",
       "cooldown": "15 minutes",
       "description": "Blades dance to the bard's tune \u2014 allies quicken, enemies falter.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "haste",
+            "value": 10
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-divine-guardian-105",
+      "id": "capstone-cleric-divine-guardian-105",
       "name": "Divine Guardian",
       "class": "cleric",
       "level": 105,
@@ -109,10 +184,20 @@
       "effect": "Target buff (5 min): -30% damage taken. When the target would die, heal to 75% instead (one-time).",
       "cooldown": "20 minutes",
       "description": "A divine guardian watches over the chosen.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 50,
+        "modifiers": [
+          {
+            "target": "db",
+            "value": 3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-group-spirit-of-the-black-wolf-105",
+      "id": "capstone-druid-group-spirit-of-the-black-wolf-105",
       "name": "Group Spirit of the Black Wolf",
       "class": "druid",
       "level": 105,
@@ -120,10 +205,24 @@
       "effect": "Group buff (10 min): +40% run speed, +25% attack, +15% damage.",
       "cooldown": "15 minutes",
       "description": "The black wolf's spirit runs with the pack.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 100,
+        "modifiers": [
+          {
+            "target": "movement",
+            "value": 40
+          },
+          {
+            "target": "ob",
+            "value": 5
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-languid-bite-105",
+      "id": "capstone-shaman-languid-bite-105",
       "name": "Languid Bite",
       "class": "shaman",
       "level": 105,
@@ -131,10 +230,22 @@
       "effect": "Target: 60% slow + stacking poison DoT (500/tick, stacks 3x) for 2 minutes.",
       "cooldown": "10 minutes",
       "description": "The serpent's languid bite \u2014 slow death.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "slow",
+            "value": 60,
+            "pct": true
+          }
+        ],
+        "notes": "Stacking poison DoT (500/tick, 3x) belongs to damage author.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-haze-105",
+      "id": "capstone-enchanter-haze-105",
       "name": "Haze",
       "class": "enchanter",
       "level": 105,
@@ -142,10 +253,28 @@
       "effect": "Debuff all enemies within 30 feet: -40 accuracy, -25% damage for 2 minutes.",
       "cooldown": "15 minutes",
       "description": "A haze settles over the enemy's minds.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 20,
+        "aoe": true,
+        "modifiers": [
+          {
+            "target": "accuracy",
+            "value": 40,
+            "pct": false
+          },
+          {
+            "target": "damage",
+            "value": 25,
+            "pct": true
+          }
+        ],
+        "notes": "'-40 accuracy' read as flat (no % in source).",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-heart-of-flames-105",
+      "id": "capstone-magician-heart-of-flames-105",
       "name": "Heart of Flames",
       "class": "magician",
       "level": 105,
@@ -153,10 +282,24 @@
       "effect": "Aura (3 min): allies within 30 feet gain +25% fire damage, +15 fire resist. Enemies take 200 fire/tick.",
       "cooldown": "15 minutes",
       "description": "The magician's heart burns with elemental fire.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "resist-fire",
+            "value": 15
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-deaths-malaise-105",
+      "id": "capstone-necromancer-death-s-malaise-105",
       "name": "Death's Malaise",
       "class": "necromancer",
       "level": 105,
@@ -167,7 +310,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-fury-of-ro-105",
+      "id": "capstone-wizard-fury-of-ro-105",
       "name": "Fury of Ro",
       "class": "wizard",
       "level": 105,
@@ -175,7 +318,17 @@
       "effect": "For 90 seconds, fire spells +60% damage, +20% crit chance on fire.",
       "cooldown": "15 minutes",
       "description": "The Tyrant of Fire's fury channels through the wizard.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 6
+          }
+        ]
+      }
     }
   ]
 }

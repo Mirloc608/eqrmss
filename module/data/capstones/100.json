@@ -2,7 +2,7 @@
   "level": 100,
   "capstones": [
     {
-      "id": "capstone-spire-of-the-warlord-100",
+      "id": "capstone-warrior-spire-of-the-warlord-100",
       "name": "Spire of the Warlord",
       "class": "warrior",
       "level": 100,
@@ -10,10 +10,20 @@
       "effect": "For 2 minutes, +40% melee damage, +25% accuracy, +15% critical chance.",
       "cooldown": "20 minutes",
       "description": "The warlord ascends the spire and channels the power of Alaris itself.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 7
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-holyforge-100",
+      "id": "capstone-paladin-holyforge-100",
       "name": "Holyforge",
       "class": "paladin",
       "level": 100,
@@ -21,10 +31,20 @@
       "effect": "For 5 minutes, weapon gains +50% damage, procs a 300-point holy damage strike. Undead take double.",
       "cooldown": "20 minutes",
       "description": "The paladin's weapon is forged in holy fire.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 50,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-unholy-aura-discipline-100",
+      "id": "capstone-shadowknight-unholy-aura-discipline-100",
       "name": "Unholy Aura Discipline",
       "class": "shadowknight",
       "level": 100,
@@ -35,7 +55,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-zan-fis-whistle-100",
+      "id": "capstone-monk-zan-fi-s-whistle-100",
       "name": "Zan Fi's Whistle",
       "class": "monk",
       "level": 100,
@@ -46,7 +66,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-thiefs-eyes-100",
+      "id": "capstone-rogue-thief-s-eyes-100",
       "name": "Thief's Eyes",
       "class": "rogue",
       "level": 100,
@@ -57,7 +77,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-reckless-abandon-100",
+      "id": "capstone-berserker-reckless-abandon-100",
       "name": "Reckless Abandon",
       "class": "berserker",
       "level": 100,
@@ -65,10 +85,24 @@
       "effect": "For 90 seconds, +60% melee damage, +20% accuracy. Take +15% damage. Cannot be stunned.",
       "cooldown": "20 minutes",
       "description": "The berserker abandons all reckoning \u2014 pure offense, no retreat.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 8
+          },
+          {
+            "target": "db",
+            "value": -1
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-flaming-arrows-100",
+      "id": "capstone-ranger-flaming-arrows-100",
       "name": "Flaming Arrows",
       "class": "ranger",
       "level": 100,
@@ -76,10 +110,20 @@
       "effect": "For 5 minutes, bow attacks deal +40% damage as fire. 20% chance to proc a 500-point fire strike.",
       "cooldown": "15 minutes",
       "description": "The ranger's arrows burn with the fire of the Veil.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 50,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-protection-of-the-warder-100",
+      "id": "capstone-beastlord-protection-of-the-warder-100",
       "name": "Protection of the Warder",
       "class": "beastlord",
       "level": 100,
@@ -87,10 +131,20 @@
       "effect": "For 2 minutes, beastlord and warder share damage (50/50 split). Both gain +25% mitigation.",
       "cooldown": "20 minutes",
       "description": "Master and warder become one \u2014 no blow falls on one alone.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "db",
+            "value": 3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-cacophony-100",
+      "id": "capstone-bard-cacophony-100",
       "name": "Cacophony",
       "class": "bard",
       "level": 100,
@@ -98,10 +152,20 @@
       "effect": "For 90 seconds, personal DPS +40%, nearby enemies take -15% to all resists.",
       "cooldown": "15 minutes",
       "description": "The bard's cacophony shatters focus and resistance alike.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-sanctified-blessing-100",
+      "id": "capstone-cleric-sanctified-blessing-100",
       "name": "Sanctified Blessing",
       "class": "cleric",
       "level": 100,
@@ -109,10 +173,21 @@
       "effect": "For 2 minutes, 40% chance for each heal to grant the target a 1000-point damage shield (rune) for 30 seconds.",
       "cooldown": "15 minutes",
       "description": "The cleric's blessing sanctifies each healing touch with protective light.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 20,
+        "proc": {
+          "chance": 40,
+          "trigger": "healCast",
+          "effect": "rune"
+        },
+        "absorb": 1000,
+        "absorbDurationRounds": 5,
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-wrath-of-the-wild-100",
+      "id": "capstone-druid-wrath-of-the-wild-100",
       "name": "Wrath of the Wild",
       "class": "druid",
       "level": 100,
@@ -120,10 +195,20 @@
       "effect": "For 2 minutes, spell damage +50%, cold/fire DoTs tick 25% faster.",
       "cooldown": "15 minutes",
       "description": "The wild's wrath flows unchecked through the druid.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-prophetic-guard-100",
+      "id": "capstone-shaman-prophetic-guard-100",
       "name": "Prophetic Guard",
       "class": "shaman",
       "level": 100,
@@ -131,10 +216,44 @@
       "effect": "Group buff (10 min): +3000 HP, +25% mitigation, +20 to all resists.",
       "cooldown": "20 minutes",
       "description": "The spirits show the shaman what is coming \u2014 and how to endure it.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 100,
+        "modifiers": [
+          {
+            "target": "hits",
+            "value": 300
+          },
+          {
+            "target": "db",
+            "value": 3
+          },
+          {
+            "target": "resist-fire",
+            "value": 20
+          },
+          {
+            "target": "resist-cold",
+            "value": 20
+          },
+          {
+            "target": "resist-magic",
+            "value": 20
+          },
+          {
+            "target": "resist-poison",
+            "value": 20
+          },
+          {
+            "target": "resist-disease",
+            "value": 20
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-phantasmal-opponent-100",
+      "id": "capstone-enchanter-phantasmal-opponent-100",
       "name": "Phantasmal Opponent",
       "class": "enchanter",
       "level": 100,
@@ -142,10 +261,14 @@
       "effect": "Summon 3 phantasmal duplicates of the target for 1 minute. They attack the original at 40% damage.",
       "cooldown": "20 minutes",
       "description": "The enemy faces itself \u2014 and finds itself wanting.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "utility",
+        "description": "Summons 3 phantasmal duplicates of the target for 1 minute. They attack the original at 40% damage."
+      }
     },
     {
-      "id": "capstone-servant-of-ro-100",
+      "id": "capstone-magician-servant-of-ro-100",
       "name": "Servant of Ro",
       "class": "magician",
       "level": 100,
@@ -153,10 +276,14 @@
       "effect": "Summon a powerful fire servant for 2 minutes. Deals heavy fire damage, immune to fire.",
       "cooldown": "20 minutes",
       "description": "The Tyrant of Fire lends the magician a servant of living flame.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "utility",
+        "description": "Summons a powerful fire servant for 2 minutes. Deals heavy fire damage, immune to fire."
+      }
     },
     {
-      "id": "capstone-gift-of-deathly-resolve-100",
+      "id": "capstone-necromancer-gift-of-deathly-resolve-100",
       "name": "Gift of Deathly Resolve",
       "class": "necromancer",
       "level": 100,
@@ -167,7 +294,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-arcane-destruction-100",
+      "id": "capstone-wizard-arcane-destruction-100",
       "name": "Arcane Destruction",
       "class": "wizard",
       "level": 100,
@@ -175,7 +302,17 @@
       "effect": "For 90 seconds, spell damage +45%, mana cost -25%.",
       "cooldown": "15 minutes",
       "description": "Arcane destruction unbound \u2014 power at a discount.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          }
+        ]
+      }
     }
   ]
 }

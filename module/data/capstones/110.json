@@ -2,7 +2,7 @@
   "level": 110,
   "capstones": [
     {
-      "id": "capstone-rage-of-rallos-zek-110",
+      "id": "capstone-warrior-rage-of-rallos-zek-110",
       "name": "Rage of Rallos Zek",
       "class": "warrior",
       "level": 110,
@@ -10,10 +10,20 @@
       "effect": "For 2 minutes, +50% melee damage, +30% accuracy. Roar fears non-dragon enemies (6 sec).",
       "cooldown": "20 minutes",
       "description": "The God of War's rage \u2014 even dragons pause.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 8
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-valorous-rage-110",
+      "id": "capstone-paladin-valorous-rage-110",
       "name": "Valorous Rage",
       "class": "paladin",
       "level": 110,
@@ -21,10 +31,24 @@
       "effect": "For 2 minutes, +45% damage vs dragons/undead, +20% mitigation. Cannot be feared.",
       "cooldown": "20 minutes",
       "description": "Valor that does not flinch \u2014 not even before dragons.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          },
+          {
+            "target": "db",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-dying-grasp-110",
+      "id": "capstone-shadowknight-dying-grasp-110",
       "name": "Dying Grasp",
       "class": "shadowknight",
       "level": 110,
@@ -32,10 +56,19 @@
       "effect": "Execute: if target below 25% HP, deal 4000 + (level \u00d7 20) unresistable damage. Heal for 50% of damage.",
       "cooldown": "15 minutes",
       "description": "The dying grasp claims what is already lost.",
-      "refresh": "day"
+      "refresh": "day",
+      "mechanics": {
+        "type": "lifetap",
+        "damageFormula": "4000 + (level * 20)",
+        "healPercent": 50,
+        "damageType": "magic",
+        "resistable": false,
+        "condition": "target below 25% HP",
+        "notes": "Execute: only usable when target is below 25% HP. Unresistable damage; heals for 50% of damage dealt."
+      }
     },
     {
-      "id": "capstone-torrent-of-fists-110",
+      "id": "capstone-monk-torrent-of-fists-110",
       "name": "Torrent of Fists",
       "class": "monk",
       "level": 110,
@@ -46,7 +79,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-knifeplay-discipline-110",
+      "id": "capstone-rogue-knifeplay-discipline-110",
       "name": "Knifeplay Discipline",
       "class": "rogue",
       "level": 110,
@@ -54,10 +87,20 @@
       "effect": "For 90 seconds, thrown attacks +50% damage, melee +25%, +15% double attack.",
       "cooldown": "15 minutes",
       "description": "Knives dance \u2014 thrown or held, they all find flesh.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 8
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-desperation-110",
+      "id": "capstone-berserker-desperation-110",
       "name": "Desperation",
       "class": "berserker",
       "level": 110,
@@ -65,10 +108,20 @@
       "effect": "For 90 seconds, damage scales with missing HP: +10% per 10% HP missing (max +90%). Requires <50% HP.",
       "cooldown": "15 minutes",
       "description": "Desperation \u2014 the closer to death, the harder the axes fall.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 9
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-guardian-of-the-forest-110",
+      "id": "capstone-ranger-guardian-of-the-forest-110",
       "name": "Guardian of the Forest",
       "class": "ranger",
       "level": 110,
@@ -76,10 +129,24 @@
       "effect": "Self buff (5 min): +30% mitigation, +25% damage, track dragons at triple range.",
       "cooldown": "15 minutes",
       "description": "The forest itself guards the ranger \u2014 even against dragons.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 50,
+        "modifiers": [
+          {
+            "target": "db",
+            "value": 3
+          },
+          {
+            "target": "ob",
+            "value": 3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-roar-of-thunder-110",
+      "id": "capstone-beastlord-roar-of-thunder-110",
       "name": "Roar of Thunder",
       "class": "beastlord",
       "level": 110,
@@ -87,10 +154,23 @@
       "effect": "AoE roar: 1500 sonic damage to all enemies within 30 feet. Cripple (-25% damage) for 1 minute. -50% hate.",
       "cooldown": "10 minutes",
       "description": "The thunder's roar \u2014 even dragons hear it.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 10,
+        "aoe": true,
+        "modifiers": [
+          {
+            "target": "damage",
+            "value": 25,
+            "pct": true
+          }
+        ],
+        "notes": "1500 sonic damage to damage author; -50% hate is threat/utility.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-song-of-stone-110",
+      "id": "capstone-bard-song-of-stone-110",
       "name": "Song of Stone",
       "class": "bard",
       "level": 110,
@@ -98,10 +178,20 @@
       "effect": "Group buff (3 min): 2000-point damage absorb (stone skin), +20% mitigation.",
       "cooldown": "15 minutes",
       "description": "The bard sings the group into living stone.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "db",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-turn-undead-110",
+      "id": "capstone-cleric-turn-undead-110",
       "name": "Turn Undead",
       "class": "cleric",
       "level": 110,
@@ -112,7 +202,7 @@
       "refresh": "day"
     },
     {
-      "id": "capstone-spirits-of-nature-110",
+      "id": "capstone-druid-spirits-of-nature-110",
       "name": "Spirits of Nature",
       "class": "druid",
       "level": 110,
@@ -120,10 +210,14 @@
       "effect": "Summon 4 nature spirits for 90 seconds. Each deals damage and heals the group for 50% of damage dealt.",
       "cooldown": "20 minutes",
       "description": "Nature's spirits fight and mend as one.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "utility",
+        "description": "Summons 4 nature spirits for 90 seconds. Each deals damage and heals the group for 50% of damage dealt."
+      }
     },
     {
-      "id": "capstone-tigirs-insects-110",
+      "id": "capstone-shaman-tigir-s-insects-110",
       "name": "Tigir's Insects",
       "class": "shaman",
       "level": 110,
@@ -134,7 +228,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-beguilers-synergy-rank-ii-110",
+      "id": "capstone-enchanter-beguiler-s-synergy-rank-ii-110",
       "name": "Beguiler's Synergy (Rank II)",
       "class": "enchanter",
       "level": 110,
@@ -145,7 +239,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-virulent-talon-110",
+      "id": "capstone-magician-virulent-talon-110",
       "name": "Virulent Talon",
       "class": "magician",
       "level": 110,
@@ -156,7 +250,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-embalmers-carapace-110",
+      "id": "capstone-necromancer-embalmer-s-carapace-110",
       "name": "Embalmer's Carapace",
       "class": "necromancer",
       "level": 110,
@@ -167,7 +261,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-silent-casting-110",
+      "id": "capstone-wizard-silent-casting-110",
       "name": "Silent Casting",
       "class": "wizard",
       "level": 110,
@@ -175,7 +269,17 @@
       "effect": "For 60 seconds, spells generate 90% less hate. +20% spell damage.",
       "cooldown": "10 minutes",
       "description": "The wizard casts in silence \u2014 destruction without witness.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 10,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     }
   ]
 }

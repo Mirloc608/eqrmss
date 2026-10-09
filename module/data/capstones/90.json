@@ -2,7 +2,7 @@
   "level": 90,
   "capstones": [
     {
-      "id": "capstone-fellstrike-discipline-90",
+      "id": "capstone-warrior-fellstrike-discipline-90",
       "name": "Fellstrike Discipline",
       "class": "warrior",
       "level": 90,
@@ -10,10 +10,20 @@
       "effect": "For 90 seconds, +45% accuracy, +35% damage, +20% crit chance. Strikes never miss.",
       "cooldown": "15 minutes",
       "description": "The warrior's fell strikes find every gap in armor.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 9
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-repel-the-wicked-90",
+      "id": "capstone-paladin-repel-the-wicked-90",
       "name": "Repel the Wicked",
       "class": "paladin",
       "level": 90,
@@ -21,10 +31,17 @@
       "effect": "AE: 1500 + (level \u00d7 12) damage to undead/evils. Knockback + stun 4 seconds.",
       "cooldown": "15 minutes",
       "description": "The paladin repels wickedness with holy force.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 1,
+        "stunRounds": 1,
+        "aoe": true,
+        "notes": "RIDER on Repel the Wicked AE (1500+(levelx12) vs undead/evils, damage author). 4s stun ~1 round. Knockback via combat engine.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-explosion-of-hatred-90",
+      "id": "capstone-shadowknight-explosion-of-hatred-90",
       "name": "Explosion of Hatred",
       "class": "shadowknight",
       "level": 90,
@@ -32,10 +49,17 @@
       "effect": "AE: 1200 + (level \u00d7 10) damage + massive hate gain on all targets. Fear for 6 seconds.",
       "cooldown": "12 minutes",
       "description": "Hatred explodes outward from the shadowknight.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 1,
+        "fearRounds": 1,
+        "aoe": true,
+        "notes": "RIDER on Explosion of Hatred AE (1200+(levelx10), damage author). AE fear 6s ~1 round. Massive hate gain is threat/utility.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-stunning-kick-90",
+      "id": "capstone-monk-stunning-kick-90",
       "name": "Stunning Kick",
       "class": "monk",
       "level": 90,
@@ -43,10 +67,16 @@
       "effect": "Kick attack: 800 + (level \u00d7 8) damage + stun for 8 seconds. Interrupts casting. Cannot be dodged.",
       "cooldown": "5 minutes",
       "description": "The monk's kick stuns like a thunderbolt.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 1,
+        "stunRounds": 1,
+        "notes": "RIDER on Stunning Kick damage (800+(levelx8), damage author). 8s stun ~1 round. Interrupts casting. Cannot be dodged.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-assassin-discipline-90",
+      "id": "capstone-rogue-assassin-discipline-90",
       "name": "Assassin Discipline",
       "class": "rogue",
       "level": 90,
@@ -54,10 +84,20 @@
       "effect": "For 60 seconds, backstabs +60% damage, +30% crit chance, can backstab from front (50% penalty).",
       "cooldown": "15 minutes",
       "description": "The assassin needs no shadows \u2014 only opportunity.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 10,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 6
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-desperation-90",
+      "id": "capstone-berserker-desperation-90",
       "name": "Desperation",
       "class": "berserker",
       "level": 90,
@@ -65,10 +105,24 @@
       "effect": "Can only be used below 30% HP. For 60 seconds, +80% damage, +40% attack speed, immune to death (min 1 HP).",
       "cooldown": "20 minutes",
       "description": "Desperation unlocks the berserker's final fury.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 10,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 8
+          },
+          {
+            "target": "haste",
+            "value": 40
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-jolting-kicks-90",
+      "id": "capstone-ranger-jolting-kicks-90",
       "name": "Jolting Kicks",
       "class": "ranger",
       "level": 90,
@@ -76,10 +130,16 @@
       "effect": "Kick: 600 + (level \u00d7 6) damage + interrupt + 4 second stun. 50% chance to knockdown.",
       "cooldown": "5 minutes",
       "description": "The ranger's kick jolts like lightning.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 1,
+        "stunRounds": 1,
+        "notes": "RIDER on Jolting Kicks damage (600+(levelx6), damage author). Interrupts casting; 50% chance knockdown (combat engine).",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-chameleon-strike-90",
+      "id": "capstone-beastlord-chameleon-strike-90",
       "name": "Chameleon Strike",
       "class": "beastlord",
       "level": 90,
@@ -90,7 +150,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-bladed-song-90",
+      "id": "capstone-bard-bladed-song-90",
       "name": "Bladed Song",
       "class": "bard",
       "level": 90,
@@ -98,10 +158,16 @@
       "effect": "Aura (2 min): allies' melee attacks deal +150 damage. Enemies take 80/tick bleed.",
       "cooldown": "12 minutes",
       "description": "The bard's song has blades.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "dot",
+        "tickFormula": "80",
+        "ticks": 20,
+        "damageType": "bleed"
+      }
     },
     {
-      "id": "capstone-turn-undead-90",
+      "id": "capstone-cleric-turn-undead-90",
       "name": "Turn Undead",
       "class": "cleric",
       "level": 90,
@@ -109,10 +175,16 @@
       "effect": "Nuke: 2500 + (level \u00d7 20) damage to undead only. Unresistable. Stuns undead 6 seconds.",
       "cooldown": "8 minutes",
       "description": "The cleric turns undead with divine wrath.",
-      "refresh": "day"
+      "refresh": "day",
+      "mechanics": {
+        "durationRounds": 1,
+        "stunRounds": 1,
+        "notes": "RIDER on Turn Undead nuke (2500+(levelx20) vs undead, damage author). Undead-only stun 6s ~1 round. Unresistable.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-spirits-of-nature-90",
+      "id": "capstone-druid-spirits-of-nature-90",
       "name": "Spirits of Nature",
       "class": "druid",
       "level": 90,
@@ -120,10 +192,14 @@
       "effect": "Summon 3 nature spirits for 90 seconds: healer, nuker, slower. Each is potent.",
       "cooldown": "20 minutes",
       "description": "Nature's spirits answer the call.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "utility",
+        "description": "Summons 3 nature spirits for 90 seconds: healer, nuker, slower. Each is potent."
+      }
     },
     {
-      "id": "capstone-tigirs-insects-90",
+      "id": "capstone-shaman-tigir-s-insects-90",
       "name": "Tigir's Insects",
       "class": "shaman",
       "level": 90,
@@ -134,7 +210,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-phantasmal-opponent-90",
+      "id": "capstone-enchanter-phantasmal-opponent-90",
       "name": "Phantasmal Opponent",
       "class": "enchanter",
       "level": 90,
@@ -142,10 +218,14 @@
       "effect": "Create a copy of target (70% power) that fights for the enchanter for 1 minute.",
       "cooldown": "18 minutes",
       "description": "The enemy faces its phantasmal double.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "utility",
+        "description": "Creates a copy of the target at 70% power that fights for the enchanter for 1 minute."
+      }
     },
     {
-      "id": "capstone-virulent-talon-90",
+      "id": "capstone-magician-virulent-talon-90",
       "name": "Virulent Talon",
       "class": "magician",
       "level": 90,
@@ -153,10 +233,16 @@
       "effect": "Pet buff (5 min): attacks apply stacking poison (100/tick, stacks 5x). +25% attack speed.",
       "cooldown": "15 minutes",
       "description": "The elemental's talons drip virulent poison.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "dot",
+        "tickFormula": "100",
+        "ticks": 10,
+        "damageType": "poison"
+      }
     },
     {
-      "id": "capstone-embalmers-carapace-90",
+      "id": "capstone-necromancer-embalmer-s-carapace-90",
       "name": "Embalmer's Carapace",
       "class": "necromancer",
       "level": 90,
@@ -167,7 +253,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-claw-spells-90",
+      "id": "capstone-wizard-claw-spells-90",
       "name": "Claw Spells",
       "class": "wizard",
       "level": 90,
@@ -175,7 +261,17 @@
       "effect": "For 60 seconds, nukes cast 50% faster, cost -30% mana, +20% damage. The claw strikes fast.",
       "cooldown": "12 minutes",
       "description": "The wizard's claws rake the enemy swiftly.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 10,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     }
   ]
 }

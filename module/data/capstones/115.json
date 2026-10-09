@@ -2,7 +2,7 @@
   "level": 115,
   "capstones": [
     {
-      "id": "capstone-fellstrike-discipline-115",
+      "id": "capstone-warrior-fellstrike-discipline-115",
       "name": "Fellstrike Discipline",
       "class": "warrior",
       "level": 115,
@@ -10,10 +10,20 @@
       "effect": "For 90 seconds, +55% accuracy, +35% damage, attacks ignore 25% of target's mitigation.",
       "cooldown": "15 minutes",
       "description": "The fell strike \u2014 precision that pierces even dragon scale.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 10
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-sanctified-blessing-rank-ii-115",
+      "id": "capstone-paladin-sanctified-blessing-rank-ii-115",
       "name": "Sanctified Blessing (Rank II)",
       "class": "paladin",
       "level": 115,
@@ -21,10 +31,21 @@
       "effect": "For 3 minutes, 50% chance for each heal to grant a 2000-point rune + cure one effect.",
       "cooldown": "15 minutes",
       "description": "Sanctification perfected in the torment of Velious.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 30,
+        "proc": {
+          "chance": 50,
+          "trigger": "healCast",
+          "effect": "rune"
+        },
+        "absorb": 2000,
+        "notes": "Also cures one effect per proc (utility/cure).",
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-explosion-of-hatred-115",
+      "id": "capstone-shadowknight-explosion-of-hatred-115",
       "name": "Explosion of Hatred",
       "class": "shadowknight",
       "level": 115,
@@ -35,7 +56,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-stunning-kick-rank-ii-115",
+      "id": "capstone-monk-stunning-kick-rank-ii-115",
       "name": "Stunning Kick (Rank II)",
       "class": "monk",
       "level": 115,
@@ -43,10 +64,16 @@
       "effect": "Kick for 2000 + (level \u00d7 12) damage. Stun 8 seconds (even stun-immune take 4 sec). Interrupt.",
       "cooldown": "5 minutes",
       "description": "The stunning kick perfected \u2014 even dragons stagger.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 1,
+        "stunRounds": 1,
+        "notes": "RIDER on Stunning Kick II damage (2000+(levelx12), damage author). Stun-immune targets still stunned 4s (~1 round). Interrupts.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-escape-rank-ii-115",
+      "id": "capstone-rogue-escape-rank-ii-115",
       "name": "Escape (Rank II)",
       "class": "rogue",
       "level": 115,
@@ -54,10 +81,16 @@
       "effect": "Instant: drop all hate, become invisible + invulnerable for 10 seconds. Next backstab +100% damage.",
       "cooldown": "10 minutes",
       "description": "The perfect escape \u2014 gone before the snow settles.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 2,
+        "invulnerable": true,
+        "notes": "Also drops all hate and invisibility \u2014 threat/utility. Next-backstab bonus is buff author's.",
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-decapitation-rank-ii-115",
+      "id": "capstone-berserker-decapitation-rank-ii-115",
       "name": "Decapitation (Rank II)",
       "class": "berserker",
       "level": 115,
@@ -65,10 +98,14 @@
       "effect": "Passive: 8% chance on hit to instantly kill humanoid targets below 30% HP. Active: next 3 hits +80% damage.",
       "cooldown": "15 minutes (active)",
       "description": "Decapitation \u2014 the axe remembers every neck.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "special",
+        "description": "Passive: 8% chance on hit to instantly kill humanoid targets below 30% HP. Active: next 3 hits +80% damage."
+      }
     },
     {
-      "id": "capstone-scouts-efficiency-115",
+      "id": "capstone-ranger-scout-s-efficiency-115",
       "name": "Scout's Efficiency",
       "class": "ranger",
       "level": 115,
@@ -79,7 +116,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-group-bestial-alignment-115",
+      "id": "capstone-beastlord-group-bestial-alignment-115",
       "name": "Group Bestial Alignment",
       "class": "beastlord",
       "level": 115,
@@ -87,10 +124,24 @@
       "effect": "For 2 minutes, entire group gains +25% melee damage, +15% attack speed. Beastlord/warder gain double.",
       "cooldown": "20 minutes",
       "description": "The pack aligns \u2014 beast, master, and allies as one.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "haste",
+            "value": 15
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-bladed-song-115",
+      "id": "capstone-bard-bladed-song-115",
       "name": "Bladed Song",
       "class": "bard",
       "level": 115,
@@ -98,10 +149,20 @@
       "effect": "Aura (3 min): allies' melee attacks deal +30% damage as magic. Enemies take 300/tick magic damage.",
       "cooldown": "15 minutes",
       "description": "The bladed song \u2014 every strike sings with magic.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-celestial-cleansing-rank-ii-115",
+      "id": "capstone-cleric-celestial-cleansing-rank-ii-115",
       "name": "Celestial Cleansing (Rank II)",
       "class": "cleric",
       "level": 115,
@@ -109,10 +170,20 @@
       "effect": "Instantly cure all effects on the raid (not just group). Heal 500 per effect removed. Cannot be interrupted.",
       "cooldown": "15 minutes",
       "description": "Celestial light scours the entire raid clean.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "durationRounds": 0,
+        "instant": true,
+        "group": true,
+        "cure": [
+          "all"
+        ],
+        "notes": "Raid-wide (not just group). Cannot be interrupted. Heal 500 per effect \u2014 heal author.",
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-natures-guardian-rank-ii-115",
+      "id": "capstone-druid-nature-s-guardian-rank-ii-115",
       "name": "Nature's Guardian (Rank II)",
       "class": "druid",
       "level": 115,
@@ -123,7 +194,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-cannibalization-rank-ii-115",
+      "id": "capstone-shaman-cannibalization-rank-ii-115",
       "name": "Cannibalization (Rank II)",
       "class": "shaman",
       "level": 115,
@@ -134,7 +205,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-clarity-rank-ii-115",
+      "id": "capstone-enchanter-clarity-rank-ii-115",
       "name": "Clarity (Rank II)",
       "class": "enchanter",
       "level": 115,
@@ -142,10 +213,28 @@
       "effect": "Group buff (10 min): +50 mana/tick, +25% spell damage, +20 to mental resists.",
       "cooldown": "15 minutes",
       "description": "Perfect clarity \u2014 \"crack\" for the torment era.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 100,
+        "modifiers": [
+          {
+            "target": "mana",
+            "value": 5
+          },
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "resist-magic",
+            "value": 20
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-elemental-union-rank-ii-115",
+      "id": "capstone-magician-elemental-union-rank-ii-115",
       "name": "Elemental Union (Rank II)",
       "class": "magician",
       "level": 115,
@@ -153,10 +242,20 @@
       "effect": "For 3 minutes, magician and pet both gain +45% damage, pet takes -35% damage, share 25% of damage taken.",
       "cooldown": "15 minutes",
       "description": "Union perfected \u2014 two bodies, one will, unbreakable.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-arch-lich-115",
+      "id": "capstone-necromancer-arch-lich-115",
       "name": "Arch Lich",
       "class": "necromancer",
       "level": 115,
@@ -167,7 +266,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-ethereal-incineration-115",
+      "id": "capstone-wizard-ethereal-incineration-115",
       "name": "Ethereal Incineration",
       "class": "wizard",
       "level": 115,

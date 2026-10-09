@@ -2,7 +2,7 @@
   "level": 65,
   "capstones": [
     {
-      "id": "capstone-final-stand-discipline-65",
+      "id": "capstone-warrior-final-stand-discipline-65",
       "name": "Final Stand Discipline",
       "class": "warrior",
       "level": 65,
@@ -10,10 +10,20 @@
       "effect": "For 3 minutes, take 45% less melee damage. Cannot be stunned from the front.",
       "cooldown": "15 minutes",
       "description": "The warrior plants their feet and becomes the wall. Nothing passes.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "db",
+            "value": 5
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-divine-intervention-65",
+      "id": "capstone-paladin-divine-intervention-65",
       "name": "Divine Intervention",
       "class": "paladin",
       "level": 65,
@@ -21,10 +31,18 @@
       "effect": "Buff target (or self). The next time they would die within 5 minutes, they are instead healed to 50% HP. One-time trigger.",
       "cooldown": "30 minutes",
       "description": "The gods themselves intervene. Death is not today.",
-      "refresh": "day"
+      "refresh": "day",
+      "mechanics": {
+        "durationRounds": 50,
+        "deathSave": true,
+        "deathSaveHealPct": 50,
+        "oneTime": true,
+        "notes": "Target or self. One-time: next would-be death within duration heals to 50% HP instead.",
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-harm-touch-65",
+      "id": "capstone-shadowknight-harm-touch-65",
       "name": "Harm Touch",
       "class": "shadowknight",
       "level": 65,
@@ -32,10 +50,17 @@
       "effect": "Instant direct damage to target: 500 + (level \u00d7 10) as unresistable magic damage. Cannot miss.",
       "cooldown": "72 minutes",
       "description": "The shadowknight channels pure hatred into a single devastating touch.",
-      "refresh": "day"
+      "refresh": "day",
+      "mechanics": {
+        "type": "damage",
+        "formula": "500 + (level * 10)",
+        "damageType": "magic",
+        "resistable": false,
+        "notes": "Cannot miss (no attack roll)."
+      }
     },
     {
-      "id": "capstone-speed-focus-discipline-65",
+      "id": "capstone-monk-speed-focus-discipline-65",
       "name": "Speed Focus Discipline",
       "class": "monk",
       "level": 65,
@@ -43,10 +68,24 @@
       "effect": "For 2 minutes, attack speed +50%, fist damage +25%. Cannot be interrupted.",
       "cooldown": "15 minutes",
       "description": "The monk enters a state of perfect martial focus. Fists become a blur.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "haste",
+            "value": 50
+          },
+          {
+            "target": "ob",
+            "value": 3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-frenzied-stabbing-discipline-65",
+      "id": "capstone-rogue-frenzied-stabbing-discipline-65",
       "name": "Frenzied Stabbing Discipline",
       "class": "rogue",
       "level": 65,
@@ -54,10 +93,20 @@
       "effect": "For 90 seconds, backstab cooldown reduced by 50%, backstab damage +30%.",
       "cooldown": "15 minutes",
       "description": "The rogue abandons caution for pure killing speed.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-blood-pact-65",
+      "id": "capstone-berserker-blood-pact-65",
       "name": "Blood Pact",
       "class": "berserker",
       "level": 65,
@@ -65,10 +114,20 @@
       "effect": "For 2 minutes, melee damage +40%, but take 10% of damage dealt as recoil. Requires <90% HP to activate.",
       "cooldown": "20 minutes",
       "description": "The berserker offers their own blood for greater fury.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-headshot-65",
+      "id": "capstone-ranger-headshot-65",
       "name": "Headshot",
       "class": "ranger",
       "level": 65,
@@ -76,10 +135,14 @@
       "effect": "Passive: Bow attacks gain 5% chance to instantly kill humanoid targets below 20% HP.",
       "cooldown": "Passive (always on)",
       "description": "The ranger's arrow finds the perfect killing shot.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "special",
+        "description": "Headshot: bow attacks gain 5% chance to instantly kill humanoid targets below 20% HP."
+      }
     },
     {
-      "id": "capstone-bestial-alignment-65",
+      "id": "capstone-beastlord-bestial-alignment-65",
       "name": "Bestial Alignment",
       "class": "beastlord",
       "level": 65,
@@ -87,10 +150,24 @@
       "effect": "For 2 minutes, beastlord and warder both gain +30% melee damage, +20% attack speed.",
       "cooldown": "20 minutes",
       "description": "Beast and master fight as one primal force.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "haste",
+            "value": 20
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-fierce-eye-65",
+      "id": "capstone-bard-fierce-eye-65",
       "name": "Fierce Eye",
       "class": "bard",
       "level": 65,
@@ -98,10 +175,20 @@
       "effect": "For 90 seconds, group gains +25% crit chance, +15% proc rate, +10% accuracy.",
       "cooldown": "15 minutes",
       "description": "The bard's fierce gaze inspires the group to legendary feats.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 1
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-celestial-cleansing-65",
+      "id": "capstone-cleric-celestial-cleansing-65",
       "name": "Celestial Cleansing",
       "class": "cleric",
       "level": 65,
@@ -109,10 +196,23 @@
       "effect": "Instantly cure all detrimental effects (poison, disease, curse, magic) on the group. Heal for 200 per effect removed.",
       "cooldown": "10 minutes",
       "description": "Divine light scours away all affliction.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "durationRounds": 0,
+        "instant": true,
+        "group": true,
+        "cure": [
+          "poison",
+          "disease",
+          "curse",
+          "magic"
+        ],
+        "notes": "Heal 200 per effect removed \u2014 heal author.",
+        "type": "defensive"
+      }
     },
     {
-      "id": "capstone-spirit-of-the-wood-65",
+      "id": "capstone-druid-spirit-of-the-wood-65",
       "name": "Spirit of the Wood",
       "class": "druid",
       "level": 65,
@@ -120,10 +220,28 @@
       "effect": "Group buff (10 min): +50 HP/tick regen, +20 mana/tick, +15 attack.",
       "cooldown": "15 minutes",
       "description": "The druid calls on the ancient spirits of the forest.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 100,
+        "modifiers": [
+          {
+            "target": "hits",
+            "value": 5
+          },
+          {
+            "target": "mana",
+            "value": 2
+          },
+          {
+            "target": "ob",
+            "value": 2
+          }
+        ]
+      }
     },
     {
-      "id": "capstone-torpor-65",
+      "id": "capstone-shaman-torpor-65",
       "name": "Torpor",
       "class": "shaman",
       "level": 65,
@@ -131,10 +249,22 @@
       "effect": "Target: 70% slow for 2 minutes + 100 HP/tick heal-over-time. Cannot be cast on self while moving.",
       "cooldown": "5 minutes",
       "description": "The shaman's most potent medicine \u2014 stillness and mending.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "slow",
+            "value": 70,
+            "pct": true
+          }
+        ],
+        "notes": "HYBRID: also grants 100 HP/tick HoT to target \u2014 heal author should add heal component.",
+        "type": "debuff"
+      }
     },
     {
-      "id": "capstone-beguilers-synergy-65",
+      "id": "capstone-enchanter-beguiler-s-synergy-65",
       "name": "Beguiler's Synergy",
       "class": "enchanter",
       "level": 65,
@@ -145,7 +275,7 @@
       "refresh": "combat"
     },
     {
-      "id": "capstone-host-of-the-elements-65",
+      "id": "capstone-magician-host-of-the-elements-65",
       "name": "Host of the Elements",
       "class": "magician",
       "level": 65,
@@ -153,10 +283,14 @@
       "effect": "Summon 4 elemental swarm pets (earth, air, fire, water) for 1 minute. Each deals moderate damage.",
       "cooldown": "20 minutes",
       "description": "The magician calls a host of elementals to overwhelm the enemy.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "utility",
+        "description": "Summons 4 elemental swarm pets (earth, air, fire, water) for 1 minute. Each deals moderate damage."
+      }
     },
     {
-      "id": "capstone-life-burn-65",
+      "id": "capstone-necromancer-life-burn-65",
       "name": "Life Burn",
       "class": "necromancer",
       "level": 65,
@@ -164,10 +298,18 @@
       "effect": "Convert 50% of current HP into direct damage to target (unresistable). Cannot kill the caster.",
       "cooldown": "15 minutes",
       "description": "The necromancer burns their own life force as a weapon.",
-      "refresh": "day"
+      "refresh": "day",
+      "mechanics": {
+        "type": "damage",
+        "formula": "floor(currentHP * 0.5)",
+        "damageType": "magic",
+        "resistable": false,
+        "costFormula": "min(floor(currentHP * 0.5), currentHP - 1)",
+        "notes": "Converts 50% of current HP into damage. Cannot kill the caster (caster keeps at least 1 HP)."
+      }
     },
     {
-      "id": "capstone-manaburn-65",
+      "id": "capstone-wizard-manaburn-65",
       "name": "Manaburn",
       "class": "wizard",
       "level": 65,
@@ -175,7 +317,15 @@
       "effect": "Convert 100% of current mana into direct damage to target (unresistable, 2:1 ratio). Caster is left at 0 mana.",
       "cooldown": "30 minutes",
       "description": "The wizard's ultimate sacrifice \u2014 all mana, one apocalyptic strike.",
-      "refresh": "day"
+      "refresh": "day",
+      "mechanics": {
+        "type": "damage",
+        "formula": "currentMana * 2",
+        "damageType": "magic",
+        "resistable": false,
+        "costFormula": "currentMana",
+        "notes": "Converts 100% of current mana into damage at a 2:1 ratio. Caster is left at 0 mana."
+      }
     }
   ]
 }
