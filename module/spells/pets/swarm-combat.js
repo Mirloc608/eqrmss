@@ -47,9 +47,9 @@ async function resolveOneCrit(tables, targetActor, type, severity, notes) {
         notes.push(`crit ${severity}${type ?? ""}: ${critResult.error} (GM adjudicates)`);
         return 0;
     }
-    const text = adjudicateCritText(critResult.text, targetActor);
-    const bonus = critBonusHits(text);
-    const condNote = await applyCritConditions(targetActor, null, text);
+    const adjudicated = adjudicateCritText(critResult.text, targetActor);
+    const bonus = critBonusHits(adjudicated.text);
+    const condNote = await applyCritConditions(targetActor, null, adjudicated.text);
     if (condNote) notes.push(stripP(condNote));
     return bonus;
 }
