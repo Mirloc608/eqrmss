@@ -302,13 +302,13 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
                 .map(c => c.actor);
             if (!allies.includes(caster)) allies.unshift(caster);
 
-            // Calculate average HP%
+            // Calculate average HP% (clamped 0-100)
             let totalPct = 0;
             const hpData = [];
             for (const a of allies) {
                 const max = Number(a.system?.hits?.max) || 1;
                 const cur = max - (Number(a.system?.hits?.value) || 0);
-                const pct = (cur / max) * 100;
+                const pct = Math.max(0, Math.min(100, (cur / max) * 100));
                 totalPct += pct;
                 hpData.push({ actor: a, max });
             }
