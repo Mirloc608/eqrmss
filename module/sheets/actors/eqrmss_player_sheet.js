@@ -549,6 +549,14 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             if (actor.system?.status?.exhausted) updates["system.status.exhausted"] = false;
             if (actor.system?.status?.subdueDoubled) updates["system.status.subdueDoubled"] = false;
             await actor.update(updates);
+            // Era Capstones (2026-10-09): refresh combat + rest tier capstones on rest.
+            try {
+                const { refreshCapstones } = await import("../../combat/capstones.js");
+                const result = await refreshCapstones(actor, "rest");
+                if (result.refreshed > 0) {
+                    console.log(`EQRMSS | Rest refreshed ${result.refreshed} capstones for ${actor.name}`);
+                }
+            } catch (e) { console.error("EQRMSS | capstone refresh on rest failed", e); }
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor }),
                 content: `<p><em>${actor.name} rests — mana and exhaustion restored.</em></p>`

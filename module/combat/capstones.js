@@ -1,10 +1,16 @@
 /**
  * Era Capstones: Active abilities earned at level cap increases (65→125).
- * (2026-10-09)
+ * (2026-10-09, refresh tiers 2026-10-09)
  *
  * Each capstone is a hand-designed active ability with an EQ canon name.
  * They appear in a separate Capstone block on the Combat tab.
- * Cooldowns are tracked per-actor in system.status.capstoneCooldowns { [capstoneId]: timestamp }.
+ *
+ * Refresh tiers (tabletop-appropriate, not minute-based):
+ * - "combat": refreshes at end of combat
+ * - "rest": refreshes at end of rest (short rest)
+ * - "day": refreshes at end of day (long rest)
+ *
+ * Used capstones tracked in system.status.capstonesUsed = [capstoneId, ...]
  */
 
 import { getAvailableCapstones } from "../data/loaders/capstone-loader.js";
@@ -14,53 +20,15 @@ function esc(s) {
 }
 
 /**
- * Parse a cooldown string like "15 minutes", "30 minutes", "10 minutes", "5 minutes", "2 seconds"
- * into milliseconds.
+ * Check if a capstone is used (on cooldown) for an actor.
  */
-function parseCooldown(cooldownStr) {
-    if (!cooldownStr) return 15 * 60 * 1000; // default 15 min
-    const str = String(cooldownStr).toLowerCase();
-    if (str.includes("passive")) return 0;
-
-    const match = str.match(/(\d+)\s*(second|minute|hour)/);
-    if (!match) return 15 * 60 * 1000;
-
-    const num = parseInt(match[1], 10);
-    const unit = match[2];
-    if (unit.startsWith("second")) return num * 1000;
-    if (unit.startsWith("minute")) return num * 60 * 1000;
-    if (unit.startsWith("hour")) return num * 60 * 60 * 1000;
-    return 15 * 60 * 1000;
-}
-
-/**
- * Check if a capstone is on cooldown for an actor.
- * Returns { onCooldown: boolean, remainingMs: number }
- */
-export function checkCapstoneCooldown(actor, capstoneId) {
-    const cooldowns = actor.system?.status?.capstoneCooldowns || {};
-    const lastUsed = cooldowns[capstoneId];
-    if (!lastUsed) return { onCooldown: false, remainingMs: 0 };
-
-    const capstone = globalThis.game?.eqrmss?.capstones?.byId?.[capstoneId];
-    if (!capstone) return { onCooldown: false, remainingMs: 0 };
-
-    const cooldownMs = parseCooldown(capstone.cooldown);
-    if (cooldownMs === 0) return { onCooldown: false, remainingMs: 0 }; // passive
-
-    const elapsed = Date.now() - lastUsed;
-    const remaining = cooldownMs - elapsed;
-
-    if (remaining <= 0) return { onCooldown: false, remainingMs: 0 };
-    return { onCooldown: true, remainingMs: remaining };
+export function isCapstoneUsed(actor, capstoneId) {
+    const used = actor.system?.status?.capstonesUsed || [];
+    return used.includes(capstoneId);
 }
 
 /**
  * Activate a capstone for an actor.
- * This is a framework — specific capstone effects are implemented as generic buffs
- * via the existing buff system. The capstone's "effect" text describes the mechanics;
- * actual implementation applies a timed buff via spellEffects.
- *
  * Returns { ok: boolean, message: string }
  */
 export async function activateCapstone(actor, capstoneId, target = null) {
@@ -81,26 +49,30 @@ export async function activateCapstone(actor, capstoneId, target = null) {
         return { ok: false, message: `${capstone.name} requires level ${capstone.level}.` };
     }
 
-    // Check cooldown
-    const { onCooldown, remainingMs } = checkCapstoneCooldown(actor, capstoneId);
-    if (onCooldown) {
-        const mins = Math.ceil(remainingMs / 60000);
-        return { ok: false, message: `${capstone.name} is on cooldown (${mins} min remaining).` };
+    // Check if already used
+    if (isCapstoneUsed(actor, capstoneId)) {
+        const refresh = capstone.refresh || "combat";
+        const refreshText = refresh === "combat" ? "end of combat" : refresh === "rest" ? "end of rest" : "end of day";
+        return { ok: false, message: `${capstone.name} has been used. Refreshes at ${refreshText}.` };
     }
 
-    // Record cooldown
-    const cooldowns = { ...(actor.system?.status?.capstoneCooldowns || {}) };
-    cooldowns[capstoneId] = Date.now();
-    await actor.update({ "system.status.capstoneCooldowns": cooldowns });
+    // Mark as used
+    const used = [...(actor.system?.status?.capstonesUsed || [])];
+    if (!used.includes(capstoneId)) {
+        used.push(capstoneId);
+    }
+    await actor.update({ "system.status.capstonesUsed": used });
 
     // Post to chat
+    const refresh = capstone.refresh || "combat";
+    const refreshText = refresh === "combat" ? "End of Combat" : refresh === "rest" ? "End of Rest" : "End of Day";
     const chatContent = `
         <div class="eqrmss-capstone">
             <h3>${esc(capstone.name)}</h3>
             <p><strong>${esc(actor.name)}</strong> invokes <strong>${esc(capstone.name)}</strong>!</p>
             <p><em>${esc(capstone.description)}</em></p>
             <p>Effect: ${esc(capstone.effect)}</p>
-            <p>Cooldown: ${esc(capstone.cooldown)}</p>
+            <p>Refresh: ${refreshText}</p>
         </div>
     `;
 
@@ -115,17 +87,40 @@ export async function activateCapstone(actor, capstoneId, target = null) {
 }
 
 /**
- * Get capstones for display on the character sheet, with cooldown status.
+ * Refresh capstones by tier.
+ * @param {Actor} actor - The actor
+ * @param {string} tier - "combat", "rest", or "day"
+ *   - "combat": clears combat-tier only
+ *   - "rest": clears combat + rest tiers
+ *   - "day": clears all tiers
+ */
+export async function refreshCapstones(actor, tier) {
+    const capstones = globalThis.game?.eqrmss?.capstones?.byId || {};
+    const used = [...(actor.system?.status?.capstonesUsed || [])];
+
+    const tiersToClear = tier === "day" ? ["combat", "rest", "day"] :
+                         tier === "rest" ? ["combat", "rest"] :
+                         ["combat"];
+
+    const remaining = used.filter(id => {
+        const c = capstones[id];
+        if (!c) return false; // Remove stale IDs
+        const refresh = c.refresh || "combat";
+        return !tiersToClear.includes(refresh);
+    });
+
+    await actor.update({ "system.status.capstonesUsed": remaining });
+    return { refreshed: used.length - remaining.length, remaining: remaining.length };
+}
+
+/**
+ * Get capstones for display on the character sheet, with used status.
  */
 export function getCapstonesForSheet(actor) {
     const available = getAvailableCapstones(actor);
-    return available.map(c => {
-        const { onCooldown, remainingMs } = checkCapstoneCooldown(actor, c.id);
-        return {
-            ...c,
-            onCooldown,
-            remainingMs,
-            remainingMins: onCooldown ? Math.ceil(remainingMs / 60000) : 0,
-        };
-    });
+    return available.map(c => ({
+        ...c,
+        onCooldown: isCapstoneUsed(actor, c.id),
+        refresh: c.refresh || "combat",
+    }));
 }

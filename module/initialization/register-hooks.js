@@ -26,6 +26,15 @@ export function registerEQRMSSHooks() {
       }
     } catch (e) { console.error(`EQRMSS | signature reset on combat ${label} failed`, e); }
   }
+  // Era Capstones (2026-10-09): refresh combat-tier capstones at end of combat.
+  async function refreshCapstonesFor(combat, tier) {
+    try {
+      const { refreshCapstones } = await import("../combat/capstones.js");
+      for (const c of combat?.combatants ?? []) {
+        if (c.actor) await refreshCapstones(c.actor, tier);
+      }
+    } catch (e) { console.error(`EQRMSS | capstone refresh (${tier}) failed`, e); }
+  }
   Hooks.on("createCombat", (combat) => {
     if (!game.user?.isGM) return;
     resetSignaturesFor(combat, "start");
@@ -33,6 +42,7 @@ export function registerEQRMSSHooks() {
   Hooks.on("deleteCombat", (combat) => {
     if (!game.user?.isGM) return;
     resetSignaturesFor(combat, "end");
+    refreshCapstonesFor(combat, "combat");
   });
 
   // Summoned items (2026-10-07): expire after 1 day of game time.
