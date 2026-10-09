@@ -639,6 +639,10 @@ async function applyManaDrain({ effect, target, source }) {
 async function applyManaRegen({ effect, target, source }) {
     const miss = requireTarget(target, "manaregen", source);
     if (miss) return miss;
+    // Unlinked tokens (2026-10-09): resolve to base actor for spellEffects.
+    const baseTarget = target?.isToken
+        ? (globalThis.game?.actors?.get(target?.token?.actorId) ?? target)
+        : target;
     const amount = Number(effect?.amount) || 0;
     const pool = String(effect?.pool ?? "mana").toLowerCase();
     if (!(amount > 0)) {
