@@ -239,10 +239,14 @@
       "class": "enchanter",
       "level": 70,
       "expansion": "OoW",
-      "effect": "Instantly reduce the enchanter's hate to 0 on all targets. Memory blur (50% chance per target).",
+      "effect": "Memory blur all enemies (50% chance per target to forget the enchanter).",
       "cooldown": "10 minutes",
       "description": "The enchanter crashes the minds of enemies, erasing their anger.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "memblur",
+        "chance": 50
+      }
     },
     {
       "id": "capstone-magician-elemental-union-70",

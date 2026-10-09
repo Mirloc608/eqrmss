@@ -329,6 +329,19 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
             }
             break;
         }
+
+        case "memblur": {
+            // Apply memory blur to all enemies: chance to forget the caster.
+            const chance = mech.chance || 50;
+            const { applyMemblur } = await import("../spells/memblur.js");
+            const combatants = game.combat?.combatants ?? [];
+            for (const c of combatants) {
+                if (!c.actor || c.actor.id === caster.id) continue;
+                const note = await applyMemblur(caster, c.actor, chance, capstone.name);
+                if (note) notes.push(note);
+            }
+            break;
+        }
             
         default:
             notes.push(`<em>Unknown mechanics type: ${esc(mech.type)}</em>`);
