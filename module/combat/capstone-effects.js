@@ -273,7 +273,9 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
 
         case "triggered": {
             const duration = mech.durationRounds || 20;
-            const triggers = [...(caster.system?.status?.triggers || [])];
+            // Remove any existing triggers from the same capstone (prevent stacking)
+            const triggers = (caster.system?.status?.triggers || [])
+                .filter(t => !(t.source === "capstone" && t.capstoneId === capstone.id));
             triggers.push({
                 source: "capstone",
                 capstoneId: capstone.id,
