@@ -170,6 +170,14 @@ export function groupSpellsByLine(spells, expandedNames) {
 
   const groups = [];
   for (const [name, rows] of byName) {
+    // Rank inference (2026-10-09): if all rows report rank 1 (catalog
+    // _id lost when items were created), infer rank from mana cost
+    // ascending — higher ranks cost more mana.
+    const allRankOne = rows.every(r => r.rank === 1);
+    if (allRankOne && rows.length > 1) {
+      const byMana = [...rows].sort((a, b) => (a.manaCost ?? 0) - (b.manaCost ?? 0));
+      byMana.forEach((r, i) => { r.rank = i + 1; });
+    }
     rows.sort((a, b) => (b.level - a.level) || (b.rank - a.rank));
     const top = rows[0];
     groups.push({
