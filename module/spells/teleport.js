@@ -14,9 +14,17 @@
 // - bind / bind-affinity: store bind point on caster
 //
 // Destinations live in module/data/teleports/destinations.json.
-// Each maps a destination ID to { name, scene, x, y }.
-// scene/x/y are null until the GM configures them —
+// Each maps a destination ID to { name, module, scene, x, y }.
+// module = which world module provides this destination
+//   ("norrath", "kuaa", "luclin", "planes", or null for special/contextual).
+// scene/x/y are null until configured —
 // teleporting to an unconfigured destination posts a chat note.
+//
+// World modules (separate Foundry modules) bind scenes at runtime via:
+//   game.eqrmss.teleports.registerScene(destId, sceneId, x, y)
+// Scene bindings are stored in a runtime registry, separate from the JSON,
+// so world modules can provide maps without modifying core data.
+// Resolution order: runtime binding → JSON scene → GM prompt.
 // ============================================================
 
 import { combatCard } from "../combat/chat-card.js";
@@ -31,6 +39,12 @@ const esc = (s) => globalThis.foundry?.utils?.escapeHTML
 
 let _destinations = null;
 
+// Runtime scene bindings from world modules.
+// Key: destination ID → { sceneId, x, y, module }
+// Separate from destinations.json so world modules can bind
+// scenes without modifying core data files.
+const _sceneBindings = new Map();
+
 async function loadDestinations() {
     if (_destinations) return _destinations;
     try {
@@ -44,7 +58,7 @@ async function loadDestinations() {
 
 /**
  * Look up a destination by ID.
- * @returns {object|null} { id, name, scene, x, y, note } or null
+ * @returns {object|null} { name, module, scene, x, y } or null
  */
 export async function getDestination(destId) {
     if (!destId) return null;
@@ -58,6 +72,68 @@ export async function getDestination(destId) {
         if (key.toLowerCase() === lower) return val;
     }
     return null;
+}
+
+/**
+ * Register a scene binding for a destination.
+ * Called by world modules (norrath, kuaa, luclin, planes) at init.
+ * @param {string} destId - Destination ID from destinations.json
+ * @param {string} sceneId - Foundry scene ID or name
+ * @param {number} x - X coordinate (pixels)
+ * @param {number} y - Y coordinate (pixels)
+ * @param {string} moduleName - World module name (for logging)
+ */
+export function registerScene(destId, sceneId, x, y, moduleName = "unknown") {
+    if (!destId || !sceneId) {
+        console.warn(`EQRMSS | Teleport | registerScene: missing destId or sceneId`);
+        return false;
+    }
+    _sceneBindings.set(destId, { sceneId, x: x ?? null, y: y ?? null, module: moduleName });
+    console.log(`EQRMSS | Teleport | scene bound: ${destId} → ${sceneId} (${moduleName})`);
+    return true;
+}
+
+/**
+ * Get the scene binding for a destination.
+ * Checks runtime bindings first, then falls back to JSON scene field.
+ * @returns {object|null} { sceneId, x, y, source } or null
+ */
+export async function getSceneBinding(destId) {
+    // Runtime binding from world module takes precedence
+    if (_sceneBindings.has(destId)) {
+        const b = _sceneBindings.get(destId);
+        return { sceneId: b.sceneId, x: b.x, y: b.y, source: `world module (${b.module})` };
+    }
+    // Fall back to JSON scene field (GM-configured)
+    const dest = await getDestination(destId);
+    if (dest?.scene) {
+        return { sceneId: dest.scene, x: dest.x, y: dest.y, source: "destinations.json" };
+    }
+    return null;
+}
+
+/**
+ * List all destinations for a world module.
+ * @param {string} moduleName - "norrath", "kuaa", "luclin", "planes", or null
+ * @returns {Promise<Array>} Destination entries
+ */
+export async function getDestinationsByModule(moduleName) {
+    const dests = await loadDestinations();
+    return Object.entries(dests)
+        .filter(([k]) => !k.startsWith("_"))
+        .map(([id, d]) => ({ id, ...d }))
+        .filter(d => d.module === moduleName);
+}
+
+// Expose on game.eqrmss for world modules
+if (typeof game !== "undefined") {
+    game.eqrmss = game.eqrmss || {};
+    game.eqrmss.teleports = {
+        registerScene,
+        getSceneBinding,
+        getDestination,
+        getDestinationsByModule,
+    };
 }
 
 // ----------------------------------------------------------------
@@ -134,22 +210,24 @@ export async function teleportActor(actor, destId, spellName = "Teleport") {
     if (!dest) {
         return `<p><em>${esc(actor.name)} tries to teleport, but the destination "${esc(destId)}" is unknown.</em></p>`;
     }
-    if (!dest.scene) {
-        return `<p><em>${esc(actor.name)} casts ${esc(spellName)} — destination "${esc(dest.name)}" is not configured. GM: set scene/coordinates in module/data/teleports/destinations.json.</em></p>`;
+    const binding = await getSceneBinding(destId);
+    if (!binding) {
+        const moduleHint = dest.module ? ` (world module: ${esc(dest.module)})` : "";
+        return `<p><em>${esc(actor.name)} casts ${esc(spellName)} — destination "${esc(dest.name)}"${moduleHint} has no scene bound. GM: install the world module or set scene/coordinates in module/data/teleports/destinations.json.</em></p>`;
     }
     if (!canControl(actor)) {
         return `<p><em>Teleport not applied — you don't control ${esc(actor.name)}.</em></p>`;
     }
 
     const tok = activeTokenOf(actor);
-    const targetScene = globalThis.game?.scenes?.find(s => s.name === dest.scene || s.id === dest.scene);
+    const targetScene = globalThis.game?.scenes?.find(s => s.name === binding.sceneId || s.id === binding.sceneId);
 
     if (!targetScene) {
-        return `<p><em>${esc(actor.name)} casts ${esc(spellName)} — no scene named "${esc(dest.scene)}" found. GM: check the scene name in destinations.json.</em></p>`;
+        return `<p><em>${esc(actor.name)} casts ${esc(spellName)} — no scene "${esc(binding.sceneId)}" found (bound via ${esc(binding.source)}). GM: check the scene exists.</em></p>`;
     }
 
-    const x = dest.x ?? (targetScene.width / 2);
-    const y = dest.y ?? (targetScene.height / 2);
+    const x = binding.x ?? (targetScene.width / 2);
+    const y = binding.y ?? (targetScene.height / 2);
 
     try {
         if (!tok) {
