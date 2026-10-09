@@ -362,6 +362,41 @@ export class EQRMSSActorContextHelper {
         context.isShadowknight = classId === "shadowknight";
         context.isBeastlord = classId === "beastlord";
         context.hasSpells = classId !== "" && classId !== "bard" && !PURE_MELEE.has(classId);
+
+        // Era Capstones (2026-10-09): available capstones for the Combat tab Capstone block.
+        // Uses game.eqrmss.capstones populated by the capstone loader at boot.
+        try {
+            const caps = globalThis.game?.eqrmss?.capstones;
+            if (caps?.byClass?.[classId]) {
+                const actorLevel = Number(sys.attributes?.level?.value) || 1;
+                const cooldowns = sys.status?.capstoneCooldowns || {};
+                context.capstones = caps.byClass[classId]
+                    .filter(c => c.level <= actorLevel)
+                    .sort((a, b) => a.level - b.level)
+                    .map(c => {
+                        const lastUsed = cooldowns[c.id];
+                        let onCooldown = false, remainingMins = 0;
+                        if (lastUsed) {
+                            // Parse cooldown (e.g., "15 minutes" -> ms)
+                            const m = String(c.cooldown || "").toLowerCase().match(/(\d+)\s*(second|minute|hour)/);
+                            if (m && !String(c.cooldown).toLowerCase().includes("passive")) {
+                                const num = parseInt(m[1], 10);
+                                const mult = m[2].startsWith("second") ? 1000 : m[2].startsWith("hour") ? 3600000 : 60000;
+                                const remaining = (num * mult) - (Date.now() - lastUsed);
+                                if (remaining > 0) {
+                                    onCooldown = true;
+                                    remainingMins = Math.ceil(remaining / 60000);
+                                }
+                            }
+                        }
+                        return { ...c, onCooldown, remainingMins };
+                    });
+            } else {
+                context.capstones = [];
+            }
+        } catch (err) {
+            context.capstones = [];
+        }
     }
 
     // ------------------------------------------------------------

@@ -90,8 +90,8 @@ import { initializeSkillEngine } from "./module/utils/skills/index.js";
 // ---------- Part 2: v4.14 data loader (unchanged) ----------
 console.log("EQRMSS | Initialize Data Loaders v4.14 | Starting - Wizard+Sheet+LazyGeo fix - NO TLA");
 
-let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null, SongModule = null, AAModule = null, ItemModule = null;
-let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null, SongLoader = null, AALoader = null, ItemLoader = null;
+let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null, SongModule = null, AAModule = null, ItemModule = null, CapstoneModule = null;
+let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null, SongLoader = null, AALoader = null, ItemLoader = null, CapstoneLoader = null;
 let modulesLoaded = false;
 
 async function tryImport(paths) {
@@ -132,6 +132,7 @@ async function loadModules() {
     SongModule = await tryImport(['./module/data/loaders/song-loader.js']);
     AAModule = await tryImport(['./module/data/loaders/aa-loader.js']);
     ItemModule = await tryImport(['./module/data/loaders/item-loader.js']);
+    CapstoneModule = await tryImport(['./module/data/loaders/capstone-loader.js']);
     AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
     ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
     SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
@@ -140,6 +141,7 @@ async function loadModules() {
     SongLoader = resolveLoader(SongModule, 'SongLoader','EQRMSSSongLoader','EQRMSS_SONG_LOADER');
     AALoader = resolveLoader(AAModule, 'AALoader','EQRMSSAALoader');
     ItemLoader = resolveLoader(ItemModule, 'ItemLoader','EQRMSSItemLoader');
+    CapstoneLoader = resolveLoader(CapstoneModule, 'CapstoneLoader','loadCapstones');
     modulesLoaded = true;
 }
 
@@ -285,6 +287,18 @@ export async function initializeDataLoaders() {
             game.eqrmss._loadStatus.items = true;
             console.log(`EQRMSS | Items ready: ${Object.keys(game.eqrmss.items?.byId || {}).length} items`);
         } catch (e) { console.error("Item load failed", e); }
+    }
+
+    // Era Capstones (2026-10-09)
+    if (CapstoneModule) {
+        try {
+            const { loadCapstones } = CapstoneModule;
+            if (typeof loadCapstones === 'function') {
+                game.eqrmss.capstones = await loadCapstones();
+                game.eqrmss._loadStatus.capstones = true;
+                console.log(`EQRMSS | Capstones ready: ${Object.keys(game.eqrmss.capstones?.byId || {}).length} capstones`);
+            }
+        } catch (e) { console.error("Capstone load failed", e); }
     }
 
     if (SpellLoader) {
