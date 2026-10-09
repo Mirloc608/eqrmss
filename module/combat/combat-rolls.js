@@ -1149,7 +1149,11 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     if (targetActor && totalDamage > 0 && (targetActor.isOwner || game.user?.isGM)) {
         // Absorb (rune) hook (2026-10-07): deplete absorb pool before HP.
         // Spell-only absorbs (2026-10-09, e.g. Geomantra) skip melee damage.
-        const ab = targetActor.system?.status?.absorb;
+        // Unlinked tokens (2026-10-09): read from base actor.
+        const baseTarget = targetActor?.isToken
+            ? (globalThis.game?.actors?.get(targetActor?.token?.actorId) ?? targetActor)
+            : targetActor;
+        const ab = baseTarget.system?.status?.absorb;
         const abAmount = Number(ab?.amount) || 0;
         const isSpellDamage = String(weaponType ?? "").toLowerCase() === "spell";
         if (abAmount > 0 && !(ab?.spellOnly && !isSpellDamage)) {
@@ -1158,10 +1162,10 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             totalDamage -= absorbed;
             const abName = String(ab?.source ?? "absorb");
             if (abLeft > 0) {
-                await targetActor.update({ "system.status.absorb.amount": abLeft });
+                await baseTarget.update({ "system.status.absorb.amount": abLeft });
                 appliedNote += `<p><em>${esc(targetName)}'s ${esc(abName)} absorbs ${absorbed} damage (${abLeft} remaining).</em></p>`;
             } else {
-                await targetActor.update({ "system.status.absorb": null });
+                await baseTarget.update({ "system.status.absorb": null });
                 appliedNote += `<p><em>${esc(targetName)}'s ${esc(abName)} absorbs ${absorbed} damage and is depleted.</em></p>`;
             }
         }
