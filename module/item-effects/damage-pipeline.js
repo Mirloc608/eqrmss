@@ -214,7 +214,9 @@ async function applyBuff({ effect, target, source, caster }) {
     // Port of spell-buff scaling (2026-10-07): EQ÷10, min 1, AC via curve.
     // Mirrors scaleSongValue() in songs.js + atk/haste/slow special cases.
     let scaledTarget = null, scaledStat = null, scaledValue = 0, label = "";
-    const rmssStat = { str: "ST", sta: "CO", agi: "AG", dex: "QU", wis: "EM", int: "ME", cha: "PR" };
+    const rmssStat = { str: "ST", sta: "CO", agi: "AG", dex: "QU", wis: "EM", int: "ME", cha: "PR",
+        // RMSS abbreviations (lowercase) — Dragoste uses these directly (2026-10-09).
+        st: "ST", co: "CO", ag: "AG", qu: "QU", em: "EM", me: "ME", pr: "PR" };
     if (stat === "atk") {
         scaledTarget = "ob"; scaledStat = "ob";
         scaledValue = Math.max(1, Math.round(rawValue / 10));
