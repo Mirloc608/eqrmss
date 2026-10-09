@@ -243,3 +243,15 @@ export function critBonusHits(critText) {
     const sh = s.match(/\+\s*(\d+)\s*H(?=[\s,.*@!;)]|$)/);
     return sh ? Number(sh[1]) : 0;
 }
+
+/**
+ * Parse RMSS power-point loss from crit text ("+(4d10-25)P").
+ * User ruling 2026-10-08: P maps to EQ mana drain.
+ * Returns { dice, minus } or null. All transcribed forms use d10.
+ */
+export function parseCritManaDrain(critText) {
+    if (!critText) return null;
+    const m = String(critText).match(/\+\s*\(\s*(\d*)\s*d10\s*-\s*(\d+)\s*\)\s*P\b/i);
+    if (!m) return null;
+    return { dice: Number(m[1]) || 1, minus: Number(m[2]) };
+}

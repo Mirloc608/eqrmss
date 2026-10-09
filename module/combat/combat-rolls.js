@@ -26,7 +26,8 @@ import {
     lookupCrit,
     lookupFumble,
     parseArmorType,
-    critBonusHits
+    critBonusHits,
+    parseCritManaDrain
 } from "./attack-resolver.js";
 import {
     applyCritConditions,
@@ -923,6 +924,23 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         // resolved against the target's worn gear before any parsing.
         const adjudicated = adjudicateCritText(critResult.text, targetActor);
         critBonus += critBonusHits(adjudicated.text);
+        // ---- Mana drain (2026-10-08): RMSS power-point loss (P) maps
+        // to EQ mana drain (user ruling). Rolled Xd10-Y, floored at 0;
+        // no effect on targets with no mana pool.
+        let drainNote = "";
+        const drainSpec = parseCritManaDrain(adjudicated.text);
+        if (drainSpec && targetActor && (targetActor.isOwner || game.user?.isGM)) {
+            const drainRoll = await new Roll(`${drainSpec.dice}d10`).evaluate();
+            const drain = Math.max(0, drainRoll.total - drainSpec.minus);
+            if (drain > 0) {
+                const mCur = Number(targetActor.system?.attributes?.mana?.value) || 0;
+                if (mCur > 0) {
+                    const mNew = Math.max(0, mCur - drain);
+                    await targetActor.update({ "system.attributes.mana.value": mNew });
+                    drainNote = `<br><em>Mana drain: ${drain} (${mCur} → ${mNew}).</em>`;
+                }
+            }
+        }
         if (subduing) subduePoints += subdueCritPoints(severity);
         critFired = true;
         resolvedSeverities.push(severity);
@@ -938,7 +956,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         }
         // ---- Critical conditions (stun pool, bleed, death timer, next swing, must parry) ----
         condNote += await applyCritConditions(targetActor, actor, adjudicated.text);
-        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critDisplayText(critResult.text))}${adjudicated.note ? `<br><em>Conditional crit: ${esc(adjudicated.note)} — matching branch applied.</em>` : ""}${wearNote}`;
+        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critDisplayText(critResult.text))}${adjudicated.note ? `<br><em>Conditional crit: ${esc(adjudicated.note)} — matching branch applied.</em>` : ""}${wearNote}${drainNote}`;
     }
     // Resolve one Strategic Targeting critical (4.15): structural
     // points land on the hit location; rider text (stun, bleed,
