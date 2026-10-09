@@ -1041,6 +1041,7 @@ async function castSpellInner(actor, spellItem, opts = {}) {
         if (combined.includes("mez") || combined.includes("mesmer")) spellType = "mez";
         else if (combined.includes("stun")) spellType = "stun";
         else if (combined.includes("charm")) spellType = "charm";
+        console.log(`EQRMSS | Trigger check: spell="${name}", detected type="${spellType}", triggers on actor:`, actor.system?.status?.triggers?.length || 0);
         if (spellType) {
             const triggerNotes = await checkCapstoneTriggers(actor, "spellCast", { spellType, spell: spellItem });
             if (triggerNotes.length) {
