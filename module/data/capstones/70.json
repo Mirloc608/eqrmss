@@ -331,10 +331,24 @@
       "class": "wizard",
       "level": 70,
       "expansion": "OoW",
-      "effect": "For 90 seconds, spell crit chance +30%, crit damage +50%.",
+      "effect": "For 15 rounds, spell crit chance +30%, crit damage +50%.",
       "cooldown": "15 minutes",
       "description": "The wizard's devastation becomes frenzied.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "crit-bonus",
+            "value": 30
+          },
+          {
+            "target": "crit-damage-pct",
+            "value": 50
+          }
+        ]
+      }
     }
   ]
 }
