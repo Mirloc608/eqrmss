@@ -920,7 +920,23 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     // Resolve one critical strike: roll d100 on the mapped table, accumulate
     // bonus hits and conditions. Returns the chat fragment.
     async function resolveOneCrit(type, severity) {
-        const cr = await d100();
+        // Era Capstones (2026-10-09): add crit-bonus from capstone buffs to the roll.
+        let critBonus = 0;
+        try {
+            const effects = actor.system?.status?.spellEffects || [];
+            for (const e of effects) {
+                if (e.source !== "capstone") continue;
+                // Check both old format (modifiers) and new format (scaledTarget)
+                const mods = e.modifiers || [];
+                for (const m of mods) {
+                    if (m.target === "crit-bonus") critBonus += Number(m.value) || 0;
+                }
+                if (e.scaledTarget === "crit-bonus") critBonus += Number(e.scaledValue) || 0;
+            }
+        } catch (err) { /* non-fatal */ }
+        const rawRoll = await d100();
+        const cr = Math.min(100, rawRoll + critBonus);
+        const bonusNote = critBonus > 0 ? ` (d100 ${rawRoll} + ${critBonus} crit bonus)` : ` (d100 ${rawRoll})`;
         const critResult = lookupCrit(tables.crits, type, severity, cr);
         if (critResult.error) return `<strong>${esc(lookup.critCode)}</strong> — ${esc(critResult.error)} (GM adjudicates)`;
         // Conditional branches ("If foe has shield... If not...") are
@@ -959,19 +975,34 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         }
         // ---- Critical conditions (stun pool, bleed, death timer, next swing, must parry) ----
         condNote += await applyCritConditions(targetActor, actor, adjudicated.text);
-        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr} on the ${esc(critResult.table)} (${severity}): ${esc(critDisplayText(critResult.text))}${adjudicated.note ? `<br><em>Conditional crit: ${esc(adjudicated.note)} — matching branch applied.</em>` : ""}${wearNote}${drainNote}`;
+        return `<strong>${esc(lookup.critCode)}</strong> → d100 ${cr}${bonusNote} on the ${esc(critResult.table)} (${severity}): ${esc(critDisplayText(critResult.text))}${adjudicated.note ? `<br><em>Conditional crit: ${esc(adjudicated.note)} — matching branch applied.</em>` : ""}${wearNote}${drainNote}`;
     }
     // Resolve one Strategic Targeting critical (4.15): structural
     // points land on the hit location; rider text (stun, bleed,
     // knocked out) applies as conditions. Returns the chat fragment.
     async function resolveOneStructuralCrit(severity) {
-        const cr = await d100();
+        // Era Capstones (2026-10-09): add crit-bonus from capstone buffs.
+        let critBonus = 0;
+        try {
+            const effects = actor.system?.status?.spellEffects || [];
+            for (const e of effects) {
+                if (e.source !== "capstone") continue;
+                const mods = e.modifiers || [];
+                for (const m of mods) {
+                    if (m.target === "crit-bonus") critBonus += Number(m.value) || 0;
+                }
+                if (e.scaledTarget === "crit-bonus") critBonus += Number(e.scaledValue) || 0;
+            }
+        } catch (err) { /* non-fatal */ }
+        const rawRoll = await d100();
+        const cr = Math.min(100, rawRoll + critBonus);
+        const bonusNote = critBonus > 0 ? ` (d100 ${rawRoll} + ${critBonus} crit bonus)` : ``;
         const stRes = lookupStructuralCrit(tables.crits, severity, cr);
         if (stRes.error) return `<strong>Strategic ${esc(severity)}</strong> — ${esc(stRes.error)} (GM adjudicates)`;
         critFired = true;
         if (subduing) subduePoints += subdueCritPoints(severity);
         condNote += await applyCritConditions(targetActor, actor, stRes.text);
-        let line = `<strong>Strategic ${esc(severity)}</strong> → d100 ${cr} on the ${esc(stRes.table)} (${severity}): ${esc(stRes.text)}`;
+        let line = `<strong>Strategic ${esc(severity)}</strong> → d100 ${cr}${bonusNote} on the ${esc(stRes.table)} (${severity}): ${esc(stRes.text)}`;
         const pts = structuralPointsOf(stRes.text);
         if (pts > 0 && hitLocation) {
             if (targetActor && (targetActor.isOwner || game.user?.isGM)) {
