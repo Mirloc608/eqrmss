@@ -71,10 +71,20 @@
       "class": "monk",
       "level": 125,
       "expansion": "NoS",
-      "effect": "AE attack: strike all enemies in range 3 times each at +40% damage. Cannot be dodged.",
+      "effect": "For 5 rounds, +40% damage on AE attacks.",
       "cooldown": "15 minutes",
       "description": "A torrent of fists overwhelms all enemies.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 5,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          }
+        ]
+      }
     },
     {
       "id": "capstone-rogue-escape-125",
@@ -146,10 +156,24 @@
       "class": "beastlord",
       "level": 125,
       "expansion": "NoS",
-      "effect": "Strike for 1500 + (level \u00d7 10) damage and reduce own hate by 80%. Warder gains +50% damage for 30 seconds.",
+      "effect": "Strike for 1500 + (level x 10) damage, -80% hate. Warder +50% damage for 5 rounds.",
       "cooldown": "10 minutes",
       "description": "Like a chameleon, the beastlord strikes unseen then fades.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 5,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          },
+          {
+            "target": "hate-reduction",
+            "value": 80
+          }
+        ]
+      }
     },
     {
       "id": "capstone-bard-dance-of-blades-125",
@@ -215,10 +239,24 @@
       "class": "shaman",
       "level": 125,
       "expansion": "NoS",
-      "effect": "AE: all enemies in range get -40% attack speed, -30% movement, stacking poison DoT (200/tick).",
+      "effect": "AE debuff: -40% attack speed, -30% movement for 15 rounds.",
       "cooldown": "15 minutes",
       "description": "Tigir's insects swarm and cripple the enemy.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "debuff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "slow",
+            "value": 40
+          },
+          {
+            "target": "snare",
+            "value": 30
+          }
+        ]
+      }
     },
     {
       "id": "capstone-enchanter-haze-125",
@@ -281,10 +319,28 @@
       "class": "necromancer",
       "level": 125,
       "expansion": "NoS",
-      "effect": "Lich form upgrade (5 min): +30% mana regen, +25% DoT damage, -20% damage taken. Cannot be dispelled.",
+      "effect": "Lich upgrade for 50 rounds: +30% mana regen, +25% DoT damage, -20% damage taken.",
       "cooldown": "20 minutes",
       "description": "The embalmer's carapace perfects the lich form.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 50,
+        "modifiers": [
+          {
+            "target": "mana-regen-pct",
+            "value": 30
+          },
+          {
+            "target": "dot-bonus-pct",
+            "value": 25
+          },
+          {
+            "target": "db",
+            "value": 2
+          }
+        ]
+      }
     },
     {
       "id": "capstone-wizard-fury-of-ro-125",

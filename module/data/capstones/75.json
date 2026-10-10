@@ -297,10 +297,28 @@
       "class": "magician",
       "level": 75,
       "expansion": "TSS",
-      "effect": "For 90 seconds, pet damage +60%, pet attack speed +30%. Pet takes +20% damage.",
+      "effect": "For 15 rounds, pet damage +60%, pet attack speed +30%. Pet takes +20% damage.",
       "cooldown": "15 minutes",
       "description": "The elemental burns with frenzied power.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "pet-ob",
+            "value": 6
+          },
+          {
+            "target": "pet-haste",
+            "value": 30
+          },
+          {
+            "target": "pet-vuln",
+            "value": 20
+          }
+        ]
+      }
     },
     {
       "id": "capstone-necromancer-hand-of-death-75",

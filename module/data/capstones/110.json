@@ -73,10 +73,20 @@
       "class": "monk",
       "level": 110,
       "expansion": "RoS",
-      "effect": "AoE: strike all enemies within 15 feet 3 times at +40% damage each.",
+      "effect": "For 5 rounds, +40% damage on AoE attacks.",
       "cooldown": "10 minutes",
       "description": "A torrent of fists \u2014 the monk is everywhere at once.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 5,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          }
+        ]
+      }
     },
     {
       "id": "capstone-rogue-knifeplay-discipline-110",
@@ -196,10 +206,15 @@
       "class": "cleric",
       "level": 110,
       "expansion": "RoS",
-      "effect": "Nuke undead/dragons: 3500 + (level \u00d7 18) holy damage. Undead below 20% HP are instantly destroyed.",
+      "effect": "Nuke undead: 3500 + (level x 18) holy damage.",
       "cooldown": "10 minutes",
       "description": "The cleric turns the unnatural \u2014 even draconic abominations.",
-      "refresh": "day"
+      "refresh": "day",
+      "mechanics": {
+        "type": "damage",
+        "formula": "3500 + (level * 18)",
+        "damageType": "holy"
+      }
     },
     {
       "id": "capstone-druid-spirits-of-nature-110",
@@ -222,10 +237,20 @@
       "class": "shaman",
       "level": 110,
       "expansion": "RoS",
-      "effect": "AoE: all enemies within 30 feet take 40% slow + stacking disease DoT for 90 seconds.",
+      "effect": "AE debuff for 15 rounds: 40% slow + disease DoT.",
       "cooldown": "15 minutes",
       "description": "Tigir's swarm descends \u2014 even dragon scales itch.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "debuff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "slow",
+            "value": 40
+          }
+        ]
+      }
     },
     {
       "id": "capstone-enchanter-beguiler-s-synergy-rank-ii-110",
@@ -273,10 +298,24 @@
       "class": "magician",
       "level": 110,
       "expansion": "RoS",
-      "effect": "Pet buff (5 min): pet attacks proc a 800-point poison strike, +30% pet damage.",
+      "effect": "Pet buff for 50 rounds: pet attacks proc poison, +30% pet damage.",
       "cooldown": "15 minutes",
       "description": "The elemental's talons drip with virulent poison.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 50,
+        "modifiers": [
+          {
+            "target": "pet-ob",
+            "value": 3
+          },
+          {
+            "target": "pet-proc-poison",
+            "value": 800
+          }
+        ]
+      }
     },
     {
       "id": "capstone-necromancer-embalmer-s-carapace-110",
@@ -284,10 +323,24 @@
       "class": "necromancer",
       "level": 110,
       "expansion": "RoS",
-      "effect": "Lich form upgrade (10 min): +30% DoT damage, convert 15% of damage dealt to mana, +20% mitigation.",
+      "effect": "Lich upgrade for 100 rounds: +30% DoT damage, convert 15% damage to mana.",
       "cooldown": "20 minutes",
       "description": "The embalmer's art perfected \u2014 death as armor.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 100,
+        "modifiers": [
+          {
+            "target": "dot-bonus-pct",
+            "value": 30
+          },
+          {
+            "target": "lifetap-mana-pct",
+            "value": 15
+          }
+        ]
+      }
     },
     {
       "id": "capstone-wizard-silent-casting-110",

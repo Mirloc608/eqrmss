@@ -57,10 +57,24 @@
       "class": "shadowknight",
       "level": 85,
       "expansion": "SoD",
-      "effect": "For 90 seconds, Harm Touch damage +100%, +25% lifetap effectiveness, aura damages nearby enemies.",
+      "effect": "For 15 rounds, Harm Touch damage +100%, +25% lifetap effectiveness.",
       "cooldown": "15 minutes",
       "description": "Unholy aura radiates from the shadowknight.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "harm-touch-pct",
+            "value": 100
+          }
+        ]
+      }
     },
     {
       "id": "capstone-monk-crane-stance-85",
@@ -336,10 +350,28 @@
       "class": "necromancer",
       "level": 85,
       "expansion": "SoD",
-      "effect": "Debuff: -25 to all resists, +20% DoT damage taken, -15% healing received for 3 minutes.",
+      "effect": "Debuff target for 30 rounds: -25 to all resists, +20% DoT damage taken, -15% healing received.",
       "cooldown": "10 minutes",
       "description": "Death's malaise withers the victim.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "debuff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "resist-all",
+            "value": 3
+          },
+          {
+            "target": "vuln-dot",
+            "value": 20
+          },
+          {
+            "target": "healing-received-pct",
+            "value": 15
+          }
+        ]
+      }
     },
     {
       "id": "capstone-wizard-silent-casting-85",
@@ -347,10 +379,24 @@
       "class": "wizard",
       "level": 85,
       "expansion": "SoD",
-      "effect": "For 2 minutes, spells generate 90% less hate. Can cast without interruption.",
+      "effect": "For 20 rounds, spells generate 90% less hate. Cannot be interrupted.",
       "cooldown": "15 minutes",
       "description": "The wizard casts in perfect silence \u2014 death unseen.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "hate-reduction",
+            "value": 90
+          },
+          {
+            "target": "no-interrupt",
+            "value": 1
+          }
+        ]
+      }
     }
   ]
 }

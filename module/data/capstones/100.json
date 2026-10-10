@@ -49,10 +49,24 @@
       "class": "shadowknight",
       "level": 100,
       "expansion": "VoA",
-      "effect": "For 2 minutes, Harm Touch/Leech Touch damage +100%, lifetap effectiveness +50%.",
+      "effect": "For 20 rounds, Harm Touch/Leech Touch damage +100%, lifetap effectiveness +50%.",
       "cooldown": "20 minutes",
       "description": "An unholy aura wreathes the shadowknight, amplifying their darkest strikes.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          },
+          {
+            "target": "harm-touch-pct",
+            "value": 100
+          }
+        ]
+      }
     },
     {
       "id": "capstone-monk-zan-fi-s-whistle-100",
@@ -60,10 +74,28 @@
       "class": "monk",
       "level": 100,
       "expansion": "VoA",
-      "effect": "For 3 minutes, +30% attack speed, +20% damage, -50% hate generation.",
+      "effect": "For 30 rounds, +30% attack speed, +20% damage, -50% hate generation.",
       "cooldown": "15 minutes",
       "description": "The whistle of the grandmaster \u2014 speed without fury, damage without hate.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "haste",
+            "value": 30
+          },
+          {
+            "target": "ob",
+            "value": 2
+          },
+          {
+            "target": "hate-reduction",
+            "value": 50
+          }
+        ]
+      }
     },
     {
       "id": "capstone-rogue-thief-s-eyes-100",
@@ -306,10 +338,23 @@
       "class": "necromancer",
       "level": 100,
       "expansion": "VoA",
-      "effect": "For 90 seconds, DoTs have 30% chance to twincast (double damage, no extra mana).",
+      "effect": "For 15 rounds, DoTs have 30% chance to twincast.",
       "cooldown": "15 minutes",
       "description": "Death itself resolves to double the necromancer's decay.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "triggered",
+        "durationRounds": 15,
+        "trigger": {
+          "event": "dotTick",
+          "chance": 30,
+          "consumes": false
+        },
+        "effect": {
+          "type": "dot-twincast",
+          "target": "spell-target"
+        }
+      }
     },
     {
       "id": "capstone-wizard-arcane-destruction-100",

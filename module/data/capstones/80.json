@@ -286,10 +286,24 @@
       "class": "cleric",
       "level": 80,
       "expansion": "SoF",
-      "effect": "For 2 minutes, +30% healing, +20% mana efficiency, resurrection costs -50%.",
+      "effect": "For 20 rounds, +30% healing, +20% mana efficiency.",
       "cooldown": "20 minutes",
       "description": "Divinity flows from the cleric's spire.",
-      "refresh": "rest"
+      "refresh": "rest",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "heal-bonus-pct",
+            "value": 30
+          },
+          {
+            "target": "mana-efficiency",
+            "value": 20
+          }
+        ]
+      }
     },
     {
       "id": "capstone-druid-spire-of-nature-80",

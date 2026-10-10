@@ -7,10 +7,28 @@
       "class": "warrior",
       "level": 120,
       "expansion": "CoV",
-      "effect": "For 3 minutes, +30% mitigation, +25% damage, immune to dragon fear. Taunt cannot be resisted.",
+      "effect": "For 30 rounds, +30% mitigation, +25% damage, immune to dragon fear.",
       "cooldown": "20 minutes",
       "description": "The warlord stands brave before the wyrms themselves.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "db",
+            "value": 3
+          },
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "fear-immunity",
+            "value": 1
+          }
+        ]
+      }
     },
     {
       "id": "capstone-paladin-holyforge-120",
@@ -62,10 +80,24 @@
       "class": "monk",
       "level": 120,
       "expansion": "CoV",
-      "effect": "For 3 minutes, +35% damage, +20% attack speed, +15% accuracy. Aggro generation -30%.",
+      "effect": "For 30 rounds, +35% damage, +20% attack speed, +15% accuracy.",
       "cooldown": "15 minutes",
       "description": "Zan Fi's whistle guides the monk's fists with perfect control.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          },
+          {
+            "target": "haste",
+            "value": 20
+          }
+        ]
+      }
     },
     {
       "id": "capstone-rogue-thief-s-eyes-120",
@@ -127,10 +159,20 @@
       "class": "ranger",
       "level": 120,
       "expansion": "CoV",
-      "effect": "For 5 minutes, bow attacks deal +300 fire damage. +15% chance to proc an AoE fire burst.",
+      "effect": "For 50 rounds, bow attacks deal +300 fire damage.",
       "cooldown": "15 minutes",
       "description": "The ranger's arrows burn with dragonfire.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 50,
+        "modifiers": [
+          {
+            "target": "bow-fire-damage",
+            "value": 300
+          }
+        ]
+      }
     },
     {
       "id": "capstone-beastlord-protection-of-the-warder-120",
@@ -290,10 +332,23 @@
       "class": "necromancer",
       "level": 120,
       "expansion": "CoV",
-      "effect": "For 90 seconds, DoTs have 40% chance to twincast (double damage, no extra mana).",
+      "effect": "For 15 rounds, DoTs have 40% chance to twincast.",
       "cooldown": "15 minutes",
       "description": "Death's resolve doubles the necromancer's decay.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "triggered",
+        "durationRounds": 15,
+        "trigger": {
+          "event": "dotTick",
+          "chance": 40,
+          "consumes": false
+        },
+        "effect": {
+          "type": "dot-twincast",
+          "target": "spell-target"
+        }
+      }
     },
     {
       "id": "capstone-wizard-arcane-destruction-120",

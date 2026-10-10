@@ -144,10 +144,24 @@
       "class": "beastlord",
       "level": 90,
       "expansion": "Underfoot",
-      "effect": "1200 + (level \u00d7 10) damage + 70% hate reduction. Warder +40% damage for 30 sec.",
+      "effect": "Strike for 1200 + (level x 10) damage + 70% hate reduction. Warder +40% damage for 5 rounds.",
       "cooldown": "10 minutes",
       "description": "The chameleon strikes unseen.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 5,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 4
+          },
+          {
+            "target": "hate-reduction",
+            "value": 70
+          }
+        ]
+      }
     },
     {
       "id": "capstone-bard-bladed-song-90",
@@ -204,10 +218,24 @@
       "class": "shaman",
       "level": 90,
       "expansion": "Underfoot",
-      "effect": "AE: -35% attack speed, -25% movement, 150/tick poison for 90 seconds.",
+      "effect": "AE debuff for 15 rounds: -35% attack speed, -25% movement, poison DoT.",
       "cooldown": "12 minutes",
       "description": "Tigir's insects swarm the enemy.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "debuff",
+        "durationRounds": 15,
+        "modifiers": [
+          {
+            "target": "slow",
+            "value": 35
+          },
+          {
+            "target": "snare",
+            "value": 25
+          }
+        ]
+      }
     },
     {
       "id": "capstone-enchanter-phantasmal-opponent-90",
@@ -247,10 +275,28 @@
       "class": "necromancer",
       "level": 90,
       "expansion": "Underfoot",
-      "effect": "Lich upgrade (5 min): +25% mana regen, +20% DoT damage, -15% damage taken.",
+      "effect": "Lich upgrade for 50 rounds: +25% mana regen, +20% DoT damage, -15% damage taken.",
       "cooldown": "18 minutes",
       "description": "The embalmer's art perfects undeath.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 50,
+        "modifiers": [
+          {
+            "target": "mana-regen-pct",
+            "value": 25
+          },
+          {
+            "target": "dot-bonus-pct",
+            "value": 20
+          },
+          {
+            "target": "db",
+            "value": 2
+          }
+        ]
+      }
     },
     {
       "id": "capstone-wizard-claw-spells-90",

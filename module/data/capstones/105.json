@@ -7,10 +7,32 @@
       "class": "warrior",
       "level": 105,
       "expansion": "EoK",
-      "effect": "For 3 minutes, +30% melee damage, +20% mitigation. Immune to fear and mez.",
+      "effect": "For 30 rounds, +30% melee damage, +20% mitigation. Immune to fear and mez.",
       "cooldown": "20 minutes",
       "description": "The bravery of the ancient warlords of Kunark.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "db",
+            "value": 2
+          },
+          {
+            "target": "fear-immunity",
+            "value": 1
+          },
+          {
+            "target": "mez-immunity",
+            "value": 1
+          }
+        ]
+      }
     },
     {
       "id": "capstone-paladin-repel-the-wicked-105",
@@ -149,10 +171,24 @@
       "class": "beastlord",
       "level": 105,
       "expansion": "EoK",
-      "effect": "Strike for 2000 + (level \u00d7 12) damage. Reduce hate by 80%. Warder gains +50% damage for 30 seconds.",
+      "effect": "Strike for 2000 + (level x 12) damage. Reduce hate by 80%. Warder +50% damage for 5 rounds.",
       "cooldown": "10 minutes",
       "description": "Strike unseen, vanish, let the warder finish.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 5,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 5
+          },
+          {
+            "target": "hate-reduction",
+            "value": 80
+          }
+        ]
+      }
     },
     {
       "id": "capstone-bard-dance-of-blades-105",
@@ -304,10 +340,28 @@
       "class": "necromancer",
       "level": 105,
       "expansion": "EoK",
-      "effect": "Debuff target (3 min): -30 to all resists, takes +25% DoT damage, -20% healing received.",
+      "effect": "Debuff target for 30 rounds: -30 to all resists, +25% DoT damage taken, -20% healing received.",
       "cooldown": "10 minutes",
       "description": "Death's malaise settles on the victim \u2014 nothing can save them now.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "debuff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "resist-all",
+            "value": 3
+          },
+          {
+            "target": "vuln-dot",
+            "value": 25
+          },
+          {
+            "target": "healing-received-pct",
+            "value": 20
+          }
+        ]
+      }
     },
     {
       "id": "capstone-wizard-fury-of-ro-105",
