@@ -1041,7 +1041,37 @@ export async function tickConditions(combat) {
                 }
                 const lo = Number(d.min) || 0;
                 const hi = Number(d.max) || lo;
-                const dmg = hi > lo ? lo + Math.floor(Math.random() * (hi - lo + 1)) : lo;
+                let dmg = hi > lo ? lo + Math.floor(Math.random() * (hi - lo + 1)) : lo;
+                
+                // Era Capstones (2026-10-09): check for DoT twincast triggers on the caster.
+                // Gift of Deathly Resolve: X% chance for DoTs to deal double damage.
+                if (dmg > 0 && d.casterId) {
+                    try {
+                        const caster = globalThis.game?.actors?.get(d.casterId);
+                        if (caster) {
+                            const triggers = caster.system?.status?.triggers || [];
+                            const currentRound = globalThis.game?.combat?.round ?? 0;
+                            for (const t of triggers) {
+                                if (t.source !== "capstone") continue;
+                                if (t.expiresRound && currentRound > t.expiresRound) continue;
+                                const trig = t.trigger || {};
+                                if (trig.event !== "dotTick") continue;
+                                const chance = Number(trig.chance) || 100;
+                                if (chance < 100 && Math.random() * 100 >= chance) continue;
+                                // Trigger fired! Double the damage.
+                                dmg = dmg * 2;
+                                notes.push(`<em>${esc(t.capstoneName)} triggers! DoT twincasts for ${dmg} damage.</em>`);
+                                // Consume if not persistent
+                                if (trig.consumes !== false) {
+                                    const remaining = triggers.filter(x => x !== t);
+                                    await caster.update({ "system.status.triggers": remaining });
+                                }
+                                break; // Only one twincast per tick
+                            }
+                        }
+                    } catch (err) { /* non-fatal */ }
+                }
+                
                 if (dmg > 0) {
                     const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
                     updates["system.hits.value"] = cur + dmg;
