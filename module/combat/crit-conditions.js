@@ -734,6 +734,40 @@ export async function tickConditions(combat) {
     const notes = [];
     const list = combat.combatants?.contents ?? [...(combat.combatants ?? [])];
 
+    // Era Capstones (2026-10-09): lich-conversion-pct.
+    // Arch Lich: convert X% of max HP to mana each round.
+    for (const c of list) {
+        const actor = c.actor;
+        if (!actor || actor.system?.status?.dead) continue;
+        try {
+            const effects = actor.system?.status?.spellEffects || [];
+            for (const e of effects) {
+                if (e.source !== "capstone") continue;
+                for (const m of (e.modifiers || [])) {
+                    if (m.target === "lich-conversion-pct") {
+                        const pct = Number(m.value) || 0;
+                        if (pct > 0) {
+                            const maxHP = Number(actor.system?.hits?.max) || 0;
+                            const convert = Math.round(maxHP * pct / 100);
+                            if (convert > 0) {
+                                const hCur = Number(actor.system?.hits?.value) || 0;
+                                const hNext = hCur + convert; // Takes damage (HP loss)
+                                const mCur = Number(actor.system?.attributes?.mana?.value) || 0;
+                                const mMax = Number(actor.system?.attributes?.mana?.max) || 0;
+                                const mNext = Math.min(mMax, mCur + convert);
+                                await actor.update({
+                                    "system.hits.value": hNext,
+                                    "system.attributes.mana.value": mNext
+                                });
+                                notes.push(`<em>${actor.name}'s lich form converts ${convert} HP to mana (${mCur} → ${mNext}).</em>`);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (err) { /* non-fatal */ }
+    }
+
     // Bard playlist sync (2026-10-07): ensure playlist songs are active
     // with maintained effects BEFORE the refresh logic below runs.
     // This handles playlists seeded without toggleSong (e.g., by macro).

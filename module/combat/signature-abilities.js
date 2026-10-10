@@ -93,7 +93,21 @@ export async function harmTouch(actor, target) {
     }
     const rank = getSignatureRank(actor, "harm-touch");
     const level = Number(actor.system?.attributes?.level?.value) || 1;
-    const damage = (50 * rank) + (10 * level);
+    let damage = (50 * rank) + (10 * level);
+    // Era Capstones (2026-10-09): harm-touch-pct increases Harm Touch damage.
+    // Unholy Aura: +X% Harm Touch damage.
+    try {
+        const effects = actor.system?.status?.spellEffects || [];
+        for (const e of effects) {
+            if (e.source !== "capstone") continue;
+            for (const m of (e.modifiers || [])) {
+                if (m.target === "harm-touch-pct") {
+                    const pct = Number(m.value) || 0;
+                    if (pct > 0) damage = Math.round(damage * (1 + pct / 100));
+                }
+            }
+        }
+    } catch (e) { /* non-fatal */ }
     
     // Disease-based RR at -20 (2026-10-07): canonical Table 15.5
     // target number and open-ended-both-ways RR from base-spell.js.

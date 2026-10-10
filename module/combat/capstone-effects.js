@@ -69,7 +69,7 @@ export function evalFormula(formula, actor) {
  * Apply direct damage to a target actor.
  * Increases system.hits.value (concussion hits taken).
  */
-export async function applyCapstoneDamage(target, amount, damageType = "magic", notes = []) {
+export async function applyCapstoneDamage(target, amount, damageType = "magic", notes = [], attacker = null) {
     if (!target || amount <= 0) return 0;
     
     // Era Capstones (2026-10-09): check for vulnerability modifiers on target.
@@ -105,6 +105,53 @@ export async function applyCapstoneDamage(target, amount, damageType = "magic", 
     const newVal = cur + finalAmount;
     await target.update({ "system.hits.value": newVal });
     notes.push(`${esc(target.name)} takes ${finalAmount} ${esc(damageType)} damage (${newVal} concussion hits).`);
+    
+    // Era Capstones (2026-10-09): thorn-shield reflects damage to attacker.
+    // Nature's Guardian: attacker takes X damage when hitting the shielded target.
+    if (attacker && finalAmount > 0) {
+        try {
+            const effects = target.system?.status?.spellEffects || [];
+            for (const e of effects) {
+                if (e.source !== "capstone") continue;
+                for (const m of (e.modifiers || [])) {
+                    if (m.target === "thorn-shield") {
+                        const thornDmg = Number(m.value) || 0;
+                        if (thornDmg > 0) {
+                            const aCur = Number(attacker.system?.hits?.value) || 0;
+                            const aNew = aCur + thornDmg;
+                            await attacker.update({ "system.hits.value": aNew });
+                            notes.push(`<em>Thorn shield! ${esc(attacker.name)} takes ${thornDmg} damage (${aNew} concussion hits).</em>`);
+                        }
+                    }
+                }
+            }
+        } catch (e) { /* non-fatal */ }
+    }
+    
+    // Era Capstones (2026-10-09): lifetap-mana-pct converts damage to mana.
+    // Embalmer's Carapace: X% of damage dealt restored as mana.
+    if (attacker && finalAmount > 0) {
+        try {
+            const effects = attacker.system?.status?.spellEffects || [];
+            for (const e of effects) {
+                if (e.source !== "capstone") continue;
+                for (const m of (e.modifiers || [])) {
+                    if (m.target === "lifetap-mana-pct") {
+                        const pct = Number(m.value) || 0;
+                        if (pct > 0) {
+                            const manaGain = Math.round(finalAmount * pct / 100);
+                            const mCur = Number(attacker.system?.attributes?.mana?.value) || 0;
+                            const mMax = Number(attacker.system?.attributes?.mana?.max) || 0;
+                            const mNext = Math.min(mMax, mCur + manaGain);
+                            await attacker.update({ "system.attributes.mana.value": mNext });
+                            notes.push(`<em>${esc(attacker.name)} siphons ${mNext - mCur} mana (${mCur} → ${mNext}).</em>`);
+                        }
+                    }
+                }
+            }
+        } catch (e) { /* non-fatal */ }
+    }
+    
     return finalAmount;
 }
 
@@ -128,53 +175,6 @@ export async function applyCapstoneHeal(target, amount, notes = []) {
  */
 export async function applyCapstoneBuff(target, capstone, modifiers, durationRounds, notes = []) {
     if (!target || !modifiers?.length) return;
-    
-    // Era Capstones (2026-10-09): handle pet-specific modifiers.
-    // pet-ob, pet-haste, etc. apply to the owner's pets, not the owner.
-    const petMods = modifiers.filter(m => String(m.target || "").startsWith("pet-"));
-    if (petMods.length > 0) {
-        try {
-            const pets = (globalThis.game?.actors ?? []).filter(a =>
-                a?.type === "pet" &&
-                a?.system?.pet?.petType !== "familiar" &&
-                (a?.system?.pet?.owner === target.id || a?.getFlag("eqrmss", "ownerId") === target.id)
-            );
-            for (const pet of pets) {
-                for (const pm of petMods) {
-                    const petTarget = pm.target.slice(4); // Remove "pet-" prefix
-                    // Map pet-specific targets to standard ones
-                    let mappedTarget = petTarget;
-                    let mappedValue = pm.value;
-                    if (petTarget === "ob") mappedTarget = "ob";
-                    else if (petTarget === "haste") mappedTarget = "haste";
-                    else if (petTarget === "vuln") mappedTarget = "vuln-all";
-                    else if (petTarget === "proc-poison") {
-                        // Store for proc system (future implementation)
-                        notes.push(`${esc(pet.name)}: poison proc stored (${pm.value} damage).`);
-                        continue;
-                    }
-                    // Apply the mapped buff to the pet
-                    const petFx = [...(pet.system?.status?.spellEffects || [])];
-                    petFx.push({
-                        source: "capstone",
-                        capstoneId: capstone.id,
-                        capstoneName: capstone.name,
-                        scaledTarget: mappedTarget,
-                        scaledValue: mappedValue,
-                        durationRounds,
-                        roundsLeft: durationRounds,
-                        name: capstone.name,
-                        kind: "buff",
-                    });
-                    await pet.update({ "system.status.spellEffects": petFx });
-                    notes.push(`${esc(pet.name)}: ${mappedTarget} +${mappedValue} (${durationRounds} rounds).`);
-                }
-            }
-        } catch (e) { /* non-fatal */ }
-        // Remove pet mods from the main list (they've been handled)
-        modifiers = modifiers.filter(m => !String(m.target || "").startsWith("pet-"));
-        if (!modifiers.length) return;
-    }
     
     const fx = [...(target.system?.status?.spellEffects || [])];
     const now = Date.now();
