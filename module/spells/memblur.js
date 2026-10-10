@@ -50,9 +50,32 @@ export async function recordAggro(target, attacker, { damage = 0, debuffs = 0, h
         const p = target.system?.status?.pacified;
         if (p && typeof p === "object" && (Number(p.roundsLeft) || 0) > 0) return;
     } catch (e) { /* ignore */ }
-    const dmg = Number(damage) || 0;
-    const deb = Number(debuffs) || 0;
-    const hl = Number(heal) || 0;
+    
+    // Era Capstones (2026-10-09): check for hate-reduction buffs on attacker.
+    let hateReduction = 0;
+    try {
+        const effects = attacker.system?.status?.spellEffects || [];
+        for (const e of effects) {
+            if (e.source !== "capstone") continue;
+            const mods = e.modifiers || [];
+            for (const m of mods) {
+                if (m.target === "hate-reduction") hateReduction += Number(m.value) || 0;
+            }
+            if (e.scaledTarget === "hate-reduction") hateReduction += Number(e.scaledValue) || 0;
+        }
+    } catch (e) { /* non-fatal */ }
+    
+    let dmg = Number(damage) || 0;
+    let deb = Number(debuffs) || 0;
+    let hl = Number(heal) || 0;
+    
+    if (hateReduction > 0) {
+        const factor = Math.max(0, 1 - hateReduction / 100);
+        dmg = Math.round(dmg * factor);
+        deb = Math.round(deb * factor);
+        hl = Math.round(hl * factor);
+    }
+    
     if (dmg <= 0 && deb <= 0 && hl <= 0) return;
 
     let aggro = {};
