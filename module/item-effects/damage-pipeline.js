@@ -856,6 +856,18 @@ async function applyFear({ effect, target, source }) {
 async function applyMez({ effect, target, source }) {
     const miss = requireTarget(target, "mez", source);
     if (miss) return miss;
+    // Era Capstones (2026-10-09): check for mez immunity from capstone buffs.
+    try {
+        const effects = target.system?.status?.spellEffects || [];
+        for (const e of effects) {
+            if (e.source !== "capstone") continue;
+            for (const m of (e.modifiers || [])) {
+                if (m.target === "mez-immunity") {
+                    return { type: "mez", rolled: 0, final: 0, notes: [`${target.name} is immune to mez (${e.label || "capstone"}).`], source };
+                }
+            }
+        }
+    } catch (e) { /* non-fatal */ }
     const rounds = payloadRounds(effect);
     const pool = await withStunPool(target, p => { p.downOrOut += rounds; });
     // Stunned visual (2026-10-07, user ruling): mez = conscious but unable to act.

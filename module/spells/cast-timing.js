@@ -136,6 +136,18 @@ export async function clearPendingCast(actor) {
 export async function interruptPendingCast(actor, reason) {
     const pending = actor.system?.status?.pendingCast;
     if (!pending) return false;
+    // Era Capstones (2026-10-09): no-interrupt prevents interruption.
+    try {
+        const effects = actor.system?.status?.spellEffects || [];
+        for (const e of effects) {
+            if (e.source !== "capstone") continue;
+            for (const m of (e.modifiers || [])) {
+                if (m.target === "no-interrupt") {
+                    return false; // Not interrupted
+                }
+            }
+        }
+    } catch (e) { /* non-fatal */ }
     await clearPendingCast(actor);
     const why = reason === "stun" ? "stunned" : "damaged";
     await globalThis.ChatMessage?.create({

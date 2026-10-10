@@ -428,11 +428,26 @@ async function castSpellInner(actor, spellItem, opts = {}) {
     if (castMode === "instant") {
         // Option B: fizzle if the caster took damage this round
         if (actor.system?.status?.damagedThisRound) {
-            await ChatMessage.create({
-                speaker: ChatMessage.getSpeaker({ actor }),
-                content: `<p><em>${esc(actor.name)} tries to cast ${esc(name)} but is reeling from damage — the spell fizzles! (no mana spent)</em></p>`
-            });
-            return { ok: false, reason: "interrupted", mode: "instant" };
+            // Era Capstones (2026-10-09): no-interrupt prevents fizzle.
+            let noInterrupt = false;
+            try {
+                const effects = actor.system?.status?.spellEffects || [];
+                for (const e of effects) {
+                    if (e.source !== "capstone") continue;
+                    for (const m of (e.modifiers || [])) {
+                        if (m.target === "no-interrupt") { noInterrupt = true; break; }
+                    }
+                    if (noInterrupt) break;
+                }
+            } catch (e) { /* non-fatal */ }
+            if (!noInterrupt) {
+                await ChatMessage.create({
+                    speaker: ChatMessage.getSpeaker({ actor }),
+                    content: `<p><em>${esc(actor.name)} tries to cast ${esc(name)} but is reeling from damage — the spell fizzles! (no mana spent)</em></p>`
+                });
+                return { ok: false, reason: "interrupted", mode: "instant" };
+            }
+            // no-interrupt: cast proceeds despite damage
         }
     } else if (castMode === "rounds") {
         // Option A: delayed casting for longer spells
