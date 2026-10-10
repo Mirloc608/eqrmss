@@ -451,12 +451,24 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
         }
 
         case "memblur": {
-            // Apply memory blur to all enemies: chance to forget the caster.
+            // Apply memory blur to enemies only (opposite disposition).
+            // Era Capstones (2026-10-09): fixed to exclude allies.
             const chance = mech.chance || 50;
             const { applyMemblur } = await import("../spells/memblur.js");
             const combatants = game.combat?.combatants ?? [];
+            let casterDisp = 1;
+            try {
+                const casterTok = canvas?.tokens?.placeables?.find(t => t.actor?.id === caster.id);
+                casterDisp = casterTok?.document?.disposition ?? casterTok?.disposition ?? 1;
+            } catch (e) { /* ignore */ }
             for (const c of combatants) {
                 if (!c.actor || c.actor.id === caster.id) continue;
+                // Skip allies (same disposition)
+                try {
+                    const tok = canvas?.tokens?.placeables?.find(t => t.actor?.id === c.actor.id);
+                    const disp = tok?.document?.disposition ?? tok?.disposition ?? 0;
+                    if (disp === casterDisp) continue;
+                } catch (e) { /* ignore */ }
                 const note = await applyMemblur(caster, c.actor, chance, capstone.name);
                 if (note) notes.push(note);
             }
@@ -464,11 +476,25 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
         }
 
         case "group-heal": {
-            // Heal group for % of max HP + cure detrimental effects.
+            // Heal group (allies only) for % of max HP + cure detrimental effects.
+            // Era Capstones (2026-10-09): fixed to exclude enemies.
             const pct = mech.healPct || 50;
             const combatants = game.combat?.combatants ?? [];
+            let casterDisp = 1;
+            try {
+                const casterTok = canvas?.tokens?.placeables?.find(t => t.actor?.id === caster.id);
+                casterDisp = casterTok?.document?.disposition ?? casterTok?.disposition ?? 1;
+            } catch (e) { /* ignore */ }
             const allies = combatants
-                .filter(c => c.actor)
+                .filter(c => {
+                    if (!c.actor) return false;
+                    if (c.actor.id === caster.id) return true;
+                    try {
+                        const tok = canvas?.tokens?.placeables?.find(t => t.actor?.id === c.actor.id);
+                        const disp = tok?.document?.disposition ?? tok?.disposition ?? 0;
+                        return disp === casterDisp;
+                    } catch (e) { return false; }
+                })
                 .map(c => c.actor);
             if (!allies.includes(caster)) allies.unshift(caster);
 
@@ -564,11 +590,24 @@ export async function checkCapstoneTriggers(actor, event, data = {}) {
         // Determine targets
         let targets = [actor];
         if (targetType === "group") {
-            // Group = all allies (for now, just the caster's allies in combat)
-            // TODO: Proper group detection
+            // Group = allies only (same disposition as caster).
+            // Era Capstones (2026-10-09): fixed to exclude enemies.
             const combatants = game.combat?.combatants ?? [];
+            // Find caster's token for disposition
+            let casterDisp = 1;
+            try {
+                const casterTok = canvas?.tokens?.placeables?.find(t => t.actor?.id === actor.id);
+                casterDisp = casterTok?.document?.disposition ?? casterTok?.disposition ?? 1;
+            } catch (e) { /* ignore */ }
             targets = combatants
-                .filter(c => c.actor && c.actor.id !== actor.id)
+                .filter(c => {
+                    if (!c.actor || c.actor.id === actor.id) return false;
+                    try {
+                        const tok = canvas?.tokens?.placeables?.find(t => t.actor?.id === c.actor.id);
+                        const disp = tok?.document?.disposition ?? tok?.disposition ?? 0;
+                        return disp === casterDisp;
+                    } catch (e) { return false; }
+                })
                 .map(c => c.actor);
             targets.unshift(actor); // Include caster
         } else if (targetType === "spell-target" && data.spellTarget) {
