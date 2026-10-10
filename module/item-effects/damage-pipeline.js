@@ -826,6 +826,18 @@ async function applySnare({ effect, target, source }) {
 async function applyFear({ effect, target, source }) {
     const miss = requireTarget(target, "fear", source);
     if (miss) return miss;
+    // Era Capstones (2026-10-09): check for fear immunity from capstone buffs.
+    try {
+        const effects = target.system?.status?.spellEffects || [];
+        for (const e of effects) {
+            if (e.source !== "capstone") continue;
+            for (const m of (e.modifiers || [])) {
+                if (m.target === "fear-immunity") {
+                    return `<p><em>${target.name} is immune to fear (${e.label || "capstone"}).</em></p>`;
+                }
+            }
+        }
+    } catch (e) { /* non-fatal */ }
     const rounds = payloadRounds(effect);
     await persistValue(target, "system.status.fear", { rounds });
     await pushStatusList(target, "spellEffects", { label: `feared (${rounds} rounds)`, roundsLeft: rounds, source });
