@@ -179,12 +179,29 @@ async function applyDamage({ effect, target, source }) {
     return { type: "damage", element: effect.element, rolled, final, notes, source };
 }
 
-async function applyRegen({ effect, target, source }) {
+async function applyRegen({ effect, target, source, caster }) {
     const pool = effect.pool ?? "mana";
     const attr = target?.system?.attributes?.[pool];
     if (!attr) return { type: "regen", pool, final: 0, notes: [`no ${pool} pool on target`], source };
     const before = attr.value ?? 0;
-    const next = Math.min(attr.max ?? Infinity, before + (effect.amount ?? 0));
+    let amount = effect.amount ?? 0;
+    // Era Capstones (2026-10-09): canni-efficiency boosts mana from Cannibalize.
+    // Cannibalization Rank II: +X% mana restored.
+    if (pool === "mana" && caster) {
+        try {
+            const effects = caster.system?.status?.spellEffects || [];
+            for (const e of effects) {
+                if (e.source !== "capstone") continue;
+                for (const m of (e.modifiers || [])) {
+                    if (m.target === "canni-efficiency") {
+                        const pct = Number(m.value) || 0;
+                        if (pct > 0) amount = Math.round(amount * (1 + pct / 100));
+                    }
+                }
+            }
+        } catch (e) { /* non-fatal */ }
+    }
+    const next = Math.min(attr.max ?? Infinity, before + amount);
     await persistValue(target, `system.attributes.${pool}.value`, next);
     return { type: "regen", pool, final: next - before, notes: [], source };
 }

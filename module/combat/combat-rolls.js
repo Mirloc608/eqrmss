@@ -1133,7 +1133,23 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
                 }
             }
             if (severity !== null) {
-                const type = options.forcedCritType ?? unusualStyle.critType ?? (sys.sollerets ? "P" : (crit.type ?? lookup.impliedCritType ?? null));
+                let type = options.forcedCritType ?? unusualStyle.critType ?? (sys.sollerets ? "P" : (crit.type ?? lookup.impliedCritType ?? null));
+                // Era Capstones (2026-10-09): bow-fire-damage changes bow crits to fire.
+                // Flaming Arrows: bow attacks deal fire damage type.
+                if (missileAttack && type) {
+                    try {
+                        const effects = actor.system?.status?.spellEffects || [];
+                        for (const e of effects) {
+                            if (e.source !== "capstone") continue;
+                            for (const m of (e.modifiers || [])) {
+                                if (m.target === "bow-fire-damage") {
+                                    type = "F"; // Fire crit table
+                                    break;
+                                }
+                            }
+                        }
+                    } catch (e) { /* non-fatal */ }
+                }
                 critLine = type
                     ? await resolveOneCrit(type, severity)
                     : `<strong>${esc(crit.raw)}</strong> — unusual result, GM adjudicates.`;
