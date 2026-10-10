@@ -1131,6 +1131,19 @@ export async function tickConditions(combat) {
                     } catch (err) { /* non-fatal */ }
                 }
                 
+                // Era Capstones (2026-10-09): vulnerability increases DoT damage.
+                if (dmg > 0) {
+                    try {
+                        const { getVulnerabilityPct } = await import("./capstone-effects.js");
+                        const vulnPct = getVulnerabilityPct(actor, d.damageType || "magic");
+                        if (vulnPct > 0) {
+                            const vulnBonus = Math.round(dmg * vulnPct / 100);
+                            dmg += vulnBonus;
+                            notes.push(`<em>${esc(actor.name)} is vulnerable (+${vulnPct}% ${esc(d.damageType || "magic")} damage).</em>`);
+                        }
+                    } catch (err) { /* non-fatal */ }
+                }
+                
                 if (dmg > 0) {
                     const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
                     updates["system.hits.value"] = cur + dmg;

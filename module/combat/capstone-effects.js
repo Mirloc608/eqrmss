@@ -69,14 +69,14 @@ export function evalFormula(formula, actor) {
  * Apply direct damage to a target actor.
  * Increases system.hits.value (concussion hits taken).
  */
-export async function applyCapstoneDamage(target, amount, damageType = "magic", notes = [], attacker = null) {
-    if (!target || amount <= 0) return 0;
-    
-    // Era Capstones (2026-10-09): check for vulnerability modifiers on target.
-    // vuln-<type> increases damage taken by X% (e.g., vuln-cold 20 = +20% cold damage).
+/**
+ * Get total vulnerability percentage for a target and damage type.
+ * Era Capstones (2026-10-09): vuln-<type> and vuln-all increase damage taken.
+ */
+export function getVulnerabilityPct(target, damageType = "magic") {
     let vulnPct = 0;
     try {
-        const effects = target.system?.status?.spellEffects || [];
+        const effects = target?.system?.status?.spellEffects || [];
         const dmgType = String(damageType).toLowerCase();
         for (const e of effects) {
             if (e.source !== "capstone") continue;
@@ -94,6 +94,15 @@ export async function applyCapstoneDamage(target, amount, damageType = "magic", 
             }
         }
     } catch (err) { /* non-fatal */ }
+    return vulnPct;
+}
+
+export async function applyCapstoneDamage(target, amount, damageType = "magic", notes = [], attacker = null) {
+    if (!target || amount <= 0) return 0;
+    
+    // Era Capstones (2026-10-09): check for vulnerability modifiers on target.
+    // vuln-<type> increases damage taken by X% (e.g., vuln-cold 20 = +20% cold damage).
+    const vulnPct = getVulnerabilityPct(target, damageType);
     
     let finalAmount = amount;
     if (vulnPct > 0) {
@@ -191,6 +200,7 @@ export async function applyCapstoneBuff(target, capstone, modifiers, durationRou
             scaledStat: mod.stat || null,
             scaledValue: mod.value,
             durationRounds,
+            roundsLeft: durationRounds,
             startRound: game.combat?.round ?? 0,
             // For compatibility with spell buff display
             name: capstone.name,
@@ -333,8 +343,13 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
         
         case "debuff": {
             const duration = mech.durationRounds || 10;
-            // Debuffs are negative buffs
-            const negMods = (mech.modifiers || []).map(m => ({ ...m, value: -Math.abs(m.value) }));
+            // Debuffs are negative buffs, BUT vulnerability is already a negative effect
+            // (more damage taken), so vuln-* keeps its positive value.
+            const negMods = (mech.modifiers || []).map(m => {
+                const t = String(m.target || "").toLowerCase();
+                if (t.startsWith("vuln-")) return { ...m }; // Don't negate vulnerability
+                return { ...m, value: -Math.abs(m.value) };
+            });
             await applyCapstoneBuff(actualTarget, capstone, negMods, duration, notes);
             break;
         }

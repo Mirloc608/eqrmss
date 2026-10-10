@@ -104,7 +104,15 @@ export function lookupBall(table, natural, total, at) {
     return { band: label, row };
 }
 
-async function addHits(target, n) {
+async function addHits(target, n, damageType = "magic") {
+    // Era Capstones (2026-10-09): vulnerability increases damage taken.
+    try {
+        const { getVulnerabilityPct } = await import("../combat/capstone-effects.js");
+        const vulnPct = getVulnerabilityPct(target, damageType);
+        if (vulnPct > 0) {
+            n = Math.round(n * (1 + vulnPct / 100));
+        }
+    } catch (e) { /* non-fatal */ }
     const cur = Number(target.system?.hits?.value) || 0;
     await target.update({ "system.hits.value": cur + n });
     await checkHitThresholds(target);
@@ -227,7 +235,9 @@ export async function resolveBallCast(caster, spellItem, targets, ball, opts = {
         let line = `<strong>${tName}</strong> (AT ${at}): EAR ${eff}${adjNote} → band ${cell.band} = ${esc(cell.row.damage)}${cell.row.critical ?? ""}${atNote}`;
         let after = null;
         if (hits > 0 && (target.isOwner || globalThis.game?.user?.isGM)) {
-            after = await addHits(target, hits);
+            // Map crit type to damage type for vulnerability: H=fire, C=cold
+            const dmgType = critType === "H" ? "fire" : critType === "C" ? "cold" : "magic";
+            after = await addHits(target, hits, dmgType);
             line += ` <em>(${after} concussion hits)</em>`;
         } else if (hits > 0) {
             line += ` <em>hits not applied — you don't control ${tName}.</em>`;
