@@ -71,11 +71,41 @@ export function evalFormula(formula, actor) {
  */
 export async function applyCapstoneDamage(target, amount, damageType = "magic", notes = []) {
     if (!target || amount <= 0) return 0;
+    
+    // Era Capstones (2026-10-09): check for vulnerability modifiers on target.
+    // vuln-<type> increases damage taken by X% (e.g., vuln-cold 20 = +20% cold damage).
+    let vulnPct = 0;
+    try {
+        const effects = target.system?.status?.spellEffects || [];
+        const dmgType = String(damageType).toLowerCase();
+        for (const e of effects) {
+            if (e.source !== "capstone") continue;
+            const mods = e.modifiers || [];
+            for (const m of mods) {
+                const t = String(m.target || "").toLowerCase();
+                if (t === `vuln-${dmgType}` || t === "vuln-all") {
+                    vulnPct += Number(m.value) || 0;
+                }
+            }
+            // Also check scaledTarget format
+            const st = String(e.scaledTarget || "").toLowerCase();
+            if (st === `vuln-${dmgType}` || st === "vuln-all") {
+                vulnPct += Number(e.scaledValue) || 0;
+            }
+        }
+    } catch (err) { /* non-fatal */ }
+    
+    let finalAmount = amount;
+    if (vulnPct > 0) {
+        finalAmount = Math.round(amount * (1 + vulnPct / 100));
+        notes.push(`<em>${esc(target.name)} is vulnerable (+${vulnPct}% ${esc(damageType)} damage).</em>`);
+    }
+    
     const cur = Number(target.system?.hits?.value) || 0;
-    const newVal = cur + amount;
+    const newVal = cur + finalAmount;
     await target.update({ "system.hits.value": newVal });
-    notes.push(`${esc(target.name)} takes ${amount} ${esc(damageType)} damage (${newVal} concussion hits).`);
-    return amount;
+    notes.push(`${esc(target.name)} takes ${finalAmount} ${esc(damageType)} damage (${newVal} concussion hits).`);
+    return finalAmount;
 }
 
 /**
