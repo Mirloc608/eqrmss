@@ -540,6 +540,22 @@ async function castSpellInner(actor, spellItem, opts = {}) {
                 <h2>${esc(actor.name)} casts ${esc(name)} on ${esc(target.name)}</h2>
                 ${healLine}${healBuffNote}${esfNote}${wornNote}<p><em>${manaNote.trim()}</em></p>`)
         });
+        // Era Capstones (2026-10-09): check triggered capstone effects on heal.
+        try {
+            const { checkCapstoneTriggers } = await import("../combat/capstone-effects.js");
+            const triggerNotes = await checkCapstoneTriggers(actor, "spellCast", {
+                spellType: "heal",
+                spell: spellItem,
+                healAmount,
+                spellTarget: target
+            });
+            if (triggerNotes.length) {
+                await ChatMessage.create({
+                    speaker: ChatMessage.getSpeaker({ actor }),
+                    content: `<div class="eqrmss-trigger">${triggerNotes.join("<br>")}</div>`
+                });
+            }
+        } catch (e) { console.warn("Trigger check failed:", e); }
         return { ok: true, kind: "heal", amount: healAmount, mods };
     }
 

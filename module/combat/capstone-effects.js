@@ -464,6 +464,9 @@ export async function checkCapstoneTriggers(actor, event, data = {}) {
                 .filter(c => c.actor && c.actor.id !== actor.id)
                 .map(c => c.actor);
             targets.unshift(actor); // Include caster
+        } else if (targetType === "spell-target" && data.spellTarget) {
+            // Use the spell's target (for duplicate heal, etc.)
+            targets = [data.spellTarget];
         }
         
         // Apply the effect to each target
@@ -475,6 +478,12 @@ export async function checkCapstoneTriggers(actor, event, data = {}) {
                 const tNotes = [];
                 await applyCapstoneBuff(tgt, pseudoCap, effect.modifiers, duration, tNotes);
                 notes.push(...tNotes);
+            } else if (effect.type === "heal" && data.healAmount > 0) {
+                // Duplicate heal: apply the same amount again
+                const cur = Number(tgt.system?.hits?.value) || 0;
+                const restored = Math.min(data.healAmount, cur);
+                await tgt.update({ "system.hits.value": cur - restored });
+                notes.push(`<em>${esc(t.capstoneName)} triggers! ${esc(tgt.name)} recovers ${restored} additional hits.</em>`);
             }
         }
         

@@ -195,10 +195,26 @@
       "class": "cleric",
       "level": 75,
       "expansion": "TSS",
-      "effect": "For 2 minutes, the cleric's heals have 30% chance to trigger a free duplicate heal.",
+      "effect": "For 20 rounds, the cleric's heals have 30% chance to trigger a free duplicate heal.",
       "cooldown": "15 minutes",
       "description": "Divinity ensures the cleric's healing never fails.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "triggered",
+        "durationRounds": 20,
+        "trigger": {
+          "event": "spellCast",
+          "spellTypes": [
+            "heal"
+          ],
+          "chance": 30,
+          "consumes": false
+        },
+        "effect": {
+          "type": "heal",
+          "target": "spell-target"
+        }
+      }
     },
     {
       "id": "capstone-druid-season-s-wrath-75",
