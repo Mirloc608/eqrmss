@@ -128,9 +128,22 @@ export async function applyCapstoneBuff(target, capstone, modifiers, durationRou
         else if (mod.target === "haste") desc = `Haste +${mod.value}%`;
         else if (mod.target === "slow") desc = `Slow ${mod.value}%`;
         else if (mod.target.startsWith("resist-")) desc = `${mod.target.slice(7)} resist +${mod.value}`;
+        else if (mod.target === "see-invisible") desc = `See invisible`;
         else desc = `${mod.target} +${mod.value}`;
         
         notes.push(`${esc(target.name)}: ${desc} (${durationRounds} rounds).`);
+
+        // Era Capstones (2026-10-09): see-invisible sets the status flag.
+        if (mod.target === "see-invisible") {
+            try {
+                await target.update({
+                    "system.status.seeInvisible": {
+                        roundsLeft: durationRounds,
+                        source: `capstone:${capstone.name}`
+                    }
+                });
+            } catch (e) { /* non-fatal */ }
+        }
     }
     
     await target.update({ "system.status.spellEffects": fx });

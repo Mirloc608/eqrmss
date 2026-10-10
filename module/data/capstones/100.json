@@ -71,10 +71,28 @@
       "class": "rogue",
       "level": 100,
       "expansion": "VoA",
-      "effect": "For 2 minutes, +30% accuracy, +25% critical chance, see invisible/hidden.",
+      "effect": "For 20 rounds, +30% accuracy, +25% critical chance, see invisible/hidden.",
       "cooldown": "15 minutes",
       "description": "The rogue sees everything \u2014 no lock, no trap, no hidden foe escapes these eyes.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 20,
+        "modifiers": [
+          {
+            "target": "ob",
+            "value": 3
+          },
+          {
+            "target": "crit-bonus",
+            "value": 25
+          },
+          {
+            "target": "see-invisible",
+            "value": 1
+          }
+        ]
+      }
     },
     {
       "id": "capstone-berserker-reckless-abandon-100",
