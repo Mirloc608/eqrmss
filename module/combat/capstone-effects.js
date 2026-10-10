@@ -233,16 +233,28 @@ export async function applyCapstoneBuff(target, capstone, modifiers, durationRou
         }
 
         // Era Capstones (2026-10-09): hp-max-pct increases max HP by percentage.
+        // Fix (2026-10-09): don't compound on reapplication — if the same
+        // capstone's hp-max-pct is already active, skip the HP modification
+        // (duration still refreshes via the new entry).
         if (mod.target === "hp-max-pct") {
             try {
                 const pct = Number(mod.value) || 0;
-                const currentMax = Number(target.system?.hits?.max) || 1;
-                const bonus = Math.round((pct / 100) * currentMax);
-                if (bonus > 0) {
-                    await target.update({ "system.hits.max": currentMax + bonus });
-                    // Store the bonus amount for restoration on expiry
-                    entry.hpMaxBonus = bonus;
-                    notes.push(`${esc(target.name)}: Max HP +${bonus} (${pct}%).`);
+                const existing = (target.system?.status?.spellEffects || []).some(e =>
+                    e.source === "capstone" &&
+                    e.capstoneId === capstoneId &&
+                    String(e.scaledTarget || "").toLowerCase() === "hp-max-pct"
+                );
+                if (!existing) {
+                    const currentMax = Number(target.system?.hits?.max) || 1;
+                    const bonus = Math.round((pct / 100) * currentMax);
+                    if (bonus > 0) {
+                        await target.update({ "system.hits.max": currentMax + bonus });
+                        // Store the bonus amount for restoration on expiry
+                        entry.hpMaxBonus = bonus;
+                        notes.push(`${esc(target.name)}: Max HP +${bonus} (${pct}%).`);
+                    }
+                } else {
+                    notes.push(`${esc(target.name)}: Max HP bonus already active (duration refreshed).`);
                 }
             } catch (e) { /* non-fatal */ }
         }
