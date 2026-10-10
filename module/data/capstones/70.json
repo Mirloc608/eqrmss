@@ -7,10 +7,28 @@
       "class": "warrior",
       "level": 70,
       "expansion": "OoW",
-      "effect": "For 3 minutes, max HP +20%, melee mitigation +15%, immune to fear.",
+      "effect": "For 30 rounds, max HP +20%, melee mitigation +15%, immune to fear.",
       "cooldown": "20 minutes",
       "description": "The warlord endures what would break lesser warriors.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "buff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "hp-max-pct",
+            "value": 20
+          },
+          {
+            "target": "db",
+            "value": 2
+          },
+          {
+            "target": "fear-immunity",
+            "value": 1
+          }
+        ]
+      }
     },
     {
       "id": "capstone-paladin-marr-s-salvation-70",
