@@ -144,6 +144,21 @@ export async function applyCapstoneBuff(target, capstone, modifiers, durationRou
                 });
             } catch (e) { /* non-fatal */ }
         }
+
+        // Era Capstones (2026-10-09): hp-max-pct increases max HP by percentage.
+        if (mod.target === "hp-max-pct") {
+            try {
+                const pct = Number(mod.value) || 0;
+                const currentMax = Number(target.system?.hits?.max) || 1;
+                const bonus = Math.round((pct / 100) * currentMax);
+                if (bonus > 0) {
+                    await target.update({ "system.hits.max": currentMax + bonus });
+                    // Store the bonus amount for restoration on expiry
+                    entry.hpMaxBonus = bonus;
+                    notes.push(`${esc(target.name)}: Max HP +${bonus} (${pct}%).`);
+                }
+            } catch (e) { /* non-fatal */ }
+        }
     }
     
     await target.update({ "system.status.spellEffects": fx });

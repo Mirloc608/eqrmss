@@ -1098,6 +1098,15 @@ export async function tickConditions(combat) {
                             await removeStatusEffect(actor, st === "haste" ? "hasted" : "slowed");
                         } catch (err) { /* ignore */ }
                     }
+                    // Era Capstones (2026-10-09): restore max HP when hp-max-pct expires.
+                    if (st === "hp-max-pct" && e.hpMaxBonus > 0) {
+                        try {
+                            const currentMax = Number(actor.system?.hits?.max) || 1;
+                            const newMax = Math.max(1, currentMax - e.hpMaxBonus);
+                            updates["system.hits.max"] = newMax;
+                            notes.push(`${esc(actor.name)}: Max HP returns to ${newMax} (lost ${e.hpMaxBonus} bonus).`);
+                        } catch (err) { /* ignore */ }
+                    }
                 }
             }
             updates["system.status.spellEffects"] = remainingFx;
