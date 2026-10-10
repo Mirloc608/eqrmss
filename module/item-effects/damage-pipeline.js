@@ -612,7 +612,28 @@ async function applySummonItem({ effect, caster, target, source }) {
 async function applyHeal({ effect, target, source }) {
     const miss = requireTarget(target, "heal", source);
     if (miss) return miss;
-    const rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    let rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    // Era Capstones (2026-10-09): check for heal-bonus-pct on the caster.
+    // Spire of Divinity: +X% healing.
+    try {
+        // Source may be an actor or have caster info
+        const caster = source?.actor || globalThis.game?.actors?.get(source?.casterId);
+        if (caster) {
+            const effects = caster.system?.status?.spellEffects || [];
+            let bonusPct = 0;
+            for (const e of effects) {
+                if (e.source !== "capstone") continue;
+                for (const m of (e.modifiers || [])) {
+                    if (m.target === "heal-bonus-pct") {
+                        bonusPct += Number(m.value) || 0;
+                    }
+                }
+            }
+            if (bonusPct > 0) {
+                rolled = Math.round(rolled * (1 + bonusPct / 100));
+            }
+        }
+    } catch (e) { /* non-fatal */ }
     const cur = Number(target.system?.hits?.value) || 0;
     const next = Math.max(0, cur - rolled);
     await persistValue(target, "system.hits.value", next);

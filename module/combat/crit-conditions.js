@@ -1072,6 +1072,31 @@ export async function tickConditions(combat) {
                     } catch (err) { /* non-fatal */ }
                 }
                 
+                // Era Capstones (2026-10-09): check for dot-bonus-pct on the caster.
+                // Embalmer's Carapace: +X% DoT damage.
+                if (dmg > 0 && d.casterId) {
+                    try {
+                        const caster = globalThis.game?.actors?.get(d.casterId);
+                        if (caster) {
+                            const effects = caster.system?.status?.spellEffects || [];
+                            let bonusPct = 0;
+                            for (const e of effects) {
+                                if (e.source !== "capstone") continue;
+                                for (const m of (e.modifiers || [])) {
+                                    if (m.target === "dot-bonus-pct") {
+                                        bonusPct += Number(m.value) || 0;
+                                    }
+                                }
+                            }
+                            if (bonusPct > 0) {
+                                const bonus = Math.round(dmg * bonusPct / 100);
+                                dmg += bonus;
+                                notes.push(`<em>${esc(caster.name)}'s DoT bonus +${bonusPct}% (+${bonus} damage).</em>`);
+                            }
+                        }
+                    } catch (err) { /* non-fatal */ }
+                }
+                
                 if (dmg > 0) {
                     const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
                     updates["system.hits.value"] = cur + dmg;
@@ -1102,7 +1127,25 @@ export async function tickConditions(combat) {
                     if (e.pool === "mana") {
                         const mCur = Number(updates["system.attributes.mana.value"] ?? actor.system?.attributes?.mana?.value) || 0;
                         const mMax = Number(actor.system?.attributes?.mana?.max) || 0;
-                        const mNext = Math.min(mMax, mCur + Number(e.amount));
+                        let amount = Number(e.amount);
+                        // Era Capstones (2026-10-09): check for mana-regen-pct.
+                        // Embalmer's Carapace: +X% mana regen.
+                        try {
+                            const capEffects = actor.system?.status?.spellEffects || [];
+                            let bonusPct = 0;
+                            for (const ce of capEffects) {
+                                if (ce.source !== "capstone") continue;
+                                for (const m of (ce.modifiers || [])) {
+                                    if (m.target === "mana-regen-pct") {
+                                        bonusPct += Number(m.value) || 0;
+                                    }
+                                }
+                            }
+                            if (bonusPct > 0) {
+                                amount = Math.round(amount * (1 + bonusPct / 100));
+                            }
+                        } catch (err) { /* non-fatal */ }
+                        const mNext = Math.min(mMax, mCur + amount);
                         if (mNext > mCur) {
                             updates["system.attributes.mana.value"] = mNext;
                             notes.push(`${esc(actor.name)} regenerates ${mNext - mCur} mana from ${esc(e.label || e.song || "a spell")} (${mCur} → ${mNext}).`);
