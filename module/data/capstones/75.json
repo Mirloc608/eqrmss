@@ -222,10 +222,32 @@
       "class": "druid",
       "level": 75,
       "expansion": "TSS",
-      "effect": "Debuff target: -30 cold/fire resist, takes +20% cold/fire damage for 3 minutes.",
+      "effect": "Debuff target: -30 cold/fire resist, takes +20% cold/fire damage for 30 rounds.",
       "cooldown": "10 minutes",
       "description": "The wrath of the seasons strips the enemy's resistance.",
-      "refresh": "combat"
+      "refresh": "combat",
+      "mechanics": {
+        "type": "debuff",
+        "durationRounds": 30,
+        "modifiers": [
+          {
+            "target": "resist-cold",
+            "value": 3
+          },
+          {
+            "target": "resist-fire",
+            "value": 3
+          },
+          {
+            "target": "vuln-cold",
+            "value": 20
+          },
+          {
+            "target": "vuln-fire",
+            "value": 20
+          }
+        ]
+      }
     },
     {
       "id": "capstone-shaman-ancestral-aid-75",
