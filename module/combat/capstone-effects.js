@@ -363,6 +363,94 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
                 return { ...m, value: -Math.abs(m.value) };
             });
             await applyCapstoneBuff(actualTarget, capstone, negMods, duration, notes);
+            
+            // Era Capstones (2026-10-09): RIDER damage for special attacks.
+            // The 9 RIDER capstones deal level×2 damage with appropriate type,
+            // plus their rider effects (stun, fear, knockback, interrupt).
+            const capName = String(capstone.name || "").toLowerCase();
+            const level = Number(caster.system?.attributes?.level?.value) || 1;
+            const riderDmg = level * 2;
+            
+            if (capName.includes("repel the wicked")) {
+                // Paladin: weapon attack vs undead in AE, holy damage + stun + knockback
+                const combatants = game.combat?.combatants ?? [];
+                for (const c of combatants) {
+                    if (!c.actor || c.actor.id === caster.id) continue;
+                    // Check if undead (simplified: check race/type)
+                    const race = String(c.actor.system?.race || "").toLowerCase();
+                    const type = String(c.actor.type || "").toLowerCase();
+                    if (!race.includes("undead") && !type.includes("undead") && 
+                        !String(c.actor.name || "").toLowerCase().includes("undead")) continue;
+                    await applyCapstoneDamage(c.actor, riderDmg, "holy", notes, caster);
+                    notes.push(`<em>${esc(c.actor.name)} is stunned for 1 round and knocked back.</em>`);
+                    // Apply stun via status
+                    try {
+                        const { applyStatusEffect } = await import("../spells/status-wiring.js");
+                        await applyStatusEffect(c.actor, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: capstone.name });
+                    } catch (e) { /* ignore */ }
+                }
+            } else if (capName.includes("stunning kick")) {
+                // Monk: martial arts damage + stun + interrupt
+                if (actualTarget) {
+                    await applyCapstoneDamage(actualTarget, riderDmg, "physical", notes, caster);
+                    notes.push(`<em>${esc(actualTarget.name)} is stunned for 1 round and interrupted.</em>`);
+                    try {
+                        const { applyStatusEffect } = await import("../spells/status-wiring.js");
+                        await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: capstone.name });
+                    } catch (e) { /* ignore */ }
+                }
+            } else if (capName.includes("five point palm")) {
+                // Monk: 5 strikes, stun if all hit (simplified: always applies, 5× damage)
+                if (actualTarget) {
+                    const totalDmg = riderDmg * 5;
+                    await applyCapstoneDamage(actualTarget, totalDmg, "physical", notes, caster);
+                    notes.push(`<em>Five strikes hit! ${esc(actualTarget.name)} is stunned for 1 round.</em>`);
+                    try {
+                        const { applyStatusEffect } = await import("../spells/status-wiring.js");
+                        await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: capstone.name });
+                    } catch (e) { /* ignore */ }
+                }
+            } else if (capName.includes("explosion of hatred")) {
+                // SK: spell AE damage + fear + hate
+                const combatants = game.combat?.combatants ?? [];
+                for (const c of combatants) {
+                    if (!c.actor || c.actor.id === caster.id) continue;
+                    await applyCapstoneDamage(c.actor, riderDmg, "magic", notes, caster);
+                    notes.push(`<em>${esc(c.actor.name)} is feared for 1 round.</em>`);
+                }
+                // Hate gain handled via threat system (simplified as note)
+                notes.push(`<em>Massive hate gain on all targets.</em>`);
+            } else if (capName.includes("jolting kicks")) {
+                // Ranger: brawling damage + interrupt + stun + knockdown chance
+                if (actualTarget) {
+                    await applyCapstoneDamage(actualTarget, riderDmg, "physical", notes, caster);
+                    notes.push(`<em>${esc(actualTarget.name)} is interrupted and stunned for 1 round.</em>`);
+                    if (Math.random() < 0.5) {
+                        notes.push(`<em>${esc(actualTarget.name)} is knocked down!</em>`);
+                    }
+                    try {
+                        const { applyStatusEffect } = await import("../spells/status-wiring.js");
+                        await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: capstone.name });
+                    } catch (e) { /* ignore */ }
+                }
+            } else if (capName.includes("turn undead")) {
+                // Cleric: channeling spell damage vs undead only, unresistable + stun
+                if (actualTarget) {
+                    const race = String(actualTarget.system?.race || "").toLowerCase();
+                    const type = String(actualTarget.type || "").toLowerCase();
+                    if (race.includes("undead") || type.includes("undead") || 
+                        String(actualTarget.name || "").toLowerCase().includes("undead")) {
+                        await applyCapstoneDamage(actualTarget, riderDmg, "holy", notes, caster);
+                        notes.push(`<em>${esc(actualTarget.name)} is stunned for 1 round (unresistable).</em>`);
+                        try {
+                            const { applyStatusEffect } = await import("../spells/status-wiring.js");
+                            await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: capstone.name });
+                        } catch (e) { /* ignore */ }
+                    } else {
+                        notes.push(`<em>${esc(actualTarget.name)} is not undead — no effect.</em>`);
+                    }
+                }
+            }
             break;
         }
         
