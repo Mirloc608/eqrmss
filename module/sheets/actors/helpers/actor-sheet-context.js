@@ -441,7 +441,7 @@ export class EQRMSSActorContextHelper {
                     // Shield requirement (2026-10-11): Bash needs a shield equipped
                     if (a.id === "bash" && !hasShieldEquipped) return false;
                     // Mark passive abilities (2026-10-11): double attack, dual wield, triple attack are passive
-                    const passiveIds = ["double-attack", "dual-wield", "triple-attack"];
+                    const passiveIds = ["double-attack", "dual-wield", "triple-attack", "riposte", "block"];
                     a.isPassive = passiveIds.includes(a.id);
                     return true;
                 }).sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
