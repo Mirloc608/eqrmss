@@ -266,7 +266,8 @@ export class EQRMSSActorContextHelper {
             // Full skill catalog (2026-10-11): merge developed skills with available catalog
             skillCatalog: (() => {
                 try {
-                    const catalog = Object.values(globalThis.CONFIG?.EQRMSS?.skills ?? {});
+                    const skillStore = (typeof CONFIG !== 'undefined' ? CONFIG?.EQRMSS?.skills : null) ?? globalThis.CONFIG?.EQRMSS?.skills ?? {};
+                    const catalog = Object.values(skillStore);
                     const developed = new Map(items.filter(i => i?.type === "skill").map(s => [String(s.system?.skillId ?? s.name).toLowerCase(), s]));
                     return catalog.map(skill => {
                         const key = String(skill.id ?? skill.name).toLowerCase();
