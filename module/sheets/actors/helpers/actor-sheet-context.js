@@ -356,6 +356,11 @@ export class EQRMSSActorContextHelper {
         // pure melee (warrior, rogue, monk, berserker) get neither.
         const sys = this.actor?.system ?? {};
         const classId = String(sys.origin?.classId ?? sys.fixed_info?.classId ?? "").toLowerCase();
+        const raceId = String(sys.origin?.raceId ?? sys.fixed_info?.raceId ?? "").toLowerCase();
+        // Check for shield equipped (2026-10-11): Bash requires a shield
+        const hasShieldEquipped = (this.actor?.items ?? []).some(i => 
+            i.type === "shield" && String(i.system?.location ?? "").toLowerCase() === "equipped"
+        );
         const PURE_MELEE = new Set(["warrior", "rogue", "monk", "berserker"]);
         context.isBard = classId === "bard";
         context.isPaladin = classId === "paladin";
@@ -425,8 +430,16 @@ export class EQRMSSActorContextHelper {
                     seen.add(a.id);
                     // Class filter (2026-10-11): only show abilities the class can use.
                     // Abilities with empty/missing classes array are hidden (not shown to all).
-                    const abilClasses = Array.isArray(a.classes) ? a.classes.map(c => String(c).toLowerCase()) : [];
-                    if (!abilClasses.includes(classId)) return false;
+                    // Racial requirement (2026-10-11): Slam is Barbarian/Ogre/Troll only
+                    if (Array.isArray(a.races)) {
+                        const abilRaces = a.races.map(r => String(r).toLowerCase());
+                        if (!abilRaces.includes(raceId)) return false;
+                    } else {
+                        const abilClasses = Array.isArray(a.classes) ? a.classes.map(c => String(c).toLowerCase()) : [];
+                        if (!abilClasses.includes(classId)) return false;
+                    }
+                    // Shield requirement (2026-10-11): Bash needs a shield equipped
+                    if (a.id === "bash" && !hasShieldEquipped) return false;
                     // Mark passive abilities (2026-10-11): double attack, dual wield, triple attack are passive
                     const passiveIds = ["double-attack", "dual-wield", "triple-attack"];
                     a.isPassive = passiveIds.includes(a.id);
