@@ -983,6 +983,17 @@ ol.aa-available .aa-row::marker {
   vertical-align: middle;
   margin-right: 6px;
 }
+/* Uniform discipline buttons (2026-10-11): every button fills its grid cell,
+   label vertically centered. */
+.discipline-entry {
+  display: flex;
+}
+.discipline-entry button {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 /* Bigger discipline buttons (2026-10-11). */
 .discipline-entry button {
   font-size: 1.25em;
