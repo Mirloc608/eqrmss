@@ -427,6 +427,9 @@ export class EQRMSSActorContextHelper {
                     // Abilities with empty/missing classes array are hidden (not shown to all).
                     const abilClasses = Array.isArray(a.classes) ? a.classes.map(c => String(c).toLowerCase()) : [];
                     if (!abilClasses.includes(classId)) return false;
+                    // Mark passive abilities (2026-10-11): double attack, dual wield, triple attack are passive
+                    const passiveIds = ["double-attack", "dual-wield", "triple-attack"];
+                    a.isPassive = passiveIds.includes(a.id);
                     return true;
                 }).sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
             } else {

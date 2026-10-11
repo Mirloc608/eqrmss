@@ -31,6 +31,28 @@
   {{#if capstones}}
   {{/if}}
 
+  {{#if abilities}}
+  <div class="panel">
+    <h4>Combat Abilities</h4>
+    <div class="ability-grid">
+      {{#each abilities}}
+      {{#if this.isPassive}}
+      <div class="ability-passive" title="{{this.name}} (Passive)">
+        <span class="ability-name">{{this.name}}</span>
+        <span class="ability-tag">Passive</span>
+      </div>
+      {{else}}
+      <div class="ability-active">
+        <button type="button" data-action="activateAbility" data-ability-id="{{this.id}}" title="{{this.name}}">
+          {{this.name}}
+        </button>
+      </div>
+      {{/if}}
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+
   <div class="panel">
     <h4>Readied Weapons</h4>
     <table class="rmss-table">
