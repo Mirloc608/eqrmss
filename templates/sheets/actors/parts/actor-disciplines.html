@@ -6,9 +6,8 @@
     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: center;">
     {{#each disciplines}}
     <div class="discipline-entry">
-      {{#if this.icon}}<img src="{{this.icon}}" alt="{{this.name}}" class="discipline-icon" />{{/if}}
       <button type="button" data-action="activateDiscipline" data-discipline-id="{{this.id}}" title="{{this.name}} (Level {{this.level}}){{#if this.description}} - {{this.description}}{{/if}}" style="width: 100%;">
-        {{this.name}} ({{this.level}})
+        {{#if this.icon}}<img src="{{this.icon}}" alt="" class="discipline-icon" />{{/if}}{{this.name}} ({{this.level}})
       </button>
     </div>
     {{/each}}
