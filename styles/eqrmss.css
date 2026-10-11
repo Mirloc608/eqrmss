@@ -983,19 +983,22 @@ ol.aa-available .aa-row::marker {
   vertical-align: middle;
   margin-right: 6px;
 }
-/* Uniform discipline buttons (2026-10-11): every button fills its grid cell,
-   label vertically centered. */
-.discipline-entry {
+/* Uniform tab buttons (2026-10-11): disciplines + capstones share size/structure.
+   Every button fills its grid cell, label vertically centered. */
+.discipline-entry,
+.capstone-entry {
   display: flex;
 }
-.discipline-entry button {
+.discipline-entry button,
+.capstone-entry button {
   flex: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
-/* Bigger discipline buttons (2026-10-11). */
-.discipline-entry button {
+/* Bigger tab buttons (2026-10-11). */
+.discipline-entry button,
+.capstone-entry button {
   font-size: 1.25em;
   padding: 12px 10px;
   line-height: 1.5;
