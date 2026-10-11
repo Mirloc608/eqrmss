@@ -423,6 +423,10 @@ export class EQRMSSActorContextHelper {
                 context.abilities = all.filter(a => {
                     if (!a.id || seen.has(a.id)) return false;
                     seen.add(a.id);
+                    // Class filter (2026-10-11): only show abilities the class can use.
+                    // Abilities with empty/missing classes array are hidden (not shown to all).
+                    const abilClasses = Array.isArray(a.classes) ? a.classes.map(c => String(c).toLowerCase()) : [];
+                    if (!abilClasses.includes(classId)) return false;
                     return true;
                 }).sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
             } else {
