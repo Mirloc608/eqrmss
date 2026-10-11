@@ -311,8 +311,12 @@ export async function initializeDataLoaders() {
                 const discs = await DisciplineLoader.load();
                 game.eqrmss.disciplines = discs;
                 game.eqrmss._loadStatus.disciplines = true;
-                // Sheet context expects CONFIG.EQRMSS.data.results.disciplines
-                if (globalThis.CONFIG?.EQRMSS?.data?.results) {
+                // Sheet context expects CONFIG.EQRMSS.data.results.disciplines.
+                // (2026-10-11): .results was never initialized anywhere, so the
+                // guarded write was silently skipped every boot and the tab saw [].
+                if (globalThis.CONFIG?.EQRMSS?.data) {
+                    globalThis.CONFIG.EQRMSS.data.results =
+                        globalThis.CONFIG.EQRMSS.data.results || {};
                     globalThis.CONFIG.EQRMSS.data.results.disciplines = discs;
                 }
                 console.log(`EQRMSS | Disciplines ready: ${discs.length} disciplines`);
