@@ -63,6 +63,20 @@ export class DisciplineLoader {
          */
         const registry = new Set();
 
+        // Discipline icons (2026-10-11): discipline id -> icon path lookup.
+        // Map values are stored as "icons/disciplines/<file>.png";
+        // iconFor() resolves them to full system asset paths for <img> use.
+        // A missing/unreadable map is non-fatal: disciplines load without icons.
+        let iconMap = {};
+        try {
+            const iconResponse =
+                await fetch(`systems/${MODULE_ID}/module/data/disciplines/icon-map.json`);
+            if (iconResponse.ok) iconMap = await iconResponse.json();
+            else console.warn(`${MODULE_ID} | Discipline icon map missing`, iconResponse.status);
+        } catch (error) {
+            console.warn(`${MODULE_ID} | Discipline icon map failed to load`, error);
+        }
+
         for (const className of classes) {
 
             const file =
@@ -134,7 +148,15 @@ export class DisciplineLoader {
 
                         registryId,
 
-                        ...discipline
+                        ...discipline,
+
+                        icon:
+                            DisciplineLoader.iconFor(
+                                discipline.id,
+                                iconMap
+                            ) ??
+                            discipline.icon ??
+                            null
                     });
                 }
 
@@ -196,6 +218,23 @@ export class DisciplineLoader {
         }
 
         return true;
+    }
+
+    /**
+     * Resolve a discipline id to its full system icon asset path.
+     * Returns null when the id has no mapped icon.
+     */
+    static iconFor(disciplineId, iconMap) {
+
+        const mapped = iconMap?.[disciplineId];
+
+        if (!mapped) return null;
+
+        if (mapped.startsWith("systems/")) return mapped;
+
+        if (mapped.startsWith("icons/")) return `systems/${MODULE_ID}/assets/${mapped}`;
+
+        return `systems/${MODULE_ID}/assets/icons/disciplines/${mapped}`;
     }
 
     /**

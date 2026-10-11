@@ -5,6 +5,7 @@
     <p><em>Trained combat disciplines.</em></p>
     {{#each disciplines}}
     <div class="discipline-entry">
+      {{#if this.icon}}<img src="{{this.icon}}" alt="{{this.name}}" class="discipline-icon" />{{/if}}
       <button type="button" data-action="activateDiscipline" data-discipline-id="{{this.id}}" title="{{this.name}} (Level {{this.level}})">
         {{this.name}} ({{this.level}})
       </button>
