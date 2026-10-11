@@ -1,4 +1,19 @@
 <div class="tab disciplines" data-group="primary" data-tab="disciplines">
+  {{#if abilities}}
+  <div class="panel">
+    <h4>Combat Abilities</h4>
+    <p><em>Trained combat techniques.</em></p>
+    {{#each abilities}}
+    <div class="ability-entry">
+      <button type="button" data-action="activateAbility" data-ability-id="{{this.id}}" title="{{this.name}}">
+        {{this.name}}
+      </button>
+      <span class="ability-desc">{{this.category}}</span>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+
   {{#if disciplines}}
   <div class="panel">
     <h4>Disciplines</h4>

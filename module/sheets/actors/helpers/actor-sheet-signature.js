@@ -62,7 +62,7 @@ export class EQRMSSActorSignatureHelper {
             });
         });
 
-        // Disciplines (2026-10-09): descriptive activation (mechanical effects future work)
+        // Disciplines (2026-10-10): mechanical activation via discipline-effects.js
         html.querySelectorAll('[data-action="activateDiscipline"]').forEach(el => {
             el.addEventListener("click", async (ev) => {
                 ev.preventDefault();
@@ -72,10 +72,45 @@ export class EQRMSSActorSignatureHelper {
                 const disc = discs.find(d => d.id === discId);
                 if (!disc) return;
                 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
-                const fxList = (disc.effects || []).map(e => `${esc(e.type)}: ${esc(e.value)}`).join("<br>");
+                const notes = [];
+                try {
+                    const { applyDisciplineEffects } = await import("../../../combat/discipline-effects.js");
+                    await applyDisciplineEffects(actor, disc, notes);
+                } catch (e) {
+                    console.error("EQRMSS | Discipline activation failed", e);
+                    notes.push(`<em>Error activating ${esc(disc.name)}.</em>`);
+                }
                 await ChatMessage.create({
                     speaker: ChatMessage.getSpeaker({ actor }),
-                    content: `<div class="eqrmss-discipline"><h3>${esc(disc.name)}</h3><p><strong>${esc(actor.name)}</strong> uses <strong>${esc(disc.name)}</strong>!</p><p>Duration: ${disc.durationRounds} rounds</p><p>${fxList}</p></div>`
+                    content: `<div class="eqrmss-discipline"><h3>${esc(disc.name)}</h3><p><strong>${esc(actor.name)}</strong> uses <strong>${esc(disc.name)}</strong>!</p><p>Duration: ${disc.durationRounds} rounds</p>${notes.join("")}</div>`
+                });
+            });
+        });
+
+        // Abilities (2026-10-10): combat ability buttons via ability-handlers.js
+        html.querySelectorAll('[data-action="activateAbility"]').forEach(el => {
+            el.addEventListener("click", async (ev) => {
+                ev.preventDefault();
+                const abilId = el.dataset.abilityId;
+                if (!abilId) return;
+                const abils = context.abilities || [];
+                const ability = abils.find(a => a.id === abilId);
+                if (!ability) return;
+                const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
+                const notes = [];
+                // Target: use current targets or none
+                const targets = Array.from(game.user?.targets ?? []);
+                const target = targets[0]?.actor ?? null;
+                try {
+                    const { executeAbility } = await import("../../../combat/ability-handlers.js");
+                    await executeAbility(actor, target, ability, notes);
+                } catch (e) {
+                    console.error("EQRMSS | Ability activation failed", e);
+                    notes.push(`<em>Error activating ${esc(ability.name)}.</em>`);
+                }
+                await ChatMessage.create({
+                    speaker: ChatMessage.getSpeaker({ actor }),
+                    content: `<div class="eqrmss-ability"><h3>${esc(ability.name)}</h3><p><strong>${esc(actor.name)}</strong> uses <strong>${esc(ability.name)}</strong>!</p>${notes.join("")}</div>`
                 });
             });
         });

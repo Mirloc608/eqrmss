@@ -133,6 +133,7 @@ async function loadModules() {
     AAModule = await tryImport(['./module/data/loaders/aa-loader.js']);
     ItemModule = await tryImport(['./module/data/loaders/item-loader.js']);
     CapstoneModule = await tryImport(['./module/data/loaders/capstone-loader.js']);
+    DisciplineModule = await tryImport(['./module/data/loaders/discipline-loader.js']);
     AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
     ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
     SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
@@ -299,6 +300,24 @@ export async function initializeDataLoaders() {
                 console.log(`EQRMSS | Capstones ready: ${Object.keys(game.eqrmss.capstones?.byId || {}).length} capstones`);
             }
         } catch (e) { console.error("Capstone load failed", e); }
+    }
+
+    // Disciplines (2026-10-10): wire the dead loader into boot.
+    // The sheet context reads from CONFIG.EQRMSS.data.results.disciplines.
+    if (DisciplineModule) {
+        try {
+            const { DisciplineLoader } = DisciplineModule;
+            if (DisciplineLoader && typeof DisciplineLoader.load === 'function') {
+                const discs = await DisciplineLoader.load();
+                game.eqrmss.disciplines = discs;
+                game.eqrmss._loadStatus.disciplines = true;
+                // Sheet context expects CONFIG.EQRMSS.data.results.disciplines
+                if (globalThis.CONFIG?.EQRMSS?.data?.results) {
+                    globalThis.CONFIG.EQRMSS.data.results.disciplines = discs;
+                }
+                console.log(`EQRMSS | Disciplines ready: ${discs.length} disciplines`);
+            }
+        } catch (e) { console.error("Discipline load failed", e); }
     }
 
     if (SpellLoader) {

@@ -58,6 +58,7 @@ import { breakFeignDeath } from "../spells/feign-death.js";
 import { unusualStyleOf, shiftSeverity } from "./unusual-style.js";
 import { combatCard } from "./chat-card.js";
 import { fireWeaponProc } from "../item-effects/proc-engine.js";
+import { ammoTableEntryFor, ammoOBFor } from "./ammunition-table.js";
 
 async function d100() {
     return (await new Roll("1d100").evaluate()).total;
@@ -686,6 +687,8 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     }
     let rangeMod = 0;
     let reloadPenalty = 0;
+    let ammoOb = 0;
+    let ammoProcId = null;
     let ammoNote = "";
     if (missileAttack) {
         const bands = rangeBandsFor(tables, tableName);
@@ -709,6 +712,15 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
                 const left = Math.max(0, (Number(shot.ammoItem.system?.quantity) || 0) - 1);
                 await shot.ammoItem.update({ "system.quantity": left });
                 ammoNote = `<p><em>${esc(shot.ammoItem.name)} fired — ${left} remaining.</em></p>`;
+                // Ammunition construction OB (2026-10-09): fixed lookup table.
+                const ammoEntry = ammoTableEntryFor(shot.ammoItem.name);
+                if (ammoEntry) {
+                    ammoOb = Number(ammoEntry.ob) || 0;
+                    ammoProcId = ammoEntry.proc || null;
+                    if (ammoOb !== 0) {
+                        ammoNote += `<p><em>Ammunition: ${esc(ammoEntry.label)} (${ammoOb >= 0 ? "+" : ""}${ammoOb} OB).</em></p>`;
+                    }
+                }
             }
         }
     }
@@ -777,7 +789,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         const songMods = getSongModifiers(actor);
         buffOb = (spellMods?.ob || 0) + (songMods?.ob || 0);
     } catch (e) { /* ignore */ }
-    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + pointBlankPenalty + buffOb + actionPenalty + armorTierPenalty + rangeMod - reloadPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod + sitTotal + (pronePenalty || 0);
+    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + pointBlankPenalty + buffOb + actionPenalty + armorTierPenalty + rangeMod - reloadPenalty + ammoOb + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod + sitTotal + (pronePenalty || 0);
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -809,12 +821,18 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         : fumbleCheck.range;
     if (inFumbleRange(firstDie, fumbleRange)) {
         if (fumbleCheck.kind === "failure") {
+            // Natural weapon fumble (2026-10-09 ruling): automatic Failure
+            // with loss of any further action that round. Natural attacks
+            // do not roll on the Fumble Table.
+            try {
+                await actor.update({ "system.status.lostActions": true });
+            } catch (e) { /* ignore */ }
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor }),
                 content: combatCard("Combat", `
                 <h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>
                 <p><strong>Attack roll:</strong> ${firstDie} — automatic Failure (unmodified ${String(fumbleRange.low).padStart(2, "0")}-${String(fumbleRange.high).padStart(2, "0")}; natural attacks do not roll on the Fumble Table)</p>
-                <p><em>No effect on ${esc(targetName)}.</em></p>`)
+                <p><em>No effect on ${esc(targetName)}. ${esc(actor.name)} loses any further action this round.</em></p>`)
             });
             return;
         }
@@ -855,7 +873,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${pointBlankPenalty ? ` (${pointBlankPenalty} point-blank)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${armorTierPenalty ? ` (${armorTierPenalty} armor tier: ${armorTier.armorCategory} ${armorTier.tiersAbove} above class)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${Math.round(effectivePct)}%${hastePct ? ` +${hastePct}% haste` : ""}${slowPct ? ` -${slowPct}% slow` : ""})` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
+        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${pointBlankPenalty ? ` (${pointBlankPenalty} point-blank)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${armorTierPenalty ? ` (${armorTierPenalty} armor tier: ${armorTier.armorCategory} ${armorTier.tiersAbove} above class)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${ammoOb ? ` (${ammoOb >= 0 ? "+" : ""}${ammoOb} ammunition)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${Math.round(effectivePct)}%${hastePct ? ` +${hastePct}% haste` : ""}${slowPct ? ` -${slowPct}% slow` : ""})` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
         + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
@@ -1308,6 +1326,19 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             if (procResult.fired) procNote = procResultNote(procResult);
         } catch (e) {
             console.error("EQRMSS | Proc fire failed", e);
+        }
+    }
+    // Ammunition procs (2026-10-09): same as weapon procs — fire on
+    // critical hits only, via the shared proc engine. The ammo table
+    // entry provides the proc ID from the item-effect catalog.
+    if (critFired && missileAttack && ammoProcId && targetActor) {
+        try {
+            // Fake a weapon-like object carrying the ammo's proc ID.
+            const ammoWeapon = { system: { proc: ammoProcId } };
+            const procResult = await fireWeaponProc({ wielder: actor, weapon: ammoWeapon, target: targetActor, event: "onCrit" });
+            if (procResult.fired) procNote += procResultNote(procResult);
+        } catch (e) {
+            console.error("EQRMSS | Ammo proc fire failed", e);
         }
     }
 

@@ -409,6 +409,28 @@ export class EQRMSSActorContextHelper {
         } catch (err) {
             context.disciplines = [];
         }
+
+        // Abilities (2026-10-10): shared combat abilities for the Disciplines tab.
+        // Uses game.eqrmss.abilities populated by the ability loader at boot.
+        try {
+            const abilData = globalThis.game?.eqrmss?.abilities;
+            if (abilData) {
+                const shared = abilData.shared || [];
+                const classAbils = abilData[classId] || [];
+                const all = [...(Array.isArray(shared) ? shared : []), ...(Array.isArray(classAbils) ? classAbils : [])];
+                // Dedupe by id
+                const seen = new Set();
+                context.abilities = all.filter(a => {
+                    if (!a.id || seen.has(a.id)) return false;
+                    seen.add(a.id);
+                    return true;
+                }).sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
+            } else {
+                context.abilities = [];
+            }
+        } catch (err) {
+            context.abilities = [];
+        }
     }
 
     // ------------------------------------------------------------

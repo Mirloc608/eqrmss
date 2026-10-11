@@ -37,7 +37,9 @@ function getSignatureRank(actor, abilityId) {
     if (!aaId) return 1;
     try {
         const rank = EQRMSSAAAdvancement.getPurchasedRank(actor, aaId);
-        return Math.max(1, rank);
+        // Cap at 12 (2026-10-10 ruling): signature data maxRank is 12,
+        // but AA files allow 17/22 — uncapped ranks would heal 175%+.
+        return Math.min(12, Math.max(1, rank));
     } catch {
         return 1;
     }
