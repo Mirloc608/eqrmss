@@ -1,71 +1,36 @@
 {
-  "id": "bard",
-  "key": "bard",
-  "name": "Bard",
-  "type": "discipline-catalog",
   "disciplines": [
     {
-      "id": "resistant",
-      "name": "Resistant Discipline",
-      "level": 51,
-      "family": "defensive",
-      "durationRounds": 10,
-      "reuseRounds": 40,
-      "effects": [
-        {
-          "type": "RESIST_ALL",
-          "value": 20
-        }
-      ]
-    },
-
-    {
-      "id": "fearless",
+      "id": "fearless-discipline",
       "name": "Fearless Discipline",
       "level": 54,
-      "family": "defensive",
       "durationRounds": 10,
       "reuseRounds": 50,
       "effects": [
         {
-          "type": "FEAR_IMMUNITY",
-          "value": true
+          "type": "EQ_RAW",
+          "value": "Increase Chance to Resist Fear Spell by 10000%"
         }
-      ]
+      ],
+      "expansion": "Original"
     },
-
     {
-      "id": "deftdance",
+      "id": "deftdance-discipline",
       "name": "Deftdance Discipline",
       "level": 55,
-      "family": "defensive",
-      "durationRounds": 5,
-      "reuseRounds": 100,
+      "durationRounds": 10,
+      "reuseRounds": 50,
       "effects": [
         {
-          "type": "DODGE_BONUS",
-          "value": 100
+          "type": "EQ_RAW",
+          "value": "Increase Chance to Dodge by 10000%"
         },
         {
-          "type": "DUAL_WIELD_BONUS",
-          "value": 100
+          "type": "EQ_RAW",
+          "value": "Increase Dual Wield by 10000%"
         }
-      ]
-    },
-
-    {
-      "id": "puretone",
-      "name": "Puretone Discipline",
-      "level": 60,
-      "family": "song",
-      "durationRounds": 10,
-      "reuseRounds": 100,
-      "effects": [
-        {
-          "type": "INSTRUMENT_MODIFIER",
-          "value": 28
-        }
-      ]
+      ],
+      "expansion": "Scars of Velious"
     }
   ]
 }
