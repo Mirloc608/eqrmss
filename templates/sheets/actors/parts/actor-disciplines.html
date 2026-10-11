@@ -3,15 +3,16 @@
   <div class="panel">
     <h4>Disciplines</h4>
     <p><em>Trained combat disciplines.</em></p>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: center;">
     {{#each disciplines}}
     <div class="discipline-entry">
       {{#if this.icon}}<img src="{{this.icon}}" alt="{{this.name}}" class="discipline-icon" />{{/if}}
-      <button type="button" data-action="activateDiscipline" data-discipline-id="{{this.id}}" title="{{this.name}} (Level {{this.level}})">
+      <button type="button" data-action="activateDiscipline" data-discipline-id="{{this.id}}" title="{{this.name}} (Level {{this.level}}){{#if this.description}} - {{this.description}}{{/if}}" style="width: 100%;">
         {{this.name}} ({{this.level}})
       </button>
-      <span class="discipline-desc">{{this.description}}</span>
     </div>
     {{/each}}
+    </div>
   </div>
   {{/if}}
 
