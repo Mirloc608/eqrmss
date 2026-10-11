@@ -18,14 +18,15 @@
   <div class="panel">
     <h4>Era Capstones</h4>
     <p><em>Hand-designed abilities earned at level cap increases.</em></p>
-    {{#each capstones}}
-    <div class="capstone-entry">
-      <button type="button" data-action="activateCapstone" data-capstone-id="{{this.id}}" {{#if this.onCooldown}}disabled{{/if}} title="{{this.name}} (Level {{this.level}}): {{this.effect}} Cooldown: {{this.cooldown}}">
-        {{this.name}} ({{this.level}}){{#if this.onCooldown}} (Used){{/if}}
-      </button>
-      <span class="capstone-desc">{{this.description}}</span>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: center;">
+      {{#each capstones}}
+      <div>
+        <button type="button" data-action="activateCapstone" data-capstone-id="{{this.id}}" {{#if this.onCooldown}}disabled{{/if}} title="{{this.name}} (Level {{this.level}}): {{this.effect}} Cooldown: {{this.cooldown}}{{#if this.description}} - {{this.description}}{{/if}}" style="width: 100%;">
+          {{this.name}} ({{this.level}}){{#if this.onCooldown}} (Used){{/if}}
+        </button>
+      </div>
+      {{/each}}
     </div>
-    {{/each}}
   </div>
   {{/if}}
 </div>
