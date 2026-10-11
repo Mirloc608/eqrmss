@@ -3,7 +3,7 @@
 
         <h3>{{localize "eqrmss.pc_sheet.skills.header"}}</h3>
 
-        {{#if skills.length}}
+        {{#if skillCatalog.length}}
         <table class="eqrmss-table skills-table">
             <thead>
                 <tr>
@@ -11,65 +11,37 @@
                     <th>{{localize "eqrmss.pc_sheet.skills.category"}}</th>
                     <th>{{localize "eqrmss.pc_sheet.skills.cost"}}</th>
                     <th>{{localize "eqrmss.pc_sheet.skills.ranks"}}</th>
-                    <th>Rank Bonus</th>
-                    <th>{{localize "eqrmss.pc_sheet.skills.total_bonus"}}</th>
                     <th>{{localize "eqrmss.pc_sheet.skills.actions"}}</th>
                 </tr>
             </thead>
 
             <tbody>
-                {{#each skills}}
-                <tr class="skill-row" data-item-id="{{id}}">
-
-                    <!-- Skill Name (click to open the skill sheet) -->
-                    <td class="skill-name">
-                        <a class="item-open" data-item-id="{{id}}"><strong>{{name}}</strong></a>
+                {{#each skillCatalog}}
+                <tr class="skill-row" data-skill-id="{{id}}">
+                    <td class="skill-name" title="{{#if description}}{{description}}{{else}}{{name}}{{/if}}">
+                        <strong>{{name}}</strong>
+                        {{#if developed}}<span style="color: green;">✓</span>{{/if}}
                     </td>
-
-                    <!-- Category -->
-                    <td class="skill-category">
-                        {{category}}
-                    </td>
-
-                    <!-- Development Cost -->
-                    <td class="skill-cost">
-                        {{cost}}
-                    </td>
-
-                    <!-- Ranks -->
-                    <td class="skill-ranks">
-                        {{ranks}}
-                    </td>
-
-                    <!-- Rank Bonus (RMSS Table 15.2.2) -->
-                    <td class="skill-rank-bonus">
-                        {{rankBonus}}
-                    </td>
-
-                    <!-- Total Bonus -->
-                    <td class="skill-total">
-                        {{totalBonus}}
-                    </td>
-
-                    <!-- Actions -->
+                    <td class="skill-category">{{category}}</td>
+                    <td class="skill-cost">{{cost}}</td>
+                    <td class="skill-ranks">{{ranks}}</td>
                     <td class="skill-actions">
-
-                        <!-- Roll Button -->
-                        <button type="button"
-                                class="skill-roll"
-                                data-item-id="{{id}}">
-                            <i class="fas fa-dice-d20"></i>
-                            {{localize "eqrmss.pc_sheet.skills.roll"}}
+                        {{#if developed}}
+                        <button type="button" class="skill-roll" data-item-id="{{itemId}}">
+                            <i class="fas fa-dice-d20"></i> Roll
                         </button>
-
+                        {{else}}
+                        <button type="button" class="skill-develop" data-skill-id="{{id}}" data-skill-name="{{name}}">
+                            Develop
+                        </button>
+                        {{/if}}
                     </td>
-
                 </tr>
                 {{/each}}
             </tbody>
         </table>
         {{else}}
-        <p>No skills developed yet.</p>
+        <p>No skills available.</p>
         {{/if}}
 
     </div>

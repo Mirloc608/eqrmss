@@ -71,6 +71,37 @@ export class EQRMSSActorSkillsHelper {
         });
 
         // ------------------------------------------------------------
+        // Develop skill (2026-10-11): create skill Item from catalog
+        // ------------------------------------------------------------
+        html.querySelectorAll(".skill-develop").forEach(btn => {
+            btn.addEventListener("click", async ev => {
+                const skillId = ev.currentTarget.dataset.skillId;
+                const skillName = ev.currentTarget.dataset.skillName;
+                if (!skillId) return;
+                
+                // Get skill data from catalog
+                const catalogSkill = globalThis.CONFIG?.EQRMSS?.skills?.[skillId];
+                if (!catalogSkill) {
+                    ui.notifications.warn(`Skill data not found: ${skillName}`);
+                    return;
+                }
+                
+                // Create skill Item on actor
+                await this.actor.createEmbeddedDocuments("Item", [{
+                    name: catalogSkill.name,
+                    type: "skill",
+                    system: {
+                        skillId: catalogSkill.id,
+                        category: catalogSkill.category ?? "",
+                        description: catalogSkill.description ?? "",
+                        ranks: 0,
+                        new_rank: 1
+                    }
+                }]);
+            });
+        });
+
+        // ------------------------------------------------------------
         // Delete skill
         // ------------------------------------------------------------
         html.querySelectorAll(".skill-delete").forEach(btn => {

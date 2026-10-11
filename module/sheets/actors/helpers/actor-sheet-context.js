@@ -263,6 +263,27 @@ export class EQRMSSActorContextHelper {
             spells: visibleSpells(items),
             songs: visibleSongs(items),
             skills: items.filter(i => i?.type === "skill"),
+            // Full skill catalog (2026-10-11): merge developed skills with available catalog
+            skillCatalog: (() => {
+                try {
+                    const catalog = Object.values(globalThis.CONFIG?.EQRMSS?.skills ?? {});
+                    const developed = new Map(items.filter(i => i?.type === "skill").map(s => [String(s.system?.skillId ?? s.name).toLowerCase(), s]));
+                    return catalog.map(skill => {
+                        const key = String(skill.id ?? skill.name).toLowerCase();
+                        const dev = developed.get(key);
+                        return {
+                            id: skill.id,
+                            name: skill.name,
+                            category: skill.category ?? "",
+                            description: skill.description ?? "",
+                            developed: !!dev,
+                            itemId: dev?.id ?? null,
+                            ranks: dev ? Number(dev.system?.ranks ?? 0) : 0,
+                            cost: skill.cost ?? "-"
+                        };
+                    }).sort((a, b) => String(a.name).localeCompare(String(b.name)));
+                } catch (e) { return []; }
+            })(),
             skillCategories: items.filter(i => i?.type === "skillcategory"),
             inventory: items.filter(i => new Set(["item", "consumable", "jewelry", "shield", "transport"]).has(i?.type)),
             languages: items.filter(i => i?.type === "language")
