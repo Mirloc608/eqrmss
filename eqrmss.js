@@ -90,7 +90,7 @@ import { initializeSkillEngine } from "./module/utils/skills/index.js";
 // ---------- Part 2: v4.14 data loader (unchanged) ----------
 console.log("EQRMSS | Initialize Data Loaders v4.14 | Starting - Wizard+Sheet+LazyGeo fix - NO TLA");
 
-let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null, SongModule = null, AAModule = null, ItemModule = null, CapstoneModule = null;
+let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null, SongModule = null, AAModule = null, ItemModule = null, CapstoneModule = null, DisciplineModule = null;
 let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null, SongLoader = null, AALoader = null, ItemLoader = null, CapstoneLoader = null;
 let modulesLoaded = false;
 
