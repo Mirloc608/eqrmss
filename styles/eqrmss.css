@@ -991,17 +991,15 @@ ol.aa-available .aa-row::marker {
   margin-right: 6px;
 }
 /* Hover cards (2026-10-12): EQResource-style rich tooltips for spells,
-   disciplines, capstones and combat abilities. Pure CSS: the card is a
-   hidden child of the hovered element, shown on hover, positioned below. */
+   disciplines, capstones and combat abilities. Pure CSS show/hide on
+   hover; JS (helpers/cardtip.js) positions the card with position:fixed
+   so it escapes the scrolling tab panels instead of being clipped. */
 .has-cardtip {
   position: relative;
 }
 .cardtip {
   display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
   z-index: 200;
   min-width: 250px;
   max-width: 330px;

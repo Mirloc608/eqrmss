@@ -10,6 +10,7 @@ import { progressionManager } from "../../progression/progression-manager.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
 import { groupSpellsByCategory, spellBaseName, spellRankNumber } from "./helpers/actor-sheet-spells.js";
+import { activateCardtips } from "./helpers/cardtip.js";
 
 export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
@@ -447,6 +448,10 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         await super._onRender(context, options);
 
         const html = this.element;
+
+        // Hover cards (2026-10-12): viewport-safe positioning for
+        // .cardtip popups so they are not clipped by tab panels.
+        activateCardtips(html);
 
         // ------------------------------------------------------------
         // Skill Roll Buttons (RMSS skill items)
