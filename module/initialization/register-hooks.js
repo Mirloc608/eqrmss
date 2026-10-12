@@ -12,7 +12,31 @@ export function registerEQRMSSHooks() {
   Hooks.on("updateCombat", (combat, changed) => {
     if (!game.user?.isGM) return;
     if (!changed || typeof changed.round !== "number") return;
-    tickConditions(combat).catch(e => console.error("EQRMSS | Condition tick failed", e));
+    (async () => {
+      // Double-tick guard (2026-10-12): tickConditions executed twice for a
+      // single round transition (two "Condition tick — round 7" cards, DoTs
+      // applied twice). No re-entrancy protection existed, so every
+      // round-based timer ran twice. Distributed mutual exclusion: claim the
+      // tick with a random token in a combat-document flag, wait for the
+      // claim to propagate, then proceed only if our claim is still the
+      // latest. Dedupes a second GM session AND a double updateCombat emit
+      // on one client. Fail-open: any guard failure runs the tick (today's
+      // behavior).
+      const token = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+      try {
+        await combat.setFlag("eqrmss", "tickGuard", { round: changed.round, at: Date.now(), token });
+      } catch (e) { /* fail-open */ }
+      await new Promise(r => setTimeout(r, 500));
+      let won = true;
+      try {
+        const live = game.combats?.get(combat.id);
+        if (!live) return; // combat deleted mid-wait; nothing to tick
+        const guard = live.getFlag("eqrmss", "tickGuard");
+        won = !!guard && guard.token === token;
+      } catch (e) { won = true; } // fail-open
+      if (!won) return;
+      await tickConditions(combat);
+    })().catch(e => console.error("EQRMSS | Condition tick failed", e));
   });
 
   // Signature abilities (Lay on Hands / Harm Touch): once per combat —
