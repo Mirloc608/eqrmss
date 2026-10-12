@@ -695,6 +695,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     let rangeMod = 0;
     let reloadPenalty = 0;
     let ammoOb = 0;
+    let quiverPenalty = 0;
     let ammoProcId = null;
     let ammoNote = "";
     if (missileAttack) {
@@ -728,6 +729,22 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
                         ammoNote += `<p><em>Ammunition: ${esc(ammoEntry.label)} (${ammoOb >= 0 ? "+" : ""}${ammoOb} OB).</em></p>`;
                     }
                 }
+                // Quiver (2026-10-12): firing ammunition other than the
+                // quivered ready stack costs -20 OB — fumbling non-ready
+                // ammo. Applies only to actors using the bandolier (flag
+                // present); everyone else keeps the old behavior. An empty
+                // quiver means every shot is non-ready.
+                try {
+                    const bnd = actor.getFlag?.("eqrmss", "bandolier");
+                    if (bnd) {
+                        const quiveredId = typeof bnd.quiver === "string" ? bnd.quiver : null;
+                        const firedId = shot.ammoItem.id ?? shot.ammoItem._id ?? null;
+                        if (firedId !== quiveredId) {
+                            quiverPenalty = -20;
+                            ammoNote += `<p><em>Ammunition not from the quiver: -20 OB.</em></p>`;
+                        }
+                    }
+                } catch (e) { /* best-effort */ }
             }
         }
     }
@@ -796,7 +813,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         const songMods = getSongModifiers(actor);
         buffOb = (spellMods?.ob || 0) + (songMods?.ob || 0);
     } catch (e) { /* ignore */ }
-    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + pointBlankPenalty + buffOb + actionPenalty + armorTierPenalty + rangeMod - reloadPenalty + ammoOb + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod + sitTotal + (pronePenalty || 0);
+    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + pointBlankPenalty + buffOb + actionPenalty + armorTierPenalty + rangeMod - reloadPenalty + ammoOb + quiverPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod + sitTotal + (pronePenalty || 0);
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -880,7 +897,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swapObNote}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${pointBlankPenalty ? ` (${pointBlankPenalty} point-blank)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${armorTierPenalty ? ` (${armorTierPenalty} armor tier: ${armorTier.armorCategory} ${armorTier.tiersAbove} above class)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${ammoOb ? ` (${ammoOb >= 0 ? "+" : ""}${ammoOb} ammunition)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${Math.round(effectivePct)}%${hastePct ? ` +${hastePct}% haste` : ""}${slowPct ? ` -${slowPct}% slow` : ""})` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
+        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swapObNote}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${pointBlankPenalty ? ` (${pointBlankPenalty} point-blank)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${armorTierPenalty ? ` (${armorTierPenalty} armor tier: ${armorTier.armorCategory} ${armorTier.tiersAbove} above class)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${ammoOb ? ` (${ammoOb >= 0 ? "+" : ""}${ammoOb} ammunition)` : ""}${quiverPenalty ? ` (${quiverPenalty} not quivered)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${Math.round(effectivePct)}%${hastePct ? ` +${hastePct}% haste` : ""}${slowPct ? ` -${slowPct}% slow` : ""})` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
         + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
