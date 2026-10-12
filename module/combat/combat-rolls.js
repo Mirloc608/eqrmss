@@ -462,10 +462,6 @@ function targetMissileParryDB(targetActor, missileAttack) {
 }
 
 export async function rollWeaponAttack(actor, weaponItem, options = {}) {
-    // TEMP TIMING INSTRUMENTATION (diagnostic only — remove after).
-    const __t0 = Date.now();
-    const __T = (label) => console.log(`EQRMSS-TIMING | ${label}: ${Date.now() - __t0}ms`);
-    __T("attack start");
     const sys = weaponItem.system ?? {};
     // Fear: a feared attacker cannot make offensive attacks — it flees.
     if (Number(actor?.system?.status?.fear?.rounds ?? 0) > 0) {
@@ -727,9 +723,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
                 ui.notifications.warn(`${actor.name} has no ${AMMO_TYPE_LABEL[ammoType] ?? "ammunition"} for ${weaponItem.name} — shot not fired.`);
                 return;
             }
-            __T("before missile dialog");
             const shot = await promptMissileShot(bands, reloadChart, weaponItem.name, ammoStacks);
-            __T("after missile dialog (think time ends)");
             if (!shot) return;
             if (reloadChart && shot.reloadPenalty == null) {
                 ui.notifications.warn(`${weaponItem.name} cannot be fired without at least 1 round of preparation (reloading, §5.2.12).`);
@@ -740,7 +734,6 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             if (shot.ammoItem) {
                 const left = Math.max(0, (Number(shot.ammoItem.system?.quantity) || 0) - 1);
                 await shot.ammoItem.update({ "system.quantity": left });
-                __T("after ammo DB write");
                 ammoNote = `<p><em>${esc(shot.ammoItem.name)} fired — ${left} remaining.</em></p>`;
                 // Ammunition construction OB (2026-10-09): fixed lookup table.
                 const ammoEntry = ammoTableEntryFor(shot.ammoItem.name);
@@ -771,7 +764,6 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             }
         }
     }
-    __T("after missile/ammo section");
 
     // ---- Strategic Targeting (§4.15.3): attackers with the skill
     // may call a shot at a body area. Prompted before the swing
@@ -781,9 +773,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     {
         const stSkill = strategicTargetingSkill(actor);
         if (stSkill != null) {
-            __T("before called-shot dialog");
             const pick = await promptCalledShot(actor, targetActor, targetName, stSkill);
-            __T("after called-shot dialog");
             if (pick == null) return;
             if (pick.areaId) {
                 calledShot = pick;
@@ -1286,7 +1276,6 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         }
         const cur = Number(targetActor.system?.hits?.value) || 0;
         await targetActor.update({ "system.hits.value": cur + totalDamage });
-        __T("after damage update");
         // Aggro (2026-10-07): record the attacker on the target's offense
         // record. Powers memblur ("remove the caster from memory").
         if (totalDamage > 0 && actor && targetActor) {
@@ -1393,7 +1382,6 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         }
     }
 
-    __T("before ChatMessage.create");
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Combat", `
@@ -1404,7 +1392,6 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             <p>${critLine}</p>
             ${appliedNote}${subdueNote}${condNote}${critCapNote}${procNote}${ammoNote}`)
     });
-    __T("after ChatMessage.create");
 
     // Pet acts after owner (2026-10-08): if the attacker has a pet
     // with attack/guard command, the pet acts now on the same turn.
