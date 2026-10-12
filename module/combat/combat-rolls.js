@@ -462,6 +462,10 @@ function targetMissileParryDB(targetActor, missileAttack) {
 }
 
 export async function rollWeaponAttack(actor, weaponItem, options = {}) {
+    // TEMP TIMING INSTRUMENTATION (diagnostic only — remove after).
+    const __t0 = Date.now();
+    const __T = (label) => console.log(`EQRMSS-TIMING | ${label}: ${Date.now() - __t0}ms`);
+    __T("attack start");
     const sys = weaponItem.system ?? {};
     // Fear: a feared attacker cannot make offensive attacks — it flees.
     if (Number(actor?.system?.status?.fear?.rounds ?? 0) > 0) {
@@ -764,6 +768,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             }
         }
     }
+    __T("after missile/ammo section");
 
     // ---- Strategic Targeting (§4.15.3): attackers with the skill
     // may call a shot at a body area. Prompted before the swing
@@ -1276,6 +1281,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         }
         const cur = Number(targetActor.system?.hits?.value) || 0;
         await targetActor.update({ "system.hits.value": cur + totalDamage });
+        __T("after damage update");
         // Aggro (2026-10-07): record the attacker on the target's offense
         // record. Powers memblur ("remove the caster from memory").
         if (totalDamage > 0 && actor && targetActor) {
@@ -1382,6 +1388,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         }
     }
 
+    __T("before ChatMessage.create");
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: combatCard("Combat", `
@@ -1392,6 +1399,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             <p>${critLine}</p>
             ${appliedNote}${subdueNote}${condNote}${critCapNote}${procNote}${ammoNote}`)
     });
+    __T("after ChatMessage.create");
 
     // Pet acts after owner (2026-10-08): if the attacker has a pet
     // with attack/guard command, the pet acts now on the same turn.
