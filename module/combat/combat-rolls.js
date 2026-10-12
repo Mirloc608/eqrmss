@@ -554,14 +554,17 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     const missileAttack = isMissileAttack(weaponType);
     // Attack speed variance (§4.11): OB percentage by prep time, melee only.
     const attackSpeed = missileAttack ? null : actorAttackSpeed(actor);
-    // Haste (2026-10-07): adds half its value to attack speed OB%
+    // Haste/Slow (2026-10-07): haste adds half its value to attack speed OB%,
+    // slow subtracts half its value.
     let hastePct = 0;
+    let slowPct = 0;
     try {
         const spellMods = getSpellModifiers(actor);
         const songMods = getSongModifiers(actor);
         hastePct = (spellMods?.haste || 0) + (songMods?.haste || 0);
+        slowPct = (spellMods?.slow || 0) + (songMods?.slow || 0);
     } catch (e) { /* ignore */ }
-    const effectivePct = attackSpeed ? hasteAdjustedPct(attackSpeed.pct, hastePct) : 100;
+    const effectivePct = attackSpeed ? hasteAdjustedPct(attackSpeed.pct, hastePct, slowPct) : 100;
     // Bandolier (2026-10-12): swapping weapons costs 50% activity
     // (Arms Law "changing weapons"). This engine has no % activity
     // tracker, so the 50% applies directly: attacks made after a swap
