@@ -137,23 +137,38 @@ export function spellCategory(item) {
 
 function spellRow(item) {
   const s = item?.system ?? {};
+  const castTime = s.castTime ?? "";
+  const range = s.range ?? "";
   return {
     id: item?.id ?? item?._id ?? "",
     name: item?.name ?? "",
     class: s.class ?? "",
     level: s.level ?? 0,
     manaCost: s.manaCost ?? 0,
-    castTime: s.castTime ?? "",
+    castTime,
+    castTimeDisplay: castTime === 0 || castTime === "0" ? "Instant" : (castTime === "" ? "—" : `${castTime}s`),
     spellList: s.spell_list ?? "",
     type: s.type ?? "",
     school: s.school ?? "",
     target: s.target ?? "",
-    range: s.range ?? "",
+    range,
+    rangeDisplay: range === 0 || range === "0" ? "self" : (range === "" ? "—" : range),
     duration: s.duration ?? "",
     effects: Array.isArray(s.effects) ? s.effects : [],
     description: s.description ?? "",
     isReady: !!item?.isReady
   };
+}
+
+/**
+ * Show/hide spell cards by name substring. Pure DOM filtering — no
+ * re-render, so the search input keeps focus while typing.
+ */
+function applySpellFilter(html, q) {
+  html.querySelectorAll(".spell-card").forEach(card => {
+    const name = (card.dataset.spellName || "").toLowerCase();
+    card.style.display = (!q || name.includes(q)) ? "" : "none";
+  });
 }
 
 /**
@@ -242,6 +257,8 @@ export class EQRMSSActorSpellsHelper {
     this.expandedGroups = new Set();
     // Collapsed category sections (categories default to expanded).
     this.collapsedCategories = new Set();
+    // Spell-card search filter text; preserved across re-renders.
+    this.spellFilter = "";
   }
 
   prepare(context) {
@@ -258,6 +275,19 @@ export class EQRMSSActorSpellsHelper {
   activate() {
     const html = this.sheet.element;
     if (!html) return;
+
+    // Spell-card search filter (2026-10-12): live name filter, no re-render.
+    const searchInput = html.querySelector(".spell-search");
+    if (searchInput) {
+      if (this.spellFilter) {
+        searchInput.value = this.spellFilter;
+        applySpellFilter(html, this.spellFilter);
+      }
+      searchInput.addEventListener("input", ev => {
+        this.spellFilter = ev.target.value.trim().toLowerCase();
+        applySpellFilter(html, this.spellFilter);
+      });
+    }
 
     // Spell-category expand/collapse
     html.querySelectorAll(".spell-category-toggle").forEach(el => {

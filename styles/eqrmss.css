@@ -1051,6 +1051,162 @@ ol.aa-available .aa-row::marker {
   color: #c9c9c9;
   font-style: italic;
 }
+/* Spell cards (2026-10-12): D&D Beyond-style card list for the Spells tab.
+   Replaces the dense spell table; one card per spell line. */
+.spell-list-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.spell-search {
+  background: #141414;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  color: #d8d8d8;
+  padding: 6px 10px;
+  font-size: 13px;
+  min-width: 180px;
+}
+.spell-search::placeholder {
+  color: #6a6a6a;
+}
+div.spell-category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #101010;
+  border: 1px solid #2c2c2c;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 14px 0 10px;
+}
+div.spell-category-header strong {
+  color: #ffd766;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+.spell-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.spell-card {
+  background: #242424;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.spell-card:hover {
+  border-color: #8a6d2f;
+}
+.spell-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.lvl-badge {
+  background: #2a2a2a;
+  border: 1px solid #8a6d2f;
+  color: #ffd766;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 20px;
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+.spell-card .spell-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.spell-card .spell-name:hover {
+  color: #ffd766;
+}
+button.rank-badge {
+  background: none;
+  font-size: 11px;
+  color: #9c9c9c;
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  padding: 1px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+button.rank-badge:hover {
+  color: #ffd766;
+  border-color: #8a6d2f;
+}
+.head-spacer {
+  flex: 1;
+}
+.spell-card .toggle-ready {
+  text-decoration: none;
+}
+.spell-card .cast-spell {
+  background: #2a2a2a;
+  border: 1px solid #8a6d2f;
+  color: #ffd766;
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+.spell-card .cast-spell:hover {
+  background: #3a2f14;
+}
+.spell-meta {
+  color: #9c9c9c;
+  font-size: 12.5px;
+  margin: 4px 0 8px;
+  text-transform: capitalize;
+}
+.spell-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+}
+.spell-chips .chip {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 13px;
+}
+.spell-chips .chip-k {
+  color: #9c9c9c;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.spell-chips .chip-v {
+  color: #e8e8e8;
+}
+.rank-rows {
+  margin-top: 10px;
+  border-top: 1px solid #333;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.rank-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  padding: 4px 0 4px 8px;
+  border-left: 2px solid #8a6d2f;
+}
+.rank-row .spell-name {
+  font-size: 14px;
+}
+.rank-tag {
+  color: #9c9c9c;
+  font-size: 12px;
+}
 /* Uniform tab buttons (2026-10-11): disciplines + capstones share size/structure.
    Every button fills its grid cell, label vertically centered. */
 .discipline-entry,

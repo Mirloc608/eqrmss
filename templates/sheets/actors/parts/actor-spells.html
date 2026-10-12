@@ -6,87 +6,86 @@
     <div class="spell-list-head">
       <h4>Spells{{#if actor.system.derived.manaMax}} <span class="mana-pool">(Mana {{actor.system.attributes.mana.value}} / {{actor.system.derived.manaMax}})</span>{{/if}}</h4>
       <div class="spell-list-controls">
+        <input type="search" class="spell-search" placeholder="Search spells…" title="Filter spell cards by name">
         <button type="button" class="spell-expand-all">Expand all</button>
         <button type="button" class="spell-collapse-all">Collapse all</button>
       </div>
     </div>
-    <table class="rmss-table spell-groups">
-      <thead><tr><th class="col-toggle"></th><th></th><th>Ready</th><th>Name</th><th>Spell List</th><th>Level</th><th>Mana</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
-      <tbody>
-        {{#each spellCategories}}
-          <tr class="spell-category-header" data-category="{{name}}">
-            <td><button type="button" class="spell-category-toggle" data-category="{{name}}" title="{{#if expanded}}Collapse{{else}}Expand{{/if}} {{name}}">{{#if expanded}}▾{{else}}▸{{/if}}</button></td>
-            <td colspan="9">
-              <strong>{{name}}</strong>
-              <span class="category-badge">{{lineCount}} lines</span>
-            </td>
-          </tr>
+    {{#each spellCategories}}
+    <div class="spell-category">
+      <div class="spell-category-header{{#unless expanded}} collapsed{{/unless}}" data-category="{{name}}">
+        <button type="button" class="spell-category-toggle" data-category="{{name}}" title="{{#if expanded}}Collapse{{else}}Expand{{/if}} {{name}}">{{#if expanded}}▾{{else}}▸{{/if}}</button>
+        <strong>{{name}}</strong>
+        <span class="category-badge">{{lineCount}} lines</span>
+      </div>
+      {{#if expanded}}
+      <div class="spell-cards">
+        {{#each groups}}
+        <article class="spell-card" data-spell-name="{{name}}">
+          <div class="spell-card-head">
+            <span class="lvl-badge">Lv {{highest.level}}</span>
+            <a class="item-open spell-name has-cardtip" data-item-id="{{highestId}}">{{name}}
+              <span class="cardtip">
+                <span class="ct-head"><span>{{name}}</span><span>{{highest.class}} · Lv {{highest.level}}</span></span>
+                <span class="ct-row"><span class="ct-k">Mana</span><span>{{highest.manaCost}}</span></span>
+                <span class="ct-row"><span class="ct-k">Cast</span><span>{{highest.castTimeDisplay}}</span></span>
+                <span class="ct-row"><span class="ct-k">Range</span><span>{{highest.rangeDisplay}}</span></span>
+                {{#if highest.target}}<span class="ct-row"><span class="ct-k">Target</span><span>{{highest.target}}</span></span>{{/if}}
+                <span class="ct-row"><span class="ct-k">Type</span><span>{{highest.type}}{{#if highest.school}} · {{highest.school}}{{/if}}</span></span>
+                {{#if highest.effects.length}}
+                <span class="ct-sec">Effects</span>
+                {{#each highest.effects}}<span class="ct-row"><span>{{this.type}}</span><span>{{this.amount}}</span></span>{{/each}}
+                {{/if}}
+                {{#if highest.description}}<span class="ct-desc">{{highest.description}}</span>{{/if}}
+              </span>
+            </a>
+            {{#if multi}}<button type="button" class="rank-badge spell-group-toggle spell-group-header" data-group="{{name}}" title="{{#if expanded}}Collapse{{else}}Expand{{/if}} ranks">{{count}} ranks {{#if expanded}}▾{{else}}▸{{/if}}</button>{{/if}}
+            <span class="head-spacer"></span>
+            <a class="toggle-ready" data-item-id="{{highestId}}" title="{{#if highest.isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if highest.isReady}}⭐{{else}}☆{{/if}}</a>
+            <button type="button" class="cast-spell" data-item-id="{{highestId}}" title="Cast {{name}} (highest known rank; EQ mana cost; RMSS resolution)">Cast</button>
+          </div>
+          <div class="spell-meta">{{highest.spellList}}{{#if highest.school}} · {{highest.school}}{{/if}}{{#if highest.class}} · {{highest.class}}{{/if}}</div>
+          <div class="spell-chips">
+            <div class="chip"><span class="chip-k">Mana</span><span class="chip-v">{{highest.manaCost}}</span></div>
+            <div class="chip"><span class="chip-k">Cast</span><span class="chip-v">{{highest.castTimeDisplay}}</span></div>
+            <div class="chip"><span class="chip-k">Range</span><span class="chip-v">{{highest.rangeDisplay}}</span></div>
+            {{#if highest.target}}<div class="chip"><span class="chip-k">Target</span><span class="chip-v">{{highest.target}}</span></div>{{/if}}
+            {{#if highest.duration}}<div class="chip"><span class="chip-k">Duration</span><span class="chip-v">{{highest.duration}}</span></div>{{/if}}
+            <div class="chip"><span class="chip-k">Type</span><span class="chip-v">{{highest.type}}</span></div>
+          </div>
           {{#if expanded}}
-            {{#each groups}}
-              <tr class="spell-group-header" data-group="{{name}}" data-item-id="{{highestId}}">
-                <td>{{#if multi}}<button type="button" class="spell-group-toggle" data-group="{{name}}" title="{{#if expanded}}Collapse{{else}}Expand{{/if}} ranks">{{#if expanded}}▾{{else}}▸{{/if}}</button>{{/if}}</td>
-                <td><button class="cast-spell" data-item-id="{{highestId}}" title="Cast {{name}} (highest known rank; EQ mana cost; RMSS resolution)">Cast</button></td>
-                <td style="text-align: center;"><a class="toggle-ready" data-item-id="{{highestId}}" title="{{#if highest.isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if highest.isReady}}⭐{{else}}☆{{/if}}</a></td>
-                <td>
-                  <a class="item-open has-cardtip" data-item-id="{{highestId}}"><strong>{{name}}</strong>
-                    <span class="cardtip">
-                      <span class="ct-head"><span>{{name}}</span><span>{{highest.class}} · Lv {{highest.level}}</span></span>
-                      <span class="ct-row"><span class="ct-k">Mana</span><span>{{highest.manaCost}}</span></span>
-                      {{#if highest.castTime}}<span class="ct-row"><span class="ct-k">Cast</span><span>{{highest.castTime}}s</span></span>{{/if}}
-                      <span class="ct-row"><span class="ct-k">Range</span><span>{{highest.range}}</span></span>
-                      {{#if highest.target}}<span class="ct-row"><span class="ct-k">Target</span><span>{{highest.target}}</span></span>{{/if}}
-                      <span class="ct-row"><span class="ct-k">Type</span><span>{{highest.type}}{{#if highest.school}} · {{highest.school}}{{/if}}</span></span>
-                      {{#if highest.effects.length}}
-                      <span class="ct-sec">Effects</span>
-                      {{#each highest.effects}}<span class="ct-row"><span>{{this.type}}</span><span>{{this.amount}}</span></span>{{/each}}
-                      {{/if}}
-                      {{#if highest.description}}<span class="ct-desc">{{highest.description}}</span>{{/if}}
-                    </span>
-                  </a>
-                  {{#if multi}}<span class="rank-badge">{{count}} ranks</span>{{/if}}
-                </td>
-                <td>{{highest.spellList}}</td>
-                <td>{{highest.level}}</td>
-                <td>{{highest.manaCost}}</td>
-                <td>{{highest.type}}</td>
-                <td>{{highest.range}}</td>
-                <td>{{highest.duration}}</td>
-              </tr>
-              {{#if multi}}
-                {{#each ranks}}
-                <tr class="spell-group-rank{{#unless ../expanded}} is-hidden{{/unless}}" data-item-id="{{id}}">
-                  <td></td>
-                  <td><button class="cast-spell" data-item-id="{{id}}" title="Cast {{name}} (Rk. {{rankRoman}}; EQ mana cost; RMSS resolution)">Cast</button></td>
-                  <td style="text-align: center;"><a class="toggle-ready" data-item-id="{{id}}" title="{{#if isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if isReady}}⭐{{else}}☆{{/if}}</a></td>
-                  <td class="spell-rank-cell"><a class="item-open has-cardtip" data-item-id="{{id}}">{{name}} <span class="rank-tag">Rk. {{rankRoman}}</span>
-                    <span class="cardtip">
-                      <span class="ct-head"><span>{{name}}</span><span>{{class}} · Lv {{level}}</span></span>
-                      <span class="ct-row"><span class="ct-k">Mana</span><span>{{manaCost}}</span></span>
-                      {{#if castTime}}<span class="ct-row"><span class="ct-k">Cast</span><span>{{castTime}}s</span></span>{{/if}}
-                      <span class="ct-row"><span class="ct-k">Range</span><span>{{range}}</span></span>
-                      {{#if target}}<span class="ct-row"><span class="ct-k">Target</span><span>{{target}}</span></span>{{/if}}
-                      <span class="ct-row"><span class="ct-k">Type</span><span>{{type}}{{#if school}} · {{school}}{{/if}}</span></span>
-                      {{#if effects.length}}
-                      <span class="ct-sec">Effects</span>
-                      {{#each effects}}<span class="ct-row"><span>{{this.type}}</span><span>{{this.amount}}</span></span>{{/each}}
-                      {{/if}}
-                      {{#if description}}<span class="ct-desc">{{description}}</span>{{/if}}
-                    </span>
-                  </a></td>
-                  <td>{{spellList}}</td>
-                  <td>{{level}}</td>
-                  <td>{{manaCost}}</td>
-                  <td>{{type}}</td>
-                  <td>{{range}}</td>
-                  <td>{{duration}}</td>
-                </tr>
-                {{/each}}
-              {{/if}}
+          <div class="rank-rows">
+            {{#each ranks}}
+            <div class="rank-row">
+              <a class="item-open spell-name has-cardtip" data-item-id="{{id}}">{{name}} <span class="rank-tag">Rk. {{rankRoman}}</span>
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{name}}</span><span>{{class}} · Lv {{level}}</span></span>
+                  <span class="ct-row"><span class="ct-k">Mana</span><span>{{manaCost}}</span></span>
+                  <span class="ct-row"><span class="ct-k">Cast</span><span>{{castTimeDisplay}}</span></span>
+                  <span class="ct-row"><span class="ct-k">Range</span><span>{{rangeDisplay}}</span></span>
+                  {{#if target}}<span class="ct-row"><span class="ct-k">Target</span><span>{{target}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Type</span><span>{{type}}{{#if school}} · {{school}}{{/if}}</span></span>
+                  {{#if effects.length}}
+                  <span class="ct-sec">Effects</span>
+                  {{#each effects}}<span class="ct-row"><span>{{this.type}}</span><span>{{this.amount}}</span></span>{{/each}}
+                  {{/if}}
+                  {{#if description}}<span class="ct-desc">{{description}}</span>{{/if}}
+                </span>
+              </a>
+              <span class="rank-tag">Lv {{level}} · {{manaCost}} mana</span>
+              <span class="head-spacer"></span>
+              <a class="toggle-ready" data-item-id="{{id}}" title="{{#if isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if isReady}}⭐{{else}}☆{{/if}}</a>
+              <button type="button" class="cast-spell" data-item-id="{{id}}" title="Cast {{name}} (Rk. {{rankRoman}}; EQ mana cost; RMSS resolution)">Cast</button>
+            </div>
             {{/each}}
+          </div>
           {{/if}}
+        </article>
         {{/each}}
-      </tbody>
-    </table>
+      </div>
+      {{/if}}
+    </div>
+    {{/each}}
   </div>
 
 </div>
