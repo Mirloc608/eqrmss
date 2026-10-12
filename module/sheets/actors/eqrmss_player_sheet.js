@@ -535,14 +535,30 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }));
 
         html.querySelectorAll(".cast-spell").forEach(el => el.addEventListener("click", async ev => {
-            const item = this.actor.items.get(ev.currentTarget.dataset.itemId);
+            const btn = ev.currentTarget;
+            const spellId = btn.dataset.itemId;
+            // Guard against double-declaration while the backend is slow:
+            // the button disables immediately, and a pending-set on the
+            // sheet survives re-renders (which replace the button node).
+            if (this._pendingCasts?.has(spellId)) return;
+            const item = this.actor.items.get(spellId);
             if (!item) return;
+            (this._pendingCasts ??= new Set()).add(spellId);
+            btn.disabled = true;
+            const origText = btn.textContent;
+            btn.textContent = "Casting...";
             try {
                 const { castSpell } = await import("../../spells/cast-spell.js");
                 await castSpell(this.actor, item);
             } catch (e) {
                 console.error("EQRMSS | Cast spell failed", e);
                 ui.notifications.error(`Cast failed: ${e.message}`);
+            } finally {
+                this._pendingCasts?.delete(spellId);
+                if (btn.isConnected) {
+                    btn.disabled = false;
+                    btn.textContent = origText;
+                }
             }
         }));
 
