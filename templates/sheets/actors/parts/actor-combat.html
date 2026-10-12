@@ -127,6 +127,16 @@
         {{/each}}
       </tbody>
     </table>
+    <div class="quiver-row">
+      <strong>Quiver</strong>
+      {{#if bandolier.canConfigure}}
+        <select class="quiver-select" title="Ready missile ammunition (out of combat only)">
+          {{#each bandolier.quiver.options}}<option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.name}}{{#if this.quantity}} × {{this.quantity}}{{/if}}</option>{{/each}}
+        </select>
+      {{else}}
+        <span>{{bandolier.quiver.itemName}}{{#if bandolier.quiver.quantity}} × {{bandolier.quiver.quantity}}{{/if}}</span>
+      {{/if}}
+    </div>
     {{#unless bandolier.canConfigure}}
       <p class="bandolier-note"><em>Bandolier configuration is locked while in combat. Swaps cost 50% activity.</em></p>
     {{/unless}}

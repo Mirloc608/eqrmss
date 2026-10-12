@@ -7,7 +7,8 @@
 import {
     swapBandolierSet,
     setBandolierSlot,
-    renameBandolierSet
+    renameBandolierSet,
+    setQuiver
 } from "../../../combat/bandolier.js";
 
 export class EQRMSSActorBandolierHelper {
@@ -41,6 +42,15 @@ export class EQRMSSActorBandolierHelper {
             el.addEventListener("change", async (ev) => {
                 ev.preventDefault();
                 const result = await renameBandolierSet(actor, el.dataset.setIndex, el.value);
+                if (!result.ok) ui.notifications?.warn(result.message);
+                this.sheet.render(false);
+            });
+        });
+
+        html.querySelectorAll(".quiver-select").forEach(el => {
+            el.addEventListener("change", async (ev) => {
+                ev.preventDefault();
+                const result = await setQuiver(actor, el.value || null);
                 if (!result.ok) ui.notifications?.warn(result.message);
                 this.sheet.render(false);
             });

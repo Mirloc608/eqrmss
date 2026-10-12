@@ -78,6 +78,16 @@ function ownedWeaponIds(actor) {
     );
 }
 
+/** Item ids of ammunition (any item with system.ammoType set). */
+function ownedAmmoIds(actor) {
+    return new Set(
+        [...(actor?.items?.contents ?? [])]
+            .filter(i => i?.system?.ammoType)
+            .map(i => i.id)
+            .filter(Boolean)
+    );
+}
+
 /**
  * Normalized bandolier state. Pure: prunes references to deleted
  * items and clamps `current`, but never persists.
@@ -93,7 +103,12 @@ export function getBandolier(actor) {
     });
     let current = Number(raw?.current);
     if (!Number.isInteger(current) || current < 0 || current >= sets.length) current = 0;
-    return { current, sets, swappedThisRound: !!raw?.swappedThisRound };
+    // Quiver: the designated ready ammunition stack (pruned if deleted).
+    const ammoIds = ownedAmmoIds(actor);
+    const quiver = (typeof raw?.quiver === "string" && raw.quiver.length && ammoIds.has(raw.quiver))
+        ? raw.quiver
+        : null;
+    return { current, sets, quiver, swappedThisRound: !!raw?.swappedThisRound };
 }
 
 /**
@@ -109,7 +124,10 @@ export async function ensureBandolier(actor) {
     const sets = DEFAULT_SET_NAMES.map(blankSet);
     if (worn[0]?.id) sets[0].left = worn[0].id;
     if (worn[1]?.id) sets[0].right = worn[1].id;
-    const fresh = { current: 0, sets, swappedThisRound: false };
+    // Seed the quiver from the first worn ammunition stack with shots left.
+    const wornAmmo = [...(actor?.items?.contents ?? [])].find(i =>
+        i?.system?.ammoType && isWorn(i) && (Number(i.system?.quantity) || 0) > 0);
+    const fresh = { current: 0, sets, quiver: wornAmmo?.id ?? null, swappedThisRound: false };
     try {
         await actor.setFlag(FLAG_SCOPE, FLAG_KEY, fresh);
     } catch (e) { /* best-effort */ }
@@ -262,6 +280,40 @@ export async function renameBandolierSet(actor, setIndex, name) {
 }
 
 /**
+ * Designate the quiver's ready ammunition stack. Assigning a stack
+ * equips it (the missile attack flow only offers equipped ammunition);
+ * replacing or clearing the quiver stows the previously quivered
+ * stack. Out of combat only, like the weapon-set configuration.
+ */
+export async function setQuiver(actor, itemId) {
+    if (!actor) return { ok: false, message: "No actor." };
+    if (isActorInCombat(actor)) {
+        return { ok: false, message: "Cannot reconfigure the quiver in combat." };
+    }
+    const b = await ensureBandolier(actor);
+    const id = (typeof itemId === "string" && itemId.length) ? itemId : null;
+    if (id === b.quiver) return { ok: true };
+    if (id) {
+        const item = actor.items?.get(id);
+        if (!item || !item.system?.ammoType) return { ok: false, message: "That is not ammunition." };
+        if ((Number(item.system?.quantity) || 0) <= 0) {
+            return { ok: false, message: `${item.name} has no shots left.` };
+        }
+    }
+    const locUpdates = new Map();
+    if (b.quiver && b.quiver !== id) locUpdates.set(b.quiver, "pack");
+    if (id) locUpdates.set(id, "equipped");
+    try {
+        const updates = [...locUpdates].map(([_id, loc]) => ({ _id, "system.location": loc }));
+        if (updates.length) await actor.updateEmbeddedDocuments("Item", updates);
+        await actor.setFlag(FLAG_SCOPE, FLAG_KEY, { ...b, quiver: id });
+    } catch (e) {
+        return { ok: false, message: "Quiver update failed." };
+    }
+    return { ok: true };
+}
+
+/**
  * Template context for the Bandolier panel. Pure builder — the caller
  * awaits ensureBandolier first (context prepare); this never writes.
  */
@@ -273,6 +325,27 @@ export function buildBandolierContext(actor) {
         .map(i => ({ id: i.id, name: i.name ?? "Unnamed weapon" }));
     const inCombat = isActorInCombat(actor);
     const canConfigure = !inCombat;
+    // Quiver: the designated ready ammunition stack.
+    const ammo = [...(actor?.items?.contents ?? [])]
+        .filter(i => i?.system?.ammoType)
+        .map(i => ({
+            id: i.id,
+            name: i.name ?? "Ammunition",
+            ammoType: i.system.ammoType,
+            quantity: Number(i.system?.quantity) || 0
+        }));
+    const qitem = b.quiver ? ammo.find(a => a.id === b.quiver) : null;
+    const quiver = {
+        itemId: b.quiver ?? "",
+        itemName: qitem ? qitem.name : "— empty —",
+        quantity: qitem ? qitem.quantity : 0,
+        options: [
+            { id: "", name: "— empty —", quantity: 0, selected: !b.quiver },
+            ...ammo
+                .filter(a => a.quantity > 0 || a.id === b.quiver)
+                .map(a => ({ ...a, selected: a.id === b.quiver }))
+        ]
+    };
     const slot = (setIdx, side, itemId) => {
         const unlocked = unlocks[setIdx][side];
         const item = itemId ? weapons.find(w => w.id === itemId) : null;
@@ -293,6 +366,7 @@ export function buildBandolierContext(actor) {
         canConfigure,
         swappedThisRound: b.swappedThisRound,
         battleReadyRank: battleReadyRank(actor),
+        quiver,
         sets: b.sets.map((s, i) => ({
             index: i,
             name: s.name,
