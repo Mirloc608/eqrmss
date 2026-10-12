@@ -6,8 +6,12 @@
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 8px; align-items: stretch;">
     {{#each disciplines}}
     <div class="discipline-entry">
-      <button type="button" data-action="activateDiscipline" data-discipline-id="{{this.id}}" title="{{this.name}} (Level {{this.level}}){{#if this.description}} - {{this.description}}{{/if}}" style="width: 100%;">
+      <button type="button" data-action="activateDiscipline" data-discipline-id="{{this.id}}" style="width: 100%;" class="has-cardtip">
         {{#if this.icon}}<img src="{{this.icon}}" alt="" class="discipline-icon" />{{/if}}{{this.name}} ({{this.level}})
+        <span class="cardtip">
+          <span class="ct-head"><span>{{this.name}}</span><span>Level {{this.level}}</span></span>
+          {{#if this.description}}<span class="ct-desc">{{this.description}}</span>{{/if}}
+        </span>
       </button>
     </div>
     {{/each}}
@@ -22,8 +26,14 @@
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 8px; align-items: stretch;">
       {{#each capstones}}
       <div class="capstone-entry">
-        <button type="button" data-action="activateCapstone" data-capstone-id="{{this.id}}" {{#if this.onCooldown}}disabled{{/if}} title="{{this.name}} (Level {{this.level}}): {{this.effect}} Cooldown: {{this.cooldown}}{{#if this.description}} - {{this.description}}{{/if}}" style="width: 100%;">
+        <button type="button" data-action="activateCapstone" data-capstone-id="{{this.id}}" {{#if this.onCooldown}}disabled{{/if}} style="width: 100%;" class="has-cardtip">
           {{#if this.icon}}<img src="{{this.icon}}" alt="" class="capstone-icon" />{{/if}}{{this.name}} ({{this.level}}){{#if this.onCooldown}} (Used){{/if}}
+          <span class="cardtip">
+            <span class="ct-head"><span>{{this.name}}</span><span>Level {{this.level}}</span></span>
+            {{#if this.effect}}<span class="ct-row"><span class="ct-k">Effect</span><span>{{this.effect}}</span></span>{{/if}}
+            {{#if this.cooldown}}<span class="ct-row"><span class="ct-k">Cooldown</span><span>{{this.cooldown}}</span></span>{{/if}}
+            {{#if this.description}}<span class="ct-desc">{{this.description}}</span>{{/if}}
+          </span>
         </button>
       </div>
       {{/each}}

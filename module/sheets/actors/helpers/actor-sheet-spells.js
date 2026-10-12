@@ -140,12 +140,18 @@ function spellRow(item) {
   return {
     id: item?.id ?? item?._id ?? "",
     name: item?.name ?? "",
+    class: s.class ?? "",
     level: s.level ?? 0,
     manaCost: s.manaCost ?? 0,
+    castTime: s.castTime ?? "",
     spellList: s.spell_list ?? "",
     type: s.type ?? "",
+    school: s.school ?? "",
+    target: s.target ?? "",
     range: s.range ?? "",
     duration: s.duration ?? "",
+    effects: Array.isArray(s.effects) ? s.effects : [],
+    description: s.description ?? "",
     isReady: !!item?.isReady
   };
 }

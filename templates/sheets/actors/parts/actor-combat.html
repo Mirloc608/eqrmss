@@ -38,8 +38,12 @@
       {{#each abilities}}
       {{#unless this.isPassive}}
       <div>
-        <button type="button" data-action="activateAbility" data-ability-id="{{this.id}}" title="{{this.name}}{{#if this.description}}: {{this.description}}{{/if}}" style="width: 100%;">
+        <button type="button" data-action="activateAbility" data-ability-id="{{this.id}}" style="width: 100%;" class="has-cardtip">
           {{this.name}}
+          <span class="cardtip">
+            <span class="ct-head"><span>{{this.name}}</span></span>
+            {{#if this.description}}<span class="ct-desc">{{this.description}}</span>{{/if}}
+          </span>
         </button>
       </div>
       {{/unless}}
@@ -79,7 +83,21 @@
         {{#each readiedSpells}}
           <tr data-item-id="{{this._id}}">
             <td><button class="cast-spell" data-item-id="{{this._id}}" title="Cast spell (EQ mana cost; RMSS resolution)">Cast</button></td>
-            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+            <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+              <span class="cardtip">
+                <span class="ct-head"><span>{{this.name}}</span><span>{{this.system.class}} · Lv {{this.system.level}}</span></span>
+                <span class="ct-row"><span class="ct-k">Mana</span><span>{{this.system.manaCost}}</span></span>
+                {{#if this.system.castTime}}<span class="ct-row"><span class="ct-k">Cast</span><span>{{this.system.castTime}}s</span></span>{{/if}}
+                <span class="ct-row"><span class="ct-k">Range</span><span>{{this.system.range}}</span></span>
+                {{#if this.system.target}}<span class="ct-row"><span class="ct-k">Target</span><span>{{this.system.target}}</span></span>{{/if}}
+                <span class="ct-row"><span class="ct-k">Type</span><span>{{this.system.type}}{{#if this.system.school}} · {{this.system.school}}{{/if}}</span></span>
+                {{#if this.system.effects.length}}
+                <span class="ct-sec">Effects</span>
+                {{#each this.system.effects}}<span class="ct-row"><span>{{this.type}}</span><span>{{this.amount}}</span></span>{{/each}}
+                {{/if}}
+                {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+              </span>
+            </a></td>
             <td>{{this.rankDisplay}}</td>
             <td>{{this.system.spell_list}}</td>
             <td>{{this.system.level}}</td>

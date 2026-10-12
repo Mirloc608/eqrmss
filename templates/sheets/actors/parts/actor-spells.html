@@ -28,7 +28,21 @@
                 <td><button class="cast-spell" data-item-id="{{highestId}}" title="Cast {{name}} (highest known rank; EQ mana cost; RMSS resolution)">Cast</button></td>
                 <td style="text-align: center;"><a class="toggle-ready" data-item-id="{{highestId}}" title="{{#if highest.isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if highest.isReady}}⭐{{else}}☆{{/if}}</a></td>
                 <td>
-                  <a class="item-open" data-item-id="{{highestId}}"><strong>{{name}}</strong></a>
+                  <a class="item-open has-cardtip" data-item-id="{{highestId}}"><strong>{{name}}</strong>
+                    <span class="cardtip">
+                      <span class="ct-head"><span>{{name}}</span><span>{{highest.class}} · Lv {{highest.level}}</span></span>
+                      <span class="ct-row"><span class="ct-k">Mana</span><span>{{highest.manaCost}}</span></span>
+                      {{#if highest.castTime}}<span class="ct-row"><span class="ct-k">Cast</span><span>{{highest.castTime}}s</span></span>{{/if}}
+                      <span class="ct-row"><span class="ct-k">Range</span><span>{{highest.range}}</span></span>
+                      {{#if highest.target}}<span class="ct-row"><span class="ct-k">Target</span><span>{{highest.target}}</span></span>{{/if}}
+                      <span class="ct-row"><span class="ct-k">Type</span><span>{{highest.type}}{{#if highest.school}} · {{highest.school}}{{/if}}</span></span>
+                      {{#if highest.effects.length}}
+                      <span class="ct-sec">Effects</span>
+                      {{#each highest.effects}}<span class="ct-row"><span>{{this.type}}</span><span>{{this.amount}}</span></span>{{/each}}
+                      {{/if}}
+                      {{#if highest.description}}<span class="ct-desc">{{highest.description}}</span>{{/if}}
+                    </span>
+                  </a>
                   {{#if multi}}<span class="rank-badge">{{count}} ranks</span>{{/if}}
                 </td>
                 <td>{{highest.spellList}}</td>
@@ -44,7 +58,21 @@
                   <td></td>
                   <td><button class="cast-spell" data-item-id="{{id}}" title="Cast {{name}} (Rk. {{rankRoman}}; EQ mana cost; RMSS resolution)">Cast</button></td>
                   <td style="text-align: center;"><a class="toggle-ready" data-item-id="{{id}}" title="{{#if isReady}}Click to remove from ready spells{{else}}Click to mark as ready (no prep ESF penalty){{/if}}" style="font-size: 1.2em; cursor: pointer;">{{#if isReady}}⭐{{else}}☆{{/if}}</a></td>
-                  <td class="spell-rank-cell"><a class="item-open" data-item-id="{{id}}">{{name}} <span class="rank-tag">Rk. {{rankRoman}}</span></a></td>
+                  <td class="spell-rank-cell"><a class="item-open has-cardtip" data-item-id="{{id}}">{{name}} <span class="rank-tag">Rk. {{rankRoman}}</span>
+                    <span class="cardtip">
+                      <span class="ct-head"><span>{{name}}</span><span>{{class}} · Lv {{level}}</span></span>
+                      <span class="ct-row"><span class="ct-k">Mana</span><span>{{manaCost}}</span></span>
+                      {{#if castTime}}<span class="ct-row"><span class="ct-k">Cast</span><span>{{castTime}}s</span></span>{{/if}}
+                      <span class="ct-row"><span class="ct-k">Range</span><span>{{range}}</span></span>
+                      {{#if target}}<span class="ct-row"><span class="ct-k">Target</span><span>{{target}}</span></span>{{/if}}
+                      <span class="ct-row"><span class="ct-k">Type</span><span>{{type}}{{#if school}} · {{school}}{{/if}}</span></span>
+                      {{#if effects.length}}
+                      <span class="ct-sec">Effects</span>
+                      {{#each effects}}<span class="ct-row"><span>{{this.type}}</span><span>{{this.amount}}</span></span>{{/each}}
+                      {{/if}}
+                      {{#if description}}<span class="ct-desc">{{description}}</span>{{/if}}
+                    </span>
+                  </a></td>
                   <td>{{spellList}}</td>
                   <td>{{level}}</td>
                   <td>{{manaCost}}</td>

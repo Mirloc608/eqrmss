@@ -990,6 +990,69 @@ ol.aa-available .aa-row::marker {
   vertical-align: middle;
   margin-right: 6px;
 }
+/* Hover cards (2026-10-12): EQResource-style rich tooltips for spells,
+   disciplines, capstones and combat abilities. Pure CSS: the card is a
+   hidden child of the hovered element, shown on hover, positioned below. */
+.has-cardtip {
+  position: relative;
+}
+.cardtip {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  min-width: 250px;
+  max-width: 330px;
+  background: #141414;
+  color: #d8d8d8;
+  border: 1px solid #8a6d2f;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: normal;
+  text-align: left;
+  text-transform: none;
+  white-space: normal;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+.has-cardtip:hover .cardtip {
+  display: block;
+}
+.cardtip .ct-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight: bold;
+  color: #ffd766;
+  border-bottom: 1px solid #3a3a3a;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+}
+.cardtip .ct-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cardtip .ct-k {
+  color: #9c9c9c;
+}
+.cardtip .ct-sec {
+  display: block;
+  color: #9c9c9c;
+  margin-top: 4px;
+}
+.cardtip .ct-desc {
+  display: block;
+  margin-top: 6px;
+  border-top: 1px solid #3a3a3a;
+  padding-top: 6px;
+  color: #c9c9c9;
+  font-style: italic;
+}
 /* Uniform tab buttons (2026-10-11): disciplines + capstones share size/structure.
    Every button fills its grid cell, label vertically centered. */
 .discipline-entry,
