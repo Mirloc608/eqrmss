@@ -407,7 +407,7 @@ export async function applyBaseSpellEffect(caster, target, classification, spell
                 spell: name
             });
             await target.update({ "system.status.spellEffects": slowList });
-            await applyStatusEffect(target, "slowed", `${name} (Slow)`, rounds ?? 10, "icons/svg/clock.svg", { source: "spell", category: "debuff" });
+            await applyStatusEffect(target, "slowed", `${name} (Slow)`, rounds ?? 10, "icons/svg/net.svg", { source: "spell", category: "debuff" });
             return `<p><em>${esc(name)} takes hold on ${tName} — slowed ${slowPct}%${rounds != null ? ` for ${rounds} rounds` : ""}.${dispelNote}</em></p>`;
         }
         // Positive attack-speed on a base spell is unusual; fall through to generic handling.

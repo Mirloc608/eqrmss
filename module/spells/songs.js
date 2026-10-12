@@ -442,7 +442,7 @@ export async function applySong(bard, songItem, targets = []) {
                 if (entry.scaledTarget === "haste" && entry.scaledValue > 0) {
                     await applyStatusEffect(target, "hasted", `${name} (Haste)`, effRounds, "icons/svg/lightning.svg", { source: "song" });
                 } else if (entry.scaledTarget === "slow" && entry.scaledValue > 0) {
-                    await applyStatusEffect(target, "slowed", `${name} (Slow)`, effRounds, "icons/svg/clock.svg", { source: "song" });
+                    await applyStatusEffect(target, "slowed", `${name} (Slow)`, effRounds, "icons/svg/net.svg", { source: "song" });
                 }
                 notes += `<p><em>${tName}: ${esc(label)}.</em></p>`;
             }

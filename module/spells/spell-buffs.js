@@ -235,7 +235,7 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
         if (scaled.target === "haste" && scaled.value > 0) {
             await applyStatusEffect(target, "hasted", `${name} (Haste)`, effRounds, "icons/svg/lightning.svg", { source: "spell" });
         } else if (scaled.target === "slow" && scaled.value > 0) {
-            await applyStatusEffect(target, "slowed", `${name} (Slow)`, effRounds, "icons/svg/clock.svg", { source: "spell" });
+            await applyStatusEffect(target, "slowed", `${name} (Slow)`, effRounds, "icons/svg/net.svg", { source: "spell" });
         }
 
         notes.push(`${esc(target.name)}: ${desc} for ${effRounds} rounds (${esc(name)}).`);
