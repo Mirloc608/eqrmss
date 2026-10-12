@@ -10,7 +10,25 @@
           {{#each actor.items}}
             {{#if (eq this.type "weapon")}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.dbBonus}}<span class="ct-row"><span class="ct-k">DB Bonus</span><span>{{this.system.dbBonus}}</span></span>{{/if}}
+                  {{#if this.system.damage}}<span class="ct-row"><span class="ct-k">Damage</span><span>{{this.system.damage}}</span></span>{{/if}}
+                  {{#if this.system.attackTable}}<span class="ct-row"><span class="ct-k">Attack Table</span><span>{{this.system.attackTable}}</span></span>{{/if}}
+                  {{#if this.system.hp}}<span class="ct-row"><span class="ct-k">HP</span><span class="ct-v-gold">+{{this.system.hp}}</span></span>{{/if}}
+                  {{#if this.system.mana}}<span class="ct-row"><span class="ct-k">Mana</span><span class="ct-v-gold">+{{this.system.mana}}</span></span>{{/if}}
+                  {{#each this.system.stats}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#each this.system.resistances}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#if this.system.wornEffect}}<span class="ct-row"><span class="ct-k">Worn</span><span class="ct-v-gold">{{itemEffectName this.system.wornEffect}}</span></span>{{/if}}
+                  {{#if this.system.proc}}<span class="ct-row"><span class="ct-k">Proc</span><span class="ct-v-gold">{{itemEffectName this.system.proc}}</span></span>{{/if}}
+                  {{#if this.system.triggeredEffect}}<span class="ct-row"><span class="ct-k">Clicky</span><span class="ct-v-gold">{{itemEffectName this.system.triggeredEffect}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a></td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
                   <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
@@ -32,7 +50,25 @@
           {{#each actor.items}}
             {{#if (eq this.type "armor")}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a>{{#if this.system.triggeredEffect}} <button type="button" class="item-clicky" data-item-id="{{this._id}}" title="Use {{this.system.triggeredEffect}}">Use</button>{{/if}}</td>
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.dbBonus}}<span class="ct-row"><span class="ct-k">DB Bonus</span><span>{{this.system.dbBonus}}</span></span>{{/if}}
+                  {{#if this.system.damage}}<span class="ct-row"><span class="ct-k">Damage</span><span>{{this.system.damage}}</span></span>{{/if}}
+                  {{#if this.system.attackTable}}<span class="ct-row"><span class="ct-k">Attack Table</span><span>{{this.system.attackTable}}</span></span>{{/if}}
+                  {{#if this.system.hp}}<span class="ct-row"><span class="ct-k">HP</span><span class="ct-v-gold">+{{this.system.hp}}</span></span>{{/if}}
+                  {{#if this.system.mana}}<span class="ct-row"><span class="ct-k">Mana</span><span class="ct-v-gold">+{{this.system.mana}}</span></span>{{/if}}
+                  {{#each this.system.stats}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#each this.system.resistances}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#if this.system.wornEffect}}<span class="ct-row"><span class="ct-k">Worn</span><span class="ct-v-gold">{{itemEffectName this.system.wornEffect}}</span></span>{{/if}}
+                  {{#if this.system.proc}}<span class="ct-row"><span class="ct-k">Proc</span><span class="ct-v-gold">{{itemEffectName this.system.proc}}</span></span>{{/if}}
+                  {{#if this.system.triggeredEffect}}<span class="ct-row"><span class="ct-k">Clicky</span><span class="ct-v-gold">{{itemEffectName this.system.triggeredEffect}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a>{{#if this.system.triggeredEffect}} <button type="button" class="item-clicky" data-item-id="{{this._id}}" title="Use {{this.system.triggeredEffect}}">Use</button>{{/if}}</td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
                   <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
@@ -54,7 +90,25 @@
           {{#each actor.items}}
             {{#if (eq this.type "shield")}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a>{{#if this.system.triggeredEffect}} <button type="button" class="item-clicky" data-item-id="{{this._id}}" title="Use {{this.system.triggeredEffect}}">Use</button>{{/if}}</td>
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.dbBonus}}<span class="ct-row"><span class="ct-k">DB Bonus</span><span>{{this.system.dbBonus}}</span></span>{{/if}}
+                  {{#if this.system.damage}}<span class="ct-row"><span class="ct-k">Damage</span><span>{{this.system.damage}}</span></span>{{/if}}
+                  {{#if this.system.attackTable}}<span class="ct-row"><span class="ct-k">Attack Table</span><span>{{this.system.attackTable}}</span></span>{{/if}}
+                  {{#if this.system.hp}}<span class="ct-row"><span class="ct-k">HP</span><span class="ct-v-gold">+{{this.system.hp}}</span></span>{{/if}}
+                  {{#if this.system.mana}}<span class="ct-row"><span class="ct-k">Mana</span><span class="ct-v-gold">+{{this.system.mana}}</span></span>{{/if}}
+                  {{#each this.system.stats}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#each this.system.resistances}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#if this.system.wornEffect}}<span class="ct-row"><span class="ct-k">Worn</span><span class="ct-v-gold">{{itemEffectName this.system.wornEffect}}</span></span>{{/if}}
+                  {{#if this.system.proc}}<span class="ct-row"><span class="ct-k">Proc</span><span class="ct-v-gold">{{itemEffectName this.system.proc}}</span></span>{{/if}}
+                  {{#if this.system.triggeredEffect}}<span class="ct-row"><span class="ct-k">Clicky</span><span class="ct-v-gold">{{itemEffectName this.system.triggeredEffect}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a>{{#if this.system.triggeredEffect}} <button type="button" class="item-clicky" data-item-id="{{this._id}}" title="Use {{this.system.triggeredEffect}}">Use</button>{{/if}}</td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
                   <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
@@ -76,7 +130,25 @@
           {{#each actor.items}}
             {{#if (eq this.type "jewelry")}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a>{{#if this.system.triggeredEffect}} <button type="button" class="item-clicky" data-item-id="{{this._id}}" title="Use {{this.system.triggeredEffect}}">Use</button>{{/if}}</td>
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.dbBonus}}<span class="ct-row"><span class="ct-k">DB Bonus</span><span>{{this.system.dbBonus}}</span></span>{{/if}}
+                  {{#if this.system.damage}}<span class="ct-row"><span class="ct-k">Damage</span><span>{{this.system.damage}}</span></span>{{/if}}
+                  {{#if this.system.attackTable}}<span class="ct-row"><span class="ct-k">Attack Table</span><span>{{this.system.attackTable}}</span></span>{{/if}}
+                  {{#if this.system.hp}}<span class="ct-row"><span class="ct-k">HP</span><span class="ct-v-gold">+{{this.system.hp}}</span></span>{{/if}}
+                  {{#if this.system.mana}}<span class="ct-row"><span class="ct-k">Mana</span><span class="ct-v-gold">+{{this.system.mana}}</span></span>{{/if}}
+                  {{#each this.system.stats}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#each this.system.resistances}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#if this.system.wornEffect}}<span class="ct-row"><span class="ct-k">Worn</span><span class="ct-v-gold">{{itemEffectName this.system.wornEffect}}</span></span>{{/if}}
+                  {{#if this.system.proc}}<span class="ct-row"><span class="ct-k">Proc</span><span class="ct-v-gold">{{itemEffectName this.system.proc}}</span></span>{{/if}}
+                  {{#if this.system.triggeredEffect}}<span class="ct-row"><span class="ct-k">Clicky</span><span class="ct-v-gold">{{itemEffectName this.system.triggeredEffect}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a>{{#if this.system.triggeredEffect}} <button type="button" class="item-clicky" data-item-id="{{this._id}}" title="Use {{this.system.triggeredEffect}}">Use</button>{{/if}}</td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
                   <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
@@ -98,7 +170,25 @@
           {{#each actor.items}}
             {{#if (eq this.type "instrument")}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.dbBonus}}<span class="ct-row"><span class="ct-k">DB Bonus</span><span>{{this.system.dbBonus}}</span></span>{{/if}}
+                  {{#if this.system.damage}}<span class="ct-row"><span class="ct-k">Damage</span><span>{{this.system.damage}}</span></span>{{/if}}
+                  {{#if this.system.attackTable}}<span class="ct-row"><span class="ct-k">Attack Table</span><span>{{this.system.attackTable}}</span></span>{{/if}}
+                  {{#if this.system.hp}}<span class="ct-row"><span class="ct-k">HP</span><span class="ct-v-gold">+{{this.system.hp}}</span></span>{{/if}}
+                  {{#if this.system.mana}}<span class="ct-row"><span class="ct-k">Mana</span><span class="ct-v-gold">+{{this.system.mana}}</span></span>{{/if}}
+                  {{#each this.system.stats}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#each this.system.resistances}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#if this.system.wornEffect}}<span class="ct-row"><span class="ct-k">Worn</span><span class="ct-v-gold">{{itemEffectName this.system.wornEffect}}</span></span>{{/if}}
+                  {{#if this.system.proc}}<span class="ct-row"><span class="ct-k">Proc</span><span class="ct-v-gold">{{itemEffectName this.system.proc}}</span></span>{{/if}}
+                  {{#if this.system.triggeredEffect}}<span class="ct-row"><span class="ct-k">Clicky</span><span class="ct-v-gold">{{itemEffectName this.system.triggeredEffect}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a></td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
                   <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
@@ -120,7 +210,25 @@
           {{#each actor.items}}
             {{#if (or (eq this.type "consumable") (eq this.type "equipment"))}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.dbBonus}}<span class="ct-row"><span class="ct-k">DB Bonus</span><span>{{this.system.dbBonus}}</span></span>{{/if}}
+                  {{#if this.system.damage}}<span class="ct-row"><span class="ct-k">Damage</span><span>{{this.system.damage}}</span></span>{{/if}}
+                  {{#if this.system.attackTable}}<span class="ct-row"><span class="ct-k">Attack Table</span><span>{{this.system.attackTable}}</span></span>{{/if}}
+                  {{#if this.system.hp}}<span class="ct-row"><span class="ct-k">HP</span><span class="ct-v-gold">+{{this.system.hp}}</span></span>{{/if}}
+                  {{#if this.system.mana}}<span class="ct-row"><span class="ct-k">Mana</span><span class="ct-v-gold">+{{this.system.mana}}</span></span>{{/if}}
+                  {{#each this.system.stats}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#each this.system.resistances}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#if this.system.wornEffect}}<span class="ct-row"><span class="ct-k">Worn</span><span class="ct-v-gold">{{itemEffectName this.system.wornEffect}}</span></span>{{/if}}
+                  {{#if this.system.proc}}<span class="ct-row"><span class="ct-k">Proc</span><span class="ct-v-gold">{{itemEffectName this.system.proc}}</span></span>{{/if}}
+                  {{#if this.system.triggeredEffect}}<span class="ct-row"><span class="ct-k">Clicky</span><span class="ct-v-gold">{{itemEffectName this.system.triggeredEffect}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a></td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
                   <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
@@ -142,7 +250,25 @@
           {{#each actor.items}}
             {{#if (eq this.type "herb_or_poison")}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.dbBonus}}<span class="ct-row"><span class="ct-k">DB Bonus</span><span>{{this.system.dbBonus}}</span></span>{{/if}}
+                  {{#if this.system.damage}}<span class="ct-row"><span class="ct-k">Damage</span><span>{{this.system.damage}}</span></span>{{/if}}
+                  {{#if this.system.attackTable}}<span class="ct-row"><span class="ct-k">Attack Table</span><span>{{this.system.attackTable}}</span></span>{{/if}}
+                  {{#if this.system.hp}}<span class="ct-row"><span class="ct-k">HP</span><span class="ct-v-gold">+{{this.system.hp}}</span></span>{{/if}}
+                  {{#if this.system.mana}}<span class="ct-row"><span class="ct-k">Mana</span><span class="ct-v-gold">+{{this.system.mana}}</span></span>{{/if}}
+                  {{#each this.system.stats}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#each this.system.resistances}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#if this.system.wornEffect}}<span class="ct-row"><span class="ct-k">Worn</span><span class="ct-v-gold">{{itemEffectName this.system.wornEffect}}</span></span>{{/if}}
+                  {{#if this.system.proc}}<span class="ct-row"><span class="ct-k">Proc</span><span class="ct-v-gold">{{itemEffectName this.system.proc}}</span></span>{{/if}}
+                  {{#if this.system.triggeredEffect}}<span class="ct-row"><span class="ct-k">Clicky</span><span class="ct-v-gold">{{itemEffectName this.system.triggeredEffect}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a></td>
               <td>{{this.system.codes}}</td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
@@ -165,7 +291,25 @@
           {{#each actor.items}}
             {{#if (eq this.type "item")}}
             <tr data-item-id="{{this._id}}">
-              <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.dbBonus}}<span class="ct-row"><span class="ct-k">DB Bonus</span><span>{{this.system.dbBonus}}</span></span>{{/if}}
+                  {{#if this.system.damage}}<span class="ct-row"><span class="ct-k">Damage</span><span>{{this.system.damage}}</span></span>{{/if}}
+                  {{#if this.system.attackTable}}<span class="ct-row"><span class="ct-k">Attack Table</span><span>{{this.system.attackTable}}</span></span>{{/if}}
+                  {{#if this.system.hp}}<span class="ct-row"><span class="ct-k">HP</span><span class="ct-v-gold">+{{this.system.hp}}</span></span>{{/if}}
+                  {{#if this.system.mana}}<span class="ct-row"><span class="ct-k">Mana</span><span class="ct-v-gold">+{{this.system.mana}}</span></span>{{/if}}
+                  {{#each this.system.stats}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#each this.system.resistances}}{{#if this}}<span class="ct-row"><span class="ct-k">{{@key}}</span><span class="ct-v-gold">+{{this}}</span></span>{{/if}}{{/each}}
+                  {{#if this.system.wornEffect}}<span class="ct-row"><span class="ct-k">Worn</span><span class="ct-v-gold">{{itemEffectName this.system.wornEffect}}</span></span>{{/if}}
+                  {{#if this.system.proc}}<span class="ct-row"><span class="ct-k">Proc</span><span class="ct-v-gold">{{itemEffectName this.system.proc}}</span></span>{{/if}}
+                  {{#if this.system.triggeredEffect}}<span class="ct-row"><span class="ct-k">Clicky</span><span class="ct-v-gold">{{itemEffectName this.system.triggeredEffect}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a></td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
                   <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>

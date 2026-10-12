@@ -21,11 +21,14 @@ import { EQRMSSActorSpellsHelper } from "./helpers/actor-sheet-spells.js";
 import { EQRMSSActorBardHelper } from "./helpers/actor-sheet-bard.js";
 import { EQRMSSActorSignatureHelper } from "./helpers/actor-sheet-signature.js";
 import { EQRMSSActorProgressionHelper } from "./helpers/actor-sheet-progression.js";
+import { getItemEffect } from "../../data/item-effects/item-effect-loader.js";
 
 // Ensure required Handlebars helpers exist (fallback)
 if (typeof Handlebars !== "undefined") {
   if (!Handlebars.helpers?.add) Handlebars.registerHelper("add", (a,b)=>(Number(a)||0)+(Number(b)||0));
   if (!Handlebars.helpers?.keys) Handlebars.registerHelper("keys", (obj)=>Object.keys(obj||{}));
+  // Resolve an item-effect id to its display name for item hover cards.
+  if (!Handlebars.helpers?.itemEffectName) Handlebars.registerHelper("itemEffectName", (id)=>getItemEffect(id)?.name ?? id);
 }
 
 const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;

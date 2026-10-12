@@ -1167,6 +1167,19 @@ div.aa-group-header strong {
   color: #c9c9c9;
   font-style: italic;
 }
+/* Item hover cards (2026-10-12): EQResource-style item cards on the
+   Equipment tab. Reuses the .cardtip component; gold values instead
+   of EQResource's red for readability on the dark card. */
+.cardtip .ct-icon {
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 4px;
+}
+.cardtip .ct-v-gold {
+  color: #ffd766;
+}
 /* Spell cards (2026-10-12): D&D Beyond-style card list for the Spells tab.
    Replaces the dense spell table; one card per spell line. */
 .spell-list-controls {
