@@ -976,6 +976,113 @@ ol.aa-available .aa-row::marker {
   opacity: 0.8;
 }
 
+/* ------------------------------------------------------------
+   AA cards (2026-10-12): D&D Beyond-style card list, same
+   treatment as the spell cards. One card per AA in both the
+   purchased and available lists. Shares .rank-badge, .lvl-badge,
+   .head-spacer and .chip utilities with the spell cards above.
+   ------------------------------------------------------------ */
+.aa-list-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.aa-search {
+  background: #141414;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  color: #d8d8d8;
+  padding: 6px 10px;
+  font-size: 13px;
+  min-width: 180px;
+}
+.aa-search::placeholder {
+  color: #6a6a6a;
+}
+div.aa-group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #101010;
+  border: 1px solid #2c2c2c;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 14px 0 10px;
+}
+div.aa-group-header strong {
+  color: #ffd766;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+.aa-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.aa-cards.is-hidden {
+  display: none;
+}
+.aa-card {
+  background: #242424;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.aa-card:hover {
+  border-color: #8a6d2f;
+}
+.aa-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.aa-card .aa-toggle {
+  font-size: 14px;
+}
+.aa-card .aa-toggle:hover {
+  color: #ffd766;
+  opacity: 1;
+}
+.aa-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+.aa-buy {
+  background: #2a2a2a;
+  border: 1px solid #8a6d2f;
+  color: #ffd766;
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.aa-buy:hover {
+  background: #3a2f14;
+}
+.aa-cost {
+  color: #9c9c9c;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.aa-locked {
+  color: #9c9c9c;
+  font-size: 13px;
+  font-style: italic;
+}
+.aa-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 8px;
+}
+.aa-card .aa-details {
+  margin: 10px 0 0;
+}
+
 /* Discipline icons (2026-10-11): EQ icon inside the discipline button, left of the label. */
 .discipline-entry button .discipline-icon {
   width: 22px;
@@ -1125,15 +1232,17 @@ div.spell-category-header strong {
 .spell-card .spell-name:hover {
   color: #ffd766;
 }
-button.rank-badge {
+.rank-badge {
   background: none;
   font-size: 11px;
   color: #9c9c9c;
   border: 1px solid #3a3a3a;
   border-radius: 12px;
   padding: 1px 8px;
-  cursor: pointer;
   white-space: nowrap;
+}
+button.rank-badge {
+  cursor: pointer;
 }
 button.rank-badge:hover {
   color: #ffd766;
@@ -1169,19 +1278,22 @@ button.rank-badge:hover {
   flex-wrap: wrap;
   gap: 6px 18px;
 }
-.spell-chips .chip {
+.spell-chips .chip,
+.aa-chips .chip {
   display: flex;
   gap: 6px;
   align-items: baseline;
   font-size: 13px;
 }
-.spell-chips .chip-k {
+.spell-chips .chip-k,
+.aa-chips .chip-k {
   color: #9c9c9c;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
-.spell-chips .chip-v {
+.spell-chips .chip-v,
+.aa-chips .chip-v {
   color: #e8e8e8;
 }
 .rank-rows {

@@ -12,6 +12,17 @@ import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
 import { groupSpellsByCategory, spellBaseName, spellRankNumber } from "./helpers/actor-sheet-spells.js";
 import { activateCardtips } from "./helpers/cardtip.js";
 
+/**
+ * Show/hide AA cards by name substring (2026-10-12). Pure DOM
+ * filtering — no re-render, so the search input keeps focus.
+ */
+function filterAACards(html, q) {
+    html.querySelectorAll(".aa-card").forEach(card => {
+        const name = (card.dataset.aaName || "").toLowerCase();
+        card.style.display = (!q || name.includes(q)) ? "" : "none";
+    });
+}
+
 export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
     // ------------------------------------------------------------
@@ -667,6 +678,23 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
                 } catch (e) { console.error("EQRMSS | clicky use failed", e); }
             });
         });
+
+        // ------------------------------------------------------------
+        // AA card search filter (2026-10-12): live name filter over
+        // .aa-card elements, no re-render so the input keeps focus.
+        // Query is preserved on the sheet across re-renders.
+        // ------------------------------------------------------------
+        const aaSearch = html.querySelector(".aa-search");
+        if (aaSearch) {
+            if (this._aaFilter) {
+                aaSearch.value = this._aaFilter;
+                filterAACards(html, this._aaFilter);
+            }
+            aaSearch.addEventListener("input", ev => {
+                this._aaFilter = ev.target.value.trim().toLowerCase();
+                filterAACards(html, this._aaFilter);
+            });
+        }
 
         // ------------------------------------------------------------
         // Manual Drag & Drop binding (V13 ApplicationV2)

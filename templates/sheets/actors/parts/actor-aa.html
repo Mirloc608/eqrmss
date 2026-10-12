@@ -17,11 +17,14 @@
 
   <h4>Purchased AAs ({{aa.purchased.length}})</h4>
   {{#if aa.purchased.length}}
-  <ul class="aa-purchased">
+  <div class="aa-cards">
     {{#each aa.purchased}}
-    <li class="aa-row" data-aa-id="{{this.id}}">
-      <button type="button" class="aa-toggle" data-action="toggleAA" data-aa-id="{{this.id}}" title="Show details">▸</button>
-      <span class="aa-name">{{this.name}} — Rank {{this.rank}}/{{this.maxRanks}}</span>
+    <article class="aa-card" data-aa-id="{{this.id}}" data-aa-name="{{this.name}}">
+      <div class="aa-card-head">
+        <button type="button" class="aa-toggle" data-action="toggleAA" data-aa-id="{{this.id}}" title="Show details">▸</button>
+        <span class="aa-name">{{this.name}}</span>
+        <span class="rank-badge">Rank {{this.rank}}/{{this.maxRanks}}</span>
+      </div>
       <div class="aa-details is-hidden" data-aa-details="{{this.id}}">
         {{#if this.description}}<p class="aa-desc">{{this.description}}</p>{{/if}}
         {{#if this.rankInfo}}
@@ -35,9 +38,9 @@
         {{/if}}
         {{/if}}
       </div>
-    </li>
+    </article>
     {{/each}}
-  </ul>
+  </div>
   {{else}}
   <p class="aa-empty">No AAs purchased yet.</p>
   {{/if}}
@@ -45,33 +48,42 @@
   <div class="aa-list-head">
     <h4>Available AAs</h4>
     <div class="aa-list-controls">
+      <input type="search" class="aa-search" placeholder="Search AAs…" title="Filter AA cards by name">
       <button type="button" data-action="expandAllAAGroups">Expand all</button>
       <button type="button" data-action="collapseAllAAGroups">Collapse all</button>
     </div>
   </div>
   {{#each aa.groups}}
   <div class="aa-group" data-aa-group="{{this.name}}">
-    <h5 class="aa-group-header">
+    <div class="aa-group-header">
       <button type="button" class="aa-group-toggle" data-action="toggleAAGroup" data-group="{{this.name}}" title="Collapse {{this.name}}">▾</button>
-      {{this.name}} <span class="aa-group-count">({{this.count}})</span>
-    </h5>
-    <ol class="aa-available" data-aa-group-list="{{this.name}}">
+      <strong>{{this.name}}</strong> <span class="aa-group-count">({{this.count}})</span>
+    </div>
+    <div class="aa-cards" data-aa-group-list="{{this.name}}">
     {{#each this.items}}
-    <li class="aa-row" data-aa-id="{{this.id}}">
-      <button type="button" class="aa-toggle" data-action="toggleAA" data-aa-id="{{this.id}}" title="Show details">▸</button>
-      <strong>{{this.name}}</strong>
-      <span class="aa-meta">(Level {{this.levelRequired}} · Rank {{this.currentRank}}/{{this.maxRanks}})</span>
-      {{#if this.eligible}}
-        {{#if this.affordable}}
-        <button type="button" data-action="purchaseAA" data-aa-id="{{this.id}}">
-          Buy — {{this.cost}} point(s)
-        </button>
+    <article class="aa-card" data-aa-id="{{this.id}}" data-aa-name="{{this.name}}">
+      <div class="aa-card-head">
+        <button type="button" class="aa-toggle" data-action="toggleAA" data-aa-id="{{this.id}}" title="Show details">▸</button>
+        <span class="aa-name">{{this.name}}</span>
+        <span class="lvl-badge">Lv {{this.levelRequired}}</span>
+        <span class="head-spacer"></span>
+        {{#if this.eligible}}
+          {{#if this.affordable}}
+          <button type="button" class="aa-buy" data-action="purchaseAA" data-aa-id="{{this.id}}" title="Buy {{this.name}} rank {{this.nextRank.rank}}">
+            Buy — {{this.cost}} pt
+          </button>
+          {{else}}
+          <span class="aa-cost">{{this.cost}} pts — not enough points</span>
+          {{/if}}
         {{else}}
-        <span class="aa-cost">Cost: {{this.cost}} point(s) — not enough points</span>
+          <span class="aa-locked">{{this.reason}}</span>
         {{/if}}
-      {{else}}
-        <span class="aa-locked">{{this.reason}}</span>
-      {{/if}}
+      </div>
+      <div class="aa-chips">
+        <div class="chip"><span class="chip-k">Cost</span><span class="chip-v">{{this.cost}} pts</span></div>
+        <div class="chip"><span class="chip-k">Rank</span><span class="chip-v">{{this.currentRank}}/{{this.maxRanks}}</span></div>
+        <div class="chip"><span class="chip-k">Requires</span><span class="chip-v">Lv {{this.levelRequired}}</span></div>
+      </div>
       <div class="aa-details is-hidden" data-aa-details="{{this.id}}">
         {{#if this.description}}<p class="aa-desc">{{this.description}}</p>{{/if}}
         {{#if this.nextRank}}
@@ -85,9 +97,9 @@
         {{/if}}
         {{/if}}
       </div>
-    </li>
+    </article>
     {{/each}}
-    </ol>
+    </div>
   </div>
   {{else}}
   <p class="aa-empty">No AAs available. AA data may still be loading, or none are unlocked for this class and expansion.</p>
