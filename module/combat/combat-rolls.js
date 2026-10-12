@@ -746,13 +746,14 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
                 }
                 // Quiver (2026-10-12): firing ammunition other than the
                 // quivered ready stack costs -20 OB — fumbling non-ready
-                // ammo. Applies only to actors using the bandolier (flag
-                // present); everyone else keeps the old behavior. An empty
+                // ammo. Applies to player characters: all PCs have
+                // bandolier access, so all play by quiver rules. NPCs
+                // and other actor types keep the old behavior. An empty
                 // quiver means every shot is non-ready.
                 try {
-                    const bnd = actor.getFlag?.("eqrmss", "bandolier");
-                    if (bnd) {
-                        const quiveredId = typeof bnd.quiver === "string" ? bnd.quiver : null;
+                    if (actor?.type === "character") {
+                        const bnd = actor.getFlag?.("eqrmss", "bandolier");
+                        const quiveredId = (bnd && typeof bnd.quiver === "string") ? bnd.quiver : null;
                         const firedId = shot.ammoItem.id ?? shot.ammoItem._id ?? null;
                         if (firedId !== quiveredId) {
                             quiverPenalty = -20;
