@@ -8,7 +8,7 @@
 import { scaleSongValue, checkBuffStacking } from "./songs.js";
 import { durationRounds, rollAmount } from "./base-spell.js";
 import { spellEffectsOf } from "./spell-mapping.js";
-import { applyStatusEffect } from "./status-wiring.js";
+import { applyStatusEffect, hasteSlowExclusion, dispelHaste } from "./status-wiring.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -190,6 +190,21 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
             continue;
         }
         let list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
+        // Haste/Slow mutual exclusion (2026-10-12): slow dispels haste,
+        // haste bounces off slowed targets. Worn effects exempt.
+        if (scaled.target === "haste" || scaled.target === "slow") {
+            const verdict = hasteSlowExclusion(target, scaled.target, "spell");
+            if (verdict === "bounce") {
+                notes.push(`${esc(target.name)}: haste bounces — slowed (${esc(name)}).`);
+                continue;
+            }
+            if (verdict === "dispel") {
+                const cleared = await dispelHaste(target);
+                if (cleared) notes.push(`${esc(target.name)}: slow dispels haste (${esc(name)}).`);
+                // Re-read the list post-dispel so the push below lands on fresh state.
+                list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
+            }
+        }
         if (stack.action === "replace" && stack.replaceIds?.length) {
             const idSet = new Set(stack.replaceIds);
             list = list.filter(e => {

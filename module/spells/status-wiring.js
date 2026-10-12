@@ -102,6 +102,66 @@ export function hasStatusEffect(target, statusId) {
 }
 
 /**
+ * Haste/Slow mutual exclusion (user ruling 2026-10-12).
+ * Slow and haste do not stack across spells, procs/clickies, and songs:
+ * - Applying slow dispels existing haste from those sources completely.
+ * - Applying haste while the target is slowed by those sources bounces
+ *   (no effect).
+ * Worn effects are exempt both ways — they neither trigger nor suffer
+ * dispel/bounce, and worn haste/slow coexist with everything.
+ *
+ * @param {Actor} target - the buff target
+ * @param {"haste"|"slow"} newKind - what's being applied
+ * @param {string} origin - "spell", "song", "proc:<id>", "triggered:<id>",
+ *   "clicky...", or "worn:<id>"
+ * @returns {"apply"|"bounce"|"dispel"}
+ */
+export function hasteSlowExclusion(target, newKind, origin) {
+    if (String(origin ?? "").startsWith("worn:")) return "apply";
+    const fx = target?.system?.status?.spellEffects;
+    if (!Array.isArray(fx)) return "apply";
+    const opposite = newKind === "slow" ? "haste" : "slow";
+    const hasOpposite = fx.some(e => {
+        if (e?.scaledTarget !== opposite) return false;
+        const sid = String(e?.spellId ?? e?.songId ?? "");
+        if (sid.startsWith("worn:")) return false;
+        if (e?.source === "worn") return false;
+        return true;
+    });
+    if (!hasOpposite) return "apply";
+    return newKind === "slow" ? "dispel" : "bounce";
+}
+
+/**
+ * Dispel haste (user ruling 2026-10-12): remove all non-worn haste
+ * spellEffects entries. The "hasted" marker is removed only if no haste
+ * of any kind remains (worn haste keeps its marker).
+ * @param {Actor} target - the actor losing haste
+ * @returns {Promise<boolean>} true if anything was dispelled
+ */
+export async function dispelHaste(target) {
+    if (!target) return false;
+    const fx = target?.system?.status?.spellEffects;
+    let removed = false;
+    if (Array.isArray(fx)) {
+        const kept = fx.filter(e => {
+            if (e?.scaledTarget !== "haste") return true;
+            const sid = String(e?.spellId ?? e?.songId ?? "");
+            if (sid.startsWith("worn:") || e?.source === "worn") return true;
+            removed = true;
+            return false;
+        });
+        if (removed) await target.update({ "system.status.spellEffects": kept });
+    }
+    if (removed) {
+        const stillHasted = (target?.system?.status?.spellEffects ?? [])
+            .some(e => e?.scaledTarget === "haste");
+        if (!stillHasted) await removeStatusEffect(target, "hasted");
+    }
+    return removed;
+}
+
+/**
  * Sync tracker-based conditions to Foundry token markers.
  * Called each tick in tickConditions().
  * - Any stun pool component > 0 → `stunned`

@@ -16,7 +16,7 @@
 // ============================================================
 
 import { durationRounds } from "./base-spell.js";
-import { applyStatusEffect } from "./status-wiring.js";
+import { applyStatusEffect, hasteSlowExclusion, dispelHaste } from "./status-wiring.js";
 import { breakInvisibility } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
 import { applyMemblur } from "./memblur.js";
@@ -403,6 +403,19 @@ export async function applySong(bard, songItem, targets = []) {
             } else {
                 const entry = maintainedEntry(bard, songItem, label, eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
                 const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue, entry.songId);
+                // Haste/Slow mutual exclusion (2026-10-12): slow dispels haste,
+                // haste bounces off slowed targets. Worn effects exempt.
+                if (entry.scaledTarget === "haste" || entry.scaledTarget === "slow") {
+                    const verdict = hasteSlowExclusion(target, entry.scaledTarget, "song");
+                    if (verdict === "bounce") {
+                        notes += `<p><em>${tName}: haste bounces — slowed (${esc(name)}).</em></p>`;
+                        continue;
+                    }
+                    if (verdict === "dispel") {
+                        const cleared = await dispelHaste(target);
+                        if (cleared) notes += `<p><em>${tName}: slow dispels haste (${esc(name)}).</em></p>`;
+                    }
+                }
                 // Block handled by pre-check above; only replace applies here.
                 let fx = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
                 if (stack.action === "replace" && stack.replaceIds?.length) {

@@ -290,7 +290,24 @@ async function applyBuff({ effect, target, source, caster }) {
         }
     }
     const duration = Number(effect?.duration ?? effect?.["duration-rounds"]) || 10;
-    const list = [...(Array.isArray(fx) ? fx : [])];
+    // Haste/Slow mutual exclusion (2026-10-12): slow dispels haste,
+    // haste bounces off slowed targets. Worn effects exempt.
+    let fxPostDispel = null;
+    if (scaledTarget === "haste" || scaledTarget === "slow") {
+        try {
+            const { hasteSlowExclusion, dispelHaste } = await import("../spells/status-wiring.js");
+            const verdict = hasteSlowExclusion(baseTarget, scaledTarget, source);
+            if (verdict === "bounce") {
+                return { type: "buff", final: 0, notes: [`Haste bounced — target is slowed`], source, applied: false };
+            }
+            if (verdict === "dispel") {
+                await dispelHaste(baseTarget);
+                // Re-read post-dispel so the push below lands on fresh state.
+                fxPostDispel = baseTarget?.system?.status?.spellEffects;
+            }
+        } catch (e) { /* ignore — fall through to normal apply */ }
+    }
+    const list = [...(Array.isArray(fxPostDispel ?? fx) ? (fxPostDispel ?? fx) : [])];
     list.push({
         name: (() => {
           if (effect?.name) return effect.name;
