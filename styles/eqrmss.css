@@ -1008,6 +1008,7 @@ div.aa-group-header {
   border-radius: 6px;
   padding: 8px 12px;
   margin: 14px 0 10px;
+  color: #d8d8d8;
 }
 div.aa-group-header strong {
   color: #ffd766;
@@ -1081,6 +1082,14 @@ div.aa-group-header strong {
 }
 .aa-card .aa-details {
   margin: 10px 0 0;
+}
+/* Descriptive text: white for readability on the dark cards (2026-10-12). */
+.aa-card .aa-details .aa-desc {
+  color: #f0f0f0;
+}
+.aa-card .aa-details .aa-rank,
+.aa-card .aa-details .aa-effects {
+  color: #d8d8d8;
 }
 
 /* Discipline icons (2026-10-11): EQ icon inside the discipline button, left of the label. */
@@ -1186,6 +1195,7 @@ div.spell-category-header {
   border-radius: 6px;
   padding: 8px 12px;
   margin: 14px 0 10px;
+  color: #d8d8d8;
 }
 div.spell-category-header strong {
   color: #ffd766;
