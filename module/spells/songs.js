@@ -195,6 +195,12 @@ export function scaleSongValue(stat, eqValue) {
     // Mirrors spell-buff logic so song haste reaches out.haste (not statBonuses).
     if (s === "haste") return { target: "haste", stat: "haste", value: Math.max(1, Math.round(v)) };
     if (s === "slow") return { target: "slow", stat: "slow", value: Math.max(1, Math.round(v)) };
+    // attack-speed (legacy stat, 2026-10-12): positive = haste, negative = slow.
+    // Used as-is (percentage), min 1.
+    if (s === "attack-speed") {
+        const kind = v < 0 ? "slow" : "haste";
+        return { target: kind, stat: kind, value: Math.max(1, Math.round(Math.abs(v))) };
+    }
     // Default: stats → bonus at ÷10
     return { target: "statBonus", stat: s, value: div10 };
 }

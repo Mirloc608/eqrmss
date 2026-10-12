@@ -375,6 +375,40 @@ export async function applyBaseSpellEffect(caster, target, classification, spell
         return `<p><em>${tName} suffers ${esc(effectName)}${rounds != null ? ` for ${rounds} rounds` : ""} (${esc(name)}).</em></p>`;
     }
 
+    // Attack-speed slow (2026-10-12, e.g., Enalam's Drowse): negative
+    // attack-speed is a mechanical slow percentage. Creates a proper
+    // scaledTarget:"slow" entry and dispels haste per the 2026-10-12 ruling.
+    if (String(eff.stat ?? "").toLowerCase() === "attack-speed") {
+        const amt = rollAmount(eff);
+        if (amt < 0) {
+            const slowPct = Math.max(1, Math.round(Math.abs(amt)));
+            const rounds = durationRounds(eff.duration);
+            const { hasteSlowExclusion, dispelHaste, applyStatusEffect } = await import("./status-wiring.js");
+            let dispelNote = "";
+            if (hasteSlowExclusion(target, "slow", "spell") === "dispel") {
+                const cleared = await dispelHaste(target);
+                if (cleared) dispelNote = ` ${tName}'s haste is dispelled.`;
+            }
+            const slowList = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
+            slowList.push({
+                label: `${name} — Slow ${slowPct}% (spell)`,
+                source: "spell",
+                kind: "debuff",
+                category: "debuff",
+                scaledTarget: "slow",
+                scaledStat: "slow",
+                scaledValue: slowPct,
+                roundsLeft: rounds,
+                spellId: spellItem?.id ?? spellItem?._id ?? "",
+                spell: name
+            });
+            await target.update({ "system.status.spellEffects": slowList });
+            await applyStatusEffect(target, "slowed", `${name} (Slow)`, rounds ?? 10, "icons/svg/clock.svg", { source: "spell", category: "debuff" });
+            return `<p><em>${esc(name)} takes hold on ${tName} — slowed ${slowPct}%${rounds != null ? ` for ${rounds} rounds` : ""}.${dispelNote}</em></p>`;
+        }
+        // Positive attack-speed on a base spell is unusual; fall through to generic handling.
+    }
+
     // debuff and anything else with a duration: recorded as a
     // timed spell effect for the GM (counters, vulnerabilities,
     // slows — no engine pool of their own yet).
