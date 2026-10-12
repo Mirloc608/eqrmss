@@ -92,8 +92,8 @@ export class EQRMSSActorSkillsHelper {
                     type: "skill",
                     system: {
                         skillId: catalogSkill.id,
-                        category: catalogSkill.category ?? "",
-                        description: catalogSkill.description ?? "",
+                        category: catalogSkill.system?.category ?? catalogSkill.category ?? "",
+                        description: catalogSkill.system?.description ?? catalogSkill.description ?? "",
                         ranks: 0,
                         new_rank: 1
                     }

@@ -275,12 +275,12 @@ export class EQRMSSActorContextHelper {
                         return {
                             id: skill.id,
                             name: skill.name,
-                            category: skill.category ?? "",
-                            description: skill.description ?? "",
+                            category: skill.system?.category ?? skill.category ?? "",
+                            description: skill.system?.description ?? skill.description ?? "",
                             developed: !!dev,
                             itemId: dev?.id ?? null,
                             ranks: dev ? Number(dev.system?.ranks ?? 0) : 0,
-                            cost: skill.cost ?? "-"
+                            cost: skill.system?.cost ?? skill.cost ?? "-"
                         };
                     }).sort((a, b) => String(a.name).localeCompare(String(b.name)));
                 } catch (e) { return []; }

@@ -36,17 +36,13 @@
     <h4>Combat Abilities</h4>
     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: center;">
       {{#each abilities}}
-      {{#if this.isPassive}}
-      <div title="{{this.name}} (Passive){{#if this.description}}: {{this.description}}{{/if}}" style="padding: 6px 4px; font-style: italic;">
-        {{this.name}}
-      </div>
-      {{else}}
+      {{#unless this.isPassive}}
       <div>
         <button type="button" data-action="activateAbility" data-ability-id="{{this.id}}" title="{{this.name}}{{#if this.description}}: {{this.description}}{{/if}}" style="width: 100%;">
           {{this.name}}
         </button>
       </div>
-      {{/if}}
+      {{/unless}}
       {{/each}}
     </div>
   </div>

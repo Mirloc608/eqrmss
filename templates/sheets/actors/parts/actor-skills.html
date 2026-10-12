@@ -3,7 +3,7 @@
 
         <h3>{{localize "eqrmss.pc_sheet.skills.header"}}</h3>
 
-        {{#if skillCatalog.length}}
+        {{#if items.skillCatalog.length}}
         <table class="eqrmss-table skills-table">
             <thead>
                 <tr>
@@ -16,7 +16,7 @@
             </thead>
 
             <tbody>
-                {{#each skillCatalog}}
+                {{#each items.skillCatalog}}
                 <tr class="skill-row" data-skill-id="{{id}}">
                     <td class="skill-name" title="{{#if description}}{{description}}{{else}}{{name}}{{/if}}">
                         <strong>{{name}}</strong>
