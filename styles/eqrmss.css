@@ -1365,3 +1365,36 @@ button.rank-badge:hover {
   white-space: normal;
   overflow-wrap: anywhere;
 }
+
+/* Bandolier (2026-10-12): weapon-set quick swaps on the Combat tab. */
+.application.sheet.eqrmss.actor.player .bandolier-current td {
+  background: rgba(212, 175, 55, 0.10);
+}
+.application.sheet.eqrmss.actor.player .bandolier-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 8px;
+  border-radius: 10px;
+  background: #6d5433;
+  color: #f4e8c8;
+  font-size: 0.75em;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+.application.sheet.eqrmss.actor.player .bandolier-note {
+  color: #5f4a2f;
+  font-size: 0.9em;
+  margin: 4px 0;
+}
+.application.sheet.eqrmss.actor.player .bandolier-locked {
+  color: #8a7a5c;
+}
+.application.sheet.eqrmss.actor.player .bandolier-name {
+  width: 130px;
+}
+.application.sheet.eqrmss.actor.player .bandolier-slot {
+  max-width: 190px;
+}
+.application.sheet.eqrmss.actor.player .bandolier-swap {
+  white-space: nowrap;
+}

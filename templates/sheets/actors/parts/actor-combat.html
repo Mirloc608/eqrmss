@@ -74,6 +74,64 @@
     </table>
   </div>
 
+  <div class="panel">
+    <h4>Bandolier</h4>
+    {{#if bandolier.swappedThisRound}}
+      <p class="bandolier-note"><em>Swapped weapons this round — attacks at half OB (Arms Law: changing weapons costs 50% activity).</em></p>
+    {{/if}}
+    <table class="rmss-table bandolier-table">
+      <thead><tr><th>Set</th><th>Left hand</th><th>Right hand</th><th></th></tr></thead>
+      <tbody>
+        {{#each bandolier.sets}}
+          <tr class="{{#if this.isCurrent}}bandolier-current{{/if}}">
+            <td>
+              {{#if ../bandolier.canConfigure}}
+                <input type="text" class="bandolier-name" data-set-index="{{this.index}}" value="{{this.name}}" maxlength="24" title="Rename set (out of combat only)">
+              {{else}}
+                <strong>{{this.name}}</strong>
+              {{/if}}
+              {{#if this.isCurrent}}<span class="bandolier-badge">wielded</span>{{/if}}
+            </td>
+            <td>
+              {{#if this.left.unlocked}}
+                {{#if ../bandolier.canConfigure}}
+                  <select class="bandolier-slot" data-set-index="{{this.index}}" data-side="left">
+                    {{#each this.left.options}}<option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.name}}</option>{{/each}}
+                  </select>
+                {{else}}
+                  {{this.left.itemName}}
+                {{/if}}
+              {{else}}
+                <em class="bandolier-locked">{{this.left.lockedNote}}</em>
+              {{/if}}
+            </td>
+            <td>
+              {{#if this.right.unlocked}}
+                {{#if ../bandolier.canConfigure}}
+                  <select class="bandolier-slot" data-set-index="{{this.index}}" data-side="right">
+                    {{#each this.right.options}}<option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.name}}</option>{{/each}}
+                  </select>
+                {{else}}
+                  {{this.right.itemName}}
+                {{/if}}
+              {{else}}
+                <em class="bandolier-locked">{{this.right.lockedNote}}</em>
+              {{/if}}
+            </td>
+            <td>
+              {{#if this.canSwapTo}}
+                <button type="button" class="bandolier-swap" data-set-index="{{this.index}}" title="Swap to this set — 50% activity in combat">Swap</button>
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{#unless bandolier.canConfigure}}
+      <p class="bandolier-note"><em>Bandolier configuration is locked while in combat. Swaps cost 50% activity.</em></p>
+    {{/unless}}
+  </div>
+
 {{#if hasSpells}}
   <div class="panel">
     <h4>Spells</h4>

@@ -20,6 +20,7 @@ import { EQRMSSActorSkillsHelper } from "./helpers/actor-sheet-skills.js";
 import { EQRMSSActorSpellsHelper } from "./helpers/actor-sheet-spells.js";
 import { EQRMSSActorBardHelper } from "./helpers/actor-sheet-bard.js";
 import { EQRMSSActorSignatureHelper } from "./helpers/actor-sheet-signature.js";
+import { EQRMSSActorBandolierHelper } from "./helpers/actor-sheet-bandolier.js";
 import { EQRMSSActorProgressionHelper } from "./helpers/actor-sheet-progression.js";
 import { getItemEffect } from "../../data/item-effects/item-effect-loader.js";
 
@@ -50,6 +51,7 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
         this.spellsHelper       = new EQRMSSActorSpellsHelper(this);
         this.bardHelper         = new EQRMSSActorBardHelper(this);
         this.signatureHelper    = new EQRMSSActorSignatureHelper(this);
+        this.bandolierHelper    = new EQRMSSActorBandolierHelper(this);
         this.progressionHelper  = new EQRMSSActorProgressionHelper(this);
     }
 
@@ -131,6 +133,7 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
         // ------------------------------------------------------------
         const html = this.element;
             this.signatureHelper?.activateListeners(html);
+            this.bandolierHelper?.activateListeners(html);
 
 
         html.querySelectorAll(".pet-manager-open").forEach(el => el.addEventListener("click", ev => {

@@ -1312,6 +1312,14 @@ export async function tickConditions(combat) {
         if (st.attackedThisRound) {
             updates["system.status.attackedThisRound"] = false;
         }
+        // Bandolier (2026-10-12): the weapon-swap round flag lapses at
+        // the round change with the other round markers.
+        try {
+            const bnd = actor.getFlag?.("eqrmss", "bandolier");
+            if (bnd?.swappedThisRound) {
+                await actor.setFlag("eqrmss", "bandolier", { ...bnd, swappedThisRound: false });
+            }
+        } catch (e) { /* flag clear is best-effort */ }
         // Declared missile parry (§4.3) also lapses at the round change.
         if ((Number(st.missileParryDB) || 0) > 0 || st.missileParryWeaponId) {
             updates["system.status.missileParryDB"] = 0;

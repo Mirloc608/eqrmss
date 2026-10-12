@@ -12,6 +12,7 @@ import { getItemEffect } from "../../../data/item-effects/item-effect-loader.js"
 import { isWorn } from "../../../utils/equipment/equipment-utils.js";
 import { dedupHighestRank } from "../../../item-effects/worn-engine.js";
 import { getFactionLevel, getFactionDisplayName } from "../../../utils/faction/faction.js";
+import { ensureBandolier, buildBandolierContext } from "../../../combat/bandolier.js";
 
 const STAT_LABELS = {
     ST: "Strength",
@@ -63,6 +64,7 @@ export class EQRMSSActorContextHelper {
         this._buildBuffsDebuffs(context);
         this._buildFactions(context);
         this._buildHateList(context);
+        await this._buildBandolier(context);
 
         context.data ??= {};
         context.data.name = this.actor.name ?? "";
@@ -531,5 +533,18 @@ export class EQRMSSActorContextHelper {
         // Highest threat first (damage + heal, then debuffs)
         list.sort((a, b) => (b.damage + b.heal) - (a.damage + a.heal) || b.debuffs - a.debuffs);
         context.hateList = list;
+    }
+
+    // Bandolier (2026-10-12): weapon-set quick swaps on the Combat tab.
+    // ensureBandolier seeds the flag on first view (adopts worn weapons
+    // into the Ready set); the pure builder then shapes the panel data.
+    async _buildBandolier(context) {
+        try {
+            if (!this.actor) { context.bandolier = null; return; }
+            await ensureBandolier(this.actor);
+            context.bandolier = buildBandolierContext(this.actor);
+        } catch (e) {
+            context.bandolier = null;
+        }
     }
 }
