@@ -72,10 +72,23 @@ export function bandolierRankNeed(setIndex, side) {
 function ownedWeaponIds(actor) {
     return new Set(
         [...(actor?.items?.contents ?? [])]
-            .filter(i => i?.type === "weapon")
+            .filter(i => isWieldableWeapon(i))
             .map(i => i.id)
             .filter(Boolean)
     );
+}
+
+/**
+ * Ammunition is never a wieldable weapon for the bandolier — the
+ * quiver owns it. (Some ammo items are weapon-typed; without this
+ * guard the swap's pack sweep would stow quivered arrows.)
+ */
+function isAmmunition(item) {
+    return !!item?.system?.ammoType;
+}
+
+function isWieldableWeapon(item) {
+    return item?.type === "weapon" && !isAmmunition(item);
 }
 
 /** Item ids of ammunition (any item with system.ammoType set). */
@@ -117,20 +130,31 @@ export function getBandolier(actor) {
  */
 export async function ensureBandolier(actor) {
     const raw = actor?.getFlag?.(FLAG_SCOPE, FLAG_KEY);
-    if (raw && Array.isArray(raw.sets) && raw.sets.length === DEFAULT_SET_NAMES.length) {
-        return getBandolier(actor);
+    if (!(raw && Array.isArray(raw.sets) && raw.sets.length === DEFAULT_SET_NAMES.length)) {
+        const worn = [...(actor?.items?.contents ?? [])].filter(i => isWieldableWeapon(i) && isWorn(i));
+        const sets = DEFAULT_SET_NAMES.map(blankSet);
+        if (worn[0]?.id) sets[0].left = worn[0].id;
+        if (worn[1]?.id) sets[0].right = worn[1].id;
+        // Seed the quiver from the first worn ammunition stack with shots left.
+        const wornAmmo = [...(actor?.items?.contents ?? [])].find(i =>
+            isAmmunition(i) && isWorn(i) && (Number(i.system?.quantity) || 0) > 0);
+        const fresh = { current: 0, sets, quiver: wornAmmo?.id ?? null, swappedThisRound: false };
+        try {
+            await actor.setFlag(FLAG_SCOPE, FLAG_KEY, fresh);
+        } catch (e) { /* best-effort */ }
     }
-    const worn = [...(actor?.items?.contents ?? [])].filter(i => i?.type === "weapon" && isWorn(i));
-    const sets = DEFAULT_SET_NAMES.map(blankSet);
-    if (worn[0]?.id) sets[0].left = worn[0].id;
-    if (worn[1]?.id) sets[0].right = worn[1].id;
-    // Seed the quiver from the first worn ammunition stack with shots left.
-    const wornAmmo = [...(actor?.items?.contents ?? [])].find(i =>
-        i?.system?.ammoType && isWorn(i) && (Number(i.system?.quantity) || 0) > 0);
-    const fresh = { current: 0, sets, quiver: wornAmmo?.id ?? null, swappedThisRound: false };
-    try {
-        await actor.setFlag(FLAG_SCOPE, FLAG_KEY, fresh);
-    } catch (e) { /* best-effort */ }
+    // Self-heal: the quivered stack is the designated ready ammunition.
+    // If something packed it (e.g. a pre-fix weapon swap), re-equip it
+    // so "in the quiver" always means ready to fire.
+    const healed = getBandolier(actor);
+    if (healed.quiver) {
+        const qitem = actor.items?.get(healed.quiver);
+        if (qitem && !isWorn(qitem)) {
+            try {
+                await actor.updateEmbeddedDocuments("Item", [{ _id: qitem.id, "system.location": "equipped" }]);
+            } catch (e) { /* best-effort */ }
+        }
+    }
     return getBandolier(actor);
 }
 
@@ -176,10 +200,11 @@ export async function swapBandolierSet(actor, setIndex) {
     }
 
     // Wielded = the bandolier's current set: every equipped WEAPON
-    // goes to pack, then the new set's weapons equip.
+    // goes to pack (ammunition is never packed here — the quiver owns
+    // it), then the new set's weapons equip.
     const locUpdates = new Map();
     for (const item of actor.items?.contents ?? []) {
-        if (item?.type === "weapon" && isWorn(item)) locUpdates.set(item.id, "pack");
+        if (isWieldableWeapon(item) && isWorn(item)) locUpdates.set(item.id, "pack");
     }
     const wield = [target.left, target.right].filter(Boolean);
     for (const id of wield) locUpdates.set(id, "equipped");
@@ -231,7 +256,11 @@ export async function setBandolierSlot(actor, setIndex, side, itemId) {
     const id = (typeof itemId === "string" && itemId.length) ? itemId : null;
     if (id) {
         const item = actor.items?.get(id);
-        if (!item || item.type !== "weapon") return { ok: false, message: "That is not one of your weapons." };
+        if (!item || !isWieldableWeapon(item)) {
+            return { ok: false, message: isAmmunition(item)
+                ? "Ammunition goes in the quiver, not a weapon slot."
+                : "That is not one of your weapons." };
+        }
     }
     const sets = b.sets.map(s => ({ ...s }));
     if (id) {
@@ -321,7 +350,7 @@ export function buildBandolierContext(actor) {
     const b = getBandolier(actor);
     const unlocks = bandolierUnlocks(actor);
     const weapons = [...(actor?.items?.contents ?? [])]
-        .filter(i => i?.type === "weapon")
+        .filter(i => isWieldableWeapon(i))
         .map(i => ({ id: i.id, name: i.name ?? "Unnamed weapon" }));
     const inCombat = isActorInCombat(actor);
     const canConfigure = !inCombat;
