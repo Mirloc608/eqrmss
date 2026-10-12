@@ -29,6 +29,7 @@ import { checkHitThresholds } from "../combat/crit-conditions.js";
 import { casterRealm, resolveSpellFailure, wornArmorAt, helmetKind } from "./spell-failure.js";
 import { CASTING_STAT_BY_CLASS, casterLevelOf, statBonusFor } from "./spell-mapping.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
+import { baseActorOf } from "./status-wiring.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -325,6 +326,9 @@ async function addHits(target, n) {
  * system.status.spellEffects and tick in tickConditions.
  */
 export async function applyBaseSpellEffect(caster, target, classification, spellItem) {
+    // Unlinked tokens (2026-10-12): resolve to the base actor so effects
+    // persist and are visible to ticks/sheets sweeping game.actors.
+    target = baseActorOf(target);
     const eff = classification?.effect ?? {};
     const name = spellItem?.name ?? "spell";
     const subtype = classification?.subtype ?? eff.type ?? "damage";

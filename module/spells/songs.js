@@ -16,7 +16,7 @@
 // ============================================================
 
 import { durationRounds } from "./base-spell.js";
-import { applyStatusEffect, hasteSlowExclusion, dispelHaste } from "./status-wiring.js";
+import { applyStatusEffect, hasteSlowExclusion, dispelHaste, baseActorOf } from "./status-wiring.js";
 import { breakInvisibility } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
 import { applyMemblur } from "./memblur.js";
@@ -317,7 +317,10 @@ export async function applySong(bard, songItem, targets = []) {
     // Manual targeting (user selected tokens) still overrides.
     const list = (targets?.length ? targets : songAutoTargets(bard, songItem, effects)).filter(Boolean);
     let notes = "";
-    for (const target of list) {
+    for (let target of list) {
+        // Unlinked tokens (2026-10-12): resolve to the base actor so buffs
+        // persist and are visible to ticks/sheets sweeping game.actors.
+        target = baseActorOf(target);
         const tName = esc(target.name);
         if (!(target.isOwner || globalThis.game?.user?.isGM)) {
             notes += `<p><em>${tName} — song effects not applied (you don't control them).</em></p>`;

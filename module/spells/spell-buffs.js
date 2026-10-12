@@ -8,7 +8,7 @@
 import { scaleSongValue, checkBuffStacking } from "./songs.js";
 import { durationRounds, rollAmount } from "./base-spell.js";
 import { spellEffectsOf } from "./spell-mapping.js";
-import { applyStatusEffect, hasteSlowExclusion, dispelHaste } from "./status-wiring.js";
+import { applyStatusEffect, hasteSlowExclusion, dispelHaste, baseActorOf } from "./status-wiring.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -56,6 +56,9 @@ export function getSpellModifiers(actor) {
  */
 export async function applySpellBuffs(caster, spellItem, target, durationFactor = 1) {
     if (!target) return "";
+    // Unlinked tokens (2026-10-12): resolve to the base actor so buffs
+    // persist and are visible to ticks/sheets sweeping game.actors.
+    target = baseActorOf(target);
     const canTouch = target.isOwner || globalThis.game?.user?.isGM;
     const name = spellItem?.name ?? "spell";
     const notes = [];

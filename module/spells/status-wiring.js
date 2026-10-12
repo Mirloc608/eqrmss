@@ -162,6 +162,22 @@ export async function dispelHaste(target) {
 }
 
 /**
+ * Resolve to the base actor for unlinked tokens (2026-10-12).
+ * Synthetic token actors don't persist to the base actor, so buffs
+ * applied to them are invisible to ticks and sheet displays sweeping
+ * game.actors. Returns the base actor if resolvable, else the input.
+ * @param {Actor} target - the actor (possibly synthetic)
+ * @returns {Actor} the base actor
+ */
+export function baseActorOf(target) {
+    const baseId = target?.token?.actorId;
+    if (baseId) {
+        return globalThis.game?.actors?.get(baseId) ?? target;
+    }
+    return target;
+}
+
+/**
  * Sync tracker-based conditions to Foundry token markers.
  * Called each tick in tickConditions().
  * - Any stun pool component > 0 → `stunned`
