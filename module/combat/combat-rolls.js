@@ -122,7 +122,11 @@ async function promptTarget(missileAttack = false, attackerActor = null) {
         })
         .join("");
     try {
-        const fd = await TargetActorDialog.prompt({
+        // V14: DialogV2.prompt resolves with the button ID (string), not
+        // form data — the actor picker selection was silently dropped.
+        // Prefer .input (form data), fall back to .prompt for V13.
+        const targetPromptFn = TargetActorDialog.input ?? TargetActorDialog.prompt;
+        const fd = await targetPromptFn.call(TargetActorDialog, {
             window: { title: "Attack: target details" },
             content: `
                 <div class="form-group">
@@ -148,8 +152,9 @@ async function promptTarget(missileAttack = false, attackerActor = null) {
             ok: { label: "Roll Attack" }
         });
         if (!fd) return null; // cancelled
-        // DialogV2.prompt resolves with the form data — as a plain object
-        // on this Foundry build (FormDataExtended on others). Read both ways.
+        if (typeof fd === "string") return { name: "Target", at: 1, db: 0, actor: null }; // V14 prompt: button ID only
+        // Form data — as a plain object on this Foundry build
+        // (FormDataExtended on others). Read both ways.
         const val = k => (typeof fd.get === "function" ? fd.get(k) : fd[k]);
         const at = Math.max(1, Math.min(20, Number(val("at")) || 1));
         const actorId = val("actorId");
@@ -272,7 +277,13 @@ function ammoStacksFor(actor, ammoType) {
 async function promptMissileShot(bands, reloadChart, weaponName, ammoStacks = []) {
     const defaultBand = Math.max(0, bands.findIndex(b => (Number(b.obMod) || 0) === 0));
     const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
-    if (!DialogV2?.prompt) {
+    // V14: DialogV2.prompt resolves with the button ID (string), not form
+    // data — band/prep/ammo selections were silently dropped and the shot
+    // fell back to the first ammo stack. DialogV2.input resolves with the
+    // form data object. Fall back to prompt for V13 compatibility.
+    // (Same pattern as strategic-targeting.js.)
+    const promptFn = DialogV2?.input ?? DialogV2?.prompt;
+    if (!promptFn) {
         return { rangeMod: Number(bands[defaultBand].obMod) || 0, bandIndex: defaultBand, prepRounds: 1, reloadPenalty: reloadChart ? (reloadChart[1] ?? 0) : 0, ammoItem: ammoStacks[0] ?? null };
     }
     const bandOptions = bands.map((b, i) => `<option value="${i}"${i === defaultBand ? " selected" : ""}>${esc(bandLabel(bands, i))}</option>`).join("");
@@ -287,7 +298,7 @@ async function promptMissileShot(bands, reloadChart, weaponName, ammoStacks = []
         ? ammoStacks.map(i => `<option value="${esc(i.id ?? i._id ?? "")}">${esc(i.name)} × ${Number(i.system?.quantity) || 0}</option>`).join("")
         : "";
     try {
-        const fd = await DialogV2.prompt({
+        const fd = await promptFn.call(DialogV2, {
             window: { title: `Missile Attack: ${weaponName}` },
             content: `
                 <div class="form-group">
@@ -305,6 +316,10 @@ async function promptMissileShot(bands, reloadChart, weaponName, ammoStacks = []
             ok: { label: "Fire" }
         });
         if (!fd) return null;
+        if (typeof fd === "string") {
+            // V14 prompt fallback: button ID only, no form data.
+            return { rangeMod: Number(bands[defaultBand].obMod) || 0, bandIndex: defaultBand, prepRounds: 1, reloadPenalty: reloadChart ? (reloadChart[1] ?? 0) : 0, ammoItem: ammoStacks[0] ?? null };
+        }
         const val = k => (typeof fd.get === "function" ? fd.get(k) : fd[k]);
         const bandIndex = Math.max(0, Math.min(bands.length - 1, Number(val("band")) || 0));
         const prepRounds = reloadChart ? Math.max(0, Math.min(3, Number(val("prep")) || 0)) : 1;
