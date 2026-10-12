@@ -727,7 +727,9 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
                 ui.notifications.warn(`${actor.name} has no ${AMMO_TYPE_LABEL[ammoType] ?? "ammunition"} for ${weaponItem.name} — shot not fired.`);
                 return;
             }
+            __T("before missile dialog");
             const shot = await promptMissileShot(bands, reloadChart, weaponItem.name, ammoStacks);
+            __T("after missile dialog (think time ends)");
             if (!shot) return;
             if (reloadChart && shot.reloadPenalty == null) {
                 ui.notifications.warn(`${weaponItem.name} cannot be fired without at least 1 round of preparation (reloading, §5.2.12).`);
@@ -738,6 +740,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             if (shot.ammoItem) {
                 const left = Math.max(0, (Number(shot.ammoItem.system?.quantity) || 0) - 1);
                 await shot.ammoItem.update({ "system.quantity": left });
+                __T("after ammo DB write");
                 ammoNote = `<p><em>${esc(shot.ammoItem.name)} fired — ${left} remaining.</em></p>`;
                 // Ammunition construction OB (2026-10-09): fixed lookup table.
                 const ammoEntry = ammoTableEntryFor(shot.ammoItem.name);
@@ -778,7 +781,9 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     {
         const stSkill = strategicTargetingSkill(actor);
         if (stSkill != null) {
+            __T("before called-shot dialog");
             const pick = await promptCalledShot(actor, targetActor, targetName, stSkill);
+            __T("after called-shot dialog");
             if (pick == null) return;
             if (pick.areaId) {
                 calledShot = pick;
