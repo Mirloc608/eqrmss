@@ -37,6 +37,18 @@ export async function loadCapstones() {
         const index = await indexResp.json();
         const levels = index.levels || [];
 
+        // Capstone icons (2026-10-11): capstone id -> icon path lookup.
+        // Mirrors the discipline icon wiring; a missing/unreadable map is
+        // non-fatal: capstones load without icons.
+        let iconMap = {};
+        try {
+            const iconResponse = await fetch(`${CAPSTONE_BASE_PATH}/icon-map.json`);
+            if (iconResponse.ok) iconMap = await iconResponse.json();
+            else console.warn("EQRMSS | Capstone Loader | icon map missing", iconResponse.status);
+        } catch (error) {
+            console.warn("EQRMSS | Capstone Loader | icon map failed to load", error);
+        }
+
         // Load each level file
         for (const lvl of levels) {
             try {
@@ -52,11 +64,15 @@ export async function loadCapstones() {
                         console.warn(`EQRMSS | Capstone Loader | invalid capstone skipped: ${c?.id}`);
                         continue;
                     }
-                    byId[c.id] = c;
-                    byLevel[lvl].push(c);
+                    const withIcon = {
+                        ...c,
+                        icon: capstoneIconFor(c.id, iconMap) ?? c.icon ?? null
+                    };
+                    byId[c.id] = withIcon;
+                    byLevel[lvl].push(withIcon);
 
                     if (!byClass[c.class]) byClass[c.class] = [];
-                    byClass[c.class].push(c);
+                    byClass[c.class].push(withIcon);
                 }
             } catch (err) {
                 console.warn(`EQRMSS | Capstone Loader | failed to load level ${lvl}`, err);
@@ -71,6 +87,18 @@ export async function loadCapstones() {
     }
 
     return { byId, byLevel, byClass };
+}
+
+/**
+ * Resolve a capstone id to its full system icon asset path.
+ * Returns null when the id has no mapped icon.
+ */
+export function capstoneIconFor(capstoneId, iconMap) {
+    const mapped = iconMap?.[capstoneId];
+    if (!mapped) return null;
+    if (mapped.startsWith("systems/")) return mapped;
+    if (mapped.startsWith("icons/")) return `systems/eqrmss/assets/${mapped}`;
+    return `systems/eqrmss/assets/icons/capstones/${mapped}`;
 }
 
 /**
