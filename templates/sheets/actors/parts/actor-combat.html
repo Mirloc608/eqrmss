@@ -144,13 +144,13 @@
 
 {{#if hasSpells}}
   <div class="panel">
-    <h4>Spells</h4>
+    <h4>Spells <button type="button" class="clear-ready" title="Remove all readied spells">Clear all</button></h4>
     <table class="rmss-table">
       <thead><tr><th></th><th>Name</th><th>Rank</th><th>Spell List</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
       <tbody>
         {{#each readiedSpells}}
           <tr data-item-id="{{this._id}}">
-            <td><button class="cast-spell" data-item-id="{{this._id}}" title="Cast spell (EQ mana cost; RMSS resolution)">Cast</button></td>
+            <td><button class="cast-spell" data-item-id="{{this._id}}" title="Cast spell (EQ mana cost; RMSS resolution)">Cast</button> <a class="toggle-ready" data-item-id="{{this._id}}" title="Click to remove from ready spells" style="font-size: 1.2em; cursor: pointer;">⭐</a></td>
             <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
               <span class="cardtip">
                 <span class="ct-head"><span>{{this.name}}</span><span>{{this.system.class}} · Lv {{this.system.level}}</span></span>

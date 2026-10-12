@@ -517,6 +517,23 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             await this.render();
         }));
 
+        html.querySelectorAll(".clear-ready").forEach(el => el.addEventListener("click", async ev => {
+            ev.preventDefault();
+            const actor = this.actor;
+            const inCombat = (globalThis.game?.combat?.combatants ?? [])
+                .some(c => c.actor?.id === actor.id);
+            if (inCombat) {
+                ui.notifications?.warn(`${actor.name} cannot change ready spells during combat. Exit combat first.`);
+                return;
+            }
+            const readySpells = Array.isArray(actor.system?.status?.readySpells)
+                ? [...actor.system.status.readySpells] : [];
+            if (!readySpells.length) return;
+            await actor.update({ "system.status.readySpells": [] });
+            ui.notifications?.info(`Cleared ${readySpells.length} readied spell(s).`);
+            await this.render();
+        }));
+
         html.querySelectorAll(".cast-spell").forEach(el => el.addEventListener("click", async ev => {
             const item = this.actor.items.get(ev.currentTarget.dataset.itemId);
             if (!item) return;
