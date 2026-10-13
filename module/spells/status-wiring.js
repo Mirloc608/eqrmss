@@ -143,6 +143,7 @@ export async function dispelHaste(target) {
     if (!target) return false;
     const fx = target?.system?.status?.spellEffects;
     let removed = false;
+    let kept = null;
     if (Array.isArray(fx)) {
         // (2026-10-13): dispel the ENTIRE source spell/proc that granted
         // the haste, not just the haste component. Collect source IDs from
@@ -161,7 +162,7 @@ export async function dispelHaste(target) {
             const src = String(e?.source ?? "");
             if (src.startsWith("proc:") || src.startsWith("triggered:")) dispelIds.add(src);
         }
-        const kept = fx.filter(e => {
+        const keptEntries = fx.filter(e => {
             const sid = String(e?.spellId ?? e?.songId ?? "");
             const src = String(e?.source ?? "");
             // Worn entries are never dispelled
@@ -173,12 +174,27 @@ export async function dispelHaste(target) {
             if (src && dispelIds.has(src)) return false;
             return true;
         });
-        if (removed) await target.update({ "system.status.spellEffects": kept });
+        if (removed) await target.update({ "system.status.spellEffects": keptEntries });
+        kept = keptEntries;
     }
     if (removed) {
-        const stillHasted = (target?.system?.status?.spellEffects ?? [])
-            .some(e => e?.scaledTarget === "haste");
-        if (!stillHasted) await removeStatusEffect(target, "hasted");
+        // The "hasted" marker is idempotent (one ActiveEffect, last writer
+        // wins), so a surviving marker may still be named after a dispelled
+        // source — e.g. "Haste +40% (Clicky)" lingering after slow dispelled
+        // the clicky while exempt worn haste remained. Rebuild the marker
+        // from whatever haste actually survives (only worn entries can;
+        // worn keeps its marker per the 2026-10-12 ruling), so the name
+        // always reflects a live source.
+        await removeStatusEffect(target, "hasted");
+        const survivors = (kept ?? []).filter(e => e?.scaledTarget === "haste");
+        if (survivors.length > 0) {
+            const pick = survivors[0];
+            const src = String(pick?.spellId ?? pick?.songId ?? pick?.source ?? "");
+            const name = pick?.name ?? pick?.label ?? "Haste";
+            const rounds = Math.max(1, Number(pick?.roundsLeft) || 10);
+            await applyStatusEffect(target, "hasted", `${name} (Haste)`,
+                rounds, "icons/svg/lightning.svg", { source: src });
+        }
     }
     return removed;
 }

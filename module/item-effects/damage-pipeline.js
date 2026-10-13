@@ -335,15 +335,20 @@ async function applyBuff({ effect, target, source, caster }) {
     });
     await baseTarget.update({ "system.status.spellEffects": list });
     // Hasted/slowed visual indicators (2026-10-07)
+    // Marker origin tag (2026-10-13): worn/proc sources were mislabeled
+    // "(Clicky)". Derive the tag from the source prefix instead.
+    const srcTag = String(source ?? "");
+    const originTag = srcTag.startsWith("worn:") ? "Worn"
+        : srcTag.startsWith("proc:") ? "Proc" : "Clicky";
     if (scaledTarget === "haste" && scaledValue > 0) {
         try {
             const { applyStatusEffect } = await import("../spells/status-wiring.js");
-            await applyStatusEffect(baseTarget, "hasted", `${label} (Clicky)`, duration, "icons/svg/lightning.svg", { source });
+            await applyStatusEffect(baseTarget, "hasted", `${label} (${originTag})`, duration, "icons/svg/lightning.svg", { source });
         } catch (e) { /* ignore */ }
     } else if (scaledTarget === "slow" && scaledValue > 0) {
         try {
             const { applyStatusEffect } = await import("../spells/status-wiring.js");
-            await applyStatusEffect(baseTarget, "slowed", `${label} (Clicky)`, duration, "icons/svg/downgrade.svg", { source, category: "debuff" });
+            await applyStatusEffect(baseTarget, "slowed", `${label} (${originTag})`, duration, "icons/svg/downgrade.svg", { source, category: "debuff" });
         } catch (e) { /* ignore */ }
     }
     return { type: "buff", final: scaledValue, notes: [`${label} for ${duration} rounds`], source, applied: true };
