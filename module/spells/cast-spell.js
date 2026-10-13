@@ -409,6 +409,24 @@ async function castSpellInner(actor, spellItem, opts = {}) {
         }
     }
 
+    // ---- Already casting (user ruling 2026-10-13): declaring a second
+    // spell while a delayed cast is pending would overwrite
+    // system.status.pendingCast and silently eat the first spell's mana.
+    // Refuse BEFORE the ESF gate — no roll, no mana spent, pending cast
+    // untouched. (skipped for delayed fire — the pending cast clears
+    // before it resolves, and trigger-cast sub-spells re-enter here)
+    if (!skipToResolution) {
+        // Unlinked tokens: pendingCast lives on the base actor.
+        const baseActor = actor?.isToken
+            ? (globalThis.game?.actors?.get(actor?.token?.actorId) ?? actor)
+            : actor;
+        const pending = baseActor?.system?.status?.pendingCast;
+        if (pending && typeof pending.roundsLeft === "number") {
+            ui.notifications?.warn(`${actor.name} is already casting ${pending.spellName || "a spell"} — wait for it to fire.`);
+            return { ok: false, reason: "already-casting" };
+        }
+    }
+
     // ---- ESF gate (before the mana is spent) ----
     // (skipped for delayed fire — passed at declaration)
     const gate = skipToResolution ? { required: false, passed: true }
