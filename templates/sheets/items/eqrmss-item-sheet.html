@@ -422,10 +422,19 @@
         Worn Effect
     </label>
 
-    <select name="system.wornEffect">
-        <option value="">None</option>
-        {{selectOptions wornEffects selected=system.wornEffect valueAttr="id" labelAttr="name"}}
-    </select>
+<div class="effect-picker" data-effect-picker="worn">
+        <select data-picker-group aria-label="Worn effect family">
+            <option value="">None</option>
+            {{#each wornEffectPicker.families}}
+            <option value="{{id}}"{{#if selected}} selected{{/if}}>{{label}}</option>
+            {{/each}}
+        </select>
+        <select name="system.wornEffect" data-picker-effect aria-label="Worn effect rank">
+            {{#each wornEffectPicker.ranks}}
+            <option value="{{id}}"{{#if selected}} selected{{/if}}>{{label}}</option>
+            {{/each}}
+        </select>
+    </div>
 
 </div>
 
@@ -435,10 +444,19 @@
         Triggered Effect
     </label>
 
-    <select name="system.triggeredEffect">
-        <option value="">None</option>
-        {{selectOptions triggeredEffects selected=system.triggeredEffect valueAttr="id" labelAttr="name"}}
-    </select>
+<div class="effect-picker" data-effect-picker="triggered">
+        <select data-picker-group aria-label="Triggered effect category">
+            <option value="">None</option>
+            {{#each triggeredEffectPicker.categories}}
+            <option value="{{id}}"{{#if selected}} selected{{/if}}>{{label}}</option>
+            {{/each}}
+        </select>
+        <select name="system.triggeredEffect" data-picker-effect aria-label="Triggered effect">
+            {{#each triggeredEffectPicker.effects}}
+            <option value="{{id}}"{{#if selected}} selected{{/if}}>{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
 
     {{#if system.triggeredEffect}}
     <button type="button" class="clicky-use-btn" title="Fire this item's triggered effect"><i class="fas fa-bolt"></i> Use</button>

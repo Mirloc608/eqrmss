@@ -5,7 +5,7 @@
 
 const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
-import { getItemEffectsByKind } from "../../data/item-effects/item-effect-loader.js";
+import { getItemEffectsByKind, getWornEffectPicker, getTriggeredEffectPicker } from "../../data/item-effects/item-effect-loader.js";
 
 export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
 
@@ -53,7 +53,9 @@ export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(Document
     return { ...context, item, system: item.system, type: item.type, config: CONFIG.eqrmss ?? {}, owner: item.isOwner, editable: this.isEditable, isGM: game?.user?.isGM ?? false, enrichedDescription,
       wornEffects: getItemEffectsByKind("worn"),
       triggeredEffects: getItemEffectsByKind("triggered"),
-      procEffects: getItemEffectsByKind("proc") };
+      procEffects: getItemEffectsByKind("proc"),
+      wornEffectPicker: getWornEffectPicker(item.system?.wornEffect ?? ""),
+      triggeredEffectPicker: getTriggeredEffectPicker(item.system?.triggeredEffect ?? "") };
   }
 
   async _onRender(context, options) {
@@ -97,6 +99,42 @@ export default class EQRMSSItemSheet extends HandlebarsApplicationMixin(Document
         });
       });
     } catch (e) { console.error('eqrmss | clicky button setup failed', e); }
+
+    // Effect pickers: the family/category select drives the effect select.
+    // Only the effect select carries a name=, so the stored document value
+    // (the effect id) is unchanged; the group select is UI-only.
+    try {
+      const wirePicker = (kind) => {
+        const picker = this.element?.querySelector(`[data-effect-picker="${kind}"]`);
+        if (!picker) return;
+        const groupSel = picker.querySelector("[data-picker-group]");
+        const effectSel = picker.querySelector("[data-picker-effect]");
+        if (!groupSel || !effectSel) return;
+        groupSel.addEventListener("change", () => {
+          const data = kind === "worn" ? getWornEffectPicker(null) : getTriggeredEffectPicker(null);
+          const groups = kind === "worn" ? data.families : data.categories;
+          const group = groups.find(g => g.id === groupSel.value);
+          const children = kind === "worn" ? (group?.ranks ?? []) : (group?.effects ?? []);
+          effectSel.replaceChildren();
+          if (!children.length) {
+            const opt = document.createElement("option");
+            opt.value = "";
+            opt.textContent = "None";
+            effectSel.appendChild(opt);
+            return;
+          }
+          for (const c of children) {
+            const opt = document.createElement("option");
+            opt.value = c.id;
+            opt.textContent = kind === "worn" ? c.label : c.name;
+            effectSel.appendChild(opt);
+          }
+          effectSel.selectedIndex = 0;
+        });
+      };
+      wirePicker("worn");
+      wirePicker("triggered");
+    } catch (e) { console.error('eqrmss | effect picker wiring failed', e); }
   }
 
   async close(options = {}) { try { if (this.isEditable) { const form = this.element?.querySelector('form'); if (form) { const fd = new FormData(form); const obj = {}; for (const [k,v] of fd.entries()) obj[k]=v; await this._updateObject(undefined, obj); } } } catch(e){console.error('eqrmss | item close save failed', e);} return super.close(options); }
