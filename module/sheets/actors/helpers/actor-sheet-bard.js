@@ -35,14 +35,32 @@ export class EQRMSSActorBardHelper {
     // data-song-id (actor-songs.html).
     const onSongButton = async (btn) => {
       const id = btn.dataset.songId;
+      // Guard against double-tap while the backend is slow (2026-10-13):
+      // the button disables immediately, and a pending-set on the sheet
+      // survives re-renders (which replace the button node). Mirrors the
+      // cast-spell button guard in eqrmss_player_sheet.js.
+      const pendingSongs = (this.sheet._pendingSongs ??= new Set());
+      if (pendingSongs.has(id)) return;
       const song = id ? this.sheet.actor.items.get(id) : null;
       if (!song) return;
-      const targets = [...(game.user?.targets ?? [])].map(t => t.actor).filter(Boolean);
-      const result = await toggleSong(this.sheet.actor, song, targets);
-      // Post the notes (bump messages, effect summaries) to chat.
-      if (result?.notes) {
-        const speaker = ChatMessage.getSpeaker({ actor: this.sheet.actor });
-        await ChatMessage.create({ speaker, content: result.notes });
+      pendingSongs.add(id);
+      const origText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = btn.dataset.action === "bardStop" ? "Stopping..." : "Playing...";
+      try {
+        const targets = [...(game.user?.targets ?? [])].map(t => t.actor).filter(Boolean);
+        const result = await toggleSong(this.sheet.actor, song, targets);
+        // Post the notes (bump messages, effect summaries) to chat.
+        if (result?.notes) {
+          const speaker = ChatMessage.getSpeaker({ actor: this.sheet.actor });
+          await ChatMessage.create({ speaker, content: result.notes });
+        }
+      } finally {
+        pendingSongs.delete(id);
+        if (btn.isConnected) {
+          btn.disabled = false;
+          btn.textContent = origText;
+        }
       }
       this.sheet.render();
     };

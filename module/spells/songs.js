@@ -484,6 +484,18 @@ export async function toggleSong(bard, songItem, targets = []) {
     let notes = "";
 
     if (!nowActive) {
+        // Already-casting guard (2026-10-13): refuse to START a song while
+        // a delayed spell is pending. Mirrors the spell guard in
+        // cast-spell.js — warn, no effect, pending cast untouched.
+        // Stopping a song is always allowed.
+        const baseBard = bard?.isToken
+            ? (globalThis.game?.actors?.get(bard?.token?.actorId) ?? bard)
+            : bard;
+        const pending = baseBard?.system?.status?.pendingCast;
+        if (pending && typeof pending.roundsLeft === "number") {
+            ui.notifications?.warn(`${bard.name} is already casting ${pending.spellName || "a spell"} — wait for it to fire.`);
+            return { ok: false, reason: "already-casting" };
+        }
         // Performing a song is an offensive action (user ruling
         // 2026-10-07): the bard's invisibility fades. Targets keep
         // theirs — only the performer breaks.
