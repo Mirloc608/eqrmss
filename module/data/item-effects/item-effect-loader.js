@@ -82,9 +82,25 @@ const TRIGGERED_CATEGORY_LABELS = {
     damageshield: "Damage Shield",
     dot: "Damage over Time",
     hot: "Heal over Time",
-    "see-invisible": "See Invisible",
-    "summon-item": "Summon Item"
+    summon: "Summon",
+    vision: "Vision"
 };
+
+// Payload types that share one picker category (user 2026-10-13):
+// summon + summon-item -> Summon; all vision enhancements -> Vision.
+const TRIGGERED_CATEGORY_GROUPS = {
+    summon: "summon",
+    "summon-item": "summon",
+    "see-invisible": "vision",
+    ultravision: "vision",
+    infravision: "vision",
+    telescope: "vision"
+};
+
+function triggeredCategoryOf(effect) {
+    const t = primaryPayloadType(effect);
+    return TRIGGERED_CATEGORY_GROUPS[t] ?? t;
+}
 
 function triggeredCategoryLabel(type) {
     return TRIGGERED_CATEGORY_LABELS[type] ?? titleCaseKey(type);
@@ -140,18 +156,19 @@ export function getWornEffectPicker(selectedId) {
  *     selectedCategory, selectedEffect }
  * `effects` on the top level is the effect list for the selected category (or
  * a single "None" entry when no category is selected). Effects with several
- * payload types are filed under their first payload's type.
+ * payload types are filed under their first payload's type; related types
+ * share a category via TRIGGERED_CATEGORY_GROUPS (summon, vision).
  */
 export function getTriggeredEffectPicker(selectedId) {
     const catMap = new Map();
     for (const e of getItemEffectsByKind("triggered")) {
-        const type = primaryPayloadType(e);
+        const type = triggeredCategoryOf(e);
         if (!catMap.has(type)) catMap.set(type, { id: type, label: triggeredCategoryLabel(type), effects: [] });
         catMap.get(type).effects.push({ id: e.id, name: e.name ?? e.id, selected: e.id === selectedId });
     }
     const categories = [...catMap.values()].sort((a, b) => a.label.localeCompare(b.label));
     const sel = selectedId ? getItemEffect(selectedId) : null;
-    const selType = sel ? primaryPayloadType(sel) : "";
+    const selType = sel ? triggeredCategoryOf(sel) : "";
     const selectedCategory = categories.some(c => c.id === selType) ? selType : "";
     for (const c of categories) c.selected = (c.id === selectedCategory);
     const effects = categories.find(c => c.id === selectedCategory)?.effects
