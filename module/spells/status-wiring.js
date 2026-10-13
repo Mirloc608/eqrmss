@@ -144,12 +144,34 @@ export async function dispelHaste(target) {
     const fx = target?.system?.status?.spellEffects;
     let removed = false;
     if (Array.isArray(fx)) {
-        const kept = fx.filter(e => {
-            if (e?.scaledTarget !== "haste") return true;
+        // (2026-10-13): dispel the ENTIRE source spell/proc that granted
+        // the haste, not just the haste component. Collect source IDs from
+        // dispelled haste entries, then remove all entries sharing those IDs.
+        // Songs are exempt from full-source dispel (ongoing performance;
+        // only the haste component is removed).
+        const dispelIds = new Set();
+        for (const e of fx) {
+            if (e?.scaledTarget !== "haste") continue;
             const sid = String(e?.spellId ?? e?.songId ?? "");
-            if (sid.startsWith("worn:") || e?.source === "worn") return true;
+            if (sid.startsWith("worn:") || e?.source === "worn") continue;
             removed = true;
-            return false;
+            if (e?.source === "song") continue; // songs: haste-only, no ID collection
+            if (sid) dispelIds.add(sid);
+            // Also match by source string for procs (e.g., "proc:<id>")
+            const src = String(e?.source ?? "");
+            if (src.startsWith("proc:") || src.startsWith("triggered:")) dispelIds.add(src);
+        }
+        const kept = fx.filter(e => {
+            const sid = String(e?.spellId ?? e?.songId ?? "");
+            const src = String(e?.source ?? "");
+            // Worn entries are never dispelled
+            if (sid.startsWith("worn:") || e?.source === "worn") return true;
+            // Haste entries: always remove (non-worn)
+            if (e?.scaledTarget === "haste") return false;
+            // Non-haste entries: remove if from a dispelled spell/proc source
+            if (sid && dispelIds.has(sid)) return false;
+            if (src && dispelIds.has(src)) return false;
+            return true;
         });
         if (removed) await target.update({ "system.status.spellEffects": kept });
     }
