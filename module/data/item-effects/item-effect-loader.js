@@ -109,13 +109,21 @@ export function getWornEffectPicker(selectedId) {
         if (!famMap.has(famId)) famMap.set(famId, { id: famId, label: titleCaseKey(famId), ranks: [] });
         famMap.get(famId).ranks.push({
             id: e.id,
+            name: e.name ?? e.id,
             rank: e.rank ?? 0,
             label: `Rank ${toRoman(e.rank ?? 0)}`,
             selected: e.id === selectedId
         });
     }
     const families = [...famMap.values()]
-        .map(f => ({ ...f, ranks: f.ranks.sort((a, b) => a.rank - b.rank) }))
+        .map(f => {
+            const ranks = f.ranks.sort((a, b) => a.rank - b.rank);
+            // Single-rank families (see-invisible, serpent-sight, truesight,
+            // enduring-breath) show the effect name, not a lonely "Rank I".
+            if (ranks.length === 1) ranks[0].label = ranks[0].name;
+            const n = ranks.length;
+            return { ...f, label: `${f.label} (${n} rank${n === 1 ? "" : "s"})`, ranks };
+        })
         .sort((a, b) => a.label.localeCompare(b.label));
     const sel = selectedId ? getItemEffect(selectedId) : null;
     const selFamily = sel?.family ?? "";
