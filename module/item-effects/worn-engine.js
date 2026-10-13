@@ -69,5 +69,58 @@ export async function applyWornRoundEffects(actor) {
         });
         out.push({ item: item.name, effect: effect.id, applied: true, results });
     }
+    // Worn combat-effect bonuses (2026-10-13, user ruling): flat numeric
+    // fields on the item (Accuracy, Avoidance, ...) applied as buff payloads
+    // through the standard pipeline (EQ÷10, min 1, highest-wins).
+    out.push(...await applyWornCombatBonuses(actor));
+    return out;
+}
+
+/**
+ * Worn combat-effect bonus fields (item system data) mapped to buff stats.
+ * Values are raw EQ numbers; applyBuff scales them (÷10, min 1).
+ */
+const COMBAT_BONUS_FIELDS = {
+    accuracy: "accuracy",
+    avoidance: "avoidance",
+    shielding: "shielding",
+    spellShield: "spell-shield",
+    dotShielding: "dot-shielding",
+    strikethrough: "strikethrough",
+    stunResist: "stun-resist",
+};
+
+const COMBAT_BONUS_LABELS = {
+    accuracy: "Accuracy",
+    avoidance: "Avoidance",
+    shielding: "Shielding",
+    spellShield: "Spell Shield",
+    dotShielding: "DoT Shielding",
+    strikethrough: "Strikethrough",
+    stunResist: "Stun Resist",
+};
+
+/**
+ * Apply worn combat-effect bonuses for an actor. Each positive field on a
+ * worn item becomes a buff payload; the pipeline's highest-wins dedup keeps
+ * only the strongest source per bonus type.
+ * @returns {Array} per-item-field results
+ */
+export async function applyWornCombatBonuses(actor) {
+    const worn = (actor?.items ?? []).filter(i => isWorn(i));
+    const out = [];
+    for (const item of worn) {
+        for (const [field, stat] of Object.entries(COMBAT_BONUS_FIELDS)) {
+            const raw = Number(item?.system?.[field]) || 0;
+            if (!(raw > 0)) continue;
+            const results = await applyEffectPayload({
+                payload: [{ type: "buff", stat, amount: raw, name: COMBAT_BONUS_LABELS[field] }],
+                caster: actor,
+                target: actor,
+                source: `worn:${item.id}:${field}`
+            });
+            out.push({ item: item.name, field, applied: true, results });
+        }
+    }
     return out;
 }

@@ -27,7 +27,7 @@
 import { combatCard } from "../combat/chat-card.js";
 import { checkHitThresholds } from "../combat/crit-conditions.js";
 import { casterRealm, resolveSpellFailure, wornArmorAt, helmetKind } from "./spell-failure.js";
-import { CASTING_STAT_BY_CLASS, casterLevelOf, statBonusFor } from "./spell-mapping.js";
+import { CASTING_STAT_BY_CLASS, casterLevelOf, statBonusFor, classifySpell } from "./spell-mapping.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { baseActorOf } from "./status-wiring.js";
 
@@ -272,13 +272,36 @@ export async function resolveBaseSpellAttack(caster, spellItem, target, opts = {
     const sameRealm = targetStat && casterRealm(target, null) === realm ? 15 : 0;
     const willingMod = willing ? -50 : 0;
     const extraMod = Number(opts.rrMod) || 0;
-    const rrTotal = rr.total + cell.value + statBonus + sameRealm + willingMod + extraMod;
+    // Worn combat effects (2026-10-13, user ruling): Spell Shield / DoT
+    // Shielding fold into RR bonuses (EQ÷10, min 1) via spellEffects entries
+    // with scaledTarget "rr" / "rr-dot". DoT Shielding applies only when the
+    // incoming spell is a damage-over-time spell.
+    let rrShield = 0, rrDotShield = 0;
+    const tfx = target?.system?.status?.spellEffects;
+    if (Array.isArray(tfx)) {
+        for (const e of tfx) {
+            const st = String(e?.scaledTarget ?? "").toLowerCase();
+            const v = Number(e?.scaledValue) || 0;
+            if (!v) continue;
+            if (st === "rr") rrShield += v;
+            else if (st === "rr-dot") rrDotShield += v;
+        }
+    }
+    let dotShieldApplies = false;
+    if (rrDotShield > 0) {
+        try {
+            const cls = classifySpell(spellItem);
+            dotShieldApplies = cls?.kind === "base" && cls?.subtype === "dot";
+        } catch (e) { /* ignore — treat as non-DoT */ }
+    }
+    const shieldMod = rrShield + (dotShieldApplies ? rrDotShield : 0);
+    const rrTotal = rr.total + cell.value + statBonus + sameRealm + willingMod + extraMod + shieldMod;
     const resisted = rrTotal >= need;
 
     const fmt = (n) => (n > 0 ? `+${n}` : `${n}`);
     const rrLine = `<strong>Resistance roll (${esc(target.name)}):</strong> ${rr.rolls.join(", ")} = ${rr.total}`
         + ` ${fmt(cell.value)} BAR, ${fmt(statBonus)} ${statCode}`
-        + `${sameRealm ? `, +15 same realm` : ""}${willingMod ? `, -50 willing` : ""}${extraMod ? `, ${fmt(extraMod)} spell` : ""}`
+        + `${sameRealm ? `, +15 same realm` : ""}${willingMod ? `, -50 willing` : ""}${extraMod ? `, ${fmt(extraMod)} spell` : ""}${shieldMod ? `, ${fmt(shieldMod)} shield` : ""}`
         + ` = <strong>${rrTotal}</strong> vs ${need} (levels ${attackLevel} vs ${targetLevel}) — ${resisted ? "RESISTED" : "spell takes effect"}`;
 
     return {

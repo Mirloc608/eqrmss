@@ -246,6 +246,34 @@ async function applyBuff({ effect, target, source, caster }) {
         scaledTarget = "ob"; scaledStat = "ob";
         scaledValue = Math.max(1, Math.round(rawValue / 10));
         label = `Attack +${scaledValue}`;
+    } else if (stat === "accuracy" || stat === "strikethrough") {
+        // Worn combat effects (2026-10-13, user ruling): fold into RMSS stats.
+        // EQ Accuracy/Strikethrough (% hit chance) -> OB, EQ÷10, min 1.
+        scaledTarget = "ob"; scaledStat = "ob";
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        label = `${stat === "accuracy" ? "Accuracy" : "Strikethrough"} +${scaledValue}`;
+    } else if (stat === "avoidance" || stat === "shielding") {
+        // EQ Avoidance/Shielding (% dodge / melee damage reduction) -> DB.
+        scaledTarget = "db"; scaledStat = null;
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        label = `${stat === "avoidance" ? "Avoidance" : "Shielding"} +${scaledValue}`;
+    } else if (stat === "spell-shield") {
+        // EQ Spell Shield (% spell damage reduction) -> RR bonus vs spells.
+        // Consumed in base-spell.js resolveBaseSpellAttack.
+        scaledTarget = "rr"; scaledStat = null;
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        label = `Spell Shield +${scaledValue}`;
+    } else if (stat === "dot-shielding" || stat === "dot-shield") {
+        // EQ DoT Shielding -> RR bonus vs DoT spells only.
+        scaledTarget = "rr-dot"; scaledStat = null;
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        label = `DoT Shielding +${scaledValue}`;
+    } else if (stat === "stun-resist") {
+        // EQ Stun Resist (% stun chance) -> flat stun-round reduction.
+        // Consumed in applyStun below.
+        scaledTarget = "stun-resist"; scaledStat = null;
+        scaledValue = Math.max(1, Math.round(rawValue / 10));
+        label = `Stun Resist +${scaledValue}`;
     } else if (stat === "haste") {
         scaledTarget = "haste"; scaledStat = "haste";
         scaledValue = Math.max(1, Math.round(rawValue));
@@ -770,8 +798,23 @@ async function applyStun({ effect, target, source }) {
     const miss = requireTarget(target, "stun", source);
     if (miss) return miss;
     const rounds = payloadRounds(effect);
-    const pool = await withStunPool(target, p => { p.stunned += rounds; });
-    return { type: "stun", rolled: rounds, final: pool.stunned, notes: [`stunned for ${rounds} rounds`], source };
+    // Stun Resist (worn combat effect, 2026-10-13): flat reduction of stun
+    // rounds from spellEffects entries with scaledTarget "stun-resist".
+    let resist = 0;
+    const fx = target?.system?.status?.spellEffects;
+    if (Array.isArray(fx)) {
+        for (const e of fx) {
+            if (String(e?.scaledTarget ?? "").toLowerCase() === "stun-resist") {
+                resist += Number(e?.scaledValue) || 0;
+            }
+        }
+    }
+    const final = Math.max(0, rounds - resist);
+    const pool = await withStunPool(target, p => { p.stunned += final; });
+    const notes = resist > 0 && final < rounds
+        ? [`stunned for ${final} rounds (${resist} resisted)`]
+        : [`stunned for ${final} rounds`];
+    return { type: "stun", rolled: rounds, final: pool.stunned, notes, source };
 }
 
 /**
