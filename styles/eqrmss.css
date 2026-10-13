@@ -1419,3 +1419,24 @@ button.rank-badge:hover {
 .application.sheet.eqrmss.actor.player .quiver-select {
   max-width: 260px;
 }
+
+/* Bonus grids (2026-10-13): multi-column layout for the item-sheet Bonuses
+   section. HP/Mana side by side; stats, resistances, and combat bonuses in
+   three columns. */
+.application.sheet.eqrmss.item .bonus-grid {
+  display: grid;
+  gap: 4px 12px;
+  margin-bottom: 8px;
+}
+.application.sheet.eqrmss.item .bonus-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.application.sheet.eqrmss.item .bonus-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.application.sheet.eqrmss.item .bonus-grid .form-group {
+  min-width: 0;
+}
+.application.sheet.eqrmss.item .bonus-grid .form-group input {
+  width: 100%;
+}
