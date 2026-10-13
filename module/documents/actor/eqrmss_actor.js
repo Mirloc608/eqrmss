@@ -25,13 +25,16 @@ import {
 from "../../utils/actor/rmss-stats.js";
 
 import {
+    manaMaxFor
+}
+from "../../spells/spell-mapping.js";
+
+import {
     calculateArmorAndDefenses,
     calculateEncumbrance,
     calculateBaseMovementRate
 }
 from "../../data/stats/rmss-derived-values.js";
-
-import { manaMaxFor } from "../../spells/spell-mapping.js";
 
 export class EQRMSSActor extends Actor
 {
@@ -432,9 +435,11 @@ export class EQRMSSActor extends Actor
             this.system.hits.max = (Number(this.system.hits.max) || 0) + hpDelta;
         }
 
-        // Mana: adjust attributes.mana.max by the delta
+        // Mana: adjust attributes.mana.max by the delta.
+        // (2026-10-13): pure melee (no mana pool) do not receive mana
+        // from items — neither as a stat bonus nor via regen.
         const manaDelta = curr.mana - (prev.mana ?? 0);
-        if (manaDelta !== 0 && this.system.attributes?.mana) {
+        if (manaDelta !== 0 && this.system.attributes?.mana && manaMaxFor(this) > 0) {
             this.system.attributes.mana.max = (Number(this.system.attributes.mana.max) || 0) + manaDelta;
         }
 
@@ -461,9 +466,12 @@ export class EQRMSSActor extends Actor
         // Remember what we applied for next prepare
         this.system.derived._equipBonus = curr;
 
-        // Keep the old derived fields for backward compat
+        // Keep the old derived fields for backward compat.
+        // (2026-10-13): pure melee do not receive mana from items.
         this.system.derived.hp = (this.system.derived.hp ?? 0) + curr.hp;
-        this.system.derived.mana = (this.system.derived.mana ?? 0) + curr.mana;
+        if (manaMaxFor(this) > 0) {
+            this.system.derived.mana = (this.system.derived.mana ?? 0) + curr.mana;
+        }
 
     }
 

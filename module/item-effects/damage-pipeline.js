@@ -181,6 +181,14 @@ async function applyDamage({ effect, target, source }) {
 
 async function applyRegen({ effect, target, source, caster }) {
     const pool = effect.pool ?? "mana";
+    // (2026-10-13): pure melee (no mana pool) do not receive mana from
+    // items — neither as a stat bonus nor via regen (e.g., Flowing Thought).
+    if (pool === "mana") {
+        const { manaMaxFor } = await import("../spells/spell-mapping.js");
+        if (manaMaxFor(target) === 0) {
+            return { type: "regen", pool, final: 0, notes: ["no mana pool on target (pure melee)"], source };
+        }
+    }
     const attr = target?.system?.attributes?.[pool];
     if (!attr) return { type: "regen", pool, final: 0, notes: [`no ${pool} pool on target`], source };
     const before = attr.value ?? 0;
