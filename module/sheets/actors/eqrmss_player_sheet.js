@@ -542,6 +542,25 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             await this.render();
         }));
 
+        // Stop All Songs (2026-10-14): stops every song in the twist playlist.
+        html.querySelectorAll(".stop-all-songs").forEach(el => el.addEventListener("click", async ev => {
+            ev.preventDefault();
+            const actor = this.actor;
+            const playlist = Array.isArray(actor.system?.status?.songPlaylist)
+                ? [...actor.system.status.songPlaylist] : [];
+            if (!playlist.length) return;
+            // Deactivate each song item
+            for (const songId of playlist) {
+                const song = actor.items?.get?.(songId);
+                if (song) {
+                    try { await song.update({ "system.active": false }); } catch {}
+                }
+            }
+            await actor.update({ "system.status.songPlaylist": [] });
+            ui.notifications?.info(`Stopped ${playlist.length} song(s).`);
+            await this.render();
+        }));
+
         html.querySelectorAll(".cast-spell").forEach(el => el.addEventListener("click", async ev => {
             const btn = ev.currentTarget;
             const spellId = btn.dataset.itemId;

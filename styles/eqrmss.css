@@ -1443,6 +1443,105 @@ button.rank-badge:hover {
   width: 100%;
 }
 
+
+/* Song cards (2026-10-14) — matches spell-card design */
+.song-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.song-list-head h4 {
+  margin: 0;
+}
+.song-list-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.song-search {
+  padding: 4px 10px;
+  border: 1px solid #5f4a2f;
+  border-radius: 6px;
+  background: rgba(255, 250, 235, 0.7);
+  color: #3a2a18;
+  font-size: 13px;
+  width: 180px;
+}
+.song-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.song-card {
+  background: rgba(255, 250, 235, 0.55);
+  border: 1px solid #5f4a2f;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(60, 40, 20, 0.25);
+}
+.song-card:hover {
+  border-color: #8a6d2f;
+}
+.song-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.song-card .song-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #3a2a18;
+  text-decoration: none;
+  cursor: pointer;
+}
+.song-card .song-name:hover {
+  color: #8a6d2f;
+}
+.song-card .play-song,
+.song-card .stop-song {
+  background: #5f4a2f;
+  border: 1px solid #3a2a18;
+  color: #fbf6e6;
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+.song-card .play-song:hover,
+.song-card .stop-song:hover {
+  background: #6f5a3f;
+}
+.song-card .stop-song {
+  background: #8a3a2a;
+}
+.song-card .stop-song:hover {
+  background: #9a4a3a;
+}
+.song-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 8px;
+}
+.song-chips .chip {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 13px;
+}
+.song-chips .chip-k {
+  color: #6a5a40;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.song-chips .chip-v {
+  color: #3a2a18;
+}
+
 /* Tradeskill dialog — PARCHMENT THEME (2026-10-14)
    Matches the item sheet parchment theme per user request.
    Light tan background, dark brown text and accents. */

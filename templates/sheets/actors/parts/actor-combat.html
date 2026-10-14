@@ -183,24 +183,34 @@
 
   {{#if items.songs}}
   <div class="panel">
-    <h4>Songs</h4>
-    <table class="rmss-table">
-      <thead><tr><th></th><th>Name</th><th>Level</th><th>Type</th><th>Range</th><th>Duration</th></tr></thead>
-      <tbody>
-        {{#each readiedSongs}}
-          <tr data-item-id="{{this._id}}">
-            <td><button data-action="bardStart" data-song-id="{{this._id}}" title="Start playing this song">Play</button> <button data-action="bardStop" data-song-id="{{this._id}}" title="Stop playing this song">Stop</button></td>
-            <td><a class="item-open" data-item-id="{{this._id}}">{{this.name}}</a></td>
-            <td>{{this.system.level}}</td>
-            <td>{{this.system.type}}</td>
-            <td>{{this.system.range}}</td>
-            <td>{{this.system.duration}}</td>
-          </tr>
-        {{else}}
-          <tr><td colspan="6"><em>No songs in playlist — play songs from the Songs tab.</em></td></tr>
-        {{/each}}
-      </tbody>
-    </table>
+    <h4>Songs <button type="button" class="stop-all-songs" title="Stop all playing songs">Stop all</button></h4>
+    <div class="song-cards">
+      {{#each readiedSongs}}
+      <article class="song-card" data-song-name="{{this.name}}">
+        <div class="song-card-head">
+          <span class="lvl-badge">Lv {{this.system.level}}</span>
+          <a class="item-open song-name has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+            <span class="cardtip">
+              <span class="ct-head"><span>{{this.name}}</span><span>Lv {{this.system.level}}</span></span>
+              {{#if this.system.type}}<span class="ct-row"><span class="ct-k">Type</span><span>{{this.system.type}}</span></span>{{/if}}
+              {{#if this.system.range}}<span class="ct-row"><span class="ct-k">Range</span><span>{{this.system.range}}</span></span>{{/if}}
+              {{#if this.system.duration}}<span class="ct-row"><span class="ct-k">Duration</span><span>{{this.system.duration}}</span></span>{{/if}}
+            </span>
+          </a>
+          <span class="head-spacer"></span>
+          <button type="button" data-action="bardStart" data-song-id="{{this._id}}" class="play-song" title="Start playing this song">Play</button>
+          <button type="button" data-action="bardStop" data-song-id="{{this._id}}" class="stop-song" title="Stop playing this song">Stop</button>
+        </div>
+        <div class="song-chips">
+          {{#if this.system.type}}<div class="chip"><span class="chip-k">Type</span><span class="chip-v">{{this.system.type}}</span></div>{{/if}}
+          {{#if this.system.range}}<div class="chip"><span class="chip-k">Range</span><span class="chip-v">{{this.system.range}}</span></div>{{/if}}
+          {{#if this.system.duration}}<div class="chip"><span class="chip-k">Duration</span><span class="chip-v">{{this.system.duration}}</span></div>{{/if}}
+        </div>
+      </article>
+      {{else}}
+      <p style="opacity: 0.6;"><em>No songs in playlist — play songs from the Songs tab.</em></p>
+      {{/each}}
+    </div>
   </div>
   {{/if}}
 

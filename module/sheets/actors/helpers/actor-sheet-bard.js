@@ -27,6 +27,18 @@ export class EQRMSSActorBardHelper {
     const html = this.sheet.element;
     if (!html) return;
 
+    // Song-card search filter (2026-10-14): live name filter, no re-render.
+    const searchInput = html.querySelector(".song-search");
+    if (searchInput) {
+      searchInput.addEventListener("input", ev => {
+        const filter = ev.target.value.trim().toLowerCase();
+        html.querySelectorAll(".song-card").forEach(card => {
+          const name = (card.dataset.songName || "").toLowerCase();
+          card.style.display = !filter || name.includes(filter) ? "" : "none";
+        });
+      });
+    }
+
     // Play/Stop (Stage 5: activation applies the song's effects
     // to the currently-targeted actors; the round tick pulses
     // them while the song stays active. Twist playlist in songs.js
