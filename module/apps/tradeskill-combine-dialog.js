@@ -106,6 +106,8 @@ export class TradeskillCombineDialog extends BaseApplication {
 
     async _consumeComponents(components) {
         for (const c of components) {
+            // Skip non-consumed components (e.g., reusable molds) - 2026-10-14
+            if (c.consume === false) continue;
             let remaining = c.qty;
             for (const item of [...this.actor.items]) {
                 if (remaining <= 0) break;
