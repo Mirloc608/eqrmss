@@ -90,16 +90,27 @@ export class TradeskillCombineDialog extends BaseApplication {
     _getOreMaterials(materialType = "ore") {
         try {
             if (materialType === "metal") {
-                // Jewelcraft metals (bars)
+                // Jewelcraft metals (bars) - regular and enchanted
+                // Full precious metals: Silver, Gold, Electrum, Platinum, Cazicite, Palladium, Velium
                 return [
                     { id: "silver-bar", name: "Silver Bar" },
                     { id: "electrum-bar", name: "Electrum Bar" },
                     { id: "gold-bar", name: "Gold Bar" },
                     { id: "platinum-bar", name: "Platinum Bar" },
+                    { id: "cazicite-bar", name: "Cazicite Bar" },
+                    { id: "palladium-bar", name: "Palladium Bar" },
+                    { id: "velium-bar", name: "Velium Bar" },
+                    { id: "enchanted-silver-bar", name: "Enchanted Silver Bar" },
+                    { id: "enchanted-electrum-bar", name: "Enchanted Electrum Bar" },
+                    { id: "enchanted-gold-bar", name: "Enchanted Gold Bar" },
+                    { id: "enchanted-platinum-bar", name: "Enchanted Platinum Bar" },
+                    { id: "enchanted-cazicite-bar", name: "Enchanted Cazicite Bar" },
+                    { id: "enchanted-palladium-bar", name: "Enchanted Palladium Bar" },
+                    { id: "enchanted-velium-bar", name: "Enchanted Velium Bar" },
                 ];
             }
             if (materialType === "gem") {
-                // Jewelcraft gems
+                // Jewelcraft gems - standard and imbued (deity-specific)
                 return [
                     { id: "malachite", name: "Malachite" },
                     { id: "turquoise", name: "Turquoise" },
@@ -112,6 +123,32 @@ export class TradeskillCombineDialog extends BaseApplication {
                     { id: "topaz", name: "Topaz" },
                     { id: "peridot", name: "Peridot" },
                     { id: "sapphire", name: "Sapphire" },
+                    { id: "ruby", name: "Ruby" },
+                    { id: "emerald", name: "Emerald" },
+                    { id: "diamond", name: "Diamond" },
+                    { id: "opal", name: "Opal" },
+                    { id: "fire-opal", name: "Fire Opal" },
+                    { id: "black-pearl", name: "Black Pearl" },
+                    { id: "black-sapphire", name: "Black Sapphire" },
+                    { id: "star-rose-quartz", name: "Star Rose Quartz" },
+                    { id: "plains-pebble", name: "Plains Pebble" },
+                    { id: "ivory", name: "Ivory" },
+                    // Imbued gems (deity-specific, for imbued jewelry)
+                    { id: "imbued-black-sapphire-bertoxxulous", name: "Imbued Black Sapphire (Bertoxxulous)" },
+                    { id: "imbued-ruby-brell", name: "Imbued Ruby (Brell Serilis)" },
+                    { id: "imbued-peridot-bristlebane", name: "Imbued Peridot (Bristlebane)" },
+                    { id: "imbued-amber-cazic", name: "Imbued Amber (Cazic-Thule)" },
+                    { id: "imbued-star-rose-quartz-erollisi", name: "Imbued Star Rose Quartz (Erollisi Marr)" },
+                    { id: "imbued-sapphire-innorruk", name: "Imbued Sapphire (Innorruk)" },
+                    { id: "imbued-plains-pebble-karana", name: "Imbued Plains Pebble (Karana)" },
+                    { id: "imbued-diamond-mithaniel", name: "Imbued Diamond (Mithaniel Marr)" },
+                    { id: "imbued-black-pearl-prexus", name: "Imbued Black Pearl (Prexus)" },
+                    { id: "imbued-topaz-quellious", name: "Imbued Topaz (Quellious)" },
+                    { id: "imbued-jade-rallos", name: "Imbued Jade (Rallos Zek)" },
+                    { id: "imbued-opal-rodcet", name: "Imbued Opal (Rodcet Nife)" },
+                    { id: "imbued-fire-opal-solusek", name: "Imbued Fire Opal (Solusek Ro)" },
+                    { id: "imbued-ivory-tribunal", name: "Imbued Ivory (The Tribunal)" },
+                    { id: "imbued-emerald-tunare", name: "Imbued Emerald (Tunare)" },
                 ];
             }
             if (materialType === "cloth" || materialType === "leather") {
@@ -534,22 +571,60 @@ export class TradeskillCombineDialog extends BaseApplication {
             "topaz": { dexBonus: 3 },
             "peridot": { staBonus: 3 },
             "sapphire": { intBonus: 3 },
+            "ruby": { strBonus: 3, hpBonus: 5 },
+            "emerald": { wisBonus: 3 },
+            "diamond": { acBonus: 2 },
+            "opal": { chaBonus: 2, intBonus: 2 },
+            "fire-opal": { intBonus: 4 },
+            "black-pearl": { dexBonus: 2, agiBonus: 2 },
+            "black-sapphire": { hpBonus: 8, manaBonus: 8 },
+            "star-rose-quartz": { chaBonus: 5 },
+            "plains-pebble": { wisBonus: 4 },
+            "ivory": { wisBonus: 2, intBonus: 2 },
         };
         
-        // Check if enchanted metal was used
+        // Deity restrictions for imbued gems
+        const IMBUED_DEITIES = {
+            "imbued-black-sapphire-bertoxxulous": "Bertoxxulous",
+            "imbued-ruby-brell": "Brell Serilis",
+            "imbued-peridot-bristlebane": "Bristlebane",
+            "imbued-amber-cazic": "Cazic-Thule",
+            "imbued-star-rose-quartz-erollisi": "Erollisi Marr",
+            "imbued-sapphire-innorruk": "Innorruk",
+            "imbued-plains-pebble-karana": "Karana",
+            "imbued-diamond-mithaniel": "Mithaniel Marr",
+            "imbued-black-pearl-prexus": "Prexus",
+            "imbued-topaz-quellious": "Quellious",
+            "imbued-jade-rallos": "Rallos Zek",
+            "imbued-opal-rodcet": "Rodcet Nife",
+            "imbued-fire-opal-solusek": "Solusek Ro",
+            "imbued-ivory-tribunal": "The Tribunal",
+            "imbued-emerald-tunare": "Tunare",
+        };
+        
+        // Check if enchanted metal was used, or imbued gem
         let enchantedBonus = null;
+        let deityRestriction = null;
         if (product.enchantedBonus && recipeId) {
             const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
             if (recipe) {
                 const metalComp = recipe.components.find(c => c.materialType === "metal");
-                if (metalComp) {
+                const gemComp = recipe.components.find(c => c.materialType === "gem");
+                let selectedGem = null;
+                if (gemComp) {
+                    selectedGem = this._getSelectedMaterial(recipeId, recipe, gemComp.id);
+                    // Check for imbued gem (deity restriction)
+                    if (selectedGem && IMBUED_DEITIES[selectedGem]) {
+                        deityRestriction = IMBUED_DEITIES[selectedGem];
+                        // Imbued gems also give bonuses based on base gem
+                        const baseGem = selectedGem.replace(/^imbued-/, "").split("-").slice(0, -1).join("-");
+                        enchantedBonus = GEM_BONUSES[baseGem] ?? GEM_BONUSES[selectedGem] ?? null;
+                    }
+                }
+                if (metalComp && !deityRestriction) {
                     const selectedMetal = this._getSelectedMaterial(recipeId, recipe, metalComp.id);
-                    if (selectedMetal && selectedMetal.startsWith("enchanted-")) {
-                        const gemComp = recipe.components.find(c => c.materialType === "gem");
-                        if (gemComp) {
-                            const selectedGem = this._getSelectedMaterial(recipeId, recipe, gemComp.id);
-                            enchantedBonus = GEM_BONUSES[selectedGem] ?? null;
-                        }
+                    if (selectedMetal && selectedMetal.startsWith("enchanted-") && selectedGem) {
+                        enchantedBonus = GEM_BONUSES[selectedGem] ?? null;
                     }
                 }
             }
@@ -560,8 +635,9 @@ export class TradeskillCombineDialog extends BaseApplication {
             type: "item",
             system: {
                 quantity: product.qty ?? 1,
-                description: `Crafted via tradeskill (${quality}).` + (enchantedBonus ? " Enchanted." : ""),
+                description: `Crafted via tradeskill (${quality}).` + (enchantedBonus ? " Enchanted." : "") + (deityRestriction ? ` Imbued (${deityRestriction} only).` : ""),
                 ...(enchantedBonus ?? {}),
+                ...(deityRestriction ? { deityRestriction } : {}),
             }
         };
         await this.actor.createEmbeddedDocuments("Item", [itemData]);
