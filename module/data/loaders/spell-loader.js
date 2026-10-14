@@ -8,6 +8,23 @@ const SPELLS = {};
 const SPELLS_BY_LEVEL = {};
 const STATS = {classes:0,total:0,chunks:0};
 
+/* Parallel fetch helper (2026-10-14): concurrency-limited Promise.all
+   to avoid hammering the server. Batches at 10 concurrent fetches. */
+async function mapLimit(items, limit, fn) {
+    const results = new Array(items.length);
+    let idx = 0;
+    async function worker() {
+        while (idx < items.length) {
+            const i = idx++;
+            try { results[i] = await fn(items[i], i); }
+            catch { results[i] = 0; }
+        }
+    }
+    const workers = Array(Math.min(limit, items.length)).fill().map(() => worker());
+    await Promise.all(workers);
+    return results;
+}
+
 async function parseSpellFile(className, file, levelKey) {
     try {
         const resp = await fetch(file);
@@ -63,28 +80,39 @@ async function loadClassSpells(className, classPath) {
         SPELLS[className] = SPELLS[className] || [];
         SPELLS_BY_LEVEL[className] = SPELLS_BY_LEVEL[className] || {};
         const sorted = browse.files.filter(f => f.endsWith('.json')).sort((a,b) => a.localeCompare(b));
-        for (const file of sorted) {
+        const fileTasks = sorted.map(file => {
             const fn = file.split('/').pop();
-            if (['index.json','manifest.json'].includes(fn) || fn.startsWith('.')) continue;
+            if (['index.json','manifest.json'].includes(fn) || fn.startsWith('.')) return null;
             const m = fn.match(/spells[_-]?(\d+)[-_](\d+)/i) || fn.match(/(\d+)[-_](\d+)/i);
             const key = m ? `${m[1].padStart(2,'0')}-${m[2].padStart(2,'0')}` : fn.replace('.json','');
+            return { file, key };
+        }).filter(Boolean);
+        const adds = await mapLimit(fileTasks, 10, async ({file, key}) => {
             const add = await parseSpellFile(className, file, key);
-            if (add > 0) { total += add; STATS.chunks++; }
-        }
-        for (const subDir of browse.dirs) {
-            if (subDir.split('/').pop().startsWith('.')) continue;
+            if (add > 0) STATS.chunks++;
+            return add;
+        });
+        total += adds.reduce((a, b) => a + b, 0);
+        const subDirs = browse.dirs.filter(d => !d.split('/').pop().startsWith('.'));
+        await mapLimit(subDirs, 5, async (subDir) => {
             try {
                 const sb = await FilePickerImpl.browse("data", subDir);
-                for (const file of sb.files.filter(f => f.endsWith('.json')).sort((a,b) => a.localeCompare(b))) {
+                const files = sb.files.filter(f => f.endsWith('.json')).sort((a,b) => a.localeCompare(b));
+                const tasks = files.map(file => {
                     const fn = file.split('/').pop();
-                    if (['index.json','manifest.json'].includes(fn)) continue;
+                    if (['index.json','manifest.json'].includes(fn)) return null;
                     const m = fn.match(/spells[_-]?(\d+)[-_](\d+)/i) || fn.match(/(\d+)[-_](\d+)/i);
                     const key = m ? `${m[1].padStart(2,'0')}-${m[2].padStart(2,'0')}` : fn.replace('.json','');
+                    return { file, key };
+                }).filter(Boolean);
+                const adds = await mapLimit(tasks, 10, async ({file, key}) => {
                     const add = await parseSpellFile(className, file, key);
-                    if (add > 0) { total += add; STATS.chunks++; }
-                }
+                    if (add > 0) STATS.chunks++;
+                    return add;
+                });
+                total += adds.reduce((a, b) => a + b, 0);
             } catch {}
-        }
+        });
         return total;
     } catch { return 0; }
 }
@@ -113,13 +141,16 @@ async function loadSpells() {
         catch { console.log("EQRMSS | Spell Loader | No spells folder"); return SPELLS; }
         
         if (baseBrowse.dirs.length > 0) {
-            for (const classDir of baseBrowse.dirs) {
+            const classDirs = baseBrowse.dirs.filter(d => {
+                const n = d.split('/').pop().toLowerCase();
+                return !n.startsWith('.') && !['backup','old'].includes(n);
+            });
+            await mapLimit(classDirs, 4, async (classDir) => {
                 const className = classDir.split('/').pop().toLowerCase();
-                if (className.startsWith('.') || ['backup','old'].includes(className)) continue;
                 const c = await loadClassSpells(className, classDir);
                 SPELLS[className] = SPELLS[className] || [];
                 if (c > 0) { STATS.classes++; STATS.total += c; }
-            }
+            });
         }
         for (const file of baseBrowse.files) {
             if (!file.endsWith('.json')) continue;

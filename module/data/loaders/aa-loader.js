@@ -12,6 +12,24 @@
  * ============================================================
  */
 
+
+/* Parallel fetch helper (2026-10-14): concurrency-limited Promise.all
+   to avoid hammering the server. Batches at 10 concurrent fetches. */
+async function mapLimit(items, limit, fn) {
+    const results = new Array(items.length);
+    let idx = 0;
+    async function worker() {
+        while (idx < items.length) {
+            const i = idx++;
+            try { results[i] = await fn(items[i], i); }
+            catch { results[i] = null; }
+        }
+    }
+    const workers = Array(Math.min(limit, items.length)).fill().map(() => worker());
+    await Promise.all(workers);
+    return results;
+}
+
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 
 const AA_BASE_PATH = "systems/eqrmss/module/data/aas";
@@ -157,17 +175,17 @@ export const EQRMSSAALoader = {
             };
 
             // Files directly under aas/ (none expected, but harmless)
-            for (const f of (root.files || [])) await loadFile(f);
+            await mapLimit(root.files || [], 10, loadFile);
 
             // One directory per group: general, archetype, <class>, mercenary
-            for (const dir of dirs) {
+            await mapLimit(dirs, 4, async (dir) => {
                 try {
                     const sub = await FilePickerImpl.browse("data", dir);
-                    for (const f of (sub.files || [])) await loadFile(f);
+                    await mapLimit(sub.files || [], 10, loadFile);
                 } catch (err) {
                     console.warn(`EQRMSS | AA Loader | cannot browse ${dir}`, err.message);
                 }
-            }
+            });
         } catch (err) {
             console.error("EQRMSS | AA Loader | failed", err);
         }

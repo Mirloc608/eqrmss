@@ -238,59 +238,73 @@ export async function initializeDataLoaders() {
     game.eqrmss = game.eqrmss || {};
     game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
 
-    if (ClassLoader) {
-        try {
-            if (typeof ClassLoader.load === 'function') await ClassLoader.load();
-            else if (ClassLoader.classes) { game.eqrmss.classes = ClassLoader.classes; }
-            game.eqrmss._loadStatus.classes = true;
-            console.log(`EQRMSS | Classes ready: ${Object.keys(game.eqrmss.classes||{}).length}`);
-        } catch (e) { console.error("Class load failed", e); }
-    }
+    // Parallel loader boot (2026-10-14): independent loaders run concurrently.
+    // Each loader writes to its own game.eqrmss key; none read another's output.
+    const _loadTasks = [];
 
-    if (RaceLoader) {
-        try {
-            if (typeof RaceLoader.load === 'function') await RaceLoader.load();
-            else if (RaceLoader.races) { game.eqrmss.races = RaceLoader.races; }
-            else if (typeof RaceLoader === 'object' && !RaceLoader.load) { game.eqrmss.races = RaceLoader; }
-            // Filter race-schema here too
-            if (game.eqrmss.races) {
-                for (const k of Object.keys(game.eqrmss.races)) {
-                    if (k.toLowerCase().includes('schema')) delete game.eqrmss.races[k];
+    _loadTasks.push((async () => {
+        if (ClassLoader) {
+            try {
+                if (typeof ClassLoader.load === 'function') await ClassLoader.load();
+                else if (ClassLoader.classes) { game.eqrmss.classes = ClassLoader.classes; }
+                game.eqrmss._loadStatus.classes = true;
+                console.log(`EQRMSS | Classes ready: ${Object.keys(game.eqrmss.classes||{}).length}`);
+            } catch (e) { console.error("Class load failed", e); }
+        }
+    })());
+
+    _loadTasks.push((async () => {
+        if (RaceLoader) {
+            try {
+                if (typeof RaceLoader.load === 'function') await RaceLoader.load();
+                else if (RaceLoader.races) { game.eqrmss.races = RaceLoader.races; }
+                else if (typeof RaceLoader === 'object' && !RaceLoader.load) { game.eqrmss.races = RaceLoader; }
+                // Filter race-schema here too
+                if (game.eqrmss.races) {
+                    for (const k of Object.keys(game.eqrmss.races)) {
+                        if (k.toLowerCase().includes('schema')) delete game.eqrmss.races[k];
+                    }
                 }
-            }
+                game.eqrmss._loadStatus.races = true;
+                console.log(`EQRMSS | Races ready: ${Object.keys(game.eqrmss.races||{}).length} [${Object.keys(game.eqrmss.races||{}).join(', ')}]`);
+            } catch (e) { console.error("Race loader failed, trying manual", e); game.eqrmss.races = await manualLoadRaces(); }
+        } else {
+            game.eqrmss.races = await manualLoadRaces();
             game.eqrmss._loadStatus.races = true;
-            console.log(`EQRMSS | Races ready: ${Object.keys(game.eqrmss.races||{}).length} [${Object.keys(game.eqrmss.races||{}).join(', ')}]`);
-        } catch (e) { console.error("Race loader failed, trying manual", e); game.eqrmss.races = await manualLoadRaces(); }
-    } else {
-        game.eqrmss.races = await manualLoadRaces();
-        game.eqrmss._loadStatus.races = true;
-        console.log(`EQRMSS | Races ready (manual): ${Object.keys(game.eqrmss.races||{}).length}`);
-    }
+            console.log(`EQRMSS | Races ready (manual): ${Object.keys(game.eqrmss.races||{}).length}`);
+        }
+    })());
 
-    if (AbilityLoader) {
-        try {
-            if (typeof AbilityLoader.load === 'function') await AbilityLoader.load();
-            else if (AbilityLoader.abilities) { game.eqrmss.abilities = AbilityLoader.abilities; }
-            game.eqrmss._loadStatus.abilities = true;
-            console.log(`EQRMSS | Abilities ready: ${Object.keys(game.eqrmss.abilities||{}).length} classes`);
-        } catch (e) { console.error("Ability load failed", e); }
-    }
+    _loadTasks.push((async () => {
+        if (AbilityLoader) {
+            try {
+                if (typeof AbilityLoader.load === 'function') await AbilityLoader.load();
+                else if (AbilityLoader.abilities) { game.eqrmss.abilities = AbilityLoader.abilities; }
+                game.eqrmss._loadStatus.abilities = true;
+                console.log(`EQRMSS | Abilities ready: ${Object.keys(game.eqrmss.abilities||{}).length} classes`);
+            } catch (e) { console.error("Ability load failed", e); }
+        }
+    })());
 
-    if (AALoader) {
-        try {
-            if (typeof AALoader.load === 'function') await AALoader.load();
-            game.eqrmss._loadStatus.aas = true;
-            console.log(`EQRMSS | AAs ready: ${Object.keys(game.eqrmss.aas?.byId || {}).length} AAs`);
-        } catch (e) { console.error("AA load failed", e); }
-    }
+    _loadTasks.push((async () => {
+        if (AALoader) {
+            try {
+                if (typeof AALoader.load === 'function') await AALoader.load();
+                game.eqrmss._loadStatus.aas = true;
+                console.log(`EQRMSS | AAs ready: ${Object.keys(game.eqrmss.aas?.byId || {}).length} AAs`);
+            } catch (e) { console.error("AA load failed", e); }
+        }
+    })());
 
-    if (ItemLoader) {
-        try {
-            if (typeof ItemLoader.load === 'function') await ItemLoader.load();
-            game.eqrmss._loadStatus.items = true;
-            console.log(`EQRMSS | Items ready: ${Object.keys(game.eqrmss.items?.byId || {}).length} items`);
-        } catch (e) { console.error("Item load failed", e); }
-    }
+    _loadTasks.push((async () => {
+        if (ItemLoader) {
+            try {
+                if (typeof ItemLoader.load === 'function') await ItemLoader.load();
+                game.eqrmss._loadStatus.items = true;
+                console.log(`EQRMSS | Items ready: ${Object.keys(game.eqrmss.items?.byId || {}).length} items`);
+            } catch (e) { console.error("Item load failed", e); }
+        }
+    })());
 
     // Tradeskill Recipes (2026-10-14)
     if (TradeskillLoader) {
@@ -307,67 +321,79 @@ export async function initializeDataLoaders() {
     }
 
     // Era Capstones (2026-10-09)
-    if (CapstoneModule) {
-        try {
-            const { loadCapstones } = CapstoneModule;
-            if (typeof loadCapstones === 'function') {
-                game.eqrmss.capstones = await loadCapstones();
-                game.eqrmss._loadStatus.capstones = true;
-                console.log(`EQRMSS | Capstones ready: ${Object.keys(game.eqrmss.capstones?.byId || {}).length} capstones`);
-            }
-        } catch (e) { console.error("Capstone load failed", e); }
-    }
+    _loadTasks.push((async () => {
+        if (CapstoneModule) {
+            try {
+                const { loadCapstones } = CapstoneModule;
+                if (typeof loadCapstones === 'function') {
+                    game.eqrmss.capstones = await loadCapstones();
+                    game.eqrmss._loadStatus.capstones = true;
+                    console.log(`EQRMSS | Capstones ready: ${Object.keys(game.eqrmss.capstones?.byId || {}).length} capstones`);
+                }
+            } catch (e) { console.error("Capstone load failed", e); }
+        }
+    })());
 
     // Disciplines (2026-10-10): wire the dead loader into boot.
     // The sheet context reads from CONFIG.EQRMSS.data.results.disciplines.
-    if (DisciplineModule) {
-        try {
-            const { DisciplineLoader } = DisciplineModule;
-            if (DisciplineLoader && typeof DisciplineLoader.load === 'function') {
-                const discs = await DisciplineLoader.load();
-                game.eqrmss.disciplines = discs;
-                game.eqrmss._loadStatus.disciplines = true;
-                // Sheet context expects CONFIG.EQRMSS.data.results.disciplines.
-                // (2026-10-11): .results was never initialized anywhere, so the
-                // guarded write was silently skipped every boot and the tab saw [].
-                if (globalThis.CONFIG?.EQRMSS?.data) {
-                    globalThis.CONFIG.EQRMSS.data.results =
-                        globalThis.CONFIG.EQRMSS.data.results || {};
-                    globalThis.CONFIG.EQRMSS.data.results.disciplines = discs;
+    _loadTasks.push((async () => {
+        if (DisciplineModule) {
+            try {
+                const { DisciplineLoader } = DisciplineModule;
+                if (DisciplineLoader && typeof DisciplineLoader.load === 'function') {
+                    const discs = await DisciplineLoader.load();
+                    game.eqrmss.disciplines = discs;
+                    game.eqrmss._loadStatus.disciplines = true;
+                    // Sheet context expects CONFIG.EQRMSS.data.results.disciplines.
+                    // (2026-10-11): .results was never initialized anywhere, so the
+                    // guarded write was silently skipped every boot and the tab saw [].
+                    if (globalThis.CONFIG?.EQRMSS?.data) {
+                        globalThis.CONFIG.EQRMSS.data.results =
+                            globalThis.CONFIG.EQRMSS.data.results || {};
+                        globalThis.CONFIG.EQRMSS.data.results.disciplines = discs;
+                    }
+                    console.log(`EQRMSS | Disciplines ready: ${discs.length} disciplines`);
                 }
-                console.log(`EQRMSS | Disciplines ready: ${discs.length} disciplines`);
-            }
-        } catch (e) { console.error("Discipline load failed", e); }
-    }
+            } catch (e) { console.error("Discipline load failed", e); }
+        }
+    })());
 
-    if (SpellLoader) {
-        try {
-            if (typeof SpellLoader.load === 'function') await SpellLoader.load();
-            game.eqrmss._loadStatus.spells = true;
-            console.log(`EQRMSS | Spells ready: ${game.eqrmss.spells ? Object.keys(game.eqrmss.spells).length : 0} classes, total ${Object.values(game.eqrmss.spells||{}).reduce((a,b)=>a+(b?.length||0),0)} spells`);
-        } catch (e) { console.error("Spell load failed", e); }
-    }
+    _loadTasks.push((async () => {
+        if (SpellLoader) {
+            try {
+                if (typeof SpellLoader.load === 'function') await SpellLoader.load();
+                game.eqrmss._loadStatus.spells = true;
+                console.log(`EQRMSS | Spells ready: ${game.eqrmss.spells ? Object.keys(game.eqrmss.spells).length : 0} classes, total ${Object.values(game.eqrmss.spells||{}).reduce((a,b)=>a+(b?.length||0),0)} spells`);
+            } catch (e) { console.error("Spell load failed", e); }
+        }
+    })());
 
-    if (SkillLoader) {
-        try {
-            if (typeof SkillLoader.load === 'function') await SkillLoader.load();
+    _loadTasks.push((async () => {
+        if (SkillLoader) {
+            try {
+                if (typeof SkillLoader.load === 'function') await SkillLoader.load();
+                game.eqrmss._loadStatus.skills = true;
+                console.log(`EQRMSS | Skills ready via loader`);
+            } catch (e) { console.warn("Skill loader failed, manual fallback", e); game.eqrmss.skills = await manualLoadSkills(); game.eqrmss._loadStatus.skills = true; }
+        } else {
+            console.log("EQRMSS | SkillLoader module not found - using manual scan (fixes 404)");
+            game.eqrmss.skills = await manualLoadSkills();
             game.eqrmss._loadStatus.skills = true;
-            console.log(`EQRMSS | Skills ready via loader`);
-        } catch (e) { console.warn("Skill loader failed, manual fallback", e); game.eqrmss.skills = await manualLoadSkills(); game.eqrmss._loadStatus.skills = true; }
-    } else {
-        console.log("EQRMSS | SkillLoader module not found - using manual scan (fixes 404)");
-        game.eqrmss.skills = await manualLoadSkills();
-        game.eqrmss._loadStatus.skills = true;
-        console.log(`EQRMSS | Skills ready (manual): ${Object.keys(game.eqrmss.skills||{}).length}`);
-    }
+            console.log(`EQRMSS | Skills ready (manual): ${Object.keys(game.eqrmss.skills||{}).length}`);
+        }
+    })());
 
-    if (SongLoader) {
-        try {
-            if (typeof SongLoader.load === 'function') await SongLoader.load();
-            game.eqrmss._loadStatus.songs = true;
-            console.log(`EQRMSS | Songs ready: ${(CONFIG.EQRMSS?.songs?.length) || 0} songs`);
-        } catch (e) { console.error("Song load failed", e); }
-    }
+    _loadTasks.push((async () => {
+        if (SongLoader) {
+            try {
+                if (typeof SongLoader.load === 'function') await SongLoader.load();
+                game.eqrmss._loadStatus.songs = true;
+                console.log(`EQRMSS | Songs ready: ${(CONFIG.EQRMSS?.songs?.length) || 0} songs`);
+            } catch (e) { console.error("Song load failed", e); }
+        }
+    })());
+
+    await Promise.all(_loadTasks);
 
     if (!game.eqrmss.races) game.eqrmss.races = {};
     if (!game.eqrmss.classes) game.eqrmss.classes = {};

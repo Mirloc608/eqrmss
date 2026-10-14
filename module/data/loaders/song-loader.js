@@ -14,6 +14,24 @@
 //     loadEQRMSSSongs()
 // ============================================================
 
+
+/* Parallel fetch helper (2026-10-14): concurrency-limited Promise.all
+   to avoid hammering the server. Batches at 10 concurrent fetches. */
+async function mapLimit(items, limit, fn) {
+    const results = new Array(items.length);
+    let idx = 0;
+    async function worker() {
+        while (idx < items.length) {
+            const i = idx++;
+            try { results[i] = await fn(items[i], i); }
+            catch { results[i] = null; }
+        }
+    }
+    const workers = Array(Math.min(limit, items.length)).fill().map(() => worker());
+    await Promise.all(workers);
+    return results;
+}
+
 const SONG_ROOT =
     "systems/eqrmss/module/data/songs";
 
@@ -60,17 +78,9 @@ export async function loadSongs()
         const songs = [];
 
 
-        for (const className of classes)
-        {
-            const classSongs =
-                await loadClassSongs(
-                    className
-                );
-
-
-            songs.push(
-                ...classSongs
-            );
+        const classResults = await mapLimit(classes, 4, loadClassSongs);
+        for (const classSongs of classResults) {
+            if (Array.isArray(classSongs)) songs.push(...classSongs);
         }
 
 
@@ -162,38 +172,13 @@ async function loadClassSongs(
                 )
             )
             {
-                for (
-                    const bandFile
-                    of index.bands
-                )
-                {
-                    const band =
-                        await loadSongFile(
-                            className,
-                            bandFile
-                        );
-
-
-                    if (Array.isArray(band))
-                    {
-                        for (const entry of band)
-                        {
-                            if (
-                                entry
-                                &&
-                                typeof entry === "object"
-                            )
-                            {
-                                songs.push(entry);
-                            }
+                const bandResults = await mapLimit(index.bands, 10, (bandFile) => loadSongFile(className, bandFile));
+                for (const band of bandResults) {
+                    if (Array.isArray(band)) {
+                        for (const entry of band) {
+                            if (entry && typeof entry === "object") songs.push(entry);
                         }
-                    }
-                    else if (
-                        band
-                        &&
-                        typeof band === "object"
-                    )
-                    {
+                    } else if (band && typeof band === "object") {
                         songs.push(band);
                     }
                 }
@@ -207,20 +192,9 @@ async function loadClassSongs(
                 )
             )
             {
-                for (
-                    const entry
-                    of index.songs
-                )
-                {
-                    const song =
-                        await loadSongEntry(
-                            className,
-                            entry
-                        );
-
-
-                    if (song)
-                        songs.push(song);
+                const songResults = await mapLimit(index.songs, 10, (entry) => loadSongEntry(className, entry));
+                for (const song of songResults) {
+                    if (song) songs.push(song);
                 }
             }
 
@@ -258,17 +232,9 @@ async function loadClassSongs(
     ];
 
 
-    for (const filename of commonFiles)
-    {
-        const song =
-            await loadSongFile(
-                className,
-                filename
-            );
-
-
-        if (song)
-            songs.push(song);
+    const commonResults = await mapLimit(commonFiles, 10, (filename) => loadSongFile(className, filename));
+    for (const song of commonResults) {
+        if (song) songs.push(song);
     }
 
 

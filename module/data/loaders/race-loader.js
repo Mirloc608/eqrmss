@@ -6,6 +6,23 @@
 const RACES = {};
 let INDEX = null;
 
+/* Parallel fetch helper (2026-10-14): concurrency-limited Promise.all
+   to avoid hammering the server. Batches at 10 concurrent fetches. */
+async function mapLimit(items, limit, fn) {
+    const results = new Array(items.length);
+    let idx = 0;
+    async function worker() {
+        while (idx < items.length) {
+            const i = idx++;
+            try { results[i] = await fn(items[i], i); }
+            catch { results[i] = null; }
+        }
+    }
+    const workers = Array(Math.min(limit, items.length)).fill().map(() => worker());
+    await Promise.all(workers);
+    return results;
+}
+
 async function fetchJsonSafe(path) {
     try {
         const r = await fetch(path);
@@ -40,9 +57,12 @@ async function loadRaces() {
         
         console.log(`EQRMSS | Race Loader | Using path: ${basePath} - ${baseBrowse.dirs.length} dirs, ${baseBrowse.files.length} files`);
         
-        for (const dir of baseBrowse.dirs) {
+        const raceDirs = baseBrowse.dirs.filter(dir => {
             const raceId = dir.split('/').pop().toLowerCase();
-            if (raceId.startsWith('.') || ['backup','old'].includes(raceId)) continue;
+            return !raceId.startsWith('.') && !['backup','old'].includes(raceId);
+        });
+        await mapLimit(raceDirs, 5, async (dir) => {
+            const raceId = dir.split('/').pop().toLowerCase();
             try {
                 const raceBrowse = await FilePickerImpl.browse("data", dir);
                 const mainFile = raceBrowse.files.find(f=> {
@@ -55,12 +75,15 @@ async function loadRaces() {
                     if (json) RACES[raceId] = json;
                 }
             } catch {}
-        }
+        });
         
-        for (const file of baseBrowse.files) {
-            if (!file.endsWith('.json')) continue;
+        const raceFiles = baseBrowse.files.filter(file => {
+            if (!file.endsWith('.json')) return false;
             const baseName = file.split('/').pop().replace('.json','').toLowerCase();
-            if (['index','manifest','race-schema','schema','races','base-hits'].includes(baseName) || baseName.includes('schema') || RACES[baseName]) continue;
+            return !['index','manifest','race-schema','schema','races','base-hits'].includes(baseName) && !baseName.includes('schema') && !RACES[baseName];
+        });
+        await mapLimit(raceFiles, 10, async (file) => {
+            const baseName = file.split('/').pop().replace('.json','').toLowerCase();
             const json = await fetchJsonSafe(file);
             if (json) {
                 if (Array.isArray(json)) {
@@ -74,7 +97,7 @@ async function loadRaces() {
                     RACES[baseName]=json;
                 }
             }
-        }
+        });
         
         console.log(`EQRMSS | Races loaded: ${Object.keys(RACES).length} [${Object.keys(RACES).sort().join(', ')}]`);
 
@@ -85,25 +108,31 @@ async function loadRaces() {
         try {
             const cBrowse = await FilePickerImpl.browse("data", "systems/eqrmss/module/data/creatures");
             const skipCreatureFiles = new Set(["types", "attack-packages"]);
-            for (const dir of cBrowse.dirs || []) {
+            await mapLimit(cBrowse.dirs || [], 5, async (dir) => {
                 try {
                     const sub = await FilePickerImpl.browse("data", dir);
-                    for (const file of sub.files || []) {
-                        if (!file.endsWith(".json")) continue;
+                    const files = (sub.files || []).filter(file => {
+                        if (!file.endsWith(".json")) return false;
                         const key = file.split("/").pop().replace(".json", "").toLowerCase();
-                        if (skipCreatureFiles.has(key) || RACES[key]) continue;
+                        return !skipCreatureFiles.has(key) && !RACES[key];
+                    });
+                    await mapLimit(files, 10, async (file) => {
+                        const key = file.split("/").pop().replace(".json", "").toLowerCase();
                         const json = await fetchJsonSafe(file);
                         if (json) RACES[key] = json;
-                    }
+                    });
                 } catch {}
-            }
-            for (const file of cBrowse.files || []) {
-                if (!file.endsWith(".json")) continue;
+            });
+            const cFiles = (cBrowse.files || []).filter(file => {
+                if (!file.endsWith(".json")) return false;
                 const key = file.split("/").pop().replace(".json", "").toLowerCase();
-                if (skipCreatureFiles.has(key) || RACES[key]) continue;
+                return !skipCreatureFiles.has(key) && !RACES[key];
+            });
+            await mapLimit(cFiles, 10, async (file) => {
+                const key = file.split("/").pop().replace(".json", "").toLowerCase();
                 const json = await fetchJsonSafe(file);
                 if (json) RACES[key] = json;
-            }
+            });
             console.log(`EQRMSS | Creatures loaded into race registry: ${Object.keys(RACES).length} total`);
         } catch {}
         game.eqrmss = game.eqrmss||{};
