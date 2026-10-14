@@ -608,17 +608,12 @@ Hooks.once("ready", async function () {
         await initializeDataLoaders();
         console.log("EQRMSS v4.15 | Data loaders ready");
         try {
-            const skillsPack = game.packs.get("eqrmss.skills");
-            const categoriesPack = game.packs.get("eqrmss.skill-categories");
-            const metadataPack = game.packs.get("eqrmss.skill-metadata");
-            const professionCostsPack = game.packs.get("eqrmss.profession-skill-costs");
-            const skills = skillsPack ? await skillsPack.getDocuments() : [];
-            const categories = categoriesPack ? await categoriesPack.getDocuments() : [];
-            const metadata = metadataPack ? await metadataPack.getDocuments() : [];
-            const professionCosts = professionCostsPack ? await professionCostsPack.getDocuments() : [];
+            // Skill engine: use CONFIG.EQRMSS.skills (packs deleted 2026-09-28)
+            // Map id -> _id for registry compatibility
+            const skillData = Object.values(CONFIG.EQRMSS?.skills ?? {}).map(s => ({ ...s, _id: s.id ?? s._id }));
             const roller = { roll: (formula) => new Roll(formula).roll({ async: false }) };
-            initializeSkillEngine({ skills, categories, metadata, professionCosts, roller });
-        } catch {}
+            initializeSkillEngine({ skills: skillData, categories: [], metadata: [], professionCosts: [], roller });
+        } catch (e) { console.warn("Skill engine init failed", e); }
         registerEQRMSSSheets();
         console.log("EQRMSS | Sheets registered v4.15");
 
