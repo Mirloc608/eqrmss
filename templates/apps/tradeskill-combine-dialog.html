@@ -30,6 +30,12 @@
                             <option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}} ({{have}}/{{need}})</option>
                             {{/each}}
                         </select>
+                        {{else if weaponChoice}}
+                        <select class="weapon-select" data-recipe-id="{{../id}}" data-component-id="{{id}}">
+                            {{#each weaponOptions}}
+                            <option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}}</option>
+                            {{/each}}
+                        </select>
                         {{else}}
                         <span class="comp-name">{{id}}</span>
                         {{/if}}

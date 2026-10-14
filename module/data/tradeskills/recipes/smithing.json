@@ -1,61 +1,5 @@
 [
   {
-    "id": "tarnished-dagger",
-    "name": "Tarnished Dagger",
-    "skill": "skill-smithing",
-    "difficulty": 18,
-    "container": "Forge",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "rusty-dagger",
-        "name": "Rusty Dagger",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "sharpening-stone",
-        "name": "Sharpening Stone",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "tarnished-dagger",
-      "name": "Tarnished Dagger",
-      "qty": 1
-    }
-  },
-  {
-    "id": "tarnished-short-sword",
-    "name": "Tarnished Short Sword",
-    "skill": "skill-smithing",
-    "difficulty": 20,
-    "container": "Forge",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "rusty-short-sword",
-        "name": "Rusty Short Sword",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "sharpening-stone",
-        "name": "Sharpening Stone",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "tarnished-short-sword",
-      "name": "Tarnished Short Sword",
-      "qty": 1
-    }
-  },
-  {
     "id": "file",
     "name": "File",
     "skill": "skill-smithing",
@@ -88,34 +32,6 @@
       "type": "item",
       "template": "file",
       "name": "File",
-      "qty": 1
-    }
-  },
-  {
-    "id": "tarnished-two-handed-sword",
-    "name": "Tarnished Two Handed Sword",
-    "skill": "skill-smithing",
-    "difficulty": 25,
-    "container": "Forge",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "rusty-two-handed-sword",
-        "name": "Rusty Two Handed Sword",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "sharpening-stone",
-        "name": "Sharpening Stone",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "tarnished-two-handed-sword",
-      "name": "Tarnished Two Handed Sword",
       "qty": 1
     }
   },
@@ -884,5 +800,35 @@
       "defaultMaterial": "iron"
     },
     "expansion": "classic"
+  },
+  {
+    "id": "polish-rusty-weapon",
+    "name": "Polish Rusty Weapon",
+    "skill": "skill-smithing",
+    "difficulty": 25,
+    "container": "Forge",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "rusty-weapon",
+        "name": "Rusty Weapon (select)",
+        "qty": 1,
+        "type": "item",
+        "weaponChoice": {
+          "condition": "rusty"
+        }
+      },
+      {
+        "id": "sharpening-stone",
+        "name": "Sharpening Stone",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "polish",
+      "fromCondition": "rusty",
+      "toCondition": "normal"
+    }
   }
 ]

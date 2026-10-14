@@ -45,6 +45,17 @@ export class TradeskillCombineDialog extends BaseApplication {
                 }
             });
         });
+        // Weapon dropdown change handler (2026-10-14)
+        this.element.querySelectorAll(".weapon-select").forEach(select => {
+            select.addEventListener("change", (ev) => {
+                const recipeId = ev.target.dataset.recipeId;
+                const weaponId = ev.target.value;
+                if (recipeId) {
+                    this.selectedWeapons[recipeId] = weaponId;
+                    this.render();
+                }
+            });
+        });
     }
 
     constructor(actor, skillId, options = {}) {
@@ -52,6 +63,24 @@ export class TradeskillCombineDialog extends BaseApplication {
         this.actor = actor;
         this.skillId = skillId;
         this.selectedMaterials = {}; // recipeId -> materialId
+        this.selectedWeapons = {}; // recipeId -> itemId (for weaponChoice)
+    }
+
+    // Get inventory weapons matching a condition (e.g., "rusty") - 2026-10-14
+    _getWeaponsByCondition(condition) {
+        const matches = [];
+        for (const item of this.actor.items) {
+            const sys = item.system ?? {};
+            // Check if it's a weapon with matching condition
+            if (sys.condition === condition || String(item.name ?? "").toLowerCase().startsWith(condition.toLowerCase())) {
+                matches.push({ id: item.id, name: item.name });
+            }
+        }
+        return matches;
+    }
+
+    _getSelectedWeapon(recipeId) {
+        return this.selectedWeapons[recipeId] ?? null;
     }
 
     // Get available ore materials for dropdown (2026-10-14)
@@ -109,6 +138,20 @@ export class TradeskillCombineDialog extends BaseApplication {
                             need: c.qty
                         }));
                     }
+                    // For weaponChoice, add weapon dropdown options (2026-10-14)
+                    if (c.weaponChoice) {
+                        const condition = c.weaponChoice.condition ?? "rusty";
+                        const weapons = this._getWeaponsByCondition(condition);
+                        const selectedWeaponId = this._getSelectedWeapon(r.id);
+                        base.weaponOptions = weapons.map(w => ({
+                            ...w,
+                            selected: w.id === selectedWeaponId || (!selectedWeaponId && w === weapons[0])
+                        }));
+                        // Auto-select first if none selected
+                        if (weapons.length > 0 && !selectedWeaponId) {
+                            this.selectedWeapons[r.id] = weapons[0].id;
+                        }
+                    }
                     return base;
                 })
             };
@@ -156,6 +199,11 @@ export class TradeskillCombineDialog extends BaseApplication {
     }
 
     _countItem(component, recipeId = null) {
+        // For weaponChoice, count matching weapons (1 if any available)
+        if (component.weaponChoice) {
+            const condition = component.weaponChoice.condition ?? "rusty";
+            return this._getWeaponsByCondition(condition).length > 0 ? 1 : 0;
+        }
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
             const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
@@ -210,6 +258,8 @@ export class TradeskillCombineDialog extends BaseApplication {
         for (const c of components) {
             // Skip non-consumed components (e.g., reusable molds) - 2026-10-14
             if (c.consume === false) continue;
+            // Skip weaponChoice (transformed, not consumed) - 2026-10-14
+            if (c.weaponChoice) continue;
             // For materialChoice, consume the selected material's ore
             if (c.materialChoice && recipeId) {
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
@@ -244,6 +294,29 @@ export class TradeskillCombineDialog extends BaseApplication {
     }
 
     async _createProduct(product, quality = "normal", recipeId = null) {
+        // Handle polish product type (2026-10-14): transform weapon condition
+        if (product.type === "polish" && recipeId) {
+            const weaponId = this._getSelectedWeapon(recipeId);
+            if (!weaponId) {
+                ui.notifications.error("No weapon selected.");
+                return;
+            }
+            const weapon = this.actor.items.get(weaponId);
+            if (!weapon) {
+                ui.notifications.error("Weapon not found.");
+                return;
+            }
+            const fromCond = product.fromCondition ?? "rusty";
+            const toCond = product.toCondition ?? "normal";
+            // Update condition and name
+            const newName = String(weapon.name ?? "").replace(new RegExp(`^${fromCond}\s+`, "i"), "");
+            await weapon.update({
+                name: newName,
+                "system.condition": toCond
+            });
+            ui.notifications.info(`Polished ${weapon.name} to ${newName}.`);
+            return;
+        }
         // Use selected material from dropdown if available (2026-10-14)
         let materialId = product.material ?? product.defaultMaterial ?? "steel";
         if (recipeId) {
