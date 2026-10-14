@@ -10,6 +10,13 @@
         {{#if this.icon}}<img src="{{this.icon}}" alt="" class="discipline-icon" />{{/if}}{{this.name}} ({{this.level}})
         <span class="cardtip">
           <span class="ct-head"><span>{{this.name}}</span><span>Level {{this.level}}</span></span>
+          {{#if this.effects}}
+            {{#each this.effects}}
+          <span class="ct-row"><span class="ct-k">Effect</span><span>{{this.value}}</span></span>
+            {{/each}}
+          {{/if}}
+          {{#if this.durationRounds}}<span class="ct-row"><span class="ct-k">Duration</span><span>{{this.durationRounds}} rounds</span></span>{{/if}}
+          {{#if this.reuseRounds}}<span class="ct-row"><span class="ct-k">Cooldown</span><span>{{this.reuseRounds}} rounds</span></span>{{/if}}
           {{#if this.description}}<span class="ct-desc">{{this.description}}</span>{{/if}}
         </span>
       </button>
