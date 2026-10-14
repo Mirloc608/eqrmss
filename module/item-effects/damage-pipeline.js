@@ -176,6 +176,12 @@ async function applyDamage({ effect, target, source }) {
     const taken = (target?.system?.hits?.value ?? 0) + final;
     await persistValue(target, "system.hits.value", taken);
 
+    // Charm break (2026-10-13, user ruling): damage breaks charm.
+    if (final > 0 && target?.system?.status?.charm) {
+        await persistValue(target, "system.status.charm", null);
+        notes.push("charm broken by damage");
+    }
+
     return { type: "damage", element: effect.element, rolled, final, notes, source };
 }
 
@@ -1013,6 +1019,27 @@ async function applyMez({ effect, target, source }) {
 }
 
 /**
+ * "charm" — item charm (2026-10-13, user ruling). Charms the target for a
+ * fixed duration. Target max level = 90% of caster level (rounded up).
+ * Breaks on damage (see applyDamage). Stored at system.status.charm =
+ * { roundsLeft, source }.
+ */
+async function applyCharm({ effect, target, source, caster }) {
+    const miss = requireTarget(target, "charm", source);
+    if (miss) return miss;
+    const casterLevel = Number(caster?.system?.attributes?.level?.value) || 1;
+    const targetLevel = Number(target?.system?.attributes?.level?.value) || 1;
+    const maxLevel = Math.ceil(casterLevel * 0.9);
+    if (targetLevel > maxLevel) {
+        return { type: "charm", final: 0, notes: [`${target.name} (level ${targetLevel}) is too high to charm (max ${maxLevel})`], source, applied: false };
+    }
+    const duration = Number(effect.duration ?? 10);
+    const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Charm";
+    await persistValue(target, "system.status.charm", { roundsLeft: duration, source: dispName });
+    return { type: "charm", final: 1, notes: [`charmed for ${duration} rounds (${dispName}); breaks on damage`], source, applied: true };
+}
+
+/**
  * "summon" — never half-implemented: post a chat note + GM prompt with the
  * creature name and duration. Safe to run headless (no ChatMessage global)
  * and in Foundry (whispers the GM when the global exists).
@@ -1186,6 +1213,29 @@ export async function applyFeignDeathPayload({ effect, caster, target, source })
 }
 
 /**
+ * "resurrect" — item resurrection (2026-10-13, user ruling). Corpse required,
+ * not usable in combat, touch range. XP return varies by item.
+ */
+export async function applyResurrect({ effect, target, source, caster }) {
+    const miss = requireTarget(target, "resurrect", source);
+    if (miss) return miss;
+    try {
+        if (globalThis.game?.combat?.active) {
+            return { type: "resurrect", final: 0, notes: ["cannot resurrect during combat"], source, applied: false };
+        }
+    } catch (e) { /* ignore */ }
+    const hits = target?.system?.hits;
+    const isDead = (hits?.value ?? 0) >= (hits?.max ?? 1);
+    if (!isDead) {
+        return { type: "resurrect", final: 0, notes: [`${target.name} is not dead`], source, applied: false };
+    }
+    const xpReturn = Number(effect.xpReturn ?? 0);
+    const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Resurrect";
+    await persistValue(target, "system.hits.value", 1);
+    return { type: "resurrect", final: 1, notes: [`${target.name} resurrected by ${dispName}; ${xpReturn}% XP return (GM adjudicates)`], source, applied: true };
+}
+
+/**
  * "identify" — EQ Identify (2026-10-08). Reveals magical information about
  * the item the target is holding. Delegates to module/spells/identify.js
  * via dynamic import.
@@ -1228,6 +1278,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "snare") results.push(await applySnare({ effect, target, source }));
         else if (effect.type === "fear") results.push(await applyFear({ effect, target, source }));
         else if (effect.type === "mez") results.push(await applyMez({ effect, target, source }));
+        else if (effect.type === "charm") results.push(await applyCharm({ effect, target, source, caster }));
         else if (effect.type === "summon") results.push(await applySummon({ effect, caster, target, source }));
         else if (effect.type === "damageshield") results.push(await applyDamageShield({ effect, target, source }));
         else if (effect.type === "absorb") results.push(await applyAbsorb({ effect, target, source }));
@@ -1244,6 +1295,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "faction") results.push(await applyFactionPayload({ effect, caster, target, source }));
         else if (effect.type === "dispel") results.push(await applyDispelPayload({ effect, caster, target, source }));
         else if (effect.type === "feign") results.push(await applyFeignDeathPayload({ effect, caster, target, source }));
+        else if (effect.type === "resurrect") results.push(await applyResurrect({ effect, target, source, caster }));
         else if (effect.type === "vampiric") results.push(await applyVampiric({ effect, target, source }));
         else if (effect.type === "lifetap") results.push(await applyLifetap({ effect, target, source, caster }));
         else if (effect.type === "identify") results.push(await applyIdentifyPayload({ effect, caster, target, source }));

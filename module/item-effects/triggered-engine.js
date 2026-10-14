@@ -88,9 +88,16 @@ export async function activateClicky({ item }) {
     // Clickies cost 0 mana — never deduct anything.
 
     const decrementCharges = async () => {
+        const updates = {};
         const ch = item?.system?.charges;
         if (typeof ch === "number" && ch > 0) {
-            await item.update({ "system.charges": ch - 1 });
+            updates["system.charges"] = ch - 1;
+        }
+        if (String(effect.recastDelay ?? "").trim()) {
+            updates["system.lastUsedAt"] = Date.now();
+        }
+        if (Object.keys(updates).length > 0) {
+            await item.update(updates);
         }
     };
 

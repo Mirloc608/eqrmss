@@ -13102,6 +13102,254 @@
           "percent": 100
         }
       ]
+    },
+    {
+      "id": "clairvoyance-1",
+      "kind": "worn",
+      "family": "clairvoyance",
+      "rank": 1,
+      "name": "Clairvoyance I",
+      "description": "While worn, the bearer regenerates 1 mana per combat round (6-second tick).",
+      "stacking": "highest",
+      "payload": [
+        {
+          "type": "regen",
+          "pool": "mana",
+          "amount": 1,
+          "per": "round"
+        }
+      ]
+    },
+    {
+      "id": "clairvoyance-2",
+      "kind": "worn",
+      "family": "clairvoyance",
+      "rank": 2,
+      "name": "Clairvoyance II",
+      "description": "While worn, the bearer regenerates 2 mana per combat round (6-second tick).",
+      "stacking": "highest",
+      "payload": [
+        {
+          "type": "regen",
+          "pool": "mana",
+          "amount": 2,
+          "per": "round"
+        }
+      ]
+    },
+    {
+      "id": "clairvoyance-3",
+      "kind": "worn",
+      "family": "clairvoyance",
+      "rank": 3,
+      "name": "Clairvoyance III",
+      "description": "While worn, the bearer regenerates 3 mana per combat round (6-second tick).",
+      "stacking": "highest",
+      "payload": [
+        {
+          "type": "regen",
+          "pool": "mana",
+          "amount": 3,
+          "per": "round"
+        }
+      ]
+    },
+    {
+      "id": "clairvoyance-4",
+      "kind": "worn",
+      "family": "clairvoyance",
+      "rank": 4,
+      "name": "Clairvoyance IV",
+      "description": "While worn, the bearer regenerates 4 mana per combat round (6-second tick).",
+      "stacking": "highest",
+      "payload": [
+        {
+          "type": "regen",
+          "pool": "mana",
+          "amount": 4,
+          "per": "round"
+        }
+      ]
+    },
+    {
+      "id": "clairvoyance-5",
+      "kind": "worn",
+      "family": "clairvoyance",
+      "rank": 5,
+      "name": "Clairvoyance V",
+      "description": "While worn, the bearer regenerates 5 mana per combat round (6-second tick).",
+      "stacking": "highest",
+      "payload": [
+        {
+          "type": "regen",
+          "pool": "mana",
+          "amount": 5,
+          "per": "round"
+        }
+      ]
+    },
+    {
+      "id": "clairvoyance-6",
+      "kind": "worn",
+      "family": "clairvoyance",
+      "rank": 6,
+      "name": "Clairvoyance VI",
+      "description": "While worn, the bearer regenerates 6 mana per combat round (6-second tick).",
+      "stacking": "highest",
+      "payload": [
+        {
+          "type": "regen",
+          "pool": "mana",
+          "amount": 6,
+          "per": "round"
+        }
+      ]
+    },
+    {
+      "id": "clairvoyance-7",
+      "kind": "worn",
+      "family": "clairvoyance",
+      "rank": 7,
+      "name": "Clairvoyance VII",
+      "description": "While worn, the bearer regenerates 7 mana per combat round (6-second tick).",
+      "stacking": "highest",
+      "payload": [
+        {
+          "type": "regen",
+          "pool": "mana",
+          "amount": 7,
+          "per": "round"
+        }
+      ]
+    },
+    {
+      "id": "clairvoyance-8",
+      "kind": "worn",
+      "family": "clairvoyance",
+      "rank": 8,
+      "name": "Clairvoyance VIII",
+      "description": "While worn, the bearer regenerates 8 mana per combat round (6-second tick).",
+      "stacking": "highest",
+      "payload": [
+        {
+          "type": "regen",
+          "pool": "mana",
+          "amount": 8,
+          "per": "round"
+        }
+      ]
+    },
+    {
+      "id": "clairvoyance-9",
+      "kind": "worn",
+      "family": "clairvoyance",
+      "rank": 9,
+      "name": "Clairvoyance IX",
+      "description": "While worn, the bearer regenerates 9 mana per combat round (6-second tick).",
+      "stacking": "highest",
+      "payload": [
+        {
+          "type": "regen",
+          "pool": "mana",
+          "amount": 9,
+          "per": "round"
+        }
+      ]
+    },
+    {
+      "id": "clairvoyance-10",
+      "kind": "worn",
+      "family": "clairvoyance",
+      "rank": 10,
+      "name": "Clairvoyance X",
+      "description": "While worn, the bearer regenerates 10 mana per combat round (6-second tick).",
+      "stacking": "highest",
+      "payload": [
+        {
+          "type": "regen",
+          "pool": "mana",
+          "amount": 10,
+          "per": "round"
+        }
+      ]
+    },
+    {
+      "id": "clicky-charm",
+      "kind": "triggered",
+      "name": "Charm",
+      "description": "Charms the target for 10 rounds. Target must be level 90% or less of caster (rounded up). Breaks on damage.",
+      "castTime": "instant",
+      "payload": [
+        {
+          "type": "charm",
+          "duration": 10
+        }
+      ]
+    },
+    {
+      "id": "clicky-resurrect-0",
+      "kind": "triggered",
+      "name": "Resurrect (0%)",
+      "description": "Resurrects the target with 0% XP return. Requires corpse, not usable in combat, touch range.",
+      "castTime": "instant",
+      "payload": [
+        {
+          "type": "resurrect",
+          "xpReturn": 0
+        }
+      ]
+    },
+    {
+      "id": "clicky-resurrect-50",
+      "kind": "triggered",
+      "name": "Resurrect (50%)",
+      "description": "Resurrects the target with 50% XP return. Requires corpse, not usable in combat, touch range.",
+      "castTime": "instant",
+      "payload": [
+        {
+          "type": "resurrect",
+          "xpReturn": 50
+        }
+      ]
+    },
+    {
+      "id": "clicky-resurrect-90",
+      "kind": "triggered",
+      "name": "Resurrect (90%)",
+      "description": "Resurrects the target with 90% XP return. Requires corpse, not usable in combat, touch range.",
+      "castTime": "instant",
+      "payload": [
+        {
+          "type": "resurrect",
+          "xpReturn": 90
+        }
+      ]
+    },
+    {
+      "id": "clicky-resurrect-96",
+      "kind": "triggered",
+      "name": "Resurrect (96%)",
+      "description": "Resurrects the target with 96% XP return. Requires corpse, not usable in combat, touch range.",
+      "castTime": "instant",
+      "payload": [
+        {
+          "type": "resurrect",
+          "xpReturn": 96
+        }
+      ]
+    },
+    {
+      "id": "clicky-resurrect-100",
+      "kind": "triggered",
+      "name": "Resurrect (100%)",
+      "description": "Resurrects the target with 100% XP return. Requires corpse, not usable in combat, touch range.",
+      "castTime": "instant",
+      "payload": [
+        {
+          "type": "resurrect",
+          "xpReturn": 100
+        }
+      ]
     }
   ]
 }
