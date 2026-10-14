@@ -611,6 +611,20 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         }
     }
 
+    // ---- Magic weapon vs non-magical protection (2026-10-14, user ruling):
+    // creatures protected from non-magical attacks cannot be struck by
+    // non-magic weapons. H2H "MAGIC ITEM" flag bypasses this.
+    if (targetActor?.system?.protectedFromNonMagical && !sys.magicWeapon) {
+        const msg = `${targetActor.name} is protected from non-magical attacks — ${weaponItem.name} cannot harm it.`;
+        ui.notifications?.warn(msg);
+        await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor }),
+            content: combatCard("Combat", `<h2>${esc(actor.name)} attacks with ${esc(weaponItem.name)}</h2>`
+                + `<p><em>${esc(msg)}</em></p>`)
+        });
+        return { error: "protected", message: msg };
+    }
+
     // ---- Invisibility sensing (2026-10-07): if the attacker cannot
     // sense the target (invisible, no see-invisible, fooled by type),
     // the attack cannot be aimed at them.

@@ -23,7 +23,8 @@ export async function loadWeaponData() {
         "two-handed",
         "polearm",
         "thrown",
-        "natural"
+        "natural",
+        "hand-to-hand"
     ];
     for (const cat of categories) {
         const res = await fetch(`${base}/templates/${cat}.json`);
@@ -51,7 +52,7 @@ export async function loadWeaponData() {
  * @param {string} conditionId e.g. "rusty" (default "normal")
  * @returns {object} Final weapon stats
  */
-export function composeWeapon(templateId, materialId = "steel", conditionId = "normal") {
+export function composeWeapon(templateId, materialId = "steel", conditionId = "normal", infused = false) {
     const template = TEMPLATES[templateId];
     const material = MATERIALS[materialId] ?? MATERIALS["steel"];
     const condition = CONDITIONS[conditionId] ?? CONDITIONS["normal"];
@@ -59,7 +60,9 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
     if (!template) throw new Error(`Unknown weapon template: ${templateId}`);
 
     // Name: "Rusty Iron Longsword" (skip baseline material/condition in name)
+    // H2H (2026-10-14): "Infused" prefix for infused quality tier (user ruling).
     const nameParts = [];
+    if (infused) nameParts.push("Infused");
     if (condition.id !== "normal") nameParts.push(condition.name);
     if (material.id !== "steel") nameParts.push(material.name);
     nameParts.push(template.name);
@@ -67,11 +70,15 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
     // Weight: template × material multiplier (rounded to 0.1)
     const weight = Math.round(template.weight * material.weightMult * 10) / 10;
 
-    // OB modifier: material + condition
-    const obMod = material.obMod + condition.obMod;
+    // OB modifier: material + condition + infused
+    const obMod = material.obMod + condition.obMod + infusedObBonus;
 
     // Damage modifier: material + condition
     const damageMod = material.damageMod + condition.damageMod;
+
+    // H2H Infused (2026-10-14, user ruling): +5 OB, +50% cost for infused tier.
+    const infusedObBonus = infused ? 5 : 0;
+    const infusedCostMult = infused ? 1.5 : 1;
 
     // Breakage: combine (higher = breaks more easily)
     // Template breakage is an array of doubles or "auto"
@@ -83,6 +90,7 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
         templateId,
         materialId: material.id,
         conditionId: condition.id,
+        infused,
         attackTable: template.attackTable,
         weaponType: template.weaponType,
         typeCode: template.typeCode,
@@ -98,6 +106,11 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
         criticalType: template.criticalType,
         obMod,
         damageMod,
+        // H2H (2026-10-14, user ruling): magic weapon flag bypasses
+        // "protected from non-magical attacks"; classes restricts to
+        // Monk/Beastlord for hand-to-hand weapons.
+        magicWeapon: template.magicWeapon ?? false,
+        classes: template.classes ?? null,
         // Item-effect hook: materials may grant a proc (weapons only).
         // Stored as an id; resolved through the item-effect catalog at fire
         // time so catalog tuning updates existing items without recompose.
