@@ -87,6 +87,31 @@ export class TradeskillCombineDialog extends BaseApplication {
     // materialType: "ore" (default), "cloth", "leather"
     _getOreMaterials(materialType = "ore") {
         try {
+            if (materialType === "metal") {
+                // Jewelcraft metals (bars)
+                return [
+                    { id: "silver-bar", name: "Silver Bar" },
+                    { id: "electrum-bar", name: "Electrum Bar" },
+                    { id: "gold-bar", name: "Gold Bar" },
+                    { id: "platinum-bar", name: "Platinum Bar" },
+                ];
+            }
+            if (materialType === "gem") {
+                // Jewelcraft gems
+                return [
+                    { id: "malachite", name: "Malachite" },
+                    { id: "turquoise", name: "Turquoise" },
+                    { id: "lapis-lazuli", name: "Lapis Lazuli" },
+                    { id: "hematite", name: "Hematite" },
+                    { id: "cat-s-eye-agate", name: "Cat Eye Agate" },
+                    { id: "jasper", name: "Jasper" },
+                    { id: "amber", name: "Amber" },
+                    { id: "jade", name: "Jade" },
+                    { id: "topaz", name: "Topaz" },
+                    { id: "peridot", name: "Peridot" },
+                    { id: "sapphire", name: "Sapphire" },
+                ];
+            }
             if (materialType === "cloth" || materialType === "leather") {
                 // Armor materials for tailoring
                 const armor = game.eqrmss?.armor;
