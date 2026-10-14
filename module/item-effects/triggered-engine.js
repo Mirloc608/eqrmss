@@ -64,6 +64,14 @@ export async function activateClicky({ item }) {
         return { fired: false, reason: "no-owning-actor" };
     }
 
+    // Limited charges (2026-10-13): if system.charges is a number, it's the
+    // remaining uses. Undefined/null = unlimited. Zero = depleted.
+    const charges = item?.system?.charges;
+    if (typeof charges === "number" && charges <= 0) {
+        ui?.notifications?.warn(`"${itemName}" has no charges remaining.`);
+        return { fired: false, reason: "no-charges" };
+    }
+
     // Target: wearer for beneficial clickies (ruling 2026-10-06), but
     // offensive clickies (damage payload) target the current canvas
     // targets instead (2026-10-09: Seawater Blast hit the wearer).
@@ -79,6 +87,13 @@ export async function activateClicky({ item }) {
 
     // Clickies cost 0 mana — never deduct anything.
 
+    const decrementCharges = async () => {
+        const ch = item?.system?.charges;
+        if (typeof ch === "number" && ch > 0) {
+            await item.update({ "system.charges": ch - 1 });
+        }
+    };
+
     const applyNow = async () => {
         const perTarget = [];
         for (const tgt of recipients) {
@@ -91,12 +106,15 @@ export async function activateClicky({ item }) {
 
     const castTime = String(effect.castTime ?? "instant").trim().toLowerCase();
     if (!castTime || castTime === "instant") {
+        await decrementCharges();
         const results = await applyNow();
         return { fired: true, effect, results };
     }
 
     // Non-instant cast: announce the casting, then fire after the delay.
+    // Charges are consumed when casting starts, not when it fires.
     const delayMs = parseCastDelayMs(castTime);
+    await decrementCharges();
     postClickyBeginsCasting({ actor, item, effect, castTime });
     setTimeout(() => {
         applyNow().catch(e => console.error("EQRMSS | delayed clicky fire failed", e));

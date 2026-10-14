@@ -576,6 +576,10 @@
 
     {{#if system.triggeredEffect}}
     <button type="button" class="clicky-use-btn" title="Fire this item's triggered effect"><i class="fas fa-bolt"></i> Use</button>
+    <div class="form-group">
+        <label>Charges <span class="hint">(blank = unlimited)</span></label>
+        <input type="number" name="system.charges" value="{{system.charges}}" min="0" step="1"/>
+    </div>
     {{/if}}
 
 </div>
