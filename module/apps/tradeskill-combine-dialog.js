@@ -92,7 +92,9 @@ export class TradeskillCombineDialog extends BaseApplication {
                     count += Number(sys.quantity ?? 1);
                 }
             } else {
-                if (item.id === component.id || sys.template === component.id) {
+                if (item.id === component.id || sys.template === component.id ||
+                    item.name.toLowerCase() === component.name.toLowerCase() ||
+                    item.name.toLowerCase().includes(component.id.toLowerCase())) {
                     count += Number(sys.quantity ?? 1);
                 }
             }
@@ -116,7 +118,9 @@ export class TradeskillCombineDialog extends BaseApplication {
                 if (c.type === "material") {
                     match = sys.material === c.id || item.name.toLowerCase().includes(c.id.toLowerCase());
                 } else {
-                    match = item.id === c.id || sys.template === c.id;
+                    match = item.id === c.id || sys.template === c.id ||
+                        item.name.toLowerCase() === c.name.toLowerCase() ||
+                        item.name.toLowerCase().includes(c.id.toLowerCase());
                 }
                 if (match) {
                     const qty = Number(sys.quantity ?? 1);
