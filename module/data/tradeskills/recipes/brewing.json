@@ -1,1 +1,452 @@
-[{"components":[{"id":"barley","qty":2,"type":"item"},{"id":"water","qty":1,"type":"item"}],"difficulty":25,"id":"ale-keg","name":"Keg of Ale","product":{"qty":1,"template":"ale","type":"item"},"skill":"skill-brewing"}]
+[
+  {
+    "id": "water-flask",
+    "name": "Water Flask",
+    "skill": "skill-brewing",
+    "difficulty": 21,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "bottle",
+        "name": "Bottle",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "pod-of-water",
+        "name": "Pod of Water",
+        "qty": 4,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "water-flask",
+      "name": "Water Flask",
+      "qty": 1
+    }
+  },
+  {
+    "id": "bog-juice",
+    "name": "Bog Juice",
+    "skill": "skill-brewing",
+    "difficulty": 21,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "bottle",
+        "name": "Bottle",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "snake-scales",
+        "name": "Snake Scales",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "water-flask",
+        "name": "Water Flask",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "bog-juice",
+      "name": "Bog Juice",
+      "qty": 1
+    }
+  },
+  {
+    "id": "flask-of-berry-juice",
+    "name": "Flask of Berry Juice",
+    "skill": "skill-brewing",
+    "difficulty": 21,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "berries",
+        "name": "Berries",
+        "qty": 2,
+        "type": "item"
+      },
+      {
+        "id": "water-flask",
+        "name": "Water Flask",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "flask-of-berry-juice",
+      "name": "Flask of Berry Juice",
+      "qty": 5
+    }
+  },
+  {
+    "id": "bottle-of-kalish",
+    "name": "Bottle of Kalish",
+    "skill": "skill-brewing",
+    "difficulty": 31,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "bottle",
+        "name": "Bottle",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "fruit",
+        "name": "Fruit",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "vegetables",
+        "name": "Vegetables",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "water-flask",
+        "name": "Water Flask",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "bottle-of-kalish",
+      "name": "Bottle of Kalish",
+      "qty": 1
+    }
+  },
+  {
+    "id": "short-beer",
+    "name": "Short Beer",
+    "skill": "skill-brewing",
+    "difficulty": 31,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "barley",
+        "name": "Barley",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "cask",
+        "name": "Cask",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "hops",
+        "name": "Hops",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "malt",
+        "name": "Malt",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "short-beer",
+      "name": "Short Beer",
+      "qty": 1
+    }
+  },
+  {
+    "id": "mead",
+    "name": "Mead",
+    "skill": "skill-brewing",
+    "difficulty": 41,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "cask",
+        "name": "Cask",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "hops",
+        "name": "Hops",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "malt",
+        "name": "Malt",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "yeast",
+        "name": "Yeast",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "mead",
+      "name": "Mead",
+      "qty": 1
+    }
+  },
+  {
+    "id": "honey-mead",
+    "name": "Honey Mead",
+    "skill": "skill-brewing",
+    "difficulty": 41,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "cask",
+        "name": "Cask",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "hops",
+        "name": "Hops",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "royal-jelly",
+        "name": "Royal Jelly",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "water-flask",
+        "name": "Water Flask",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "honey-mead",
+      "name": "Honey Mead",
+      "qty": 1
+    }
+  },
+  {
+    "id": "ogre-swill",
+    "name": "Ogre Swill",
+    "skill": "skill-brewing",
+    "difficulty": 51,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "cask",
+        "name": "Cask",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "froglok-meat",
+        "name": "Froglok Meat",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "malt",
+        "name": "Malt",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "yeast",
+        "name": "Yeast",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "ogre-swill",
+      "name": "Ogre Swill",
+      "qty": 1
+    }
+  },
+  {
+    "id": "ale",
+    "name": "Ale",
+    "skill": "skill-brewing",
+    "difficulty": 68,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "barley",
+        "name": "Barley",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "cask",
+        "name": "Cask",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "malt",
+        "name": "Malt",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "water-flask",
+        "name": "Water Flask",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "ale",
+      "name": "Ale",
+      "qty": 3
+    }
+  },
+  {
+    "id": "white-wine",
+    "name": "White Wine",
+    "skill": "skill-brewing",
+    "difficulty": 82,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "bottle",
+        "name": "Bottle",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "fruit",
+        "name": "Fruit",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "grapes",
+        "name": "Grapes",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "wine-yeast",
+        "name": "Wine Yeast",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "white-wine",
+      "name": "White Wine",
+      "qty": 1
+    }
+  },
+  {
+    "id": "gnomish-spirits",
+    "name": "Gnomish Spirits",
+    "skill": "skill-brewing",
+    "difficulty": 102,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "bottle",
+        "name": "Bottle",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "rat-ears",
+        "name": "Rat Ears",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "rice",
+        "name": "Rice",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "spider-legs",
+        "name": "Spider Legs",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "gnomish-spirits",
+      "name": "Gnomish Spirits",
+      "qty": 2
+    }
+  },
+  {
+    "id": "vodka",
+    "name": "Vodka",
+    "skill": "skill-brewing",
+    "difficulty": 135,
+    "container": "Brew Barrel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "bottle",
+        "name": "Bottle",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "short-beer",
+        "name": "Short Beer",
+        "qty": 2,
+        "type": "item"
+      },
+      {
+        "id": "vegetables",
+        "name": "Vegetables",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "water-flask",
+        "name": "Water Flask",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "vodka",
+      "name": "Vodka",
+      "qty": 1
+    }
+  }
+]
