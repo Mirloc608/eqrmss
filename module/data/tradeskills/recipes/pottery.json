@@ -1,322 +1,82 @@
 [
   {
-    "id": "medium-clay-jar",
-    "name": "Medium Clay Jar",
+    "id": "unfired-vial",
+    "name": "Unfired Vial",
+    "skill": "skill-pottery",
+    "difficulty": 30,
+    "container": "Pottery Wheel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sketch-vial",
+        "name": "Vial Sketch",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "block-of-clay",
+        "name": "Block of Clay",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "water-flask",
+        "name": "Water Flask",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "itemId": "unfired-vial",
+      "itemName": "Unfired Vial",
+      "qty": 1
+    }
+  },
+  {
+    "id": "vial",
+    "name": "Vial",
     "skill": "skill-pottery",
     "difficulty": 17,
     "container": "Kiln",
     "expansion": "classic",
     "components": [
       {
-        "id": "quality-firing-sheet",
-        "name": "Quality Firing Sheet",
+        "id": "unfired-vial",
+        "name": "Unfired Vial",
         "qty": 1,
         "type": "item"
       },
       {
-        "id": "unfired-medium-container",
-        "name": "Unfired Medium Container",
+        "id": "firing-sheet",
+        "name": "Firing Sheet",
         "qty": 1,
         "type": "item"
       }
     ],
     "product": {
       "type": "item",
-      "template": "medium-clay-jar",
-      "name": "Medium Clay Jar",
+      "itemId": "vial",
+      "itemName": "Vial",
       "qty": 1
     }
   },
   {
-    "id": "medium-bowl",
-    "name": "Medium Bowl",
+    "id": "unfired-bowl",
+    "name": "Unfired Bowl",
     "skill": "skill-pottery",
-    "difficulty": 17,
-    "container": "Kiln",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "high-quality-firing-sheet",
-        "name": "High Quality Firing Sheet",
-        "qty": 2,
-        "type": "item"
-      },
-      {
-        "id": "unfired-medium-bowl",
-        "name": "Unfired Medium Bowl",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "medium-bowl",
-      "name": "Medium Bowl",
-      "qty": 1
-    }
-  },
-  {
-    "id": "small-block-of-clay",
-    "name": "Small Block of Clay",
-    "skill": "skill-pottery",
-    "difficulty": 21,
+    "difficulty": 25,
     "container": "Pottery Wheel",
     "expansion": "classic",
     "components": [
       {
-        "id": "block-of-clay",
-        "name": "Block of Clay",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "water-flask",
-        "name": "Water Flask",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "small-block-of-clay",
-      "name": "Small Block of Clay",
-      "qty": 3
-    }
-  },
-  {
-    "id": "block-of-clay",
-    "name": "Block of Clay",
-    "skill": "skill-pottery",
-    "difficulty": 21,
-    "container": "Pottery Wheel",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "small-block-of-clay",
-        "name": "Small Block of Clay",
-        "qty": 3,
-        "type": "item"
-      },
-      {
-        "id": "water-flask",
-        "name": "Water Flask",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "block-of-clay",
-      "name": "Block of Clay",
-      "qty": 1
-    }
-  },
-  {
-    "id": "large-block-of-clay",
-    "name": "Large Block of Clay",
-    "skill": "skill-pottery",
-    "difficulty": 21,
-    "container": "Pottery Wheel",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "block-of-clay",
-        "name": "Block of Clay",
-        "qty": 3,
-        "type": "item"
-      },
-      {
-        "id": "water-flask",
-        "name": "Water Flask",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "large-block-of-clay",
-      "name": "Large Block of Clay",
-      "qty": 1
-    }
-  },
-  {
-    "id": "unfired-small-container",
-    "name": "Unfired Small Container",
-    "skill": "skill-pottery",
-    "difficulty": 31,
-    "container": "Pottery Wheel",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "block-of-clay",
-        "name": "Block of Clay",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "small-jar-sketch",
-        "name": "Small Jar Sketch",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "water-flask",
-        "name": "Water Flask",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "unfired-small-container",
-      "name": "Unfired Small Container",
-      "qty": 1
-    }
-  },
-  {
-    "id": "unfired-ceramic-lining",
-    "name": "Unfired Ceramic Lining",
-    "skill": "skill-pottery",
-    "difficulty": 36,
-    "container": "Pottery Wheel",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "ceramic-lining-sketch",
-        "name": "Ceramic Lining Sketch",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "small-block-of-clay",
-        "name": "Small Block of Clay",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "water-flask",
-        "name": "Water Flask",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "unfired-ceramic-lining",
-      "name": "Unfired Ceramic Lining",
-      "qty": 1
-    }
-  },
-  {
-    "id": "unfired-medium-container",
-    "name": "Unfired Medium Container",
-    "skill": "skill-pottery",
-    "difficulty": 36,
-    "container": "Pottery Wheel",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "block-of-clay",
-        "name": "Block of Clay",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "medium-jar-sketch",
-        "name": "Medium Jar Sketch",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "water-flask",
-        "name": "Water Flask",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "unfired-medium-container",
-      "name": "Unfired Medium Container",
-      "qty": 1
-    }
-  },
-  {
-    "id": "unfired-large-container",
-    "name": "Unfired Large Container",
-    "skill": "skill-pottery",
-    "difficulty": 41,
-    "container": "Pottery Wheel",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "block-of-clay",
-        "name": "Block of Clay",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "large-jar-sketch",
-        "name": "Large Jar Sketch",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "water-flask",
-        "name": "Water Flask",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "unfired-large-container",
-      "name": "Unfired Large Container",
-      "qty": 1
-    }
-  },
-  {
-    "id": "unfired-small-bowl",
-    "name": "Unfired Small Bowl",
-    "skill": "skill-pottery",
-    "difficulty": 102,
-    "container": "Pottery Wheel",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "bowl-sketch",
+        "id": "sketch-bowl",
         "name": "Bowl Sketch",
         "qty": 1,
-        "type": "item"
+        "type": "item",
+        "consume": false
       },
-      {
-        "id": "small-block-of-clay",
-        "name": "Small Block of Clay",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "water-flask",
-        "name": "Water Flask",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "unfired-small-bowl",
-      "name": "Unfired Small Bowl",
-      "qty": 1
-    }
-  },
-  {
-    "id": "unfired-medium-bowl",
-    "name": "Unfired Medium Bowl",
-    "skill": "skill-pottery",
-    "difficulty": 122,
-    "container": "Pottery Wheel",
-    "expansion": "classic",
-    "components": [
       {
         "id": "block-of-clay",
         "name": "Block of Clay",
@@ -324,12 +84,6 @@
         "type": "item"
       },
       {
-        "id": "medium-bowl-sketch",
-        "name": "Medium Bowl Sketch",
-        "qty": 1,
-        "type": "item"
-      },
-      {
         "id": "water-flask",
         "name": "Water Flask",
         "qty": 1,
@@ -338,34 +92,57 @@
     ],
     "product": {
       "type": "item",
-      "template": "unfired-medium-bowl",
-      "name": "Unfired Medium Bowl",
+      "itemId": "unfired-bowl",
+      "itemName": "Unfired Bowl",
       "qty": 1
     }
   },
   {
-    "id": "unfired-large-bowl",
-    "name": "Unfired Large Bowl",
+    "id": "bowl",
+    "name": "Bowl",
     "skill": "skill-pottery",
-    "difficulty": 148,
+    "difficulty": 15,
+    "container": "Kiln",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "unfired-bowl",
+        "name": "Unfired Bowl",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "firing-sheet",
+        "name": "Firing Sheet",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "itemId": "bowl",
+      "itemName": "Bowl",
+      "qty": 1
+    }
+  },
+  {
+    "id": "unfired-jar",
+    "name": "Unfired Jar",
+    "skill": "skill-pottery",
+    "difficulty": 35,
     "container": "Pottery Wheel",
     "expansion": "classic",
     "components": [
       {
-        "id": "glass-shard",
-        "name": "Glass Shard",
+        "id": "sketch-jar",
+        "name": "Jar Sketch",
         "qty": 1,
-        "type": "item"
+        "type": "item",
+        "consume": false
       },
       {
-        "id": "large-block-of-clay",
-        "name": "Large Block of Clay",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "large-bowl-sketch",
-        "name": "Large Bowl Sketch",
+        "id": "block-of-clay",
+        "name": "Block of Clay",
         "qty": 1,
         "type": "item"
       },
@@ -378,8 +155,225 @@
     ],
     "product": {
       "type": "item",
-      "template": "unfired-large-bowl",
-      "name": "Unfired Large Bowl",
+      "itemId": "unfired-jar",
+      "itemName": "Unfired Jar",
+      "qty": 1
+    }
+  },
+  {
+    "id": "jar",
+    "name": "Jar",
+    "skill": "skill-pottery",
+    "difficulty": 20,
+    "container": "Kiln",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "unfired-jar",
+        "name": "Unfired Jar",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "firing-sheet",
+        "name": "Firing Sheet",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "itemId": "jar",
+      "itemName": "Jar",
+      "qty": 1
+    }
+  },
+  {
+    "id": "unfired-pot",
+    "name": "Unfired Pot",
+    "skill": "skill-pottery",
+    "difficulty": 40,
+    "container": "Pottery Wheel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sketch-pot",
+        "name": "Pot Sketch",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "block-of-clay",
+        "name": "Block of Clay",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "water-flask",
+        "name": "Water Flask",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "itemId": "unfired-pot",
+      "itemName": "Unfired Pot",
+      "qty": 1
+    }
+  },
+  {
+    "id": "pot",
+    "name": "Pot",
+    "skill": "skill-pottery",
+    "difficulty": 22,
+    "container": "Kiln",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "unfired-pot",
+        "name": "Unfired Pot",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "firing-sheet",
+        "name": "Firing Sheet",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "itemId": "pot",
+      "itemName": "Pot",
+      "qty": 1
+    }
+  },
+  {
+    "id": "unfired-mug",
+    "name": "Unfired Mug",
+    "skill": "skill-pottery",
+    "difficulty": 28,
+    "container": "Pottery Wheel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sketch-mug",
+        "name": "Mug Sketch",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "block-of-clay",
+        "name": "Block of Clay",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "water-flask",
+        "name": "Water Flask",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "itemId": "unfired-mug",
+      "itemName": "Unfired Mug",
+      "qty": 1
+    }
+  },
+  {
+    "id": "mug",
+    "name": "Mug",
+    "skill": "skill-pottery",
+    "difficulty": 18,
+    "container": "Kiln",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "unfired-mug",
+        "name": "Unfired Mug",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "firing-sheet",
+        "name": "Firing Sheet",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "itemId": "mug",
+      "itemName": "Mug",
+      "qty": 1
+    }
+  },
+  {
+    "id": "unfired-charm-form",
+    "name": "Unfired Charm Form",
+    "skill": "skill-pottery",
+    "difficulty": 45,
+    "container": "Pottery Wheel",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sketch-charm-form",
+        "name": "Charm Sketch",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "block-of-clay",
+        "name": "Block of Clay",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "water-flask",
+        "name": "Water Flask",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "itemId": "unfired-charm-form",
+      "itemName": "Unfired Charm Form",
+      "qty": 1
+    }
+  },
+  {
+    "id": "charm-form",
+    "name": "Charm Form",
+    "skill": "skill-pottery",
+    "difficulty": 25,
+    "container": "Kiln",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "unfired-charm-form",
+        "name": "Unfired Charm Form",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "firing-sheet",
+        "name": "Firing Sheet",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "itemId": "charm-form",
+      "itemName": "Charm Form",
       "qty": 1
     }
   }
