@@ -192,6 +192,24 @@ export async function applyCapstoneBuff(target, capstone, modifiers, durationRou
     const capstoneId = capstone.id;
     
     for (const mod of modifiers) {
+        // Haste/Slow mutual exclusion (user ruling 2026-10-14):
+        // capstones follow the same rules as spells — slow dispels haste,
+        // haste bounces off slowed targets. Worn effects exempt.
+        if (mod.target === "haste" || mod.target === "slow") {
+            const { hasteSlowExclusion, dispelHaste } = await import("../spells/status-wiring.js");
+            const verdict = hasteSlowExclusion(target, mod.target, "capstone");
+            if (verdict === "bounce") {
+                notes.push(`${esc(target.name)}: haste bounces — slowed (${esc(capstone.name)}).`);
+                continue;
+            }
+            if (verdict === "dispel") {
+                const cleared = await dispelHaste(target);
+                if (cleared) notes.push(`${esc(target.name)}: slow dispels haste (${esc(capstone.name)}).`);
+                // Re-read the list post-dispel so the push below lands on fresh state.
+                fx.length = 0;
+                fx.push(...(target.system?.status?.spellEffects || []));
+            }
+        }
         const entry = {
             source: "capstone",
             capstoneId,
