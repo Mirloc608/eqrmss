@@ -318,13 +318,29 @@ export class TradeskillCombineDialog extends BaseApplication {
             }
             const fromCond = product.fromCondition ?? "rusty";
             const toCond = product.toCondition ?? "normal";
-            // Update condition and name
-            const newName = String(weapon.name ?? "").replace(new RegExp(`^${fromCond}\s+`, "i"), "");
+            const sys = weapon.system ?? {};
+            // Try to recompose name via weapon composer for correctness
+            let newName = String(weapon.name ?? "");
+            try {
+                const weapons = game.eqrmss?.weapons;
+                const templateId = sys.template ?? sys.weaponTemplate;
+                const materialId = sys.material;
+                if (weapons && typeof weapons.compose === "function" && templateId && materialId) {
+                    const composed = weapons.compose(templateId, materialId, toCond);
+                    if (composed?.name) newName = composed.name;
+                } else {
+                    // Fallback: strip old condition prefix (case-insensitive, anywhere)
+                    newName = newName.replace(new RegExp(`${fromCond}\s+`, "i"), "");
+                }
+            } catch (e) {
+                newName = newName.replace(new RegExp(`${fromCond}\s+`, "i"), "");
+            }
+            const oldName = weapon.name;
             await weapon.update({
                 name: newName,
                 "system.condition": toCond
             });
-            ui.notifications.info(`Polished ${weapon.name} to ${newName}.`);
+            ui.notifications.info(`Polished ${oldName} to ${newName}.`);
             return;
         }
         // Use selected material from dropdown if available (2026-10-14)
