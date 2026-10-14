@@ -24,7 +24,15 @@
                 <ul class="recipe-components">
                     {{#each componentStatus}}
                     <li class="{{#if met}}comp-met{{else}}comp-missing{{/if}}">
+                        {{#if materialChoice}}
+                        <select class="material-select" data-recipe-id="{{../id}}" data-component-id="{{id}}">
+                            {{#each materialOptions}}
+                            <option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}} ({{have}}/{{need}})</option>
+                            {{/each}}
+                        </select>
+                        {{else}}
                         <span class="comp-name">{{id}}</span>
+                        {{/if}}
                         <span class="comp-count">{{have}}/{{need}}</span>
                     </li>
                     {{/each}}

@@ -31,10 +31,52 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
     };
 
+    _onRender(context, options) {
+        super._onRender?.(context, options);
+        // Material dropdown change handler (2026-10-14)
+        this.element.querySelectorAll(".material-select").forEach(select => {
+            select.addEventListener("change", (ev) => {
+                const recipeId = ev.target.dataset.recipeId;
+                const materialId = ev.target.value;
+                if (recipeId) {
+                    this.selectedMaterials[recipeId] = materialId;
+                    // Re-render to update have/need counts
+                    this.render();
+                }
+            });
+        });
+    }
+
     constructor(actor, skillId, options = {}) {
         super(options);
         this.actor = actor;
         this.skillId = skillId;
+        this.selectedMaterials = {}; // recipeId -> materialId
+    }
+
+    // Get available ore materials for dropdown (2026-10-14)
+    _getOreMaterials() {
+        try {
+            const weapons = game.eqrmss?.weapons;
+            if (!weapons || !weapons.materials) return [];
+            // Filter to metal/ore materials (exclude cloth, leather, etc.)
+            return Object.values(weapons.materials)
+                .filter(m => {
+                    const id = String(m.id ?? "").toLowerCase();
+                    // Include ores and metals, exclude cloth/leather/silk
+                    return id.includes("ore") || ["iron", "steel", "mithril", "velium", "acrylia", "titanium"].some(x => id.includes(x));
+                })
+                .map(m => ({ id: m.id, name: m.name }))
+                .sort((a, b) => a.name.localeCompare(b.name));
+        } catch (e) { return []; }
+    }
+
+    // Get selected material for a recipe (default to first available or recipe default)
+    _getSelectedMaterial(recipeId, recipe) {
+        if (this.selectedMaterials[recipeId]) return this.selectedMaterials[recipeId];
+        // Default to recipe's defaultMaterial or first ore
+        const prod = recipe.product ?? {};
+        return prod.defaultMaterial ?? "iron";
     }
 
     async _prepareContext(options) {
@@ -43,16 +85,32 @@ export class TradeskillCombineDialog extends BaseApplication {
         const access = canUseTradeskill(this.actor, this.skillId);
 
         // Check inventory for each recipe's components
-        const recipesWithStatus = recipes.map(r => ({
-            ...r,
-            canCombine: access.allowed && this._hasComponents(r.components),
-            componentStatus: r.components.map(c => ({
-                ...c,
-                have: this._countItem(c),
-                need: c.qty,
-                met: this._countItem(c) >= c.qty
-            }))
-        }));
+        const oreMaterials = this._getOreMaterials();
+        const recipesWithStatus = recipes.map(r => {
+            const selectedMat = this._getSelectedMaterial(r.id, r);
+            return {
+                ...r,
+                canCombine: access.allowed && this._hasComponents(r.components, r.id),
+                componentStatus: r.components.map(c => {
+                    const base = {
+                        ...c,
+                        have: this._countItem(c, r.id),
+                        need: c.qty,
+                        met: this._countItem(c, r.id) >= c.qty
+                    };
+                    // For materialChoice, add dropdown options
+                    if (c.materialChoice) {
+                        base.materialOptions = oreMaterials.map(m => ({
+                            ...m,
+                            selected: m.id === selectedMat,
+                            have: this._countOreMaterial(m.id),
+                            need: c.qty
+                        }));
+                    }
+                    return base;
+                })
+            };
+        });
 
         return {
             actor: this.actor,
@@ -81,7 +139,27 @@ export class TradeskillCombineDialog extends BaseApplication {
         return names[this.skillId] ?? this.skillId;
     }
 
-    _countItem(component) {
+    // Count ore items matching a material ID (e.g., "iron" matches "Iron Ore")
+    _countOreMaterial(materialId) {
+        let count = 0;
+        const matLower = String(materialId ?? "").toLowerCase().replace(/_ore$/, "");
+        for (const item of this.actor.items) {
+            const nameLower = String(item.name ?? "").toLowerCase();
+            // Match if item name contains the material name (e.g., "iron ore" contains "iron")
+            if (nameLower.includes(matLower)) {
+                count += Number(item.system?.quantity ?? 1);
+            }
+        }
+        return count;
+    }
+
+    _countItem(component, recipeId = null) {
+        // For materialChoice, count the selected material's ore
+        if (component.materialChoice && recipeId) {
+            const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+            const selectedMat = this._getSelectedMaterial(recipeId, recipe ?? {});
+            return this._countOreMaterial(selectedMat);
+        }
         // Count matching items in actor inventory
         // For materials, match by material id; for items, by item id
         let count = 0;
@@ -102,14 +180,41 @@ export class TradeskillCombineDialog extends BaseApplication {
         return count;
     }
 
-    _hasComponents(components) {
-        return components.every(c => this._countItem(c) >= c.qty);
+    _hasComponents(components, recipeId = null) {
+        return components.every(c => this._countItem(c, recipeId) >= c.qty);
     }
 
-    async _consumeComponents(components) {
+    // Consume ore items matching a material ID
+    async _consumeOreMaterial(materialId, qty) {
+        let remaining = qty;
+        const matLower = String(materialId ?? "").toLowerCase().replace(/_ore$/, "");
+        for (const item of [...this.actor.items]) {
+            if (remaining <= 0) break;
+            const nameLower = String(item.name ?? "").toLowerCase();
+            if (nameLower.includes(matLower)) {
+                const itemQty = Number(item.system?.quantity ?? 1);
+                if (itemQty <= remaining) {
+                    await item.delete();
+                    remaining -= itemQty;
+                } else {
+                    await item.update({ "system.quantity": itemQty - remaining });
+                    remaining = 0;
+                }
+            }
+        }
+    }
+
+    async _consumeComponents(components, recipeId = null) {
         for (const c of components) {
             // Skip non-consumed components (e.g., reusable molds) - 2026-10-14
             if (c.consume === false) continue;
+            // For materialChoice, consume the selected material's ore
+            if (c.materialChoice && recipeId) {
+                const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+                const selectedMat = this._getSelectedMaterial(recipeId, recipe ?? {});
+                await this._consumeOreMaterial(selectedMat, c.qty);
+                continue;
+            }
             let remaining = c.qty;
             for (const item of [...this.actor.items]) {
                 if (remaining <= 0) break;
@@ -136,7 +241,19 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
     }
 
-    async _createProduct(product, quality = "normal") {
+    async _createProduct(product, quality = "normal", recipeId = null) {
+        // Use selected material from dropdown if available (2026-10-14)
+        let materialId = product.material ?? product.defaultMaterial ?? "steel";
+        if (recipeId) {
+            const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+            if (recipe) {
+                const selected = this._getSelectedMaterial(recipeId, recipe);
+                // Only override if recipe has materialChoice
+                if (recipe.components?.some(c => c.materialChoice)) {
+                    materialId = selected;
+                }
+            }
+        }
         // Create the product item on the actor using composers (2026-10-14)
         // Quality from roll: pristine/normal/worn/tarnished/broken
         const productType = product.type ?? "item";
@@ -151,7 +268,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             try {
                 const composed = weapons.compose(
                     product.weaponTemplate,
-                    product.material ?? "steel",
+                    materialId,
                     quality
                 );
                 await this.actor.createEmbeddedDocuments("Item", [{
@@ -188,7 +305,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                 const composed = armor.compose(
                     product.location,
                     product.category ?? "cloth",
-                    product.material ?? "cloth",
+                    materialId,
                     quality
                 );
                 await this.actor.createEmbeddedDocuments("Item", [{
@@ -239,9 +356,9 @@ export class TradeskillCombineDialog extends BaseApplication {
         const result = await attemptCombine(
             dialog.actor,
             recipe,
-            (c) => dialog._hasComponents(c),
-            (c) => dialog._consumeComponents(c),
-            (p, q) => dialog._createProduct(p, q),
+            (c) => dialog._hasComponents(c, recipeId),
+            (c) => dialog._consumeComponents(c, recipeId),
+            (p, q) => dialog._createProduct(p, q, recipeId),
             skillEngine
         );
 
