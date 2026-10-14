@@ -473,6 +473,14 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }));
 
         // ------------------------------------------------------------
+        // Skills Tab: Tradeskill Combine (2026-10-14)
+        // ------------------------------------------------------------
+        html.querySelectorAll(".skill-combine").forEach(el => el.addEventListener("click", ev => {
+            const skillId = ev.currentTarget.dataset.skillId;
+            this._onTradeskillCombine(skillId);
+        }));
+
+        // ------------------------------------------------------------
         // Combat Tab: Weapon Attack Rolls (RMSS §6.2–6.4)
         // ------------------------------------------------------------
         html.querySelectorAll(".attack-roll").forEach(el => el.addEventListener("click", ev => {
@@ -1121,6 +1129,16 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
                 <p><strong>Success:</strong> ${success ? "Yes" : "No"}</p>
             `
         });
+    }
+
+    async _onTradeskillCombine(skillId) {
+        try {
+            const { TradeskillCombineDialog } = await import("../../apps/tradeskill-combine-dialog.js");
+            new TradeskillCombineDialog(this.actor, skillId).render(true);
+        } catch (e) {
+            console.error("EQRMSS | Tradeskill dialog failed", e);
+            ui.notifications.error(`Tradeskill dialog failed: ${e.message}`);
+        }
     }
 
     async _onInitiativeRoll() {

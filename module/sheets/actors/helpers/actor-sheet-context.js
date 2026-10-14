@@ -271,6 +271,13 @@ export class EQRMSSActorContextHelper {
                     const skillStore = (typeof CONFIG !== 'undefined' ? CONFIG?.EQRMSS?.skills : null) ?? globalThis.CONFIG?.EQRMSS?.skills ?? {};
                     const catalog = Object.values(skillStore);
                     const developed = new Map(items.filter(i => i?.type === "skill").map(s => [String(s.system?.skillId ?? s.name).toLowerCase(), s]));
+                    // Tradeskill ids (2026-10-14): show Combine button on Skills tab
+                    const TRADESKILL_IDS = new Set([
+                        "skill-baking", "skill-brewing", "skill-fletching",
+                        "skill-jewelcraft", "skill-pottery", "skill-smithing",
+                        "skill-tailoring", "skill-tinkering", "skill-alchemy",
+                        "skill-poison", "skill-research"
+                    ]);
                     return catalog.map(skill => {
                         const key = String(skill.id ?? skill.name).toLowerCase();
                         const dev = developed.get(key);
@@ -282,7 +289,8 @@ export class EQRMSSActorContextHelper {
                             developed: !!dev,
                             itemId: dev?.id ?? null,
                             ranks: dev ? Number(dev.system?.ranks ?? 0) : 0,
-                            cost: skill.system?.cost ?? skill.cost ?? "-"
+                            cost: skill.system?.cost ?? skill.cost ?? "-",
+                            isTradeskill: TRADESKILL_IDS.has(skill.id)
                         };
                     }).sort((a, b) => String(a.name).localeCompare(String(b.name)));
                 } catch (e) { return []; }

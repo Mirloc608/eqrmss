@@ -90,8 +90,8 @@ import { initializeSkillEngine } from "./module/utils/skills/index.js";
 // ---------- Part 2: v4.14 data loader (unchanged) ----------
 console.log("EQRMSS | Initialize Data Loaders v4.14 | Starting - Wizard+Sheet+LazyGeo fix - NO TLA");
 
-let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null, SongModule = null, AAModule = null, ItemModule = null, CapstoneModule = null, DisciplineModule = null;
-let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null, SongLoader = null, AALoader = null, ItemLoader = null, CapstoneLoader = null;
+let AbilityModule = null, ClassModule = null, SpellModule = null, RaceModule = null, SkillModule = null, SongModule = null, AAModule = null, ItemModule = null, CapstoneModule = null, DisciplineModule = null, TradeskillModule = null;
+let AbilityLoader = null, ClassLoader = null, SpellLoader = null, RaceLoader = null, SkillLoader = null, SongLoader = null, AALoader = null, ItemLoader = null, CapstoneLoader = null, TradeskillLoader = null;
 let modulesLoaded = false;
 
 async function tryImport(paths) {
@@ -134,6 +134,7 @@ async function loadModules() {
     ItemModule = await tryImport(['./module/data/loaders/item-loader.js']);
     CapstoneModule = await tryImport(['./module/data/loaders/capstone-loader.js']);
     DisciplineModule = await tryImport(['./module/data/loaders/discipline-loader.js']);
+    TradeskillModule = await tryImport(['./module/data/loaders/tradeskill-loader.js']);
     AbilityLoader = resolveLoader(AbilityModule, 'AbilityLoader','EQRMSSAbilityLoader','EQRMSS_ABILITY_LOADER');
     ClassLoader = resolveLoader(ClassModule, 'ClassLoader','EQRMSSClassLoader','EQRMSS_CLASS_LOADER');
     SpellLoader = resolveLoader(SpellModule, 'SpellLoader','EQRMSSSpellLoader','EQRMSS_SPELL_LOADER');
@@ -143,6 +144,7 @@ async function loadModules() {
     AALoader = resolveLoader(AAModule, 'AALoader','EQRMSSAALoader');
     ItemLoader = resolveLoader(ItemModule, 'ItemLoader','EQRMSSItemLoader');
     CapstoneLoader = resolveLoader(CapstoneModule, 'CapstoneLoader','loadCapstones');
+    TradeskillLoader = resolveLoader(TradeskillModule, 'TradeskillLoader','EQRMSSRecipeLoader');
     modulesLoaded = true;
 }
 
@@ -288,6 +290,20 @@ export async function initializeDataLoaders() {
             game.eqrmss._loadStatus.items = true;
             console.log(`EQRMSS | Items ready: ${Object.keys(game.eqrmss.items?.byId || {}).length} items`);
         } catch (e) { console.error("Item load failed", e); }
+    }
+
+    // Tradeskill Recipes (2026-10-14)
+    if (TradeskillLoader) {
+        try {
+            if (typeof TradeskillLoader.load === 'function') await TradeskillLoader.load();
+            game.eqrmss.tradeskills = {
+                recipes: TradeskillLoader.recipes,
+                byId: TradeskillLoader.byId,
+                bySkill: TradeskillLoader.bySkill
+            };
+            game.eqrmss._loadStatus.tradeskills = true;
+            console.log(`EQRMSS | Tradeskills ready: ${TradeskillLoader.recipes.length} recipes`);
+        } catch (e) { console.error("Tradeskill load failed", e); }
     }
 
     // Era Capstones (2026-10-09)
