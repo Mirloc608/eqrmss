@@ -12,6 +12,48 @@
 export const CRIT_FAIL_RANGE = [1, 5];
 
 /**
+ * Tradeskill restrictions (2026-10-14, user rulings — EQ canon).
+ * - Alchemy: Shamans only
+ * - Poison Making: Rogues only
+ * - Tinkering: Gnomes only (race)
+ * All others: unrestricted.
+ */
+export const TRADESKILL_RESTRICTIONS = {
+    "skill-alchemy": { classes: ["shaman"], races: null },
+    "skill-poison": { classes: ["rogue"], races: null },
+    "skill-tinkering": { classes: null, races: ["gnome"] }
+};
+
+/**
+ * Check if an actor may use a tradeskill.
+ * @param {Actor} actor
+ * @param {string} skillId
+ * @returns {{ allowed: boolean, reason: string|null }}
+ */
+export function canUseTradeskill(actor, skillId) {
+    const restriction = TRADESKILL_RESTRICTIONS[skillId];
+    if (!restriction) return { allowed: true, reason: null };
+
+    const sys = actor?.system ?? {};
+    const classId = String(sys.origin?.classId ?? sys.fixed_info?.profession ?? "").toLowerCase();
+    const raceId = String(sys.origin?.raceId ?? sys.fixed_info?.race ?? "").toLowerCase();
+
+    if (restriction.classes && !restriction.classes.includes(classId)) {
+        return {
+            allowed: false,
+            reason: `Requires ${restriction.classes.join("/")} class.`
+        };
+    }
+    if (restriction.races && !restriction.races.includes(raceId)) {
+        return {
+            allowed: false,
+            reason: `Requires ${restriction.races.join("/")} race.`
+        };
+    }
+    return { allowed: true, reason: null };
+}
+
+/**
  * Attempt a tradeskill combine.
  *
  * @param {Actor} actor - The crafting actor
@@ -23,6 +65,17 @@ export const CRIT_FAIL_RANGE = [1, 5];
  * @returns {Object} { success, critFail, roll, total, message }
  */
 export async function attemptCombine(actor, recipe, hasComponents, consumeComponents, createProduct, skillEngine) {
+    // Check class/race restriction first (2026-10-14)
+    const access = canUseTradeskill(actor, recipe.skill);
+    if (!access.allowed) {
+        return {
+            success: false,
+            critFail: false,
+            restricted: true,
+            message: `Cannot attempt ${recipe.name}: ${access.reason}`
+        };
+    }
+
     // Verify components available
     if (!hasComponents(recipe.components)) {
         return {

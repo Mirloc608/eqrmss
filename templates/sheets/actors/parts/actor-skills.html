@@ -31,9 +31,11 @@
                             <i class="fas fa-dice-d20"></i> Roll
                         </button>
                         {{#if isTradeskill}}
+                        {{#if canCombine}}
                         <button type="button" class="skill-combine" data-skill-id="{{id}}" title="Open combine dialog">
                             <i class="fas fa-hammer"></i> Combine
                         </button>
+                        {{/if}}
                         {{/if}}
                         {{else}}
                         <button type="button" class="skill-develop" data-skill-id="{{id}}" data-skill-name="{{name}}">

@@ -7,7 +7,7 @@
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 const BaseApplication = HandlebarsApplicationMixin(ApplicationV2);
 
-import { attemptCombine, getRecipesForSkill } from "../tradeskills/tradeskill-engine.js";
+import { attemptCombine, getRecipesForSkill, canUseTradeskill } from "../tradeskills/tradeskill-engine.js";
 
 export class TradeskillCombineDialog extends BaseApplication {
 
@@ -40,11 +40,12 @@ export class TradeskillCombineDialog extends BaseApplication {
     async _prepareContext(options) {
         const recipes = getRecipesForSkill(this.skillId);
         const skillName = this._getSkillName();
+        const access = canUseTradeskill(this.actor, this.skillId);
 
         // Check inventory for each recipe's components
         const recipesWithStatus = recipes.map(r => ({
             ...r,
-            canCombine: this._hasComponents(r.components),
+            canCombine: access.allowed && this._hasComponents(r.components),
             componentStatus: r.components.map(c => ({
                 ...c,
                 have: this._countItem(c),
@@ -57,7 +58,9 @@ export class TradeskillCombineDialog extends BaseApplication {
             actor: this.actor,
             skillId: this.skillId,
             skillName,
-            recipes: recipesWithStatus
+            recipes: recipesWithStatus,
+            restricted: !access.allowed,
+            restrictionReason: access.reason
         };
     }
 

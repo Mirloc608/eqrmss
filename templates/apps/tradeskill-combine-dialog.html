@@ -1,44 +1,40 @@
 <section class="tradeskill-combine">
     <h2>{{skillName}} — Recipes</h2>
 
-    {{#if recipes.length}}
-    <table class="eqrmss-table">
-        <thead>
-            <tr>
-                <th>Recipe</th>
-                <th>Difficulty</th>
-                <th>Components</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each recipes}}
-            <tr data-recipe-id="{{id}}">
-                <td><strong>{{name}}</strong></td>
-                <td>{{difficulty}}</td>
-                <td>
-                    <ul style="margin:0; padding-left:1.2em;">
-                        {{#each componentStatus}}
-                        <li style="color: {{#if met}}green{{else}}red{{/if}};">
-                            {{id}} ({{have}}/{{need}})
-                        </li>
-                        {{/each}}
-                    </ul>
-                </td>
-                <td>
-                    {{#if canCombine}}
-                    <button type="button" data-action="combine" data-recipe-id="{{id}}">
-                        <i class="fas fa-hammer"></i> Combine
-                    </button>
-                    {{else}}
-                    <span style="color:#888;">Missing mats</span>
-                    {{/if}}
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+    {{#if restricted}}
+    <p class="recipe-restricted"><i class="fas fa-lock"></i> {{restrictionReason}}</p>
     {{else}}
-    <p>No recipes available for {{skillName}} yet.</p>
+    {{#if recipes.length}}
+    <div class="recipe-cards">
+        {{#each recipes}}
+        <article class="recipe-card" data-recipe-id="{{id}}">
+            <div class="recipe-card-head">
+                <span class="recipe-name">{{name}}</span>
+                <span class="difficulty-badge" title="d100 + skill bonus vs this">Diff {{difficulty}}</span>
+                <span class="head-spacer"></span>
+                {{#if canCombine}}
+                <button type="button" class="recipe-combine" data-action="combine" data-recipe-id="{{id}}">
+                    <i class="fas fa-hammer"></i> Combine
+                </button>
+                {{else}}
+                <span class="recipe-missing">Missing mats</span>
+                {{/if}}
+            </div>
+            <div class="recipe-card-body">
+                <ul class="recipe-components">
+                    {{#each componentStatus}}
+                    <li class="{{#if met}}comp-met{{else}}comp-missing{{/if}}">
+                        <span class="comp-name">{{id}}</span>
+                        <span class="comp-count">{{have}}/{{need}}</span>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </article>
+        {{/each}}
+    </div>
+    {{else}}
+    <p class="recipe-empty">No recipes available for {{skillName}} yet.</p>
+    {{/if}}
     {{/if}}
 </section>

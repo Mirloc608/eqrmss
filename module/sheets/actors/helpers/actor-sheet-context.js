@@ -13,6 +13,7 @@ import { isWorn } from "../../../utils/equipment/equipment-utils.js";
 import { dedupHighestRank } from "../../../item-effects/worn-engine.js";
 import { getFactionLevel, getFactionDisplayName } from "../../../utils/faction/faction.js";
 import { ensureBandolier, buildBandolierContext } from "../../../combat/bandolier.js";
+import { canUseTradeskill } from "../../../tradeskills/tradeskill-engine.js";
 
 const STAT_LABELS = {
     ST: "Strength",
@@ -278,9 +279,11 @@ export class EQRMSSActorContextHelper {
                         "skill-tailoring", "skill-tinkering", "skill-alchemy",
                         "skill-poison", "skill-research"
                     ]);
+                    const actorRef = this.actor;
                     return catalog.map(skill => {
                         const key = String(skill.id ?? skill.name).toLowerCase();
                         const dev = developed.get(key);
+                        const isTs = TRADESKILL_IDS.has(skill.id);
                         return {
                             id: skill.id,
                             name: skill.name,
@@ -290,7 +293,9 @@ export class EQRMSSActorContextHelper {
                             itemId: dev?.id ?? null,
                             ranks: dev ? Number(dev.system?.ranks ?? 0) : 0,
                             cost: skill.system?.cost ?? skill.cost ?? "-",
-                            isTradeskill: TRADESKILL_IDS.has(skill.id)
+                            isTradeskill: isTs,
+                            // 2026-10-14: hide Combine when class/race restricted
+                            canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed
                         };
                     }).sort((a, b) => String(a.name).localeCompare(String(b.name)));
                 } catch (e) { return []; }

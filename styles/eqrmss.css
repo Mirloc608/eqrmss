@@ -1440,3 +1440,100 @@ button.rank-badge:hover {
 .application.sheet.eqrmss.item .bonus-grid .form-group input {
   width: 100%;
 }
+
+/* Tradeskill recipe cards (2026-10-14) — matches aa-card/spell-card language */
+.tradeskill-combine .recipe-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.tradeskill-combine .recipe-card {
+  background: #242424;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.tradeskill-combine .recipe-card:hover {
+  border-color: #8a6d2f;
+}
+.tradeskill-combine .recipe-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tradeskill-combine .recipe-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+.tradeskill-combine .difficulty-badge {
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #aaa;
+}
+.tradeskill-combine .head-spacer {
+  flex: 1;
+}
+.tradeskill-combine .recipe-combine {
+  background: #2a2a2a;
+  border: 1px solid #8a6d2f;
+  color: #ffd766;
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.tradeskill-combine .recipe-combine:hover {
+  background: #3a3a3a;
+}
+.tradeskill-combine .recipe-missing {
+  color: #888;
+  font-size: 13px;
+  font-style: italic;
+}
+.tradeskill-combine .recipe-card-body {
+  margin-top: 8px;
+}
+.tradeskill-combine .recipe-components {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tradeskill-combine .recipe-components li {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 13px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: #1a1a1a;
+}
+.tradeskill-combine .comp-met {
+  color: #7f7;
+}
+.tradeskill-combine .comp-missing {
+  color: #f77;
+}
+.tradeskill-combine .comp-count {
+  opacity: 0.8;
+}
+.tradeskill-combine .recipe-empty {
+  color: #888;
+  font-style: italic;
+}
+.tradeskill-combine .recipe-restricted {
+  color: #f77;
+  font-size: 15px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #5a2a2a;
+  border-radius: 8px;
+  background: #2a1a1a;
+}
