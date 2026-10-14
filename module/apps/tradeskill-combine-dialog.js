@@ -303,6 +303,18 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
     }
 
+    // Map a weapon ore ID to an armor material ID (e.g., "iron" -> "iron_chain")
+    _mapOreToArmorMaterial(oreId, category) {
+        try {
+            const armor = game.eqrmss?.armor;
+            if (!armor || typeof armor.options !== "function") return null;
+            const materials = armor.options()?.materials ?? [];
+            const candidateId = `${oreId}_${category}`;
+            if (materials.some(m => m.id === candidateId)) return candidateId;
+            return null;
+        } catch (e) { return null; }
+    }
+
     async _createProduct(product, quality = "normal", recipeId = null) {
         // Handle polish product type (2026-10-14): transform weapon condition
         if (product.type === "polish" && recipeId) {
@@ -351,7 +363,13 @@ export class TradeskillCombineDialog extends BaseApplication {
                 const selected = this._getSelectedMaterial(recipeId, recipe);
                 // Only override if recipe has materialChoice
                 if (recipe.components?.some(c => c.materialChoice)) {
-                    materialId = selected;
+                    // For armor, map ore ID to armor material ID (e.g., "iron" -> "iron_chain")
+                    if (product.type === "armor" && product.category) {
+                        const mapped = this._mapOreToArmorMaterial(selected, product.category);
+                        materialId = mapped ?? product.defaultMaterial ?? "iron_chain";
+                    } else {
+                        materialId = selected;
+                    }
                 }
             }
         }
