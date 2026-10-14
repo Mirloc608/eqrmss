@@ -1,111 +1,396 @@
 [
   {
-    "id": "silk-swatch",
-    "name": "Silk Swatch",
+    "id": "cloth-face",
+    "name": "Cloth Veil",
     "skill": "skill-tailoring",
-    "difficulty": 0,
-    "container": "Small Sewing Kit",
+    "difficulty": 15,
+    "container": "Sewing Kit",
     "expansion": "classic",
     "components": [
       {
-        "id": "spider-silk",
-        "name": "Spider Silk",
-        "qty": 2,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "silk-swatch",
-      "name": "Silk Swatch",
-      "qty": 1
-    }
-  },
-  {
-    "id": "silk-thread",
-    "name": "Silk Thread",
-    "skill": "skill-tailoring",
-    "difficulty": 0,
-    "container": "Small Sewing Kit",
-    "expansion": "classic",
-    "components": [
+        "id": "face-pattern",
+        "name": "Face Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
       {
-        "id": "spiderling-silk",
-        "name": "Spiderling Silk",
+        "id": "silk",
+        "name": "Silk (select material)",
         "qty": 2,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "silk-thread",
-      "name": "Silk Thread",
-      "qty": 1
-    }
-  },
-  {
-    "id": "silk-bandage",
-    "name": "Silk Bandage",
-    "skill": "skill-tailoring",
-    "difficulty": 21,
-    "container": "Small Sewing Kit",
-    "expansion": "classic",
-    "components": [
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "cloth"
+      },
       {
         "id": "silk-thread",
         "name": "Silk Thread",
-        "qty": 2,
+        "qty": 1,
         "type": "item"
       }
     ],
     "product": {
-      "type": "item",
-      "template": "silk-bandage",
-      "name": "Silk Bandage",
-      "qty": 1
+      "type": "armor",
+      "location": "face",
+      "category": "cloth",
+      "defaultMaterial": "cloth"
     }
   },
   {
-    "id": "patchwork-tunic",
-    "name": "Patchwork Tunic",
+    "id": "leather-face",
+    "name": "Leather Mask",
+    "skill": "skill-tailoring",
+    "difficulty": 30,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "face-pattern",
+        "name": "Face Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "hide",
+        "name": "Hide (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "leather"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "armor",
+      "location": "face",
+      "category": "leather",
+      "defaultMaterial": "soft_leather"
+    }
+  },
+  {
+    "id": "cloth-head",
+    "name": "Cloth Cap",
+    "skill": "skill-tailoring",
+    "difficulty": 18,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "head-pattern",
+        "name": "Head Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "silk",
+        "name": "Silk (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "cloth"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "armor",
+      "location": "head",
+      "category": "cloth",
+      "defaultMaterial": "cloth"
+    }
+  },
+  {
+    "id": "leather-head",
+    "name": "Leather Cap",
+    "skill": "skill-tailoring",
+    "difficulty": 33,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "head-pattern",
+        "name": "Head Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "hide",
+        "name": "Hide (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "leather"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "armor",
+      "location": "head",
+      "category": "leather",
+      "defaultMaterial": "soft_leather"
+    }
+  },
+  {
+    "id": "cloth-hands",
+    "name": "Cloth Gloves",
+    "skill": "skill-tailoring",
+    "difficulty": 20,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "hands-pattern",
+        "name": "Hands Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "silk",
+        "name": "Silk (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "cloth"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "armor",
+      "location": "hands",
+      "category": "cloth",
+      "defaultMaterial": "cloth"
+    }
+  },
+  {
+    "id": "leather-hands",
+    "name": "Leather Gloves",
+    "skill": "skill-tailoring",
+    "difficulty": 35,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "hands-pattern",
+        "name": "Hands Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "hide",
+        "name": "Hide (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "leather"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "armor",
+      "location": "hands",
+      "category": "leather",
+      "defaultMaterial": "soft_leather"
+    }
+  },
+  {
+    "id": "cloth-waist",
+    "name": "Cloth Sash",
+    "skill": "skill-tailoring",
+    "difficulty": 22,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "waist-pattern",
+        "name": "Waist Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "silk",
+        "name": "Silk (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "cloth"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "armor",
+      "location": "waist",
+      "category": "cloth",
+      "defaultMaterial": "cloth"
+    }
+  },
+  {
+    "id": "leather-waist",
+    "name": "Leather Belt",
+    "skill": "skill-tailoring",
+    "difficulty": 37,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "waist-pattern",
+        "name": "Waist Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "hide",
+        "name": "Hide (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "leather"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "armor",
+      "location": "waist",
+      "category": "leather",
+      "defaultMaterial": "soft_leather"
+    }
+  },
+  {
+    "id": "cloth-feet",
+    "name": "Cloth Shoes",
+    "skill": "skill-tailoring",
+    "difficulty": 24,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "feet-pattern",
+        "name": "Feet Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "silk",
+        "name": "Silk (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "cloth"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "armor",
+      "location": "feet",
+      "category": "cloth",
+      "defaultMaterial": "cloth"
+    }
+  },
+  {
+    "id": "leather-feet",
+    "name": "Leather Boots",
+    "skill": "skill-tailoring",
+    "difficulty": 39,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "feet-pattern",
+        "name": "Feet Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "hide",
+        "name": "Hide (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "leather"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "armor",
+      "location": "feet",
+      "category": "leather",
+      "defaultMaterial": "soft_leather"
+    }
+  },
+  {
+    "id": "cloth-back",
+    "name": "Cloth Cloak",
     "skill": "skill-tailoring",
     "difficulty": 26,
-    "container": "Small Sewing Kit",
+    "container": "Sewing Kit",
     "expansion": "classic",
     "components": [
       {
-        "id": "ruined-cat-pelt",
-        "name": "Ruined Cat Pelt",
+        "id": "back-pattern",
+        "name": "Back Pattern",
         "qty": 1,
-        "type": "item"
+        "type": "item",
+        "consume": false
       },
       {
-        "id": "tunic-pattern",
-        "name": "Tunic Pattern",
-        "qty": 1,
-        "type": "item"
-      }
-    ],
-    "product": {
-      "type": "item",
-      "template": "patchwork-tunic",
-      "name": "Patchwork Tunic",
-      "qty": 1
-    }
-  },
-  {
-    "id": "leather-padding",
-    "name": "Leather Padding",
-    "skill": "skill-tailoring",
-    "difficulty": 31,
-    "container": "Small Sewing Kit",
-    "expansion": "classic",
-    "components": [
-      {
-        "id": "low-quality-wolf-skin",
-        "name": "Low Quality Wolf Skin",
-        "qty": 1,
-        "type": "item"
+        "id": "silk",
+        "name": "Silk (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "cloth"
       },
       {
         "id": "silk-thread",
@@ -115,196 +400,269 @@
       }
     ],
     "product": {
-      "type": "item",
-      "template": "leather-padding",
-      "name": "Leather Padding",
-      "qty": 1
+      "type": "armor",
+      "location": "back",
+      "category": "cloth",
+      "defaultMaterial": "cloth"
     }
   },
   {
-    "id": "raw-silk-headband",
-    "name": "Raw Silk Headband",
+    "id": "leather-back",
+    "name": "Leather Cloak",
     "skill": "skill-tailoring",
-    "difficulty": 36,
-    "container": "Small Sewing Kit",
+    "difficulty": 41,
+    "container": "Sewing Kit",
     "expansion": "classic",
     "components": [
       {
-        "id": "cap-pattern",
-        "name": "Cap Pattern",
+        "id": "back-pattern",
+        "name": "Back Pattern",
         "qty": 1,
-        "type": "item"
+        "type": "item",
+        "consume": false
       },
       {
-        "id": "silk-swatch",
-        "name": "Silk Swatch",
+        "id": "hide",
+        "name": "Hide (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "leather"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
         "qty": 1,
         "type": "item"
       }
     ],
     "product": {
-      "type": "item",
-      "template": "raw-silk-headband",
-      "name": "Raw Silk Headband",
-      "qty": 1
+      "type": "armor",
+      "location": "back",
+      "category": "leather",
+      "defaultMaterial": "soft_leather"
     }
   },
   {
-    "id": "studded-mask",
-    "name": "Studded Mask",
+    "id": "cloth-wrist",
+    "name": "Cloth Wristband",
     "skill": "skill-tailoring",
-    "difficulty": 56,
-    "container": "Deluxe Sewing Kit",
+    "difficulty": 28,
+    "container": "Sewing Kit",
     "expansion": "classic",
     "components": [
       {
-        "id": "mask-pattern",
-        "name": "Mask Pattern",
+        "id": "wrist-pattern",
+        "name": "Wrist Pattern",
         "qty": 1,
-        "type": "item"
+        "type": "item",
+        "consume": false
       },
       {
-        "id": "medium-quality-wolf-skin",
-        "name": "Medium Quality Wolf Skin",
-        "qty": 1,
-        "type": "item"
+        "id": "silk",
+        "name": "Silk (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "cloth"
       },
       {
-        "id": "studs",
-        "name": "Studs",
+        "id": "silk-thread",
+        "name": "Silk Thread",
         "qty": 1,
         "type": "item"
       }
     ],
     "product": {
-      "type": "item",
-      "template": "studded-mask",
-      "name": "Studded Mask",
-      "qty": 1
+      "type": "armor",
+      "location": "wrist",
+      "category": "cloth",
+      "defaultMaterial": "cloth"
     }
   },
   {
-    "id": "cured-silk-mask",
-    "name": "Cured Silk Mask",
+    "id": "leather-wrist",
+    "name": "Leather Bracer",
     "skill": "skill-tailoring",
-    "difficulty": 82,
-    "container": "Deluxe Sewing Kit",
+    "difficulty": 43,
+    "container": "Sewing Kit",
     "expansion": "classic",
     "components": [
       {
-        "id": "mask-pattern",
-        "name": "Mask Pattern",
+        "id": "wrist-pattern",
+        "name": "Wrist Pattern",
         "qty": 1,
-        "type": "item"
+        "type": "item",
+        "consume": false
       },
       {
-        "id": "heady-kiola",
-        "name": "Heady Kiola",
-        "qty": 1,
-        "type": "item"
+        "id": "hide",
+        "name": "Hide (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "leather"
       },
       {
-        "id": "silk-swatch",
-        "name": "Silk Swatch",
+        "id": "silk-thread",
+        "name": "Silk Thread",
         "qty": 1,
         "type": "item"
       }
     ],
     "product": {
-      "type": "item",
-      "template": "cured-silk-mask",
-      "name": "Cured Silk Mask",
-      "qty": 1
+      "type": "armor",
+      "location": "wrist",
+      "category": "leather",
+      "defaultMaterial": "soft_leather"
     }
   },
   {
-    "id": "hand-made-backpack",
-    "name": "Hand Made Backpack",
+    "id": "cloth-legs",
+    "name": "Cloth Pants",
     "skill": "skill-tailoring",
-    "difficulty": 88,
-    "container": "Deluxe Sewing Kit",
+    "difficulty": 32,
+    "container": "Sewing Kit",
     "expansion": "classic",
     "components": [
       {
-        "id": "high-quality-bear-skin",
-        "name": "High Quality Bear Skin",
+        "id": "legs-pattern",
+        "name": "Legs Pattern",
         "qty": 1,
-        "type": "item"
+        "type": "item",
+        "consume": false
       },
       {
-        "id": "backpack-pattern",
-        "name": "Backpack Pattern",
+        "id": "silk",
+        "name": "Silk (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "cloth"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
         "qty": 1,
         "type": "item"
       }
     ],
     "product": {
-      "type": "item",
-      "template": "hand-made-backpack",
-      "name": "Hand Made Backpack",
-      "qty": 1
+      "type": "armor",
+      "location": "legs",
+      "category": "cloth",
+      "defaultMaterial": "cloth"
     }
   },
   {
-    "id": "large-reinforced-mask",
-    "name": "Large Reinforced Mask",
+    "id": "leather-legs",
+    "name": "Leather Leggings",
     "skill": "skill-tailoring",
-    "difficulty": 108,
-    "container": "Deluxe Sewing Kit",
+    "difficulty": 47,
+    "container": "Sewing Kit",
     "expansion": "classic",
     "components": [
       {
-        "id": "mask-pattern",
-        "name": "Mask Pattern",
+        "id": "legs-pattern",
+        "name": "Legs Pattern",
         "qty": 1,
-        "type": "item"
+        "type": "item",
+        "consume": false
       },
       {
-        "id": "high-quality-bear-skin",
-        "name": "High Quality Bear Skin",
-        "qty": 1,
-        "type": "item"
+        "id": "hide",
+        "name": "Hide (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "leather"
       },
       {
-        "id": "steel-boning",
-        "name": "Steel Boning",
+        "id": "silk-thread",
+        "name": "Silk Thread",
         "qty": 1,
         "type": "item"
       }
     ],
     "product": {
-      "type": "item",
-      "template": "large-reinforced-mask",
-      "name": "Large Reinforced Mask",
-      "qty": 1
+      "type": "armor",
+      "location": "legs",
+      "category": "leather",
+      "defaultMaterial": "soft_leather"
     }
   },
   {
-    "id": "tailored-quiver",
-    "name": "Tailored Quiver",
+    "id": "cloth-chest",
+    "name": "Cloth Robe",
     "skill": "skill-tailoring",
-    "difficulty": 115,
-    "container": "Loom",
+    "difficulty": 35,
+    "container": "Sewing Kit",
     "expansion": "classic",
     "components": [
       {
-        "id": "high-quality-cat-pelt",
-        "name": "High Quality Cat Pelt",
+        "id": "chest-pattern",
+        "name": "Chest Pattern",
         "qty": 1,
-        "type": "item"
+        "type": "item",
+        "consume": false
       },
       {
-        "id": "quiver-pattern",
-        "name": "Quiver Pattern",
+        "id": "silk",
+        "name": "Silk (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "cloth"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
         "qty": 1,
         "type": "item"
       }
     ],
     "product": {
-      "type": "item",
-      "template": "tailored-quiver",
-      "name": "Tailored Quiver",
-      "qty": 1
+      "type": "armor",
+      "location": "chest",
+      "category": "cloth",
+      "defaultMaterial": "cloth"
+    }
+  },
+  {
+    "id": "leather-chest",
+    "name": "Leather Tunic",
+    "skill": "skill-tailoring",
+    "difficulty": 55,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "chest-pattern",
+        "name": "Chest Pattern",
+        "qty": 1,
+        "type": "item",
+        "consume": false
+      },
+      {
+        "id": "hide",
+        "name": "Hide (select material)",
+        "qty": 2,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "leather"
+      },
+      {
+        "id": "silk-thread",
+        "name": "Silk Thread",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "armor",
+      "location": "chest",
+      "category": "leather",
+      "defaultMaterial": "soft_leather"
     }
   }
 ]

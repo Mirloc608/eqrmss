@@ -83,9 +83,27 @@ export class TradeskillCombineDialog extends BaseApplication {
         return this.selectedWeapons[recipeId] ?? null;
     }
 
-    // Get available ore materials for dropdown (2026-10-14)
-    _getOreMaterials() {
+    // Get available materials for dropdown (2026-10-14)
+    // materialType: "ore" (default), "cloth", "leather"
+    _getOreMaterials(materialType = "ore") {
         try {
+            if (materialType === "cloth" || materialType === "leather") {
+                // Armor materials for tailoring
+                const armor = game.eqrmss?.armor;
+                if (!armor || typeof armor.options !== "function") return [];
+                const materials = armor.options()?.materials ?? [];
+                const keywords = materialType === "cloth"
+                    ? ["cloth", "silk"]
+                    : ["leather", "hide", "rawhide"];
+                return materials
+                    .filter(m => {
+                        const id = String(m.id ?? "").toLowerCase();
+                        return keywords.some(k => id.includes(k));
+                    })
+                    .map(m => ({ id: m.id, name: m.name }))
+                    .sort((a, b) => a.name.localeCompare(b.name));
+            }
+            // Default: weapon ores for smithing
             const weapons = game.eqrmss?.weapons;
             if (!weapons || typeof weapons.options !== "function") return [];
             const opts = weapons.options();
@@ -116,7 +134,7 @@ export class TradeskillCombineDialog extends BaseApplication {
         const access = canUseTradeskill(this.actor, this.skillId);
 
         // Check inventory for each recipe's components
-        const oreMaterials = this._getOreMaterials();
+        // Note: oreMaterials is per-component now (materialType varies)
         const recipesWithStatus = recipes.map(r => {
             const selectedMat = this._getSelectedMaterial(r.id, r);
             return {
@@ -131,7 +149,9 @@ export class TradeskillCombineDialog extends BaseApplication {
                     };
                     // For materialChoice, add dropdown options
                     if (c.materialChoice) {
-                        base.materialOptions = oreMaterials.map(m => ({
+                        const matType = c.materialType ?? "ore";
+                        const compMaterials = this._getOreMaterials(matType);
+                        base.materialOptions = compMaterials.map(m => ({
                             ...m,
                             selected: m.id === selectedMat,
                             have: this._countOreMaterial(m.id),
@@ -184,13 +204,13 @@ export class TradeskillCombineDialog extends BaseApplication {
         return names[this.skillId] ?? this.skillId;
     }
 
-    // Count ore items matching a material ID (e.g., "iron" matches "Iron Ore")
+    // Count items matching a material ID (e.g., "iron" matches "Iron Ore", "raw_silk" matches "Raw Silk")
     _countOreMaterial(materialId) {
         let count = 0;
-        const matLower = String(materialId ?? "").toLowerCase().replace(/_ore$/, "");
+        const matLower = String(materialId ?? "").toLowerCase().replace(/_ore$/, "").replace(/_/g, " ");
         for (const item of this.actor.items) {
             const nameLower = String(item.name ?? "").toLowerCase();
-            // Match if item name contains the material name (e.g., "iron ore" contains "iron")
+            // Match if item name contains the material name
             if (nameLower.includes(matLower)) {
                 count += Number(item.system?.quantity ?? 1);
             }
@@ -239,10 +259,10 @@ export class TradeskillCombineDialog extends BaseApplication {
         return components.every(c => this._countItem(c, recipeId) >= c.qty);
     }
 
-    // Consume ore items matching a material ID
+    // Consume items matching a material ID
     async _consumeOreMaterial(materialId, qty) {
         let remaining = qty;
-        const matLower = String(materialId ?? "").toLowerCase().replace(/_ore$/, "");
+        const matLower = String(materialId ?? "").toLowerCase().replace(/_ore$/, "").replace(/_/g, " ");
         for (const item of [...this.actor.items]) {
             if (remaining <= 0) break;
             const nameLower = String(item.name ?? "").toLowerCase();
@@ -363,10 +383,17 @@ export class TradeskillCombineDialog extends BaseApplication {
                 const selected = this._getSelectedMaterial(recipeId, recipe);
                 // Only override if recipe has materialChoice
                 if (recipe.components?.some(c => c.materialChoice)) {
-                    // For armor, map ore ID to armor material ID (e.g., "iron" -> "iron_chain")
+                    // For armor, use selected material directly if valid, else map ore->armor
                     if (product.type === "armor" && product.category) {
-                        const mapped = this._mapOreToArmorMaterial(selected, product.category);
-                        materialId = mapped ?? product.defaultMaterial ?? "iron_chain";
+                        // Check if selected is already a valid armor material
+                        const armorMats = game.eqrmss?.armor?.options?.()?.materials ?? [];
+                        if (armorMats.some(m => m.id === selected)) {
+                            materialId = selected;
+                        } else {
+                            // Map ore ID to armor material (e.g., "iron" -> "iron_chain")
+                            const mapped = this._mapOreToArmorMaterial(selected, product.category);
+                            materialId = mapped ?? product.defaultMaterial ?? "iron_chain";
+                        }
                     } else {
                         materialId = selected;
                     }
