@@ -140,7 +140,41 @@ async function loadSpells() {
         try { baseBrowse = await FilePickerImpl.browse("data", basePath); }
         catch { console.log("EQRMSS | Spell Loader | No spells folder"); return SPELLS; }
         
-        if (baseBrowse.dirs.length > 0) {
+        // Bundle fast-path (2026-10-14): if class bundles exist, load 11 files
+        // instead of browsing + fetching 275 chunk files.
+        const bundleClasses = ["beastlord","cleric","druid","enchanter","magician","necromancer","paladin","ranger","shadowknight","shaman","wizard"];
+        let useBundles = false;
+        const bundleResults = await mapLimit(bundleClasses, 6, async (className) => {
+            try {
+                const resp = await fetch(`${basePath}/bundles/${className}.json`);
+                if (!resp.ok) return null;
+                const spells = await resp.json();
+                if (!Array.isArray(spells) || spells.length === 0) return null;
+                SPELLS[className] = spells;
+                SPELLS_BY_LEVEL[className] = {};
+                for (const s of spells) {
+                    const lvl = s.level || s.spellLevel || s.minLevel || 1;
+                    const rangeStart = Math.floor((lvl - 1) / 5) * 5 + 1;
+                    const rangeEnd = rangeStart + 4;
+                    const key = `${String(rangeStart).padStart(2,'0')}-${String(rangeEnd).padStart(2,'0')}`;
+                    (SPELLS_BY_LEVEL[className][key] = SPELLS_BY_LEVEL[className][key] || []).push(s);
+                }
+                STATS.chunks++;
+                return { className, count: spells.length };
+            } catch { return null; }
+        });
+
+        const loadedBundles = bundleResults.filter(Boolean);
+        if (loadedBundles.length > 0) {
+            useBundles = true;
+            console.log(`EQRMSS | Spell Loader | using bundles (${loadedBundles.length} classes)`);
+            for (const { className, count } of loadedBundles) {
+                STATS.classes++;
+                STATS.total += count;
+            }
+        }
+
+        if (!useBundles && baseBrowse.dirs.length > 0) {
             const classDirs = baseBrowse.dirs.filter(d => {
                 const n = d.split('/').pop().toLowerCase();
                 return !n.startsWith('.') && !['backup','old'].includes(n);

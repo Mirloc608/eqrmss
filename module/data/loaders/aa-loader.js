@@ -140,6 +140,57 @@ export const EQRMSSAALoader = {
                 console.warn("EQRMSS | AA Loader | expansion manager unavailable, gating disabled");
             }
 
+            // Bundle fast-path (2026-10-14): if bundles exist, load 4 files
+            // instead of browsing + fetching 1,264 individual files.
+            const bundleNames = ["general", "archetype", "classes", "mercenary"];
+            let useBundles = false;
+            const bundleData = [];
+            for (const bn of bundleNames) {
+                try {
+                    const resp = await fetch(`${AA_BASE_PATH}/bundles/${bn}.json`);
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        if (Array.isArray(data) && data.length > 0) {
+                            bundleData.push(...data);
+                            useBundles = true;
+                        }
+                    }
+                } catch {}
+            }
+
+            if (useBundles) {
+                console.log(`EQRMSS | AA Loader | using bundles (${bundleData.length} entries)`);
+                for (const entry of bundleData) {
+                    const j = entry.data || entry;
+                    const file = entry._source || "bundle";
+                    scanned++;
+                    if (!isValidAA(j)) { invalid++; continue; }
+                    if (!isAAUnlocked(j, manager)) { gated++; continue; }
+                    const id = j.id;
+                    if (byId[id]) {
+                        console.warn(`EQRMSS | AA Loader | duplicate id "${id}" in ${file}, keeping first`);
+                        continue;
+                    }
+                    byId[id] = j;
+                    loaded++;
+                    const cat = j.system.category;
+                    (byCategory[cat] = byCategory[cat] || []).push(j);
+                    const classes = j.system.classes || [];
+                    if (classes.length === 0) {
+                        (byClass.all = byClass.all || []).push(j);
+                    } else {
+                        for (const c of classes) {
+                            (byClass[c] = byClass[c] || []).push(j);
+                        }
+                    }
+                }
+                console.log(
+                    `EQRMSS | AA Loader | scanned=${scanned} loaded=${loaded} gated=${gated} invalid=${invalid} (bundled)`
+                );
+                return this._store(byId, byClass, byCategory);
+            }
+
+            // Fallback: individual files (parallelized)
             const root = await FilePickerImpl.browse("data", AA_BASE_PATH).catch(() => ({ dirs: [], files: [] }));
             const dirs = [...(root.dirs || [])];
 
