@@ -521,12 +521,47 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
         
         // Generic item (default): consumables, etc.
+        // Gem bonuses for enchanted jewelry (2026-10-14)
+        const GEM_BONUSES = {
+            "malachite": { hpBonus: 5 },
+            "turquoise": { manaBonus: 5 },
+            "lapis-lazuli": { hpBonus: 3, manaBonus: 3 },
+            "hematite": { hpBonus: 10 },
+            "cat-s-eye-agate": { chaBonus: 4 },
+            "jasper": { wisBonus: 2 },
+            "amber": { strBonus: 2 },
+            "jade": { agiBonus: 3 },
+            "topaz": { dexBonus: 3 },
+            "peridot": { staBonus: 3 },
+            "sapphire": { intBonus: 3 },
+        };
+        
+        // Check if enchanted metal was used
+        let enchantedBonus = null;
+        if (product.enchantedBonus && recipeId) {
+            const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+            if (recipe) {
+                const metalComp = recipe.components.find(c => c.materialType === "metal");
+                if (metalComp) {
+                    const selectedMetal = this._getSelectedMaterial(recipeId, recipe, metalComp.id);
+                    if (selectedMetal && selectedMetal.startsWith("enchanted-")) {
+                        const gemComp = recipe.components.find(c => c.materialType === "gem");
+                        if (gemComp) {
+                            const selectedGem = this._getSelectedMaterial(recipeId, recipe, gemComp.id);
+                            enchantedBonus = GEM_BONUSES[selectedGem] ?? null;
+                        }
+                    }
+                }
+            }
+        }
+        
         const itemData = {
             name: product.name ?? product.template ?? "Crafted Item",
             type: "item",
             system: {
                 quantity: product.qty ?? 1,
-                description: `Crafted via tradeskill (${quality}).`
+                description: `Crafted via tradeskill (${quality}).` + (enchantedBonus ? " Enchanted." : ""),
+                ...(enchantedBonus ?? {}),
             }
         };
         await this.actor.createEmbeddedDocuments("Item", [itemData]);
