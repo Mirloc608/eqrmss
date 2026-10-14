@@ -220,9 +220,14 @@ export class TradeskillCombineDialog extends BaseApplication {
                     count += Number(sys.quantity ?? 1);
                 }
             } else {
+                const itemNameNorm = String(item.name ?? "").toLowerCase().trim();
+                const compNameNorm = String(component.name ?? "").toLowerCase().trim();
+                const compIdNorm = String(component.id ?? "").toLowerCase().replace(/-/g, " ").trim();
                 if (item.id === component.id || sys.template === component.id ||
-                    item.name.toLowerCase() === component.name.toLowerCase() ||
-                    item.name.toLowerCase().includes(component.id.toLowerCase())) {
+                    itemNameNorm === compNameNorm ||
+                    itemNameNorm === compIdNorm ||
+                    itemNameNorm.includes(compIdNorm) ||
+                    itemNameNorm.includes(compNameNorm)) {
                     count += Number(sys.quantity ?? 1);
                 }
             }
@@ -275,9 +280,14 @@ export class TradeskillCombineDialog extends BaseApplication {
                 if (c.type === "material") {
                     match = sys.material === c.id || item.name.toLowerCase().includes(c.id.toLowerCase());
                 } else {
+                    const itemNameNorm = String(item.name ?? "").toLowerCase().trim();
+                    const compNameNorm = String(c.name ?? "").toLowerCase().trim();
+                    const compIdNorm = String(c.id ?? "").toLowerCase().replace(/-/g, " ").trim();
                     match = item.id === c.id || sys.template === c.id ||
-                        item.name.toLowerCase() === c.name.toLowerCase() ||
-                        item.name.toLowerCase().includes(c.id.toLowerCase());
+                        itemNameNorm === compNameNorm ||
+                        itemNameNorm === compIdNorm ||
+                        itemNameNorm.includes(compIdNorm) ||
+                        itemNameNorm.includes(compNameNorm);
                 }
                 if (match) {
                     const qty = Number(sys.quantity ?? 1);
