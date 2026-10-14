@@ -58,9 +58,11 @@ export class TradeskillCombineDialog extends BaseApplication {
     _getOreMaterials() {
         try {
             const weapons = game.eqrmss?.weapons;
-            if (!weapons || !weapons.materials) return [];
+            if (!weapons || typeof weapons.options !== "function") return [];
+            const opts = weapons.options();
+            const materials = opts?.materials ?? [];
             // Filter to metal/ore materials (exclude cloth, leather, etc.)
-            return Object.values(weapons.materials)
+            return materials
                 .filter(m => {
                     const id = String(m.id ?? "").toLowerCase();
                     // Include ores and metals, exclude cloth/leather/silk
