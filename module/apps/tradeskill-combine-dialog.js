@@ -37,9 +37,11 @@ export class TradeskillCombineDialog extends BaseApplication {
         this.element.querySelectorAll(".material-select").forEach(select => {
             select.addEventListener("change", (ev) => {
                 const recipeId = ev.target.dataset.recipeId;
+                const componentId = ev.target.dataset.componentId;
                 const materialId = ev.target.value;
                 if (recipeId) {
-                    this.selectedMaterials[recipeId] = materialId;
+                    const key = componentId ? `${recipeId}:${componentId}` : recipeId;
+                    this.selectedMaterials[key] = materialId;
                     // Re-render to update have/need counts
                     this.render();
                 }
@@ -62,7 +64,7 @@ export class TradeskillCombineDialog extends BaseApplication {
         super(options);
         this.actor = actor;
         this.skillId = skillId;
-        this.selectedMaterials = {}; // recipeId -> materialId
+        this.selectedMaterials = {}; // recipeId:componentId -> materialId
         this.selectedWeapons = {}; // recipeId -> itemId (for weaponChoice)
     }
 
@@ -146,11 +148,22 @@ export class TradeskillCombineDialog extends BaseApplication {
     }
 
     // Get selected material for a recipe (default to first available or recipe default)
-    _getSelectedMaterial(recipeId, recipe) {
-        if (this.selectedMaterials[recipeId]) return this.selectedMaterials[recipeId];
-        // Default to recipe's defaultMaterial or first ore
+    _getSelectedMaterial(recipeId, recipe, componentId = null) {
+        const key = componentId ? `${recipeId}:${componentId}` : recipeId;
+        if (this.selectedMaterials[key]) return this.selectedMaterials[key];
+        // Default to recipe's defaultMaterial, or first material of the component's type
         const prod = recipe.product ?? {};
-        return prod.defaultMaterial ?? "iron";
+        if (prod.defaultMaterial) return prod.defaultMaterial;
+        // For per-component, find the component and default to first of its type
+        if (componentId && recipe.components) {
+            const comp = recipe.components.find(c => c.id === componentId);
+            if (comp?.materialChoice) {
+                const matType = comp.materialType ?? "ore";
+                const materials = this._getOreMaterials(matType);
+                if (materials.length > 0) return materials[0].id;
+            }
+        }
+        return "iron";
     }
 
     async _prepareContext(options) {
@@ -176,9 +189,10 @@ export class TradeskillCombineDialog extends BaseApplication {
                     if (c.materialChoice) {
                         const matType = c.materialType ?? "ore";
                         const compMaterials = this._getOreMaterials(matType);
+                        const compSelectedMat = this._getSelectedMaterial(r.id, r, c.id);
                         base.materialOptions = compMaterials.map(m => ({
                             ...m,
-                            selected: m.id === selectedMat,
+                            selected: m.id === compSelectedMat,
                             have: this._countOreMaterial(m.id),
                             need: c.qty
                         }));
@@ -252,7 +266,7 @@ export class TradeskillCombineDialog extends BaseApplication {
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
             const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
-            const selectedMat = this._getSelectedMaterial(recipeId, recipe ?? {});
+            const selectedMat = this._getSelectedMaterial(recipeId, recipe ?? {}, component.id);
             return this._countOreMaterial(selectedMat);
         }
         // Count matching items in actor inventory
@@ -313,7 +327,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             // For materialChoice, consume the selected material's ore
             if (c.materialChoice && recipeId) {
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
-                const selectedMat = this._getSelectedMaterial(recipeId, recipe ?? {});
+                const selectedMat = this._getSelectedMaterial(recipeId, recipe ?? {}, c.id);
                 await this._consumeOreMaterial(selectedMat, c.qty);
                 continue;
             }
