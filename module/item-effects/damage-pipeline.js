@@ -477,6 +477,29 @@ async function applyVampiric({ effect, target, source }) {
 }
 
 /**
+ * "lifetap" — direct lifetap weapon proc (2026-10-13). Deals damage to the
+ * target and heals the caster (wielder) for the damage dealt (or a percent).
+ * Payload: { type: "lifetap", min, max, percent } — percent defaults to 100.
+ */
+async function applyLifetap({ effect, target, source, caster }) {
+    const miss = requireTarget(target, "lifetap", source);
+    if (miss) return miss;
+    const rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    // Damage the target
+    const dmgResult = await applyDamage({ effect: { ...effect, type: "damage" }, target, source, caster });
+    const actualDamage = dmgResult.final ?? rolled;
+    // Heal the caster for percent of damage dealt
+    const percent = Number(effect.percent ?? 100);
+    const healAmount = Math.round(actualDamage * (percent / 100));
+    let healNote = "no caster to heal";
+    if (caster && healAmount > 0) {
+        const healResult = await applyHeal({ effect: { min: healAmount, max: healAmount }, target: caster, source });
+        healNote = `healed ${healResult.final ?? healAmount}`;
+    }
+    return { type: "lifetap", final: actualDamage, notes: [`lifetap: ${actualDamage} damage, ${healNote}`], source, applied: true };
+}
+
+/**
  * "illusion" — racial appearance illusion (2026-10-07). Grants the APPEARANCE
  * of another race only: no stat benefits/penalties. The `race` field stores
  * the illusory race id (e.g. "dark-elf", "skeleton") for the future faction
@@ -1222,6 +1245,7 @@ export async function applyEffectPayload({ payload, caster, target, source }) {
         else if (effect.type === "dispel") results.push(await applyDispelPayload({ effect, caster, target, source }));
         else if (effect.type === "feign") results.push(await applyFeignDeathPayload({ effect, caster, target, source }));
         else if (effect.type === "vampiric") results.push(await applyVampiric({ effect, target, source }));
+        else if (effect.type === "lifetap") results.push(await applyLifetap({ effect, target, source, caster }));
         else if (effect.type === "identify") results.push(await applyIdentifyPayload({ effect, caster, target, source }));
         else if (effect.type === "shrink") results.push(await applyShrinkPayload({ effect, target, source, caster }));
         else if (effect.type === "utility") results.push(await applyUtility({ effect, source, target, caster }));
