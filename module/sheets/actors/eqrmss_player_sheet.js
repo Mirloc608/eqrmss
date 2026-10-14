@@ -463,6 +463,17 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // Hover cards (2026-10-12): viewport-safe positioning for
         // .cardtip popups so they are not clipped by tab panels.
         activateCardtips(html);
+        html.querySelectorAll(".skill-category-toggle").forEach(el => el.addEventListener("click", ev => {
+            ev.preventDefault(); ev.stopPropagation();
+            const header = el.closest(".skill-category-header");
+            const body = header?.parentElement?.querySelector(".skill-category-body");
+            const icon = el.querySelector(".toggle-icon");
+            if (header && body) {
+                const isCollapsed = body.classList.toggle("collapsed");
+                header.classList.toggle("collapsed", isCollapsed);
+                if (icon) icon.textContent = isCollapsed ? "▸" : "▾";
+            }
+        }));
 
         // ------------------------------------------------------------
         // Skill Roll Buttons (RMSS skill items)

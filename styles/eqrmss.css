@@ -1542,6 +1542,17 @@ button.rank-badge:hover {
   color: #3a2a18;
 }
 
+/* Skill categories (2026-10-14) — collapsible sections */
+.skill-category { margin-bottom: 12px; border: 1px solid #5f4a2f; border-radius: 8px; background: rgba(255, 250, 235, 0.4); }
+.skill-category-header { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: linear-gradient(180deg, #e8d5a8, #d4b87f); border-bottom: 1px solid #5f4a2f; border-radius: 8px 8px 0 0; cursor: pointer; }
+.skill-category-header.collapsed { border-radius: 8px; border-bottom: none; }
+.skill-category-header strong { font-size: 15px; color: #3a2a18; }
+.skill-category-toggle { background: none; border: none; cursor: pointer; font-size: 14px; color: #5f4a2f; padding: 2px 6px; }
+.skill-category-toggle:hover { color: #3a2a18; }
+.skill-category-body { padding: 8px; }
+.skill-category-body.collapsed { display: none; }
+.category-badge { background: #d9c08a; border: 1px solid #5f4a2f; border-radius: 12px; padding: 2px 10px; font-size: 12px; color: #3a2a18; margin-left: auto; }
+
 /* Tradeskill dialog — PARCHMENT THEME (2026-10-14)
    Matches the item sheet parchment theme per user request.
    Light tan background, dark brown text and accents. */

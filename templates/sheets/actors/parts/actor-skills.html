@@ -1,55 +1,24 @@
 <section class="tab skills-tab" data-group="primary" data-tab="skills">
     <div class="skills-container">
-
         <h3>{{localize "eqrmss.pc_sheet.skills.header"}}</h3>
-
-        {{#if items.skillCatalog.length}}
-        <table class="eqrmss-table skills-table">
-            <thead>
-                <tr>
-                    <th>{{localize "eqrmss.pc_sheet.skills.name"}}</th>
-                    <th>{{localize "eqrmss.pc_sheet.skills.category"}}</th>
-                    <th>{{localize "eqrmss.pc_sheet.skills.cost"}}</th>
-                    <th>{{localize "eqrmss.pc_sheet.skills.ranks"}}</th>
-                    <th>{{localize "eqrmss.pc_sheet.skills.actions"}}</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {{#each items.skillCatalog}}
-                <tr class="skill-row" data-skill-id="{{id}}">
-                    <td class="skill-name" title="{{#if description}}{{description}}{{else}}{{name}}{{/if}}">
-                        <strong>{{name}}</strong>
-                        {{#if developed}}<span style="color: green;">✓</span>{{/if}}
-                    </td>
-                    <td class="skill-category">{{category}}</td>
-                    <td class="skill-cost">{{cost}}</td>
-                    <td class="skill-ranks">{{ranks}}</td>
-                    <td class="skill-actions">
-                        {{#if developed}}
-                        <button type="button" class="skill-roll" data-item-id="{{itemId}}">
-                            <i class="fas fa-dice-d20"></i> Roll
-                        </button>
-                        {{#if isTradeskill}}
-                        {{#if canCombine}}
-                        <button type="button" class="skill-combine" data-skill-id="{{id}}" title="Open combine dialog">
-                            <i class="fas fa-hammer"></i> Combine
-                        </button>
-                        {{/if}}
-                        {{/if}}
-                        {{else}}
-                        <button type="button" class="skill-develop" data-skill-id="{{id}}" data-skill-name="{{name}}">
-                            Develop
-                        </button>
-                        {{/if}}
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+        {{#if items.skillGroups.length}}
+        {{#each items.skillGroups}}
+        <div class="skill-category">
+            <div class="skill-category-header" data-category="{{name}}">
+                <button type="button" class="skill-category-toggle" data-category="{{name}}" title="Expand/Collapse {{name}}"><span class="toggle-icon">▾</span></button>
+                <strong>{{name}}</strong>
+                <span class="category-badge">{{count}} skills</span>
+            </div>
+            <div class="skill-category-body">
+                <table class="eqrmss-table skills-table">
+                    <thead><tr><th>{{localize "eqrmss.pc_sheet.skills.name"}}</th><th>{{localize "eqrmss.pc_sheet.skills.cost"}}</th><th>{{localize "eqrmss.pc_sheet.skills.ranks"}}</th><th>{{localize "eqrmss.pc_sheet.skills.actions"}}</th></tr></thead>
+                    <tbody>{{#each skills}}<tr class="skill-row" data-skill-id="{{id}}"><td class="skill-name" title="{{#if description}}{{description}}{{else}}{{name}}{{/if}}"><strong>{{name}}</strong>{{#if developed}}<span style="color: green;">✓</span>{{/if}}</td><td class="skill-cost">{{cost}}</td><td class="skill-ranks">{{ranks}}</td><td class="skill-actions">{{#if developed}}<button type="button" class="skill-roll" data-item-id="{{itemId}}"><i class="fas fa-dice-d20"></i> Roll</button>{{#if isTradeskill}}{{#if canCombine}}<button type="button" class="skill-combine" data-skill-id="{{id}}" title="Open combine dialog"><i class="fas fa-hammer"></i> Combine</button>{{/if}}{{/if}}{{else}}<button type="button" class="skill-develop" data-skill-id="{{id}}" data-skill-name="{{name}}">Develop</button>{{/if}}</td></tr>{{/each}}</tbody>
+                </table>
+            </div>
+        </div>
+        {{/each}}
         {{else}}
         <p>No skills available.</p>
         {{/if}}
-
     </div>
 </section>

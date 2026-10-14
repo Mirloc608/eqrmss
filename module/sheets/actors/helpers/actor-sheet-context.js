@@ -258,6 +258,32 @@ export class EQRMSSActorContextHelper {
 
     _categorizeItems(context) {
         const items = this.actor?.items?.contents ?? [];
+        const _skillCatalog = (() => {
+            try {
+                const skillStore = (typeof CONFIG !== 'undefined' ? CONFIG?.EQRMSS?.skills : null) ?? globalThis.CONFIG?.EQRMSS?.skills ?? {};
+                const catalog = Object.values(skillStore);
+                const developed = new Map(items.filter(i => i?.type === "skill").map(s => [String(s.system?.skillId ?? s.name).toLowerCase(), s]));
+                const TRADESKILL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcraft","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison","skill-research"]);
+                const actorRef = this.actor;
+                return catalog.map(skill => {
+                    const key = String(skill.id ?? skill.name).toLowerCase();
+                    const dev = developed.get(key);
+                    const isTs = TRADESKILL_IDS.has(skill.id);
+                    return { id: skill.id, name: skill.name, category: skill.system?.category ?? skill.category ?? "", description: skill.system?.description ?? skill.description ?? "", developed: !!dev, itemId: dev?.id ?? null, ranks: dev ? Number(dev.system?.ranks ?? 0) : 0, cost: skill.system?.cost ?? skill.cost ?? "-", isTradeskill: isTs, canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed };
+                }).sort((a, b) => String(a.name).localeCompare(String(b.name)));
+            } catch (e) { return []; }
+        })();
+        const _skillGroups = (() => {
+            try {
+                const groups = {};
+                for (const skill of _skillCatalog) {
+                    const cat = skill.category || "Uncategorized";
+                    if (!groups[cat]) groups[cat] = [];
+                    groups[cat].push(skill);
+                }
+                return Object.keys(groups).sort().map(name => ({ name, skills: groups[name], count: groups[name].length }));
+            } catch (e) { return []; }
+        })();
         context.items = {
             all: items,
             weapons: items.filter(i => i?.type === "weapon"),
@@ -266,40 +292,8 @@ export class EQRMSSActorContextHelper {
             spells: visibleSpells(items),
             songs: visibleSongs(items),
             skills: items.filter(i => i?.type === "skill"),
-            // Full skill catalog (2026-10-11): merge developed skills with available catalog
-            skillCatalog: (() => {
-                try {
-                    const skillStore = (typeof CONFIG !== 'undefined' ? CONFIG?.EQRMSS?.skills : null) ?? globalThis.CONFIG?.EQRMSS?.skills ?? {};
-                    const catalog = Object.values(skillStore);
-                    const developed = new Map(items.filter(i => i?.type === "skill").map(s => [String(s.system?.skillId ?? s.name).toLowerCase(), s]));
-                    // Tradeskill ids (2026-10-14): show Combine button on Skills tab
-                    const TRADESKILL_IDS = new Set([
-                        "skill-baking", "skill-brewing", "skill-fletching",
-                        "skill-jewelcraft", "skill-pottery", "skill-smithing",
-                        "skill-tailoring", "skill-tinkering", "skill-alchemy",
-                        "skill-poison", "skill-research"
-                    ]);
-                    const actorRef = this.actor;
-                    return catalog.map(skill => {
-                        const key = String(skill.id ?? skill.name).toLowerCase();
-                        const dev = developed.get(key);
-                        const isTs = TRADESKILL_IDS.has(skill.id);
-                        return {
-                            id: skill.id,
-                            name: skill.name,
-                            category: skill.system?.category ?? skill.category ?? "",
-                            description: skill.system?.description ?? skill.description ?? "",
-                            developed: !!dev,
-                            itemId: dev?.id ?? null,
-                            ranks: dev ? Number(dev.system?.ranks ?? 0) : 0,
-                            cost: skill.system?.cost ?? skill.cost ?? "-",
-                            isTradeskill: isTs,
-                            // 2026-10-14: hide Combine when class/race restricted
-                            canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed
-                        };
-                    }).sort((a, b) => String(a.name).localeCompare(String(b.name)));
-                } catch (e) { return []; }
-            })(),
+            skillCatalog: _skillCatalog,
+            skillGroups: _skillGroups,
             skillCategories: items.filter(i => i?.type === "skillcategory"),
             inventory: items.filter(i => new Set(["item", "consumable", "jewelry", "shield", "transport"]).has(i?.type)),
             languages: items.filter(i => i?.type === "language")
