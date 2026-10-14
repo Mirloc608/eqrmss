@@ -20,6 +20,7 @@ import {
 } from "./module/initialization/index.js";
 
 import "./module/config.js";
+import { getSkillCheckEngine } from "./module/utils/skills/index.js";
 import { registerEQRMSSSheets } from "./module/initialization/register-sheets.js";
 
 import * as WizardModule from "./module/apps/eqrmss-character-creation-wizard.js";
@@ -373,6 +374,7 @@ export async function initializeDataLoaders() {
             try {
                 if (typeof SkillLoader.load === 'function') await SkillLoader.load();
                 game.eqrmss._loadStatus.skills = true;
+            game.eqrmss.getSkillCheckEngine = getSkillCheckEngine;
                 console.log(`EQRMSS | Skills ready via loader`);
             } catch (e) { console.warn("Skill loader failed, manual fallback", e); game.eqrmss.skills = await manualLoadSkills(); game.eqrmss._loadStatus.skills = true; }
         } else {
