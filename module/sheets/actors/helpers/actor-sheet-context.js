@@ -288,12 +288,23 @@ export class EQRMSSActorContextHelper {
             if (id === "skill-tinkering" && !v.isGnome) return false;
             if (id === "skill-alchemy" && v.classId !== "shaman") return false;
             if (id === "skill-poison" && v.classId !== "rogue") return false;
-            if (["skill-traps", "skill-pick-locks", "skill-pick-pockets"].includes(id) && !["ranger", "bard"].includes(v.classId)) return false;
+            if (id === "skill-traps" && !["ranger", "bard"].includes(v.classId)) return false;
+            if (["skill-pick-locks", "skill-pick-pockets"].includes(id) && v.classId !== "bard") return false;
             if (id === "skill-tracking" && !["bard", "druid", "ranger"].includes(v.classId)) return false;
             if (id === "skill-foraging" && !["ranger", "druid", "bard"].includes(v.classId) && !v.isIksar) return false;
             if (id === "skill-research" && !v.PURE_CASTER.has(v.classId)) return false;
             if (id === "skill-safe-fall" && !["monk", "beastlord"].includes(v.classId) && !v.isVahShir) return false;
             return true;
+        };
+        // Rank caps (2026-10-14): racial/class-granted skills capped at 1 rank.
+        // Vah Shir Safe Fall, Iksar Foraging, Bard Tracking are capped at 1.
+        const _skillRankCap = (skillId) => {
+            const v = _skillVisibility;
+            const id = String(skillId ?? "");
+            if (id === "skill-safe-fall" && v.isVahShir && !["monk", "beastlord"].includes(v.classId)) return 1;
+            if (id === "skill-foraging" && v.isIksar && !["ranger", "druid", "bard"].includes(v.classId)) return 1;
+            if (id === "skill-tracking" && v.classId === "bard") return 1;
+            return null;
         };
         const _skillCatalog = (() => {
             try {
@@ -307,7 +318,7 @@ export class EQRMSSActorContextHelper {
                     const dev = developed.get(key);
                     const isTs = TRADESKILL_IDS.has(skill.id);
                     const category = skill.system?.category ?? skill.category ?? "";
-                    return { id: skill.id, name: skill.name, category, description: skill.system?.description ?? skill.description ?? "", developed: !!dev, itemId: dev?.id ?? null, ranks: dev ? Number(dev.system?.ranks ?? 0) : 0, cost: skill.system?.cost ?? skill.cost ?? "-", isTradeskill: isTs, canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed };
+                    return { id: skill.id, name: skill.name, category, description: skill.system?.description ?? skill.description ?? "", developed: !!dev, itemId: dev?.id ?? null, ranks: dev ? Number(dev.system?.ranks ?? 0) : 0, cost: skill.system?.cost ?? skill.cost ?? "-", isTradeskill: isTs, canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed, maxRanks: _skillRankCap(skill.id) };
                 }).filter(s => _isSkillVisible(s.id, s.category)).sort((a, b) => String(a.name).localeCompare(String(b.name)));
             } catch (e) { return []; }
         })();

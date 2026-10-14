@@ -53,7 +53,13 @@ export class EQRMSSActorSkillsHelper {
                 if (!item) return;
 
                 const current = Number(item.system.new_rank ?? 0);
-                const next = (current + 1) % 4;
+                const maxRanks = Number(item.system.max_ranks ?? 0);
+                let next = (current + 1) % 4;
+                // Enforce rank cap (2026-10-14): racial/class-capped skills cannot exceed max
+                if (maxRanks > 0 && next > maxRanks) {
+                    ui.notifications.warn(`This skill is capped at ${maxRanks} rank(s).`);
+                    return;
+                }
 
                 item.update({ "system.new_rank": next });
             });
@@ -86,7 +92,8 @@ export class EQRMSSActorSkillsHelper {
                     return;
                 }
                 
-                // Create skill Item on actor
+                // Create skill Item on actor (maxRanks from visibility cap, if any)
+                const maxRanks = ev.currentTarget.dataset.maxRanks ? Number(ev.currentTarget.dataset.maxRanks) : null;
                 await this.actor.createEmbeddedDocuments("Item", [{
                     name: catalogSkill.name,
                     type: "skill",
@@ -95,7 +102,8 @@ export class EQRMSSActorSkillsHelper {
                         category: catalogSkill.system?.category ?? catalogSkill.category ?? "",
                         description: catalogSkill.system?.description ?? catalogSkill.description ?? "",
                         ranks: 0,
-                        new_rank: 1
+                        new_rank: 1,
+                        ...(maxRanks ? { max_ranks: maxRanks } : {})
                     }
                 }]);
             });
