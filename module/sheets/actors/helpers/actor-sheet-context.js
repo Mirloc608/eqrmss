@@ -258,6 +258,43 @@ export class EQRMSSActorContextHelper {
 
     _categorizeItems(context) {
         const items = this.actor?.items?.contents ?? [];
+        // Skill visibility filters (2026-10-14): class/race-based visibility per user rulings.
+        // "Available" = "Visible" — skills not visible to this actor are hidden from the Skills tab.
+        const _skillVisibility = (() => {
+            try {
+                const sys = this.actor?.system ?? {};
+                const classId = String(sys.origin?.classId ?? sys.fixed_info?.classId ?? "").toLowerCase();
+                const raceId = String(sys.origin?.raceId ?? sys.fixed_info?.raceId ?? "").toLowerCase();
+                const PURE_MELEE = new Set(["warrior", "rogue", "monk", "berserker"]);
+                const PURE_CASTER = new Set(["magician", "wizard", "enchanter", "necromancer", "cleric", "druid", "shaman"]);
+                const hasManaPool = classId !== "" && !PURE_MELEE.has(classId);
+                const isGnome = raceId.includes("gnome");
+                const isIksar = raceId.includes("iksar");
+                const isVahShir = raceId.includes("vah");
+                return { classId, raceId, hasManaPool, isGnome, isIksar, isVahShir, PURE_CASTER };
+            } catch (e) { return { classId: "", raceId: "", hasManaPool: false, isGnome: false, isIksar: false, isVahShir: false, PURE_CASTER: new Set() }; }
+        })();
+        const _isSkillVisible = (skillId, category) => {
+            const v = _skillVisibility;
+            const id = String(skillId ?? "");
+            const cat = String(category ?? "");
+            // Category-level: Subterfuge only for Bard/Rogue/Ranger
+            if (cat === "Subterfuge" && !["bard", "rogue", "ranger"].includes(v.classId)) return false;
+            // Category-level: Power only if has mana pool
+            if (cat === "Power" && !v.hasManaPool) return false;
+            // Category-level: Bardic only for Bards
+            if (cat === "Bardic" && v.classId !== "bard") return false;
+            // Skill-level filters
+            if (id === "skill-tinkering" && !v.isGnome) return false;
+            if (id === "skill-alchemy" && v.classId !== "shaman") return false;
+            if (id === "skill-poison" && v.classId !== "rogue") return false;
+            if (["skill-traps", "skill-pick-locks", "skill-pick-pockets"].includes(id) && !["ranger", "bard"].includes(v.classId)) return false;
+            if (id === "skill-tracking" && !["bard", "druid", "ranger"].includes(v.classId)) return false;
+            if (id === "skill-foraging" && !["ranger", "druid", "bard"].includes(v.classId) && !v.isIksar) return false;
+            if (id === "skill-research" && !v.PURE_CASTER.has(v.classId)) return false;
+            if (id === "skill-safe-fall" && !["monk", "beastlord"].includes(v.classId) && !v.isVahShir) return false;
+            return true;
+        };
         const _skillCatalog = (() => {
             try {
                 const skillStore = (typeof CONFIG !== 'undefined' ? CONFIG?.EQRMSS?.skills : null) ?? globalThis.CONFIG?.EQRMSS?.skills ?? {};
@@ -269,8 +306,9 @@ export class EQRMSSActorContextHelper {
                     const key = String(skill.id ?? skill.name).toLowerCase();
                     const dev = developed.get(key);
                     const isTs = TRADESKILL_IDS.has(skill.id);
-                    return { id: skill.id, name: skill.name, category: skill.system?.category ?? skill.category ?? "", description: skill.system?.description ?? skill.description ?? "", developed: !!dev, itemId: dev?.id ?? null, ranks: dev ? Number(dev.system?.ranks ?? 0) : 0, cost: skill.system?.cost ?? skill.cost ?? "-", isTradeskill: isTs, canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed };
-                }).sort((a, b) => String(a.name).localeCompare(String(b.name)));
+                    const category = skill.system?.category ?? skill.category ?? "";
+                    return { id: skill.id, name: skill.name, category, description: skill.system?.description ?? skill.description ?? "", developed: !!dev, itemId: dev?.id ?? null, ranks: dev ? Number(dev.system?.ranks ?? 0) : 0, cost: skill.system?.cost ?? skill.cost ?? "-", isTradeskill: isTs, canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed };
+                }).filter(s => _isSkillVisible(s.id, s.category)).sort((a, b) => String(a.name).localeCompare(String(b.name)));
             } catch (e) { return []; }
         })();
         const _skillGroups = (() => {
