@@ -311,7 +311,7 @@ export class EQRMSSActorContextHelper {
                 const skillStore = (typeof CONFIG !== 'undefined' ? CONFIG?.EQRMSS?.skills : null) ?? globalThis.CONFIG?.EQRMSS?.skills ?? {};
                 const catalog = Object.values(skillStore);
                 const developed = new Map(items.filter(i => i?.type === "skill").map(s => [String(s.system?.skillId ?? s.name).toLowerCase(), s]));
-                const TRADESKILL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcraft","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison","skill-research"]);
+                const TRADESKILL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison","skill-research"]);
                 const actorRef = this.actor;
                 return catalog.map(skill => {
                     const key = String(skill.id ?? skill.name).toLowerCase();
