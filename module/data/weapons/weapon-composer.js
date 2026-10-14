@@ -70,14 +70,14 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
     // Weight: template × material multiplier (rounded to 0.1)
     const weight = Math.round(template.weight * material.weightMult * 10) / 10;
 
+    // H2H Infused (2026-10-14, user ruling): +5 OB, +50% cost for infused tier.
+    const infusedObBonus = infused ? 5 : 0;
     // OB modifier: material + condition + infused
     const obMod = material.obMod + condition.obMod + infusedObBonus;
 
     // Damage modifier: material + condition
     const damageMod = material.damageMod + condition.damageMod;
 
-    // H2H Infused (2026-10-14, user ruling): +5 OB, +50% cost for infused tier.
-    const infusedObBonus = infused ? 5 : 0;
     const infusedCostMult = infused ? 1.5 : 1;
 
     // Breakage: combine (higher = breaks more easily)
