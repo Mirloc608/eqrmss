@@ -1,15 +1,401 @@
 {
-    "materials":
-    [
-        {"breakageMod":20,"damageMod":-2,"id":"wood","name":"Wood","notes":"Light but fragile; -10 OB, -2 damage, breaks easily","obMod":-10,"weightMult":0.6},
-        {"breakageMod":10,"damageMod":-1,"id":"bone","name":"Bone","notes":"Light; -5 OB, -1 damage","obMod":-5,"weightMult":0.7},
-        {"breakageMod":10,"damageMod":0,"id":"stone","name":"Stone","notes":"Heavy; -5 OB","obMod":-5,"weightMult":1.3},
-        {"breakageMod":5,"damageMod":-1,"id":"copper","name":"Copper","notes":"Soft metal; -5 OB, -1 damage","obMod":-5,"weightMult":1.1},
-        {"breakageMod":0,"damageMod":0,"id":"bronze","name":"Bronze","notes":"Slightly heavier than steel, otherwise standard","obMod":0,"weightMult":1.1},
-        {"breakageMod":0,"damageMod":0,"id":"iron","name":"Iron","notes":"Heavier than steel; standard otherwise","obMod":0,"weightMult":1.15},
-        {"breakageMod":0,"damageMod":0,"id":"steel","name":"Steel","notes":"Baseline material; no modifiers","obMod":0,"weightMult":1.0},
-        {"breakageMod":-20,"damageMod":0,"id":"mithril","name":"Mithril","notes":"Half weight, +10 OB, resists breakage","obMod":10,"weightMult":0.5},
-                {"breakageMod":-30,"damageMod":2,"id":"adamantine","name":"Adamantine","notes":"Light, +5 OB, +2 damage, nearly unbreakable","obMod":5,"weightMult":0.8},
-        {"breakageMod":0,"damageMod":0,"id":"velium","name":"Velium","notes":"Enchanted ice-metal of Velious; procs Velium Shards on a critical hit. Stat mods placeholder (steel-equivalent) pending ruling.","obMod":0,"weightMult":1.0,"proc":"velium-shards"}
+    "materials":[
+        {
+            "breakageMod":20,
+            "damageMod":-2,
+            "id":"wood",
+            "name":"Wood",
+            "notes":"Light but fragile; -10 OB, -2 damage, breaks easily",
+            "obMod":-10,
+            "weightMult":0.6
+        },
+        {
+            "breakageMod":10,
+            "damageMod":-1,
+            "id":"bone",
+            "name":"Bone",
+            "notes":"Light; -5 OB, -1 damage",
+            "obMod":-5,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":10,
+            "damageMod":0,
+            "id":"stone",
+            "name":"Stone",
+            "notes":"Heavy; -5 OB",
+            "obMod":-5,
+            "weightMult":1.3
+        },
+        {
+            "breakageMod":5,
+            "damageMod":-1,
+            "id":"copper",
+            "name":"Copper",
+            "notes":"Soft metal; -5 OB, -1 damage",
+            "obMod":-5,
+            "weightMult":1.1
+        },
+        {
+            "breakageMod":0,
+            "damageMod":0,
+            "id":"bronze",
+            "name":"Bronze",
+            "notes":"Slightly heavier than steel, otherwise standard",
+            "obMod":0,
+            "weightMult":1.1
+        },
+        {
+            "breakageMod":0,
+            "damageMod":0,
+            "id":"iron",
+            "name":"Iron",
+            "notes":"Common ore; baseline iron-equivalent stats.",
+            "obMod":0,
+            "weightMult":1.15
+        },
+        {
+            "breakageMod":0,
+            "damageMod":0,
+            "id":"steel",
+            "name":"Steel",
+            "notes":"Baseline material; no modifiers",
+            "obMod":0,
+            "weightMult":1.0
+        },
+        {
+            "breakageMod":-10,
+            "damageMod":0,
+            "id":"mithril",
+            "name":"Mithril",
+            "notes":"+10 OB, lighter, resists breakage.",
+            "obMod":10,
+            "weightMult":0.8
+        },
+        {
+            "breakageMod":-30,
+            "damageMod":2,
+            "id":"adamantine",
+            "name":"Adamantine",
+            "notes":"Light, +5 OB, +2 damage, nearly unbreakable",
+            "obMod":5,
+            "weightMult":0.8
+        },
+        {
+            "breakageMod":0,
+            "damageMod":0,
+            "id":"velium",
+            "name":"Velium",
+            "notes":"Enchanted ice-metal of Velious; procs Velium Shards on a critical hit. Stat mods placeholder (steel-equivalent) pending ruling.",
+            "obMod":0,
+            "weightMult":1.0,
+            "proc":"velium-shards"
+        },
+        {
+            "breakageMod":-10,
+            "damageMod":0,
+            "id":"acrylia_ore",
+            "name":"Acrylia",
+            "notes":"+10 OB, lighter, resists breakage.",
+            "obMod":10,
+            "weightMult":0.8
+        },
+        {
+            "breakageMod":-25,
+            "damageMod":3,
+            "id":"august_ore",
+            "name":"August",
+            "notes":"+12 OB, +3 damage, very light, strongly resists breakage.",
+            "obMod":12,
+            "weightMult":0.6
+        },
+        {
+            "breakageMod":-10,
+            "damageMod":0,
+            "id":"chronium_ore",
+            "name":"Chronium",
+            "notes":"+10 OB, lighter, resists breakage.",
+            "obMod":10,
+            "weightMult":0.8
+        },
+        {
+            "breakageMod":-25,
+            "damageMod":3,
+            "id":"conflagrant_ore",
+            "name":"Conflagrant",
+            "notes":"+12 OB, +3 damage, very light, strongly resists breakage.",
+            "obMod":12,
+            "weightMult":0.6
+        },
+        {
+            "breakageMod":-30,
+            "damageMod":3,
+            "id":"crystallized_velium_ore",
+            "name":"Crystallized Velium",
+            "notes":"+15 OB, +3 damage, very light, strongly resists breakage.",
+            "obMod":15,
+            "weightMult":0.5
+        },
+        {
+            "breakageMod":0,
+            "damageMod":0,
+            "id":"deathsteel_ore",
+            "name":"Deathsteel",
+            "notes":"+5 OB; fine quality ore.",
+            "obMod":5,
+            "weightMult":1.0
+        },
+        {
+            "breakageMod":0,
+            "damageMod":0,
+            "id":"enchanted_ghostly_ore",
+            "name":"Enchanted Ghostly",
+            "notes":"+5 OB; fine quality ore.",
+            "obMod":5,
+            "weightMult":1.0
+        },
+        {
+            "breakageMod":0,
+            "damageMod":0,
+            "id":"fiery_ore",
+            "name":"Fiery",
+            "notes":"+5 OB; fine quality ore.",
+            "obMod":5,
+            "weightMult":1.0
+        },
+        {
+            "breakageMod":0,
+            "damageMod":0,
+            "id":"frontier_ore",
+            "name":"Frontier",
+            "notes":"+5 OB; fine quality ore.",
+            "obMod":5,
+            "weightMult":1.0
+        },
+        {
+            "breakageMod":-10,
+            "damageMod":0,
+            "id":"fusible_coral_ore",
+            "name":"Fusible Coral",
+            "notes":"+10 OB, lighter, resists breakage.",
+            "obMod":10,
+            "weightMult":0.8
+        },
+        {
+            "breakageMod":-10,
+            "damageMod":0,
+            "id":"fusible_earthen_ore",
+            "name":"Fusible Earthen",
+            "notes":"+10 OB, lighter, resists breakage.",
+            "obMod":10,
+            "weightMult":0.8
+        },
+        {
+            "breakageMod":-10,
+            "damageMod":0,
+            "id":"fusible_igneous_ore",
+            "name":"Fusible Igneous",
+            "notes":"+10 OB, lighter, resists breakage.",
+            "obMod":10,
+            "weightMult":0.8
+        },
+        {
+            "breakageMod":-10,
+            "damageMod":0,
+            "id":"fusible_velium_ore",
+            "name":"Fusible Velium",
+            "notes":"+10 OB, lighter, resists breakage.",
+            "obMod":10,
+            "weightMult":0.8
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"iridium_ore",
+            "name":"Iridium",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"molten_ore",
+            "name":"Molten",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"osmium_ore",
+            "name":"Osmium",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"palladium_ore",
+            "name":"Palladium",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"perfect_acrylia_ore",
+            "name":"Perfect Acrylia",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-10,
+            "damageMod":0,
+            "id":"porous_ore",
+            "name":"Porous",
+            "notes":"+10 OB, lighter, resists breakage.",
+            "obMod":10,
+            "weightMult":0.8
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"purescale_ore",
+            "name":"Purescale",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"rhenium_ore",
+            "name":"Rhenium",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"rubicite_ore",
+            "name":"Rubicite",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-30,
+            "damageMod":3,
+            "id":"rygorr_velium_ore",
+            "name":"Ry'Gorr Velium",
+            "notes":"+15 OB, +3 damage, very light, strongly resists breakage.",
+            "obMod":15,
+            "weightMult":0.5
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"scale_ore",
+            "name":"Scale",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-25,
+            "damageMod":3,
+            "id":"scorched_ore",
+            "name":"Scorched",
+            "notes":"+12 OB, +3 damage, very light, strongly resists breakage.",
+            "obMod":12,
+            "weightMult":0.6
+        },
+        {
+            "breakageMod":0,
+            "damageMod":0,
+            "id":"starmetal_ore",
+            "name":"Starmetal",
+            "notes":"+5 OB; fine quality ore.",
+            "obMod":5,
+            "weightMult":1.0
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"steppes_ore",
+            "name":"Steppes",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-10,
+            "damageMod":0,
+            "id":"sunshard_ore",
+            "name":"Sunshard",
+            "notes":"+10 OB, lighter, resists breakage.",
+            "obMod":10,
+            "weightMult":0.8
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"taelosian_tempered_ore",
+            "name":"Taelosian Tempered",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-25,
+            "damageMod":3,
+            "id":"tantalum_ore",
+            "name":"Tantalum",
+            "notes":"+12 OB, +3 damage, very light, strongly resists breakage.",
+            "obMod":12,
+            "weightMult":0.6
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"thalium_ore",
+            "name":"Thalium",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"titanium_ore",
+            "name":"Titanium",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-20,
+            "damageMod":2,
+            "id":"tungsten_ore",
+            "name":"Tungsten",
+            "notes":"+10 OB, +2 damage, light, resists breakage.",
+            "obMod":10,
+            "weightMult":0.7
+        },
+        {
+            "breakageMod":-25,
+            "damageMod":3,
+            "id":"vanadium_ore",
+            "name":"Vanadium",
+            "notes":"+12 OB, +3 damage, very light, strongly resists breakage.",
+            "obMod":12,
+            "weightMult":0.6
+        }
     ]
 }
