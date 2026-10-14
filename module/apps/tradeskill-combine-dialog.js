@@ -383,8 +383,14 @@ export class TradeskillCombineDialog extends BaseApplication {
                 const selected = this._getSelectedMaterial(recipeId, recipe);
                 // Only override if recipe has materialChoice
                 if (recipe.components?.some(c => c.materialChoice)) {
+                    const matComp = recipe.components.find(c => c.materialChoice);
+                    const matType = matComp?.materialType ?? "ore";
+                    // Tailoring weapons: map cloth/leather to weapon material IDs
+                    if (product.type === "weapon" && (matType === "cloth" || matType === "leather")) {
+                        materialId = matType === "cloth" ? "silk" : "leather";
+                    }
                     // For armor, use selected material directly if valid, else map ore->armor
-                    if (product.type === "armor" && product.category) {
+                    else if (product.type === "armor" && product.category) {
                         // Check if selected is already a valid armor material
                         const armorMats = game.eqrmss?.armor?.options?.()?.materials ?? [];
                         if (armorMats.some(m => m.id === selected)) {
