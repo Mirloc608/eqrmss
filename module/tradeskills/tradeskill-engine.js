@@ -10,6 +10,17 @@
  */
 
 export const CRIT_FAIL_RANGE = [1, 5];
+export const CRIT_SUCCESS_RANGE = [96, 100];
+
+// Quality bands (2026-10-14, user rulings):
+// 96-100: Pristine (crit success), 60-95: Normal, 30-59: Worn, 06-29: Tarnished, 01-05: Broken (crit fail)
+export function qualityForRoll(natural) {
+    if (natural >= 96) return "pristine";
+    if (natural >= 60) return "normal";
+    if (natural >= 30) return "worn";
+    if (natural >= 6) return "tarnished";
+    return "broken";
+}
 
 /**
  * Tradeskill restrictions (2026-10-14, user rulings — EQ canon).
@@ -96,14 +107,15 @@ export async function attemptCombine(actor, recipe, hasComponents, consumeCompon
     const isCritFail = natural >= CRIT_FAIL_RANGE[0] && natural <= CRIT_FAIL_RANGE[1];
 
     if (isCritFail) {
-        // Critical failure: lose materials (user ruling: softer — only crit fail loses mats)
+        // Critical failure (2026-10-14): lose materials, but produce a Broken quality item
         await consumeComponents(recipe.components);
+        await createProduct(recipe.product, "broken");
         return {
             success: false,
             critFail: true,
             roll: check.roll,
             total: check.total,
-            message: `Critical failure! The ${recipe.name} combine destroys the materials.`
+            message: `Critical failure! The ${recipe.name} combine produces a broken result.`
         };
     }
 
@@ -118,9 +130,10 @@ export async function attemptCombine(actor, recipe, hasComponents, consumeCompon
         };
     }
 
-    // Success: consume components, create product
+    // Success: consume components, create product with quality from natural roll
+    const quality = qualityForRoll(natural);
     await consumeComponents(recipe.components);
-    await createProduct(recipe.product);
+    await createProduct(recipe.product, quality);
 
     return {
         success: true,

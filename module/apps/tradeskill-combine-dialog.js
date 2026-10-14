@@ -130,15 +130,89 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
     }
 
-    async _createProduct(product) {
-        // Create the product item on the actor
-        // For now, create a generic item; full template composition is future work
+    async _createProduct(product, quality = "normal") {
+        // Create the product item on the actor using composers (2026-10-14)
+        // Quality from roll: pristine/normal/worn/tarnished/broken
+        const productType = product.type ?? "item";
+        
+        if (productType === "weapon" && product.weaponTemplate) {
+            // Weapon via composer: template + material + quality condition
+            const weapons = game.eqrmss?.weapons;
+            if (!weapons) {
+                ui.notifications.error("Weapon data not loaded.");
+                return;
+            }
+            try {
+                const composed = weapons.compose(
+                    product.weaponTemplate,
+                    product.material ?? "steel",
+                    quality
+                );
+                await this.actor.createEmbeddedDocuments("Item", [{
+                    name: composed.name,
+                    type: "weapon",
+                    system: {
+                        weaponTemplate: composed.templateId,
+                        material: composed.materialId,
+                        condition: composed.conditionId,
+                        type: composed.weaponType,
+                        weight: composed.weight,
+                        cost: composed.cost,
+                        obMod: composed.obMod,
+                        damageMod: composed.damageMod,
+                        quantity: product.qty ?? 1,
+                        description: `Crafted via tradeskill (${quality}).`
+                    }
+                }]);
+                return;
+            } catch (e) {
+                ui.notifications.error(`Weapon compose failed: ${e.message}`);
+                return;
+            }
+        }
+        
+        if (productType === "armor" && product.location) {
+            // Armor via composer: location + category + material + quality condition
+            const armor = game.eqrmss?.armor;
+            if (!armor) {
+                ui.notifications.error("Armor data not loaded.");
+                return;
+            }
+            try {
+                const composed = armor.compose(
+                    product.location,
+                    product.category ?? "cloth",
+                    product.material ?? "cloth",
+                    quality
+                );
+                await this.actor.createEmbeddedDocuments("Item", [{
+                    name: composed.name,
+                    type: "armor",
+                    system: {
+                        location: composed.locationId,
+                        category: composed.categoryId,
+                        material: composed.materialId,
+                        condition: composed.conditionId,
+                        weight: composed.weight,
+                        cost: composed.cost,
+                        quantity: product.qty ?? 1,
+                        description: `Crafted via tradeskill (${quality}).`
+                    }
+                }]);
+                return;
+            } catch (e) {
+                ui.notifications.error(`Armor compose failed: ${e.message}`);
+                return;
+            }
+        }
+        
+        // Generic item (default): consumables, etc.
         const itemData = {
-            name: product.template ?? "Crafted Item",
+            name: product.name ?? product.template ?? "Crafted Item",
             type: "item",
             system: {
                 quantity: product.qty ?? 1,
-                description: `Crafted via tradeskill.`
+                description: `Crafted via tradeskill (${quality}).`
             }
         };
         await this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -161,7 +235,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             recipe,
             (c) => dialog._hasComponents(c),
             (c) => dialog._consumeComponents(c),
-            (p) => dialog._createProduct(p),
+            (p, q) => dialog._createProduct(p, q),
             skillEngine
         );
 
