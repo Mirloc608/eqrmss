@@ -1035,10 +1035,11 @@ div.aa-group-header strong {
   display: none;
 }
 .aa-card {
-  background: #242424;
-  border: 1px solid #3a3a3a;
+  background: rgba(255, 250, 235, 0.55);
+  border: 1px solid #5f4a2f;
   border-radius: 8px;
   padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(60, 40, 20, 0.25);
 }
 .aa-card:hover {
   border-color: #8a6d2f;
@@ -1052,18 +1053,18 @@ div.aa-group-header strong {
   font-size: 14px;
 }
 .aa-card .aa-toggle:hover {
-  color: #ffd766;
+  color: #8a6d2f;
   opacity: 1;
 }
 .aa-name {
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: #3a2a18;
 }
 .aa-buy {
-  background: #2a2a2a;
-  border: 1px solid #8a6d2f;
-  color: #ffd766;
+  background: #5f4a2f;
+  border: 1px solid #3a2a18;
+  color: #fbf6e6;
   border-radius: 6px;
   padding: 5px 14px;
   cursor: pointer;
@@ -1072,15 +1073,15 @@ div.aa-group-header strong {
   white-space: nowrap;
 }
 .aa-buy:hover {
-  background: #3a2f14;
+  background: #6f5a3f;
 }
 .aa-cost {
-  color: #9c9c9c;
+  color: #6a5a40;
   font-size: 13px;
   white-space: nowrap;
 }
 .aa-locked {
-  color: #9c9c9c;
+  color: #6a5a40;
   font-size: 13px;
   font-style: italic;
 }
@@ -1095,7 +1096,7 @@ div.aa-group-header strong {
 }
 /* Descriptive text: white for readability on the dark cards (2026-10-12). */
 .aa-card .aa-details .aa-desc {
-  color: #f0f0f0;
+  color: #3a2a18;
 }
 .aa-card .aa-details .aa-rank,
 .aa-card .aa-details .aa-effects {
@@ -1232,10 +1233,11 @@ div.spell-category-header strong {
   margin-bottom: 6px;
 }
 .spell-card {
-  background: #242424;
-  border: 1px solid #3a3a3a;
+  background: rgba(255, 250, 235, 0.55);
+  border: 1px solid #5f4a2f;
   border-radius: 8px;
   padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(60, 40, 20, 0.25);
 }
 .spell-card:hover {
   border-color: #8a6d2f;
@@ -1246,9 +1248,9 @@ div.spell-category-header strong {
   gap: 10px;
 }
 .lvl-badge {
-  background: #2a2a2a;
-  border: 1px solid #8a6d2f;
-  color: #ffd766;
+  background: #d9c08a;
+  border: 1px solid #5f4a2f;
+  color: #3a2a18;
   font-weight: bold;
   font-size: 12px;
   border-radius: 20px;
@@ -1258,18 +1260,18 @@ div.spell-category-header strong {
 .spell-card .spell-name {
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: #3a2a18;
   text-decoration: none;
   cursor: pointer;
 }
 .spell-card .spell-name:hover {
-  color: #ffd766;
+  color: #8a6d2f;
 }
 .rank-badge {
   background: none;
   font-size: 11px;
-  color: #9c9c9c;
-  border: 1px solid #3a3a3a;
+  color: #6a5a40;
+  border: 1px solid #5f4a2f;
   border-radius: 12px;
   padding: 1px 8px;
   white-space: nowrap;
@@ -1278,7 +1280,7 @@ button.rank-badge {
   cursor: pointer;
 }
 button.rank-badge:hover {
-  color: #ffd766;
+  color: #8a6d2f;
   border-color: #8a6d2f;
 }
 .head-spacer {
@@ -1288,9 +1290,9 @@ button.rank-badge:hover {
   text-decoration: none;
 }
 .spell-card .cast-spell {
-  background: #2a2a2a;
-  border: 1px solid #8a6d2f;
-  color: #ffd766;
+  background: #5f4a2f;
+  border: 1px solid #3a2a18;
+  color: #fbf6e6;
   border-radius: 6px;
   padding: 5px 14px;
   cursor: pointer;
@@ -1298,10 +1300,10 @@ button.rank-badge:hover {
   font-weight: 600;
 }
 .spell-card .cast-spell:hover {
-  background: #3a2f14;
+  background: #6f5a3f;
 }
 .spell-meta {
-  color: #9c9c9c;
+  color: #6a5a40;
   font-size: 12.5px;
   margin: 4px 0 8px;
   text-transform: capitalize;
@@ -1320,14 +1322,14 @@ button.rank-badge:hover {
 }
 .spell-chips .chip-k,
 .aa-chips .chip-k {
-  color: #9c9c9c;
+  color: #6a5a40;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 .spell-chips .chip-v,
 .aa-chips .chip-v {
-  color: #e8e8e8;
+  color: #3a2a18;
 }
 .rank-rows {
   margin-top: 10px;
@@ -1441,7 +1443,23 @@ button.rank-badge:hover {
   width: 100%;
 }
 
-/* Tradeskill recipe cards (2026-10-14) — matches aa-card/spell-card language */
+/* Tradeskill dialog — PARCHMENT THEME (2026-10-14)
+   Matches the item sheet parchment theme per user request.
+   Light tan background, dark brown text and accents. */
+.application:has(.tradeskill-combine) .window-content {
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,250,230,.7), rgba(255,250,230,0) 60%),
+    linear-gradient(165deg, #e9d6a4 0%, #dec48f 50%, #cfb178 100%);
+  color: #3a2a18;
+}
+.tradeskill-combine {
+  color: #3a2a18;
+}
+.tradeskill-combine h2 {
+  color: #3a2a18;
+  border-bottom: 2px solid #5f4a2f;
+  padding-bottom: 6px;
+}
 .tradeskill-combine .recipe-cards {
   display: flex;
   flex-direction: column;
@@ -1449,14 +1467,15 @@ button.rank-badge:hover {
   margin-bottom: 6px;
 }
 .tradeskill-combine .recipe-card {
-  background: #2d2d2d;
-  border: 1px solid #4a4a4a;
+  background: rgba(255, 250, 235, 0.55);
+  border: 1px solid #5f4a2f;
   border-radius: 8px;
   padding: 12px 14px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 3px rgba(60, 40, 20, 0.25);
 }
 .tradeskill-combine .recipe-card:hover {
   border-color: #8a6d2f;
+  background: rgba(255, 250, 235, 0.75);
 }
 .tradeskill-combine .recipe-card-head {
   display: flex;
@@ -1466,33 +1485,33 @@ button.rank-badge:hover {
 .tradeskill-combine .recipe-name {
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: #3a2a18;
 }
 .tradeskill-combine .difficulty-badge {
-  background: #2a2a2a;
-  border: 1px solid #3a3a3a;
+  background: #d9c08a;
+  border: 1px solid #5f4a2f;
   border-radius: 6px;
   padding: 2px 8px;
   font-size: 12px;
-  color: #aaa;
+  color: #3a2a18;
 }
 .tradeskill-combine .head-spacer {
   flex: 1;
 }
 .tradeskill-combine .recipe-combine {
-  background: #2a2a2a;
-  border: 1px solid #8a6d2f;
-  color: #ffd766;
+  background: #5f4a2f;
+  border: 1px solid #3a2a18;
+  color: #fbf6e6;
   border-radius: 6px;
   padding: 5px 14px;
   cursor: pointer;
   font-size: 13px;
 }
 .tradeskill-combine .recipe-combine:hover {
-  background: #3a3a3a;
+  background: #6f5a3f;
 }
 .tradeskill-combine .recipe-missing {
-  color: #888;
+  color: #6a5a40;
   font-size: 13px;
   font-style: italic;
 }
@@ -1514,27 +1533,28 @@ button.rank-badge:hover {
   font-size: 13px;
   padding: 3px 8px;
   border-radius: 4px;
-  background: #1a1a1a;
+  background: rgba(90, 70, 40, 0.12);
+  border: 1px solid rgba(95, 74, 47, 0.4);
 }
 .tradeskill-combine .comp-met {
-  color: #7f7;
+  color: #1a5a1a;
 }
 .tradeskill-combine .comp-missing {
-  color: #f77;
+  color: #a02020;
 }
 .tradeskill-combine .comp-count {
   opacity: 0.8;
 }
 .tradeskill-combine .recipe-empty {
-  color: #888;
+  color: #6a5a40;
   font-style: italic;
 }
 .tradeskill-combine .recipe-restricted {
-  color: #f77;
+  color: #a02020;
   font-size: 15px;
   padding: 20px;
   text-align: center;
-  border: 1px solid #5a2a2a;
+  border: 1px solid #8a3a3a;
   border-radius: 8px;
-  background: #2a1a1a;
+  background: rgba(160, 32, 32, 0.08);
 }
