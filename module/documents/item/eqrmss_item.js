@@ -382,6 +382,12 @@ export class EQRMSSItem extends Item {
 
     _prepareDurability() {
 
+        // Backward compat: old items stored durability as a plain number (2026-10-15)
+        if (typeof this.system.durability === "number") {
+            const d = this.system.durability;
+            this.system.durability = { current: d, maximum: d };
+        }
+
         // Ensure the durability object exists and has numeric current/maximum
         this.system.durability ??= { current: 100, maximum: 100 };
 
