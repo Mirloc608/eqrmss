@@ -105,6 +105,46 @@ export async function attemptCombine(actor, recipe, hasComponents, consumeCompon
 
     const natural = check.roll.total;
     const isCritFail = natural >= CRIT_FAIL_RANGE[0] && natural <= CRIT_FAIL_RANGE[1];
+    const isCritSuccess = natural >= CRIT_SUCCESS_RANGE[0] && natural <= CRIT_SUCCESS_RANGE[1];
+
+    // Component recipes (2026-10-15): shafts, fletchings, arrow/bolt heads
+    // - Crit success: 40, Normal success: 20, Regular failure: 10 (materials consumed), Crit fail: 0 (materials destroyed)
+    if (recipe.componentYield) {
+        if (isCritFail) {
+            // Critical failure: materials destroyed, no product
+            await consumeComponents(recipe.components);
+            return {
+                success: false,
+                critFail: true,
+                roll: check.roll,
+                total: check.total,
+                message: `Critical failure! The materials are destroyed.`
+            };
+        }
+        if (!check.success) {
+            // Regular failure: materials consumed, salvaged 10
+            await consumeComponents(recipe.components);
+            await createProduct(recipe.product, "tarnished");
+            return {
+                success: false,
+                critFail: false,
+                roll: check.roll,
+                total: check.total,
+                message: `Failed to create ${recipe.name}. Salvaged 10.`
+            };
+        }
+        // Success: quality determines yield (pristine: 40, else 20)
+        const quality = qualityForRoll(natural);
+        await consumeComponents(recipe.components);
+        await createProduct(recipe.product, quality);
+        return {
+            success: true,
+            critFail: false,
+            roll: check.roll,
+            total: check.total,
+            message: `Successfully created ${recipe.name}!`
+        };
+    }
 
     if (isCritFail) {
         // Critical failure (2026-10-14): lose materials, but produce a Broken quality item

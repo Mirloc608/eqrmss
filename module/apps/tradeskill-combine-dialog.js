@@ -1234,6 +1234,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
 
             // Fashion Arrow Shafts: creates "{Shaft} Arrow Shafts" bundle
+            // Component yield (2026-10-15): pristine 40, normal/worn 20, tarnished 10
             if (productType === "arrowshaft") {
                 const shaftId = product.shaftId;
                 const shaft = shaftId ? arrows.getShaft(shaftId) : null;
@@ -1241,6 +1242,8 @@ export class TradeskillCombineDialog extends BaseApplication {
                     ui.notifications.error("Unknown shaft type.");
                     return;
                 }
+                const qty = quality === "pristine" ? 40 : quality === "tarnished" ? 10 : 20;
+                if (qty === 0) return; // Crit fail: no product (materials destroyed)
                 const shaftNames = {
                     "wood": "Bundled Wooden Arrow Shafts",
                     "bone": "Bundled Bone Arrow Shafts",
@@ -1253,11 +1256,11 @@ export class TradeskillCombineDialog extends BaseApplication {
                     system: {
                         arrowShaft: shaft.id,
                         arrowShaftName: shaft.name,
-                        quantity: product.qty ?? 1,
+                        quantity: qty,
                         description: `Crafted arrow shafts (${quality}).`
                     }
                 }]);
-                ui.notifications.info(`Fashioned ${shaftNames[shaftId] ?? shaft.name} shafts.`);
+                ui.notifications.info(`Fashioned ${qty}x ${shaftNames[shaftId] ?? shaft.name} shafts.`);
                 return;
             }
 
@@ -1571,42 +1574,48 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
 
         // Fashion Fletchings (2026-10-15): creates fletching items
+        // Component yield: pristine 40, normal/worn 20, tarnished 10
         if (productType === "fletching" && recipeId) {
             const fletchId = product.fletchId;
             if (!fletchId) {
                 ui.notifications.error("Fletching type not specified.");
                 return;
             }
+            const qty = quality === "pristine" ? 40 : quality === "tarnished" ? 10 : 20;
+            if (qty === 0) return;
             await this.actor.createEmbeddedDocuments("Item", [{
                 name: product.name,
                 type: "weapon",
                 system: {
                     fletchId: fletchId,
-                    quantity: product.qty ?? 1,
+                    quantity: qty,
                     description: `Crafted fletchings (${quality}).`
                 }
             }]);
-            ui.notifications.info(`Fashioned ${product.name}.`);
+            ui.notifications.info(`Fashioned ${qty}x ${product.name}.`);
             return;
         }
 
         // Fashion Arrowheads (2026-10-15): creates arrowhead items
+        // Component yield: pristine 40, normal/worn 20, tarnished 10
         if (productType === "arrowhead" && recipeId) {
             const headId = product.headId;
             if (!headId) {
                 ui.notifications.error("Arrowhead type not specified.");
                 return;
             }
+            const qty = quality === "pristine" ? 40 : quality === "tarnished" ? 10 : 20;
+            if (qty === 0) return;
             await this.actor.createEmbeddedDocuments("Item", [{
                 name: product.name,
                 type: "weapon",
                 system: {
                     headId: headId,
-                    quantity: product.qty ?? 1,
+                    quantity: qty,
                     description: `Crafted arrowheads (${quality}).`
                 }
             }]);
-            ui.notifications.info(`Fashioned ${product.name}.`);
+            ui.notifications.info(`Fashioned ${qty}x ${product.name}.`);
             return;
         }
         
