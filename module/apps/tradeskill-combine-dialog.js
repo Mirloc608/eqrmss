@@ -845,6 +845,10 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
+            // Style selectors (bowtype, etc.) are always available - not inventory items
+            if (["bowtype", "crossbowtype"].includes(component.materialType)) {
+                return 1;
+            }
             const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
             const selectedMat = this._getSelectedMaterial(recipeId, recipe ?? {}, component.id);
             return this._countOreMaterial(selectedMat);
@@ -1000,7 +1004,11 @@ export class TradeskillCombineDialog extends BaseApplication {
                 // Fall through to normal consumption
             }
             // For materialChoice, consume the selected material's ore
+            // Skip style selectors (bowtype, crossbowtype) - not consumed
             if (c.materialChoice && recipeId) {
+                if (["bowtype", "crossbowtype"].includes(c.materialType)) {
+                    continue;
+                }
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
                 const selectedMat = this._getSelectedMaterial(recipeId, recipe ?? {}, c.id);
                 await this._consumeOreMaterial(selectedMat, c.qty);
