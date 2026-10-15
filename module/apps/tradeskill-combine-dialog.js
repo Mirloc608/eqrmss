@@ -274,6 +274,21 @@ export class TradeskillCombineDialog extends BaseApplication {
     _setSelectedBowItem(recipeId, kind, itemId) {
         if (!this.selectedBowItems) this.selectedBowItems = {};
         this.selectedBowItems[`${recipeId}:${kind}`] = itemId;
+        // Cache item info for use after consumption (2026-10-15)
+        // The bowstring handler needs strand name/type after strands are consumed
+        if (!this.selectedBowItemInfo) this.selectedBowItemInfo = {};
+        const item = itemId ? this.actor.items.get(itemId) : null;
+        if (item) {
+            this.selectedBowItemInfo[`${recipeId}:${kind}`] = {
+                name: item.name,
+                strandId: item.system?.strandId,
+                bowStringTier: item.system?.bowStringTier,
+            };
+        }
+    }
+
+    _getSelectedBowItemInfo(recipeId, kind) {
+        return this.selectedBowItemInfo?.[`${recipeId}:${kind}`] ?? null;
     }
 
     // Get available materials for dropdown (2026-10-14)
@@ -1214,18 +1229,14 @@ export class TradeskillCombineDialog extends BaseApplication {
 
             // Fashion Bowstring: string dropdown -> "{String} Bowstring"
             if (productType === "bowstring") {
-                const strandId = this._getSelectedBowItem(recipeId, "strand");
-                if (!strandId) {
+                // Use cached info (strands are consumed before product creation)
+                const info = this._getSelectedBowItemInfo(recipeId, "strand");
+                if (!info) {
                     ui.notifications.error("No strands selected.");
                     return;
                 }
-                const strand = this.actor.items.get(strandId);
-                if (!strand) {
-                    ui.notifications.error("Selected strands not found.");
-                    return;
-                }
-                const strandTypeId = strand.system?.strandId ?? "unknown";
-                const strandName = strand.name.replace(" Strands", "");
+                const strandTypeId = info.strandId ?? "unknown";
+                const strandName = (info.name ?? "Strands").replace(" Strands", "");
                 // Determine tier from strand type (metal tiers or default)
                 const metals = game.eqrmss?.metals;
                 let tier = 1;
