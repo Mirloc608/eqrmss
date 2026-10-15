@@ -1464,7 +1464,7 @@ export class TradeskillCombineDialog extends BaseApplication {
         if (productType === "haft-weapon" && recipeId) {
             const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
             const shaftType = product.shaftType; // "long" or "short"
-            const kind = shaftType === "long" ? "haft-long-haft" : "haft-short-shaft";
+            const kind = shaftType === "long" ? "haft-long-shaft" : "haft-short-shaft";
             const shaftId = this._getSelectedBowItem(recipeId, kind);
             const metalComp = recipe?.components?.find(c => c.materialType === "ore");
             const metalId = metalComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, metalComp.id) : "iron";
