@@ -1222,7 +1222,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                 }
                 await this.actor.createEmbeddedDocuments("Item", [{
                     name: `${wood.name} Bowstave`,
-                    type: "weapon",
+                    type: "item",
                     system: {
                         bowWood: wood.id,
                         bowWoodName: wood.name,
@@ -1648,7 +1648,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             }
             await this.actor.createEmbeddedDocuments("Item", [{
                 name: itemName,
-                type: "weapon",
+                type: "item",
                 system: {
                     ...sysExtra,
                     quantity: product.qty ?? 1,
