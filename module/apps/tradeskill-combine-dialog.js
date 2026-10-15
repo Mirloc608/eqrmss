@@ -815,9 +815,12 @@ export class TradeskillCombineDialog extends BaseApplication {
             return item ? Number(item.system?.quantity ?? 1) : 0;
         }
         if (component.strandChoice) {
-            const itemId = this._getSelectedBowItem(recipeId, "strand");
-            const item = itemId ? this.actor.items.get(itemId) : null;
-            return item ? Number(item.system?.quantity ?? 1) : 0;
+            // Sum all strands (user may have multiple stacks)
+            let total = 0;
+            for (const s of this._getStrands()) {
+                total += Number(s.item?.system?.quantity ?? 1);
+            }
+            return total;
         }
         if (component.bowstringChoice) {
             const itemId = this._getSelectedBowItem(recipeId, "bowstring-enhance");
@@ -933,6 +936,23 @@ export class TradeskillCombineDialog extends BaseApplication {
                 strandChoice: "strand",
                 bowstringChoice: "bowstring-enhance"
             };
+            // Special handling for strandChoice: consume across multiple stacks
+            if (c.strandChoice && recipeId) {
+                let need = c.qty ?? 20;
+                for (const s of this._getStrands()) {
+                    if (need <= 0) break;
+                    const item = s.item;
+                    const have = Number(item.system?.quantity ?? 1);
+                    if (have <= need) {
+                        need -= have;
+                        await item.delete();
+                    } else {
+                        await item.update({ "system.quantity": have - need });
+                        need = 0;
+                    }
+                }
+                continue;
+            }
             for (const [flag, kind] of Object.entries(xbowConsumeKinds)) {
                 if (c[flag] && recipeId) {
                     const itemId = this._getSelectedBowItem(recipeId, kind);
