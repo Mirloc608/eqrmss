@@ -237,7 +237,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, bows:false, arrows:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, bows:false, arrows:false, darts:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
 
     // Parallel loader boot (2026-10-14): independent loaders run concurrently.
     // Each loader writes to its own game.eqrmss key; none read another's output.
@@ -469,6 +469,24 @@ export async function initializeDataLoaders() {
     } catch (e) {
         console.error("Arrow data load failed", e);
         game.eqrmss.arrows = null;
+    }
+
+    // Darts (2026-10-15): single-component thrown weapons
+    try {
+        const dartRes = await fetch('systems/eqrmss/module/data/fletching/dart-materials.json');
+        const dartMaterials = await dartRes.json();
+        const dartById = {};
+        for (const m of dartMaterials) dartById[m.id] = m;
+        game.eqrmss.darts = {
+            list: () => dartMaterials,
+            get: (id) => dartById[id] ?? null,
+            difficulty: (id) => (dartById[id]?.trivial ?? 16)
+        };
+        game.eqrmss._loadStatus.darts = true;
+        console.log(`EQRMSS | Darts ready: ${dartMaterials.length} materials.`);
+    } catch (e) {
+        console.error("Dart data load failed", e);
+        game.eqrmss.darts = null;
     }
 
     // Armor (location + category + material + condition composer)

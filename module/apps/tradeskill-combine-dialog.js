@@ -269,6 +269,13 @@ export class TradeskillCombineDialog extends BaseApplication {
                 return arrows.listNocks()
                     .map(n => ({ id: n.id, name: `${n.name} (+${n.rangeMod} range)` }));
             }
+            if (materialType === "dartmaterial") {
+                // Dart materials (2026-10-15): single-component darts
+                const darts = game.eqrmss?.darts;
+                if (!darts || typeof darts.list !== "function") return [];
+                return darts.list()
+                    .map(m => ({ id: m.id, name: m.poison ? `${m.name} (+poison)` : m.name }));
+            }
             if (materialType === "cloth" || materialType === "leather") {
                 // Armor materials for tailoring
                 const armor = game.eqrmss?.armor;
@@ -431,20 +438,31 @@ export class TradeskillCombineDialog extends BaseApplication {
 
     // Dynamic difficulty for Fletch Arrows (2026-10-15): max of component trivials
     _getDynamicDifficulty(recipe, recipeId) {
-        if (recipe.id !== "fletch-arrows") return recipe.difficulty;
-        const arrows = game.eqrmss?.arrows;
-        if (!arrows) return recipe.difficulty;
-        const headComp = recipe.components?.find(c => c.materialType === "arrowhead");
-        const fletchComp = recipe.components?.find(c => c.materialType === "arrowfletch");
-        const nockComp = recipe.components?.find(c => c.materialType === "arrownock");
-        const headId = headComp ? this._getSelectedMaterial(recipeId, recipe, headComp.id) : null;
-        const fletchId = fletchComp ? this._getSelectedMaterial(recipeId, recipe, fletchComp.id) : null;
-        const nockId = nockComp ? this._getSelectedMaterial(recipeId, recipe, nockComp.id) : null;
-        const shaftItemId = this._getSelectedBowItem(recipeId, "shaft");
-        const shaftItem = shaftItemId ? this.actor.items.get(shaftItemId) : null;
-        const shaftId = shaftItem?.system?.arrowShaft;
-        if (!headId || !fletchId || !nockId || !shaftId) return recipe.difficulty;
-        return arrows.difficulty(headId, shaftId, fletchId, nockId);
+        if (recipe.id === "fletch-arrows") {
+            const arrows = game.eqrmss?.arrows;
+            if (!arrows) return recipe.difficulty;
+            const headComp = recipe.components?.find(c => c.materialType === "arrowhead");
+            const fletchComp = recipe.components?.find(c => c.materialType === "arrowfletch");
+            const nockComp = recipe.components?.find(c => c.materialType === "arrownock");
+            const headId = headComp ? this._getSelectedMaterial(recipeId, recipe, headComp.id) : null;
+            const fletchId = fletchComp ? this._getSelectedMaterial(recipeId, recipe, fletchComp.id) : null;
+            const nockId = nockComp ? this._getSelectedMaterial(recipeId, recipe, nockComp.id) : null;
+            const shaftItemId = this._getSelectedBowItem(recipeId, "shaft");
+            const shaftItem = shaftItemId ? this.actor.items.get(shaftItemId) : null;
+            const shaftId = shaftItem?.system?.arrowShaft;
+            if (!headId || !fletchId || !nockId || !shaftId) return recipe.difficulty;
+            return arrows.difficulty(headId, shaftId, fletchId, nockId);
+        }
+        // Dynamic difficulty for Fashion Darts (2026-10-15): material trivial
+        if (recipe.id === "fashion-darts") {
+            const darts = game.eqrmss?.darts;
+            if (!darts) return recipe.difficulty;
+            const matComp = recipe.components?.find(c => c.materialType === "dartmaterial");
+            const matId = matComp ? this._getSelectedMaterial(recipeId, recipe, matComp.id) : null;
+            if (!matId) return recipe.difficulty;
+            return darts.difficulty(matId);
+        }
+        return recipe.difficulty;
     }
 
     _getSkillName() {
@@ -1030,6 +1048,38 @@ export class TradeskillCombineDialog extends BaseApplication {
                 }
                 return;
             }
+        }
+
+        // Dart products (2026-10-15): single-component darts
+        if (productType === "dart" && recipeId) {
+            const darts = game.eqrmss?.darts;
+            if (!darts) {
+                ui.notifications.error("Dart data not loaded.");
+                return;
+            }
+            const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+            const matComp = recipe?.components?.find(c => c.materialType === "dartmaterial");
+            const matId = matComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, matComp.id) : null;
+            const mat = matId ? darts.get(matId) : null;
+            if (!mat) {
+                ui.notifications.error("No dart material selected.");
+                return;
+            }
+            const dartName = mat.poison ? `${mat.name} Dart (Poisoned)` : `${mat.name} Dart`;
+            await this.actor.createEmbeddedDocuments("Item", [{
+                name: dartName,
+                type: "weapon",
+                system: {
+                    weaponType: "thrown",
+                    weaponTemplate: "dart",
+                    dartMaterial: mat.id,
+                    poisoned: mat.poison === true,
+                    quantity: product.qty ?? 5,
+                    description: `Crafted darts (${quality}).${mat.poison ? " Poisoned." : ""}`
+                }
+            }]);
+            ui.notifications.info(`Fashioned ${product.qty ?? 5}x ${dartName}.`);
+            return;
         }
         
         // Generic item (default): consumables, etc.
