@@ -530,11 +530,10 @@
   "components": [
    {
     "id": "arrow-head",
-    "name": "Arrow Head (select)",
+    "name": "Arrow Head (select from inventory)",
     "qty": 1,
     "type": "item",
-    "materialChoice": true,
-    "materialType": "arrowhead"
+    "headChoice": true
    },
    {
     "id": "arrow-shaft",
@@ -776,11 +775,10 @@
   "components": [
    {
     "id": "arrow-head",
-    "name": "Bolt Head (select)",
+    "name": "Arrow Head (select from inventory)",
     "qty": 1,
     "type": "item",
-    "materialChoice": true,
-    "materialType": "arrowhead"
+    "headChoice": true
    },
    {
     "id": "arrow-shaft",
@@ -897,6 +895,64 @@
    "name": "Shield Cut Fletchings",
    "qty": 1,
    "fletchId": "class-3-shield"
+  }
+ },
+ {
+  "id": "fashion-bone-arrowheads",
+  "name": "Fashion Bone Arrowheads",
+  "skill": "skill-fletching",
+  "difficulty": 32,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "bone",
+    "name": "Bone",
+    "qty": 1,
+    "type": "item"
+   },
+   {
+    "id": "fletchers-toolkit",
+    "name": "Fletcher's Toolkit",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "arrowhead",
+   "name": "Bone Arrowheads",
+   "qty": 1,
+   "headId": "bone"
+  }
+ },
+ {
+  "id": "fashion-stone-arrowheads",
+  "name": "Fashion Stone Arrowheads",
+  "skill": "skill-fletching",
+  "difficulty": 68,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "stone",
+    "name": "Stone",
+    "qty": 1,
+    "type": "item"
+   },
+   {
+    "id": "fletchers-toolkit",
+    "name": "Fletcher's Toolkit",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "arrowhead",
+   "name": "Stone Arrowheads",
+   "qty": 1,
+   "headId": "stone"
   }
  }
 ]
