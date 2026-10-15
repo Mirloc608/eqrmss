@@ -263,7 +263,8 @@ export class TradeskillCombineDialog extends BaseApplication {
     _getStrands() {
         const matches = [];
         for (const item of this.actor.items) {
-            if (item.system?.strandId) {
+            // Match by strandId flag, or by name fallback for older items
+            if (item.system?.strandId || String(item.name ?? "").toLowerCase().includes("strands")) {
                 matches.push({ id: item.id, name: item.name, item });
             }
         }
