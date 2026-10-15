@@ -237,7 +237,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, bows:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
 
     // Parallel loader boot (2026-10-14): independent loaders run concurrently.
     // Each loader writes to its own game.eqrmss key; none read another's output.
@@ -420,6 +420,32 @@ export async function initializeDataLoaders() {
     } catch (e) {
         console.error("Weapon data load failed", e);
         game.eqrmss.weapons = null;
+    }
+
+    // Bows (wood + string + type + class composer, 2026-10-15)
+    try {
+        const bowMod = await import('./module/data/fletching/bow-composer.js');
+        await bowMod.loadBowData();
+        game.eqrmss.bows = {
+            compose: bowMod.composeBow,
+            validate: bowMod.validateBow,
+            woodAcceptsString: bowMod.woodAcceptsString,
+            classCanMakeType: bowMod.classCanMakeType,
+            bowDifficulty: bowMod.bowDifficulty,
+            getWood: bowMod.getWood,
+            getBowstring: bowMod.getBowstring,
+            getBowType: bowMod.getBowType,
+            getBowClass: bowMod.getBowClass,
+            listWoods: bowMod.listWoods,
+            listStrings: bowMod.listStrings,
+            listTypes: bowMod.listTypes,
+            listClasses: bowMod.listClasses
+        };
+        game.eqrmss._loadStatus.bows = true;
+        console.log(`EQRMSS | Bows ready: ${bowMod.listWoods().length} woods, ${bowMod.listStrings().length} strings, ${bowMod.listTypes().length} types, ${bowMod.listClasses().length} classes`);
+    } catch (e) {
+        console.error("Bow data load failed", e);
+        game.eqrmss.bows = null;
     }
 
     // Armor (location + category + material + condition composer)

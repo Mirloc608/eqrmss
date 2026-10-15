@@ -58,6 +58,18 @@ export class TradeskillCombineDialog extends BaseApplication {
                 }
             });
         });
+        // Bow item dropdown change handler (2026-10-15): bows, bowstaves, bowstrings
+        this.element.querySelectorAll(".bowitem-select").forEach(select => {
+            select.addEventListener("change", (ev) => {
+                const recipeId = ev.target.dataset.recipeId;
+                const kind = ev.target.dataset.kind; // "bow", "bowstave", "bowstring"
+                const itemId = ev.target.value;
+                if (recipeId && kind) {
+                    this._setSelectedBowItem(recipeId, kind, itemId);
+                    this.render();
+                }
+            });
+        });
     }
 
     constructor(actor, skillId, options = {}) {
@@ -83,6 +95,55 @@ export class TradeskillCombineDialog extends BaseApplication {
 
     _getSelectedWeapon(recipeId) {
         return this.selectedWeapons[recipeId] ?? null;
+    }
+
+    // Bow inventory picks (2026-10-15): bows, bowstaves, bowstrings from actor inventory
+    _getBows() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            const sys = item.system ?? {};
+            if (sys.bowWood || sys.bowType || String(item.name ?? "").toLowerCase().includes("bow")) {
+                // Exclude bowstaves and bowstrings (they're components, not finished bows)
+                const n = String(item.name ?? "").toLowerCase();
+                if (n.includes("bowstave") || n.includes("bowstring")) continue;
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
+    _getBowstaves() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            const sys = item.system ?? {};
+            if (sys.bowWood || String(item.name ?? "").toLowerCase().includes("bowstave")) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
+    _getBowstrings() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            const sys = item.system ?? {};
+            if (sys.bowString || String(item.name ?? "").toLowerCase().includes("bowstring")) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
+    _getSelectedBowItem(recipeId, kind) {
+        // kind: "bow", "bowstave", "bowstring"
+        const key = `${recipeId}:${kind}`;
+        if (!this.selectedBowItems) this.selectedBowItems = {};
+        return this.selectedBowItems[key] ?? null;
+    }
+
+    _setSelectedBowItem(recipeId, kind, itemId) {
+        if (!this.selectedBowItems) this.selectedBowItems = {};
+        this.selectedBowItems[`${recipeId}:${kind}`] = itemId;
     }
 
     // Get available materials for dropdown (2026-10-14)
@@ -150,6 +211,30 @@ export class TradeskillCombineDialog extends BaseApplication {
                     { id: "imbued-ivory-tribunal", name: "Imbued Ivory (The Tribunal)" },
                     { id: "imbued-emerald-tunare", name: "Imbued Emerald (Tunare)" },
                 ];
+            }
+            if (materialType === "wood") {
+                // Bow woods (2026-10-15): from bow composer data
+                const bows = game.eqrmss?.bows;
+                if (!bows || typeof bows.listWoods !== "function") return [];
+                return bows.listWoods()
+                    .map(w => ({ id: w.id, name: `${w.name} (T${w.tier})` }))
+                    .sort((a, b) => a.name.localeCompare(b.name));
+            }
+            if (materialType === "bowstring") {
+                // Bowstring materials (2026-10-15): from bow composer data
+                const bows = game.eqrmss?.bows;
+                if (!bows || typeof bows.listStrings !== "function") return [];
+                return bows.listStrings()
+                    .map(s => ({ id: s.id, name: `${s.name} (T${s.tier}, +${s.obBonus} OB)` }))
+                    .sort((a, b) => a.name.localeCompare(b.name));
+            }
+            if (materialType === "bowtype") {
+                // Bow types (2026-10-15): filtered by class via component.bowClass
+                const bows = game.eqrmss?.bows;
+                if (!bows || typeof bows.listTypes !== "function") return [];
+                // Note: class filtering happens in _prepareContext where component is available
+                return bows.listTypes()
+                    .map(t => ({ id: t.id, name: t.name }));
             }
             if (materialType === "cloth" || materialType === "leather") {
                 // Armor materials for tailoring
@@ -248,6 +333,41 @@ export class TradeskillCombineDialog extends BaseApplication {
                             this.selectedWeapons[r.id] = weapons[0].id;
                         }
                     }
+                    // For bowChoice/bowstaveChoice/bowstringChoice, add inventory dropdowns (2026-10-15)
+                    if (c.bowChoice || c.bowstaveChoice || c.bowstringChoice) {
+                        const kind = c.bowChoice ? "bow" : c.bowstaveChoice ? "bowstave" : "bowstring";
+                        const items = kind === "bow" ? this._getBows() : kind === "bowstave" ? this._getBowstaves() : this._getBowstrings();
+                        const selectedId = this._getSelectedBowItem(r.id, kind);
+                        base.bowItemOptions = items.map(w => ({
+                            ...w,
+                            selected: w.id === selectedId || (!selectedId && w === items[0])
+                        }));
+                        base.bowItemKind = kind;
+                        if (items.length > 0 && !selectedId) {
+                            this._setSelectedBowItem(r.id, kind, items[0].id);
+                        }
+                    }
+                    // For bowtype materialChoice, filter by class (2026-10-15)
+                    if (c.materialChoice && c.materialType === "bowtype" && c.bowClass) {
+                        const bows = game.eqrmss?.bows;
+                        if (bows && typeof bows.listTypes === "function") {
+                            const allowed = bows.listTypes().filter(t => bows.classCanMakeType(c.bowClass, t.id));
+                            const compSelectedMat = this._getSelectedMaterial(r.id, r, c.id);
+                            base.materialOptions = allowed.map(t => ({
+                                id: t.id,
+                                name: t.name,
+                                selected: t.id === compSelectedMat,
+                                have: 1,
+                                need: c.qty
+                            }));
+                            // Auto-select first allowed if current selection not allowed
+                            if (!allowed.some(t => t.id === compSelectedMat) && allowed.length > 0) {
+                                const key = `${r.id}:${c.id}`;
+                                this.selectedMaterials[key] = allowed[0].id;
+                                base.materialOptions[0].selected = true;
+                            }
+                        }
+                    }
                     return base;
                 })
             };
@@ -300,6 +420,16 @@ export class TradeskillCombineDialog extends BaseApplication {
             const condition = component.weaponChoice.condition ?? "rusty";
             return this._getWeaponsByCondition(condition).length > 0 ? 1 : 0;
         }
+        // For bow item choices (2026-10-15), count 1 if any available
+        if (component.bowChoice) {
+            return this._getBows().length > 0 ? 1 : 0;
+        }
+        if (component.bowstaveChoice) {
+            return this._getBowstaves().length > 0 ? 1 : 0;
+        }
+        if (component.bowstringChoice) {
+            return this._getBowstrings().length > 0 ? 1 : 0;
+        }
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
             const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
@@ -332,7 +462,16 @@ export class TradeskillCombineDialog extends BaseApplication {
     }
 
     _hasComponents(components, recipeId = null) {
-        return components.every(c => this._countItem(c, recipeId) >= c.qty);
+        return components.every(c => {
+            // Optional cams: only required if selected type needs them (2026-10-15)
+            if (c.optionalForTypes && recipeId) {
+                const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+                const typeComp = recipe?.components?.find(x => x.materialType === "bowtype");
+                const selectedType = typeComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, typeComp.id) : null;
+                if (selectedType && c.optionalForTypes.includes(selectedType)) return true;
+            }
+            return this._countItem(c, recipeId) >= c.qty;
+        });
     }
 
     // Consume items matching a material ID
@@ -361,6 +500,29 @@ export class TradeskillCombineDialog extends BaseApplication {
             if (c.consume === false) continue;
             // Skip weaponChoice (transformed, not consumed) - 2026-10-14
             if (c.weaponChoice) continue;
+            // Skip bowChoice (restring transforms, not consumes) - 2026-10-15
+            if (c.bowChoice) continue;
+            // For bowstaveChoice/bowstringChoice, consume the selected inventory item - 2026-10-15
+            if ((c.bowstaveChoice || c.bowstringChoice) && recipeId) {
+                const kind = c.bowstaveChoice ? "bowstave" : "bowstring";
+                const itemId = this._getSelectedBowItem(recipeId, kind);
+                if (itemId) {
+                    const item = this.actor.items.get(itemId);
+                    if (item) await item.delete();
+                }
+                continue;
+            }
+            // For optionalForTypes (cams), only consume if selected type needs them - 2026-10-15
+            if (c.optionalForTypes && recipeId) {
+                const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+                const typeComp = recipe?.components?.find(x => x.materialType === "bowtype");
+                const selectedType = typeComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, typeComp.id) : null;
+                if (selectedType && c.optionalForTypes.includes(selectedType)) {
+                    // Type doesn't need cams, skip consumption
+                    continue;
+                }
+                // Fall through to normal consumption
+            }
             // For materialChoice, consume the selected material's ore
             if (c.materialChoice && recipeId) {
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
@@ -553,6 +715,157 @@ export class TradeskillCombineDialog extends BaseApplication {
                 return;
             } catch (e) {
                 ui.notifications.error(`Armor compose failed: ${e.message}`);
+                return;
+            }
+        }
+        
+        // Bow products (2026-10-15): bowstave, bowstring, bow, restring
+        if (["bowstave", "bowstring", "bow", "restring"].includes(productType) && recipeId) {
+            const bows = game.eqrmss?.bows;
+            if (!bows) {
+                ui.notifications.error("Bow data not loaded.");
+                return;
+            }
+            const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+
+            // Fashion Bowstave: wood dropdown -> "{Wood} Bowstave"
+            if (productType === "bowstave") {
+                const woodComp = recipe?.components?.find(c => c.materialType === "wood");
+                const woodId = woodComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, woodComp.id) : null;
+                const wood = woodId ? bows.getWood(woodId) : null;
+                if (!wood) {
+                    ui.notifications.error("No wood selected.");
+                    return;
+                }
+                await this.actor.createEmbeddedDocuments("Item", [{
+                    name: `${wood.name} Bowstave`,
+                    type: "weapon",
+                    system: {
+                        bowWood: wood.id,
+                        bowWoodName: wood.name,
+                        bowWoodTier: wood.tier,
+                        quantity: product.qty ?? 1,
+                        description: `Crafted bowstave (${quality}).`
+                    }
+                }]);
+                ui.notifications.info(`Fashioned ${wood.name} Bowstave.`);
+                return;
+            }
+
+            // Fashion Bowstring: string dropdown -> "{String} Bowstring"
+            if (productType === "bowstring") {
+                const strComp = recipe?.components?.find(c => c.materialType === "bowstring");
+                const stringId = strComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, strComp.id) : null;
+                const str = stringId ? bows.getBowstring(stringId) : null;
+                if (!str) {
+                    ui.notifications.error("No string selected.");
+                    return;
+                }
+                await this.actor.createEmbeddedDocuments("Item", [{
+                    name: `${str.name} Bowstring`,
+                    type: "weapon",
+                    system: {
+                        bowString: str.id,
+                        bowStringName: str.name,
+                        bowStringTier: str.tier,
+                        quantity: product.qty ?? 1,
+                        description: `Crafted bowstring (${quality}).`
+                    }
+                }]);
+                ui.notifications.info(`Fashioned ${str.name} Bowstring.`);
+                return;
+            }
+
+            // Fashion Bow: bowstave + bowstring + type + class -> composed bow
+            if (productType === "bow") {
+                const staveId = this._getSelectedBowItem(recipeId, "bowstave");
+                const stringItemId = this._getSelectedBowItem(recipeId, "bowstring");
+                const typeComp = recipe?.components?.find(c => c.materialType === "bowtype");
+                const typeId = typeComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, typeComp.id) : null;
+                const classId = product.bowClass;
+                if (!staveId || !stringItemId || !typeId || !classId) {
+                    ui.notifications.error("Missing bow components (stave, string, type, or class).");
+                    return;
+                }
+                const stave = this.actor.items.get(staveId);
+                const stringItem = this.actor.items.get(stringItemId);
+                if (!stave || !stringItem) {
+                    ui.notifications.error("Selected stave or string not found.");
+                    return;
+                }
+                const woodId = stave.system?.bowWood;
+                const stringId = stringItem.system?.bowString;
+                if (!woodId || !stringId) {
+                    ui.notifications.error("Stave or string is missing its material data.");
+                    return;
+                }
+                try {
+                    const composed = bows.compose(woodId, stringId, typeId, classId, quality);
+                    await this.actor.createEmbeddedDocuments("Item", [{
+                        name: composed.name,
+                        type: "weapon",
+                        system: {
+                            weaponType: "missile",
+                            bowWood: composed.woodId,
+                            bowString: composed.stringId,
+                            bowType: composed.typeId,
+                            bowClass: composed.classId,
+                            durability: composed.durability,
+                            range: composed.range,
+                            obMod: composed.obMod,
+                            quantity: product.qty ?? 1,
+                            description: composed.description
+                        }
+                    }]);
+                    ui.notifications.info(`Fashioned ${composed.name}.`);
+                } catch (e) {
+                    ui.notifications.error(`Bow compose failed: ${e.message}`);
+                }
+                return;
+            }
+
+            // Restring Bow: existing bow + new string -> updated bow (2026-10-15)
+            if (productType === "restring") {
+                const bowId = this._getSelectedBowItem(recipeId, "bow");
+                const stringItemId = this._getSelectedBowItem(recipeId, "bowstring");
+                if (!bowId || !stringItemId) {
+                    ui.notifications.error("No bow or string selected.");
+                    return;
+                }
+                const bow = this.actor.items.get(bowId);
+                const stringItem = this.actor.items.get(stringItemId);
+                if (!bow || !stringItem) {
+                    ui.notifications.error("Selected bow or string not found.");
+                    return;
+                }
+                const woodId = bow.system?.bowWood;
+                const newStringId = stringItem.system?.bowString;
+                const typeId = bow.system?.bowType;
+                const classId = bow.system?.bowClass;
+                if (!woodId || !newStringId || !typeId || !classId) {
+                    ui.notifications.error("Bow or string is missing data.");
+                    return;
+                }
+                // Validate wood-string compatibility
+                if (!bows.woodAcceptsString(woodId, newStringId)) {
+                    const wood = bows.getWood(woodId);
+                    const str = bows.getBowstring(newStringId);
+                    ui.notifications.error(`${wood?.name} cannot accept ${str?.name} string.`);
+                    return;
+                }
+                try {
+                    const composed = bows.compose(woodId, newStringId, typeId, classId, quality);
+                    const oldName = bow.name;
+                    await bow.update({
+                        name: composed.name,
+                        "system.bowString": composed.stringId,
+                        "system.obMod": composed.obMod,
+                        "system.description": composed.description
+                    });
+                    ui.notifications.info(`Restrung ${oldName} -> ${composed.name}.`);
+                } catch (e) {
+                    ui.notifications.error(`Restring failed: ${e.message}`);
+                }
                 return;
             }
         }

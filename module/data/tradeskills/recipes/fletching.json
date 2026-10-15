@@ -40,34 +40,6 @@
   }
  },
  {
-  "id": "rough-hickory-recurve-bow",
-  "name": "Rough Hickory Recurve Bow",
-  "skill": "skill-fletching",
-  "difficulty": 16,
-  "container": "Fletching Kit",
-  "expansion": "classic",
-  "components": [
-   {
-    "id": "hickory-bowstave",
-    "name": "Hickory Bowstave",
-    "qty": 1,
-    "type": "item"
-   },
-   {
-    "id": "hemp-twine",
-    "name": "Hemp Twine",
-    "qty": 1,
-    "type": "item"
-   }
-  ],
-  "product": {
-   "type": "item",
-   "template": "rough-hickory-recurve-bow",
-   "name": "Rough Hickory Recurve Bow",
-   "qty": 1
-  }
- },
- {
   "id": "class-1-bone-point-arrow",
   "name": "CLASS 1 Bone Point Arrow",
   "skill": "skill-fletching",
@@ -105,34 +77,6 @@
    "template": "class-1-bone-point-arrow",
    "name": "CLASS 1 Bone Point Arrow",
    "qty": 5
-  }
- },
- {
-  "id": "rough-elm-recurve-bow",
-  "name": "Rough Elm Recurve Bow",
-  "skill": "skill-fletching",
-  "difficulty": 68,
-  "container": "Fletching Kit",
-  "expansion": "classic",
-  "components": [
-   {
-    "id": "elm-bowstave",
-    "name": "Elm Bowstave",
-    "qty": 1,
-    "type": "item"
-   },
-   {
-    "id": "hemp-twine",
-    "name": "Hemp Twine",
-    "qty": 1,
-    "type": "item"
-   }
-  ],
-  "product": {
-   "type": "item",
-   "template": "rough-elm-recurve-bow",
-   "name": "Rough Elm Recurve Bow",
-   "qty": 1
   }
  },
  {
@@ -213,74 +157,6 @@
    "template": "class-1-wood-hooked-arrow",
    "name": "CLASS 1 Wood Hooked Arrow",
    "qty": 5
-  }
- },
- {
-  "id": "carved-elm-recurve-bow",
-  "name": "Carved Elm Recurve Bow",
-  "skill": "skill-fletching",
-  "difficulty": 102,
-  "container": "Fletching Kit",
-  "expansion": "classic",
-  "components": [
-   {
-    "id": "elm-bowstave",
-    "name": "Elm Bowstave",
-    "qty": 1,
-    "type": "item"
-   },
-   {
-    "id": "silk-string",
-    "name": "Silk String",
-    "qty": 1,
-    "type": "item"
-   },
-   {
-    "id": "whittling-blade",
-    "name": "Whittling Blade",
-    "qty": 1,
-    "type": "item"
-   }
-  ],
-  "product": {
-   "type": "item",
-   "template": "carved-elm-recurve-bow",
-   "name": "Carved Elm Recurve Bow",
-   "qty": 1
-  }
- },
- {
-  "id": "carved-ashwood-recurve-bow",
-  "name": "Carved Ashwood Recurve Bow",
-  "skill": "skill-fletching",
-  "difficulty": 128,
-  "container": "Fletching Kit",
-  "expansion": "classic",
-  "components": [
-   {
-    "id": "ashwood-bowstave",
-    "name": "Ashwood Bowstave",
-    "qty": 1,
-    "type": "item"
-   },
-   {
-    "id": "silk-string",
-    "name": "Silk String",
-    "qty": 1,
-    "type": "item"
-   },
-   {
-    "id": "whittling-blade",
-    "name": "Whittling Blade",
-    "qty": 1,
-    "type": "item"
-   }
-  ],
-  "product": {
-   "type": "item",
-   "template": "carved-ashwood-recurve-bow",
-   "name": "Carved Ashwood Recurve Bow",
-   "qty": 1
   }
  },
  {
@@ -484,46 +360,6 @@
   }
  },
  {
-  "id": "carved-oak-1-cam-bow",
-  "name": "Carved Oak 1-Cam Bow",
-  "skill": "skill-fletching",
-  "difficulty": 195,
-  "container": "Fletching Kit",
-  "expansion": "classic",
-  "components": [
-   {
-    "id": "oak-bowstave",
-    "name": "Oak Bowstave",
-    "qty": 1,
-    "type": "item"
-   },
-   {
-    "id": "silk-string",
-    "name": "Silk String",
-    "qty": 1,
-    "type": "item"
-   },
-   {
-    "id": "standard-bow-cam",
-    "name": "Standard Bow Cam",
-    "qty": 1,
-    "type": "item"
-   },
-   {
-    "id": "whittling-blade",
-    "name": "Whittling Blade",
-    "qty": 1,
-    "type": "item"
-   }
-  ],
-  "product": {
-   "type": "item",
-   "template": "carved-oak-1-cam-bow",
-   "name": "Carved Oak 1-Cam Bow",
-   "qty": 1
-  }
- },
- {
   "id": "class-1-steel-hooked-arrow",
   "name": "CLASS 1 Steel Hooked Arrow",
   "skill": "skill-fletching",
@@ -644,83 +480,466 @@
   }
  },
  {
-  "id": "carved-darkwood-1-cam-bow",
-  "name": "Carved Darkwood 1-Cam Bow",
+  "id": "fashion-bowstave",
+  "name": "Fashion Bowstave",
   "skill": "skill-fletching",
-  "difficulty": 215,
+  "difficulty": 30,
   "container": "Fletching Kit",
   "expansion": "classic",
   "components": [
    {
-    "id": "darkwood-bowstave",
-    "name": "Darkwood Bowstave",
+    "id": "wood",
+    "name": "Wood (select material)",
     "qty": 1,
-    "type": "item"
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "wood"
    },
    {
-    "id": "silk-string",
-    "name": "Silk String",
+    "id": "fletchers-toolkit",
+    "name": "Fletcher's Toolkit",
     "qty": 1,
-    "type": "item"
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "bowstave",
+   "name": "Bowstave",
+   "qty": 1
+  }
+ },
+ {
+  "id": "fashion-bowstring",
+  "name": "Fashion Bowstring",
+  "skill": "skill-fletching",
+  "difficulty": 30,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "bowstring-material",
+    "name": "String (select material)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "bowstring"
    },
    {
-    "id": "standard-bow-cam",
-    "name": "Standard Bow Cam",
-    "qty": 1,
-    "type": "item"
-   },
-   {
-    "id": "whittling-blade",
-    "name": "Whittling Blade",
+    "id": "clump-of-wax",
+    "name": "Clump of Wax",
     "qty": 1,
     "type": "item"
    }
   ],
   "product": {
-   "type": "item",
-   "template": "carved-darkwood-1-cam-bow",
-   "name": "Carved Darkwood 1-Cam Bow",
+   "type": "bowstring",
+   "name": "Bowstring",
    "qty": 1
   }
  },
  {
-  "id": "carved-darkwood-compound-bow",
-  "name": "Carved Darkwood Compound Bow",
+  "id": "restring-bow",
+  "name": "Restring Bow",
   "skill": "skill-fletching",
-  "difficulty": 235,
+  "difficulty": 40,
   "container": "Fletching Kit",
   "expansion": "classic",
   "components": [
    {
-    "id": "darkwood-bowstave",
-    "name": "Darkwood Bowstave",
+    "id": "bow",
+    "name": "Bow (select from inventory)",
     "qty": 1,
-    "type": "item"
+    "type": "item",
+    "bowChoice": true
    },
    {
-    "id": "silk-string",
-    "name": "Silk String",
+    "id": "bowstring",
+    "name": "Bowstring (select from inventory)",
     "qty": 1,
-    "type": "item"
+    "type": "item",
+    "bowstringChoice": true
+   }
+  ],
+  "product": {
+   "type": "restring",
+   "name": "Restrung Bow",
+   "qty": 1
+  }
+ },
+ {
+  "id": "fashion-rough-bow",
+  "name": "Fashion Rough Bow",
+  "skill": "skill-fletching",
+  "difficulty": 20,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "bowstave",
+    "name": "Bowstave (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstaveChoice": true
+   },
+   {
+    "id": "bowstring",
+    "name": "Bowstring (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstringChoice": true
+   },
+   {
+    "id": "bow-type",
+    "name": "Bow Type (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "bowtype",
+    "bowClass": "rough"
+   }
+  ],
+  "product": {
+   "type": "bow",
+   "name": "Rough Bow",
+   "qty": 1,
+   "bowClass": "rough"
+  }
+ },
+ {
+  "id": "fashion-shaped-bow",
+  "name": "Fashion Shaped Bow",
+  "skill": "skill-fletching",
+  "difficulty": 60,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "bowstave",
+    "name": "Bowstave (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstaveChoice": true
+   },
+   {
+    "id": "bowstring",
+    "name": "Bowstring (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstringChoice": true
+   },
+   {
+    "id": "bow-type",
+    "name": "Bow Type (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "bowtype",
+    "bowClass": "shaped"
+   },
+   {
+    "id": "planing-tool",
+    "name": "Planing Tool",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "bow",
+   "name": "Shaped Bow",
+   "qty": 1,
+   "bowClass": "shaped"
+  }
+ },
+ {
+  "id": "fashion-carved-bow",
+  "name": "Fashion Carved Bow",
+  "skill": "skill-fletching",
+  "difficulty": 100,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "bowstave",
+    "name": "Bowstave (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstaveChoice": true
+   },
+   {
+    "id": "bowstring",
+    "name": "Bowstring (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstringChoice": true
+   },
+   {
+    "id": "bow-type",
+    "name": "Bow Type (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "bowtype",
+    "bowClass": "carved"
+   },
+   {
+    "id": "standard-bow-cam",
+    "name": "Standard Bow Cam",
+    "qty": 1,
+    "type": "item",
+    "optionalForTypes": [
+     "long-bow",
+     "short-bow",
+     "laminate-recurve-bow",
+     "composite-recurve-bow"
+    ]
+   },
+   {
+    "id": "whittling-blade",
+    "name": "Whittling Blade",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "bow",
+   "name": "Carved Bow",
+   "qty": 1,
+   "bowClass": "carved"
+  }
+ },
+ {
+  "id": "fashion-fine-bow",
+  "name": "Fashion Fine Bow",
+  "skill": "skill-fletching",
+  "difficulty": 140,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "bowstave",
+    "name": "Bowstave (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstaveChoice": true
+   },
+   {
+    "id": "bowstring",
+    "name": "Bowstring (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstringChoice": true
+   },
+   {
+    "id": "bow-type",
+    "name": "Bow Type (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "bowtype",
+    "bowClass": "fine"
    },
    {
     "id": "standard-bow-cam",
     "name": "Standard Bow Cam",
     "qty": 2,
-    "type": "item"
+    "type": "item",
+    "optionalForTypes": [
+     "long-bow",
+     "short-bow",
+     "laminate-recurve-bow",
+     "composite-recurve-bow"
+    ]
    },
    {
     "id": "whittling-blade",
     "name": "Whittling Blade",
     "qty": 1,
-    "type": "item"
+    "type": "item",
+    "consume": false
    }
   ],
   "product": {
-   "type": "item",
-   "template": "carved-darkwood-compound-bow",
-   "name": "Carved Darkwood Compound Bow",
-   "qty": 1
+   "type": "bow",
+   "name": "Fine Bow",
+   "qty": 1,
+   "bowClass": "fine"
+  }
+ },
+ {
+  "id": "fashion-intricate-bow",
+  "name": "Fashion Intricate Bow",
+  "skill": "skill-fletching",
+  "difficulty": 180,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "bowstave",
+    "name": "Bowstave (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstaveChoice": true
+   },
+   {
+    "id": "bowstring",
+    "name": "Bowstring (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstringChoice": true
+   },
+   {
+    "id": "bow-type",
+    "name": "Bow Type (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "bowtype",
+    "bowClass": "intricate"
+   },
+   {
+    "id": "standard-bow-cam",
+    "name": "Standard Bow Cam",
+    "qty": 2,
+    "type": "item",
+    "optionalForTypes": [
+     "long-bow",
+     "short-bow",
+     "laminate-recurve-bow",
+     "composite-recurve-bow"
+    ]
+   },
+   {
+    "id": "whittling-blade",
+    "name": "Whittling Blade",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "bow",
+   "name": "Intricate Bow",
+   "qty": 1,
+   "bowClass": "intricate"
+  }
+ },
+ {
+  "id": "fashion-ornate-bow",
+  "name": "Fashion Ornate Bow",
+  "skill": "skill-fletching",
+  "difficulty": 220,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "bowstave",
+    "name": "Bowstave (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstaveChoice": true
+   },
+   {
+    "id": "bowstring",
+    "name": "Bowstring (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstringChoice": true
+   },
+   {
+    "id": "bow-type",
+    "name": "Bow Type (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "bowtype",
+    "bowClass": "ornate"
+   },
+   {
+    "id": "standard-bow-cam",
+    "name": "Standard Bow Cam",
+    "qty": 2,
+    "type": "item",
+    "optionalForTypes": [
+     "long-bow",
+     "short-bow",
+     "laminate-recurve-bow",
+     "composite-recurve-bow"
+    ]
+   },
+   {
+    "id": "whittling-blade",
+    "name": "Whittling Blade",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "bow",
+   "name": "Ornate Bow",
+   "qty": 1,
+   "bowClass": "ornate"
+  }
+ },
+ {
+  "id": "fashion-lavish-bow",
+  "name": "Fashion Lavish Bow",
+  "skill": "skill-fletching",
+  "difficulty": 260,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "bowstave",
+    "name": "Bowstave (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstaveChoice": true
+   },
+   {
+    "id": "bowstring",
+    "name": "Bowstring (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstringChoice": true
+   },
+   {
+    "id": "bow-type",
+    "name": "Bow Type (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "bowtype",
+    "bowClass": "lavish"
+   },
+   {
+    "id": "standard-bow-cam",
+    "name": "Standard Bow Cam",
+    "qty": 2,
+    "type": "item",
+    "optionalForTypes": [
+     "long-bow",
+     "short-bow",
+     "laminate-recurve-bow",
+     "composite-recurve-bow"
+    ]
+   },
+   {
+    "id": "whittling-blade",
+    "name": "Whittling Blade",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "bow",
+   "name": "Lavish Bow",
+   "qty": 1,
+   "bowClass": "lavish"
   }
  }
 ]
