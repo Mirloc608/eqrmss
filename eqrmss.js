@@ -237,7 +237,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, bows:false, arrows:false, darts:false, hafts:false, crossbows:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, bows:false, arrows:false, darts:false, hafts:false, metals:false, crossbows:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
 
     // Parallel loader boot (2026-10-14): independent loaders run concurrently.
     // Each loader writes to its own game.eqrmss key; none read another's output.
@@ -505,6 +505,25 @@ export async function initializeDataLoaders() {
     } catch (e) {
         console.error("Haft data load failed", e);
         game.eqrmss.hafts = null;
+    }
+
+    // Metal tiers (2026-10-15): 5-tier system for smithing, like wood tiers
+    try {
+        const metalRes = await fetch('systems/eqrmss/module/data/smithing/metals.json');
+        const metals = await metalRes.json();
+        const metalById = {};
+        for (const m of metals) metalById[m.id] = m;
+        game.eqrmss.metals = {
+            list: () => metals,
+            get: (id) => metalById[id] ?? null,
+            tier: (id) => (metalById[id]?.tier ?? 1),
+            canEnchant: (id) => (metalById[id]?.tier ?? 1) >= 3
+        };
+        game.eqrmss._loadStatus.metals = true;
+        console.log(`EQRMSS | Metal tiers ready: ${metals.length} types.`);
+    } catch (e) {
+        console.error("Metal data load failed", e);
+        game.eqrmss.metals = null;
     }
 
     // Crossbow types (2026-10-15)

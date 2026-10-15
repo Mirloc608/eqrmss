@@ -412,11 +412,12 @@ export class TradeskillCombineDialog extends BaseApplication {
                     .map(m => ({ id: m.id, name: m.name }))
                     .sort((a, b) => a.name.localeCompare(b.name));
             }
-            // Default: weapon ores for smithing
+            // Default: weapon ores for smithing (with metal tiers, 2026-10-15)
             const weapons = game.eqrmss?.weapons;
             if (!weapons || typeof weapons.options !== "function") return [];
             const opts = weapons.options();
             const materials = opts?.materials ?? [];
+            const metals = game.eqrmss?.metals;
             // Filter to metal/ore materials (exclude cloth, leather, etc.)
             return materials
                 .filter(m => {
@@ -424,7 +425,11 @@ export class TradeskillCombineDialog extends BaseApplication {
                     // Include ores and metals, exclude cloth/leather/silk
                     return id.includes("ore") || ["iron", "steel", "mithril", "velium", "acrylia", "titanium"].some(x => id.includes(x));
                 })
-                .map(m => ({ id: m.id, name: m.name }))
+                .map(m => {
+                    const tier = metals?.tier(m.id) ?? 1;
+                    const enchant = tier >= 3 ? " (enchantable)" : "";
+                    return { id: m.id, name: `${m.name} (T${tier})${enchant}` };
+                })
                 .sort((a, b) => a.name.localeCompare(b.name));
         } catch (e) { return []; }
     }
