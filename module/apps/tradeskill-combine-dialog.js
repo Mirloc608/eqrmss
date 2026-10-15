@@ -58,11 +58,11 @@ export class TradeskillCombineDialog extends BaseApplication {
                 }
             });
         });
-        // Bow item dropdown change handler (2026-10-15): bows, bowstaves, bowstrings
+        // Bow item dropdown change handler (2026-10-15): bows, bowstaves, bowstrings, arrow shafts
         this.element.querySelectorAll(".bowitem-select").forEach(select => {
             select.addEventListener("change", (ev) => {
                 const recipeId = ev.target.dataset.recipeId;
-                const kind = ev.target.dataset.kind; // "bow", "bowstave", "bowstring"
+                const kind = ev.target.dataset.kind; // "bow", "bowstave", "bowstring", "shaft"
                 const itemId = ev.target.value;
                 if (recipeId && kind) {
                     this._setSelectedBowItem(recipeId, kind, itemId);
@@ -139,6 +139,18 @@ export class TradeskillCombineDialog extends BaseApplication {
         const key = `${recipeId}:${kind}`;
         if (!this.selectedBowItems) this.selectedBowItems = {};
         return this.selectedBowItems[key] ?? null;
+    }
+
+    // Arrow shafts from inventory (2026-10-15)
+    _getArrowShafts() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            const sys = item.system ?? {};
+            if (sys.arrowShaft || String(item.name ?? "").toLowerCase().includes("arrow shaft")) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
     }
 
     _setSelectedBowItem(recipeId, kind, itemId) {
@@ -235,6 +247,27 @@ export class TradeskillCombineDialog extends BaseApplication {
                 // Note: class filtering happens in _prepareContext where component is available
                 return bows.listTypes()
                     .map(t => ({ id: t.id, name: t.name }));
+            }
+            if (materialType === "arrowhead") {
+                // Arrow heads (2026-10-15)
+                const arrows = game.eqrmss?.arrows;
+                if (!arrows || typeof arrows.listHeads !== "function") return [];
+                return arrows.listHeads()
+                    .map(h => ({ id: h.id, name: `${h.name} (+${h.damageBonus} dmg)` }));
+            }
+            if (materialType === "arrowfletch") {
+                // Arrow fletchings (2026-10-15)
+                const arrows = game.eqrmss?.arrows;
+                if (!arrows || typeof arrows.listFletches !== "function") return [];
+                return arrows.listFletches()
+                    .map(f => ({ id: f.id, name: `Class ${f.class}: ${f.name}` }));
+            }
+            if (materialType === "arrownock") {
+                // Arrow nocks (2026-10-15)
+                const arrows = game.eqrmss?.arrows;
+                if (!arrows || typeof arrows.listNocks !== "function") return [];
+                return arrows.listNocks()
+                    .map(n => ({ id: n.id, name: `${n.name} (+${n.rangeMod} range)` }));
             }
             if (materialType === "cloth" || materialType === "leather") {
                 // Armor materials for tailoring
@@ -347,6 +380,19 @@ export class TradeskillCombineDialog extends BaseApplication {
                             this._setSelectedBowItem(r.id, kind, items[0].id);
                         }
                     }
+                    // For shaftChoice, add arrow shaft inventory dropdown (2026-10-15)
+                    if (c.shaftChoice) {
+                        const items = this._getArrowShafts();
+                        const selectedId = this._getSelectedBowItem(r.id, "shaft");
+                        base.bowItemOptions = items.map(w => ({
+                            ...w,
+                            selected: w.id === selectedId || (!selectedId && w === items[0])
+                        }));
+                        base.bowItemKind = "shaft";
+                        if (items.length > 0 && !selectedId) {
+                            this._setSelectedBowItem(r.id, "shaft", items[0].id);
+                        }
+                    }
                     // For bowtype materialChoice, filter by class (2026-10-15)
                     if (c.materialChoice && c.materialType === "bowtype" && c.bowClass) {
                         const bows = game.eqrmss?.bows;
@@ -381,6 +427,24 @@ export class TradeskillCombineDialog extends BaseApplication {
             restricted: !access.allowed,
             restrictionReason: access.reason
         };
+    }
+
+    // Dynamic difficulty for Fletch Arrows (2026-10-15): max of component trivials
+    _getDynamicDifficulty(recipe, recipeId) {
+        if (recipe.id !== "fletch-arrows") return recipe.difficulty;
+        const arrows = game.eqrmss?.arrows;
+        if (!arrows) return recipe.difficulty;
+        const headComp = recipe.components?.find(c => c.materialType === "arrowhead");
+        const fletchComp = recipe.components?.find(c => c.materialType === "arrowfletch");
+        const nockComp = recipe.components?.find(c => c.materialType === "arrownock");
+        const headId = headComp ? this._getSelectedMaterial(recipeId, recipe, headComp.id) : null;
+        const fletchId = fletchComp ? this._getSelectedMaterial(recipeId, recipe, fletchComp.id) : null;
+        const nockId = nockComp ? this._getSelectedMaterial(recipeId, recipe, nockComp.id) : null;
+        const shaftItemId = this._getSelectedBowItem(recipeId, "shaft");
+        const shaftItem = shaftItemId ? this.actor.items.get(shaftItemId) : null;
+        const shaftId = shaftItem?.system?.arrowShaft;
+        if (!headId || !fletchId || !nockId || !shaftId) return recipe.difficulty;
+        return arrows.difficulty(headId, shaftId, fletchId, nockId);
     }
 
     _getSkillName() {
@@ -429,6 +493,9 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
         if (component.bowstringChoice) {
             return this._getBowstrings().length > 0 ? 1 : 0;
+        }
+        if (component.shaftChoice) {
+            return this._getArrowShafts().length > 0 ? 1 : 0;
         }
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
@@ -506,6 +573,15 @@ export class TradeskillCombineDialog extends BaseApplication {
             if ((c.bowstaveChoice || c.bowstringChoice) && recipeId) {
                 const kind = c.bowstaveChoice ? "bowstave" : "bowstring";
                 const itemId = this._getSelectedBowItem(recipeId, kind);
+                if (itemId) {
+                    const item = this.actor.items.get(itemId);
+                    if (item) await item.delete();
+                }
+                continue;
+            }
+            // For shaftChoice, consume the selected arrow shaft - 2026-10-15
+            if (c.shaftChoice && recipeId) {
+                const itemId = this._getSelectedBowItem(recipeId, "shaft");
                 if (itemId) {
                     const item = this.actor.items.get(itemId);
                     if (item) await item.delete();
@@ -720,8 +796,7 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
         
         // Bow products (2026-10-15): bowstave, bowstring, bow, restring
-        if (["bowstave", "bowstring", "bow", "restring"].includes(productType) && recipeId) {
-            const bows = game.eqrmss?.bows;
+        if (["bowstave", "bowstring", "bow", "restring"].includes(productType) && recipeId) {            const bows = game.eqrmss?.bows;
             if (!bows) {
                 ui.notifications.error("Bow data not loaded.");
                 return;
@@ -869,6 +944,93 @@ export class TradeskillCombineDialog extends BaseApplication {
                 return;
             }
         }
+
+        // Arrow products (2026-10-15): arrowshaft, arrow
+        if (["arrowshaft", "arrow"].includes(productType) && recipeId) {
+            const arrows = game.eqrmss?.arrows;
+            if (!arrows) {
+                ui.notifications.error("Arrow data not loaded.");
+                return;
+            }
+            const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+
+            // Fashion Arrow Shafts: creates "{Shaft} Arrow Shafts" bundle
+            if (productType === "arrowshaft") {
+                const shaftId = product.shaftId;
+                const shaft = shaftId ? arrows.getShaft(shaftId) : null;
+                if (!shaft) {
+                    ui.notifications.error("Unknown shaft type.");
+                    return;
+                }
+                const shaftNames = {
+                    "wood": "Bundled Wooden Arrow Shafts",
+                    "bone": "Bundled Bone Arrow Shafts",
+                    "ceramic": "Bundled Ceramic Arrow Shafts",
+                    "steel": "Bundled Steel Arrow Shafts"
+                };
+                await this.actor.createEmbeddedDocuments("Item", [{
+                    name: shaftNames[shaftId] ?? `${shaft.name} Arrow Shafts`,
+                    type: "weapon",
+                    system: {
+                        arrowShaft: shaft.id,
+                        arrowShaftName: shaft.name,
+                        quantity: product.qty ?? 1,
+                        description: `Crafted arrow shafts (${quality}).`
+                    }
+                }]);
+                ui.notifications.info(`Fashioned ${shaftNames[shaftId] ?? shaft.name} shafts.`);
+                return;
+            }
+
+            // Fletch Arrows: head + shaft + fletch + nock -> composed arrows
+            if (productType === "arrow") {
+                const headComp = recipe?.components?.find(c => c.materialType === "arrowhead");
+                const fletchComp = recipe?.components?.find(c => c.materialType === "arrowfletch");
+                const nockComp = recipe?.components?.find(c => c.materialType === "arrownock");
+                const headId = headComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, headComp.id) : null;
+                const fletchId = fletchComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, fletchComp.id) : null;
+                const nockId = nockComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, nockComp.id) : null;
+                const shaftItemId = this._getSelectedBowItem(recipeId, "shaft");
+                if (!headId || !fletchId || !nockId || !shaftItemId) {
+                    ui.notifications.error("Missing arrow components.");
+                    return;
+                }
+                const shaftItem = this.actor.items.get(shaftItemId);
+                if (!shaftItem) {
+                    ui.notifications.error("Selected shaft not found.");
+                    return;
+                }
+                const shaftId = shaftItem.system?.arrowShaft;
+                if (!shaftId) {
+                    ui.notifications.error("Shaft is missing its type data.");
+                    return;
+                }
+                try {
+                    const composed = arrows.compose(headId, shaftId, fletchId, nockId, quality);
+                    await this.actor.createEmbeddedDocuments("Item", [{
+                        name: composed.name,
+                        type: "weapon",
+                        system: {
+                            weaponType: "missile",
+                            ammoType: "arrow",
+                            arrowHead: composed.headId,
+                            arrowShaft: composed.shaftId,
+                            arrowFletch: composed.fletchId,
+                            arrowNock: composed.nockId,
+                            arrowClass: composed.arrowClass,
+                            damageBonus: composed.damageBonus,
+                            rangeMod: composed.rangeMod,
+                            quantity: composed.quantity,
+                            description: composed.description
+                        }
+                    }]);
+                    ui.notifications.info(`Fletched ${composed.quantity}x ${composed.name}.`);
+                } catch (e) {
+                    ui.notifications.error(`Arrow compose failed: ${e.message}`);
+                }
+                return;
+            }
+        }
         
         // Generic item (default): consumables, etc.
         // Gem bonuses for enchanted jewelry (2026-10-14)
@@ -970,7 +1132,7 @@ export class TradeskillCombineDialog extends BaseApplication {
 
         const result = await attemptCombine(
             dialog.actor,
-            recipe,
+            { ...recipe, difficulty: dialog._getDynamicDifficulty(recipe, recipeId) },
             (c) => dialog._hasComponents(c, recipeId),
             (c) => dialog._consumeComponents(c, recipeId),
             (p, q) => dialog._createProduct(p, q, recipeId),
@@ -979,10 +1141,11 @@ export class TradeskillCombineDialog extends BaseApplication {
 
         // Post result to chat
         const icon = result.success ? "✅" : result.critFail ? "💥" : "❌";
+        const shownDifficulty = dialog._getDynamicDifficulty(recipe, recipeId);
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor: dialog.actor }),
             content: `<h2>${icon} ${recipe.name}</h2><p>${result.message}</p>
-                ${result.roll ? `<p>Roll: ${result.roll.total} + bonus = ${result.total} vs ${recipe.difficulty}</p>` : ""}`
+                ${result.roll ? `<p>Roll: ${result.roll.total} + bonus = ${result.total} vs ${shownDifficulty}</p>` : ""}`
         });
 
         // Refresh the dialog

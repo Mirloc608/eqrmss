@@ -237,7 +237,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, bows:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, bows:false, arrows:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
 
     // Parallel loader boot (2026-10-14): independent loaders run concurrently.
     // Each loader writes to its own game.eqrmss key; none read another's output.
@@ -446,6 +446,29 @@ export async function initializeDataLoaders() {
     } catch (e) {
         console.error("Bow data load failed", e);
         game.eqrmss.bows = null;
+    }
+
+    // Arrows (head + shaft + fletch + nock composer, 2026-10-15)
+    try {
+        const arrowMod = await import('./module/data/fletching/arrow-composer.js');
+        await arrowMod.loadArrowData();
+        game.eqrmss.arrows = {
+            compose: arrowMod.composeArrow,
+            difficulty: arrowMod.arrowDifficulty,
+            getHead: arrowMod.getArrowHead,
+            getShaft: arrowMod.getArrowShaft,
+            getFletch: arrowMod.getArrowFletch,
+            getNock: arrowMod.getArrowNock,
+            listHeads: arrowMod.listArrowHeads,
+            listShafts: arrowMod.listArrowShafts,
+            listFletches: arrowMod.listArrowFletches,
+            listNocks: arrowMod.listArrowNocks
+        };
+        game.eqrmss._loadStatus.arrows = true;
+        console.log(`EQRMSS | Arrows ready.`);
+    } catch (e) {
+        console.error("Arrow data load failed", e);
+        game.eqrmss.arrows = null;
     }
 
     // Armor (location + category + material + condition composer)
