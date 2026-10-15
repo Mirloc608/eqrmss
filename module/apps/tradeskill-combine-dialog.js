@@ -179,6 +179,64 @@ export class TradeskillCombineDialog extends BaseApplication {
         return matches;
     }
 
+    // Crossbow components from inventory (2026-10-15)
+    _getCrossbowStocks() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            if (item.system?.crossbowStock) matches.push({ id: item.id, name: item.name, item });
+        }
+        return matches;
+    }
+
+    _getBowCams() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            const n = String(item.name ?? "").toLowerCase();
+            if (n.includes("bow cam") || n.includes("cam")) matches.push({ id: item.id, name: item.name, item });
+        }
+        return matches;
+    }
+
+    _getTriggers() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            if (item.system?.crossbowTrigger || String(item.name ?? "").toLowerCase().includes("trigger")) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
+    _getLimbs() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            if (item.system?.crossbowLimbs || String(item.name ?? "").toLowerCase().includes("limbs")) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
+    _getRisers() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            if (item.system?.crossbowRiser || String(item.name ?? "").toLowerCase().includes("riser")) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
+    _getGrooves() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            if (item.system?.crossbowGroove || String(item.name ?? "").toLowerCase().includes("groove")) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
     _setSelectedBowItem(recipeId, kind, itemId) {
         if (!this.selectedBowItems) this.selectedBowItems = {};
         this.selectedBowItems[`${recipeId}:${kind}`] = itemId;
@@ -308,6 +366,13 @@ export class TradeskillCombineDialog extends BaseApplication {
                 if (!hafts || typeof hafts.list !== "function") return [];
                 return hafts.list()
                     .map(p => ({ id: p.id, name: p.usable ? `${p.name} (usable)` : p.name }));
+            }
+            if (materialType === "crossbowtype") {
+                // Crossbow types (2026-10-15): Hand, Light, Heavy, cammed variants
+                const xbows = game.eqrmss?.crossbows;
+                if (!xbows || typeof xbows.list !== "function") return [];
+                return xbows.list()
+                    .map(t => ({ id: t.id, name: t.name }));
             }
             if (materialType === "cloth" || materialType === "leather") {
                 // Armor materials for tailoring
@@ -460,6 +525,28 @@ export class TradeskillCombineDialog extends BaseApplication {
                             this._setSelectedBowItem(r.id, "shield", items[0].id);
                         }
                     }
+                    // Crossbow component choices (2026-10-15)
+                    const xbowKinds = {
+                        stockChoice: ["stock", "_getCrossbowStocks"],
+                        triggerChoice: ["trigger", "_getTriggers"],
+                        limbsChoice: ["limbs", "_getLimbs"],
+                        riserChoice: ["riser", "_getRisers"],
+                        grooveChoice: ["groove", "_getGrooves"]
+                    };
+                    for (const [flag, [kind, getter]] of Object.entries(xbowKinds)) {
+                        if (c[flag]) {
+                            const items = this[getter]();
+                            const selectedId = this._getSelectedBowItem(r.id, kind);
+                            base.bowItemOptions = items.map(w => ({
+                                ...w,
+                                selected: w.id === selectedId || (!selectedId && w === items[0])
+                            }));
+                            base.bowItemKind = kind;
+                            if (items.length > 0 && !selectedId) {
+                                this._setSelectedBowItem(r.id, kind, items[0].id);
+                            }
+                        }
+                    }
                     // For bowtype materialChoice, filter by class (2026-10-15)
                     if (c.materialChoice && c.materialType === "bowtype" && c.bowClass) {
                         const bows = game.eqrmss?.bows;
@@ -531,6 +618,31 @@ export class TradeskillCombineDialog extends BaseApplication {
             if (!pieceId) return recipe.difficulty;
             return hafts.difficulty(pieceId);
         }
+        // Dynamic difficulty for Assemble Crossbow (2026-10-15): type trivial
+        if (recipe.id === "assemble-crossbow") {
+            const xbows = game.eqrmss?.crossbows;
+            if (!xbows) return recipe.difficulty;
+            const typeComp = recipe.components?.find(c => c.materialType === "crossbowtype");
+            const typeId = typeComp ? this._getSelectedMaterial(recipeId, recipe, typeComp.id) : null;
+            if (!typeId) return recipe.difficulty;
+            return xbows.difficulty(typeId);
+        }
+        // Dynamic difficulty for Fletch Bolts (2026-10-15): same as arrows
+        if (recipe.id === "fletch-bolts") {
+            const arrows = game.eqrmss?.arrows;
+            if (!arrows) return recipe.difficulty;
+            const headComp = recipe.components?.find(c => c.materialType === "arrowhead");
+            const fletchComp = recipe.components?.find(c => c.materialType === "arrowfletch");
+            const nockComp = recipe.components?.find(c => c.materialType === "arrownock");
+            const headId = headComp ? this._getSelectedMaterial(recipeId, recipe, headComp.id) : null;
+            const fletchId = fletchComp ? this._getSelectedMaterial(recipeId, recipe, fletchComp.id) : null;
+            const nockId = nockComp ? this._getSelectedMaterial(recipeId, recipe, nockComp.id) : null;
+            const shaftItemId = this._getSelectedBowItem(recipeId, "shaft");
+            const shaftItem = shaftItemId ? this.actor.items.get(shaftItemId) : null;
+            const shaftId = shaftItem?.system?.arrowShaft;
+            if (!headId || !fletchId || !nockId || !shaftId) return recipe.difficulty;
+            return arrows.difficulty(headId, shaftId, fletchId, nockId);
+        }
         return recipe.difficulty;
     }
 
@@ -589,6 +701,21 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
         if (component.shieldChoice) {
             return this._getWoodShields().length > 0 ? 1 : 0;
+        }
+        if (component.stockChoice) {
+            return this._getCrossbowStocks().length > 0 ? 1 : 0;
+        }
+        if (component.triggerChoice) {
+            return this._getTriggers().length > 0 ? 1 : 0;
+        }
+        if (component.limbsChoice) {
+            return this._getLimbs().length > 0 ? 1 : 0;
+        }
+        if (component.riserChoice) {
+            return this._getRisers().length > 0 ? 1 : 0;
+        }
+        if (component.grooveChoice) {
+            return this._getGrooves().length > 0 ? 1 : 0;
         }
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
@@ -685,6 +812,25 @@ export class TradeskillCombineDialog extends BaseApplication {
             if ((c.haftChoice || c.shieldChoice) && recipeId) {
                 continue;
             }
+            // Crossbow components are consumed in assembly - 2026-10-15
+            const xbowConsumeKinds = {
+                stockChoice: "stock",
+                triggerChoice: "trigger",
+                limbsChoice: "limbs",
+                riserChoice: "riser",
+                grooveChoice: "groove"
+            };
+            for (const [flag, kind] of Object.entries(xbowConsumeKinds)) {
+                if (c[flag] && recipeId) {
+                    const itemId = this._getSelectedBowItem(recipeId, kind);
+                    if (itemId) {
+                        const item = this.actor.items.get(itemId);
+                        if (item) await item.delete();
+                    }
+                    break;
+                }
+            }
+            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice) continue;
             // For optionalForTypes (cams), only consume if selected type needs them - 2026-10-15
             if (c.optionalForTypes && recipeId) {
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
@@ -1255,6 +1401,133 @@ export class TradeskillCombineDialog extends BaseApplication {
                 ui.notifications.info(`Augmented ${oldName} -> ${augment} ${newName} (${metalName}).`);
                 return;
             }
+        }
+
+        // Crossbow component products (2026-10-15)
+        const xbowComponents = {
+            "crossbowstock": ["crossbowStock", "Crossbow Stock"],
+            "bowcam": ["bowCam", "Standard Bow Cam"],
+            "crosstrigger": ["crossbowTrigger", "Crossbow Trigger"],
+            "crosslimbs": ["crossbowLimbs", "Crossbow Limbs"],
+            "crossriser": ["crossbowRiser", "Crossbow Riser"],
+            "crossgroove": ["crossbowGroove", "Crossbow Groove"]
+        };
+        if (xbowComponents[productType] && recipeId) {
+            const [sysKey, baseName] = xbowComponents[productType];
+            // For stock, include wood name
+            let itemName = baseName;
+            const sysExtra = { [sysKey]: true };
+            if (productType === "crossbowstock") {
+                const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+                const woodComp = recipe?.components?.find(c => c.materialType === "wood");
+                const woodId = woodComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, woodComp.id) : null;
+                const bows = game.eqrmss?.bows;
+                const wood = woodId && bows ? bows.getWood(woodId) : null;
+                if (wood) {
+                    itemName = `${wood.name} ${baseName}`;
+                    sysExtra.haftWood = wood.id;
+                    sysExtra.durability = wood.durability ?? 20;
+                }
+            }
+            await this.actor.createEmbeddedDocuments("Item", [{
+                name: itemName,
+                type: "weapon",
+                system: {
+                    ...sysExtra,
+                    quantity: product.qty ?? 1,
+                    description: `Crafted crossbow component (${quality}).`
+                }
+            }]);
+            ui.notifications.info(`Fashioned ${itemName}.`);
+            return;
+        }
+
+        // Assemble Crossbow (2026-10-15)
+        if (productType === "crossbow" && recipeId) {
+            const xbows = game.eqrmss?.crossbows;
+            const bows = game.eqrmss?.bows;
+            if (!xbows) {
+                ui.notifications.error("Crossbow data not loaded.");
+                return;
+            }
+            const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+            const typeComp = recipe?.components?.find(c => c.materialType === "crossbowtype");
+            const typeId = typeComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, typeComp.id) : null;
+            const xbowType = typeId ? xbows.get(typeId) : null;
+            if (!xbowType) {
+                ui.notifications.error("No crossbow type selected.");
+                return;
+            }
+            // Get stock for wood info
+            const stockId = this._getSelectedBowItem(recipeId, "stock");
+            const stock = stockId ? this.actor.items.get(stockId) : null;
+            const woodName = stock?.system?.haftWoodName ?? stock?.system?.haftWood ?? "";
+            const itemName = woodName ? `${woodName} ${xbowType.name}` : xbowType.name;
+            await this.actor.createEmbeddedDocuments("Item", [{
+                name: itemName,
+                type: "weapon",
+                system: {
+                    weaponType: "missile",
+                    weaponTemplate: xbowType.id.includes("hand") ? "crossbow_light" : xbowType.id.includes("heavy") ? "crossbow_heavy" : "crossbow_light",
+                    crossbowType: xbowType.id,
+                    crossbowCams: xbowType.cams,
+                    range: xbowType.range,
+                    damageBonus: xbowType.damageBonus,
+                    quantity: 1,
+                    description: `Assembled ${xbowType.name.toLowerCase()} (${quality}). ${xbowType.description ?? ""}`
+                }
+            }]);
+            ui.notifications.info(`Assembled ${itemName}.`);
+            return;
+        }
+
+        // Fletch Bolts (2026-10-15): same as arrows, called Bolt
+        if (productType === "bolt" && recipeId) {
+            const arrows = game.eqrmss?.arrows;
+            if (!arrows) {
+                ui.notifications.error("Arrow data not loaded.");
+                return;
+            }
+            const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+            const headComp = recipe?.components?.find(c => c.materialType === "arrowhead");
+            const fletchComp = recipe?.components?.find(c => c.materialType === "arrowfletch");
+            const nockComp = recipe?.components?.find(c => c.materialType === "arrownock");
+            const headId = headComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, headComp.id) : null;
+            const fletchId = fletchComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, fletchComp.id) : null;
+            const nockId = nockComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, nockComp.id) : null;
+            const shaftItemId = this._getSelectedBowItem(recipeId, "shaft");
+            const shaftItem = shaftItemId ? this.actor.items.get(shaftItemId) : null;
+            const shaftId = shaftItem?.system?.arrowShaft;
+            if (!headId || !fletchId || !nockId || !shaftId) {
+                ui.notifications.error("Missing bolt components.");
+                return;
+            }
+            try {
+                const composed = arrows.compose(headId, shaftId, fletchId, nockId, quality);
+                // Rename Arrow -> Bolt
+                const boltName = composed.name.replace(/Arrow/g, "Bolt");
+                await this.actor.createEmbeddedDocuments("Item", [{
+                    name: boltName,
+                    type: "weapon",
+                    system: {
+                        weaponType: "missile",
+                        ammoType: "bolt",
+                        arrowHead: composed.headId,
+                        arrowShaft: composed.shaftId,
+                        arrowFletch: composed.fletchId,
+                        arrowNock: composed.nockId,
+                        arrowClass: composed.arrowClass,
+                        damageBonus: composed.damageBonus,
+                        rangeMod: composed.rangeMod,
+                        quantity: composed.quantity,
+                        description: composed.description.replace(/arrows/g, "bolts")
+                    }
+                }]);
+                ui.notifications.info(`Fletched ${composed.quantity}x ${boltName}.`);
+            } catch (e) {
+                ui.notifications.error(`Bolt compose failed: ${e.message}`);
+            }
+            return;
         }
         
         // Generic item (default): consumables, etc.

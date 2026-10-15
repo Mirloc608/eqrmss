@@ -659,5 +659,159 @@
    "name": "Wood Shield",
    "qty": 1
   }
+ },
+ {
+  "id": "fashion-crossbow-stock",
+  "name": "Fashion Crossbow Stock",
+  "skill": "skill-fletching",
+  "difficulty": 30,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "wood",
+    "name": "Wood (select material)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "wood"
+   },
+   {
+    "id": "fletchers-toolkit",
+    "name": "Fletcher's Toolkit",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "crossbowstock",
+   "name": "Crossbow Stock",
+   "qty": 1
+  }
+ },
+ {
+  "id": "assemble-crossbow",
+  "name": "Assemble Crossbow",
+  "skill": "skill-fletching",
+  "difficulty": 80,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "stock",
+    "name": "Crossbow Stock (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "stockChoice": true
+   },
+   {
+    "id": "bowstring",
+    "name": "Bowstring (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "bowstringChoice": true
+   },
+   {
+    "id": "trigger",
+    "name": "Trigger (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "triggerChoice": true
+   },
+   {
+    "id": "limbs",
+    "name": "Limbs (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "limbsChoice": true
+   },
+   {
+    "id": "riser",
+    "name": "Riser (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "riserChoice": true
+   },
+   {
+    "id": "groove",
+    "name": "Groove (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "grooveChoice": true
+   },
+   {
+    "id": "crossbow-type",
+    "name": "Crossbow Type (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "crossbowtype"
+   },
+   {
+    "id": "bow-cam",
+    "name": "Bow Cam",
+    "qty": 2,
+    "type": "item",
+    "optionalForTypes": [
+     "hand-crossbow",
+     "light-crossbow",
+     "heavy-crossbow"
+    ]
+   }
+  ],
+  "product": {
+   "type": "crossbow",
+   "name": "Crossbow",
+   "qty": 1,
+   "dynamicDifficulty": true
+  }
+ },
+ {
+  "id": "fletch-bolts",
+  "name": "Fletch Bolts",
+  "skill": "skill-fletching",
+  "difficulty": 16,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "arrow-head",
+    "name": "Bolt Head (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "arrowhead"
+   },
+   {
+    "id": "arrow-shaft",
+    "name": "Bolt Shaft (select from inventory)",
+    "qty": 1,
+    "type": "item",
+    "shaftChoice": true
+   },
+   {
+    "id": "arrow-fletch",
+    "name": "Fletching (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "arrowfletch"
+   },
+   {
+    "id": "arrow-nock",
+    "name": "Nock (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "arrownock"
+   }
+  ],
+  "product": {
+   "type": "bolt",
+   "name": "Bolts",
+   "qty": 5,
+   "dynamicDifficulty": true
+  }
  }
 ]
