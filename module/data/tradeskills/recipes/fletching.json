@@ -961,5 +961,36 @@
    "headId": "stone"
   },
   "componentYield": true
+ },
+ {
+  "id": "fashion-short-shaft",
+  "name": "Fashion Short Shaft",
+  "skill": "skill-fletching",
+  "difficulty": 25,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "wood",
+    "name": "Wood (select material)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "wood"
+   },
+   {
+    "id": "fletchers-toolkit",
+    "name": "Fletcher's Toolkit",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "haft",
+   "name": "Short Shaft",
+   "qty": 1,
+   "dynamicDifficulty": true
+  }
  }
 ]

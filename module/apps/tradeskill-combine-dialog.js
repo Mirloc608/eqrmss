@@ -1444,6 +1444,43 @@ export class TradeskillCombineDialog extends BaseApplication {
             }
         }
 
+        // Haft weapons (2026-10-15): shaft + metal head -> finished weapon
+        if (productType === "haft-weapon" && recipeId) {
+            const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+            const shaftType = product.shaftType; // "long" or "short"
+            const kind = shaftType === "long" ? "haft-long-haft" : "haft-short-shaft";
+            const shaftId = this._getSelectedBowItem(recipeId, kind);
+            const metalComp = recipe?.components?.find(c => c.materialType === "ore");
+            const metalId = metalComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, metalComp.id) : "iron";
+            if (!shaftId) {
+                ui.notifications.error("No shaft selected.");
+                return;
+            }
+            const shaft = this.actor.items.get(shaftId);
+            if (!shaft) {
+                ui.notifications.error("Selected shaft not found.");
+                return;
+            }
+            const woodName = shaft.system?.haftWoodName ?? "";
+            const metalName = String(metalId).replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+            const weaponName = product.name;
+            const fullName = woodName ? `${metalName} ${weaponName} (${woodName} Shaft)` : `${metalName} ${weaponName}`;
+            await this.actor.createEmbeddedDocuments("Item", [{
+                name: fullName,
+                type: "weapon",
+                system: {
+                    weaponTemplate: product.weaponId,
+                    material: metalId,
+                    haftWood: shaft.system?.haftWood,
+                    haftWoodName: woodName,
+                    quantity: 1,
+                    description: `Crafted ${weaponName.toLowerCase()} (${quality}). ${woodName} shaft, ${metalName} head.`
+                }
+            }]);
+            ui.notifications.info(`Forged ${fullName}.`);
+            return;
+        }
+
         // Crossbow component products (2026-10-15)
         const xbowComponents = {
             "crossbowstock": ["crossbowStock", "Crossbow Stock"],
