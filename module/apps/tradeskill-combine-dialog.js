@@ -1216,7 +1216,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                 tier = strandTiers[strandTypeId] ?? 1;
                 await this.actor.createEmbeddedDocuments("Item", [{
                     name: `${strandName} Bowstring`,
-                    type: "weapon",
+                    type: "item",
                     system: {
                         bowString: strandTypeId,
                         bowStringName: strandName,
@@ -1256,7 +1256,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                     const composed = bows.compose(woodId, stringId, typeId, classId, quality);
                     await this.actor.createEmbeddedDocuments("Item", [{
                         name: composed.name,
-                        type: "weapon",
+                        type: "item",
                         system: {
                             weaponType: "missile",
                             bowWood: composed.woodId,
@@ -1351,7 +1351,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                 };
                 await this.actor.createEmbeddedDocuments("Item", [{
                     name: shaftNames[shaftId] ?? `${shaft.name} Arrow Shafts`,
-                    type: "weapon",
+                    type: "item",
                     system: {
                         arrowShaft: shaft.id,
                         arrowShaftName: shaft.name,
@@ -1392,7 +1392,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                     const composed = arrows.compose(headId, shaftId, fletchId, nockId, quality);
                     await this.actor.createEmbeddedDocuments("Item", [{
                         name: composed.name,
-                        type: "weapon",
+                        type: "item",
                         system: {
                             weaponType: "missile",
                             ammoType: "arrow",
@@ -1687,7 +1687,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                 const boltName = composed.name.replace(/Arrow/g, "Bolt");
                 await this.actor.createEmbeddedDocuments("Item", [{
                     name: boltName,
-                    type: "weapon",
+                    type: "item",
                     system: {
                         weaponType: "missile",
                         ammoType: "bolt",
@@ -1721,7 +1721,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             if (qty === 0) return;
             await this.actor.createEmbeddedDocuments("Item", [{
                 name: product.name,
-                type: "weapon",
+                type: "item",
                 system: {
                     fletchId: fletchId,
                     quantity: qty,
@@ -1743,7 +1743,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             if (qty === 0) return;
             await this.actor.createEmbeddedDocuments("Item", [{
                 name: product.name,
-                type: "weapon",
+                type: "item",
                 system: {
                     strandId: strandId,
                     quantity: qty,
@@ -1760,7 +1760,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             if (qty === 0) return;
             await this.actor.createEmbeddedDocuments("Item", [{
                 name: product.name,
-                type: "weapon",
+                type: "item",
                 system: {
                     leatherStrips: true,
                     quantity: qty,
@@ -1790,7 +1790,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             const newName = `${product.name} (${baseName})${deityOnly}`;
             await this.actor.createEmbeddedDocuments("Item", [{
                 name: newName,
-                type: "weapon",
+                type: "item",
                 system: {
                     bowString: oldString.system?.bowString,
                     bowStringName: `${product.name} ${baseName}`,
@@ -1819,7 +1819,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             if (qty === 0) return;
             await this.actor.createEmbeddedDocuments("Item", [{
                 name: product.name,
-                type: "weapon",
+                type: "item",
                 system: {
                     headId: headId,
                     quantity: qty,
