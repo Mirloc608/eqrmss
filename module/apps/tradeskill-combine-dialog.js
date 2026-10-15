@@ -237,6 +237,17 @@ export class TradeskillCombineDialog extends BaseApplication {
         return matches;
     }
 
+    // Fletchings from inventory (2026-10-15)
+    _getFletchings() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            if (item.system?.fletchId || String(item.name ?? "").toLowerCase().includes("fletching") || String(item.name ?? "").toLowerCase().includes("vane")) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
     _setSelectedBowItem(recipeId, kind, itemId) {
         if (!this.selectedBowItems) this.selectedBowItems = {};
         this.selectedBowItems[`${recipeId}:${kind}`] = itemId;
@@ -531,7 +542,8 @@ export class TradeskillCombineDialog extends BaseApplication {
                         triggerChoice: ["trigger", "_getTriggers"],
                         limbsChoice: ["limbs", "_getLimbs"],
                         riserChoice: ["riser", "_getRisers"],
-                        grooveChoice: ["groove", "_getGrooves"]
+                        grooveChoice: ["groove", "_getGrooves"],
+                        fletchChoice: ["fletch", "_getFletchings"]
                     };
                     for (const [flag, [kind, getter]] of Object.entries(xbowKinds)) {
                         if (c[flag]) {
@@ -589,14 +601,15 @@ export class TradeskillCombineDialog extends BaseApplication {
             const arrows = game.eqrmss?.arrows;
             if (!arrows) return recipe.difficulty;
             const headComp = recipe.components?.find(c => c.materialType === "arrowhead");
-            const fletchComp = recipe.components?.find(c => c.materialType === "arrowfletch");
             const nockComp = recipe.components?.find(c => c.materialType === "arrownock");
             const headId = headComp ? this._getSelectedMaterial(recipeId, recipe, headComp.id) : null;
-            const fletchId = fletchComp ? this._getSelectedMaterial(recipeId, recipe, fletchComp.id) : null;
             const nockId = nockComp ? this._getSelectedMaterial(recipeId, recipe, nockComp.id) : null;
             const shaftItemId = this._getSelectedBowItem(recipeId, "shaft");
             const shaftItem = shaftItemId ? this.actor.items.get(shaftItemId) : null;
             const shaftId = shaftItem?.system?.arrowShaft;
+            const fletchItemId = this._getSelectedBowItem(recipeId, "fletch");
+            const fletchItem = fletchItemId ? this.actor.items.get(fletchItemId) : null;
+            const fletchId = fletchItem?.system?.fletchId;
             if (!headId || !fletchId || !nockId || !shaftId) return recipe.difficulty;
             return arrows.difficulty(headId, shaftId, fletchId, nockId);
         }
@@ -632,14 +645,15 @@ export class TradeskillCombineDialog extends BaseApplication {
             const arrows = game.eqrmss?.arrows;
             if (!arrows) return recipe.difficulty;
             const headComp = recipe.components?.find(c => c.materialType === "arrowhead");
-            const fletchComp = recipe.components?.find(c => c.materialType === "arrowfletch");
             const nockComp = recipe.components?.find(c => c.materialType === "arrownock");
             const headId = headComp ? this._getSelectedMaterial(recipeId, recipe, headComp.id) : null;
-            const fletchId = fletchComp ? this._getSelectedMaterial(recipeId, recipe, fletchComp.id) : null;
             const nockId = nockComp ? this._getSelectedMaterial(recipeId, recipe, nockComp.id) : null;
             const shaftItemId = this._getSelectedBowItem(recipeId, "shaft");
             const shaftItem = shaftItemId ? this.actor.items.get(shaftItemId) : null;
             const shaftId = shaftItem?.system?.arrowShaft;
+            const fletchItemId = this._getSelectedBowItem(recipeId, "fletch");
+            const fletchItem = fletchItemId ? this.actor.items.get(fletchItemId) : null;
+            const fletchId = fletchItem?.system?.fletchId;
             if (!headId || !fletchId || !nockId || !shaftId) return recipe.difficulty;
             return arrows.difficulty(headId, shaftId, fletchId, nockId);
         }
@@ -716,6 +730,9 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
         if (component.grooveChoice) {
             return this._getGrooves().length > 0 ? 1 : 0;
+        }
+        if (component.fletchChoice) {
+            return this._getFletchings().length > 0 ? 1 : 0;
         }
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
@@ -818,7 +835,8 @@ export class TradeskillCombineDialog extends BaseApplication {
                 triggerChoice: "trigger",
                 limbsChoice: "limbs",
                 riserChoice: "riser",
-                grooveChoice: "groove"
+                grooveChoice: "groove",
+                fletchChoice: "fletch"
             };
             for (const [flag, kind] of Object.entries(xbowConsumeKinds)) {
                 if (c[flag] && recipeId) {
@@ -830,7 +848,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                     break;
                 }
             }
-            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice) continue;
+            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice || c.fletchChoice) continue;
             // For optionalForTypes (cams), only consume if selected type needs them - 2026-10-15
             if (c.optionalForTypes && recipeId) {
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
@@ -1228,24 +1246,25 @@ export class TradeskillCombineDialog extends BaseApplication {
             // Fletch Arrows: head + shaft + fletch + nock -> composed arrows
             if (productType === "arrow") {
                 const headComp = recipe?.components?.find(c => c.materialType === "arrowhead");
-                const fletchComp = recipe?.components?.find(c => c.materialType === "arrowfletch");
                 const nockComp = recipe?.components?.find(c => c.materialType === "arrownock");
                 const headId = headComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, headComp.id) : null;
-                const fletchId = fletchComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, fletchComp.id) : null;
                 const nockId = nockComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, nockComp.id) : null;
                 const shaftItemId = this._getSelectedBowItem(recipeId, "shaft");
-                if (!headId || !fletchId || !nockId || !shaftItemId) {
+                const fletchItemId = this._getSelectedBowItem(recipeId, "fletch");
+                if (!headId || !nockId || !shaftItemId || !fletchItemId) {
                     ui.notifications.error("Missing arrow components.");
                     return;
                 }
                 const shaftItem = this.actor.items.get(shaftItemId);
-                if (!shaftItem) {
-                    ui.notifications.error("Selected shaft not found.");
+                const fletchItem = this.actor.items.get(fletchItemId);
+                if (!shaftItem || !fletchItem) {
+                    ui.notifications.error("Selected shaft or fletching not found.");
                     return;
                 }
                 const shaftId = shaftItem.system?.arrowShaft;
-                if (!shaftId) {
-                    ui.notifications.error("Shaft is missing its type data.");
+                const fletchId = fletchItem.system?.fletchId;
+                if (!shaftId || !fletchId) {
+                    ui.notifications.error("Shaft or fletching is missing type data.");
                     return;
                 }
                 try {
@@ -1490,14 +1509,15 @@ export class TradeskillCombineDialog extends BaseApplication {
             }
             const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
             const headComp = recipe?.components?.find(c => c.materialType === "arrowhead");
-            const fletchComp = recipe?.components?.find(c => c.materialType === "arrowfletch");
             const nockComp = recipe?.components?.find(c => c.materialType === "arrownock");
             const headId = headComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, headComp.id) : null;
-            const fletchId = fletchComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, fletchComp.id) : null;
             const nockId = nockComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, nockComp.id) : null;
             const shaftItemId = this._getSelectedBowItem(recipeId, "shaft");
             const shaftItem = shaftItemId ? this.actor.items.get(shaftItemId) : null;
             const shaftId = shaftItem?.system?.arrowShaft;
+            const fletchItemId = this._getSelectedBowItem(recipeId, "fletch");
+            const fletchItem = fletchItemId ? this.actor.items.get(fletchItemId) : null;
+            const fletchId = fletchItem?.system?.fletchId;
             if (!headId || !fletchId || !nockId || !shaftId) {
                 ui.notifications.error("Missing bolt components.");
                 return;
@@ -1527,6 +1547,26 @@ export class TradeskillCombineDialog extends BaseApplication {
             } catch (e) {
                 ui.notifications.error(`Bolt compose failed: ${e.message}`);
             }
+            return;
+        }
+
+        // Fashion Fletchings (2026-10-15): creates fletching items
+        if (productType === "fletching" && recipeId) {
+            const fletchId = product.fletchId;
+            if (!fletchId) {
+                ui.notifications.error("Fletching type not specified.");
+                return;
+            }
+            await this.actor.createEmbeddedDocuments("Item", [{
+                name: product.name,
+                type: "weapon",
+                system: {
+                    fletchId: fletchId,
+                    quantity: product.qty ?? 1,
+                    description: `Crafted fletchings (${quality}).`
+                }
+            }]);
+            ui.notifications.info(`Fashioned ${product.name}.`);
             return;
         }
         

@@ -545,11 +545,10 @@
    },
    {
     "id": "arrow-fletch",
-    "name": "Fletching (select)",
+    "name": "Fletching (select from inventory)",
     "qty": 1,
     "type": "item",
-    "materialChoice": true,
-    "materialType": "arrowfletch"
+    "fletchChoice": true
    },
    {
     "id": "arrow-nock",
@@ -792,11 +791,10 @@
    },
    {
     "id": "arrow-fletch",
-    "name": "Fletching (select)",
+    "name": "Fletching (select from inventory)",
     "qty": 1,
     "type": "item",
-    "materialChoice": true,
-    "materialType": "arrowfletch"
+    "fletchChoice": true
    },
    {
     "id": "arrow-nock",
@@ -812,6 +810,93 @@
    "name": "Bolts",
    "qty": 5,
    "dynamicDifficulty": true
+  }
+ },
+ {
+  "id": "fashion-round-cut-fletchings",
+  "name": "Fashion Round Cut Fletchings",
+  "skill": "skill-fletching",
+  "difficulty": 16,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "feathers",
+    "name": "Feathers",
+    "qty": 1,
+    "type": "item"
+   },
+   {
+    "id": "fletchers-toolkit",
+    "name": "Fletcher's Toolkit",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "fletching",
+   "name": "Round Cut Fletchings",
+   "qty": 1,
+   "fletchId": "class-1-round"
+  }
+ },
+ {
+  "id": "fashion-parabolic-cut-fletchings",
+  "name": "Fashion Parabolic Cut Fletchings",
+  "skill": "skill-fletching",
+  "difficulty": 46,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "feathers",
+    "name": "Feathers",
+    "qty": 1,
+    "type": "item"
+   },
+   {
+    "id": "fletchers-toolkit",
+    "name": "Fletcher's Toolkit",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "fletching",
+   "name": "Parabolic Cut Fletchings",
+   "qty": 1,
+   "fletchId": "class-2-parabolic"
+  }
+ },
+ {
+  "id": "fashion-shield-cut-fletchings",
+  "name": "Fashion Shield Cut Fletchings",
+  "skill": "skill-fletching",
+  "difficulty": 82,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "feathers",
+    "name": "Feathers",
+    "qty": 1,
+    "type": "item"
+   },
+   {
+    "id": "fletchers-toolkit",
+    "name": "Fletcher's Toolkit",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "fletching",
+   "name": "Shield Cut Fletchings",
+   "qty": 1,
+   "fletchId": "class-3-shield"
   }
  }
 ]
