@@ -283,6 +283,8 @@ export class TradeskillCombineDialog extends BaseApplication {
                 name: item.name,
                 strandId: item.system?.strandId,
                 bowStringTier: item.system?.bowStringTier,
+                bowWood: item.system?.bowWood,
+                bowString: item.system?.bowString,
             };
         }
     }
@@ -1271,23 +1273,18 @@ export class TradeskillCombineDialog extends BaseApplication {
 
             // Fashion Bow: bowstave + bowstring + type + class -> composed bow
             if (productType === "bow") {
-                const staveId = this._getSelectedBowItem(recipeId, "bowstave");
-                const stringItemId = this._getSelectedBowItem(recipeId, "bowstring");
+                // Use cached info (stave/string are consumed before product creation)
+                const staveInfo = this._getSelectedBowItemInfo(recipeId, "bowstave");
+                const stringInfo = this._getSelectedBowItemInfo(recipeId, "bowstring");
                 const typeComp = recipe?.components?.find(c => c.materialType === "bowtype");
                 const typeId = typeComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, typeComp.id) : null;
                 const classId = product.bowClass;
-                if (!staveId || !stringItemId || !typeId || !classId) {
+                if (!staveInfo || !stringInfo || !typeId || !classId) {
                     ui.notifications.error("Missing bow components (stave, string, type, or class).");
                     return;
                 }
-                const stave = this.actor.items.get(staveId);
-                const stringItem = this.actor.items.get(stringItemId);
-                if (!stave || !stringItem) {
-                    ui.notifications.error("Selected stave or string not found.");
-                    return;
-                }
-                const woodId = stave.system?.bowWood;
-                const stringId = stringItem.system?.bowString;
+                const woodId = staveInfo.bowWood;
+                const stringId = stringInfo.bowString;
                 if (!woodId || !stringId) {
                     ui.notifications.error("Stave or string is missing its material data.");
                     return;
