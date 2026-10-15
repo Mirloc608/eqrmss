@@ -590,5 +590,74 @@
    "qty": 5,
    "dynamicDifficulty": true
   }
+ },
+ {
+  "id": "fashion-haft",
+  "name": "Fashion Wooden Haft",
+  "skill": "skill-fletching",
+  "difficulty": 20,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "haft-piece",
+    "name": "Haft Piece (select)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "haftpiece"
+   },
+   {
+    "id": "wood",
+    "name": "Wood (select material)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "wood"
+   },
+   {
+    "id": "fletchers-toolkit",
+    "name": "Fletcher's Toolkit",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "haft",
+   "name": "Wooden Haft",
+   "qty": 1,
+   "dynamicDifficulty": true
+  }
+ },
+ {
+  "id": "fashion-wood-shield",
+  "name": "Fashion Wood Shield",
+  "skill": "skill-fletching",
+  "difficulty": 30,
+  "container": "Fletching Kit",
+  "expansion": "classic",
+  "components": [
+   {
+    "id": "wood",
+    "name": "Wood (select material)",
+    "qty": 1,
+    "type": "item",
+    "materialChoice": true,
+    "materialType": "wood"
+   },
+   {
+    "id": "fletchers-toolkit",
+    "name": "Fletcher's Toolkit",
+    "qty": 1,
+    "type": "item",
+    "consume": false
+   }
+  ],
+  "product": {
+   "type": "woodshield",
+   "name": "Wood Shield",
+   "qty": 1
+  }
  }
 ]

@@ -237,7 +237,7 @@ export async function initializeDataLoaders() {
     console.log("EQRMSS | initializeDataLoaders() v4.14 | Starting");
     await loadModules();
     game.eqrmss = game.eqrmss || {};
-    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, bows:false, arrows:false, darts:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
+    game.eqrmss._loadStatus = { classes:false, abilities:false, spells:false, races:false, skills:false, songs:false, aas:false, weapons:false, bows:false, arrows:false, darts:false, hafts:false, armor:false, shields:false, itemEffects:false, accessories:false, transports:false, herbs:false, poisons:false, combatTables:false };
 
     // Parallel loader boot (2026-10-14): independent loaders run concurrently.
     // Each loader writes to its own game.eqrmss key; none read another's output.
@@ -487,6 +487,24 @@ export async function initializeDataLoaders() {
     } catch (e) {
         console.error("Dart data load failed", e);
         game.eqrmss.darts = null;
+    }
+
+    // Haft pieces (2026-10-15): wooden hafts/shafts for smiths, usable staves
+    try {
+        const haftRes = await fetch('systems/eqrmss/module/data/fletching/haft-pieces.json');
+        const haftPieces = await haftRes.json();
+        const haftById = {};
+        for (const p of haftPieces) haftById[p.id] = p;
+        game.eqrmss.hafts = {
+            list: () => haftPieces,
+            get: (id) => haftById[id] ?? null,
+            difficulty: (id) => (haftById[id]?.trivial ?? 20)
+        };
+        game.eqrmss._loadStatus.hafts = true;
+        console.log(`EQRMSS | Haft pieces ready: ${haftPieces.length} types.`);
+    } catch (e) {
+        console.error("Haft data load failed", e);
+        game.eqrmss.hafts = null;
     }
 
     // Armor (location + category + material + condition composer)

@@ -153,6 +153,32 @@ export class TradeskillCombineDialog extends BaseApplication {
         return matches;
     }
 
+    // Haft pieces from inventory (2026-10-15): filter by piece type if specified
+    _getHafts(pieceType = null) {
+        const matches = [];
+        for (const item of this.actor.items) {
+            const sys = item.system ?? {};
+            if (sys.haftPiece) {
+                if (!pieceType || sys.haftPiece === pieceType) {
+                    matches.push({ id: item.id, name: item.name, item });
+                }
+            }
+        }
+        return matches;
+    }
+
+    // Wood shields from inventory (2026-10-15)
+    _getWoodShields() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            const sys = item.system ?? {};
+            if (sys.woodShield || (String(item.name ?? "").toLowerCase().includes("wood") && String(item.name ?? "").toLowerCase().includes("shield"))) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
     _setSelectedBowItem(recipeId, kind, itemId) {
         if (!this.selectedBowItems) this.selectedBowItems = {};
         this.selectedBowItems[`${recipeId}:${kind}`] = itemId;
@@ -275,6 +301,13 @@ export class TradeskillCombineDialog extends BaseApplication {
                 if (!darts || typeof darts.list !== "function") return [];
                 return darts.list()
                     .map(m => ({ id: m.id, name: m.poison ? `${m.name} (+poison)` : m.name }));
+            }
+            if (materialType === "haftpiece") {
+                // Haft pieces (2026-10-15): wooden hafts/shafts/staves
+                const hafts = game.eqrmss?.hafts;
+                if (!hafts || typeof hafts.list !== "function") return [];
+                return hafts.list()
+                    .map(p => ({ id: p.id, name: p.usable ? `${p.name} (usable)` : p.name }));
             }
             if (materialType === "cloth" || materialType === "leather") {
                 // Armor materials for tailoring
@@ -400,6 +433,33 @@ export class TradeskillCombineDialog extends BaseApplication {
                             this._setSelectedBowItem(r.id, "shaft", items[0].id);
                         }
                     }
+                    // For haftChoice, add haft inventory dropdown filtered by piece type (2026-10-15)
+                    if (c.haftChoice) {
+                        const items = this._getHafts(c.haftChoice);
+                        const kind = `haft-${c.haftChoice}`;
+                        const selectedId = this._getSelectedBowItem(r.id, kind);
+                        base.bowItemOptions = items.map(w => ({
+                            ...w,
+                            selected: w.id === selectedId || (!selectedId && w === items[0])
+                        }));
+                        base.bowItemKind = kind;
+                        if (items.length > 0 && !selectedId) {
+                            this._setSelectedBowItem(r.id, kind, items[0].id);
+                        }
+                    }
+                    // For shieldChoice, add wood shield inventory dropdown (2026-10-15)
+                    if (c.shieldChoice) {
+                        const items = this._getWoodShields();
+                        const selectedId = this._getSelectedBowItem(r.id, "shield");
+                        base.bowItemOptions = items.map(w => ({
+                            ...w,
+                            selected: w.id === selectedId || (!selectedId && w === items[0])
+                        }));
+                        base.bowItemKind = "shield";
+                        if (items.length > 0 && !selectedId) {
+                            this._setSelectedBowItem(r.id, "shield", items[0].id);
+                        }
+                    }
                     // For bowtype materialChoice, filter by class (2026-10-15)
                     if (c.materialChoice && c.materialType === "bowtype" && c.bowClass) {
                         const bows = game.eqrmss?.bows;
@@ -462,6 +522,15 @@ export class TradeskillCombineDialog extends BaseApplication {
             if (!matId) return recipe.difficulty;
             return darts.difficulty(matId);
         }
+        // Dynamic difficulty for Fashion Haft (2026-10-15): piece trivial
+        if (recipe.id === "fashion-haft") {
+            const hafts = game.eqrmss?.hafts;
+            if (!hafts) return recipe.difficulty;
+            const pieceComp = recipe.components?.find(c => c.materialType === "haftpiece");
+            const pieceId = pieceComp ? this._getSelectedMaterial(recipeId, recipe, pieceComp.id) : null;
+            if (!pieceId) return recipe.difficulty;
+            return hafts.difficulty(pieceId);
+        }
         return recipe.difficulty;
     }
 
@@ -514,6 +583,12 @@ export class TradeskillCombineDialog extends BaseApplication {
         }
         if (component.shaftChoice) {
             return this._getArrowShafts().length > 0 ? 1 : 0;
+        }
+        if (component.haftChoice) {
+            return this._getHafts(component.haftChoice).length > 0 ? 1 : 0;
+        }
+        if (component.shieldChoice) {
+            return this._getWoodShields().length > 0 ? 1 : 0;
         }
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
@@ -604,6 +679,10 @@ export class TradeskillCombineDialog extends BaseApplication {
                     const item = this.actor.items.get(itemId);
                     if (item) await item.delete();
                 }
+                continue;
+            }
+            // For haftChoice/shieldChoice (smith augmenting), the haft/shield is transformed not consumed - 2026-10-15
+            if ((c.haftChoice || c.shieldChoice) && recipeId) {
                 continue;
             }
             // For optionalForTypes (cams), only consume if selected type needs them - 2026-10-15
@@ -1080,6 +1159,102 @@ export class TradeskillCombineDialog extends BaseApplication {
             }]);
             ui.notifications.info(`Fashioned ${product.qty ?? 5}x ${dartName}.`);
             return;
+        }
+
+        // Haft and shield products (2026-10-15)
+        if (["haft", "woodshield", "augment-javelin", "reinforce-quarterstaff", "reinforce-shield"].includes(productType) && recipeId) {
+            const hafts = game.eqrmss?.hafts;
+            const bows = game.eqrmss?.bows;
+            const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+
+            // Fashion Haft: piece + wood -> wooden haft piece
+            if (productType === "haft") {
+                const pieceComp = recipe?.components?.find(c => c.materialType === "haftpiece");
+                const woodComp = recipe?.components?.find(c => c.materialType === "wood");
+                const pieceId = pieceComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, pieceComp.id) : null;
+                const woodId = woodComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, woodComp.id) : null;
+                const piece = pieceId && hafts ? hafts.get(pieceId) : null;
+                const wood = woodId && bows ? bows.getWood(woodId) : null;
+                if (!piece || !wood) {
+                    ui.notifications.error("No piece or wood selected.");
+                    return;
+                }
+                const itemName = `${wood.name} ${piece.name}`;
+                const isWeapon = piece.usable === true;
+                await this.actor.createEmbeddedDocuments("Item", [{
+                    name: itemName,
+                    type: isWeapon ? "weapon" : "weapon",
+                    system: {
+                        haftPiece: piece.id,
+                        haftWood: wood.id,
+                        haftWoodName: wood.name,
+                        durability: wood.durability ?? 20,
+                        weaponTemplate: piece.weaponTemplate ?? null,
+                        weaponType: piece.weaponTemplate ? "melee" : null,
+                        quantity: product.qty ?? 1,
+                        description: `Crafted ${piece.name.toLowerCase()} (${quality}). ${piece.description ?? ""}`
+                    }
+                }]);
+                ui.notifications.info(`Fashioned ${itemName}.`);
+                return;
+            }
+
+            // Fashion Wood Shield
+            if (productType === "woodshield") {
+                const woodComp = recipe?.components?.find(c => c.materialType === "wood");
+                const woodId = woodComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, woodComp.id) : null;
+                const wood = woodId && bows ? bows.getWood(woodId) : null;
+                if (!wood) {
+                    ui.notifications.error("No wood selected.");
+                    return;
+                }
+                await this.actor.createEmbeddedDocuments("Item", [{
+                    name: `${wood.name} Wood Shield`,
+                    type: "armor",
+                    system: {
+                        woodShield: true,
+                        shieldWood: wood.id,
+                        shieldWoodName: wood.name,
+                        durability: wood.durability ?? 20,
+                        armorLocation: "shield",
+                        quantity: 1,
+                        description: `Crafted wood shield (${quality}). Can be reinforced by a blacksmith.`
+                    }
+                }]);
+                ui.notifications.info(`Fashioned ${wood.name} Wood Shield.`);
+                return;
+            }
+
+            // Smith augmentations: transform the haft/shield in place
+            if (["augment-javelin", "reinforce-quarterstaff", "reinforce-shield"].includes(productType)) {
+                const kind = productType === "augment-javelin" ? "haft-javelin"
+                    : productType === "reinforce-quarterstaff" ? "haft-quarterstaff" : "shield";
+                const itemId = this._getSelectedBowItem(recipeId, kind);
+                const metalComp = recipe?.components?.find(c => c.materialType === "ore");
+                const metalId = metalComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, metalComp.id) : "iron";
+                if (!itemId) {
+                    ui.notifications.error("No item selected.");
+                    return;
+                }
+                const item = this.actor.items.get(itemId);
+                if (!item) {
+                    ui.notifications.error("Selected item not found.");
+                    return;
+                }
+                const oldName = item.name;
+                const augment = productType === "augment-javelin" ? "Tipped"
+                    : productType === "reinforce-quarterstaff" ? "Reinforced" : "Reinforced";
+                const metalName = String(metalId).replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+                const newName = oldName.replace(/^(Tipped|Reinforced)\s+/i, "");
+                await item.update({
+                    name: `${augment} ${newName} (${metalName})`,
+                    "system.augmented": true,
+                    "system.augmentMetal": metalId,
+                    "system.description": `${item.system?.description ?? ""} Augmented with ${metalName} (${quality}).`
+                });
+                ui.notifications.info(`Augmented ${oldName} -> ${augment} ${newName} (${metalName}).`);
+                return;
+            }
         }
         
         // Generic item (default): consumables, etc.

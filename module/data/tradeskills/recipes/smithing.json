@@ -2184,5 +2184,95 @@
       "qty": 1,
       "shaftId": "steel"
     }
+  },
+  {
+    "id": "augment-javelin",
+    "name": "Augment Javelin (Add Tip)",
+    "skill": "skill-smithing",
+    "difficulty": 60,
+    "container": "Forge",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "javelin",
+        "name": "Javelin (select from inventory)",
+        "qty": 1,
+        "type": "item",
+        "haftChoice": "javelin"
+      },
+      {
+        "id": "metal",
+        "name": "Metal (select material)",
+        "qty": 1,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "ore"
+      }
+    ],
+    "product": {
+      "type": "augment-javelin",
+      "name": "Tipped Javelin",
+      "qty": 1
+    }
+  },
+  {
+    "id": "reinforce-quarterstaff",
+    "name": "Reinforce Quarterstaff",
+    "skill": "skill-smithing",
+    "difficulty": 60,
+    "container": "Forge",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "quarterstaff",
+        "name": "Quarterstaff (select from inventory)",
+        "qty": 1,
+        "type": "item",
+        "haftChoice": "quarterstaff"
+      },
+      {
+        "id": "metal",
+        "name": "Metal (select material)",
+        "qty": 1,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "ore"
+      }
+    ],
+    "product": {
+      "type": "reinforce-quarterstaff",
+      "name": "Reinforced Quarterstaff",
+      "qty": 1
+    }
+  },
+  {
+    "id": "reinforce-wood-shield",
+    "name": "Reinforce Wood Shield",
+    "skill": "skill-smithing",
+    "difficulty": 50,
+    "container": "Forge",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "wood-shield",
+        "name": "Wood Shield (select from inventory)",
+        "qty": 1,
+        "type": "item",
+        "shieldChoice": true
+      },
+      {
+        "id": "metal",
+        "name": "Metal (select material)",
+        "qty": 1,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "ore"
+      }
+    ],
+    "product": {
+      "type": "reinforce-shield",
+      "name": "Reinforced Wood Shield",
+      "qty": 1
+    }
   }
 ]
