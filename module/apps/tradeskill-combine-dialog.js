@@ -722,7 +722,9 @@ export class TradeskillCombineDialog extends BaseApplication {
             return this._getBowstrings().length > 0 ? 1 : 0;
         }
         if (component.shaftChoice) {
-            return this._getArrowShafts().length > 0 ? 1 : 0;
+            const itemId = this._getSelectedBowItem(recipeId, "shaft");
+            const item = itemId ? this.actor.items.get(itemId) : null;
+            return item ? Number(item.system?.quantity ?? 1) : 0;
         }
         if (component.haftChoice) {
             return this._getHafts(component.haftChoice).length > 0 ? 1 : 0;
@@ -746,10 +748,14 @@ export class TradeskillCombineDialog extends BaseApplication {
             return this._getGrooves().length > 0 ? 1 : 0;
         }
         if (component.fletchChoice) {
-            return this._getFletchings().length > 0 ? 1 : 0;
+            const itemId = this._getSelectedBowItem(recipeId, "fletch");
+            const item = itemId ? this.actor.items.get(itemId) : null;
+            return item ? Number(item.system?.quantity ?? 1) : 0;
         }
         if (component.headChoice) {
-            return this._getArrowHeads().length > 0 ? 1 : 0;
+            const itemId = this._getSelectedBowItem(recipeId, "head");
+            const item = itemId ? this.actor.items.get(itemId) : null;
+            return item ? Number(item.system?.quantity ?? 1) : 0;
         }
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
@@ -847,6 +853,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                 continue;
             }
             // Crossbow components are consumed in assembly - 2026-10-15
+            // Fletch components use qty from recipe (20 for arrows/bolts) - 2026-10-15
             const xbowConsumeKinds = {
                 stockChoice: "stock",
                 triggerChoice: "trigger",
@@ -854,19 +861,28 @@ export class TradeskillCombineDialog extends BaseApplication {
                 riserChoice: "riser",
                 grooveChoice: "groove",
                 fletchChoice: "fletch",
-                headChoice: "head"
+                headChoice: "head",
+                shaftChoice: "shaft"
             };
             for (const [flag, kind] of Object.entries(xbowConsumeKinds)) {
                 if (c[flag] && recipeId) {
                     const itemId = this._getSelectedBowItem(recipeId, kind);
                     if (itemId) {
                         const item = this.actor.items.get(itemId);
-                        if (item) await item.delete();
+                        if (item) {
+                            const need = c.qty ?? 1;
+                            const have = Number(item.system?.quantity ?? 1);
+                            if (have <= need) {
+                                await item.delete();
+                            } else {
+                                await item.update({ "system.quantity": have - need });
+                            }
+                        }
                     }
                     break;
                 }
             }
-            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice || c.fletchChoice || c.headChoice) continue;
+            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice || c.fletchChoice || c.headChoice || c.shaftChoice) continue;
             // For optionalForTypes (cams), only consume if selected type needs them - 2026-10-15
             if (c.optionalForTypes && recipeId) {
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
@@ -1304,11 +1320,11 @@ export class TradeskillCombineDialog extends BaseApplication {
                             arrowClass: composed.arrowClass,
                             damageBonus: composed.damageBonus,
                             rangeMod: composed.rangeMod,
-                            quantity: composed.quantity,
+                            quantity: 20,
                             description: composed.description
                         }
                     }]);
-                    ui.notifications.info(`Fletched ${composed.quantity}x ${composed.name}.`);
+                    ui.notifications.info(`Fletched 20x ${composed.name}.`);
                 } catch (e) {
                     ui.notifications.error(`Arrow compose failed: ${e.message}`);
                 }
@@ -1599,11 +1615,11 @@ export class TradeskillCombineDialog extends BaseApplication {
                         arrowClass: composed.arrowClass,
                         damageBonus: composed.damageBonus,
                         rangeMod: composed.rangeMod,
-                        quantity: composed.quantity,
+                        quantity: 20,
                         description: composed.description.replace(/arrows/g, "bolts")
                     }
                 }]);
-                ui.notifications.info(`Fletched ${composed.quantity}x ${boltName}.`);
+                ui.notifications.info(`Fletched 20x ${boltName}.`);
             } catch (e) {
                 ui.notifications.error(`Bolt compose failed: ${e.message}`);
             }
