@@ -259,6 +259,17 @@ export class TradeskillCombineDialog extends BaseApplication {
         return matches;
     }
 
+    // Get bowstring strands from inventory (2026-10-15)
+    _getStrands() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            if (item.system?.strandId) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
     _setSelectedBowItem(recipeId, kind, itemId) {
         if (!this.selectedBowItems) this.selectedBowItems = {};
         this.selectedBowItems[`${recipeId}:${kind}`] = itemId;
@@ -396,13 +407,35 @@ export class TradeskillCombineDialog extends BaseApplication {
                 return xbows.list()
                     .map(t => ({ id: t.id, name: t.name }));
             }
-            if (materialType === "cloth" || materialType === "leather") {
+            if (materialType === "effusion") {
+                // Deity effusions for Glorious bowstring (2026-10-15)
+                return [
+                    { id: "effusion-bertoxxulous", name: "Effusion of Bertoxxulous" },
+                    { id: "effusion-brell", name: "Effusion of Brell Serilis" },
+                    { id: "effusion-bristlebane", name: "Effusion of Bristlebane" },
+                    { id: "effusion-cazic", name: "Effusion of Cazic-Thule" },
+                    { id: "effusion-erollisi", name: "Effusion of Erollisi Marr" },
+                    { id: "effusion-innorruk", name: "Effusion of Innorruk" },
+                    { id: "effusion-karana", name: "Effusion of Karana" },
+                    { id: "effusion-mithaniel", name: "Effusion of Mithaniel Marr" },
+                    { id: "effusion-prexus", name: "Effusion of Prexus" },
+                    { id: "effusion-quellious", name: "Effusion of Quellious" },
+                    { id: "effusion-rallos", name: "Effusion of Rallos Zek" },
+                    { id: "effusion-rodcet", name: "Effusion of Rodcet Nife" },
+                    { id: "effusion-solusek", name: "Effusion of Solusek Ro" },
+                    { id: "effusion-tribunal", name: "Effusion of The Tribunal" },
+                    { id: "effusion-tunare", name: "Effusion of Tunare" },
+                ];
+            }
+            if (materialType === "cloth" || materialType === "leather" || materialType === "pelt") {
                 // Armor materials for tailoring
                 const armor = game.eqrmss?.armor;
                 if (!armor || typeof armor.options !== "function") return [];
                 const materials = armor.options()?.materials ?? [];
                 const keywords = materialType === "cloth"
                     ? ["cloth", "silk"]
+                    : materialType === "pelt"
+                    ? ["pelt", "hide"]
                     : ["leather", "hide", "rawhide"];
                 return materials
                     .filter(m => {
@@ -560,7 +593,8 @@ export class TradeskillCombineDialog extends BaseApplication {
                         riserChoice: ["riser", "_getRisers"],
                         grooveChoice: ["groove", "_getGrooves"],
                         fletchChoice: ["fletch", "_getFletchings"],
-                        headChoice: ["head", "_getArrowHeads"]
+                        headChoice: ["head", "_getArrowHeads"],
+                        strandChoice: ["strand", "_getStrands"]
                     };
                     for (const [flag, [kind, getter]] of Object.entries(xbowKinds)) {
                         if (c[flag]) {
@@ -574,6 +608,24 @@ export class TradeskillCombineDialog extends BaseApplication {
                             if (items.length > 0 && !selectedId) {
                                 this._setSelectedBowItem(r.id, kind, items[0].id);
                             }
+                        }
+                    }
+                    // Bowstring choice for enhancements (2026-10-15): filter by minTier
+                    if (c.bowstringChoice) {
+                        const minTier = c.minTier ?? 1;
+                        const allStrings = this._getBowstrings();
+                        const items = allStrings.filter(s => {
+                            const tier = Number(s.item?.system?.bowStringTier ?? 1);
+                            return tier >= minTier;
+                        });
+                        const selectedId = this._getSelectedBowItem(r.id, "bowstring-enhance");
+                        base.bowItemOptions = items.map(w => ({
+                            ...w,
+                            selected: w.id === selectedId || (!selectedId && w === items[0])
+                        }));
+                        base.bowItemKind = "bowstring-enhance";
+                        if (items.length > 0 && !selectedId) {
+                            this._setSelectedBowItem(r.id, "bowstring-enhance", items[0].id);
                         }
                     }
                     // For bowtype materialChoice, filter by class (2026-10-15)
@@ -762,6 +814,16 @@ export class TradeskillCombineDialog extends BaseApplication {
             const item = itemId ? this.actor.items.get(itemId) : null;
             return item ? Number(item.system?.quantity ?? 1) : 0;
         }
+        if (component.strandChoice) {
+            const itemId = this._getSelectedBowItem(recipeId, "strand");
+            const item = itemId ? this.actor.items.get(itemId) : null;
+            return item ? Number(item.system?.quantity ?? 1) : 0;
+        }
+        if (component.bowstringChoice) {
+            const itemId = this._getSelectedBowItem(recipeId, "bowstring-enhance");
+            const item = itemId ? this.actor.items.get(itemId) : null;
+            return item ? 1 : 0;
+        }
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
             const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
@@ -867,7 +929,9 @@ export class TradeskillCombineDialog extends BaseApplication {
                 grooveChoice: "groove",
                 fletchChoice: "fletch",
                 headChoice: "head",
-                shaftChoice: "shaft"
+                shaftChoice: "shaft",
+                strandChoice: "strand",
+                bowstringChoice: "bowstring-enhance"
             };
             for (const [flag, kind] of Object.entries(xbowConsumeKinds)) {
                 if (c[flag] && recipeId) {
@@ -887,7 +951,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                     break;
                 }
             }
-            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice || c.fletchChoice || c.headChoice || c.shaftChoice) continue;
+            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice || c.fletchChoice || c.headChoice || c.shaftChoice || c.strandChoice || c.bowstringChoice) continue;
             // For optionalForTypes (cams), only consume if selected type needs them - 2026-10-15
             if (c.optionalForTypes && recipeId) {
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
@@ -1129,25 +1193,39 @@ export class TradeskillCombineDialog extends BaseApplication {
 
             // Fashion Bowstring: string dropdown -> "{String} Bowstring"
             if (productType === "bowstring") {
-                const strComp = recipe?.components?.find(c => c.materialType === "bowstring");
-                const stringId = strComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, strComp.id) : null;
-                const str = stringId ? bows.getBowstring(stringId) : null;
-                if (!str) {
-                    ui.notifications.error("No string selected.");
+                const strandId = this._getSelectedBowItem(recipeId, "strand");
+                if (!strandId) {
+                    ui.notifications.error("No strands selected.");
                     return;
                 }
+                const strand = this.actor.items.get(strandId);
+                if (!strand) {
+                    ui.notifications.error("Selected strands not found.");
+                    return;
+                }
+                const strandTypeId = strand.system?.strandId ?? "unknown";
+                const strandName = strand.name.replace(" Strands", "");
+                // Determine tier from strand type (metal tiers or default)
+                const metals = game.eqrmss?.metals;
+                let tier = 1;
+                // Map strand IDs to tiers
+                const strandTiers = {
+                    "light-mithril": 3, "light-steel": 2, "shimmering-steel": 2,
+                    "air-arachnid-silk": 3, "hemp": 1, "linen": 1, "silk": 2, "sinew": 2, "vegrog-fiber": 2
+                };
+                tier = strandTiers[strandTypeId] ?? 1;
                 await this.actor.createEmbeddedDocuments("Item", [{
-                    name: `${str.name} Bowstring`,
+                    name: `${strandName} Bowstring`,
                     type: "weapon",
                     system: {
-                        bowString: str.id,
-                        bowStringName: str.name,
-                        bowStringTier: str.tier,
-                        quantity: product.qty ?? 1,
+                        bowString: strandTypeId,
+                        bowStringName: strandName,
+                        bowStringTier: tier,
+                        quantity: 1,
                         description: `Crafted bowstring (${quality}).`
                     }
                 }]);
-                ui.notifications.info(`Fashioned ${str.name} Bowstring.`);
+                ui.notifications.info(`Fashioned ${strandName} Bowstring (T${tier}).`);
                 return;
             }
 
@@ -1651,6 +1729,81 @@ export class TradeskillCombineDialog extends BaseApplication {
                 }
             }]);
             ui.notifications.info(`Fashioned ${qty}x ${product.name}.`);
+            return;
+        }
+
+        // Bowstring strands (2026-10-15): 20 strands, component yield
+        if (productType === "bowstring-strand" && recipeId) {
+            const strandId = product.strandId;
+            if (!strandId) {
+                ui.notifications.error("Strand type not specified.");
+                return;
+            }
+            const qty = quality === "pristine" ? 40 : quality === "tarnished" ? 10 : 20;
+            if (qty === 0) return;
+            await this.actor.createEmbeddedDocuments("Item", [{
+                name: product.name,
+                type: "weapon",
+                system: {
+                    strandId: strandId,
+                    quantity: qty,
+                    description: `Crafted bowstring strands (${quality}).`
+                }
+            }]);
+            ui.notifications.info(`Fashioned ${qty}x ${product.name}.`);
+            return;
+        }
+
+        // Leather strips (2026-10-15): 40 strips, component yield
+        if (productType === "leather-strips" && recipeId) {
+            const qty = quality === "pristine" ? 80 : quality === "tarnished" ? 20 : 40;
+            if (qty === 0) return;
+            await this.actor.createEmbeddedDocuments("Item", [{
+                name: product.name,
+                type: "weapon",
+                system: {
+                    leatherStrips: true,
+                    quantity: qty,
+                    description: `Crafted leather strips (${quality}).`
+                }
+            }]);
+            ui.notifications.info(`Fashioned ${qty}x ${product.name}.`);
+            return;
+        }
+
+        // Enhanced bowstrings (2026-10-15): fletcher quality add-ons
+        if (productType === "enhanced-bowstring" && recipeId) {
+            const stringId = this._getSelectedBowItem(recipeId, "bowstring-enhance");
+            if (!stringId) {
+                ui.notifications.error("No bowstring selected.");
+                return;
+            }
+            const oldString = this.actor.items.get(stringId);
+            if (!oldString) {
+                ui.notifications.error("Selected bowstring not found.");
+                return;
+            }
+            const baseName = oldString.system?.bowStringName ?? "Bowstring";
+            const tier = oldString.system?.bowStringTier ?? 1;
+            const enhancement = product.enhancement;
+            const deityOnly = product.deityOnly ? " (Deity Only)" : "";
+            const newName = `${product.name} (${baseName})${deityOnly}`;
+            await this.actor.createEmbeddedDocuments("Item", [{
+                name: newName,
+                type: "weapon",
+                system: {
+                    bowString: oldString.system?.bowString,
+                    bowStringName: `${product.name} ${baseName}`,
+                    bowStringTier: tier,
+                    bowStringEnhancement: enhancement,
+                    deityOnly: product.deityOnly ?? False,
+                    quantity: 1,
+                    description: `Enhanced bowstring (${quality}). ${enhancement} quality.`
+                }
+            }]);
+            // Consume the old bowstring
+            await oldString.delete();
+            ui.notifications.info(`Enhanced to ${newName}.`);
             return;
         }
 

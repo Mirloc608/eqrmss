@@ -906,12 +906,11 @@
     "expansion": "classic",
     "components": [
       {
-        "id": "bowstring-material",
-        "name": "String (select material)",
-        "qty": 1,
+        "id": "strand",
+        "name": "Strands (select from inventory)",
+        "qty": 20,
         "type": "item",
-        "materialChoice": true,
-        "materialType": "bowstring"
+        "strandChoice": true
       },
       {
         "id": "clump-of-wax",
@@ -925,5 +924,167 @@
       "name": "Bowstring",
       "qty": 1
     }
+  },
+  {
+    "id": "fashion-air-arachnid-silk-strands",
+    "name": "Fashion Air Arachnid Silk Strands",
+    "skill": "skill-tailoring",
+    "difficulty": 60,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "air-arachnid-silk",
+        "name": "Air Arachnid Silk",
+        "qty": 10,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "bowstring-strand",
+      "name": "Air Arachnid Silk Strands",
+      "qty": 20,
+      "strandId": "air-arachnid-silk"
+    },
+    "componentYield": true
+  },
+  {
+    "id": "fashion-hemp-strands",
+    "name": "Fashion Hemp Strands",
+    "skill": "skill-tailoring",
+    "difficulty": 40,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "hemp",
+        "name": "Hemp",
+        "qty": 10,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "bowstring-strand",
+      "name": "Hemp Strands",
+      "qty": 20,
+      "strandId": "hemp"
+    },
+    "componentYield": true
+  },
+  {
+    "id": "fashion-linen-strands",
+    "name": "Fashion Linen Strands",
+    "skill": "skill-tailoring",
+    "difficulty": 50,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "linen",
+        "name": "Linen",
+        "qty": 10,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "bowstring-strand",
+      "name": "Linen Strands",
+      "qty": 20,
+      "strandId": "linen"
+    },
+    "componentYield": true
+  },
+  {
+    "id": "fashion-silk-strands",
+    "name": "Fashion Silk Strands",
+    "skill": "skill-tailoring",
+    "difficulty": 70,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "silk",
+        "name": "Silk",
+        "qty": 10,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "bowstring-strand",
+      "name": "Silk Strands",
+      "qty": 20,
+      "strandId": "silk"
+    },
+    "componentYield": true
+  },
+  {
+    "id": "fashion-sinew-strands",
+    "name": "Fashion Sinew Strands",
+    "skill": "skill-tailoring",
+    "difficulty": 55,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sinew",
+        "name": "Sinew",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "bowstring-strand",
+      "name": "Sinew Strands",
+      "qty": 20,
+      "strandId": "sinew"
+    },
+    "componentYield": true
+  },
+  {
+    "id": "fashion-vegrog-fiber-strands",
+    "name": "Fashion Vegrog Fiber Strands",
+    "skill": "skill-tailoring",
+    "difficulty": 65,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "vegrog-fiber",
+        "name": "Vegrog Fiber",
+        "qty": 5,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "bowstring-strand",
+      "name": "Vegrog Fiber Strands",
+      "qty": 20,
+      "strandId": "vegrog-fiber"
+    },
+    "componentYield": true
+  },
+  {
+    "id": "fashion-leather-strips",
+    "name": "Fashion Leather Strips",
+    "skill": "skill-tailoring",
+    "difficulty": 30,
+    "container": "Sewing Kit",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "pelt",
+        "name": "Pelt (any)",
+        "qty": 1,
+        "type": "item",
+        "materialChoice": true,
+        "materialType": "pelt"
+      }
+    ],
+    "product": {
+      "type": "leather-strips",
+      "name": "Leather Strips",
+      "qty": 40
+    },
+    "componentYield": true
   }
 ]
