@@ -1291,16 +1291,17 @@ export class TradeskillCombineDialog extends BaseApplication {
                 }
                 try {
                     const composed = bows.compose(woodId, stringId, typeId, classId, quality);
+                    const dur = composed.durability ?? 20;
                     await this.actor.createEmbeddedDocuments("Item", [{
                         name: composed.name,
-                        type: "item",
+                        type: "weapon",
                         system: {
                             weaponType: "missile",
                             bowWood: composed.woodId,
                             bowString: composed.stringId,
                             bowType: composed.typeId,
                             bowClass: composed.classId,
-                            durability: composed.durability,
+                            durability: { current: dur, maximum: dur },
                             range: composed.range,
                             obMod: composed.obMod,
                             quantity: product.qty ?? 1,
