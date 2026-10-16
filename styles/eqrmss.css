@@ -1834,3 +1834,132 @@ button.rank-badge:hover {
   text-align: center;
   padding: 40px 20px;
 }
+
+/* ============================================================
+   XP Scoreboard Dialog — parchment theme (Table 15.4.2)
+   ============================================================ */
+.xp-scoreboard {
+  color: #3a2a18;
+  padding: 4px 2px;
+}
+.xp-scoreboard h2 {
+  color: #3a2a18;
+  border-bottom: 2px solid #5f4a2f;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+}
+.xp-scoreboard .xp-sub {
+  color: #6a5a40;
+  font-style: italic;
+  margin-top: 0;
+}
+.xp-scoreboard .xp-nogm {
+  color: #6a5a40;
+  font-style: italic;
+  text-align: center;
+  padding: 40px 20px;
+}
+.xp-scoreboard .xp-section {
+  border: 1px solid #5f4a2f;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin: 10px 0;
+  background: rgba(255, 250, 235, 0.5);
+}
+.xp-scoreboard .xp-section legend {
+  color: #3a2a18;
+  font-weight: bold;
+  padding: 0 6px;
+}
+.xp-scoreboard .xp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 6px 12px;
+}
+.xp-scoreboard .xp-grid label,
+.xp-scoreboard .form-group label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  gap: 2px;
+}
+.xp-scoreboard .xp-grid label:has(input[type="checkbox"]) {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+.xp-scoreboard input[type="number"],
+.xp-scoreboard input[type="text"],
+.xp-scoreboard select {
+  background: rgba(255, 250, 235, 0.8);
+  border: 1px solid #5f4a2f;
+  border-radius: 4px;
+  color: #3a2a18;
+  padding: 3px 8px;
+  font-size: 13px;
+}
+.xp-scoreboard .xp-crit-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px dashed #b09a70;
+}
+.xp-scoreboard .xp-crit-row label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+.xp-scoreboard .xp-crit-row input[type="number"] {
+  width: 60px;
+}
+.xp-scoreboard .xp-hint {
+  color: #6a5a40;
+  font-style: italic;
+  font-size: 13px;
+}
+.xp-scoreboard .xp-actions {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+}
+.xp-scoreboard .xp-calc-btn,
+.xp-scoreboard .xp-award-btn,
+.xp-scoreboard .xp-small-btn {
+  background: #e8dcc0;
+  border: 1px solid #5f4a2f;
+  border-radius: 4px;
+  color: #3a2a18;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.xp-scoreboard .xp-calc-btn:hover,
+.xp-scoreboard .xp-award-btn:hover,
+.xp-scoreboard .xp-small-btn:hover {
+  background: #dccda8;
+}
+.xp-scoreboard .xp-small-btn {
+  padding: 2px 8px;
+  font-size: 12px;
+}
+.xp-scoreboard .xp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.xp-scoreboard .xp-table th,
+.xp-scoreboard .xp-table td {
+  border: 1px solid #b09a70;
+  padding: 4px 8px;
+  text-align: left;
+}
+.xp-scoreboard .xp-table th {
+  background: rgba(95, 74, 47, 0.15);
+}
+.xp-scoreboard .xp-results h3 {
+  color: #3a2a18;
+  margin-bottom: 6px;
+}

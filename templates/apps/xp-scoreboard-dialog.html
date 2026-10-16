@@ -1,0 +1,136 @@
+<section class="xp-scoreboard">
+    {{#if notGM}}
+    <p class="xp-nogm"><i class="fas fa-lock"></i> Only the GM can use the XP Scoreboard.</p>
+    {{else}}
+    <div class="xp-head">
+        <h2>{{actorName}}</h2>
+        <p class="xp-sub">Experience Guideline Table 15.4.2 — enter the session's events, calculate, then award.</p>
+    </div>
+
+    <div class="form-group">
+        <label>Event novelty (kill / hit / crit values)</label>
+        <select data-xp-field="novelty">
+            {{#each multiplierLabels as |label key|}}
+            <option value="{{key}}" {{#if (eq ../form.novelty key)}}selected{{/if}}>{{label}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <fieldset class="xp-section">
+        <legend>1) Kill Points — hits + 20×level + racial bonus</legend>
+        <div class="xp-grid">
+            <label>Foe hits <input type="number" min="0" data-xp-field="killHits" value="{{form.killHits}}"></label>
+            <label>Foe level <input type="number" min="0" data-xp-field="killLevel" value="{{form.killLevel}}"></label>
+            <label>Race bonus
+                <select data-xp-field="killRace">
+                    <option value="">— none —</option>
+                    {{#each raceBonuses as |bonus key|}}
+                    <option value="{{key}}" {{#if (eq ../form.killRace key)}}selected{{/if}}>{{key}} (+{{bonus}})</option>
+                    {{/each}}
+                    <option value="demon" {{#if (eq form.killRace "demon")}}selected{{/if}}>demon (type²×50)</option>
+                    <option value="custom" {{#if (eq form.killRace "custom")}}selected{{/if}}>custom…</option>
+                </select>
+            </label>
+            <label>Demon type <input type="number" min="0" data-xp-field="killDemonType" value="{{form.killDemonType}}"></label>
+            <label>Custom bonus <input type="number" min="0" data-xp-field="killRaceBonus" value="{{form.killRaceBonus}}"></label>
+        </div>
+    </fieldset>
+
+    <fieldset class="xp-section">
+        <legend>2) Hit Points — 1 XP per hit delivered / received</legend>
+        <div class="xp-grid">
+            <label>Delivered <input type="number" min="0" data-xp-field="hitsDelivered" value="{{form.hitsDelivered}}"></label>
+            <label>Received <input type="number" min="0" data-xp-field="hitsReceived" value="{{form.hitsReceived}}"></label>
+            <label><input type="checkbox" data-xp-field="charKnockedOut" {{#if form.charKnockedOut}}checked{{/if}}> Char knocked out (×½)</label>
+            <label><input type="checkbox" data-xp-field="foeKnockedOut" {{#if form.foeKnockedOut}}checked{{/if}}> Foe knocked out (×2)</label>
+        </div>
+    </fieldset>
+
+    <fieldset class="xp-section">
+        <legend>3) Critical Points <button type="button" data-action="add-crit" class="xp-small-btn"><i class="fas fa-plus"></i> Add crit</button></legend>
+        {{#each form.crits as |crit idx|}}
+        <div class="xp-crit-row">
+            <select data-crit-field="severity" data-crit-idx="{{idx}}">
+                <option value="A" {{#if (eq crit.severity "A")}}selected{{/if}}>A</option>
+                <option value="B" {{#if (eq crit.severity "B")}}selected{{/if}}>B</option>
+                <option value="C" {{#if (eq crit.severity "C")}}selected{{/if}}>C</option>
+                <option value="D" {{#if (eq crit.severity "D")}}selected{{/if}}>D</option>
+                <option value="E" {{#if (eq crit.severity "E")}}selected{{/if}}>E</option>
+            </select>
+            <label>Lvl <input type="number" min="0" data-crit-field="foeLevel" data-crit-idx="{{idx}}" value="{{crit.foeLevel}}"></label>
+            <label><input type="checkbox" data-crit-field="large" data-crit-idx="{{idx}}" {{#if crit.large}}checked{{/if}}> Large</label>
+            <label><input type="checkbox" data-crit-field="superLarge" data-crit-idx="{{idx}}" {{#if crit.superLarge}}checked{{/if}}> S-Large</label>
+            <label><input type="checkbox" data-crit-field="foeUnconscious" data-crit-idx="{{idx}}" {{#if crit.foeUnconscious}}checked{{/if}}> Unconscious</label>
+            <label><input type="checkbox" data-crit-field="foeStunned" data-crit-idx="{{idx}}" {{#if crit.foeStunned}}checked{{/if}}> Stunned</label>
+            <label><input type="checkbox" data-crit-field="singleCombat" data-crit-idx="{{idx}}" {{#if crit.singleCombat}}checked{{/if}}> Single</label>
+            <button type="button" data-action="remove-crit" data-crit-idx="{{idx}}" class="xp-small-btn"><i class="fas fa-trash"></i></button>
+        </div>
+        {{else}}
+        <p class="xp-hint">No criticals recorded.</p>
+        {{/each}}
+    </fieldset>
+
+    <fieldset class="xp-section">
+        <legend>4–5) Maneuver &amp; Idea Points</legend>
+        <div class="xp-grid">
+            <label>Maneuver resulting XP <input type="number" min="0" data-xp-field="maneuverXp" value="{{form.maneuverXp}}"></label>
+            <label>Difficulty
+                <select data-xp-field="maneuverDifficulty">
+                    <option value="routine" {{#if (eq form.maneuverDifficulty "routine")}}selected{{/if}}>Routine / medium (×½)</option>
+                    <option value="hard" {{#if (eq form.maneuverDifficulty "hard")}}selected{{/if}}>Hard / very hard (×1)</option>
+                    <option value="folly" {{#if (eq form.maneuverDifficulty "folly")}}selected{{/if}}>Sheer folly (×2)</option>
+                </select>
+            </label>
+            <label>Idea group total <input type="number" min="0" data-xp-field="ideaGroupTotal" value="{{form.ideaGroupTotal}}"></label>
+            <label>Planners <input type="number" min="1" data-xp-field="ideaPlanners" value="{{form.ideaPlanners}}"></label>
+        </div>
+    </fieldset>
+
+    <fieldset class="xp-section">
+        <legend>6–7) Death &amp; Travel Points</legend>
+        <div class="xp-grid">
+            <label>Own kill value <input type="number" min="0" data-xp-field="deathKillValue" value="{{form.deathKillValue}}"></label>
+            <label><input type="checkbox" data-xp-field="deathNearDeath" {{#if form.deathNearDeath}}checked{{/if}}> Near death (×½)</label>
+            <label><input type="checkbox" data-xp-field="deathResurrected" {{#if form.deathResurrected}}checked{{/if}}> Killed + resurrected (×2)</label>
+            <label>Travel miles <input type="number" min="0" data-xp-field="travelMiles" value="{{form.travelMiles}}"></label>
+            <label><input type="checkbox" data-xp-field="travelAirSea" {{#if form.travelAirSea}}checked{{/if}}> Air / sea (1 XP per 10 mi)</label>
+            <label>Terrain
+                <select data-xp-field="travelTerrain">
+                    <option value="normal" {{#if (eq form.travelTerrain "normal")}}selected{{/if}}>Normal (×1)</option>
+                    <option value="rugged" {{#if (eq form.travelTerrain "rugged")}}selected{{/if}}>Rugged (×2)</option>
+                    <option value="extreme" {{#if (eq form.travelTerrain "extreme")}}selected{{/if}}>Extremely dangerous (×3)</option>
+                </select>
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="xp-section">
+        <legend>8–10) Spell, Religious, Miscellaneous (GM entry)</legend>
+        <div class="xp-grid">
+            <label>Power points spent <input type="number" min="0" data-xp-field="spellPower" value="{{form.spellPower}}"></label>
+            <label>Religious points <input type="number" min="0" data-xp-field="religiousPoints" value="{{form.religiousPoints}}"></label>
+            <label>Misc points <input type="number" min="0" data-xp-field="miscPoints" value="{{form.miscPoints}}"></label>
+            <label>Misc label <input type="text" data-xp-field="miscLabel" value="{{form.miscLabel}}" placeholder="e.g. solved the riddle"></label>
+        </div>
+    </fieldset>
+
+    <div class="xp-actions">
+        <button type="button" data-action="calculate" class="xp-calc-btn"><i class="fas fa-calculator"></i> Calculate</button>
+        <button type="button" data-action="award" class="xp-award-btn"><i class="fas fa-gift"></i> Award XP</button>
+    </div>
+
+    <div class="xp-results">
+        {{#if breakdown}}
+        <h3>Breakdown — Total: {{breakdown.total}} XP</h3>
+        <table class="xp-table">
+            <thead><tr><th>Category</th><th>Detail</th><th>XP</th></tr></thead>
+            <tbody>
+                {{#each breakdown.lines}}
+                <tr><td>{{label}}</td><td>{{detail}}</td><td>{{xp}}</td></tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{/if}}
+    </div>
+    {{/if}}
+</section>

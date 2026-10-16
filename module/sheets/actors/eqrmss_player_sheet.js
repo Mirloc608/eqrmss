@@ -49,7 +49,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             expandAllAAGroups: EQRMSSPlayerSheet.prototype.expandAllAAGroups,
             collapseAllAAGroups: EQRMSSPlayerSheet.prototype.collapseAllAAGroups,
             awardXP: EQRMSSPlayerSheet.prototype.awardXP,
-            addLogEntry: EQRMSSPlayerSheet.prototype.addLogEntry
+            addLogEntry: EQRMSSPlayerSheet.prototype.addLogEntry,
+            xpScoreboard: EQRMSSPlayerSheet.prototype.xpScoreboard
         }
     };
 
@@ -1107,6 +1108,21 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // Organic level-up: check thresholds and apply any earned levels.
         await checkAndApplyLevelUps(actor);
         await this.render();
+    }
+
+    async xpScoreboard(event, target) {
+        event.preventDefault();
+        if (!game?.user?.isGM) {
+            ui.notifications.warn("EQRMSS | Only the GM can use the XP Scoreboard.");
+            return;
+        }
+        try {
+            const { XPScoreboardDialog } = await import("../../apps/xp-scoreboard-dialog.js");
+            new XPScoreboardDialog(this.actor).render(true);
+        } catch (e) {
+            console.error("EQRMSS | XP Scoreboard failed", e);
+            ui.notifications.error(`XP Scoreboard failed: ${e.message}`);
+        }
     }
 
     async addLogEntry(event, target) {
