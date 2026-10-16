@@ -1963,3 +1963,145 @@ button.rank-badge:hover {
   color: #3a2a18;
   margin-bottom: 6px;
 }
+
+/* ============================================================
+   GM Screen (2026-10-16): GM-only quick-reference panel.
+   Parchment theme matching the rest of the system.
+   ============================================================ */
+#eqrmss-gm-screen-btn {
+  display: block;
+  width: calc(100% - 16px);
+  margin: 8px;
+  padding: 8px 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: #3a2a18;
+  background: linear-gradient(160deg, #efdfae 0%, #e3cc96 45%, #d3b77e 100%);
+  border: 3px double #5f4a2f;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#eqrmss-gm-screen-btn:hover {
+  background: linear-gradient(160deg, #f7ecd0 0%, #eedcae 45%, #dfc48c 100%);
+}
+#eqrmss-gm-screen-btn i { margin-right: 6px; }
+
+.eqrmss.gm-screen .gm-screen {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #3a2a18;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,250,230,.85), rgba(255,250,230,0) 60%),
+    linear-gradient(160deg, #efdfae 0%, #e3cc96 45%, #d3b77e 100%);
+  border: 3px double #5f4a2f;
+  padding: 10px 12px;
+  min-height: 100%;
+}
+.eqrmss.gm-screen .gm-screen-locked {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 15px;
+}
+.eqrmss.gm-screen .gm-screen-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #5f4a2f;
+  padding-bottom: 6px;
+  flex-wrap: wrap;
+}
+.eqrmss.gm-screen .gm-screen-tabs button {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  color: #3a2a18;
+  background: rgba(95, 74, 47, 0.12);
+  border: 1px solid #b09a70;
+  border-radius: 4px 4px 0 0;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.eqrmss.gm-screen .gm-screen-tabs button.active {
+  background: #5f4a2f;
+  color: #f7f1de;
+  font-weight: bold;
+}
+.eqrmss.gm-screen .gm-screen-tabs button i { margin-right: 5px; }
+.eqrmss.gm-screen .gm-screen-panel { display: none; }
+.eqrmss.gm-screen .gm-screen-panel.active { display: block; }
+.eqrmss.gm-screen .gm-screen-panel h3 {
+  color: #3a2a18;
+  border-bottom: 1px solid #b09a70;
+  padding-bottom: 4px;
+  margin: 14px 0 8px;
+}
+.eqrmss.gm-screen .gm-screen-panel h3:first-child { margin-top: 0; }
+.eqrmss.gm-screen .ref-note {
+  font-size: 11px;
+  font-style: italic;
+  color: #6d5a3a;
+  font-weight: normal;
+}
+.eqrmss.gm-screen .gm-screen-hint {
+  font-size: 12px;
+  font-style: italic;
+  color: #5a4a30;
+  margin: 6px 0 10px;
+}
+.eqrmss.gm-screen .gm-screen-charlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.eqrmss.gm-screen .gm-screen-charlist li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  border-bottom: 1px solid #d3b77e;
+}
+.eqrmss.gm-screen .gm-screen-charlist .char-name { font-weight: bold; }
+.eqrmss.gm-screen .gm-screen-charlist button,
+.eqrmss.gm-screen .gm-screen-panel button[data-action="open-scoreboard"] {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  color: #3a2a18;
+  background: rgba(95, 74, 47, 0.15);
+  border: 1px solid #8a6f45;
+  border-radius: 3px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.eqrmss.gm-screen .gm-screen-charlist button:hover {
+  background: rgba(95, 74, 47, 0.3);
+}
+.eqrmss.gm-screen .gm-screen-table-wrap { overflow-x: auto; }
+.eqrmss.gm-screen .gm-screen-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.eqrmss.gm-screen .gm-screen-table th,
+.eqrmss.gm-screen .gm-screen-table td {
+  border: 1px solid #b09a70;
+  padding: 3px 6px;
+  text-align: left;
+}
+.eqrmss.gm-screen .gm-screen-table th {
+  background: rgba(95, 74, 47, 0.2);
+  font-weight: bold;
+}
+.eqrmss.gm-screen .gm-screen-table td.num,
+.eqrmss.gm-screen .gm-screen-table th.num { text-align: right; }
+.eqrmss.gm-screen .gm-screen-table tr.subhead th {
+  font-size: 10px;
+  font-style: italic;
+  font-weight: normal;
+  text-align: center;
+}
+.eqrmss.gm-screen .gm-screen-table.stat-gain { font-size: 11px; }
+.eqrmss.gm-screen .gm-screen-table.stat-gain td.num { text-align: center; }
+.eqrmss.gm-screen .gm-screen-table tr.overstress td {
+  background: rgba(140, 40, 40, 0.12);
+  font-style: italic;
+}

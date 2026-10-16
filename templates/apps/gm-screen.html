@@ -1,0 +1,126 @@
+{{!-- EQRMSS GM Screen — tabbed quick-reference panel (GM only) --}}
+<div class="gm-screen">
+{{#if notGM}}
+    <div class="gm-screen-locked">
+        <i class="fas fa-lock"></i>
+        <p>The GM Screen is available to Gamemasters only.</p>
+    </div>
+{{else}}
+    <nav class="gm-screen-tabs">
+        <button type="button" data-action="select-tab" data-tab="xp" class="{{#if (eq activeTab 'xp')}}active{{/if}}">
+            <i class="fas fa-trophy"></i> XP Scoreboard
+        </button>
+        <button type="button" data-action="select-tab" data-tab="thresholds" class="{{#if (eq activeTab 'thresholds')}}active{{/if}}">
+            <i class="fas fa-list-ol"></i> XP Thresholds
+        </button>
+        <button type="button" data-action="select-tab" data-tab="statgains" class="{{#if (eq activeTab 'statgains')}}active{{/if}}">
+            <i class="fas fa-dice-d20"></i> Stat Gains
+        </button>
+        <button type="button" data-action="select-tab" data-tab="combat" class="{{#if (eq activeTab 'combat')}}active{{/if}}">
+            <i class="fas fa-swords"></i> Combat
+        </button>
+    </nav>
+
+    {{!-- Tab 1: XP Scoreboard launcher --}}
+    <section class="gm-screen-panel {{#if (eq activeTab 'xp')}}active{{/if}}" data-panel="xp">
+        <h3>XP Scoreboard <span class="ref-note">Table 15.4.2</span></h3>
+        <p class="gm-screen-hint">Pick a character to open the full XP calculator. Enter the session's kills, crits, hits, maneuvers and travel, review the book-pure breakdown, then award.</p>
+        {{#if scoreboardAvailable}}
+            {{#if characters.length}}
+            <ul class="gm-screen-charlist">
+                {{#each characters}}
+                <li>
+                    <span class="char-name">{{name}}</span>
+                    <button type="button" data-action="open-scoreboard" data-actor-id="{{id}}">
+                        <i class="fas fa-trophy"></i> Scoreboard
+                    </button>
+                </li>
+                {{/each}}
+            </ul>
+            {{else}}
+            <p class="gm-screen-hint">No player characters found.</p>
+            {{/if}}
+        {{else}}
+            <p class="gm-screen-hint"><i class="fas fa-exclamation-triangle"></i> The XP Scoreboard dialog is not installed yet.</p>
+        {{/if}}
+    </section>
+
+    {{!-- Tab 2: XP Thresholds (Table 15.4.1) --}}
+    <section class="gm-screen-panel {{#if (eq activeTab 'thresholds')}}active{{/if}}" data-panel="thresholds">
+        <h3>XP Thresholds <span class="ref-note">Table 15.4.1</span></h3>
+        <p class="gm-screen-hint">Cumulative XP required to <em>reach</em> each level. L1 starts at 10,000. +10k/lv 1–5, +20k/lv 6–10, +30k/lv 11–15, +40k/lv 16–20, +50k/lv 21+.</p>
+        <div class="gm-screen-table-wrap">
+        <table class="gm-screen-table">
+            <thead><tr><th>Level</th><th>XP Required</th><th>Level</th><th>XP Required</th></tr></thead>
+            <tbody>
+                {{#each xpThresholdPairs}}
+                <tr>
+                    <td class="num">{{left.level}}</td><td class="num">{{numberFormat left.xp}}</td>
+                    {{#if right}}
+                    <td class="num">{{right.level}}</td><td class="num">{{numberFormat right.xp}}</td>
+                    {{else}}
+                    <td></td><td></td>
+                    {{/if}}
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    {{!-- Tab 3: Stat Gains (Table 15.1.2) --}}
+    <section class="gm-screen-panel {{#if (eq activeTab 'statgains')}}active{{/if}}" data-panel="statgains">
+        <h3>Stat Gain Table <span class="ref-note">Table 15.1.2</span></h3>
+        <p class="gm-screen-hint">Roll d100 per stat on level-up. Column = potential − temp. <strong>*</strong> = overstress: temp decreases by 2× the roll (2–8), even at potential.</p>
+        <div class="gm-screen-table-wrap">
+        <table class="gm-screen-table stat-gain">
+            <thead>
+                <tr><th>Roll</th>{{#each statGainColumns}}<th>{{this}}</th>{{/each}}</tr>
+                <tr class="subhead"><th></th><th colspan="9">Difference (potential − temp)</th></tr>
+            </thead>
+            <tbody>
+                {{#each statGainRows}}
+                <tr class="{{#if overstress}}overstress{{/if}}">
+                    <td class="num">{{roll}}</td>
+                    {{#each values}}<td class="num">{{this}}</td>{{/each}}
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    {{!-- Tab 4: Combat quick-reference --}}
+    <section class="gm-screen-panel {{#if (eq activeTab 'combat')}}active{{/if}}" data-panel="combat">
+        <h3>Level Combat Bonuses <span class="ref-note">§5.2.1</span></h3>
+        <table class="gm-screen-table">
+            <thead><tr><th>Classes</th><th>OB/level</th><th>Max</th></tr></thead>
+            <tbody>
+                {{#each combatBonusRows}}
+                <tr><td>{{classes}}</td><td class="num">{{ob}}</td><td class="num">{{obCap}}</td></tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <h3>Level Spell Bonuses <span class="ref-note">§5.2.2</span></h3>
+        <table class="gm-screen-table">
+            <thead><tr><th>Classes</th><th>Bonus</th><th>Max</th></tr></thead>
+            <tbody>
+                {{#each spellBonusRows}}
+                <tr><td>{{classes}}</td><td class="num">{{bonus}}</td><td class="num">{{cap}}</td></tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <h3>Critical XP Values <span class="ref-note">Table 15.4.2</span></h3>
+        <table class="gm-screen-table">
+            <thead><tr><th>Severity</th><th>XP</th></tr></thead>
+            <tbody>
+                {{#each critXpRows}}
+                <tr><td>{{severity}}</td><td class="num">{{xp}}</td></tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </section>
+{{/if}}
+</div>

@@ -251,4 +251,47 @@ export function registerEQRMSSHooks() {
     }
   });
 
+  // ------------------------------------------------------------
+  // GM Screen (2026-10-16): GM-only button at the bottom of the
+  // sidebar opening the tabbed quick-reference panel (XP
+  // scoreboard launcher, XP thresholds, stat gains, combat ref).
+  // ------------------------------------------------------------
+  Hooks.on("renderSidebar", (app, html) => {
+    try {
+      if (!game?.user?.isGM) return;
+      const root = html instanceof HTMLElement ? html : html?.[0];
+      if (!root || root.querySelector("#eqrmss-gm-screen-btn")) return;
+      const btn = document.createElement("button");
+      btn.id = "eqrmss-gm-screen-btn";
+      btn.type = "button";
+      btn.classList.add("eqrmss-gm-screen-btn");
+      btn.innerHTML = '<i class="fas fa-book-reader"></i> GM Screen';
+      btn.title = "EQRMSS GM Screen — quick reference & XP scoreboard";
+      btn.addEventListener("click", async (ev) => {
+        ev.preventDefault();
+        try {
+          const { openGMScreen } = await import("../apps/gm-screen.js");
+          openGMScreen();
+        } catch (e) {
+          console.error("EQRMSS | GM Screen failed to open", e);
+          ui.notifications?.error("EQRMSS | GM Screen failed to open.");
+        }
+      });
+      root.appendChild(btn);
+    } catch (e) {
+      console.warn("EQRMSS | GM Screen button injection failed", e);
+    }
+  });
+
+  // Expose a programmatic opener for macros / console.
+  Hooks.once("ready", () => {
+    try {
+      game.eqrmss = game.eqrmss || {};
+      game.eqrmss.openGMScreen = async () => {
+        const { openGMScreen } = await import("../apps/gm-screen.js");
+        return openGMScreen();
+      };
+    } catch (e) { /* fail-open */ }
+  });
+
 }
