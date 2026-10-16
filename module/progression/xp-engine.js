@@ -173,8 +173,8 @@ export function levelSongBonus(actor) {
 // ----------------------------------------------------------------------------
 
 // Apply a single level-up (RMSS §5.3). Returns a summary object.
-//  A. Stat gain rolls (Table 15.1.2) — TODO: table data not yet in the
-//     system; stubbed, does not block level-up.
+//  A. Stat gain rolls (Table 15.1.2) — via rollStatGains() in
+//     ./stat-gain.js; results posted to chat and stored on the summary.
 //  B. Skill rank benefits: granted via DP below; multi-level jumps grant
 //     DP per level through the checkAndApplyLevelUps loop (book: double
 //     ranks when jumping 2+ levels without developing between).
@@ -191,8 +191,26 @@ export async function applyLevelUp(actor) {
         from: level, to: nextLevel, dp: 0, tradeskillPoints: 5, abilities: [],
         combatBonus: levelCombatBonus(actor),
         spellBonus: levelSpellBonus(actor),
-        songBonus: levelSongBonus(actor)
+        songBonus: levelSongBonus(actor),
+        statGains: []
     };
+
+    // --- A. Stat gain rolls (Table 15.1.2) ---
+    try {
+        const { rollStatGains, formatStatGainSummary } = await import("./stat-gain.js");
+        summary.statGains = await rollStatGains(actor);
+        // Post results to chat.
+        try {
+            const ChatMsg = globalThis.ChatMessage;
+            if (ChatMsg && typeof ChatMsg.create === "function") {
+                await ChatMsg.create({
+                    speaker: ChatMsg.getSpeaker({ actor }),
+                    content: `<h2>📊 ${actor.name} — Level ${nextLevel} Stat Gains</h2>` +
+                        formatStatGainSummary(summary.statGains)
+                });
+            }
+        } catch (e) { console.warn("EQRMSS | XP engine: stat gain chat failed", e); }
+    } catch (e) { console.warn("EQRMSS | XP engine: stat gain rolls failed", e); }
 
     // --- Development points (via class data) ---
     try {
