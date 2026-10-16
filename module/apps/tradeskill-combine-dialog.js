@@ -325,6 +325,20 @@ export class TradeskillCombineDialog extends BaseApplication {
         return matches;
     }
 
+    _getHides() {
+        const matches = [];
+        for (const item of this.actor.items) {
+            // Match by hide flag, or by name (hide/pelt/skin)
+            const nameLower = String(item.name ?? "").toLowerCase();
+            if (item.system?.isHide || nameLower.includes("hide") || nameLower.includes("pelt") || nameLower.includes("skin")) {
+                // Exclude skinning knives and other tools
+                if (nameLower.includes("knife")) continue;
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
     _setSelectedBowItem(recipeId, kind, itemId) {
         if (!this.selectedBowItems) this.selectedBowItems = {};
         this.selectedBowItems[`${recipeId}:${kind}`] = itemId;
@@ -675,7 +689,8 @@ export class TradeskillCombineDialog extends BaseApplication {
                         grooveChoice: ["groove", "_getGrooves"],
                         fletchChoice: ["fletch", "_getFletchings"],
                         headChoice: ["head", "_getArrowHeads"],
-                        strandChoice: ["strand", "_getStrands"]
+                        strandChoice: ["strand", "_getStrands"],
+                        hideChoice: ["hide", "_getHides"]
                     };
                     for (const [flag, [kind, getter]] of Object.entries(xbowKinds)) {
                         if (c[flag]) {
@@ -905,6 +920,11 @@ export class TradeskillCombineDialog extends BaseApplication {
             }
             return total;
         }
+        if (component.hideChoice) {
+            const itemId = this._getSelectedBowItem(recipeId, "hide");
+            const item = itemId ? this.actor.items.get(itemId) : null;
+            return item ? Number(item.system?.quantity ?? 1) : 0;
+        }
         if (component.bowstringChoice) {
             const itemId = this._getSelectedBowItem(recipeId, "bowstring-enhance");
             const item = itemId ? this.actor.items.get(itemId) : null;
@@ -1021,6 +1041,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                 headChoice: "head",
                 shaftChoice: "shaft",
                 strandChoice: "strand",
+                hideChoice: "hide",
                 bowstringChoice: "bowstring-enhance"
             };
             // Special handling for strandChoice: consume across multiple stacks
@@ -1058,7 +1079,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                     break;
                 }
             }
-            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice || c.fletchChoice || c.headChoice || c.shaftChoice || c.strandChoice || c.bowstringChoice) continue;
+            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice || c.fletchChoice || c.headChoice || c.shaftChoice || c.strandChoice || c.hideChoice || c.bowstringChoice) continue;
             // For optionalForTypes (cams), only consume if selected type needs them - 2026-10-15
             if (c.optionalForTypes && recipeId) {
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
