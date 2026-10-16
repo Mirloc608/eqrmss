@@ -3,6 +3,7 @@
 // ============================================================
 
 import { tickConditions } from "../combat/crit-conditions.js";
+import { openGMScreen } from "../apps/gm-screen.js";
 
 export function registerEQRMSSHooks() {
   console.info("EQRMSS | Registering hooks");
@@ -270,7 +271,7 @@ export function registerEQRMSSHooks() {
       btn.addEventListener("click", async (ev) => {
         ev.preventDefault();
         try {
-          const { openGMScreen } = await import("../apps/gm-screen.js");
+          console.log("EQRMSS | GM Screen button clicked");
           openGMScreen();
         } catch (e) {
           console.error("EQRMSS | GM Screen failed to open", e);
@@ -287,8 +288,7 @@ export function registerEQRMSSHooks() {
   Hooks.once("ready", () => {
     try {
       game.eqrmss = game.eqrmss || {};
-      game.eqrmss.openGMScreen = async () => {
-        const { openGMScreen } = await import("../apps/gm-screen.js");
+      game.eqrmss.openGMScreen = () => {
         return openGMScreen();
       };
     } catch (e) { /* fail-open */ }
