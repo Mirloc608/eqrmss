@@ -257,28 +257,31 @@ export function registerEQRMSSHooks() {
   // sidebar opening the tabbed quick-reference panel (XP
   // scoreboard launcher, XP thresholds, stat gains, combat ref).
   // ------------------------------------------------------------
-  Hooks.on("renderSidebar", (app, html) => {
+  // Fixed-position button (not inside the sidebar DOM — sidebar re-renders
+  // and CSS overlays were swallowing clicks).
+  Hooks.once("ready", () => {
     try {
       if (!game?.user?.isGM) return;
-      const root = html instanceof HTMLElement ? html : html?.[0];
-      if (!root || root.querySelector("#eqrmss-gm-screen-btn")) return;
+      if (document.querySelector("#eqrmss-gm-screen-btn")) return;
       const btn = document.createElement("button");
       btn.id = "eqrmss-gm-screen-btn";
       btn.type = "button";
       btn.classList.add("eqrmss-gm-screen-btn");
       btn.innerHTML = '<i class="fas fa-book-reader"></i> GM Screen';
       btn.title = "EQRMSS GM Screen — quick reference & XP scoreboard";
-      btn.addEventListener("click", async (ev) => {
+      btn.addEventListener("click", (ev) => {
         ev.preventDefault();
+        ev.stopPropagation();
+        console.log("EQRMSS | GM Screen button clicked");
         try {
-          console.log("EQRMSS | GM Screen button clicked");
           openGMScreen();
         } catch (e) {
           console.error("EQRMSS | GM Screen failed to open", e);
           ui.notifications?.error("EQRMSS | GM Screen failed to open.");
         }
       });
-      root.appendChild(btn);
+      document.body.appendChild(btn);
+      console.log("EQRMSS | GM Screen button injected");
     } catch (e) {
       console.warn("EQRMSS | GM Screen button injection failed", e);
     }
