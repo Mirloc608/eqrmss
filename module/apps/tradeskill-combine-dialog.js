@@ -1910,19 +1910,30 @@ export class TradeskillCombineDialog extends BaseApplication {
             const baseName = oldString.system?.bowStringName ?? "Bowstring";
             const tier = oldString.system?.bowStringTier ?? 1;
             const enhancement = product.enhancement;
+            // Glorious bowstrings (2026-10-16): retain the selected deity effusion
+            // identity on the crafted item so the deity is not lost.
+            let deityName = null;
+            const eRecipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
+            const effComp = eRecipe?.components?.find(c => c.materialChoice && c.materialType === "effusion");
+            if (effComp) {
+                const effId = this._getSelectedMaterial(recipeId, eRecipe, effComp.id);
+                deityName = this._getOreMaterials("effusion").find(m => m.id === effId)?.name ?? null;
+            }
+            const deitySuffix = deityName ? ` of ${deityName.replace(/^Effusion of /i, "")}` : "";
             const deityOnly = product.deityOnly ? " (Deity Only)" : "";
-            const newName = `${product.name} (${baseName})${deityOnly}`;
+            const newName = `${product.name}${deitySuffix} (${baseName})${deityOnly}`;
             await this.actor.createEmbeddedDocuments("Item", [{
                 name: newName,
                 type: "item",
                 system: {
                     bowString: oldString.system?.bowString,
-                    bowStringName: `${product.name} ${baseName}`,
+                    bowStringName: `${product.name}${deitySuffix} ${baseName}`,
                     bowStringTier: tier,
                     bowStringEnhancement: enhancement,
-                    deityOnly: product.deityOnly ?? False,
+                    bowStringDeity: deityName,
+                    deityOnly: product.deityOnly ?? false,
                     quantity: 1,
-                    description: `Enhanced bowstring (${quality}). ${enhancement} quality.`
+                    description: `Enhanced bowstring (${quality}). ${enhancement} quality.${deityName ? ` ${deityName}.` : ""}`
                 }
             }]);
             // Consume the old bowstring
