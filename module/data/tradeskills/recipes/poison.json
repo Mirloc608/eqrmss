@@ -1,9 +1,121 @@
 [
   {
+    "id": "quicksilver",
+    "name": "Quicksilver",
+    "skill": "skill-poison-making",
+    "difficulty": 15,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "cinnabar",
+        "name": "Cinnabar",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "gnomish-spirits",
+        "name": "Gnomish Spirits",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "quicksilver",
+      "name": "Quicksilver",
+      "qty": 1
+    }
+  },
+  {
+    "id": "iron-sulphide",
+    "name": "Iron Sulphide",
+    "skill": "skill-poison-making",
+    "difficulty": 15,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "brimstone",
+        "name": "Brimstone",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "small-piece-of-ore",
+        "name": "Small Piece of Ore",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "iron-sulphide",
+      "name": "Iron Sulphide",
+      "qty": 1
+    }
+  },
+  {
+    "id": "lead-peroxide",
+    "name": "Lead Peroxide",
+    "skill": "skill-poison-making",
+    "difficulty": 15,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lead-sulphide",
+        "name": "Lead Sulphide",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "tumpy-tonic",
+        "name": "Tumpy Tonic",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "lead-peroxide",
+      "name": "Lead Peroxide",
+      "qty": 1
+    }
+  },
+  {
+    "id": "white-lead",
+    "name": "White Lead",
+    "skill": "skill-poison-making",
+    "difficulty": 15,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lead-sulphide",
+        "name": "Lead Sulphide",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "limestone",
+        "name": "Limestone",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "white-lead",
+      "name": "White Lead",
+      "qty": 1
+    }
+  },
+  {
     "id": "spider-venom",
     "name": "Spider Venom",
     "skill": "skill-poison-making",
-    "difficulty": 16,
+    "difficulty": 17,
     "container": "Mortar and Pestle",
     "expansion": "classic",
     "components": [
@@ -14,15 +126,15 @@
         "type": "item"
       },
       {
-        "id": "spider-venom-sac",
-        "name": "Spider Venom Sac",
-        "qty": 2,
-        "type": "item"
-      },
-      {
         "id": "suspension",
         "name": "Suspension",
         "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "spider-venom-sac",
+        "name": "Spider Venom Sac",
+        "qty": 2,
         "type": "item"
       }
     ],
@@ -37,16 +149,10 @@
     "id": "giant-wasp-venom",
     "name": "Giant Wasp Venom",
     "skill": "skill-poison-making",
-    "difficulty": 16,
+    "difficulty": 20,
     "container": "Mortar and Pestle",
     "expansion": "classic",
     "components": [
-      {
-        "id": "giant-wasp-venom-sac",
-        "name": "Giant Wasp Venom Sac",
-        "qty": 3,
-        "type": "item"
-      },
       {
         "id": "poison-vial",
         "name": "Poison Vial",
@@ -58,12 +164,92 @@
         "name": "Suspension",
         "qty": 1,
         "type": "item"
+      },
+      {
+        "id": "giant-wasp-venom-sac",
+        "name": "Giant Wasp Venom Sac",
+        "qty": 3,
+        "type": "item"
       }
     ],
     "product": {
       "type": "item",
       "template": "giant-wasp-venom",
       "name": "Giant Wasp Venom",
+      "qty": 1
+    }
+  },
+  {
+    "id": "snake-venom",
+    "name": "Snake Venom",
+    "skill": "skill-poison-making",
+    "difficulty": 20,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "poison-vial",
+        "name": "Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "snake-venom-sac",
+        "name": "Snake Venom Sac",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "snake-venom",
+      "name": "Snake Venom",
+      "qty": 1
+    }
+  },
+  {
+    "id": "regalis-poison",
+    "name": "Regalis Poison",
+    "skill": "skill-poison-making",
+    "difficulty": 21,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "poison-vial",
+        "name": "Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "urticating-hairs",
+        "name": "Urticating Hairs",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "froglok-poison-gland",
+        "name": "Froglok Poison Gland",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "regalis-poison",
+      "name": "Regalis Poison",
       "qty": 1
     }
   },
@@ -76,12 +262,6 @@
     "expansion": "classic",
     "components": [
       {
-        "id": "asp-poison-sac",
-        "name": "Asp Poison Sac",
-        "qty": 2,
-        "type": "item"
-      },
-      {
         "id": "poison-vial",
         "name": "Poison Vial",
         "qty": 1,
@@ -91,6 +271,12 @@
         "id": "suspension",
         "name": "Suspension",
         "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "asp-poison-sac",
+        "name": "Asp Poison Sac",
+        "qty": 2,
         "type": "item"
       }
     ],
@@ -102,19 +288,13 @@
     }
   },
   {
-    "id": "basilisk-poison",
-    "name": "Basilisk Poison",
+    "id": "retinal-deactivator",
+    "name": "Retinal Deactivator",
     "skill": "skill-poison-making",
-    "difficulty": 32,
+    "difficulty": 24,
     "container": "Mortar and Pestle",
     "expansion": "classic",
     "components": [
-      {
-        "id": "basilisk-eye-stalk",
-        "name": "Basilisk Eye Stalk",
-        "qty": 2,
-        "type": "item"
-      },
       {
         "id": "lined-poison-vial",
         "name": "Lined Poison Vial",
@@ -126,12 +306,24 @@
         "name": "Suspension",
         "qty": 1,
         "type": "item"
+      },
+      {
+        "id": "coyotetail",
+        "name": "Coyotetail",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "asp-poison-sac",
+        "name": "Asp Poison Sac",
+        "qty": 1,
+        "type": "item"
       }
     ],
     "product": {
       "type": "item",
-      "template": "basilisk-poison",
-      "name": "Basilisk Poison",
+      "template": "retinal-deactivator",
+      "name": "Retinal Deactivator",
       "qty": 1
     }
   },
@@ -144,6 +336,12 @@
     "expansion": "classic",
     "components": [
       {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
         "id": "constrict-suspension",
         "name": "Constrict Suspension",
         "qty": 1,
@@ -152,12 +350,6 @@
       {
         "id": "delphinium",
         "name": "Delphinium",
-        "qty": 1,
-        "type": "item"
-      },
-      {
-        "id": "lined-poison-vial",
-        "name": "Lined Poison Vial",
         "qty": 1,
         "type": "item"
       },
@@ -176,6 +368,40 @@
     }
   },
   {
+    "id": "basilisk-poison",
+    "name": "Basilisk Poison",
+    "skill": "skill-poison-making",
+    "difficulty": 32,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "basilisk-eye-stalk",
+        "name": "Basilisk Eye Stalk",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "basilisk-poison",
+      "name": "Basilisk Poison",
+      "qty": 1
+    }
+  },
+  {
     "id": "solvent-gangrene",
     "name": "Solvent Gangrene",
     "skill": "skill-poison-making",
@@ -183,12 +409,6 @@
     "container": "Mortar and Pestle",
     "expansion": "classic",
     "components": [
-      {
-        "id": "grave-mold",
-        "name": "Grave Mold",
-        "qty": 2,
-        "type": "item"
-      },
       {
         "id": "poison-vial",
         "name": "Poison Vial",
@@ -200,12 +420,52 @@
         "name": "Suspension",
         "qty": 1,
         "type": "item"
+      },
+      {
+        "id": "grave-mold",
+        "name": "Grave Mold",
+        "qty": 2,
+        "type": "item"
       }
     ],
     "product": {
       "type": "item",
       "template": "solvent-gangrene",
       "name": "Solvent Gangrene",
+      "qty": 1
+    }
+  },
+  {
+    "id": "crystal-eritus",
+    "name": "Crystal Eritus",
+    "skill": "skill-poison-making",
+    "difficulty": 42,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "crystallized-marrow",
+        "name": "Crystallized Marrow",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "crystal-eritus",
+      "name": "Crystal Eritus",
       "qty": 1
     }
   },
@@ -218,26 +478,26 @@
     "expansion": "classic",
     "components": [
       {
-        "id": "cyclamine-corm",
-        "name": "Cyclamine Corm",
-        "qty": 2,
-        "type": "item"
-      },
-      {
         "id": "lined-poison-vial",
         "name": "Lined Poison Vial",
         "qty": 1,
         "type": "item"
       },
       {
-        "id": "snake-venom-sac",
-        "name": "Snake Venom Sac",
+        "id": "suspension",
+        "name": "Suspension",
         "qty": 1,
         "type": "item"
       },
       {
-        "id": "suspension",
-        "name": "Suspension",
+        "id": "cyclamine-corm",
+        "name": "Cyclamine Corm",
+        "qty": 2,
+        "type": "item"
+      },
+      {
+        "id": "snake-venom-sac",
+        "name": "Snake Venom Sac",
         "qty": 1,
         "type": "item"
       }
@@ -264,15 +524,15 @@
         "type": "item"
       },
       {
-        "id": "putrid-bile",
-        "name": "Putrid Bile",
-        "qty": 2,
-        "type": "item"
-      },
-      {
         "id": "suspension",
         "name": "Suspension",
         "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "putrid-bile",
+        "name": "Putrid Bile",
+        "qty": 2,
         "type": "item"
       }
     ],
@@ -292,12 +552,6 @@
     "expansion": "classic",
     "components": [
       {
-        "id": "giant-wasp-venom-sac",
-        "name": "Giant Wasp Venom Sac",
-        "qty": 1,
-        "type": "item"
-      },
-      {
         "id": "poison-vial",
         "name": "Poison Vial",
         "qty": 1,
@@ -314,12 +568,172 @@
         "name": "Vampire Bat Saliva",
         "qty": 2,
         "type": "item"
+      },
+      {
+        "id": "giant-wasp-venom-sac",
+        "name": "Giant Wasp Venom Sac",
+        "qty": 1,
+        "type": "item"
       }
     ],
     "product": {
       "type": "item",
       "template": "delusional-swiftness",
       "name": "Delusional Swiftness",
+      "qty": 1
+    }
+  },
+  {
+    "id": "sweet-lathyris",
+    "name": "Sweet Lathyris",
+    "skill": "skill-poison-making",
+    "difficulty": 66,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ichor",
+        "name": "Ichor",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "giant-wasp-venom-sac",
+        "name": "Giant Wasp Venom Sac",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "sweet-lathyris",
+      "name": "Sweet Lathyris",
+      "qty": 1
+    }
+  },
+  {
+    "id": "rancid-wolfkiller",
+    "name": "Rancid Wolfkiller",
+    "skill": "skill-poison-making",
+    "difficulty": 76,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "dogbane",
+        "name": "Dogbane",
+        "qty": 2,
+        "type": "item"
+      },
+      {
+        "id": "chunk-of-meat",
+        "name": "Chunk of Meat",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "rancid-wolfkiller",
+      "name": "Rancid Wolfkiller",
+      "qty": 1
+    }
+  },
+  {
+    "id": "anti-element",
+    "name": "Anti-Element",
+    "skill": "skill-poison-making",
+    "difficulty": 76,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ground-garlic",
+        "name": "Ground Garlic",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "red-hellebore",
+        "name": "Red Hellebore",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "anti-element",
+      "name": "Anti-Element",
+      "qty": 1
+    }
+  },
+  {
+    "id": "lixt-wing-dust",
+    "name": "Lixt Wing Dust",
+    "skill": "skill-poison-making",
+    "difficulty": 78,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "embalming-dust",
+        "name": "Embalming Dust",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "lixt-wing-dust",
+      "name": "Lixt Wing Dust",
       "qty": 1
     }
   },
@@ -338,15 +752,15 @@
         "type": "item"
       },
       {
-        "id": "succulent-sap",
-        "name": "Succulent Sap",
-        "qty": 2,
-        "type": "item"
-      },
-      {
         "id": "suspension",
         "name": "Suspension",
         "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "succulent-sap",
+        "name": "Succulent Sap",
+        "qty": 2,
         "type": "item"
       }
     ],
@@ -354,6 +768,444 @@
       "type": "item",
       "template": "maddening-sap",
       "name": "Maddening Sap",
+      "qty": 1
+    }
+  },
+  {
+    "id": "festering-nettle",
+    "name": "Festering Nettle",
+    "skill": "skill-poison-making",
+    "difficulty": 87,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ashroot",
+        "name": "Ashroot",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "festering-nettle",
+      "name": "Festering Nettle",
+      "qty": 1
+    }
+  },
+  {
+    "id": "atrophic-sap",
+    "name": "Atrophic Sap",
+    "skill": "skill-poison-making",
+    "difficulty": 98,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "alocasia-root",
+        "name": "Alocasia Root",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "atrophic-sap",
+      "name": "Atrophic Sap",
+      "qty": 1
+    }
+  },
+  {
+    "id": "aching-blood",
+    "name": "Aching Blood",
+    "skill": "skill-poison-making",
+    "difficulty": 108,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "lactera",
+        "name": "Lactera",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "aching-blood",
+      "name": "Aching Blood",
+      "qty": 1
+    }
+  },
+  {
+    "id": "eyeburn-solution",
+    "name": "Eyeburn Solution",
+    "skill": "skill-poison-making",
+    "difficulty": 108,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "coyotetail",
+        "name": "Coyotetail",
+        "qty": 2,
+        "type": "item"
+      },
+      {
+        "id": "muddite-mud",
+        "name": "Muddite Mud",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "eyeburn-solution",
+      "name": "Eyeburn Solution",
+      "qty": 1
+    }
+  },
+  {
+    "id": "kinetic-suppressant",
+    "name": "Kinetic Suppressant",
+    "skill": "skill-poison-making",
+    "difficulty": 119,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "basilisk-eye-stalk",
+        "name": "Basilisk Eye Stalk",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "delphinium",
+        "name": "Delphinium",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "kinetic-suppressant",
+      "name": "Kinetic Suppressant",
+      "qty": 1
+    }
+  },
+  {
+    "id": "lethargic-bliss",
+    "name": "Lethargic Bliss",
+    "skill": "skill-poison-making",
+    "difficulty": 119,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "whores-bane",
+        "name": "Whore's Bane",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "lethargic-bliss",
+      "name": "Lethargic Bliss",
+      "qty": 1
+    }
+  },
+  {
+    "id": "brain-freeze",
+    "name": "Brain Freeze",
+    "skill": "skill-poison-making",
+    "difficulty": 130,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "gelsemium-root",
+        "name": "Gelsemium Root",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "brain-freeze",
+      "name": "Brain Freeze",
+      "qty": 1
+    }
+  },
+  {
+    "id": "leprous-pus",
+    "name": "Leprous Pus",
+    "skill": "skill-poison-making",
+    "difficulty": 140,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "bundle-of-wormwood",
+        "name": "Bundle of Wormwood",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "darkbone-marrow",
+        "name": "Darkbone Marrow",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "grave-mold",
+        "name": "Grave Mold",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "leprous-pus",
+      "name": "Leprous Pus",
+      "qty": 1
+    }
+  },
+  {
+    "id": "powdered-banality",
+    "name": "Powdered Banality",
+    "skill": "skill-poison-making",
+    "difficulty": 140,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "gelsemium-petals",
+        "name": "Gelsemium Petals",
+        "qty": 3,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "powdered-banality",
+      "name": "Powdered Banality",
+      "qty": 1
+    }
+  },
+  {
+    "id": "choking-asmag",
+    "name": "Choking Asmag",
+    "skill": "skill-poison-making",
+    "difficulty": 151,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "asmag-weed",
+        "name": "Asmag Weed",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "choking-asmag",
+      "name": "Choking Asmag",
+      "qty": 1
+    }
+  },
+  {
+    "id": "xegonys-curse",
+    "name": "Xegony's Curse",
+    "skill": "skill-poison-making",
+    "difficulty": 160,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "lined-poison-vial",
+        "name": "Lined Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ash-hornet-venom",
+        "name": "Ash Hornet Venom",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "cinder-hornet-pollen",
+        "name": "Cinder Hornet Pollen",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "xegonys-curse",
+      "name": "Xegony's Curse",
+      "qty": 1
+    }
+  },
+  {
+    "id": "languid-lixt-wing",
+    "name": "Languid Lixt Wing",
+    "skill": "skill-poison-making",
+    "difficulty": 162,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "lixt-wing-stalk",
+        "name": "Lixt Wing Stalk",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "languid-lixt-wing",
+      "name": "Languid Lixt Wing",
       "qty": 1
     }
   },
@@ -366,14 +1218,614 @@
     "expansion": "classic",
     "components": [
       {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
         "id": "constrict-suspension",
         "name": "Constrict Suspension",
         "qty": 1,
         "type": "item"
       },
       {
+        "id": "putrid-bile",
+        "name": "Putrid Bile",
+        "qty": 1,
+        "type": "item"
+      },
+      {
         "id": "ground-garlic",
         "name": "Ground Garlic",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "red-hellebore",
+        "name": "Red Hellebore",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "corrosive-solvent",
+      "name": "Corrosive Solvent",
+      "qty": 1
+    }
+  },
+  {
+    "id": "beastchoker",
+    "name": "Beastchoker",
+    "skill": "skill-poison-making",
+    "difficulty": 172,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "castorbean",
+        "name": "Castorbean",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "hounds-tongue",
+        "name": "Hounds Tongue",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "chunk-of-meat",
+        "name": "Chunk of Meat",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "beastchoker",
+      "name": "Beastchoker",
+      "qty": 1
+    }
+  },
+  {
+    "id": "calcium-rot",
+    "name": "Calcium Rot",
+    "skill": "skill-poison-making",
+    "difficulty": 172,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "kings-thorn",
+        "name": "King's Thorn",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "calcium-rot",
+      "name": "Calcium Rot",
+      "qty": 1
+    }
+  },
+  {
+    "id": "zek-frost",
+    "name": "Zek Frost",
+    "skill": "skill-poison-making",
+    "difficulty": 183,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "succulent-sap",
+        "name": "Succulent Sap",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "crystal-nightshade",
+        "name": "Crystal Nightshade",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "zek-frost",
+      "name": "Zek Frost",
+      "qty": 1
+    }
+  },
+  {
+    "id": "dilapidating-ash",
+    "name": "Dilapidating Ash",
+    "skill": "skill-poison-making",
+    "difficulty": 183,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "soot-hemlock",
+        "name": "Soot Hemlock",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "dilapidating-ash",
+      "name": "Dilapidating Ash",
+      "qty": 1
+    }
+  },
+  {
+    "id": "monks-hood-aconite",
+    "name": "Monk's Hood Aconite",
+    "skill": "skill-poison-making",
+    "difficulty": 194,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "wolves-bane",
+        "name": "Wolves Bane",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "monks-hood-aconite",
+      "name": "Monk's Hood Aconite",
+      "qty": 1
+    }
+  },
+  {
+    "id": "shadowveil-hemlock",
+    "name": "Shadowveil Hemlock",
+    "skill": "skill-poison-making",
+    "difficulty": 194,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "soot-hemlock",
+        "name": "Soot Hemlock",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "coyotetail",
+        "name": "Coyotetail",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "burned-out-lightstone",
+        "name": "Burned Out Lightstone",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "shadowveil-hemlock",
+      "name": "Shadowveil Hemlock",
+      "qty": 1
+    }
+  },
+  {
+    "id": "stiffening-ergot",
+    "name": "Stiffening Ergot",
+    "skill": "skill-poison-making",
+    "difficulty": 204,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "heartsting-venom-sack",
+        "name": "Heartsting Venom Sack",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "stiffening-ergot",
+      "name": "Stiffening Ergot",
+      "qty": 1
+    }
+  },
+  {
+    "id": "visionistic-pain",
+    "name": "Visionistic Pain",
+    "skill": "skill-poison-making",
+    "difficulty": 204,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "white-hellebore",
+        "name": "White Hellebore",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "visionistic-pain",
+      "name": "Visionistic Pain",
+      "qty": 1
+    }
+  },
+  {
+    "id": "metallic-alkaloid",
+    "name": "Metallic Alkaloid",
+    "skill": "skill-poison-making",
+    "difficulty": 213,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "lead-peroxide",
+        "name": "Lead Peroxide",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "quicksilver",
+        "name": "Quicksilver",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "white-lead",
+        "name": "White Lead",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "metallic-alkaloid",
+      "name": "Metallic Alkaloid",
+      "qty": 1
+    }
+  },
+  {
+    "id": "pacifying-whisper",
+    "name": "Pacifying Whisper",
+    "skill": "skill-poison-making",
+    "difficulty": 215,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "gelsemium-root",
+        "name": "Gelsemium Root",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "thorny-ergot",
+        "name": "Thorny Ergot",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "wolves-bane",
+        "name": "Wolves Bane",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "pacifying-whisper",
+      "name": "Pacifying Whisper",
+      "qty": 1
+    }
+  },
+  {
+    "id": "cranial-cryofrost",
+    "name": "Cranial Cryofrost",
+    "skill": "skill-poison-making",
+    "difficulty": 226,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "frosty-datura",
+        "name": "Frosty Datura",
+        "qty": 3,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "cranial-cryofrost",
+      "name": "Cranial Cryofrost",
+      "qty": 1
+    }
+  },
+  {
+    "id": "visceral-rot",
+    "name": "Visceral Rot",
+    "skill": "skill-poison-making",
+    "difficulty": 231,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "darkbone-marrow",
+        "name": "Darkbone Marrow",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "grave-mold",
+        "name": "Grave Mold",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "wood-rose",
+        "name": "Wood Rose",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "visceral-rot",
+      "name": "Visceral Rot",
+      "qty": 1
+    }
+  },
+  {
+    "id": "amnesic-lolium",
+    "name": "Amnesic Lolium",
+    "skill": "skill-poison-making",
+    "difficulty": 236,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "snowfall-algae",
+        "name": "Snowfall Algae",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "tares-lichen",
+        "name": "Tares Lichen",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "amnesic-lolium",
+      "name": "Amnesic Lolium",
+      "qty": 1
+    }
+  },
+  {
+    "id": "crippling-peptide",
+    "name": "Crippling Peptide",
+    "skill": "skill-poison-making",
+    "difficulty": 245,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "black-henbane",
+        "name": "Black Henbane",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "death-cap",
+        "name": "Death Cap",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "crippling-peptide",
+      "name": "Crippling Peptide",
+      "qty": 1
+    }
+  },
+  {
+    "id": "acidic-dissolver",
+    "name": "Acidic Dissolver",
+    "skill": "skill-poison-making",
+    "difficulty": 245,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
         "qty": 1,
         "type": "item"
       },
@@ -390,62 +1842,690 @@
         "type": "item"
       },
       {
-        "id": "sealed-poison-vial",
-        "name": "Sealed Poison Vial",
+        "id": "soot-hemlock",
+        "name": "Soot Hemlock",
         "qty": 1,
         "type": "item"
       }
     ],
     "product": {
       "type": "item",
-      "template": "corrosive-solvent",
-      "name": "Corrosive Solvent",
+      "template": "acidic-dissolver",
+      "name": "Acidic Dissolver",
       "qty": 1
     }
   },
   {
-    "id": "mental-implosion",
-    "name": "Mental Implosion",
+    "id": "paradoxical-peptide",
+    "name": "Paradoxical Peptide",
+    "skill": "skill-poison-making",
+    "difficulty": 247,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "constrict-suspension",
+        "name": "Constrict Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "skyash-bile",
+        "name": "Skyash Bile",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "chromadrac-wing",
+        "name": "Chromadrac Wing",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "paradoxical-peptide",
+      "name": "Paradoxical Peptide",
+      "qty": 1
+    }
+  },
+  {
+    "id": "carnivore-mortis",
+    "name": "Carnivore Mortis",
+    "skill": "skill-poison-making",
+    "difficulty": 258,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "black-henbane",
+        "name": "Black Henbane",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "snakes-head-iris",
+        "name": "Snakes Head Iris",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "chunk-of-meat",
+        "name": "Chunk of Meat",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "carnivore-mortis",
+      "name": "Carnivore Mortis",
+      "qty": 1
+    }
+  },
+  {
+    "id": "temporal-rot",
+    "name": "Temporal Rot",
+    "skill": "skill-poison-making",
+    "difficulty": 258,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "wood-rose",
+        "name": "Wood Rose",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "embalming-dust",
+        "name": "Embalming Dust",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "kings-thorn",
+        "name": "King's Thorn",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "temporal-rot",
+      "name": "Temporal Rot",
+      "qty": 1
+    }
+  },
+  {
+    "id": "cyclic-vertigo",
+    "name": "Cyclic Vertigo",
+    "skill": "skill-poison-making",
+    "difficulty": 258,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "crystal-nightshade",
+        "name": "Crystal Nightshade",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "snowcap-amanita",
+        "name": "Snowcap Amanita",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "cyclic-vertigo",
+      "name": "Cyclic Vertigo",
+      "qty": 1
+    }
+  },
+  {
+    "id": "essence-of-rallos",
+    "name": "Essence of Rallos",
+    "skill": "skill-poison-making",
+    "difficulty": 268,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "pixie-dust",
+        "name": "Pixie Dust",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "amanita-phalloide",
+        "name": "Amanita Phalloide",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "essence-of-rallos",
+      "name": "Essence of Rallos",
+      "qty": 1
+    }
+  },
+  {
+    "id": "iron-dimethyl",
+    "name": "Iron Dimethyl",
+    "skill": "skill-poison-making",
+    "difficulty": 268,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "iron-sulphide",
+        "name": "Iron Sulphide",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "quicksilver",
+        "name": "Quicksilver",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "iron-dimethyl",
+      "name": "Iron Dimethyl",
+      "qty": 1
+    }
+  },
+  {
+    "id": "smoldering-cyanide",
+    "name": "Smoldering Cyanide",
+    "skill": "skill-poison-making",
+    "difficulty": 268,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "larent-suspension",
+        "name": "Larent Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "emeraldberry-cyanide",
+        "name": "Emeraldberry Cyanide",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "smoldering-cyanide",
+      "name": "Smoldering Cyanide",
+      "qty": 1
+    }
+  },
+  {
+    "id": "spirit-of-sloth",
+    "name": "Spirit of Sloth",
+    "skill": "skill-poison-making",
+    "difficulty": 276,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ethereal-suspension",
+        "name": "Ethereal Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "creeper-ivy",
+        "name": "Creeper Ivy",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "spirit-of-sloth",
+      "name": "Spirit of Sloth",
+      "qty": 1
+    }
+  },
+  {
+    "id": "mages-bane",
+    "name": "Mages Bane",
+    "skill": "skill-poison-making",
+    "difficulty": 282,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ethereal-suspension",
+        "name": "Ethereal Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ivory-poppy",
+        "name": "Ivory Poppy",
+        "qty": 2,
+        "type": "item"
+      },
+      {
+        "id": "frosty-datura",
+        "name": "Frosty Datura",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "mages-bane",
+      "name": "Mages Bane",
+      "qty": 1
+    }
+  },
+  {
+    "id": "susceptible-essence",
+    "name": "Susceptible Essence",
+    "skill": "skill-poison-making",
+    "difficulty": 288,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ethereal-suspension",
+        "name": "Ethereal Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "nohope-moss",
+        "name": "Nohope Moss",
+        "qty": 2,
+        "type": "item"
+      },
+      {
+        "id": "snowcap-amanita",
+        "name": "Snowcap Amanita",
+        "qty": 1,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "susceptible-essence",
+      "name": "Susceptible Essence",
+      "qty": 1
+    }
+  },
+  {
+    "id": "horrendous-atrophy",
+    "name": "Horrendous Atrophy",
+    "skill": "skill-poison-making",
+    "difficulty": 295,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ethereal-suspension",
+        "name": "Ethereal Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "shriveled-flesh",
+        "name": "Shriveled Flesh",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "horrendous-atrophy",
+      "name": "Horrendous Atrophy",
+      "qty": 1
+    }
+  },
+  {
+    "id": "soul-burn",
+    "name": "Soul Burn",
+    "skill": "skill-poison-making",
+    "difficulty": 302,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ethereal-suspension",
+        "name": "Ethereal Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "scorpikis-venom",
+        "name": "Scorpikis Venom",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "soul-burn",
+      "name": "Soul Burn",
+      "qty": 1
+    }
+  },
+  {
+    "id": "warlords-rage",
+    "name": "Warlords Rage",
+    "skill": "skill-poison-making",
+    "difficulty": 308,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ethereal-suspension",
+        "name": "Ethereal Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "succulent-sap",
+        "name": "Succulent Sap",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "crystallized-sulfur",
+        "name": "Crystallized Sulfur",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "warlords-rage",
+      "name": "Warlords Rage",
+      "qty": 1
+    }
+  },
+  {
+    "id": "rending-swiftness",
+    "name": "Rending Swiftness",
+    "skill": "skill-poison-making",
+    "difficulty": 315,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ethereal-suspension",
+        "name": "Ethereal Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "skyash-bile",
+        "name": "Skyash Bile",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "spiroc-bone-dust",
+        "name": "Spiroc Bone Dust",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "rending-swiftness",
+      "name": "Rending Swiftness",
+      "qty": 1
+    }
+  },
+  {
+    "id": "mind-melt",
+    "name": "Mind Melt",
     "skill": "skill-poison-making",
     "difficulty": 322,
     "container": "Mortar and Pestle",
     "expansion": "classic",
     "components": [
       {
-        "id": "advanced-poison-vial",
-        "name": "Advanced Poison Vial",
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
         "qty": 1,
         "type": "item"
       },
       {
-        "id": "celestial-suspension",
-        "name": "Celestial Suspension",
+        "id": "ethereal-suspension",
+        "name": "Ethereal Suspension",
         "qty": 1,
         "type": "item"
       },
       {
-        "id": "drop-of-mercury",
-        "name": "Drop of Mercury",
+        "id": "quicksilver",
+        "name": "Quicksilver",
         "qty": 1,
         "type": "item"
       },
       {
-        "id": "dust-of-decay",
-        "name": "Dust of Decay",
+        "id": "mt.-death-mineral-salts",
+        "name": "Mt. Death Mineral Salts",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "mind-melt",
+      "name": "Mind Melt",
+      "qty": 1
+    }
+  },
+  {
+    "id": "twisting-disorientation",
+    "name": "Twisting Disorientation",
+    "skill": "skill-poison-making",
+    "difficulty": 328,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
         "qty": 1,
         "type": "item"
       },
       {
-        "id": "smashed-war-grubs",
-        "name": "Smashed War Grubs",
+        "id": "ethereal-suspension",
+        "name": "Ethereal Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "crystal-nightshade",
+        "name": "Crystal Nightshade",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "black-henbane",
+        "name": "Black Henbane",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "death-cap",
+        "name": "Death Cap",
         "qty": 1,
         "type": "item"
       }
     ],
     "product": {
       "type": "item",
-      "template": "mental-implosion",
-      "name": "Mental Implosion",
+      "template": "twisting-disorientation",
+      "name": "Twisting Disorientation",
+      "qty": 1
+    }
+  },
+  {
+    "id": "inferno-blood",
+    "name": "Inferno Blood",
+    "skill": "skill-poison-making",
+    "difficulty": 335,
+    "container": "Mortar and Pestle",
+    "expansion": "classic",
+    "components": [
+      {
+        "id": "sealed-poison-vial",
+        "name": "Sealed Poison Vial",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "ethereal-suspension",
+        "name": "Ethereal Suspension",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "emeraldberry-cyanide",
+        "name": "Emeraldberry Cyanide",
+        "qty": 1,
+        "type": "item"
+      },
+      {
+        "id": "blood-thorn-extract",
+        "name": "Blood Thorn Extract",
+        "qty": 2,
+        "type": "item"
+      }
+    ],
+    "product": {
+      "type": "item",
+      "template": "inferno-blood",
+      "name": "Inferno Blood",
       "qty": 1
     }
   }
