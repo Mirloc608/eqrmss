@@ -24,6 +24,7 @@ import { combatCard } from "../combat/chat-card.js";
 import { applyCritConditions, checkHitThresholds } from "../combat/crit-conditions.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { CASTING_STAT_BY_CLASS, casterLevelOf } from "./spell-mapping.js";
+import { levelSpellBonus } from "../progression/xp-engine.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -478,11 +479,17 @@ export async function esfGate(caster, spellItem, opts = {}) {
     const esf = computeESF(caster, spellItem, opts);
     if (esf.total <= 0) return { required: false, esf };
     const roll = await highOpenEnded(opts.rollD100);
+    // Level spell bonus (RMSS §5.2.2, user-modified 2026-10-16): pure
+    // casters +2/level, hybrids +1/level, max +20. This is the spell
+    // casting die roll the book describes.
+    const lvlBonus = levelSpellBonus(caster);
+    const rollTotal = roll.total + lvlBonus;
     const partsText = esf.parts.map(p => `${p.label} +${p.mod}`).join(", ");
-    if (roll.total > esf.total) {
+    const bonusText = lvlBonus > 0 ? ` +${lvlBonus} level` : "";
+    if (rollTotal > esf.total) {
         return {
-            required: true, passed: true, esf, roll: roll.total,
-            note: `ESF ${roll.total} vs ${esf.total} (${partsText}) — the spell resolves.`
+            required: true, passed: true, esf, roll: rollTotal, levelBonus: lvlBonus,
+            note: `ESF ${roll.total}${bonusText} vs ${esf.total} (${partsText}) — the spell resolves.`
         };
     }
     const failure = await resolveSpellFailure(caster, spellItem, {
@@ -490,7 +497,7 @@ export async function esfGate(caster, spellItem, opts = {}) {
         esfTotal: esf.total,
         rollD100: opts.rollD100,
         displace: opts.displace ?? null,
-        headerHtml: `<p><strong>ESF roll:</strong> ${roll.rolls.join(" + ")}${roll.rolls.length > 1 ? ` = ${roll.total}` : ""} vs ESF ${esf.total} (${esc(partsText)}) — the spell fails.</p>`
+        headerHtml: `<p><strong>ESF roll:</strong> ${roll.rolls.join(" + ")}${roll.rolls.length > 1 ? ` = ${roll.total}` : ""}${bonusText} vs ESF ${esf.total} (${esc(partsText)}) — the spell fails.</p>`
     });
-    return { required: true, passed: false, esf, roll: roll.total, failure };
+    return { required: true, passed: false, esf, roll: rollTotal, levelBonus: lvlBonus, failure };
 }

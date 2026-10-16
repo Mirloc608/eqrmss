@@ -78,6 +78,7 @@ import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { roundExhaustionCost, exhaustionCurrent, exhaustionMaxFor } from "./subdue.js";
 import { combatCard } from "./chat-card.js";
 import { applyWornRoundEffects } from "../item-effects/worn-engine.js";
+import { levelCombatBonus } from "../progression/xp-engine.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -109,7 +110,11 @@ export function computeWeaponOB(actor, weaponItem) {
     // Prone (user ruling 2026-10-06 Option B): -30 to actions
     const proneRounds = Number(actor?.system?.status?.prone?.rounds) || 0;
     const pronePenalty = proneRounds > 0 ? -30 : 0;
-    return { weaponType, skill, skillBonus, obMod, ob: skillBonus + obMod + pronePenalty, pronePenalty };
+    // Level combat bonus (RMSS §5.2.1, user EQ-class mapping 2026-10-16):
+    // +3/level fighters (uncapped), +3 rogues (max +60), +2 warrior monks
+    // (max +40), +1 bards (max +20). Applies to all melee/missile OBs.
+    const levelBonus = levelCombatBonus(actor);
+    return { weaponType, skill, skillBonus, obMod, levelBonus, ob: skillBonus + obMod + pronePenalty + levelBonus, pronePenalty };
 }
 
 // ------------------------------------------------------------
