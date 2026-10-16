@@ -1702,15 +1702,21 @@ button.rank-badge:hover {
   color: #8a7a5f;
   font-style: italic;
 }
+.ts-two-panel {
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+}
 .ts-two-panel .ts-panels {
   display: flex;
   gap: 12px;
-  height: calc(100% - 60px);
-  min-height: 380px;
+  flex: 1;
+  min-height: 0;
 }
 .ts-two-panel .ts-recipe-list {
   flex: 0 0 42%;
   overflow-y: auto;
+  min-height: 0;
   border: 1px solid #5f4a2f;
   border-radius: 8px;
   background: rgba(255, 250, 235, 0.4);
@@ -1759,6 +1765,7 @@ button.rank-badge:hover {
 .ts-two-panel .ts-detail {
   flex: 1;
   overflow-y: auto;
+  min-height: 0;
   border: 1px solid #5f4a2f;
   border-radius: 8px;
   background: rgba(255, 250, 235, 0.55);
