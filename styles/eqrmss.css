@@ -2030,6 +2030,12 @@ button.rank-badge:hover {
 .eqrmss.gm-screen .gm-screen-tabs button i { margin-right: 5px; }
 .eqrmss.gm-screen .gm-screen-panel { display: none; }
 .eqrmss.gm-screen .gm-screen-panel.active { display: block; }
+.eqrmss.gm-screen .gm-screen-panel.active {
+  max-height: 480px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+}
 .eqrmss.gm-screen .gm-screen-panel h3 {
   color: #3a2a18;
   border-bottom: 1px solid #b09a70;
