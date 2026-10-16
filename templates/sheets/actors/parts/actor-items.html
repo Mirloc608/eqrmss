@@ -42,27 +42,6 @@
             {{item.name}}
         </div>
 
-        <div class="items-grid-cell item">
-
-            {{#if item.system.worn}}
-
-                <a class="wearable"
-                   data-item-id="{{item._id}}"
-                   title="Remove">
-                    <i class="fa-regular fa-square-check"></i>
-                </a>
-
-            {{else}}
-
-                <a class="wearable"
-                   data-item-id="{{item._id}}"
-                   title="Wear">
-                    <i class="fa-regular fa-square"></i>
-                </a>
-
-            {{/if}}
-
-        </div>
 
         <div class="items-grid-cell item"
              data-item-id="{{item._id}}">

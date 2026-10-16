@@ -4,7 +4,7 @@
 //
 // Responsibilities:
 // - Bind inventory UI interactions
-// - Provide item edit / delete / toggle-worn behavior
+// - Provide item edit / delete behavior
 // - Normalize inventory item blocks
 // - Support drag/drop (optional future expansion)
 // - Keep logic out of the main sheet class
@@ -45,27 +45,6 @@ export class EQRMSSActorInventoryHelper {
             btn.addEventListener("click", ev => {
                 const id = ev.currentTarget.dataset.itemId;
                 if (id) this.actor.deleteEmbeddedDocuments("Item", [id]);
-            });
-        });
-
-        // ------------------------------------------------------------
-        // Toggle worn/equipped (with slot-capacity enforcement)
-        // ------------------------------------------------------------
-        html.querySelectorAll(".item-toggle-worn").forEach(btn => {
-            btn.addEventListener("click", async ev => {
-                const id = ev.currentTarget.dataset.itemId;
-                const item = this.actor.items.get(id);
-                if (!item) return;
-
-                const newState = !item.system.worn;
-                if (newState) {
-                    // Enforce one-item-per-slot (ears/fingers/wrists excepted).
-                    const { checkSlotAvailable, warnBlocked } =
-                        await import("../../../utils/equipment/equipment-restrictions.js");
-                    const check = checkSlotAvailable(this.actor, item);
-                    if (!check.ok) { warnBlocked(check.message); return; }
-                }
-                item.update({ "system.worn": newState });
             });
         });
 
