@@ -39,6 +39,73 @@ const XP_TABLE_MULTIPLIERS = {
 
 const MAX_LEVEL = 125;
 
+// ----------------------------------------------------------------------------
+// Development Points (RMSS §3.2.1, Table 15.1.1)
+// ----------------------------------------------------------------------------
+//
+// DP = sum of the Development Points value for each of the 5 development
+// stats, using TEMPORARY values (not potentials):
+//   Constitution (CO), Agility (AG), Self Discipline (SD),
+//   Reasoning (RE), Memory (ME)
+//
+// Table 15.1.1 Development Points column:
+//   102+: 11 | 101: 10 | 100: 10 | 98-99: 9 | 95-97: 9 | 90-94: 8
+//   85-89: 8 | 75-84: 7 | 60-74: 6 | 40-59: 5 | 25-39: 4 | 15-24: 3
+//   10-14: 2 | 5-9: 2 | 3-4: 1 | 2: 1 | 1: 1
+//
+// NOTE (behavioral difference from the book): the book says DP "must be
+// expended immediately" and "may not accumulate from level to level."
+// This system accumulates unspent DP on the actor (system.character.
+// developmentPoints). Changing that is a design decision for the user.
+
+const DP_TABLE = [
+    { min: 102, dp: 11 },
+    { min: 101, dp: 10 },
+    { min: 100, dp: 10 },
+    { min: 98,  dp: 9 },
+    { min: 95,  dp: 9 },
+    { min: 90,  dp: 8 },
+    { min: 85,  dp: 8 },
+    { min: 75,  dp: 7 },
+    { min: 60,  dp: 6 },
+    { min: 40,  dp: 5 },
+    { min: 25,  dp: 4 },
+    { min: 15,  dp: 3 },
+    { min: 10,  dp: 2 },
+    { min: 5,   dp: 2 },
+    { min: 3,   dp: 1 },
+    { min: 2,   dp: 1 },
+    { min: 1,   dp: 1 }
+];
+
+// Development stat keys (RMSS §3.2.1).
+const DEVELOPMENT_STAT_KEYS = ["CO", "AG", "SD", "RE", "ME"];
+
+// Development Points for a single stat value (Table 15.1.1).
+export function developmentPointsForStat(statValue) {
+    const v = Math.floor(Number(statValue ?? 0));
+    for (const row of DP_TABLE) {
+        if (v >= row.min) return row.dp;
+    }
+    return 1; // below 1 — shouldn't happen, but fail safe
+}
+
+// Total Development Points for an actor: sum of DP for the 5 development
+// stats using their TEMPORARY values (book §3.2.1: "temporary values,
+// not potentials").
+export function developmentPointsForActor(actor) {
+    const stats = actor?.system?.stats?.stats ?? {};
+    let total = 0;
+    for (const key of DEVELOPMENT_STAT_KEYS) {
+        const entry = stats[key] ?? {};
+        // Prefer `temp` (the book's "temporary value"); fall back to
+        // `total`/`value` for actors that predate the temp/potential split.
+        const temp = Number(entry.temp ?? entry.total ?? entry.value ?? 50);
+        total += developmentPointsForStat(temp);
+    }
+    return total;
+}
+
 // RMSS Character Law Table 15.4.1 (book-pure). Cumulative XP required to
 // REACH a given level. Index 0 = level 1 (10,000 XP starting base).
 const XP_THRESHOLDS = [
@@ -212,23 +279,14 @@ export async function applyLevelUp(actor) {
         } catch (e) { console.warn("EQRMSS | XP engine: stat gain chat failed", e); }
     } catch (e) { console.warn("EQRMSS | XP engine: stat gain rolls failed", e); }
 
-    // --- Development points (via class data) ---
+    // --- Development points (RMSS §3.2.1, Table 15.1.1) ---
+    // Book-pure: sum of DP for CO/AG/SD/RE/ME using temporary values.
     try {
-        if (typeof actor.awardLevelDevelopmentPoints === "function") {
-            summary.dp = actor.awardLevelDevelopmentPoints() ?? 0;
-        } else {
-            // Fallback: sum class developmentPoints directly.
-            const classes = typeof actor.getClasses === "function" ? actor.getClasses() : [];
-            let pts = 0;
-            for (const cls of classes) {
-                const cd = game?.eqrmss?.classes?.[cls] ?? CONFIG?.EQRMSS?.data?.classIndex?.[cls];
-                pts += Number(cd?.developmentPoints ?? 0);
-            }
-            if (pts > 0 && actor?.system?.character) {
-                actor.system.character.developmentPoints =
-                    Number(actor.system.character.developmentPoints ?? 0) + pts;
-                summary.dp = pts;
-            }
+        const pts = developmentPointsForActor(actor);
+        if (actor?.system?.character) {
+            actor.system.character.developmentPoints =
+                Number(actor.system.character.developmentPoints ?? 0) + pts;
+            summary.dp = pts;
         }
     } catch (e) { console.warn("EQRMSS | XP engine: DP grant failed", e); }
 
