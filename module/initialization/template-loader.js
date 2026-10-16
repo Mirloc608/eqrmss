@@ -88,9 +88,7 @@ export async function loadEQRMSSTemplates() {
         "systems/eqrmss/templates/sheets/items/eqrmss-armor-sheet.html",
         "systems/eqrmss/templates/sheets/items/eqrmss-race-sheet.html",
         "systems/eqrmss/templates/sheets/items/eqrmss-class-sheet.html",
-        "systems/eqrmss/templates/sheets/items/eqrmss-language-sheet.html",
         "systems/eqrmss/templates/sheets/items/eqrmss-transport-sheet.html",
-        "systems/eqrmss/templates/sheets/items/eqrmss-herb-or-poison-sheet.html",
         "systems/eqrmss/templates/sheets/items/eqrmss-shield-sheet.html",
 
         // ==========================================================

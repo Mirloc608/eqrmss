@@ -177,9 +177,3 @@ export {
 }
 from "./eqrmss_training_package.js";
 
-export {
-
-    EQRMSSHerbOrPoison
-
-}
-from "./eqrmss_herb_or_poison.js";
