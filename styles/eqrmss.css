@@ -1671,3 +1671,159 @@ button.rank-badge:hover {
   border-radius: 8px;
   background: rgba(160, 32, 32, 0.08);
 }
+
+/* Tradeskill dialog — EQ two-panel layout (2026-10-15)
+   Left: searchable recipe list. Right: selected recipe details.
+   Keeps the uniform parchment theme. */
+.ts-two-panel .ts-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid #5f4a2f;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+.ts-two-panel .ts-header h2 {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0;
+  flex: 1;
+}
+.ts-two-panel .ts-search {
+  background: rgba(255, 250, 235, 0.7);
+  border: 1px solid #5f4a2f;
+  border-radius: 6px;
+  color: #3a2a18;
+  padding: 4px 10px;
+  font-size: 13px;
+  width: 200px;
+}
+.ts-two-panel .ts-search::placeholder {
+  color: #8a7a5f;
+  font-style: italic;
+}
+.ts-two-panel .ts-panels {
+  display: flex;
+  gap: 12px;
+  height: calc(100% - 60px);
+  min-height: 380px;
+}
+.ts-two-panel .ts-recipe-list {
+  flex: 0 0 42%;
+  overflow-y: auto;
+  border: 1px solid #5f4a2f;
+  border-radius: 8px;
+  background: rgba(255, 250, 235, 0.4);
+  padding: 6px;
+}
+.ts-two-panel .ts-recipe-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #3a2a18;
+}
+.ts-two-panel .ts-recipe-row:hover {
+  background: rgba(90, 70, 40, 0.15);
+}
+.ts-two-panel .ts-recipe-row.selected {
+  background: rgba(90, 70, 40, 0.25);
+  border: 1px solid #5f4a2f;
+}
+.ts-two-panel .ts-recipe-row.ts-cant-combine .ts-recipe-name {
+  color: #8a7a5f;
+}
+.ts-two-panel .ts-recipe-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ts-two-panel .ts-diff-badge {
+  border: 1px solid #5f4a2f;
+  border-radius: 6px;
+  padding: 1px 7px;
+  font-size: 11px;
+  white-space: nowrap;
+  color: #3a2a18;
+  background: #d9c08a;
+}
+.ts-two-panel .ts-diff-badge.diff-trivial { background: #b8c8a8; }
+.ts-two-panel .ts-diff-badge.diff-easy { background: #a8d0a8; }
+.ts-two-panel .ts-diff-badge.diff-even { background: #d9c08a; }
+.ts-two-panel .ts-diff-badge.diff-hard { background: #e8a878; }
+.ts-two-panel .ts-diff-badge.diff-perilous { background: #d88888; }
+.ts-two-panel .ts-detail {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid #5f4a2f;
+  border-radius: 8px;
+  background: rgba(255, 250, 235, 0.55);
+  padding: 12px 14px;
+}
+.ts-two-panel .ts-detail-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(95, 74, 47, 0.4);
+}
+.ts-two-panel .ts-detail-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #3a2a18;
+  flex: 1;
+}
+.ts-two-panel .ts-detail .recipe-components {
+  flex-direction: column;
+  align-items: stretch;
+}
+.ts-two-panel .ts-detail .recipe-components li {
+  justify-content: space-between;
+}
+.ts-two-panel .ts-detail select {
+  background: rgba(255, 250, 235, 0.8);
+  border: 1px solid #5f4a2f;
+  border-radius: 4px;
+  color: #3a2a18;
+  padding: 2px 6px;
+  font-size: 13px;
+  max-width: 220px;
+}
+.ts-two-panel .ts-batch-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(95, 74, 47, 0.4);
+}
+.ts-two-panel .ts-qty-label {
+  font-size: 13px;
+  color: #3a2a18;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ts-two-panel .ts-qty {
+  background: rgba(255, 250, 235, 0.8);
+  border: 1px solid #5f4a2f;
+  border-radius: 4px;
+  color: #3a2a18;
+  padding: 3px 8px;
+  font-size: 13px;
+  width: 60px;
+}
+.ts-two-panel .ts-combine-btn {
+  margin-left: auto;
+}
+.ts-two-panel .ts-select-prompt {
+  color: #6a5a40;
+  font-style: italic;
+  text-align: center;
+  padding: 40px 20px;
+}

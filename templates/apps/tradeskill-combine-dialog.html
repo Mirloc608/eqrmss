@@ -1,54 +1,86 @@
-<section class="tradeskill-combine">
-    <h2>{{skillName}} — Recipes</h2>
+<section class="tradeskill-combine ts-two-panel">
+    <div class="ts-header">
+        <h2>{{skillName}}</h2>
+        <input type="text" class="ts-search" placeholder="Search recipes..." value="{{searchFilter}}" />
+    </div>
 
     {{#if restricted}}
     <p class="recipe-restricted"><i class="fas fa-lock"></i> {{restrictionReason}}</p>
     {{else}}
-    {{#if recipes.length}}
-    <div class="recipe-cards">
-        {{#each recipes}}
-        <article class="recipe-card" data-recipe-id="{{id}}">
-            <div class="recipe-card-head">
-                <span class="recipe-name">{{name}}</span>
-                <span class="difficulty-badge" title="d100 + skill bonus vs this">Diff {{difficulty}}</span>
-                <span class="head-spacer"></span>
-                {{#if canCombine}}
-                <button type="button" class="recipe-combine" data-action="combine" data-recipe-id="{{id}}">
+    <div class="ts-panels">
+        <!-- Left panel: searchable recipe list -->
+        <div class="ts-recipe-list">
+            {{#if recipes.length}}
+            {{#each recipes}}
+            <div class="ts-recipe-row {{#if selected}}selected{{/if}} {{#unless canCombine}}ts-cant-combine{{/unless}}" data-recipe-id="{{id}}" title="{{name}}">
+                <span class="ts-recipe-name">{{name}}</span>
+                <span class="ts-diff-badge diff-{{diffClass}}">{{diffRating}}({{displayDifficulty}})</span>
+            </div>
+            {{/each}}
+            {{else}}
+            <p class="recipe-empty">No recipes match.</p>
+            {{/if}}
+        </div>
+
+        <!-- Right panel: selected recipe details -->
+        <div class="ts-detail">
+            {{#if selectedRecipe}}
+            <div class="ts-detail-head">
+                <span class="ts-detail-name">{{selectedRecipe.name}}</span>
+                <span class="ts-diff-badge diff-{{selectedRecipe.diffClass}}">{{selectedRecipe.diffRating}}({{selectedRecipe.displayDifficulty}})</span>
+            </div>
+            {{#if selectedRecipe.canCombine}}
+            <ul class="recipe-components">
+                {{#each selectedRecipe.componentStatus}}
+                <li class="{{#if met}}comp-met{{else}}comp-missing{{/if}}">
+                    {{#if materialChoice}}
+                    <select class="material-select" data-recipe-id="{{@root.selectedRecipe.id}}" data-component-id="{{id}}">
+                        {{#each materialOptions}}
+                        <option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}} ({{have}}/{{need}})</option>
+                        {{/each}}
+                    </select>
+                    {{else if weaponChoice}}
+                    <select class="weapon-select" data-recipe-id="{{@root.selectedRecipe.id}}" data-component-id="{{id}}">
+                        {{#each weaponOptions}}
+                        <option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}}</option>
+                        {{/each}}
+                    </select>
+                    {{else if bowItemOptions}}
+                    <select class="bowitem-select" data-recipe-id="{{@root.selectedRecipe.id}}" data-kind="{{bowItemKind}}">
+                        {{#each bowItemOptions}}
+                        <option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}}</option>
+                        {{/each}}
+                    </select>
+                    {{else}}
+                    <span class="comp-name">{{name}}</span>
+                    {{/if}}
+                    <span class="comp-count">{{have}}/{{need}}</span>
+                </li>
+                {{/each}}
+            </ul>
+            <div class="ts-batch-row">
+                <label class="ts-qty-label">Qty:
+                    <input type="number" class="ts-qty" min="1" max="99" value="1" />
+                </label>
+                <button type="button" class="recipe-combine ts-combine-btn" data-action="combine" data-recipe-id="{{selectedRecipe.id}}">
                     <i class="fas fa-hammer"></i> Combine
                 </button>
-                {{else}}
-                <span class="recipe-missing">Missing mats</span>
-                {{/if}}
             </div>
-            <div class="recipe-card-body">
-                <ul class="recipe-components">
-                    {{#each componentStatus}}
-                    <li class="{{#if met}}comp-met{{else}}comp-missing{{/if}}">
-                        {{#if materialChoice}}
-                        <select class="material-select" data-recipe-id="{{../id}}" data-component-id="{{id}}">
-                            {{#each materialOptions}}
-                            <option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}} ({{have}}/{{need}})</option>
-                            {{/each}}
-                        </select>
-                        {{else if weaponChoice}}
-                        <select class="weapon-select" data-recipe-id="{{../id}}" data-component-id="{{id}}">
-                            {{#each weaponOptions}}
-                            <option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}}</option>
-                            {{/each}}
-                        </select>
-                        {{else}}
-                        <span class="comp-name">{{id}}</span>
-                        {{/if}}
-                        <span class="comp-count">{{have}}/{{need}}</span>
-                    </li>
-                    {{/each}}
-                </ul>
-            </div>
-        </article>
-        {{/each}}
+            {{else}}
+            <span class="recipe-missing">Missing mats</span>
+            <ul class="recipe-components">
+                {{#each selectedRecipe.componentStatus}}
+                <li class="{{#if met}}comp-met{{else}}comp-missing{{/if}}">
+                    <span class="comp-name">{{name}}</span>
+                    <span class="comp-count">{{have}}/{{need}}</span>
+                </li>
+                {{/each}}
+            </ul>
+            {{/if}}
+            {{else}}
+            <p class="ts-select-prompt">Select a recipe from the list.</p>
+            {{/if}}
+        </div>
     </div>
-    {{else}}
-    <p class="recipe-empty">No recipes available for {{skillName}} yet.</p>
-    {{/if}}
     {{/if}}
 </section>

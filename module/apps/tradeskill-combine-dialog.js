@@ -8,6 +8,7 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 const BaseApplication = HandlebarsApplicationMixin(ApplicationV2);
 
 import { attemptCombine, getRecipesForSkill, canUseTradeskill } from "../tradeskills/tradeskill-engine.js";
+import { resolveSkillProfile } from "../utils/skills/skill-profile-resolver.js";
 
 export class TradeskillCombineDialog extends BaseApplication {
 
@@ -19,7 +20,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             icon: "fas fa-hammer",
             resizable: true
         },
-        position: { width: 600, height: 500 },
+        position: { width: 800, height: 560 },
         actions: {
             "combine": this.#onCombine
         }
@@ -70,6 +71,33 @@ export class TradeskillCombineDialog extends BaseApplication {
                 }
             });
         });
+        // Recipe row click: select recipe for detail panel (2026-10-15)
+        this.element.querySelectorAll(".ts-recipe-row").forEach(row => {
+            row.addEventListener("click", (ev) => {
+                const recipeId = ev.currentTarget.dataset.recipeId;
+                if (recipeId) {
+                    this.selectedRecipeId = recipeId;
+                    this.render();
+                }
+            });
+        });
+        // Search box: filter recipe list (2026-10-15)
+        const searchInput = this.element.querySelector(".ts-search");
+        if (searchInput) {
+            searchInput.addEventListener("input", (ev) => {
+                this.searchFilter = ev.target.value ?? "";
+                // Re-render list without losing focus: update rows in place
+                const filter = this.searchFilter.toLowerCase();
+                this.element.querySelectorAll(".ts-recipe-row").forEach(row => {
+                    const name = row.querySelector(".ts-recipe-name")?.textContent?.toLowerCase() ?? "";
+                    row.style.display = name.includes(filter) ? "" : "none";
+                });
+            });
+            // Restore focus + caret after re-render
+            searchInput.focus();
+            const len = searchInput.value.length;
+            searchInput.setSelectionRange(len, len);
+        }
     }
 
     constructor(actor, skillId, options = {}) {
@@ -78,6 +106,32 @@ export class TradeskillCombineDialog extends BaseApplication {
         this.skillId = skillId;
         this.selectedMaterials = {}; // recipeId:componentId -> materialId
         this.selectedWeapons = {}; // recipeId -> itemId (for weaponChoice)
+        this.selectedRecipeId = null; // two-panel selection (2026-10-15)
+        this.searchFilter = ""; // recipe search text (2026-10-15)
+    }
+
+    // Actor's total skill bonus for EQ-style difficulty ratings (2026-10-15)
+    _getSkillBonus() {
+        try {
+            const engine = game.eqrmss?.getSkillCheckEngine?.();
+            const registry = engine?.registry;
+            if (!registry) return 0;
+            const profile = resolveSkillProfile(this.actor, this.skillId, registry);
+            return Number(profile?.totalBonus ?? 0);
+        } catch (e) {
+            return 0;
+        }
+    }
+
+    // EQ-style difficulty rating: Trivial / Easy / Even / Hard / Perilous (2026-10-15)
+    _getDifficultyRating(difficulty) {
+        const skill = this._getSkillBonus();
+        const d = Number(difficulty ?? 0);
+        if (d <= skill - 50) return { name: "Trivial", cls: "trivial" };
+        if (d <= skill - 20) return { name: "Easy", cls: "easy" };
+        if (d <= skill + 20) return { name: "Even", cls: "even" };
+        if (d <= skill + 50) return { name: "Hard", cls: "hard" };
+        return { name: "Perilous", cls: "perilous" };
     }
 
     // Get inventory weapons matching a condition (e.g., "rusty") - 2026-10-14
@@ -508,13 +562,22 @@ export class TradeskillCombineDialog extends BaseApplication {
         const recipes = getRecipesForSkill(this.skillId);
         const skillName = this._getSkillName();
         const access = canUseTradeskill(this.actor, this.skillId);
+        const filter = String(this.searchFilter ?? "").toLowerCase();
 
         // Check inventory for each recipe's components
         // Note: oreMaterials is per-component now (materialType varies)
-        const recipesWithStatus = recipes.map(r => {
+        const recipesWithStatus = recipes
+            .filter(r => !filter || String(r.name ?? "").toLowerCase().includes(filter))
+            .map(r => {
             const selectedMat = this._getSelectedMaterial(r.id, r);
+            const dynDiff = this._getDynamicDifficulty(r, r.id);
+            const rating = this._getDifficultyRating(dynDiff);
             return {
                 ...r,
+                displayDifficulty: dynDiff,
+                diffRating: rating.name,
+                diffClass: rating.cls,
+                selected: r.id === this.selectedRecipeId,
                 canCombine: access.allowed && this._hasComponents(r.components, r.id),
                 componentStatus: r.components.map(c => {
                     const base = {
@@ -677,6 +740,8 @@ export class TradeskillCombineDialog extends BaseApplication {
             skillId: this.skillId,
             skillName,
             recipes: recipesWithStatus,
+            selectedRecipe: recipesWithStatus.find(r => r.id === this.selectedRecipeId) ?? null,
+            searchFilter: this.searchFilter,
             restricted: !access.allowed,
             restrictionReason: access.reason
         };
@@ -1966,23 +2031,67 @@ export class TradeskillCombineDialog extends BaseApplication {
             return;
         }
 
-        const result = await attemptCombine(
-            dialog.actor,
-            { ...recipe, difficulty: dialog._getDynamicDifficulty(recipe, recipeId) },
-            (c) => dialog._hasComponents(c, recipeId),
-            (c) => dialog._consumeComponents(c, recipeId),
-            (p, q) => dialog._createProduct(p, q, recipeId),
-            skillEngine
-        );
+        // Batch quantity (2026-10-15): read from detail panel input, default 1
+        const qtyInput = dialog.element?.querySelector(".ts-qty");
+        let batchQty = 1;
+        if (qtyInput) {
+            batchQty = Math.max(1, Math.min(99, Number(qtyInput.value) || 1));
+        }
 
-        // Post result to chat
-        const icon = result.success ? "✅" : result.critFail ? "💥" : "❌";
         const shownDifficulty = dialog._getDynamicDifficulty(recipe, recipeId);
-        await ChatMessage.create({
-            speaker: ChatMessage.getSpeaker({ actor: dialog.actor }),
-            content: `<h2>${icon} ${recipe.name}</h2><p>${result.message}</p>
-                ${result.roll ? `<p>Roll: ${result.roll.total} + bonus = ${result.total} vs ${shownDifficulty}</p>` : ""}`
-        });
+        const recipeWithDiff = { ...recipe, difficulty: shownDifficulty };
+
+        let made = 0;
+        let successes = 0;
+        let failures = 0;
+        let stoppedEarly = false;
+        const rollLines = [];
+
+        for (let i = 0; i < batchQty; i++) {
+            // Re-check components before each iteration (2026-10-15)
+            if (!dialog._hasComponents(recipe.components, recipeId)) {
+                if (i > 0) stoppedEarly = true;
+                break;
+            }
+            const result = await attemptCombine(
+                dialog.actor,
+                recipeWithDiff,
+                (c) => dialog._hasComponents(c, recipeId),
+                (c) => dialog._consumeComponents(c, recipeId),
+                (p, q) => dialog._createProduct(p, q, recipeId),
+                skillEngine
+            );
+            made++;
+            if (result.success) successes++; else failures++;
+            if (batchQty > 1 && result.roll) {
+                const icon = result.success ? "✅" : result.critFail ? "💥" : "❌";
+                rollLines.push(`${icon} #${i + 1}: ${result.roll.total} + bonus = ${result.total} vs ${shownDifficulty} — ${result.message}`);
+            }
+            // Post single-combine result to chat as before (2026-10-15: only for qty 1)
+            if (batchQty === 1) {
+                const icon = result.success ? "✅" : result.critFail ? "💥" : "❌";
+                await ChatMessage.create({
+                    speaker: ChatMessage.getSpeaker({ actor: dialog.actor }),
+                    content: `<h2>${icon} ${recipe.name}</h2><p>${result.message}</p>
+                        ${result.roll ? `<p>Roll: ${result.roll.total} + bonus = ${result.total} vs ${shownDifficulty}</p>` : ""}`
+                });
+            }
+        }
+
+        // Batch summary (2026-10-15)
+        if (batchQty > 1) {
+            const productName = recipe.product?.name ?? recipe.name;
+            let summary = `<h2>🔨 ${recipe.name} × ${made}</h2>`;
+            summary += `<p>Made ${made}x ${productName}: ${successes} success, ${failures} failure.</p>`;
+            if (stoppedEarly) summary += `<p><i>Stopped early — ran out of components.</i></p>`;
+            if (rollLines.length > 0) summary += `<p>${rollLines.join("<br>")}</p>`;
+            await ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor: dialog.actor }),
+                content: summary
+            });
+        } else if (made === 0) {
+            ui.notifications.warn(`Missing components for ${recipe.name}.`);
+        }
 
         // Refresh the dialog
         dialog.render();
