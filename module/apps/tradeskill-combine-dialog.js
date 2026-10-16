@@ -913,9 +913,14 @@ export class TradeskillCombineDialog extends BaseApplication {
             return item ? Number(item.system?.quantity ?? 1) : 0;
         }
         if (component.strandChoice) {
-            // Sum all strands (user may have multiple stacks)
+            // Sum strands of the SELECTED type only (user may have multiple stacks).
+            // Never mix strand types (e.g., Light Steel vs Silk) - 2026-10-16
+            const selectedId = this._getSelectedBowItem(recipeId, "strand");
+            const selectedItem = selectedId ? this.actor.items.get(selectedId) : null;
+            const selectedStrandId = selectedItem?.system?.strandId ?? null;
             let total = 0;
             for (const s of this._getStrands()) {
+                if ((s.item?.system?.strandId ?? null) !== selectedStrandId) continue;
                 total += Number(s.item?.system?.quantity ?? 1);
             }
             return total;
@@ -1045,10 +1050,15 @@ export class TradeskillCombineDialog extends BaseApplication {
                 bowstringChoice: "bowstring-enhance"
             };
             // Special handling for strandChoice: consume across multiple stacks
+            // of the SELECTED strand type only - never mix types - 2026-10-16
             if (c.strandChoice && recipeId) {
+                const selectedId = this._getSelectedBowItem(recipeId, "strand");
+                const selectedItem = selectedId ? this.actor.items.get(selectedId) : null;
+                const selectedStrandId = selectedItem?.system?.strandId ?? null;
                 let need = c.qty ?? 20;
                 for (const s of this._getStrands()) {
                     if (need <= 0) break;
+                    if ((s.item?.system?.strandId ?? null) !== selectedStrandId) continue;
                     const item = s.item;
                     const have = Number(item.system?.quantity ?? 1);
                     if (have <= need) {
