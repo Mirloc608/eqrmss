@@ -193,7 +193,7 @@ export class GMScreen extends BaseApplication {
 // Singleton accessor.
 let _gmScreenInstance = null;
 
-export function openGMScreen() {
+export async function openGMScreen() {
     if (!game?.user?.isGM) {
         ui.notifications?.warn("EQRMSS | The GM Screen is for GMs only.");
         return null;
@@ -201,7 +201,6 @@ export function openGMScreen() {
     if (!_gmScreenInstance) {
         _gmScreenInstance = new GMScreen();
     }
-    _gmScreenInstance.render(true);
-    _gmScreenInstance.bringToFront();
+    await _gmScreenInstance.render(true);
     return _gmScreenInstance;
 }
