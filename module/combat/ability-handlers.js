@@ -21,7 +21,22 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<"
 export async function executeAbility(actor, target, ability, notes = []) {
     if (!actor || !ability) return;
     const handler = String(ability.handler || ability.id || "").toLowerCase();
-    
+
+    // Active shield use (Shield Bash) requires shield training: the
+    // Shield Mastery skill or the Shield Bash ability granted by class.
+    // Passive shield wear (DB bonus) remains available to all classes.
+    if (handler === "bash") {
+        try {
+            const { hasShieldTraining } =
+                await import("../utils/equipment/equipment-restrictions.js");
+            if (!hasShieldTraining(actor)) {
+                notes.push(`<em>${esc(ability.name)}: requires Shield Mastery training to use actively.</em>`);
+                try { ui?.notifications?.warn?.(`EQRMSS | ${ability.name}: requires Shield Mastery training to use actively.`); } catch (e) {}
+                return;
+            }
+        } catch (e) { /* fail-open on import error */ }
+    }
+
     switch (handler) {
         case "kick": return await strikeAbility(actor, target, ability, notes, { damage: 5 });
         case "bash": return await strikeAbility(actor, target, ability, notes, { damage: 8, interrupt: true });

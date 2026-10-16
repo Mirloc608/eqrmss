@@ -49,15 +49,22 @@ export class EQRMSSActorInventoryHelper {
         });
 
         // ------------------------------------------------------------
-        // Toggle worn/equipped
+        // Toggle worn/equipped (with slot-capacity enforcement)
         // ------------------------------------------------------------
         html.querySelectorAll(".item-toggle-worn").forEach(btn => {
-            btn.addEventListener("click", ev => {
+            btn.addEventListener("click", async ev => {
                 const id = ev.currentTarget.dataset.itemId;
                 const item = this.actor.items.get(id);
                 if (!item) return;
 
                 const newState = !item.system.worn;
+                if (newState) {
+                    // Enforce one-item-per-slot (ears/fingers/wrists excepted).
+                    const { checkSlotAvailable, warnBlocked } =
+                        await import("../../../utils/equipment/equipment-restrictions.js");
+                    const check = checkSlotAvailable(this.actor, item);
+                    if (!check.ok) { warnBlocked(check.message); return; }
+                }
                 item.update({ "system.worn": newState });
             });
         });

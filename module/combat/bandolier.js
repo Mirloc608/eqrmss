@@ -261,6 +261,13 @@ export async function setBandolierSlot(actor, setIndex, side, itemId) {
                 ? "Ammunition goes in the quiver, not a weapon slot."
                 : "That is not one of your weapons." };
         }
+        // Class weapon restriction: e.g. no wizards with claymores.
+        try {
+            const { checkWeaponAllowedForClass } =
+                await import("../utils/equipment/equipment-restrictions.js");
+            const allowed = checkWeaponAllowedForClass(actor, item);
+            if (!allowed.ok) return { ok: false, message: allowed.message };
+        } catch (e) { /* fail-open on import error */ }
     }
     const sets = b.sets.map(s => ({ ...s }));
     if (id) {
@@ -271,6 +278,15 @@ export async function setBandolierSlot(actor, setIndex, side, itemId) {
     }
     const prev = sets[idx][side];
     sets[idx][side] = id;
+    // Dual Wield gate: two 1-handed weapons require the Dual Wield skill/ability.
+    if (id) {
+        try {
+            const { checkDualWield } =
+                await import("../utils/equipment/equipment-restrictions.js");
+            const dw = checkDualWield(actor, sets, idx, (wid) => actor.items?.get(wid));
+            if (!dw.ok) return { ok: false, message: dw.message };
+        } catch (e) { /* fail-open on import error */ }
+    }
     // Editing the wielded set keeps item locations in sync.
     const locUpdates = new Map();
     if (idx === b.current) {
