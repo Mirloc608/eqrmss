@@ -1,0 +1,523 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+    <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
+  </header>
+    <div class="sheet-content">
+      <div>
+        <table class="stat-grid">
+          <tr>
+            <th>{{localize "eqrmss.item.equipped"}}</th>
+            <td>
+              <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
+            </td>
+            <th>{{localize "eqrmss.armor.weight"}}</th>
+            <td>
+              <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"/>
+            </td>
+          </tr>
+          <tr>
+            <th>{{localize "eqrmss.armor.cost"}}</th>
+            <td>
+              <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
+            </td>
+            <th>Location</th>
+            <td>
+              <select name="system.jewelryLocation">
+                <option value=""></option>
+                {{selectOptions jewelryOptions.locations selected=system.jewelryLocation valueAttr="id" labelAttr="name"}}
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th>Condition</th>
+            <td>
+              <select name="system.jewelryCondition">
+                <option value=""></option>
+                {{selectOptions jewelryOptions.conditions selected=system.jewelryCondition valueAttr="id" labelAttr="name"}}
+              </select>
+            </td>
+            <th>Quality</th>
+            <td>
+              <select name="system.jewelryQuality">
+                <option value=""></option>
+                {{selectOptions jewelryOptions.qualities selected=system.jewelryQuality valueAttr="id" labelAttr="name"}}
+              </select>
+            </td>
+          </tr>
+        </table>
+<h3>Bonuses</h3>
+
+<div class="bonus-grid cols-2">
+
+<div class="form-group">
+
+    <label>
+        HP Bonus
+    </label>
+
+    <input
+        name="system.hp"
+        type="number"
+        value="{{system.hp}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Mana Bonus
+    </label>
+
+    <input
+        name="system.mana"
+        type="number"
+        value="{{system.mana}}"
+    />
+
+</div>
+
+</div>
+
+<h4>Stat Bonuses</h4>
+
+<div class="bonus-grid cols-3">
+
+<div class="form-group">
+
+    <label>
+        ST (Strength)
+    </label>
+
+    <input
+        name="system.stats.ST"
+        type="number"
+        value="{{system.stats.ST}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        AG (Agility)
+    </label>
+
+    <input
+        name="system.stats.AG"
+        type="number"
+        value="{{system.stats.AG}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        CO (Constitution)
+    </label>
+
+    <input
+        name="system.stats.CO"
+        type="number"
+        value="{{system.stats.CO}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        ME (Memory)
+    </label>
+
+    <input
+        name="system.stats.ME"
+        type="number"
+        value="{{system.stats.ME}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        RE (Reasoning)
+    </label>
+
+    <input
+        name="system.stats.RE"
+        type="number"
+        value="{{system.stats.RE}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        SD (Self Discipline)
+    </label>
+
+    <input
+        name="system.stats.SD"
+        type="number"
+        value="{{system.stats.SD}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        QU (Quickness)
+    </label>
+
+    <input
+        name="system.stats.QU"
+        type="number"
+        value="{{system.stats.QU}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        EM (Empathy)
+    </label>
+
+    <input
+        name="system.stats.EM"
+        type="number"
+        value="{{system.stats.EM}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        IN (Intuition)
+    </label>
+
+    <input
+        name="system.stats.IN"
+        type="number"
+        value="{{system.stats.IN}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        PR (Presence)
+    </label>
+
+    <input
+        name="system.stats.PR"
+        type="number"
+        value="{{system.stats.PR}}"
+    />
+
+</div>
+
+</div>
+
+<h4>Resistance Bonuses</h4>
+
+<div class="bonus-grid cols-3">
+
+<div class="form-group">
+
+    <label>
+        Essence
+    </label>
+
+    <input
+        name="system.resistances.essence"
+        type="number"
+        value="{{system.resistances.essence}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Channeling
+    </label>
+
+    <input
+        name="system.resistances.channeling"
+        type="number"
+        value="{{system.resistances.channeling}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Mentalism
+    </label>
+
+    <input
+        name="system.resistances.mentalism"
+        type="number"
+        value="{{system.resistances.mentalism}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Poison/Disease
+    </label>
+
+    <input
+        name="system.resistances.poison_disease"
+        type="number"
+        value="{{system.resistances.poison_disease}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Fear
+    </label>
+
+    <input
+        name="system.resistances.fear"
+        type="number"
+        value="{{system.resistances.fear}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Arcane
+    </label>
+
+    <input
+        name="system.resistances.arcane"
+        type="number"
+        value="{{system.resistances.arcane}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Channeling/Essence
+    </label>
+
+    <input
+        name="system.resistances.chann_ess"
+        type="number"
+        value="{{system.resistances.chann_ess}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Channeling/Mentalism
+    </label>
+
+    <input
+        name="system.resistances.chann_ment"
+        type="number"
+        value="{{system.resistances.chann_ment}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Essence/Mentalism
+    </label>
+
+    <input
+        name="system.resistances.ess_ment"
+        type="number"
+        value="{{system.resistances.ess_ment}}"
+    />
+
+</div>
+
+</div>
+
+<h4>Combat Bonuses</h4>
+
+<div class="bonus-grid cols-3">
+
+<div class="form-group">
+
+    <label>
+        Accuracy
+    </label>
+
+    <input
+        name="system.accuracy"
+        type="number"
+        value="{{system.accuracy}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Avoidance
+    </label>
+
+    <input
+        name="system.avoidance"
+        type="number"
+        value="{{system.avoidance}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Shielding
+    </label>
+
+    <input
+        name="system.shielding"
+        type="number"
+        value="{{system.shielding}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Spell Shield
+    </label>
+
+    <input
+        name="system.spellShield"
+        type="number"
+        value="{{system.spellShield}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        DoT Shielding
+    </label>
+
+    <input
+        name="system.dotShielding"
+        type="number"
+        value="{{system.dotShielding}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Strikethrough
+    </label>
+
+    <input
+        name="system.strikethrough"
+        type="number"
+        value="{{system.strikethrough}}"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Stun Resist
+    </label>
+
+    <input
+        name="system.stunResist"
+        type="number"
+        value="{{system.stunResist}}"
+    />
+
+</div>
+
+</div>
+
+<h4>Item Effects</h4>
+
+<div class="form-group">
+
+    <label>
+        Worn Effect
+    </label>
+
+<div class="effect-picker" data-effect-picker="worn">
+        <select data-picker-group aria-label="Worn effect family">
+            <option value="">None</option>
+            {{#each wornEffectPicker.families}}
+            <option value="{{id}}"{{#if selected}} selected{{/if}}>{{label}}</option>
+            {{/each}}
+        </select>
+        <select name="system.wornEffect" data-picker-effect aria-label="Worn effect rank">
+            {{#each wornEffectPicker.ranks}}
+            <option value="{{id}}"{{#if selected}} selected{{/if}}>{{label}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Triggered Effect
+    </label>
+
+<div class="effect-picker" data-effect-picker="triggered">
+        <select data-picker-group aria-label="Triggered effect category">
+            <option value="">None</option>
+            {{#each triggeredEffectPicker.categories}}
+            <option value="{{id}}"{{#if selected}} selected{{/if}}>{{label}}</option>
+            {{/each}}
+        </select>
+        <select name="system.triggeredEffect" data-picker-effect aria-label="Triggered effect">
+            {{#each triggeredEffectPicker.effects}}
+            <option value="{{id}}"{{#if selected}} selected{{/if}}>{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    {{#if system.triggeredEffect}}
+    <button type="button" class="clicky-use-btn" title="Fire this item's triggered effect"><i class="fas fa-bolt"></i> Use</button>
+    {{/if}}
+
+</div>
+
+        <div class="form-group" style="margin: 8px 0;">
+          <label style="min-width: 110px; flex: 0 0 auto;">Notes</label>
+          <input name="system.notes" type="text" value="{{system.notes}}" data-dtype="String" style="flex: 1;" placeholder="Informational note"/>
+        </div>
+          {{localize "eqrmss.item.description"}}
+          {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
+    </div>
+  </div>
+</form>
