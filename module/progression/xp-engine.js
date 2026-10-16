@@ -129,9 +129,12 @@ const LEVEL_COMBAT_BONUS = {
     rogue:        { perLevel: 3, cap: 60 },
     monk:         { perLevel: 2, cap: 40 },
     beastlord:    { perLevel: 2, cap: 40 },
-    bard:         { perLevel: 1, cap: 20 }
-    // Pure casters (wizard, magician, enchanter, necromancer, cleric,
-    // druid, shaman) get +0 — absent from the map.
+    bard:         { perLevel: 1, cap: 20 },
+    cleric:       { perLevel: 1, cap: 20 },
+    druid:        { perLevel: 1, cap: 20 },
+    shaman:       { perLevel: 1, cap: 20 }
+    // Arcane casters (wizard, magician, enchanter, necromancer)
+    // get +0 — absent from the map.
 };
 
 export function levelCombatBonus(actor) {
