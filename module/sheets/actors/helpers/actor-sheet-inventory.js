@@ -65,6 +65,28 @@ export class EQRMSSActorInventoryHelper {
                 item.update({ "system.quantity": next });
             });
         });
+
+        // ------------------------------------------------------------
+        // Consolidate stacks (2026-10-16): merge matching inventory
+        // items into fewer entries.
+        // ------------------------------------------------------------
+        html.querySelectorAll(".item-consolidate").forEach(btn => {
+            btn.addEventListener("click", async ev => {
+                ev.preventDefault();
+                try {
+                    const { consolidateInventory } = await import("../../../utils/inventory/inventory-stacking.js");
+                    const { merged, removed } = await consolidateInventory(this.actor);
+                    if (merged > 0) {
+                        ui.notifications.info(`EQRMSS | Consolidated ${merged} stack${merged === 1 ? "" : "s"} (${removed} entries removed).`);
+                    } else {
+                        ui.notifications.info("EQRMSS | Nothing to consolidate.");
+                    }
+                } catch (e) {
+                    console.warn("EQRMSS | Consolidate failed", e);
+                    ui.notifications.warn("EQRMSS | Consolidation failed. See console.");
+                }
+            });
+        });
     }
 
     // =========================================================================

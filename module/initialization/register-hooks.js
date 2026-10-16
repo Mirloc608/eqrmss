@@ -228,5 +228,27 @@ export function registerEQRMSSHooks() {
       .catch(e => console.error("EQRMSS | pet lifecycle init failed", e));
   });
 
-}
+  // ------------------------------------------------------------
+  // Inventory auto-stacking (2026-10-16): when an item is created
+  // on an actor, merge it into an existing matching stack instead
+  // of creating a separate entry. Conservative matching — when in
+  // doubt, items do not stack.
+  // ------------------------------------------------------------
+  Hooks.on("preCreateItem", async (item, data, options, userId) => {
+    try {
+      const actor = item?.parent;
+      if (!actor || actor.documentName !== "Actor") return;
+      const { tryStackInto } = await import("../utils/inventory/inventory-stacking.js");
+      const merged = await tryStackInto(actor, data);
+      if (merged) {
+        // Returning false cancels the creation; the quantity was
+        // already added to the existing stack.
+        return false;
+      }
+    } catch (e) {
+      // Fail-open: any stacking error falls through to normal creation.
+      console.warn("EQRMSS | Auto-stack check failed", e);
+    }
+  });
 
+}
