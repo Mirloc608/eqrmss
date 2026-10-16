@@ -7,6 +7,7 @@ import { isWorn } from "../../utils/equipment/equipment-utils.js";
 import { structuralAreasFor, structuralDamageOf, structuralRating } from "../../combat/hit-locations.js";
 import { exhaustionMaxFor } from "../../combat/subdue.js";
 import { progressionManager } from "../../progression/progression-manager.js";
+import { checkAndApplyLevelUps, applyLevelUp, currentLevel } from "../../progression/xp-engine.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
 import { groupSpellsByCategory, spellBaseName, spellRankNumber } from "./helpers/actor-sheet-spells.js";
@@ -419,11 +420,29 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         // Logs / XP Context
         // ------------------------------------------------------------
         const logEntries = Array.isArray(system.logs?.entries) ? system.logs.entries : [];
+        const totalXp = Number(system.logs?.xp ?? 0);
+        const actorLevel = Math.max(1, Math.floor(Number(
+            system?.attributes?.level?.value ?? system?.level ?? 1
+        ) || 1));
+        // XP progress (lazy import to avoid cycles; fail-open).
+        let xpProgress = null;
+        try {
+            const { xpForLevel, xpToNextLevel } = await import("../../progression/xp-engine.js");
+            const floor = xpForLevel(actorLevel);
+            const needed = xpToNextLevel(actorLevel);
+            xpProgress = needed > 0 ? {
+                level: actorLevel,
+                intoLevel: Math.max(0, totalXp - floor),
+                needed,
+                pct: Math.min(100, Math.round(100 * Math.max(0, totalXp - floor) / needed))
+            } : { level: actorLevel, intoLevel: 0, needed: 0, pct: 100 };
+        } catch (e) { /* fail-open */ }
         const logsContext = {
-            xp: system.logs?.xp ?? 0,
+            xp: totalXp,
             entries: logEntries,
             isGM: game?.user?.isGM ?? false,
-            today: new Date().toISOString().slice(0, 10)
+            today: new Date().toISOString().slice(0, 10),
+            xpProgress
         };
 
         return {
@@ -914,22 +933,21 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         const actor = this.document;
         if (!actor) return;
 
-        const currentLevel = actor.system?.attributes?.level?.value ?? 1;
-        const nextLevel = currentLevel + 1;
-
         const levelCap = EQRMSSExpansionManager.getLevelCap();
 
-        if (nextLevel > levelCap) {
+        if (currentLevel(actor) + 1 > levelCap) {
             ui.notifications.warn(
                 `EQRMSS | Maximum level reached (${levelCap}, ${EQRMSSExpansionManager.getActiveExpansionName()})`
             );
             return;
         }
 
-        await progressionManager.processLevelUp(actor, nextLevel);
-        await actor.update({ "system.attributes.level.value": nextLevel });
+        // Route through the XP engine so DP + tradeskill points are granted.
+        const summary = await applyLevelUp(actor);
 
-        ui.notifications.info(`${actor.name} advanced to level ${nextLevel}!`);
+        ui.notifications.info(
+            `${actor.name} advanced to level ${summary.to}! (+${summary.dp} DP, +${summary.tradeskillPoints} tradeskill points)`
+        );
         await this.render();
     }
 
@@ -1086,6 +1104,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             "system.logs.entries": entries
         });
         ui.notifications.info(`EQRMSS | Awarded ${amount} XP.`);
+        // Organic level-up: check thresholds and apply any earned levels.
+        await checkAndApplyLevelUps(actor);
         await this.render();
     }
 
@@ -1118,6 +1138,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         }
 
         await actor.update(updates);
+        // Organic level-up if this entry granted XP.
+        if (xp > 0) await checkAndApplyLevelUps(actor);
         await this.render();
     }
 

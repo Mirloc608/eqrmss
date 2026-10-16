@@ -3,7 +3,13 @@
     <h3>Experience Point &amp; Session Log</h3>
 
     <div class="field-row" style="display: flex; justify-content: space-between; align-items: center;">
-      <div><label>Total XP:</label> <strong>{{logs.xp}}</strong></div>
+      <div><label>Total XP:</label> <strong>{{logs.xp}}</strong>
+        {{#if logs.xpProgress}}
+        <span style="margin-left: 1em; font-size: 0.9em;">
+          Level {{logs.xpProgress.level}} — {{logs.xpProgress.intoLevel}} / {{logs.xpProgress.needed}} XP to next ({{logs.xpProgress.pct}}%)
+        </span>
+        {{/if}}
+      </div>
       {{#if logs.isGM}}
       <div>
         <input type="number" name="xpAwardAmount" min="1" step="1" value="100" style="width: 6em;">
