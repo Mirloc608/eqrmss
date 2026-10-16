@@ -325,6 +325,18 @@ export class TradeskillCombineDialog extends BaseApplication {
         return matches;
     }
 
+    // Get weapon heads from inventory (2026-10-15)
+    _getWeaponHeads(weaponHeadId = null) {
+        const matches = [];
+        for (const item of this.actor.items) {
+            const itemHeadId = item.system?.weaponHeadId;
+            if (itemHeadId && (!weaponHeadId || itemHeadId === weaponHeadId)) {
+                matches.push({ id: item.id, name: item.name, item });
+            }
+        }
+        return matches;
+    }
+
     _getHides() {
         const matches = [];
         for (const item of this.actor.items) {
@@ -724,6 +736,19 @@ export class TradeskillCombineDialog extends BaseApplication {
                             this._setSelectedBowItem(r.id, "bowstring-enhance", items[0].id);
                         }
                     }
+                    // Weapon head choice (2026-10-15): filter by specific head type
+                    if (c.weaponHeadChoice) {
+                        const items = this._getWeaponHeads(c.weaponHeadChoice);
+                        const selectedId = this._getSelectedBowItem(r.id, "weaponhead");
+                        base.bowItemOptions = items.map(w => ({
+                            ...w,
+                            selected: w.id === selectedId || (!selectedId && w === items[0])
+                        }));
+                        base.bowItemKind = "weaponhead";
+                        if (items.length > 0 && !selectedId) {
+                            this._setSelectedBowItem(r.id, "weaponhead", items[0].id);
+                        }
+                    }
                     // For bowtype materialChoice, filter by class (2026-10-15)
                     if (c.materialChoice && c.materialType === "bowtype" && c.bowClass) {
                         const bows = game.eqrmss?.bows;
@@ -935,6 +960,11 @@ export class TradeskillCombineDialog extends BaseApplication {
             const item = itemId ? this.actor.items.get(itemId) : null;
             return item ? 1 : 0;
         }
+        if (component.weaponHeadChoice) {
+            const itemId = this._getSelectedBowItem(recipeId, "weaponhead");
+            const item = itemId ? this.actor.items.get(itemId) : null;
+            return item ? Number(item.system?.quantity ?? 1) : 0;
+        }
         // For materialChoice, count the selected material's ore
         if (component.materialChoice && recipeId) {
             // Style selectors (bowtype, etc.) are always available - not inventory items
@@ -1036,6 +1066,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             }
             // Crossbow components are consumed in assembly - 2026-10-15
             // Fletch components use qty from recipe (20 for arrows/bolts) - 2026-10-15
+            // Weapon heads are consumed in attach - 2026-10-15
             const xbowConsumeKinds = {
                 stockChoice: "stock",
                 triggerChoice: "trigger",
@@ -1047,6 +1078,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                 shaftChoice: "shaft",
                 strandChoice: "strand",
                 hideChoice: "hide",
+                weaponHeadChoice: "weaponhead",
                 bowstringChoice: "bowstring-enhance"
             };
             // Special handling for strandChoice: consume across multiple stacks
@@ -1089,7 +1121,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                     break;
                 }
             }
-            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice || c.fletchChoice || c.headChoice || c.shaftChoice || c.strandChoice || c.hideChoice || c.bowstringChoice) continue;
+            if (c.stockChoice || c.triggerChoice || c.limbsChoice || c.riserChoice || c.grooveChoice || c.fletchChoice || c.headChoice || c.shaftChoice || c.strandChoice || c.hideChoice || c.bowstringChoice || c.weaponHeadChoice) continue;
             // For optionalForTypes (cams), only consume if selected type needs them - 2026-10-15
             if (c.optionalForTypes && recipeId) {
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
@@ -1677,25 +1709,49 @@ export class TradeskillCombineDialog extends BaseApplication {
             }
         }
 
-        // Haft weapons (2026-10-15): shaft + metal head -> finished weapon
+        // Weapon heads (2026-10-15): forge the head/blade
+        if (productType === "weapon-head" && recipeId) {
+            const metalName = String(materialId).replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+            const headName = `${metalName} ${product.name}`;
+            await this.actor.createEmbeddedDocuments("Item", [{
+                name: headName,
+                type: "weapon",
+                system: {
+                    weaponHeadId: product.weaponHeadId,
+                    weaponTemplate: product.weaponId,
+                    material: materialId,
+                    quantity: 1,
+                    description: `Forged ${product.name.toLowerCase()} (${quality}).`
+                }
+            }]);
+            ui.notifications.info(`Forged ${headName}.`);
+            return;
+        }
+
+        // Haft weapons (2026-10-15): shaft + head (from inventory) -> finished weapon
         if (productType === "haft-weapon" && recipeId) {
             const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
             const shaftType = product.shaftType; // "long" or "short"
             const kind = shaftType === "long" ? "haft-long-shaft" : "haft-short-shaft";
             const shaftId = this._getSelectedBowItem(recipeId, kind);
-            const metalComp = recipe?.components?.find(c => c.materialType === "ore");
-            const metalId = metalComp ? this._getSelectedMaterial(recipeId, recipe ?? {}, metalComp.id) : "iron";
+            const headId = this._getSelectedBowItem(recipeId, "weaponhead");
             if (!shaftId) {
                 ui.notifications.error("No shaft selected.");
                 return;
             }
+            if (!headId) {
+                ui.notifications.error("No head selected.");
+                return;
+            }
             const shaft = this.actor.items.get(shaftId);
-            if (!shaft) {
-                ui.notifications.error("Selected shaft not found.");
+            const head = this.actor.items.get(headId);
+            if (!shaft || !head) {
+                ui.notifications.error("Selected components not found.");
                 return;
             }
             const woodName = shaft.system?.haftWoodName ?? "";
-            const metalName = String(metalId).replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+            const headMetalId = head.system?.material ?? "iron";
+            const metalName = String(headMetalId).replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
             const weaponName = product.name;
             const fullName = woodName ? `${metalName} ${weaponName} (${woodName} Shaft)` : `${metalName} ${weaponName}`;
             await this.actor.createEmbeddedDocuments("Item", [{
@@ -1703,14 +1759,14 @@ export class TradeskillCombineDialog extends BaseApplication {
                 type: "weapon",
                 system: {
                     weaponTemplate: product.weaponId,
-                    material: metalId,
+                    material: headMetalId,
                     haftWood: shaft.system?.haftWood,
                     haftWoodName: woodName,
                     quantity: 1,
                     description: `Crafted ${weaponName.toLowerCase()} (${quality}). ${woodName} shaft, ${metalName} head.`
                 }
             }]);
-            ui.notifications.info(`Forged ${fullName}.`);
+            ui.notifications.info(`Assembled ${fullName}.`);
             return;
         }
 
