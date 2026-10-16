@@ -298,12 +298,24 @@ export class EQRMSSActorContextHelper {
         };
         // Rank caps (2026-10-14): racial/class-granted skills capped at 1 rank.
         // Vah Shir Safe Fall, Iksar Foraging, Bard Tracking are capped at 1.
+        // Tradeskill caps (2026-10-16, EQ canon): 200 for general tradeskills,
+        // 300 for class/race skills (Alchemy, Poison Making, Tinkering).
+        // Specialization: one general tradeskill can be raised to 300.
+        const TRADESKILL_GENERAL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-research"]);
+        const TRADESKILL_CLASS_IDS = new Set(["skill-alchemy","skill-poison-making","skill-tinkering"]);
         const _skillRankCap = (skillId) => {
             const v = _skillVisibility;
             const id = String(skillId ?? "");
             if (id === "skill-safe-fall" && v.isVahShir && !["monk", "beastlord"].includes(v.classId)) return 1;
             if (id === "skill-foraging" && v.isIksar && !["ranger", "druid", "bard"].includes(v.classId)) return 1;
             if (id === "skill-tracking" && v.classId === "bard") return 1;
+            // Tradeskill caps
+            if (TRADESKILL_CLASS_IDS.has(id)) return 300;
+            if (TRADESKILL_GENERAL_IDS.has(id)) {
+                const spec = String(this.actor?.system?.tradeskillSpecialization ?? "");
+                if (spec === id) return 300;
+                return 200;
+            }
             return null;
         };
         const _skillCatalog = (() => {
@@ -318,7 +330,10 @@ export class EQRMSSActorContextHelper {
                     const dev = developed.get(key);
                     const isTs = TRADESKILL_IDS.has(skill.id);
                     const category = skill.system?.category ?? skill.category ?? "";
-                    return { id: skill.id, name: skill.name, category, description: skill.system?.description ?? skill.description ?? "", developed: !!dev, itemId: dev?.id ?? null, ranks: dev ? Number(dev.system?.ranks ?? 0) : 0, cost: skill.system?.cost ?? skill.cost ?? "-", isTradeskill: isTs, canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed, maxRanks: _skillRankCap(skill.id) };
+                    const specId = String(actorRef?.system?.tradeskillSpecialization ?? "");
+                    const isSpec = specId === skill.id;
+                    const canSpec = TRADESKILL_GENERAL_IDS.has(skill.id);
+                    return { id: skill.id, name: skill.name, category, description: skill.system?.description ?? skill.description ?? "", developed: !!dev, itemId: dev?.id ?? null, ranks: dev ? Number(dev.system?.ranks ?? 0) : 0, cost: skill.system?.cost ?? skill.cost ?? "-", isTradeskill: isTs, canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed, maxRanks: _skillRankCap(skill.id), isSpecialized: isSpec, canSpecialize: canSpec, specializationId: specId };
                 }).filter(s => _isSkillVisible(s.id, s.category)).sort((a, b) => String(a.name).localeCompare(String(b.name)));
             } catch (e) { return []; }
         })();
