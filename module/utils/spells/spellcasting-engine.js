@@ -32,7 +32,7 @@ export class EQRMSSSpellcastingEngine {
     }
 
     // Resist roll
-    const roll = new Roll("1d100").evaluateSync().total;
+    const roll = (await new Roll("1d100").evaluate()).total;
     const resisted = roll < resistValue;
 
     if (resisted) {

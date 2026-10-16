@@ -733,7 +733,7 @@ Hooks.once("ready", async function () {
             // Skill engine: use CONFIG.EQRMSS.skills (packs deleted 2026-09-28)
             // Map id -> _id for registry compatibility
             const skillData = Object.values(CONFIG.EQRMSS?.skills ?? {}).map(s => ({ ...s, _id: s.id ?? s._id }));
-            const roller = { roll: (formula) => new Roll(formula).evaluateSync() };
+            const roller = { roll: async (formula) => await new Roll(formula).evaluate() };
             initializeSkillEngine({ skills: skillData, categories: [], metadata: [], professionCosts: [], roller });
         } catch (e) { console.warn("Skill engine init failed", e); }
         registerEQRMSSSheets();
