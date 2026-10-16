@@ -24,7 +24,8 @@ const RECIPE_FILES = [
     "tinkering.json",
     "alchemy.json",
     "poison.json",
-    "research.json"
+    "research.json",
+    "fishing.json"
 ];
 
 async function fetchJson(path) {

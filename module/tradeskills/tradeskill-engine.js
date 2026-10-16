@@ -209,6 +209,7 @@ export function getTradeskillIds() {
         "skill-tinkering",
         "skill-alchemy",
         "skill-poison-making",
-        "skill-research"
+        "skill-research",
+        "skill-fishing"
     ];
 }
