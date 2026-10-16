@@ -1,6 +1,10 @@
 <section class="tab skills-tab" data-group="primary" data-tab="skills">
     <div class="skills-container">
         <h3>{{localize "eqrmss.pc_sheet.skills.header"}}</h3>
+        <div class="tradeskill-points-display" style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 4px;">
+            <strong>Tradeskill Points: {{items.tradeskillPoints}}</strong>
+            <span style="font-size: 0.9em; color: #666;">(+5 per level, dedicated pool)</span>
+        </div>
         {{#if items.skillGroups.length}}
         {{#each items.skillGroups}}
         <div class="skill-category">

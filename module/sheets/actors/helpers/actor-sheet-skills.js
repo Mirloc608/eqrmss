@@ -47,7 +47,7 @@ export class EQRMSSActorSkillsHelper {
         // Cycle new ranks (0 → 1 → 2 → 3 → 0)
         // ------------------------------------------------------------
         html.querySelectorAll(".skill-newrank-toggle").forEach(btn => {
-            btn.addEventListener("click", ev => {
+            btn.addEventListener("click", async ev => {
                 const id = ev.currentTarget.dataset.itemId;
                 const item = this.actor.items.get(id);
                 if (!item) return;
@@ -60,36 +60,25 @@ export class EQRMSSActorSkillsHelper {
                     ui.notifications.warn(`This skill is capped at ${maxRanks} rank(s).`);
                     return;
                 }
-                // Tradeskill points-per-level (2026-10-16, EQ canon): limit tradeskill
-                // ranks purchased per character level to 5 (matches EQ alchemy rule).
-                const TRADESKILL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research"]);
+                // Tradeskill point pool (2026-10-16): dedicated pool, 5 granted per level.
+                // Spending a rank deducts from pool; un-spending refunds. Unspent carries over.
+                const TRADESKILL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research","skill-fishing"]);
                 const skillId = String(item.system.skillId ?? "");
-                if (TRADESKILL_IDS.has(skillId) && next > current) {
-                    const level = Number(this.actor.system?.attributes?.level?.value ?? 1);
-                    const spentLevel = Number(this.actor.system?.tradeskillPointsLevel ?? 0);
-                    let spent = Number(this.actor.system?.tradeskillPointsSpent ?? 0);
-                    if (spentLevel !== level) spent = 0;
-                    const MAX_TRADESKILL_PER_LEVEL = 5;
-                    // Count current new_rank across all tradeskills (excluding this item's old value)
-                    let totalNew = 0;
-                    for (const s of this.actor.items.contents) {
-                        if (s.type !== "skill") continue;
-                        if (!TRADESKILL_IDS.has(String(s.system?.skillId ?? ""))) continue;
-                        if (s.id === id) continue;
-                        totalNew += Number(s.system?.new_rank ?? 0);
-                    }
-                    if (totalNew + next > MAX_TRADESKILL_PER_LEVEL) {
-                        ui.notifications.warn(`Tradeskill ranks limited to ${MAX_TRADESKILL_PER_LEVEL} per level.`);
+                if (TRADESKILL_IDS.has(skillId) && next !== current) {
+                    const pool = Number(this.actor.system?.tradeskillPoints ?? 0);
+                    const delta = next - current;
+                    // Handle 3->0 wrap (refunds 3)
+                    const actualDelta = (current === 3 && next === 0) ? -3 : delta;
+                    if (actualDelta > 0 && pool < actualDelta) {
+                        ui.notifications.warn(`Not enough tradeskill points (${pool} available).`);
                         return;
                     }
-                    // Update spent counter
-                    this.actor.update({
-                        "system.tradeskillPointsSpent": totalNew + next,
-                        "system.tradeskillPointsLevel": level
+                    await this.actor.update({
+                        "system.tradeskillPoints": pool - actualDelta
                     });
                 }
 
-                item.update({ "system.new_rank": next });
+                await item.update({ "system.new_rank": next });
             });
         });
 
@@ -147,6 +136,18 @@ export class EQRMSSActorSkillsHelper {
                 if (!catalogSkill) {
                     ui.notifications.warn(`Skill data not found: ${skillName}`);
                     return;
+                }
+                
+                // Tradeskill point pool (2026-10-16): developing a tradeskill costs
+                // 1 point from the dedicated pool.
+                const TRADESKILL_IDS_DEV = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research","skill-fishing"]);
+                if (TRADESKILL_IDS_DEV.has(String(skillId ?? ""))) {
+                    const pool = Number(this.actor.system?.tradeskillPoints ?? 0);
+                    if (pool < 1) {
+                        ui.notifications.warn(`Not enough tradeskill points (${pool} available).`);
+                        return;
+                    }
+                    await this.actor.update({ "system.tradeskillPoints": pool - 1 });
                 }
                 
                 // Create skill Item on actor (maxRanks from visibility cap, if any)

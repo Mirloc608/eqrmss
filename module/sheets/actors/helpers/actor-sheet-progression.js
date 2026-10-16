@@ -67,7 +67,13 @@ export class EQRMSSActorProgressionHelper {
         // ------------------------------------------------------------
         await this.actor.update({ "system.level": level + 1 });
 
-        ui.notifications.info(`Leveled up to ${level + 1}!`);
+        // ------------------------------------------------------------
+        // Tradeskill points (2026-10-16): 5 dedicated points per level
+        // ------------------------------------------------------------
+        const currentTsPoints = Number(this.actor.system?.tradeskillPoints ?? 0);
+        await this.actor.update({ "system.tradeskillPoints": currentTsPoints + 5 });
+
+        ui.notifications.info(`Leveled up to ${level + 1}! (+5 tradeskill points)`);
     }
 
     // =========================================================================

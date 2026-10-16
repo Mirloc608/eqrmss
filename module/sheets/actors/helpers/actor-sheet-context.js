@@ -301,8 +301,8 @@ export class EQRMSSActorContextHelper {
         // Tradeskill caps (2026-10-16, EQ canon): 200 for general tradeskills,
         // 300 for class/race skills (Alchemy, Poison Making, Tinkering).
         // Specialization: one general tradeskill can be raised to 300.
-        const TRADESKILL_GENERAL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-research"]);
-        const TRADESKILL_CLASS_IDS = new Set(["skill-alchemy","skill-poison-making","skill-tinkering"]);
+        const TRADESKILL_GENERAL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring"]);
+        const TRADESKILL_CLASS_IDS = new Set(["skill-alchemy","skill-poison-making","skill-tinkering","skill-research"]);
         const _skillRankCap = (skillId) => {
             const v = _skillVisibility;
             const id = String(skillId ?? "");
@@ -359,6 +359,7 @@ export class EQRMSSActorContextHelper {
             skillCatalog: _skillCatalog,
             skillGroups: _skillGroups,
             skillCategories: items.filter(i => i?.type === "skillcategory"),
+            tradeskillPoints: Number(this.actor?.system?.tradeskillPoints ?? 0),
             inventory: items.filter(i => new Set(["item", "consumable", "jewelry", "shield", "transport"]).has(i?.type)),
             languages: items.filter(i => i?.type === "language")
         };
