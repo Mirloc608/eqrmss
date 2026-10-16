@@ -1945,6 +1945,27 @@ button.rank-badge:hover {
   padding: 2px 8px;
   font-size: 12px;
 }
+/* Parchment window chrome + scrolling (matches tradeskill-combine pattern).
+   The dialog's section.xp-scoreboard lives inside .window-content; without
+   this the Foundry dark theme shows through and long forms don't scroll. */
+.application:has(.xp-scoreboard) .window-content {
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,250,230,.7), rgba(255,250,230,0) 60%),
+    linear-gradient(165deg, #e9d6a4 0%, #dec48f 50%, #cfb178 100%);
+  color: #3a2a18;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+.application:has(.xp-scoreboard) .window-content h2,
+.application:has(.xp-scoreboard) .window-content h3,
+.application:has(.xp-scoreboard) .window-content legend,
+.application:has(.xp-scoreboard) .window-content label {
+  color: #3a2a18;
+}
+.application:has(.xp-scoreboard) .window-content select,
+.application:has(.xp-scoreboard) .window-content input {
+  color: #3a2a18;
+}
 .xp-scoreboard .xp-table {
   width: 100%;
   border-collapse: collapse;
