@@ -287,7 +287,7 @@ export class EQRMSSActorContextHelper {
             // Skill-level filters
             if (id === "skill-tinkering" && !v.isGnome) return false;
             if (id === "skill-alchemy" && v.classId !== "shaman") return false;
-            if (id === "skill-poison" && v.classId !== "rogue") return false;
+            if ((id === "skill-poison-making" || id === "skill-apply-poison") && v.classId !== "rogue") return false;
             if (id === "skill-traps" && !["ranger", "bard"].includes(v.classId)) return false;
             if (["skill-pick-locks", "skill-pick-pockets"].includes(id) && v.classId !== "bard") return false;
             if (id === "skill-tracking" && !["bard", "druid", "ranger"].includes(v.classId)) return false;
@@ -311,7 +311,7 @@ export class EQRMSSActorContextHelper {
                 const skillStore = (typeof CONFIG !== 'undefined' ? CONFIG?.EQRMSS?.skills : null) ?? globalThis.CONFIG?.EQRMSS?.skills ?? {};
                 const catalog = Object.values(skillStore);
                 const developed = new Map(items.filter(i => i?.type === "skill").map(s => [String(s.system?.skillId ?? s.name).toLowerCase(), s]));
-                const TRADESKILL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison","skill-research"]);
+                const TRADESKILL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research"]);
                 const actorRef = this.actor;
                 return catalog.map(skill => {
                     const key = String(skill.id ?? skill.name).toLowerCase();

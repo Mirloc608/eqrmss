@@ -825,7 +825,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             "skill-tailoring": "Tailoring",
             "skill-tinkering": "Tinkering",
             "skill-alchemy": "Alchemy",
-            "skill-poison": "Poison Making",
+            "skill-poison-making": "Poison Making",
             "skill-research": "Research"
         };
         return names[this.skillId] ?? this.skillId;

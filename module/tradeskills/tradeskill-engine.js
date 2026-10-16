@@ -31,7 +31,7 @@ export function qualityForRoll(natural) {
  */
 export const TRADESKILL_RESTRICTIONS = {
     "skill-alchemy": { classes: ["shaman"], races: null },
-    "skill-poison": { classes: ["rogue"], races: null },
+    "skill-poison-making": { classes: ["rogue"], races: null },
     "skill-tinkering": { classes: null, races: ["gnome"] }
 };
 
@@ -208,7 +208,7 @@ export function getTradeskillIds() {
         "skill-tailoring",
         "skill-tinkering",
         "skill-alchemy",
-        "skill-poison",
+        "skill-poison-making",
         "skill-research"
     ];
 }
