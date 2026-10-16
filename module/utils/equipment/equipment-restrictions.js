@@ -6,11 +6,16 @@
 //  2. Class weapon-type restrictions on bandolier assignment
 //  3. Dual Wield requirement for two 1-handed weapons
 //  4. Shield skill gate for active shield use (bash)
+//  5. Class armor-category restrictions on equip
 //
-// Slot enforcement hooks into the worn toggle (actor-sheet-inventory.js).
+// Slot + armor enforcement hooks into the location dropdown
+// (_onItemLocationChange in eqrmss_player_sheet.js) and the worn
+// toggle (actor-sheet-inventory.js).
 // Weapon/dual-wield hooks into setBandolierSlot (module/combat/bandolier.js).
 // Shield bash hooks into executeAbility (module/combat/ability-handlers.js).
 // ============================================================
+
+import { isWorn } from "./equipment-utils.js";
 
 // ------------------------------------------------------------
 // Slot definitions
@@ -65,12 +70,14 @@ export function getSlotCapacity(slotKey) {
 
 /**
  * Count worn items of the actor occupying the same slot.
+ * Uses the shared isWorn rule: location === "equipped" is
+ * authoritative; falls back to the worn/equipped flags.
  */
 function countWornInSlot(actor, slotKey, excludeId = null) {
     let n = 0;
     for (const i of actor?.items?.contents ?? []) {
         if (excludeId && i.id === excludeId) continue;
-        if (!i.system?.worn) continue;
+        if (!isWorn(i)) continue;
         if (getItemSlot(i) === slotKey) n++;
     }
     return n;
@@ -256,14 +263,65 @@ export function checkWeaponAllowedForClass(actor, weaponItem) {
     return { ok: true };
 }
 
+// ------------------------------------------------------------
+// Class armor restrictions
+// ------------------------------------------------------------
+
+/** Load the armor { allowed, restricted } block for a classId. */
+function getClassArmorBlock(classId) {
+    try {
+        const classes = game?.eqrmss?.classes ?? {};
+        const cls = classes[classId] ?? classes[String(classId ?? "").toLowerCase()];
+        const a = cls?.armor ?? cls?.system?.armor;
+        if (a && (Array.isArray(a.allowed) || Array.isArray(a.restricted))) return a;
+    } catch (e) { /* fall through */ }
+    return null;
+}
+
+/**
+ * Check whether an armor item may be worn by the actor's class.
+ * Uses the class JSON's armor { allowed, restricted } block and the
+ * item's system.armorCategory (cloth/leather/chain/plate).
+ * Returns { ok: true } or { ok: false, message }.
+ * If no class armor data exists, the armor is allowed (fail-open).
+ */
+export function checkArmorAllowedForClass(actor, armorItem) {
+    const classId = getActorClassId(actor);
+    if (!classId) return { ok: true };
+    const block = getClassArmorBlock(classId);
+    if (!block) return { ok: true };
+
+    const category = String(armorItem?.system?.armorCategory ?? "").trim().toLowerCase();
+    if (!category) return { ok: true };
+
+    const restricted = new Set((block.restricted ?? []).map(s => String(s).trim().toLowerCase()));
+    if (restricted.has(category)) {
+        return {
+            ok: false,
+            message: `Your class cannot wear ${category} armor (${armorItem?.name ?? "armor"}).`,
+        };
+    }
+
+    const allowed = block.allowed ?? [];
+    if (allowed.length) {
+        const allowedSet = new Set(allowed.map(s => String(s).trim().toLowerCase()));
+        if (!allowedSet.has(category)) {
+            return {
+                ok: false,
+                message: `Your class cannot wear ${category} armor (${armorItem?.name ?? "armor"}).`,
+            };
+        }
+    }
+    return { ok: true };
+}
+
 /**
  * Dual-wield gate: after assigning itemId to (setIndex, side), would the
  * set hold two 1-handed weapons? If so the actor needs Dual Wield.
  * `sets` is the post-assignment array of { left, right } (item ids or null).
  * `getItem` resolves an id to an item (for hands lookup).
  * Returns { ok: true } or { ok: false, message }.
- */
-export function checkDualWield(actor, sets, setIndex, getItem) {
+ */export function checkDualWield(actor, sets, setIndex, getItem) {
     const set = sets?.[setIndex];
     if (!set) return { ok: true };
     const left = set.left ? getItem(set.left) : null;

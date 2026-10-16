@@ -871,6 +871,32 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             }
         } else {
             // Equipped or Pack - update location
+            if (newLocation === "equipped") {
+                // Enforce equipment restrictions before equipping.
+                const {
+                    checkSlotAvailable,
+                    checkArmorAllowedForClass,
+                    warnBlocked,
+                } = await import("../../utils/equipment/equipment-restrictions.js");
+
+                // Slot capacity: one item per slot (ears/fingers/wrists excepted).
+                const slotCheck = checkSlotAvailable(actor, item);
+                if (!slotCheck.ok) {
+                    warnBlocked(slotCheck.message);
+                    await this.render(); // revert dropdown
+                    return;
+                }
+
+                // Armor proficiency: class must be able to wear this category.
+                if (item.type === "armor") {
+                    const armorCheck = checkArmorAllowedForClass(actor, item);
+                    if (!armorCheck.ok) {
+                        warnBlocked(armorCheck.message);
+                        await this.render(); // revert dropdown
+                        return;
+                    }
+                }
+            }
             await item.update({ "system.location": newLocation });
             if (newLocation === "equipped") {
                 ui.notifications.info(`${item.name} equipped.`);
