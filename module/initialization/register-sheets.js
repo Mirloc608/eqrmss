@@ -6,6 +6,8 @@
 import EQRMSSPlayerSheet from "../sheets/actors/eqrmss_player_sheet.js";
 import EQRMSSNPCSheet from "../sheets/actors/eqrmss_npc_sheet.js";
 import EQRMSSItemSheet from "../sheets/items/eqrmss_item_sheet.js";
+import EQRMSSItemToolSheet from "../sheets/items/eqrmss_tool_sheet.js";
+import EQRMSSItemTradeskillSheet from "../sheets/items/eqrmss_tradeskill_sheet.js";
 import EQRMSSArmorSheet from "../sheets/items/eqrmss_armor_sheet.js";
 import EQRMSSTransportSheet from "../sheets/items/eqrmss_transport_sheet.js";
 import EQRMSSWeaponSheet from "../sheets/items/eqrmss_weapon_sheet.js";
@@ -43,8 +45,20 @@ export function registerEQRMSSSheets() {
 
     // --- Item Sheets ---
     DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSItemSheet, {
-        types: ["item", "consumable", "tool", "tradeskill"],
+        types: ["item", "consumable"],
         label: "eqrmss.entity_sheet.item",
+        makeDefault: true
+    });
+
+    DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSItemToolSheet, {
+        types: ["tool"],
+        label: "eqrmss.entity_sheet.tool",
+        makeDefault: true
+    });
+
+    DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSItemTradeskillSheet, {
+        types: ["tradeskill"],
+        label: "eqrmss.entity_sheet.tradeskill",
         makeDefault: true
     });
 

@@ -96,11 +96,22 @@ export async function attemptCombine(actor, recipe, hasComponents, consumeCompon
         };
     }
 
+    // Tool bonus (2026-10-16): tools in the actor's inventory whose
+    // system.tradeskillId matches this recipe's skill grant their
+    // system.skillBonus as a situational modifier on the combine roll.
+    let toolBonus = 0;
+    try {
+        const tools = actor.items.filter(i =>
+            i.type === "tool" && String(i.system?.tradeskillId ?? "") === recipe.skill
+        );
+        for (const t of tools) toolBonus += Number(t.system?.skillBonus ?? 0);
+    } catch (e) { /* inventory unavailable; no tool bonus */ }
+
     // Roll d100 + skill bonus vs difficulty
     const check = await skillEngine.rollSkillCheck(
         actor,
         recipe.skill,
-        { target: recipe.difficulty, label: recipe.name }
+        { target: recipe.difficulty, label: recipe.name, situationalModifiers: toolBonus }
     );
 
     const natural = check.roll.total;

@@ -1,0 +1,41 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
+    </header>
+    <div class="sheet-content">
+        <div>
+            <table>
+                <tr>
+                    <th>{{localize "eqrmss.item.weight"}}</th>
+                    <th>{{localize "eqrmss.item.cost"}}</th>
+                    <th>Used With</th>
+                    <th>Skill Bonus</th>
+                </tr>
+                <td>
+                    <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"/>
+                </td>
+                <td>
+                    <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
+                </td>
+                <td>
+                    <select name="system.tradeskillId" data-dtype="String">
+                        <option value="" {{#if (eq system.tradeskillId "")}}selected{{/if}}>—</option>
+                        {{#each tradeskills}}
+                        <option value="{{id}}" {{#if (eq ../system.tradeskillId id)}}selected{{/if}}>{{name}}</option>
+                        {{/each}}
+                    </select>
+                </td>
+                <td>
+                    <input name="system.skillBonus" type="text" value="{{system.skillBonus}}" data-dtype="Number" placeholder="0"/>
+                </td>
+            </table>
+            <div class="form-group" style="margin: 8px 0;">
+                <label style="min-width: 110px; flex: 0 0 auto;">Notes</label>
+                <input name="system.notes" type="text" value="{{system.notes}}" data-dtype="String" style="flex: 1;" placeholder="e.g. reusable, consumed on crit fail"/>
+            </div>
+                {{localize "eqrmss.item.description"}}
+                {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
+        </div>
+    </div>
+</form>
