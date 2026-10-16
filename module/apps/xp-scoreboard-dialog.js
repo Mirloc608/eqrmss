@@ -14,6 +14,7 @@ import {
     calculateXpBreakdown
 } from "../progression/xp-calculator.js";
 import { checkAndApplyLevelUps } from "../progression/xp-engine.js";
+import { getXPTracker, trackerHasData, clearXPTracker } from "../progression/xp-tracker.js";
 
 export class XPScoreboardDialog extends BaseApplication {
 
@@ -72,6 +73,49 @@ export class XPScoreboardDialog extends BaseApplication {
             miscLabel: ""
         };
         this.breakdown = null;
+        // Pre-fill from the combat XP tracker (2026-10-16). The GM can
+        // still edit every field before calculating/awarding.
+        this.trackedNote = "";
+        try {
+            const tracked = getXPTracker(actor);
+            if (trackerHasData(tracked)) {
+                const f = this.formState;
+                // Kills: pre-fill the first; note any additional kills.
+                if (tracked.kills.length > 0) {
+                    const k = tracked.kills[0];
+                    if (k.hits > 0) f.killHits = String(k.hits);
+                    if (k.level > 0) f.killLevel = String(k.level);
+                    if (k.raceKey) f.killRace = k.raceKey;
+                    if (tracked.kills.length > 1) {
+                        const others = tracked.kills.slice(1)
+                            .map(x => `${x.name} (lvl ${x.level})`).join(", ");
+                        this.trackedNote += `Also tracked kills: ${others}. Pre-filled the first — adjust as needed. `;
+                    }
+                }
+                // Hits delivered/received and knockout flags.
+                if (tracked.hitsDelivered > 0) f.hitsDelivered = String(tracked.hitsDelivered);
+                if (tracked.hitsReceived > 0) f.hitsReceived = String(tracked.hitsReceived);
+                f.charKnockedOut = !!tracked.charKnockedOut;
+                f.foeKnockedOut = !!tracked.foeKnockedOut;
+                // Crits: one row per tracked crit.
+                for (const c of tracked.crits) {
+                    f.crits.push({
+                        severity: c.severity || "C",
+                        foeLevel: c.foeLevel > 0 ? String(c.foeLevel) : "",
+                        large: !!c.large,
+                        superLarge: !!c.superLarge,
+                        foeUnconscious: !!c.foeUnconscious,
+                        foeStunned: !!c.foeStunned,
+                        singleCombat: !!c.singleCombat
+                    });
+                }
+                if (this.trackedNote) {
+                    console.log(`EQRMSS | XP scoreboard pre-filled from combat tracker for ${actor?.name}`);
+                }
+            }
+        } catch (e) {
+            console.warn("EQRMSS | XP tracker pre-fill failed", e);
+        }
     }
 
     get title() {
@@ -91,6 +135,7 @@ export class XPScoreboardDialog extends BaseApplication {
         ctx.raceBonuses = KILL_RACE_BONUSES;
         ctx.maneuverDifficulties = MANEUVER_DIFFICULTY_MULT;
         ctx.breakdown = this.breakdown;
+        ctx.trackedNote = this.trackedNote || "";
         return ctx;
     }
 
@@ -269,6 +314,13 @@ export class XPScoreboardDialog extends BaseApplication {
         });
         ui.notifications.info(`EQRMSS | Awarded ${breakdown.total} XP to ${actor.name}.`);
         await checkAndApplyLevelUps(actor);
+        // Clear the combat tracker so the same events aren't double-counted
+        // if the scoreboard is opened again.
+        try {
+            await clearXPTracker(actor);
+            // Reset pre-filled form state for the next session.
+            this.trackedNote = "";
+        } catch (e) { /* non-fatal */ }
         this.breakdown = breakdown;
         await this.render();
     }

@@ -5,6 +5,9 @@
     <div class="xp-head">
         <h2>{{actorName}}</h2>
         <p class="xp-sub">Experience Guideline Table 15.4.2 — enter the session's events, calculate, then award.</p>
+        {{#if trackedNote}}
+        <p class="xp-tracked-note"><i class="fas fa-bolt"></i> {{trackedNote}}</p>
+        {{/if}}
     </div>
 
     <div class="form-group">

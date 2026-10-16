@@ -63,6 +63,18 @@ export function registerEQRMSSHooks() {
   Hooks.on("createCombat", (combat) => {
     if (!game.user?.isGM) return;
     resetSignaturesFor(combat, "start");
+    // XP tracker (2026-10-16): clear per-character combat XP data at
+    // encounter start so the scoreboard pre-fills only this fight.
+    (async () => {
+      try {
+        const { clearXPTracker } = await import("../progression/xp-tracker.js");
+        for (const c of combat?.combatants ?? []) {
+          if (c?.actor) await clearXPTracker(c.actor);
+        }
+      } catch (e) {
+        console.warn("EQRMSS | XP tracker reset failed", e);
+      }
+    })();
   });
   Hooks.on("deleteCombat", (combat) => {
     if (!game.user?.isGM) return;

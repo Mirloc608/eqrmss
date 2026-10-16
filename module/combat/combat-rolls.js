@@ -43,6 +43,7 @@ import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { getSpellModifiers } from "../spells/spell-buffs.js";
 import { getSongModifiers } from "../spells/songs.js";
 import { strategicTargetingSkill, promptCalledShot } from "./strategic-targeting.js";
+import { trackXPHits, trackXPCrit, trackXPKill, trackXPCharKnockedOut } from "../progression/xp-tracker.js";
 import { applyArmorWear, ARMOR_WEAR_FAMILY_LABEL } from "./armor-wear.js";
 import { actorStance, stanceOBBonus, stanceRanks, defensiveCritCap, capCritSeverity } from "./stance.js";
 import { isSubduing, subdueCritPoints, isExhausted, applySubdueExhaustion, rollExhaustionResistance } from "./subdue.js";
@@ -610,6 +611,11 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
             db = manual.db;
         }
     }
+
+    // ---- XP tracker (2026-10-16): snapshot alive/unconscious state
+    // before resolution so kills and knockouts can be attributed.
+    const xpTargetWasDead = !!targetActor?.system?.status?.dead;
+    const xpAttackerWasUnconscious = !!actor?.system?.status?.unconscious;
 
     // ---- Magic weapon vs non-magical protection (2026-10-14, user ruling):
     // creatures protected from non-magical attacks cannot be struck by
@@ -1397,6 +1403,28 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         } catch (e) {
             console.error("EQRMSS | Ammo proc fire failed", e);
         }
+    }
+
+    // ---- XP tracker (2026-10-16): record hits, crits, kills, knockouts
+    // for the Table 15.4.2 scoreboard. All calls are no-ops on null
+    // actors and never throw into the attack flow.
+    try {
+        if (targetActor && totalDamage > 0) {
+            await trackXPHits(actor, targetActor, totalDamage);
+        }
+        if (targetActor && Array.isArray(resolvedSeverities)) {
+            for (const sev of resolvedSeverities) {
+                await trackXPCrit(actor, targetActor, { severity: sev });
+            }
+        }
+        if (targetActor && !xpTargetWasDead && targetActor.system?.status?.dead) {
+            await trackXPKill(actor, targetActor);
+        }
+        if (!xpAttackerWasUnconscious && actor?.system?.status?.unconscious) {
+            await trackXPCharKnockedOut(actor);
+        }
+    } catch (e) {
+        console.warn("EQRMSS | XP tracking failed", e);
     }
 
     await ChatMessage.create({
