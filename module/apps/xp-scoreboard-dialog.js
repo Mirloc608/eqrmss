@@ -44,7 +44,7 @@ export class XPScoreboardDialog extends BaseApplication {
         super(options);
         this.actor = actor;
         // Form state; crits is a dynamic row list.
-        this.form = {
+        this.formState = {
             novelty: "subsequent",
             killHits: "",
             killLevel: "",
@@ -86,7 +86,7 @@ export class XPScoreboardDialog extends BaseApplication {
         }
         ctx.notGM = false;
         ctx.actorName = this.actor?.name ?? "Character";
-        ctx.form = this.form;
+        ctx.form = this.formState;
         ctx.multiplierLabels = XP_MULTIPLIER_LABELS;
         ctx.raceBonuses = KILL_RACE_BONUSES;
         ctx.maneuverDifficulties = MANEUVER_DIFFICULTY_MULT;
@@ -101,7 +101,7 @@ export class XPScoreboardDialog extends BaseApplication {
             const field = el.dataset.xpField;
             const evt = el.type === "checkbox" ? "change" : "input";
             el.addEventListener(evt, () => {
-                this.form[field] = el.type === "checkbox" ? el.checked : el.value;
+                this.formState[field] = el.type === "checkbox" ? el.checked : el.value;
                 // Changing inputs invalidates the last calculation.
                 this.breakdown = null;
                 const results = this.element.querySelector(".xp-results");
@@ -112,8 +112,8 @@ export class XPScoreboardDialog extends BaseApplication {
             el.addEventListener(el.type === "checkbox" ? "change" : "input", () => {
                 const idx = Number(el.dataset.critIdx);
                 const field = el.dataset.critField;
-                if (this.form.crits[idx]) {
-                    this.form.crits[idx][field] = el.type === "checkbox" ? el.checked : el.value;
+                if (this.formState.crits[idx]) {
+                    this.formState.crits[idx][field] = el.type === "checkbox" ? el.checked : el.value;
                 }
                 this.breakdown = null;
                 const results = this.element.querySelector(".xp-results");
@@ -126,19 +126,19 @@ export class XPScoreboardDialog extends BaseApplication {
     _syncForm() {
         this.element.querySelectorAll("[data-xp-field]").forEach(el => {
             const field = el.dataset.xpField;
-            this.form[field] = el.type === "checkbox" ? el.checked : el.value;
+            this.formState[field] = el.type === "checkbox" ? el.checked : el.value;
         });
         this.element.querySelectorAll("[data-crit-field]").forEach(el => {
             const idx = Number(el.dataset.critIdx);
             const field = el.dataset.critField;
-            if (this.form.crits[idx]) {
-                this.form.crits[idx][field] = el.type === "checkbox" ? el.checked : el.value;
+            if (this.formState.crits[idx]) {
+                this.formState.crits[idx][field] = el.type === "checkbox" ? el.checked : el.value;
             }
         });
     }
 
     _buildInput() {
-        const f = this.form;
+        const f = this.formState;
         const num = v => {
             const n = Number(v);
             return Number.isFinite(n) ? n : 0;
@@ -217,7 +217,7 @@ export class XPScoreboardDialog extends BaseApplication {
     static async #onAddCrit(event, target) {
         event.preventDefault();
         this._syncForm();
-        this.form.crits.push({
+        this.formState.crits.push({
             severity: "C", foeLevel: "",
             large: false, superLarge: false,
             foeUnconscious: false, foeStunned: false, singleCombat: false
@@ -230,7 +230,7 @@ export class XPScoreboardDialog extends BaseApplication {
         event.preventDefault();
         this._syncForm();
         const idx = Number(target.dataset.critIdx);
-        this.form.crits.splice(idx, 1);
+        this.formState.crits.splice(idx, 1);
         this.breakdown = null;
         await this.render();
     }
