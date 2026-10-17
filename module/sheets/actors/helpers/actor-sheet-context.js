@@ -311,6 +311,8 @@ export class EQRMSSActorContextHelper {
             if (id === "skill-tracking" && v.classId === "bard") return 1;
             // Tradeskill caps
             if (TRADESKILL_CLASS_IDS.has(id)) return 300;
+            // Fishing: capped at 200, never specializable (2026-10-16, EQ canon)
+            if (id === "skill-fishing") return 200;
             if (TRADESKILL_GENERAL_IDS.has(id)) {
                 const spec = String(this.actor?.system?.tradeskillSpecialization ?? "");
                 if (spec === id) return 300;
