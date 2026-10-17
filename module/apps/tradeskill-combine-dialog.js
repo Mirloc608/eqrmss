@@ -587,6 +587,7 @@ export class TradeskillCombineDialog extends BaseApplication {
     async _prepareContext(options) {
         const recipes = getRecipesForSkill(this.skillId);
         const skillName = this._getSkillName();
+        const skillLevel = this._getSkillLevel();
         const access = canUseTradeskill(this.actor, this.skillId);
         const filter = String(this.searchFilter ?? "").toLowerCase();
 
@@ -779,6 +780,7 @@ export class TradeskillCombineDialog extends BaseApplication {
             actor: this.actor,
             skillId: this.skillId,
             skillName,
+            skillLevel,
             recipes: recipesWithStatus,
             selectedRecipe: recipesWithStatus.find(r => r.id === this.selectedRecipeId) ?? null,
             searchFilter: this.searchFilter,
@@ -869,6 +871,15 @@ export class TradeskillCombineDialog extends BaseApplication {
             "skill-research": "Research"
         };
         return names[this.skillId] ?? this.skillId;
+    }
+
+    _getSkillLevel() {
+        const key = String(this.skillId ?? "").toLowerCase();
+        const dev = this.actor?.items?.find?.(i =>
+            i?.type === "skill" &&
+            String(i.system?.skillId ?? i.name ?? "").toLowerCase() === key
+        );
+        return dev ? Number(dev.system?.ranks ?? 0) : 0;
     }
 
     // Count items matching a material ID (e.g., "iron" matches "Iron Ore", "raw_silk" matches "Raw Silk")
