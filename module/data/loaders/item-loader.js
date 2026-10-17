@@ -26,7 +26,7 @@ async function fetchJson(path) {
 function isValidItem(j) {
     if (!j || typeof j !== "object") return false;
     if (typeof j.name !== "string" || !j.name) return false;
-    if (j.type !== "item" && j.type !== "container") return false;
+    if (j.type !== "item" && j.type !== "container" && j.type !== "tool" && j.type !== "tradeskill") return false;
     const s = j.system;
     if (!s || typeof s !== "object") return false;
     // Containers aren't worn in a slot; only plain items require one.
