@@ -99,4 +99,37 @@ export function registerEQRMSSSettings() {
       off: "Off (no cast-time enforcement)"
     }
   });
+
+  // ==========================================================
+  // Party HUD (native MMO-style overlay)
+  // ==========================================================
+
+  game.settings.register("eqrmss", "partyHudMode", {
+    name: "Party HUD Mode",
+    hint: "When should the party HUD be shown?",
+    scope: "client",
+    config: true,
+    type: String,
+    default: "always",
+    choices: {
+      always: "Always",
+      combat: "Only in Combat",
+      never: "Never"
+    },
+    onChange: () => { try { game.eqrmss?.partyHud?.render(); } catch (e) {} }
+  });
+
+  game.settings.register("eqrmss", "partyHudPartySource", {
+    name: "Party HUD Party Source",
+    hint: "Which characters appear in the party list?",
+    scope: "world",
+    config: true,
+    type: String,
+    default: "assigned",
+    choices: {
+      assigned: "Assigned characters (all users)",
+      loggedin: "Assigned characters (logged-in users only)"
+    },
+    onChange: () => { try { game.eqrmss?.partyHud?.render(); } catch (e) {} }
+  });
 }

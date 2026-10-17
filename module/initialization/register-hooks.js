@@ -309,4 +309,37 @@ export function registerEQRMSSHooks() {
     } catch (e) { /* fail-open */ }
   });
 
+  // ------------------------------------------------------------
+  // Party HUD (native MMO-style overlay, 2026-10-17)
+  // ------------------------------------------------------------
+  Hooks.once("ready", async () => {
+    try {
+      const { default: EQRMSSPartyHUD } = await import("../apps/party-hud/eqrmss-party-hud.js");
+      EQRMSSPartyHUD.init();
+    } catch (e) {
+      console.warn("EQRMSS | Party HUD failed to initialize", e);
+    }
+  });
+
+  // Re-render the HUD on anything that changes its data.
+  for (const hook of ["updateActor", "targetToken", "updateUser", "userConnected",
+      "createCombatant", "updateCombatant", "deleteCombatant",
+      "createCombat", "updateCombat", "deleteCombat",
+      "createActiveEffect", "updateActiveEffect", "deleteActiveEffect"]) {
+    Hooks.on(hook, () => {
+      try { game.eqrmss?.partyHud?.render(); } catch (e) { /* fail-open */ }
+    });
+  }
+
+  // When combat ends, clear boss-lock flags.
+  Hooks.on("deleteCombat", async () => {
+    try {
+      for (const t of canvas.tokens?.placeables ?? []) {
+        if (t.document?.getFlag?.("eqrmss", "hudBoss")) {
+          await t.document.unsetFlag("eqrmss", "hudBoss");
+        }
+      }
+    } catch (e) { /* fail-open */ }
+  });
+
 }

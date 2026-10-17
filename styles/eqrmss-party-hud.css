@@ -1,0 +1,214 @@
+/* ============================================================
+   EQRMSS Party HUD — parchment theme (uniform parchment directive)
+   ============================================================ */
+
+#eqrmss-party-hud {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 60;
+    pointer-events: none;
+    font-family: inherit;
+}
+
+#eqrmss-party-hud .window-header {
+    display: none;
+}
+
+.eqrmss-hud-party,
+.eqrmss-hud-enemies {
+    pointer-events: auto;
+    background: linear-gradient(180deg, #fff3cf, #e8d09c);
+    border: 2px solid #5f4a2f;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.45);
+    padding: 6px;
+    color: #3a2c1a;
+}
+
+.eqrmss-hud-party {
+    max-width: 320px;
+    margin-bottom: 8px;
+}
+
+.eqrmss-hud-enemies {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 480px;
+}
+
+.hud-party-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+    color: #5f4a2f;
+    border-bottom: 1px solid #5f4a2f;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.hud-party-list,
+.hud-enemy-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hud-member,
+.hud-enemy {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    background: rgba(255, 248, 220, 0.35);
+    border: 1px solid transparent;
+}
+
+.hud-member.is-targeted {
+    border-color: #8a6d3b;
+    background: rgba(255, 243, 207, 0.7);
+}
+
+.hud-portrait {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #5f4a2f;
+    object-fit: cover;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.hud-enemy .hud-portrait {
+    width: 32px;
+    height: 32px;
+}
+
+.hud-member-main,
+.hud-enemy-main {
+    flex: 1 1 auto;
+    min-width: 0;
+    cursor: pointer;
+}
+
+.hud-member-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.hud-name {
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hud-level,
+.hud-init {
+    color: #6b5233;
+    font-size: 11px;
+}
+
+.hud-init {
+    font-weight: bold;
+    background: #5f4a2f;
+    color: #f4e8c8;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+}
+
+.hud-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 2px;
+}
+
+.hud-bar {
+    position: relative;
+    height: 14px;
+    border-radius: 4px;
+    border: 1px solid #5f4a2f;
+    background: #2a2118;
+    overflow: hidden;
+}
+
+.hud-bar-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.hud-bar-hits .hud-bar-fill {
+    background: linear-gradient(180deg, #7ec87e, #3f8f3f);
+}
+
+.hud-bar-mana .hud-bar-fill {
+    background: linear-gradient(180deg, #7ea8e8, #3f6fbf);
+}
+
+.hud-bar-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.hud-effects {
+    display: flex;
+    gap: 2px;
+    flex: 0 0 auto;
+    max-width: 76px;
+    flex-wrap: wrap;
+}
+
+.hud-effect {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    border: 1px solid #5f4a2f;
+    object-fit: cover;
+}
+
+.hud-effect.is-buff {
+    border-color: #3f8f3f;
+    box-shadow: 0 0 3px #3f8f3f;
+}
+
+.hud-effect.is-debuff {
+    border-color: #a03030;
+    box-shadow: 0 0 3px #a03030;
+}
+
+.hud-boss-lock {
+    flex: 0 0 auto;
+    background: none;
+    border: 1px solid #5f4a2f;
+    border-radius: 4px;
+    color: #5f4a2f;
+    cursor: pointer;
+    padding: 2px 6px;
+    font-size: 11px;
+}
+
+.hud-boss-lock.is-locked {
+    background: #5f4a2f;
+    color: #f4e8c8;
+}

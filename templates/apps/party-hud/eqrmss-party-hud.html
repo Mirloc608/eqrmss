@@ -1,0 +1,79 @@
+{{#if visible}}
+<div class="eqrmss-hud-party parchment-panel">
+    {{#if partySize}}<div class="hud-party-title">{{partySize}}</div>{{/if}}
+    <ul class="hud-party-list">
+        {{#each party}}
+        <li class="hud-member {{#if targeted}}is-targeted{{/if}}" data-actor-id="{{actorId}}" data-token-id="{{tokenId}}">
+            <img class="hud-portrait" src="{{img}}" alt="{{name}}" title="Open sheet"
+                 data-action="hud-open-sheet" data-actor-id="{{actorId}}" />
+            <div class="hud-member-main" data-action="hud-toggle-target" data-token-id="{{tokenId}}" title="Toggle target">
+                <div class="hud-member-meta">
+                    {{#if initiativeOrder}}<span class="hud-init">{{initiativeOrder}}</span>{{/if}}
+                    {{#if level}}<span class="hud-level">Lv{{level}}</span>{{/if}}
+                    <span class="hud-name">{{name}}</span>
+                </div>
+                <div class="hud-bars">
+                    {{#if primary}}
+                    <div class="hud-bar hud-bar-hits" title="{{primary.name}}: {{primary.value}} / {{primary.max}}">
+                        <div class="hud-bar-fill" style="width: {{primary.percent}}%;"></div>
+                        <span class="hud-bar-text">{{primary.value}} / {{primary.max}}</span>
+                    </div>
+                    {{/if}}
+                    {{#if secondary}}
+                    <div class="hud-bar hud-bar-mana" title="{{secondary.name}}: {{secondary.value}} / {{secondary.max}}">
+                        <div class="hud-bar-fill" style="width: {{secondary.percent}}%;"></div>
+                        <span class="hud-bar-text">{{secondary.value}} / {{secondary.max}}</span>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+            {{#if ../showEffects}}
+            <div class="hud-effects">
+                {{#each effects}}
+                <img class="hud-effect {{#if isDebuff}}is-debuff{{else if isBuff}}is-buff{{/if}}"
+                     src="{{icon}}" alt="{{name}}" title="{{name}}" />
+                {{/each}}
+            </div>
+            {{/if}}
+        </li>
+        {{/each}}
+    </ul>
+</div>
+{{/if}}
+
+{{#if enemies.length}}
+<div class="eqrmss-hud-enemies parchment-panel">
+    <ul class="hud-enemy-list">
+        {{#each enemies}}
+        <li class="hud-enemy" data-token-id="{{tokenId}}">
+            {{#if ../isGM}}
+            <button type="button" class="hud-boss-lock {{#if bossLocked}}is-locked{{/if}}"
+                    data-action="hud-boss-lock" data-token-id="{{tokenId}}"
+                    title="{{#if bossLocked}}Unlock boss bar{{else}}Lock boss bar for everyone{{/if}}">
+                <i class="fas fa-{{#if bossLocked}}lock{{else}}lock-open{{/if}}"></i>
+            </button>
+            {{/if}}
+            <div class="hud-enemy-main" data-action="hud-toggle-target" data-token-id="{{tokenId}}" title="Toggle target">
+                <div class="hud-member-meta">
+                    <span class="hud-name">{{name}}</span>
+                </div>
+                {{#if primary}}
+                <div class="hud-bar hud-bar-hits" title="{{primary.name}}: {{primary.value}} / {{primary.max}}">
+                    <div class="hud-bar-fill" style="width: {{primary.percent}}%;"></div>
+                    <span class="hud-bar-text">{{primary.value}} / {{primary.max}}</span>
+                </div>
+                {{/if}}
+            </div>
+            {{#if ../showEffects}}
+            <div class="hud-effects">
+                {{#each effects}}
+                <img class="hud-effect {{#if isDebuff}}is-debuff{{else if isBuff}}is-buff{{/if}}"
+                     src="{{icon}}" alt="{{name}}" title="{{name}}" />
+                {{/each}}
+            </div>
+            {{/if}}
+        </li>
+        {{/each}}
+    </ul>
+</div>
+{{/if}}
