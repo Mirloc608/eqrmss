@@ -26,10 +26,11 @@ async function fetchJson(path) {
 function isValidItem(j) {
     if (!j || typeof j !== "object") return false;
     if (typeof j.name !== "string" || !j.name) return false;
-    if (j.type !== "item") return false;
+    if (j.type !== "item" && j.type !== "container") return false;
     const s = j.system;
     if (!s || typeof s !== "object") return false;
-    if (typeof s.slot !== "string" || !s.slot) return false;
+    // Containers aren't worn in a slot; only plain items require one.
+    if (j.type === "item" && (typeof s.slot !== "string" || !s.slot)) return false;
     return true;
 }
 
@@ -92,7 +93,7 @@ export const EQRMSSItemLoader = {
                     loaded++;
 
                     const slot = item.system.slot;
-                    (bySlot[slot] = bySlot[slot] || []).push(item);
+                    if (typeof slot === "string" && slot) (bySlot[slot] = bySlot[slot] || []).push(item);
 
                     const level = item.system.level || 1;
                     (byLevel[level] = byLevel[level] || []).push(item);
