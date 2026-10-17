@@ -916,14 +916,44 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
                         return;
                     }
                 }
-            }
-            await item.update({ "system.location": newLocation });
-            if (newLocation === "equipped") {
+
+                // Taking it out of any container — it's now worn/held.
+                await item.update({ "system.location": newLocation, "system.containerId": "" });
                 ui.notifications.info(`${item.name} equipped.`);
                 // Equipment bonuses apply automatically: calculateArmorAndDefenses
                 // derives armorType, maneuver penalties, and shield DB from
                 // equipped items on the next prepare.
+                return;
             }
+            if (newLocation === "pack") {
+                if (item.type === "container") {
+                    // Stored (inactive) container — just set location, don't auto-nest.
+                    await item.update({ "system.location": newLocation });
+                    return;
+                }
+                // Store in the active container (the one set to Pack).
+                const activeContainer = actor.items.find(i =>
+                    i.type === "container" &&
+                    i.system?.location === "equipped" &&
+                    i.id !== item.id
+                );
+                if (!activeContainer) {
+                    ui.notifications.warn("No active Pack — set a container to Pack first.");
+                    await this.render(); // revert dropdown
+                    return;
+                }
+                const { storeItemInContainer } = await import("../../utils/inventory/container-storage.js");
+                const res = await storeItemInContainer(actor, item.id, activeContainer.id);
+                if (!res.ok) {
+                    ui.notifications.warn(`Cannot store: ${res.reason}`);
+                    await this.render(); // revert dropdown
+                    return;
+                }
+                await item.update({ "system.location": newLocation });
+                ui.notifications.info(`${item.name} stored in ${activeContainer.name}.`);
+                return;
+            }
+            await item.update({ "system.location": newLocation });
         }
     }
 
