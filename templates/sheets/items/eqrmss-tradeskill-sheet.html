@@ -9,7 +9,7 @@
                 <tr>
                     <th>{{localize "eqrmss.item.quantity"}}</th>
                     <th>{{localize "eqrmss.item.weight"}}</th>
-                    <th>{{localize "eqrmss.item.cost"}}</th>
+                    <th>{{localize "eqrmss.item.cost"}} (tp)</th>
                 </tr>
                 <td>
                     <input name="system.quantity" type="text" value="{{system.quantity}}" data-dtype="Number"/>
@@ -18,7 +18,7 @@
                     <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"/>
                 </td>
                 <td>
-                    <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
+                    <input name="system.cost" type="number" min="0" step="1" value="{{system.cost}}" data-dtype="Number"/>
                 </td>
             </table>
             <div class="form-group" style="margin: 8px 0;">

@@ -3,6 +3,8 @@
  * Single source of truth for Handlebars preloading.
  */
 
+import { formatPrice } from "../utils/price.js";
+
 export async function loadEQRMSSTemplates() {
     console.info("EQRMSS | Loading Handlebars templates");
 
@@ -37,6 +39,10 @@ export async function loadEQRMSSTemplates() {
             if (Array.isArray(values)) return values.filter(value => value != null).join(separator);
             return values == null ? "" : String(values);
         });
+    }
+
+    if (!Handlebars.helpers?.formatPrice) {
+        Handlebars.registerHelper("formatPrice", (value) => formatPrice(value));
     }
 
     const templatePaths = [

@@ -8,7 +8,7 @@
             <table>
                 <tr>
                     <th>{{localize "eqrmss.item.weight"}}</th>
-                    <th>{{localize "eqrmss.item.cost"}}</th>
+                    <th>{{localize "eqrmss.item.cost"}} (tp)</th>
                     <th>Used With</th>
                     <th>Skill Bonus</th>
                 </tr>
@@ -16,7 +16,7 @@
                     <input name="system.weight" type="text" value="{{system.weight}}" data-dtype="Number"/>
                 </td>
                 <td>
-                    <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
+                    <input name="system.cost" type="number" min="0" step="1" value="{{system.cost}}" data-dtype="Number"/>
                 </td>
                 <td>
                     <select name="system.tradeskillId" data-dtype="String">

@@ -9,6 +9,7 @@ import { EQRMSSCharacterCreationWizardFinalizer } from "./eqrmss-character-creat
 import { EQRMSSCharacterCreationRules, checkRaceClassCompatibility } from "./eqrmss-character-creation-wizard-rules.js";
 import { getStatValueFromPoints, calculatePotentialStat } from "./eqrmss-character-creation-tables.js";
 import { rmssStatBonus, rmssDevelopmentPoints } from "../data/stats/rmss-stat-bonus.js";
+import { parsePriceToTp } from "../utils/price.js";
 import { rmssRankBonus } from "../data/skills/rmss-rank-bonus.js";
 import {
   WEAPON_CATEGORIES,
@@ -619,22 +620,13 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
 
   // Coin helpers — same rates as the armor composer:
   // 1sp = 10bp, 1gp = 100bp, 1pp = 1000bp (cp/tp count as bp).
-  _parseCostToBp(str) {
-    const m = /^\s*([\d.]+)\s*(bp|sp|gp|cp|pp|tp)?\s*$/i.exec(str ?? "");
-    if (!m) return 0;
-    const n = parseFloat(m[1]);
-    const unit = (m[2] ?? "bp").toLowerCase();
-    if (unit === "sp") return n * 10;
-    if (unit === "gp") return n * 100;
-    if (unit === "pp") return n * 1000;
-    return n;
+  _parseCostToBp(cost) {
+    // Buy-list costs are stored as tin pieces; the equipment budget works in bp.
+    return parsePriceToTp(cost) / 100;
   }
 
   _formatBp(bp) {
-    bp = Math.round(bp);
-    if (bp >= 100 && bp % 100 === 0) return `${bp / 100}gp`;
-    if (bp >= 10 && bp % 10 === 0) return `${bp / 10}sp`;
-    return `${bp}bp`;
+    return formatPrice(Math.round(bp) * 100) || "0 tp";
   }
 
   async _loadBuyList() {

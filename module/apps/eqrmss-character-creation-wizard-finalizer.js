@@ -4,6 +4,7 @@
 // ============================================================
 
 import { extractRacialModifiers } from "../utils/actor/rmss-stats.js";
+import { parsePriceToTp } from "../utils/price.js";
 import { rmssDevelopmentPoints } from "../data/stats/rmss-stat-bonus.js";
 import { rmssRankBonus } from "../data/skills/rmss-rank-bonus.js";
 import {
@@ -736,15 +737,9 @@ export class EQRMSSCharacterCreationWizardFinalizer {
     }
   }
 
-  #parseCostToBp(str) {
-    const m = /^\s*([\d.]+)\s*(bp|sp|gp|cp|pp|tp)?\s*$/i.exec(str ?? "");
-    if (!m) return 0;
-    const n = parseFloat(m[1]);
-    const unit = (m[2] ?? "bp").toLowerCase();
-    if (unit === "sp") return n * 10;
-    if (unit === "gp") return n * 100;
-    if (unit === "pp") return n * 1000;
-    return n;
+  #parseCostToBp(cost) {
+    // Buy-list costs are stored as tin pieces; the equipment budget works in bp.
+    return parsePriceToTp(cost) / 100;
   }
 
   #buyListItemToDoc(entry) {
@@ -753,7 +748,9 @@ export class EQRMSSCharacterCreationWizardFinalizer {
     const weight = parseFloat(entry.weight);
     if (Number.isFinite(weight)) system.weight = weight;
     // Carry the buy-list data onto the item so the sheet shows it.
-    if (entry.cost) system.cost = String(entry.cost);
+    // Prices are stored as tin pieces (tp); legacy "2bp"-style strings parse.
+    const costTp = parsePriceToTp(entry.cost);
+    if (costTp > 0) system.cost = costTp;
     if (entry.notes) system.description = String(entry.notes);
     system.quantity = 1;
     if (doc.type === "consumable") {

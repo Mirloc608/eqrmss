@@ -75,13 +75,16 @@
 <div class="form-group">
 
     <label>
-        {{localize "eqrmss.item.cost"}}
+        {{localize "eqrmss.item.cost"}} (tp)
     </label>
 
     <input
         name="system.cost"
-        type="text"
+        type="number"
+        min="0"
+        step="1"
         value="{{system.cost}}"
+        data-dtype="Number"
     />
 
 </div>

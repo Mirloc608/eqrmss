@@ -147,7 +147,7 @@
         <p><strong>Purchased ({{equipmentContext.spentLabel}}):</strong></p>
         <ul>
           {{#each equipmentContext.cart}}
-            <li>{{this.name}} ×{{this.qty}} ({{this.cost}})</li>
+            <li>{{this.name}} ×{{this.qty}} ({{formatPrice this.cost}})</li>
           {{/each}}
         </ul>
       {{/if}}

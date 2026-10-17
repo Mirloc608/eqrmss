@@ -13,9 +13,9 @@
             </td>
           </tr>
           <tr>
-            <th>{{localize "eqrmss.armor.cost"}}</th>
+            <th>{{localize "eqrmss.armor.cost"}} (tp)</th>
             <td>
-              <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
+              <input name="system.cost" type="number" min="0" step="1" value="{{system.cost}}" data-dtype="Number"/>
             </td>
             <th>Location</th>
             <td>

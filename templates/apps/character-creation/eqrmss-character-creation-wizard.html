@@ -527,7 +527,7 @@
         <ul style="list-style-type: none; padding: 0;">
           {{#each equipmentContext.cart}}
           <li style="margin-bottom: 6px;">
-            {{name}} ×{{qty}} <span class="eqrmss-cc-spell-meta">({{cost}} each)</span>
+            {{name}} ×{{qty}} <span class="eqrmss-cc-spell-meta">({{formatPrice cost}} each)</span>
             <button type="button" data-action="equip-refund-item" data-item="{{id}}" title="Refund one">−1</button>
           </li>
           {{/each}}
@@ -651,7 +651,7 @@
       {{#if equipmentContext.cart.length}}
       <ul style="list-style-type: none; padding: 0;">
         {{#each equipmentContext.cart}}
-        <li>{{name}} ×{{qty}} <span class="eqrmss-cc-spell-meta">({{cost}} each)</span></li>
+        <li>{{name}} ×{{qty}} <span class="eqrmss-cc-spell-meta">({{formatPrice cost}} each)</span></li>
         {{/each}}
       </ul>
       {{else}}

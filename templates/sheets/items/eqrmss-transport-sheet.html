@@ -7,7 +7,7 @@
         <div>
             <table>
                 <tr>
-                    <th>{{localize "eqrmss.transport.cost"}}</th>
+                    <th>{{localize "eqrmss.transport.cost"}} (tp)</th>
                     <th>{{localize "eqrmss.transport.feet_per_round"}}</th>
                     <th>{{localize "eqrmss.transport.miles_per_hour"}}</th>
                     <th>{{localize "eqrmss.transport.maneuver"}}</th>
@@ -17,7 +17,7 @@
                     <th>{{localize "eqrmss.transport.offensive_bonus"}}</th>
                 </tr>
                 <td>
-                    <input name="system.cost" type="text" value="{{system.cost}}" data-dtype="String"/>
+                    <input name="system.cost" type="number" min="0" step="1" value="{{system.cost}}" data-dtype="Number"/>
                 </td>
                 <td>
                     <input name="system.feet_per_round" type="text" value="{{system.feet_per_round}}" data-dtype="Number"/>

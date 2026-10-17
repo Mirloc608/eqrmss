@@ -24,7 +24,7 @@
         <div>{{weapon.system.strength}}</div>
         <div>{{weapon.system.quantity}}</div>
         <div>{{weapon.system.weight}}</div>
-        <div>{{weapon.system.cost}}</div>
+        <div>{{formatPrice weapon.system.cost}}</div>
         <div class="item-controls">
           <a class="item-control item-edit" title="Edit Item" data-item-id="{{weapon._id}}"><i class="fas fa-edit"></i></a>
           <a class="item-control item-delete" title="Delete Item" data-item-id="{{weapon._id}}"><i class="fas fa-trash"></i></a>
