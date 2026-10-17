@@ -446,6 +446,129 @@
           {{/each}}
         </tbody>
       </table>
+
+      <h4>Containers</h4>
+      <table class="rmss-table">
+        <thead><tr><th>Item</th><th>Location</th><th>Weight</th></tr></thead>
+        <tbody>
+          {{#each actor.items}}
+            {{#if (eq this.type "container")}}
+            <tr data-item-id="{{this._id}}">
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{formatPrice this.system.cost}}</span></span>{{/if}}
+                  {{{{#if this.system.capacityWeight}}}}<span class="ct-row"><span class="ct-k">Capacity</span><span>{{{{this.system.capacityWeight}}}} lbs</span></span>{{{{/if}}}}
+                  {{{{#if this.system.capacitySlots}}}}<span class="ct-row"><span class="ct-k">Slots</span><span>{{{{this.system.capacitySlots}}}}</span></span>{{{{/if}}}}
+                  {{{{#if this.system.liquidCapacityOz}}}}<span class="ct-row"><span class="ct-k">Liquid</span><span>{{{{this.system.liquidCapacityOz}}}} fl oz</span></span>{{{{/if}}}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a></td>
+              <td>
+                <select class="item-location" data-item-id="{{this._id}}">
+                  <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
+                  <option value="pack" {{#if (eq this.system.location "pack")}}selected{{/if}}>Pack</option>
+                  <option value="ground" {{#if (eq this.system.location "ground")}}selected{{/if}}>Ground</option>
+                </select>
+              </td>
+              <td>{{this.system.weight}}</td>
+            </tr>
+            {{/if}}
+          {{/each}}
+        </tbody>
+      </table>
+
+      <h4>Tools</h4>
+      <table class="rmss-table">
+        <thead><tr><th>Item</th><th>Location</th><th>Weight</th></tr></thead>
+        <tbody>
+          {{#each actor.items}}
+            {{#if (eq this.type "tool")}}
+            <tr data-item-id="{{this._id}}">
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{formatPrice this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a></td>
+              <td>
+                <select class="item-location" data-item-id="{{this._id}}">
+                  <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
+                  <option value="pack" {{#if (eq this.system.location "pack")}}selected{{/if}}>Pack</option>
+                  <option value="ground" {{#if (eq this.system.location "ground")}}selected{{/if}}>Ground</option>
+                </select>
+              </td>
+              <td>{{this.system.weight}}</td>
+            </tr>
+            {{/if}}
+          {{/each}}
+        </tbody>
+      </table>
+
+      <h4>Tradeskill Items</h4>
+      <table class="rmss-table">
+        <thead><tr><th>Item</th><th>Location</th><th>Weight</th></tr></thead>
+        <tbody>
+          {{#each actor.items}}
+            {{#if (eq this.type "tradeskill")}}
+            <tr data-item-id="{{this._id}}">
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{formatPrice this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a></td>
+              <td>
+                <select class="item-location" data-item-id="{{this._id}}">
+                  <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
+                  <option value="pack" {{#if (eq this.system.location "pack")}}selected{{/if}}>Pack</option>
+                  <option value="ground" {{#if (eq this.system.location "ground")}}selected{{/if}}>Ground</option>
+                </select>
+              </td>
+              <td>{{this.system.weight}}</td>
+            </tr>
+            {{/if}}
+          {{/each}}
+        </tbody>
+      </table>
+
+      <h4>Transport</h4>
+      <table class="rmss-table">
+        <thead><tr><th>Item</th><th>Location</th><th>Weight</th></tr></thead>
+        <tbody>
+          {{#each actor.items}}
+            {{#if (eq this.type "transport")}}
+            <tr data-item-id="{{this._id}}">
+              <td><a class="item-open has-cardtip" data-item-id="{{this._id}}">{{this.name}}
+                <span class="cardtip">
+                  <span class="ct-head"><span>{{#if this.img}}<img src="{{this.img}}" class="ct-icon" alt="">{{/if}}{{this.name}}</span><span>{{this.type}}</span></span>
+                  {{#if this.system.slot}}<span class="ct-row"><span class="ct-k">Slot</span><span>{{this.system.slot}}</span></span>{{/if}}
+                  <span class="ct-row"><span class="ct-k">Weight</span><span>{{this.system.weight}}</span></span>
+                  {{#if this.system.cost}}<span class="ct-row"><span class="ct-k">Cost</span><span>{{formatPrice this.system.cost}}</span></span>{{/if}}
+                  {{#if this.system.description}}<span class="ct-desc">{{this.system.description}}</span>{{/if}}
+                </span>
+              </a></td>
+              <td>
+                <select class="item-location" data-item-id="{{this._id}}">
+                  <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
+                  <option value="pack" {{#if (eq this.system.location "pack")}}selected{{/if}}>Pack</option>
+                  <option value="ground" {{#if (eq this.system.location "ground")}}selected{{/if}}>Ground</option>
+                </select>
+              </td>
+              <td>{{this.system.weight}}</td>
+            </tr>
+            {{/if}}
+          {{/each}}
+        </tbody>
+      </table>
     </div>
     <div class="panel" style="flex: 1;">
       <h3>Coins and Wealth</h3>
