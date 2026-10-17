@@ -119,6 +119,13 @@ export function canStoreInContainer(actor, itemId, containerId) {
     if (!item) return { ok: false, reason: "Item not found" };
     if (!container) return { ok: false, reason: "Container not found" };
     if (container.type !== "container") return { ok: false, reason: "Not a container" };
+    // Only physical items can be stored (not spells, songs, skills, etc.)
+    const STORABLE_TYPES = new Set([
+        "weapon", "armor", "shield", "jewelry", "consumable",
+        "container", "instrument", "item", "tool", "tradeskill",
+        "transport", "herb_or_poison", "equipment",
+    ]);
+    if (!STORABLE_TYPES.has(item.type)) return { ok: false, reason: "That cannot be stored in a container" };
     if (itemId === containerId) return { ok: false, reason: "Cannot store a container in itself" };
     if (item.system?.containerId === containerId) return { ok: false, reason: "Already stored there" };
     // Block cycles: container must not be inside the item being stored
@@ -187,9 +194,17 @@ export async function removeItemFromContainer(actor, itemId) {
  */
 export function getStorableItems(actor, containerId) {
     if (!containerId) return [];
+    // Only physical items can be stored — spells, songs, skills, AAs, etc.
+    // are character abilities, not objects.
+    const STORABLE_TYPES = new Set([
+        "weapon", "armor", "shield", "jewelry", "consumable",
+        "container", "instrument", "item", "tool", "tradeskill",
+        "transport", "herb_or_poison", "equipment",
+    ]);
     return itemListOf(actor).filter((it) => {
         const iid = itemIdOf(it);
         if (iid === containerId) return false;
+        if (!STORABLE_TYPES.has(it?.type)) return false;
         if (it.system?.containerId) return false;
         if (isAncestorOf(actor, iid, containerId)) return false;
         return true;
