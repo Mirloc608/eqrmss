@@ -6,6 +6,7 @@
 import EQRMSSPlayerSheet from "../sheets/actors/eqrmss_player_sheet.js";
 import EQRMSSNPCSheet from "../sheets/actors/eqrmss_npc_sheet.js";
 import EQRMSSItemSheet from "../sheets/items/eqrmss_item_sheet.js";
+import EQRMSSContainerSheet from "../sheets/items/eqrmss_container_sheet.js";
 import EQRMSSItemToolSheet from "../sheets/items/eqrmss_tool_sheet.js";
 import EQRMSSItemTradeskillSheet from "../sheets/items/eqrmss_tradeskill_sheet.js";
 import EQRMSSArmorSheet from "../sheets/items/eqrmss_armor_sheet.js";
@@ -47,6 +48,12 @@ export function registerEQRMSSSheets() {
     DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSItemSheet, {
         types: ["item", "consumable"],
         label: "eqrmss.entity_sheet.item",
+        makeDefault: true
+    });
+
+    DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSContainerSheet, {
+        types: ["container"],
+        label: "eqrmss.entity_sheet.container",
         makeDefault: true
     });
 

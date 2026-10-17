@@ -1,0 +1,300 @@
+<form class="eqrmss item-sheet container-sheet"
+      autocomplete="off">
+
+<header class="sheet-header">
+
+    <div class="header-image">
+
+        <img
+            src="{{item.img}}"
+            data-edit="img"
+            title="{{item.name}}"
+            height="64"
+            width="64"
+        />
+
+    </div>
+
+    <div class="header-name">
+
+        <input
+            name="name"
+            type="text"
+            value="{{item.name}}"
+            placeholder="{{localize 'Name'}}"
+        />
+
+    </div>
+
+</header>
+
+<section class="sheet-body">
+
+<div class="form-group">
+
+    <label>
+        {{localize "eqrmss.item.weight"}}
+    </label>
+
+    <input
+        name="system.weight"
+        type="number"
+        min="0"
+        step="0.1"
+        value="{{system.weight}}"
+        data-dtype="Number"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        {{localize "eqrmss.item.cost"}} (tp)
+    </label>
+
+    <input
+        name="system.cost"
+        type="number"
+        min="0"
+        step="1"
+        value="{{system.cost}}"
+        data-dtype="Number"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Stackable
+    </label>
+
+    <input
+        name="system.stackable"
+        type="checkbox"
+        {{checked system.stackable}}
+    />
+
+</div>
+
+<h3>Capacity</h3>
+
+<div class="form-group">
+
+    <label>
+        Holds (lb)
+    </label>
+
+    <input
+        name="system.capacityWeight"
+        type="number"
+        min="0"
+        step="1"
+        value="{{system.capacityWeight}}"
+        data-dtype="Number"
+        placeholder="unlimited"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Holds (items)
+    </label>
+
+    <input
+        name="system.capacitySlots"
+        type="number"
+        min="0"
+        step="1"
+        value="{{system.capacitySlots}}"
+        data-dtype="Number"
+        placeholder="unlimited"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Weight reduction %
+    </label>
+
+    <input
+        name="system.weightReduction"
+        type="number"
+        min="0"
+        max="100"
+        step="1"
+        value="{{system.weightReduction}}"
+        data-dtype="Number"
+        placeholder="0"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Coin purse
+    </label>
+
+    <input
+        name="system.isCoinPurse"
+        type="checkbox"
+        {{checked system.isCoinPurse}}
+    />
+
+</div>
+
+{{#if isLiquidContainer}}
+
+<h3>Liquid</h3>
+
+<div class="form-group">
+
+    <label>
+        Capacity
+    </label>
+
+    <span>{{liquidCapacityDisplay}}</span>
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Liquid type
+    </label>
+
+    <input
+        name="system.liquid.type"
+        type="text"
+        value="{{system.liquid.type}}"
+        placeholder="water, ale, ..."
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Amount (oz)
+    </label>
+
+    <input
+        name="system.liquid.amountOz"
+        type="number"
+        min="0"
+        step="0.5"
+        value="{{system.liquid.amountOz}}"
+        data-dtype="Number"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <span>Currently: {{liquidAmountDisplay}}</span>
+
+    <button type="button" data-action="container-empty-liquid">Empty</button>
+
+</div>
+
+{{/if}}
+
+{{#if isCoinPurse}}
+
+<h3>Purse</h3>
+
+{{#if purseMoney}}
+
+<div class="form-group">
+    <label>Mithril</label><span>{{purseMoney.mithril}}</span>
+    <label>Platinum</label><span>{{purseMoney.platinum}}</span>
+    <label>Gold</label><span>{{purseMoney.gold}}</span>
+</div>
+
+<div class="form-group">
+    <label>Silver</label><span>{{purseMoney.silver}}</span>
+    <label>Bronze</label><span>{{purseMoney.bronze}}</span>
+    <label>Copper</label><span>{{purseMoney.copper}}</span>
+    <label>Tin</label><span>{{purseMoney.tin}}</span>
+</div>
+
+<p style="opacity: 0.7;">The character's money is assumed to be in the purse and is spendable directly.</p>
+
+{{else}}
+
+<p style="opacity: 0.7;">No owning actor — purse contents unavailable.</p>
+
+{{/if}}
+
+{{/if}}
+
+{{#if hasActor}}
+
+<h3>Contents ({{contents.length}} items, {{contentsWeight}} lb)</h3>
+
+<p style="opacity: 0.7;">Capacity: {{capacityWeightDisplay}} / {{capacitySlotsDisplay}} slots &mdash; carried at {{effectiveWeight}} lb</p>
+
+{{#if contents.length}}
+
+<table>
+    <tr><th>Item</th><th>Qty</th><th>Wt</th><th></th></tr>
+    {{#each contents}}
+    <tr>
+        <td>{{name}}</td>
+        <td>{{quantity}}</td>
+        <td>{{weight}}</td>
+        <td><button type="button" data-action="container-remove" data-item-id="{{_id}}">Remove</button></td>
+    </tr>
+    {{/each}}
+</table>
+
+{{else}}
+
+<p style="opacity: 0.7;">Empty.</p>
+
+{{/if}}
+
+{{#if storable.length}}
+
+<div class="form-group">
+
+    <label>Store item</label>
+
+    <select data-container-store-select>
+        <option value="">—</option>
+        {{#each storable}}
+        <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+
+    <button type="button" data-action="container-store">Store</button>
+
+</div>
+
+{{/if}}
+
+{{else}}
+
+<p style="opacity: 0.7;">Place this container on an actor to store items in it.</p>
+
+{{/if}}
+
+<div class="form-group">
+
+    <label>
+        {{localize "eqrmss.item.description"}}
+    </label>
+
+</div>
+
+{{editor enrichedDescription target="system.description" button=true editable=editable engine="prosemirror"}}
+
+</section>
+
+</form>

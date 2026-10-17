@@ -3,6 +3,7 @@
  */
 
 import { isWorn } from "../../utils/equipment/equipment-utils.js";
+import { getEffectiveContainerWeight } from "../../utils/inventory/container-storage.js";
 import { rmssStatBonus } from "./rmss-stat-bonus.js";
 import { stanceDBBonus } from "../../combat/stance.js";
 
@@ -317,6 +318,13 @@ export function calculateEncumbrance(actorData) {
     let load = 0;
     for (const item of itemList) {
         if (item?.type === "armor" && isWornItem(item)) continue;
+        // Items inside a container are counted via the container's
+        // effective weight (own weight + reduced contents), not twice.
+        if (item?.system?.containerId) continue;
+        if (item?.type === "container") {
+            load += getEffectiveContainerWeight({ items: itemList }, item);
+            continue;
+        }
         const w = Number(item?.system?.weight);
         if (!Number.isFinite(w) || w <= 0) continue;
         const qty = Number(item?.system?.quantity ?? 1);

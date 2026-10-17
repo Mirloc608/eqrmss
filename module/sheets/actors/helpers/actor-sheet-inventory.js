@@ -95,16 +95,20 @@ export class EQRMSSActorInventoryHelper {
     buildInventoryContext() {
 
         const items = this.actor.items.contents;
+        // Items stored inside a container live under that container's
+        // sheet; keep them out of the flat inventory lists.
+        const loose = items.filter(i => !i?.system?.containerId);
 
         return {
-            weapons:        items.filter(i => i.type === "weapon"),
-            armor:          items.filter(i => i.type === "armor"),
-            herbs:          items.filter(i => i.type === "herb_or_poison"),
-            transport:      items.filter(i => i.type === "transport"),
-            consumables:    items.filter(i => i.type === "consumable"),
-            shields:        items.filter(i => i.type === "shield"),
-            jewelry:        items.filter(i => i.type === "jewelry"),
-            general:        items.filter(i => i.type === "item")
+            weapons:        loose.filter(i => i.type === "weapon"),
+            armor:          loose.filter(i => i.type === "armor"),
+            herbs:          loose.filter(i => i.type === "herb_or_poison"),
+            transport:      loose.filter(i => i.type === "transport"),
+            consumables:    loose.filter(i => i.type === "consumable"),
+            shields:        loose.filter(i => i.type === "shield"),
+            jewelry:        loose.filter(i => i.type === "jewelry"),
+            containers:     loose.filter(i => i.type === "container"),
+            general:        loose.filter(i => i.type === "item")
         };
     }
 }
