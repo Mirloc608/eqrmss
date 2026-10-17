@@ -129,6 +129,31 @@ export default class EQRMSSActorSheet extends HandlebarsApplicationMixin(Documen
         this.bardHelper.activate();
 
         // ------------------------------------------------------------
+        // PORTRAIT PICKER — click the portrait to choose an image
+        // (the template carries data-edit="img" but V2 needs the
+        // handler wired explicitly)
+        // ------------------------------------------------------------
+        try {
+            const portrait = this.element?.querySelector("[data-edit='img']");
+            if (portrait && !portrait.dataset.eqrmssPortraitWired) {
+                portrait.dataset.eqrmssPortraitWired = "1";
+                portrait.style.cursor = "pointer";
+                portrait.title = portrait.title || "Click to change portrait";
+                portrait.addEventListener("click", ev => {
+                    ev.preventDefault();
+                    if (!this.isEditable) return;
+                    new foundry.applications.apps.FilePicker.implementation({
+                        type: "image",
+                        current: this.actor?.img,
+                        callback: async path => { await this.actor?.update({ img: path }); },
+                    }).browse();
+                });
+            }
+        } catch (e) {
+            console.warn("EQRMSS | portrait picker wiring failed", e);
+        }
+
+        // ------------------------------------------------------------
         // PET BUTTON (header) — opens the character's active pet sheet
         // ------------------------------------------------------------
         const html = this.element;
