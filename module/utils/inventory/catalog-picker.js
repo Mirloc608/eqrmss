@@ -39,15 +39,41 @@ function esc(s) {
  * Add a catalog entry to an actor. Stacks when possible.
  * Returns true on success.
  */
+// Jewelry slots in EQ data — these map to the "jewelry" item type
+const JEWELRY_SLOTS = ["ear", "finger", "charm", "neck", "wrist"];
+
+/**
+ * Normalize EQ catalog data to the system's expected structure.
+ * - Jewelry (by slot) gets type "jewelry" for the dedicated sheet/document
+ * - Stat keys are uppercased (EQ data uses lowercase, sheets expect uppercase)
+ * - Resists stay in EQ structure (fire/cold/magic/poison/disease/corruption)
+ */
+function normalizeCatalogData(data) {
+    const sys = data.system ?? {};
+    // Jewelry type detection by slot
+    if (data.type === "item" && JEWELRY_SLOTS.includes(sys.slot)) {
+        data.type = "jewelry";
+    }
+    // Uppercase stat keys
+    if (sys.stats && typeof sys.stats === "object") {
+        const normalized = {};
+        for (const [k, v] of Object.entries(sys.stats)) {
+            normalized[k.toUpperCase()] = v;
+        }
+        sys.stats = normalized;
+    }
+    return data;
+}
+
 export async function addCatalogItemToActor(actor, catalogId) {
     const entry = getCatalog()[catalogId];
     if (!entry || !actor) return false;
-    const data = {
+    const data = normalizeCatalogData({
         name: entry.name,
         type: entry.type,
         img: entry.img || "icons/svg/item-bag.svg",
         system: JSON.parse(JSON.stringify(entry.system ?? {})),
-    };
+    });
     if (data.system.quantity == null) data.system.quantity = 1;
     try {
         const stacked = await tryStackInto(actor, data);
