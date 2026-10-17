@@ -10,6 +10,8 @@
                     <th>{{localize "eqrmss.item.quantity"}}</th>
                     <th>{{localize "eqrmss.item.weight"}}</th>
                     <th>{{localize "eqrmss.item.cost"}} (tp)</th>
+                    <th>Stackable</th>
+                    <th>Max stack</th>
                 </tr>
                 <td>
                     <input name="system.quantity" type="text" value="{{system.quantity}}" data-dtype="Number"/>
@@ -19,6 +21,12 @@
                 </td>
                 <td>
                     <input name="system.cost" type="number" min="0" step="1" value="{{system.cost}}" data-dtype="Number"/>
+                </td>
+                <td style="text-align: center;">
+                    <input name="system.stackable" type="checkbox" {{checked system.stackable}}/>
+                </td>
+                <td>
+                    <input name="system.maxStack" type="number" min="0" step="1" value="{{system.maxStack}}" data-dtype="Number" placeholder="∞"/>
                 </td>
             </table>
             <div class="form-group" style="margin: 8px 0;">

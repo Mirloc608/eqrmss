@@ -513,7 +513,7 @@ export class EQRMSSItem extends Item {
     isStackable() {
 
         return (
-            this.system.item?.stackable === true
+            (this.system.stackable ?? this.system.item?.stackable) === true
         );
 
     }

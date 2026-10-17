@@ -61,6 +61,37 @@
 <div class="form-group">
 
     <label>
+        Stackable
+    </label>
+
+    <input
+        name="system.stackable"
+        type="checkbox"
+        {{checked system.stackable}}
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
+        Max stack <span style="opacity: 0.6;">(blank = unlimited)</span>
+    </label>
+
+    <input
+        name="system.maxStack"
+        type="number"
+        min="0"
+        step="1"
+        value="{{system.maxStack}}"
+        data-dtype="Number"
+    />
+
+</div>
+
+<div class="form-group">
+
+    <label>
         {{localize "eqrmss.item.weight"}}
     </label>
 

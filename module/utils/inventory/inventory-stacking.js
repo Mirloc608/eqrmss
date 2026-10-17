@@ -49,6 +49,30 @@ export function getItemQuantity(itemOrData) {
 }
 
 /**
+ * Per-item stackable flag from the sheet (system.stackable).
+ * Returns true / false / null (unset → legacy type-based behavior).
+ */
+export function getStackableFlag(itemOrData) {
+    const v = itemOrData?.system?.stackable;
+    if (v === true) return true;
+    if (v === false) return false;
+    return null;
+}
+
+/**
+ * Max stack size across the given items. Unset / 0 / blank = unlimited.
+ * When items disagree, the most restrictive cap wins.
+ */
+export function getMaxStack(...items) {
+    let cap = Infinity;
+    for (const it of items) {
+        const v = Number(it?.system?.maxStack);
+        if (Number.isFinite(v) && v > 0) cap = Math.min(cap, Math.floor(v));
+    }
+    return cap;
+}
+
+/**
  * Check whether an item has any distinguishing effects or bonuses
  * that would make stacking unsafe.
  */
@@ -114,65 +138,97 @@ export function itemsCanStack(a, b) {
     // Items with effects or bonuses never auto-stack
     if (hasEffects(a) || hasEffects(b)) return false;
 
+    // Explicit per-item opt-out always wins
+    if (getStackableFlag(a) === false || getStackableFlag(b) === false) return false;
+
     return true;
 }
 
 /**
  * Find an existing item on the actor that the new item data can
  * stack into. Returns the Item document, or null.
+ *
+ * An explicit stackable=true on the incoming item bypasses the type
+ * gate; stackable=false refuses outright. Full stacks (at maxStack)
+ * are skipped.
  */
 export function findStackTarget(actor, itemData) {
     if (!actor?.items) return null;
+    if (getStackableFlag(itemData) === false) return null;
     const type = itemData?.type ?? null;
-    if (!AUTO_STACK_TYPES.has(type)) return null;
+    const bypassGate = getStackableFlag(itemData) === true;
+    if (!bypassGate && !AUTO_STACK_TYPES.has(type)) return null;
 
     for (const existing of actor.items) {
         // Skip the item itself (relevant during updates)
         if (itemData._id && existing.id === itemData._id) continue;
-        if (itemsCanStack(existing, itemData)) return existing;
+        if (!itemsCanStack(existing, itemData)) continue;
+        // Skip stacks already at their cap
+        const cap = getMaxStack(existing, itemData);
+        if (getItemQuantity(existing) >= cap) continue;
+        return existing;
     }
     return null;
 }
 
 /**
- * Merge a new item's quantity into an existing stack.
- * Returns true if merged (caller should skip creating the new item).
+ * Merge a new item's quantity into existing stacks, honoring maxStack.
+ * Fills each matching stack to its cap before moving to the next.
+ * Any remainder stays on itemData (system.quantity) for normal creation.
+ * Returns true only when the full quantity was merged (caller cancels
+ * the creation); false otherwise.
  */
 export async function tryStackInto(actor, itemData) {
-    const target = findStackTarget(actor, itemData);
-    if (!target) return false;
+    const sys = (itemData.system ??= {});
+    let remaining = getItemQuantity(itemData);
 
-    const addQty = getItemQuantity(itemData);
-    const curQty = getItemQuantity(target);
-    try {
-        await target.update({ "system.quantity": curQty + addQty });
-        // Also sync the legacy field if the target uses it
-        if (target.system?.item && "quantity" in target.system.item) {
-            await target.update({ "system.item.quantity": curQty + addQty });
+    while (remaining > 0) {
+        const target = findStackTarget(actor, itemData);
+        if (!target) break;
+        const cap = getMaxStack(target, itemData);
+        const curQty = getItemQuantity(target);
+        const space = cap - curQty;
+        if (!(space > 0)) break;
+        const add = Math.min(remaining, space);
+        if (!(add > 0)) break;
+        const newQty = curQty + add;
+        try {
+            await target.update({ "system.quantity": newQty });
+            // Also sync the legacy field if the target uses it
+            if (target.system?.item && "quantity" in target.system.item) {
+                await target.update({ "system.item.quantity": newQty });
+            }
+        } catch (e) {
+            console.warn("EQRMSS | Stack merge failed", e);
+            break;
         }
-        return true;
-    } catch (e) {
-        console.warn("EQRMSS | Stack merge failed", e);
-        return false;
+        remaining -= add;
+        // Reflect the remainder on the pending creation data
+        sys.quantity = remaining;
+        if (sys.item && "quantity" in sys.item) sys.item.quantity = remaining;
     }
+
+    return remaining <= 0;
 }
 
 /**
  * Consolidate all stacks in an actor's inventory. Groups items by
- * matching criteria and merges duplicates into the oldest entry.
+ * matching criteria and merges duplicates into the oldest entry,
+ * splitting into maxStack-sized chunks when capped.
  * Returns { merged: N, removed: M }.
  */
 export async function consolidateInventory(actor) {
     if (!actor?.items) return { merged: 0, removed: 0 };
 
     const items = [...actor.items];
-    const toDelete = [];
     let merged = 0;
+    let removed = 0;
 
     // Group by a stable key derived from matching criteria
     const groups = new Map();
     for (const item of items) {
-        if (!AUTO_STACK_TYPES.has(item.type)) continue;
+        if (getStackableFlag(item) === false) continue;
+        if (!AUTO_STACK_TYPES.has(item.type) && getStackableFlag(item) !== true) continue;
         if (hasEffects(item)) continue;
 
         const sys = item.system ?? {};
@@ -194,31 +250,52 @@ export async function consolidateInventory(actor) {
 
     for (const [, group] of groups) {
         if (group.length < 2) continue;
-        // Keep the first (oldest), merge the rest into it
+        // Keep the first (oldest), merge the rest into it.
+        // Honor maxStack: overflow becomes additional cap-sized stacks.
         const keeper = group[0];
-        let total = getItemQuantity(keeper);
-        for (let i = 1; i < group.length; i++) {
-            total += getItemQuantity(group[i]);
-            toDelete.push(group[i].id);
-            merged++;
+        const cap = getMaxStack(...group);
+        let total = 0;
+        for (const it of group) total += getItemQuantity(it);
+
+        // Split the merged total into cap-sized chunks
+        const chunks = [];
+        let rest = total;
+        while (rest > 0) {
+            const c = Math.min(rest, cap);
+            if (!(c > 0)) break;
+            chunks.push(c);
+            rest -= c;
         }
+        if (chunks.length === 0) continue;
+
         try {
-            await keeper.update({ "system.quantity": total });
+            await keeper.update({ "system.quantity": chunks[0] });
             if (keeper.system?.item && "quantity" in keeper.system.item) {
-                await keeper.update({ "system.item.quantity": total });
+                await keeper.update({ "system.item.quantity": chunks[0] });
+            }
+            merged++;
+            const toDelete = [];
+            for (let i = 1; i < group.length; i++) toDelete.push(group[i].id);
+            // Overflow beyond the first chunk becomes new stacks
+            if (chunks.length > 1) {
+                const base = keeper.toObject();
+                delete base._id;
+                const creates = chunks.slice(1).map((q) => {
+                    const d = foundry.utils.deepClone(base);
+                    d.system.quantity = q;
+                    if (d.system.item && "quantity" in d.system.item) d.system.item.quantity = q;
+                    return d;
+                });
+                await actor.createEmbeddedDocuments("Item", creates);
+            }
+            if (toDelete.length > 0) {
+                await actor.deleteEmbeddedDocuments("Item", toDelete);
+                removed += toDelete.length;
             }
         } catch (e) {
             console.warn("EQRMSS | Consolidate update failed", e);
         }
     }
 
-    if (toDelete.length > 0) {
-        try {
-            await actor.deleteEmbeddedDocuments("Item", toDelete);
-        } catch (e) {
-            console.warn("EQRMSS | Consolidate delete failed", e);
-        }
-    }
-
-    return { merged, removed: toDelete.length };
+    return { merged, removed };
 }
