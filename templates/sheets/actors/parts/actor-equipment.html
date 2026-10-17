@@ -2,6 +2,11 @@
   <div class="equipment-split" style="display: flex; gap: 10px;">
     <div class="panel" style="flex: 2;">
       <h3>Equipment and Gear</h3>
+      <div style="margin-bottom: 8px;">
+        <a class="item-control item-catalog" title="Add an item from the catalog" style="cursor: pointer;">
+          <i class="fas fa-book-open"></i> Catalog
+        </a>
+      </div>
 
       <h4>Weapons</h4>
       <table class="rmss-table">
@@ -345,8 +350,8 @@
               </a></td>
               <td>
                 <select class="item-location" data-item-id="{{this._id}}">
-                  <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Equipped</option>
-                  <option value="pack" {{#if (eq this.system.location "pack")}}selected{{/if}}>Pack</option>
+                  <option value="equipped" {{#if (eq this.system.location "equipped")}}selected{{/if}}>Pack</option>
+                  <option value="pack" {{#if (eq this.system.location "pack")}}selected{{/if}}>Stored</option>
                   <option value="ground" {{#if (eq this.system.location "ground")}}selected{{/if}}>Ground</option>
                 </select>
               </td>
