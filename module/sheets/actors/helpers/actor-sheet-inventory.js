@@ -87,6 +87,23 @@ export class EQRMSSActorInventoryHelper {
                 }
             });
         });
+
+        // ------------------------------------------------------------
+        // Catalog picker (2026-10-17): browse the item catalog and add
+        // entries directly to the actor.
+        // ------------------------------------------------------------
+        html.querySelectorAll(".item-catalog").forEach(btn => {
+            btn.addEventListener("click", async ev => {
+                ev.preventDefault();
+                try {
+                    const { openCatalogPicker } = await import("../../../utils/inventory/catalog-picker.js");
+                    await openCatalogPicker(this.actor);
+                } catch (e) {
+                    console.warn("EQRMSS | Catalog picker failed", e);
+                    ui.notifications.warn("EQRMSS | Catalog picker failed. See console.");
+                }
+            });
+        });
     }
 
     // =========================================================================
