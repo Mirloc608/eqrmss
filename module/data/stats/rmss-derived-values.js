@@ -118,6 +118,26 @@ export function calculateArmorAndDefenses(actorData) {
         }
     }
 
+    // Song + spell stat bonuses (2026-10-18): EQ stat names → RMSS keys.
+    // Buffs stored in spellEffects with scaledTarget "statBonus" flow into
+    // derived stats, which then feed OB/DB/RR. Follows the songDB/songMove pattern.
+    const EQ_TO_RMSS = { str: "St", sta: "Co", agi: "Ag", dex: "Qu", wis: "Em", int: "Me", cha: "Pr" };
+    const buffFx = system.status?.spellEffects;
+    if (Array.isArray(buffFx)) {
+        for (const e of buffFx) {
+            if (e?.scaledTarget !== "statBonus" || !e?.scaledStat) continue;
+            if (e?.source !== "song" && e?.source !== "spell") continue;
+            if (e?.source === "spell" && e?.kind === "regen") continue;
+            const rmssKey = EQ_TO_RMSS[String(e.scaledStat).toLowerCase()];
+            if (!rmssKey) continue;
+            const val = Number(e?.scaledValue) || 0;
+            if (!val) continue;
+            // stats keys are capitalized (St, Ag, Co...); also try lowercase
+            if (stats[rmssKey] !== undefined) stats[rmssKey] += val;
+            else if (stats[rmssKey.toLowerCase()] !== undefined) stats[rmssKey.toLowerCase()] += val;
+        }
+    }
+
     // Run the RMSS Derived Value Engine
     const engine = new RMSSDerivedValueEngine();
     const derivedStats = engine.compute(stats);
