@@ -2013,10 +2013,12 @@ button.rank-badge:hover {
   top: 12px;
   right: 380px;
   z-index: 100;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   padding: 14px 16px;
   line-height: 1.2;
-  text-align: center;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 15px;
   font-weight: bold;
@@ -2029,7 +2031,7 @@ button.rank-badge:hover {
 #eqrmss-gm-screen-btn:hover {
   background: linear-gradient(160deg, #f7ecd0 0%, #eedcae 45%, #dfc48c 100%);
 }
-#eqrmss-gm-screen-btn i { margin-right: 6px; }
+#eqrmss-gm-screen-btn i { margin: 0; }
 
 .eqrmss.gm-screen .gm-screen {
   font-family: Georgia, "Times New Roman", serif;
