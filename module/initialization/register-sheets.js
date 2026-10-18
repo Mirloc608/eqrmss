@@ -14,6 +14,7 @@ import EQRMSSTransportSheet from "../sheets/items/eqrmss_transport_sheet.js";
 import EQRMSSWeaponSheet from "../sheets/items/eqrmss_weapon_sheet.js";
 import EQRMSSShieldSheet from "../sheets/items/eqrmss_shield_sheet.js";
 import EQRMSSJewelrySheet from "../sheets/items/eqrmss_jewelry_sheet.js";
+import EQRMSSInstrumentSheet from "../sheets/items/eqrmss_instrument_sheet.js";
 import EQRMSSSpellSheet from "../sheets/spells/eqrmss_spell_sheet.js";
 import EQRMSSSongSheet from "../sheets/songs/eqrmss_song_sheet.js";
 import EQRMSSSkillCategorySheet from "../sheets/skills/eqrmss_skill_category_sheet.js";
@@ -46,7 +47,7 @@ export function registerEQRMSSSheets() {
 
     // --- Item Sheets ---
     DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSItemSheet, {
-        types: ["item", "consumable", "instrument"],
+        types: ["item", "consumable"],
         label: "eqrmss.entity_sheet.item",
         makeDefault: true
     });
@@ -96,6 +97,12 @@ export function registerEQRMSSSheets() {
     DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSJewelrySheet, {
         types: ["jewelry"],
         label: "eqrmss.entity_sheet.jewelry",
+        makeDefault: true
+    });
+
+    DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSInstrumentSheet, {
+        types: ["instrument"],
+        label: "eqrmss.entity_sheet.instrument",
         makeDefault: true
     });
 
