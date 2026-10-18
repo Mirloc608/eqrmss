@@ -9,7 +9,7 @@ import { EQRMSSCharacterCreationWizardFinalizer } from "./eqrmss-character-creat
 import { EQRMSSCharacterCreationRules, checkRaceClassCompatibility } from "./eqrmss-character-creation-wizard-rules.js";
 import { getStatValueFromPoints, calculatePotentialStat } from "./eqrmss-character-creation-tables.js";
 import { rmssStatBonus, rmssDevelopmentPoints } from "../data/stats/rmss-stat-bonus.js";
-import { parsePriceToTp } from "../utils/price.js";
+import { parsePriceToTp, formatPrice } from "../utils/price.js";
 import { rmssRankBonus } from "../data/skills/rmss-rank-bonus.js";
 import {
   WEAPON_CATEGORIES,
