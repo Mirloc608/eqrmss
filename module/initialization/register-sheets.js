@@ -46,7 +46,7 @@ export function registerEQRMSSSheets() {
 
     // --- Item Sheets ---
     DocumentSheetConfig.registerSheet(Item, "eqrmss", EQRMSSItemSheet, {
-        types: ["item", "consumable"],
+        types: ["item", "consumable", "instrument"],
         label: "eqrmss.entity_sheet.item",
         makeDefault: true
     });
