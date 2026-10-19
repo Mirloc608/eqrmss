@@ -52,11 +52,13 @@ function readiedWeapons(actor) {
 // and % of movement expended this round.
 async function promptSituational() {
     const DialogV2 = foundry?.applications?.api?.DialogV2;
-    if (!DialogV2?.prompt) {
+    // V14: DialogV2.prompt returns button ID, not form data. Use input with prompt fallback.
+    const promptFn = DialogV2?.input ?? DialogV2?.prompt;
+    if (!promptFn) {
         return { surprised: false, charging: false, movementPct: 0 };
     }
     try {
-        const fd = await DialogV2.prompt({
+        const fd = await promptFn.call(DialogV2, {
             window: { title: "Initiative: situation (§6.1)" },
             content: `
                 <div class="form-group">

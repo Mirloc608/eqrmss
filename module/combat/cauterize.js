@@ -96,9 +96,11 @@ async function openEndedRoll() {
 async function promptCauterize(patient, bleed, difficulty, skillBonus) {
     const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
     const fallback = { bonus: skillBonus ?? -10, skilled: skillBonus != null, self: false };
-    if (!DialogV2?.prompt) return fallback;
+    // V14: DialogV2.prompt returns button ID, not form data. Use input with prompt fallback.
+    const promptFn = DialogV2?.input ?? DialogV2?.prompt;
+    if (!promptFn) return fallback;
     try {
-        const result = await DialogV2.prompt({
+        const result = await promptFn.call(DialogV2, {
             window: { title: "Cauterize Wound" },
             content: `
                 <div class="form-group">

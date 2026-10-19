@@ -1505,14 +1505,16 @@ export async function consumeNextSwingBonus(actor) {
 
 async function promptParryAllocation(actor, weaponItem, maxOb) {
     const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
-    if (!DialogV2?.prompt || maxOb <= 0) return maxOb;
+    // V14: DialogV2.prompt returns button ID, not form data. Use input with prompt fallback.
+    const promptFn = DialogV2?.input ?? DialogV2?.prompt;
+    if (!promptFn || maxOb <= 0) return maxOb;
     try {
         // Read the allocation from the live input in the ok callback:
         // this build's prompt resolution shape for form data has proven
         // unreliable (a submitted 5 came back as 0), while the DOM value
         // at click time is authoritative. Fall back to the resolved form
         // data if the callback result is not a usable primitive.
-        const result = await DialogV2.prompt({
+        const result = await promptFn.call(DialogV2, {
             window: { title: "Parry: OB Allocation" },
             content: `
                 <div class="form-group">
@@ -1627,11 +1629,13 @@ export async function declareParry(actor, weaponItem, allocation = null) {
 
 async function promptMissileParryAllocation(actor, weaponItem, maxOb, hasShield) {
     const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
-    if (!DialogV2?.prompt || maxOb <= 0) {
+    // V14: DialogV2.prompt returns button ID, not form data. Use input with prompt fallback.
+    const promptFn = DialogV2?.input ?? DialogV2?.prompt;
+    if (!promptFn || maxOb <= 0) {
         return { allocation: maxOb, terrain: !hasShield };
     }
     try {
-        const result = await DialogV2.prompt({
+        const result = await promptFn.call(DialogV2, {
             window: { title: "Missile Parry: OB Allocation" },
             content: `
                 <div class="form-group">
