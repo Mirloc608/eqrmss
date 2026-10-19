@@ -246,6 +246,13 @@ class EQRMSSProgressionManager
 
             }
 
+            // Auto-grant AA ranks (2026-10-19): e.g. Harm Touch / Lay on Hands
+            // ranks unlock at level thresholds per EQ Live.
+            const autoGranted = await EQRMSSAAAdvancement.autoGrantRanks(actor);
+            for (const g of autoGranted) {
+                console.log(`EQRMSS | Auto-granted ${g.aaName} rank ${g.rank} (level ${newLevel})`);
+            }
+
         }
 
         // ------------------------------------------

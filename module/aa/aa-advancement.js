@@ -264,6 +264,55 @@ export class EQRMSSAAAdvancement {
      * API for future earn sources (AA XP conversion, quest rewards).
      * Permission is the caller's responsibility.
      */
+    /**
+     * Auto-grant AA ranks based on character level.
+     * For AAs with system.autoGrant=true, grants all ranks whose
+     * grantLevel <= actor level. Called on level-up and character creation.
+     * @returns {Array} List of {aaId, aaName, rank} granted.
+     */
+    static async autoGrantRanks(actor) {
+        if (!actor) return [];
+        const level = this.getLevel(actor);
+        const state = this.getAAState(actor);
+        const granted = [];
+
+        // Check all AA definitions for auto-grant
+        const allDefs = Object.values(game?.eqrmss?.aas?.byId ?? {});
+        for (const def of allDefs) {
+            if (!def?.system?.autoGrant) continue;
+            const ranks = def.system.ranks ?? [];
+            const currentRank = this.getPurchasedRank(actor, def.id);
+
+            // Find highest rank the actor qualifies for
+            let targetRank = currentRank;
+            for (const r of ranks) {
+                const grantLevel = Number(r.grantLevel ?? 999);
+                if (grantLevel <= level && r.rank > targetRank) {
+                    targetRank = r.rank;
+                }
+            }
+
+            if (targetRank > currentRank) {
+                const abilities = state.abilities.map(a => ({ ...a }));
+                const entry = abilities.find(a => a.id === def.id);
+                if (entry) entry.rank = targetRank;
+                else abilities.push({ id: def.id, rank: targetRank });
+
+                await actor.update({
+                    "system.aa": {
+                        points: state.points,
+                        spent: state.spent,
+                        abilities
+                    }
+                });
+                // Refresh state for next iteration
+                Object.assign(state, this.getAAState(actor));
+                granted.push({ aaId: def.id, aaName: def.name, rank: targetRank });
+            }
+        }
+        return granted;
+    }
+
     static async grantPoints(actor, amount, { reason } = {}) {
         amount = Math.floor(Number(amount));
         if (!actor) return { ok: false, reason: "No actor." };
