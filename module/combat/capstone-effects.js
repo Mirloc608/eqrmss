@@ -184,7 +184,53 @@ export async function applyCapstoneHeal(target, amount, notes = []) {
  */
 export async function applyCapstoneBuff(target, capstone, modifiers, durationRounds, notes = []) {
     if (!target || !modifiers?.length) return;
-    
+
+    // Track 3 (2026-10-18): pet buff pipeline (re-implements a2dc2086, removed in e5c50e26).
+    // pet-<target> modifiers apply to the owner's non-familiar pets, not the owner.
+    // Supported: pet-ob, pet-db, pet-haste, pet-regen, pet-damage-shield, pet-vuln.
+    const petMods = modifiers.filter(m => String(m.target || "").startsWith("pet-"));
+    if (petMods.length > 0) {
+        try {
+            const pets = (globalThis.game?.actors ?? []).filter(a =>
+                a?.type === "pet" &&
+                a?.system?.pet?.petType !== "familiar" &&
+                (a?.system?.pet?.owner === target.id || a?.getFlag("eqrmss", "ownerId") === target.id)
+            );
+            for (const pet of pets) {
+                for (const pm of petMods) {
+                    const petTarget = pm.target.slice(4); // Remove "pet-" prefix
+                    // Map pet-specific targets to standard modifier targets
+                    let mappedTarget = petTarget;
+                    let mappedKind = "buff";
+                    if (petTarget === "ob") mappedTarget = "ob";
+                    else if (petTarget === "db") mappedTarget = "db";
+                    else if (petTarget === "haste") mappedTarget = "haste";
+                    else if (petTarget === "regen") { mappedTarget = "regen"; mappedKind = "regen"; }
+                    else if (petTarget === "damage-shield") mappedTarget = "thorn-shield";
+                    else if (petTarget === "vuln") mappedTarget = "vuln-all";
+                    // Apply the mapped buff to the pet as a spellEffect
+                    const petFx = [...(pet.system?.status?.spellEffects || [])];
+                    petFx.push({
+                        source: "capstone",
+                        capstoneId: capstone.id,
+                        capstoneName: capstone.name,
+                        scaledTarget: mappedTarget,
+                        scaledValue: pm.value,
+                        durationRounds,
+                        roundsLeft: durationRounds,
+                        name: capstone.name,
+                        kind: mappedKind,
+                    });
+                    await pet.update({ "system.status.spellEffects": petFx });
+                    notes.push(`${esc(pet.name)}: ${mappedTarget} +${pm.value} (${durationRounds} rounds).`);
+                }
+            }
+        } catch (e) { /* non-fatal */ }
+        // Remove pet mods from the main list (they've been handled)
+        modifiers = modifiers.filter(m => !String(m.target || "").startsWith("pet-"));
+        if (!modifiers.length) return;
+    }
+
     const fx = [...(target.system?.status?.spellEffects || [])];
     const now = Date.now();
     // Convert rounds to ms for expiry (1 round = 6 seconds)
