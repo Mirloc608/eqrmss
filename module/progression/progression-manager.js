@@ -30,6 +30,11 @@ import {
 }
 from "./song-granter.js";
 
+import {
+    EQRMSSAAAdvancement
+}
+from "../aa/aa-advancement.js";
+
 class EQRMSSProgressionManager
 {
 
@@ -205,18 +210,41 @@ class EQRMSSProgressionManager
         }
 
         // ------------------------------------------
-        // AA Unlock
+        // AA Points (61+)
         // ------------------------------------------
 
         if(
-            rewards.aa
+            newLevel >= 61
         )
         {
 
-            await abilityGranter.grantAAUnlock(
-                actor,
-                newLevel
-            );
+            const aaPerLevel =
+                Math.max(
+                    0,
+                    Math.floor(
+                        Number(
+                            game.settings.get(
+                                "eqrmss",
+                                "aaPointsPerLevel"
+                            )
+                        ) || 0
+                    )
+                );
+
+            if(
+                aaPerLevel > 0
+            )
+            {
+
+                await EQRMSSAAAdvancement.grantPoints(
+                    actor,
+                    aaPerLevel,
+                    {
+                        reason: `Level ${newLevel} advancement`
+                    }
+                );
+
+            }
 
         }
 

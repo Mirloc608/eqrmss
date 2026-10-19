@@ -132,4 +132,18 @@ export function registerEQRMSSSettings() {
     },
     onChange: () => { try { game.eqrmss?.partyHud?.render(); } catch (e) {} }
   });
+
+  game.settings.register("eqrmss", "aaPointsPerLevel", {
+    name: "AA Points Per Level (61+)",
+    hint: "How many Alternate Advancement points characters gain on each level-up from 61 to 125.",
+    scope: "world",
+    config: true,
+    type: Number,
+    default: 5,
+    choices: {
+      3: "3 — Tight (195 total, hard choices)",
+      5: "5 — Standard (325 total)",
+      10: "10 — Generous (650 total, completionist)"
+    }
+  });
 }
