@@ -53,12 +53,57 @@ SKILL_MAP = {
     "tinkering": "skill-tinkering",
 }
 
-# eqtraders recipe index pages per skill (article IDs from eqtraders.com)
-# These are the "recipe_page.php" article pages listing all recipes for a skill.
+# eqtraders recipe index pages per skill (article IDs from eqtraders.com).
+# Each skill maps to a LIST of URLs — many skills split recipes across
+# subcategory pages (basic, expansion-specific, quest, etc.).
+# Add more URLs as they're discovered; the harvester dedupes by recipe ID.
 RECIPE_INDEX = {
-    "brewing": "http://eqtraders.com/recipes/recipe_page.php?menustr=010000000000&rsa=Brewing&sb=trivial",
-    # Others follow the same pattern; article IDs vary. The harvester
-    # discovers them via the skill index page if not listed here.
+    "brewing": [
+        "http://eqtraders.com/recipes/recipe_page.php?menustr=010000000000&rsa=Brewing&sb=trivial",
+    ],
+    "baking": [
+        # TODO: main baking page URL needed; TOB subpage below
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=1761&rsa=Baking&sb=trivial&so=desc&sub=TOB&menustr=010000000000&printer=tree",
+    ],
+    "smithing": [
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=58&rsa=Smithing&sb=trivial&sub=basic&menustr=080100020000",
+        "https://eqtraders.com/recipes/recipe_page.php?article=435&rsa=Smithing&sb=item&sub=Sod&menustr=080100000000&printer=tree",
+    ],
+    "tailoring": [
+        # TODO: tailoring page URLs needed
+    ],
+    "jewelcraft": [
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=167&rsa=Jewelcraft&sb=item&so=desc&sub=other&menustr=080070800000&printer=tree",
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=420&rsa=Jewelcraft&sb=item&sub=SoF&menustr=010000000000",
+    ],
+    "jewelry": [
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=167&rsa=Jewelcraft&sb=item&so=desc&sub=other&menustr=080070800000&printer=tree",
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=420&rsa=Jewelcraft&sb=item&sub=SoF&menustr=010000000000",
+    ],
+    "fletching": [
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=39&rsa=Fletching&sb=trivial&sub=&menustr=080060000000&printer=tree",
+        "https://www.eqtraders.com/recipes/recipe_page.php?article=766&rsa=Fletching&sb=item&menustr=080060000000&printer=tree",
+    ],
+    "alchemy": [
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=376&rsa=Alchemy&sb=trivial&sub=other&menustr=080010700000&printer=tree",
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=360&rsa=Alchemy&sb=item&so=desc&sub=pop&menustr=010000000000&printer=tree",
+    ],
+    "pottery": [
+        # Note: pottery uses a different script (pottery_recipe_page.php)
+        "http://www.eqtraders.com/recipes/pottery_recipe_page.php?article=185&rsa=Pottery&sb=trivial&sub=potion&menustr=080090110000",
+    ],
+    "poison": [
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=52&rsa=Make%20Poison&sb=item&sub=&menustr=080080000000&printer=tree",
+    ],
+    "research": [
+        # TODO: research page URLs needed
+    ],
+    "fishing": [
+        # TODO: fishing page URLs needed
+    ],
+    "tinkering": [
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=66&rsa=Tinkering&sb=item&sub=&menustr=080120000000&printer=tree",
+    ],
 }
 
 last_req = [0.0]
@@ -209,37 +254,66 @@ def harvest_skill(skill):
         print(f"Unknown skill: {skill}", file=sys.stderr)
         sys.exit(1)
 
-    url = RECIPE_INDEX.get(skill.lower())
-    if not url:
-        print(f"No index URL configured for {skill}; add it to RECIPE_INDEX.", file=sys.stderr)
+    urls = RECIPE_INDEX.get(skill.lower(), [])
+    if not urls:
+        print(f"No index URLs configured for {skill}; add them to RECIPE_INDEX.", file=sys.stderr)
         sys.exit(1)
 
-    print(f"Fetching {url} ...", file=sys.stderr)
-    html = fetch(url)
-    text = clean_text(html)
-    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    seen = set()
+    for url in urls:
+        print(f"Fetching {url} ...", file=sys.stderr)
+        html = fetch(url)
+        text = clean_text(html)
+        lines = [l.strip() for l in text.split("\n") if l.strip()]
 
-    recipes = parse_recipe_lines(lines)
-    for r in recipes:
-        r["skill"] = skill_id
-        # Reorder keys to match schema
-        ordered = {
-            "id": r["id"],
-            "name": r["name"],
-            "skill": r["skill"],
-            "difficulty": r["difficulty"],
-            "container": r["container"],
-            "components": r["components"],
-            "product": r["product"],
-        }
-        yield ordered
+        for r in parse_recipe_lines(lines):
+            if r["id"] in seen:
+                continue
+            seen.add(r["id"])
+            r["skill"] = skill_id
+            # Reorder keys to match schema
+            yield {
+                "id": r["id"],
+                "name": r["name"],
+                "skill": r["skill"],
+                "difficulty": r["difficulty"],
+                "container": r["container"],
+                "components": r["components"],
+                "product": r["product"],
+            }
 
 def main():
     ap = argparse.ArgumentParser(description="Harvest eqtraders recipes into eqrmss schema")
-    ap.add_argument("--skill", required=True, help="Tradeskill name (e.g. brewing)")
-    ap.add_argument("--out", required=True, help="Output JSON path")
+    ap.add_argument("--skill", help="Tradeskill name (e.g. brewing)")
+    ap.add_argument("--all", action="store_true", help="Harvest all configured skills")
+    ap.add_argument("--out", help="Output JSON path (required with --skill; with --all, a directory)")
     args = ap.parse_args()
 
+    if args.all:
+        import os
+        outdir = args.out or "."
+        os.makedirs(outdir, exist_ok=True)
+        total = 0
+        for skill in sorted(RECIPE_INDEX):
+            urls = RECIPE_INDEX[skill]
+            if not urls:
+                print(f"Skipping {skill}: no URLs configured", file=sys.stderr)
+                continue
+            try:
+                recipes = list(harvest_skill(skill))
+            except Blocked as b:
+                print(f"STOPPED on {skill}: {b}", file=sys.stderr)
+                sys.exit(2)
+            path = os.path.join(outdir, f"{skill}-fresh.json")
+            with open(path, "w") as f:
+                json.dump(recipes, f, indent=2)
+            print(f"Wrote {len(recipes)} recipes to {path}", file=sys.stderr)
+            total += len(recipes)
+        print(f"Total: {total} recipes across all skills", file=sys.stderr)
+        return
+
+    if not args.skill or not args.out:
+        ap.error("--skill and --out are required (or use --all)")
     try:
         recipes = list(harvest_skill(args.skill))
     except Blocked as b:
