@@ -2,8 +2,8 @@
  * ============================================================
  * EQRMSS AA Loader
  * ============================================================
- * Loads Alternate Advancement data from module/data/aas/
- * (one JSON object per file, see module/data/aas/SCHEMA.md)
+ * Loads Alternate Advancement data from module/data/aas/consolidated/
+ * (19 JSON files: 16 classes + general + archetype + mercenary)
  * and applies expansion gating via EQRMSSExpansionManager.
  *
  * Populates: game.eqrmss.aas = { byId, byClass, byCategory }
@@ -32,17 +32,10 @@ async function mapLimit(items, limit, fn) {
 
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 
-const AA_BASE_PATH = "systems/eqrmss/module/data/aas";
+const AA_BASE_PATH = "systems/eqrmss/module/data/aas/consolidated";
 const DEFAULT_AA_EXPANSION = "luclin";
 
-// Manifest / non-data files never treated as AAs
-const SKIP_FILES = new Set([
-    "index.json",
-    "aa-categories.json",
-    "signature-dependencies.json",
-    "schema.json",
-    "manifest.json"
-]);
+const AA_FILES = ["general", "archetype", "mercenary", "bard", "beastlord", "berserker", "cleric", "druid", "enchanter", "magician", "monk", "necromancer", "paladin", "ranger", "rogue", "shadowknight", "shaman", "warrior", "wizard"];
 
 function isValidAA(j) {
     if (!j || typeof j !== "object") return false;
@@ -123,15 +116,6 @@ export const EQRMSSAALoader = {
         let scanned = 0, loaded = 0, gated = 0, invalid = 0;
 
         try {
-            const foundryPicker = (typeof foundry !== "undefined")
-                ? foundry?.applications?.apps?.FilePicker?.implementation
-                : undefined;
-            const FilePickerImpl = foundryPicker ?? globalThis.FilePicker;
-            if (!FilePickerImpl) {
-                console.warn("EQRMSS | AA Loader | FilePicker unavailable, no AAs loaded");
-                return this._store(byId, byClass, byCategory);
-            }
-
             // Resolve the expansion manager once for this load; warn at most once
             // when gating is unavailable instead of once per AA file.
             const manager = await getExpansionManager();
@@ -140,29 +124,18 @@ export const EQRMSSAALoader = {
                 console.warn("EQRMSS | AA Loader | expansion manager unavailable, gating disabled");
             }
 
-            // Bundle fast-path (2026-10-14): if bundles exist, load 4 files
-            // instead of browsing + fetching 1,264 individual files.
-            const bundleNames = ["general", "archetype", "classes", "mercenary"];
-            let useBundles = false;
-            const bundleData = [];
-            for (const bn of bundleNames) {
-                try {
-                    const resp = await fetch(`${AA_BASE_PATH}/bundles/${bn}.json`);
-                    if (resp.ok) {
-                        const data = await resp.json();
-                        if (Array.isArray(data) && data.length > 0) {
-                            bundleData.push(...data);
-                            useBundles = true;
-                        }
-                    }
-                } catch {}
-            }
-
-            if (useBundles) {
-                console.log(`EQRMSS | AA Loader | using bundles (${bundleData.length} entries)`);
-                for (const entry of bundleData) {
-                    const j = entry.data || entry;
-                    const file = entry._source || "bundle";
+            // Load 19 consolidated files directly (2026-10-19)
+            const loadConsolidated = async (name) => {
+                const file = `${AA_BASE_PATH}/${name}.json`;
+                let arr;
+                try { arr = await fetchJson(file); }
+                catch (err) {
+                    console.warn(`EQRMSS | AA Loader | cannot fetch ${file}`, err.message);
+                    invalid++;
+                    return;
+                }
+                if (!Array.isArray(arr)) { invalid++; return; }
+                for (const j of arr) {
                     scanned++;
                     if (!isValidAA(j)) { invalid++; continue; }
                     if (!isAAUnlocked(j, manager)) { gated++; continue; }
@@ -176,67 +149,11 @@ export const EQRMSSAALoader = {
                     const cat = j.system.category;
                     (byCategory[cat] = byCategory[cat] || []).push(j);
                     const classes = j.system.classes || [];
-                    if (classes.length === 0) {
-                        (byClass.all = byClass.all || []).push(j);
-                    } else {
-                        for (const c of classes) {
-                            (byClass[c] = byClass[c] || []).push(j);
-                        }
-                    }
-                }
-                console.log(
-                    `EQRMSS | AA Loader | scanned=${scanned} loaded=${loaded} gated=${gated} invalid=${invalid} (bundled)`
-                );
-                return this._store(byId, byClass, byCategory);
-            }
-
-            // Fallback: individual files (parallelized)
-            const root = await FilePickerImpl.browse("data", AA_BASE_PATH).catch(() => ({ dirs: [], files: [] }));
-            const dirs = [...(root.dirs || [])];
-
-            const loadFile = async (file) => {
-                const fname = file.split("/").pop();
-                if (!fname.endsWith(".json") || SKIP_FILES.has(fname.toLowerCase())) return;
-                scanned++;
-                let j;
-                try {
-                    j = await fetchJson(file);
-                } catch { invalid++; return; }
-                if (!isValidAA(j)) { invalid++; return; }
-                if (!isAAUnlocked(j, manager)) { gated++; return; }
-                const id = j.id;
-                if (byId[id]) {
-                    console.warn(`EQRMSS | AA Loader | duplicate id "${id}" in ${file}, keeping first`);
-                    return;
-                }
-                byId[id] = j;
-                loaded++;
-
-                const cat = j.system.category;
-                (byCategory[cat] = byCategory[cat] || []).push(j);
-
-                const classes = j.system.classes || [];
-                if (classes.length === 0) {
-                    (byClass.all = byClass.all || []).push(j);
-                } else {
-                    for (const c of classes) {
-                        (byClass[c] = byClass[c] || []).push(j);
-                    }
+                    if (classes.length === 0) { (byClass.all = byClass.all || []).push(j); }
+                    else { for (const cl of classes) { (byClass[cl] = byClass[cl] || []).push(j); } }
                 }
             };
-
-            // Files directly under aas/ (none expected, but harmless)
-            await mapLimit(root.files || [], 10, loadFile);
-
-            // One directory per group: general, archetype, <class>, mercenary
-            await mapLimit(dirs, 4, async (dir) => {
-                try {
-                    const sub = await FilePickerImpl.browse("data", dir);
-                    await mapLimit(sub.files || [], 10, loadFile);
-                } catch (err) {
-                    console.warn(`EQRMSS | AA Loader | cannot browse ${dir}`, err.message);
-                }
-            });
+            await mapLimit(AA_FILES, 5, loadConsolidated);
         } catch (err) {
             console.error("EQRMSS | AA Loader | failed", err);
         }
