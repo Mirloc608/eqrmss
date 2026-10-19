@@ -178,10 +178,14 @@ export class EQRMSSAAAdvancement {
         return { ok: true, currentRank, maxRanks };
     }
 
-    /** Cost of the NEXT rank, given the current rank (0-based index). */
+    /** Cost of the NEXT rank, given the current rank (0-based index).
+     * Returns null when no cost is defined; 0 means explicitly free. */
     static getCost(aaDef, currentRank) {
         const costs = aaDef?.system?.costPerRank ?? [];
-        return Math.max(0, Math.floor(Number(costs[currentRank]) || 0));
+        if (currentRank >= costs.length) return null;
+        const raw = costs[currentRank];
+        if (raw == null) return null;
+        return Math.max(0, Math.floor(Number(raw) || 0));
     }
 
     static getAvailableAAs(actor) {
@@ -305,7 +309,7 @@ export class EQRMSSAAAdvancement {
         }
 
         const cost = this.getCost(def, check.currentRank);
-        if (cost <= 0) {
+        if (cost == null) {
             const r = { ok: false, reason: "This rank has no defined cost." };
             ui.notifications?.warn(`EQRMSS | ${r.reason}`);
             return r;
