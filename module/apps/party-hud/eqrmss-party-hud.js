@@ -47,8 +47,14 @@ export default class EQRMSSPartyHUD extends HandlebarsApplicationMixin(Applicati
     get visible() {
         const mode = game.settings.get("eqrmss", "partyHudMode");
         if (mode === "never") return false;
-        if (mode === "combat") return !!game.combat;
-        return true;
+        if (mode === "combat" && !game.combat) return false;
+        // Hide entirely when there's nothing to show (empty party, no enemies)
+        // instead of rendering as a tiny dot.
+        const party = this._getPartyActors();
+        if (party.length > 0) return true;
+        const partyIds = party.map(a => a.id);
+        const enemies = this._getEnemyTokens(partyIds);
+        return enemies.length > 0;
     }
 
     // ------------------------------------------------------------
