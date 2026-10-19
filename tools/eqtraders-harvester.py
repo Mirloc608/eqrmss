@@ -62,15 +62,18 @@ RECIPE_INDEX = {
         "http://eqtraders.com/recipes/recipe_page.php?menustr=010000000000&rsa=Brewing&sb=trivial",
     ],
     "baking": [
-        # TODO: main baking page URL needed; TOB subpage below
         "http://www.eqtraders.com/recipes/recipe_page.php?article=1761&rsa=Baking&sb=trivial&so=desc&sub=TOB&menustr=010000000000&printer=tree",
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=1866&rsa=Baking&sb=item&so=desc&sub=SOR&menustr=010000000000&printer=tree",
+        # TODO: main baking page URL needed
     ],
     "smithing": [
         "http://www.eqtraders.com/recipes/recipe_page.php?article=58&rsa=Smithing&sb=trivial&sub=basic&menustr=080100020000",
         "https://eqtraders.com/recipes/recipe_page.php?article=435&rsa=Smithing&sb=item&sub=Sod&menustr=080100000000&printer=tree",
     ],
     "tailoring": [
-        # TODO: tailoring page URLs needed
+        "https://www.eqtraders.com/recipes/recipe_page.php?article=271&rsa=Tailoring&sb=item&so=desc&sub=OoW&menustr=080110232000&printer=normal",
+        "https://www.eqtraders.com/recipes/recipe_page.php?article=1793&rsa=Tailoring&sb=trivial&so=desc&sub=ToB&menustr=010000000000&printer=tree",
+        # TODO: basic tailoring page URL needed (cultural pages are race-specific, skipped)
     ],
     "jewelcraft": [
         "http://www.eqtraders.com/recipes/recipe_page.php?article=167&rsa=Jewelcraft&sb=item&so=desc&sub=other&menustr=080070800000&printer=tree",
@@ -96,10 +99,14 @@ RECIPE_INDEX = {
         "http://www.eqtraders.com/recipes/recipe_page.php?article=52&rsa=Make%20Poison&sb=item&sub=&menustr=080080000000&printer=tree",
     ],
     "research": [
-        # TODO: research page URLs needed
+        # Spell Research is split by class; add more class pages as needed
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=120&rsa=Spell%20Research&sb=item&sub=Enchanter&menustr=080105000000&printer=normal",
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=123&rsa=Spell%20Research&sb=item&sub=Wizard&menustr=080105000000&printer=tree",
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=124&rsa=Spell%20Research&sb=item&sub=Druid&menustr=080105000000&printer=normal",
     ],
     "fishing": [
-        # TODO: fishing page URLs needed
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=38&rsa=Fishing&sb=trivial&so=desc&menustr=080050000000&printer=tree",
+        "http://www.eqtraders.com/recipes/recipe_page.php?article=1874&rsa=Fishing&sb=trivial&sub=SOR&menustr=010000000000&printer=tree",
     ],
     "tinkering": [
         "http://www.eqtraders.com/recipes/recipe_page.php?article=66&rsa=Tinkering&sb=item&sub=&menustr=080120000000&printer=tree",
