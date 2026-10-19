@@ -241,6 +241,7 @@ export class EQRMSSAAAdvancement {
                 maxRanks: Math.max(1, Math.floor(Number(def?.system?.maxRanks ?? 1))),
                 levelRequired: Number(def?.system?.levelRequired ?? 1),
                 description: def?.system?.description ?? "",
+                activation: def?.system?.activation ?? "passive",
                 rankInfo: rankDef ? {
                     rank: Number(rankDef.rank ?? entry.rank),
                     description: rankDef.description ?? "",

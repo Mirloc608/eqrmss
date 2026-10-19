@@ -12,6 +12,7 @@ import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
 import { groupSpellsByCategory, spellBaseName, spellRankNumber } from "./helpers/actor-sheet-spells.js";
 import { activateCardtips } from "./helpers/cardtip.js";
+import { teleportActor, getDestination } from "../../spells/teleport.js";
 
 /**
  * Show/hide AA cards by name substring (2026-10-12). Pure DOM
@@ -45,6 +46,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             purchaseAA: EQRMSSPlayerSheet.prototype.purchaseAA,
             grantAAPoints: EQRMSSPlayerSheet.prototype.grantAAPoints,
             toggleAA: EQRMSSPlayerSheet.prototype.toggleAA,
+            activateAA: EQRMSSPlayerSheet.prototype.activateAA,
             toggleAAGroup: EQRMSSPlayerSheet.prototype.toggleAAGroup,
             expandAllAAGroups: EQRMSSPlayerSheet.prototype.expandAllAAGroups,
             collapseAllAAGroups: EQRMSSPlayerSheet.prototype.collapseAllAAGroups,
@@ -995,6 +997,47 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
         await EQRMSSAAAdvancement.purchaseRank(actor, aaId);
         await this.render();
+    }
+
+    // ------------------------------------------------------------
+    // AA Activation (2026-10-19): Activate button for purchased
+    // activated AAs. Origin teleports to home town (Gate mechanics,
+    // home city instead of bind point). Others post a placeholder
+    // until their effects are wired.
+    // ------------------------------------------------------------
+    async activateAA(event, target) {
+        event.preventDefault();
+        const actor = this.document;
+        if (!actor) return;
+
+        const aaId = target?.dataset?.aaId;
+        if (!aaId) return;
+
+        // Origin: Gate to home town center
+        if (aaId === "aa-origin") {
+            const homeTown = actor.system?.fixed_info?.home_town;
+            if (!homeTown) {
+                ui.notifications?.warn("EQRMSS | No home town set for this character.");
+                return;
+            }
+            // Try to find the home town as a teleport destination
+            const dest = await getDestination(homeTown);
+            if (!dest) {
+                const msg = `<p><em>${actor.name} calls upon their Origins, but "${homeTown}" is not configured as a teleport destination. GM: add it to module/data/teleports/destinations.json or bind a scene.</em></p>`;
+                ChatMessage.create({ content: msg, speaker: ChatMessage.getSpeaker({ actor }) });
+                return;
+            }
+            const note = await teleportActor(actor, homeTown, "Origin");
+            if (note) {
+                ChatMessage.create({ content: note, speaker: ChatMessage.getSpeaker({ actor }) });
+            }
+            return;
+        }
+
+        // Other activated AAs: placeholder until wired
+        const aaName = target?.dataset?.aaName ?? aaId;
+        const msg = `<p><em>${actor.name} activates ${aaName} — effect not yet implemented.</em></p>`;
+        ChatMessage.create({ content: msg, speaker: ChatMessage.getSpeaker({ actor }) });
     }
 
     // ------------------------------------------------------------

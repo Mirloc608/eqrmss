@@ -24,6 +24,9 @@
         <button type="button" class="aa-toggle" data-action="toggleAA" data-aa-id="{{this.id}}" title="Show details">▸</button>
         <span class="aa-name">{{this.name}}</span>
         <span class="rank-badge">Rank {{this.rank}}/{{this.maxRanks}}</span>
+        {{#if (eq this.activation "activated")}}
+        <button type="button" class="aa-activate" data-action="activateAA" data-aa-id="{{this.id}}" data-aa-name="{{this.name}}" title="Activate {{this.name}}">Activate</button>
+        {{/if}}
       </div>
       <div class="aa-details is-hidden" data-aa-details="{{this.id}}">
         {{#if this.description}}<p class="aa-desc">{{this.description}}</p>{{/if}}
