@@ -62,18 +62,19 @@ RECIPE_INDEX = {
         "http://eqtraders.com/recipes/recipe_page.php?menustr=010000000000&rsa=Brewing&sb=trivial",
     ],
     "baking": [
+        "https://www.eqtraders.com/recipes/recipe_page.php?article=754&rsa=Baking&sb=item&menustr=080020000000&printer=tree",
         "http://www.eqtraders.com/recipes/recipe_page.php?article=1761&rsa=Baking&sb=trivial&so=desc&sub=TOB&menustr=010000000000&printer=tree",
         "http://www.eqtraders.com/recipes/recipe_page.php?article=1866&rsa=Baking&sb=item&so=desc&sub=SOR&menustr=010000000000&printer=tree",
-        # TODO: main baking page URL needed
     ],
     "smithing": [
         "http://www.eqtraders.com/recipes/recipe_page.php?article=58&rsa=Smithing&sb=trivial&sub=basic&menustr=080100020000",
         "https://eqtraders.com/recipes/recipe_page.php?article=435&rsa=Smithing&sb=item&sub=Sod&menustr=080100000000&printer=tree",
     ],
     "tailoring": [
+        "https://www.eqtraders.com/recipes/recipe_page.php?article=786&rsa=Tailoring&sb=item&menustr=080110000000&printer=tree",
         "https://www.eqtraders.com/recipes/recipe_page.php?article=271&rsa=Tailoring&sb=item&so=desc&sub=OoW&menustr=080110232000&printer=normal",
         "https://www.eqtraders.com/recipes/recipe_page.php?article=1793&rsa=Tailoring&sb=trivial&so=desc&sub=ToB&menustr=010000000000&printer=tree",
-        # TODO: basic tailoring page URL needed (cultural pages are race-specific, skipped)
+        # Note: cultural pages are race-specific, skipped
     ],
     "jewelcraft": [
         "http://www.eqtraders.com/recipes/recipe_page.php?article=167&rsa=Jewelcraft&sb=item&so=desc&sub=other&menustr=080070800000&printer=tree",
