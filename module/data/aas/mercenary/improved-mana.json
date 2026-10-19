@@ -1,19 +1,20 @@
 {
   "schemaVersion": "1.0",
-  "id": "aa-improved-health-i",
-  "name": "Improved Health I",
+  "id": "aa-improved-mana",
+  "name": "Improved Mana",
   "type": "aa",
   "system": {
-    "slug": "improved-health-i",
+    "slug": "improved-mana",
     "category": "mercenary",
     "archetype": null,
     "classes": [],
     "expansion": "luclin",
     "advanced": false,
     "levelRequired": 1,
-    "maxRanks": 1,
+    "maxRanks": 2,
     "activation": "passive",
     "costPerRank": [
+      1,
       1
     ],
     "prerequisites": [],
@@ -21,11 +22,17 @@
       {
         "rank": 1,
         "cost": 1,
-        "description": "This passive ability increases your mercenary's maximum health.",
+        "description": "Increases your mercenary's maximum mana (rank 1 of 2).",
+        "effects": []
+      },
+      {
+        "rank": 2,
+        "cost": 1,
+        "description": "Increases your mercenary's maximum mana (rank 2 of 2).",
         "effects": []
       }
     ],
-    "description": "This passive ability increases your mercenary's maximum health.",
+    "description": "This passive ability increases your mercenary's maximum mana. Additional ranks further increase the amount.",
     "aaNumber": null,
     "sourceCategory": "Mercenary",
     "rankCountUncertain": true,
