@@ -125,6 +125,43 @@ export async function recordHealAggro(healer, healTarget, healAmount) {
  * @param {Actor} target
  * @returns {object} aggro record keyed by attacker ID
  */
+/**
+ * GM manual adjustment (2026-10-19): directly set hate amounts.
+ * Values are clamped at 0 (no negative hate).
+ */
+export async function adjustAggro(target, attackerId, { damage = 0, debuffs = 0, heal = 0 } = {}) {
+    if (!target || !attackerId) return false;
+    let aggro = {};
+    try {
+        aggro = { ...(target.system?.status?.aggro ?? {}) };
+    } catch (e) { /* ignore */ }
+    const key = String(attackerId);
+    const existing = aggro[key];
+    if (!existing) return false;
+    aggro[key] = {
+        ...existing,
+        damage: Math.max(0, (Number(existing.damage) || 0) + (Number(damage) || 0)),
+        debuffs: Math.max(0, (Number(existing.debuffs) || 0) + (Number(debuffs) || 0)),
+        heal: Math.max(0, (Number(existing.heal) || 0) + (Number(heal) || 0)),
+    };
+    try {
+        await target.update({ "system.status.aggro": aggro });
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+export async function clearAllAggro(target) {
+    if (!target) return false;
+    try {
+        await target.update({ "system.status.aggro": {} });
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
 export function getAggro(target) {
     try {
         return { ...(target?.system?.status?.aggro ?? {}) };

@@ -101,10 +101,16 @@
   </div>
 
   <div class="panel" style="margin-top: 10px;">
-    <h3>Hate List</h3>
+    <h3>Hate List
+      {{#if isGM}}
+      {{#if hateList.length}}
+      <button type="button" data-action="clearHateList" title="Clear entire hate list" style="float: right; font-size: 0.8em;">Clear All</button>
+      {{/if}}
+      {{/if}}
+    </h3>
     {{#if hateList.length}}
     <table style="width: 100%; border-collapse: collapse; font-size: 0.95em;">
-      <thead><tr style="text-align: left; opacity: 0.7;"><th>Attacker</th><th style="text-align: right;">Damage</th><th style="text-align: right;">Debuffs</th><th style="text-align: right;">Heal</th><th style="text-align: right;">Last Round</th></tr></thead>
+      <thead><tr style="text-align: left; opacity: 0.7;"><th>Attacker</th><th style="text-align: right;">Damage</th><th style="text-align: right;">Debuffs</th><th style="text-align: right;">Heal</th><th style="text-align: right;">Last Round</th>{{#if ../isGM}}<th style="text-align: right;">GM</th>{{/if}}</tr></thead>
       <tbody>
         {{#each hateList}}
         <tr style="border-top: 1px solid rgba(0,0,0,0.1);">
@@ -113,6 +119,13 @@
           <td style="text-align: right;">{{this.debuffs}}</td>
           <td style="text-align: right;">{{this.heal}}</td>
           <td style="text-align: right;">{{this.lastRound}}</td>
+          {{#if ../isGM}}
+          <td style="text-align: right; white-space: nowrap;">
+            <button type="button" data-action="adjustHate" data-attacker-id="{{this.id}}" data-field="damage" data-amount="100" title="+100 damage hate">+D</button>
+            <button type="button" data-action="adjustHate" data-attacker-id="{{this.id}}" data-field="damage" data-amount="-100" title="-100 damage hate">-D</button>
+            <button type="button" data-action="removeHate" data-attacker-id="{{this.id}}" title="Remove from hate list">✕</button>
+          </td>
+          {{/if}}
         </tr>
         {{/each}}
       </tbody>

@@ -13,6 +13,7 @@ import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
 import { groupSpellsByCategory, spellBaseName, spellRankNumber } from "./helpers/actor-sheet-spells.js";
 import { activateCardtips } from "./helpers/cardtip.js";
 import { teleportActor, getDestination } from "../../spells/teleport.js";
+import { adjustAggro, clearAggro, clearAllAggro } from "../../spells/memblur.js";
 
 /**
  * Show/hide AA cards by name substring (2026-10-12). Pure DOM
@@ -47,6 +48,9 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             grantAAPoints: EQRMSSPlayerSheet.prototype.grantAAPoints,
             toggleAA: EQRMSSPlayerSheet.prototype.toggleAA,
             activateAA: EQRMSSPlayerSheet.prototype.activateAA,
+            adjustHate: EQRMSSPlayerSheet.prototype.adjustHate,
+            removeHate: EQRMSSPlayerSheet.prototype.removeHate,
+            clearHateList: EQRMSSPlayerSheet.prototype.clearHateList,
             toggleAAGroup: EQRMSSPlayerSheet.prototype.toggleAAGroup,
             expandAllAAGroups: EQRMSSPlayerSheet.prototype.expandAllAAGroups,
             collapseAllAAGroups: EQRMSSPlayerSheet.prototype.collapseAllAAGroups,
@@ -1046,6 +1050,45 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
     // expanders stay put. Collapsed by default for performance
     // with hundreds of rows.
     // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    // Hate List GM Controls (2026-10-19): manual add/remove of hate.
+    // Referential only — no mechanical effects.
+    // ------------------------------------------------------------
+    async adjustHate(event, target) {
+        event.preventDefault();
+        if (!game?.user?.isGM) return;
+        const actor = this.document;
+        if (!actor) return;
+        const attackerId = target?.dataset?.attackerId;
+        const field = target?.dataset?.field;
+        const amount = Number(target?.dataset?.amount) || 0;
+        if (!attackerId || !field) return;
+        const deltas = { damage: 0, debuffs: 0, heal: 0 };
+        if (field in deltas) deltas[field] = amount;
+        await adjustAggro(actor, attackerId, deltas);
+        await this.render();
+    }
+
+    async removeHate(event, target) {
+        event.preventDefault();
+        if (!game?.user?.isGM) return;
+        const actor = this.document;
+        if (!actor) return;
+        const attackerId = target?.dataset?.attackerId;
+        if (!attackerId) return;
+        await clearAggro(actor, attackerId);
+        await this.render();
+    }
+
+    async clearHateList(event, target) {
+        event.preventDefault();
+        if (!game?.user?.isGM) return;
+        const actor = this.document;
+        if (!actor) return;
+        await clearAllAggro(actor);
+        await this.render();
+    }
+
     toggleAA(event, target) {
         event.preventDefault();
         const aaId = target?.dataset?.aaId;
