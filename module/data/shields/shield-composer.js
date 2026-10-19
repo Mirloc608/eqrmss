@@ -4,6 +4,8 @@
 // Shields grant DB (melee/missile), not AT.
 // ============================================================
 
+import { parsePriceToTp } from "../../utils/price.js";
+
 let templates = {};
 let materials = {};
 let conditions = {};
@@ -56,7 +58,7 @@ export function composeShield(templateId, materialId, conditionId) {
         meleeDB,
         missileDB,
         weight,
-        cost: t.cost ?? "",
+        cost: parsePriceToTp(t.cost ?? ""),
         prodTime: t.prodTime ?? "",
         notes: t.notes ?? null,
         // Item-effect hooks: materials may grant worn/triggered effects

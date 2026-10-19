@@ -2,6 +2,8 @@
 // EQRMSS Armor Composer
 // Location + Category + Material + Condition -> finished armor piece
 //
+import { parsePriceToTp } from "../../utils/price.js";
+
 // The location is the base item (slot, base weight/cost, name nouns).
 // The category is the armor class (cloth, leather, chain, plate) and
 // gates which materials are valid: cloth takes cloth, leather takes
@@ -144,7 +146,8 @@ export function composeArmor(locationId, categoryId, materialId, conditionId, op
     const maneuverPenalty = (loc.baseManeuver ?? 0) + (m.maneuverMod ?? 0) + (c.maneuverMod ?? 0) + (enh?.maneuverMax ?? 0);
     const quicknessPenalty = enh?.quicknessMod ?? 0;
     const missilePenalty = enh?.missileMod ?? 0;
-    const cost = formatBp(parseCostToBp(loc.baseCost) * (m.costMult ?? 1) * (enh?.costMult ?? 1) * (q.costMult ?? 1) * (thk?.costMult ?? 1));
+    const costBp = parseCostToBp(loc.baseCost) * (m.costMult ?? 1) * (enh?.costMult ?? 1) * (q.costMult ?? 1) * (thk?.costMult ?? 1);
+    const cost = Math.round(costBp * 100); // bp -> tp (numeric, for system.cost)
 
     return {
         name,
@@ -202,7 +205,7 @@ export function composeHelmet(presetId, conditionId = "normal", options = {}) {
     composed.name = `${c?.prefix ? `${c.prefix} ` : ""}${preset.name}${composed.thicknessSuffix ?? ""}`;
     composed.presetId = preset.id;
     composed.source = preset.source;
-    if (preset.cost != null) composed.cost = preset.cost;
+    if (preset.cost != null) composed.cost = parsePriceToTp(preset.cost);
     if (preset.weight != null) composed.weight = preset.weight;
     if (preset.prodTime != null) composed.prodTime = preset.prodTime;
     composed.notes = preset.notes ?? composed.notes;
