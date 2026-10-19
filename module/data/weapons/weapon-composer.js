@@ -1,3 +1,5 @@
+import { parsePriceToTp } from "../../utils/price.js";
+
 /**
  * EQRMSS Weapon Composer
  * Combines a base weapon template + material + condition into final item stats.
@@ -94,7 +96,7 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
         attackTable: template.attackTable,
         weaponType: template.weaponType,
         typeCode: template.typeCode,
-        cost: template.cost,
+        cost: parsePriceToTp(template.cost),
         prodTime: template.prodTime,
         notes: template.notes ?? null,
         length: template.length,
