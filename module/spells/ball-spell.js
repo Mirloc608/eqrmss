@@ -119,6 +119,30 @@ async function addHits(target, n, damageType = "magic") {
     return cur + n;
 }
 
+// Track 3 (2026-10-18): crit modifiers from capstone/AA/spell effects.
+// crit-chance-pct: X% chance to trigger a severity-A crit on a non-crit table result.
+// crit-damage-pct: +X% to bonus hits when a crit occurs.
+function getCritModifiers(caster) {
+    let chancePct = 0;
+    let damagePct = 0;
+    try {
+        const effects = caster?.system?.status?.spellEffects || [];
+        for (const e of effects) {
+            if (e.source !== "capstone" && e.source !== "aa" && e.source !== "spell") continue;
+            for (const m of (e.modifiers || [])) {
+                const t = String(m.target || "").toLowerCase();
+                if (t === "crit-chance-pct") chancePct += Number(m.value) || 0;
+                else if (t === "crit-damage-pct") damagePct += Number(m.value) || 0;
+            }
+            // Also check scaledTarget format
+            const st = String(e.scaledTarget || "").toLowerCase();
+            if (st === "crit-chance-pct") chancePct += Number(e.scaledValue) || 0;
+            else if (st === "crit-damage-pct") damagePct += Number(e.scaledValue) || 0;
+        }
+    } catch (err) { /* non-fatal */ }
+    return { chancePct, damagePct };
+}
+
 async function rollCrit(caster, target, critTables, critType, severity, rollD100) {
     const cr = await d100(rollD100);
     const res = lookupCrit(critTables, critType, severity, cr);
@@ -129,7 +153,14 @@ async function rollCrit(caster, target, critTables, critType, severity, rollD100
     if (adjudicated.unresolved?.length) {
         note += ` <em>GM adjudicates: ${adjudicated.unresolved.map(u => esc(u.phrase)).join("; ")}</em>`;
     }
-    const bonus = critBonusHits(adjudicated.text);
+    let bonus = critBonusHits(adjudicated.text);
+    // Track 3 (2026-10-18): crit-damage-pct multiplies crit bonus hits.
+    const { damagePct } = getCritModifiers(caster);
+    if (bonus > 0 && damagePct > 0) {
+        const extra = Math.round(bonus * damagePct / 100);
+        bonus += extra;
+        note += ` <em>(crit damage +${damagePct}%: +${extra} hits)</em>`;
+    }
     let bonusNote = "";
     if (bonus > 0) {
         const cur = Number(target.system?.hits?.value) || 0;
@@ -245,8 +276,20 @@ export async function resolveBallCast(caster, spellItem, targets, ball, opts = {
             line += ` <em>(no effect)</em>`;
         }
         body += `<p>${line}.</p>`;
-        if (cell.row.critical && hits > 0) {
-            const crit = await rollCrit(caster, target, critTables, critType, cell.row.critical, opts.rollD100);
+        // Track 3 (2026-10-18): crit-chance-pct gives a chance to crit on non-crit results.
+        let critSeverity = cell.row.critical;
+        if (!critSeverity && hits > 0) {
+            const { chancePct } = getCritModifiers(caster);
+            if (chancePct > 0) {
+                const roll = Math.random() * 100;
+                if (roll < chancePct) {
+                    critSeverity = "A"; // Lowest severity for chance-based crits
+                    body += `<p><em>Critical chance triggers! (${chancePct}% — rolled ${roll.toFixed(1)})</em></p>`;
+                }
+            }
+        }
+        if (critSeverity && hits > 0) {
+            const crit = await rollCrit(caster, target, critTables, critType, critSeverity, opts.rollD100);
             body += crit.html;
         }
     }
