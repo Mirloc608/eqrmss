@@ -13,7 +13,10 @@ const esc = (s) => globalThis.foundry?.utils?.escapeHTML
  * @param {string} statusId - Foundry status ID (e.g., "flying", "frightened")
  * @param {string} name - display name for the effect
  * @param {number} rounds - duration in combat rounds
- * @param {string} img - icon path
+ * @param {string} img - icon path. NOTE: Foundry V13+ has no
+ *   icons/svg/stunned.svg — the stun-family icon is paralysis.svg
+ *   (verified against the live server 2026-10-20; a bad path here
+ *   makes the token renderer throw "Invalid Asset" every frame).
  * @param {object} flags - extra flags.eqrmss entries
  * @returns {Promise<boolean>} true if applied
  */

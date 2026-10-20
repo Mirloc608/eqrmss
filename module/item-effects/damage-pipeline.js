@@ -1031,7 +1031,7 @@ async function applyMez({ effect, target, source }) {
     // Stunned visual (2026-10-07, user ruling): mez = conscious but unable to act.
     try {
         const { applyStatusEffect } = await import("../spells/status-wiring.js");
-        await applyStatusEffect(target, "stunned", "Mesmerized", rounds, "icons/svg/stunned.svg", { source });
+        await applyStatusEffect(target, "stunned", "Mesmerized", rounds, "icons/svg/paralysis.svg", { source });
     } catch (e) { /* ignore */ }
     return { type: "mez", rolled: rounds, final: pool.downOrOut, notes: [`mesmerized (down or out) for ${rounds} rounds`], source };
 }

@@ -450,7 +450,7 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
                     // Apply stun via status
                     try {
                         const { applyStatusEffect } = await import("../spells/status-wiring.js");
-                        await applyStatusEffect(c.actor, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: capstone.name });
+                        await applyStatusEffect(c.actor, "stunned", "Stunned", 1, "icons/svg/paralysis.svg", { source: capstone.name });
                     } catch (e) { /* ignore */ }
                 }
             } else if (capName.includes("stunning kick")) {
@@ -460,7 +460,7 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
                     notes.push(`<em>${esc(actualTarget.name)} is stunned for 1 round and interrupted.</em>`);
                     try {
                         const { applyStatusEffect } = await import("../spells/status-wiring.js");
-                        await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: capstone.name });
+                        await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/paralysis.svg", { source: capstone.name });
                     } catch (e) { /* ignore */ }
                 }
             } else if (capName.includes("five point palm")) {
@@ -471,7 +471,7 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
                     notes.push(`<em>Five strikes hit! ${esc(actualTarget.name)} is stunned for 1 round.</em>`);
                     try {
                         const { applyStatusEffect } = await import("../spells/status-wiring.js");
-                        await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: capstone.name });
+                        await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/paralysis.svg", { source: capstone.name });
                     } catch (e) { /* ignore */ }
                 }
             } else if (capName.includes("explosion of hatred")) {
@@ -494,7 +494,7 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
                     }
                     try {
                         const { applyStatusEffect } = await import("../spells/status-wiring.js");
-                        await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: capstone.name });
+                        await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/paralysis.svg", { source: capstone.name });
                     } catch (e) { /* ignore */ }
                 }
             } else if (capName.includes("turn undead")) {
@@ -508,7 +508,7 @@ export async function executeCapstoneMechanics(caster, capstone, target = null) 
                         notes.push(`<em>${esc(actualTarget.name)} is stunned for 1 round (unresistable).</em>`);
                         try {
                             const { applyStatusEffect } = await import("../spells/status-wiring.js");
-                            await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: capstone.name });
+                            await applyStatusEffect(actualTarget, "stunned", "Stunned", 1, "icons/svg/paralysis.svg", { source: capstone.name });
                         } catch (e) { /* ignore */ }
                     } else {
                         notes.push(`<em>${esc(actualTarget.name)} is not undead — no effect.</em>`);

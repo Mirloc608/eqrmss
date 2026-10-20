@@ -84,7 +84,7 @@ async function strikeAbility(actor, target, ability, notes, opts = {}) {
         if (opts.stun) {
             try {
                 const { applyStatusEffect } = await import("../spells/status-wiring.js");
-                await applyStatusEffect(target, "stunned", "Stunned", 1, "icons/svg/stunned.svg", { source: ability.name });
+                await applyStatusEffect(target, "stunned", "Stunned", 1, "icons/svg/paralysis.svg", { source: ability.name });
                 notes.push(`<em>${esc(target.name)} is stunned for 1 round.</em>`);
             } catch (e) { /* ignore */ }
         }
