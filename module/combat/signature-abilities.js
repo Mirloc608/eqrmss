@@ -3,7 +3,9 @@
  * (2026-10-07)
  * 
  * Lay on Hands: Heals 15% of max HP + 10% per rank. Melee range. Once per combat. Free.
- * Harm Touch: Damage = (50 × rank) + (10 × level). Melee range. Disease RR at -20. Once per combat. Free.
+ * Harm Touch: Damage = ((50 × rank) + (10 × level)) / 10 — the 2026-10-19
+ * formula rescaled to RMSS hit totals (ruling 2026-10-20); equals
+ * (5 × rank) + level. Melee range. Disease RR at -20. Once per combat. Free.
  */
 
 import { rrTargetNumber, rrOpenEnded } from "../spells/base-spell.js";
@@ -98,7 +100,9 @@ export async function harmTouch(actor, target) {
     }
     const rank = getSignatureRank(actor, "harm-touch");
     const level = Number(actor.system?.attributes?.level?.value) || 1;
-    let damage = (50 * rank) + (10 * level);
+    // Rescaled /10 to RMSS hit scale (ruling 2026-10-20): rank 3 @ 130 = 145,
+    // rank 34 @ 130 = 300 (one peer-level hit pool), was 1,450 / 3,000.
+    let damage = Math.round(((50 * rank) + (10 * level)) / 10);
     // Era Capstones (2026-10-09): harm-touch-pct increases Harm Touch damage.
     // Unholy Aura: +X% Harm Touch damage.
     try {
