@@ -211,7 +211,7 @@ export class EQRMSSAAAdvancement {
                     currentRank,
                     cost,
                     eligible: check.ok,
-                    affordable: check.ok && state.points >= cost,
+                    affordable: check.ok && cost != null && state.points >= cost,
                     reason: check.reason ?? null,
                     description: def.system?.description ?? "",
                     nextRank: nextRankDef ? {

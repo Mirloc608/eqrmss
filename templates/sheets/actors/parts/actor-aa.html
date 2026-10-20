@@ -76,7 +76,11 @@
             Buy — {{this.cost}} pt
           </button>
           {{else}}
+          {{#if (eq this.cost null)}}
+          <span class="aa-cost">cost not defined</span>
+          {{else}}
           <span class="aa-cost">{{this.cost}} pts — not enough points</span>
+          {{/if}}
           {{/if}}
         {{else}}
           <span class="aa-locked">{{this.reason}}</span>
