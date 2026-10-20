@@ -79,6 +79,7 @@ import { roundExhaustionCost, exhaustionCurrent, exhaustionMaxFor } from "./subd
 import { combatCard } from "./chat-card.js";
 import { applyWornRoundEffects } from "../item-effects/worn-engine.js";
 import { levelCombatBonus } from "../progression/xp-engine.js";
+import { hasSpecialTrait } from "../utils/special-traits.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -510,7 +511,10 @@ export async function applyCritConditions(targetActor, attackerActor, critText) 
     }
 
     if (stun.stunned > 0 || stun.stunNoParry > 0) {
-        if (canApply) {
+        if (hasSpecialTrait(targetActor, "stun-immunity")) {
+            // NPC special trait (2026-10-20): Stun Immunity feature item.
+            notes.push(`${esc(tName)} is immune to stun.`);
+        } else if (canApply) {
             const pool = { stunned: 0, stunNoParry: 0, ...(targetActor.system?.status?.stun ?? {}) };
             pool.stunned += stun.stunned;
             pool.stunNoParry += stun.stunNoParry;

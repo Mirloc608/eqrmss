@@ -46,6 +46,8 @@
  *   "utility"   -> payload note text logged to result notes; no mechanics
  */
 
+import { hasSpecialTrait } from "../utils/special-traits.js";
+
 function rollRange(min, max) {
     return min + Math.floor(Math.random() * (max - min + 1));
 }
@@ -826,6 +828,10 @@ async function applyCure({ effect, target, source }) {
 async function applyStun({ effect, target, source }) {
     const miss = requireTarget(target, "stun", source);
     if (miss) return miss;
+    // NPC special trait (2026-10-20): Stun Immunity feature item.
+    if (hasSpecialTrait(target, "stun-immunity")) {
+        return { type: "stun", rolled: 0, final: 0, notes: [`${target.name} is immune to stun (Stun Immunity).`], source };
+    }
     const rounds = payloadRounds(effect);
     // Stun Resist (worn combat effect, 2026-10-13): flat reduction of stun
     // rounds from spellEffects entries with scaledTarget "stun-resist".
@@ -944,6 +950,10 @@ async function applyRoot({ effect, target, source }) {
 async function applySnare({ effect, target, source }) {
     const miss = requireTarget(target, "snare", source);
     if (miss) return miss;
+    // NPC special trait (2026-10-20): Snare Immunity feature item.
+    if (hasSpecialTrait(target, "snare-immunity")) {
+        return { type: "snare", rolled: 0, final: 0, notes: [`${target.name} is immune to snare (Snare Immunity).`], source };
+    }
     const value = Math.abs(Number(effect?.value ?? effect?.amount ?? 0));
     const rounds = payloadRounds(effect, 0);
     await persistValue(target, "system.movement.snarePenalty", value);
@@ -978,6 +988,10 @@ async function applyFear({ effect, target, source }) {
             }
         }
     } catch (e) { /* non-fatal */ }
+    // NPC special trait (2026-10-20): Fear Immunity feature item.
+    if (hasSpecialTrait(target, "fear-immunity")) {
+        return `<p><em>${target.name} is immune to fear (Fear Immunity).</em></p>`;
+    }
     const rounds = payloadRounds(effect);
     await persistValue(target, "system.status.fear", { rounds });
     await pushStatusList(target, "spellEffects", { label: `feared (${rounds} rounds)`, roundsLeft: rounds, source });
@@ -1008,6 +1022,10 @@ async function applyMez({ effect, target, source }) {
             }
         }
     } catch (e) { /* non-fatal */ }
+    // NPC special trait (2026-10-20): Mesmerize Immunity feature item.
+    if (hasSpecialTrait(target, "mez-immunity")) {
+        return { type: "mez", rolled: 0, final: 0, notes: [`${target.name} is immune to mez (Mesmerize Immunity).`], source };
+    }
     const rounds = payloadRounds(effect);
     const pool = await withStunPool(target, p => { p.downOrOut += rounds; });
     // Stunned visual (2026-10-07, user ruling): mez = conscious but unable to act.
@@ -1027,6 +1045,10 @@ async function applyMez({ effect, target, source }) {
 async function applyCharm({ effect, target, source, caster }) {
     const miss = requireTarget(target, "charm", source);
     if (miss) return miss;
+    // NPC special trait (2026-10-20): Charm Immunity feature item.
+    if (hasSpecialTrait(target, "charm-immunity")) {
+        return { type: "charm", final: 0, notes: [`${target.name} is immune to charm (Charm Immunity).`], source, applied: false };
+    }
     const casterLevel = Number(caster?.system?.attributes?.level?.value) || 1;
     const targetLevel = Number(target?.system?.attributes?.level?.value) || 1;
     const maxLevel = Math.ceil(casterLevel * 0.9);
@@ -1133,6 +1155,10 @@ export async function applyMemblurPayload({ effect, caster, target, source }) {
 export async function applyPacifyPayload({ effect, caster, target, source }) {
     const miss = requireTarget(target, "pacify", source);
     if (miss) return miss;
+    // NPC special trait (2026-10-20): Pacify Immunity feature item.
+    if (hasSpecialTrait(target, "pacify-immunity")) {
+        return { type: "pacify", final: 0, notes: [`${target.name} is immune to pacify (Pacify Immunity).`], source, applied: false };
+    }
     const rounds = Number(effect?.rounds) || 7;
     const levelCap = Number(effect?.levelCap) || 55;
     const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Pacify";
@@ -1177,6 +1203,10 @@ export async function applyFactionPayload({ effect, caster, target, source }) {
 export async function applyDispelPayload({ effect, caster, target, source }) {
     const miss = requireTarget(target, "dispel", source);
     if (miss) return miss;
+    // NPC special trait (2026-10-20): Dispel Immunity feature item.
+    if (hasSpecialTrait(target, "dispel-immunity")) {
+        return { type: "dispel", final: 0, notes: [`${target.name} is immune to dispel (Dispel Immunity).`], source, applied: false };
+    }
     const count = Number(effect?.count) || 1;
     const mode = String(effect?.mode ?? "all").toLowerCase();
     const dispName = String(source ?? "").split(":").pop().trim().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Cancel Magic";
