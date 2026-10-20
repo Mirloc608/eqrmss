@@ -461,6 +461,9 @@ export function stunTotal(pool) {
 
 // Most severe type with rounds remaining, or null.
 export function activeStun(pool) {
+    // Paralysis (2026-10-20 ruling): a permanent down-or-out flag on the
+    // pool; it carries no rounds and never ticks down.
+    if (pool?.paralyzed) return { type: "downOrOut", rounds: 0, paralyzed: true };
     for (const k of STUN_ORDER) {
         const r = Number(pool?.[k]) || 0;
         if (r > 0) return { type: k, rounds: r };
@@ -476,6 +479,25 @@ function roundsWord(n) {
 // Application (called from rollWeaponAttack after a crit lands)
 // ------------------------------------------------------------
 
+/**
+ * Full-body paralysis from a crit result ("paralyzed from the neck
+ * down", "paralyzes foe from the shoulders down"). Ruling 2026-10-20:
+ * a non-expiring down-or-out. NOT parsed: limb-only paralysis ("One arm
+ * is paralyzed" — the foe can still act), explicitly timed paralysis
+ * ("paralyzed for d10 rounds"), and chance results ("50% chance foe is
+ * paralyzed") — those stay GM-adjudicated.
+ */
+export function parseParalysis(text) {
+    if (!text) return false;
+    const s = String(text);
+    if (!/paralyz/i.test(s)) return false;
+    if (/%\s*chance/i.test(s)) return false;
+    if (/paralyz\w*\s+for\s+(?:d\d+|\d+)\s+rounds?/i.test(s)) return false;
+    if (/\b(?:one|left|right|both)\s+(?:arm|leg|hand|foot|wing)\b/i.test(s)
+        && !/from the (?:neck|shoulders?|waist) down/i.test(s)) return false;
+    return true;
+}
+
 export async function applyCritConditions(targetActor, attackerActor, critText) {
     if (!critText) return "";
     const notes = [];
@@ -483,6 +505,23 @@ export async function applyCritConditions(targetActor, attackerActor, critText) 
     const canApply = !!targetActor && (targetActor.isOwner || game.user?.isGM);
 
     const stun = parseStun(critText);
+    // Paralysis (2026-10-20 ruling): full-body crit paralysis is a
+    // non-expiring down-or-out — a flag on the stun pool that
+    // activeStun() reports and the round tick never counts down.
+    // Deliberately NOT gated by Stun Immunity: paralysis is its own
+    // condition class (mez writes the same pool and answers only to
+    // Mez Immunity), and there is no paralysis-immunity trait.
+    if (parseParalysis(critText)) {
+        if (canApply) {
+            const pool = { stunned: 0, stunNoParry: 0, ...(targetActor.system?.status?.stun ?? {}) };
+            pool.paralyzed = true;
+            await targetActor.update({ "system.status.stun": pool });
+            notes.push(`${esc(tName)} is paralyzed — down or out, permanently (until cured).`);
+        } else {
+            notes.push(denied(`${esc(tName)} is paralyzed`));
+        }
+    }
+
     const bleed = parseBleed(critText);
     const deathIn = parseDeathTimer(critText);
     const swing = parseNextSwing(critText);
@@ -1241,6 +1280,17 @@ export async function tickConditions(combat) {
             updates["system.status.spellEffects"] = remainingFx;
         }
 
+        // Fear flag (system.status.fear) ticks in step with the
+        // spellEffects entry applyFear pushes beside it: the attack
+        // gate reads the flag, so it must clear when the timer ends
+        // (previously the entry expired but the flag never did, and
+        // the actor stayed feared forever).
+        const fearRounds = Number(st.fear?.rounds) || 0;
+        if (fearRounds > 0) {
+            const left = fearRounds - 1;
+            updates["system.status.fear"] = left > 0 ? { rounds: left } : null;
+        }
+
         // Worn regen (Flowing Thought line etc.): once per round
         // while the item is worn. The payload caps at the pool max.
         try {
@@ -1266,7 +1316,9 @@ export async function tickConditions(combat) {
             updates["system.status.stun"] = pool;
             const active = activeStun(pool);
             notes.push(active
-                ? `${esc(actor.name)}: ${STUN_LABEL[active.type]} (${roundsWord(active.rounds)} left).`
+                ? (active.paralyzed
+                    ? `${esc(actor.name)} remains paralyzed (down or out).`
+                    : `${esc(actor.name)}: ${STUN_LABEL[active.type]} (${roundsWord(active.rounds)} left).`)
                 : `${esc(actor.name)} recovers from stun.`);
         }
 
