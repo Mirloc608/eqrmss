@@ -15,6 +15,7 @@ import { activateCardtips } from "./helpers/cardtip.js";
 import { teleportActor, getDestination } from "../../spells/teleport.js";
 import { adjustAggro, clearAggro, clearAllAggro } from "../../spells/memblur.js";
 import { applyCannibalize, cannibalizeAARatio } from "../../spells/cannibalize.js";
+import { resolveAACastSpell } from "../../aa/aa-cast-resolve.js";
 
 /**
  * Show/hide AA cards by name substring (2026-10-12). Pure DOM
@@ -1054,6 +1055,30 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             }
             return;
         }
+
+        // Generic "Cast: X" AAs (2026-10-20): when the purchased
+        // rank's Cast name resolves to a catalog spell, cast it
+        // free and instant (AA abilities carry no mana cost).
+        try {
+            const aaDef = game.eqrmss?.aas?.byId?.get?.(aaId);
+            const rank = EQRMSSAAAdvancement.getPurchasedRank(actor, aaId);
+            const rankDef = aaDef?.system?.ranks?.[Math.max(0, rank - 1)];
+            const castFx = (rankDef?.effects ?? []).map(e => String(e))
+                .find(e => /^Cast:\s*/i.test(e));
+            if (castFx) {
+                const castName = castFx.replace(/^Cast:\s*/i, "").trim();
+                const lvl = Number(actor.system?.attributes?.level?.value)
+                    || Number(actor.system?.character?.level) || 999;
+                const spell = resolveAACastSpell(castName, lvl);
+                if (spell) {
+                    const { castSpell } = await import("../../spells/cast-spell.js");
+                    const free = foundry.utils.deepClone(spell);
+                    if (free.system) { free.system.manaCost = 0; free.system.castTime = 0; }
+                    await castSpell(actor, free);
+                    return;
+                }
+            }
+        } catch (e) { console.warn("EQRMSS | AA cast resolution failed:", e); }
 
         // Other activated AAs: placeholder until wired
         const aaName = target?.dataset?.aaName ?? aaId;
