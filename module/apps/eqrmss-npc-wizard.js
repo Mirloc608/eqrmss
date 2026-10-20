@@ -1,9 +1,14 @@
 // ============================================================
-// EQRMSS — NPC Quick-Build Wizard (Stage 1 + creature types)
+// EQRMSS — NPC Wizard (2026-10-20 rework: 3 steps)
 //
-// Single-screen wizard: creature type, name, sex, race, class
-// (sentients only), level -> EQRMSSNPCFinalizer builds a generic
-// NPC. Detailed NPCs are built by the GM as full characters.
+// Step 1 — Race: creature type + race (the level-1 template),
+//   name, sex.
+// Step 2 — Build: role (Striker/Defender/Caster/Healer) or PC
+//   class, plus target level. The finalizer simulates the build
+//   level-by-level with PC rules.
+// Step 3 — Special attacks: one optional pick per 10-level band
+//   the level reaches, from the PEQ-coordinated menu for the
+//   race/type (module/data/creatures/special-attacks.json).
 // ============================================================
 
 import { EQRMSSNPCFinalizer } from "./eqrmss-npc-finalizer.js";
@@ -22,6 +27,13 @@ const CREATURE_TYPE_FALLBACK = [
   { id: "elemental", name: "Elemental", sentient: false }
 ];
 
+const ROLES = [
+  { id: "striker", name: "Striker", desc: "High OB, high damage. Buys at Warrior costs." },
+  { id: "defender", name: "Defender", desc: "High DB, meat shield. Buys at Warrior costs." },
+  { id: "caster", name: "Caster", desc: "Magic-focused offense. Buys at Wizard costs." },
+  { id: "healer", name: "Healer", desc: "Healing and support. Buys at Cleric costs." }
+];
+
 function escapeHtml(s) {
   return String(s ?? "").replace(/[&<>"']/g, c =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -32,7 +44,9 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
   constructor(options = {}) {
     super(options);
     this.creatureType = "sentient";
+    this.step = 1;
     this._allRaces = [];
+    this._specialData = null; // lazily fetched special-attacks.json
   }
 
   static DEFAULT_OPTIONS = {
@@ -40,11 +54,11 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     classes: ["eqrmss", "eqrmss-npc-wizard"],
     tag: "form",
     window: {
-      title: "Create NPC — Quick-Build",
+      title: "Create NPC",
       icon: "fas fa-hat-wizard",
       resizable: true
     },
-    position: { width: 440, height: "auto" }
+    position: { width: 460, height: "auto" }
   };
 
   static PARTS = {
@@ -89,6 +103,16 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     return CREATURE_TYPE_FALLBACK;
   }
 
+  async #loadSpecialData() {
+    if (this._specialData) return this._specialData;
+    try {
+      const resp = await fetch("systems/eqrmss/module/data/creatures/special-attacks.json");
+      if (resp.ok) this._specialData = await resp.json();
+    } catch { /* fail-soft */ }
+    this._specialData ??= {};
+    return this._specialData;
+  }
+
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     this._allRaces = EQRMSSNPCWizard.#asList(game?.eqrmss?.races);
@@ -100,6 +124,7 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     context.isSentient = this.creatureType === "sentient";
     context.races = this._allRaces.filter(r => r.creatureType === this.creatureType);
     context.classes = EQRMSSNPCWizard.#asList(game?.eqrmss?.classes);
+    context.roles = ROLES;
     return context;
   }
 
@@ -110,28 +135,41 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
       form.dataset.wired = "1";
       form.addEventListener("submit", this.#onSubmit.bind(this));
     }
-    const typeSel = this.element?.querySelector("[name=creatureType]");
-    if (typeSel && !typeSel.dataset.wired) {
-      typeSel.dataset.wired = "1";
-      typeSel.addEventListener("change", () => {
-        this.creatureType = typeSel.value || "sentient";
-        this.#syncTypeUI();
-      });
-    }
+    const wire = (sel, ev, fn) => {
+      const el = this.element?.querySelector(sel);
+      if (el && !el.dataset.wired) { el.dataset.wired = "1"; el.addEventListener(ev, fn); }
+    };
+    wire("[name=creatureType]", "change", (e) => {
+      this.creatureType = e.target.value || "sentient";
+      this.#syncTypeUI();
+    });
+    wire("#npc-next-1", "click", () => { if (this.#validateStep1()) this.#gotoStep(2); });
+    wire("#npc-back-2", "click", () => this.#gotoStep(1));
+    wire("#npc-next-2", "click", async () => { if (this.#validateStep2()) { await this.#buildSpecialStep(); this.#gotoStep(3); } });
+    wire("#npc-back-3", "click", () => this.#gotoStep(2));
+    this.element?.querySelectorAll("[name=buildMode]").forEach(el => {
+      if (!el.dataset.wired) { el.dataset.wired = "1"; el.addEventListener("change", () => this.#syncBuildModeUI()); }
+    });
     this.#syncTypeUI();
+    this.#syncBuildModeUI();
+    this.#gotoStep(this.step);
   }
 
-  /** Show/hide the class row and re-filter the race list in place
+  #gotoStep(n) {
+    this.step = n;
+    for (const s of [1, 2, 3]) {
+      const sec = this.element?.querySelector(`[data-step="${s}"]`);
+      if (sec) sec.style.display = s === n ? "" : "none";
+    }
+    const title = this.element?.querySelector(".eqrmss-npc-wizard-step-title");
+    if (title) title.textContent = `Step ${n} of 3 — ${["Race", "Role & Level", "Special Attacks"][n - 1]}`;
+  }
+
+  /** Show/hide the class option and re-filter the race list in place
    *  (no full re-render, so name/level/sex entries are preserved). */
   #syncTypeUI() {
     const root = this.element;
     if (!root) return;
-    const sentient = this.creatureType === "sentient";
-    const classRow = root.querySelector("#npc-class-row");
-    const note = root.querySelector("#npc-no-class-note");
-    if (classRow) classRow.style.display = sentient ? "" : "none";
-    if (note) note.hidden = sentient;
-
     const raceSel = root.querySelector("[name=race]");
     if (raceSel) {
       const prev = raceSel.value;
@@ -146,6 +184,89 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
       raceSel.innerHTML = html;
       if (matches.some(r => r.id === prev)) raceSel.value = prev;
     }
+    this.#syncBuildModeUI();
+  }
+
+  /** Role vs class rows; class mode is sentient-only. */
+  #syncBuildModeUI() {
+    const root = this.element;
+    if (!root) return;
+    const sentient = this.creatureType === "sentient";
+    const classRadio = root.querySelector("[name=buildMode][value=class]");
+    if (classRadio) {
+      classRadio.disabled = !sentient;
+      if (!sentient && classRadio.checked) {
+        const roleRadio = root.querySelector("[name=buildMode][value=role]");
+        if (roleRadio) roleRadio.checked = true;
+      }
+    }
+    const mode = root.querySelector("[name=buildMode]:checked")?.value ?? "role";
+    const roleRow = root.querySelector("#npc-role-row");
+    const classRow = root.querySelector("#npc-class-row");
+    if (roleRow) roleRow.style.display = mode === "role" ? "" : "none";
+    if (classRow) classRow.style.display = mode === "class" ? "" : "none";
+  }
+
+  #formValue(name) {
+    return this.element?.querySelector(`[name="${name}"]`)?.value ?? "";
+  }
+
+  #validateStep1() {
+    if (!this.#formValue("race")) {
+      ui.notifications.warn("Pick a race first.");
+      return false;
+    }
+    return true;
+  }
+
+  #validateStep2() {
+    const mode = this.element?.querySelector("[name=buildMode]:checked")?.value ?? "role";
+    if (mode === "class" && !this.#formValue("class")) {
+      ui.notifications.warn("Pick a class, or switch to a role build.");
+      return false;
+    }
+    const level = Number(this.#formValue("level")) || 0;
+    if (level < 1 || level > 130) {
+      ui.notifications.warn("Level must be 1–130.");
+      return false;
+    }
+    return true;
+  }
+
+  /** Populate step 3: one select per 10-level band reached, with
+   *  the PEQ menu for the chosen race (type menu as fallback). */
+  async #buildSpecialStep() {
+    const host = this.element?.querySelector("#npc-special-bands");
+    if (!host) return;
+    const data = await this.#loadSpecialData();
+    const raceId = this.#formValue("race");
+    const raceKey = String(raceId ?? "").toLowerCase().replace(/^eqrmss-/, "");
+    const level = Math.min(130, Math.max(1, Number(this.#formValue("level")) || 1));
+    const bandCount = Math.ceil(level / 10);
+
+    const menuFor = (band) => {
+      const b = String(band);
+      return data?.byRace?.[raceKey]?.bands?.[b]
+        ?? data?.byType?.[this.creatureType]?.bands?.[b]
+        ?? data?.general?.bands?.[b]
+        ?? [];
+    };
+
+    let html = "";
+    let any = false;
+    for (let band = 1; band <= bandCount; band++) {
+      const menu = menuFor(band);
+      if (!menu.length) continue;
+      any = true;
+      const lo = (band - 1) * 10 + 1, hi = Math.min(130, band * 10);
+      html += `<div class="form-group"><label>Levels ${lo}–${hi}</label>` +
+        `<select name="special_band_${band}"><option value="">— none —</option>` +
+        menu.map(m => `<option value="${escapeHtml(m.id)}">${escapeHtml(m.name)}</option>`).join("") +
+        `</select></div>`;
+    }
+    host.innerHTML = any
+      ? html
+      : `<p class="eqrmss-npc-wizard-hint">No special-attack menu data for this race yet — the NPC is created without band specials.</p>`;
   }
 
   async #onSubmit(event) {
@@ -154,21 +275,28 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     const data = new FormData(form);
 
     const creatureType = String(data.get("creatureType") ?? "sentient").toLowerCase();
-    const sentient = creatureType === "sentient";
+    const buildMode = String(data.get("buildMode") ?? "role").toLowerCase();
     const raceId = String(data.get("race") ?? "").trim();
-    const classId = String(data.get("class") ?? "").trim();
-    if (!raceId || (sentient && !classId)) {
-      ui.notifications.warn(sentient ? "Pick a race and a class first." : "Pick a race first.");
+    if (!raceId) {
+      ui.notifications.warn("Pick a race first.");
       return;
+    }
+
+    const specialPicks = [];
+    for (const [k, v] of data.entries()) {
+      if (k.startsWith("special_band_") && v) specialPicks.push(String(v));
     }
 
     const finalizer = new EQRMSSNPCFinalizer({
       name: String(data.get("name") ?? ""),
       sex: String(data.get("sex") ?? ""),
       raceId,
-      classId: sentient ? classId : "",
+      classId: buildMode === "class" ? String(data.get("class") ?? "").trim() : "",
       level: Number(data.get("level")) || 1,
-      creatureType
+      creatureType,
+      buildMode,
+      role: String(data.get("role") ?? "striker"),
+      specialPicks
     });
 
     await this.close();
