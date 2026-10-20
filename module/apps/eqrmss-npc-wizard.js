@@ -11,7 +11,7 @@
 //   race/type (module/data/creatures/special-attacks.json).
 // ============================================================
 
-import { EQRMSSNPCFinalizer } from "./eqrmss-npc-finalizer.js";
+import { EQRMSSNPCFinalizer, npcMaxLevel } from "./eqrmss-npc-finalizer.js";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -125,6 +125,7 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     context.races = this._allRaces.filter(r => r.creatureType === this.creatureType);
     context.classes = EQRMSSNPCWizard.#asList(game?.eqrmss?.classes);
     context.roles = ROLES;
+    context.npcMaxLevel = npcMaxLevel();
     return context;
   }
 
@@ -226,8 +227,9 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
       return false;
     }
     const level = Number(this.#formValue("level")) || 0;
-    if (level < 1 || level > 130) {
-      ui.notifications.warn("Level must be 1–130.");
+    const maxLevel = npcMaxLevel();
+    if (level < 1 || level > maxLevel) {
+      ui.notifications.warn(`Level must be 1–${maxLevel}.`);
       return false;
     }
     return true;
@@ -241,7 +243,7 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     const data = await this.#loadSpecialData();
     const raceId = this.#formValue("race");
     const raceKey = String(raceId ?? "").toLowerCase().replace(/^eqrmss-/, "");
-    const level = Math.min(130, Math.max(1, Number(this.#formValue("level")) || 1));
+    const level = Math.min(npcMaxLevel(), Math.max(1, Number(this.#formValue("level")) || 1));
     const bandCount = Math.ceil(level / 10);
 
     const menuFor = (band) => {
@@ -258,7 +260,7 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
       const menu = menuFor(band);
       if (!menu.length) continue;
       any = true;
-      const lo = (band - 1) * 10 + 1, hi = Math.min(130, band * 10);
+      const lo = (band - 1) * 10 + 1, hi = Math.min(npcMaxLevel(), band * 10);
       html += `<div class="form-group"><label>Levels ${lo}–${hi}</label>` +
         `<select name="special_band_${band}"><option value="">— none —</option>` +
         menu.map(m => `<option value="${escapeHtml(m.id)}">${escapeHtml(m.name)}</option>`).join("") +

@@ -21,6 +21,7 @@
 // natural-weapon attack package for non-sentients.
 // ============================================================
 
+import { EQRMSSExpansionManager } from "../expansions/expansion-manager.js";
 import { extractRacialModifiers } from "../utils/actor/rmss-stats.js";
 import { rmssRankBonus } from "../data/skills/rmss-rank-bonus.js";
 import { displayName } from "../development/dp-engine.js";
@@ -37,6 +38,15 @@ const WEAPON_TYPE_TO_CATEGORY = {
 };
 
 const NPC_SKILL_ICON = "systems/eqrmss/assets/Icons/game/skills.svg";
+
+/** NPC level ceiling: the PC level cap for the active expansion + 10
+ *  (user ruling 2026-10-20). Falls back to the xp-engine's 125 base,
+ *  same fail-open pattern. Under LS (PC cap 130) NPCs reach 140. */
+export function npcMaxLevel() {
+  let cap = 125;
+  try { cap = EQRMSSExpansionManager.getLevelCap() ?? cap; } catch (e) { /* fail-open */ }
+  return cap + 10;
+}
 
 /** Resolve one record from a keyed object or an array.
  *  Prefers the collection key, then scans records by _id/id/key/name
@@ -82,7 +92,7 @@ export class EQRMSSNPCFinalizer {
     this.sex = String(sex ?? "");
     this.raceId = String(raceId ?? "");
     this.classId = String(classId ?? "");
-    this.level = Math.min(130, Math.max(1, Math.floor(Number(level) || 1)));
+    this.level = Math.min(npcMaxLevel(), Math.max(1, Math.floor(Number(level) || 1)));
     this.creatureType = String(creatureType ?? "sentient").toLowerCase();
     // Build mode: explicit, else class when a class was picked.
     this.buildMode = buildMode ? String(buildMode).toLowerCase()
