@@ -1,8 +1,8 @@
 .eqrmss-cc-dp-spend-box {
   margin-top: 1rem;
   padding: 0.75rem;
-  border: 1px solid #444;
-  background: #181818;
+  border: 1px solid var(--eqrmss-theme-accent, #5f4a2f);
+  background: var(--eqrmss-theme-panel, rgba(255,250,230,.45));
 }
 
 .eqrmss-cc-dp-table {
@@ -13,20 +13,20 @@
 
 .eqrmss-cc-dp-table th,
 .eqrmss-cc-dp-table td {
-  border: 1px solid #444;
+  border: 1px solid var(--eqrmss-theme-accent, #5f4a2f);
   padding: 0.35rem;
 }
 
 .eqrmss-cc-dp-table input[type="number"] {
   width: 3rem;
-  background: #1a1a1a;
-  border: 1px solid #555;
-  color: #ddd;
+  background: var(--eqrmss-theme-field, rgba(255,252,240,.85));
+  border: 1px solid var(--eqrmss-theme-accent, #5f4a2f);
+  color: var(--eqrmss-theme-ink, #3a2a18);
   padding: 0.15rem;
 }
 
 .eqrmss-cc-dp-remaining {
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  color: #ccc;
+  color: var(--eqrmss-theme-muted, #7a6448);
 }

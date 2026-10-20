@@ -2157,3 +2157,102 @@ button.rank-badge:hover {
   background: rgba(140, 40, 40, 0.12);
   font-style: italic;
 }
+
+/* ============================================================
+   WIZARD THEME (2026-10-20) — the character-creation wizard and
+   the NPC wizard use the same parchment styling as the sheets
+   and cards (uniform parchment ruling, 2026-10-14). All wizard
+   colors resolve through these tokens: a future theme redefines
+   the --eqrmss-theme-* values under a new window class instead
+   of restating every rule.
+   ============================================================ */
+.application.eqrmss-wizard-app,
+.application.eqrmss-npc-wizard {
+  --eqrmss-theme-bg:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,250,230,.7), rgba(255,250,230,0) 60%),
+    radial-gradient(ellipse 55% 35% at 90% 100%, rgba(160,120,60,.28), rgba(160,120,60,0) 70%),
+    linear-gradient(165deg, #e9d6a4 0%, #dec48f 50%, #cfb178 100%);
+  --eqrmss-theme-ink: #3a2a18;
+  --eqrmss-theme-muted: #7a6448;
+  --eqrmss-theme-accent: #5f4a2f;
+  --eqrmss-theme-bar: #6d4423;
+  --eqrmss-theme-bar-ink: #f7f1de;
+  --eqrmss-theme-panel: rgba(255, 250, 230, .45);
+  --eqrmss-theme-field: rgba(255, 252, 240, .85);
+  --eqrmss-theme-font: Georgia, "Times New Roman", serif;
+}
+
+.application.eqrmss-wizard-app .window-content,
+.application.eqrmss-npc-wizard .window-content {
+  background: var(--eqrmss-theme-bg);
+  color: var(--eqrmss-theme-ink);
+  font-family: var(--eqrmss-theme-font);
+}
+
+/* NPC wizard components (the PC wizard's component rules live in
+   styles/eqrmss-character-creation-wizard.css). */
+.application.eqrmss-npc-wizard .eqrmss-npc-wizard-form {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.application.eqrmss-npc-wizard .eqrmss-npc-wizard-step-title {
+  margin: 0;
+  padding: 0.3rem 0.5rem;
+  background: var(--eqrmss-theme-bar);
+  color: var(--eqrmss-theme-bar-ink);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.application.eqrmss-npc-wizard .eqrmss-npc-wizard-hint {
+  margin: 0.25rem 0 0.5rem;
+  font-style: italic;
+  color: var(--eqrmss-theme-muted);
+  font-size: 0.85rem;
+}
+
+.application.eqrmss-npc-wizard .form-group label {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.application.eqrmss-npc-wizard .form-group input[type="text"],
+.application.eqrmss-npc-wizard .form-group input[type="number"],
+.application.eqrmss-npc-wizard .form-group select {
+  background: var(--eqrmss-theme-field);
+  border: 1px solid var(--eqrmss-theme-accent);
+  color: var(--eqrmss-theme-ink);
+  padding: 0.25rem;
+}
+
+.application.eqrmss-npc-wizard .eqrmss-npc-wizard-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.application.eqrmss-npc-wizard .eqrmss-npc-wizard-actions button {
+  padding: 0.35rem 0.75rem;
+  background: var(--eqrmss-theme-panel);
+  border: 1px solid var(--eqrmss-theme-accent);
+  color: var(--eqrmss-theme-ink);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.application.eqrmss-npc-wizard .eqrmss-npc-wizard-actions button:hover {
+  background: var(--eqrmss-theme-bar);
+  color: var(--eqrmss-theme-bar-ink);
+}
+
+.application.eqrmss-npc-wizard .eqrmss-npc-wizard-actions button.eqrmss-npc-wizard-create {
+  background: var(--eqrmss-theme-bar);
+  border-color: var(--eqrmss-theme-bar);
+  color: var(--eqrmss-theme-bar-ink);
+}
