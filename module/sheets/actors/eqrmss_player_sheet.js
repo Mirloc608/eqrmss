@@ -14,6 +14,7 @@ import { groupSpellsByCategory, spellBaseName, spellRankNumber } from "./helpers
 import { activateCardtips } from "./helpers/cardtip.js";
 import { teleportActor, getDestination } from "../../spells/teleport.js";
 import { adjustAggro, clearAggro, clearAllAggro } from "../../spells/memblur.js";
+import { applyCannibalize, cannibalizeAARatio } from "../../spells/cannibalize.js";
 
 /**
  * Show/hide AA cards by name substring (2026-10-12). Pure DOM
@@ -1016,6 +1017,22 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
         const aaId = target?.dataset?.aaId;
         if (!aaId) return;
+
+        // Cannibalization: HP -> mana (user ruling 2026-10-19)
+        if (aaId === "aa-cannibalization") {
+            const rank = EQRMSSAAAdvancement.getPurchasedRank(actor, aaId);
+            const ratio = cannibalizeAARatio(rank);
+            const res = await applyCannibalize(actor, ratio, `Cannibalization ${rank}`);
+            if (!res.ok) {
+                ui.notifications?.warn(`EQRMSS | ${res.reason}`);
+                return;
+            }
+            await ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor }),
+                content: res.note
+            });
+            return;
+        }
 
         // Origin: Gate to home town center
         if (aaId === "aa-origin") {

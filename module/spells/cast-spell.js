@@ -44,6 +44,7 @@ import { applyIllusion, applySeeInvisible, applyInfravision, applyUltravision } 
 import { applyTeleport } from "./teleport.js";
 import { summonItem } from "./summon.js";
 import { applyMemblur } from "./memblur.js";
+import { applyCannibalize, cannibalizeSpellRatio } from "./cannibalize.js";
 import { applyPacify } from "./pacify.js";
 import { applyFeignDeath, breakFeignDeath } from "./feign-death.js";
 import { summonPet, swarmPetAsDot, isSwarmPet, isSwarmEffect, findCasterPet, dismissPet, summonFamiliar } from "./pets/summon-pet.js";
@@ -243,6 +244,21 @@ async function castSpellInner(actor, spellItem, opts = {}) {
     await breakInvisibility(actor, "casting");
     const name = spellItem.name ?? "spell";
     const cls = classifySpell(spellItem);
+    // Cannibalize spells (2026-10-19): HP -> mana via Live ratios,
+    // not the fixed data effects. Formula: 2 x level HP, ratio by spell.
+    const cannRatio = cannibalizeSpellRatio(name);
+    if (cannRatio != null) {
+        const res = await applyCannibalize(actor, cannRatio, name);
+        if (!res.ok) {
+            ui.notifications?.warn(`EQRMSS | ${res.reason}`);
+            return { ok: false, reason: res.reason };
+        }
+        await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor }),
+            content: res.note
+        });
+        return { ok: true, kind: "cannibalize", hpCost: res.hpCost, manaGained: res.manaGained };
+    }
     // Phase 5: worn-effect focus modifiers (deduped
     // highest-rank-wins per family) gather BEFORE the ESF gate
     // and the mana spend, so the reduced cost is what the
