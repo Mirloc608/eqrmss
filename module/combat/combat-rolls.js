@@ -1005,7 +1005,11 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     // bonus hits and conditions. Returns the chat fragment.
     async function resolveOneCrit(type, severity) {
         // Era Capstones (2026-10-09): add crit-bonus from capstone buffs to the roll.
-        let critBonus = 0;
+        // rollBonus is ONLY the d100 roll modifier. Bonus HITS from the crit
+        // text and armor-wear leaks accumulate into the OUTER critBonus
+        // (line ~975) that totalDamage reads — a local of the same name
+        // shadowed it and silently dropped them (fixed 2026-10-20).
+        let rollBonus = 0;
         try {
             const effects = actor.system?.status?.spellEffects || [];
             for (const e of effects) {
@@ -1013,14 +1017,14 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
                 // Check both old format (modifiers) and new format (scaledTarget)
                 const mods = e.modifiers || [];
                 for (const m of mods) {
-                    if (m.target === "crit-bonus") critBonus += Number(m.value) || 0;
+                    if (m.target === "crit-bonus") rollBonus += Number(m.value) || 0;
                 }
-                if (e.scaledTarget === "crit-bonus") critBonus += Number(e.scaledValue) || 0;
+                if (e.scaledTarget === "crit-bonus") rollBonus += Number(e.scaledValue) || 0;
             }
         } catch (err) { /* non-fatal */ }
         const rawRoll = await d100();
-        const cr = Math.min(100, rawRoll + critBonus);
-        const bonusNote = critBonus > 0 ? ` (d100 ${rawRoll} + ${critBonus} crit bonus)` : ` (d100 ${rawRoll})`;
+        const cr = Math.min(100, rawRoll + rollBonus);
+        const bonusNote = rollBonus > 0 ? ` (d100 ${rawRoll} + ${rollBonus} crit bonus)` : ` (d100 ${rawRoll})`;
         const critResult = lookupCrit(tables.crits, type, severity, cr);
         if (critResult.error) return `<strong>${esc(lookup.critCode)}</strong> — ${esc(critResult.error)} (GM adjudicates)`;
         // Conditional branches ("If foe has shield... If not...") are
@@ -1066,21 +1070,23 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     // knocked out) applies as conditions. Returns the chat fragment.
     async function resolveOneStructuralCrit(severity) {
         // Era Capstones (2026-10-09): add crit-bonus from capstone buffs.
-        let critBonus = 0;
+        // rollBonus, not critBonus: the outer critBonus is the damage
+        // accumulator totalDamage reads (see resolveOneCrit).
+        let rollBonus = 0;
         try {
             const effects = actor.system?.status?.spellEffects || [];
             for (const e of effects) {
                 if (e.source !== "capstone") continue;
                 const mods = e.modifiers || [];
                 for (const m of mods) {
-                    if (m.target === "crit-bonus") critBonus += Number(m.value) || 0;
+                    if (m.target === "crit-bonus") rollBonus += Number(m.value) || 0;
                 }
-                if (e.scaledTarget === "crit-bonus") critBonus += Number(e.scaledValue) || 0;
+                if (e.scaledTarget === "crit-bonus") rollBonus += Number(e.scaledValue) || 0;
             }
         } catch (err) { /* non-fatal */ }
         const rawRoll = await d100();
-        const cr = Math.min(100, rawRoll + critBonus);
-        const bonusNote = critBonus > 0 ? ` (d100 ${rawRoll} + ${critBonus} crit bonus)` : ``;
+        const cr = Math.min(100, rawRoll + rollBonus);
+        const bonusNote = rollBonus > 0 ? ` (d100 ${rawRoll} + ${rollBonus} crit bonus)` : ``;
         const stRes = lookupStructuralCrit(tables.crits, severity, cr);
         if (stRes.error) return `<strong>Strategic ${esc(severity)}</strong> — ${esc(stRes.error)} (GM adjudicates)`;
         critFired = true;
