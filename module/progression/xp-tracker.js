@@ -41,8 +41,24 @@ function emptyTracker() {
     };
 }
 
+// XP tracking accumulates per CHARACTER, so reads/writes resolve a
+// token's synthetic actor to its world (base) actor. Without this,
+// actions taken from an unlinked token's sheet record to the token
+// delta — invisible to the GM Screen and every world-actor reader
+// (found 2026-10-20: HT hits sat on the token copy, GM form empty).
+function baseActor(actor) {
+    if (!actor) return actor;
+    try {
+        if (actor.isToken) {
+            return globalThis.game?.actors?.get?.(actor.id) ?? actor;
+        }
+    } catch (e) { /* fall through to the actor itself */ }
+    return actor;
+}
+
 /** Read the tracker for an actor (returns a fresh empty shape if none). */
 export function getXPTracker(actor) {
+    actor = baseActor(actor);
     try {
         const raw = actor?.getFlag?.(FLAG_SCOPE, FLAG_KEY);
         if (!raw || typeof raw !== "object") return emptyTracker();
@@ -61,6 +77,7 @@ export function getXPTracker(actor) {
 
 /** Persist tracker data for an actor. */
 async function setXPTracker(actor, data) {
+    actor = baseActor(actor);
     if (!actor?.setFlag) return;
     try {
         await actor.setFlag(FLAG_SCOPE, FLAG_KEY, data);
