@@ -180,6 +180,9 @@ function esc(s) {
 // one line per resolved payload entry (damage / regen / buff).
 function procResultNote({ proc, results }) {
     const lines = (results ?? []).map(r => {
+        // A few appliers historically returned an HTML string instead of
+        // a result object; render its text rather than a bare "effect".
+        if (typeof r === "string") return esc(r.replace(/<[^>]*>/g, "").trim());
         const note = (r.notes ?? []).filter(Boolean).map(esc).join("; ");
         const tail = note ? ` — ${note}` : "";
         if (r.type === "damage") return `${r.final} ${esc(r.element ?? "untyped")} damage (rolled ${r.rolled})${tail}`;

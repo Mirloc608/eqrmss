@@ -983,14 +983,14 @@ async function applyFear({ effect, target, source }) {
             if (e.source !== "capstone") continue;
             for (const m of (e.modifiers || [])) {
                 if (m.target === "fear-immunity") {
-                    return `<p><em>${target.name} is immune to fear (${e.label || "capstone"}).</em></p>`;
+                    return { type: "fear", rolled: 0, final: 0, notes: [`${target.name} is immune to fear (${e.label || "capstone"}).`], source };
                 }
             }
         }
     } catch (e) { /* non-fatal */ }
     // NPC special trait (2026-10-20): Fear Immunity feature item.
     if (hasSpecialTrait(target, "fear-immunity")) {
-        return `<p><em>${target.name} is immune to fear (Fear Immunity).</em></p>`;
+        return { type: "fear", rolled: 0, final: 0, notes: [`${target.name} is immune to fear (Fear Immunity).`], source };
     }
     const rounds = payloadRounds(effect);
     await persistValue(target, "system.status.fear", { rounds });
