@@ -8,6 +8,8 @@
 
 import { rrTargetNumber, rrOpenEnded } from "../spells/base-spell.js";
 import { EQRMSSAAAdvancement } from "../aa/aa-advancement.js";
+import { trackXPHits, trackXPKill } from "../progression/xp-tracker.js";
+import { checkHitThresholds } from "./crit-conditions.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
@@ -71,12 +73,13 @@ export async function layOnHands(actor, target) {
     const percent = 15 + (rank - 1) * 10;
     const maxHp = Number(target.system?.hits?.max) || Number(target.system?.attributes?.hits?.max) || 0;
     const healAmount = Math.floor(maxHp * percent / 100);
-    const hitsTaken = Number(target.system?.hits?.taken) || 0;
+    const hitsTaken = Number(target.system?.hits?.value) || 0;
     const newTaken = Math.max(0, hitsTaken - healAmount);
-    await target.update({ 
-        "system.hits.taken": newTaken,
+    await target.update({
+        "system.hits.value": newTaken,
         "system.status.bleed": { perRound: 0 }
     });
+    await checkHitThresholds(target);
     await actor.update({ "system.status.layOnHandsUsed": true });
     const actualHealed = hitsTaken - newTaken;
     await ChatMessage.create({
@@ -134,8 +137,16 @@ export async function harmTouch(actor, target) {
         return { ok: true, damage: 0, resisted: true };
     }
     
-    const currentTaken = Number(target.system?.hits?.taken) || 0;
-    await target.update({ "system.hits.taken": currentTaken + damage });
+    const wasDead = !!target.system?.status?.dead;
+    const currentTaken = Number(target.system?.hits?.value) || 0;
+    await target.update({ "system.hits.value": currentTaken + damage });
+    await checkHitThresholds(target);
+    // XP tracker (2026-10-20): signature damage counts on the
+    // Table 15.4.2 scoreboard like any other damage source.
+    await trackXPHits(actor, target, damage);
+    if (!wasDead && target.system?.status?.dead) {
+        await trackXPKill(actor, target);
+    }
     await actor.update({ "system.status.harmTouchUsed": true });
     html += `<p><em>${esc(actor.name)} touches ${esc(target.name)} with unholy power, dealing ${damage} damage.</em></p>`;
     await ChatMessage.create({

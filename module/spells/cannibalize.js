@@ -45,7 +45,7 @@ export async function applyCannibalize(actor, ratio, label = "Cannibalize") {
 
     const maxHp = Number(actor.system?.hits?.max)
         ?? Number(actor.system?.attributes?.hits?.max) ?? 0;
-    const taken = Number(actor.system?.hits?.taken) || 0;
+    const taken = Number(actor.system?.hits?.value) || 0;
     const currentHp = maxHp - taken;
 
     // Cannot kill: leave at least 1 hit, fail if nothing available.
@@ -64,7 +64,7 @@ export async function applyCannibalize(actor, ratio, label = "Cannibalize") {
     const newMana = Math.min(manaMax, manaValue + manaGained);
 
     await actor.update({
-        "system.hits.taken": taken + hpCost,
+        "system.hits.value": taken + hpCost,
         "system.attributes.mana.value": newMana
     });
 
