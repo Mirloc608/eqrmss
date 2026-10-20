@@ -326,8 +326,11 @@ export class EQRMSSNPCFinalizer {
         });
       }
       if (items.length) {
-        await actor.createEmbeddedDocuments("Item", items);
-        console.log(`EQRMSS | NPC build | granted ${items.length} special attack(s)`, items.map(i => i.name));
+        const created = await actor.createEmbeddedDocuments("Item", items);
+        console.log(`EQRMSS | NPC build | granted ${created.length} special attack(s)`, created.map(i => i.name));
+        if (created.length < items.length) {
+          console.warn(`EQRMSS | NPC build | ${items.length - created.length} special attack(s) failed to create`);
+        }
       }
     } catch (error) {
       console.warn("EQRMSS | NPC build | special attack grant failed (non-blocking)", error);

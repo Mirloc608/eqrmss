@@ -29,6 +29,8 @@ export class EQRMSSItem extends Item {
 
         "faction",
 
+        "feature",
+
         "race",
 
         "skill",

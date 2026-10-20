@@ -234,6 +234,25 @@
     </div>
   </div>
 
+  <div class="npc-panel">
+    <div class="npc-panel-head">Special Attacks</div>
+    <div style="padding: 6px 10px;">
+      {{#if items.features.length}}
+        {{#each items.features}}
+        <div style="padding: 3px 0; border-bottom: 1px dashed rgba(95,74,47,.3);">
+          <div style="display: flex; justify-content: space-between;">
+            <span>{{name}}</span>
+            <span style="opacity: 0.6;">{{flags.eqrmss.specialKind}}</span>
+          </div>
+          {{#if system.description}}<div style="font-size: 11px; opacity: 0.75;">{{system.description}}</div>{{/if}}
+        </div>
+        {{/each}}
+      {{else}}
+        <div class="npc-none">No special attacks</div>
+      {{/if}}
+    </div>
+  </div>
+
   <div class="npc-panel npc-panel-attacks">
     <div class="npc-panel-head">Weapons &amp; Attacks</div>
     <div class="npc-attacks">

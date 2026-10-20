@@ -353,6 +353,7 @@ export class EQRMSSActorContextHelper {
         context.items = {
             all: items,
             weapons: items.filter(i => i?.type === "weapon"),
+            features: items.filter(i => i?.type === "feature"),
             armor: items.filter(i => i?.type === "armor"),
             herbs: items.filter(i => i?.type === "herb_or_poison"),
             spells: visibleSpells(items),
