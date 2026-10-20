@@ -68,9 +68,25 @@ export class EQRMSSActorSignatureHelper {
                 ev.preventDefault();
                 const discId = el.dataset.disciplineId;
                 if (!discId) return;
-                const discs = context.disciplines || [];
-                const disc = discs.find(d => d.id === discId);
-                if (!disc) return;
+                // Resolve from the boot registry (the same source the
+                // sheet context builder filters): activateListeners
+                // receives no context, and the old `context.disciplines`
+                // reference threw on click — the buttons died silently.
+                const discData = globalThis.CONFIG?.EQRMSS?.data?.results?.disciplines;
+                let disc = null;
+                if (Array.isArray(discData)) {
+                    disc = discData.find(d => d.id === discId) ?? null;
+                } else if (discData) {
+                    for (const cd of Object.values(discData)) {
+                        const arr = Array.isArray(cd) ? cd : (cd?.disciplines || []);
+                        disc = arr.find(d => d.id === discId) ?? null;
+                        if (disc) break;
+                    }
+                }
+                if (!disc) {
+                    try { ui?.notifications?.warn?.(`EQRMSS | Discipline not found: ${discId}`); } catch (e) {}
+                    return;
+                }
                 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
                 const notes = [];
                 try {
@@ -93,9 +109,23 @@ export class EQRMSSActorSignatureHelper {
                 ev.preventDefault();
                 const abilId = el.dataset.abilityId;
                 if (!abilId) return;
-                const abils = context.abilities || [];
-                const ability = abils.find(a => a.id === abilId);
-                if (!ability) return;
+                // Resolve from the boot registry (the same source the
+                // sheet context builder filters): activateListeners
+                // receives no context, and the old `context.abilities`
+                // reference threw on click — Taunt/Slam died silently.
+                const abilData = globalThis.game?.eqrmss?.abilities;
+                let ability = null;
+                if (abilData) {
+                    for (const pool of Object.values(abilData)) {
+                        if (!Array.isArray(pool)) continue;
+                        ability = pool.find(a => a.id === abilId) ?? null;
+                        if (ability) break;
+                    }
+                }
+                if (!ability) {
+                    try { ui?.notifications?.warn?.(`EQRMSS | Ability not found: ${abilId}`); } catch (e) {}
+                    return;
+                }
                 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
                 const notes = [];
                 // Target: use current targets or none
