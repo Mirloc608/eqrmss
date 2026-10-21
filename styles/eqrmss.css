@@ -2256,3 +2256,57 @@ button.rank-badge:hover {
   border-color: var(--eqrmss-theme-bar);
   color: var(--eqrmss-theme-bar-ink);
 }
+
+/* NPC wizard step 3 — Spire-style special toggles (2026-10-21). */
+.application.eqrmss-npc-wizard .eqrmss-special-group h4 {
+  margin: 0.4rem 0 0.3rem;
+  padding: 0.2rem 0.5rem;
+  background: var(--eqrmss-theme-bar);
+  color: var(--eqrmss-theme-bar-ink);
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.application.eqrmss-npc-wizard .eqrmss-special-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.1rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.application.eqrmss-npc-wizard .eqrmss-special-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.application.eqrmss-npc-wizard .eqrmss-special-toggle:hover {
+  background: var(--eqrmss-theme-panel);
+}
+
+.application.eqrmss-npc-wizard .eqrmss-special-toggle input {
+  display: none;
+}
+
+.application.eqrmss-npc-wizard .eqrmss-special-dot {
+  flex: 0 0 auto;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  border: 2px solid var(--eqrmss-theme-accent);
+  background: transparent;
+}
+
+.application.eqrmss-npc-wizard .eqrmss-special-toggle:has(input:checked) .eqrmss-special-dot {
+  background: var(--eqrmss-theme-accent);
+  box-shadow: inset 0 0 0 2px var(--eqrmss-theme-field);
+}
+
+.application.eqrmss-npc-wizard .eqrmss-special-toggle:has(input:checked) .eqrmss-special-name {
+  font-weight: 700;
+}

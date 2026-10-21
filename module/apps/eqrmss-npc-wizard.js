@@ -6,12 +6,15 @@
 // Step 2 — Build: role (Striker/Defender/Caster/Healer) or PC
 //   class, plus target level. The finalizer simulates the build
 //   level-by-level with PC rules.
-// Step 3 — Special attacks: one optional pick per 10-level band
-//   the level reaches, from the PEQ-coordinated menu for the
-//   race/type (module/data/creatures/special-attacks.json).
+// Step 3 — Specials & traits: a Spire-style page of independent
+//   toggles (user ruling 2026-10-21 — free multi-toggle replaces
+//   one pick per band). The available list is the union of the
+//   PEQ band menus for the race/type up to the chosen level
+//   (module/data/creatures/special-attacks.json).
 // ============================================================
 
 import { EQRMSSNPCFinalizer, npcMaxLevel } from "./eqrmss-npc-finalizer.js";
+import { specialMenuUnion } from "./npc-build-engine.js";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -47,6 +50,7 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     this.step = 1;
     this._allRaces = [];
     this._specialData = null; // lazily fetched special-attacks.json
+    this._specialPicks = new Set(); // step-3 toggles, kept across Back/Next
   }
 
   static DEFAULT_OPTIONS = {
@@ -148,6 +152,19 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     wire("#npc-back-2", "click", () => this.#gotoStep(1));
     wire("#npc-next-2", "click", async () => { if (this.#validateStep2()) { await this.#buildSpecialStep(); this.#gotoStep(3); } });
     wire("#npc-back-3", "click", () => this.#gotoStep(2));
+    // Step-3 toggles are rendered dynamically; one delegated
+    // listener on the static host keeps the pick set in step
+    // with the checkboxes so Back/Next preserves selections.
+    const bandsHost = this.element?.querySelector("#npc-special-bands");
+    if (bandsHost && !bandsHost.dataset.wired) {
+      bandsHost.dataset.wired = "1";
+      bandsHost.addEventListener("change", (e) => {
+        const input = e.target?.closest?.("input[name='special_pick']");
+        if (!input) return;
+        if (input.checked) this._specialPicks.add(input.value);
+        else this._specialPicks.delete(input.value);
+      });
+    }
     this.element?.querySelectorAll("[name=buildMode]").forEach(el => {
       if (!el.dataset.wired) { el.dataset.wired = "1"; el.addEventListener("change", () => this.#syncBuildModeUI()); }
     });
@@ -163,7 +180,7 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
       if (sec) sec.style.display = s === n ? "" : "none";
     }
     const title = this.element?.querySelector(".eqrmss-npc-wizard-step-title");
-    if (title) title.textContent = `Step ${n} of 3 — ${["Race", "Role & Level", "Special Attacks"][n - 1]}`;
+    if (title) title.textContent = `Step ${n} of 3 — ${["Race", "Role & Level", "Specials & Traits"][n - 1]}`;
   }
 
   /** Show/hide the class option and re-filter the race list in place
@@ -235,8 +252,12 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     return true;
   }
 
-  /** Populate step 3: one select per 10-level band reached, with
-   *  the PEQ menu for the chosen race (type menu as fallback). */
+  /** Populate step 3 (2026-10-21, Spire-style): the union of the
+   *  PEQ band menus up to the chosen level, rendered as two
+   *  toggle grids — Special Attacks and Traits & Immunities.
+   *  Every toggle is independent; selections persist on the
+   *  instance across Back/Next and are pruned when a race or
+   *  level change makes a pick unavailable. */
   async #buildSpecialStep() {
     const host = this.element?.querySelector("#npc-special-bands");
     if (!host) return;
@@ -244,31 +265,24 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     const raceId = this.#formValue("race");
     const raceKey = String(raceId ?? "").toLowerCase().replace(/^eqrmss-/, "");
     const level = Math.min(npcMaxLevel(), Math.max(1, Number(this.#formValue("level")) || 1));
-    const bandCount = Math.ceil(level / 10);
+    const { attacks, traits } = specialMenuUnion(data, { raceKey, creatureType: this.creatureType, level });
 
-    const menuFor = (band) => {
-      const b = String(band);
-      return data?.byRace?.[raceKey]?.bands?.[b]
-        ?? data?.byType?.[this.creatureType]?.bands?.[b]
-        ?? data?.general?.bands?.[b]
-        ?? [];
-    };
+    const available = new Set([...attacks, ...traits].map(e => e.id));
+    this._specialPicks = new Set([...this._specialPicks].filter(id => available.has(id)));
 
-    let html = "";
-    let any = false;
-    for (let band = 1; band <= bandCount; band++) {
-      const menu = menuFor(band);
-      if (!menu.length) continue;
-      any = true;
-      const lo = (band - 1) * 10 + 1, hi = Math.min(npcMaxLevel(), band * 10);
-      html += `<div class="form-group"><label>Levels ${lo}–${hi}</label>` +
-        `<select name="special_band_${band}"><option value="">— none —</option>` +
-        menu.map(m => `<option value="${escapeHtml(m.id)}">${escapeHtml(m.name)}</option>`).join("") +
-        `</select></div>`;
-    }
-    host.innerHTML = any
+    const group = (title, entries) => !entries.length ? "" :
+      `<div class="eqrmss-special-group"><h4>${escapeHtml(title)}</h4><div class="eqrmss-special-grid">` +
+      entries.map(e =>
+        `<label class="eqrmss-special-toggle" title="${escapeHtml(e.desc)}">` +
+        `<input type="checkbox" name="special_pick" value="${escapeHtml(e.id)}"${this._specialPicks.has(e.id) ? " checked" : ""}>` +
+        `<span class="eqrmss-special-dot"></span>` +
+        `<span class="eqrmss-special-name">${escapeHtml(e.name)}</span></label>`
+      ).join("") +
+      `</div></div>`;
+    const html = group("Special Attacks", attacks) + group("Traits & Immunities", traits);
+    host.innerHTML = html
       ? html
-      : `<p class="eqrmss-npc-wizard-hint">No special-attack menu data for this race yet — the NPC is created without band specials.</p>`;
+      : `<p class="eqrmss-npc-wizard-hint">No special-attack menu data for this race yet — the NPC is created without specials.</p>`;
   }
 
   async #onSubmit(event) {
@@ -284,10 +298,7 @@ export class EQRMSSNPCWizard extends HandlebarsApplicationMixin(ApplicationV2) {
       return;
     }
 
-    const specialPicks = [];
-    for (const [k, v] of data.entries()) {
-      if (k.startsWith("special_band_") && v) specialPicks.push(String(v));
-    }
+    const specialPicks = data.getAll("special_pick").map(String).filter(Boolean);
 
     const finalizer = new EQRMSSNPCFinalizer({
       name: String(data.get("name") ?? ""),

@@ -201,6 +201,44 @@ function findCost(costs, key) {
 //           baseHits, dpLeftover, log }
 // ------------------------------------------------------------
 
+/**
+ * NPC wizard step 3 (user ruling 2026-10-21, Spire-style free
+ * multi-toggle — replaces the one-pick-per-10-level-band rule):
+ * the specials available to a creature are the union of its PEQ
+ * band menus for every band up to its level (per band: race menu,
+ * falling back to type, then general), deduplicated and enriched
+ * from the catalog, split by kind. Availability still follows
+ * the menus and level; the COUNT selected is free.
+ */
+export function specialMenuUnion(data, { raceKey = "", creatureType = "", level = 1 } = {}) {
+  const bandCount = Math.max(1, Math.ceil((Number(level) || 1) / 10));
+  const catalog = data?.catalog ?? {};
+  const seen = new Map();
+  for (let band = 1; band <= bandCount; band++) {
+    const b = String(band);
+    const menu = data?.byRace?.[raceKey]?.bands?.[b]
+      ?? data?.byType?.[creatureType]?.bands?.[b]
+      ?? data?.general?.bands?.[b]
+      ?? [];
+    for (const entry of menu) {
+      const id = String(entry?.id ?? "");
+      if (!id || seen.has(id)) continue;
+      const cat = catalog[id] ?? {};
+      seen.set(id, {
+        id,
+        name: String(entry?.name ?? cat.name ?? id),
+        kind: String(cat.kind ?? entry?.kind ?? "trait"),
+        desc: String(cat.desc ?? entry?.desc ?? "")
+      });
+    }
+  }
+  const all = [...seen.values()];
+  return {
+    attacks: all.filter(e => e.kind === "attack"),
+    traits: all.filter(e => e.kind !== "attack")
+  };
+}
+
 export function simulateBuild({ race, hitDie = 10, maxBaseHits = 150, costs, profile, weaponKey = null, targetLevel = 1, rng = Math.random }) {
   const d100 = () => 1 + Math.floor(rng() * 100);
   const rollDie = (sides) => 1 + Math.floor(rng() * sides);
