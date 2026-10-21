@@ -15,6 +15,7 @@ export const WEAPON_TYPE_TO_SKILL_ID = {
     "polearm": "poleArms",
     "missile": "bows",
     "thrown": "thrown",
+    "hand-to-hand": "hand-to-hand",
     "natural": "naturalWeapons"
 };
 

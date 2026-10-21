@@ -26,11 +26,17 @@ async function fetchJson(path) {
 function isValidItem(j) {
     if (!j || typeof j !== "object") return false;
     if (typeof j.name !== "string" || !j.name) return false;
-    if (j.type !== "item" && j.type !== "container" && j.type !== "tool" && j.type !== "tradeskill" && j.type !== "instrument") return false;
+    if (j.type !== "item" && j.type !== "container" && j.type !== "tool" && j.type !== "tradeskill" && j.type !== "instrument" && j.type !== "armor" && j.type !== "weapon") return false;
     const s = j.system;
     if (!s || typeof s !== "object") return false;
     // Containers aren't worn in a slot; only plain items require one.
     if (j.type === "item" && (typeof s.slot !== "string" || !s.slot)) return false;
+    // Armor entries declare their worn slot and material — the catalog
+    // picker derives AT from the material and the DB bonus from the
+    // EQ AC above that AT (user ruling 2026-10-21).
+    if (j.type === "armor" && (typeof s.slot !== "string" || !s.slot || typeof s.material !== "string" || !s.material)) return false;
+    // Weapon entries declare their attack table and weapon-type slug.
+    if (j.type === "weapon" && (typeof s.attackTable !== "string" || !s.attackTable || typeof s.weaponType !== "string" || !s.weaponType)) return false;
     return true;
 }
 

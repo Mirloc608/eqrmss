@@ -45,14 +45,70 @@ const JEWELRY_SLOTS = ["ear", "finger", "charm", "neck", "wrist"];
 /**
  * Normalize EQ catalog data to the system's expected structure.
  * - Jewelry (by slot) gets type "jewelry" for the dedicated sheet/document
+ * - Armor entries become real armor documents: AT from the declared
+ *   material, DB bonus = EQ AC above that AT (user ruling 2026-10-21)
+ * - Weapon entries become real weapon documents carrying their
+ *   weapon-type slug in system.type
  * - Stat keys are uppercased (EQ data uses lowercase, sheets expect uppercase)
  * - Resists stay in EQ structure (fire/cold/magic/poison/disease/corruption)
  */
-function normalizeCatalogData(data) {
+export async function normalizeCatalogData(data) {
     const sys = data.system ?? {};
     // Jewelry type detection by slot
     if (data.type === "item" && JEWELRY_SLOTS.includes(sys.slot)) {
         data.type = "jewelry";
+    }
+    // Armor: derive the RMSS fields the defense engine reads
+    // (system.at, system.armorLocation, system.dbBonus, penalties).
+    if (data.type === "armor") {
+        const slot = String(sys.slot ?? "");
+        let at = 0;
+        let maneuverPenalty = 0;
+        let quicknessPenalty = 0;
+        let missilePenalty = 0;
+        let category = String(sys.armorCategory ?? "");
+        try {
+            const mRes = await fetch("systems/eqrmss/module/data/armor/materials.json");
+            const mData = await mRes.json();
+            const mat = (mData.materials ?? []).find(m => m.id === sys.material);
+            if (mat) {
+                at = Number(mat.baseAT) || 0;
+                category = category || String((mat.categories ?? [])[0] ?? "");
+            }
+            if (category && sys.material) {
+                const { loadArmorData, composeArmor } = await import("../../data/armor/armor-composer.js");
+                await loadArmorData();
+                const composed = composeArmor(slot, category, String(sys.material), "normal");
+                at = Number(composed.armorType) || at;
+                maneuverPenalty = Number(composed.maneuverPenalty) || 0;
+                quicknessPenalty = Number(composed.quicknessPenalty) || 0;
+                missilePenalty = Number(composed.missilePenalty) || 0;
+            }
+        } catch (e) {
+            console.warn(`EQRMSS | Catalog armor derivation failed for ${data.name}`, e);
+        }
+        sys.armorLocation = slot;
+        sys.armorCategory = category;
+        sys.armorMaterial = String(sys.material ?? "");
+        sys.armorCondition = "normal";
+        sys.armorQuality = "average";
+        sys.armorThickness = "standard";
+        sys.at = at;
+        sys.dbBonus = Math.max(0, (Number(sys.defense) || 0) - at);
+        sys.maneuverPenalty = maneuverPenalty;
+        sys.quicknessPenalty = quicknessPenalty;
+        sys.missilePenalty = missilePenalty;
+        delete sys.slot;
+        delete sys.defense;
+        delete sys.material;
+    }
+    // Weapons: the type slug drives class restrictions and skill OB.
+    if (data.type === "weapon") {
+        sys.type = String(sys.weaponType ?? "");
+        if (sys.obMod == null) sys.obMod = 0;
+        if (sys.damageMod == null) sys.damageMod = 0;
+        delete sys.weaponType;
+        delete sys.slot;
     }
     // Uppercase stat keys
     if (sys.stats && typeof sys.stats === "object") {
@@ -68,7 +124,7 @@ function normalizeCatalogData(data) {
 export async function addCatalogItemToActor(actor, catalogId) {
     const entry = getCatalog()[catalogId];
     if (!entry || !actor) return false;
-    const data = normalizeCatalogData({
+    const data = await normalizeCatalogData({
         name: entry.name,
         type: entry.type,
         img: entry.img || "icons/svg/item-bag.svg",

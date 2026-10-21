@@ -516,6 +516,12 @@ export async function applyCritConditions(targetActor, attackerActor, critText) 
             const pool = { stunned: 0, stunNoParry: 0, ...(targetActor.system?.status?.stun ?? {}) };
             pool.paralyzed = true;
             await targetActor.update({ "system.status.stun": pool });
+            // Apply Foundry's own Paralyzed status right away (the
+            // per-tick sync in status-wiring keeps it in step after).
+            try {
+                const { syncParalyzedStatus } = await import("../spells/status-wiring.js");
+                await syncParalyzedStatus(targetActor);
+            } catch (e) { /* the tick sync will catch up */ }
             notes.push(`${esc(tName)} is paralyzed — down or out, permanently (until cured).`);
         } else {
             notes.push(denied(`${esc(tName)} is paralyzed`));

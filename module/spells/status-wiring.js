@@ -219,9 +219,42 @@ export function baseActorOf(target) {
 }
 
 /**
+ * The core Foundry status id for paralysis. Resolved from
+ * CONFIG.statusEffects at runtime (prefer the exact "paralyzed" id;
+ * fall back to any entry matching by id/name/icon) so the engine
+ * applies Foundry's own Paralyzed status rather than a lookalike.
+ */
+export function paralyzedStatusId() {
+    try {
+        const list = globalThis.CONFIG?.statusEffects ?? [];
+        if (list.some(e => e?.id === "paralyzed")) return "paralyzed";
+        const hit = list.find(e => /paralys/i.test(e?.id ?? "")
+            || /paralys/i.test(e?.name ?? "")
+            || /paralysis/i.test(e?.icon ?? ""));
+        if (hit?.id) return hit.id;
+    } catch (e) { /* fall through to the canonical id */ }
+    return "paralyzed";
+}
+
+/**
+ * Mirror the stun pool's paralyzed flag onto the core Paralyzed
+ * status (user direction 2026-10-21: apply the known Foundry status
+ * directly). The pool flag stays the engine's source of truth —
+ * non-expiring, cleared by death cleanup — and this keeps the token
+ * marker in step, exactly like stunned/prone below.
+ */
+export async function syncParalyzedStatus(actor) {
+    if (!actor) return;
+    const canTouch = actor.isOwner || globalThis.game?.user?.isGM;
+    if (!canTouch) return;
+    await syncOne(actor, paralyzedStatusId(), !!actor.system?.status?.stun?.paralyzed);
+}
+
+/**
  * Sync tracker-based conditions to Foundry token markers.
  * Called each tick in tickConditions().
  * - Any stun pool component > 0 → `stunned`
+ * - Stun pool paralyzed flag → core `paralyzed` status
  * - system.status.prone.rounds > 0 → `prone`
  * - system.status.bleed.perRound > 0 → `bleeding` (custom icon, not in core)
  */
@@ -235,6 +268,9 @@ export async function syncTrackerStatuses(actor) {
     const stun = sys.status?.stun ?? {};
     const stunned = (Number(stun.stunned) || 0) + (Number(stun.stunNoParry) || 0) + (Number(stun.downOrOut) || 0) > 0;
     await syncOne(actor, "stunned", stunned);
+
+    // Paralysis: the pool's permanent flag drives the core status.
+    await syncOne(actor, paralyzedStatusId(), !!stun.paralyzed);
 
     // Prone
     const prone = (Number(sys.status?.prone?.rounds) || 0) > 0;

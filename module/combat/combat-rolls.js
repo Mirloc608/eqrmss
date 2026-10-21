@@ -855,7 +855,10 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         const songMods = getSongModifiers(actor);
         buffOb = (spellMods?.ob || 0) + (songMods?.ob || 0);
     } catch (e) { /* ignore */ }
-    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + pointBlankPenalty + buffOb + actionPenalty + armorTierPenalty + rangeMod - reloadPenalty + ammoOb + quiverPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod + sitTotal + (pronePenalty || 0);
+    // Ability OB bonus (2026-10-21): e.g. Backstab's level-scaled bonus,
+    // passed by ability handlers via options.obBonus.
+    const abilityObBonus = Number(options.obBonus) || 0;
+    const ob = speedBaseOb - attackerParryAllocation - attackerMissileParryAllocation + swingBonus + pointBlankPenalty + buffOb + actionPenalty + armorTierPenalty + rangeMod - reloadPenalty + ammoOb + quiverPenalty + calledShotMod + (closingOnTarget ? 30 : 0) - cqcLengthPenalty + stanceBonus + racPenalty + weaponUse.ob + unusualStyle.obMod + sitTotal + (pronePenalty || 0) + abilityObBonus;
 
     // The attack is committed once target selection succeeds: mark the
     // round so a parry split cannot be declared retroactively.
@@ -939,7 +942,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         ? ` (shield omitted — used vs ${esc(shieldDefense.shieldOpponentName || "another opponent")})`
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
-        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swapObNote}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${pointBlankPenalty ? ` (${pointBlankPenalty} point-blank)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${armorTierPenalty ? ` (${armorTierPenalty} armor tier: ${armorTier.armorCategory} ${armorTier.tiersAbove} above class)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${ammoOb ? ` (${ammoOb >= 0 ? "+" : ""}${ammoOb} ammunition)` : ""}${quiverPenalty ? ` (${quiverPenalty} not quivered)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${Math.round(effectivePct)}%${hastePct ? ` +${hastePct}% haste` : ""}${slowPct ? ` -${slowPct}% slow` : ""})` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
+        + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swapObNote}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${pointBlankPenalty ? ` (${pointBlankPenalty} point-blank)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${armorTierPenalty ? ` (${armorTierPenalty} armor tier: ${armorTier.armorCategory} ${armorTier.tiersAbove} above class)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${ammoOb ? ` (${ammoOb >= 0 ? "+" : ""}${ammoOb} ammunition)` : ""}${quiverPenalty ? ` (${quiverPenalty} not quivered)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${Math.round(effectivePct)}%${hastePct ? ` +${hastePct}% haste` : ""}${slowPct ? ` -${slowPct}% slow` : ""})` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${abilityObBonus ? ` (+${abilityObBonus} ${esc(options.obBonusLabel || "ability")})` : ""}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
         + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
@@ -1268,6 +1271,13 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     const damageMod = Number(sys.damageMod) || 0;
     const tableDamage = lookup.damage ?? 0;
     let totalDamage = tableDamage + damageMod + critBonus;
+    // Ability damage multiplier (2026-10-21): e.g. Backstab multiplies
+    // the attack's total concussion hits (table + crit bonus).
+    const damageMultiplier = Math.max(1, Number(options.damageMultiplier) || 1);
+    if (damageMultiplier > 1 && totalDamage > 0) {
+        totalDamage *= damageMultiplier;
+        dmgParts.push(`${esc(options.damageMultiplierLabel || "ability")} ×${damageMultiplier}`);
+    }
     const dmgParts = [`table ${tableDamage}`];
     if (damageMod) dmgParts.push(`weapon ${damageMod >= 0 ? "+" : ""}${damageMod}`);
     if (critBonus) dmgParts.push(`crit +${critBonus}`);

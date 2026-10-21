@@ -3,8 +3,12 @@
 // module/data/abilities/shared/*.json via the "handler" field.
 //
 // Categories:
-// - Strikes: kick, bash, slam, crescent-kick, flying-kick, round-kick, tiger-claw
-// - Backstab: backstab (positional)
+// - Monk strikes (kick, crescent-kick, flying-kick, round-kick,
+//   tiger-claw): real attacks on the MA Strikes table, level-scaled
+//   (user ruling 2026-10-21)
+// - Fixed strikes: bash, slam
+// - Backstab: readied-weapon attack with level-scaled OB bonus and
+//   damage multiplier (user ruling 2026-10-21)
 // - Extra attacks: double-attack, triple-attack, flurry, frenzy, dual-wield
 // - Defensive: block, evade, riposte
 // - Taunt: provoke, taunt
@@ -38,13 +42,13 @@ export async function executeAbility(actor, target, ability, notes = []) {
     }
 
     switch (handler) {
-        case "kick": return await strikeAbility(actor, target, ability, notes, { damage: 5 });
+        case "kick":
+        case "crescent-kick":
+        case "flying-kick":
+        case "round-kick":
+        case "tiger-claw": return await martialStrikeAbility(actor, target, ability, notes);
         case "bash": return await strikeAbility(actor, target, ability, notes, { damage: 8, interrupt: true });
         case "slam": return await strikeAbility(actor, target, ability, notes, { damage: 10, stun: true });
-        case "crescent-kick": return await strikeAbility(actor, target, ability, notes, { damage: 12 });
-        case "flying-kick": return await strikeAbility(actor, target, ability, notes, { damage: 15 });
-        case "round-kick": return await strikeAbility(actor, target, ability, notes, { damage: 10 });
-        case "tiger-claw": return await strikeAbility(actor, target, ability, notes, { damage: 14 });
         
         case "backstab": return await backstabAbility(actor, target, ability, notes);
         
@@ -94,22 +98,134 @@ async function strikeAbility(actor, target, ability, notes, opts = {}) {
 }
 
 /**
- * Backstab: positional crit — requires behind or concealed.
+ * Level scaling for the strike abilities (user ruling 2026-10-21).
+ * Bands: 1-20 / 21-50 / 51-80 / 81-110 / 111+.
+ * Backstab: OB +10/+20/+25/+30/+40, damage x2/x2/x3/x3/x4.
+ * Monk martial strikes: same OB bands, x2 hits from level 51.
+ */
+export function backstabScaleForLevel(level) {
+    const lv = Math.max(1, Number(level) || 1);
+    if (lv <= 20) return { obBonus: 10, damageMultiplier: 2 };
+    if (lv <= 50) return { obBonus: 20, damageMultiplier: 2 };
+    if (lv <= 80) return { obBonus: 25, damageMultiplier: 3 };
+    if (lv <= 110) return { obBonus: 30, damageMultiplier: 3 };
+    return { obBonus: 40, damageMultiplier: 4 };
+}
+
+export function martialStrikeScaleForLevel(level) {
+    const lv = Math.max(1, Number(level) || 1);
+    if (lv <= 20) return { obBonus: 10, damageMultiplier: 1 };
+    if (lv <= 50) return { obBonus: 20, damageMultiplier: 1 };
+    if (lv <= 80) return { obBonus: 25, damageMultiplier: 2 };
+    if (lv <= 110) return { obBonus: 30, damageMultiplier: 2 };
+    return { obBonus: 40, damageMultiplier: 2 };
+}
+
+function actorLevel(actor) {
+    return Math.max(1, Number(actor?.system?.attributes?.level?.value)
+        || Number(actor?.system?.character?.level) || 1);
+}
+
+function targetTokenOf(target) {
+    try { return target?.getActiveTokens?.()[0] ?? null; } catch (e) { return null; }
+}
+
+/**
+ * Monk martial strikes: real attacks on the MA Strikes table through
+ * the normal combat pipeline. OB = Hand to Hand / Martial Arts skill
+ * bonus + the level-scaled bonus; hits doubled from level 51.
+ */
+async function martialStrikeAbility(actor, target, ability, notes) {
+    if (!target) {
+        notes.push(`<em>${esc(ability.name)}: no target.</em>`);
+        return;
+    }
+    try {
+        const { rollWeaponAttack } = await import("./combat-rolls.js");
+        const scale = martialStrikeScaleForLevel(actorLevel(actor));
+        const synthetic = {
+            _id: `ability-${ability.id || "strike"}`,
+            id: `ability-${ability.id || "strike"}`,
+            name: ability.name,
+            type: "weapon",
+            system: {
+                type: "hand-to-hand",
+                attackTable: "MA Strikes",
+                obMod: 0,
+                damageMod: 0,
+                location: "equipped",
+                equipped: true
+            }
+        };
+        const token = targetTokenOf(target);
+        const options = {
+            obBonus: scale.obBonus,
+            obBonusLabel: ability.name,
+            ...(token ? { targetToken: token } : {})
+        };
+        if (scale.damageMultiplier > 1) {
+            options.damageMultiplier = scale.damageMultiplier;
+            options.damageMultiplierLabel = ability.name;
+        }
+        await rollWeaponAttack(actor, synthetic, options);
+        notes.push(`<em>${esc(ability.name)} resolved on the MA Strikes table.</em>`);
+    } catch (e) {
+        console.error("EQRMSS | Martial strike failed", e);
+        notes.push(`<em>${esc(ability.name)} failed to resolve.</em>`);
+    }
+}
+
+/**
+ * The actor's readied weapon for Backstab: the current bandolier
+ * set's right hand, then left, then any worn weapon.
+ */
+async function readiedWeapon(actor) {
+    const items = [...(actor?.items?.contents ?? actor?.items ?? [])];
+    const byId = (id) => items.find(i => i.id === id || i._id === id) ?? null;
+    try {
+        const band = actor?.getFlag?.("eqrmss", "bandolier");
+        const set = band?.sets?.[Number(band?.current) || 0];
+        for (const id of [set?.right, set?.left]) {
+            const it = id ? byId(id) : null;
+            if (it) return it;
+        }
+    } catch (e) { /* fall through to the worn scan */ }
+    try {
+        const { isWorn } = await import("../utils/equipment/equipment-utils.js");
+        return items.find(i => isWorn(i) && (i.system?.attackTable || i.type === "weapon")) ?? null;
+    } catch (e) { return null; }
+}
+
+/**
+ * Backstab: the rogue's readied-weapon attack with a level-scaled
+ * OB bonus and damage multiplier (user ruling 2026-10-21).
  */
 async function backstabAbility(actor, target, ability, notes) {
     if (!target) {
         notes.push(`<em>${esc(ability.name)}: no target.</em>`);
         return;
     }
-    // Position check would go here (behind/concealed)
-    // For now, apply with crit bonus
+    const weapon = await readiedWeapon(actor);
+    if (!weapon) {
+        notes.push(`<em>${esc(ability.name)}: no readied weapon.</em>`);
+        try { ui?.notifications?.warn?.(`EQRMSS | ${ability.name}: no readied weapon.`); } catch (e) {}
+        return;
+    }
     try {
-        const { applyCapstoneDamage } = await import("./capstone-effects.js");
-        const damage = 20; // Base backstab damage
-        await applyCapstoneDamage(target, damage, "physical", notes, actor);
-        notes.push(`<em>${esc(actor.name)} backstabs ${esc(target.name)} for ${damage} (critical opportunity).</em>`);
+        const { rollWeaponAttack } = await import("./combat-rolls.js");
+        const scale = backstabScaleForLevel(actorLevel(actor));
+        const token = targetTokenOf(target);
+        await rollWeaponAttack(actor, weapon, {
+            obBonus: scale.obBonus,
+            obBonusLabel: "backstab",
+            damageMultiplier: scale.damageMultiplier,
+            damageMultiplierLabel: "backstab",
+            ...(token ? { targetToken: token } : {})
+        });
+        notes.push(`<em>${esc(actor.name)} backstabs with ${esc(weapon.name)} (+${scale.obBonus} OB, x${scale.damageMultiplier} hits).</em>`);
     } catch (e) {
         console.error("EQRMSS | Backstab failed", e);
+        notes.push(`<em>${esc(ability.name)} failed to resolve.</em>`);
     }
 }
 
