@@ -56,6 +56,7 @@ import {
 } from "./base-spell.js";
 import { resolveBallCast } from "./ball-spell.js";
 import { rollWeaponAttack } from "../combat/combat-rolls.js";
+import { resolveTableAttack, tableForElement } from "../combat/table-resolver.js";
 import { applyHealingSpell, checkHitThresholds, activeStun } from "../combat/crit-conditions.js";
 import {
     getCastTimeMode, waitRoundsFor, checkRange,
@@ -163,16 +164,29 @@ async function applyRegenBuff(caster, spellItem, durationFactor = 1) {
             continue;
         }
         const list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
-        list.push({
-            kind: "regen",
-            pool: isManaRegen ? "mana" : "hits",
-            amount, roundsLeft: effRounds,
-            label: name, source: "spell"
-        });
+        if (isManaRegen) {
+            list.push({
+                kind: "regen",
+                pool: "mana",
+                amount, roundsLeft: effRounds,
+                label: name, source: "spell"
+            });
+            notes.push(`${esc(target.name)} regenerates ${amount} mana/round for ${effRounds} rounds (${esc(name)}).`);
+        } else {
+            // Tables routing (2026-10-21 ruling): hits HoTs carry
+            // their table + the caster's Directed Spells OB; each
+            // tick heals the table's hits result (tickConditions).
+            const { attackTable } = tableForElement(eff.element);
+            const ob = directedSpellsOB(caster);
+            list.push({
+                kind: "regen",
+                pool: "hits",
+                amount: 0, table: attackTable, ob, roundsLeft: effRounds,
+                label: name, source: "spell"
+            });
+            notes.push(`${esc(target.name)} regenerates on the ${attackTable} table at OB ${ob}/round for ${effRounds} rounds (${esc(name)}).`);
+        }
         await target.update({ "system.status.spellEffects": list });
-        notes.push(isManaRegen
-            ? `${esc(target.name)} regenerates ${amount} mana/round for ${effRounds} rounds (${esc(name)}).`
-            : `${esc(target.name)} regenerates ${amount} hits/round for ${effRounds} rounds (${esc(name)}).`);
     }
     return notes.length ? `<p><em>${notes.join("<br>")}</em></p>` : "";
 }
@@ -559,10 +573,17 @@ async function castSpellInner(actor, spellItem, opts = {}) {
         let healLine = "";
         // Spells with both heal and buffs (e.g., Inner Fire) apply buffs too (2026-10-07 fix).
         const healBuffNote = await applySpellBuffs(actor, spellItem, target, worn.durationFactor);
-        // Phase 5: Improved Healing (and kin) scale the heal
-        // amount; with no worn effects this is exactly cls.amount.
+        // Tables routing (2026-10-21 ruling): the heal amount is
+        // the table's hits result at the caster's Directed Spells
+        // OB — no DB, AT 1 column, no table crits (healing is not
+        // an attack on armor). The Phase 5 Improved Healing
+        // factor still scales the result. Falls back to the EQ
+        // amount only when the tables are not loaded.
         // Always round (2026-10-07 fix: fractional heals left float garbage).
-        const healAmount = Math.round(cls.amount * (worn.healingFactor || 1));
+        const healEffect = spellEffectsOf(spellItem).find(e => e?.type === "heal") ?? {};
+        const healRes = resolveTableAttack({ element: healEffect.element, ob: directedSpellsOB(actor), target, allowCrit: false, noDefense: true, atOverride: 1 });
+        const healAmount = Math.round((healRes ? healRes.total : cls.amount) * (worn.healingFactor || 1));
+        const healTableNote = healRes ? ` (${healRes.table} table: roll ${healRes.roll} + OB ${healRes.ob} = ${healRes.net} → ${healRes.hits} hits)` : "";
         if (canTouch) {
             // Per ruling, ANY direct healing magic stops bleeding and
             // clears the death timer; then hits are restored.
@@ -571,7 +592,7 @@ async function castSpellInner(actor, spellItem, opts = {}) {
             const restored = Math.min(healAmount, cur);
             await target.update({ "system.hits.value": Math.round(cur - restored) });
             await checkHitThresholds(target);
-            healLine = `<p><em>${esc(target.name)} recovers ${restored} hits (${cur} → ${cur - restored}).</em></p>`;
+            healLine = `<p><em>${esc(target.name)} recovers ${restored} hits (${cur} → ${cur - restored})${healTableNote}.</em></p>`;
             // Healing aggro (2026-10-08): mobs with the heal target on
             // their hate list gain hate towards the healer.
             if (restored > 0 && target.id !== actor.id) {

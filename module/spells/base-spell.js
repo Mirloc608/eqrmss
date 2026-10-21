@@ -19,15 +19,21 @@
 // defender's stat bonus follows the SPELL'S REALM (15.6):
 // Essence -> Empathy, Channeling -> Intuition, Mentalism ->
 // Presence. EQ's per-effect resist/resistMod fields are not
-// used. EQ effect amounts are the spell's described effect
-// (15.5: the target "suffers the results given in the
-// description of that spell"), exactly as heal amounts are.
+// used.
+//
+// RULING (user, 2026-10-21): damage and lifetap amounts no
+// longer come from the EQ description. On a failed RR the
+// amount resolves on the RMSS tables (module/combat/
+// table-resolver.js) at the caster's Directed Spells OB —
+// the same scale as bolt spells. DoTs register their table
+// + OB and tick on it. Controls/debuffs are unchanged.
 // ============================================================
 
 import { combatCard } from "../combat/chat-card.js";
-import { checkHitThresholds } from "../combat/crit-conditions.js";
+import { checkHitThresholds, applyCritConditions } from "../combat/crit-conditions.js";
 import { casterRealm, resolveSpellFailure, wornArmorAt, helmetKind } from "./spell-failure.js";
-import { CASTING_STAT_BY_CLASS, casterLevelOf, statBonusFor, classifySpell } from "./spell-mapping.js";
+import { CASTING_STAT_BY_CLASS, casterLevelOf, statBonusFor, classifySpell, directedSpellsOB } from "./spell-mapping.js";
+import { resolveTableAttack, tableForElement } from "../combat/table-resolver.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { baseActorOf } from "./status-wiring.js";
 
@@ -343,6 +349,31 @@ async function addHits(target, n) {
 }
 
 /**
+ * Tables routing (2026-10-21 ruling): resolve a base spell's
+ * damage on the tables at the caster's Directed Spells OB —
+ * crits allowed on the initial application. Returns
+ * { amount, crits, note }; amount includes crit bonus hits.
+ * Falls back to the EQ amount only when the tables are not
+ * loaded (resolveTableAttack returns null).
+ */
+function tableDamageFor(caster, target, eff) {
+    const res = resolveTableAttack({ element: eff?.element, ob: directedSpellsOB(caster), target, allowCrit: true });
+    if (!res) return { amount: rollAmount(eff), crits: [], note: "" };
+    const critText = res.crits.map(c => ` Critical ${c.severity} (${c.type}): ${c.text}`).join("");
+    return {
+        amount: res.total,
+        crits: res.crits,
+        note: `${res.table} table: roll ${res.roll} + OB ${res.ob} − DB ${res.db} = ${res.net} → ${res.hits} hits${res.critBonus ? ` + ${res.critBonus} critical` : ""}.${critText}`
+    };
+}
+
+async function applyTableCrits(caster, target, crits) {
+    for (const c of crits ?? []) {
+        try { await applyCritConditions(target, caster, c.text); } catch (e) { /* non-fatal: bonus hits already counted */ }
+    }
+}
+
+/**
  * Apply a base spell's payload to a target that failed its RR.
  * Returns an HTML note for the cast card. DoTs and timed
  * controls/debuffs land in system.status.dots /
@@ -360,31 +391,48 @@ export async function applyBaseSpellEffect(caster, target, classification, spell
     if (subtype === "damage") {
         const amount = effectAmount(eff);
         if (amount <= 0) return `<p><em>${esc(name)} takes effect on ${tName} (no damage amount recorded).</em></p>`;
-        const after = await addHits(target, amount);
-        return `<p><em>${tName} takes ${amount} hits (${after} concussion hits).</em></p>`;
+        const td = tableDamageFor(caster, target, eff);
+        const after = await addHits(target, td.amount);
+        await applyTableCrits(caster, target, td.crits);
+        return `<p><em>${tName} takes ${td.amount} hits (${after} concussion hits). ${td.note}</em></p>`;
     }
 
     if (subtype === "lifetap") {
-        const amount = rollAmount(eff);
+        const td = tableDamageFor(caster, target, eff);
+        const amount = td.amount;
         const after = await addHits(target, amount);
+        await applyTableCrits(caster, target, td.crits);
         const cCur = Number(caster.system?.hits?.value) || 0;
         const healed = Math.min(amount, cCur);
         await caster.update({ "system.hits.value": cCur - healed });
         await checkHitThresholds(caster);
-        return `<p><em>${tName} takes ${amount} hits (${after} concussion hits); ${esc(caster.name)} drains ${healed} hits (${cCur} → ${cCur - healed}).</em></p>`;
+        return `<p><em>${tName} takes ${amount} hits (${after} concussion hits); ${esc(caster.name)} drains ${healed} hits (${cCur} → ${cCur - healed}). ${td.note}</em></p>`;
     }
 
     if (subtype === "dot") {
         const rounds = durationRounds(eff.duration);
-        const per = rollAmount(eff);
         if (rounds == null) {
-            const after = await addHits(target, per);
-            return `<p><em>${tName} takes ${per} hits (${after} concussion hits).</em></p>`;
+            const td = tableDamageFor(caster, target, eff);
+            const after = await addHits(target, td.amount);
+            await applyTableCrits(caster, target, td.crits);
+            return `<p><em>${tName} takes ${td.amount} hits (${after} concussion hits). ${td.note}</em></p>`;
         }
+        // Tables routing: the entry carries its table + the
+        // caster's Directed Spells OB; ticks resolve on the table
+        // (hits only) in tickConditions. casterId also enables
+        // the capstone DoT hooks keyed on it.
+        const { attackTable, critType } = tableForElement(eff.element);
+        const ob = directedSpellsOB(caster);
         const dots = [...(Array.isArray(target.system?.status?.dots) ? target.system.status.dots : [])];
-        dots.push({ name, element: String(eff.element ?? ""), min: Number(eff.min ?? eff.amount) || 0, max: Number(eff.max ?? eff.amount) || 0, roundsLeft: rounds });
+        dots.push({
+            name, element: String(eff.element ?? ""), damageType: String(eff.element ?? ""),
+            min: Number(eff.min ?? eff.amount) || 0, max: Number(eff.max ?? eff.amount) || 0,
+            table: attackTable, critType, ob,
+            casterId: caster?.id ?? caster?._id ?? null,
+            roundsLeft: rounds
+        });
         await target.update({ "system.status.dots": dots });
-        return `<p><em>${esc(name)} settles on ${tName}: ${Number(eff.min ?? eff.amount) || 0}${Number(eff.max ?? eff.amount) !== Number(eff.min ?? eff.amount) ? `-${Number(eff.max ?? eff.amount)}` : ""} hits/round for ${rounds} rounds.</em></p>`;
+        return `<p><em>${esc(name)} settles on ${tName}: ${attackTable} table at OB ${ob}/round for ${rounds} rounds.</em></p>`;
     }
 
     if (subtype === "control") {
