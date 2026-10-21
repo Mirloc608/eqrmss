@@ -535,7 +535,11 @@ export class EQRMSSCharacterCreationWizardFinalizer {
    * lightweight embedded Item documents, fail-soft, never blocks creation.
    *
    * Race overrides apply after the class kit (e.g. any ogre character's
-   * chest piece becomes the Worn Hide Tunic). Money gp is fixed per kit;
+   * chest piece becomes the Worn Hide Tunic). An override key of
+   * "<race>:<class>" scopes the renames to one class — an Iksar
+   * shadowknight's Calcified Bone starter armor carries the Dreadscale
+   * names (user ruling 2026-10-21: Dreadscale is Calcified Bone with
+   * the Iksar naming). Money gp is fixed per kit;
    * the cp die (e.g. "1d100") is rolled here.
    */
   async #grantStarterKit(actor, cls, race) {
@@ -559,7 +563,10 @@ export class EQRMSSCharacterCreationWizardFinalizer {
       const raceKey =
         String(race?.id ?? race?._id ?? "").toLowerCase().replace(/^eqrmss-/, "") ||
         String(race?.name ?? "").toLowerCase();
-      const overrides = (data.raceOverrides ?? {})[raceKey] ?? {};
+      // Race-wide renames, with class-scoped renames ("<race>:<class>")
+      // winning per slot.
+      const allOverrides = data.raceOverrides ?? {};
+      const overrides = { ...(allOverrides[raceKey] ?? {}), ...(allOverrides[`${raceKey}:${key}`] ?? {}) };
 
       const items = [];
       for (const entry of kit.items ?? []) {

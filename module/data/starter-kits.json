@@ -1,5 +1,5 @@
 {
-  "_comment": "EQRMSS class starter kits \u2014 granted by the character creation wizard finalizer. One kit per class (user-locked 2026-09-29). Money is a house rule (not historical): gp is fixed, cp is rolled. raceOverrides apply after the class kit: { raceKey: { Slot: 'Replacement name' } }. Race keys are the race id lowercased with any 'eqrmss-' prefix stripped.",
+  "_comment": "EQRMSS class starter kits \u2014 granted by the character creation wizard finalizer. One kit per class (user-locked 2026-09-29). Money is a house rule (not historical): gp is fixed, cp is rolled. raceOverrides apply after the class kit: { raceKey: { Slot: 'Replacement name' } }; a '<raceKey>:<classKey>' entry scopes the renames to one class (iksar shadowknights: Dreadscale-named Calcified Bone starter armor). Race keys are the race id lowercased with any 'eqrmss-' prefix stripped.",
   "bard": {
     "items": [
       {
@@ -535,6 +535,15 @@
     }
   },
   "raceOverrides": {
+    "iksar:shadowknight": {
+      "Arms": "Dreadscale Vambraces",
+      "Chest": "Dreadscale Breastplate",
+      "Feet": "Dreadscale Boots",
+      "Hands": "Dreadscale Gauntlets",
+      "Head": "Dreadscale Helm",
+      "Legs": "Dreadscale Greaves",
+      "Wrist": "Dreadscale Bracer"
+    },
     "ogre": {
       "Chest": "Worn Hide Tunic"
     }
