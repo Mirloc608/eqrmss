@@ -636,6 +636,16 @@ export class EQRMSSCharacterCreationWizardFinalizer {
           for (const key of ["at", "maneuverPenalty", "weight", "armorMaterial", "armorCondition", "notes"]) {
             if (entry[key] !== undefined) system[key] = entry[key];
           }
+          // Identity fields (slot assignment + category) come from the
+          // armor composer, validated like a catalog add: without them
+          // the piece has no armorLocation/armorCategory and the
+          // defense engine cannot place it. The entry's declared stats
+          // above stay authoritative.
+          const identity = this.#composeKitArmor(entry);
+          if (Object.keys(identity).length) {
+            Object.assign(system, identity);
+            delete system.slot;
+          }
         }
         if (Object.keys(system).length) item.system = system;
         items.push(item);
@@ -728,6 +738,45 @@ export class EQRMSSCharacterCreationWizardFinalizer {
       return system;
     } catch (error) {
       console.warn("EQRMSS | Finalizer | kit weapon compose failed (non-fatal)", error);
+      return {};
+    }
+  }
+
+  /**
+   * Validate a kit armor piece against the armor composer and return
+   * its identity fields (location, category, material, condition,
+   * quality, thickness) — the fields the defense engine and the armor
+   * sheet key off. The category comes from the entry when declared,
+   * else the material's first category. Stats are NOT taken from the
+   * compose: kit entries declare their own (starter clothing is
+   * deliberately AT 1 with no maneuver penalty). Fail-soft: returns
+   * {} when the composer is unavailable or the combination is
+   * invalid, leaving the entry's declared fields as granted.
+   */
+  #composeKitArmor(entry) {
+    try {
+      const armor = game.eqrmss?.armor;
+      if (!armor?.compose) return {};
+      const materialId = String(entry.armorMaterial ?? "");
+      const locationId = String(entry.slot ?? "").toLowerCase();
+      if (!materialId || !locationId) return {};
+      let categoryId = String(entry.armorCategory ?? "");
+      if (!categoryId) {
+        const mat = (armor.options?.().materials ?? []).find(m => m.id === materialId);
+        categoryId = String((mat?.categories ?? [])[0] ?? "");
+      }
+      if (!categoryId) return {};
+      const composed = armor.compose(locationId, categoryId, materialId, String(entry.armorCondition ?? "normal"));
+      return {
+        armorLocation: composed.locationId,
+        armorCategory: composed.categoryId,
+        armorMaterial: composed.materialId,
+        armorCondition: composed.conditionId,
+        armorQuality: composed.qualityId,
+        armorThickness: composed.thicknessId
+      };
+    } catch (error) {
+      console.warn("EQRMSS | Finalizer | kit armor compose failed (non-fatal)", error);
       return {};
     }
   }

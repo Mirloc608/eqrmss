@@ -455,7 +455,10 @@ export class EQRMSSNPCFinalizer {
       const raceKey =
         String(race?.id ?? race?._id ?? "").toLowerCase().replace(/^eqrmss-/, "") ||
         String(race?.name ?? "").toLowerCase();
-      const overrides = (data.raceOverrides ?? {})[raceKey] ?? {};
+      // Race-wide renames, with class-scoped renames ("<race>:<class>")
+      // winning per slot — mirrors the character creation finalizer.
+      const allOverrides = data.raceOverrides ?? {};
+      const overrides = { ...(allOverrides[raceKey] ?? {}), ...(allOverrides[`${raceKey}:${key}`] ?? {}) };
 
       const items = [];
       for (const entry of kit.items ?? []) {
@@ -485,6 +488,14 @@ export class EQRMSSNPCFinalizer {
         if (entry.type === "armor") {
           for (const k of ["at", "maneuverPenalty", "weight", "armorMaterial", "armorCondition", "notes"]) {
             if (entry[k] !== undefined) system[k] = entry[k];
+          }
+          // Identity fields (slot assignment + category) from the
+          // armor composer, mirroring the character creation
+          // finalizer; the entry's declared stats stay authoritative.
+          const identity = this.#composeKitArmor(entry);
+          if (Object.keys(identity).length) {
+            Object.assign(system, identity);
+            delete system.slot;
           }
         }
         if (Object.keys(system).length) item.system = system;
@@ -549,6 +560,39 @@ export class EQRMSSNPCFinalizer {
       return system;
     } catch (error) {
       console.warn("EQRMSS | NPC build | kit weapon compose failed (non-blocking)", error);
+      return {};
+    }
+  }
+
+  /** Validate a kit armor piece against the armor composer and
+   *  return its identity fields (location, category, material,
+   *  condition, quality, thickness). Stats are NOT taken from the
+   *  compose — kit entries declare their own. Mirrors the character
+   *  creation finalizer. Fail-soft: {} when unavailable/invalid. */
+  #composeKitArmor(entry) {
+    try {
+      const armor = game.eqrmss?.armor;
+      if (!armor?.compose) return {};
+      const materialId = String(entry.armorMaterial ?? "");
+      const locationId = String(entry.slot ?? "").toLowerCase();
+      if (!materialId || !locationId) return {};
+      let categoryId = String(entry.armorCategory ?? "");
+      if (!categoryId) {
+        const mat = (armor.options?.().materials ?? []).find(m => m.id === materialId);
+        categoryId = String((mat?.categories ?? [])[0] ?? "");
+      }
+      if (!categoryId) return {};
+      const composed = armor.compose(locationId, categoryId, materialId, String(entry.armorCondition ?? "normal"));
+      return {
+        armorLocation: composed.locationId,
+        armorCategory: composed.categoryId,
+        armorMaterial: composed.materialId,
+        armorCondition: composed.conditionId,
+        armorQuality: composed.qualityId,
+        armorThickness: composed.thicknessId
+      };
+    } catch (error) {
+      console.warn("EQRMSS | NPC build | kit armor compose failed (non-blocking)", error);
       return {};
     }
   }

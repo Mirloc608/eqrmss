@@ -685,7 +685,11 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
         const data = await resp.json();
         const raw = data[classKey];
         if (raw) {
-          const overrides = (data.raceOverrides ?? {})[raceKey] ?? {};
+          // Race-wide renames, with class-scoped renames
+          // ("<race>:<class>") winning per slot — mirrors the
+          // finalizer's #grantStarterKit lookup.
+          const allOverrides = data.raceOverrides ?? {};
+          const overrides = { ...(allOverrides[raceKey] ?? {}), ...(allOverrides[`${raceKey}:${classKey}`] ?? {}) };
           kit = {
             classKey, raceKey,
             money: raw.money ?? {},

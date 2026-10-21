@@ -78,7 +78,7 @@ export async function normalizeCatalogData(data) {
             if (category && sys.material) {
                 const { loadArmorData, composeArmor } = await import("../../data/armor/armor-composer.js");
                 await loadArmorData();
-                const composed = composeArmor(slot, category, String(sys.material), "normal");
+                const composed = composeArmor(slot, category, String(sys.material), String(sys.armorCondition ?? "normal"));
                 at = Number(composed.armorType) || at;
                 maneuverPenalty = Number(composed.maneuverPenalty) || 0;
                 quicknessPenalty = Number(composed.quicknessPenalty) || 0;
@@ -90,7 +90,7 @@ export async function normalizeCatalogData(data) {
         sys.armorLocation = slot;
         sys.armorCategory = category;
         sys.armorMaterial = String(sys.material ?? "");
-        sys.armorCondition = "normal";
+        sys.armorCondition = String(sys.armorCondition ?? "normal");
         sys.armorQuality = "average";
         sys.armorThickness = "standard";
         sys.at = at;
