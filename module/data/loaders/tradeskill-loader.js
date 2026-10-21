@@ -58,21 +58,52 @@ export const EQRMSSRecipeLoader = {
         let loaded = 0;
         let invalid = 0;
 
+        const ingest = (list, label) => {
+            for (const r of list) {
+                if (!isValidRecipe(r)) {
+                    invalid++;
+                    console.warn(`EQRMSS | Invalid recipe in ${label}:`, r?.id);
+                    continue;
+                }
+                this.recipes.push(r);
+                this.byId[r.id] = r;
+                (this.bySkill[r.skill] ??= []).push(r);
+                loaded++;
+            }
+        };
+
+        // Optional data service: when the "dataServiceUrl" world setting
+        // is configured, the service is the recipe source of truth and
+        // the bundled files below are only a fallback.
+        let serviceUrl = "";
+        try { serviceUrl = game?.settings?.get("eqrmss", "dataServiceUrl") || ""; } catch { serviceUrl = ""; }
+        if (serviceUrl) {
+            try {
+                const base = String(serviceUrl).replace(/\/+$/, "");
+                const ctrl = new AbortController();
+                const timer = setTimeout(() => ctrl.abort(), 15000);
+                const r = await fetch(`${base}/api/v1/recipes`, { signal: ctrl.signal });
+                clearTimeout(timer);
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                const data = await r.json();
+                if (!Array.isArray(data)) throw new Error("unexpected recipes shape");
+                ingest(data, "service");
+                console.log(`EQRMSS | Recipes loaded: ${loaded} (invalid: ${invalid}) source=service`);
+                return { loaded, invalid };
+            } catch (err) {
+                console.warn(`EQRMSS | data service unavailable (${err.message}); falling back to bundled recipe files`);
+                this.recipes = [];
+                this.byId = {};
+                this.bySkill = {};
+                loaded = 0;
+                invalid = 0;
+            }
+        }
+
         for (const file of RECIPE_FILES) {
             try {
                 const data = await fetchJson(`${RECIPE_BASE_PATH}/${file}`);
-                const list = Array.isArray(data) ? data : [];
-                for (const r of list) {
-                    if (!isValidRecipe(r)) {
-                        invalid++;
-                        console.warn(`EQRMSS | Invalid recipe in ${file}:`, r?.id);
-                        continue;
-                    }
-                    this.recipes.push(r);
-                    this.byId[r.id] = r;
-                    (this.bySkill[r.skill] ??= []).push(r);
-                    loaded++;
-                }
+                ingest(Array.isArray(data) ? data : [], file);
             } catch (e) {
                 console.warn(`EQRMSS | Recipe file failed: ${file}`, e.message);
             }

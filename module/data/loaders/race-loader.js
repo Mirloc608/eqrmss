@@ -101,6 +101,30 @@ async function loadRaces() {
         
         console.log(`EQRMSS | Races loaded: ${Object.keys(RACES).length} [${Object.keys(RACES).sort().join(', ')}]`);
 
+        // Optional data service: pre-fill bestiary entries from the
+        // service. The file scan below never overwrites existing keys,
+        // so service entries win and unlisted files still load.
+        try {
+            const svcBase = game?.settings?.get("eqrmss", "dataServiceUrl") || "";
+            if (svcBase) {
+                const base = String(svcBase).replace(/\/+$/, "");
+                const ctrl = new AbortController();
+                const timer = setTimeout(() => ctrl.abort(), 8000);
+                const r = await fetch(`${base}/api/v1/bestiary`, { signal: ctrl.signal });
+                clearTimeout(timer);
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                const data = await r.json();
+                if (!data || typeof data !== "object" || Array.isArray(data)) throw new Error("unexpected bestiary shape");
+                let added = 0;
+                for (const [key, json] of Object.entries(data)) {
+                    if (json && !RACES[key]) { RACES[key] = json; added++; }
+                }
+                console.log(`EQRMSS | Race Loader | Bestiary from data service: ${added} creatures`);
+            }
+        } catch (err) {
+            console.warn(`EQRMSS | Race Loader | bestiary service unavailable (${err.message}); using bundled creature files`);
+        }
+
         // Creatures & Treasures bestiary: module/data/creatures/<type>/<name>.json
         // races/ stays PC-sentient-only; creatures/ holds every NPC entry
         // (including NPC versions of PC races). types.json and attack-packages.json

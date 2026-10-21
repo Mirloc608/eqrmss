@@ -146,4 +146,13 @@ export function registerEQRMSSSettings() {
       10: "10 — Generous (650 total, completionist)"
     }
   });
+
+  game.settings.register("eqrmss", "dataServiceUrl", {
+    name: "Data Service URL",
+    hint: "Base URL of the EQRMSS data service (e.g. https://foundry.dmathome.com/eqrmss-data). When set, the item catalog, tradeskill recipes, and bestiary load from the service and the bundled data files are only a fallback. Leave empty to use the bundled files only. Takes effect on the next world load.",
+    scope: "world",
+    config: true,
+    type: String,
+    default: ""
+  });
 }

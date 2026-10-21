@@ -51,6 +51,62 @@ export const EQRMSSItemLoader = {
         const byLevel = {};
         let loaded = 0, invalid = 0, files = 0;
 
+        // Ingest one catalog object (keyed by item name) from any source.
+        const ingest = (data) => {
+            const items = Object.values(data);
+            for (const item of items) {
+                if (!isValidItem(item)) {
+                    invalid++;
+                    continue;
+                }
+
+                // Generate ID from name if not present
+                const id = item.id || item.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+                if (byId[id]) {
+                    console.warn(`EQRMSS | Item Loader | duplicate id "${id}", keeping first`);
+                    continue;
+                }
+
+                byId[id] = item;
+                loaded++;
+
+                const slot = item.system.slot;
+                if (typeof slot === "string" && slot) (bySlot[slot] = bySlot[slot] || []).push(item);
+
+                const level = item.system.level || 1;
+                (byLevel[level] = byLevel[level] || []).push(item);
+            }
+        };
+
+        // Optional data service: when the "dataServiceUrl" world setting
+        // is configured, the service is the catalog source of truth and
+        // the bundled files below are only a fallback.
+        let serviceUrl = "";
+        try { serviceUrl = game?.settings?.get("eqrmss", "dataServiceUrl") || ""; } catch { serviceUrl = ""; }
+        if (serviceUrl) {
+            try {
+                const base = String(serviceUrl).replace(/\/+$/, "");
+                const ctrl = new AbortController();
+                const timer = setTimeout(() => ctrl.abort(), 5000);
+                const r = await fetch(`${base}/api/v1/items`, { signal: ctrl.signal });
+                clearTimeout(timer);
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                const data = await r.json();
+                if (!data || typeof data !== "object" || Array.isArray(data)) throw new Error("unexpected catalog shape");
+                ingest(data);
+                files = 1;
+                this._store(byId, bySlot, byLevel);
+                console.log(`EQRMSS | Item Loader | files=${files} loaded=${loaded} invalid=${invalid} source=service`);
+                return this;
+            } catch (err) {
+                console.warn(`EQRMSS | Item Loader | data service unavailable (${err.message}); falling back to bundled files`);
+                for (const k of Object.keys(byId)) delete byId[k];
+                for (const k of Object.keys(bySlot)) delete bySlot[k];
+                for (const k of Object.keys(byLevel)) delete byLevel[k];
+                loaded = 0; invalid = 0; files = 0;
+            }
+        }
+
         try {
             const foundryPicker = (typeof foundry !== "undefined")
                 ? foundry?.applications?.apps?.FilePicker?.implementation
@@ -75,29 +131,7 @@ export const EQRMSSItemLoader = {
                 }
 
                 // Files are objects keyed by item name
-                const items = Object.values(data);
-                for (const item of items) {
-                    if (!isValidItem(item)) {
-                        invalid++;
-                        continue;
-                    }
-
-                    // Generate ID from name if not present
-                    const id = item.id || item.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-                    if (byId[id]) {
-                        console.warn(`EQRMSS | Item Loader | duplicate id "${id}", keeping first`);
-                        continue;
-                    }
-
-                    byId[id] = item;
-                    loaded++;
-
-                    const slot = item.system.slot;
-                    if (typeof slot === "string" && slot) (bySlot[slot] = bySlot[slot] || []).push(item);
-
-                    const level = item.system.level || 1;
-                    (byLevel[level] = byLevel[level] || []).push(item);
-                }
+                ingest(data);
             }
         } catch (err) {
             console.error("EQRMSS | Item Loader | failed:", err);
