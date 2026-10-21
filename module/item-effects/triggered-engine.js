@@ -33,9 +33,56 @@ function parseCastDelayMs(castTime) {
 }
 
 /**
+ * Clicky targeting (user ruling 2026-10-21): a clicky is a
+ * targeted cast. The earlier rules — wearer for beneficial
+ * clickies (2026-10-06) and canvas targets for offensive ones
+ * (2026-10-09) — tested only payload type "damage", so DoT,
+ * debuff and control clickies classified as "beneficial" and
+ * landed on the wearer: Engulfing Darkness DoT'ing its own
+ * wearer, a Complete Heal clicky healing the cleric instead
+ * of the dying ally it was clicked for. Disposition is now
+ * derived from the whole payload:
+ *   hostile — any payload that harms or controls its
+ *     recipient: requires canvas targets; NEVER falls back
+ *     to the wearer.
+ *   ally — heal / hot / protective payloads: canvas targets
+ *     when set (the wearer's own token included), otherwise
+ *     the wearer.
+ *   self — buffs, regen, utility and the rest: the wearer
+ *     (the 2026-10-06 ruling, preserved).
+ */
+const HOSTILE_PAYLOAD_TYPES = new Set([
+    "damage", "dot", "debuff", "stun", "snare", "root", "fear",
+    "mez", "charm", "mana-drain", "lifetap"
+]);
+const ALLY_PAYLOAD_TYPES = new Set(["heal", "hot", "damageshield", "absorb", "cure"]);
+
+export function clickyDisposition(effect) {
+    const types = (effect?.payload ?? []).map(p => String(p?.type ?? ""));
+    if (types.some(t => HOSTILE_PAYLOAD_TYPES.has(t))) return "hostile";
+    if (types.some(t => ALLY_PAYLOAD_TYPES.has(t))) return "ally";
+    return "self";
+}
+
+export function resolveClickyRecipients({ effect, actor, targets }) {
+    const disposition = clickyDisposition(effect);
+    const canvasActors = (targets ?? []).map(t => t?.actor ?? t).filter(Boolean);
+    if (disposition === "hostile") {
+        // Targets are taken as set — deliberately targeting your
+        // own token is your call; the defect was the NO-target
+        // fallback to the wearer, never an explicit target.
+        return { disposition, recipients: canvasActors, missingTarget: canvasActors.length === 0 };
+    }
+    if (disposition === "ally") {
+        return { disposition, recipients: canvasActors.length ? canvasActors : [actor], missingTarget: false };
+    }
+    return { disposition, recipients: [actor], missingTarget: false };
+}
+
+/**
  * Player-facing clicky activation: resolves the item's triggered effect
- * against the current targets (or the owning actor when nothing is
- * targeted), honors the catalog castTime, posts chat, and never costs
+ * against the clicky's targets (see clickyDisposition for who counts),
+ * honors the catalog castTime, posts chat, and never costs
  * mana. No-op with a note when there is nothing to fire.
  * @param {object} args { item } — an owned item document
  * @returns {object} { fired, effect?, results?, reason?, delayed? }
@@ -72,17 +119,16 @@ export async function activateClicky({ item }) {
         return { fired: false, reason: "no-charges" };
     }
 
-    // Target: wearer for beneficial clickies (ruling 2026-10-06), but
-    // offensive clickies (damage payload) target the current canvas
-    // targets instead (2026-10-09: Seawater Blast hit the wearer).
-    const isOffensive = Array.isArray(effect?.payload) &&
-        effect.payload.some(p => p?.type === "damage");
-    let recipients = [actor];
-    if (isOffensive) {
-        const canvasTargets = [...(game?.user?.targets ?? [])]
-            .map(t => t?.actor)
-            .filter(a => a && a?.id !== actor?.id);
-        if (canvasTargets.length > 0) recipients = canvasTargets;
+    // Target: a clicky is a targeted cast (2026-10-21 ruling —
+    // see clickyDisposition above). Hostile clickies require
+    // canvas targets and never fall back to the wearer; the
+    // refusal happens before any charge is consumed.
+    const { recipients, missingTarget } = resolveClickyRecipients({
+        effect, actor, targets: [...(game?.user?.targets ?? [])]
+    });
+    if (missingTarget) {
+        ui?.notifications?.warn(`"${itemName}" needs a target — target a token first.`);
+        return { fired: false, reason: "no-target", effectId };
     }
 
     // Clickies cost 0 mana — never deduct anything.
