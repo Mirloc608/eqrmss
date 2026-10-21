@@ -259,8 +259,15 @@ export function simulateBuild({ race, hitDie = 10, maxBaseHits = 150, costs, pro
       for (const key of NPC_STAT_KEYS) {
         const diff = potentials[key] - temps[key];
         if (diff <= 0) continue;
-        const { gain } = statGainFor(d100(), diff);
-        if (gain > 0) temps[key] = Math.min(potentials[key], temps[key] + gain);
+        const roll = d100();
+        const { gain, overstressed } = statGainFor(roll, diff);
+        if (overstressed) {
+          // Table 15.1.2 overstress (ruling 2026-10-20, per the user's
+          // table image): temporary decreases by twice the roll.
+          temps[key] = Math.max(1, temps[key] - 2 * roll);
+        } else if (gain > 0) {
+          temps[key] = Math.min(potentials[key], temps[key] + gain);
+        }
       }
     }
     let dp = 0;

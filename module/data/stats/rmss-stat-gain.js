@@ -11,9 +11,11 @@
  * never exceeds its potential.
  *
  * Rolls of 01–04 are "*" in the book (overstress) for every column.
- * Overstress handling is NOT implemented here — statGainFor returns
- * gain 0 with overstressed: true and the caller decides; see the
- * NPC wizard / level-up deliveries (ruling pending).
+ * Overstress handling lives with the callers — statGainFor returns
+ * gain 0 with overstressed: true. Ruling 2026-10-20 (per the user's
+ * table image): the temporary value decreases by twice the roll;
+ * implemented in module/progression/stat-gain.js (PC level-up) and
+ * module/apps/npc-build-engine.js (NPC build sim).
  */
 
 // Difference columns: [minDiff, maxDiff] per column index.
