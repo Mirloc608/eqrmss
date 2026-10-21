@@ -1,5 +1,5 @@
 {
-  "_comment": "EQRMSS class starter kits \u2014 granted by the character creation wizard finalizer. One kit per class (user-locked 2026-09-29). Money is a house rule (not historical): gp is fixed, cp is rolled. raceOverrides apply after the class kit: { raceKey: { Slot: 'Replacement name' } }; a '<raceKey>:<classKey>' entry scopes the renames to one class (iksar shadowknights: Dreadscale-named Calcified Bone starter armor). Race keys are the race id lowercased with any 'eqrmss-' prefix stripped.",
+  "_comment": "EQRMSS class starter kits \u2014 granted by the character creation wizard finalizer. One kit per class (user-locked 2026-09-29). Money is a house rule (not historical): gp is fixed, cp is rolled. raceOverrides apply after the class kit: each race has a starter set (names only - stats come from the class kit), { raceKey: { Slot: 'Set piece name', Primary: '<Set name>' } }; the Primary entry is the set name and kit weapons are granted as '<Set name> <weapon noun>'. A '<raceKey>:<classKey>' entry scopes renames to one class. Race keys are the race id lowercased with any 'eqrmss-' prefix stripped.",
   "bard": {
     "items": [
       {
@@ -535,17 +535,165 @@
     }
   },
   "raceOverrides": {
-    "iksar:shadowknight": {
+    "barbarian": {
+      "Arms": "Black Wolf Armplates",
+      "Chest": "Black Wolf Mail",
+      "Feet": "Black Wolf Boots",
+      "Hands": "Black Wolf Gloves",
+      "Head": "Black Wolf Crown",
+      "Legs": "Black Wolf Legplates",
+      "Primary": "Black Wolf",
+      "Wrist": "Black Wolf Bracers"
+    },
+    "dark-elf": {
+      "Arms": "Nightshade Vambraces",
+      "Chest": "Nightshade Breastplate",
+      "Feet": "Nightshade Boots",
+      "Hands": "Nightshade Gauntlets",
+      "Head": "Nightshade Helm",
+      "Legs": "Nightshade Greaves",
+      "Primary": "Nightshade",
+      "Wrist": "Nightshade Bracer"
+    },
+    "drakkin": {
+      "Arms": "Crescent Vambraces",
+      "Chest": "Crescent Breastplate",
+      "Feet": "Crescent Boots",
+      "Hands": "Crescent Gauntlets",
+      "Head": "Crescent Helm",
+      "Legs": "Crescent Greaves",
+      "Primary": "Crescent",
+      "Wrist": "Crescent Bracer"
+    },
+    "dwarf": {
+      "Arms": "Bloodforge Armplates",
+      "Chest": "Bloodforge Mail",
+      "Feet": "Bloodforge Boots",
+      "Hands": "Bloodforge Gauntlets",
+      "Head": "Bloodforge Helm",
+      "Legs": "Bloodforge Legplates",
+      "Primary": "Bloodforge",
+      "Wrist": "Bloodforge Bracers"
+    },
+    "erudite": {
+      "Arms": "Tomebound Vambraces",
+      "Chest": "Tomebound Breastplate",
+      "Feet": "Tomebound Boots",
+      "Hands": "Tomebound Gauntlets",
+      "Head": "Tomebound Helm",
+      "Legs": "Tomebound Greaves",
+      "Primary": "Tomebound",
+      "Wrist": "Tomebound Bracer"
+    },
+    "froglok": {
+      "Arms": "Bogscale Vambraces",
+      "Chest": "Bogscale Breastplate",
+      "Feet": "Bogscale Boots",
+      "Hands": "Bogscale Gauntlets",
+      "Head": "Bogscale Helm",
+      "Legs": "Bogscale Greaves",
+      "Primary": "Bogscale",
+      "Wrist": "Bogscale Bracer"
+    },
+    "gnome": {
+      "Arms": "Scrapwork Vambraces",
+      "Chest": "Scrapwork Breastplate",
+      "Feet": "Scrapwork Boots",
+      "Hands": "Scrapwork Gauntlets",
+      "Head": "Scrapwork Helm",
+      "Legs": "Scrapwork Greaves",
+      "Primary": "Scrapwork",
+      "Wrist": "Scrapwork Bracer"
+    },
+    "half-elf": {
+      "Arms": "Crossroads Vambraces",
+      "Chest": "Crossroads Breastplate",
+      "Feet": "Crossroads Boots",
+      "Hands": "Crossroads Gauntlets",
+      "Head": "Crossroads Helm",
+      "Legs": "Crossroads Greaves",
+      "Primary": "Crossroads",
+      "Wrist": "Crossroads Bracer"
+    },
+    "halfling": {
+      "Arms": "Bravefoot Mail Vambraces",
+      "Chest": "Bravefoot Mail Breastplate",
+      "Feet": "Bravefoot Mail Boots",
+      "Hands": "Bravefoot Mail Gauntlets",
+      "Head": "Bravefoot Mail Helm",
+      "Legs": "Bravefoot Mail Greaves",
+      "Primary": "Bravefoot Mail",
+      "Wrist": "Bravefoot Mail Bracer"
+    },
+    "high-elf": {
+      "Arms": "Felwithe Vambraces",
+      "Chest": "Felwithe Breastplate",
+      "Feet": "Felwithe Boots",
+      "Hands": "Felwithe Gauntlets",
+      "Head": "Felwithe Helm",
+      "Legs": "Felwithe Greaves",
+      "Primary": "Felwithe",
+      "Wrist": "Felwithe Bracer"
+    },
+    "human": {
+      "Arms": "Dawnwatch Vambraces",
+      "Chest": "Dawnwatch Breastplate",
+      "Feet": "Dawnwatch Boots",
+      "Hands": "Dawnwatch Gauntlets",
+      "Head": "Dawnwatch Helm",
+      "Legs": "Dawnwatch Greaves",
+      "Primary": "Dawnwatch",
+      "Wrist": "Dawnwatch Bracer"
+    },
+    "iksar": {
       "Arms": "Dreadscale Vambraces",
       "Chest": "Dreadscale Breastplate",
       "Feet": "Dreadscale Boots",
       "Hands": "Dreadscale Gauntlets",
       "Head": "Dreadscale Helm",
       "Legs": "Dreadscale Greaves",
+      "Primary": "Dreadscale",
       "Wrist": "Dreadscale Bracer"
     },
     "ogre": {
-      "Chest": "Worn Hide Tunic"
+      "Arms": "Oggok Vambraces",
+      "Chest": "Oggok Breastplate",
+      "Feet": "Oggok Boots",
+      "Hands": "Oggok Gauntlets",
+      "Head": "Oggok Helm",
+      "Legs": "Oggok Greaves",
+      "Primary": "Oggok",
+      "Wrist": "Oggok Bracer"
+    },
+    "troll": {
+      "Arms": "Muckhide Vambraces",
+      "Chest": "Muckhide Breastplate",
+      "Feet": "Muckhide Boots",
+      "Hands": "Muckhide Gauntlets",
+      "Head": "Muckhide Helm",
+      "Legs": "Muckhide Greaves",
+      "Primary": "Muckhide",
+      "Wrist": "Muckhide Bracer"
+    },
+    "vah-shir": {
+      "Arms": "Moonclaw Vambraces",
+      "Chest": "Moonclaw Breastplate",
+      "Feet": "Moonclaw Boots",
+      "Hands": "Moonclaw Gauntlets",
+      "Head": "Moonclaw Helm",
+      "Legs": "Moonclaw Greaves",
+      "Primary": "Moonclaw",
+      "Wrist": "Moonclaw Bracer"
+    },
+    "wood-elf": {
+      "Arms": "Faydark Vambraces",
+      "Chest": "Faydark Breastplate",
+      "Feet": "Faydark Boots",
+      "Hands": "Faydark Gauntlets",
+      "Head": "Faydark Helm",
+      "Legs": "Faydark Greaves",
+      "Primary": "Faydark",
+      "Wrist": "Faydark Bracer"
     }
   },
   "ranger": {

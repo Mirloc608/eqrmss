@@ -84,6 +84,38 @@ async function fetchJson(path) {
   return null;
 }
 
+/**
+ * Weapon nouns for kit weapons, keyed by weaponTemplate — the granted
+ * starter weapon is "<race set> <noun>" (Dreadscale Short Sword).
+ */
+const KIT_WEAPON_NOUNS = {
+  short_sword: "Short Sword",
+  dagger: "Dagger",
+  club: "Club",
+  battle_axe: "Great Axe",
+  mace: "Mace",
+  quarterstaff: "Quarterstaff",
+  spear: "Spear"
+};
+
+/**
+ * Resolve a kit entry's granted name under the race's starter-set
+ * overrides. Armor overrides are full piece names ("Dreadscale
+ * Breastplate"); the weapon override (slot "Primary") is the race's
+ * set name and combines with the weapon's noun, so every class of a
+ * race wields its set's weapon (Dreadscale Spear for an Iksar shaman,
+ * Dreadscale Short Sword for an Iksar shadowknight). Falls back to
+ * the entry's own name. Mirrors the character creation finalizer.
+ */
+function kitEntryName(entry, overrides) {
+  const override = entry.slot ? overrides[entry.slot] : null;
+  if (!override) return entry.name;
+  if (entry.type !== "weapon") return override;
+  const noun = KIT_WEAPON_NOUNS[entry.weaponTemplate]
+    ?? String(entry.name ?? "").replace(/^Worn \S+ /, "");
+  return noun ? `${override} ${noun}` : override;
+}
+
 export class EQRMSSNPCFinalizer {
 
   constructor({ name = "", sex = "", raceId = "", classId = "", level = 1, creatureType = "sentient",
@@ -427,7 +459,7 @@ export class EQRMSSNPCFinalizer {
 
       const items = [];
       for (const entry of kit.items ?? []) {
-        const name = (entry.slot && overrides[entry.slot]) || entry.name;
+        const name = kitEntryName(entry, overrides);
         const item = { name, type: entry.type };
         const system = {};
         if (entry.slot) system.slot = entry.slot;

@@ -29,6 +29,35 @@ import {
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
+/**
+ * Weapon nouns for kit weapons, keyed by weaponTemplate — the granted
+ * starter weapon is "<race set> <noun>" (Dreadscale Short Sword).
+ */
+const KIT_WEAPON_NOUNS = {
+  short_sword: "Short Sword",
+  dagger: "Dagger",
+  club: "Club",
+  battle_axe: "Great Axe",
+  mace: "Mace",
+  quarterstaff: "Quarterstaff",
+  spear: "Spear"
+};
+
+/**
+ * Resolve a kit entry's display name under the race's starter-set
+ * overrides — mirrors the finalizer's kitEntryName: armor overrides
+ * are full piece names; the weapon override (slot "Primary") is the
+ * race's set name and combines with the weapon's noun.
+ */
+function kitEntryName(entry, overrides) {
+  const override = entry.slot ? overrides[entry.slot] : null;
+  if (!override) return entry.name;
+  if (entry.type !== "weapon") return override;
+  const noun = KIT_WEAPON_NOUNS[entry.weaponTemplate]
+    ?? String(entry.name ?? "").replace(/^Worn \S+ /, "");
+  return noun ? `${override} ${noun}` : override;
+}
+
 export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(ApplicationV2) {
   constructor(options = {}) {
     super(options);
@@ -661,7 +690,7 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
             classKey, raceKey,
             money: raw.money ?? {},
             items: (raw.items ?? []).map(entry => ({
-              name: (entry.slot && overrides[entry.slot]) || entry.name,
+              name: kitEntryName(entry, overrides),
               slot: entry.slot ?? "",
               quantity: entry.quantity ?? 1,
               type: entry.type ?? "item"
