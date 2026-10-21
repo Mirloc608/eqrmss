@@ -74,6 +74,7 @@
 // ============================================================
 
 import { WEAPON_TYPE_TO_SKILL_ID } from "./attack-resolver.js";
+import { resolveTableAttack } from "./table-resolver.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { roundExhaustionCost, exhaustionCurrent, exhaustionMaxFor } from "./subdue.js";
 import { combatCard } from "./chat-card.js";
@@ -1127,9 +1128,19 @@ export async function tickConditions(combat) {
                     else notes.push(`${esc(d.name || "A swarm")} disperses.`);
                     continue;
                 }
-                const lo = Number(d.min) || 0;
-                const hi = Number(d.max) || lo;
-                let dmg = hi > lo ? lo + Math.floor(Math.random() * (hi - lo + 1)) : lo;
+                // Tables routing (2026-10-21 ruling): entries that
+                // carry a table + OB resolve on the table, hits only
+                // (no crits on ticks). Legacy entries (min/max only)
+                // keep their original per-round roll.
+                let dmg;
+                if (d.table) {
+                    const res = resolveTableAttack({ tableName: d.table, critType: d.critType ?? null, ob: Number(d.ob) || 0, target: actor, allowCrit: false });
+                    dmg = res ? res.total : 0;
+                } else {
+                    const lo = Number(d.min) || 0;
+                    const hi = Number(d.max) || lo;
+                    dmg = hi > lo ? lo + Math.floor(Math.random() * (hi - lo + 1)) : lo;
+                }
                 
                 // Era Capstones (2026-10-09): check for DoT twincast triggers on the caster.
                 // Gift of Deathly Resolve: X% chance for DoTs to deal double damage.
@@ -1225,7 +1236,7 @@ export async function tickConditions(combat) {
                 const regenAlive = songAlive || e.source === "spell"
                     || (typeof e.source === "string" && (e.source.startsWith("triggered:")
                         || e.source.startsWith("proc:") || e.source.startsWith("worn:")));
-                if (e.kind === "regen" && Number(e.amount) > 0 && regenAlive) {
+                if (e.kind === "regen" && (Number(e.amount) > 0 || e.table) && regenAlive) {
                     if (e.pool === "mana") {
                         const mCur = Number(updates["system.attributes.mana.value"] ?? actor.system?.attributes?.mana?.value) || 0;
                         const mMax = Number(actor.system?.attributes?.mana?.max) || 0;
@@ -1253,10 +1264,21 @@ export async function tickConditions(combat) {
                             notes.push(`${esc(actor.name)} regenerates ${mNext - mCur} mana from ${esc(e.label || e.song || "a spell")} (${mCur} → ${mNext}).`);
                         }
                     } else {
-                        const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
-                        const healed = Math.max(0, cur - Number(e.amount));
-                        updates["system.hits.value"] = healed;
-                        notes.push(`${esc(actor.name)} regenerates ${Number(e.amount)} from ${esc(e.song || e.label || "a song")} (${cur} → ${healed} concussion hits).`);
+                        // Tables routing (2026-10-21 ruling): entries
+                        // carrying a table + OB heal the table's hits
+                        // result (no DB, AT 1 column); legacy entries
+                        // heal their stored amount.
+                        let amount = Number(e.amount) || 0;
+                        if (e.table) {
+                            const res = resolveTableAttack({ tableName: e.table, ob: Number(e.ob) || 0, target: actor, allowCrit: false, noDefense: true, atOverride: 1 });
+                            amount = res ? res.total : 0;
+                        }
+                        if (amount > 0) {
+                            const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
+                            const healed = Math.max(0, cur - amount);
+                            updates["system.hits.value"] = healed;
+                            notes.push(`${esc(actor.name)} regenerates ${amount} from ${esc(e.song || e.label || "a song")} (${cur} → ${healed} concussion hits).`);
+                        }
                     }
                 }
                 if (e.roundsLeft == null) { remainingFx.push(e); continue; }

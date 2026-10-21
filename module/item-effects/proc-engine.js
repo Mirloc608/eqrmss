@@ -24,7 +24,7 @@ export function getWeaponProcId(weapon) {
  *   event: the combat trigger that occurred, e.g. "onCrit"
  * @returns {object} { fired, proc?, results?, reason? }
  */
-export async function fireWeaponProc({ wielder, weapon, target, event }) {
+export async function fireWeaponProc({ wielder, weapon, target, event, swingOb }) {
     const procId = getWeaponProcId(weapon);
     if (!procId) return { fired: false, reason: "no-proc" };
 
@@ -37,7 +37,11 @@ export async function fireWeaponProc({ wielder, weapon, target, event }) {
         payload: proc.payload,
         caster: wielder,
         target,
-        source: `proc:${proc.id}`
+        source: `proc:${proc.id}`,
+        // Tables routing (2026-10-21 ruling, design choice D): a
+        // proc's damage resolves at the OB of the swing that
+        // triggered it, not the wielder's effect OB.
+        obOverride: swingOb
     });
 
     console.log(`EQRMSS | Proc fired: ${proc.name} (${wielder?.name ?? "?"}) -> ${target?.name ?? "?"}`, results);

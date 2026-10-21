@@ -33,9 +33,10 @@
  *   "debuff"    -> worst-wins system.status.actionPenalty { value, rounds }
  *                  + timed system.status.spellEffects label entry
  *   "dot"       -> system.status.dots entry { name, element, min, max,
- *                  roundsLeft } — the exact shape tickConditions ticks
+ *                  table, critType, ob, casterId, roundsLeft } — the exact
+ *                  shape tickConditions ticks (ticks resolve on the table)
  *   "hot"       -> timed regen entry in system.status.spellEffects
- *                  { kind: "regen", pool: "hits", amount, roundsLeft } —
+ *                  { kind: "regen", pool: "hits", table, ob, roundsLeft } —
  *                  tickConditions heals non-mana regen pools each round
  *   "root"      -> system.status.rooted { rounds } + timed spellEffects entry
  *                  (no immobilization field exists yet; GM adjudicates)
@@ -44,9 +45,19 @@
  *                  (no fear pool exists yet; GM adjudicates)
  *   "summon"    -> chat note + GM prompt; never half-spawned
  *   "utility"   -> payload note text logged to result notes; no mechanics
+ *
+ * TABLES ROUTING (user ruling 2026-10-21): damage, dot, heal and hot
+ * payloads no longer apply their EQ min/max as points. Amounts resolve
+ * on the RMSS tables via module/combat/table-resolver.js — damage and
+ * the initial dot/hot registration at the source actor's effect OB
+ * (effectOBFor), heals at the healer's OB against no DB on the AT 1
+ * column. The immunity/weakness/resistance/absorb order below still
+ * applies to the table result for damage. Entries registered before
+ * the ruling (min/max only, no table) keep their legacy tick.
  */
 
 import { hasSpecialTrait } from "../utils/special-traits.js";
+import { resolveTableAttack, effectOBFor, tableForElement } from "../combat/table-resolver.js";
 
 function rollRange(min, max) {
     return min + Math.floor(Math.random() * (max - min + 1));
@@ -133,9 +144,22 @@ async function withStunPool(target, fn) {
     return pool;
 }
 
-async function applyDamage({ effect, target, source }) {
+async function applyDamage({ effect, target, source, caster, obOverride }) {
     const notes = [];
-    const rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    // Tables routing (2026-10-21 ruling): the EQ min/max no longer
+    // deal damage — the payload resolves as an attack on its
+    // element's bolt table at the source actor's effect OB, crits
+    // allowed. Immunity/weakness/resistance/absorb below still
+    // process the table result exactly as they processed the roll.
+    // Falls back to the legacy min/max roll only when the combat
+    // tables are not loaded.
+    const res = resolveTableAttack({ element: effect.element, ob: obOverride ?? effectOBFor(caster), target, allowCrit: true });
+    let rolled = res ? res.total : rollRange(effect.min ?? 0, effect.max ?? 0);
+    if (res) {
+        notes.push(`${res.table} table: roll ${res.roll} + OB ${res.ob} − DB ${res.db} = ${res.net} → ${res.hits} hits${res.critBonus ? ` + ${res.critBonus} critical` : ""}`);
+        if (res.noEffect) notes.push(res.fizzle ? "no effect (F cell — the effect fizzles)" : "no effect (table result)");
+        for (const c of res.crits) notes.push(`Critical ${c.severity} (${c.type}): ${c.text}`);
+    }
     const { immune, weaknessMult, resist } = getTargetModifiers(target, effect.element);
 
     let final = rolled;
@@ -182,6 +206,16 @@ async function applyDamage({ effect, target, source }) {
     if (final > 0 && target?.system?.status?.charm) {
         await persistValue(target, "system.status.charm", null);
         notes.push("charm broken by damage");
+    }
+
+    // Tables routing: criticals rolled on the table apply their
+    // conditions (stun, bleed, penalties...) through the same
+    // adjudication weapon attacks use.
+    if (final > 0 && res?.crits?.length && target) {
+        try {
+            const { applyCritConditions } = await import("../combat/crit-conditions.js");
+            for (const c of res.crits) await applyCritConditions(target, caster ?? null, c.text);
+        } catch (e) { /* non-fatal: bonus hits already counted */ }
     }
 
     return { type: "damage", element: effect.element, rolled, final, notes, source };
@@ -501,7 +535,9 @@ async function applyLifetap({ effect, target, source, caster }) {
     const healAmount = Math.round(actualDamage * (percent / 100));
     let healNote = "no caster to heal";
     if (caster && healAmount > 0) {
-        const healResult = await applyHeal({ effect: { min: healAmount, max: healAmount }, target: caster, source });
+        // fixed: the lifetap heal equals the damage dealt (ruling) —
+        // it must not re-roll on the tables inside applyHeal.
+        const healResult = await applyHeal({ effect: { min: healAmount, max: healAmount, fixed: true }, target: caster, source, caster });
         healNote = `healed ${healResult.final ?? healAmount}`;
     }
     return { type: "lifetap", final: actualDamage, notes: [`lifetap: ${actualDamage} damage, ${healNote}`], source, applied: true };
@@ -715,10 +751,27 @@ async function applySummonItem({ effect, caster, target, source }) {
 }
 
 /** "heal" — restore concussion hits taken (system.hits.value), floored at 0. */
-async function applyHeal({ effect, target, source }) {
+async function applyHeal({ effect, target, source, caster }) {
     const miss = requireTarget(target, "heal", source);
     if (miss) return miss;
-    let rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    const notes = [];
+    // Tables routing (2026-10-21 ruling): the heal amount is the
+    // table's hits result at the healer's effect OB, rolled against
+    // no DB on the AT 1 column — healing is not an attack on armor.
+    // effect.fixed marks internal fixed amounts (the lifetap heal,
+    // which by ruling equals the damage dealt) that skip the table.
+    let rolled;
+    if (effect.fixed === true) {
+        rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    } else {
+        const healer = caster ?? source?.actor ?? target;
+        const res = resolveTableAttack({
+            element: effect.element, ob: effectOBFor(healer), target,
+            allowCrit: false, noDefense: true, atOverride: 1
+        });
+        rolled = res ? res.total : rollRange(effect.min ?? 0, effect.max ?? 0);
+        if (res) notes.push(`${res.table} table: roll ${res.roll} + OB ${res.ob} = ${res.net} → ${res.hits} hits healed`);
+    }
     // Era Capstones (2026-10-09): check for heal-bonus-pct on the caster.
     // Spire of Divinity: +X% healing.
     try {
@@ -744,7 +797,7 @@ async function applyHeal({ effect, target, source }) {
     const next = Math.max(0, cur - rolled);
     await persistValue(target, "system.hits.value", next);
     const final = cur - next;
-    const notes = final < rolled ? [`capped at full health (${final} of ${rolled} applied)`] : [];
+    if (final < rolled) notes.push(`capped at full health (${final} of ${rolled} applied)`);
     return { type: "heal", rolled, final, notes, source };
 }
 
@@ -885,20 +938,30 @@ async function applyDebuff({ effect, target, source }) {
  * shape the spell engine's tickConditions expects:
  * { name, element, min, max, roundsLeft } (source for attribution).
  */
-async function applyDot({ effect, target, source }) {
+async function applyDot({ effect, target, source, caster, obOverride }) {
     const miss = requireTarget(target, "dot", source);
     if (miss) return miss;
     const rounds = payloadRounds(effect);
-    const rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    // Tables routing (2026-10-21 ruling): the entry carries its
+    // table + the source actor's effect OB; each tick resolves on
+    // the table (hits only). min/max ride along for back-compat
+    // display; ticks prefer the table whenever one is stored.
+    const { attackTable, critType } = tableForElement(effect.element);
+    const ob = obOverride ?? effectOBFor(caster);
     await pushStatusList(target, "dots", {
         name: effect.name ?? source ?? "item effect",
         element: String(effect.element ?? ""),
-        min: Number(effect.min ?? rolled) || 0,
-        max: Number(effect.max ?? rolled) || 0,
+        damageType: String(effect.element ?? ""),
+        min: Number(effect.min ?? 0) || 0,
+        max: Number(effect.max ?? 0) || 0,
+        table: attackTable,
+        critType,
+        ob,
+        casterId: caster?.id ?? caster?._id ?? null,
         roundsLeft: rounds,
         source
     });
-    return { type: "dot", rolled, final: rolled, notes: [`${rolled} hits/round for ${rounds} rounds`], source };
+    return { type: "dot", rolled: 0, final: 0, notes: [`${attackTable} table at OB ${ob}/round for ${rounds} rounds`], source };
 }
 
 /**
@@ -907,21 +970,27 @@ async function applyDot({ effect, target, source }) {
  * non-mana regen pools each round (hits clamped at 0 taken). A re-fired
  * hot from the same source refreshes the entry instead of stacking.
  */
-async function applyHot({ effect, target, source }) {
+async function applyHot({ effect, target, source, caster }) {
     const miss = requireTarget(target, "hot", source);
     if (miss) return miss;
     const rounds = payloadRounds(effect);
-    const rolled = rollRange(effect.min ?? 0, effect.max ?? 0);
+    // Tables routing (2026-10-21 ruling): like the dot, the entry
+    // carries its table + the healer's effect OB and each tick heals
+    // the table's hits result. amount stays 0 — the tick prefers the
+    // table whenever one is stored.
+    const { attackTable } = tableForElement(effect.element);
+    const ob = effectOBFor(caster ?? target);
     const list = [...(Array.isArray(target?.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];
     const fresh = list.filter(e => !(e?.kind === "regen" && e?.pool === "hits" && e?.source === source));
     fresh.push({
-        kind: "regen", pool: "hits", amount: rolled,
+        kind: "regen", pool: "hits", amount: 0,
+        table: attackTable, ob,
         roundsLeft: rounds,
         label: effect.name ?? source ?? "heal over time",
         source
     });
     await persistValue(target, "system.status.spellEffects", fresh);
-    return { type: "hot", rolled, final: rolled, notes: [`${rolled} hits/round for ${rounds} rounds`], source };
+    return { type: "hot", rolled: 0, final: 0, notes: [`${attackTable} table at OB ${ob}/round for ${rounds} rounds`], source };
 }
 
 /**
@@ -1291,20 +1360,20 @@ export async function applyIdentifyPayload({ effect, caster, target, source }) {
  *   target: the actor receiving the effect
  *   source: "proc:<id>" | "worn:<id>" | "triggered:<id>" for logging
  */
-export async function applyEffectPayload({ payload, caster, target, source }) {
+export async function applyEffectPayload({ payload, caster, target, source, obOverride }) {
     const results = [];
     for (const effect of payload ?? []) {
-        if (effect.type === "damage") results.push(await applyDamage({ effect, caster, target, source }));
+        if (effect.type === "damage") results.push(await applyDamage({ effect, caster, target, source, obOverride }));
         else if (effect.type === "regen") results.push(await applyRegen({ effect, caster, target, source }));
         else if (effect.type === "buff") results.push(await applyBuff({ effect, target, source, caster }));
-        else if (effect.type === "heal") results.push(await applyHeal({ effect, target, source }));
+        else if (effect.type === "heal") results.push(await applyHeal({ effect, target, source, caster }));
         else if (effect.type === "mana-drain") results.push(await applyManaDrain({ effect, target, source }));
         else if (effect.type === "manaregen") results.push(await applyManaRegen({ effect, target, source }));
         else if (effect.type === "cure") results.push(await applyCure({ effect, target, source }));
         else if (effect.type === "stun") results.push(await applyStun({ effect, target, source }));
         else if (effect.type === "debuff") results.push(await applyDebuff({ effect, target, source }));
-        else if (effect.type === "dot") results.push(await applyDot({ effect, target, source }));
-        else if (effect.type === "hot") results.push(await applyHot({ effect, target, source }));
+        else if (effect.type === "dot") results.push(await applyDot({ effect, target, source, caster, obOverride }));
+        else if (effect.type === "hot") results.push(await applyHot({ effect, target, source, caster }));
         else if (effect.type === "root") results.push(await applyRoot({ effect, target, source }));
         else if (effect.type === "snare") results.push(await applySnare({ effect, target, source }));
         else if (effect.type === "fear") results.push(await applyFear({ effect, target, source }));

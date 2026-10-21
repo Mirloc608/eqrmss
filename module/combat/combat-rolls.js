@@ -1404,7 +1404,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     let procNote = "";
     if (critFired && sys.type !== "spell" && sys.proc) {
         try {
-            const procResult = await fireWeaponProc({ wielder: actor, weapon: weaponItem, target: targetActor, event: "onCrit" });
+            const procResult = await fireWeaponProc({ wielder: actor, weapon: weaponItem, target: targetActor, event: "onCrit", swingOb: ob });
             if (procResult.fired) procNote = procResultNote(procResult);
         } catch (e) {
             console.error("EQRMSS | Proc fire failed", e);
@@ -1417,7 +1417,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         try {
             // Fake a weapon-like object carrying the ammo's proc ID.
             const ammoWeapon = { system: { proc: ammoProcId } };
-            const procResult = await fireWeaponProc({ wielder: actor, weapon: ammoWeapon, target: targetActor, event: "onCrit" });
+            const procResult = await fireWeaponProc({ wielder: actor, weapon: ammoWeapon, target: targetActor, event: "onCrit", swingOb: ob });
             if (procResult.fired) procNote += procResultNote(procResult);
         } catch (e) {
             console.error("EQRMSS | Ammo proc fire failed", e);
