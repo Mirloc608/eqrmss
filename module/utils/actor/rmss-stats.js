@@ -34,6 +34,7 @@ const ALIASES = new Map([
   ["CON", "CO"],
   ["ME", "ME"],
   ["MEM", "ME"],
+  ["RE", "RE"],
   ["SD", "SD"],
   ["QU", "QU"],
   ["EM", "EM"],
