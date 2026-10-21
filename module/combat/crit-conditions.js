@@ -1219,6 +1219,7 @@ export async function tickConditions(combat) {
         const spellEffects = Array.isArray(st.spellEffects) ? st.spellEffects : [];
         if (spellEffects.length) {
             const remainingFx = [];
+            let snareExpired = false;
             for (const e of spellEffects) {
                 const songAlive = e.source === "song" && e.maintained && songStillActive(e);
                 const regenAlive = songAlive || e.source === "spell"
@@ -1281,6 +1282,16 @@ export async function tickConditions(combat) {
                             notes.push(`${esc(actor.name)}: Max HP returns to ${newMax} (lost ${e.hpMaxBonus} bonus).`);
                         } catch (err) { /* ignore */ }
                     }
+                    if (Number(e.snareValue) > 0) snareExpired = true;
+                }
+            }
+            if (snareExpired) {
+                // Snare expiry (2026-10-21): snarePenalty is a single scalar,
+                // so recompute it from the surviving snare entries
+                // (strongest wins); zero when none remain.
+                const liveSnare = remainingFx.reduce((m, x) => Math.max(m, Number(x.snareValue) || 0), 0);
+                if ((Number(actor.system?.movement?.snarePenalty) || 0) !== liveSnare) {
+                    updates["system.movement.snarePenalty"] = liveSnare;
                 }
             }
             updates["system.status.spellEffects"] = remainingFx;

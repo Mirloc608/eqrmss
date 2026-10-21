@@ -942,10 +942,11 @@ async function applyRoot({ effect, target, source }) {
 }
 
 /**
- * "snare" — movement penalty { value }. Movement lives at system.movement
- * (baseRate is derived each prepare and does not consume penalties yet),
- * so the penalty is recorded on that object plus a timed spellEffects
- * entry; the note flags the pending engine hook.
+ * "snare" — movement penalty { value }. The penalty is recorded on
+ * system.movement.snarePenalty (the §7.2.1 derived baseRate subtracts it
+ * each prepare) plus a timed spellEffects entry carrying snareValue;
+ * when that entry expires, the combat tick recomputes the scalar from
+ * any surviving snare entries (strongest wins, zero when none remain).
  */
 async function applySnare({ effect, target, source }) {
     const miss = requireTarget(target, "snare", source);
@@ -964,7 +965,7 @@ async function applySnare({ effect, target, source }) {
         category: "debuff",
         snareValue: value
     });
-    const notes = [`−${value} movement${rounds > 0 ? ` for ${rounds} rounds` : " (indefinite)"} — recorded on system.movement.snarePenalty; the §7.2.1 prepare does not consume it yet`];
+    const notes = [`−${value} movement${rounds > 0 ? ` for ${rounds} rounds` : " (indefinite)"} — applies to the §7.2.1 movement rate via system.movement.snarePenalty${rounds > 0 ? "; clears when the effect ends" : ""}`];
     return { type: "snare", rolled: value, final: value, notes, source };
 }
 
