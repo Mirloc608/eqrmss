@@ -131,6 +131,15 @@ export async function addCatalogItemToActor(actor, catalogId) {
         system: JSON.parse(JSON.stringify(entry.system ?? {})),
     });
     if (data.system.quantity == null) data.system.quantity = 1;
+    // Wearables land equipped so armor AT/DB and weapon wielding apply
+    // immediately; everything else goes to the pack. Without a stored
+    // location the equipment dropdown misleadingly displays "Equipped"
+    // (its first option) while the defense engine counts nothing worn.
+    if (!data.system.location) {
+        data.system.location = ["armor", "weapon", "shield", "jewelry"].includes(data.type)
+            ? "equipped"
+            : "pack";
+    }
     try {
         const stacked = await tryStackInto(actor, data);
         if (!stacked) await actor.createEmbeddedDocuments("Item", [data]);
