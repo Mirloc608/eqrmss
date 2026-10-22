@@ -2,8 +2,9 @@
  * Tradeskill Combine Engine (2026-10-14)
  *
  * User rulings:
- * - All 11 EQ tradeskills (baking, brewing, fletching, jewelcraft, pottery,
- *   smithing, tailoring, tinkering, alchemy, poison making, research)
+ * - EQ tradeskills after the 2026-10-22 purge (fletching, jewelcraft,
+ *   smithing, tailoring, tinkering, alchemy, poison making, research);
+ *   baking, brewing, pottery and fishing were removed entirely.
  * - d100 RMSS-style skill check vs. recipe difficulty
  * - Softer failure: regular failure keeps materials; ONLY critical failure
  *   (natural 01-05) loses materials
@@ -210,17 +211,13 @@ export function getRecipesForSkill(skillId) {
  */
 export function getTradeskillIds() {
     return [
-        "skill-baking",
-        "skill-brewing",
         "skill-fletching",
         "skill-jewelcraft",
-        "skill-pottery",
         "skill-smithing",
         "skill-tailoring",
         "skill-tinkering",
         "skill-alchemy",
         "skill-poison-making",
-        "skill-research",
-        "skill-fishing"
+        "skill-research"
     ];
 }

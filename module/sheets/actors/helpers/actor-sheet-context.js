@@ -301,7 +301,7 @@ export class EQRMSSActorContextHelper {
         // Tradeskill caps (2026-10-16, EQ canon): 200 for general tradeskills,
         // 300 for class/race skills (Alchemy, Poison Making, Tinkering).
         // Specialization: one general tradeskill can be raised to 300.
-        const TRADESKILL_GENERAL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring"]);
+        const TRADESKILL_GENERAL_IDS = new Set(["skill-fletching","skill-jewelcrafting","skill-smithing","skill-tailoring"]);
         const TRADESKILL_CLASS_IDS = new Set(["skill-alchemy","skill-poison-making","skill-tinkering","skill-research"]);
         const _skillRankCap = (skillId) => {
             const v = _skillVisibility;
@@ -311,8 +311,6 @@ export class EQRMSSActorContextHelper {
             if (id === "skill-tracking" && v.classId === "bard") return 1;
             // Tradeskill caps
             if (TRADESKILL_CLASS_IDS.has(id)) return 300;
-            // Fishing: capped at 200, never specializable (2026-10-16, EQ canon)
-            if (id === "skill-fishing") return 200;
             if (TRADESKILL_GENERAL_IDS.has(id)) {
                 const spec = String(this.actor?.system?.tradeskillSpecialization ?? "");
                 if (spec === id) return 300;
@@ -325,7 +323,7 @@ export class EQRMSSActorContextHelper {
                 const skillStore = (typeof CONFIG !== 'undefined' ? CONFIG?.EQRMSS?.skills : null) ?? globalThis.CONFIG?.EQRMSS?.skills ?? {};
                 const catalog = Object.values(skillStore);
                 const developed = new Map(items.filter(i => i?.type === "skill").map(s => [String(s.system?.skillId ?? s.name).toLowerCase(), s]));
-                const TRADESKILL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research","skill-fishing"]);
+                const TRADESKILL_IDS = new Set(["skill-fletching","skill-jewelcrafting","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research"]);
                 const actorRef = this.actor;
                 return catalog.map(skill => {
                     const key = String(skill.id ?? skill.name).toLowerCase();

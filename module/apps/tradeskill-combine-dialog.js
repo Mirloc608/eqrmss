@@ -859,18 +859,14 @@ export class TradeskillCombineDialog extends BaseApplication {
 
     _getSkillName() {
         const names = {
-            "skill-baking": "Baking",
-            "skill-brewing": "Brewing",
             "skill-fletching": "Fletching",
             "skill-jewelcrafting": "Jewelcrafting",
-            "skill-pottery": "Pottery",
             "skill-smithing": "Smithing",
             "skill-tailoring": "Tailoring",
             "skill-tinkering": "Tinkering",
             "skill-alchemy": "Alchemy",
             "skill-poison-making": "Poison Making",
-            "skill-research": "Research",
-            "skill-fishing": "Fishing"
+            "skill-research": "Research"
         };
         return names[this.skillId] ?? this.skillId;
     }

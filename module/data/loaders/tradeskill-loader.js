@@ -16,16 +16,12 @@ const RECIPE_BASE_PATH = "systems/eqrmss/module/data/tradeskills/recipes";
 const RECIPE_FILES = [
     "smithing.json",
     "tailoring.json",
-    "baking.json",
-    "brewing.json",
     "fletching.json",
     "jewelcraft.json",
-    "pottery.json",
     "tinkering.json",
     "alchemy.json",
     "poison.json",
-    "research.json",
-    "fishing.json"
+    "research.json"
 ];
 
 async function fetchJson(path) {

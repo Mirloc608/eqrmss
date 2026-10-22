@@ -7,13 +7,9 @@ import EQRMSSItemSheet from "./eqrmss_item_sheet.js";
 
 const TRADESKILLS = [
     { id: "skill-alchemy", name: "Alchemy & Potions" },
-    { id: "skill-baking", name: "Baking & Cooking" },
-    { id: "skill-brewing", name: "Brewing" },
-    { id: "skill-fishing", name: "Fishing" },
     { id: "skill-fletching", name: "Fletching" },
     { id: "skill-jewelcrafting", name: "Jewelcrafting" },
     { id: "skill-poison-making", name: "Poison Making" },
-    { id: "skill-pottery", name: "Pottery" },
     { id: "skill-research", name: "Magical Research" },
     { id: "skill-smithing", name: "Smithing & Blacksmithing" },
     { id: "skill-tailoring", name: "Tailoring" },

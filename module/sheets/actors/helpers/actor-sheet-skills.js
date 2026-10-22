@@ -62,7 +62,7 @@ export class EQRMSSActorSkillsHelper {
                 }
                 // Tradeskill point pool (2026-10-16): dedicated pool, 5 granted per level.
                 // Spending a rank deducts from pool; un-spending refunds. Unspent carries over.
-                const TRADESKILL_IDS = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research","skill-fishing"]);
+                const TRADESKILL_IDS = new Set(["skill-fletching","skill-jewelcrafting","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research"]);
                 const skillId = String(item.system.skillId ?? "");
                 if (TRADESKILL_IDS.has(skillId) && next !== current) {
                     const pool = Number(this.actor.system?.tradeskillPoints ?? 0);
@@ -140,7 +140,7 @@ export class EQRMSSActorSkillsHelper {
                 
                 // Tradeskill point pool (2026-10-16): developing a tradeskill costs
                 // 1 point from the dedicated pool.
-                const TRADESKILL_IDS_DEV = new Set(["skill-baking","skill-brewing","skill-fletching","skill-jewelcrafting","skill-pottery","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research","skill-fishing"]);
+                const TRADESKILL_IDS_DEV = new Set(["skill-fletching","skill-jewelcrafting","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research"]);
                 if (TRADESKILL_IDS_DEV.has(String(skillId ?? ""))) {
                     const pool = Number(this.actor.system?.tradeskillPoints ?? 0);
                     if (pool < 1) {
