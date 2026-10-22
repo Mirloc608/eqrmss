@@ -70,5 +70,7 @@ export const EXPANSION_CHOICES = {
 
     tob: "The Outer Brood",
 
-    sor: "Shattering of Ro"
+    sor: "Shattering of Ro",
+
+    fof: "Favors of Fortune"
 };
