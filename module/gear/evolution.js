@@ -122,11 +122,22 @@ export function setIndex(lines) {
     return idx;
 }
 
-/** The set key an item belongs to (stamp wins, then name match). */
+/** The set key an item belongs to (stamp wins, then name, then a
+ *  material that belongs to exactly one set — renamed kit pieces
+ *  like "Dreadscale Helm" keep their material when the name goes). */
 export function setOf(lines, item) {
     const stamped = item?.system?.evolution?.set;
     if (stamped && lines?.sets?.[stamped]) return stamped;
-    return setIndex(lines)[item?.name] ?? null;
+    const byName = setIndex(lines)[item?.name] ?? null;
+    if (byName) return byName;
+    const mat = item?.system?.armorMaterial ?? item?.system?.material ?? null;
+    if (mat) {
+        const hits = Object.entries(lines?.sets ?? {})
+            .filter(([, s]) => s.material && s.material === mat)
+            .map(([k]) => k);
+        if (hits.length === 1) return hits[0];
+    }
+    return null;
 }
 
 /** Weapon form from the composer spec (material + condition). */
@@ -180,7 +191,7 @@ export function evolutionState(lines, item, ctx = {}) {
 
     // Armor derivation from the class line.
     const setKey = setOf(lines, item);
-    if (!setKey || !ctx.classKey) return null;
+    if (!ctx.classKey) return null;
     const line = lines?.armorLines?.[ctx.classKey];
     if (!line) return null;
     for (const f of line.forms ?? []) {
@@ -195,6 +206,21 @@ export function evolutionState(lines, item, ctx = {}) {
     // when its set is the line's form-1 basis).
     if (setKey === "starter" || setKey === "calcified-bone") {
         return { kind, line: ctx.classKey, form: 1, set: setKey,
+                 combines: 0, bakedDb: 0, bakedOb: 0, augments: [] };
+    }
+    // Unstamped kit pieces whose names were race-renamed at grant
+    // ("Dreadscale Helm") match the line's form-1 name list; the
+    // material fallback is gated on the kit's worn condition so a
+    // player-composed piece of the same material doesn't qualify.
+    const f1 = (line.forms ?? []).find(f => f.form === 1);
+    if (f1 && (line.form1Names ?? []).includes(item?.name)) {
+        return { kind, line: ctx.classKey, form: 1, set: f1.set ?? "starter",
+                 combines: 0, bakedDb: 0, bakedOb: 0, augments: [] };
+    }
+    const matId = item?.system?.armorMaterial ?? item?.system?.material ?? null;
+    if (f1 && matId && (line.form1Materials ?? []).includes(matId)
+        && item?.system?.armorCondition === "worn") {
+        return { kind, line: ctx.classKey, form: 1, set: f1.set ?? "starter",
                  combines: 0, bakedDb: 0, bakedOb: 0, augments: [] };
     }
     return null;
