@@ -607,11 +607,12 @@ export class TradeskillCombineDialog extends BaseApplication {
                 selected: r.id === this.selectedRecipeId,
                 canCombine: access.allowed && this._hasComponents(r.components, r.id),
                 componentStatus: r.components.map(c => {
+                    const env = this._isEnvironmentComponent(c, r);
                     const base = {
                         ...c,
-                        have: this._countItem(c, r.id),
+                        have: env ? c.qty : this._countItem(c, r.id),
                         need: c.qty,
-                        met: this._countItem(c, r.id) >= c.qty
+                        met: env || this._countItem(c, r.id) >= c.qty
                     };
                     // For materialChoice, add dropdown options
                     if (c.materialChoice) {
@@ -1012,8 +1013,24 @@ export class TradeskillCombineDialog extends BaseApplication {
         return count;
     }
 
+    // The combine environment: the eqtraders import duplicates each
+    // recipe's container as a non-consumed component (Forge, Kiln,
+    // Spell Research Kit — 40,904 of 41,015 such components). That
+    // entry is the station the combine happens at, not an inventory
+    // requirement; the dialog itself is the station. Genuine tools
+    // (Fishing Pole, Fletcher's Toolkit) don't duplicate the
+    // container and stay inventory-gated as before.
+    _isEnvironmentComponent(c, recipe) {
+        return !!recipe?.container && c?.consume === false &&
+            String(c.name ?? "") === String(recipe.container);
+    }
+
     _hasComponents(components, recipeId = null) {
+        const recipe = recipeId
+            ? getRecipesForSkill(this.skillId).find(r => r.id === recipeId)
+            : null;
         return components.every(c => {
+            if (this._isEnvironmentComponent(c, recipe)) return true;
             // Optional cams: only required if selected type needs them (2026-10-15)
             if (c.optionalForTypes && recipeId) {
                 const recipe = getRecipesForSkill(this.skillId).find(r => r.id === recipeId);
