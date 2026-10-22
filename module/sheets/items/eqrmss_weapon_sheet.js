@@ -25,6 +25,38 @@ export default class EQRMSSWeaponSheet extends EQRMSSItemSheet {
     this.element?.querySelectorAll(".weapon-composer-select").forEach(el => {
       el.addEventListener("change", () => this._recomposeWeapon());
     });
+    this._evolutionBar();
+  }
+
+  // Gear evolution (Stage 2): a Reforge bar on weapons owned by an
+  // actor — opens the evolution dialog for this piece as vessel.
+  _evolutionBar() {
+    const actor = this.document?.parent;
+    if (actor?.documentName !== "Actor" || !this.element) return;
+    if (this.element.querySelector(".eqrmss-evo-bar")) return;
+    const form = this.element.querySelector("form") ?? this.element;
+    const bar = document.createElement("div");
+    bar.className = "eqrmss-evo-bar";
+    bar.innerHTML = `<button type="button" class="eqrmss-evo-open"><i class="fas fa-fire"></i> Reforge…</button> <span class="eqrmss-evo-label"></span>`;
+    form.prepend(bar);
+    bar.querySelector(".eqrmss-evo-open").addEventListener("click", async () => {
+      const { EvolutionDialog } = await import("../../apps/eqrmss-evolution-dialog.js");
+      new EvolutionDialog(actor, this.document).render(true);
+    });
+    import("../../gear/evolution.js").then(async (evo) => {
+      try {
+        const lines = await evo.loadEvolutionLines();
+        evo.cacheEvolutionLines(lines);
+        const state = evo.evolutionState(lines, this.document, {
+          classKey: actor.system?.fixed_info?.profession ?? null,
+          raceKey: actor.system?.fixed_info?.race ?? null
+        });
+        const label = bar.querySelector(".eqrmss-evo-label");
+        if (label) label.textContent = state
+          ? `Evolution: Form ${state.form} · ${state.combines}/${evo.formCap(state.form)} combines · slots [${evo.socketLayout(state.combines).join(", ") || "none"}]`
+          : "Not on an evolution line";
+      } catch { /* label stays blank */ }
+    }).catch(() => {});
   }
 
   async _recomposeWeapon() {

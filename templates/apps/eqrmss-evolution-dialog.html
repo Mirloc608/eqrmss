@@ -1,0 +1,76 @@
+<section class="evolution-dialog evo-two-panel">
+    <div class="evo-vessel-head">
+        <img class="evo-vessel-img" src="{{vesselImg}}" alt="{{vesselName}}" />
+        <div class="evo-vessel-info">
+            <h2>{{vesselName}}</h2>
+            {{#if evolvable}}
+            <p class="evo-form-line">{{formLabel}} &middot; Combines: {{combines}}/{{cap}}{{#if nextFormLabel}} &middot; Next: {{nextFormLabel}}{{/if}}</p>
+            <p class="evo-sockets">
+                {{#if slots.length}}
+                {{#each slots}}<span class="evo-slot {{#if filled}}filled{{else}}empty{{/if}}" title="{{label}}">{{tier}}{{#if filled}}: {{label}}{{/if}}</span>{{/each}}
+                {{else}}<span class="evo-slot none">No augment slots yet</span>{{/if}}
+            </p>
+            {{#if hasBaked}}<p class="evo-baked">Baked in:{{#if bakedDb}} +{{bakedDb}} DB{{/if}}{{#if bakedOb}} +{{bakedOb}} OB{{/if}}</p>{{/if}}
+            {{else}}
+            <p class="evo-not-evolvable"><i class="fas fa-lock"></i> {{reason}}</p>
+            {{/if}}
+        </div>
+    </div>
+
+    {{#if evolvable}}
+    <div class="evo-section">
+        <h3>Reforge</h3>
+        <label class="evo-fodder-label">Consume:
+            <select class="evo-fodder-select">
+                {{#each candidates}}
+                <option value="{{id}}" {{#if selected}}selected{{/if}} {{#unless ok}}disabled{{/unless}}>{{name}}{{#if kindLabel}} — {{kindLabel}}{{/if}}</option>
+                {{/each}}
+            </select>
+        </label>
+        {{#if selectedFodder}}
+            {{#if selectedFodder.ok}}
+            <p class="evo-verdict ok"><i class="fas fa-check"></i> {{#if selectedIsTransition}}Transition: this piece templates the vessel's next form.{{else}}Ripening: +1 combine in the current form.{{/if}}</p>
+            {{else}}
+            <p class="evo-verdict bad"><i class="fas fa-times"></i> {{selectedFodder.reasons.[0]}}</p>
+            {{/if}}
+        {{else}}
+        <p class="evo-verdict">No candidate pieces in this character's inventory.</p>
+        {{/if}}
+
+        <div class="evo-routes">
+            <label>
+                <input type="radio" name="evo-route" value="diy" {{#if routeDiy}}checked{{/if}} />
+                Do it myself — {{skillName}} vs trivial {{trivial}}
+                {{#unless skillAllowed}}<span class="evo-warn">({{skillRestriction}})</span>{{/unless}}
+                {{#if neededTechnique}}{{#unless techniqueKnown}}<span class="evo-warn">Technique not learned: {{techniqueLabel}} — research it first.</span>{{/unless}}{{/if}}
+            </label>
+            <label>
+                <input type="radio" name="evo-route" value="npc" {{#if routeNpc}}checked{{/if}} />
+                Pay a smith — {{feeGp}} gp (you have {{wealthGp}} gp), 5% failure, fee kept on failure
+            </label>
+        </div>
+        <p class="evo-stakes">On failure the vessel is returned intact, but the consumed piece is lost.</p>
+        <button type="button" class="evo-combine-btn" data-action="combine" {{#unless canCombine}}disabled{{/unless}}>
+            <i class="fas fa-fire"></i> Reforge
+        </button>
+    </div>
+
+    <div class="evo-section">
+        <h3>Augments</h3>
+        {{#if freeSlotSummary}}<p class="evo-free">Free slots: {{freeSlotSummary}}. Augments match their slot tier exactly; socketing is permanent until bake-in.</p>{{else}}<p class="evo-free">No free augment slots.</p>{{/if}}
+        {{#if augments.length}}
+        <ul class="evo-augment-list">
+            {{#each augments}}
+            <li>
+                <span class="evo-augment-name">{{name}}</span>
+                <span class="evo-augment-bonus">{{bonus}} ({{tier}})</span>
+                <button type="button" data-action="socket" data-augment-id="{{id}}" {{#unless fits}}disabled{{/unless}}>Socket</button>
+            </li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p class="evo-none">No augments in this character's inventory.</p>
+        {{/if}}
+    </div>
+    {{/if}}
+</section>

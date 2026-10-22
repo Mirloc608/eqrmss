@@ -81,6 +81,7 @@ import { combatCard } from "./chat-card.js";
 import { applyWornRoundEffects } from "../item-effects/worn-engine.js";
 import { levelCombatBonus } from "../progression/xp-engine.js";
 import { hasSpecialTrait } from "../utils/special-traits.js";
+import { evolutionOb } from "../gear/evolution.js";
 
 function esc(s) {
     return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -108,7 +109,8 @@ export function computeWeaponOB(actor, weaponItem) {
         ? actor?.items?.find?.(i => i.type === "skill" && i.system?.slug === skillId)
         : null;
     const skillBonus = Number(skill?.system?.bonus) || 0;
-    const obMod = Number(sys.obMod) || 0;
+    // Gear evolution: baked + socketed augment OB on the weapon itself.
+    const obMod = (Number(sys.obMod) || 0) + evolutionOb(weaponItem);
     // Prone (user ruling 2026-10-06 Option B): -30 to actions
     const proneRounds = Number(actor?.system?.status?.prone?.rounds) || 0;
     const pronePenalty = proneRounds > 0 ? -30 : 0;

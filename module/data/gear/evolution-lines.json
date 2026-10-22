@@ -1,0 +1,1615 @@
+{
+ "version": 1,
+ "comment": "Gear evolution line data (Stage 2, T1->T2). Eras: 0 classic, 1 kunark, 2 planar, 3 velious, 4 growth/mischief. A set marked crafted can be a form (transition target) but never fodder.",
+ "config": {
+  "trivialBase": 100,
+  "trivialStep": 60,
+  "npcFeeBaseGp": 50,
+  "npcFailChance": 0.05,
+  "tierNames": [
+   "minor",
+   "moderate",
+   "major",
+   "epic",
+   "artifact"
+  ],
+  "tierValues": {
+   "minor": 1,
+   "moderate": 3,
+   "major": 9,
+   "epic": 27,
+   "artifact": 81
+  }
+ },
+ "eras": [
+  "classic",
+  "kunark",
+  "planar",
+  "velious",
+  "growth"
+ ],
+ "sets": {
+  "apothic": {
+   "name": "Apothic",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Apothic Boots",
+    "Apothic Crown",
+    "Apothic Gloves",
+    "Apothic Kilt",
+    "Apothic Robe",
+    "Apothic Sleeves",
+    "Apothic Warband"
+   ]
+  },
+  "armor-of-harmony": {
+   "name": "Armor of Harmony",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Crown of Harmony",
+    "Gloves of Harmony",
+    "Greaves of Harmony",
+    "Hauberk of Harmony",
+    "Sandals of Harmony",
+    "Vambraces of Harmony",
+    "Wristguard of Harmony"
+   ]
+  },
+  "armor-of-ro": {
+   "name": "Armor of Ro",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Boots of Ro",
+    "Bracer of Ro",
+    "Breastplate of Ro",
+    "Gauntlets of Ro",
+    "Greaves of Ro",
+    "Helm of Ro",
+    "Vambraces of Ro"
+   ]
+  },
+  "armor-of-the-priest": {
+   "name": "Armor of the Priest",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Boots of the Reliant",
+    "Bracers of the Reverent",
+    "Chestplate of the Constant",
+    "Gauntlets of the Ardent",
+    "Greaves of the Penitent",
+    "Vambraces of the Fervent"
+   ]
+  },
+  "armor-of-the-untamed": {
+   "name": "Armor of the Untamed",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Boots of the Untamed",
+    "Bracer of the Untamed",
+    "Breastplate of the Untamed",
+    "Gauntlets of the Untamed",
+    "Greaves of the Untamed",
+    "Helm of the Untamed",
+    "Vambraces of the Untamed"
+   ]
+  },
+  "assassin": {
+   "name": "Assassin",
+   "era": 4,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Assassin's Boots",
+    "Assassin's Bracer",
+    "Assassin's Chain Leggings",
+    "Assassin's Chain Sleeves",
+    "Assassin's Chestguard",
+    "Assassin's Coif",
+    "Assassin's Gauntlets"
+   ]
+  },
+  "banded": {
+   "name": "Banded",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Banded Belt",
+    "Banded Boots",
+    "Banded Bracer",
+    "Banded Cloak",
+    "Banded Gauntlets",
+    "Banded Gorget",
+    "Banded Helm",
+    "Banded Leggings",
+    "Banded Mail",
+    "Banded Mantle",
+    "Banded Mask",
+    "Banded Sleeves"
+   ]
+  },
+  "barbed-ringmail": {
+   "name": "Barbed Ringmail",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Barbed Ringmail",
+    "Barbed Ringmail Gloves",
+    "Barbed Ringmail Leggings",
+    "Barbed Ringmail Shoulderpads",
+    "Barbed Ringmail Sleeves"
+   ]
+  },
+  "black-wolf": {
+   "name": "Black Wolf",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Black Wolf Armplates",
+    "Black Wolf Boots",
+    "Black Wolf Bracers",
+    "Black Wolf Cape",
+    "Black Wolf Collar",
+    "Black Wolf Crown",
+    "Black Wolf Gloves",
+    "Black Wolf Legplates",
+    "Black Wolf Mail",
+    "Black Wolf Mask",
+    "Black Wolf Pauldrons",
+    "Black Wolf Waistband"
+   ]
+  },
+  "blackened-alloy": {
+   "name": "Blackened Alloy",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Blackened Alloy Boots",
+    "Blackened Alloy Bracers",
+    "Blackened Alloy Coif",
+    "Blackened Alloy Collar",
+    "Blackened Alloy Gloves",
+    "Blackened Alloy Legplates",
+    "Blackened Alloy Mail"
+   ]
+  },
+  "blackened-iron": {
+   "name": "Blackened Iron",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Blackened Iron Boots",
+    "Blackened Iron Bracers",
+    "Blackened Iron Coif",
+    "Blackened Iron Collar",
+    "Blackened Iron Gloves",
+    "Blackened Iron Legplates",
+    "Blackened Iron Mail"
+   ]
+  },
+  "blighted": {
+   "name": "Blighted",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Blighted Armband",
+    "Blighted Boots",
+    "Blighted Gloves",
+    "Blighted Robe",
+    "Blighted Skullcap",
+    "Blighted Sleeves",
+    "Blighted Trousers"
+   ]
+  },
+  "blood-ember": {
+   "name": "Blood Ember",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Blood Ember Boots",
+    "Blood Ember Bracer",
+    "Blood Ember Breastplate",
+    "Blood Ember Gauntlets",
+    "Blood Ember Greaves",
+    "Blood Ember Helm",
+    "Blood Ember Vambraces"
+   ]
+  },
+  "bonecaster": {
+   "name": "Bonecaster",
+   "era": 4,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Boots of the Bonecaster",
+    "Crown of the Bonecaster",
+    "Gloves of the Bonecaster",
+    "Pantaloons of the Bonecaster",
+    "Robe of the Bonecaster",
+    "Sleeves of the Bonecaster",
+    "Wristband of the Bonecaster"
+   ]
+  },
+  "bronze": {
+   "name": "Bronze",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Bronze Boots",
+    "Bronze Bracers",
+    "Bronze Breastplate",
+    "Bronze Collar",
+    "Bronze Gauntlets",
+    "Bronze Girdle",
+    "Bronze Greaves",
+    "Bronze Helm",
+    "Bronze Mask",
+    "Bronze Pauldron",
+    "Bronze Vambraces",
+    "Splinted Bronze Cloak"
+   ]
+  },
+  "calcified-bone": {
+   "name": "Calcified Bone",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Calcified Bone Boots",
+    "Calcified Bone Bracer",
+    "Calcified Bone Breastplate",
+    "Calcified Bone Gauntlets",
+    "Calcified Bone Greaves",
+    "Calcified Bone Helm",
+    "Calcified Bone Vambraces"
+   ]
+  },
+  "carmine": {
+   "name": "Carmine",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Carmine Boots",
+    "Carmine Gloves",
+    "Carmine Pants",
+    "Carmine Robe",
+    "Carmine Sleeves",
+    "Carmine Trinket",
+    "Carmine Turban"
+   ]
+  },
+  "chainmail-iron": {
+   "name": "Chainmail / Iron",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Chain Coif",
+    "Chainmail Bracelet",
+    "Chainmail Cape",
+    "Chainmail Coat",
+    "Chainmail Gloves",
+    "Chainmail Mantle",
+    "Chainmail Neckguard",
+    "Chainmail Skirt",
+    "Iron Armplates",
+    "Iron Boots",
+    "Iron Legplates",
+    "Iron Mask"
+   ]
+  },
+  "cloth": {
+   "name": "Cloth",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Cloth Cap",
+    "Cloth Cap",
+    "Cloth Choker",
+    "Cloth Gloves",
+    "Cloth Sandals",
+    "Cloth Shawl",
+    "Cloth Shirt",
+    "Cloth Shirt",
+    "Cloth Sleeves",
+    "Cloth Veil",
+    "Cloth Wristband"
+   ]
+  },
+  "cobalt": {
+   "name": "Cobalt",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Cobalt Boots",
+    "Cobalt Bracer",
+    "Cobalt Breastplate",
+    "Cobalt Gauntlets",
+    "Cobalt Greaves",
+    "Cobalt Helm",
+    "Cobalt Vambraces"
+   ]
+  },
+  "conjuration": {
+   "name": "Conjuration",
+   "era": 4,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Boots of Conjuration",
+    "Circlet of Conjuration",
+    "Gloves of Conjuration",
+    "Pantaloons of Conjuration",
+    "Robe of Conjuration",
+    "Sleeves of Conjuration",
+    "Wristband of Conjuration"
+   ]
+  },
+  "crafted": {
+   "name": "Crafted",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Crafted Bracers",
+    "Crafted Breastplate",
+    "Crafted Gauntlets",
+    "Crafted Greaves",
+    "Crafted Helm",
+    "Crafted Pauldron",
+    "Crafted Vambraces"
+   ]
+  },
+  "cured-silk": {
+   "name": "Cured Silk",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Cured Silk Cloak",
+    "Cured Silk Collar",
+    "Cured Silk Headband",
+    "Cured Silk Leggings",
+    "Cured Silk Mantle",
+    "Cured Silk Mask",
+    "Cured Silk Sandals",
+    "Cured Silk Sash",
+    "Cured Silk Sleeves",
+    "Cured Silk Wristbands"
+   ]
+  },
+  "damask": {
+   "name": "Damask",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Damask Cap",
+    "Damask Collar",
+    "Damask Gloves",
+    "Damask Leggings",
+    "Damask Robe",
+    "Damask Sash",
+    "Damask Sleeves",
+    "Damask Veil",
+    "Damask Wristbands"
+   ]
+  },
+  "darkforge": {
+   "name": "Darkforge",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Darkforge Boots",
+    "Darkforge Bracer",
+    "Darkforge Breastplate",
+    "Darkforge Gauntlets",
+    "Darkforge Greaves",
+    "Darkforge Helm",
+    "Darkforge Vambraces"
+   ]
+  },
+  "decayed": {
+   "name": "Decayed Armor",
+   "era": 0,
+   "crafted": false,
+   "catalyst": true,
+   "materialClass": null,
+   "pieces": [
+    "Decayed Boots",
+    "Decayed Bracers",
+    "Decayed Breastplate",
+    "Decayed Gauntlets",
+    "Decayed Helm",
+    "Decayed Legplates",
+    "Decayed Vambraces",
+    "Decayed Visor"
+   ]
+  },
+  "deepwater": {
+   "name": "Deepwater",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Deepwater Boots",
+    "Deepwater Bracer",
+    "Deepwater Breastplate",
+    "Deepwater Gauntlets",
+    "Deepwater Greaves",
+    "Deepwater Helm",
+    "Deepwater Vambraces"
+   ]
+  },
+  "distraction": {
+   "name": "Distraction",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Boots of Distraction",
+    "Breastplate of Distraction",
+    "Crown of Distraction",
+    "Gloves of Distraction",
+    "Greaves of Distraction",
+    "Robe of Distraction",
+    "Vambraces of Distraction",
+    "Wristguard of Distraction"
+   ]
+  },
+  "donals": {
+   "name": "Donal's",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Donal's Boots of Mourning",
+    "Donal's Bracer of Mourning",
+    "Donal's Chestplate of Mourning",
+    "Donal's Gauntlets of Mourning",
+    "Donal's Helm of Mourning",
+    "Donal's Leggings of Mourning",
+    "Donal's Vambraces of Mourning"
+   ]
+  },
+  "elder-spiritist": {
+   "name": "Elder Spiritist",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Elder Spiritist's Boots",
+    "Elder Spiritist's Bracer",
+    "Elder Spiritist's Breastplate",
+    "Elder Spiritist's Gauntlets",
+    "Elder Spiritist's Greaves",
+    "Elder Spiritist's Helm",
+    "Elder Spiritist's Vambraces"
+   ]
+  },
+  "etched-iron": {
+   "name": "Etched Iron",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Etched Iron Boots",
+    "Etched Iron Bracers",
+    "Etched Iron Breastplate",
+    "Etched Iron Collar",
+    "Etched Iron Gauntlets",
+    "Etched Iron Girdle",
+    "Etched Iron Greaves",
+    "Etched Iron Helm",
+    "Etched Iron Mask",
+    "Etched Iron Pauldron",
+    "Etched Iron Vambraces"
+   ]
+  },
+  "ethereal-mist": {
+   "name": "Ethereal Mist",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Ethereal Mist Boots",
+    "Ethereal Mist Bracers",
+    "Ethereal Mist Chestplate",
+    "Ethereal Mist Gauntlets",
+    "Ethereal Mist Greaves",
+    "Ethereal Mist Helm",
+    "Ethereal Mist Vambraces"
+   ]
+  },
+  "fine-plate": {
+   "name": "Fine Plate",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Fine Plate Boots",
+    "Fine Plate Bracer",
+    "Fine Plate Breastplate",
+    "Fine Plate Collar",
+    "Fine Plate Gauntlets",
+    "Fine Plate Girdle",
+    "Fine Plate Greaves",
+    "Fine Plate Helm",
+    "Fine Plate Pauldron",
+    "Fine Plate Vambraces"
+   ]
+  },
+  "gladiators-chain": {
+   "name": "Gladiator's Chain",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Gladiator's Chain Leggings",
+    "Gladiator's Chain Sleeves"
+   ]
+  },
+  "gossamer": {
+   "name": "Gossamer",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Gossamer Cap",
+    "Gossamer Collar",
+    "Gossamer Gloves",
+    "Gossamer Leggings",
+    "Gossamer Robe",
+    "Gossamer Sash",
+    "Gossamer Sleeves",
+    "Gossamer Veil",
+    "Gossamer Wristbands"
+   ]
+  },
+  "imbrued": {
+   "name": "Imbrued",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Imbrued Platemail Boots",
+    "Imbrued Platemail Bracer",
+    "Imbrued Platemail Breastplate",
+    "Imbrued Platemail Gauntlets",
+    "Imbrued Platemail Greaves",
+    "Imbrued Platemail Helm",
+    "Imbrued Platemail Vambraces"
+   ]
+  },
+  "incandescent": {
+   "name": "Incandescent",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Incandescent Gloves",
+    "Incandescent Mask"
+   ]
+  },
+  "incarnadine": {
+   "name": "Incarnadine",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Incarnadine Boots",
+    "Incarnadine Bracers",
+    "Incarnadine Breastplate",
+    "Incarnadine Gauntlets",
+    "Incarnadine Greaves",
+    "Incarnadine Helm",
+    "Incarnadine Legplates",
+    "Incarnadine Vambraces"
+   ]
+  },
+  "indicolite": {
+   "name": "Indicolite",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Indicolite Boots",
+    "Indicolite Bracer",
+    "Indicolite Breastplate",
+    "Indicolite Gauntlets",
+    "Indicolite Greaves",
+    "Indicolite Helm",
+    "Indicolite Vambraces"
+   ]
+  },
+  "insidious": {
+   "name": "Insidious",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Insidious Gloves",
+    "Insidious Halo",
+    "Insidious Manacle",
+    "Insidious Pantaloons",
+    "Insidious Robe",
+    "Insidious Sleeves",
+    "Insidious Slippers"
+   ]
+  },
+  "ivy-etched": {
+   "name": "Ivy Etched",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Ivy Etched Belt",
+    "Ivy Etched Boots",
+    "Ivy Etched Bracer",
+    "Ivy Etched Cloak",
+    "Ivy Etched Gauntlets",
+    "Ivy Etched Gorget",
+    "Ivy Etched Helm",
+    "Ivy Etched Leggings",
+    "Ivy Etched Mask",
+    "Ivy Etched Sleeves",
+    "Ivy Etched Tunic"
+   ]
+  },
+  "jarsath-scale": {
+   "name": "Jarsath Scale",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Jarsath Scale Boots",
+    "Jarsath Scale Chestplate",
+    "Jarsath Scale Gauntlets",
+    "Jarsath Scale Helm",
+    "Jarsath Scale Leggings",
+    "Jarsath Scale Vambraces"
+   ]
+  },
+  "jaundiced-bone": {
+   "name": "Jaundiced Bone",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Jaundiced Bone Boots",
+    "Jaundiced Bone Bracer",
+    "Jaundiced Bone Breastplate",
+    "Jaundiced Bone Gauntlets",
+    "Jaundiced Bone Greaves",
+    "Jaundiced Bone Helm",
+    "Jaundiced Bone Vambraces"
+   ]
+  },
+  "kylong": {
+   "name": "Kylong",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Kylong Boots",
+    "Kylong Chestplate",
+    "Kylong Gauntlets",
+    "Kylong Greaves"
+   ]
+  },
+  "lambent": {
+   "name": "Lambent",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Lambent Boots",
+    "Lambent Bracers",
+    "Lambent Breastplate",
+    "Lambent Gauntlets",
+    "Lambent Greaves",
+    "Lambent Helm",
+    "Lambent Vambraces"
+   ]
+  },
+  "leather": {
+   "name": "Leather",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Leather Belt",
+    "Leather Belt",
+    "Leather Boots",
+    "Leather Cloak",
+    "Leather Gloves",
+    "Leather Gorget",
+    "Leather Leggings",
+    "Leather Leggings",
+    "Leather Mask",
+    "Leather Sleeves",
+    "Leather Tunic",
+    "Leather Tunic",
+    "Leather Wristbands"
+   ]
+  },
+  "legionnaire-scale": {
+   "name": "Legionnaire Scale",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Legionnaire Scale Boots",
+    "Legionnaire Scale Bracers",
+    "Legionnaire Scale Breastplate",
+    "Legionnaire Scale Gauntlets",
+    "Legionnaire Scale Greaves",
+    "Legionnaire Scale Helm",
+    "Legionnaire Scale Pauldron",
+    "Legionnaire Scale Vambraces"
+   ]
+  },
+  "mesh": {
+   "name": "Mesh",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Mesh Bracers",
+    "Mesh Gauntlets",
+    "Mesh Gorget",
+    "Mesh Helm",
+    "Mesh Leggings",
+    "Mesh Mantle",
+    "Mesh Mask",
+    "Mesh Tunic"
+   ]
+  },
+  "mrylokars": {
+   "name": "Mrylokar's",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Mrylokar's Boots",
+    "Mrylokar's Bracer",
+    "Mrylokar's Breastplate",
+    "Mrylokar's Gauntlets",
+    "Mrylokar's Greaves",
+    "Mrylokar's Helm",
+    "Mrylokar's Vambraces"
+   ]
+  },
+  "nathsar": {
+   "name": "Nathsar",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Nathsar Bracer",
+    "Nathsar Breastplate",
+    "Nathsar Gauntlets",
+    "Nathsar Helm",
+    "Nathsar Leggings",
+    "Nathsar Vambraces"
+   ]
+  },
+  "netted": {
+   "name": "Netted",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Netted Cap",
+    "Netted Choker",
+    "Netted Gloves",
+    "Netted Mantle",
+    "Netted Mask",
+    "Netted Shirt",
+    "Netted Sleeves",
+    "Netted Wristband"
+   ]
+  },
+  "noctivagant": {
+   "name": "Noctivagant",
+   "era": 4,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Noctivagant Boots",
+    "Noctivagant Bracer",
+    "Noctivagant Breastplate",
+    "Noctivagant Crown",
+    "Noctivagant Gauntlets",
+    "Noctivagant Greaves",
+    "Noctivagant Vambraces"
+   ]
+  },
+  "ornate-chain": {
+   "name": "Ornate Chain",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Ornate Chain Boots",
+    "Ornate Chain Cloak",
+    "Ornate Chain Coif",
+    "Ornate Chain Gloves",
+    "Ornate Chain Gorget",
+    "Ornate Chain Leggings",
+    "Ornate Chain Leggings",
+    "Ornate Chain Mail",
+    "Ornate Chain Mantle",
+    "Ornate Chain Skirt",
+    "Ornate Chain Sleeves",
+    "Ornate Chain Veil"
+   ]
+  },
+  "patchwork": {
+   "name": "Patchwork",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Patchwork Boots",
+    "Patchwork Cloak",
+    "Patchwork Sleeves",
+    "Patchwork Tunic"
+   ]
+  },
+  "ravenscale": {
+   "name": "Ravenscale",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Ravenscale Armguards",
+    "Ravenscale Belt",
+    "Ravenscale Boots",
+    "Ravenscale Bracer",
+    "Ravenscale Chestguard",
+    "Ravenscale Cloak",
+    "Ravenscale Coif",
+    "Ravenscale Gloves",
+    "Ravenscale Leggings",
+    "Ravenscale Mask",
+    "Ravenscale Neckguard",
+    "Ravenscale Shoulderpads"
+   ]
+  },
+  "raw-hide": {
+   "name": "Raw-Hide",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Raw-hide Belt",
+    "Raw-hide Boots",
+    "Raw-hide Cloak",
+    "Raw-hide Gloves",
+    "Raw-hide Gorget",
+    "Raw-hide Leggings",
+    "Raw-hide Mask",
+    "Raw-hide Sleeves",
+    "Raw-hide Tunic",
+    "Raw-hide Wristbands"
+   ]
+  },
+  "raw-silk": {
+   "name": "Raw Silk",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Raw Silk Cloak",
+    "Raw Silk Collar",
+    "Raw Silk Gloves",
+    "Raw Silk Headband",
+    "Raw Silk Leggings",
+    "Raw Silk Mantle",
+    "Raw Silk Mask",
+    "Raw Silk Robe",
+    "Raw Silk Sandals",
+    "Raw Silk Sash",
+    "Raw Silk Sleeves",
+    "Raw Silk Wristbands"
+   ]
+  },
+  "ringmail": {
+   "name": "Ringmail",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Ringmail Boots",
+    "Ringmail Coat",
+    "Ringmail Coif",
+    "Ringmail Gloves",
+    "Ringmail Mantle",
+    "Ringmail Skirt",
+    "Ringmail Sleeves"
+   ]
+  },
+  "rubicite": {
+   "name": "Rubicite",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Rubicite Boots",
+    "Rubicite Bracers",
+    "Rubicite Breastplate",
+    "Rubicite Cloak",
+    "Rubicite Collar",
+    "Rubicite Gauntlets",
+    "Rubicite Greaves",
+    "Rubicite Helm",
+    "Rubicite Mask",
+    "Rubicite Pauldron",
+    "Rubicite Vambraces"
+   ]
+  },
+  "rune-etched": {
+   "name": "Rune Etched",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Rune Etched Boots",
+    "Rune Etched Bracer",
+    "Rune Etched Chestplate",
+    "Rune Etched Gauntlets",
+    "Rune Etched Greaves",
+    "Rune Etched Helm",
+    "Rune Etched Vambraces"
+   ]
+  },
+  "scaled-hierophant": {
+   "name": "Scaled Hierophant",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Scaled Hierophant Boots",
+    "Scaled Hierophant Bracers",
+    "Scaled Hierophant Breastplate",
+    "Scaled Hierophant Cloak",
+    "Scaled Hierophant Gauntlets",
+    "Scaled Hierophant Greaves",
+    "Scaled Hierophant Helm",
+    "Scaled Hierophant Vambraces"
+   ]
+  },
+  "scaled-mystic": {
+   "name": "Scaled Mystic",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Scaled Mystic Boots",
+    "Scaled Mystic Bracers",
+    "Scaled Mystic Breastplate",
+    "Scaled Mystic Cloak",
+    "Scaled Mystic Gauntlets",
+    "Scaled Mystic Greaves",
+    "Scaled Mystic Helm",
+    "Scaled Mystic Vambraces"
+   ]
+  },
+  "sebilite-scale": {
+   "name": "Sebilite Scale",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Sebilite Scale Belt",
+    "Sebilite Scale Boots",
+    "Sebilite Scale Bracelet",
+    "Sebilite Scale Cap",
+    "Sebilite Scale Coat",
+    "Sebilite Scale Gloves",
+    "Sebilite Scale Leggings",
+    "Sebilite Scale Mantle",
+    "Sebilite Scale Mask",
+    "Sebilite Scale Neckguard",
+    "Sebilite Scale Vambraces"
+   ]
+  },
+  "shadowbound": {
+   "name": "Shadowbound",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Robe of Enshroudment",
+    "ShadowBound Boots",
+    "ShadowBound Gloves"
+   ]
+  },
+  "shiverback-hide": {
+   "name": "Shiverback-hide",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Shiverback-hide Armbands",
+    "Shiverback-hide Boots",
+    "Shiverback-hide Gloves",
+    "Shiverback-hide Jerkin",
+    "Shiverback-hide Leggings",
+    "Shiverback-hide Wristbands"
+   ]
+  },
+  "singing-steel": {
+   "name": "Singing Steel",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Singing Steel Boots",
+    "Singing Steel Bracer",
+    "Singing Steel Breastplate",
+    "Singing Steel Gauntlets",
+    "Singing Steel Greaves",
+    "Singing Steel Helm",
+    "Singing Steel Vambraces"
+   ]
+  },
+  "stability": {
+   "name": "Stability",
+   "era": 4,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Boots of Stability",
+    "Bracer of Stability",
+    "Chestplate of Stability",
+    "Crown of Stability",
+    "Gauntlets of Stability",
+    "Greaves of Stability",
+    "Vambraces of Stability"
+   ]
+  },
+  "starter": {
+   "name": "Starter Armor",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": null,
+   "pieces": []
+  },
+  "steel": {
+   "name": "Steel",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Plate Gauntlets",
+    "Plate Girdle",
+    "Platemail Helm",
+    "Splinted Cloak",
+    "Steel Bracers",
+    "Steel Breastplate",
+    "Steel Collar",
+    "Steel Mask",
+    "Steel Pauldron",
+    "Steel Plate Boots",
+    "Steel Vambraces"
+   ]
+  },
+  "studded": {
+   "name": "Studded",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Studded Belt",
+    "Studded Boots",
+    "Studded Cloak",
+    "Studded Gloves",
+    "Studded Gorget",
+    "Studded Leggings",
+    "Studded Mask",
+    "Studded Sleeves",
+    "Studded Tunic",
+    "Studded Wristbands"
+   ]
+  },
+  "tattered": {
+   "name": "Tattered",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Tattered Belt",
+    "Tattered Gloves",
+    "Tattered Gorget",
+    "Tattered Mask",
+    "Tattered Shoulderpads",
+    "Tattered Skullcap",
+    "Tattered Wristbands"
+   ]
+  },
+  "thorny-vine": {
+   "name": "Thorny Vine",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Thorny Vine Boots",
+    "Thorny Vine Bracer",
+    "Thorny Vine Chestplate",
+    "Thorny Vine Gauntlets",
+    "Thorny Vine Greaves",
+    "Thorny Vine Helm",
+    "Thorny Vine Vambraces"
+   ]
+  },
+  "tolans-darkwood": {
+   "name": "Tolan's Darkwood",
+   "era": 1,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Tolan's Darkwood Boots",
+    "Tolan's Darkwood Bracer",
+    "Tolan's Darkwood Breastplate",
+    "Tolan's Darkwood Gauntlets",
+    "Tolan's Darkwood Greaves",
+    "Tolan's Darkwood Helm",
+    "Tolan's Darkwood Vambraces"
+   ]
+  },
+  "totemic": {
+   "name": "Totemic",
+   "era": 0,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Totemic Boots",
+    "Totemic Bracers",
+    "Totemic Breastplate",
+    "Totemic Cloak",
+    "Totemic Gauntlets",
+    "Totemic Greaves",
+    "Totemic Helm",
+    "Totemic Vambraces"
+   ]
+  },
+  "umbral": {
+   "name": "Umbral",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "plate",
+   "pieces": [
+    "Umbral Platemail Boots",
+    "Umbral Platemail Bracer",
+    "Umbral Platemail Breastplate",
+    "Umbral Platemail Gauntlets",
+    "Umbral Platemail Greaves",
+    "Umbral Platemail Helm",
+    "Umbral Platemail Vambraces"
+   ]
+  },
+  "untamed-leather": {
+   "name": "Untamed Leather",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "leather",
+   "pieces": [
+    "Untamed Leather Boots",
+    "Untamed Leather Bracer",
+    "Untamed Leather Gloves",
+    "Untamed Leather Helm",
+    "Untamed Leather Leggings",
+    "Untamed Leather Sleeves",
+    "Untamed Leather Tunic"
+   ]
+  },
+  "worn-elemental": {
+   "name": "Worn Elemental",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Worn Elemental Cap",
+    "Worn Elemental Gloves",
+    "Worn Elemental Pantaloons",
+    "Worn Elemental Robe",
+    "Worn Elemental Sandals",
+    "Worn Elemental Sleeves",
+    "Worn Elemental Wristband"
+   ]
+  },
+  "woven": {
+   "name": "Woven",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Woven Cap",
+    "Woven Collar",
+    "Woven Gloves",
+    "Woven Leggings",
+    "Woven Mantle",
+    "Woven Mask",
+    "Woven Sleeves",
+    "Woven Tunic",
+    "Woven Wristbands"
+   ]
+  },
+  "woven-shadow": {
+   "name": "Woven Shadow",
+   "era": 2,
+   "crafted": false,
+   "catalyst": false,
+   "materialClass": "chain",
+   "pieces": [
+    "Woven Shadow Boots",
+    "Woven Shadow Bracer",
+    "Woven Shadow Chestplate",
+    "Woven Shadow Gauntlets",
+    "Woven Shadow Greaves",
+    "Woven Shadow Helm",
+    "Woven Shadow Vambraces"
+   ]
+  },
+  "wus-fighting-armor": {
+   "name": "Wu's Fighting Armor",
+   "era": 0,
+   "crafted": true,
+   "catalyst": false,
+   "materialClass": "cloth",
+   "pieces": [
+    "Wu's Fighting Cap",
+    "Wu's Fighting Cloak",
+    "Wu's Fighting Collar",
+    "Wu's Fighting Gauntlets",
+    "Wu's Fighting Mantle",
+    "Wu's Fighting Mask",
+    "Wu's Fighting Pantaloons",
+    "Wu's Fighting Sash",
+    "Wu's Fighting Shirt",
+    "Wu's Fighting Sleeves",
+    "Wu's Fighting Slippers",
+    "Wu's Fighting Wristbands",
+    "Wu's Fist of Mastery",
+    "Wu's Quivering Staff",
+    "Wu's Tranquil Fist"
+   ]
+  }
+ },
+ "armorLines": {
+  "warrior": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "crafted",
+     "name": "Crafted"
+    }
+   ]
+  },
+  "cleric": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "armor-of-the-priest",
+     "name": "Armor of the Priest"
+    }
+   ]
+  },
+  "paladin": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "armor-of-ro",
+     "name": "Armor of Ro"
+    }
+   ]
+  },
+  "shadowknight": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "darkforge",
+     "name": "Darkforge",
+     "eatSet": "decayed"
+    }
+   ]
+  },
+  "ranger": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "ivy-etched",
+     "name": "Ivy Etched"
+    }
+   ]
+  },
+  "druid": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "untamed-leather",
+     "name": "Untamed Leather"
+    }
+   ]
+  },
+  "monk": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "wus-fighting-armor",
+     "name": "Wu's Fighting Armor"
+    }
+   ]
+  },
+  "bard": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "lambent",
+     "name": "Lambent"
+    }
+   ]
+  },
+  "rogue": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "ravenscale",
+     "name": "Ravenscale",
+     "variants": {
+      "barbarian": "black-wolf"
+     }
+    }
+   ]
+  },
+  "shaman": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "totemic",
+     "name": "Totemic"
+    }
+   ]
+  },
+  "necromancer": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "shadowbound",
+     "name": "Shadowbound"
+    }
+   ]
+  },
+  "wizard": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "cured-silk",
+     "name": "Cured Silk"
+    }
+   ]
+  },
+  "magician": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "worn-elemental",
+     "name": "Worn Elemental"
+    }
+   ]
+  },
+  "enchanter": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    },
+    {
+     "form": 2,
+     "set": "incandescent",
+     "name": "Incandescent"
+    }
+   ]
+  },
+  "beastlord": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    }
+   ]
+  },
+  "berserker": {
+   "forms": [
+    {
+     "form": 1,
+     "set": "starter",
+     "name": "Starter Armor"
+    }
+   ]
+  }
+ },
+ "weaponLine": {
+  "forms": [
+   {
+    "form": 1,
+    "name": "Tarnished",
+    "material": "iron",
+    "condition": "worn"
+   },
+   {
+    "form": 2,
+    "name": "Forged",
+    "material": "steel",
+    "condition": "normal"
+   }
+  ]
+ }
+}

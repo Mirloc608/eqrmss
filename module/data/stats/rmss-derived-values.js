@@ -6,6 +6,7 @@ import { isWorn } from "../../utils/equipment/equipment-utils.js";
 import { getEffectiveContainerWeight } from "../../utils/inventory/container-storage.js";
 import { rmssStatBonus } from "./rmss-stat-bonus.js";
 import { stanceDBBonus } from "../../combat/stance.js";
+import { evolutionDb } from "../../gear/evolution.js";
 
 /**
  * Shared "is this item worn?" check: the location dropdown is
@@ -237,7 +238,8 @@ export function calculateArmorAndDefenses(actorData) {
     const otherDB = Number(combat.otherDB ?? 0);
     const armorDB = Number(combat.armorDB ?? 0);
     // Arms Companion 5.1/6.23: worn armor's enhancement/quality DB bonus.
-    const enhancedArmorDB = wornArmor.reduce((sum, i) => sum + (Number(i.system?.dbBonus) || 0), 0);
+    // Gear evolution (baked + socketed augment DB) rides the same total.
+    const enhancedArmorDB = wornArmor.reduce((sum, i) => sum + (Number(i.system?.dbBonus) || 0) + evolutionDb(i), 0);
 
     // Adrenal Defense (§4.4.3): the skill's bonus adds to DB, but the
     // skill is restrictive — it does not work while wearing armor.

@@ -1200,6 +1200,23 @@ export class TradeskillCombineDialog extends BaseApplication {
     }
 
     async _createProduct(product, quality = "normal", recipeId = null) {
+        // Technique products (gear evolution, 2026-10-21): a successful
+        // research combine teaches the technique — an actor flag, no item.
+        // (attemptCombine calls here with quality "broken" on a crit
+        // fail; a failed research teaches nothing.)
+        if (product.type === "technique") {
+            if (quality === "broken") {
+                ui.notifications.warn(`The research collapses — ${product.name ?? "the technique"} is not learned.`);
+                return;
+            }
+            const id = `${product.technique}-${product.tier}`;
+            const known = this.actor.getFlag("eqrmss", "techniques") ?? [];
+            if (!known.includes(id)) {
+                await this.actor.setFlag("eqrmss", "techniques", [...known, id]);
+            }
+            ui.notifications.info(`Technique learned: ${product.name ?? id}.`);
+            return;
+        }
         // Handle polish product type (2026-10-14): transform weapon condition
         if (product.type === "polish" && recipeId) {
             const weaponId = this._getSelectedWeapon(recipeId);

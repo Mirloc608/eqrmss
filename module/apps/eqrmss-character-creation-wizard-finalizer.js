@@ -647,6 +647,15 @@ export class EQRMSSCharacterCreationWizardFinalizer {
             delete system.slot;
           }
         }
+        if (entry.type === "armor" || entry.type === "weapon") {
+          // Gear evolution (Stage 2): kit gear is the vessel — form 1
+          // of the class's evolution line.
+          system.evolution = {
+            line: key, form: 1, combines: 0,
+            bakedDb: 0, bakedOb: 0, augments: [],
+            ...(entry.type === "armor" ? { set: "starter" } : {})
+          };
+        }
         if (Object.keys(system).length) item.system = system;
         items.push(item);
       }
