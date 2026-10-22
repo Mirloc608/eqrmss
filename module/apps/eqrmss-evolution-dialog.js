@@ -4,7 +4,8 @@
 // ApplicationV2 — reforge a vessel piece: eat fodder to ripen it
 // (in-form combines add ternary augment slots) or eat the authored
 // transition piece to take the next form. Two routes: DIY (tiered
-// tradeskill combine, technique learned via Research) or a paid
+// tradeskill combine, technique learned via Smithing, Tailoring,
+// or Fletching) or a paid
 // NPC (fee doubles per tier, 5% failure, fee kept on failure).
 // On any failure the vessel is returned intact; the fodder is lost.
 // ============================================================
@@ -354,7 +355,7 @@ export class EvolutionDialog extends BaseApplication {
         } else {
             const technique = verdict.kind === "transition" ? `transition-${tier}` : `socketing-${tier}`;
             const known = (actor.getFlag("eqrmss", "techniques") ?? []).includes(technique);
-            if (!known) return ui.notifications.warn(`The technique "Reforge: ${verdict.kind === "transition" ? "Transition" : "Socketing"} (Tier ${tier})" must be learned through Research first.`);
+            if (!known) return ui.notifications.warn(`The technique "Reforge: ${verdict.kind === "transition" ? "Transition" : "Socketing"} (Tier ${tier})" must be learned first (Smithing, Tailoring, or Fletching).`);
             const skillId = skillForVessel(vessel, state);
             const access = canUseTradeskill(actor, skillId);
             if (!access.allowed) return ui.notifications.warn(access.reason);
