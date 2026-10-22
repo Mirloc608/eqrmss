@@ -2310,3 +2310,150 @@ button.rank-badge:hover {
 .application.eqrmss-npc-wizard .eqrmss-special-toggle:has(input:checked) .eqrmss-special-name {
   font-weight: 700;
 }
+
+/* Evolution dialog (Reforge) — PARCHMENT THEME (2026-10-22)
+   The dialog shipped without any CSS: the vessel icon rendered at
+   natural size and pushed the Reforge controls out of the window.
+   These rules size the header icon and lay out the two sections. */
+.application:has(.evolution-dialog) .window-content {
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,250,230,.7), rgba(255,250,230,0) 60%),
+    linear-gradient(165deg, #e9d6a4 0%, #dec48f 50%, #cfb178 100%);
+  color: #3a2a18;
+}
+.evolution-dialog {
+  color: #3a2a18;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.evolution-dialog .evo-vessel-head {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.evolution-dialog .evo-vessel-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex: 0 0 auto;
+  border: 1px solid #5f4a2f;
+  border-radius: 6px;
+  background: rgba(255, 250, 235, 0.55);
+}
+.evolution-dialog .evo-vessel-info h2 {
+  margin: 0 0 4px;
+  color: #3a2a18;
+  border-bottom: 2px solid #5f4a2f;
+  padding-bottom: 4px;
+}
+.evolution-dialog .evo-form-line {
+  margin: 2px 0;
+  font-size: 13px;
+}
+.evolution-dialog .evo-sockets {
+  margin: 4px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.evolution-dialog .evo-slot {
+  border: 1px solid #5f4a2f;
+  border-radius: 10px;
+  padding: 1px 8px;
+  font-size: 11px;
+  background: rgba(255, 250, 235, 0.4);
+}
+.evolution-dialog .evo-slot.filled {
+  background: #d9c08a;
+  font-weight: 700;
+}
+.evolution-dialog .evo-slot.none {
+  border-style: dashed;
+  color: #7a6448;
+}
+.evolution-dialog .evo-baked {
+  margin: 2px 0;
+  font-size: 12px;
+  font-style: italic;
+}
+.evolution-dialog .evo-not-evolvable {
+  margin: 4px 0;
+  font-style: italic;
+}
+.evolution-dialog .evo-section {
+  background: rgba(255, 250, 235, 0.45);
+  border: 1px solid #5f4a2f;
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 3px rgba(60, 40, 20, 0.25);
+}
+.evolution-dialog .evo-section h3 {
+  margin: 0 0 8px;
+  color: #3a2a18;
+  border-bottom: 1px solid #5f4a2f;
+  padding-bottom: 4px;
+}
+.evolution-dialog .evo-fodder-label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.evolution-dialog .evo-fodder-select {
+  width: 100%;
+  margin-top: 4px;
+}
+.evolution-dialog .evo-verdict {
+  margin: 6px 0;
+  font-size: 13px;
+}
+.evolution-dialog .evo-verdict.ok { color: #3d621e; }
+.evolution-dialog .evo-verdict.bad { color: #8a3324; }
+.evolution-dialog .evo-routes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 8px 0;
+}
+.evolution-dialog .evo-routes label {
+  display: block;
+  font-size: 13px;
+}
+.evolution-dialog .evo-warn {
+  color: #8a3324;
+  font-weight: 700;
+}
+.evolution-dialog .evo-stakes {
+  font-size: 12px;
+  font-style: italic;
+  color: #7a6448;
+  margin: 6px 0;
+}
+.evolution-dialog .evo-combine-btn {
+  width: 100%;
+}
+.evolution-dialog .evo-free,
+.evolution-dialog .evo-none {
+  font-size: 13px;
+  margin: 4px 0;
+}
+.evolution-dialog .evo-augment-list {
+  list-style: none;
+  margin: 6px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.evolution-dialog .evo-augment-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.evolution-dialog .evo-augment-name { font-weight: 700; }
+.evolution-dialog .evo-augment-bonus {
+  font-size: 12px;
+  color: #7a6448;
+  margin-right: auto;
+}
