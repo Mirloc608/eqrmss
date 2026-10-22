@@ -75,7 +75,7 @@ export function formCap(form) { return Math.max(0, Math.floor(Number(form) || 0)
 
 /** DIY trivial for a combine performed in the given form (tier). */
 export function trivialForTier(cfg, tier) {
-    return (Number(cfg?.trivialBase) || 100) + ((Number(cfg?.trivialStep) || 60) * (Math.max(1, tier) - 1));
+    return (Number(cfg?.trivialBase) || 25) + ((Number(cfg?.trivialStep) || 60) * (Math.max(1, tier) - 1));
 }
 
 /** NPC fee in gold pieces for a combine in the given form (tier). */
