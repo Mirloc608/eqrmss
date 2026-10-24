@@ -13,6 +13,48 @@
 
 import { rmssRankBonus } from "../../../data/skills/rmss-rank-bonus.js";
 
+// ---------------------------------------------------------------------------
+// DP cost of staged ranks. RMSS cost strings are "a/b": the first rank
+// staged in a pass costs a, each further rank costs b; a single "a" (or
+// "a/*") costs a per rank. Same convention as the creation wizard's
+// development passes. Costs come from the skill catalog entry — the
+// figure the Skills tab shows in its Cost column.
+// ---------------------------------------------------------------------------
+function stagedRankStepCost(costStr, stepIndex) {
+    const parts = String(costStr ?? "").split("/").map(s => s.trim());
+    const first = Number.parseInt(parts[0], 10);
+    if (!Number.isFinite(first)) return null;
+    if (stepIndex <= 0) return first;
+    const rest = parts.length > 1 ? Number.parseInt(parts[1], 10) : NaN;
+    return Number.isFinite(rest) ? rest : first;
+}
+
+// Signed DP delta for moving staged ranks from -> to: positive = charge,
+// negative = refund. The 3->0 cycle wrap refunds every staged step.
+function stagedRankCostDelta(costStr, from, to) {
+    if (to === from) return 0;
+    let total = 0;
+    if (to > from) {
+        for (let i = from; i < to; i++) {
+            const c = stagedRankStepCost(costStr, i);
+            if (c === null) return null;
+            total += c;
+        }
+        return total;
+    }
+    for (let i = to; i < from; i++) {
+        const c = stagedRankStepCost(costStr, i);
+        if (c === null) return null;
+        total += c;
+    }
+    return -total;
+}
+
+function catalogCostFor(skillId) {
+    const entry = globalThis.CONFIG?.EQRMSS?.skills?.[skillId];
+    return entry?.system?.cost ?? entry?.cost ?? null;
+}
+
 export class EQRMSSActorSkillsHelper {
 
     constructor(sheet) {
@@ -76,6 +118,27 @@ export class EQRMSSActorSkillsHelper {
                     await this.actor.update({
                         "system.tradeskillPoints": pool - actualDelta
                     });
+                } else if (next !== current) {
+                    // Development Points (2026-10-22): staging a rank on a
+                    // regular skill charges DP at the catalog cost;
+                    // un-staging refunds. Pool is the accumulating
+                    // system.character.developmentPoints granted per level.
+                    const costStr = catalogCostFor(skillId);
+                    const delta = stagedRankCostDelta(costStr, current, next);
+                    if (delta === null) {
+                        ui.notifications.warn(`No DP cost configured for ${item.name}; cannot buy ranks.`);
+                        return;
+                    }
+                    const pool = Number(this.actor.system?.character?.developmentPoints ?? 0);
+                    if (delta > 0 && pool < delta) {
+                        ui.notifications.warn(`Not enough development points (need ${delta}, have ${pool}).`);
+                        return;
+                    }
+                    if (delta !== 0) {
+                        await this.actor.update({
+                            "system.character.developmentPoints": pool - delta
+                        });
+                    }
                 }
 
                 await item.update({ "system.new_rank": next });
@@ -148,6 +211,22 @@ export class EQRMSSActorSkillsHelper {
                         return;
                     }
                     await this.actor.update({ "system.tradeskillPoints": pool - 1 });
+                } else {
+                    // Development Points (2026-10-22): developing a regular
+                    // skill stages its first rank (new_rank: 1 below), so it
+                    // charges the first-rank DP cost — mirroring the
+                    // tradeskill pool charge above and the rank toggle.
+                    const firstCost = stagedRankStepCost(catalogSkill?.system?.cost ?? catalogSkill?.cost, 0);
+                    if (firstCost === null) {
+                        ui.notifications.warn(`No DP cost configured for ${skillName}; cannot develop.`);
+                        return;
+                    }
+                    const pool = Number(this.actor.system?.character?.developmentPoints ?? 0);
+                    if (pool < firstCost) {
+                        ui.notifications.warn(`Not enough development points (need ${firstCost}, have ${pool}).`);
+                        return;
+                    }
+                    await this.actor.update({ "system.character.developmentPoints": pool - firstCost });
                 }
                 
                 // Create skill Item on actor (maxRanks from visibility cap, if any)

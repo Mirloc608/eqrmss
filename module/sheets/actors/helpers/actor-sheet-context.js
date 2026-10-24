@@ -333,7 +333,7 @@ export class EQRMSSActorContextHelper {
                     const specId = String(actorRef?.system?.tradeskillSpecialization ?? "");
                     const isSpec = specId === skill.id;
                     const canSpec = TRADESKILL_GENERAL_IDS.has(skill.id);
-                    return { id: skill.id, name: skill.name, category, description: skill.system?.description ?? skill.description ?? "", developed: !!dev, itemId: dev?.id ?? null, ranks: dev ? Number(dev.system?.ranks ?? 0) : 0, cost: skill.system?.cost ?? skill.cost ?? "-", isTradeskill: isTs, canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed, maxRanks: _skillRankCap(skill.id), isSpecialized: isSpec, canSpecialize: canSpec, specializationId: specId };
+                    return { id: skill.id, name: skill.name, category, description: skill.system?.description ?? skill.description ?? "", developed: !!dev, itemId: dev?.id ?? null, ranks: dev ? Number(dev.system?.ranks ?? 0) : 0, newRank: dev ? Number(dev.system?.new_rank ?? 0) : 0, cost: skill.system?.cost ?? skill.cost ?? "-", isTradeskill: isTs, canCombine: !isTs || canUseTradeskill(actorRef, skill.id).allowed, maxRanks: _skillRankCap(skill.id), isSpecialized: isSpec, canSpecialize: canSpec, specializationId: specId };
                 }).filter(s => _isSkillVisible(s.id, s.category)).sort((a, b) => String(a.name).localeCompare(String(b.name)));
             } catch (e) { return []; }
         })();
@@ -361,6 +361,7 @@ export class EQRMSSActorContextHelper {
             skillGroups: _skillGroups,
             skillCategories: items.filter(i => i?.type === "skillcategory"),
             tradeskillPoints: Number(this.actor?.system?.tradeskillPoints ?? 0),
+            developmentPoints: Number(this.actor?.system?.character?.developmentPoints ?? 0),
             inventory: items.filter(i => new Set(["item", "consumable", "jewelry", "shield", "transport"]).has(i?.type)),
             languages: items.filter(i => i?.type === "language")
         };

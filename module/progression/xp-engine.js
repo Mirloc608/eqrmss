@@ -281,11 +281,14 @@ export async function applyLevelUp(actor) {
 
     // --- Development points (RMSS §3.2.1, Table 15.1.1) ---
     // Book-pure: sum of DP for CO/AG/SD/RE/ME using temporary values.
+    // The grant is folded into the level update payload below — a bare
+    // in-memory mutation of actor.system never reaches the database,
+    // so granted DP used to evaporate on reload (fixed 2026-10-22).
+    let dpGrant = 0;
     try {
         const pts = developmentPointsForActor(actor);
         if (actor?.system?.character) {
-            actor.system.character.developmentPoints =
-                Number(actor.system.character.developmentPoints ?? 0) + pts;
+            dpGrant = pts;
             summary.dp = pts;
         }
     } catch (e) { console.warn("EQRMSS | XP engine: DP grant failed", e); }
@@ -300,6 +303,10 @@ export async function applyLevelUp(actor) {
 
     // --- Increment level (canonical field) ---
     const updates = { "system.attributes.level.value": nextLevel };
+    if (dpGrant > 0) {
+        updates["system.character.developmentPoints"] =
+            Number(actor.system.character.developmentPoints ?? 0) + dpGrant;
+    }
     // Keep legacy system.level in sync if present.
     if (actor?.system?.level !== undefined) updates["system.level"] = nextLevel;
     await actor.update(updates);
