@@ -1252,7 +1252,7 @@ export class TradeskillCombineDialog extends BaseApplication {
                 const templateId = sys.template ?? sys.weaponTemplate;
                 const materialId = sys.material;
                 if (weapons && typeof weapons.compose === "function" && templateId && materialId) {
-                    const composed = weapons.compose(templateId, materialId, toCond);
+                    const composed = weapons.compose(templateId, materialId, toCond, sys.damageType ?? null);
                     if (composed?.name) newName = composed.name;
                 } else {
                     // Fallback: strip old condition prefix (case-insensitive, anywhere)
@@ -1315,12 +1315,10 @@ export class TradeskillCombineDialog extends BaseApplication {
                 const composed = weapons.compose(
                     product.weaponTemplate,
                     materialId,
-                    quality
+                    quality,
+                    product.infusedDamageType ?? null
                 );
-                await this.actor.createEmbeddedDocuments("Item", [{
-                    name: composed.name,
-                    type: "weapon",
-                    system: {
+                const craftedSystem = {
                         weaponTemplate: composed.templateId,
                         material: composed.materialId,
                         condition: composed.conditionId,
@@ -1331,7 +1329,21 @@ export class TradeskillCombineDialog extends BaseApplication {
                         damageMod: composed.damageMod,
                         quantity: product.qty ?? 1,
                         description: `Crafted via tradeskill (${quality}).`
-                    }
+                    };
+                // Composer-provided stats and weapon properties
+                // (2026-10-23), mirroring the kit finalizers: attack
+                // table, Infused damage type, magic flag, class list.
+                if (composed.attackTable != null) craftedSystem.attackTable = composed.attackTable;
+                if (composed.length != null) craftedSystem.length = composed.length;
+                if (composed.criticalType != null) craftedSystem.criticalType = composed.criticalType;
+                if (composed.fumble != null) craftedSystem.fumble_range = composed.fumble;
+                if (composed.damageType != null) craftedSystem.damageType = composed.damageType;
+                if (composed.magicWeapon != null) craftedSystem.magicWeapon = composed.magicWeapon;
+                if (composed.classes != null) craftedSystem.classes = composed.classes;
+                await this.actor.createEmbeddedDocuments("Item", [{
+                    name: composed.name,
+                    type: "weapon",
+                    system: craftedSystem
                 }]);
                 return;
             } catch (e) {

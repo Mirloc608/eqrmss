@@ -718,7 +718,8 @@ export class EQRMSSCharacterCreationWizardFinalizer {
       const composed = weapons.compose(
         entry.weaponTemplate,
         entry.material ?? "steel",
-        entry.condition ?? "normal"
+        entry.condition ?? "normal",
+        entry.infusedDamageType ?? null
       );
       const breakageStr = composed.breakage
         ? composed.breakage.join("-") +
@@ -744,6 +745,11 @@ export class EQRMSSCharacterCreationWizardFinalizer {
       if (composed.length != null) system.length = composed.length;
       if (composed.criticalType != null) system.criticalType = composed.criticalType;
       if (composed.notes != null) system.notes = composed.notes;
+      // Weapon properties (2026-10-23): Infused damage type, magic
+      // flag, template class list — persisted when provided.
+      if (composed.damageType != null) system.damageType = composed.damageType;
+      if (composed.magicWeapon != null) system.magicWeapon = composed.magicWeapon;
+      if (composed.classes != null) system.classes = composed.classes;
       return system;
     } catch (error) {
       console.warn("EQRMSS | Finalizer | kit weapon compose failed (non-fatal)", error);

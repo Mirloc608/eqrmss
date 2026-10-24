@@ -108,6 +108,13 @@ export default class EQRMSSWeaponSheet extends EQRMSSItemSheet {
     if (composed.proc != null) updates["system.proc"] = composed.proc;
     // Notes come from the chart when present; a GM's manual entry is otherwise preserved.
     if (composed.notes != null) updates["system.notes"] = composed.notes;
+    // Weapon properties from the composer (2026-10-23): Infused damage
+    // type, the magic-weapon flag, and the template class list (H2H
+    // Monk/Beastlord restrictions) persist when the composer provides
+    // them; manual entries are otherwise preserved.
+    if (composed.damageType != null) updates["system.damageType"] = composed.damageType;
+    if (composed.magicWeapon != null) updates["system.magicWeapon"] = composed.magicWeapon;
+    if (composed.classes != null) updates["system.classes"] = composed.classes;
 
     await this.document.update(updates);
   }

@@ -48,23 +48,50 @@ export async function loadWeaponData() {
 }
 
 /**
+ * Damage types an Infused weapon can carry (user ruling 2026-10-23:
+ * "Infused" grants the weapon a natural damage type — nothing else).
+ * The vocabulary is the system's element set (spell data elements and
+ * BOLT_BY_ELEMENT in module/spells/spell-mapping.js): fire, cold,
+ * electric, water, magic, arcane, poison, disease. An un-infused
+ * weapon deals physical damage and carries damageType null.
+ */
+export const INFUSED_DAMAGE_TYPES = [
+    "fire", "cold", "electric", "water", "magic", "arcane", "poison", "disease"
+];
+
+function normalizeDamageType(value) {
+    const v = String(value ?? "").trim().toLowerCase();
+    return INFUSED_DAMAGE_TYPES.includes(v) ? v : null;
+}
+
+/**
  * Compose a weapon from template + material + condition.
  * @param {string} templateId  e.g. "longsword"
  * @param {string} materialId  e.g. "iron" (default "steel")
  * @param {string} conditionId e.g. "rusty" (default "normal")
+ * @param {string|null} infusedDamageType  Infused damage type (one of
+ *        INFUSED_DAMAGE_TYPES) or null for an un-infused weapon. A
+ *        template may also declare its own damageType; the compose-time
+ *        value wins. Infusion changes ONLY the weapon's damage type:
+ *        no OB bonus and no cost change (2026-10-23 ruling, superseding
+ *        the 2026-10-14 +5 OB / 1.5x cost tier mechanics).
  * @returns {object} Final weapon stats
  */
-export function composeWeapon(templateId, materialId = "steel", conditionId = "normal", infused = false) {
+export function composeWeapon(templateId, materialId = "steel", conditionId = "normal", infusedDamageType = null) {
     const template = TEMPLATES[templateId];
     const material = MATERIALS[materialId] ?? MATERIALS["steel"];
     const condition = CONDITIONS[conditionId] ?? CONDITIONS["normal"];
 
     if (!template) throw new Error(`Unknown weapon template: ${templateId}`);
 
+    // Damage type: compose-time Infused type wins, else the template's
+    // own declared damageType, else null (physical).
+    const damageType = normalizeDamageType(infusedDamageType) ?? normalizeDamageType(template.damageType);
+
     // Name: "Rusty Iron Longsword" (skip baseline material/condition in name)
-    // H2H (2026-10-14): "Infused" prefix for infused quality tier (user ruling).
+    // Infused weapons carry the "Infused" prefix (the property's name).
     const nameParts = [];
-    if (infused) nameParts.push("Infused");
+    if (damageType) nameParts.push("Infused");
     if (condition.id !== "normal") nameParts.push(condition.name);
     if (material.id !== "steel") nameParts.push(material.name);
     nameParts.push(template.name);
@@ -72,15 +99,12 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
     // Weight: template × material multiplier (rounded to 0.1)
     const weight = Math.round(template.weight * material.weightMult * 10) / 10;
 
-    // H2H Infused (2026-10-14, user ruling): +5 OB, +50% cost for infused tier.
-    const infusedObBonus = infused ? 5 : 0;
-    // OB modifier: material + condition + infused
-    const obMod = material.obMod + condition.obMod + infusedObBonus;
+    // OB modifier: material + condition. (Infusion adds nothing —
+    // see the 2026-10-23 ruling in the composeWeapon docstring.)
+    const obMod = material.obMod + condition.obMod;
 
     // Damage modifier: material + condition
     const damageMod = material.damageMod + condition.damageMod;
-
-    const infusedCostMult = infused ? 1.5 : 1;
 
     // Breakage: combine (higher = breaks more easily)
     // Template breakage is an array of doubles or "auto"
@@ -92,7 +116,8 @@ export function composeWeapon(templateId, materialId = "steel", conditionId = "n
         templateId,
         materialId: material.id,
         conditionId: condition.id,
-        infused,
+        infused: damageType != null,
+        damageType,
         attackTable: template.attackTable,
         weaponType: template.weaponType,
         typeCode: template.typeCode,
