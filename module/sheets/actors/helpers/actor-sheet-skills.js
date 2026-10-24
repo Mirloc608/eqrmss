@@ -145,9 +145,17 @@ export class EQRMSSActorSkillsHelper {
                 // immediately — new_rank only tracks this level's buys for
                 // the 3-per-level cap and cycle-down refunds.
                 const rankDelta = (current === 3 && next === 0) ? -3 : next - current;
+                const newRanks = Math.max(0, Number(item.system.ranks ?? 0) + rankDelta);
+                const newRankBonus = rmssRankBonus(newRanks);
                 await item.update({
                     "system.new_rank": next,
-                    "system.ranks": Math.max(0, Number(item.system.ranks ?? 0) + rankDelta)
+                    "system.ranks": newRanks,
+                    // Keep the wizard-stamped bonus block in sync with ranks.
+                    "system.rankBonus": newRankBonus,
+                    "system.bonus": newRankBonus
+                        + Number(item.system.statBonus ?? 0)
+                        + Number(item.system.profBonus ?? 0)
+                        + Number(item.system.specialBonus ?? 0)
                 });
             });
         });
@@ -255,6 +263,13 @@ export class EQRMSSActorSkillsHelper {
                         // level's buys for the cap/refund bookkeeping.
                         ranks: 1,
                         new_rank: 1,
+                        // Bonus block in the wizard's shape, so the skill
+                        // rolls correctly from the moment it is developed.
+                        rankBonus: rmssRankBonus(1),
+                        statBonus: 0,
+                        profBonus: 0,
+                        specialBonus: 0,
+                        bonus: rmssRankBonus(1),
                         ...(maxRanks ? { max_ranks: maxRanks } : {})
                     }
                 }]);

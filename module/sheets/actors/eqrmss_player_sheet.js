@@ -8,6 +8,7 @@ import { structuralAreasFor, structuralDamageOf, structuralRating } from "../../
 import { exhaustionMaxFor } from "../../combat/subdue.js";
 import { progressionManager } from "../../progression/progression-manager.js";
 import { checkAndApplyLevelUps, applyLevelUp, currentLevel } from "../../progression/xp-engine.js";
+import { rmssRankBonus } from "../../data/skills/rmss-rank-bonus.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
 import { groupSpellsByCategory, spellBaseName, spellRankNumber } from "./helpers/actor-sheet-spells.js";
@@ -1365,7 +1366,18 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             ui.notifications.error(`Unknown skill: ${itemId}`);
             return;
         }
-        const totalBonus = Number(item.system?.bonus) || 0;
+        // Skill total (2026-10-24): computed live from the item's ranks —
+        // Table 15.2.2 rank bonus plus the item's stat/prof/special
+        // components (the same fields the creation wizard stamps). The
+        // stored system.bonus goes stale whenever ranks change outside
+        // the wizard (sheet Develop/toggle, progression rewards), which
+        // left sheet-bought skills rolling at +0.
+        const ranks = Number(item.system?.ranks ?? 0);
+        const rankBonus = rmssRankBonus(ranks);
+        const totalBonus = rankBonus
+            + Number(item.system?.statBonus ?? 0)
+            + Number(item.system?.profBonus ?? 0)
+            + Number(item.system?.specialBonus ?? 0);
 
         const roll = await new Roll("1d100").evaluate();
         const total = roll.total + totalBonus;
@@ -1377,6 +1389,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             content: `
                 <h2>${item.name}</h2>
                 <p><strong>Roll:</strong> ${roll.total} + ${totalBonus} = ${total}</p>
+                <p><strong>Bonus:</strong> ${rankBonus >= 0 ? "+" : ""}${rankBonus} rank bonus (${ranks} rank${ranks === 1 ? "" : "s"})</p>
                 <p><strong>Target:</strong> ${target}</p>
                 <p><strong>Success:</strong> ${success ? "Yes" : "No"}</p>
             `
