@@ -13,9 +13,16 @@
 // each round; heal effects become per-round regen entries;
 // controls/debuffs/utility/cures become timed spell effects.
 // EQ durations are seconds; 1 round = 6 s (standing ruling).
+//
+// Hostile songs resolve like spells (user ruling 2026-10-23,
+// "more like enchanter spells than any other"): a hostile song
+// gates on a per-target Resistance Roll at application — see
+// resolveSongResistance below. Beneficial songs never roll.
 // ============================================================
 
-import { durationRounds } from "./base-spell.js";
+import { durationRounds, rrOpenEnded, rrTargetNumber, RESIST_STAT_BY_REALM } from "./base-spell.js";
+import { casterRealm } from "./spell-failure.js";
+import { CASTING_STAT_BY_CLASS, casterLevelOf, statBonusFor } from "./spell-mapping.js";
 import { applyStatusEffect, hasteSlowExclusion, dispelHaste, baseActorOf } from "./status-wiring.js";
 import { breakInvisibility } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
@@ -244,6 +251,198 @@ function songTargetMode(effects) {
     return "ally";
 }
 
+// ------------------------------------------------------------
+// Song Resistance Rolls (user ruling 2026-10-23): hostile songs
+// resolve like spells — "more like enchanter spells than any
+// other" — so a hostile song's effects gate on a per-target
+// Resistance Roll at application, composed like the base-spell
+// RR (module/spells/base-spell.js): open-ended d100 + the
+// defender's realm-stat bonus for the song's realm + same-realm
+// +15 + Spell Shield / DoT Shielding entries + the element
+// resist modification (Spell Law Table 15.6 — the same ruling
+// as spells: resist points for the song's element add to the
+// RR), against the Table 15.5 level cross-index. A resisted
+// song lands nothing on that target. Beneficial songs never
+// roll. Song DoTs gate once here, at application; their ticks
+// (crit-conditions.js) never re-roll, exactly like spell DoTs.
+//
+// Two flagged differences from the spell track (one-line flips
+// if the user rules otherwise):
+//  - REALM: the code's own realm for the singer. casterRealm
+//    keys a bard to Mentalism (CASTING_STAT_BY_CLASS bard ->
+//    PR -> REALM_BY_STAT), so the defender's RR stat is
+//    Presence. The enchanter read would be Essence (defender
+//    stat Empathy); songRealmOf() is the one place to change.
+//  - BAR: 0. Songs make no Base Attack Roll anywhere in this
+//    system — activation is a performance, not a cast at a
+//    defended target — and a Table 15.1 lookup would drag in
+//    spell-failure "F" cells that have no meaning for a song.
+//    Every other RR term is the spell composition unchanged,
+//    so a song lands somewhat more readily than an equivalent
+//    base spell (no BAR drag on the roll).
+// ------------------------------------------------------------
+
+/** The catalog document for a song item (same lookup order as
+ *  songEffectsOf: loaded catalog by name, then CONFIG flat). */
+function songDocOf(songItem) {
+    const name = String(songItem?.name ?? "").toLowerCase();
+    const byClass = globalThis.game?.eqrmss?.data?.songs?.songsByClass?.bard ?? [];
+    const hit = byClass.find(s => String(s?.name ?? "").toLowerCase() === name);
+    if (hit) return hit;
+    const flat = globalThis.CONFIG?.EQRMSS?.songs ?? [];
+    return flat.find(s => String(s?.name ?? "").toLowerCase() === name) ?? null;
+}
+
+/** Who the song is aimed at, as declared: the item's stored
+ *  targets (both finalizers copy the catalog's targeting), else
+ *  the catalog document's, else "" (undeclared). */
+function songTargetsIntent(songItem) {
+    const own = String(songItem?.system?.targets ?? "").toLowerCase();
+    if (own) return own;
+    return String(songDocOf(songItem)?.targeting?.targets ?? "").toLowerCase();
+}
+
+/** Is this one effect detrimental to whoever it lands on?
+ *  Hate modifiers are exempt: hate is referential only in this
+ *  system, and the hate-down songs are ally buffs. */
+function isDetrimentalEffect(eff) {
+    const type = String(eff?.type ?? "").toLowerCase();
+    if (["damage", "debuff", "control", "fear", "root", "snare", "dot"].includes(type)) return true;
+    if (type !== "modifier") return false;
+    const stat = String(eff?.stat ?? "").toLowerCase();
+    if (stat === "hate") return false;
+    const scaled = scaleSongValue(stat, effectValue(eff));
+    if (scaled.target === "slow") return scaled.value > 0;
+    if (scaled.target === "haste") return false;
+    // Vulnerability stats: a positive value harms the bearer.
+    if (/damage-taken/.test(stat)) return effectValue(eff) > 0;
+    return scaled.value < 0;
+}
+
+/**
+ * Hostile = sung AT opponents. Declared intent wins: the
+ * catalog's enemy/enemies songs are hostile (including the
+ * utility-only silence / Assonant lines, whose payload is a
+ * hostile mark), and ally/self songs are never hostile (the
+ * hate-down Accelerandos, the ally Reflexive retaliation
+ * songs, Song of Highsun). With no declared intent anywhere,
+ * the payload decides.
+ */
+export function songIsHostile(songItem, effects) {
+    const intent = songTargetsIntent(songItem);
+    if (intent === "enemy" || intent === "enemies") return true;
+    if (intent === "allies" || intent === "ally" || intent === "self") return false;
+    return (effects ?? []).some(isDetrimentalEffect);
+}
+
+/** The element a hostile song attacks with, if any: the first
+ *  detrimental effect's own element, else the element of a
+ *  resist-<element> debuff it carries (the chants). */
+function songElementOf(effects) {
+    for (const eff of effects ?? []) {
+        if (!isDetrimentalEffect(eff)) continue;
+        const el = String(eff?.element ?? "").toLowerCase();
+        if (el) return el;
+    }
+    for (const eff of effects ?? []) {
+        if (!isDetrimentalEffect(eff)) continue;
+        const m = String(eff?.stat ?? "").toLowerCase().match(/^resist-([a-z]+)$/);
+        if (m && m[1] !== "all") return m[1];
+    }
+    return "";
+}
+
+/** Element resist points for a target: gear resistances
+ *  (system.resistances[element]) + spellEffects buffs with
+ *  scaledTarget "resist-<element>", summed. This is exactly
+ *  the resist sum getTargetModifiers performs in
+ *  module/item-effects/damage-pipeline.js and elementResistFor
+ *  performs in module/spells/base-spell.js — keep all three
+ *  identical. It is replicated here rather than imported
+ *  because base-spell.js's copy arrives with the staged
+ *  spell-flow resists patch; this module must load correctly
+ *  whether or not that patch has been applied. */
+function elementResistFor(target, element) {
+    if (!target || !element) return 0;
+    const sys = target.system ?? {};
+    const resistances = sys.resistances ?? {};
+    let buffResist = 0;
+    const fx = sys.status?.spellEffects;
+    if (Array.isArray(fx)) {
+        const key = `resist-${String(element).toLowerCase()}`;
+        for (const e of fx) {
+            if (String(e?.scaledTarget ?? "").toLowerCase() === key) {
+                buffResist += Number(e?.scaledValue) || 0;
+            }
+        }
+    }
+    return (resistances[element] ?? 0) + buffResist;
+}
+
+/** The song's realm (flagged choice, see the section header):
+ *  the singer's own realm per casterRealm — Mentalism for a
+ *  bard. The enchanter (Essence) read flips here. */
+function songRealmOf(bard, songItem) {
+    return casterRealm(bard, songItem);
+}
+
+function classIdOf(actor) {
+    const sys = actor?.system ?? {};
+    return String(sys.origin?.classId ?? sys.fixed_info?.classId ?? sys.classId ?? "").toLowerCase();
+}
+
+/**
+ * Roll one target's Resistance Roll against a hostile song.
+ * Returns { resisted, realm, element, rr: { rolls, total,
+ * need }, html } — the caller posts html on the song's notes.
+ * opts: { rollD100, effects } (effects defaults to the song's
+ * own, resolved by the caller so hostility and element agree).
+ */
+export async function resolveSongResistance(bard, songItem, target, opts = {}) {
+    const name = songItem?.name ?? "song";
+    const effects = opts.effects ?? songEffectsOf(songItem);
+    const realm = songRealmOf(bard, songItem);
+    const attackLevel = casterLevelOf(bard);
+    const targetLevel = casterLevelOf(target);
+    const need = rrTargetNumber(attackLevel, targetLevel);
+    const rr = await rrOpenEnded(opts.rollD100);
+    const statCode = RESIST_STAT_BY_REALM[realm];
+    const statBonus = statBonusFor(target, statCode);
+    const targetStat = CASTING_STAT_BY_CLASS[classIdOf(target)];
+    const sameRealm = targetStat && casterRealm(target, null) === realm ? 15 : 0;
+    // Worn combat effects (mirror base-spell): Spell Shield
+    // folds into every RR; DoT Shielding only against a song
+    // whose payload is damage over time (song damage effects
+    // register as DoTs in this engine).
+    let rrShield = 0, rrDotShield = 0;
+    const tfx = target?.system?.status?.spellEffects;
+    if (Array.isArray(tfx)) {
+        for (const e of tfx) {
+            const st = String(e?.scaledTarget ?? "").toLowerCase();
+            const v = Number(e?.scaledValue) || 0;
+            if (!v) continue;
+            if (st === "rr") rrShield += v;
+            else if (st === "rr-dot") rrDotShield += v;
+        }
+    }
+    const isDotSong = (effects ?? []).some(e => String(e?.type ?? "").toLowerCase() === "damage");
+    const shieldMod = rrShield + (isDotSong ? rrDotShield : 0);
+    // Element resistance (Table 15.6): the target's resist
+    // points for the song's element modify the RR, as spells.
+    const element = songElementOf(effects);
+    const resistMod = element ? elementResistFor(target, element) : 0;
+    const rrTotal = rr.total + statBonus + sameRealm + shieldMod + resistMod;
+    const resisted = rrTotal >= need;
+
+    const fmt = (n) => (n > 0 ? `+${n}` : `${n}`);
+    const html = `<strong>Resistance roll (${esc(target.name)} vs ${esc(name)}):</strong> ${rr.rolls.join(", ")} = ${rr.total}`
+        + ` ${fmt(statBonus)} ${statCode}`
+        + `${sameRealm ? `, +15 same realm` : ""}${shieldMod ? `, ${fmt(shieldMod)} shield` : ""}${resistMod ? `, ${fmt(resistMod)} ${esc(element)} resist` : ""}`
+        + ` = <strong>${rrTotal}</strong> vs ${need} (levels ${attackLevel} vs ${targetLevel}) — ${resisted ? "RESISTED" : "song takes effect"}`;
+
+    return { resisted, realm, element, rr: { rolls: rr.rolls, total: rrTotal, need }, html };
+}
+
 /**
  * Find tokens in the song's range (2026-10-06): beneficial songs affect
  * all allies in range, harmful songs affect all opponents in range.
@@ -310,9 +509,12 @@ function songAutoTargets(bard, songItem, effects) {
     return out.length ? out : [bard];
 }
 
-export async function applySong(bard, songItem, targets = []) {
+export async function applySong(bard, songItem, targets = [], opts = {}) {
     const name = songItem?.name ?? "song";
     const effects = songEffectsOf(songItem);
+    // Hostile songs resolve like spells (user ruling 2026-10-23):
+    // each target gets one Resistance Roll at application.
+    const hostile = songIsHostile(songItem, effects);
     // Auto-target by range/disposition if no explicit targets (2026-10-06).
     // Manual targeting (user selected tokens) still overrides.
     const list = (targets?.length ? targets : songAutoTargets(bard, songItem, effects)).filter(Boolean);
@@ -325,6 +527,28 @@ export async function applySong(bard, songItem, targets = []) {
         if (!(target.isOwner || globalThis.game?.user?.isGM)) {
             notes += `<p><em>${tName} — song effects not applied (you don't control them).</em></p>`;
             continue;
+        }
+        // Resistance gate (2026-10-23): one RR per target per
+        // application of a hostile song. A target already carrying
+        // this song's entries is being refreshed (re-sing, twist
+        // re-sync) — the song landed when it first applied, so no
+        // new roll; the dedup below refreshes its entries. A
+        // resisted song lands nothing: no entries, no DoT, and the
+        // special control paths (memblur / pacify) never run.
+        if (hostile) {
+            const sid = songIdOf(songItem);
+            const landed = (Array.isArray(target.system?.status?.spellEffects)
+                ? target.system.status.spellEffects : []).some(e => e?.songId === sid && e?.source === "song")
+                || (Array.isArray(target.system?.status?.dots)
+                    ? target.system.status.dots : []).some(d => d?.songId === sid && d?.source === "song");
+            if (!landed) {
+                const gate = await resolveSongResistance(bard, songItem, target, { rollD100: opts.rollD100, effects });
+                notes += `<p>${gate.html}.</p>`;
+                if (gate.resisted) {
+                    notes += `<p><em>${tName} resists ${esc(name)} — no effect.</em></p>`;
+                    continue;
+                }
+            }
         }
         // Pre-check buffs: all-or-nothing (2026-10-07). If ANY buff is blocked,
         // no buffs from this song apply to this target.
