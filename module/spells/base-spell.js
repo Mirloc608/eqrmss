@@ -9,7 +9,8 @@
 // casters only) + range/cover modifiers, cross-indexed on
 // Table 15.1 by the realm column the target's defenses select.
 // The result modifies the target's Resistance Roll (open-ended
-// d100 + realm stat bonus + same-realm +15 + willing -50),
+// d100 + realm stat bonus + same-realm +15 + willing -50 +
+// element resist points, Table 15.6 — 2026-10-23 ruling),
 // resisted on >= the Table 15.5 level cross-index. A natural
 // BAR of 01-02 is an automatic spell failure, and an "F" cell
 // on 15.1 likewise — both go to the Attack section of the
@@ -216,6 +217,32 @@ export async function rrOpenEnded(rollD100) {
     return { rolls, total };
 }
 
+/** Element resist points for a target: gear resistances
+ *  (system.resistances[element]) + spellEffects buffs with
+ *  scaledTarget "resist-<element>", summed. This is exactly
+ *  the resist sum getTargetModifiers performs in
+ *  module/item-effects/damage-pipeline.js — keep the two
+ *  identical. It is replicated here rather than imported
+ *  because the pipeline imports this module's RR helpers
+ *  (rrOpenEnded / rrTargetNumber), so a back-import would
+ *  close a module cycle. */
+export function elementResistFor(target, element) {
+    if (!target || !element) return 0;
+    const sys = target.system ?? {};
+    const resistances = sys.resistances ?? {};
+    let buffResist = 0;
+    const fx = sys.status?.spellEffects;
+    if (Array.isArray(fx)) {
+        const key = `resist-${String(element).toLowerCase()}`;
+        for (const e of fx) {
+            if (String(e?.scaledTarget ?? "").toLowerCase() === key) {
+                buffResist += Number(e?.scaledValue) || 0;
+            }
+        }
+    }
+    return (resistances[element] ?? 0) + buffResist;
+}
+
 // ------------------------------------------------------------
 // Resolution
 // ------------------------------------------------------------
@@ -301,19 +328,34 @@ export async function resolveBaseSpellAttack(caster, spellItem, target, opts = {
         } catch (e) { /* ignore — treat as non-DoT */ }
     }
     const shieldMod = rrShield + (dotShieldApplies ? rrDotShield : 0);
-    const rrTotal = rr.total + cell.value + statBonus + sameRealm + willingMod + extraMod + shieldMod;
+    // Element resistance (user ruling 2026-10-23: "go with the
+    // book"): Spell Law Table 15.6 — items and spells that grant
+    // resistance give the target a modification to his RR. The
+    // target's resist points for THIS SPELL's element (gear +
+    // resist-<element> buffs, summed by elementResistFor) add to
+    // the RR. The element is the classification's element — the
+    // same determination the cast flow and effect application
+    // use. Non-elemental spells (element "") get no modification.
+    // This rides the RR where one is rolled; bolt and ball
+    // spells resolve on the Elemental Attack Table and roll no
+    // RR, so they gain no resist term here (flagged 2026-10-23,
+    // no RR invented for them).
+    let spellElement = "";
+    try { spellElement = String(classifySpell(spellItem)?.element ?? "").toLowerCase(); } catch (e) { /* unclassifiable — no element */ }
+    const resistMod = spellElement ? elementResistFor(target, spellElement) : 0;
+    const rrTotal = rr.total + cell.value + statBonus + sameRealm + willingMod + extraMod + shieldMod + resistMod;
     const resisted = rrTotal >= need;
 
     const fmt = (n) => (n > 0 ? `+${n}` : `${n}`);
     const rrLine = `<strong>Resistance roll (${esc(target.name)}):</strong> ${rr.rolls.join(", ")} = ${rr.total}`
         + ` ${fmt(cell.value)} BAR, ${fmt(statBonus)} ${statCode}`
-        + `${sameRealm ? `, +15 same realm` : ""}${willingMod ? `, -50 willing` : ""}${extraMod ? `, ${fmt(extraMod)} spell` : ""}${shieldMod ? `, ${fmt(shieldMod)} shield` : ""}`
+        + `${sameRealm ? `, +15 same realm` : ""}${willingMod ? `, -50 willing` : ""}${extraMod ? `, ${fmt(extraMod)} spell` : ""}${shieldMod ? `, ${fmt(shieldMod)} shield` : ""}${resistMod ? `, ${fmt(resistMod)} ${esc(spellElement)} resist` : ""}`
         + ` = <strong>${rrTotal}</strong> vs ${need} (levels ${attackLevel} vs ${targetLevel}) — ${resisted ? "RESISTED" : "spell takes effect"}`;
 
     return {
         failed: false, resisted, realm, column,
         bar: { natural, modified, value: cell.value, band: cell.band },
-        rr: { rolls: rr.rolls, total: rrTotal, need },
+        rr: { rolls: rr.rolls, total: rrTotal, need, element: spellElement, resistMod },
         html: `<p>${barLine}: RR modification <strong>${fmt(cell.value)}</strong>.</p><p>${rrLine}.</p>`
     };
 }
