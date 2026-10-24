@@ -279,6 +279,24 @@ export async function applyLevelUp(actor) {
         } catch (e) { console.warn("EQRMSS | XP engine: stat gain chat failed", e); }
     } catch (e) { console.warn("EQRMSS | XP engine: stat gain rolls failed", e); }
 
+    // --- Commit staged skill purchases (ruling B, 2026-10-24) ---
+    // Sheet purchases commit to system.ranks at purchase time; system.
+    // new_rank only counts this level's buys (3-per-level cap + cycle-down
+    // refunds). Gaining a level makes those purchases permanent: reset the
+    // counters so last level's buys can no longer be refunded.
+    try {
+        const resets = [];
+        for (const it of (actor.items?.contents ?? [])) {
+            if (it.type === "skill" && Number(it.system?.new_rank ?? 0) !== 0) {
+                resets.push({ _id: it.id, "system.new_rank": 0 });
+            }
+        }
+        if (resets.length) {
+            await actor.updateEmbeddedDocuments("Item", resets);
+            console.log(`EQRMSS | XP engine: ${actor.name} — purchase counters reset on ${resets.length} skill(s) at level ${nextLevel}`);
+        }
+    } catch (e) { console.warn("EQRMSS | XP engine: skill purchase counter reset failed", e); }
+
     // --- Development points (RMSS §3.2.1, Table 15.1.1) ---
     // Book-pure: sum of DP for CO/AG/SD/RE/ME using temporary values.
     // The grant is folded into the level update payload below — a bare

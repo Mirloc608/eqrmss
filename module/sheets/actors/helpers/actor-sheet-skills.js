@@ -141,7 +141,14 @@ export class EQRMSSActorSkillsHelper {
                     }
                 }
 
-                await item.update({ "system.new_rank": next });
+                // Ruling B (2026-10-24): purchases commit to system.ranks
+                // immediately — new_rank only tracks this level's buys for
+                // the 3-per-level cap and cycle-down refunds.
+                const rankDelta = (current === 3 && next === 0) ? -3 : next - current;
+                await item.update({
+                    "system.new_rank": next,
+                    "system.ranks": Math.max(0, Number(item.system.ranks ?? 0) + rankDelta)
+                });
             });
         });
 
@@ -243,7 +250,10 @@ export class EQRMSSActorSkillsHelper {
                         skillId: catalogSkill.id,
                         category: catalogSkill.system?.category ?? catalogSkill.category ?? "",
                         description: catalogSkill.system?.description ?? catalogSkill.description ?? "",
-                        ranks: 0,
+                        // Ruling B (2026-10-24): the first rank commits to
+                        // system.ranks immediately; new_rank counts this
+                        // level's buys for the cap/refund bookkeeping.
+                        ranks: 1,
                         new_rank: 1,
                         ...(maxRanks ? { max_ranks: maxRanks } : {})
                     }
@@ -285,9 +295,11 @@ export class EQRMSSActorSkillsHelper {
     recalcSkill(skillItem, categoryItem) {
 
         const ranks   = Number(skillItem.system.ranks ?? 0);
-        const newRank = Number(skillItem.system.new_rank ?? 0);
-        // Table 15.2.2: bonus is a function of TOTAL ranks (existing + new).
-        const rankBonus = rmssRankBonus(ranks + newRank);
+        // Table 15.2.2: bonus is a function of total ranks. Since ruling B
+        // (2026-10-24) purchases commit to ranks immediately, so ranks
+        // already includes this level's buys — new_rank is only a counter
+        // and must NOT be added again here.
+        const rankBonus = rmssRankBonus(ranks);
 
         const catBonus = Number(categoryItem?.system?.category_bonus ?? 0);
         const itemBonus = Number(skillItem.system.item_bonus ?? 0);
