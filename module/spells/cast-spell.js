@@ -127,6 +127,11 @@ export function syntheticBoltWeapon(actor, spellItem, cls) {
         system: {
             type: "spell",
             attackTable: cls.attackTable,
+            // The spell's element rides the synthetic weapon so
+            // the attack engine can apply the target's element
+            // resistance as +DB (user ruling 2026-10-23; bolts
+            // roll no Resistance Roll). "" for non-elemental.
+            element: cls.element ?? "",
             obMod: directedSpellsOB(actor),
             damageMod: 0,
             criticalType: cls.critType ?? "",

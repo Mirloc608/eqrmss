@@ -29,6 +29,14 @@
 // Target model: area spells hit every currently-targeted
 // token; the first targeted token is the center point (+20).
 // A shared "F" fails the whole spell, once.
+//
+// RULING (user, 2026-10-23): element resistance counts against
+// ball spells as it does against bolts (+DB). Ball resolution
+// has no DB term — per-target defense enters as adjustments to
+// the shared EAR — so each target's resist points for the
+// spell's element subtract from the EAR against that target
+// only: the same defensive role +DB plays against a bolt,
+// resolved per target.
 // ============================================================
 
 import { combatCard } from "../combat/chat-card.js";
@@ -40,11 +48,38 @@ import {
 } from "../combat/crit-conditions.js";
 import { resolveSpellFailure } from "./spell-failure.js";
 import { SEMI_CASTERS, d100 } from "./base-spell.js";
-import { BALL_BY_ELEMENT, casterLevelOf } from "./spell-mapping.js";
+import { BALL_BY_ELEMENT, casterLevelOf, classifySpell } from "./spell-mapping.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
     : String(s ?? "");
+
+/** Element resist points for a target: gear resistances
+ *  (system.resistances[element]) + spellEffects buffs with
+ *  scaledTarget "resist-<element>", summed. KEEP IDENTICAL to
+ *  elementResistFor in module/spells/base-spell.js (and to the
+ *  resist sum in getTargetModifiers, module/item-effects/
+ *  damage-pipeline.js). Replicated here rather than imported:
+ *  that export arrives with the staged spellflow patch, and
+ *  this bolt/ball patch is kept independently applicable
+ *  against origin/main — the same replication the spellflow
+ *  patch itself made. */
+function elementResistFor(target, element) {
+    if (!target || !element) return 0;
+    const sys = target.system ?? {};
+    const resistances = sys.resistances ?? {};
+    let buffResist = 0;
+    const fx = sys.status?.spellEffects;
+    if (Array.isArray(fx)) {
+        const key = `resist-${String(element).toLowerCase()}`;
+        for (const e of fx) {
+            if (String(e?.scaledTarget ?? "").toLowerCase() === key) {
+                buffResist += Number(e?.scaledValue) || 0;
+            }
+        }
+    }
+    return (resistances[element] ?? 0) + buffResist;
+}
 
 // Re-exported for the classifier tests and sheet code.
 export { BALL_BY_ELEMENT };
@@ -189,6 +224,11 @@ export async function resolveBallCast(caster, spellItem, targets, ball, opts = {
     }
     const name = spellItem?.name ?? "ball spell";
     const critType = ball.critType ?? table.critType ?? "H";
+    // The spell's element — the classification's element, the
+    // same determination cast-spell.js branches on. Drives the
+    // per-target resistance adjustment below (2026-10-23 ruling).
+    let spellElement = "";
+    try { spellElement = String(classifySpell(spellItem)?.element ?? "").toLowerCase(); } catch (e) { /* unclassifiable — no element */ }
 
     // ---- Shared Elemental Attack Roll (open-ended high) ----
     const dice = [];
@@ -237,12 +277,17 @@ export async function resolveBallCast(caster, spellItem, targets, ball, opts = {
         // instead); no movement state is plumbed yet, so quBonus
         // arrives 0 until a caller supplies it.
         const helmetMod = Number(helmetMods[target?.id] ?? 5);
+        // Element resistance as +DB (user ruling 2026-10-23):
+        // this target's resist points for the spell's element
+        // subtract from the shared EAR against this target only.
+        const resistDb = spellElement ? elementResistFor(target, spellElement) : 0;
         const isCenter = centerId != null && target?.id === centerId;
-        const eff = modified + coverMod + helmetMod - quBonus + (isCenter ? 20 : 0);
+        const eff = modified + coverMod + helmetMod - quBonus - resistDb + (isCenter ? 20 : 0);
         const parts = [];
         if (coverMod) parts.push(`${coverMod} cover`);
         if (helmetMod) parts.push(`${helmetMod > 0 ? "+" : ""}${helmetMod} helmet`);
         if (quBonus) parts.push(`-${quBonus} Qu`);
+        if (resistDb) parts.push(`-${resistDb} ${spellElement} resist`);
         if (isCenter) parts.push("+20 center");
         const adjNote = parts.length ? ` (${parts.join(", ")})` : "";
 

@@ -465,6 +465,33 @@ function targetMissileParryDB(targetActor, missileAttack) {
     return Math.max(0, Number(targetActor.system?.status?.missileParryDB) || 0);
 }
 
+/** Element resist points for a target: gear resistances
+ *  (system.resistances[element]) + spellEffects buffs with
+ *  scaledTarget "resist-<element>", summed. KEEP IDENTICAL to
+ *  elementResistFor in module/spells/base-spell.js (and to the
+ *  resist sum in getTargetModifiers, module/item-effects/
+ *  damage-pipeline.js). Replicated here rather than imported:
+ *  that export arrives with the staged spellflow patch, and
+ *  this bolt/ball patch is kept independently applicable
+ *  against origin/main — the same replication the spellflow
+ *  patch itself made. */
+function elementResistFor(target, element) {
+    if (!target || !element) return 0;
+    const sys = target.system ?? {};
+    const resistances = sys.resistances ?? {};
+    let buffResist = 0;
+    const fx = sys.status?.spellEffects;
+    if (Array.isArray(fx)) {
+        const key = `resist-${String(element).toLowerCase()}`;
+        for (const e of fx) {
+            if (String(e?.scaledTarget ?? "").toLowerCase() === key) {
+                buffResist += Number(e?.scaledValue) || 0;
+            }
+        }
+    }
+    return (resistances[element] ?? 0) + buffResist;
+}
+
 export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     const sys = weaponItem.system ?? {};
     // Fear: a feared attacker cannot make offensive attacks — it flees.
@@ -920,6 +947,23 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         return;
     }
 
+    // ---- Element resistance as DB (user ruling 2026-10-23):
+    // bolt spells roll no Resistance Roll — they resolve on the
+    // Elemental Attack Table — so the target's resist points for
+    // the bolt's element count as +DB against the attack (DB is
+    // the directed-spell defense). The synthetic bolt weapon
+    // carries the spell's element (syntheticBoltWeapon in
+    // cast-spell.js, shared by displaced stray bolts); ordinary
+    // weapons declare no element and are untouched. A manual
+    // typed target has no actor to read resists from — its typed
+    // DB stands as entered.
+    let resistDbBonus = 0;
+    const resistElement = sys.type === "spell" ? String(sys.element ?? "").toLowerCase() : "";
+    if (resistElement && targetActor) {
+        resistDbBonus = elementResistFor(targetActor, resistElement);
+        db += resistDbBonus;
+    }
+
     // ---- Net attack roll (§6.2): AR + OB − DB, cap 150 ----
     // Claw Law (AL&CL 11.1): the net roll also cannot exceed the attack
     // table's maximum-result threshold for the weapon's attack size.
@@ -943,7 +987,7 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         : (shieldDefense.shieldDB ? ` (+${shieldDefense.shieldDB} shield)` : "");
     const arLine = `Attack roll ${ar.rolls.join(" + ")}${ar.rolls.length > 1 ? ` = ${ar.total}` : ""}`
         + ` + OB ${ob}${sys.type === "spell" ? " (directed spells)" : (skill ? "" : " (no skill)")}${sys.type !== "spell" && obMod ? ` (skill ${skillBonus}, weapon ${obMod >= 0 ? "+" : ""}${obMod})` : ""}${attackerParryAllocation ? ` (-${attackerParryAllocation} parry)` : ""}${attackerMissileParryAllocation ? ` (-${attackerMissileParryAllocation} missile parry)` : ""}${swapObNote}${swingBonus ? ` (+${swingBonus} next swing)` : ""}${pointBlankPenalty ? ` (${pointBlankPenalty} point-blank)` : ""}${buffOb ? ` (+${buffOb} buff)` : ""}${actionPenalty ? ` (${actionPenalty} all actions)` : ""}${armorTierPenalty ? ` (${armorTierPenalty} armor tier: ${armorTier.armorCategory} ${armorTier.tiersAbove} above class)` : ""}${rangeMod ? ` (${rangeMod >= 0 ? "+" : ""}${rangeMod} range)` : ""}${reloadPenalty ? ` (-${reloadPenalty} reloading)` : ""}${ammoOb ? ` (${ammoOb >= 0 ? "+" : ""}${ammoOb} ammunition)` : ""}${quiverPenalty ? ` (${quiverPenalty} not quivered)` : ""}${calledShot ? ` (${calledShotMod} called: ${esc(calledShot.areaName)})` : ""}${closingOnTarget ? ` (+30 close quarters)` : ""}${stanceBonus ? ` (+${stanceBonus} stance)` : ""}${pronePenalty ? ` (${pronePenalty} prone)` : ""}${attackSpeed && attackSpeed.pct !== 100 ? ` (attack speed ${Math.round(effectivePct)}%${hastePct ? ` +${hastePct}% haste` : ""}${slowPct ? ` -${slowPct}% slow` : ""})` : ""}${racPenalty ? ` (${racPenalty} restricted area)` : ""}${weaponUse.ob ? ` (${weaponUse.ob} weapon use)` : ""}${unusualStyle.obMod ? ` (${unusualStyle.obMod} unusual style)` : ""}${sitNote}${abilityObBonus ? ` (+${abilityObBonus} ${esc(options.obBonusLabel || "ability")})` : ""}${cqcLengthPenalty ? ` (-${cqcLengthPenalty} close quarters: weapon too long)` : ""}`
-        + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
+        + ` − DB ${db}${shieldNote}${effectiveParryDB ? ` (+${effectiveParryDB} parry)` : ""}${parryHeldNote}${cqcParryNote}${cqcQuLoss ? ` (-${cqcQuLoss} Qu DB — close quarters)` : ""}${missileParryDB ? ` (+${missileParryDB} missile parry)` : ""}${resistDbBonus ? ` (+${resistDbBonus} ${esc(resistElement)} resist)` : ""}${targetUnconscious ? " (unconscious — no DB)" : ""} = <strong>${ar.total + ob - db}</strong>`
         + (lookup.capped ? ` → treated as ${lookup.cap}${lookup.attackSize && SIZE_LABEL[lookup.attackSize] ? ` (${SIZE_LABEL[lookup.attackSize]} attack max)` : ""}` : "");
 
     // Directed spells (Stage 3): an "F" cell on a bolt table is a
