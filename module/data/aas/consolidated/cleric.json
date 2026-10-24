@@ -92,29 +92,29 @@
       "activation": "activated",
       "costPerRank": [
         5,
+        3,
+        6,
         5,
         5,
         5,
         5,
         5,
         5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        8,
+        9,
+        10,
+        8,
+        9,
+        10,
+        10,
+        10,
+        10,
+        9,
+        12,
+        15,
+        12,
+        15,
+        18
       ],
       "prerequisites": [],
       "ranks": [
@@ -128,7 +128,7 @@
         },
         {
           "rank": 2,
-          "cost": 5,
+          "cost": 3,
           "description": "Unleash Celestial Regeneration II, a gift earned through long dedication.",
           "effects": [
             "Cast: Celestial Regeneration II"
@@ -136,7 +136,7 @@
         },
         {
           "rank": 3,
-          "cost": 5,
+          "cost": 6,
           "description": "Call upon Celestial Regeneration III \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Celestial Regeneration III"
@@ -192,7 +192,7 @@
         },
         {
           "rank": 10,
-          "cost": 5,
+          "cost": 8,
           "description": "Call upon Celestial Regeneration X \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Celestial Regeneration X"
@@ -200,7 +200,7 @@
         },
         {
           "rank": 11,
-          "cost": 5,
+          "cost": 9,
           "description": "Unleash Celestial Regeneration XI, a gift earned through long dedication.",
           "effects": [
             "Cast: Celestial Regeneration XI"
@@ -208,7 +208,7 @@
         },
         {
           "rank": 12,
-          "cost": 5,
+          "cost": 10,
           "description": "Invoke Celestial Regeneration XII at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Celestial Regeneration XII"
@@ -216,7 +216,7 @@
         },
         {
           "rank": 13,
-          "cost": 5,
+          "cost": 8,
           "description": "Call upon Celestial Regeneration XIII \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Celestial Regeneration XIII"
@@ -224,7 +224,7 @@
         },
         {
           "rank": 14,
-          "cost": 5,
+          "cost": 9,
           "description": "Invoke Celestial Regeneration XIV at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Celestial Regeneration XIV"
@@ -232,7 +232,7 @@
         },
         {
           "rank": 15,
-          "cost": 5,
+          "cost": 10,
           "description": "Unleash Celestial Regeneration XV, a gift earned through long dedication.",
           "effects": [
             "Cast: Celestial Regeneration XV"
@@ -240,7 +240,7 @@
         },
         {
           "rank": 16,
-          "cost": 5,
+          "cost": 10,
           "description": "Call upon Celestial Regeneration XVI \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Celestial Regeneration XVI"
@@ -248,7 +248,7 @@
         },
         {
           "rank": 17,
-          "cost": 5,
+          "cost": 10,
           "description": "Invoke Celestial Regeneration XVII at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Celestial Regeneration XVII"
@@ -256,7 +256,7 @@
         },
         {
           "rank": 18,
-          "cost": 5,
+          "cost": 10,
           "description": "Unleash Celestial Regeneration XVIII, a gift earned through long dedication.",
           "effects": [
             "Cast: Celestial Regeneration XVIII"
@@ -264,7 +264,7 @@
         },
         {
           "rank": 19,
-          "cost": 5,
+          "cost": 9,
           "description": "Unleash Celestial Regeneration XVIII, a gift earned through long dedication.",
           "effects": [
             "Cast: Celestial Regeneration XVIII"
@@ -272,7 +272,7 @@
         },
         {
           "rank": 20,
-          "cost": 5,
+          "cost": 12,
           "description": "Call upon Celestial Regeneration XVIII \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Celestial Regeneration XVIII"
@@ -280,7 +280,7 @@
         },
         {
           "rank": 21,
-          "cost": 5,
+          "cost": 15,
           "description": "Invoke Celestial Regeneration XVIII at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Celestial Regeneration XVIII"
@@ -288,7 +288,7 @@
         },
         {
           "rank": 22,
-          "cost": 5,
+          "cost": 12,
           "description": "Invoke Celestial Regeneration XIX at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Celestial Regeneration XIX"
@@ -296,7 +296,7 @@
         },
         {
           "rank": 23,
-          "cost": 5,
+          "cost": 15,
           "description": "Call upon Celestial Regeneration XX \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Celestial Regeneration XX"
@@ -304,14 +304,14 @@
         },
         {
           "rank": 24,
-          "cost": 5,
+          "cost": 18,
           "description": "Unleash Celestial Regeneration XXI, a gift earned through long dedication.",
           "effects": [
             "Cast: Celestial Regeneration XXI"
           ]
         }
       ],
-      "description": "Call upon Celestial Regeneration I \u2014 the power answers when you speak its name.",
+      "description": "When activated, Celestial Regeneration heals all group members within range. Additional ranks in this ability further increase the amount healed by Celestial Regrowth.",
       "aaNumber": 38,
       "sourceCategory": "SoL"
     }
@@ -414,10 +414,15 @@
           "rank": 1,
           "cost": 12,
           "description": "Further mastery of Quiet Miracle. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Increase HP when cast by 15000",
+            "Increase Mana by 15000",
+            "C_Stacker (10)",
+            "Add effect: Shroud of Prayer"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Quiet Miracle, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability channels a burst of health and mana to your target without drawing attention to yourself.",
       "aaNumber": 135,
       "sourceCategory": "VoA",
       "_fillSource": "metadata-fallback"
@@ -490,7 +495,7 @@
           ]
         }
       ],
-      "description": "Call upon Beacon of Life I \u2014 the power answers when you speak its name.",
+      "description": "This abilty blasts your nearby allies with the light of Rodcet Nife, instantly healing their wounds.",
       "aaNumber": 137,
       "sourceCategory": "HoT"
     }
@@ -550,8 +555,8 @@
       "activation": "passive",
       "costPerRank": [
         11,
-        11,
-        11
+        13,
+        15
       ],
       "prerequisites": [],
       "ranks": [
@@ -559,19 +564,25 @@
           "rank": 1,
           "cost": 11,
           "description": "Speed is its own reward: Focused Celestial Regeneration refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 11,
+          "cost": 13,
           "description": "Speed is its own reward: Focused Celestial Regeneration refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 11,
+          "cost": 15,
           "description": "Speed is its own reward: Focused Celestial Regeneration refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Focused Celestial Regeneration refreshes faster with each rank.",
@@ -610,31 +621,41 @@
           "rank": 1,
           "cost": 2,
           "description": "Speed is its own reward: Divinity refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 2,
           "description": "Speed is its own reward: Divinity refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 2,
           "description": "Speed is its own reward: Divinity refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 2,
           "description": "Speed is its own reward: Divinity refreshes faster with each rank. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 2,
           "description": "Speed is its own reward: Divinity refreshes faster with each rank. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Divinity refreshes faster with each rank.",
@@ -675,43 +696,57 @@
           "rank": 1,
           "cost": 2,
           "description": "Speed is its own reward: Purification of the Soul refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 2,
           "description": "Speed is its own reward: Purification of the Soul refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 2,
           "description": "Speed is its own reward: Purification of the Soul refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 2,
           "description": "Speed is its own reward: Purification of the Soul refreshes faster with each rank. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 2,
           "description": "Speed is its own reward: Purification of the Soul refreshes faster with each rank. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 2,
           "description": "Speed is its own reward: Purification of the Soul refreshes faster with each rank. (Rank 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
           "cost": 2,
           "description": "Speed is its own reward: Purification of the Soul refreshes faster with each rank. (Rank 7)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Purification of the Soul refreshes faster with each rank.",
@@ -769,7 +804,7 @@
           ]
         }
       ],
-      "description": "Call upon Divine Arbitration I \u2014 the power answers when you speak its name.",
+      "description": "Using this ability balances the health of your group such that all group members end up with the same amount of damage taken. The first rank does so at a 20 percent penalty to the average, the second rank does so at a 10 percent penalty, and the final rank does so at no penalty. You may train the ranks of this ability at or after levels 61, 63, and 65.",
       "aaNumber": 169,
       "sourceCategory": "PoP"
     }
@@ -793,8 +828,8 @@
       "activation": "passive",
       "costPerRank": [
         2,
-        2,
-        2
+        4,
+        6
       ],
       "prerequisites": [],
       "ranks": [
@@ -802,22 +837,28 @@
           "rank": 1,
           "cost": 2,
           "description": "Further mastery of Unfailing Divinity. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 2,
+          "cost": 4,
           "description": "Further mastery of Unfailing Divinity. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 2,
+          "cost": 6,
           "description": "Further mastery of Unfailing Divinity. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Unfailing Divinity, a discipline that rewards dedicated practice with growing power.",
+      "description": "The most devout find that their calls are answered with much greater frequency. This ability grants your Death Pact-type spells a second chance to successfully heal their target. Additional ranks of this ability cause said spells to do a portion of their healing value even on a complete failure. You gain the ability to train an additional rank at levels 61, 63, and 65.",
       "aaNumber": 194,
       "sourceCategory": "PoP",
       "_fillSource": "metadata-fallback"
@@ -1079,7 +1120,7 @@
           ]
         }
       ],
-      "description": "Call upon Exquisite Benediction I \u2014 the power answers when you speak its name.",
+      "description": "Use of this ability creates a stationary ward that continually heals everyone around it. Increased ranks improve the healing capabilities of the ward.",
       "aaNumber": 255,
       "sourceCategory": "GoD"
     }
@@ -1493,7 +1534,7 @@
           ]
         }
       ],
-      "description": "Call upon Divine Retribution I \u2014 the power answers when you speak its name.",
+      "description": "While this ability is active, any creature daring to attack the cleric has a chance to be stunned in retribution. This ability does not affect creatures that are immune to stunning. The first rank affects creatures up to level 70. The second rank works on creatures to up level 75. The third rank works on creatures up to level 83 and the fourth rank works on creatures up to level 88. Rank 5 increases the chance to proc Divine Blessing and Favor and removes a greater portion of your target's hate towards you.",
       "aaNumber": 392,
       "sourceCategory": "OoW"
     }
@@ -1568,31 +1609,41 @@
           "rank": 1,
           "cost": 9,
           "description": "Calls Improved Twincast to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Calls Improved Twincast to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Calls Improved Twincast to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 9,
           "description": "Calls Improved Twincast to hand more swiftly \u2014 less waiting, more doing. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 9,
           "description": "Calls Improved Twincast to hand more swiftly \u2014 less waiting, more doing. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Improved Twincast to hand more swiftly \u2014 less waiting, more doing.",
@@ -1723,7 +1774,7 @@
           ]
         }
       ],
-      "description": "Call upon Yaulping I \u2014 the power answers when you speak its name.",
+      "description": "This ability provides you with an alternate version of your Yaulp spell.",
       "aaNumber": 489,
       "sourceCategory": "VoA"
     }
@@ -1749,15 +1800,15 @@
         7,
         7,
         7,
+        5,
+        5,
+        5,
         7,
+        9,
+        12,
         7,
-        7,
-        7,
-        7,
-        7,
-        7,
-        7,
-        7
+        9,
+        12
       ],
       "prerequisites": [],
       "ranks": [
@@ -1787,7 +1838,7 @@
         },
         {
           "rank": 4,
-          "cost": 7,
+          "cost": 5,
           "description": "Call upon Ward of Purity IV \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Ward of Purity IV"
@@ -1795,7 +1846,7 @@
         },
         {
           "rank": 5,
-          "cost": 7,
+          "cost": 5,
           "description": "Unleash Ward of Purity V, a gift earned through long dedication.",
           "effects": [
             "Cast: Ward of Purity V"
@@ -1803,7 +1854,7 @@
         },
         {
           "rank": 6,
-          "cost": 7,
+          "cost": 5,
           "description": "Invoke Ward of Purity VI at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Ward of Purity VI"
@@ -1819,7 +1870,7 @@
         },
         {
           "rank": 8,
-          "cost": 7,
+          "cost": 9,
           "description": "Unleash Ward of Purity VIII, a gift earned through long dedication.",
           "effects": [
             "Cast: Ward of Purity VIII"
@@ -1827,7 +1878,7 @@
         },
         {
           "rank": 9,
-          "cost": 7,
+          "cost": 12,
           "description": "Invoke Ward of Purity IX at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Ward of Purity IX"
@@ -1843,7 +1894,7 @@
         },
         {
           "rank": 11,
-          "cost": 7,
+          "cost": 9,
           "description": "Call upon Ward of Purity XI \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Ward of Purity XI"
@@ -1851,14 +1902,14 @@
         },
         {
           "rank": 12,
-          "cost": 7,
+          "cost": 12,
           "description": "Call upon Ward of Purity XII \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Ward of Purity XII"
           ]
         }
       ],
-      "description": "Call upon Ward of Purity I \u2014 the power answers when you speak its name.",
+      "description": "Use of this ability creates a stationary ward that cleanses poison and disease from every player within its range. Increased ranks improve the effectiveness of the ward.",
       "aaNumber": 506,
       "sourceCategory": "DoD"
     }
@@ -1949,15 +2000,15 @@
       "activation": "activated",
       "costPerRank": [
         3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
+        6,
+        9,
+        9,
+        9,
+        12,
+        12,
+        12,
+        12,
+        12
       ],
       "prerequisites": [],
       "ranks": [
@@ -1971,7 +2022,7 @@
         },
         {
           "rank": 2,
-          "cost": 3,
+          "cost": 6,
           "description": "Unleash Turn Undead II, a gift earned through long dedication.",
           "effects": [
             "Cast: Turn Undead II"
@@ -1979,7 +2030,7 @@
         },
         {
           "rank": 3,
-          "cost": 3,
+          "cost": 9,
           "description": "Invoke Turn Undead III at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Turn Undead III"
@@ -1987,7 +2038,7 @@
         },
         {
           "rank": 4,
-          "cost": 3,
+          "cost": 9,
           "description": "Unleash Turn Undead IV, a gift earned through long dedication.",
           "effects": [
             "Cast: Turn Undead IV"
@@ -1995,7 +2046,7 @@
         },
         {
           "rank": 5,
-          "cost": 3,
+          "cost": 9,
           "description": "Call upon Turn Undead V \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Turn Undead V"
@@ -2003,7 +2054,7 @@
         },
         {
           "rank": 6,
-          "cost": 3,
+          "cost": 12,
           "description": "Call upon Turn Undead VI \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Turn Undead VI"
@@ -2011,7 +2062,7 @@
         },
         {
           "rank": 7,
-          "cost": 3,
+          "cost": 12,
           "description": "Unleash Turn Undead VII, a gift earned through long dedication.",
           "effects": [
             "Cast: Turn Undead VII"
@@ -2019,7 +2070,7 @@
         },
         {
           "rank": 8,
-          "cost": 3,
+          "cost": 12,
           "description": "Unleash Turn Undead VIII, a gift earned through long dedication.",
           "effects": [
             "Cast: Turn Undead VIII"
@@ -2027,7 +2078,7 @@
         },
         {
           "rank": 9,
-          "cost": 3,
+          "cost": 12,
           "description": "Call upon Turn Undead VIII \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Turn Undead VIII"
@@ -2035,7 +2086,7 @@
         },
         {
           "rank": 10,
-          "cost": 3,
+          "cost": 12,
           "description": "Unleash Turn Undead VIII, a gift earned through long dedication.",
           "effects": [
             "Cast: Turn Undead VIII"
@@ -2115,19 +2166,25 @@
           "rank": 1,
           "cost": 9,
           "description": "Speed is its own reward: Purified Spirits refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Speed is its own reward: Purified Spirits refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Speed is its own reward: Purified Spirits refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Purified Spirits refreshes faster with each rank.",
@@ -2166,31 +2223,41 @@
           "rank": 1,
           "cost": 3,
           "description": "Speed is its own reward: Sanctuary refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 3,
           "description": "Speed is its own reward: Sanctuary refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 3,
           "description": "Speed is its own reward: Sanctuary refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 3,
           "description": "Speed is its own reward: Sanctuary refreshes faster with each rank. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 3,
           "description": "Speed is its own reward: Sanctuary refreshes faster with each rank. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Sanctuary refreshes faster with each rank.",
@@ -2275,7 +2342,7 @@
           ]
         }
       ],
-      "description": "Call upon Battle Frenzy I \u2014 the power answers when you speak its name.",
+      "description": "This ability will cause you to score a critical damage nuke for each nuke you cast for a short time at the cost of additional mana. As you gain ranks, your mana penalty is reduced.",
       "aaNumber": 735,
       "sourceCategory": "HoT"
     }
@@ -2344,22 +2411,28 @@
           "rank": 1,
           "cost": 9,
           "description": "Further mastery of Quickened Turn Undead. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Further mastery of Quickened Turn Undead. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Further mastery of Quickened Turn Undead. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Turn Undead, a discipline that rewards dedicated practice with growing power.",
+      "description": "This passive ability reduces the time required to cast Turn Undead by 10% per rank.",
       "aaNumber": 991,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
@@ -2396,40 +2469,52 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Righteous Zeal. (Rank 1 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Righteous Zeal. (Rank 2 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Righteous Zeal. (Rank 3 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 5,
           "description": "Further mastery of Righteous Zeal. (Rank 4 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 5,
           "description": "Further mastery of Righteous Zeal. (Rank 5 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 5,
           "description": "Further mastery of Righteous Zeal. (Rank 6 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Righteous Zeal, a discipline that rewards dedicated practice with growing power.",
+      "description": "This passive ability grants you a small amount of double-attack skill. Rank 1 grants you 50 skill, with each additional rank adding 25 double-attack.",
       "aaNumber": 993,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
@@ -2463,19 +2548,25 @@
           "rank": 1,
           "cost": 9,
           "description": "Speed is its own reward: Divine Retribution refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Speed is its own reward: Divine Retribution refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Speed is its own reward: Divine Retribution refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Divine Retribution refreshes faster with each rank.",
@@ -2503,8 +2594,8 @@
       "activation": "passive",
       "costPerRank": [
         9,
-        9,
-        9
+        12,
+        15
       ],
       "prerequisites": [],
       "ranks": [
@@ -2512,22 +2603,28 @@
           "rank": 1,
           "cost": 9,
           "description": "Further mastery of Powerful Elixirs. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 9,
+          "cost": 12,
           "description": "Further mastery of Powerful Elixirs. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 9,
+          "cost": 15,
           "description": "Further mastery of Powerful Elixirs. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Powerful Elixirs, a discipline that rewards dedicated practice with growing power.",
+      "description": "This passive ability extends the duration of your Elixir line of spells. Each rank increases the duration by 1 tick.",
       "aaNumber": 996,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
@@ -2582,7 +2679,7 @@
           ]
         }
       ],
-      "description": "Call upon Celestial Rapidity I \u2014 the power answers when you speak its name.",
+      "description": "This ability decreases the cast time of your healing spells by 50 percent for 24 seconds. Spells which have already been reduced by other effects may not receive the same level of benefit. Additional ranks extend the duration by 1 tick per rank.",
       "aaNumber": 997,
       "sourceCategory": "HoT"
     }
@@ -2606,8 +2703,8 @@
       "activation": "passive",
       "costPerRank": [
         9,
-        9,
-        9
+        12,
+        15
       ],
       "prerequisites": [],
       "ranks": [
@@ -2615,19 +2712,25 @@
           "rank": 1,
           "cost": 9,
           "description": "Calls Celestial Regeneration to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 9,
+          "cost": 12,
           "description": "Calls Celestial Regeneration to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 9,
+          "cost": 15,
           "description": "Calls Celestial Regeneration to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Celestial Regeneration to hand more swiftly \u2014 less waiting, more doing.",
@@ -2655,15 +2758,15 @@
       "activation": "passive",
       "costPerRank": [
         5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        7,
+        9,
+        12,
+        15,
+        9,
+        11,
+        13,
+        15,
+        18
       ],
       "prerequisites": [],
       "ranks": [
@@ -2671,64 +2774,84 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Improved Burst of Life. (Rank 1 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 5,
+          "cost": 7,
           "description": "Further mastery of Improved Burst of Life. (Rank 2 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 5,
+          "cost": 9,
           "description": "Further mastery of Improved Burst of Life. (Rank 3 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
-          "cost": 5,
+          "cost": 12,
           "description": "Further mastery of Improved Burst of Life. (Rank 4 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
-          "cost": 5,
+          "cost": 15,
           "description": "Further mastery of Improved Burst of Life. (Rank 5 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
-          "cost": 5,
+          "cost": 9,
           "description": "Further mastery of Improved Burst of Life. (Rank 6 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
-          "cost": 5,
+          "cost": 11,
           "description": "Further mastery of Improved Burst of Life. (Rank 7 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
-          "cost": 5,
+          "cost": 13,
           "description": "Further mastery of Improved Burst of Life. (Rank 8 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
-          "cost": 5,
+          "cost": 15,
           "description": "Further mastery of Improved Burst of Life. (Rank 9 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 10,
-          "cost": 5,
+          "cost": 18,
           "description": "Further mastery of Improved Burst of Life. (Rank 10 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability channels vital energy, restoring life and curing ailments.",
+      "description": "This passive ability increases the effectiveness of your Burst of Life ability by 1000hp per rank.",
       "aaNumber": 999,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
@@ -2878,10 +3001,13 @@
           "rank": 1,
           "cost": 6,
           "description": "Further mastery of Cascading Divine Aura. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Invulnerability",
+            "Increase Hitpoints v2 by 25000 per tick"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Divine Aura, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to cast a Divine Aura spell on a player target, temporarily rendering the target invulnerable and granting a short duration heal on your target.",
       "aaNumber": 1061,
       "sourceCategory": "SoD",
       "_fillSource": "metadata-fallback"
@@ -3157,12 +3283,12 @@
         6,
         6,
         6,
-        6,
-        6,
-        6,
-        6,
-        6,
-        6
+        9,
+        9,
+        9,
+        11,
+        13,
+        15
       ],
       "prerequisites": [],
       "ranks": [
@@ -3216,7 +3342,7 @@
         },
         {
           "rank": 7,
-          "cost": 6,
+          "cost": 9,
           "description": "Call upon Focused Celestial Regeneration VII \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Focused Celestial Regeneration VII"
@@ -3224,7 +3350,7 @@
         },
         {
           "rank": 8,
-          "cost": 6,
+          "cost": 9,
           "description": "Call upon Focused Celestial Regeneration VIII \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Focused Celestial Regeneration VIII"
@@ -3232,7 +3358,7 @@
         },
         {
           "rank": 9,
-          "cost": 6,
+          "cost": 9,
           "description": "Unleash Focused Celestial Regeneration IX, a gift earned through long dedication.",
           "effects": [
             "Cast: Focused Celestial Regeneration IX"
@@ -3240,7 +3366,7 @@
         },
         {
           "rank": 10,
-          "cost": 6,
+          "cost": 11,
           "description": "Unleash Focused Celestial Regeneration X, a gift earned through long dedication.",
           "effects": [
             "Cast: Focused Celestial Regeneration X"
@@ -3248,7 +3374,7 @@
         },
         {
           "rank": 11,
-          "cost": 6,
+          "cost": 13,
           "description": "Call upon Focused Celestial Regeneration XI \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Focused Celestial Regeneration XI"
@@ -3256,14 +3382,14 @@
         },
         {
           "rank": 12,
-          "cost": 6,
+          "cost": 15,
           "description": "Invoke Focused Celestial Regeneration XII at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Focused Celestial Regeneration XII"
           ]
         }
       ],
-      "description": "Call upon Focused Celestial Regeneration I \u2014 the power answers when you speak its name.",
+      "description": "This ability gives you the ability to cast a large heal over time spell at no mana cost on a single target.",
       "aaNumber": 1065,
       "sourceCategory": "SoD"
     }
@@ -3302,58 +3428,76 @@
           "rank": 1,
           "cost": 1,
           "description": "Further mastery of Fundament of Wisdom. (Rank 1 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 1,
           "description": "Further mastery of Fundament of Wisdom. (Rank 2 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 1,
           "description": "Further mastery of Fundament of Wisdom. (Rank 3 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 1,
           "description": "Further mastery of Fundament of Wisdom. (Rank 4 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 1,
           "description": "Further mastery of Fundament of Wisdom. (Rank 5 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 1,
           "description": "Further mastery of Fundament of Wisdom. (Rank 6 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
           "cost": 1,
           "description": "Further mastery of Fundament of Wisdom. (Rank 7 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
           "cost": 1,
           "description": "Further mastery of Fundament of Wisdom. (Rank 8 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
           "cost": 1,
           "description": "Further mastery of Fundament of Wisdom. (Rank 9 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability draws on fundamental arcane principles, strengthening the foundation of your spellcasting.",
+      "description": "After endless experiences and training, some individuals are able to forge their experiences into new understandings of the world around them. Lessons layered on top of other lessons form a tapestry of knowledge. As you master the Fundament of Wisdom you will unlock other new abilities and secrets. After training the first three ranks of Fundament of Wisdom you will be able to train in the First Spire of Divinity. After you master the First Spire and the next three ranks of Fundament of Wisdom you can then train the Second Spire of Divinity. After completing your training with the Second Spire and completing the final three ranks of Fundament of Wisdom you will be able to train the Third Spire of Divinity and complete your mastery. Fundament of Wisdom itself will grant you 10 mana per rank and increase the cap on your Wisdom skill by 1 point per rank.",
       "aaNumber": 1304,
       "sourceCategory": "SoD",
       "_fillSource": "metadata-fallback"
@@ -3488,19 +3632,37 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Fundament: First Spire of Divinity. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Melee Mitigation by 2%",
+            "Increase Spell Critical Direct Damage Chance by 2%",
+            "Increase Chance to Critical Cast by 10%",
+            "Spell Proc Chance (10)",
+            "Increase AC by 17"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Fundament: First Spire of Divinity. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Melee Mitigation by 3%",
+            "Increase Spell Critical Direct Damage Chance by 4%",
+            "Increase Chance to Critical Cast by 20%",
+            "Spell Proc Chance (20)",
+            "Increase AC by 34"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Fundament: First Spire of Divinity. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Melee Mitigation by 4%",
+            "Increase Spell Critical Direct Damage Chance by 6%",
+            "Increase Chance to Critical Cast by 30%",
+            "Spell Proc Chance (30)",
+            "Increase AC by 52"
+          ]
         }
       ],
       "description": "This active ability raises a spire of arcane power, focusing your destructive magic to devastating effect.",
@@ -3537,19 +3699,43 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Fundament: Second Spire of Divinity. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Melee Mitigation by 4%",
+            "Increase Spell Critical Direct Damage Chance by 6%",
+            "Increase Chance to Critical Cast by 30%",
+            "Spell Proc Chance (30)",
+            "Increase AC by 52",
+            "Fc_Heal_Amt (1000)",
+            "Limit: Min Level (75)"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Fundament: Second Spire of Divinity. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Melee Mitigation by 4%",
+            "Increase Spell Critical Direct Damage Chance by 6%",
+            "Increase Chance to Critical Cast by 30%",
+            "Spell Proc Chance (30)",
+            "Increase AC by 52",
+            "Fc_Heal_Amt (1500)",
+            "Limit: Min Level (75)"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Fundament: Second Spire of Divinity. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Melee Mitigation by 4%",
+            "Increase Spell Critical Direct Damage Chance by 6%",
+            "Increase Chance to Critical Cast by 30%",
+            "Spell Proc Chance (30)",
+            "Increase AC by 52",
+            "Fc_Heal_Amt (2000)",
+            "Limit: Min Level (75)"
+          ]
         }
       ],
       "description": "This active ability raises a spire of arcane power, focusing your destructive magic to devastating effect.",
@@ -3586,19 +3772,34 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Fundament: Third Spire of Divinity. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Melee Mitigation by 2%",
+            "Mitigate Spell Damage by 1%, 0 total",
+            "Increase AC by 21",
+            "Mitigate Melee Damage by 1%, 0 total"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Fundament: Third Spire of Divinity. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Melee Mitigation by 3%",
+            "Mitigate Spell Damage by 2%, 0 total",
+            "Increase AC by 43",
+            "Mitigate Melee Damage by 2%, 0 total"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Fundament: Third Spire of Divinity. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Melee Mitigation by 4%",
+            "Mitigate Spell Damage by 3%, 0 total",
+            "Increase AC by 65",
+            "Mitigate Melee Damage by 3%, 0 total"
+          ]
         }
       ],
       "description": "This active ability raises a spire of arcane power, focusing your destructive magic to devastating effect.",
@@ -7067,37 +7268,49 @@
           "rank": 1,
           "cost": 7,
           "description": "Speed is its own reward: Divine Intervention refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 7,
           "description": "Speed is its own reward: Divine Intervention refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 7,
           "description": "Speed is its own reward: Divine Intervention refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 7,
           "description": "Speed is its own reward: Divine Intervention refreshes faster with each rank. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 7,
           "description": "Speed is its own reward: Divine Intervention refreshes faster with each rank. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 7,
           "description": "Speed is its own reward: Divine Intervention refreshes faster with each rank. (Rank 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Divine Intervention refreshes faster with each rank.",
@@ -7125,8 +7338,8 @@
       "activation": "passive",
       "costPerRank": [
         5,
-        5,
-        5
+        7,
+        9
       ],
       "prerequisites": [],
       "ranks": [
@@ -7141,7 +7354,7 @@
         },
         {
           "rank": 2,
-          "cost": 5,
+          "cost": 7,
           "description": "Less waiting between wonders: reuse time cut by 6.",
           "effects": [
             "Reduce Timer by 6s (v310)",
@@ -7150,7 +7363,7 @@
         },
         {
           "rank": 3,
-          "cost": 5,
+          "cost": 9,
           "description": "Less waiting between wonders: reuse time cut by 10.",
           "effects": [
             "Reduce Timer by 10s (v310)",
@@ -7233,55 +7446,73 @@
           "rank": 1,
           "cost": 6,
           "description": "Speed is its own reward: Divine Avatar refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 6,
           "description": "Speed is its own reward: Divine Avatar refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 6,
           "description": "Speed is its own reward: Divine Avatar refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 6,
           "description": "Speed is its own reward: Divine Avatar refreshes faster with each rank. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 6,
           "description": "Speed is its own reward: Divine Avatar refreshes faster with each rank. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 6,
           "description": "Speed is its own reward: Divine Avatar refreshes faster with each rank. (Rank 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
           "cost": 6,
           "description": "Speed is its own reward: Divine Avatar refreshes faster with each rank. (Rank 7)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
           "cost": 6,
           "description": "Speed is its own reward: Divine Avatar refreshes faster with each rank. (Rank 8)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
           "cost": 6,
           "description": "Speed is its own reward: Divine Avatar refreshes faster with each rank. (Rank 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Divine Avatar refreshes faster with each rank.",
@@ -7657,8 +7888,8 @@
       "activation": "passive",
       "costPerRank": [
         3,
-        3,
-        3
+        5,
+        7
       ],
       "prerequisites": [],
       "ranks": [
@@ -7666,19 +7897,25 @@
           "rank": 1,
           "cost": 3,
           "description": "Calls Blessing of Resurrection to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 3,
+          "cost": 5,
           "description": "Calls Blessing of Resurrection to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 3,
+          "cost": 7,
           "description": "Calls Blessing of Resurrection to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Blessing of Resurrection to hand more swiftly \u2014 less waiting, more doing.",
@@ -7706,8 +7943,8 @@
       "activation": "passive",
       "costPerRank": [
         5,
-        5,
-        5
+        7,
+        9
       ],
       "prerequisites": [],
       "ranks": [
@@ -7715,19 +7952,25 @@
           "rank": 1,
           "cost": 5,
           "description": "Speed is its own reward: Divine Resurrection refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 5,
+          "cost": 7,
           "description": "Speed is its own reward: Divine Resurrection refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 5,
+          "cost": 9,
           "description": "Speed is its own reward: Divine Resurrection refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Divine Resurrection refreshes faster with each rank.",
@@ -7803,7 +8046,7 @@
           ]
         }
       ],
-      "description": "Call upon Burst of Life I \u2014 the power answers when you speak its name.",
+      "description": "This abilty blasts your target with the light of Rodcet Nife, instantly healing their wounds.",
       "aaNumber": 7689,
       "sourceCategory": "Uf"
     }
@@ -7893,7 +8136,7 @@
           ]
         }
       ],
-      "description": "Call upon Healing Frenzy I \u2014 the power answers when you speak its name.",
+      "description": "This ability will cause you to score a critical heal for each heal you cast for a short time but at the cost of additional mana. As you gain ranks your mana penalty will shrink.",
       "aaNumber": 8500,
       "sourceCategory": "Uf"
     }
@@ -7918,8 +8161,8 @@
       "activation": "passive",
       "costPerRank": [
         5,
-        5,
-        5
+        7,
+        9
       ],
       "prerequisites": [],
       "ranks": [
@@ -7935,7 +8178,7 @@
         },
         {
           "rank": 2,
-          "cost": 5,
+          "cost": 7,
           "description": "Less of a burden now \u2014 Spell Resist Rate reduced by 2%. Your knack for Stun Bash sharpens; expect success 2% more often.",
           "effects": [
             "Decrease Spell Resist Rate by 2%",
@@ -7945,7 +8188,7 @@
         },
         {
           "rank": 3,
-          "cost": 5,
+          "cost": 9,
           "description": "Less of a burden now \u2014 Spell Resist Rate reduced by 3%. Lady Luck smiles a little wider: +3% chance to Stun Bash.",
           "effects": [
             "Decrease Spell Resist Rate by 3%",
@@ -7978,8 +8221,8 @@
       "activation": "passive",
       "costPerRank": [
         5,
-        5,
-        5
+        7,
+        9
       ],
       "prerequisites": [],
       "ranks": [
@@ -7987,22 +8230,28 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Quickened Blessing of Ressurection. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 5,
+          "cost": 7,
           "description": "Further mastery of Quickened Blessing of Ressurection. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 5,
+          "cost": 9,
           "description": "Further mastery of Quickened Blessing of Ressurection. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability invokes a divine blessing, granting you supernatural favor and protection.",
+      "description": "This passive ability reduces the cast time of your Blessing of Resurrection ability by .5 seconds per rank.",
       "aaNumber": 8502,
       "sourceCategory": "Uf",
       "_fillSource": "metadata-fallback"
@@ -8027,8 +8276,8 @@
       "activation": "passive",
       "costPerRank": [
         5,
-        5,
-        5
+        7,
+        9
       ],
       "prerequisites": [],
       "ranks": [
@@ -8036,19 +8285,25 @@
           "rank": 1,
           "cost": 5,
           "description": "Calls Atonement to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 5,
+          "cost": 7,
           "description": "Calls Atonement to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 5,
+          "cost": 9,
           "description": "Calls Atonement to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Atonement to hand more swiftly \u2014 less waiting, more doing.",
@@ -8083,10 +8338,13 @@
           "rank": 1,
           "cost": 12,
           "description": "Further mastery of Improved Sanctuary. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Observer (1)",
+            "Increase HP when cast by 46000"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Improved Sanctuary, a discipline that rewards dedicated practice with growing power.",
+      "description": "This is a faster casting version of your Sanctuary ability.",
       "aaNumber": 8504,
       "sourceCategory": "Uf",
       "_fillSource": "metadata-fallback"
@@ -8156,19 +8414,25 @@
           "rank": 1,
           "cost": 5,
           "description": "Speed is its own reward: Celestial Hammer refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Speed is its own reward: Celestial Hammer refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Speed is its own reward: Celestial Hammer refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Celestial Hammer refreshes faster with each rank.",
@@ -8205,7 +8469,11 @@
           "rank": 1,
           "cost": 2,
           "description": "Further mastery of Sense the Dead. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Increase Chance to Avoid Melee by 75%",
+            "Increase Movement by 100%",
+            "Mitigate Melee Damage by 12%, 0 total"
+          ]
         }
       ],
       "description": "This active ability masters the art of Sense Dead, a discipline that rewards dedicated practice with growing power.",
@@ -8240,7 +8508,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
@@ -8274,7 +8544,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. Planar energies course through you, a testament to trials survived in realms beyond.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. Planar energies course through you, a testament to trials survived in realms beyond.",
@@ -8308,7 +8580,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
@@ -8342,7 +8616,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. You have walked where mortals fear to tread, and returned stronger.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. You have walked where mortals fear to tread, and returned stronger.",
@@ -8376,7 +8652,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. Planar energies course through you, a testament to trials survived in realms beyond.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. Planar energies course through you, a testament to trials survived in realms beyond.",
@@ -8410,7 +8688,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Forged in the trials of the planes, this ability carries the weight of divine judgment. You have walked where mortals fear to tread, and returned stronger.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. You have walked where mortals fear to tread, and returned stronger.",
@@ -8436,18 +8716,20 @@
       "maxRanks": 1,
       "activation": "activated",
       "costPerRank": [
-        11
+        3
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 11,
+          "cost": 3,
           "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. Forged in the trials of the planes, this ability carries the weight of divine judgment. The gods watched your ascent through their domains, and this is their acknowledgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. The gods watched your ascent through their domains, and this is their acknowledgment.",
+      "description": "This ability infuses an undead NPC with holy energy, causing it to continually take damage for the next 30 seconds. Each additional level of this ability increases the damage done. Occasionally an undead NPC will react violently to the infusion of holy energy, potentially destroying it outright.",
       "aaNumber": 13108,
       "sourceCategory": "Planes of Power"
     }
@@ -8478,7 +8760,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Forged in the trials of the planes, this ability carries the weight of divine judgment. Planar energies course through you, a testament to trials survived in realms beyond.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Planar energies course through you, a testament to trials survived in realms beyond.",
@@ -8512,7 +8796,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. The Dragorn learned to fear your name in the Bloodfields.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. The Dragorn learned to fear your name in the Bloodfields.",
@@ -8546,7 +8832,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. Muramite tactics taught you lessons no training ground could impart.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. Muramite tactics taught you lessons no training ground could impart.",
@@ -8580,7 +8868,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. Muramite tactics taught you lessons no training ground could impart.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. Muramite tactics taught you lessons no training ground could impart.",
@@ -8614,7 +8904,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. The Dragorn learned to fear your name in the Bloodfields.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. The Dragorn learned to fear your name in the Bloodfields.",
@@ -8648,7 +8940,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. Dranik's survivors speak of your courage in hushed, reverent tones.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. Dranik's survivors speak of your courage in hushed, reverent tones.",
@@ -8682,7 +8976,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Tempered in the war against the Muramites, this ability hums with defiant resolve. Muramite tactics taught you lessons no training ground could impart.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Muramite tactics taught you lessons no training ground could impart.",
@@ -8708,18 +9004,20 @@
       "maxRanks": 1,
       "activation": "activated",
       "costPerRank": [
-        11
+        3
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 11,
+          "cost": 3,
           "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. Tempered in the war against the Muramites, this ability hums with defiant resolve. You stood against the Discord invasion when Norrath needed defenders most.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. You stood against the Discord invasion when Norrath needed defenders most.",
+      "description": "This ability infuses an undead NPC with holy energy, causing it to continually take damage for the next 30 seconds. Each additional level of this ability increases the damage done. Occasionally an undead NPC will react violently to the infusion of holy energy, potentially destroying it outright.",
       "aaNumber": 13249,
       "sourceCategory": "Omens of War"
     }
@@ -8750,7 +9048,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Tempered in the war against the Muramites, this ability hums with defiant resolve. Tempered in the war against the Muramites, this ability hums with defiant resolve.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Tempered in the war against the Muramites, this ability hums with defiant resolve.",
@@ -8784,7 +9084,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. The Buried Sea's dangers honed instincts that civilized lands never could.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. The Buried Sea's dangers honed instincts that civilized lands never could.",
@@ -8818,7 +9120,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. You have sailed waters charted by no map and lived to tell of it.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. You have sailed waters charted by no map and lived to tell of it.",
@@ -8852,7 +9156,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. Jungle shadows taught you patience; pirate blades taught you speed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. Jungle shadows taught you patience; pirate blades taught you speed.",
@@ -8886,7 +9192,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. Jungle shadows taught you patience; pirate blades taught you speed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. Jungle shadows taught you patience; pirate blades taught you speed.",
@@ -8920,7 +9228,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. The Buried Sea's dangers honed instincts that civilized lands never could.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. The Buried Sea's dangers honed instincts that civilized lands never could.",
@@ -8954,7 +9264,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Learned among dragons and pirates, this ability strikes with cunning grace. Learned among dragons and pirates, this ability strikes with cunning grace.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Learned among dragons and pirates, this ability strikes with cunning grace.",
@@ -8980,18 +9292,20 @@
       "maxRanks": 1,
       "activation": "activated",
       "costPerRank": [
-        11
+        3
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 11,
+          "cost": 3,
           "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. Learned among dragons and pirates, this ability strikes with cunning grace. The Buried Sea's dangers honed instincts that civilized lands never could.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. The Buried Sea's dangers honed instincts that civilized lands never could.",
+      "description": "This ability infuses an undead NPC with holy energy, causing it to continually take damage for the next 30 seconds. Each additional level of this ability increases the damage done. Occasionally an undead NPC will react violently to the infusion of holy energy, potentially destroying it outright.",
       "aaNumber": 13390,
       "sourceCategory": "The Serpent's Spine"
     }
@@ -9022,7 +9336,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Learned among dragons and pirates, this ability strikes with cunning grace. You have sailed waters charted by no map and lived to tell of it.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. You have sailed waters charted by no map and lived to tell of it.",
@@ -9056,7 +9372,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. Infused with the magic of the Faydark, this ability sparkles with fey mischief.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. Infused with the magic of the Faydark, this ability sparkles with fey mischief.",
@@ -9090,7 +9408,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. The fairies giggle at your exploits, which is high praise indeed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. The fairies giggle at your exploits, which is high praise indeed.",
@@ -9124,7 +9444,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. The fairies giggle at your exploits, which is high praise indeed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. The fairies giggle at your exploits, which is high praise indeed.",
@@ -9158,7 +9480,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. Infused with the magic of the Faydark, this ability sparkles with fey mischief.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. Infused with the magic of the Faydark, this ability sparkles with fey mischief.",
@@ -9192,7 +9516,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. The fairies giggle at your exploits, which is high praise indeed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. The fairies giggle at your exploits, which is high praise indeed.",
@@ -9226,7 +9552,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Infused with the magic of the Faydark, this ability sparkles with fey mischief. Steamfont's gears turn in rhythm with your newfound understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Steamfont's gears turn in rhythm with your newfound understanding.",
@@ -9252,18 +9580,20 @@
       "maxRanks": 1,
       "activation": "activated",
       "costPerRank": [
-        11
+        3
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 11,
+          "cost": 3,
           "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. Infused with the magic of the Faydark, this ability sparkles with fey mischief. Steamfont's gears turn in rhythm with your newfound understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. Steamfont's gears turn in rhythm with your newfound understanding.",
+      "description": "This ability infuses an undead NPC with holy energy, causing it to continually take damage for the next 30 seconds. Each additional level of this ability increases the damage done. Occasionally an undead NPC will react violently to the infusion of holy energy, potentially destroying it outright.",
       "aaNumber": 13531,
       "sourceCategory": "Secrets of Faydwer"
     }
@@ -9294,7 +9624,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Infused with the magic of the Faydark, this ability sparkles with fey mischief. The fairies giggle at your exploits, which is high praise indeed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. The fairies giggle at your exploits, which is high praise indeed.",
@@ -9328,7 +9660,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. Temporal rifts showed you truths that linear minds cannot grasp.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. Temporal rifts showed you truths that linear minds cannot grasp.",
@@ -9362,7 +9696,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. The past and future converge in your actions, guided by this understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. The past and future converge in your actions, guided by this understanding.",
@@ -9396,7 +9732,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. The past and future converge in your actions, guided by this understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. The past and future converge in your actions, guided by this understanding.",
@@ -9430,7 +9768,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. You have seen Norrath as it was and as it might be; this wisdom remains.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. You have seen Norrath as it was and as it might be; this wisdom remains.",
@@ -9464,7 +9804,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. Those who travel time's currents carry its mark; yours manifests thus.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. Those who travel time's currents carry its mark; yours manifests thus.",
@@ -9498,7 +9840,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Touched by the currents of time, this ability echoes across past and future. Touched by the currents of time, this ability echoes across past and future.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Touched by the currents of time, this ability echoes across past and future.",
@@ -9524,18 +9868,20 @@
       "maxRanks": 1,
       "activation": "activated",
       "costPerRank": [
-        11
+        3
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 11,
+          "cost": 3,
           "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. Touched by the currents of time, this ability echoes across past and future. Temporal rifts showed you truths that linear minds cannot grasp.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. Temporal rifts showed you truths that linear minds cannot grasp.",
+      "description": "This ability infuses an undead NPC with holy energy, causing it to continually take damage for the next 30 seconds. Each additional level of this ability increases the damage done. Occasionally an undead NPC will react violently to the infusion of holy energy, potentially destroying it outright.",
       "aaNumber": 13672,
       "sourceCategory": "Seeds of Destruction"
     }
@@ -9566,7 +9912,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Touched by the currents of time, this ability echoes across past and future. Those who travel time's currents carry its mark; yours manifests thus.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Those who travel time's currents carry its mark; yours manifests thus.",
@@ -9600,7 +9948,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
@@ -9634,7 +9984,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. Fungal grottos and crystal caverns witnessed your transformation.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. Fungal grottos and crystal caverns witnessed your transformation.",
@@ -9668,7 +10020,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. Brell Serilis himself is said to nod approvingly at such craftsmanship.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. Brell Serilis himself is said to nod approvingly at such craftsmanship.",
@@ -9702,7 +10056,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
@@ -9736,7 +10092,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
@@ -9770,7 +10128,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock. Stone remembers; through this ability, you remember with it.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Stone remembers; through this ability, you remember with it.",
@@ -9796,18 +10156,20 @@
       "maxRanks": 1,
       "activation": "activated",
       "costPerRank": [
-        11
+        3
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 11,
+          "cost": 3,
           "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
+      "description": "This ability infuses an undead NPC with holy energy, causing it to continually take damage for the next 30 seconds. Each additional level of this ability increases the damage done. Occasionally an undead NPC will react violently to the infusion of holy energy, potentially destroying it outright.",
       "aaNumber": 13813,
       "sourceCategory": "Underfoot"
     }
@@ -9838,7 +10200,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock.",
@@ -9872,7 +10236,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. Cazic-Thule's nightmares could not break you; instead, you learned from them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of divine healing. Your healing spells restore 10% more hit points. Cazic-Thule's nightmares could not break you; instead, you learned from them.",
@@ -9906,7 +10272,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of sacred ward. Increases your Defensive Bonus (DB) by 2. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
@@ -9940,7 +10308,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead turning. Adds +10 to rolls made to turn or destroy undead. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
@@ -9974,7 +10344,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. Sleep and waking are merely different rooms; you have learned to move between them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of blessed mana. Reduces the mana cost of your healing spells by 5%. Sleep and waking are merely different rooms; you have learned to move between them.",
@@ -10008,7 +10380,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. You have walked the Dream and returned with power most only imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of resolute faith. Adds +10 to Resistance Rolls (RR) against disease and poison. You have walked the Dream and returned with power most only imagine.",
@@ -10042,7 +10416,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Spun from the fabric of dreams, this ability blurs the line between sleep and waking. Sleep and waking are merely different rooms; you have learned to move between them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Divine Light. Channel holy light: heal all nearby allies for a significant amount. Sleep and waking are merely different rooms; you have learned to move between them.",
@@ -10068,18 +10444,20 @@
       "maxRanks": 1,
       "activation": "activated",
       "costPerRank": [
-        11
+        3
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 11,
+          "cost": 3,
           "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. Spun from the fabric of dreams, this ability blurs the line between sleep and waking. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This active ability allows you to unleash Turn Undead. Force undead to flee: undead in range must resist or cower for 3 rounds. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
+      "description": "This ability infuses an undead NPC with holy energy, causing it to continually take damage for the next 30 seconds. Each additional level of this ability increases the damage done. Occasionally an undead NPC will react violently to the infusion of holy energy, potentially destroying it outright.",
       "aaNumber": 13954,
       "sourceCategory": "House of Thule"
     }
@@ -10110,7 +10488,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Spun from the fabric of dreams, this ability blurs the line between sleep and waking. Cazic-Thule's nightmares could not break you; instead, you learned from them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Sacred Bulwark. Bless an ally with divine protection: +10 DB for 5 rounds. Cazic-Thule's nightmares could not break you; instead, you learned from them.",

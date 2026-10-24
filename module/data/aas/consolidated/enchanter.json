@@ -30,7 +30,7 @@
           ]
         }
       ],
-      "description": "Call upon Dire Charm I \u2014 the power answers when you speak its name.",
+      "description": "This ability gives you the chance to permanently charm an NPC. (Enchanters: All. Druids: Animals only. Necromancers: Undead only.)",
       "aaNumber": 46,
       "sourceCategory": "SoL"
     }
@@ -102,7 +102,7 @@
           ]
         }
       ],
-      "description": "Call upon Gather Mana I \u2014 the power answers when you speak its name.",
+      "description": "This ability, when activated, restores 25000 mana instantly and continues to restore 500 mana every 6 seconds for 1 minute. Ranks 9-11 reduce the reuse time of this ability by 7% per rank. Ranks 12-14 by 10% per rank.",
       "aaNumber": 57,
       "sourceCategory": "SoL"
     }
@@ -135,19 +135,25 @@
           "rank": 1,
           "cost": 2,
           "description": "Calls Gathering to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 2,
           "description": "Calls Gathering to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 2,
           "description": "Calls Gathering to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Gathering to hand more swiftly \u2014 less waiting, more doing.",
@@ -328,8 +334,8 @@
       "activation": "passive",
       "costPerRank": [
         4,
-        4,
-        4
+        3,
+        2
       ],
       "prerequisites": [],
       "ranks": [
@@ -337,22 +343,28 @@
           "rank": 1,
           "cost": 4,
           "description": "Further mastery of Animation Empathy. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 4,
+          "cost": 3,
           "description": "Further mastery of Animation Empathy. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 4,
+          "cost": 2,
           "description": "Further mastery of Animation Empathy. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Animation Empathy, a discipline that rewards dedicated practice with growing power.",
+      "description": "This passive ability grants you finer control over your animations. Hotkeys for these commands can be created using the pet window. Rank 1 - Guard - /pet guard and Follow - /pet follow. Rank 2 - Attack - /pet attack and Queue Attack - /pet qattack. Rank 3 - Back off - /pet back off, Toggle Taunt - /pet taunt (on/off), Toggle Sit - /pet sit (on/off), Toggle Stop - /pet stop (on/off), Who Leader - /pet who leader, Report Health - /pet (report) health, and Target Pet /pet target. Rank 4 - Hold and Greater Hold - /pet hold -or- /pet ghold. When your pet is in the hold state, your pet will only attack something when you tell it to, and your pet will continue to attack anything on its hate list after that point. Once the encounter is finished, your pet will automatically go back to a held state. If your pet is never told to exclusively attack anything, your pet will never attack anything, even if something is attacking it. The greater hold state forces your pet not to add anything to its hatelist unless specifically added by you. You can add a target to your pet's hatelist with either /pet attack or /pet qattack. Rank 5 - Focus - /pet focus. While focused, your pet will ignore all other opponents until the target that it was last instructed to attack is defeated. Rank 6 - Swarm and Qswarm - /pet swarm and /pet qswarm. Commands your temporary pets to attack your current target.",
       "aaNumber": 195,
       "sourceCategory": "PoP",
       "_fillSource": "metadata-fallback"
@@ -384,10 +396,12 @@
           "rank": 1,
           "cost": 4,
           "description": "Further mastery of Project Illusion. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Increase Faction for ( DaBashers ) by 200"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Project Illusion, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to project your innate talent with illusions upon others. (Activating this ability on a targeted group member causes your next illusion spell to affect that target.)",
       "aaNumber": 217,
       "sourceCategory": "PoP",
       "_fillSource": "metadata-fallback"
@@ -604,7 +618,7 @@
           ]
         }
       ],
-      "description": "Call upon Doppelganger I \u2014 the power answers when you speak its name.",
+      "description": "This ability, when activated, creates a mirror of yourself to draw the attacks of enemies. Ranks 2-3 and 7-24 increase the power of the summoned minion. Ranks 4-6 reduce the reuse timer of this ability by 5 minutes per rank.",
       "aaNumber": 261,
       "sourceCategory": "GoD"
     }
@@ -760,8 +774,8 @@
       "activation": "passive",
       "costPerRank": [
         3,
-        3,
-        3
+        6,
+        9
       ],
       "prerequisites": [],
       "ranks": [
@@ -769,22 +783,28 @@
           "rank": 1,
           "cost": 3,
           "description": "Further mastery of Quick Mass Group Buff. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 3,
+          "cost": 6,
           "description": "Further mastery of Quick Mass Group Buff. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 3,
+          "cost": 9,
           "description": "Further mastery of Quick Mass Group Buff. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Group Buff, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability decreases the reuse time on Mass Group Buff by 10 percent per rank.",
       "aaNumber": 264,
       "sourceCategory": "GoD",
       "_fillSource": "metadata-fallback"
@@ -823,7 +843,7 @@
           ]
         }
       ],
-      "description": "Call upon Group Perfected Invisibility to Undead I \u2014 the power answers when you speak its name.",
+      "description": "An invisibility to undead creatures that will not fade over time than you can share with your group.",
       "aaNumber": 280,
       "sourceCategory": "VoA"
     }
@@ -861,7 +881,7 @@
           ]
         }
       ],
-      "description": "Call upon Perfected Invisibility to Undead \u2014 the power answers when you speak its name.",
+      "description": "An invisibility to undead creatures that will not fade over time.",
       "aaNumber": 291,
       "sourceCategory": "VoA"
     }
@@ -894,22 +914,28 @@
           "rank": 1,
           "cost": 7,
           "description": "Further mastery of Quickened Stasis. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 7,
           "description": "Further mastery of Quickened Stasis. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 7,
           "description": "Further mastery of Quickened Stasis. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Quickened Stasis, a discipline that rewards dedicated practice with growing power.",
+      "description": "Each rank of this passive ability shortens the cast time of Stasis and Nightmare Stasis by .25 seconds. This does not affect Friendly Stasis or Self Stasis.",
       "aaNumber": 293,
       "sourceCategory": "VoA",
       "_fillSource": "metadata-fallback"
@@ -943,19 +969,25 @@
           "rank": 1,
           "cost": 9,
           "description": "Makes dreary deeds linger \u2014 good things last longer with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Makes dreary deeds linger \u2014 good things last longer with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Makes dreary deeds linger \u2014 good things last longer with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Makes dreary deeds linger \u2014 good things last longer with each rank.",
@@ -983,8 +1015,8 @@
       "activation": "activated",
       "costPerRank": [
         3,
-        3,
-        3
+        6,
+        9
       ],
       "prerequisites": [],
       "ranks": [
@@ -992,22 +1024,31 @@
           "rank": 1,
           "cost": 3,
           "description": "Further mastery of Stasis. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/73)",
+            "Memblur (40%)"
+          ]
         },
         {
           "rank": 2,
-          "cost": 3,
+          "cost": 6,
           "description": "Further mastery of Stasis. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/73)",
+            "Memblur (40%)"
+          ]
         },
         {
           "rank": 3,
-          "cost": 3,
+          "cost": 9,
           "description": "Further mastery of Stasis. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/73)",
+            "Memblur (40%)"
+          ]
         }
       ],
-      "description": "This active ability channels the power of Stasis, growing more potent with each rank.",
+      "description": "Use of this ability causes your opponent to immediately fall into a deep sleep. The effect last for up to one minute per rank.",
       "aaNumber": 409,
       "sourceCategory": "OoW",
       "_fillSource": "metadata-fallback"
@@ -1041,22 +1082,33 @@
           "rank": 1,
           "cost": 12,
           "description": "Further mastery of Color Shock. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Faction for ( Brood of Di`Zok ) by 700",
+            "Increase Faction for ( Empire of the Di`Zok ) by 350"
+          ]
         },
         {
           "rank": 2,
           "cost": 12,
           "description": "Further mastery of Color Shock. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Decrease Hitpoints by 30000.",
+            "Stun (1.00 sec/110)",
+            "Detect Poison (1)"
+          ]
         },
         {
           "rank": 3,
           "cost": 12,
           "description": "Further mastery of Color Shock. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Decrease Spell Mana Cost by 40%",
+            "Limit: Max Level(129)",
+            "Limit: ClassPlayer (131070)"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Color Shock, a discipline that rewards dedicated practice with growing power.",
+      "description": "While this ability is active, any creature that tries to attack the enchanter has a chance to be stunned in retribution. This ability does not affect creatures that are immune to stunning. Rank 1 will affect creatures level 73 and below and rank 2 will affect creatures level 83 and below while rank 3 will affect creatures level 88 and below.",
       "aaNumber": 412,
       "sourceCategory": "OoW",
       "_fillSource": "metadata-fallback"
@@ -1216,8 +1268,8 @@
       "activation": "activated",
       "costPerRank": [
         3,
-        3,
-        3
+        6,
+        9
       ],
       "prerequisites": [],
       "ranks": [
@@ -1225,22 +1277,28 @@
           "rank": 1,
           "cost": 3,
           "description": "Further mastery of Soothing Words. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Decrease Hitpoints by 2875."
+          ]
         },
         {
           "rank": 2,
-          "cost": 3,
+          "cost": 6,
           "description": "Further mastery of Soothing Words. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Decrease Hitpoints by 3250."
+          ]
         },
         {
           "rank": 3,
-          "cost": 3,
+          "cost": 9,
           "description": "Further mastery of Soothing Words. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Decrease Hitpoints by 6000."
+          ]
         }
       ],
-      "description": "This active ability masters the art of Soothing Words, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability, when activated, attempts to reduce your target's hatred for their current target by 5000 points if that creature's target is a member of your group or raid. Ranks 4-6 reduce the reuse time of this ability by 4 minutes per rank.",
       "aaNumber": 414,
       "sourceCategory": "OoW",
       "_fillSource": "metadata-fallback"
@@ -1314,31 +1372,41 @@
           "rank": 1,
           "cost": 5,
           "description": "Speed is its own reward: Phantasmal Opponent refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Speed is its own reward: Phantasmal Opponent refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Speed is its own reward: Phantasmal Opponent refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 5,
           "description": "Speed is its own reward: Phantasmal Opponent refreshes faster with each rank. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 5,
           "description": "Speed is its own reward: Phantasmal Opponent refreshes faster with each rank. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Phantasmal Opponent refreshes faster with each rank.",
@@ -1377,31 +1445,41 @@
           "rank": 1,
           "cost": 5,
           "description": "Calls First Spire of Enchantment to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Calls First Spire of Enchantment to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Calls First Spire of Enchantment to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 5,
           "description": "Calls First Spire of Enchantment to hand more swiftly \u2014 less waiting, more doing. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 5,
           "description": "Calls First Spire of Enchantment to hand more swiftly \u2014 less waiting, more doing. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls First Spire of Enchantment to hand more swiftly \u2014 less waiting, more doing.",
@@ -1441,40 +1519,58 @@
           "rank": 1,
           "cost": 3,
           "description": "Further mastery of Edict of Command. (Rank 1 of 6)",
-          "effects": []
+          "effects": [
+            "Charm up to level 70",
+            "Doom Req Target (2761)"
+          ]
         },
         {
           "rank": 2,
           "cost": 3,
           "description": "Further mastery of Edict of Command. (Rank 2 of 6)",
-          "effects": []
+          "effects": [
+            "Charm up to level 70",
+            "Doom Req Target (2761)"
+          ]
         },
         {
           "rank": 3,
           "cost": 3,
           "description": "Further mastery of Edict of Command. (Rank 3 of 6)",
-          "effects": []
+          "effects": [
+            "Charm up to level 70",
+            "Doom Req Target (2761)"
+          ]
         },
         {
           "rank": 4,
           "cost": 3,
           "description": "Further mastery of Edict of Command. (Rank 4 of 6)",
-          "effects": []
+          "effects": [
+            "Charm up to level 75",
+            "Doom Req Target (2761)"
+          ]
         },
         {
           "rank": 5,
           "cost": 3,
           "description": "Further mastery of Edict of Command. (Rank 5 of 6)",
-          "effects": []
+          "effects": [
+            "Charm up to level 80",
+            "Doom Req Target (2761)"
+          ]
         },
         {
           "rank": 6,
           "cost": 3,
           "description": "Further mastery of Edict of Command. (Rank 6 of 6)",
-          "effects": []
+          "effects": [
+            "Charm up to level 85",
+            "Doom Req Target (2761)"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Edict Command, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability, when activated, will bind an NPC to your will, charming them until the spell wears off. This ability works on NPCs up to the level you must be before you can purchase each rank. Rank 1 last for 2 minutes. Rank 2 for 4 minutes. Rank 3 and beyond for 6 minutes. Ranks 7-12, 19-21, and 28-23 (in-game typo) reduce the reuse time of this ability by 3 minutes per rank.",
       "aaNumber": 521,
       "sourceCategory": "DoD",
       "_fillSource": "metadata-fallback"
@@ -1508,19 +1604,25 @@
           "rank": 1,
           "cost": 5,
           "description": "Calls Second Spire of Enchantment to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Calls Second Spire of Enchantment to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Calls Second Spire of Enchantment to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Second Spire of Enchantment to hand more swiftly \u2014 less waiting, more doing.",
@@ -1559,31 +1661,41 @@
           "rank": 1,
           "cost": 5,
           "description": "Speed is its own reward: Third Spire of Enchantment refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Speed is its own reward: Third Spire of Enchantment refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Speed is its own reward: Third Spire of Enchantment refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 5,
           "description": "Speed is its own reward: Third Spire of Enchantment refreshes faster with each rank. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 5,
           "description": "Speed is its own reward: Third Spire of Enchantment refreshes faster with each rank. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Third Spire of Enchantment refreshes faster with each rank.",
@@ -1758,7 +1870,7 @@
       "activation": "activated",
       "costPerRank": [
         12,
-        12
+        15
       ],
       "prerequisites": [],
       "ranks": [
@@ -1766,16 +1878,20 @@
           "rank": 1,
           "cost": 12,
           "description": "Further mastery of Crippling Aurora. (Rank 1 of 2)",
-          "effects": []
+          "effects": [
+            "Unknown #470 (100/100/1)"
+          ]
         },
         {
           "rank": 2,
-          "cost": 12,
+          "cost": 15,
           "description": "Further mastery of Crippling Aurora. (Rank 2 of 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Crippling Aurora, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability, when activated, showers the area around you with bursts of crippling sparkling lights, reducing the combat statistics of any affected enemies for 7.5 minutes. Ranks 2-4, 6-7, and 9 increase the power of this debuff. Ranks 3-5 and 8 reduce the reuse time of this ability by 1 minute per rank.",
       "aaNumber": 535,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
@@ -1814,52 +1930,68 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Deep Sleep. (Rank 1 of 8)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Deep Sleep. (Rank 2 of 8)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Deep Sleep. (Rank 3 of 8)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 5,
           "description": "Further mastery of Deep Sleep. (Rank 4 of 8)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 5,
           "description": "Further mastery of Deep Sleep. (Rank 5 of 8)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 5,
           "description": "Further mastery of Deep Sleep. (Rank 6 of 8)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
           "cost": 5,
           "description": "Further mastery of Deep Sleep. (Rank 7 of 8)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
           "cost": 5,
           "description": "Further mastery of Deep Sleep. (Rank 8 of 8)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Deep Sleep, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability gives you an innate chance to put an NPC into a deep sleep when you mesmerize it. An NPC under the effects of a deep sleep will suffer offensive penalties for 2 minutes after the spell was initially cast. Additional ranks increase the effectiveness of the ability and the chance for it to occur.",
       "aaNumber": 545,
       "sourceCategory": "DoD",
       "_fillSource": "metadata-fallback"
@@ -1895,31 +2027,41 @@
           "rank": 1,
           "cost": 5,
           "description": "Speed is its own reward: Nightmare Stasis refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Speed is its own reward: Nightmare Stasis refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Speed is its own reward: Nightmare Stasis refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 5,
           "description": "Speed is its own reward: Nightmare Stasis refreshes faster with each rank. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 5,
           "description": "Speed is its own reward: Nightmare Stasis refreshes faster with each rank. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Nightmare Stasis refreshes faster with each rank.",
@@ -1956,22 +2098,31 @@
           "rank": 1,
           "cost": 9,
           "description": "Further mastery of Scintillating Beam. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Mesmerize (1/93)",
+            "Increase Curse Counter by 5",
+            "Add effect: Beam of Slumber Root II",
+            "Add effect: Somnolence IV"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Further mastery of Scintillating Beam. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Further mastery of Scintillating Beam. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Scintillating Beam, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability, when activated, fires a beam of scintillating colors enthralling up to 5 targets caught in the brilliant light. When they recover, it will take some time to recover their full run speed and fighting accuracy. Each rank increases the duration of all effects slightly.",
       "aaNumber": 556,
       "sourceCategory": "VoA",
       "_fillSource": "metadata-fallback"
@@ -2008,7 +2159,7 @@
           ]
         }
       ],
-      "description": "Call upon Glyph Spray I \u2014 the power answers when you speak its name.",
+      "description": "This ability, when activated, places a barrier around everyone within 100 feet of you that protects against 20000 total points of direct-damage spell damage for up to 36 minutes.",
       "aaNumber": 578,
       "sourceCategory": "HoT"
     }
@@ -2053,7 +2204,7 @@
           ]
         }
       ],
-      "description": "Call upon Mental Contortion I \u2014 the power answers when you speak its name.",
+      "description": "This ability, when activated, reduces your target's melee accuracy by 15%, melee damage by 10% and deals 1080 damage every 6 seconds for 3 minutes.",
       "aaNumber": 602,
       "sourceCategory": "HoT"
     }
@@ -2086,22 +2237,28 @@
           "rank": 1,
           "cost": 6,
           "description": "Further mastery of Surreality. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 6,
           "description": "Further mastery of Surreality. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 6,
           "description": "Further mastery of Surreality. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability channels the power of Surreality, growing more potent with each rank.",
+      "description": "Surreality decreases the reuse timer of Mind Over Matter by 2 minutes per rank.",
       "aaNumber": 615,
       "sourceCategory": "TSS",
       "_fillSource": "metadata-fallback"
@@ -2136,28 +2293,40 @@
           "rank": 1,
           "cost": 9,
           "description": "Further mastery of Mana Draw. (Rank 1 of 4)",
-          "effects": []
+          "effects": [
+            "Increase Mana by 10000",
+            "Increase Mana by 500 per tick"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Further mastery of Mana Draw. (Rank 2 of 4)",
-          "effects": []
+          "effects": [
+            "Increase Mana by 15000",
+            "Increase Mana by 500 per tick"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Further mastery of Mana Draw. (Rank 3 of 4)",
-          "effects": []
+          "effects": [
+            "Increase Mana by 20000",
+            "Increase Mana by 500 per tick"
+          ]
         },
         {
           "rank": 4,
           "cost": 9,
           "description": "Further mastery of Mana Draw. (Rank 4 of 4)",
-          "effects": []
+          "effects": [
+            "Increase Mana by 25000",
+            "Increase Mana by 500 per tick"
+          ]
         }
       ],
-      "description": "This active ability improves your mana efficiency, stretching your magical reserves further.",
+      "description": "Manadraw allows the enchanter to gather mana from his surroundings. Unlike the Gather Mana, Manadraw continues to pull additional mana from the environment for up to one minute after activation.",
       "aaNumber": 616,
       "sourceCategory": "TSS",
       "_fillSource": "metadata-fallback"
@@ -2191,22 +2360,28 @@
           "rank": 1,
           "cost": 3,
           "description": "Further mastery of Doppelganger's Beckon. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 3,
           "description": "Further mastery of Doppelganger's Beckon. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 3,
           "description": "Further mastery of Doppelganger's Beckon. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Doppelganger's Beckon, a discipline that rewards dedicated practice with growing power.",
+      "description": "Each rank of this ability shortens the reuse timer of your Doppelganger ability by 5 minutes.",
       "aaNumber": 617,
       "sourceCategory": "TSS",
       "_fillSource": "metadata-fallback"
@@ -2315,7 +2490,7 @@
           ]
         }
       ],
-      "description": "Call upon Azure Mind Crystal I \u2014 the power answers when you speak its name.",
+      "description": "Through this ability, an enchanter learns to channel and congeal his mana into sapphire crystals. These crystals can later be harvested to recover lost mana.",
       "aaNumber": 633,
       "sourceCategory": "TSS"
     }
@@ -2341,10 +2516,10 @@
       "activation": "activated",
       "costPerRank": [
         9,
+        12,
         9,
-        9,
-        9,
-        9
+        12,
+        12
       ],
       "prerequisites": [],
       "ranks": [
@@ -2358,7 +2533,7 @@
         },
         {
           "rank": 2,
-          "cost": 9,
+          "cost": 12,
           "description": "Invoke Arcane Whisper II at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Arcane Whisper II"
@@ -2374,7 +2549,7 @@
         },
         {
           "rank": 4,
-          "cost": 9,
+          "cost": 12,
           "description": "Invoke Arcane Whisper IV at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Arcane Whisper IV"
@@ -2382,7 +2557,7 @@
         },
         {
           "rank": 5,
-          "cost": 9,
+          "cost": 12,
           "description": "Unleash Arcane Whisper V, a gift earned through long dedication.",
           "effects": [
             "Cast: Arcane Whisper V"
@@ -2422,10 +2597,13 @@
           "rank": 1,
           "cost": 7,
           "description": "Further mastery of Dimensional Instability. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Add effect: Dimensional Instability I",
+            "Mitigate Melee Damage by 50%, 10000 total"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Dimensional Instability, a discipline that rewards dedicated practice with growing power.",
+      "description": "By creating a localized field of unstable reality, this ability periodically teleports you in random directions while keeping you slightly phased out of physical existence. While Dimensional Instability is active, enemies will notice your actions significantly less and you will be less susceptible to melee damage. Be careful! The locational shifts caused by Dimensional Instability beginning and ending will interrupt your spell casting.",
       "aaNumber": 639,
       "sourceCategory": "TSS",
       "_fillSource": "metadata-fallback"
@@ -2459,19 +2637,25 @@
           "rank": 1,
           "cost": 5,
           "description": "Calls Calculated Insanity to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Calls Calculated Insanity to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Calls Calculated Insanity to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Calculated Insanity to hand more swiftly \u2014 less waiting, more doing.",
@@ -2510,31 +2694,41 @@
           "rank": 1,
           "cost": 5,
           "description": "Speed is its own reward: Mental Contortion refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Speed is its own reward: Mental Contortion refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Speed is its own reward: Mental Contortion refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 5,
           "description": "Speed is its own reward: Mental Contortion refreshes faster with each rank. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 5,
           "description": "Speed is its own reward: Mental Contortion refreshes faster with each rank. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Mental Contortion refreshes faster with each rank.",
@@ -2571,19 +2765,25 @@
           "rank": 1,
           "cost": 9,
           "description": "Speed is its own reward: Crippling Aurora refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Speed is its own reward: Crippling Aurora refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Speed is its own reward: Crippling Aurora refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Crippling Aurora refreshes faster with each rank.",
@@ -2623,7 +2823,7 @@
           ]
         }
       ],
-      "description": "Call upon Enchant Alaran Metal (x1) \u2014 the power answers when you speak its name.",
+      "description": "This ability allows you to enchant a bar of Alaran metal using some of your mana.",
       "aaNumber": 708,
       "sourceCategory": "Trad"
     }
@@ -2654,10 +2854,12 @@
           "rank": 1,
           "cost": 0,
           "description": "Further mastery of Mass Enchant Alaran Metal. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Summon Item: Enchanted Alaran Metal Bar"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Alaran Metal, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to enchant 10 bars of Alaran metal using some of your mana.",
       "aaNumber": 709,
       "sourceCategory": "Trad",
       "_fillSource": "metadata-fallback"
@@ -2691,19 +2893,25 @@
           "rank": 1,
           "cost": 9,
           "description": "Calls Eldritch Rune to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Calls Eldritch Rune to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Calls Eldritch Rune to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Eldritch Rune to hand more swiftly \u2014 less waiting, more doing.",
@@ -2746,58 +2954,103 @@
           "rank": 1,
           "cost": 6,
           "description": "Further mastery of Nightmare Stasis. (Rank 1 of 9)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/74)",
+            "Memblur (40%)",
+            "Trigger Effect: Waking Nightmare I on Fade",
+            "A_Stacker (1)"
+          ]
         },
         {
           "rank": 2,
           "cost": 6,
           "description": "Further mastery of Nightmare Stasis. (Rank 2 of 9)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/76)",
+            "Memblur (40%)",
+            "Trigger Effect: Waking Nightmare I on Fade",
+            "A_Stacker (2)"
+          ]
         },
         {
           "rank": 3,
           "cost": 6,
           "description": "Further mastery of Nightmare Stasis. (Rank 3 of 9)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/78)",
+            "Memblur (40%)",
+            "Trigger Effect: Waking Nightmare I on Fade",
+            "A_Stacker (3)"
+          ]
         },
         {
           "rank": 4,
           "cost": 6,
           "description": "Further mastery of Nightmare Stasis. (Rank 4 of 9)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/79)",
+            "Memblur (40%)",
+            "Trigger Effect: Waking Nightmare II on Fade",
+            "A_Stacker (4)"
+          ]
         },
         {
           "rank": 5,
           "cost": 6,
           "description": "Further mastery of Nightmare Stasis. (Rank 5 of 9)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/81)",
+            "Memblur (40%)",
+            "Trigger Effect: Waking Nightmare II on Fade",
+            "A_Stacker (5)"
+          ]
         },
         {
           "rank": 6,
           "cost": 6,
           "description": "Further mastery of Nightmare Stasis. (Rank 6 of 9)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/83)",
+            "Memblur (40%)",
+            "Trigger Effect: Waking Nightmare II on Fade",
+            "A_Stacker (6)"
+          ]
         },
         {
           "rank": 7,
           "cost": 6,
           "description": "Further mastery of Nightmare Stasis. (Rank 7 of 9)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/84)",
+            "Memblur (40%)",
+            "Trigger Effect: Waking Nightmare III on Fade",
+            "A_Stacker (7)"
+          ]
         },
         {
           "rank": 8,
           "cost": 6,
           "description": "Further mastery of Nightmare Stasis. (Rank 8 of 9)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/86)",
+            "Memblur (40%)",
+            "Trigger Effect: Waking Nightmare IV on Fade",
+            "A_Stacker (8)"
+          ]
         },
         {
           "rank": 9,
           "cost": 6,
           "description": "Further mastery of Nightmare Stasis. (Rank 9 of 9)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/88)",
+            "Memblur (40%)",
+            "Trigger Effect: Waking Nightmare V on Fade",
+            "A_Stacker (9)"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Nightmare Stasis, a discipline that rewards dedicated practice with growing power.",
+      "description": "Use of this ability causes your opponent to immediately fall into a deep sleep and suffer terrible nightmares. When they wake, their movements will be slowed while they recover from the effects. The base ability affects NPCs up to level 74 and additional ranks increase the max level of NPC that can be affected 76 and 78 respectively for ranks 2 and 3. Ranks 4, 5 and 6 increase the cap to levels 79, 81 and 83, respectively and ranks 7, 8, and 9 raise the cap to level 84, 86 and 88.",
       "aaNumber": 748,
       "sourceCategory": "TSS",
       "_fillSource": "metadata-fallback"
@@ -2829,10 +3082,12 @@
           "rank": 1,
           "cost": 9,
           "description": "Further mastery of Dreary Deeds. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Unknown #470 (100/100/1)"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Dreary Deeds, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability, when activated, slows your target's attack speed by 70% for 1.5 minutes. Ranks 2-4 extend the duration of this ability by 6 seconds per rank.",
       "aaNumber": 753,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
@@ -2900,10 +3155,12 @@
           "rank": 1,
           "cost": 0,
           "description": "Further mastery of Mass Enchant Feymetal. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Summon Item: Enchanted Feymetal Bar"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Enchant Feymetal, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to enchant 10 bars of Feymetal using some of your mana.",
       "aaNumber": 755,
       "sourceCategory": "Trad",
       "_fillSource": "metadata-fallback"
@@ -2931,8 +3188,8 @@
       "activation": "passive",
       "costPerRank": [
         11,
-        11,
-        11
+        13,
+        15
       ],
       "prerequisites": [],
       "ranks": [
@@ -2940,19 +3197,25 @@
           "rank": 1,
           "cost": 11,
           "description": "Makes silent casting linger \u2014 good things last longer with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 11,
+          "cost": 13,
           "description": "Makes silent casting linger \u2014 good things last longer with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 11,
+          "cost": 15,
           "description": "Makes silent casting linger \u2014 good things last longer with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Makes silent casting linger \u2014 good things last longer with each rank.",
@@ -3193,55 +3456,73 @@
           "rank": 1,
           "cost": 6,
           "description": "Calls Veil of Mindshadow to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 6,
           "description": "Calls Veil of Mindshadow to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 6,
           "description": "Calls Veil of Mindshadow to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 6,
           "description": "Calls Veil of Mindshadow to hand more swiftly \u2014 less waiting, more doing. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 6,
           "description": "Calls Veil of Mindshadow to hand more swiftly \u2014 less waiting, more doing. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 6,
           "description": "Calls Veil of Mindshadow to hand more swiftly \u2014 less waiting, more doing. (Rank 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
           "cost": 6,
           "description": "Calls Veil of Mindshadow to hand more swiftly \u2014 less waiting, more doing. (Rank 7)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
           "cost": 6,
           "description": "Calls Veil of Mindshadow to hand more swiftly \u2014 less waiting, more doing. (Rank 8)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
           "cost": 6,
           "description": "Calls Veil of Mindshadow to hand more swiftly \u2014 less waiting, more doing. (Rank 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Veil of Mindshadow to hand more swiftly \u2014 less waiting, more doing.",
@@ -3281,7 +3562,7 @@
           ]
         }
       ],
-      "description": "Call upon Phantasmal Opponent I \u2014 the power answers when you speak its name.",
+      "description": "This ability, when activated, calls forth a Doppelganger of your current target that will attack your target for 1 minute. Ranks 2-7 reduce the reuse time of this ability by 30 seconds per rank. Ranks 8-9 increase the power of the Doppleganger.",
       "aaNumber": 1122,
       "sourceCategory": "SoD"
     }
@@ -3317,37 +3598,49 @@
           "rank": 1,
           "cost": 6,
           "description": "Calls Edict of Command to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 6,
           "description": "Calls Edict of Command to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 6,
           "description": "Calls Edict of Command to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 6,
           "description": "Calls Edict of Command to hand more swiftly \u2014 less waiting, more doing. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 6,
           "description": "Calls Edict of Command to hand more swiftly \u2014 less waiting, more doing. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 6,
           "description": "Calls Edict of Command to hand more swiftly \u2014 less waiting, more doing. (Rank 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Edict of Command to hand more swiftly \u2014 less waiting, more doing.",
@@ -3387,7 +3680,7 @@
           ]
         }
       ],
-      "description": "Call upon Fog of Memories I \u2014 the power answers when you speak its name.",
+      "description": "This ability, when activated, has a chance to wipe your target's memory. Additional ranks increase this chance slightly.",
       "aaNumber": 1124,
       "sourceCategory": "SoD"
     }
@@ -3461,7 +3754,7 @@
           ]
         }
       ],
-      "description": "Call upon Group Perfected Invisibility I \u2014 the power answers when you speak its name.",
+      "description": "An invisibility that will not fade over time than you can share with your group.",
       "aaNumber": 1210,
       "sourceCategory": "SoD"
     }
@@ -3500,55 +3793,73 @@
           "rank": 1,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 1 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 2 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 3 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 4 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 5 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 6 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 7 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 8 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 9 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability draws on fundamental arcane principles, strengthening the foundation of your spellcasting.",
@@ -3585,19 +3896,25 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Fundament: First Spire of Enchantment. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Add Defensive Proc: Enchanted Doppelganger I rate mod 300"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Fundament: First Spire of Enchantment. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Add Defensive Proc: Enchanted Doppelganger II rate mod 400"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Fundament: First Spire of Enchantment. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Add Defensive Proc: Enchanted Doppelganger III rate mod 500"
+          ]
         }
       ],
       "description": "This active ability raises a spire of arcane power, focusing your destructive magic to devastating effect.",
@@ -3634,19 +3951,28 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Fundament: Second Spire of Enchantment. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Mana Pool by 500",
+            "Increase Current Mana by 200 per tick"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Fundament: Second Spire of Enchantment. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Mana Pool by 750",
+            "Increase Current Mana by 250 per tick"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Fundament: Second Spire of Enchantment. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Mana Pool by 1000",
+            "Increase Current Mana by 300 per tick"
+          ]
         }
       ],
       "description": "This active ability raises a spire of arcane power, focusing your destructive magic to devastating effect.",
@@ -3683,19 +4009,31 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Fundament: Third Spire of Enchantment. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Mana Pool by 1000",
+            "Increase Current Mana by 300 per tick",
+            "Increase Spell Critical Direct Damage Chance by 6%"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Fundament: Third Spire of Enchantment. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Mana Pool by 1000",
+            "Increase Current Mana by 300 per tick",
+            "Increase Spell Critical Direct Damage Chance by 7%"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Fundament: Third Spire of Enchantment. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Mana Pool by 8000",
+            "Increase Current Mana by 400 per tick",
+            "Increase Spell Critical Direct Damage Chance by 7%"
+          ]
         }
       ],
       "description": "This active ability raises a spire of arcane power, focusing your destructive magic to devastating effect.",
@@ -3766,7 +4104,9 @@
           "rank": 1,
           "cost": 0,
           "description": "Further mastery of Mass Enchant Planar Alloy. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Summon Item: Enchanted Planar Alloy"
+          ]
         }
       ],
       "description": "This active ability masters the art of Planar Alloy, a discipline that rewards dedicated practice with growing power.",
@@ -7563,10 +7903,12 @@
           "rank": 1,
           "cost": 6,
           "description": "Further mastery of Pet Discipline. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability strengthens your bond with your minions, improving their effectiveness in battle.",
+      "description": "This ability will allow you to give your pet a 'hold' command until explicitly told to attack. Usage: /pet hold. Pet Hold is now a state that your pet is either in or not. When your pet is in the hold state, your pet will only attack something when you tell it to, and your pet will continue to attack anything on its hate list after that point. Once the encounter is finished, your pet will automatically go back to a held state. If your pet is never told to exclusively attack anything, your pet will never attack anything, even if something is attacking it. This ability also grants the \"Greater Pet Hold\" command which forces your pet to not add anything to its hatelist unless specifically added by you when greater hold is activated. You can add a target to your pet's hatelist with either attack or qattack.",
       "aaNumber": 3202,
       "sourceCategory": "TSS",
       "_fillSource": "metadata-fallback"
@@ -7598,10 +7940,12 @@
           "rank": 1,
           "cost": 0,
           "description": "Further mastery of Enchant Palladium Trio. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Increase Hate by 1"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Palladium Trio, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to enchant three bars of palladium using some of your mana.",
       "aaNumber": 3203,
       "sourceCategory": "Trad",
       "_fillSource": "metadata-fallback"
@@ -7633,10 +7977,12 @@
           "rank": 1,
           "cost": 0,
           "description": "Further mastery of Mass Enchant Palladium. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Summon Item: Enchanted Palladium Bar"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Enchant Palladium, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to enchant ten bars of palladium using some of your mana.",
       "aaNumber": 3204,
       "sourceCategory": "Trad",
       "_fillSource": "metadata-fallback"
@@ -7668,10 +8014,14 @@
           "rank": 1,
           "cost": 0,
           "description": "Further mastery of Greater Mass Enchant Palladium. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Trigger Effect: Blood Magic VIII (Ena) on Fade",
+            "HP to Mana (400%)",
+            "Increase Hitpoints v2 by 2600 per tick"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Enchant Palladium, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to enchant twenty bars of palladium using some of your mana.",
       "aaNumber": 3205,
       "sourceCategory": "Trad",
       "_fillSource": "metadata-fallback"
@@ -7739,10 +8089,12 @@
           "rank": 1,
           "cost": 0,
           "description": "Further mastery of Mass Enchant Dwerium. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Summon Item: Enchanted Dwerium Bar"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Enchant Dwerium, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to enchant ten bars of dwerium using some of your mana.",
       "aaNumber": 3207,
       "sourceCategory": "Trad",
       "_fillSource": "metadata-fallback"
@@ -7815,7 +8167,7 @@
           ]
         }
       ],
-      "description": "Call upon Enchant Temporite (x1) \u2014 the power answers when you speak its name.",
+      "description": "This ability allows you to enchant a bar of Temporite using some of your mana.",
       "aaNumber": 3209,
       "sourceCategory": "EQ"
     }
@@ -7846,10 +8198,12 @@
           "rank": 1,
           "cost": 0,
           "description": "Further mastery of Mass Enchant Temporite. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Summon Item: Enchanted Temporite Bar"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Enchant Temporite, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to enchant ten bars of Temporite using some of your mana.",
       "aaNumber": 3210,
       "sourceCategory": "Trad",
       "_fillSource": "metadata-fallback"
@@ -7917,10 +8271,12 @@
           "rank": 1,
           "cost": 0,
           "description": "Further mastery of Mass Enchant Cosgrite. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Summon Item: Enchanted Cosgrite Bar"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Enchant Cosgrite, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to enchant ten bars of Cosgrite using some of your mana.",
       "aaNumber": 3219,
       "sourceCategory": "Trad",
       "_fillSource": "metadata-fallback"
@@ -8099,64 +8455,84 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Mana Overburn. (Rank 1 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Mana Overburn. (Rank 2 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Mana Overburn. (Rank 3 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 5,
           "description": "Further mastery of Mana Overburn. (Rank 4 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 5,
           "description": "Further mastery of Mana Overburn. (Rank 5 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 5,
           "description": "Further mastery of Mana Overburn. (Rank 6 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
           "cost": 5,
           "description": "Further mastery of Mana Overburn. (Rank 7 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
           "cost": 5,
           "description": "Further mastery of Mana Overburn. (Rank 8 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
           "cost": 5,
           "description": "Further mastery of Mana Overburn. (Rank 9 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 10,
           "cost": 5,
           "description": "Further mastery of Mana Overburn. (Rank 10 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability improves your mana efficiency, stretching your magical reserves further.",
+      "description": "This ability will decrease the reuse time of your spells Mana Flare and Mana Recursion spells by 1 second per rank.",
       "aaNumber": 3720,
       "sourceCategory": "SoF",
       "_fillSource": "metadata-fallback"
@@ -8228,19 +8604,25 @@
           "rank": 1,
           "cost": 7,
           "description": "Calls Mana Draw to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 7,
           "description": "Calls Mana Draw to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 7,
           "description": "Calls Mana Draw to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Mana Draw to hand more swiftly \u2014 less waiting, more doing.",
@@ -8335,7 +8717,7 @@
           ]
         }
       ],
-      "description": "Call upon Beam of Slumber I \u2014 the power answers when you speak its name.",
+      "description": "This ability, when activated, mesmerizes up to 8 level 93 (at rank 1) or lower enemies in the direction you are facing for 18 seconds.",
       "aaNumber": 8700,
       "sourceCategory": "Uf"
     }
@@ -8434,7 +8816,7 @@
           ]
         }
       ],
-      "description": "Call upon Friendly Stasis I \u2014 the power answers when you speak its name.",
+      "description": "This ability, when activated, allows you to remove a target group member from combat by making them immobile and unable to act for up to 30 seconds. This ability causes all level 91 and lower NPCs to forget about your target. If your target is out of immediate combat, this ability will also apply invisibility.",
       "aaNumber": 8702,
       "sourceCategory": "Uf"
     }
@@ -8467,19 +8849,25 @@
           "rank": 1,
           "cost": 6,
           "description": "Calls Self Stasis to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 6,
           "description": "Calls Self Stasis to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 6,
           "description": "Calls Self Stasis to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Self Stasis to hand more swiftly \u2014 less waiting, more doing.",
@@ -8516,22 +8904,28 @@
           "rank": 1,
           "cost": 6,
           "description": "Further mastery of Forceful Banishment. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 6,
           "description": "Further mastery of Forceful Banishment. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 6,
           "description": "Further mastery of Forceful Banishment. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Forceful Banishment, a discipline that rewards dedicated practice with growing power.",
+      "description": "This passive ability improves the resist check of your Beguiler's Banishment and Beguiler's Directed Banishment abilities by 5 points per rank.",
       "aaNumber": 8704,
       "sourceCategory": "Uf",
       "_fillSource": "metadata-fallback"
@@ -8563,7 +8957,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
@@ -8597,7 +8993,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
@@ -8631,7 +9029,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. Planar energies course through you, a testament to trials survived in realms beyond.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. Planar energies course through you, a testament to trials survived in realms beyond.",
@@ -8665,7 +9065,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
@@ -8699,7 +9101,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. The Plane of Knowledge holds records of your deeds; this ability is etched among them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. The Plane of Knowledge holds records of your deeds; this ability is etched among them.",
@@ -8733,7 +9137,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. Forged in the trials of the planes, this ability carries the weight of divine judgment. The gods watched your ascent through their domains, and this is their acknowledgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. The gods watched your ascent through their domains, and this is their acknowledgment.",
@@ -8767,7 +9173,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. Forged in the trials of the planes, this ability carries the weight of divine judgment. The gods watched your ascent through their domains, and this is their acknowledgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. The gods watched your ascent through their domains, and this is their acknowledgment.",
@@ -8801,7 +9209,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Forged in the trials of the planes, this ability carries the weight of divine judgment. Planar energies course through you, a testament to trials survived in realms beyond.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Planar energies course through you, a testament to trials survived in realms beyond.",
@@ -8835,7 +9245,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Muramite tactics taught you lessons no training ground could impart.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Muramite tactics taught you lessons no training ground could impart.",
@@ -8869,7 +9281,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. The Dragorn learned to fear your name in the Bloodfields.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. The Dragorn learned to fear your name in the Bloodfields.",
@@ -8903,7 +9317,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. Tempered in the war against the Muramites, this ability hums with defiant resolve.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. Tempered in the war against the Muramites, this ability hums with defiant resolve.",
@@ -8937,7 +9353,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. You stood against the Discord invasion when Norrath needed defenders most.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. You stood against the Discord invasion when Norrath needed defenders most.",
@@ -8971,7 +9389,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. Muramite tactics taught you lessons no training ground could impart.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. Muramite tactics taught you lessons no training ground could impart.",
@@ -9005,7 +9425,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. Tempered in the war against the Muramites, this ability hums with defiant resolve. You stood against the Discord invasion when Norrath needed defenders most.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. You stood against the Discord invasion when Norrath needed defenders most.",
@@ -9039,7 +9461,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. Tempered in the war against the Muramites, this ability hums with defiant resolve. Muramite tactics taught you lessons no training ground could impart.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. Muramite tactics taught you lessons no training ground could impart.",
@@ -9073,7 +9497,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Tempered in the war against the Muramites, this ability hums with defiant resolve. Muramite tactics taught you lessons no training ground could impart.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Muramite tactics taught you lessons no training ground could impart.",
@@ -9107,7 +9533,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Jungle shadows taught you patience; pirate blades taught you speed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Jungle shadows taught you patience; pirate blades taught you speed.",
@@ -9141,7 +9569,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Learned among dragons and pirates, this ability strikes with cunning grace.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Learned among dragons and pirates, this ability strikes with cunning grace.",
@@ -9175,7 +9605,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. Learned among dragons and pirates, this ability strikes with cunning grace.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. Learned among dragons and pirates, this ability strikes with cunning grace.",
@@ -9209,7 +9641,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. Katta Castrum's exiles recognized a kindred spirit in your resourcefulness.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. Katta Castrum's exiles recognized a kindred spirit in your resourcefulness.",
@@ -9243,7 +9677,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. Learned among dragons and pirates, this ability strikes with cunning grace.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. Learned among dragons and pirates, this ability strikes with cunning grace.",
@@ -9277,7 +9713,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. Learned among dragons and pirates, this ability strikes with cunning grace. Katta Castrum's exiles recognized a kindred spirit in your resourcefulness.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. Katta Castrum's exiles recognized a kindred spirit in your resourcefulness.",
@@ -9311,7 +9749,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. Learned among dragons and pirates, this ability strikes with cunning grace. The Buried Sea's dangers honed instincts that civilized lands never could.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. The Buried Sea's dangers honed instincts that civilized lands never could.",
@@ -9345,7 +9785,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Learned among dragons and pirates, this ability strikes with cunning grace. The Buried Sea's dangers honed instincts that civilized lands never could.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. The Buried Sea's dangers honed instincts that civilized lands never could.",
@@ -9379,7 +9821,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Steamfont's gears turn in rhythm with your newfound understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Steamfont's gears turn in rhythm with your newfound understanding.",
@@ -9413,7 +9857,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Infused with the magic of the Faydark, this ability sparkles with fey mischief.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Infused with the magic of the Faydark, this ability sparkles with fey mischief.",
@@ -9447,7 +9893,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. Steamfont's gears turn in rhythm with your newfound understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. Steamfont's gears turn in rhythm with your newfound understanding.",
@@ -9481,7 +9929,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. Gnomish ingenuity and fey magic intertwine in this hard-won knowledge.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. Gnomish ingenuity and fey magic intertwine in this hard-won knowledge.",
@@ -9515,7 +9965,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. You have wandered mushroom forests that exist half in dreams.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. You have wandered mushroom forests that exist half in dreams.",
@@ -9549,7 +10001,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. Infused with the magic of the Faydark, this ability sparkles with fey mischief. Gnomish ingenuity and fey magic intertwine in this hard-won knowledge.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. Gnomish ingenuity and fey magic intertwine in this hard-won knowledge.",
@@ -9583,7 +10037,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. Infused with the magic of the Faydark, this ability sparkles with fey mischief. The fairies giggle at your exploits, which is high praise indeed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. The fairies giggle at your exploits, which is high praise indeed.",
@@ -9617,7 +10073,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Infused with the magic of the Faydark, this ability sparkles with fey mischief. You have wandered mushroom forests that exist half in dreams.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. You have wandered mushroom forests that exist half in dreams.",
@@ -9651,7 +10109,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Those who travel time's currents carry its mark; yours manifests thus.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Those who travel time's currents carry its mark; yours manifests thus.",
@@ -9685,7 +10145,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Temporal rifts showed you truths that linear minds cannot grasp.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Temporal rifts showed you truths that linear minds cannot grasp.",
@@ -9719,7 +10181,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. The past and future converge in your actions, guided by this understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. The past and future converge in your actions, guided by this understanding.",
@@ -9753,7 +10217,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. You have seen Norrath as it was and as it might be; this wisdom remains.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. You have seen Norrath as it was and as it might be; this wisdom remains.",
@@ -9787,7 +10253,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. Those who travel time's currents carry its mark; yours manifests thus.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. Those who travel time's currents carry its mark; yours manifests thus.",
@@ -9821,7 +10289,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. Touched by the currents of time, this ability echoes across past and future. You have seen Norrath as it was and as it might be; this wisdom remains.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. You have seen Norrath as it was and as it might be; this wisdom remains.",
@@ -9855,7 +10325,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. Touched by the currents of time, this ability echoes across past and future. The past and future converge in your actions, guided by this understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. The past and future converge in your actions, guided by this understanding.",
@@ -9889,7 +10361,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Touched by the currents of time, this ability echoes across past and future. Those who travel time's currents carry its mark; yours manifests thus.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Those who travel time's currents carry its mark; yours manifests thus.",
@@ -9923,7 +10397,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock.",
@@ -9957,7 +10433,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Stone remembers; through this ability, you remember with it.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Stone remembers; through this ability, you remember with it.",
@@ -9991,7 +10469,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
@@ -10025,7 +10505,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. Fungal grottos and crystal caverns witnessed your transformation.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. Fungal grottos and crystal caverns witnessed your transformation.",
@@ -10059,7 +10541,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. Fungal grottos and crystal caverns witnessed your transformation.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. Fungal grottos and crystal caverns witnessed your transformation.",
@@ -10093,7 +10577,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock. Fungal grottos and crystal caverns witnessed your transformation.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. Fungal grottos and crystal caverns witnessed your transformation.",
@@ -10127,7 +10613,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
@@ -10161,7 +10649,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock.",
@@ -10195,7 +10685,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mesmeric control. Your mesmerization effects last 1 additional round. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
@@ -10229,7 +10721,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Cazic-Thule's nightmares could not break you; instead, you learned from them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of clarity of mind. Your mana regeneration aura grants 1 additional mana per round. Cazic-Thule's nightmares could not break you; instead, you learned from them.",
@@ -10263,7 +10757,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of illusion mastery. Adds +10 to rolls made to maintain illusions. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
@@ -10297,7 +10793,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. Sleep and waking are merely different rooms; you have learned to move between them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of haste mastery. Your haste spells grant 5% additional attack speed. Sleep and waking are merely different rooms; you have learned to move between them.",
@@ -10331,7 +10829,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. You have walked the Dream and returned with power most only imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of mind shield. Adds +10 to Resistance Rolls (RR) against charm and mez. You have walked the Dream and returned with power most only imagine.",
@@ -10365,7 +10865,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. Spun from the fabric of dreams, this ability blurs the line between sleep and waking. You have walked the Dream and returned with power most only imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Mass Mesmerize. Blanket the area in magic: up to 4 enemies are mesmerized for 3 rounds. You have walked the Dream and returned with power most only imagine.",
@@ -10399,7 +10901,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. Spun from the fabric of dreams, this ability blurs the line between sleep and waking. Spun from the fabric of dreams, this ability blurs the line between sleep and waking.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Charm Break. Shatter enchantments: dispel all charm and mez effects in range. Spun from the fabric of dreams, this ability blurs the line between sleep and waking.",
@@ -10433,7 +10937,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Spun from the fabric of dreams, this ability blurs the line between sleep and waking. Spun from the fabric of dreams, this ability blurs the line between sleep and waking.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Illusionary Army. Create phantoms: enemies must resist or attack illusions for 3 rounds. Spun from the fabric of dreams, this ability blurs the line between sleep and waking.",

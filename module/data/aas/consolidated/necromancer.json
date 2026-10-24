@@ -30,7 +30,7 @@
           ]
         }
       ],
-      "description": "Call upon Life Burn I \u2014 the power answers when you speak its name.",
+      "description": "This ability allows you to cast a no-resist direct damage spell equal to that of your current hitpoints. The effect drains your life and provides a life bond effect that does 250 damage per tick, for 6 ticks.",
       "aaNumber": 68,
       "sourceCategory": "SoL"
     }
@@ -84,7 +84,7 @@
           ]
         }
       ],
-      "description": "Call upon Dead Mesmerization I \u2014 the power answers when you speak its name.",
+      "description": "This ability allows you to cast an AE low resist mesmerization spell effective against the undead.",
       "aaNumber": 69,
       "sourceCategory": "SoL"
     }
@@ -187,10 +187,12 @@
           "rank": 1,
           "cost": 6,
           "description": "Further mastery of Call to Corpse. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Unknown #470 (100/100/1)"
+          ]
         }
       ],
-      "description": "This active ability masters the art of to Corpse, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to cast a no component summon corpse spell.",
       "aaNumber": 72,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -215,8 +217,8 @@
       "activation": "activated",
       "costPerRank": [
         5,
-        5,
-        5
+        4,
+        3
       ],
       "prerequisites": [],
       "ranks": [
@@ -230,7 +232,7 @@
         },
         {
           "rank": 2,
-          "cost": 5,
+          "cost": 4,
           "description": "Call upon Wake the Dead II \u2014 the power answers when you speak its name.",
           "effects": [
             "Cast: Wake the Dead II"
@@ -238,14 +240,14 @@
         },
         {
           "rank": 3,
-          "cost": 5,
+          "cost": 3,
           "description": "Unleash Wake the Dead III, a gift earned through long dedication.",
           "effects": [
             "Cast: Wake the Dead III"
           ]
         }
       ],
-      "description": "Call upon Wake the Dead I \u2014 the power answers when you speak its name.",
+      "description": "This ability calls the shade of a nearby corpse back to life to serve the Necromancer. The soulless abomination will fight the target, until called back to the afterlife some time later. The slave summoned by the first rank of this ability serves for 60 seconds, and each increasing rank adds 15 additional seconds. You may train the ranks of this ability at or after levels 61, 63, and 65.",
       "aaNumber": 175,
       "sourceCategory": "PoP"
     }
@@ -279,28 +281,36 @@
           "rank": 1,
           "cost": 3,
           "description": "Further mastery of Feigned Minion. (Rank 1 of 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 3,
           "description": "Further mastery of Feigned Minion. (Rank 2 of 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 3,
           "description": "Further mastery of Feigned Minion. (Rank 3 of 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 3,
           "description": "Further mastery of Feigned Minion. (Rank 4 of 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability strengthens your bond with your minions, improving their effectiveness in battle.",
+      "description": "This ability allows you to instruct your pet to feign death via the '/pet feign' command. Three ranks of this skill are available, causing your pet to succeed 25%, 50%, and 75% of the time, respectively. You gain the ability to train an additional rank at levels 61, 63, and 65.",
       "aaNumber": 193,
       "sourceCategory": "PoP",
       "_fillSource": "metadata-fallback"
@@ -326,24 +336,24 @@
       "activation": "passive",
       "costPerRank": [
         1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
+        2,
+        3,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        7,
+        9,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
       ],
       "prerequisites": [],
       "ranks": [
@@ -357,7 +367,7 @@
         },
         {
           "rank": 2,
-          "cost": 1,
+          "cost": 2,
           "description": "6% better odds when it comes to Critical Heal \u2014 fortune favors the prepared.",
           "effects": [
             "Increase Chance to Critical Heal by 6%"
@@ -365,7 +375,7 @@
         },
         {
           "rank": 3,
-          "cost": 1,
+          "cost": 3,
           "description": "10% better odds when it comes to Critical Heal \u2014 fortune favors the prepared.",
           "effects": [
             "Increase Chance to Critical Heal by 10%"
@@ -373,7 +383,7 @@
         },
         {
           "rank": 4,
-          "cost": 1,
+          "cost": 5,
           "description": "Your knack for Critical Heal sharpens; expect success 12% more often.",
           "effects": [
             "Increase Chance to Critical Heal by 12%"
@@ -381,7 +391,7 @@
         },
         {
           "rank": 5,
-          "cost": 1,
+          "cost": 5,
           "description": "Your knack for Critical Heal sharpens; expect success 14% more often.",
           "effects": [
             "Increase Chance to Critical Heal by 14%"
@@ -389,7 +399,7 @@
         },
         {
           "rank": 6,
-          "cost": 1,
+          "cost": 5,
           "description": "Lady Luck smiles a little wider: +16% chance to Critical Heal.",
           "effects": [
             "Increase Chance to Critical Heal by 16%"
@@ -397,7 +407,7 @@
         },
         {
           "rank": 7,
-          "cost": 1,
+          "cost": 5,
           "description": "Lady Luck smiles a little wider: +18% chance to Critical Heal.",
           "effects": [
             "Increase Chance to Critical Heal by 18%"
@@ -405,7 +415,7 @@
         },
         {
           "rank": 8,
-          "cost": 1,
+          "cost": 5,
           "description": "20% better odds when it comes to Critical Heal \u2014 fortune favors the prepared.",
           "effects": [
             "Increase Chance to Critical Heal by 20%"
@@ -413,7 +423,7 @@
         },
         {
           "rank": 9,
-          "cost": 1,
+          "cost": 5,
           "description": "22% better odds when it comes to Critical Heal \u2014 fortune favors the prepared.",
           "effects": [
             "Increase Chance to Critical Heal by 22%"
@@ -421,7 +431,7 @@
         },
         {
           "rank": 10,
-          "cost": 1,
+          "cost": 5,
           "description": "Your knack for Critical Heal sharpens; expect success 24% more often.",
           "effects": [
             "Increase Chance to Critical Heal by 24%"
@@ -429,7 +439,7 @@
         },
         {
           "rank": 11,
-          "cost": 1,
+          "cost": 5,
           "description": "Your knack for Critical Heal sharpens; expect success 26% more often.",
           "effects": [
             "Increase Chance to Critical Heal by 26%"
@@ -437,7 +447,7 @@
         },
         {
           "rank": 12,
-          "cost": 1,
+          "cost": 7,
           "description": "Lady Luck smiles a little wider: +28% chance to Critical Heal.",
           "effects": [
             "Increase Chance to Critical Heal by 28%"
@@ -445,7 +455,7 @@
         },
         {
           "rank": 13,
-          "cost": 1,
+          "cost": 9,
           "description": "Lady Luck smiles a little wider: +30% chance to Critical Heal.",
           "effects": [
             "Increase Chance to Critical Heal by 30%"
@@ -453,7 +463,7 @@
         },
         {
           "rank": 14,
-          "cost": 1,
+          "cost": 12,
           "description": "32% better odds when it comes to Critical Heal \u2014 fortune favors the prepared.",
           "effects": [
             "Increase Chance to Critical Heal by 32%"
@@ -461,7 +471,7 @@
         },
         {
           "rank": 15,
-          "cost": 1,
+          "cost": 12,
           "description": "34% better odds when it comes to Critical Heal \u2014 fortune favors the prepared.",
           "effects": [
             "Increase Chance to Critical Heal by 34%"
@@ -469,7 +479,7 @@
         },
         {
           "rank": 16,
-          "cost": 1,
+          "cost": 12,
           "description": "Your knack for Critical Heal sharpens; expect success 36% more often.",
           "effects": [
             "Increase Chance to Critical Heal by 36%"
@@ -477,7 +487,7 @@
         },
         {
           "rank": 17,
-          "cost": 1,
+          "cost": 12,
           "description": "Your knack for Critical Heal sharpens; expect success 38% more often.",
           "effects": [
             "Increase Chance to Critical Heal by 38%"
@@ -485,7 +495,7 @@
         },
         {
           "rank": 18,
-          "cost": 1,
+          "cost": 12,
           "description": "Lady Luck smiles a little wider: +40% chance to Critical Heal.",
           "effects": [
             "Increase Chance to Critical Heal by 40%"
@@ -493,7 +503,7 @@
         },
         {
           "rank": 19,
-          "cost": 1,
+          "cost": 12,
           "description": "Lady Luck smiles a little wider: +42% chance to Critical Heal.",
           "effects": [
             "Increase Chance to Critical Heal by 42%"
@@ -536,34 +546,44 @@
           "rank": 1,
           "cost": 3,
           "description": "Further mastery of Death's Fury. (Rank 1 of 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 3,
           "description": "Further mastery of Death's Fury. (Rank 2 of 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 3,
           "description": "Further mastery of Death's Fury. (Rank 3 of 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 3,
           "description": "Further mastery of Death's Fury. (Rank 4 of 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 3,
           "description": "Further mastery of Death's Fury. (Rank 5 of 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability channels your battle fury, increasing the damage of your attacks.",
+      "description": "This ability imbues your pet with the ability to land critical hits.",
       "aaNumber": 278,
       "sourceCategory": "GoD",
       "_fillSource": "metadata-fallback"
@@ -592,21 +612,21 @@
         5,
         5,
         5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
       ],
       "prerequisites": [],
       "ranks": [
@@ -614,124 +634,164 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Quickening of Death. (Rank 1 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Quickening of Death. (Rank 2 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Quickening of Death. (Rank 3 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 5,
           "description": "Further mastery of Quickening of Death. (Rank 4 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 5,
           "description": "Further mastery of Quickening of Death. (Rank 5 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 6 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 7 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 8 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 9 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 10,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 10 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 11,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 11 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 12,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 12 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 13,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 13 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 14,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 14 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 15,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 15 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 16,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 16 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 17,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 17 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 18,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 18 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 19,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 19 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 20,
-          "cost": 5,
+          "cost": 6,
           "description": "Further mastery of Quickening of Death. (Rank 20 of 20)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Quickening Death, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability imbues your pet with the ability to flurry attacks.",
       "aaNumber": 279,
       "sourceCategory": "GoD",
       "_fillSource": "metadata-fallback"
@@ -768,7 +828,7 @@
           ]
         }
       ],
-      "description": "Call upon Dire Charm I \u2014 the power answers when you speak its name.",
+      "description": "This ability gives you the chance to permanently charm an NPC. (Enchanters: All. Druids: Animals only. Necromancers: Undead only.) Charm up to level 46.",
       "aaNumber": 318,
       "sourceCategory": "SoL"
     }
@@ -903,7 +963,7 @@
           ]
         }
       ],
-      "description": "Call upon Swarm of Decay I \u2014 the power answers when you speak its name.",
+      "description": "This ability summons a swarm of skeletal archers to harry your foes.",
       "aaNumber": 320,
       "sourceCategory": "GoD"
     }
@@ -927,8 +987,8 @@
       "activation": "passive",
       "costPerRank": [
         9,
-        9,
-        9
+        12,
+        15
       ],
       "prerequisites": [],
       "ranks": [
@@ -936,19 +996,25 @@
           "rank": 1,
           "cost": 9,
           "description": "Speed is its own reward: Pestilent Paralysis refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
-          "cost": 9,
+          "cost": 12,
           "description": "Speed is its own reward: Pestilent Paralysis refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
-          "cost": 9,
+          "cost": 15,
           "description": "Speed is its own reward: Pestilent Paralysis refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Pestilent Paralysis refreshes faster with each rank.",
@@ -985,19 +1051,25 @@
           "rank": 1,
           "cost": 9,
           "description": "Calls Mercurial Torment to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Calls Mercurial Torment to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Calls Mercurial Torment to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Mercurial Torment to hand more swiftly \u2014 less waiting, more doing.",
@@ -1032,10 +1104,13 @@
           "rank": 1,
           "cost": 12,
           "description": "Further mastery of Death's Malaise. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Decrease Attack Speed by 30%",
+            "Increase Disease Counter by 16"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Death's Malaise, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability, when activated, reduces the melee speed of your undead enemies.",
       "aaNumber": 350,
       "sourceCategory": "VoA",
       "_fillSource": "metadata-fallback"
@@ -1097,7 +1172,7 @@
       "activation": "activated",
       "costPerRank": [
         5,
-        5
+        6
       ],
       "prerequisites": [],
       "ranks": [
@@ -1111,14 +1186,14 @@
         },
         {
           "rank": 2,
-          "cost": 5,
+          "cost": 6,
           "description": "Your knack for Feign Death Through Spell Hit sharpens; expect success 30% more often.",
           "effects": [
             "Increase Chance to Feign Death Through Spell Hit by 30%"
           ]
         }
       ],
-      "description": "Call upon Death Peace I \u2014 the power answers when you speak its name.",
+      "description": "This ability gives you an additional way to feign death.",
       "aaNumber": 428,
       "sourceCategory": "OoW"
     }
@@ -1187,8 +1262,8 @@
       "activation": "activated",
       "costPerRank": [
         9,
-        9,
-        9
+        12,
+        15
       ],
       "prerequisites": [],
       "ranks": [
@@ -1202,7 +1277,7 @@
         },
         {
           "rank": 2,
-          "cost": 9,
+          "cost": 12,
           "description": "Unleash Pestilent Paralysis II, a gift earned through long dedication.",
           "effects": [
             "Cast: Pestilent Paralysis II"
@@ -1210,7 +1285,7 @@
         },
         {
           "rank": 3,
-          "cost": 9,
+          "cost": 15,
           "description": "Invoke Pestilent Paralysis III at will, bending its magic to your purpose.",
           "effects": [
             "Cast: Pestilent Paralysis III"
@@ -1262,7 +1337,7 @@
           ]
         }
       ],
-      "description": "Call upon Embalmer's Carapace I \u2014 the power answers when you speak its name.",
+      "description": "This ability causes your skin to stiffen making you impervious to damage but unable to move. As your mind is not affected, your spellcasting is unaffected. The after effects of this state will inflict lasting pain. If not cured, these after effects CAN kill you.",
       "aaNumber": 433,
       "sourceCategory": "HoT"
     }
@@ -1295,19 +1370,25 @@
           "rank": 1,
           "cost": 7,
           "description": "Speed is its own reward: Encroaching Darkness refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 7,
           "description": "Speed is its own reward: Encroaching Darkness refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 7,
           "description": "Speed is its own reward: Encroaching Darkness refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Encroaching Darkness refreshes faster with each rank.",
@@ -1344,22 +1425,28 @@
           "rank": 1,
           "cost": 7,
           "description": "Further mastery of Expanding Darkness. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 7,
           "description": "Further mastery of Expanding Darkness. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 7,
           "description": "Further mastery of Expanding Darkness. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Expanding Darkness, a discipline that rewards dedicated practice with growing power.",
+      "description": "This passive ability extends the casting range of Encroaching Darkness by ten percent per rank.",
       "aaNumber": 438,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
@@ -1414,7 +1501,7 @@
           ]
         }
       ],
-      "description": "Call upon Blood Magic I (Azia) \u2014 the power answers when you speak its name.",
+      "description": "This ability allows you to fuel your spells directly from your health instead of from your mana. Blood magic is dangerous, though. Spells will drain more health than they would use mana and every time you cast a spell while Blood Magic is in effect, there's a chance that the penalty will grow. Once you have started using Blood Magic, you cannot stop until it wears off by itself or you die. Additional ranks increase the duration of each stage of the effect.",
       "aaNumber": 524,
       "sourceCategory": "DoD"
     }
@@ -1440,9 +1527,9 @@
         5,
         5,
         5,
-        5,
-        5,
-        5
+        12,
+        12,
+        12
       ],
       "prerequisites": [],
       "ranks": [
@@ -1450,40 +1537,52 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Graverobbing. (Rank 1 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Graverobbing. (Rank 2 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Graverobbing. (Rank 3 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
-          "cost": 5,
+          "cost": 12,
           "description": "Further mastery of Graverobbing. (Rank 4 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
-          "cost": 5,
+          "cost": 12,
           "description": "Further mastery of Graverobbing. (Rank 5 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
-          "cost": 5,
+          "cost": 12,
           "description": "Further mastery of Graverobbing. (Rank 6 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability channels the power of Graverobbing, growing more potent with each rank.",
+      "description": "This ability decreases the amount of time required between uses of Wake the Dead or Army of the Dead by one minute per rank.",
       "aaNumber": 525,
       "sourceCategory": "DoD",
       "_fillSource": "metadata-fallback"
@@ -1562,64 +1661,84 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Willful Death. (Rank 1 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Willful Death. (Rank 2 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Willful Death. (Rank 3 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 5,
           "description": "Further mastery of Willful Death. (Rank 4 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 5,
           "description": "Further mastery of Willful Death. (Rank 5 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 5,
           "description": "Further mastery of Willful Death. (Rank 6 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
           "cost": 5,
           "description": "Further mastery of Willful Death. (Rank 7 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
           "cost": 5,
           "description": "Further mastery of Willful Death. (Rank 8 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
           "cost": 5,
           "description": "Further mastery of Willful Death. (Rank 9 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 10,
           "cost": 5,
           "description": "Further mastery of Willful Death. (Rank 10 of 10)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Willful Death, a discipline that rewards dedicated practice with growing power.",
+      "description": "Each rank in this ability gives you an increasing chance for your feigned deaths to not be revealed by spells cast upon you. At the highest rank, you become immune to feign breaking on a resisted spell and have a good chance of feigning through a spell that successfully lands upon you.",
       "aaNumber": 532,
       "sourceCategory": "DoD",
       "_fillSource": "metadata-fallback"
@@ -1646,12 +1765,12 @@
         6,
         6,
         6,
-        6,
-        6,
-        6,
-        6,
-        6,
-        6
+        7,
+        9,
+        12,
+        9,
+        12,
+        12
       ],
       "prerequisites": [],
       "ranks": [
@@ -1659,58 +1778,76 @@
           "rank": 1,
           "cost": 6,
           "description": "Further mastery of Soul Seeker. (Rank 1 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 6,
           "description": "Further mastery of Soul Seeker. (Rank 2 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 6,
           "description": "Further mastery of Soul Seeker. (Rank 3 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
-          "cost": 6,
+          "cost": 7,
           "description": "Further mastery of Soul Seeker. (Rank 4 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
-          "cost": 6,
+          "cost": 9,
           "description": "Further mastery of Soul Seeker. (Rank 5 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
-          "cost": 6,
+          "cost": 12,
           "description": "Further mastery of Soul Seeker. (Rank 6 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
-          "cost": 6,
+          "cost": 9,
           "description": "Further mastery of Soul Seeker. (Rank 7 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
-          "cost": 6,
+          "cost": 12,
           "description": "Further mastery of Soul Seeker. (Rank 8 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
-          "cost": 6,
+          "cost": 12,
           "description": "Further mastery of Soul Seeker. (Rank 9 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Soul Seeker, a discipline that rewards dedicated practice with growing power.",
+      "description": "Soul Seeker lowers the reuse timer of your Life Burn by 10 minutes per rank.",
       "aaNumber": 612,
       "sourceCategory": "TSS",
       "_fillSource": "metadata-fallback"
@@ -1747,40 +1884,52 @@
           "rank": 1,
           "cost": 12,
           "description": "Further mastery of Lingering Death. (Rank 1 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 12,
           "description": "Further mastery of Lingering Death. (Rank 2 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 12,
           "description": "Further mastery of Lingering Death. (Rank 3 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 12,
           "description": "Further mastery of Lingering Death. (Rank 4 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 12,
           "description": "Further mastery of Lingering Death. (Rank 5 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 12,
           "description": "Further mastery of Lingering Death. (Rank 6 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Lingering Death, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability will add one tick to all the damage over time of spells you cast for each rank of this ability that you purchase. This only works on spells with durations of at least 3 ticks or greater.",
       "aaNumber": 613,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
@@ -1807,9 +1956,9 @@
         5,
         5,
         5,
-        5,
-        5,
-        5
+        9,
+        10,
+        12
       ],
       "prerequisites": [],
       "ranks": [
@@ -1817,40 +1966,52 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Greater Blood Tithe. (Rank 1 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Greater Blood Tithe. (Rank 2 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Greater Blood Tithe. (Rank 3 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
-          "cost": 5,
+          "cost": 9,
           "description": "Further mastery of Greater Blood Tithe. (Rank 4 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
-          "cost": 5,
+          "cost": 10,
           "description": "Further mastery of Greater Blood Tithe. (Rank 5 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
-          "cost": 5,
+          "cost": 12,
           "description": "Further mastery of Greater Blood Tithe. (Rank 6 of 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Blood Tithe, a discipline that rewards dedicated practice with growing power.",
+      "description": "Each rank in this ability further increases your chance to get a critical hit with your damage-over-time spells.",
       "aaNumber": 628,
       "sourceCategory": "TSS",
       "_fillSource": "metadata-fallback"
@@ -1939,19 +2100,25 @@
           "rank": 1,
           "cost": 9,
           "description": "Calls Harmshield to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Calls Harmshield to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Calls Harmshield to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Harmshield to hand more swiftly \u2014 less waiting, more doing.",
@@ -1983,27 +2150,27 @@
         3,
         3,
         3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
+        7,
+        8,
+        9,
+        10,
+        12,
+        7,
+        8,
+        9,
+        10,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        15,
+        18
       ],
       "prerequisites": [],
       "ranks": [
@@ -2011,160 +2178,212 @@
           "rank": 1,
           "cost": 3,
           "description": "Further mastery of Death's Wrath. (Rank 1 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 3,
           "description": "Further mastery of Death's Wrath. (Rank 2 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 3,
           "description": "Further mastery of Death's Wrath. (Rank 3 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 3,
           "description": "Further mastery of Death's Wrath. (Rank 4 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 3,
           "description": "Further mastery of Death's Wrath. (Rank 5 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
-          "cost": 3,
+          "cost": 7,
           "description": "Further mastery of Death's Wrath. (Rank 6 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
-          "cost": 3,
+          "cost": 8,
           "description": "Further mastery of Death's Wrath. (Rank 7 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
-          "cost": 3,
+          "cost": 9,
           "description": "Further mastery of Death's Wrath. (Rank 8 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
-          "cost": 3,
+          "cost": 10,
           "description": "Further mastery of Death's Wrath. (Rank 9 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 10,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 10 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 11,
-          "cost": 3,
+          "cost": 7,
           "description": "Further mastery of Death's Wrath. (Rank 11 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 12,
-          "cost": 3,
+          "cost": 8,
           "description": "Further mastery of Death's Wrath. (Rank 12 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 13,
-          "cost": 3,
+          "cost": 9,
           "description": "Further mastery of Death's Wrath. (Rank 13 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 14,
-          "cost": 3,
+          "cost": 10,
           "description": "Further mastery of Death's Wrath. (Rank 14 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 15,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 15 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 16,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 16 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 17,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 17 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 18,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 18 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 19,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 19 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 20,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 20 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 21,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 21 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 22,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 22 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 23,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 23 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 24,
-          "cost": 3,
+          "cost": 12,
           "description": "Further mastery of Death's Wrath. (Rank 24 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 25,
-          "cost": 3,
+          "cost": 15,
           "description": "Further mastery of Death's Wrath. (Rank 25 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 26,
-          "cost": 3,
+          "cost": 18,
           "description": "Further mastery of Death's Wrath. (Rank 26 of 26)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability channels your battle fury, increasing the damage of your attacks.",
+      "description": "Increases the critical hit chance of your pet's melee attacks by 1% per rank.",
       "aaNumber": 665,
       "sourceCategory": "TSS",
       "_fillSource": "metadata-fallback"
@@ -2232,10 +2451,17 @@
           "rank": 1,
           "cost": 15,
           "description": "Further mastery of Gift of Deathly Resolve. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Increase Chance to Twincast by (100%)",
+            "Limit: Spell Type (Detrimental only)",
+            "Limit: Minimum Mana Cost (10)",
+            "Limit: Effect (Hitpoints allowed)",
+            "Limit: Effect (Detect Poison excluded)",
+            "Stacking: Block new spell if slot 1 is effect 'Increase Chance to Twincast by' and < 150"
+          ]
         }
       ],
-      "description": "This active ability steels your resolve, allowing you to stand firm where others would break.",
+      "description": "This ability, when activated, allows any direct damage spell over level 91 to allow your next damage over time spell greater than level 91 to be twincast.",
       "aaNumber": 677,
       "sourceCategory": "VoA",
       "_fillSource": "metadata-fallback"
@@ -2269,22 +2495,28 @@
           "rank": 1,
           "cost": 9,
           "description": "Further mastery of Quickened Death Bloom. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Further mastery of Quickened Death Bloom. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Further mastery of Quickened Death Bloom. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Death Bloom, a discipline that rewards dedicated practice with growing power.",
+      "description": "This passive ability reduces the casting time of Death Bloom by 10 percent per rank.",
       "aaNumber": 703,
       "sourceCategory": "VoA",
       "_fillSource": "metadata-fallback"
@@ -2345,7 +2577,7 @@
       "activation": "activated",
       "costPerRank": [
         6,
-        6
+        12
       ],
       "prerequisites": [],
       "ranks": [
@@ -2353,16 +2585,22 @@
           "rank": 1,
           "cost": 6,
           "description": "Further mastery of Scent of Terris. (Rank 1 of 2)",
-          "effects": []
+          "effects": [
+            "Unknown #470 (100/100/1)",
+            "Unknown #470 (100/100/1)"
+          ]
         },
         {
           "rank": 2,
-          "cost": 6,
+          "cost": 12,
           "description": "Further mastery of Scent of Terris. (Rank 2 of 2)",
-          "effects": []
+          "effects": [
+            "Unknown #470 (100/100/1)",
+            "Unknown #470 (100/100/1)"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Scent Terris, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability provides an alternate version of Scent of Terris.",
       "aaNumber": 751,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
@@ -2505,34 +2743,44 @@
           "rank": 1,
           "cost": 9,
           "description": "Further mastery of Quickened Scent of Terris. (Rank 1 of 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 9,
           "description": "Further mastery of Quickened Scent of Terris. (Rank 2 of 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 9,
           "description": "Further mastery of Quickened Scent of Terris. (Rank 3 of 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 9,
           "description": "Further mastery of Quickened Scent of Terris. (Rank 4 of 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 9,
           "description": "Further mastery of Quickened Scent of Terris. (Rank 5 of 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Scent Terris, a discipline that rewards dedicated practice with growing power.",
+      "description": "This passive ability reduces the time required to cast Scent of Terris by 10 percent for each rank.",
       "aaNumber": 765,
       "sourceCategory": "VoA",
       "_fillSource": "metadata-fallback"
@@ -2564,10 +2812,17 @@
           "rank": 1,
           "cost": 18,
           "description": "Further mastery of Frenzy of the Dead. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Increase AC by 75",
+            "Increase Haste v3 by 18%",
+            "Increase STR by 30",
+            "Increase ATK by 295",
+            "Increase Chance to Hit by 12% with All Skills",
+            "Increase All Skills Damage Modifier by 110%"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Frenzy Dead, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to cast a buff on your pet that will cause it to go berserk, doing increased damage.",
       "aaNumber": 766,
       "sourceCategory": "VoA",
       "_fillSource": "metadata-fallback"
@@ -2604,7 +2859,7 @@
           ]
         }
       ],
-      "description": "Call upon Death's Necromantic Effigy I \u2014 the power answers when you speak its name.",
+      "description": "Your intimate knowledge of death and the dead allows you to immitate the appearance of a corpse at will.",
       "aaNumber": 773,
       "sourceCategory": "HoT"
     }
@@ -2655,130 +2910,172 @@
           "rank": 1,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 1 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (3)"
+          ]
         },
         {
           "rank": 2,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 2 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (4)"
+          ]
         },
         {
           "rank": 3,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 3 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 4,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 4 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 5,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 5 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 6,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 6 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 7,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 7 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 8,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 8 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 9,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 9 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 10,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 10 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 11,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 11 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 12,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 12 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 13,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 13 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 14,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 14 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 15,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 15 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 16,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 16 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 17,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 17 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 18,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 18 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 19,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 19 of 21)",
-          "effects": []
+          "effects": [
+            "Wake the Dead 2 (5)"
+          ]
         },
         {
           "rank": 20,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 20 of 21)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 21,
           "cost": 3,
           "description": "Further mastery of Army of the Dead. (Rank 21 of 21)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Army Dead, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability calls up to five shades of nearby corpses back to life to serve the necromancer. The soulless abominations will mindlessly fight the target until called back to the afterlife some time later. The first rank summons up to three shades that serve for 60 seconds. The second rank summons up to four shades that serve for 75 seconds. The third and onward rank summons up to five shades that serve for up to 90 seconds. Additional ranks increase the power of the shades.",
       "aaNumber": 792,
       "sourceCategory": "OoW",
       "_fillSource": "metadata-fallback"
@@ -2970,7 +3267,7 @@
           ]
         }
       ],
-      "description": "Call upon Whisperwind I \u2014 the power answers when you speak its name.",
+      "description": "This ability gives you the ability to randomly teleport a short distance forward.",
       "aaNumber": 901,
       "sourceCategory": "SoD"
     }
@@ -3006,37 +3303,49 @@
           "rank": 1,
           "cost": 6,
           "description": "Calls Blood Magic to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 6,
           "description": "Calls Blood Magic to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 6,
           "description": "Calls Blood Magic to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 6,
           "description": "Calls Blood Magic to hand more swiftly \u2014 less waiting, more doing. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 6,
           "description": "Calls Blood Magic to hand more swiftly \u2014 less waiting, more doing. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 6,
           "description": "Calls Blood Magic to hand more swiftly \u2014 less waiting, more doing. (Rank 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Blood Magic to hand more swiftly \u2014 less waiting, more doing.",
@@ -3071,10 +3380,13 @@
           "rank": 1,
           "cost": 12,
           "description": "Further mastery of Overpower Undead. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Mesmerize (2/75)",
+            "Memblur (1%)"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Overpower Undead, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability grants you a low resistance mesmerization ability that only works on the undead.",
       "aaNumber": 903,
       "sourceCategory": "SoD",
       "_fillSource": "metadata-fallback"
@@ -3112,43 +3424,57 @@
           "rank": 1,
           "cost": 4,
           "description": "Calls Swarm of Decay to hand more swiftly \u2014 less waiting, more doing.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 4,
           "description": "Calls Swarm of Decay to hand more swiftly \u2014 less waiting, more doing. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 4,
           "description": "Calls Swarm of Decay to hand more swiftly \u2014 less waiting, more doing. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 4,
           "description": "Calls Swarm of Decay to hand more swiftly \u2014 less waiting, more doing. (Rank 4)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 4,
           "description": "Calls Swarm of Decay to hand more swiftly \u2014 less waiting, more doing. (Rank 5)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 4,
           "description": "Calls Swarm of Decay to hand more swiftly \u2014 less waiting, more doing. (Rank 6)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
           "cost": 4,
           "description": "Calls Swarm of Decay to hand more swiftly \u2014 less waiting, more doing. (Rank 7)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Calls Swarm of Decay to hand more swiftly \u2014 less waiting, more doing.",
@@ -3184,16 +3510,20 @@
           "rank": 1,
           "cost": 12,
           "description": "Further mastery of Gift of the Grave. (Rank 1 of 2)",
-          "effects": []
+          "effects": [
+            "Mitigate Spell Damage by 3%, 0 total"
+          ]
         },
         {
           "rank": 2,
           "cost": 12,
           "description": "Further mastery of Gift of the Grave. (Rank 2 of 2)",
-          "effects": []
+          "effects": [
+            "Mitigate Spell Damage by 6%, 0 total"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Gift Grave, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability allows you to turn into a Zombie at will and also grants a small boost to survivability.",
       "aaNumber": 905,
       "sourceCategory": "SoD",
       "_fillSource": "metadata-fallback"
@@ -3226,10 +3556,12 @@
           "rank": 1,
           "cost": 12,
           "description": "Further mastery of Improved Death Peace. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Feign Death, 98% Success Rate"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Death Peace, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability gives you an instant cast version of Death Peace. Requires Death Peace 2 to purchase.",
       "aaNumber": 933,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
@@ -3269,55 +3601,73 @@
           "rank": 1,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 1 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 2 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 3 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 4,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 4 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 5,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 5 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 6,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 6 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 7,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 7 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 8,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 8 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 9,
           "cost": 1,
           "description": "Further mastery of Fundament of Intellect. (Rank 9 of 9)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability draws on fundamental arcane principles, strengthening the foundation of your spellcasting.",
@@ -3354,19 +3704,25 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Fundament: First Spire of Necromancy. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Critical DoT (15%)"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Fundament: First Spire of Necromancy. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Critical DoT (18%)"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Fundament: First Spire of Necromancy. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Critical DoT (21%)"
+          ]
         }
       ],
       "description": "This active ability raises a spire of arcane power, focusing your destructive magic to devastating effect.",
@@ -3403,19 +3759,25 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Fundament: Second Spire of Necromancy. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Add Proc: Companion's Necromantic Bite I rate mod 100"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Fundament: Second Spire of Necromancy. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Add Proc: Companion's Necromantic Bite II rate mod 100"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Fundament: Second Spire of Necromancy. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Add Proc: Companion's Necromantic Bite III rate mod 100"
+          ]
         }
       ],
       "description": "This active ability raises a spire of arcane power, focusing your destructive magic to devastating effect.",
@@ -3452,19 +3814,31 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Fundament: Third Spire of Necromancy. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Critical DoT Damage by 205%",
+            "Add effect: Companion's Necromancy III",
+            "Critical DoT (21%)"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Further mastery of Fundament: Third Spire of Necromancy. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Critical DoT Damage by 205%",
+            "Add effect: Companion's Necromancy III",
+            "Critical DoT (25%)"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Further mastery of Fundament: Third Spire of Necromancy. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Increase Critical DoT Damage by 205%",
+            "Add effect: Companion's Necromancy IV",
+            "Critical DoT (25%)"
+          ]
         }
       ],
       "description": "This active ability raises a spire of arcane power, focusing your destructive magic to devastating effect.",
@@ -6307,7 +6681,12 @@
           "rank": 1,
           "cost": 6,
           "description": "Further mastery of Perfected Dead Man Floating. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "Water Breathing (3)",
+            "See Invisible (1)",
+            "Levitate (5)",
+            "Increase Poison Resist by 70"
+          ]
         }
       ],
       "description": "This active ability masters the art of Man Floating, a discipline that rewards dedicated practice with growing power.",
@@ -7009,10 +7388,12 @@
           "rank": 1,
           "cost": 5,
           "description": "Further mastery of Deathly Pact. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Deathly Pact, a discipline that rewards dedicated practice with growing power.",
+      "description": "This ability will prevent components used in the summoning of pets from being expended.",
       "aaNumber": 7105,
       "sourceCategory": "SoD",
       "_fillSource": "metadata-fallback"
@@ -7080,10 +7461,12 @@
           "rank": 1,
           "cost": 12,
           "description": "Further mastery of Dread Incarnate. (Rank 1 of 1)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Dread Incarnate, a discipline that rewards dedicated practice with growing power.",
+      "description": "As you are the embodiement of fear itself, you are unaffected by fear spells.",
       "aaNumber": 7699,
       "sourceCategory": "Uf",
       "_fillSource": "metadata-fallback"
@@ -7153,19 +7536,25 @@
           "rank": 1,
           "cost": 5,
           "description": "Speed is its own reward: Whisperwind refreshes faster with each rank.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 5,
           "description": "Speed is its own reward: Whisperwind refreshes faster with each rank. (Rank 2)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 5,
           "description": "Speed is its own reward: Whisperwind refreshes faster with each rank. (Rank 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "Speed is its own reward: Whisperwind refreshes faster with each rank.",
@@ -7238,22 +7627,28 @@
           "rank": 1,
           "cost": 7,
           "description": "Further mastery of Reluctant Benevolence. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "Flying Kick Attack for 99 with 10000% Accuracy Mod"
+          ]
         },
         {
           "rank": 2,
           "cost": 7,
           "description": "Further mastery of Reluctant Benevolence. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "Flying Kick Attack for 124 with 10000% Accuracy Mod"
+          ]
         },
         {
           "rank": 3,
           "cost": 7,
           "description": "Further mastery of Reluctant Benevolence. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "Flying Kick Attack for 165 with 10000% Accuracy Mod"
+          ]
         }
       ],
-      "description": "This active ability masters the art of Reluctant Benevolence, a discipline that rewards dedicated practice with growing power.",
+      "description": "A Necromancer may, at times, find it necessary to share the life stolen from a victim with members of the Necromancer's party, but this act of benevolance is only ever done with reluctance. Additional ranks increase the power of the heal that might be triggered by your lifetap skills. This ability only works on spells level 75 and above.",
       "aaNumber": 9001,
       "sourceCategory": "Uf",
       "_fillSource": "metadata-fallback"
@@ -7287,22 +7682,28 @@
           "rank": 1,
           "cost": 7,
           "description": "Further mastery of Quickened Army of the Dead. (Rank 1 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 2,
           "cost": 7,
           "description": "Further mastery of Quickened Army of the Dead. (Rank 2 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         },
         {
           "rank": 3,
           "cost": 7,
           "description": "Further mastery of Quickened Army of the Dead. (Rank 3 of 3)",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
-      "description": "This passive ability masters the art of Army Dead, a discipline that rewards dedicated practice with growing power.",
+      "description": "This passive ability reduces the cast time of your Army of the Dead ability by .5 seconds per rank.",
       "aaNumber": 10434,
       "sourceCategory": "Uf",
       "_fillSource": "metadata-fallback"
@@ -7334,7 +7735,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. The gods watched your ascent through their domains, and this is their acknowledgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. The gods watched your ascent through their domains, and this is their acknowledgment.",
@@ -7368,7 +7771,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. The gods watched your ascent through their domains, and this is their acknowledgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. The gods watched your ascent through their domains, and this is their acknowledgment.",
@@ -7402,7 +7807,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. The gods watched your ascent through their domains, and this is their acknowledgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. The gods watched your ascent through their domains, and this is their acknowledgment.",
@@ -7436,7 +7843,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. You have walked where mortals fear to tread, and returned stronger.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. You have walked where mortals fear to tread, and returned stronger.",
@@ -7470,7 +7879,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. You have walked where mortals fear to tread, and returned stronger.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. You have walked where mortals fear to tread, and returned stronger.",
@@ -7504,7 +7915,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Forged in the trials of the planes, this ability carries the weight of divine judgment. The Plane of Knowledge holds records of your deeds; this ability is etched among them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. The Plane of Knowledge holds records of your deeds; this ability is etched among them.",
@@ -7538,7 +7951,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Forged in the trials of the planes, this ability carries the weight of divine judgment. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Forged in the trials of the planes, this ability carries the weight of divine judgment.",
@@ -7572,7 +7987,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Forged in the trials of the planes, this ability carries the weight of divine judgment. The Plane of Knowledge holds records of your deeds; this ability is etched among them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. The Plane of Knowledge holds records of your deeds; this ability is etched among them.",
@@ -7606,7 +8023,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. You stood against the Discord invasion when Norrath needed defenders most.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. You stood against the Discord invasion when Norrath needed defenders most.",
@@ -7640,7 +8059,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. You stood against the Discord invasion when Norrath needed defenders most.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. You stood against the Discord invasion when Norrath needed defenders most.",
@@ -7674,7 +8095,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. Tempered in the war against the Muramites, this ability hums with defiant resolve.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. Tempered in the war against the Muramites, this ability hums with defiant resolve.",
@@ -7708,7 +8131,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. The Dragorn learned to fear your name in the Bloodfields.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. The Dragorn learned to fear your name in the Bloodfields.",
@@ -7742,7 +8167,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. Muramite tactics taught you lessons no training ground could impart.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. Muramite tactics taught you lessons no training ground could impart.",
@@ -7776,7 +8203,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Tempered in the war against the Muramites, this ability hums with defiant resolve. Tempered in the war against the Muramites, this ability hums with defiant resolve.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Tempered in the war against the Muramites, this ability hums with defiant resolve.",
@@ -7810,7 +8239,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Tempered in the war against the Muramites, this ability hums with defiant resolve. The Dragorn learned to fear your name in the Bloodfields.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. The Dragorn learned to fear your name in the Bloodfields.",
@@ -7844,7 +8275,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Tempered in the war against the Muramites, this ability hums with defiant resolve. Muramite tactics taught you lessons no training ground could impart.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Muramite tactics taught you lessons no training ground could impart.",
@@ -7878,7 +8311,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. Jungle shadows taught you patience; pirate blades taught you speed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. Jungle shadows taught you patience; pirate blades taught you speed.",
@@ -7912,7 +8347,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. Katta Castrum's exiles recognized a kindred spirit in your resourcefulness.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. Katta Castrum's exiles recognized a kindred spirit in your resourcefulness.",
@@ -7946,7 +8383,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. Katta Castrum's exiles recognized a kindred spirit in your resourcefulness.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. Katta Castrum's exiles recognized a kindred spirit in your resourcefulness.",
@@ -7980,7 +8419,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. Katta Castrum's exiles recognized a kindred spirit in your resourcefulness.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. Katta Castrum's exiles recognized a kindred spirit in your resourcefulness.",
@@ -8014,7 +8455,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. You have sailed waters charted by no map and lived to tell of it.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. You have sailed waters charted by no map and lived to tell of it.",
@@ -8048,7 +8491,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Learned among dragons and pirates, this ability strikes with cunning grace. Jungle shadows taught you patience; pirate blades taught you speed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Jungle shadows taught you patience; pirate blades taught you speed.",
@@ -8082,7 +8527,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Learned among dragons and pirates, this ability strikes with cunning grace. The Buried Sea's dangers honed instincts that civilized lands never could.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. The Buried Sea's dangers honed instincts that civilized lands never could.",
@@ -8116,7 +8563,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Learned among dragons and pirates, this ability strikes with cunning grace. Learned among dragons and pirates, this ability strikes with cunning grace.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Learned among dragons and pirates, this ability strikes with cunning grace.",
@@ -8150,7 +8599,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. Steamfont's gears turn in rhythm with your newfound understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. Steamfont's gears turn in rhythm with your newfound understanding.",
@@ -8184,7 +8635,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. You have wandered mushroom forests that exist half in dreams.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. You have wandered mushroom forests that exist half in dreams.",
@@ -8218,7 +8671,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. You have wandered mushroom forests that exist half in dreams.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. You have wandered mushroom forests that exist half in dreams.",
@@ -8252,7 +8707,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. Steamfont's gears turn in rhythm with your newfound understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. Steamfont's gears turn in rhythm with your newfound understanding.",
@@ -8286,7 +8743,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. The fairies giggle at your exploits, which is high praise indeed.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. The fairies giggle at your exploits, which is high praise indeed.",
@@ -8320,7 +8779,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Infused with the magic of the Faydark, this ability sparkles with fey mischief. Steamfont's gears turn in rhythm with your newfound understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Steamfont's gears turn in rhythm with your newfound understanding.",
@@ -8354,7 +8815,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Infused with the magic of the Faydark, this ability sparkles with fey mischief. Infused with the magic of the Faydark, this ability sparkles with fey mischief.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Infused with the magic of the Faydark, this ability sparkles with fey mischief.",
@@ -8388,7 +8851,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Infused with the magic of the Faydark, this ability sparkles with fey mischief. Steamfont's gears turn in rhythm with your newfound understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Steamfont's gears turn in rhythm with your newfound understanding.",
@@ -8422,7 +8887,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. Those who travel time's currents carry its mark; yours manifests thus.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. Those who travel time's currents carry its mark; yours manifests thus.",
@@ -8456,7 +8923,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. Temporal rifts showed you truths that linear minds cannot grasp.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. Temporal rifts showed you truths that linear minds cannot grasp.",
@@ -8490,7 +8959,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. Touched by the currents of time, this ability echoes across past and future.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. Touched by the currents of time, this ability echoes across past and future.",
@@ -8524,7 +8995,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. Temporal rifts showed you truths that linear minds cannot grasp.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. Temporal rifts showed you truths that linear minds cannot grasp.",
@@ -8558,7 +9031,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. The past and future converge in your actions, guided by this understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. The past and future converge in your actions, guided by this understanding.",
@@ -8592,7 +9067,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Touched by the currents of time, this ability echoes across past and future. The past and future converge in your actions, guided by this understanding.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. The past and future converge in your actions, guided by this understanding.",
@@ -8626,7 +9103,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Touched by the currents of time, this ability echoes across past and future. Those who travel time's currents carry its mark; yours manifests thus.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Those who travel time's currents carry its mark; yours manifests thus.",
@@ -8660,7 +9139,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Touched by the currents of time, this ability echoes across past and future. Temporal rifts showed you truths that linear minds cannot grasp.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Temporal rifts showed you truths that linear minds cannot grasp.",
@@ -8694,7 +9175,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. Fungal grottos and crystal caverns witnessed your transformation.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. Fungal grottos and crystal caverns witnessed your transformation.",
@@ -8728,7 +9211,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock.",
@@ -8762,7 +9247,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. The Underfoot's crushing depths forge strength that surface dwellers cannot imagine.",
@@ -8796,7 +9283,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. Stone remembers; through this ability, you remember with it.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. Stone remembers; through this ability, you remember with it.",
@@ -8830,7 +9319,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. Fungal grottos and crystal caverns witnessed your transformation.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. Fungal grottos and crystal caverns witnessed your transformation.",
@@ -8864,7 +9355,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock. Brell Serilis himself is said to nod approvingly at such craftsmanship.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Brell Serilis himself is said to nod approvingly at such craftsmanship.",
@@ -8898,7 +9391,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock. Stone remembers; through this ability, you remember with it.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Stone remembers; through this ability, you remember with it.",
@@ -8932,7 +9427,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Drawn from the deep earth of Brell's realm, this ability is unyielding as bedrock. Fungal grottos and crystal caverns witnessed your transformation.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Fungal grottos and crystal caverns witnessed your transformation.",
@@ -8966,7 +9463,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. Cazic-Thule's nightmares could not break you; instead, you learned from them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of deathly pallor. Your damage-over-time spells deal 5% more damage. Cazic-Thule's nightmares could not break you; instead, you learned from them.",
@@ -9000,7 +9499,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. You have walked the Dream and returned with power most only imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of soul harvest. Your lifetaps return 8% more health. You have walked the Dream and returned with power most only imagine.",
@@ -9034,7 +9535,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. You have walked the Dream and returned with power most only imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of undead mastery. Increases your undead pet's Offensive and Defensive Bonus by 2. You have walked the Dream and returned with power most only imagine.",
@@ -9068,7 +9571,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. You have walked the Dream and returned with power most only imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of fear monger. Adds +10 to rolls made to inflict fear. You have walked the Dream and returned with power most only imagine.",
@@ -9102,7 +9607,9 @@
           "rank": 1,
           "cost": 5,
           "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. Sleep and waking are merely different rooms; you have learned to move between them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This passive ability reflects your mastery of plague bringer. Your disease and poison effects last 1 additional round. Sleep and waking are merely different rooms; you have learned to move between them.",
@@ -9136,7 +9643,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. Spun from the fabric of dreams, this ability blurs the line between sleep and waking. You have walked the Dream and returned with power most only imagine.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Death Pact. Bargain with death: when you would die, instead survive at 1 HP once. Lasts until triggered or 10 rounds. You have walked the Dream and returned with power most only imagine.",
@@ -9170,7 +9679,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Spun from the fabric of dreams, this ability blurs the line between sleep and waking. Cazic-Thule's nightmares could not break you; instead, you learned from them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Plague Wind. Spread corruption: all nearby enemies suffer a damage-over-time effect for 4 rounds. Cazic-Thule's nightmares could not break you; instead, you learned from them.",
@@ -9204,7 +9715,9 @@
           "rank": 1,
           "cost": 11,
           "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. Spun from the fabric of dreams, this ability blurs the line between sleep and waking. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
-          "effects": []
+          "effects": [
+            "PLACEHOLDER"
+          ]
         }
       ],
       "description": "This active ability allows you to unleash Raise the Fallen. Animate a corpse to fight for you for 5 rounds. The House of Thule holds terrors, but also truths for those brave enough to seek them.",
