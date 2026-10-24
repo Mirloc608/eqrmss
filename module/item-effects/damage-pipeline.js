@@ -9,18 +9,24 @@
  * Per damage payload, in order:
  *   1. immunity   -> damage negated
  *   2. weakness   -> damage multiplied
- *   3. resistance -> damage reduced
+ *   3. resistance -> Resistance Roll; a made RR negates the damage
  *   4. apply      -> remainder added to the target's concussion hits taken
  *
  * Target modifiers are read from conventional optional paths on
  * target.system; anything absent is neutral:
  *   system.immunities  -> ["cold", ...]
  *   system.weaknesses  -> { cold: 2, ... }   (damage multiplier)
- *   system.resistances -> { cold: 10, ... }  (flat reduction, PLACEHOLDER)
+ *   system.resistances -> { cold: 10, ... }  (RR modification, below)
  *
- * PLACEHOLDER: the resistance formula is pending the user's ruling on RMSS
- * resistance-roll mechanics. It currently subtracts flat; replace
- * applyResistance() when the RR rule lands.
+ * RESISTANCE (user ruling 2026-10-23: "go with the book"): Spell
+ * Law §8.3.2 / Table 15.6 — items and spells that grant resistance
+ * give the target a modification to his Resistance Roll. The
+ * defender's resist points for the element (gear resistances +
+ * resist-<element> buffs) add to an open-ended RR against the
+ * Table 15.5 target number (rollElementResistance below; the RR
+ * machinery is shared with base spells via module/spells/
+ * base-spell.js). A made RR negates the damage entirely; a failed
+ * RR lets the full damage through — there is no flat subtraction.
  *
  * Supported payload types (Phase 3 — damage pipeline):
  *   "damage"    -> immunity/weakness/resistance gate, then concussion hits
@@ -58,6 +64,8 @@
 
 import { hasSpecialTrait } from "../utils/special-traits.js";
 import { resolveTableAttack, effectOBFor, tableForElement } from "../combat/table-resolver.js";
+import { rrTargetNumber, rrOpenEnded } from "../spells/base-spell.js";
+import { casterLevelOf } from "../spells/spell-mapping.js";
 
 function rollRange(min, max) {
     return min + Math.floor(Math.random() * (max - min + 1));
@@ -69,7 +77,8 @@ function getTargetModifiers(target, element) {
     const weaknesses = sys.weaknesses ?? {};
     const resistances = sys.resistances ?? {};
     // Sum resist buffs from spellEffects (2026-10-07): entries with
-    // scaledTarget "resist-fire" etc. contribute to flat damage reduction.
+    // scaledTarget "resist-fire" etc. add their points to the gear
+    // resistance — together they are the RR modification (2026-10-23).
     let buffResist = 0;
     const fx = sys.status?.spellEffects;
     if (Array.isArray(fx) && element) {
@@ -87,9 +96,42 @@ function getTargetModifiers(target, element) {
     };
 }
 
-function applyResistance(rolled, resist) {
-    // PLACEHOLDER — see header note.
-    return Math.max(0, rolled - resist);
+/**
+ * Element resistance roll (user ruling 2026-10-23: "go with the
+ * book"). Spell Law Table 15.6: items and spells may give a target
+ * a modification to his Resistance Roll — the defender's resist
+ * points for the element (gear + buffs, summed by
+ * getTargetModifiers) are exactly that modification. The roll is
+ * the system's shared RR machinery (base-spell.js: open-ended both
+ * ways vs the Table 15.5 target number), the same composition
+ * Harm Touch's disease RR uses. A made RR negates the effect; a
+ * failed RR lets it through in full.
+ *
+ * Attacker level is the source actor's level (casterLevelOf) —
+ * the same source actor whose numbers the effect OB reads
+ * (effectOBFor). PLACEHOLDER (flagged 2026-10-23): a payload with
+ * no source actor falls back to the target's own level, making
+ * the RR level-neutral (target number 50).
+ *
+ * Callers roll only when the defender actually has resistance to
+ * the element: item effects carry no BAR/RR of their own, so a
+ * zero-resist defender rolls nothing and is affected exactly as
+ * before this ruling.
+ */
+async function rollElementResistance({ caster, target, element, resist }) {
+    const attackLevel = caster ? casterLevelOf(caster) : casterLevelOf(target);
+    const targetLevel = casterLevelOf(target);
+    const need = rrTargetNumber(attackLevel, targetLevel);
+    const rr = await rrOpenEnded();
+    const total = rr.total + (Number(resist) || 0);
+    return {
+        resisted: total >= need,
+        rolls: rr.rolls, die: rr.total, total, need, attackLevel, targetLevel
+    };
+}
+
+function rrNote(rr, element, resist) {
+    return `resistance roll ${rr.rolls.join(", ")} = ${rr.die} + ${resist} ${element} resist = ${rr.total} vs ${rr.need} (levels ${rr.attackLevel} vs ${rr.targetLevel})`;
 }
 
 async function persistValue(target, path, value) {
@@ -163,6 +205,7 @@ async function applyDamage({ effect, target, source, caster, obOverride }) {
     const { immune, weaknessMult, resist } = getTargetModifiers(target, effect.element);
 
     let final = rolled;
+    let resisted = false;
     if (immune) {
         final = 0;
         notes.push(`immune to ${effect.element}`);
@@ -171,10 +214,18 @@ async function applyDamage({ effect, target, source, caster, obOverride }) {
             final = Math.round(final * weaknessMult);
             notes.push(`weakness x${weaknessMult} ${effect.element}`);
         }
-        if (resist) {
-            const before = final;
-            final = applyResistance(final, resist);
-            notes.push(`resisted ${before - final} ${effect.element}`);
+        if (resist > 0) {
+            // Book resistance (2026-10-23): the resist points modify
+            // a Resistance Roll; a made RR negates the damage, a
+            // failed RR lets the full amount through.
+            const rr = await rollElementResistance({ caster, target, element: effect.element, resist });
+            if (rr.resisted) {
+                resisted = true;
+                final = 0;
+                notes.push(`RESISTED ${effect.element}: ${rrNote(rr, effect.element, resist)} — damage negated`);
+            } else {
+                notes.push(`${rrNote(rr, effect.element, resist)} — not resisted, full damage`);
+            }
         }
     }
 
@@ -218,7 +269,7 @@ async function applyDamage({ effect, target, source, caster, obOverride }) {
         } catch (e) { /* non-fatal: bonus hits already counted */ }
     }
 
-    return { type: "damage", element: effect.element, rolled, final, notes, source };
+    return { type: "damage", element: effect.element, rolled, final, resisted, notes, source };
 }
 
 async function applyRegen({ effect, target, source, caster }) {
@@ -942,6 +993,22 @@ async function applyDot({ effect, target, source, caster, obOverride }) {
     const miss = requireTarget(target, "dot", source);
     if (miss) return miss;
     const rounds = payloadRounds(effect);
+    // Resistance gate (2026-10-23, book ruling): a spell DoT is
+    // gated by its initial RR before it ever registers; the item
+    // pipeline has no upstream RR, so the element RR happens here,
+    // once, at registration. Ticks never re-roll — tickConditions
+    // resolves them on the table directly, exactly like spell DoTs.
+    const { resist: dotResist } = getTargetModifiers(target, effect.element);
+    if (dotResist > 0) {
+        const rr = await rollElementResistance({ caster, target, element: effect.element, resist: dotResist });
+        if (rr.resisted) {
+            return {
+                type: "dot", rolled: 0, final: 0, applied: false,
+                notes: [`RESISTED ${effect.element}: ${rrNote(rr, effect.element, dotResist)} — the effect does not settle`],
+                source
+            };
+        }
+    }
     // Tables routing (2026-10-21 ruling): the entry carries its
     // table + the source actor's effect OB; each tick resolves on
     // the table (hits only). min/max ride along for back-compat
