@@ -192,6 +192,11 @@ export class EQRMSSActorSkillsHelper {
             btn.addEventListener("click", async ev => {
                 const skillId = ev.currentTarget.dataset.skillId;
                 const skillName = ev.currentTarget.dataset.skillName;
+                // Capture dataset values NOW: ev.currentTarget is only valid
+                // during event dispatch — after the awaits below it is null,
+                // and reading .dataset then throws (this killed skill creation
+                // after the DP charge had already been applied).
+                const maxRanks = ev.currentTarget.dataset.maxRanks ? Number(ev.currentTarget.dataset.maxRanks) : null;
                 if (!skillId) return;
                 
                 // Get skill data from catalog
@@ -229,8 +234,8 @@ export class EQRMSSActorSkillsHelper {
                     await this.actor.update({ "system.character.developmentPoints": pool - firstCost });
                 }
                 
-                // Create skill Item on actor (maxRanks from visibility cap, if any)
-                const maxRanks = ev.currentTarget.dataset.maxRanks ? Number(ev.currentTarget.dataset.maxRanks) : null;
+                // Create skill Item on actor (maxRanks captured at handler top —
+                // ev.currentTarget is null by the time the awaits above return)
                 await this.actor.createEmbeddedDocuments("Item", [{
                     name: catalogSkill.name,
                     type: "skill",
