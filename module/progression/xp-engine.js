@@ -94,7 +94,10 @@ export function developmentPointsForStat(statValue) {
 // stats using their TEMPORARY values (book §3.2.1: "temporary values,
 // not potentials").
 export function developmentPointsForActor(actor) {
-    const stats = actor?.system?.stats?.stats ?? {};
+    // Flat system.stats.<KEY> record — the wizard/sheet canonical shape
+    // (the legacy nested system.stats.stats remnant lacks potentials and
+    // some stats entirely; reading it skewed DP inputs — fixed 2026-10-24).
+    const stats = actor?.system?.stats ?? {};
     let total = 0;
     for (const key of DEVELOPMENT_STAT_KEYS) {
         const entry = stats[key] ?? {};

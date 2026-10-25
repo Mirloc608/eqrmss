@@ -23,7 +23,11 @@ import { statGainFor } from "../data/stats/rmss-stat-gain.js";
 
 // All ten stats roll (Table 15.1.2) — same key set/order as the NPC
 // build engine's NPC_STAT_KEYS. Actor entries live at
-// system.stats.stats.<KEY> = { temp, potential, racial_bonus, ... }.
+// system.stats.<KEY> = { temp, potential, racial_bonus, ... } — the flat
+// record the wizard writes and the sheet displays. (A partial legacy
+// system.stats.stats remnant sits on some actors; it carries no
+// potentials, and reading it made every stat look "at potential" —
+// fixed 2026-10-24.)
 const STAT_KEYS = ["ST", "AG", "SD", "CO", "ME", "RE", "IN", "PR", "QU", "EM"];
 
 const d100 = () => 1 + Math.floor(Math.random() * 100);
@@ -40,7 +44,7 @@ const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => (
  *   diff, gain, overstressed, oldTemp, newTemp, change }
  */
 export async function rollStatGains(actor) {
-    const stats = actor?.system?.stats?.stats ?? {};
+    const stats = actor?.system?.stats ?? {};
     const results = [];
     const updates = {};
     for (const key of STAT_KEYS) {
@@ -71,11 +75,11 @@ export async function rollStatGains(actor) {
             overstressed, oldTemp: temp, newTemp, change: newTemp - temp
         });
         if (newTemp !== temp) {
-            updates[`system.stats.stats.${key}.temp`] = newTemp;
+            updates[`system.stats.${key}.temp`] = newTemp;
             // Preserve the creation invariant total = temp + bonuses.
             const racial = Number(entry.racial_bonus ?? 0);
             const special = Number(entry.special_bonus ?? 0);
-            updates[`system.stats.stats.${key}.total`] = newTemp + racial + special;
+            updates[`system.stats.${key}.total`] = newTemp + racial + special;
         }
     }
     if (actor && Object.keys(updates).length) {
