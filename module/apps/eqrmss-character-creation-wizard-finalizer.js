@@ -847,6 +847,7 @@ export class EQRMSSCharacterCreationWizardFinalizer {
 
   #buyListItemToDoc(entry) {
     const doc = { name: entry.name, type: entry.type ?? "item" };
+    if (entry.img) doc.img = entry.img;
     const system = {};
     const weight = parseFloat(entry.weight);
     if (Number.isFinite(weight)) system.weight = weight;
@@ -856,6 +857,19 @@ export class EQRMSSCharacterCreationWizardFinalizer {
     if (costTp > 0) system.cost = costTp;
     if (entry.notes) system.description = String(entry.notes);
     system.quantity = 1;
+    if (doc.type === "container") {
+      // Real containers (Backpack, Sack, Quiver): the sheet's Pack/storage
+      // flow only recognises type "container" items, so a buy-list entry
+      // typed "item" could never be set as the active Pack. Capacities
+      // come from the entry itself (its own chart notes), emitted in the
+      // catalog container shape.
+      system.stackable = false;
+      system.capacityWeight = entry.capacityWeight ?? 0;
+      system.capacitySlots = entry.capacitySlots ?? 0;
+      system.weightReduction = 0;
+      system.liquidCapacityOz = 0;
+      system.isCoinPurse = false;
+    }
     if (doc.type === "consumable") {
       system.item = {
         category: null,
