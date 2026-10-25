@@ -127,11 +127,12 @@ async function loadRaces() {
 
         // Creatures & Treasures bestiary: module/data/creatures/<type>/<name>.json
         // races/ stays PC-sentient-only; creatures/ holds every NPC entry
-        // (including NPC versions of PC races). types.json and attack-packages.json
-        // are data files, not creature entries — skip them.
+        // (including NPC versions of PC races). types.json,
+        // attack-packages.json and special-attacks.json are data files,
+        // not creature entries — skip them.
         try {
             const cBrowse = await FilePickerImpl.browse("data", "systems/eqrmss/module/data/creatures");
-            const skipCreatureFiles = new Set(["types", "attack-packages"]);
+            const skipCreatureFiles = new Set(["types", "attack-packages", "special-attacks"]);
             await mapLimit(cBrowse.dirs || [], 5, async (dir) => {
                 try {
                     const sub = await FilePickerImpl.browse("data", dir);
