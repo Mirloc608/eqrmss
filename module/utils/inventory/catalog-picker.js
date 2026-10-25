@@ -131,14 +131,15 @@ export async function addCatalogItemToActor(actor, catalogId) {
         system: JSON.parse(JSON.stringify(entry.system ?? {})),
     });
     if (data.system.quantity == null) data.system.quantity = 1;
-    // Wearables land equipped so armor AT/DB and weapon wielding apply
-    // immediately; everything else goes to the pack. Without a stored
-    // location the equipment dropdown misleadingly displays "Equipped"
-    // (its first option) while the defense engine counts nothing worn.
+    // Everything lands in the pack, wearables included. Auto-equipping
+    // catalog adds bypassed the sheet's slot-capacity and class checks,
+    // so every pulled piece counted as worn at once and gear bonuses
+    // stacked without limit. The player equips deliberately through the
+    // location dropdown, which enforces one item per slot. A location is
+    // always stored, so the dropdown shows the truth (no unset-location
+    // mismatch for the defense engine to misread).
     if (!data.system.location) {
-        data.system.location = ["armor", "weapon", "shield", "jewelry"].includes(data.type)
-            ? "equipped"
-            : "pack";
+        data.system.location = "pack";
     }
     try {
         const stacked = await tryStackInto(actor, data);
