@@ -887,8 +887,8 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
 
         if (newLocation === "ground") {
             // Dropped - remove from inventory
-            const confirm = await Dialog.confirm({
-                title: "Drop Item",
+            const confirm = await foundry.applications.api.DialogV2.confirm({
+                window: { title: "Drop Item" },
                 content: `<p>Drop <strong>${item.name}</strong> on the ground? It will be removed from your inventory.</p>`
             });
             if (confirm) {

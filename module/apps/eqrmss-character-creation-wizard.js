@@ -1228,8 +1228,8 @@ export class EQRMSSCharacterCreationWizard extends HandlebarsApplicationMixin(Ap
     const unspentApprenticeship = Math.max(0, dpPool - (dev.apprenticeship?.spent ?? 0));
     const totalUnspent = unspentAdolescence + unspentApprenticeship;
     if (totalUnspent > 0) {
-      const confirmed = await Dialog.confirm({
-        title: "Forfeit Unspent Development Points",
+      const confirmed = await foundry.applications.api.DialogV2.confirm({
+        window: { title: "Forfeit Unspent Development Points" },
         content: `<p>Unspent development points are <strong>forfeited</strong> when the character is finalized:</p>
           <ul><li>Adolescence: ${unspentAdolescence} unspent</li>
           <li>Apprenticeship: ${unspentApprenticeship} unspent</li></ul>

@@ -203,8 +203,8 @@ export class EQRMSSActorSkillsHelper {
                 if (!skillId) return;
                 const current = String(this.actor.system?.tradeskillSpecialization ?? "");
                 if (current && current !== skillId) {
-                    const confirmed = await Dialog.confirm({
-                        title: "Change Specialization",
+                    const confirmed = await foundry.applications.api.DialogV2.confirm({
+                        window: { title: "Change Specialization" },
                         content: `<p>Replace your current tradeskill specialization with <strong>${skillName}</strong>?</p><p>Only one tradeskill may be specialized.</p>`
                     });
                     if (!confirmed) return;
