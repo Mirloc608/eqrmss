@@ -175,6 +175,7 @@ async function applyRegenBuff(caster, spellItem, durationFactor = 1) {
                 kind: "regen",
                 pool: "mana",
                 amount, roundsLeft: effRounds,
+                casterId: caster?.id ?? caster?._id ?? null,
                 label: name, source: "spell"
             });
             notes.push(`${esc(target.name)} regenerates ${amount} mana/round for ${effRounds} rounds (${esc(name)}).`);
@@ -188,6 +189,7 @@ async function applyRegenBuff(caster, spellItem, durationFactor = 1) {
                 kind: "regen",
                 pool: "hits",
                 amount: 0, table: attackTable, ob, roundsLeft: effRounds,
+                casterId: caster?.id ?? caster?._id ?? null,
                 label: name, source: "spell"
             });
             notes.push(`${esc(target.name)} regenerates on the ${attackTable} table at OB ${ob}/round for ${effRounds} rounds (${esc(name)}).`);

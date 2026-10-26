@@ -1060,6 +1060,7 @@ async function applyHot({ effect, target, source, caster }) {
         kind: "regen", pool: "hits", amount: 0,
         table: attackTable, ob,
         roundsLeft: rounds,
+        casterId: caster?.id ?? caster?._id ?? null,
         label: effect.name ?? source ?? "heal over time",
         source
     });

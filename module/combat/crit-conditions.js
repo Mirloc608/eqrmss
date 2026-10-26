@@ -80,6 +80,7 @@ import { roundExhaustionCost, exhaustionCurrent, exhaustionMaxFor } from "./subd
 import { combatCard } from "./chat-card.js";
 import { applyWornRoundEffects } from "../item-effects/worn-engine.js";
 import { levelCombatBonus } from "../progression/xp-engine.js";
+import { trackXPHits, trackXPHealing } from "../progression/xp-tracker.js";
 import { hasSpecialTrait } from "../utils/special-traits.js";
 import { evolutionOb } from "../gear/evolution.js";
 
@@ -1215,6 +1216,15 @@ export async function tickConditions(combat) {
                     const cur = Number(updates["system.hits.value"] ?? actor.system?.hits?.value) || 0;
                     updates["system.hits.value"] = cur + dmg;
                     notes.push(`${esc(actor.name)} takes ${dmg} from ${esc(d.name || "a spell")} (${cur + dmg} concussion hits).`);
+                    // XP tracking (2026-10-25 ruling): over-time spell
+                    // damage earns XP like direct damage — credit the
+                    // DoT's caster for the tick's hits.
+                    if (d.casterId) {
+                        try {
+                            const xpCaster = globalThis.game?.actors?.get(d.casterId);
+                            if (xpCaster) await trackXPHits(xpCaster, actor, dmg);
+                        } catch (err) { /* non-fatal */ }
+                    }
                 }
                 const maintained = d.source === "song" && d.maintained && songStillActive(d);
                 const left = maintained ? (Number(d.roundsLeft) || 1) : (Number(d.roundsLeft) || 1) - 1;
@@ -1280,6 +1290,16 @@ export async function tickConditions(combat) {
                             const healed = Math.max(0, cur - amount);
                             updates["system.hits.value"] = healed;
                             notes.push(`${esc(actor.name)} regenerates ${amount} from ${esc(e.song || e.label || "a song")} (${cur} → ${healed} concussion hits).`);
+                            // XP tracking (2026-10-25 ruling): over-time
+                            // healing earns XP like direct healing —
+                            // credit the HoT's caster for hits restored.
+                            const restored = cur - healed;
+                            if (restored > 0 && e.casterId) {
+                                try {
+                                    const xpHealer = globalThis.game?.actors?.get(e.casterId);
+                                    if (xpHealer) await trackXPHealing(xpHealer, restored);
+                                } catch (err) { /* non-fatal */ }
+                            }
                         }
                     }
                 }
