@@ -37,6 +37,7 @@ import { CASTING_STAT_BY_CLASS, casterLevelOf, statBonusFor, classifySpell, dire
 import { resolveTableAttack, tableForElement } from "../combat/table-resolver.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { baseActorOf } from "./status-wiring.js";
+import { trackXPHits, trackXPCrit, trackXPKill, trackXPHealing } from "../progression/xp-tracker.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -416,6 +417,29 @@ async function applyTableCrits(caster, target, crits) {
 }
 
 /**
+ * XP tracking for base-track damage (user ruling 2026-10-25):
+ * mirrors rollWeaponAttack's scoreboard feeds — hits delivered /
+ * received, one crit entry per resolved severity, and the kill
+ * when this application drops the target. wasDead is the target's
+ * status.dead captured BEFORE the damage landed.
+ */
+async function trackBaseDamageXP(caster, target, amount, crits, wasDead) {
+    try {
+        if (!caster || !target) return;
+        if (amount > 0) await trackXPHits(caster, target, amount);
+        for (const c of crits ?? []) {
+            const sev = String(c?.severity ?? "").toUpperCase();
+            if (["A", "B", "C", "D", "E"].includes(sev)) {
+                await trackXPCrit(caster, target, { severity: sev });
+            }
+        }
+        if (!wasDead && target.system?.status?.dead) {
+            await trackXPKill(caster, target);
+        }
+    } catch (e) { /* non-fatal */ }
+}
+
+/**
  * Apply a base spell's payload to a target that failed its RR.
  * Returns an HTML note for the cast card. DoTs and timed
  * controls/debuffs land in system.status.dots /
@@ -434,20 +458,27 @@ export async function applyBaseSpellEffect(caster, target, classification, spell
         const amount = effectAmount(eff);
         if (amount <= 0) return `<p><em>${esc(name)} takes effect on ${tName} (no damage amount recorded).</em></p>`;
         const td = tableDamageFor(caster, target, eff);
+        const wasDead = !!target.system?.status?.dead;
         const after = await addHits(target, td.amount);
         await applyTableCrits(caster, target, td.crits);
+        await trackBaseDamageXP(caster, target, td.amount, td.crits, wasDead);
         return `<p><em>${tName} takes ${td.amount} hits (${after} concussion hits). ${td.note}</em></p>`;
     }
 
     if (subtype === "lifetap") {
         const td = tableDamageFor(caster, target, eff);
         const amount = td.amount;
+        const wasDead = !!target.system?.status?.dead;
         const after = await addHits(target, amount);
         await applyTableCrits(caster, target, td.crits);
+        await trackBaseDamageXP(caster, target, amount, td.crits, wasDead);
         const cCur = Number(caster.system?.hits?.value) || 0;
         const healed = Math.min(amount, cCur);
         await caster.update({ "system.hits.value": cCur - healed });
         await checkHitThresholds(caster);
+        // The lifetap heal-back is healing the caster delivered —
+        // it earns Healing Points like any other heal (2026-10-25).
+        if (healed > 0) { try { await trackXPHealing(caster, healed); } catch (e) { /* non-fatal */ } }
         return `<p><em>${tName} takes ${amount} hits (${after} concussion hits); ${esc(caster.name)} drains ${healed} hits (${cCur} → ${cCur - healed}). ${td.note}</em></p>`;
     }
 
@@ -455,8 +486,10 @@ export async function applyBaseSpellEffect(caster, target, classification, spell
         const rounds = durationRounds(eff.duration);
         if (rounds == null) {
             const td = tableDamageFor(caster, target, eff);
+            const wasDead = !!target.system?.status?.dead;
             const after = await addHits(target, td.amount);
             await applyTableCrits(caster, target, td.crits);
+            await trackBaseDamageXP(caster, target, td.amount, td.crits, wasDead);
             return `<p><em>${tName} takes ${td.amount} hits (${after} concussion hits). ${td.note}</em></p>`;
         }
         // Tables routing: the entry carries its table + the
