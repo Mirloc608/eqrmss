@@ -190,31 +190,33 @@ export function renderItemCard(item, effectName = prettifyEffectId) {
 
 /**
  * Group the catalog into player-guide pages: one HTML page per
- * equipment group, items sorted by name, each card an <h3> heading
- * (journal search/outline) over a <pre> block that copy/pastes
- * exactly as shown. HTML rather than markdown pages: the V14
- * journal view does not convert markdown for API-created pages
- * (they display raw), while HTML renders — the same format the
- * storage journal already uses successfully.
+ * equipment group, items sorted by name. Each card is a draggable
+ * div (data-catalog-id) holding an <h3> heading (journal
+ * search/outline) over a <pre> block that copy/pastes exactly as
+ * shown; dragging a card onto a character sheet adds the item
+ * (catalog-drag.js + the sheet's drop handler). HTML rather than
+ * markdown pages: the V14 journal view does not convert markdown
+ * for API-created pages (they display raw), while HTML renders —
+ * the same format the storage journal already uses successfully.
  */
-export function buildPlayerCatalogPages(items, effectName = prettifyEffectId) {
+export function buildPlayerCatalogPages(byId, effectName = prettifyEffectId) {
     const groups = new Map();
-    for (const item of items ?? []) {
+    for (const [id, item] of Object.entries(byId ?? {})) {
         const g = catalogGroupFor(item);
         if (!groups.has(g)) groups.set(g, []);
-        groups.get(g).push(item);
+        groups.get(g).push([id, item]);
     }
     return [...groups.entries()]
         .sort((a, b) => a[0].localeCompare(b[0]))
-        .map(([label, groupItems]) => {
-            const sorted = [...groupItems].sort((a, b) => String(a?.name ?? "").localeCompare(String(b?.name ?? "")));
-            const body = sorted.map(i =>
-                `<h3>${escapeHtmlText(i?.name ?? "Unnamed Item")}</h3>\n<pre>${escapeHtmlText(itemCardLines(i, effectName).join("\n"))}</pre>`
+        .map(([label, entries]) => {
+            const sorted = [...entries].sort((a, b) => String(a[1]?.name ?? "").localeCompare(String(b[1]?.name ?? "")));
+            const cards = sorted.map(([id, i]) =>
+                `<div class="eqrmss-catalog-card" draggable="true" data-catalog-id="${escapeHtmlText(id)}" title="Drag onto a character sheet to add this item">\n<h3>${escapeHtmlText(i?.name ?? "Unnamed Item")}</h3>\n<pre>${escapeHtmlText(itemCardLines(i, effectName).join("\n"))}</pre>\n</div>`
             ).join("\n");
             return {
                 name: label,
                 type: "text",
-                text: { content: body, format: 1 }
+                text: { content: `<p><em>Drag any card onto a character sheet to add the item to their pack.</em></p>\n${cards}`, format: 1 }
             };
         });
 }
@@ -463,7 +465,7 @@ export const EQRMSSItemLoader = {
                 effectName = (id) => mod.getItemEffect(id)?.name ?? prettifyEffectId(id);
             }
         } catch { /* effect ids render prettified */ }
-        const pages = buildPlayerCatalogPages(items, effectName);
+        const pages = buildPlayerCatalogPages(this.byId ?? {}, effectName);
         let journal = findPlayerCatalogJournal();
         if (journal) {
             const ids = journal.pages.map(p => p.id);

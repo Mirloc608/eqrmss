@@ -2457,3 +2457,15 @@ button.rank-badge:hover {
   color: #7a6448;
   margin-right: auto;
 }
+
+/* Player-guide catalog cards: draggable onto character sheets. */
+.eqrmss-catalog-card {
+  cursor: grab;
+}
+.eqrmss-catalog-card:active {
+  cursor: grabbing;
+}
+.eqrmss-catalog-card:hover {
+  outline: 1px dashed rgba(160, 130, 80, 0.65);
+  outline-offset: 3px;
+}

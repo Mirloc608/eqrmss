@@ -824,6 +824,15 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
                 return;
             }
 
+            // Catalog drag (player guide journal): the payload names
+            // a catalog entry, not a world Item — add it through the
+            // catalog path (lands in the pack, stacks when possible).
+            if (data.type === "EQRMSSCatalogItem" && data.id) {
+                const { addCatalogItemToActor } = await import("../../utils/inventory/catalog-picker.js");
+                await addCatalogItemToActor(actor, String(data.id));
+                return;
+            }
+
             // Handle Item drops
             if (data.type === "Item") {
                 const item = await fromUuid(data.uuid);

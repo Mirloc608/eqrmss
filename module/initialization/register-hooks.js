@@ -4,9 +4,13 @@
 
 import { tickConditions } from "../combat/crit-conditions.js";
 import { openGMScreen } from "../apps/gm-screen.js";
+import { registerCatalogDrag } from "../utils/inventory/catalog-drag.js";
 
 export function registerEQRMSSHooks() {
   console.info("EQRMSS | Registering hooks");
+
+  // Player-guide catalog cards are draggable onto character sheets.
+  registerCatalogDrag();
 
   // Critical conditions tick: on each combat round change the GM ticks
   // stun pools (-1, most severe first), bleed, and death timers.
