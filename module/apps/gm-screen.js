@@ -105,7 +105,9 @@ export class GMScreen extends BaseApplication {
         position: { width: 760, height: 620 },
         actions: {
             "select-tab": this.#onSelectTab,
-            "open-scoreboard": this.#onOpenScoreboard
+            "open-scoreboard": this.#onOpenScoreboard,
+            "seed-catalog": this.#onSeedCatalog,
+            "reload-catalog": this.#onReloadCatalog
         }
     };
 
@@ -157,6 +159,20 @@ export class GMScreen extends BaseApplication {
         ctx.combatBonusRows = COMBAT_BONUS_ROWS;
         ctx.spellBonusRows = SPELL_BONUS_ROWS;
         ctx.critXpRows = CRIT_XP_ROWS;
+
+        // Item catalog journal status (user ruling 2026-10-25: the
+        // catalog can live in a GM-edited world journal).
+        try {
+            const { EQRMSSItemLoader } = await import("../data/loaders/item-loader.js");
+            const journal = EQRMSSItemLoader.catalogJournal();
+            ctx.catalog = {
+                journalExists: !!journal,
+                journalName: journal?.name ?? "",
+                itemCount: Object.keys(EQRMSSItemLoader.byId ?? {}).length
+            };
+        } catch (e) {
+            ctx.catalog = { journalExists: false, journalName: "", itemCount: 0 };
+        }
         return ctx;
     }
 
@@ -186,6 +202,37 @@ export class GMScreen extends BaseApplication {
         } catch (e) {
             console.error("EQRMSS | GM Screen: XP scoreboard unavailable", e);
             ui.notifications?.error("EQRMSS | XP Scoreboard is not available.");
+        }
+    }
+
+    static async #onSeedCatalog(event, target) {
+        try {
+            const { EQRMSSItemLoader } = await import("../data/loaders/item-loader.js");
+            if (EQRMSSItemLoader.catalogJournal()) {
+                const count = Object.keys(EQRMSSItemLoader.byId ?? {}).length;
+                const confirmed = await foundry.applications.api.DialogV2.confirm({
+                    window: { title: "Re-seed Item Catalog Journal" },
+                    content: `<p>The catalog journal already exists. Re-seeding replaces all of its pages with the currently loaded catalog (${count} items).</p><p><strong>Any edits made in the journal will be lost.</strong></p>`
+                });
+                if (!confirmed) return;
+            }
+            const res = await EQRMSSItemLoader.seedCatalogJournal();
+            ui.notifications?.info(`EQRMSS | Item catalog journal seeded: ${res.items} items in ${res.groups} pages. Reload the catalog (or refresh) to boot from it.`);
+        } catch (e) {
+            console.error("EQRMSS | GM Screen: seed catalog journal failed", e);
+            ui.notifications?.error(`EQRMSS | Seeding the catalog journal failed: ${e.message}`);
+        }
+    }
+
+    static async #onReloadCatalog(event, target) {
+        try {
+            const { EQRMSSItemLoader } = await import("../data/loaders/item-loader.js");
+            await EQRMSSItemLoader.load();
+            const n = Object.keys(EQRMSSItemLoader.byId ?? {}).length;
+            ui.notifications?.info(`EQRMSS | Item catalog reloaded: ${n} items (see console for the source used).`);
+        } catch (e) {
+            console.error("EQRMSS | GM Screen: reload catalog failed", e);
+            ui.notifications?.error(`EQRMSS | Reloading the catalog failed: ${e.message}`);
         }
     }
 }

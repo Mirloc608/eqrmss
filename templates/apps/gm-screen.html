@@ -19,6 +19,9 @@
         <button type="button" data-action="select-tab" data-tab="combat" class="{{#if (eq activeTab 'combat')}}active{{/if}}">
             <i class="fas fa-swords"></i> Combat
         </button>
+        <button type="button" data-action="select-tab" data-tab="catalog" class="{{#if (eq activeTab 'catalog')}}active{{/if}}">
+            <i class="fas fa-book"></i> Item Catalog
+        </button>
     </nav>
 
     {{!-- Tab 1: XP Scoreboard launcher --}}
@@ -121,6 +124,19 @@
                 {{/each}}
             </tbody>
         </table>
+    </section>
+
+    {{!-- Tab 5: Item Catalog journal --}}
+    <section class="gm-screen-panel {{#if (eq activeTab 'catalog')}}active{{/if}}" data-panel="catalog">
+        <h3>Item Catalog <span class="ref-note">Journal storage</span></h3>
+        <p class="gm-screen-hint">The item catalog can live in a world Journal entry — one page per equipment group, each page a name-keyed JSON object — that the GM edits in-game. When the journal exists it is the catalog's boot source, ahead of the data service and the bundled files. A page that fails to parse aborts the journal source entirely; the catalog falls back rather than loading partial or empty.</p>
+        <p>Journal: {{#if catalog.journalExists}}<strong>{{catalog.journalName}}</strong> (present){{else}}<em>not created yet</em>{{/if}}<br>
+        Items currently loaded: <strong>{{catalog.itemCount}}</strong></p>
+        <p>
+            <button type="button" data-action="seed-catalog"><i class="fas fa-seedling"></i> {{#if catalog.journalExists}}Re-seed journal from loaded catalog{{else}}Seed journal from loaded catalog{{/if}}</button>
+            <button type="button" data-action="reload-catalog"><i class="fas fa-rotate"></i> Reload catalog now</button>
+        </p>
+        <p class="gm-screen-hint">Workflow: seed once, edit item JSON in the journal's pages, then Reload. Re-seeding overwrites in-journal edits (it asks first). Deleting the journal returns the catalog to the data service.</p>
     </section>
 {{/if}}
 </div>

@@ -11,6 +11,11 @@
  *
  * Populates: game.eqrmss.items = { byId, bySlot, byLevel }
  *
+ * Source priority (2026-10-25): a world JournalEntry flagged as the
+ * item catalog (GM-editable in-game, one page per equipment group)
+ * wins when present and parseable; then the data service when
+ * configured; then the bundled files above.
+ *
  * Foundry VTT V13/V14 Compatible
  * ============================================================
  */
@@ -38,6 +43,66 @@ function isValidItem(j) {
     // Weapon entries declare their attack table and weapon-type slug.
     if (j.type === "weapon" && (typeof s.attackTable !== "string" || !s.attackTable || typeof s.weaponType !== "string" || !s.weaponType)) return false;
     return true;
+}
+
+// ---------------------------------------------------------------------------
+// Catalog journal (user ruling 2026-10-25): the item catalog can live
+// in a world JournalEntry the GM edits in-game. One text page per
+// equipment group; each page holds a name-keyed JSON object inside a
+// <pre> block. Foundry's rich-text editor may re-wrap edited content,
+// so extraction prefers the <pre>, strips any tags, and unescapes
+// entities before parsing.
+// ---------------------------------------------------------------------------
+export const CATALOG_JOURNAL_NAME = "EQRMSS Item Catalog";
+
+export function findCatalogJournal() {
+    try {
+        return globalThis.game?.journal?.find?.(j => j?.flags?.eqrmss?.catalog === "items") ?? null;
+    } catch { return null; }
+}
+
+function escapeHtmlText(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+export function journalPageText(html) {
+    let text = String(html ?? "");
+    const pre = text.match(/<pre[^>]*>([\s\S]*?)<\/pre>/i);
+    if (pre) text = pre[1];
+    text = text.replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]+>/g, "");
+    return text
+        .replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+        .replace(/&quot;/g, "\"").replace(/&#0?39;|&apos;/g, "'")
+        .replace(/&amp;/g, "&")
+        .trim();
+}
+
+export function parseJournalPage(page) {
+    const data = JSON.parse(journalPageText(page?.text?.content ?? ""));
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+        throw new Error(`page "${page?.name ?? "?"}" did not contain a JSON object`);
+    }
+    return data;
+}
+
+/** Seed grouping: one journal page per equipment group. */
+export function catalogGroupFor(item) {
+    const t = String(item?.type ?? "item");
+    const slot = String(item?.system?.slot ?? "");
+    if (t === "armor") return "Armor";
+    if (t === "weapon") return "Weapons";
+    if (t === "shield") return "Shields";
+    if (t === "container") return "Containers";
+    if (slot === "ear") return "Earrings";
+    if (slot === "finger") return "Rings";
+    if (slot === "charm") return "Charms";
+    if (slot === "neck") return "Necklaces";
+    if (slot === "wrist") return "Bracelets";
+    if (slot === "face") return "Face";
+    if (t === "jewelry") return "Jewelry";
+    if (t === "instrument") return "Instruments";
+    if (t === "tool" || t === "tradeskill") return "Tools & Tradeskill";
+    return "Miscellaneous";
 }
 
 export const EQRMSSItemLoader = {
@@ -83,6 +148,34 @@ export const EQRMSSItemLoader = {
                 (byLevel[level] = byLevel[level] || []).push(item);
             }
         };
+
+        // World journal (user ruling 2026-10-25): when a journal
+        // flagged as the item catalog exists, it is the catalog's
+        // source of truth. Any page that fails to parse aborts the
+        // journal source entirely (never a partial catalog); the
+        // data service and bundled files remain the fallbacks.
+        const catalogJournal = findCatalogJournal();
+        if (catalogJournal) {
+            try {
+                const pages = [...(catalogJournal.pages ?? [])]
+                    .filter(p => p?.type === "text")
+                    .sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
+                if (!pages.length) throw new Error("catalog journal has no text pages");
+                for (const page of pages) {
+                    ingest(parseJournalPage(page));
+                    files++;
+                }
+                this._store(byId, bySlot, byLevel);
+                console.log(`EQRMSS | Item Loader | files=${files} loaded=${loaded} invalid=${invalid} source=journal`);
+                return this;
+            } catch (err) {
+                console.warn(`EQRMSS | Item Loader | catalog journal unusable (${err.message}); falling back to data service / bundled files`);
+                for (const k of Object.keys(byId)) delete byId[k];
+                for (const k of Object.keys(bySlot)) delete bySlot[k];
+                for (const k of Object.keys(byLevel)) delete byLevel[k];
+                loaded = 0; invalid = 0; files = 0;
+            }
+        }
 
         // Optional data service: when the "dataServiceUrl" world setting
         // is configured, the service is the catalog source of truth and
@@ -185,5 +278,51 @@ export const EQRMSSItemLoader = {
             }
         }
         return result.sort((a, b) => (a.system.level || 1) - (b.system.level || 1));
+    },
+
+    /** The world journal flagged as the item catalog, or null. */
+    catalogJournal() {
+        return findCatalogJournal();
+    },
+
+    /**
+     * Seed (or re-seed) the catalog journal from the currently
+     * loaded catalog: one text page per equipment group, each a
+     * name-keyed JSON object in a <pre> block. Re-seeding replaces
+     * all pages — in-journal edits are overwritten. GM only.
+     * Returns { journal, groups, items }.
+     */
+    async seedCatalogJournal() {
+        if (!globalThis.game?.user?.isGM) throw new Error("GM only");
+        const items = Object.values(this.byId ?? {});
+        if (!items.length) throw new Error("no catalog is loaded to seed from");
+        const groups = new Map();
+        for (const item of items) {
+            const g = catalogGroupFor(item);
+            if (!groups.has(g)) groups.set(g, {});
+            groups.get(g)[item.name] = item;
+        }
+        const pages = [...groups.entries()]
+            .sort((a, b) => a[0].localeCompare(b[0]))
+            .map(([label, obj]) => ({
+                name: label,
+                type: "text",
+                text: { content: `<pre>${escapeHtmlText(JSON.stringify(obj, null, 2))}</pre>`, format: 1 }
+            }));
+        let journal = findCatalogJournal();
+        if (journal) {
+            const ids = journal.pages.map(p => p.id);
+            if (ids.length) await journal.deleteEmbeddedDocuments("JournalEntryPage", ids);
+            await journal.createEmbeddedDocuments("JournalEntryPage", pages);
+        } else {
+            journal = await globalThis.JournalEntry.create({
+                name: CATALOG_JOURNAL_NAME,
+                ownership: { default: 0 },
+                flags: { eqrmss: { catalog: "items" } },
+                pages
+            });
+        }
+        console.log(`EQRMSS | Item Loader | catalog journal seeded: ${items.length} items in ${pages.length} pages`);
+        return { journal, groups: pages.length, items: items.length };
     }
 };
