@@ -56,6 +56,7 @@ export class EQRMSSCharacter extends EQRMSSActor
             experience: 0,
             nextLevelXP: 1000,
             developmentPoints: 0,
+            purchasesFinalizedForLevel: 0,
             spentDevelopmentPoints: 0,
             trainingPackages: [],
             deity: null,

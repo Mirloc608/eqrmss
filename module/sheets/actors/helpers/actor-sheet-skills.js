@@ -65,6 +65,24 @@ function catalogCostFor(skillId) {
     return entry?.system?.cost ?? entry?.cost ?? null;
 }
 
+// ---------------------------------------------------------------------------
+// Purchase finalization (user ruling 2026-10-25): pressing Save on the
+// Skills tab affixes the level's purchases — buying and refunds close
+// until the next level. The lock is the level number purchases were
+// finalized at; it stops matching the moment the actor levels, which
+// is what reopens purchases. Ranks themselves already commit at
+// purchase time (Ruling B) — Save changes nothing about the numbers,
+// it ends the shopping.
+// ---------------------------------------------------------------------------
+function currentLevelOf(actor) {
+    return Number(actor?.system?.attributes?.level?.value) || 0;
+}
+
+function purchasesFinalizedLevel(actor) {
+    const fin = Number(actor?.system?.character?.purchasesFinalizedForLevel) || 0;
+    return fin > 0 && fin === currentLevelOf(actor) ? fin : 0;
+}
+
 export class EQRMSSActorSkillsHelper {
 
     constructor(sheet) {
@@ -110,6 +128,13 @@ export class EQRMSSActorSkillsHelper {
                 const id = ev.currentTarget.dataset.itemId;
                 const item = this.actor.items.get(id);
                 if (!item) return;
+
+                // Purchase finalization gate (2026-10-25): a saved
+                // level takes no more buys or refunds.
+                if (purchasesFinalizedLevel(this.actor)) {
+                    ui.notifications.warn(`Purchases for level ${currentLevelOf(this.actor)} are finalized — buying reopens at the next level.`);
+                    return;
+                }
 
                 const TRADESKILL_IDS = new Set(["skill-fletching","skill-jewelcrafting","skill-smithing","skill-tailoring","skill-tinkering","skill-alchemy","skill-poison-making","skill-research"]);
                 const skillId = String(item.system.skillId ?? "");
@@ -222,6 +247,33 @@ export class EQRMSSActorSkillsHelper {
         });
 
         // ------------------------------------------------------------
+        // Finalize purchases (user ruling 2026-10-25): the Save
+        // button affixes this level's purchases and ends buying and
+        // refunds until the next level. Ranks already count (Ruling
+        // B) — Save only locks the shopping. A GM can reopen.
+        // ------------------------------------------------------------
+        html.querySelectorAll(".purchase-finalize").forEach(btn => {
+            btn.addEventListener("click", async ev => {
+                const lvl = currentLevelOf(this.actor);
+                const confirmed = await foundry.applications.api.DialogV2.confirm({
+                    window: { title: "Finalize Purchases" },
+                    content: `<p>Permanently affix this level's purchases? Saving ends buying and refunds for <strong>level ${lvl}</strong>.</p><p>Unspent development and tradeskill points carry over, and purchases reopen at level ${lvl + 1}.</p>`
+                });
+                if (!confirmed) return;
+                await this.actor.update({ "system.character.purchasesFinalizedForLevel": lvl });
+                ui.notifications.info(`Purchases finalized for level ${lvl}.`);
+            });
+        });
+
+        html.querySelectorAll(".purchase-reopen").forEach(btn => {
+            btn.addEventListener("click", async ev => {
+                if (!globalThis.game?.user?.isGM) return;
+                await this.actor.update({ "system.character.purchasesFinalizedForLevel": 0 });
+                ui.notifications.info("Purchases reopened.");
+            });
+        });
+
+        // ------------------------------------------------------------
         // Edit skill
         // ------------------------------------------------------------
         html.querySelectorAll(".skill-edit").forEach(btn => {
@@ -245,6 +297,13 @@ export class EQRMSSActorSkillsHelper {
                 // after the DP charge had already been applied).
                 const maxRanks = ev.currentTarget.dataset.maxRanks ? Number(ev.currentTarget.dataset.maxRanks) : null;
                 if (!skillId) return;
+
+                // Purchase finalization gate (2026-10-25): developing
+                // a new skill is a purchase — closed once saved.
+                if (purchasesFinalizedLevel(this.actor)) {
+                    ui.notifications.warn(`Purchases for level ${currentLevelOf(this.actor)} are finalized — buying reopens at the next level.`);
+                    return;
+                }
                 
                 // Get skill data from catalog
                 const catalogSkill = globalThis.CONFIG?.EQRMSS?.skills?.[skillId];

@@ -9,6 +9,16 @@
             <strong>Tradeskill Points: {{items.tradeskillPoints}}</strong>
             <span style="font-size: 0.9em; color: #666;">(+5 per level, dedicated pool)</span>
         </div>
+        <div class="purchase-finalize-display" style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 4px;">
+            {{#if items.purchasesFinalized}}
+            <strong>Purchases finalized for level {{items.currentLevel}}</strong>
+            <span style="font-size: 0.9em; color: #666;">(buying and refunds reopen at level {{items.nextLevel}})</span>
+            {{#if items.isGM}}<button type="button" class="purchase-reopen" style="margin-left: 8px;">Reopen purchases (GM)</button>{{/if}}
+            {{else}}
+            <button type="button" class="purchase-finalize"><i class="fas fa-save"></i> Save — finalize level {{items.currentLevel}} purchases</button>
+            <span style="font-size: 0.9em; color: #666;">(affixes this level's ranks and ends buying and refunds until the next level — unspent points carry over)</span>
+            {{/if}}
+        </div>
         {{#if items.skillGroups.length}}
         {{#each items.skillGroups}}
         <div class="skill-category">

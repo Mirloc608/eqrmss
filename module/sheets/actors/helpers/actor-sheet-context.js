@@ -362,6 +362,11 @@ export class EQRMSSActorContextHelper {
             skillCategories: items.filter(i => i?.type === "skillcategory"),
             tradeskillPoints: Number(this.actor?.system?.tradeskillPoints ?? 0),
             developmentPoints: Number(this.actor?.system?.character?.developmentPoints ?? 0),
+            purchasesFinalized: (Number(this.actor?.system?.character?.purchasesFinalizedForLevel ?? 0) > 0)
+                && Number(this.actor?.system?.character?.purchasesFinalizedForLevel ?? 0) === Number(this.actor?.system?.attributes?.level?.value ?? 0),
+            currentLevel: Number(this.actor?.system?.attributes?.level?.value ?? 0),
+            nextLevel: (Number(this.actor?.system?.attributes?.level?.value ?? 0) || 0) + 1,
+            isGM: !!globalThis.game?.user?.isGM,
             inventory: items.filter(i => new Set(["item", "consumable", "jewelry", "shield", "transport"]).has(i?.type)),
             languages: items.filter(i => i?.type === "language")
         };
