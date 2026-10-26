@@ -138,7 +138,7 @@
         </p>
         <p class="gm-screen-hint">Workflow: seed once, edit item JSON in the journal's pages, then Reload. Re-seeding overwrites in-journal edits (it asks first). Deleting the journal returns the catalog to the data service.</p>
         <h4>Player Guide</h4>
-        <p class="gm-screen-hint">Generate a player-facing journal that renders every catalog item as an EQ-style item card in markdown — players browse it in the Journal sidebar and can copy/paste the cards. It is presentation only; regenerate after catalog changes. Guide: {{#if catalog.guideExists}}<strong>present</strong>{{else}}<em>not generated yet</em>{{/if}}</p>
+        <p class="gm-screen-hint">Generate a player-facing journal that renders every catalog item as an EQ-style item card — players browse it in the Journal sidebar and can copy/paste the cards. It is presentation only; regenerate after catalog changes. Guide: {{#if catalog.guideExists}}<strong>present</strong>{{else}}<em>not generated yet</em>{{/if}}</p>
         <p>
             <button type="button" data-action="generate-player-catalog"><i class="fas fa-book-open"></i> {{#if catalog.guideExists}}Regenerate player guide{{else}}Generate player guide{{/if}}</button>
         </p>

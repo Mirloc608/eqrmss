@@ -107,8 +107,8 @@ export function catalogGroupFor(item) {
 
 // ---------------------------------------------------------------------------
 // Player guide (user ruling 2026-10-26): a second journal renders the
-// catalog as EQ-style item cards in markdown — the player-facing view.
-// The JSON journal above is storage; this one is presentation only.
+// catalog as EQ-style item cards — the player-facing view. The JSON
+// journal above is storage; this one is presentation only.
 // ---------------------------------------------------------------------------
 export const PLAYER_CATALOG_JOURNAL_NAME = "EQRMSS Item Catalog — Player Guide";
 
@@ -133,14 +133,12 @@ export function prettifyEffectId(id) {
 }
 
 /**
- * Render one catalog entry as an EQ item-window card (markdown):
- * a heading for search/TOC plus a fenced plain-text block that
- * copy/pastes exactly as shown. Only fields the entry carries are
- * rendered.
+ * The body lines of one item's EQ-style card (no heading, no
+ * fencing). Only fields the entry carries are rendered.
  */
-export function renderItemCard(item, effectName = prettifyEffectId) {
+export function itemCardLines(item, effectName = prettifyEffectId) {
     const s = item?.system ?? {};
-    const lines = [`### ${item?.name ?? "Unnamed Item"}`, "```"];
+    const lines = [];
     if (item?.type === "weapon") {
         const skill = String(s.weaponType ?? "").replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()).replace(/ (To|Of|And) /g, m => m.toLowerCase());
         if (skill) lines.push(`Skill: ${skill}`);
@@ -178,14 +176,26 @@ export function renderItemCard(item, effectName = prettifyEffectId) {
     if (tail.length) lines.push(tail.join("   "));
     if (s.notes) lines.push(String(s.notes));
     if (s.description) lines.push(String(s.description));
-    lines.push("```");
-    return lines.join("\n");
+    return lines;
 }
 
 /**
- * Group the catalog into player-guide pages: one markdown page per
- * equipment group, items sorted by name. Returns JournalEntryPage
- * create data (format 2 = markdown).
+ * Render one catalog entry as an EQ item-window card in markdown:
+ * a heading for search/TOC plus a fenced plain-text block that
+ * copy/pastes exactly as shown.
+ */
+export function renderItemCard(item, effectName = prettifyEffectId) {
+    return [`### ${item?.name ?? "Unnamed Item"}`, "```", ...itemCardLines(item, effectName), "```"].join("\n");
+}
+
+/**
+ * Group the catalog into player-guide pages: one HTML page per
+ * equipment group, items sorted by name, each card an <h3> heading
+ * (journal search/outline) over a <pre> block that copy/pastes
+ * exactly as shown. HTML rather than markdown pages: the V14
+ * journal view does not convert markdown for API-created pages
+ * (they display raw), while HTML renders — the same format the
+ * storage journal already uses successfully.
  */
 export function buildPlayerCatalogPages(items, effectName = prettifyEffectId) {
     const groups = new Map();
@@ -198,11 +208,13 @@ export function buildPlayerCatalogPages(items, effectName = prettifyEffectId) {
         .sort((a, b) => a[0].localeCompare(b[0]))
         .map(([label, groupItems]) => {
             const sorted = [...groupItems].sort((a, b) => String(a?.name ?? "").localeCompare(String(b?.name ?? "")));
-            const body = sorted.map(i => renderItemCard(i, effectName)).join("\n\n");
+            const body = sorted.map(i =>
+                `<h3>${escapeHtmlText(i?.name ?? "Unnamed Item")}</h3>\n<pre>${escapeHtmlText(itemCardLines(i, effectName).join("\n"))}</pre>`
+            ).join("\n");
             return {
                 name: label,
                 type: "text",
-                text: { content: `# ${label}\n\n${body}\n`, format: 2 }
+                text: { content: body, format: 1 }
             };
         });
 }
@@ -428,14 +440,14 @@ export const EQRMSSItemLoader = {
         return { journal, groups: pages.length, items: items.length };
     },
 
-    /** The player-guide journal (markdown item cards), or null. */
+    /** The player-guide journal (HTML item cards), or null. */
     playerCatalogJournal() {
         return findPlayerCatalogJournal();
     },
 
     /**
      * Generate (or regenerate) the player-guide journal from the
-     * currently loaded catalog: EQ-style markdown item cards, one
+     * currently loaded catalog: EQ-style item cards, one
      * page per equipment group, readable by all players (Observer).
      * Regeneration replaces all pages. GM only.
      * Returns { journal, groups, items }.
