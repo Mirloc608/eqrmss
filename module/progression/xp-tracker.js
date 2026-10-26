@@ -12,6 +12,7 @@
 //   kills: [{ name, hits, level, raceKey, timestamp }],
 //   hitsDelivered: 0,
 //   hitsReceived: 0,
+//   healingDelivered: 0,
 //   charKnockedOut: false,
 //   foeKnockedOut: false,
 //   crits: [{ severity, foeLevel, foeName,
@@ -35,6 +36,7 @@ function emptyTracker() {
         kills: [],
         hitsDelivered: 0,
         hitsReceived: 0,
+        healingDelivered: 0,
         charKnockedOut: false,
         foeKnockedOut: false,
         crits: []
@@ -66,6 +68,7 @@ export function getXPTracker(actor) {
         if (Array.isArray(raw.kills)) t.kills = raw.kills;
         t.hitsDelivered = Number(raw.hitsDelivered) || 0;
         t.hitsReceived = Number(raw.hitsReceived) || 0;
+        t.healingDelivered = Number(raw.healingDelivered) || 0;
         t.charKnockedOut = !!raw.charKnockedOut;
         t.foeKnockedOut = !!raw.foeKnockedOut;
         if (Array.isArray(raw.crits)) t.crits = raw.crits;
@@ -97,6 +100,7 @@ export function trackerHasData(t) {
     return (t.kills?.length ?? 0) > 0
         || (t.hitsDelivered ?? 0) > 0
         || (t.hitsReceived ?? 0) > 0
+        || (t.healingDelivered ?? 0) > 0
         || (t.crits?.length ?? 0) > 0
         || !!t.charKnockedOut
         || !!t.foeKnockedOut;
@@ -190,6 +194,24 @@ export async function trackXPHits(attacker, target, hits) {
         }
     } catch (e) {
         console.warn("EQRMSS | XP hit tracking failed", e);
+    }
+}
+
+/**
+ * Record hits restored by a healer (user ruling 2026-10-25: healing
+ * earns XP on par with offensive casting — 1 XP per hit healed,
+ * scored in the scoreboard's Healing Points category). Only the
+ * actual amount restored counts; callers pass the capped amount.
+ */
+export async function trackXPHealing(healer, amount) {
+    const n = Math.max(0, Math.floor(Number(amount ?? 0)));
+    if (!healer || n <= 0) return;
+    try {
+        const t = getXPTracker(healer);
+        t.healingDelivered += n;
+        await setXPTracker(healer, t);
+    } catch (e) {
+        console.warn("EQRMSS | XP healing tracking failed", e);
     }
 }
 

@@ -181,6 +181,16 @@ export function spellPoints(powerPoints) {
 }
 
 // ----------------------------------------------------------------------------
+// 9) Healing Points (user ruling 2026-10-25) — 1 XP per hit healed, the
+// mirror of Hit Points' 1 XP per hit delivered: healing is as much of a
+// reward as offensive casting. Novelty multiplier applies, as for hits.
+// ----------------------------------------------------------------------------
+
+export function healingPoints(amount) {
+    return Math.max(0, Math.floor(Number(amount ?? 0)));
+}
+
+// ----------------------------------------------------------------------------
 // Full breakdown driver
 // ----------------------------------------------------------------------------
 // Input shape (all fields optional; only present categories are scored):
@@ -195,6 +205,7 @@ export function spellPoints(powerPoints) {
 //   death:  { ownKillValue, nearDeath?, resurrected? },
 //   travel: { miles, airOrSea?, terrain },
 //   spell:  { powerPoints },
+//   healing:{ amount },
 //   religious: { points },      // GM-assigned
 //   misc:   { points, label }   // GM discretionary
 // }
@@ -210,6 +221,7 @@ const CATEGORY_LABELS = {
     death: "Death Points",
     travel: "Travel Points",
     spell: "Spell Points",
+    healing: "Healing Points",
     religious: "Religious Points",
     misc: "Miscellaneous"
 };
@@ -288,6 +300,11 @@ export function calculateXpBreakdown(input = {}) {
         push("spell", `${input.spell.powerPoints ?? 0} power points`, spellPoints(input.spell.powerPoints));
     }
 
+    if (input.healing) {
+        const xp = applyMultiplier(healingPoints(input.healing.amount), novelty);
+        push("healing", `${input.healing.amount ?? 0} hits healed x ${XP_MULTIPLIER_LABELS[novelty]}`, xp);
+    }
+
     if (input.religious) {
         push("religious", "GM-assigned", Math.max(0, Math.floor(Number(input.religious.points ?? 0))));
     }
@@ -315,5 +332,6 @@ export default {
     deathPoints,
     travelPoints,
     spellPoints,
+    healingPoints,
     calculateXpBreakdown
 };

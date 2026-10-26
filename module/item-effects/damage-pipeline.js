@@ -66,6 +66,7 @@ import { hasSpecialTrait } from "../utils/special-traits.js";
 import { resolveTableAttack, effectOBFor, tableForElement } from "../combat/table-resolver.js";
 import { rrTargetNumber, rrOpenEnded } from "../spells/base-spell.js";
 import { casterLevelOf } from "../spells/spell-mapping.js";
+import { trackXPHealing } from "../progression/xp-tracker.js";
 
 function rollRange(min, max) {
     return min + Math.floor(Math.random() * (max - min + 1));
@@ -849,6 +850,12 @@ async function applyHeal({ effect, target, source, caster }) {
     await persistValue(target, "system.hits.value", next);
     const final = cur - next;
     if (final < rolled) notes.push(`capped at full health (${final} of ${rolled} applied)`);
+    // XP tracking (2026-10-25 ruling): healing earns on par with
+    // offensive casting — credit the healer for hits restored.
+    if (final > 0) {
+        const healer = caster ?? source?.actor ?? null;
+        if (healer) { try { await trackXPHealing(healer, final); } catch (e) { /* non-fatal */ } }
+    }
     return { type: "heal", rolled, final, notes, source };
 }
 

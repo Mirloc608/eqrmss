@@ -54,6 +54,7 @@ export class XPScoreboardDialog extends BaseApplication {
             killDemonType: "",
             hitsDelivered: "",
             hitsReceived: "",
+            healingDelivered: "",
             charKnockedOut: false,
             foeKnockedOut: false,
             crits: [],
@@ -95,6 +96,7 @@ export class XPScoreboardDialog extends BaseApplication {
                 // Hits delivered/received and knockout flags.
                 if (tracked.hitsDelivered > 0) f.hitsDelivered = String(tracked.hitsDelivered);
                 if (tracked.hitsReceived > 0) f.hitsReceived = String(tracked.hitsReceived);
+                if (tracked.healingDelivered > 0) f.healingDelivered = String(tracked.healingDelivered);
                 f.charKnockedOut = !!tracked.charKnockedOut;
                 f.foeKnockedOut = !!tracked.foeKnockedOut;
                 // Crits: one row per tracked crit.
@@ -210,6 +212,10 @@ export class XPScoreboardDialog extends BaseApplication {
                 charKnockedOut: !!f.charKnockedOut,
                 foeKnockedOut: !!f.foeKnockedOut
             };
+        }
+
+        if (num(f.healingDelivered) > 0) {
+            input.healing = { amount: num(f.healingDelivered) };
         }
 
         const crits = (f.crits ?? [])

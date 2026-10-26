@@ -42,6 +42,7 @@ import { applyLevitate } from "./levitate.js";
 import { applyVampiric } from "./vampiric.js";
 import { applyIllusion, applySeeInvisible, applyInfravision, applyUltravision } from "../item-effects/damage-pipeline.js";
 import { applyTeleport } from "./teleport.js";
+import { trackXPHealing } from "../progression/xp-tracker.js";
 import { summonItem } from "./summon.js";
 import { applyMemblur } from "./memblur.js";
 import { applyCannibalize, cannibalizeSpellRatio } from "./cannibalize.js";
@@ -597,6 +598,9 @@ async function castSpellInner(actor, spellItem, opts = {}) {
             const restored = Math.min(healAmount, cur);
             await target.update({ "system.hits.value": Math.round(cur - restored) });
             await checkHitThresholds(target);
+            // XP tracking (2026-10-25 ruling): healing earns on par
+            // with offensive casting — record hits actually restored.
+            if (restored > 0) { try { await trackXPHealing(actor, restored); } catch (e) { /* non-fatal */ } }
             healLine = `<p><em>${esc(target.name)} recovers ${restored} hits (${cur} → ${cur - restored})${healTableNote}.</em></p>`;
             // Healing aggro (2026-10-08): mobs with the heal target on
             // their hate list gain hate towards the healer.

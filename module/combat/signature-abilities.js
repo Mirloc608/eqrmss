@@ -12,7 +12,7 @@
 
 import { rrTargetNumber, rrOpenEnded } from "../spells/base-spell.js";
 import { EQRMSSAAAdvancement } from "../aa/aa-advancement.js";
-import { trackXPHits, trackXPKill } from "../progression/xp-tracker.js";
+import { trackXPHits, trackXPKill, trackXPHealing } from "../progression/xp-tracker.js";
 import { checkHitThresholds } from "./crit-conditions.js";
 
 // ------------------------------------------------------------
@@ -155,6 +155,9 @@ export async function layOnHands(actor, target) {
     await checkHitThresholds(target);
     await actor.update({ "system.status.layOnHandsUsed": true });
     const actualHealed = hitsTaken - newTaken;
+    // XP tracking (2026-10-25 ruling): healing earns on par with
+    // offensive casting — record hits actually restored.
+    if (actualHealed > 0) { try { await trackXPHealing(actor, actualHealed); } catch (e) { /* non-fatal */ } }
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content: `<h2>${esc(name)}</h2><p><em>${esc(actor.name)} lays hands on ${esc(target.name)}, restoring ${actualHealed} hits (${percent}% of max) and halting bleeding.</em></p>`
