@@ -105,6 +105,108 @@ export function catalogGroupFor(item) {
     return "Miscellaneous";
 }
 
+// ---------------------------------------------------------------------------
+// Player guide (user ruling 2026-10-26): a second journal renders the
+// catalog as EQ-style item cards in markdown — the player-facing view.
+// The JSON journal above is storage; this one is presentation only.
+// ---------------------------------------------------------------------------
+export const PLAYER_CATALOG_JOURNAL_NAME = "EQRMSS Item Catalog — Player Guide";
+
+export function findPlayerCatalogJournal() {
+    try {
+        return globalThis.game?.journal?.find?.(j => j?.flags?.eqrmss?.catalogDisplay === "items") ?? null;
+    } catch { return null; }
+}
+
+const CARD_STATS = [["st", "ST"], ["co", "CO"], ["ag", "AG"], ["qu", "QU"], ["em", "EM"], ["me", "ME"], ["pr", "PR"]];
+const CARD_RESISTS = [["fire", "FIRE"], ["cold", "COLD"], ["magic", "MAGIC"], ["poison", "POISON"], ["disease", "DISEASE"], ["corruption", "CORRUPTION"]];
+
+function signed(n) { return n > 0 ? `+${n}` : `${n}`; }
+
+/** Fallback effect label when the effects catalog has no name for an id. */
+export function prettifyEffectId(id) {
+    return String(id ?? "")
+        .replace(/^(clicky|focus|worn)-/, "")
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase())
+        .trim();
+}
+
+/**
+ * Render one catalog entry as an EQ item-window card (markdown):
+ * a heading for search/TOC plus a fenced plain-text block that
+ * copy/pastes exactly as shown. Only fields the entry carries are
+ * rendered.
+ */
+export function renderItemCard(item, effectName = prettifyEffectId) {
+    const s = item?.system ?? {};
+    const lines = [`### ${item?.name ?? "Unnamed Item"}`, "```"];
+    if (item?.type === "weapon") {
+        const skill = String(s.weaponType ?? "").replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()).replace(/ (To|Of|And) /g, m => m.toLowerCase());
+        if (skill) lines.push(`Skill: ${skill}`);
+        if (s.damage != null && s.damage !== "") lines.push(`DMG: ${s.damage}`);
+        if (s.magicWeapon) lines.push("MAGIC ITEM");
+    } else if (s.slot) {
+        lines.push(`Slot: ${String(s.slot).toUpperCase()}`);
+    }
+    const vitals = [];
+    if (s.defense) vitals.push(`AC: ${s.defense}`);
+    if (s.hp) vitals.push(`HP: ${signed(Number(s.hp))}`);
+    if (s.mana) vitals.push(`MANA: ${signed(Number(s.mana))}`);
+    if (s.stamina) vitals.push(`END: ${signed(Number(s.stamina))}`);
+    if (vitals.length) lines.push(vitals.join("   "));
+    if (s.attackBonus) lines.push(`Attack Bonus: ${signed(Number(s.attackBonus))}`);
+    const stats = CARD_STATS.filter(([k]) => Number(s.stats?.[k])).map(([k, l]) => `${l}: ${signed(Number(s.stats[k]))}`);
+    if (stats.length) lines.push(stats.join("  "));
+    const res = CARD_RESISTS.filter(([k]) => Number(s.resistances?.[k])).map(([k, l]) => `SV ${l}: ${signed(Number(s.resistances[k]))}`);
+    if (res.length) lines.push(res.join("  "));
+    if (s.triggeredEffect) lines.push(`Effect: ${effectName(s.triggeredEffect)} (clicky)`);
+    if (s.wornEffect) lines.push(`Effect: ${effectName(s.wornEffect)} (worn)`);
+    if (s.focusEffect) lines.push(`Focus: ${effectName(s.focusEffect)}`);
+    if (item?.type === "container") {
+        const cap = [];
+        if (s.capacitySlots) cap.push(`${s.capacitySlots} slots`);
+        if (s.capacityWeight) cap.push(`${s.capacityWeight} lb`);
+        if (cap.length) lines.push(`Capacity: ${cap.join(" / ")}`);
+        if (s.weightReduction) lines.push(`Weight Reduction: ${s.weightReduction}%`);
+    }
+    if (s.classes) lines.push(`Class: ${String(s.classes).toUpperCase()}`);
+    if (s.races && String(s.races).toUpperCase() !== "ALL") lines.push(`Race: ${String(s.races).toUpperCase()}`);
+    const tail = [];
+    if (s.weight != null && s.weight !== "") tail.push(`WT: ${s.weight}`);
+    if (Number(s.level) > 1) tail.push(`Required level of ${s.level}`);
+    if (tail.length) lines.push(tail.join("   "));
+    if (s.notes) lines.push(String(s.notes));
+    if (s.description) lines.push(String(s.description));
+    lines.push("```");
+    return lines.join("\n");
+}
+
+/**
+ * Group the catalog into player-guide pages: one markdown page per
+ * equipment group, items sorted by name. Returns JournalEntryPage
+ * create data (format 2 = markdown).
+ */
+export function buildPlayerCatalogPages(items, effectName = prettifyEffectId) {
+    const groups = new Map();
+    for (const item of items ?? []) {
+        const g = catalogGroupFor(item);
+        if (!groups.has(g)) groups.set(g, []);
+        groups.get(g).push(item);
+    }
+    return [...groups.entries()]
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([label, groupItems]) => {
+            const sorted = [...groupItems].sort((a, b) => String(a?.name ?? "").localeCompare(String(b?.name ?? "")));
+            const body = sorted.map(i => renderItemCard(i, effectName)).join("\n\n");
+            return {
+                name: label,
+                type: "text",
+                text: { content: `# ${label}\n\n${body}\n`, format: 2 }
+            };
+        });
+}
+
 export const EQRMSSItemLoader = {
     byId: {},
     bySlot: {},
@@ -323,6 +425,47 @@ export const EQRMSSItemLoader = {
             });
         }
         console.log(`EQRMSS | Item Loader | catalog journal seeded: ${items.length} items in ${pages.length} pages`);
+        return { journal, groups: pages.length, items: items.length };
+    },
+
+    /** The player-guide journal (markdown item cards), or null. */
+    playerCatalogJournal() {
+        return findPlayerCatalogJournal();
+    },
+
+    /**
+     * Generate (or regenerate) the player-guide journal from the
+     * currently loaded catalog: EQ-style markdown item cards, one
+     * page per equipment group, readable by all players (Observer).
+     * Regeneration replaces all pages. GM only.
+     * Returns { journal, groups, items }.
+     */
+    async generatePlayerCatalog() {
+        if (!globalThis.game?.user?.isGM) throw new Error("GM only");
+        const items = Object.values(this.byId ?? {});
+        if (!items.length) throw new Error("no catalog is loaded to render");
+        let effectName = prettifyEffectId;
+        try {
+            const mod = await import("../item-effects/item-effect-loader.js");
+            if (typeof mod?.getItemEffect === "function") {
+                effectName = (id) => mod.getItemEffect(id)?.name ?? prettifyEffectId(id);
+            }
+        } catch { /* effect ids render prettified */ }
+        const pages = buildPlayerCatalogPages(items, effectName);
+        let journal = findPlayerCatalogJournal();
+        if (journal) {
+            const ids = journal.pages.map(p => p.id);
+            if (ids.length) await journal.deleteEmbeddedDocuments("JournalEntryPage", ids);
+            await journal.createEmbeddedDocuments("JournalEntryPage", pages);
+        } else {
+            journal = await globalThis.JournalEntry.create({
+                name: PLAYER_CATALOG_JOURNAL_NAME,
+                ownership: { default: 2 },
+                flags: { eqrmss: { catalogDisplay: "items" } },
+                pages
+            });
+        }
+        console.log(`EQRMSS | Item Loader | player catalog generated: ${items.length} items in ${pages.length} pages`);
         return { journal, groups: pages.length, items: items.length };
     }
 };

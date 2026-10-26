@@ -107,7 +107,8 @@ export class GMScreen extends BaseApplication {
             "select-tab": this.#onSelectTab,
             "open-scoreboard": this.#onOpenScoreboard,
             "seed-catalog": this.#onSeedCatalog,
-            "reload-catalog": this.#onReloadCatalog
+            "reload-catalog": this.#onReloadCatalog,
+            "generate-player-catalog": this.#onGeneratePlayerCatalog
         }
     };
 
@@ -165,13 +166,15 @@ export class GMScreen extends BaseApplication {
         try {
             const { EQRMSSItemLoader } = await import("../data/loaders/item-loader.js");
             const journal = EQRMSSItemLoader.catalogJournal();
+            const guide = EQRMSSItemLoader.playerCatalogJournal();
             ctx.catalog = {
                 journalExists: !!journal,
                 journalName: journal?.name ?? "",
+                guideExists: !!guide,
                 itemCount: Object.keys(EQRMSSItemLoader.byId ?? {}).length
             };
         } catch (e) {
-            ctx.catalog = { journalExists: false, journalName: "", itemCount: 0 };
+            ctx.catalog = { journalExists: false, journalName: "", guideExists: false, itemCount: 0 };
         }
         return ctx;
     }
@@ -233,6 +236,24 @@ export class GMScreen extends BaseApplication {
         } catch (e) {
             console.error("EQRMSS | GM Screen: reload catalog failed", e);
             ui.notifications?.error(`EQRMSS | Reloading the catalog failed: ${e.message}`);
+        }
+    }
+
+    static async #onGeneratePlayerCatalog(event, target) {
+        try {
+            const { EQRMSSItemLoader } = await import("../data/loaders/item-loader.js");
+            if (EQRMSSItemLoader.playerCatalogJournal()) {
+                const confirmed = await foundry.applications.api.DialogV2.confirm({
+                    window: { title: "Regenerate Player Item Guide" },
+                    content: `<p>The player item guide already exists. Regenerating replaces all of its pages with fresh cards from the currently loaded catalog.</p><p><strong>Any edits made in the guide will be lost.</strong></p>`
+                });
+                if (!confirmed) return;
+            }
+            const res = await EQRMSSItemLoader.generatePlayerCatalog();
+            ui.notifications?.info(`EQRMSS | Player item guide generated: ${res.items} items in ${res.groups} pages. Players can open it in the Journal sidebar.`);
+        } catch (e) {
+            console.error("EQRMSS | GM Screen: generate player catalog failed", e);
+            ui.notifications?.error(`EQRMSS | Generating the player guide failed: ${e.message}`);
         }
     }
 }
