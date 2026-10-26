@@ -13,6 +13,7 @@
 //   hitsDelivered: 0,
 //   hitsReceived: 0,
 //   healingDelivered: 0,
+//   spellPointsEarned: 0,
 //   charKnockedOut: false,
 //   foeKnockedOut: false,
 //   crits: [{ severity, foeLevel, foeName,
@@ -37,6 +38,7 @@ function emptyTracker() {
         hitsDelivered: 0,
         hitsReceived: 0,
         healingDelivered: 0,
+        spellPointsEarned: 0,
         charKnockedOut: false,
         foeKnockedOut: false,
         crits: []
@@ -69,6 +71,7 @@ export function getXPTracker(actor) {
         t.hitsDelivered = Number(raw.hitsDelivered) || 0;
         t.hitsReceived = Number(raw.hitsReceived) || 0;
         t.healingDelivered = Number(raw.healingDelivered) || 0;
+        t.spellPointsEarned = Number(raw.spellPointsEarned) || 0;
         t.charKnockedOut = !!raw.charKnockedOut;
         t.foeKnockedOut = !!raw.foeKnockedOut;
         if (Array.isArray(raw.crits)) t.crits = raw.crits;
@@ -101,6 +104,7 @@ export function trackerHasData(t) {
         || (t.hitsDelivered ?? 0) > 0
         || (t.hitsReceived ?? 0) > 0
         || (t.healingDelivered ?? 0) > 0
+        || (t.spellPointsEarned ?? 0) > 0
         || (t.crits?.length ?? 0) > 0
         || !!t.charKnockedOut
         || !!t.foeKnockedOut;
@@ -212,6 +216,27 @@ export async function trackXPHealing(healer, amount) {
         await setXPTracker(healer, t);
     } catch (e) {
         console.warn("EQRMSS | XP healing tracking failed", e);
+    }
+}
+
+/**
+ * Record Spell Points earned (user ruling 2026-10-25): a support or
+ * control cast that LANDS earns XP equal to the mana spent (Table
+ * 15.4.2 Spell Points, auto-tracked instead of GM-entered). Support
+ * songs cost no mana — a landed support song earns its level instead
+ * (same accumulator; the scoreboard's Spell Points line is the pot
+ * both feed). Damage/healing casts earn through hits/healing and
+ * never bank spell points (no double-dip).
+ */
+export async function trackXPSpellPoints(actor, amount) {
+    const n = Math.max(0, Math.floor(Number(amount ?? 0)));
+    if (!actor || n <= 0) return;
+    try {
+        const t = getXPTracker(actor);
+        t.spellPointsEarned += n;
+        await setXPTracker(actor, t);
+    } catch (e) {
+        console.warn("EQRMSS | XP spell-point tracking failed", e);
     }
 }
 

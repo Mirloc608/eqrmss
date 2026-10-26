@@ -42,7 +42,7 @@ import { applyLevitate } from "./levitate.js";
 import { applyVampiric } from "./vampiric.js";
 import { applyIllusion, applySeeInvisible, applyInfravision, applyUltravision } from "../item-effects/damage-pipeline.js";
 import { applyTeleport } from "./teleport.js";
-import { trackXPHealing } from "../progression/xp-tracker.js";
+import { trackXPHealing, trackXPSpellPoints } from "../progression/xp-tracker.js";
 import { summonItem } from "./summon.js";
 import { applyMemblur } from "./memblur.js";
 import { applyCannibalize, cannibalizeSpellRatio } from "./cannibalize.js";
@@ -733,6 +733,15 @@ async function castSpellInner(actor, spellItem, opts = {}) {
                 }
             }
         } catch (e) { console.error("EQRMSS | capstone trigger check failed", e); }
+        // XP (2026-10-25 ruling): a support/control base cast (mez,
+        // slow, debuff) that lands on at least one target earns Spell
+        // Points equal to the mana spent. Pure support only — a cast
+        // carrying damage/dot/lifetap effects earns through those.
+        if ((cls.subtype === "control" || cls.subtype === "debuff") && cost > 0 && !opts._triggered
+            && applied.some(a => !a.resisted)
+            && !(spellEffectsOf(spellItem) ?? []).some(e => ["damage", "dot", "lifetap"].includes(String(e?.type ?? "").toLowerCase()))) {
+            try { await trackXPSpellPoints(actor, cost); } catch (e) { /* non-fatal */ }
+        }
         return { ok: true, kind: "base", targets: applied, resisted: baseTargets.length === 1 ? applied[0].resisted : undefined, mods };
     }
 
@@ -787,6 +796,16 @@ async function castSpellInner(actor, spellItem, opts = {}) {
         } catch { /* fall back to targeted/caster */ }
     }
     const buffNote = await applySpellBuffs(actor, spellItem, buffTarget, worn.durationFactor);
+    // XP (2026-10-25 ruling): a buff/support cast that lands earns
+    // Spell Points equal to the mana spent. Pure support only — a
+    // cast carrying damage/heal/dot/lifetap effects earns through
+    // those tracks instead (no double-dip).
+    if (cost > 0 && !opts._triggered && buffNote && !buffNote.includes("entire spell blocked")) {
+        const _xpTypes = (spellEffectsOf(spellItem) ?? []).map(e => String(e?.type ?? "").toLowerCase());
+        const _isSupport = _xpTypes.some(t => ["buff", "movement", "debuff"].includes(t))
+            && !_xpTypes.some(t => ["damage", "heal", "dot", "lifetap"].includes(t));
+        if (_isSupport) { try { await trackXPSpellPoints(actor, cost); } catch (e) { /* non-fatal */ } }
+    }
     // Debuff aggro (2026-10-08): hostile debuffs via the announced path
     // record hate (self-buffs with tradeoff debuffs do not).
     if (buffTarget.id !== actor.id) {

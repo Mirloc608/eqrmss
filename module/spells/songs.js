@@ -28,6 +28,7 @@ import { breakInvisibility } from "./invisibility.js";
 import { applyLevitate } from "./levitate.js";
 import { applyMemblur } from "./memblur.js";
 import { applyPacify } from "./pacify.js";
+import { trackXPSpellPoints } from "../progression/xp-tracker.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
     ? globalThis.foundry.utils.escapeHTML(String(s ?? ""))
@@ -519,6 +520,16 @@ export async function applySong(bard, songItem, targets = [], opts = {}) {
     // Manual targeting (user selected tokens) still overrides.
     const list = (targets?.length ? targets : songAutoTargets(bard, songItem, effects)).filter(Boolean);
     let notes = "";
+    // XP (2026-10-25 ruling): a support song (buffs, debuffs, mez,
+    // haste, slow — no damage/heal/regen effects, which earn through
+    // their own tracks) that lands fresh on at least one target
+    // earns the bard Spell Points equal to the song's level. Songs
+    // cost no mana, so level is the grant. Maintained refreshes of a
+    // song already carried by the target do not re-earn.
+    const _xpTypes = effects.map(e => String(e?.type ?? "").toLowerCase());
+    const _supportSong = _xpTypes.some(t => ["buff", "modifier", "debuff", "control", "fear", "root", "snare", "movement"].includes(t))
+        && !_xpTypes.some(t => ["damage", "heal", "regen", "dot"].includes(t));
+    let _xpFreshLand = false;
     for (let target of list) {
         // Unlinked tokens (2026-10-12): resolve to the base actor so buffs
         // persist and are visible to ticks/sheets sweeping game.actors.
@@ -528,6 +539,14 @@ export async function applySong(bard, songItem, targets = [], opts = {}) {
             notes += `<p><em>${tName} — song effects not applied (you don't control them).</em></p>`;
             continue;
         }
+        // XP fresh-application check (2026-10-25): did this target
+        // already carry this song before this application? (Same
+        // predicate the resistance gate below uses for "landed".)
+        const _sid = songIdOf(songItem);
+        const _hadSong = (Array.isArray(target.system?.status?.spellEffects)
+            ? target.system.status.spellEffects : []).some(e => e?.songId === _sid && e?.source === "song")
+            || (Array.isArray(target.system?.status?.dots)
+                ? target.system.status.dots : []).some(d => d?.songId === _sid && d?.source === "song");
         // Resistance gate (2026-10-23): one RR per target per
         // application of a hostile song. A target already carrying
         // this song's entries is being refreshed (re-sing, twist
@@ -629,10 +648,12 @@ export async function applySong(bard, songItem, targets = [], opts = {}) {
                 // Memblur (2026-10-07): song data doesn't specify a chance;
                 // use 50% (matches the mid-range spell values).
                 notes += await applyMemblur(bard, target, 50, name);
+                if (!_hadSong) _xpFreshLand = true;
             } else if (String(eff?.condition ?? "").toLowerCase() === "pacify") {
                 // Pacify (2026-10-07): e.g. Kelin's Lugubrious Lament.
                 const pacRounds = durationRounds(eff?.duration) ?? 5;
                 notes += await applyPacify(bard, target, { rounds: pacRounds, sourceName: name });
+                if (!_hadSong) _xpFreshLand = true;
             } else {
                 const entry = maintainedEntry(bard, songItem, label, eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
                 const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue, entry.songId);
@@ -660,6 +681,7 @@ export async function applySong(bard, songItem, targets = [], opts = {}) {
                     notes += `<p><em>${tName}: ${esc(label)} replaces entire buff source.</em></p>`;
                 }
                 fx.push(entry);
+                if (!_hadSong) _xpFreshLand = true;
                 await target.update({ "system.status.spellEffects": fx });
                 // Hasted/slowed visual indicators (2026-10-07)
                 const effRounds = entry.roundsLeft ?? 2;
@@ -671,6 +693,11 @@ export async function applySong(bard, songItem, targets = [], opts = {}) {
                 notes += `<p><em>${tName}: ${esc(label)}.</em></p>`;
             }
         }
+    }
+    // XP (2026-10-25 ruling): grant the support-song award once,
+    // when it landed fresh on at least one target.
+    if (_supportSong && _xpFreshLand) {
+        try { await trackXPSpellPoints(bard, Number(songItem?.system?.level) || 1); } catch (e) { /* non-fatal */ }
     }
     return notes || `<p><em>${esc(name)} sounds — no targets.</em></p>`;
 }

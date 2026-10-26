@@ -97,6 +97,7 @@ export class XPScoreboardDialog extends BaseApplication {
                 if (tracked.hitsDelivered > 0) f.hitsDelivered = String(tracked.hitsDelivered);
                 if (tracked.hitsReceived > 0) f.hitsReceived = String(tracked.hitsReceived);
                 if (tracked.healingDelivered > 0) f.healingDelivered = String(tracked.healingDelivered);
+                if (tracked.spellPointsEarned > 0) f.spellPower = String(tracked.spellPointsEarned);
                 f.charKnockedOut = !!tracked.charKnockedOut;
                 f.foeKnockedOut = !!tracked.foeKnockedOut;
                 // Crits: one row per tracked crit.
