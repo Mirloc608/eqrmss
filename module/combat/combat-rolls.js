@@ -1318,13 +1318,13 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
     // Ability damage multiplier (2026-10-21): e.g. Backstab multiplies
     // the attack's total concussion hits (table + crit bonus).
     const damageMultiplier = Math.max(1, Number(options.damageMultiplier) || 1);
+    const dmgParts = [`table ${tableDamage}`];
+    if (damageMod) dmgParts.push(`weapon ${damageMod >= 0 ? "+" : ""}${damageMod}`);
+    if (critBonus) dmgParts.push(`crit +${critBonus}`);
     if (damageMultiplier > 1 && totalDamage > 0) {
         totalDamage *= damageMultiplier;
         dmgParts.push(`${esc(options.damageMultiplierLabel || "ability")} ×${damageMultiplier}`);
     }
-    const dmgParts = [`table ${tableDamage}`];
-    if (damageMod) dmgParts.push(`weapon ${damageMod >= 0 ? "+" : ""}${damageMod}`);
-    if (critBonus) dmgParts.push(`crit +${critBonus}`);
     // Defensive Stance delivers half concussion-hit damage (§4.16).
     if (actorStance(actor) === "defensive" && totalDamage > 0) {
         totalDamage = Math.floor(totalDamage / 2);
