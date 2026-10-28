@@ -1,13 +1,16 @@
 // ============================================================
 // EQRMSS — Gear Evolution Dialog (Stage 2, T1->T2)
 //
-// ApplicationV2 — reforge a vessel piece: eat fodder to ripen it
-// (in-form combines add ternary augment slots) or eat the authored
-// transition piece to take the next form. Two routes: DIY (tiered
-// tradeskill combine, technique learned via Smithing, Tailoring,
-// or Fletching) or a paid
-// NPC (fee doubles per tier, 5% failure, fee kept on failure).
-// On any failure the vessel is returned intact; the fodder is lost.
+// ApplicationV2 — reforge a vessel piece. ARMOR (Crescent Reach
+// redesign, 2026-10-27): combines burn a slot-scaled count of a
+// catalyst material (family by current form, material by vessel
+// class) to ripen the form or transition to the next; the augment
+// combine is mandatory before a transition. WEAPONS: unchanged —
+// eat a same-type weapon to ripen or take the next rung.
+// Two routes: DIY (tiered tradeskill combine, technique learned
+// via Smithing, Tailoring, or Fletching) or a paid NPC (fee
+// doubles per tier, 5% failure, fee kept on failure).
+// On any failure the vessel is returned intact; the fuel is lost.
 // ============================================================
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
@@ -16,8 +19,9 @@ const BaseApplication = HandlebarsApplicationMixin(ApplicationV2);
 import {
     loadEvolutionLines, cacheEvolutionLines, socketLayout, formCap,
     trivialForTier, npcFeeGp, armorLocationOf, armorCategoryOf,
-    classesOf, setOf, ruinedTwinBase, weaponFormOf, evolutionState, freeSlots,
-    augmentsByTier, validateCombine, nextForm, transitionEatSet,
+    classesOf, setOf, weaponFormOf, evolutionState, freeSlots,
+    augmentsByTier, validateCombine, validateCatalystCombine,
+    catalystRequirement, catalystCost, nextForm,
     ripen, transition, socketAugment, skillForVessel, TIER_NAMES
 } from "../gear/evolution.js";
 import { canUseTradeskill, CRIT_FAIL_RANGE, CRIT_SUCCESS_RANGE } from "../tradeskills/tradeskill-engine.js";
@@ -68,6 +72,7 @@ export class EvolutionDialog extends BaseApplication {
         this.vessel = vessel;
         this._route = "diy";
         this._fodderId = null;
+        this._actionId = "ripening"; // armor catalyst combines: ripening | transition
     }
 
     get title() {
@@ -92,52 +97,47 @@ export class EvolutionDialog extends BaseApplication {
         };
     }
 
-    /** Slot for a catalyst piece (e.g. Decayed X) via its target set. */
-    _catalystLocation(lines, catalystItem, vesselState) {
-        const nf = nextForm(lines, vesselState, this._ctx());
-        if (!nf) return null;
-        const targetSet = lines.sets[nf.set];
-        if (!targetSet) return null;
-        // Match by trailing noun: "Decayed Breastplate" -> the target
-        // set piece ending in "Breastplate".
-        const noun = String(catalystItem.name ?? "").split(/\s+/).pop();
-        const pieceName = (targetSet.pieces ?? []).find(p => p.endsWith(` ${noun}`) || p === noun);
-        if (!pieceName) return null;
-        const byId = game.eqrmss?.items?.byId ?? {};
-        for (const entry of Object.values(byId)) {
-            if (entry?.name === pieceName) return entry.system?.slot ?? entry.system?.armorLocation ?? null;
-        }
-        return null;
-    }
-
+    /** Weapon fodder descriptor (weapons still eat weapons). */
     _fodderDescriptor(lines, item, vesselState) {
-        // A ruined twin resolves to its BASE piece's set (the twin
-        // itself is not registered); era / crafted / catalyst then
-        // follow the base set, and the twin is flagged classless.
-        const twin = ruinedTwinBase(lines, item);
-        const setKey = twin?.setKey ?? setOf(lines, item);
+        const setKey = setOf(lines, item);
         const set = setKey ? lines.sets[setKey] : null;
-        let location = armorLocationOf(item);
-        // Catalysts without their own slot (the legacy Decayed
-        // items) resolve their slot by trailing noun instead;
-        // catalog catalysts (the Decaying family) carry real slots.
-        if (set?.catalyst && item.type !== "armor") {
-            location = this._catalystLocation(lines, item, vesselState) ?? location;
-        }
         return {
             item,
             setKey,
             era: set ? set.era : null,
             crafted: !!set?.crafted,
             catalyst: !!set?.catalyst,
-            location,
+            location: armorLocationOf(item),
             category: armorCategoryOf(item, this._materialsById()),
             templateId: item?.system?.weaponTemplate ?? null,
             weaponForm: weaponFormOf(lines, item),
-            classes: classesOf(item),
-            material: item?.system?.material ?? item?.system?.armorMaterial ?? null,
-            ruined: !!twin
+            classes: classesOf(item)
         };
+    }
+
+    /** Units of a named catalyst material this actor holds. */
+    _catalystHeld(name) {
+        let held = 0;
+        for (const item of this.actor.items) {
+            if (item.name === name) held += Number(item.system?.quantity) || 1;
+        }
+        return held;
+    }
+
+    /** Consume `count` units of a named catalyst material. */
+    async _consumeCatalyst(name, count) {
+        let remaining = count;
+        for (const item of this.actor.items.filter(i => i.name === name)) {
+            if (remaining <= 0) break;
+            const qty = Number(item.system?.quantity) || 1;
+            if (qty <= remaining) {
+                remaining -= qty;
+                await item.delete();
+            } else {
+                await item.update({ "system.quantity": qty - remaining });
+                remaining = 0;
+            }
+        }
     }
 
     _vesselDescriptor(lines, state) {
@@ -194,33 +194,67 @@ export class EvolutionDialog extends BaseApplication {
         const nf = nextForm(lines, state, ctx);
         context.nextFormLabel = nf ? `Form ${nf.form}${nf.name ? ` — ${nf.name}` : ""}` : null;
 
-        // Fodder candidates with live validation.
+        // Combine selection: armor burns catalyst materials
+        // (Crescent Reach redesign); weapons still pick fodder.
         const vesselDesc = this._vesselDescriptor(lines, state);
         const actorDesc = { classKey: ctx.classKey, raceKey: ctx.raceKey };
-        const candidates = [];
-        for (const item of this.actor.items) {
-            if (item.id === this.vessel.id) continue;
-            if (!["armor", "weapon", "item"].includes(item.type)) continue;
-            const desc = this._fodderDescriptor(lines, item, state);
-            // Only list plausible food: same kind family or a catalyst.
-            if (state.kind === "armor" && !(item.type === "armor" || desc.catalyst)) continue;
-            if (state.kind === "weapon" && item.type !== "weapon") continue;
-            const verdict = validateCombine(lines, vesselDesc, desc, actorDesc);
-            candidates.push({
-                id: item.id, name: item.name, img: item.img,
-                ok: verdict.ok, kind: verdict.kind,
-                kindLabel: verdict.kind === "transition" ? "TRANSITION" : verdict.kind === "ripening" ? "Ripen" : "",
-                reasons: verdict.reasons
-            });
+        let selKind = null;
+        let selectionOk = false;
+        if (state.kind === "armor") {
+            context.catalystMode = true;
+            const req = catalystRequirement(lines, state, vesselDesc.category);
+            const cost = req ? catalystCost(lines, vesselDesc.location) : 0;
+            const held = req ? this._catalystHeld(req.itemName) : 0;
+            context.catalyst = req ? { name: req.itemName, family: req.family, cost, held } : null;
+            const actions = [];
+            for (const kind of ["ripening", "transition"]) {
+                const verdict = req
+                    ? validateCatalystCombine(lines, vesselDesc, { kind, held }, actorDesc)
+                    : { ok: false, reasons: ["No catalyst family is authored for this form."] };
+                actions.push({
+                    id: kind,
+                    label: kind === "transition"
+                        ? `Transition${nf ? ` to ${nf.name}` : ""} — ${cost} × ${req?.itemName ?? "catalyst"}`
+                        : `Ripen — ${cost} × ${req?.itemName ?? "catalyst"}`,
+                    ok: verdict.ok, kind, reasons: verdict.reasons
+                });
+            }
+            if (!actions.some(a => a.id === this._actionId)) this._actionId = "ripening";
+            if (!actions.find(a => a.id === this._actionId)?.ok) {
+                const firstOk = actions.find(a => a.ok);
+                if (firstOk) this._actionId = firstOk.id;
+            }
+            for (const a of actions) a.selected = a.id === this._actionId;
+            context.combineActions = actions;
+            context.selectedAction = actions.find(a => a.id === this._actionId) ?? null;
+            context.selectedIsTransition = context.selectedAction?.kind === "transition";
+            selKind = context.selectedAction?.kind ?? null;
+            selectionOk = !!context.selectedAction?.ok;
+        } else {
+            const candidates = [];
+            for (const item of this.actor.items) {
+                if (item.id === this.vessel.id) continue;
+                if (item.type !== "weapon") continue;
+                const desc = this._fodderDescriptor(lines, item, state);
+                const verdict = validateCombine(lines, vesselDesc, desc, actorDesc);
+                candidates.push({
+                    id: item.id, name: item.name, img: item.img,
+                    ok: verdict.ok, kind: verdict.kind,
+                    kindLabel: verdict.kind === "transition" ? "TRANSITION" : verdict.kind === "ripening" ? "Ripen" : "",
+                    reasons: verdict.reasons
+                });
+            }
+            candidates.sort((a, b) => (b.ok - a.ok) || a.name.localeCompare(b.name));
+            context.candidates = candidates;
+            if (!this._fodderId || !candidates.some(c => c.id === this._fodderId)) {
+                this._fodderId = candidates.find(c => c.ok)?.id ?? candidates[0]?.id ?? null;
+            }
+            context.selectedFodder = candidates.find(c => c.id === this._fodderId) ?? null;
+            context.selectedIsTransition = context.selectedFodder?.kind === "transition";
+            for (const c of candidates) c.selected = c.id === this._fodderId;
+            selKind = context.selectedFodder?.kind ?? null;
+            selectionOk = !!context.selectedFodder?.ok;
         }
-        candidates.sort((a, b) => (b.ok - a.ok) || a.name.localeCompare(b.name));
-        context.candidates = candidates;
-        if (!this._fodderId || !candidates.some(c => c.id === this._fodderId)) {
-            this._fodderId = candidates.find(c => c.ok)?.id ?? candidates[0]?.id ?? null;
-        }
-        context.selectedFodder = candidates.find(c => c.id === this._fodderId) ?? null;
-        context.selectedIsTransition = context.selectedFodder?.kind === "transition";
-        for (const c of candidates) c.selected = c.id === this._fodderId;
 
         // Routes.
         const tier = state.form;
@@ -235,7 +269,6 @@ export class EvolutionDialog extends BaseApplication {
         context.skillAllowed = access.allowed;
         context.skillRestriction = access.allowed ? null : access.reason;
         const techniques = this.actor.getFlag("eqrmss", "techniques") ?? [];
-        const selKind = context.selectedFodder?.kind;
         context.neededTechnique = selKind === "transition" ? `transition-${tier}`
             : selKind === "ripening" ? `socketing-${tier}` : null;
         context.techniqueKnown = context.neededTechnique ? techniques.includes(context.neededTechnique) : false;
@@ -244,7 +277,7 @@ export class EvolutionDialog extends BaseApplication {
         context.feeGp = npcFeeGp(cfg, tier);
         context.wealthGp = Math.floor(wealthCp(this.actor) / 100);
         context.canAfford = wealthCp(this.actor) >= context.feeGp * 100;
-        context.canCombine = !!context.selectedFodder?.ok
+        context.canCombine = selectionOk
             && (this._route === "npc" ? context.canAfford
                 : context.skillAllowed && context.techniqueKnown);
 
@@ -270,6 +303,10 @@ export class EvolutionDialog extends BaseApplication {
         super._onRender?.(context, options);
         this.element?.querySelector(".evo-fodder-select")?.addEventListener("change", ev => {
             this._fodderId = ev.target.value;
+            this.render();
+        });
+        this.element?.querySelector(".evo-action-select")?.addEventListener("change", ev => {
+            this._actionId = ev.target.value;
             this.render();
         });
         this.element?.querySelectorAll("input[name='evo-route']").forEach(r => {
@@ -311,36 +348,27 @@ export class EvolutionDialog extends BaseApplication {
     }
 
     async _targetData(lines, state, fodderItem, verdict) {
-        // Weapons and direct-set armor transitions: the eaten piece
-        // itself is the template.
-        const eatSet = transitionEatSet(lines, state, this._ctx());
-        if (state.kind === "weapon" || !eatSet || eatSet === verdict.targetSet) {
+        // Weapon transitions: the eaten weapon itself is the template.
+        if (state.kind === "weapon") {
             return { name: fodderItem.name, img: fodderItem.img, system: fodderItem.system };
         }
-        // Catalyst transition (Decaying piece -> the line's next
-        // form): the target piece comes from the catalog registry,
-        // normalized like a catalog add. Resolve it by the
-        // catalyst's SLOT first (Decaying pieces carry real slots);
-        // the trailing-noun match remains as a fallback for
-        // slotless legacy catalysts.
+        // Armor catalyst transition: the target piece (same slot,
+        // the line's next form set) comes from the catalog registry,
+        // normalized like a catalog add.
         const nf = nextForm(lines, state, this._ctx());
         const targetSet = lines.sets[nf.set];
         const byId = game.eqrmss?.items?.byId ?? {};
         const entries = Object.values(byId);
-        const fodderLoc = this._fodderDescriptor(lines, fodderItem, state).location;
+        const vesselLoc = armorLocationOf(this.vessel);
         let pieceName = null;
-        if (fodderLoc) {
+        if (vesselLoc) {
             pieceName = (targetSet?.pieces ?? []).find(p => {
                 const e = entries.find(x => x?.name === p);
                 const loc = e?.system?.armorLocation ?? e?.system?.slot ?? null;
-                return loc === fodderLoc;
+                return loc === vesselLoc;
             }) ?? null;
         }
-        if (!pieceName) {
-            const noun = String(fodderItem.name ?? "").split(/\s+/).pop();
-            pieceName = (targetSet?.pieces ?? []).find(p => p.endsWith(` ${noun}`) || p === noun) ?? null;
-        }
-        if (!pieceName) throw new Error(`No ${nf.name} piece matches ${fodderItem.name}.`);
+        if (!pieceName) throw new Error(`No ${nf.name} piece found for slot ${vesselLoc}.`);
         const entry = entries.find(e => e?.name === pieceName);
         if (!entry) throw new Error(`Catalog entry missing: ${pieceName}`);
         const normalized = await normalizeCatalogData(foundry.utils.deepClone(entry));
@@ -358,12 +386,29 @@ export class EvolutionDialog extends BaseApplication {
         const state = evolutionState(lines, vessel, ctx);
         if (!state) return ui.notifications.warn("This piece is not on an evolution line.");
 
-        const fodderItem = actor.items.get(dialog._fodderId);
-        if (!fodderItem) return ui.notifications.warn("Choose a piece to consume.");
         const vesselDesc = dialog._vesselDescriptor(lines, state);
-        const fodderDesc = dialog._fodderDescriptor(lines, fodderItem, state);
-        const verdict = validateCombine(lines, vesselDesc, fodderDesc, { classKey: ctx.classKey, raceKey: ctx.raceKey });
+        let fodderItem = null;
+        let verdict = null;
+        let consumedLabel = "";
+        if (state.kind === "armor") {
+            // Catalyst combine: validate the chosen action against
+            // the actor's held count of the required material.
+            const req = catalystRequirement(lines, state, vesselDesc.category);
+            const held = req ? dialog._catalystHeld(req.itemName) : 0;
+            verdict = validateCatalystCombine(lines, vesselDesc, { kind: dialog._actionId, held }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
+            consumedLabel = req ? `${verdict.cost ?? 0} × ${req.itemName}` : "the catalyst materials";
+        } else {
+            fodderItem = actor.items.get(dialog._fodderId);
+            if (!fodderItem) return ui.notifications.warn("Choose a piece to consume.");
+            const fodderDesc = dialog._fodderDescriptor(lines, fodderItem, state);
+            verdict = validateCombine(lines, vesselDesc, fodderDesc, { classKey: ctx.classKey, raceKey: ctx.raceKey });
+            consumedLabel = fodderItem.name;
+        }
         if (!verdict.ok) return ui.notifications.warn(verdict.reasons[0] ?? "That combine is not legal.");
+        const consumeFuel = async () => {
+            if (state.kind === "armor") await dialog._consumeCatalyst(verdict.requirement.itemName, verdict.cost);
+            else await dialog._consumeItem(fodderItem);
+        };
 
         const tier = state.form;
         const route = dialog._route;
@@ -401,12 +446,12 @@ export class EvolutionDialog extends BaseApplication {
         }
 
         if (!success) {
-            await dialog._consumeItem(fodderItem);
+            await consumeFuel();
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor }),
-                content: `<p><strong>Reforge failed.</strong> ${vessel.name} is returned intact, but ${fodderItem.name} is lost in the attempt. ${rollNote}</p>`
+                content: `<p><strong>Reforge failed.</strong> ${vessel.name} is returned intact, but ${consumedLabel} ${state.kind === "armor" ? "are" : "is"} lost in the attempt. ${rollNote}</p>`
             });
-            ui.notifications.warn(`Reforge failed — ${fodderItem.name} was lost.`);
+            ui.notifications.warn(`Reforge failed — ${consumedLabel} lost.`);
             dialog.render();
             return;
         }
@@ -415,16 +460,16 @@ export class EvolutionDialog extends BaseApplication {
         if (verdict.kind === "ripening") {
             const { state: next, bakedTiers } = ripen(state);
             await vessel.update({ "system.evolution": next });
-            resultNote = `${vessel.name} consumes ${fodderItem.name} and ripens (${next.combines}/${formCap(next.form)}).` +
+            resultNote = `${vessel.name} ${state.kind === "armor" ? "burns" : "consumes"} ${consumedLabel} and ripens (${next.combines}/${formCap(next.form)}).` +
                 (bakedTiers.length ? ` Sockets fused — their augments baked in.` : ` New socket state: [${socketLayout(next.combines).join(", ") || "none"}].`);
         } else {
             const next = transition(state, verdict.targetSet);
             const targetData = await dialog._targetData(lines, state, fodderItem, verdict);
             const oldName = vessel.name;
             await vessel.update(dialog._identityUpdate(targetData, next));
-            resultNote = `${oldName} consumes ${fodderItem.name} and is reforged into ${targetData.name} — Form ${next.form}. Socketed augments baked in; slots reset.`;
+            resultNote = `${oldName} is reforged into ${targetData.name} — Form ${next.form}. Socketed augments baked in; slots reset.`;
         }
-        await dialog._consumeItem(fodderItem);
+        await consumeFuel();
         await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
             content: `<p><strong>Reforge complete.</strong> ${resultNote} ${rollNote}</p>`

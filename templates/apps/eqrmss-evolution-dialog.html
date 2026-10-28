@@ -20,6 +20,25 @@
     {{#if evolvable}}
     <div class="evo-section">
         <h3>Reforge</h3>
+        {{#if catalystMode}}
+        {{#if catalyst}}
+        <p class="evo-catalyst-line">Catalyst: <strong>{{catalyst.name}}</strong> ({{catalyst.family}} family) — {{catalyst.cost}} per combine &middot; you hold {{catalyst.held}}</p>
+        {{/if}}
+        <label class="evo-fodder-label">Combine:
+            <select class="evo-action-select">
+                {{#each combineActions}}
+                <option value="{{id}}" {{#if selected}}selected{{/if}} {{#unless ok}}disabled{{/unless}}>{{label}}</option>
+                {{/each}}
+            </select>
+        </label>
+        {{#if selectedAction}}
+            {{#if selectedAction.ok}}
+            <p class="evo-verdict ok"><i class="fas fa-check"></i> {{#if selectedIsTransition}}Transition: the catalyst reforges this piece into its next form.{{else}}Ripening: +1 combine in the current form.{{/if}}</p>
+            {{else}}
+            <p class="evo-verdict bad"><i class="fas fa-times"></i> {{selectedAction.reasons.[0]}}</p>
+            {{/if}}
+        {{/if}}
+        {{else}}
         <label class="evo-fodder-label">Consume:
             <select class="evo-fodder-select">
                 {{#each candidates}}
@@ -36,6 +55,7 @@
         {{else}}
         <p class="evo-verdict">No candidate pieces in this character's inventory.</p>
         {{/if}}
+        {{/if}}
 
         <div class="evo-routes">
             <label>
@@ -49,7 +69,7 @@
                 Pay a smith — {{feeGp}} gp (you have {{wealthGp}} gp), 5% failure, fee kept on failure
             </label>
         </div>
-        <p class="evo-stakes">On failure the vessel is returned intact, but the consumed piece is lost.</p>
+        <p class="evo-stakes">On failure the vessel is returned intact, but the {{#if catalystMode}}catalyst materials are{{else}}consumed piece is{{/if}} lost.</p>
         <button type="button" class="evo-combine-btn" data-action="combine" {{#unless canCombine}}disabled{{/unless}}>
             <i class="fas fa-fire"></i> Reforge
         </button>

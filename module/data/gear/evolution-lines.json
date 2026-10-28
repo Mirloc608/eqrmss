@@ -5006,5 +5006,42 @@
     "condition": "normal"
    }
   ]
+ },
+ "catalysts": {
+  "comment": "Crescent Reach redesign (2026-10-27): armor combines burn stackable catalyst materials, not armor pieces. slotCosts = units per combine by vessel slot (every combine, ripening or transition). families are keyed by the vessel's CURRENT form (tier): form 1 burns Decaying, form 2 burns Rubicite. The material within a family follows the vessel's material class (a line may override with catalystCategory \u2014 beastlord is leather).",
+  "slotCosts": {
+   "head": 3,
+   "chest": 4,
+   "arms": 3,
+   "wrist": 1,
+   "hands": 2,
+   "legs": 4,
+   "feet": 2,
+   "face": 2,
+   "neck": 1,
+   "shoulders": 3,
+   "back": 2,
+   "waist": 1
+  },
+  "families": {
+   "1": {
+    "name": "Decaying",
+    "materials": {
+     "chain": "Decaying Chain Links",
+     "cloth": "Decaying Silk",
+     "leather": "Decaying Hide",
+     "plate": "Decaying Steel Plate"
+    }
+   },
+   "2": {
+    "name": "Rubicite",
+    "materials": {
+     "chain": "Rubicite Chain Links",
+     "cloth": "Rubicite Infused Silk",
+     "leather": "Rubicite Infused Hide",
+     "plate": "Rubicite Plate"
+    }
+   }
+  }
  }
 }

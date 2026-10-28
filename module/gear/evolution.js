@@ -1,6 +1,11 @@
 // ============================================================
 // EQRMSS Gear Evolution — engine (Stage 2, T1->T2)
 //
+// Crescent Reach redesign (2026-10-27): ARMOR combines burn
+// stackable catalyst materials (see validateCatalystCombine);
+// weapons still eat weapons (see validateCombine). The original
+// model, below, survives for weapons:
+//
 // A worn piece is never replaced: it is REFORGED by eating other
 // pieces. The vessel keeps its identity, history, baked effects and
 // socketed augments; the consumed piece templates any transition.
@@ -400,7 +405,10 @@ export function nextForm(lines, state, ctx = {}) {
     return { ...f, set: variantSet ?? f.set, name: variantSet ? (lines.sets[variantSet]?.name ?? f.name) : f.name };
 }
 
-/** The set a transition must eat: the catalyst set when authored. */
+/** The set a transition must eat: the catalyst set when authored.
+ *  (Pre-redesign armor path; armor transitions are catalyst-driven
+ *  since the Crescent Reach redesign, 2026-10-27. Kept for API
+ *  compatibility.) */
 export function transitionEatSet(lines, state, ctx = {}) {
     const nf = nextForm(lines, state, ctx);
     if (!nf) return null;
@@ -408,8 +416,80 @@ export function transitionEatSet(lines, state, ctx = {}) {
     return nf.eatSet ?? nf.set;
 }
 
+// ------------------------------------------------------------
+// Catalyst combines (Crescent Reach redesign, 2026-10-27)
+//
+// Armor no longer eats armor. Every armor combine — ripening or
+// transition — burns a slot-scaled count of a stackable catalyst
+// material: the family is keyed by the vessel's CURRENT form
+// (form 1 = Decaying, form 2 = Rubicite) and the material within
+// the family follows the vessel's material class (a line may
+// override with catalystCategory — beastlord is leather only).
+// The augment combine is mandatory: a form must be ripened at
+// least once before it can transition. Weapons are unchanged and
+// still combine through validateCombine below.
+// ------------------------------------------------------------
+
 /**
- * Validate eating `fodder` with `vessel`.
+ * The catalyst requirement for an armor vessel state:
+ * { itemName, category, family, tier } or null when no family is
+ * authored for the vessel's form or its material class is unknown.
+ */
+export function catalystRequirement(lines, state, vesselCategory) {
+    if (!state || state.kind !== "armor") return null;
+    const cfg = lines?.catalysts;
+    const family = cfg?.families?.[String(state.form)];
+    if (!family) return null;
+    const lineCat = state.line ? lines?.armorLines?.[state.line]?.catalystCategory : null;
+    const category = lineCat ?? vesselCategory ?? null;
+    const itemName = category ? (family.materials?.[category] ?? null) : null;
+    if (!itemName) return null;
+    return { itemName, category, family: family.name ?? null, tier: state.form };
+}
+
+/** Catalyst units one combine burns for a vessel in this slot. */
+export function catalystCost(lines, location) {
+    return Number(lines?.catalysts?.slotCosts?.[location]) || 0;
+}
+
+/**
+ * Validate a catalyst combine.
+ *   vessel: { item, state, location, category }
+ *   action: { kind: "ripening" | "transition", held }
+ *   actor:  { classKey, raceKey }
+ * On success the result carries the requirement and cost so the
+ * caller consumes exactly what was validated.
+ */
+export function validateCatalystCombine(lines, vessel, action, actor) {
+    const st = vessel?.state;
+    if (!st) return { ok: false, kind: null, reasons: ["The vessel is not on an evolution line."] };
+    if (st.kind !== "armor") return { ok: false, kind: null, reasons: ["Only armor combines burn catalyst materials."] };
+    const req = catalystRequirement(lines, st, vessel.category);
+    if (!req) return { ok: false, kind: null, reasons: [`No catalyst family is authored for form ${st.form}.`] };
+    const cost = catalystCost(lines, vessel.location);
+    const reasons = [];
+    if (!cost) reasons.push("No catalyst cost is authored for this slot.");
+    const held = Number(action?.held) || 0;
+    if (cost && held < cost) reasons.push(`Needs ${cost} × ${req.itemName} — you hold ${held}.`);
+    if (action?.kind === "transition") {
+        const nf = nextForm(lines, st, actor);
+        if (!nf) reasons.push("This piece is at its line's final form.");
+        if (st.combines < 1) reasons.push("Ripen this form at least once before transitioning — the augment combine is mandatory.");
+        if (reasons.length === 0) {
+            return { ok: true, kind: "transition", reasons: [], targetSet: nf.set, targetForm: nf.form, requirement: req, cost };
+        }
+        return { ok: false, kind: null, reasons, requirement: req, cost };
+    }
+    if (st.combines >= formCap(st.form)) {
+        reasons.push(`Form ${st.form} is fully ripened (${st.combines}/${formCap(st.form)}) — transition to grow further.`);
+    }
+    if (reasons.length === 0) return { ok: true, kind: "ripening", reasons: [], requirement: req, cost };
+    return { ok: false, kind: null, reasons, requirement: req, cost };
+}
+
+/**
+ * Validate eating `fodder` with `vessel` (WEAPONS only since the
+ * Crescent Reach redesign — armor uses validateCatalystCombine).
  *
  * vesselCtx / fodderCtx carry precomputed descriptors so this stays
  * pure and testable:
@@ -428,59 +508,7 @@ export function validateCombine(lines, vessel, fodder, actor) {
     }
 
     if (st.kind === "armor") {
-        // Transition first: the authored catalyst set (e.g. Decayed
-        // Armor) is made of plain items, not armor documents, and a
-        // direct target-set piece must win over the ripening rules.
-        const eatSet = transitionEatSet(lines, st, actor);
-        const nf = nextForm(lines, st, actor);
-        // Material-family gate: a catalyst set may author
-        // catalystMaterials (per armor category) — the catalyst
-        // must then be of the vessel's own material family (the
-        // Decaying family feeding Tier 1: plate vessels eat Iron /
-        // Bronze pieces, chain eats Black Iron / Chain Mail, ...).
-        let familyOk = true;
-        const famMap = eatSet ? lines?.sets?.[eatSet]?.catalystMaterials : null;
-        if (famMap) {
-            // The family is the vessel's material class, unless the
-            // line authors its own catalystCategory (beastlord is
-            // leather only, though its starter kit is worn chain —
-            // user ruling, 2026-10-27).
-            const lineCat = st.line ? lines?.armorLines?.[st.line]?.catalystCategory : null;
-            const gateCat = lineCat ?? vessel.category;
-            const allowed = gateCat ? (famMap[gateCat] ?? []) : [];
-            familyOk = allowed.includes(fodder.material);
-        }
-        if (nf && eatSet && fodder.setKey === eatSet && fodder.location === vessel.location && familyOk) {
-            return { ok: true, kind: "transition", reasons: [], targetSet: nf.set, targetForm: nf.form };
-        }
-        if (fodder.item.type !== "armor") reasons.push("Armor can only eat armor.");
-        if (fodder.location !== vessel.location) reasons.push("Different slot — a piece only eats its own slot.");
-        // Ripening rules.
-        if (!fodder.setKey) reasons.push("Unknown provenance — only recognized sets can feed a reforge.");
-        if (fodder.catalyst) reasons.push("That piece is a transition catalyst, not fodder.");
-        if (fodder.crafted) reasons.push("Crafted gear cannot be fodder — fodder is dropped loot only.");
-        if (fodder.category && vessel.category && fodder.category !== vessel.category) {
-            reasons.push("Different material class — plate feeds plate, chain feeds chain.");
-        }
-        if (fodder.setKey) {
-            const vEra = vessel.era ?? 0;
-            if (!(fodder.era === vEra || fodder.era === vEra + 1)) {
-                reasons.push("Wrong era — fodder must be from the vessel's era or the next.");
-            }
-        }
-        // Ruined twins are classless by design: the class lock
-        // never applies to them (their set / era / material class
-        // still gate the combine via the checks above).
-        if (!fodder.ruined) {
-            const abbrev = CLASS_ABBREV[actor.classKey];
-            if (fodder.classes && abbrev && !fodder.classes.includes(abbrev)) {
-                reasons.push("Class-locked — that piece is not usable by the vessel's class.");
-            }
-        }
-        if (st.combines >= formCap(st.form)) {
-            reasons.push(`Form ${st.form} is fully ripened (${st.combines}/${formCap(st.form)}) — transition to grow further.`);
-        }
-        return { ok: reasons.length === 0, kind: reasons.length === 0 ? "ripening" : null, reasons };
+        return { ok: false, kind: null, reasons: ["Armor no longer eats armor — reforging burns catalyst materials."] };
     }
 
     // Weapons.
