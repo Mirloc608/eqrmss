@@ -333,21 +333,31 @@ export class EvolutionDialog extends BaseApplication {
         const targetSystem = foundry.utils.deepClone(targetData.system ?? {});
         const keepLocation = this.vessel.system?.location;
         const current = this.vessel.system ?? {};
+        // Vessel state that is NOT part of the piece's identity and
+        // must survive the swap: the evolution stamp (set below),
+        // where the piece sits, its stack size, and its worn state.
+        // Armor derivation (armor-tier, actor prepare) reads the
+        // boolean system.equipped / system.worn, which catalog
+        // targets do not carry — deleting them left transitioned
+        // pieces reading as unworn ("No Armor") until re-equipped.
+        const PRESERVE = ["evolution", "location", "quantity", "equipped", "worn"];
         // Foundry V14 deprecates the legacy "system.-=key" deletion
         // syntax in update data; use the ForcedDeletion operator
         // when the core provides it, legacy keys otherwise.
         const ForcedDeletion = globalThis.foundry?.data?.operators?.ForcedDeletion;
         for (const key of Object.keys(current)) {
-            if (!(key in targetSystem) && key !== "evolution" && key !== "location" && key !== "quantity") {
+            if (!(key in targetSystem) && !PRESERVE.includes(key)) {
                 if (ForcedDeletion) updates[`system.${key}`] = new ForcedDeletion();
                 else updates[`system.-=${key}`] = null;
             }
         }
         for (const [key, value] of Object.entries(targetSystem)) {
-            if (key === "evolution" || key === "location" || key === "quantity") continue;
+            if (PRESERVE.includes(key)) continue;
             updates[`system.${key}`] = value;
         }
         if (keepLocation !== undefined) updates["system.location"] = keepLocation;
+        if (current.equipped !== undefined) updates["system.equipped"] = current.equipped;
+        if (current.worn !== undefined) updates["system.worn"] = current.worn;
         updates["system.evolution"] = newState;
         return updates;
     }
