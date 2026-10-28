@@ -9,6 +9,7 @@ import { exhaustionMaxFor } from "../../combat/subdue.js";
 import { progressionManager } from "../../progression/progression-manager.js";
 import { checkAndApplyLevelUps, applyLevelUp, currentLevel } from "../../progression/xp-engine.js";
 import { rmssRankBonus } from "../../data/skills/rmss-rank-bonus.js";
+import { promptDifficultyTier, maneuverOutcome, formatModifier } from "../../utils/skills/difficulty-tiers.js";
 import { EQRMSSExpansionManager } from "../../expansions/expansion-manager.js";
 import { EQRMSSAAAdvancement } from "../../aa/aa-advancement.js";
 import { groupSpellsByCategory, spellBaseName, spellRankNumber } from "./helpers/actor-sheet-spells.js";
@@ -1375,7 +1376,7 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
     }
 
     // ------------------------------------------------------------
-    // Skill Roll (RMSS skill item: 1d100 + total bonus vs target)
+    // Skill Roll (RMSS skill item: d100 + bonus + difficulty tier modifier)
     // ------------------------------------------------------------
     async _onSkillRoll(itemId) {
         const item = this.actor.items.get(itemId);
@@ -1396,19 +1397,24 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             + Number(item.system?.profBonus ?? 0)
             + Number(item.system?.specialBonus ?? 0);
 
+        // General skills roll on the RMSS maneuver difficulty tiers
+        // (2026-10-28): the GM sets the difficulty (default Medium);
+        // total = d100 + skill bonus + tier modifier, 100+ succeeds.
+        const tier = await promptDifficultyTier({ title: `Roll ${item.name}` });
+        if (!tier) return;
+
         const roll = await new Roll("1d100").evaluate();
-        const total = roll.total + totalBonus;
-        const target = 75;
-        const success = total >= target;
+        const total = roll.total + totalBonus + tier.modifier;
+        const outcome = maneuverOutcome(total);
 
         ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: `
                 <h2>${item.name}</h2>
-                <p><strong>Roll:</strong> ${roll.total} + ${totalBonus} = ${total}</p>
+                <p><strong>Roll:</strong> ${roll.total} + ${totalBonus} ${formatModifier(tier.modifier)} (${tier.name}) = ${total}</p>
                 <p><strong>Bonus:</strong> ${rankBonus >= 0 ? "+" : ""}${rankBonus} rank bonus (${ranks} rank${ranks === 1 ? "" : "s"})</p>
-                <p><strong>Target:</strong> ${target}</p>
-                <p><strong>Success:</strong> ${success ? "Yes" : "No"}</p>
+                <p><strong>Difficulty:</strong> ${tier.name} (${formatModifier(tier.modifier)})</p>
+                <p><strong>Result:</strong> ${outcome.label}</p>
             `
         });
     }
@@ -1428,19 +1434,21 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
         const rankBonus = rmssRankBonus(0);
         const totalBonus = rankBonus;
 
+        const tier = await promptDifficultyTier({ title: `Roll ${entry.name}` });
+        if (!tier) return;
+
         const roll = await new Roll("1d100").evaluate();
-        const total = roll.total + totalBonus;
-        const target = 75;
-        const success = total >= target;
+        const total = roll.total + totalBonus + tier.modifier;
+        const outcome = maneuverOutcome(total);
 
         ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: `
                 <h2>${entry.name}</h2>
-                <p><strong>Roll:</strong> ${roll.total} + ${totalBonus} = ${total}</p>
+                <p><strong>Roll:</strong> ${roll.total} + ${totalBonus} ${formatModifier(tier.modifier)} (${tier.name}) = ${total}</p>
                 <p><strong>Bonus:</strong> ${rankBonus >= 0 ? "+" : ""}${rankBonus} rank bonus (0 ranks — untrained)</p>
-                <p><strong>Target:</strong> ${target}</p>
-                <p><strong>Success:</strong> ${success ? "Yes" : "No"}</p>
+                <p><strong>Difficulty:</strong> ${tier.name} (${formatModifier(tier.modifier)})</p>
+                <p><strong>Result:</strong> ${outcome.label}</p>
             `
         });
     }
