@@ -384,6 +384,39 @@ export class EvolutionDialog extends BaseApplication {
         if (keepLocation !== undefined) updates["system.location"] = keepLocation;
         if (current.equipped !== undefined) updates["system.equipped"] = current.equipped;
         if (current.worn !== undefined) updates["system.worn"] = current.worn;
+        // Effect carry-forward (user ruling 2026-10-28, option A):
+        // armor should never slide back. The vessel's own triggered /
+        // worn effects fill the target's slots when the target has
+        // none of that kind; a target's own effects are never
+        // displaced. (Overwrites any deletion scheduled above for a
+        // field the target lacks.)
+        const carry = (field, value) => {
+            updates[`system.${field}`] = value;
+            delete updates[`system.-=${field}`];
+        };
+        for (const field of ["triggeredEffect", "wornEffect"]) {
+            if (current[field] && !targetSystem[field]) carry(field, current[field]);
+        }
+        // Stat carry-forward (user ruling 2026-10-28): the same
+        // never-slide-back rule for numbers — defense / hp / mana and
+        // each stat / resistance key take the better of vessel and
+        // target, so a transition can only raise a profile, never
+        // lower any part of it.
+        for (const field of ["defense", "hp", "mana"]) {
+            const c = Number(current[field]) || 0, t = Number(targetSystem[field]) || 0;
+            if (c > t) carry(field, current[field]);
+        }
+        for (const field of ["stats", "resistances"]) {
+            const c = current[field], t = targetSystem[field];
+            if (!c) continue;
+            if (!t) { carry(field, foundry.utils.deepClone(c)); continue; }
+            const merged = { ...t };
+            let raised = false;
+            for (const [k, v] of Object.entries(c)) {
+                if (!(k in merged) || (Number(v) || 0) > (Number(merged[k]) || 0)) { merged[k] = v; raised = true; }
+            }
+            if (raised) carry(field, merged);
+        }
         updates["system.evolution"] = newState;
         return updates;
     }
