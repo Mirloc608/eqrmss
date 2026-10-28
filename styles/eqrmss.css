@@ -2469,3 +2469,17 @@ button.rank-badge:hover {
   outline: 1px dashed rgba(160, 130, 80, 0.65);
   outline-offset: 3px;
 }
+
+/* Skills tab: keep each row's action buttons on a single row
+   (2026-10-28). Wraps only when a row has more controls than the
+   cell can hold (e.g. a specialized developed tradeskill). */
+.skills-tab .skill-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+.skills-tab .skill-actions button {
+    flex: 0 0 auto;
+    width: auto;
+}
