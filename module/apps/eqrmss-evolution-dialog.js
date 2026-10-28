@@ -333,9 +333,14 @@ export class EvolutionDialog extends BaseApplication {
         const targetSystem = foundry.utils.deepClone(targetData.system ?? {});
         const keepLocation = this.vessel.system?.location;
         const current = this.vessel.system ?? {};
+        // Foundry V14 deprecates the legacy "system.-=key" deletion
+        // syntax in update data; use the ForcedDeletion operator
+        // when the core provides it, legacy keys otherwise.
+        const ForcedDeletion = globalThis.foundry?.data?.operators?.ForcedDeletion;
         for (const key of Object.keys(current)) {
             if (!(key in targetSystem) && key !== "evolution" && key !== "location" && key !== "quantity") {
-                updates[`system.-=${key}`] = null;
+                if (ForcedDeletion) updates[`system.${key}`] = new ForcedDeletion();
+                else updates[`system.-=${key}`] = null;
             }
         }
         for (const [key, value] of Object.entries(targetSystem)) {
