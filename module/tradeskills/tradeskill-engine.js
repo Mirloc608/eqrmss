@@ -9,18 +9,18 @@
  * - Softer failure: regular failure keeps materials; ONLY critical failure
  *   (natural 01-05) loses materials
  * - Critical results (2026-10-28, user rulings): natural 01-05 = critical
- *   failure (consume DOUBLE components, no product); natural 95-100 =
+ *   failure (consume DOUBLE components, no product); natural 96-100 =
  *   critical success (always succeeds; consumes 1 of any component that
  *   requires multiples, and nothing for single-quantity components)
  */
 
 export const CRIT_FAIL_RANGE = [1, 5];
-export const CRIT_SUCCESS_RANGE = [95, 100];
+export const CRIT_SUCCESS_RANGE = [96, 100];
 
 // Quality bands (2026-10-14, user rulings; crit band aligned 2026-10-28):
-// 95-100: Pristine (crit success), 60-94: Normal, 30-59: Worn, 06-29: Tarnished, 01-05: Broken (crit fail)
+// 96-100: Pristine (crit success), 60-95: Normal, 30-59: Worn, 06-29: Tarnished, 01-05: Broken (crit fail)
 export function qualityForRoll(natural) {
-    if (natural >= 95) return "pristine";
+    if (natural >= 96) return "pristine";
     if (natural >= 60) return "normal";
     if (natural >= 30) return "worn";
     if (natural >= 6) return "tarnished";
@@ -153,7 +153,7 @@ export async function attemptCombine(actor, recipe, hasComponents, consumeCompon
     const natural = check.roll.total;
     const isCritFail = natural >= CRIT_FAIL_RANGE[0] && natural <= CRIT_FAIL_RANGE[1];
     const isCritSuccess = natural >= CRIT_SUCCESS_RANGE[0] && natural <= CRIT_SUCCESS_RANGE[1];
-    // Critical success (natural 95-100) always succeeds, whatever the total
+    // Critical success (natural 96-100) always succeeds, whatever the total
     const succeeded = (check.success || isCritSuccess) && !isCritFail;
     const outcome = isCritFail ? "critFail" : isCritSuccess ? "critSuccess" : "normal";
 
