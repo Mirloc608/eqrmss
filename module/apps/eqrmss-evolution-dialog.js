@@ -223,10 +223,12 @@ export class EvolutionDialog extends BaseApplication {
                 label: `Ripen — ${cost} × ${req?.itemName ?? "catalyst"}`,
                 ok: ripenVerdict.ok, kind: "ripening", reasons: ripenVerdict.reasons
             });
-            // Velious fork (V1): a form-3 transition burns a faction
-            // mold, and the mold chooses the form-4 set — one action
-            // per faction, validated against that mold's held count.
-            const factions = state.form === 3 ? lines.catalysts?.families?.["4"]?.factions : null;
+            // Mold fork (V1, generalized 2026-10-28 for the PoP
+            // ornate/elemental fork): a transition into a form whose
+            // family block carries factions burns one variant's
+            // mold, and the mold chooses the set — one action per
+            // variant, validated against that mold's held count.
+            const factions = lines.catalysts?.families?.[String(state.form + 1)]?.factions ?? null;
             if (factions) {
                 for (const [facKey, fac] of Object.entries(factions)) {
                     const mreq = catalystRequirement(lines, state, vesselDesc.category,
@@ -495,7 +497,7 @@ export class EvolutionDialog extends BaseApplication {
             // Velious fork — "transition:<faction>" (the mold).
             const [kind, faction] = String(dialog._actionId).split(":");
             const req = catalystRequirement(lines, state, vesselDesc.category,
-                { forTransition: kind === "transition" && state.form === 3, faction });
+                { forTransition: kind === "transition" && !!lines.catalysts?.families?.[String(state.form + 1)]?.factions, faction });
             const held = req ? dialog._catalystHeld(req.itemName) : 0;
             verdict = validateCatalystCombine(lines, vesselDesc, { kind, held, faction }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
             consumedLabel = verdict.requirement ? `${verdict.cost ?? 0} × ${verdict.requirement.itemName}` : "the catalyst materials";

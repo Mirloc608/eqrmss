@@ -498,14 +498,18 @@ export function catalystRequirement(lines, state, vesselCategory, opts = {}) {
     const category = lineCat ?? vesselCategory ?? null;
     if (!category) return null;
     let family = null, familyName = null, faction = null;
-    if (opts.forTransition && state.form === 3) {
+    // Mold forks (Velious form 4, PoP form 6): a form whose family
+    // block carries `factions` ripens on its own variant's molds, and
+    // a transition INTO such a form burns the chosen variant's mold.
+    const famOf = (form) => cfg.families?.[String(form)] ?? null;
+    if (opts.forTransition && famOf(state.form + 1)?.factions) {
         faction = opts.faction ?? null;
-        family = faction ? cfg.families?.["4"]?.factions?.[faction] : null;
+        family = faction ? famOf(state.form + 1).factions[faction] : null;
         if (!family) return null;
         familyName = `${family.name} molds`;
-    } else if (state.form === 4) {
+    } else if (famOf(state.form)?.factions) {
         faction = lines?.sets?.[state.set]?.faction ?? null;
-        family = faction ? cfg.families?.["4"]?.factions?.[faction] : null;
+        family = faction ? famOf(state.form).factions[faction] : null;
         if (!family) return null;
         familyName = `${family.name} molds`;
     } else {
@@ -537,11 +541,12 @@ export function validateCatalystCombine(lines, vessel, action, actor) {
     if (st.kind !== "armor") return { ok: false, kind: null, reasons: ["Only armor combines burn catalyst materials."] };
     // The form-3 transition burns a chosen faction mold (V1); every
     // other combine reads the vessel form's own family.
-    const moldTransition = action?.kind === "transition" && st.form === 3;
+    const moldTransition = action?.kind === "transition"
+        && !!lines?.catalysts?.families?.[String(st.form + 1)]?.factions;
     const req = catalystRequirement(lines, st, vessel.category,
         { forTransition: moldTransition, faction: action?.faction });
     if (!req) return { ok: false, kind: null, reasons: [moldTransition && !action?.faction
-        ? "Choose a faction mold to burn — the mold decides the Velious set."
+        ? "Choose a mold to burn — the mold decides the next form's set."
         : `No catalyst family is authored for form ${st.form}.`] };
     const cost = catalystCost(lines, vessel.location);
     const reasons = [];
