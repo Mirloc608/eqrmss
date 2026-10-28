@@ -207,15 +207,41 @@ export class EvolutionDialog extends BaseApplication {
             const held = req ? this._catalystHeld(req.itemName) : 0;
             context.catalyst = req ? { name: req.itemName, family: req.family, cost, held } : null;
             const actions = [];
-            for (const kind of ["ripening", "transition"]) {
+            const ripenVerdict = req
+                ? validateCatalystCombine(lines, vesselDesc, { kind: "ripening", held }, actorDesc)
+                : { ok: false, reasons: ["No catalyst family is authored for this form."] };
+            actions.push({
+                id: "ripening",
+                label: `Ripen — ${cost} × ${req?.itemName ?? "catalyst"}`,
+                ok: ripenVerdict.ok, kind: "ripening", reasons: ripenVerdict.reasons
+            });
+            // Velious fork (V1): a form-3 transition burns a faction
+            // mold, and the mold chooses the form-4 set — one action
+            // per faction, validated against that mold's held count.
+            const factions = state.form === 3 ? lines.catalysts?.families?.["4"]?.factions : null;
+            if (factions) {
+                for (const [facKey, fac] of Object.entries(factions)) {
+                    const mreq = catalystRequirement(lines, state, vesselDesc.category,
+                        { forTransition: true, faction: facKey });
+                    const mheld = mreq ? this._catalystHeld(mreq.itemName) : 0;
+                    const verdict = mreq
+                        ? validateCatalystCombine(lines, vesselDesc,
+                            { kind: "transition", held: mheld, faction: facKey }, actorDesc)
+                        : { ok: false, reasons: ["No mold is authored for this material class."] };
+                    const tnf = nextForm(lines, state, { ...actorDesc, faction: facKey });
+                    actions.push({
+                        id: `transition:${facKey}`, faction: facKey,
+                        label: `Transition${tnf ? ` to ${tnf.name}` : ""} — ${cost} × ${mreq?.itemName ?? "mold"}`,
+                        ok: verdict.ok, kind: "transition", reasons: verdict.reasons
+                    });
+                }
+            } else {
                 const verdict = req
-                    ? validateCatalystCombine(lines, vesselDesc, { kind, held }, actorDesc)
+                    ? validateCatalystCombine(lines, vesselDesc, { kind: "transition", held }, actorDesc)
                     : { ok: false, reasons: ["No catalyst family is authored for this form."] };
                 actions.push({
-                    id: kind,
-                    label: kind === "transition"
-                        ? `Transition${nf ? ` to ${nf.name}` : ""} — ${cost} × ${req?.itemName ?? "catalyst"}`
-                        : `Ripen — ${cost} × ${req?.itemName ?? "catalyst"}`,
+                    id: "transition",
+                    label: `Transition${nf ? ` to ${nf.name}` : ""} — ${cost} × ${req?.itemName ?? "catalyst"}`,
                     ok: verdict.ok, kind, reasons: verdict.reasons
                 });
             }
@@ -369,9 +395,10 @@ export class EvolutionDialog extends BaseApplication {
         }
         // Armor catalyst transition: the target piece (same slot,
         // the line's next form set) comes from the catalog registry,
-        // normalized like a catalog add.
-        const nf = nextForm(lines, state, this._ctx());
-        const targetSet = lines.sets[nf.set];
+        // normalized like a catalog add. The set is the verdict's —
+        // it already carries the race variant and, at the Velious
+        // fork, the burned mold's faction variant.
+        const targetSet = lines.sets[verdict.targetSet];
         const byId = game.eqrmss?.items?.byId ?? {};
         const entries = Object.values(byId);
         const vesselLoc = armorLocationOf(this.vessel);
@@ -383,7 +410,7 @@ export class EvolutionDialog extends BaseApplication {
                 return loc === vesselLoc;
             }) ?? null;
         }
-        if (!pieceName) throw new Error(`No ${nf.name} piece found for slot ${vesselLoc}.`);
+        if (!pieceName) throw new Error(`No ${targetSet?.name ?? verdict.targetSet} piece found for slot ${vesselLoc}.`);
         const entry = entries.find(e => e?.name === pieceName);
         if (!entry) throw new Error(`Catalog entry missing: ${pieceName}`);
         const normalized = await normalizeCatalogData(foundry.utils.deepClone(entry));
@@ -407,11 +434,15 @@ export class EvolutionDialog extends BaseApplication {
         let consumedLabel = "";
         if (state.kind === "armor") {
             // Catalyst combine: validate the chosen action against
-            // the actor's held count of the required material.
-            const req = catalystRequirement(lines, state, vesselDesc.category);
+            // the actor's held count of the required material. The
+            // action id is "ripening", "transition", or — at the
+            // Velious fork — "transition:<faction>" (the mold).
+            const [kind, faction] = String(dialog._actionId).split(":");
+            const req = catalystRequirement(lines, state, vesselDesc.category,
+                { forTransition: kind === "transition" && state.form === 3, faction });
             const held = req ? dialog._catalystHeld(req.itemName) : 0;
-            verdict = validateCatalystCombine(lines, vesselDesc, { kind: dialog._actionId, held }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
-            consumedLabel = req ? `${verdict.cost ?? 0} × ${req.itemName}` : "the catalyst materials";
+            verdict = validateCatalystCombine(lines, vesselDesc, { kind, held, faction }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
+            consumedLabel = verdict.requirement ? `${verdict.cost ?? 0} × ${verdict.requirement.itemName}` : "the catalyst materials";
         } else {
             fodderItem = actor.items.get(dialog._fodderId);
             if (!fodderItem) return ui.notifications.warn("Choose a piece to consume.");

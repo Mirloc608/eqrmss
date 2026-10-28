@@ -401,7 +401,11 @@ export function nextForm(lines, state, ctx = {}) {
     if (!line) return null;
     const f = (line.forms ?? []).find(x => x.form === state.form + 1);
     if (!f) return null;
-    const variantSet = ctx.raceKey && f.variants ? f.variants[ctx.raceKey] : null;
+    // Variants resolve by faction first (the Velious mold fork: the
+    // burned mold's faction decides the form-4 set), then by race
+    // (the iksar form-2 sets). A form entry never mixes both.
+    const variantSet = (ctx.faction && f.variants?.[ctx.faction])
+        ?? (ctx.raceKey && f.variants ? f.variants[ctx.raceKey] : null);
     return { ...f, set: variantSet ?? f.set, name: variantSet ? (lines.sets[variantSet]?.name ?? f.name) : f.name };
 }
 
@@ -422,29 +426,55 @@ export function transitionEatSet(lines, state, ctx = {}) {
 // Armor no longer eats armor. Every armor combine — ripening or
 // transition — burns a slot-scaled count of a stackable catalyst
 // material: the family is keyed by the vessel's CURRENT form
-// (form 1 = Decaying, form 2 = Rubicite) and the material within
-// the family follows the vessel's material class (a line may
-// override with catalystCategory — beastlord is leather only).
-// The augment combine is mandatory: a form must be ripened at
-// least once before it can transition. Weapons are unchanged and
-// still combine through validateCombine below.
+// (form 1 = Decaying, form 2 = Rubicite, form 3 = Sebilite) and the
+// material within the family follows the vessel's material class
+// (a line may override with catalystCategory — beastlord is
+// leather only). Velious exceptions (V1–V3, 2026-10-28): the
+// form-3 transition burns a chosen faction MOLD, which selects
+// the form-4 set; form-4 pieces ripen on their own faction's
+// molds. The augment combine is mandatory: a form must be ripened
+// at least once before it can transition. Weapons are unchanged
+// and still combine through validateCombine below.
 // ------------------------------------------------------------
 
 /**
  * The catalyst requirement for an armor vessel state:
- * { itemName, category, family, tier } or null when no family is
- * authored for the vessel's form or its material class is unknown.
+ * { itemName, category, family, tier, faction } or null when no
+ * family is authored for the vessel's form or its material class
+ * is unknown.
+ *
+ * Velious (V1–V3 rulings, 2026-10-28): the form-3 TRANSITION burns
+ * a faction mold instead of Sebilite — pass opts { forTransition:
+ * true, faction } and the requirement reads that faction's mold
+ * materials from families["4"].factions. Form-4 pieces ripen on
+ * their own set's faction molds (the set entry carries `faction`).
  */
-export function catalystRequirement(lines, state, vesselCategory) {
+export function catalystRequirement(lines, state, vesselCategory, opts = {}) {
     if (!state || state.kind !== "armor") return null;
     const cfg = lines?.catalysts;
-    const family = cfg?.families?.[String(state.form)];
-    if (!family) return null;
+    if (!cfg) return null;
     const lineCat = state.line ? lines?.armorLines?.[state.line]?.catalystCategory : null;
     const category = lineCat ?? vesselCategory ?? null;
-    const itemName = category ? (family.materials?.[category] ?? null) : null;
+    if (!category) return null;
+    let family = null, familyName = null, faction = null;
+    if (opts.forTransition && state.form === 3) {
+        faction = opts.faction ?? null;
+        family = faction ? cfg.families?.["4"]?.factions?.[faction] : null;
+        if (!family) return null;
+        familyName = `${family.name} molds`;
+    } else if (state.form === 4) {
+        faction = lines?.sets?.[state.set]?.faction ?? null;
+        family = faction ? cfg.families?.["4"]?.factions?.[faction] : null;
+        if (!family) return null;
+        familyName = `${family.name} molds`;
+    } else {
+        family = cfg.families?.[String(state.form)];
+        if (!family) return null;
+        familyName = family.name ?? null;
+    }
+    const itemName = family.materials?.[category] ?? null;
     if (!itemName) return null;
-    return { itemName, category, family: family.name ?? null, tier: state.form };
+    return { itemName, category, family: familyName, tier: state.form, faction };
 }
 
 /** Catalyst units one combine burns for a vessel in this slot. */
@@ -464,15 +494,21 @@ export function validateCatalystCombine(lines, vessel, action, actor) {
     const st = vessel?.state;
     if (!st) return { ok: false, kind: null, reasons: ["The vessel is not on an evolution line."] };
     if (st.kind !== "armor") return { ok: false, kind: null, reasons: ["Only armor combines burn catalyst materials."] };
-    const req = catalystRequirement(lines, st, vessel.category);
-    if (!req) return { ok: false, kind: null, reasons: [`No catalyst family is authored for form ${st.form}.`] };
+    // The form-3 transition burns a chosen faction mold (V1); every
+    // other combine reads the vessel form's own family.
+    const moldTransition = action?.kind === "transition" && st.form === 3;
+    const req = catalystRequirement(lines, st, vessel.category,
+        { forTransition: moldTransition, faction: action?.faction });
+    if (!req) return { ok: false, kind: null, reasons: [moldTransition && !action?.faction
+        ? "Choose a faction mold to burn — the mold decides the Velious set."
+        : `No catalyst family is authored for form ${st.form}.`] };
     const cost = catalystCost(lines, vessel.location);
     const reasons = [];
     if (!cost) reasons.push("No catalyst cost is authored for this slot.");
     const held = Number(action?.held) || 0;
     if (cost && held < cost) reasons.push(`Needs ${cost} × ${req.itemName} — you hold ${held}.`);
     if (action?.kind === "transition") {
-        const nf = nextForm(lines, st, actor);
+        const nf = nextForm(lines, st, { ...actor, faction: action?.faction });
         if (!nf) reasons.push("This piece is at its line's final form.");
         if (st.combines < 1) reasons.push("Ripen this form at least once before transitioning — the augment combine is mandatory.");
         if (reasons.length === 0) {
