@@ -1,7 +1,8 @@
 // EQRMSS Skill Profile Resolver
 // Computes effective skill bonus for an actor + skillId.
 
-import { getPrimaryStatForSkill, getStatBonus, getDesignationModifier, sum } from "./skill-utils.js";
+import { getPrimaryStatForSkill, getStatBonus, sum } from "./skill-utils.js";
+import { rmssRankBonus } from "../../data/skills/rmss-rank-bonus.js";
 
 export function resolveSkillProfile(actor, skillId, registry) {
   const skill = registry.getSkillById(skillId);
@@ -13,11 +14,12 @@ export function resolveSkillProfile(actor, skillId, registry) {
 
   const actorSkill = getActorSkillInstance(actor, skillId);
   const totalRanks = Number(actorSkill?.ranks ?? 0);
+  // Rank bonus comes from the canonical RMSS table (Table 15.2.2) — the
+  // same curve the character sheet uses. Raw rank count is NOT a bonus.
+  const rankBonus = rmssRankBonus(totalRanks);
 
   const professionId = actor?.system?.professionId;
   const professionCosts = registry.getProfessionCosts(professionId);
-  const designation = metadata?.designation ?? "occupational";
-  const designationModifier = getDesignationModifier(designation);
 
   const professionBonus = computeProfessionBonus(skill, professionCosts);
   const talentBonus = computeTalentBonus(actor, skillId);
@@ -26,9 +28,8 @@ export function resolveSkillProfile(actor, skillId, registry) {
 
   const totalBonus = sum([
     statBonus,
-    totalRanks,
+    rankBonus,
     professionBonus,
-    designationModifier,
     talentBonus,
     -flawPenalty,
     effectBonus
@@ -37,9 +38,9 @@ export function resolveSkillProfile(actor, skillId, registry) {
   return {
     skill,
     totalRanks,
+    rankBonus,
     statBonus,
     professionBonus,
-    designationModifier,
     talentBonus,
     flawPenalty,
     effectBonus,
