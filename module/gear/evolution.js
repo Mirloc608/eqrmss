@@ -441,7 +441,13 @@ export function validateCombine(lines, vessel, fodder, actor) {
         let familyOk = true;
         const famMap = eatSet ? lines?.sets?.[eatSet]?.catalystMaterials : null;
         if (famMap) {
-            const allowed = vessel.category ? (famMap[vessel.category] ?? []) : [];
+            // The family is the vessel's material class, unless the
+            // line authors its own catalystCategory (beastlord is
+            // leather only, though its starter kit is worn chain —
+            // user ruling, 2026-10-27).
+            const lineCat = st.line ? lines?.armorLines?.[st.line]?.catalystCategory : null;
+            const gateCat = lineCat ?? vessel.category;
+            const allowed = gateCat ? (famMap[gateCat] ?? []) : [];
             familyOk = allowed.includes(fodder.material);
         }
         if (nf && eatSet && fodder.setKey === eatSet && fodder.location === vessel.location && familyOk) {
