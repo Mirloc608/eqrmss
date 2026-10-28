@@ -16,7 +16,7 @@ const BaseApplication = HandlebarsApplicationMixin(ApplicationV2);
 import {
     loadEvolutionLines, cacheEvolutionLines, socketLayout, formCap,
     trivialForTier, npcFeeGp, armorLocationOf, armorCategoryOf,
-    classesOf, setOf, weaponFormOf, evolutionState, freeSlots,
+    classesOf, setOf, ruinedTwinBase, weaponFormOf, evolutionState, freeSlots,
     augmentsByTier, validateCombine, nextForm, transitionEatSet,
     ripen, transition, socketAugment, skillForVessel, TIER_NAMES
 } from "../gear/evolution.js";
@@ -111,10 +111,19 @@ export class EvolutionDialog extends BaseApplication {
     }
 
     _fodderDescriptor(lines, item, vesselState) {
-        const setKey = setOf(lines, item);
+        // A ruined twin resolves to its BASE piece's set (the twin
+        // itself is not registered); era / crafted / catalyst then
+        // follow the base set, and the twin is flagged classless.
+        const twin = ruinedTwinBase(lines, item);
+        const setKey = twin?.setKey ?? setOf(lines, item);
         const set = setKey ? lines.sets[setKey] : null;
         let location = armorLocationOf(item);
-        if (set?.catalyst) location = this._catalystLocation(lines, item, vesselState);
+        // Catalysts without their own slot (the legacy Decayed
+        // items) resolve their slot by trailing noun instead;
+        // catalog catalysts (the Decaying family) carry real slots.
+        if (set?.catalyst && item.type !== "armor") {
+            location = this._catalystLocation(lines, item, vesselState) ?? location;
+        }
         return {
             item,
             setKey,
@@ -125,7 +134,9 @@ export class EvolutionDialog extends BaseApplication {
             category: armorCategoryOf(item, this._materialsById()),
             templateId: item?.system?.weaponTemplate ?? null,
             weaponForm: weaponFormOf(lines, item),
-            classes: classesOf(item)
+            classes: classesOf(item),
+            material: item?.system?.material ?? item?.system?.armorMaterial ?? null,
+            ruined: !!twin
         };
     }
 
@@ -306,16 +317,31 @@ export class EvolutionDialog extends BaseApplication {
         if (state.kind === "weapon" || !eatSet || eatSet === verdict.targetSet) {
             return { name: fodderItem.name, img: fodderItem.img, system: fodderItem.system };
         }
-        // Catalyst transition (SK: Decayed -> Darkforge): the target
-        // piece comes from the catalog registry, normalized like a
-        // catalog add.
+        // Catalyst transition (Decaying piece -> the line's next
+        // form): the target piece comes from the catalog registry,
+        // normalized like a catalog add. Resolve it by the
+        // catalyst's SLOT first (Decaying pieces carry real slots);
+        // the trailing-noun match remains as a fallback for
+        // slotless legacy catalysts.
         const nf = nextForm(lines, state, this._ctx());
         const targetSet = lines.sets[nf.set];
-        const noun = String(fodderItem.name ?? "").split(/\s+/).pop();
-        const pieceName = (targetSet?.pieces ?? []).find(p => p.endsWith(` ${noun}`));
-        if (!pieceName) throw new Error(`No ${nf.name} piece matches ${fodderItem.name}.`);
         const byId = game.eqrmss?.items?.byId ?? {};
-        const entry = Object.values(byId).find(e => e?.name === pieceName);
+        const entries = Object.values(byId);
+        const fodderLoc = this._fodderDescriptor(lines, fodderItem, state).location;
+        let pieceName = null;
+        if (fodderLoc) {
+            pieceName = (targetSet?.pieces ?? []).find(p => {
+                const e = entries.find(x => x?.name === p);
+                const loc = e?.system?.armorLocation ?? e?.system?.slot ?? null;
+                return loc === fodderLoc;
+            }) ?? null;
+        }
+        if (!pieceName) {
+            const noun = String(fodderItem.name ?? "").split(/\s+/).pop();
+            pieceName = (targetSet?.pieces ?? []).find(p => p.endsWith(` ${noun}`) || p === noun) ?? null;
+        }
+        if (!pieceName) throw new Error(`No ${nf.name} piece matches ${fodderItem.name}.`);
+        const entry = entries.find(e => e?.name === pieceName);
         if (!entry) throw new Error(`Catalog entry missing: ${pieceName}`);
         const normalized = await normalizeCatalogData(foundry.utils.deepClone(entry));
         return { name: normalized.name ?? entry.name, img: normalized.img ?? entry.img, system: normalized.system ?? entry.system };

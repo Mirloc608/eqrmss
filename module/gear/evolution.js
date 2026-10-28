@@ -113,6 +113,69 @@ export function classesOf(item) {
     return String(c).split(/[,\s]+/).filter(Boolean);
 }
 
+// ------------------------------------------------------------
+// Ruined twins (Stage 2, Tier 1 engine)
+//
+// Every dropped armor piece has a ruined twin in the world: same
+// stats and effects, 0 AC, usable by NO class. The twin's name
+// prefix encodes its material class (user ruling, 2026-10-27):
+//   Torn = leather, Ripped = cloth, Mangled = chain, Broken = plate
+// Twins feed evolution like their base piece (same set, era and
+// material class for the fodder rules) except the class lock does
+// not apply — a twin is classless by design.
+// ------------------------------------------------------------
+
+export const RUINED_PREFIX_BY_CATEGORY = {
+    plate: "Broken", chain: "Mangled", leather: "Torn", cloth: "Ripped"
+};
+export const RUINED_CATEGORY_BY_PREFIX = {
+    Broken: "plate", Mangled: "chain", Torn: "leather", Ripped: "cloth"
+};
+
+/**
+ * Resolve an item as a ruined twin: returns
+ * { baseName, setKey, prefix, category } or null. The
+ * system.ruinedOf stamp wins; otherwise the name prefix must
+ * match and the base name must be a registered set piece.
+ */
+export function ruinedTwinBase(lines, item) {
+    if (!item?.name) return null;
+    let baseName = item?.system?.ruinedOf ?? null;
+    let prefix = null;
+    if (!baseName) {
+        const m = /^(Broken|Mangled|Torn|Ripped)\s+(.+)$/.exec(item.name);
+        if (!m) return null;
+        prefix = m[1];
+        baseName = m[2];
+    }
+    const setKey = setIndex(lines)[baseName] ?? null;
+    if (!setKey) return null;
+    return {
+        baseName,
+        setKey,
+        prefix,
+        category: prefix ? RUINED_CATEGORY_BY_PREFIX[prefix] : null
+    };
+}
+
+/**
+ * Derive the ruined twin of a dropped armor piece (catalog-shaped
+ * data in, catalog-shaped data out): stats and effects copied,
+ * defense zeroed, classes removed, stamped with its base name.
+ * Returns null when the piece's material class has no prefix.
+ */
+export function deriveRuinedTwin(item, category) {
+    const prefix = RUINED_PREFIX_BY_CATEGORY[category];
+    if (!prefix || !item?.name) return null;
+    const system = { ...(item.system ?? {}) };
+    delete system.classes;
+    if ("defense" in system) system.defense = 0;
+    if ("at" in system) system.at = 0;
+    if ("dbBonus" in system) system.dbBonus = 0;
+    system.ruinedOf = item.name;
+    return { name: `${prefix} ${item.name}`, img: item.img, type: item.type ?? "armor", system };
+}
+
 /** Name -> set key index for a lines document. */
 export function setIndex(lines) {
     const idx = {};
@@ -352,7 +415,8 @@ export function transitionEatSet(lines, state, ctx = {}) {
  * pure and testable:
  *   vessel: { item, state, location, category, templateId, era }
  *   fodder: { item, setKey, era, crafted, catalyst, location,
- *             category, templateId, weaponForm, classes[] }
+ *             category, templateId, weaponForm, classes[],
+ *             material, ruined }
  *   actor:  { classKey, raceKey }
  */
 export function validateCombine(lines, vessel, fodder, actor) {
@@ -369,7 +433,18 @@ export function validateCombine(lines, vessel, fodder, actor) {
         // direct target-set piece must win over the ripening rules.
         const eatSet = transitionEatSet(lines, st, actor);
         const nf = nextForm(lines, st, actor);
-        if (nf && eatSet && fodder.setKey === eatSet && fodder.location === vessel.location) {
+        // Material-family gate: a catalyst set may author
+        // catalystMaterials (per armor category) — the catalyst
+        // must then be of the vessel's own material family (the
+        // Decaying family feeding Tier 1: plate vessels eat Iron /
+        // Bronze pieces, chain eats Black Iron / Chain Mail, ...).
+        let familyOk = true;
+        const famMap = eatSet ? lines?.sets?.[eatSet]?.catalystMaterials : null;
+        if (famMap) {
+            const allowed = vessel.category ? (famMap[vessel.category] ?? []) : [];
+            familyOk = allowed.includes(fodder.material);
+        }
+        if (nf && eatSet && fodder.setKey === eatSet && fodder.location === vessel.location && familyOk) {
             return { ok: true, kind: "transition", reasons: [], targetSet: nf.set, targetForm: nf.form };
         }
         if (fodder.item.type !== "armor") reasons.push("Armor can only eat armor.");
@@ -387,9 +462,14 @@ export function validateCombine(lines, vessel, fodder, actor) {
                 reasons.push("Wrong era — fodder must be from the vessel's era or the next.");
             }
         }
-        const abbrev = CLASS_ABBREV[actor.classKey];
-        if (fodder.classes && abbrev && !fodder.classes.includes(abbrev)) {
-            reasons.push("Class-locked — that piece is not usable by the vessel's class.");
+        // Ruined twins are classless by design: the class lock
+        // never applies to them (their set / era / material class
+        // still gate the combine via the checks above).
+        if (!fodder.ruined) {
+            const abbrev = CLASS_ABBREV[actor.classKey];
+            if (fodder.classes && abbrev && !fodder.classes.includes(abbrev)) {
+                reasons.push("Class-locked — that piece is not usable by the vessel's class.");
+            }
         }
         if (st.combines >= formCap(st.form)) {
             reasons.push(`Form ${st.form} is fully ripened (${st.combines}/${formCap(st.form)}) — transition to grow further.`);
