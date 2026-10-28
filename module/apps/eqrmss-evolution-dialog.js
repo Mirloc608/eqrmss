@@ -190,7 +190,14 @@ export class EvolutionDialog extends BaseApplication {
         });
         context.bakedDb = state.bakedDb;
         context.bakedOb = state.bakedOb;
-        context.hasBaked = (state.bakedDb || state.bakedOb);
+        context.bakedHp = state.bakedHp;
+        context.bakedMana = state.bakedMana;
+        const bakedParts = [];
+        for (const [k, v] of Object.entries(state.bakedStats ?? {})) if (v) bakedParts.push(`+${v} ${k.toUpperCase()}`);
+        const resistVals = Object.values(state.bakedResists ?? {}).filter(v => v);
+        if (resistVals.length) bakedParts.push(`Resists +${Math.max(...resistVals)}`);
+        context.bakedExtra = bakedParts.join(", ");
+        context.hasBaked = (state.bakedDb || state.bakedOb || state.bakedHp || state.bakedMana || bakedParts.length);
         const nf = nextForm(lines, state, ctx);
         context.nextFormLabel = nf ? `Form ${nf.form}${nf.name ? ` — ${nf.name}` : ""}` : null;
 
@@ -314,9 +321,17 @@ export class EvolutionDialog extends BaseApplication {
             const aug = item?.system?.augment;
             if (!aug) continue;
             const fits = aug.appliesTo === state.kind && (free[aug.tier] ?? 0) > 0;
+            const parts = [];
+            if (aug.db) parts.push(`+${aug.db} DB`);
+            if (aug.ob) parts.push(`+${aug.ob} OB`);
+            if (aug.hp) parts.push(`+${aug.hp} HP`);
+            if (aug.mana) parts.push(`+${aug.mana} Mana`);
+            for (const [k, v] of Object.entries(aug.stats ?? {})) if (v) parts.push(`+${v} ${k.toUpperCase()}`);
+            const rv = Object.values(aug.resistances ?? {}).filter(v => v);
+            if (rv.length) parts.push(`Resists +${Math.max(...rv)}`);
             context.augments.push({
                 id: item.id, name: item.name, tier: aug.tier,
-                bonus: aug.db ? `+${aug.db} DB` : aug.ob ? `+${aug.ob} OB` : "",
+                bonus: parts.join(", "),
                 fits
             });
         }
@@ -594,6 +609,10 @@ export class EvolutionDialog extends BaseApplication {
             db: Number(aug.db) || 0, ob: Number(aug.ob) || 0,
             name: augmentItem.name
         };
+        if (aug.hp) record.hp = Number(aug.hp) || 0;
+        if (aug.mana) record.mana = Number(aug.mana) || 0;
+        if (aug.stats) record.stats = { ...aug.stats };
+        if (aug.resistances) record.resistances = { ...aug.resistances };
         await dialog.vessel.update({ "system.evolution": socketAugment(state, record) });
         await dialog._consumeItem(augmentItem);
         await ChatMessage.create({

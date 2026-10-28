@@ -18,8 +18,14 @@
 //
 // Line data: module/data/gear/evolution-lines.json (authored).
 // State lives on the item document at system.evolution:
-//   { line, form, set, combines, bakedDb, bakedOb,
-//     augments: [{tier, appliesTo, db, ob, name}] }
+//   { line, form, set, combines, bakedDb, bakedOb, bakedHp,
+//     bakedMana, bakedStats, bakedResists,
+//     augments: [{tier, appliesTo, db, ob, hp, mana, stats,
+//                 resistances, name}] }
+// Augment payloads beyond db/ob arrived with the S2 augment wave
+// (user ruling 2026-10-28): hp/mana/stat/resist augments socket and
+// bake exactly like db/ob, and EquipmentStateEngine adds a worn
+// piece's evolution bonuses to its profile.
 // ============================================================
 
 export const TIER_NAMES = ["minor", "moderate", "major", "epic", "artifact"];
@@ -246,6 +252,10 @@ export function evolutionState(lines, item, ctx = {}) {
             combines: Number(stamp.combines) || 0,
             bakedDb: Number(stamp.bakedDb) || 0,
             bakedOb: Number(stamp.bakedOb) || 0,
+            bakedHp: Number(stamp.bakedHp) || 0,
+            bakedMana: Number(stamp.bakedMana) || 0,
+            bakedStats: (stamp.bakedStats && typeof stamp.bakedStats === "object") ? stamp.bakedStats : {},
+            bakedResists: (stamp.bakedResists && typeof stamp.bakedResists === "object") ? stamp.bakedResists : {},
             augments: Array.isArray(stamp.augments) ? stamp.augments : []
         };
     }
@@ -254,7 +264,7 @@ export function evolutionState(lines, item, ctx = {}) {
         const form = weaponFormOf(lines, item);
         if (!form) return null;
         return { kind, line: ctx.classKey ?? null, form, set: null,
-                 combines: 0, bakedDb: 0, bakedOb: 0, augments: [] };
+                 combines: 0, bakedDb: 0, bakedOb: 0, bakedHp: 0, bakedMana: 0, bakedStats: {}, bakedResists: {}, augments: [] };
     }
 
     // Armor derivation from the class line.
@@ -266,7 +276,7 @@ export function evolutionState(lines, item, ctx = {}) {
         const candidates = [f.set, ...Object.values(f.variants ?? {})];
         if (candidates.includes(setKey)) {
             return { kind, line: ctx.classKey, form: f.form, set: setKey,
-                     combines: 0, bakedDb: 0, bakedOb: 0, augments: [] };
+                     combines: 0, bakedDb: 0, bakedOb: 0, bakedHp: 0, bakedMana: 0, bakedStats: {}, bakedResists: {}, augments: [] };
         }
     }
     // A starter piece for this class (kit-stamped pieces return above;
@@ -274,7 +284,7 @@ export function evolutionState(lines, item, ctx = {}) {
     // when its set is the line's form-1 basis).
     if (setKey === "starter" || setKey === "calcified-bone") {
         return { kind, line: ctx.classKey, form: 1, set: setKey,
-                 combines: 0, bakedDb: 0, bakedOb: 0, augments: [] };
+                 combines: 0, bakedDb: 0, bakedOb: 0, bakedHp: 0, bakedMana: 0, bakedStats: {}, bakedResists: {}, augments: [] };
     }
     // Unstamped kit pieces whose names were race-renamed at grant
     // ("Dreadscale Helm") match the line's form-1 name list; the
@@ -283,13 +293,13 @@ export function evolutionState(lines, item, ctx = {}) {
     const f1 = (line.forms ?? []).find(f => f.form === 1);
     if (f1 && (line.form1Names ?? []).includes(item?.name)) {
         return { kind, line: ctx.classKey, form: 1, set: f1.set ?? "starter",
-                 combines: 0, bakedDb: 0, bakedOb: 0, augments: [] };
+                 combines: 0, bakedDb: 0, bakedOb: 0, bakedHp: 0, bakedMana: 0, bakedStats: {}, bakedResists: {}, augments: [] };
     }
     const matId = item?.system?.armorMaterial ?? item?.system?.material ?? null;
     if (f1 && matId && (line.form1Materials ?? []).includes(matId)
         && item?.system?.armorCondition === "worn") {
         return { kind, line: ctx.classKey, form: 1, set: f1.set ?? "starter",
-                 combines: 0, bakedDb: 0, bakedOb: 0, augments: [] };
+                 combines: 0, bakedDb: 0, bakedOb: 0, bakedHp: 0, bakedMana: 0, bakedStats: {}, bakedResists: {}, augments: [] };
     }
     return null;
 }
@@ -334,6 +344,29 @@ export function evolutionOb(item) {
     return sum;
 }
 
+/**
+ * The non-DB/OB bonuses a piece's evolution contributes (baked +
+ * socketed): {hp, mana, stats, resistances}. EquipmentStateEngine
+ * adds these to the host piece's own profile, so hp/mana follow the
+ * best-piece rule through the host and stats/resists stack.
+ */
+export function evolutionBonuses(item) {
+    const out = { hp: 0, mana: 0, stats: {}, resistances: {} };
+    const st = item?.system?.evolution;
+    if (!st) return out;
+    out.hp = Number(st.bakedHp) || 0;
+    out.mana = Number(st.bakedMana) || 0;
+    for (const [k, v] of Object.entries(st.bakedStats ?? {})) out.stats[k] = Number(v) || 0;
+    for (const [k, v] of Object.entries(st.bakedResists ?? {})) out.resistances[k] = Number(v) || 0;
+    for (const a of st.augments ?? []) {
+        out.hp += Number(a?.hp) || 0;
+        out.mana += Number(a?.mana) || 0;
+        for (const [k, v] of Object.entries(a?.stats ?? {})) out.stats[k] = (out.stats[k] || 0) + (Number(v) || 0);
+        for (const [k, v] of Object.entries(a?.resistances ?? {})) out.resistances[k] = (out.resistances[k] || 0) + (Number(v) || 0);
+    }
+    return out;
+}
+
 // ------------------------------------------------------------
 // Combine outcomes (pure state transforms)
 // ------------------------------------------------------------
@@ -343,12 +376,20 @@ export function evolutionOb(item) {
  * totals. Returns a new state.
  */
 export function bakeTiers(state, tiers) {
-    const next = { ...state, augments: [...(state.augments ?? [])] };
+    const next = { ...state, augments: [...(state.augments ?? [])],
+                   bakedStats: { ...(state.bakedStats ?? {}) },
+                   bakedResists: { ...(state.bakedResists ?? {}) } };
     const keep = [];
     for (const a of next.augments) {
         if (tiers.includes(a.tier)) {
             next.bakedDb = (Number(next.bakedDb) || 0) + (Number(a.db) || 0);
             next.bakedOb = (Number(next.bakedOb) || 0) + (Number(a.ob) || 0);
+            next.bakedHp = (Number(next.bakedHp) || 0) + (Number(a.hp) || 0);
+            next.bakedMana = (Number(next.bakedMana) || 0) + (Number(a.mana) || 0);
+            for (const [k, v] of Object.entries(a.stats ?? {}))
+                next.bakedStats[k] = (Number(next.bakedStats[k]) || 0) + (Number(v) || 0);
+            for (const [k, v] of Object.entries(a.resistances ?? {}))
+                next.bakedResists[k] = (Number(next.bakedResists[k]) || 0) + (Number(v) || 0);
         } else {
             keep.push(a);
         }

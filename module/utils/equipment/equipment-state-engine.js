@@ -20,6 +20,13 @@ from "./equipment-manager.js";
 
 import {
 
+    evolutionBonuses
+
+}
+from "../../gear/evolution.js";
+
+import {
+
     EquipmentEffects
 
 }
@@ -163,6 +170,14 @@ export class EquipmentStateEngine
             ??
             {};
 
+        // Evolution bonuses (S2 augments, 2026-10-28): a worn
+        // piece's socketed + baked augment payloads ride its own
+        // profile — stats/resistances stack with the piece's, and
+        // hp/mana join the piece's value before the best-piece
+        // rule below is applied.
+        const evo =
+            evolutionBonuses(item);
+
         // -----------------------------------------------
         // Stats
         // -----------------------------------------------
@@ -172,6 +187,14 @@ export class EquipmentStateEngine
             state.stats,
 
             data.stats
+
+        );
+
+        this.addObject(
+
+            state.stats,
+
+            evo.stats
 
         );
 
@@ -192,6 +215,8 @@ export class EquipmentStateEngine
                     ??
                     0
                 )
+                +
+                evo.hp
             );
 
         state.mana =
@@ -203,6 +228,8 @@ export class EquipmentStateEngine
                     ??
                     0
                 )
+                +
+                evo.mana
             );
 
         state.stamina =
@@ -288,6 +315,14 @@ export class EquipmentStateEngine
             state.resistances,
 
             data.resistances
+
+        );
+
+        this.addObject(
+
+            state.resistances,
+
+            evo.resistances
 
         );
 

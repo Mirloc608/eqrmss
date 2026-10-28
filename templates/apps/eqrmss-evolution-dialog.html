@@ -10,7 +10,7 @@
                 {{#each slots}}<span class="evo-slot {{#if filled}}filled{{else}}empty{{/if}}" title="{{label}}">{{tier}}{{#if filled}}: {{label}}{{/if}}</span>{{/each}}
                 {{else}}<span class="evo-slot none">No augment slots yet</span>{{/if}}
             </p>
-            {{#if hasBaked}}<p class="evo-baked">Baked in:{{#if bakedDb}} +{{bakedDb}} DB{{/if}}{{#if bakedOb}} +{{bakedOb}} OB{{/if}}</p>{{/if}}
+            {{#if hasBaked}}<p class="evo-baked">Baked in:{{#if bakedDb}} +{{bakedDb}} DB{{/if}}{{#if bakedOb}} +{{bakedOb}} OB{{/if}}{{#if bakedHp}} +{{bakedHp}} HP{{/if}}{{#if bakedMana}} +{{bakedMana}} Mana{{/if}}{{#if bakedExtra}} {{bakedExtra}}{{/if}}</p>{{/if}}
             {{else}}
             <p class="evo-not-evolvable"><i class="fas fa-lock"></i> {{reason}}</p>
             {{/if}}
