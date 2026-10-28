@@ -512,6 +512,14 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
             this._onSkillRoll(itemId);
         }));
 
+        // Undeveloped skills roll untrained (2026-10-28): no item exists
+        // yet, so the roll is built from the catalog entry at the
+        // unskilled rank bonus.
+        html.querySelectorAll(".skill-roll-catalog").forEach(el => el.addEventListener("click", ev => {
+            const skillId = ev.currentTarget.dataset.skillId;
+            this._onCatalogSkillRoll(skillId);
+        }));
+
         // ------------------------------------------------------------
         // Skills Tab: Tradeskill Combine (2026-10-14)
         // ------------------------------------------------------------
@@ -1399,6 +1407,38 @@ export default class EQRMSSPlayerSheet extends EQRMSSActorSheet {
                 <h2>${item.name}</h2>
                 <p><strong>Roll:</strong> ${roll.total} + ${totalBonus} = ${total}</p>
                 <p><strong>Bonus:</strong> ${rankBonus >= 0 ? "+" : ""}${rankBonus} rank bonus (${ranks} rank${ranks === 1 ? "" : "s"})</p>
+                <p><strong>Target:</strong> ${target}</p>
+                <p><strong>Success:</strong> ${success ? "Yes" : "No"}</p>
+            `
+        });
+    }
+
+    // ------------------------------------------------------------
+    // Untrained Skill Roll (catalog skill, not yet developed)
+    // ------------------------------------------------------------
+    async _onCatalogSkillRoll(skillId) {
+        const entry = globalThis.CONFIG?.EQRMSS?.skills?.[skillId];
+        if (!entry) {
+            ui.notifications.error(`Unknown skill: ${skillId}`);
+            return;
+        }
+        // Untrained: 0 ranks at the Table 15.2.2 unskilled bonus; the
+        // stat/prof/special components of a not-yet-developed skill are
+        // the same zeros a fresh skill item is stamped with.
+        const rankBonus = rmssRankBonus(0);
+        const totalBonus = rankBonus;
+
+        const roll = await new Roll("1d100").evaluate();
+        const total = roll.total + totalBonus;
+        const target = 75;
+        const success = total >= target;
+
+        ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: `
+                <h2>${entry.name}</h2>
+                <p><strong>Roll:</strong> ${roll.total} + ${totalBonus} = ${total}</p>
+                <p><strong>Bonus:</strong> ${rankBonus >= 0 ? "+" : ""}${rankBonus} rank bonus (0 ranks — untrained)</p>
                 <p><strong>Target:</strong> ${target}</p>
                 <p><strong>Success:</strong> ${success ? "Yes" : "No"}</p>
             `
