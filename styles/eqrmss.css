@@ -2327,6 +2327,12 @@ button.rank-badge:hover {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  /* The window is a fixed 640px; with the full augment catalog the
+     content outgrows it (user report 2026-10-28). The section
+     scrolls inside the window instead of clipping. */
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
 }
 .evolution-dialog .evo-vessel-head {
   display: flex;
@@ -2439,6 +2445,9 @@ button.rank-badge:hover {
   margin: 4px 0;
 }
 .evolution-dialog .evo-augment-list {
+  max-height: 218px;
+  overflow-y: auto;
+  padding-right: 4px;
   list-style: none;
   margin: 6px 0;
   padding: 0;

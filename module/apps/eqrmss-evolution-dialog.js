@@ -62,7 +62,8 @@ export class EvolutionDialog extends BaseApplication {
 
     static PARTS = {
         main: {
-            template: "systems/eqrmss/templates/apps/eqrmss-evolution-dialog.html"
+            template: "systems/eqrmss/templates/apps/eqrmss-evolution-dialog.html",
+            scrollable: [".evo-two-panel", ".evo-augment-list"]
         }
     };
 
@@ -314,13 +315,16 @@ export class EvolutionDialog extends BaseApplication {
             && (this._route === "npc" ? context.canAfford
                 : context.skillAllowed && context.techniqueKnown);
 
-        // Augments in inventory.
+        // Augments in inventory. Picker (2026-10-28): only augments
+        // for this vessel's kind are listed (the others can never
+        // fit here), sorted fits-first, then by tier, then name.
         const free = freeSlots(state);
         context.augments = [];
         for (const item of this.actor.items) {
             const aug = item?.system?.augment;
             if (!aug) continue;
-            const fits = aug.appliesTo === state.kind && (free[aug.tier] ?? 0) > 0;
+            if (aug.appliesTo !== state.kind) continue;
+            const fits = (free[aug.tier] ?? 0) > 0;
             const parts = [];
             if (aug.db) parts.push(`+${aug.db} DB`);
             if (aug.ob) parts.push(`+${aug.ob} OB`);
@@ -335,6 +339,10 @@ export class EvolutionDialog extends BaseApplication {
                 fits
             });
         }
+        context.augments.sort((a, b) =>
+            (b.fits - a.fits)
+            || (TIER_NAMES.indexOf(a.tier) - TIER_NAMES.indexOf(b.tier))
+            || a.name.localeCompare(b.name));
         context.freeSlotSummary = TIER_NAMES.filter(t => (free[t] ?? 0) > 0)
             .map(t => `${free[t]} ${t}`).join(", ");
         return context;
