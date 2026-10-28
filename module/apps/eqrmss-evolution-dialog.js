@@ -451,9 +451,26 @@ export class EvolutionDialog extends BaseApplication {
             consumedLabel = fodderItem.name;
         }
         if (!verdict.ok) return ui.notifications.warn(verdict.reasons[0] ?? "That combine is not legal.");
+        // Critical outcomes (2026-10-28, user rulings): a critical failure
+        // burns double fuel; a critical success burns 1 catalyst for slots
+        // costing multiples and nothing for slots costing 1 (for a weapon
+        // feed, the single fodder piece survives a critical success; a
+        // critical failure still consumes it — a unique piece cannot be
+        // doubled).
+        let fuelOutcome = "normal";
         const consumeFuel = async () => {
-            if (state.kind === "armor") await dialog._consumeCatalyst(verdict.requirement.itemName, verdict.cost);
-            else await dialog._consumeItem(fodderItem);
+            if (state.kind === "armor") {
+                const cost = verdict.cost ?? 0;
+                const qty = fuelOutcome === "critFail" ? cost * 2
+                    : fuelOutcome === "critSuccess" ? (cost > 1 ? 1 : 0)
+                    : cost;
+                if (qty > 0) await dialog._consumeCatalyst(verdict.requirement.itemName, qty);
+                consumedLabel = `${qty} × ${verdict.requirement.itemName}`;
+            } else if (fuelOutcome === "critSuccess") {
+                consumedLabel = `nothing (the ${fodderItem.name} survives)`;
+            } else {
+                await dialog._consumeItem(fodderItem);
+            }
         };
 
         const tier = state.form;
@@ -488,7 +505,9 @@ export class EvolutionDialog extends BaseApplication {
             const isCritFail = natural >= CRIT_FAIL_RANGE[0] && natural <= CRIT_FAIL_RANGE[1];
             const isCritSuccess = natural >= CRIT_SUCCESS_RANGE[0] && natural <= CRIT_SUCCESS_RANGE[1];
             success = (check.success || isCritSuccess) && !isCritFail;
-            rollNote = `${skillId.replace("skill-", "")} check: rolled ${natural} (total ${check.total}) vs trivial ${trivial}.`;
+            fuelOutcome = isCritFail ? "critFail" : isCritSuccess ? "critSuccess" : "normal";
+            rollNote = `${skillId.replace("skill-", "")} check: rolled ${natural} (total ${check.total}) vs trivial ${trivial}.`
+                + (isCritFail ? " Critical failure!" : isCritSuccess ? " Critical success!" : "");
         }
 
         if (!success) {

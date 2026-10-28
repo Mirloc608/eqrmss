@@ -7,7 +7,7 @@
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 const BaseApplication = HandlebarsApplicationMixin(ApplicationV2);
 
-import { attemptCombine, getRecipesForSkill, canUseTradeskill } from "../tradeskills/tradeskill-engine.js";
+import { attemptCombine, getRecipesForSkill, canUseTradeskill, effectiveDifficulty } from "../tradeskills/tradeskill-engine.js";
 import { resolveSkillProfile } from "../utils/skills/skill-profile-resolver.js";
 
 export class TradeskillCombineDialog extends BaseApplication {
@@ -598,10 +598,10 @@ export class TradeskillCombineDialog extends BaseApplication {
             .map(r => {
             const selectedMat = this._getSelectedMaterial(r.id, r);
             const dynDiff = this._getDynamicDifficulty(r, r.id);
-            const rating = this._getDifficultyRating(dynDiff);
+            const rating = this._getDifficultyRating(effectiveDifficulty({ ...r, difficulty: dynDiff }));
             return {
                 ...r,
-                displayDifficulty: dynDiff,
+                displayDifficulty: effectiveDifficulty({ ...r, difficulty: dynDiff }),
                 diffRating: rating.name,
                 diffClass: rating.cls,
                 selected: r.id === this.selectedRecipeId,
@@ -2190,8 +2190,12 @@ export class TradeskillCombineDialog extends BaseApplication {
             batchQty = Math.max(1, Math.min(99, Number(qtyInput.value) || 1));
         }
 
-        const shownDifficulty = dialog._getDynamicDifficulty(recipe, recipeId);
-        const recipeWithDiff = { ...recipe, difficulty: shownDifficulty };
+        // attemptCombine rolls against effectiveDifficulty(recipe); the
+        // card shows that same scaled target, while the raw (dynamic) EQ
+        // trivial is what gets passed in.
+        const rawDifficulty = dialog._getDynamicDifficulty(recipe, recipeId);
+        const shownDifficulty = effectiveDifficulty({ ...recipe, difficulty: rawDifficulty });
+        const recipeWithDiff = { ...recipe, difficulty: rawDifficulty };
 
         let made = 0;
         let successes = 0;

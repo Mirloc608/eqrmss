@@ -8,19 +8,53 @@
  * - d100 RMSS-style skill check vs. recipe difficulty
  * - Softer failure: regular failure keeps materials; ONLY critical failure
  *   (natural 01-05) loses materials
+ * - Critical results (2026-10-28, user rulings): natural 01-05 = critical
+ *   failure (consume DOUBLE components, no product); natural 95-100 =
+ *   critical success (always succeeds; consumes 1 of any component that
+ *   requires multiples, and nothing for single-quantity components)
  */
 
 export const CRIT_FAIL_RANGE = [1, 5];
-export const CRIT_SUCCESS_RANGE = [96, 100];
+export const CRIT_SUCCESS_RANGE = [95, 100];
 
-// Quality bands (2026-10-14, user rulings):
-// 96-100: Pristine (crit success), 60-95: Normal, 30-59: Worn, 06-29: Tarnished, 01-05: Broken (crit fail)
+// Quality bands (2026-10-14, user rulings; crit band aligned 2026-10-28):
+// 95-100: Pristine (crit success), 60-94: Normal, 30-59: Worn, 06-29: Tarnished, 01-05: Broken (crit fail)
 export function qualityForRoll(natural) {
-    if (natural >= 96) return "pristine";
+    if (natural >= 95) return "pristine";
     if (natural >= 60) return "normal";
     if (natural >= 30) return "worn";
     if (natural >= 6) return "tarnished";
     return "broken";
+}
+
+// Difficulty scaling (2026-10-28, user ruling): catalog difficulties are
+// raw EQ trivials (median ~355, cap 510), which no RMSS skill bonus can
+// reach as a d100 target. Combines roll against a scaled target; the raw
+// EQ trivial stays in the recipe data. Reforge Technique recipes carry
+// the evolution ladder values and map ladder-to-ladder (the ladder in
+// evolution-lines.json moved from step 60 to step 40 the same day).
+export const DIFFICULTY_SCALE = 0.30;
+const TECHNIQUE_LADDER = { 25: 25, 85: 65, 145: 105, 205: 145, 265: 185 };
+export function effectiveDifficulty(recipe) {
+    const raw = Number(recipe?.difficulty) || 0;
+    if (String(recipe?.id ?? "").startsWith("technique-") && TECHNIQUE_LADDER[raw] != null) {
+        return TECHNIQUE_LADDER[raw];
+    }
+    return Math.max(5, Math.round(raw * DIFFICULTY_SCALE));
+}
+
+// Component quantities for a combine outcome (2026-10-28, user rulings):
+// critical failure consumes double; critical success consumes 1 of any
+// component requiring multiples and nothing for single-quantity ones.
+// Non-consumed components (containers, molds) pass through untouched.
+export function componentsForOutcome(components, outcome) {
+    return (components ?? []).map(c => {
+        if (c.consume === false || outcome === "normal") return c;
+        const qty = Number(c.qty ?? 1) || 0;
+        if (outcome === "critFail") return { ...c, qty: qty * 2 };
+        if (outcome === "critSuccess") return { ...c, qty: qty > 1 ? 1 : 0 };
+        return c;
+    }).filter(c => c.consume === false || (Number(c.qty) || 0) > 0);
 }
 
 /**
@@ -108,38 +142,44 @@ export async function attemptCombine(actor, recipe, hasComponents, consumeCompon
         for (const t of tools) toolBonus += Number(t.system?.skillBonus ?? 0);
     } catch (e) { /* inventory unavailable; no tool bonus */ }
 
-    // Roll d100 + skill bonus vs difficulty
+    // Roll d100 + skill bonus vs the scaled difficulty (raw EQ trivials
+    // in the data are not reachable d100 targets — see effectiveDifficulty)
     const check = await skillEngine.rollSkillCheck(
         actor,
         recipe.skill,
-        { target: recipe.difficulty, label: recipe.name, situationalModifiers: toolBonus }
+        { target: effectiveDifficulty(recipe), label: recipe.name, situationalModifiers: toolBonus }
     );
 
     const natural = check.roll.total;
     const isCritFail = natural >= CRIT_FAIL_RANGE[0] && natural <= CRIT_FAIL_RANGE[1];
     const isCritSuccess = natural >= CRIT_SUCCESS_RANGE[0] && natural <= CRIT_SUCCESS_RANGE[1];
+    // Critical success (natural 95-100) always succeeds, whatever the total
+    const succeeded = (check.success || isCritSuccess) && !isCritFail;
+    const outcome = isCritFail ? "critFail" : isCritSuccess ? "critSuccess" : "normal";
 
     // Component recipes (2026-10-15): shafts, fletchings, arrow/bolt heads
-    // - Crit success: 40, Normal success: 20, Regular failure: 10 (materials consumed), Crit fail: 0 (materials destroyed)
+    // - Crit success: 40, Normal success: 20, Regular failure: 10 (materials consumed), Crit fail: 0 (double materials consumed)
     if (recipe.componentYield) {
         if (isCritFail) {
-            // Critical failure: materials destroyed, no product
-            await consumeComponents(recipe.components);
+            // Critical failure (2026-10-28): double materials consumed, no product
+            await consumeComponents(componentsForOutcome(recipe.components, outcome));
             return {
                 success: false,
                 critFail: true,
+                critSuccess: false,
                 roll: check.roll,
                 total: check.total,
-                message: `Critical failure! The materials are destroyed.`
+                message: `Critical failure! Double materials consumed; nothing is produced.`
             };
         }
-        if (!check.success) {
+        if (!succeeded) {
             // Regular failure: materials consumed, salvaged 10
             await consumeComponents(recipe.components);
             await createProduct(recipe.product, "tarnished");
             return {
                 success: false,
                 critFail: false,
+                critSuccess: false,
                 roll: check.roll,
                 total: check.total,
                 message: `Failed to create ${recipe.name}. Salvaged 10.`
@@ -147,52 +187,60 @@ export async function attemptCombine(actor, recipe, hasComponents, consumeCompon
         }
         // Success: quality determines yield (pristine: 40, else 20)
         const quality = qualityForRoll(natural);
-        await consumeComponents(recipe.components);
+        await consumeComponents(componentsForOutcome(recipe.components, outcome));
         await createProduct(recipe.product, quality);
         return {
             success: true,
             critFail: false,
+            critSuccess: isCritSuccess,
             roll: check.roll,
             total: check.total,
-            message: `Successfully created ${recipe.name}!`
+            message: isCritSuccess
+                ? `Critical success! Created ${recipe.name} with barely any materials.`
+                : `Successfully created ${recipe.name}!`
         };
     }
 
     if (isCritFail) {
-        // Critical failure (2026-10-14): lose materials, but produce a Broken quality item
-        await consumeComponents(recipe.components);
-        await createProduct(recipe.product, "broken");
+        // Critical failure (2026-10-28): double materials consumed, no combine
+        await consumeComponents(componentsForOutcome(recipe.components, outcome));
         return {
             success: false,
             critFail: true,
+            critSuccess: false,
             roll: check.roll,
             total: check.total,
-            message: `Critical failure! The ${recipe.name} combine produces a broken result.`
+            message: `Critical failure! The ${recipe.name} combine fails. Double materials consumed; nothing produced.`
         };
     }
 
-    if (!check.success) {
+    if (!succeeded) {
         // Regular failure: keep materials
         return {
             success: false,
             critFail: false,
+            critSuccess: false,
             roll: check.roll,
             total: check.total,
             message: `Failed to create ${recipe.name}. Materials salvaged.`
         };
     }
 
-    // Success: consume components, create product with quality from natural roll
+    // Success: consume components (reduced on a critical success), create
+    // product with quality from natural roll
     const quality = qualityForRoll(natural);
-    await consumeComponents(recipe.components);
+    await consumeComponents(componentsForOutcome(recipe.components, outcome));
     await createProduct(recipe.product, quality);
 
     return {
         success: true,
         critFail: false,
+        critSuccess: isCritSuccess,
         roll: check.roll,
         total: check.total,
-        message: `Successfully created ${recipe.name}!`
+        message: isCritSuccess
+            ? `Critical success! Created ${recipe.name} with barely any materials.`
+            : `Successfully created ${recipe.name}!`
     };
 }
 
