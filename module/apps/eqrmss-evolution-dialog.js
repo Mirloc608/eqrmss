@@ -242,7 +242,7 @@ export class EvolutionDialog extends BaseApplication {
                 actions.push({
                     id: "transition",
                     label: `Transition${nf ? ` to ${nf.name}` : ""} — ${cost} × ${req?.itemName ?? "catalyst"}`,
-                    ok: verdict.ok, kind, reasons: verdict.reasons
+                    ok: verdict.ok, kind: "transition", reasons: verdict.reasons
                 });
             }
             if (!actions.some(a => a.id === this._actionId)) this._actionId = "ripening";
