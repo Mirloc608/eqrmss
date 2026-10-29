@@ -154,7 +154,7 @@
           ]
         }
       ],
-      "description": "This passive ability reflects brutal sparring in the ruined Akheva temples of Luclin, where every recruit learns to strike true. Each rank increases your melee Offensive Bonus.",
+      "description": "This ability raises your base Strength by 2 points for each ability level.",
       "aaNumber": 1,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -315,7 +315,7 @@
           ]
         }
       ],
-      "description": "This passive ability marks you as one who has run the Vah Shir endurance rites across the cratered plains of Luclin. Each rank increases your maximum hits.",
+      "description": "This ability raises your base Stamina by 2 points for each ability level.",
       "aaNumber": 2,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -476,7 +476,7 @@
           ]
         }
       ],
-      "description": "This passive ability is earned in the Shissar serpent pits, dodging strikes you cannot afford to take. Each rank increases your Defensive Bonus.",
+      "description": "This ability raises your base Agility by 2 points for each ability level.",
       "aaNumber": 3,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -637,7 +637,7 @@
           ]
         }
       ],
-      "description": "This passive ability comes from studying grimling trappers in the Netherbian Lair \u2014 hands that never miss their mark. Each rank increases your Offensive Bonus with missile and thrown weapons.",
+      "description": "This ability raises your base Dexterity by 2 points for each ability level.",
       "aaNumber": 4,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -798,7 +798,7 @@
           ]
         }
       ],
-      "description": "This passive ability follows the mental disciplines of Sanctus Seru's scholars, who hold a spell's shape through force of will. Each rank reduces your Extraordinary Spell Failure chance.",
+      "description": "This ability raises your base Intelligence by 2 points for each ability level.",
       "aaNumber": 5,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -959,7 +959,7 @@
           ]
         }
       ],
-      "description": "This passive ability is learned meditating on the shores of the Twilight Sea, where the Grey meets the water. Each rank improves your Resistance Rolls against charm, fear, and beguilement.",
+      "description": "This ability raises your base Wisdom by 2 points for each ability level.",
       "aaNumber": 6,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -1120,7 +1120,7 @@
           ]
         }
       ],
-      "description": "This passive ability is honed in the courts of Katta Castrum, where a word properly placed moves armies. Each rank improves your Resistance Rolls against mentalism and your bearing among NPCs.",
+      "description": "This ability raises your base Charisma by 2 points for each ability level.",
       "aaNumber": 7,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -1281,7 +1281,7 @@
           ]
         }
       ],
-      "description": "This passive ability is earned training in the scorched hollows near the Deep, where the rock itself burns. Each rank improves your Resistance Rolls against fire.",
+      "description": "This ability raises your base Save Vs Fire by 2 points for each ability level.",
       "aaNumber": 8,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -1442,7 +1442,7 @@
           ]
         }
       ],
-      "description": "This passive ability comes from enduring the killing cold of the geonid caverns, learning to keep blood moving when stone freezes. Each rank improves your Resistance Rolls against cold.",
+      "description": "This ability raises your base Save Vs Cold by 2 points for each ability level.",
       "aaNumber": 9,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -1603,7 +1603,7 @@
           ]
         }
       ],
-      "description": "This passive ability draws on the warding glyphs of Akhev'aru, turned against their makers. Each rank improves your Resistance Rolls against arcane magic.",
+      "description": "This ability raises your base Save Vs Magic by 2 points for each ability level.",
       "aaNumber": 10,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -1764,7 +1764,7 @@
           ]
         }
       ],
-      "description": "This passive ability is learned from the fungoids of the Undershore, brewing antivenoms from the very poisons that kill. Each rank improves your Resistance Rolls against poison.",
+      "description": "This ability raises your base Save Vs Poison by 2 points for each ability level.",
       "aaNumber": 11,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -1925,7 +1925,7 @@
           ]
         }
       ],
-      "description": "This passive ability is taught by the survivors of the Netherbian plagues, who learned which wards hold. Each rank improves your Resistance Rolls against disease.",
+      "description": "This ability raises your base Save Vs Disease by 2 points for each ability level.",
       "aaNumber": 12,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -1996,7 +1996,7 @@
           ]
         }
       ],
-      "description": "This passive ability is learned running messages through the Shadel-infested dark of Luclin, where the slow do not return. Each rank increases your Base Move Rate.",
+      "description": "This ability will slightly modify your base run speed. This modification does NOT stack with movement rate spell effects.",
       "aaNumber": 13,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -2049,7 +2049,7 @@
           ]
         }
       ],
-      "description": "This passive ability comes from long patrols in the Vah Shir wilds, learning to make a day's rations last three. Each rank slows your exhaustion and hunger accumulation.",
+      "description": "This ability decreases your food consumption by 10, 25 and 50 percent.",
       "aaNumber": 15,
       "sourceCategory": "SoL"
     }
@@ -2073,9 +2073,9 @@
         1,
         1,
         1,
-        1,
-        1,
-        1
+        2,
+        3,
+        5
       ],
       "prerequisites": [],
       "ranks": [
@@ -2108,7 +2108,7 @@
         },
         {
           "rank": 4,
-          "cost": 1,
+          "cost": 2,
           "description": "Breath-holding +4 rounds; underwater maneuver +8. (Rank 4 of 6)",
           "effects": [
             "Extend breath-holding by 4 rounds",
@@ -2117,7 +2117,7 @@
         },
         {
           "rank": 5,
-          "cost": 1,
+          "cost": 3,
           "description": "Breath-holding +5 rounds; underwater maneuver +10. (Rank 5 of 6)",
           "effects": [
             "Extend breath-holding by 5 rounds",
@@ -2126,7 +2126,7 @@
         },
         {
           "rank": 6,
-          "cost": 1,
+          "cost": 5,
           "description": "Breath-holding +6 rounds; underwater maneuver +12. (Rank 6 of 6)",
           "effects": [
             "Extend breath-holding by 6 rounds",
@@ -2134,7 +2134,7 @@
           ]
         }
       ],
-      "description": "This passive ability is taught by the kedge of the deep waters, who hunt far below the light. Each rank extends breath-holding and steadies maneuvers underwater.",
+      "description": "This ability increases the amount of air you can hold in your lungs 10, 25, 50, 75, and 100% percent. Rank 6 grants you the permanent ability to breathe underwater and in airless environment.",
       "aaNumber": 16,
       "sourceCategory": "SoL"
     }
@@ -3378,29 +3378,14 @@
       "expansion": "pop",
       "advanced": false,
       "levelRequired": 61,
-      "maxRanks": 20,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
         2,
         2,
         2,
         2,
-        2,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        2
       ],
       "prerequisites": [],
       "ranks": [
@@ -3443,131 +3428,721 @@
           "effects": [
             "Increase Base Stats Cap by 25"
           ]
-        },
-        {
-          "rank": 6,
-          "cost": 5,
-          "description": "Sharpened through practice: Base Stats Cap improves by 30.",
-          "effects": [
-            "Increase Base Stats Cap by 30"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 5,
-          "description": "Sharpened through practice: Base Stats Cap improves by 35.",
-          "effects": [
-            "Increase Base Stats Cap by 35"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 5,
-          "description": "+40 Base Stats Cap. Small gains, hard-won, that add up to mastery.",
-          "effects": [
-            "Increase Base Stats Cap by 40"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 5,
-          "description": "+45 Base Stats Cap. Small gains, hard-won, that add up to mastery.",
-          "effects": [
-            "Increase Base Stats Cap by 45"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 5,
-          "description": "+50 Base Stats Cap. Small gains, hard-won, that add up to mastery.",
-          "effects": [
-            "Increase Base Stats Cap by 50"
-          ]
-        },
-        {
-          "rank": 11,
-          "cost": 5,
-          "description": "Your command of Base Stats Cap grows \u2014 +55.",
-          "effects": [
-            "Increase Base Stats Cap by 55"
-          ]
-        },
-        {
-          "rank": 12,
-          "cost": 5,
-          "description": "Your command of Base Stats Cap grows \u2014 +60.",
-          "effects": [
-            "Increase Base Stats Cap by 60"
-          ]
-        },
-        {
-          "rank": 13,
-          "cost": 5,
-          "description": "Your command of Base Stats Cap grows \u2014 +65.",
-          "effects": [
-            "Increase Base Stats Cap by 65"
-          ]
-        },
-        {
-          "rank": 14,
-          "cost": 5,
-          "description": "Your command of Base Stats Cap grows \u2014 +70.",
-          "effects": [
-            "Increase Base Stats Cap by 70"
-          ]
-        },
-        {
-          "rank": 15,
-          "cost": 5,
-          "description": "Your command of Base Stats Cap grows \u2014 +75.",
-          "effects": [
-            "Increase Base Stats Cap by 75"
-          ]
-        },
-        {
-          "rank": 16,
-          "cost": 5,
-          "description": "Your command of Base Stats Cap grows \u2014 +80.",
-          "effects": [
-            "Increase Base Stats Cap by 80"
-          ]
-        },
-        {
-          "rank": 17,
-          "cost": 5,
-          "description": "Your command of Base Stats Cap grows \u2014 +85.",
-          "effects": [
-            "Increase Base Stats Cap by 85"
-          ]
-        },
-        {
-          "rank": 18,
-          "cost": 5,
-          "description": "Your command of Base Stats Cap grows \u2014 +90.",
-          "effects": [
-            "Increase Base Stats Cap by 90"
-          ]
-        },
-        {
-          "rank": 19,
-          "cost": 5,
-          "description": "Your command of Base Stats Cap grows \u2014 +95.",
-          "effects": [
-            "Increase Base Stats Cap by 95"
-          ]
-        },
-        {
-          "rank": 20,
-          "cost": 5,
-          "description": "+100 Base Stats Cap. Small gains, hard-won, that add up to mastery.",
-          "effects": [
-            "Increase Base Stats Cap by 100"
-          ]
         }
       ],
       "description": "Sharpened through practice: Base Stats Cap improves by 5.",
       "aaNumber": 142,
       "sourceCategory": "PoP"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-planar-force",
+    "name": "Planar Force",
+    "type": "aa",
+    "system": {
+      "slug": "planar-force",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "pop",
+      "advanced": false,
+      "levelRequired": 61,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 2,
+          "description": "Further mastery of Planar Force. (Rank 1 of 5)",
+          "effects": [
+            "Increase Strength Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 2,
+          "description": "Further mastery of Planar Force. (Rank 2 of 5)",
+          "effects": [
+            "Increase Strength Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 2,
+          "description": "Further mastery of Planar Force. (Rank 3 of 5)",
+          "effects": [
+            "Increase Strength Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 2,
+          "description": "Further mastery of Planar Force. (Rank 4 of 5)",
+          "effects": [
+            "Increase Strength Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 2,
+          "description": "Further mastery of Planar Force. (Rank 5 of 5)",
+          "effects": [
+            "Increase Strength Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Planar Force, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "PoP",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-planar-vigor",
+    "name": "Planar Vigor",
+    "type": "aa",
+    "system": {
+      "slug": "planar-vigor",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "pop",
+      "advanced": false,
+      "levelRequired": 61,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 2,
+          "description": "Further mastery of Planar Vigor. (Rank 1 of 5)",
+          "effects": [
+            "Increase Constitution Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 2,
+          "description": "Further mastery of Planar Vigor. (Rank 2 of 5)",
+          "effects": [
+            "Increase Constitution Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 2,
+          "description": "Further mastery of Planar Vigor. (Rank 3 of 5)",
+          "effects": [
+            "Increase Constitution Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 2,
+          "description": "Further mastery of Planar Vigor. (Rank 4 of 5)",
+          "effects": [
+            "Increase Constitution Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 2,
+          "description": "Further mastery of Planar Vigor. (Rank 5 of 5)",
+          "effects": [
+            "Increase Constitution Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Planar Vigor, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "PoP",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-planar-grace",
+    "name": "Planar Grace",
+    "type": "aa",
+    "system": {
+      "slug": "planar-grace",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "pop",
+      "advanced": false,
+      "levelRequired": 61,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 2,
+          "description": "Further mastery of Planar Grace. (Rank 1 of 5)",
+          "effects": [
+            "Increase Agility Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 2,
+          "description": "Further mastery of Planar Grace. (Rank 2 of 5)",
+          "effects": [
+            "Increase Agility Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 2,
+          "description": "Further mastery of Planar Grace. (Rank 3 of 5)",
+          "effects": [
+            "Increase Agility Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 2,
+          "description": "Further mastery of Planar Grace. (Rank 4 of 5)",
+          "effects": [
+            "Increase Agility Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 2,
+          "description": "Further mastery of Planar Grace. (Rank 5 of 5)",
+          "effects": [
+            "Increase Agility Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Planar Grace, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "PoP",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-planar-finesse",
+    "name": "Planar Finesse",
+    "type": "aa",
+    "system": {
+      "slug": "planar-finesse",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "pop",
+      "advanced": false,
+      "levelRequired": 61,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 2,
+          "description": "Further mastery of Planar Finesse. (Rank 1 of 5)",
+          "effects": [
+            "Increase Quickness Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 2,
+          "description": "Further mastery of Planar Finesse. (Rank 2 of 5)",
+          "effects": [
+            "Increase Quickness Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 2,
+          "description": "Further mastery of Planar Finesse. (Rank 3 of 5)",
+          "effects": [
+            "Increase Quickness Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 2,
+          "description": "Further mastery of Planar Finesse. (Rank 4 of 5)",
+          "effects": [
+            "Increase Quickness Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 2,
+          "description": "Further mastery of Planar Finesse. (Rank 5 of 5)",
+          "effects": [
+            "Increase Quickness Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Planar Finesse, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "PoP",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-planar-resolve",
+    "name": "Planar Resolve",
+    "type": "aa",
+    "system": {
+      "slug": "planar-resolve",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "pop",
+      "advanced": false,
+      "levelRequired": 61,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 2,
+          "description": "Further mastery of Planar Resolve. (Rank 1 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 2,
+          "description": "Further mastery of Planar Resolve. (Rank 2 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 2,
+          "description": "Further mastery of Planar Resolve. (Rank 3 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 2,
+          "description": "Further mastery of Planar Resolve. (Rank 4 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 2,
+          "description": "Further mastery of Planar Resolve. (Rank 5 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Planar Resolve, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "PoP",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-planar-discernment",
+    "name": "Planar Discernment",
+    "type": "aa",
+    "system": {
+      "slug": "planar-discernment",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "pop",
+      "advanced": false,
+      "levelRequired": 61,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 2,
+          "description": "Further mastery of Planar Discernment. (Rank 1 of 5)",
+          "effects": [
+            "Increase Empathy Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 2,
+          "description": "Further mastery of Planar Discernment. (Rank 2 of 5)",
+          "effects": [
+            "Increase Empathy Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 2,
+          "description": "Further mastery of Planar Discernment. (Rank 3 of 5)",
+          "effects": [
+            "Increase Empathy Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 2,
+          "description": "Further mastery of Planar Discernment. (Rank 4 of 5)",
+          "effects": [
+            "Increase Empathy Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 2,
+          "description": "Further mastery of Planar Discernment. (Rank 5 of 5)",
+          "effects": [
+            "Increase Empathy Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Planar Discernment, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "PoP",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-planar-instinct",
+    "name": "Planar Instinct",
+    "type": "aa",
+    "system": {
+      "slug": "planar-instinct",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "pop",
+      "advanced": false,
+      "levelRequired": 61,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 2,
+          "description": "Further mastery of Planar Instinct. (Rank 1 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 2,
+          "description": "Further mastery of Planar Instinct. (Rank 2 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 2,
+          "description": "Further mastery of Planar Instinct. (Rank 3 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 2,
+          "description": "Further mastery of Planar Instinct. (Rank 4 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 2,
+          "description": "Further mastery of Planar Instinct. (Rank 5 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Planar Instinct, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "PoP",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-planar-recall",
+    "name": "Planar Recall",
+    "type": "aa",
+    "system": {
+      "slug": "planar-recall",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "pop",
+      "advanced": false,
+      "levelRequired": 61,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 2,
+          "description": "Further mastery of Planar Recall. (Rank 1 of 5)",
+          "effects": [
+            "Increase Memory Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 2,
+          "description": "Further mastery of Planar Recall. (Rank 2 of 5)",
+          "effects": [
+            "Increase Memory Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 2,
+          "description": "Further mastery of Planar Recall. (Rank 3 of 5)",
+          "effects": [
+            "Increase Memory Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 2,
+          "description": "Further mastery of Planar Recall. (Rank 4 of 5)",
+          "effects": [
+            "Increase Memory Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 2,
+          "description": "Further mastery of Planar Recall. (Rank 5 of 5)",
+          "effects": [
+            "Increase Memory Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Planar Recall, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "PoP",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-planar-logic",
+    "name": "Planar Logic",
+    "type": "aa",
+    "system": {
+      "slug": "planar-logic",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "pop",
+      "advanced": false,
+      "levelRequired": 61,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 2,
+          "description": "Further mastery of Planar Logic. (Rank 1 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 2,
+          "description": "Further mastery of Planar Logic. (Rank 2 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 2,
+          "description": "Further mastery of Planar Logic. (Rank 3 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 2,
+          "description": "Further mastery of Planar Logic. (Rank 4 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 2,
+          "description": "Further mastery of Planar Logic. (Rank 5 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Planar Logic, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "PoP",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-planar-presence",
+    "name": "Planar Presence",
+    "type": "aa",
+    "system": {
+      "slug": "planar-presence",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "pop",
+      "advanced": false,
+      "levelRequired": 61,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 2,
+          "description": "Further mastery of Planar Presence. (Rank 1 of 5)",
+          "effects": [
+            "Increase Presence Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 2,
+          "description": "Further mastery of Planar Presence. (Rank 2 of 5)",
+          "effects": [
+            "Increase Presence Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 2,
+          "description": "Further mastery of Planar Presence. (Rank 3 of 5)",
+          "effects": [
+            "Increase Presence Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 2,
+          "description": "Further mastery of Planar Presence. (Rank 4 of 5)",
+          "effects": [
+            "Increase Presence Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 2,
+          "description": "Further mastery of Planar Presence. (Rank 5 of 5)",
+          "effects": [
+            "Increase Presence Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Planar Presence, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "PoP",
+      "_fillSource": "metadata-fallback"
     }
   },
   {
@@ -3583,51 +4158,56 @@
       "expansion": "luclin",
       "advanced": false,
       "levelRequired": 51,
-      "maxRanks": 35,
+      "maxRanks": 40,
       "activation": "passive",
       "costPerRank": [
         1,
         1,
         1,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
         1,
         1,
         1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
+        3,
+        3,
+        3,
+        3,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
           "cost": 1,
-          "description": "Regenerate +1 hits per round from the mending ritual. (Rank 1 of 35)",
+          "description": "Regenerate +1 hits per round from the mending ritual. (Rank 1 of 40)",
           "effects": [
             "Regenerate 1 hits per round"
           ]
@@ -3635,7 +4215,7 @@
         {
           "rank": 2,
           "cost": 1,
-          "description": "Regenerate +2 hits per round from the mending ritual. (Rank 2 of 35)",
+          "description": "Regenerate +2 hits per round from the mending ritual. (Rank 2 of 40)",
           "effects": [
             "Regenerate 2 hits per round"
           ]
@@ -3643,167 +4223,167 @@
         {
           "rank": 3,
           "cost": 1,
-          "description": "Regenerate +3 hits per round from the mending ritual. (Rank 3 of 35)",
+          "description": "Regenerate +3 hits per round from the mending ritual. (Rank 3 of 40)",
           "effects": [
             "Regenerate 3 hits per round"
           ]
         },
         {
           "rank": 4,
-          "cost": 1,
-          "description": "Regenerate +4 hits per round from the mending ritual. (Rank 4 of 35)",
+          "cost": 3,
+          "description": "Regenerate +4 hits per round from the mending ritual. (Rank 4 of 40)",
           "effects": [
             "Regenerate 4 hits per round"
           ]
         },
         {
           "rank": 5,
-          "cost": 1,
-          "description": "Regenerate +5 hits per round from the mending ritual. (Rank 5 of 35)",
+          "cost": 3,
+          "description": "Regenerate +5 hits per round from the mending ritual. (Rank 5 of 40)",
           "effects": [
             "Regenerate 5 hits per round"
           ]
         },
         {
           "rank": 6,
-          "cost": 1,
-          "description": "Regenerate +6 hits per round from the mending ritual. (Rank 6 of 35)",
+          "cost": 3,
+          "description": "Regenerate +6 hits per round from the mending ritual. (Rank 6 of 40)",
           "effects": [
             "Regenerate 6 hits per round"
           ]
         },
         {
           "rank": 7,
-          "cost": 1,
-          "description": "Regenerate +7 hits per round from the mending ritual. (Rank 7 of 35)",
+          "cost": 3,
+          "description": "Regenerate +7 hits per round from the mending ritual. (Rank 7 of 40)",
           "effects": [
             "Regenerate 7 hits per round"
           ]
         },
         {
           "rank": 8,
-          "cost": 1,
-          "description": "Regenerate +8 hits per round from the mending ritual. (Rank 8 of 35)",
+          "cost": 3,
+          "description": "Regenerate +8 hits per round from the mending ritual. (Rank 8 of 40)",
           "effects": [
             "Regenerate 8 hits per round"
           ]
         },
         {
           "rank": 9,
-          "cost": 1,
-          "description": "Regenerate +9 hits per round from the mending ritual. (Rank 9 of 35)",
+          "cost": 3,
+          "description": "Regenerate +9 hits per round from the mending ritual. (Rank 9 of 40)",
           "effects": [
             "Regenerate 9 hits per round"
           ]
         },
         {
           "rank": 10,
-          "cost": 1,
-          "description": "Regenerate +10 hits per round from the mending ritual. (Rank 10 of 35)",
+          "cost": 3,
+          "description": "Regenerate +10 hits per round from the mending ritual. (Rank 10 of 40)",
           "effects": [
             "Regenerate 10 hits per round"
           ]
         },
         {
           "rank": 11,
-          "cost": 1,
-          "description": "Regenerate +11 hits per round from the mending ritual. (Rank 11 of 35)",
+          "cost": 3,
+          "description": "Regenerate +11 hits per round from the mending ritual. (Rank 11 of 40)",
           "effects": [
             "Regenerate 11 hits per round"
           ]
         },
         {
           "rank": 12,
-          "cost": 1,
-          "description": "Regenerate +12 hits per round from the mending ritual. (Rank 12 of 35)",
+          "cost": 3,
+          "description": "Regenerate +12 hits per round from the mending ritual. (Rank 12 of 40)",
           "effects": [
             "Regenerate 12 hits per round"
           ]
         },
         {
           "rank": 13,
-          "cost": 1,
-          "description": "Regenerate +13 hits per round from the mending ritual. (Rank 13 of 35)",
+          "cost": 3,
+          "description": "Regenerate +13 hits per round from the mending ritual. (Rank 13 of 40)",
           "effects": [
             "Regenerate 13 hits per round"
           ]
         },
         {
           "rank": 14,
-          "cost": 1,
-          "description": "Regenerate +14 hits per round from the mending ritual. (Rank 14 of 35)",
+          "cost": 3,
+          "description": "Regenerate +14 hits per round from the mending ritual. (Rank 14 of 40)",
           "effects": [
             "Regenerate 14 hits per round"
           ]
         },
         {
           "rank": 15,
-          "cost": 1,
-          "description": "Regenerate +15 hits per round from the mending ritual. (Rank 15 of 35)",
+          "cost": 3,
+          "description": "Regenerate +15 hits per round from the mending ritual. (Rank 15 of 40)",
           "effects": [
             "Regenerate 15 hits per round"
           ]
         },
         {
           "rank": 16,
-          "cost": 1,
-          "description": "Regenerate +16 hits per round from the mending ritual. (Rank 16 of 35)",
+          "cost": 3,
+          "description": "Regenerate +16 hits per round from the mending ritual. (Rank 16 of 40)",
           "effects": [
             "Regenerate 16 hits per round"
           ]
         },
         {
           "rank": 17,
-          "cost": 1,
-          "description": "Regenerate +17 hits per round from the mending ritual. (Rank 17 of 35)",
+          "cost": 3,
+          "description": "Regenerate +17 hits per round from the mending ritual. (Rank 17 of 40)",
           "effects": [
             "Regenerate 17 hits per round"
           ]
         },
         {
           "rank": 18,
-          "cost": 1,
-          "description": "Regenerate +18 hits per round from the mending ritual. (Rank 18 of 35)",
+          "cost": 3,
+          "description": "Regenerate +18 hits per round from the mending ritual. (Rank 18 of 40)",
           "effects": [
             "Regenerate 18 hits per round"
           ]
         },
         {
           "rank": 19,
-          "cost": 1,
-          "description": "Regenerate +19 hits per round from the mending ritual. (Rank 19 of 35)",
+          "cost": 3,
+          "description": "Regenerate +19 hits per round from the mending ritual. (Rank 19 of 40)",
           "effects": [
             "Regenerate 19 hits per round"
           ]
         },
         {
           "rank": 20,
-          "cost": 1,
-          "description": "Regenerate +20 hits per round from the mending ritual. (Rank 20 of 35)",
+          "cost": 3,
+          "description": "Regenerate +20 hits per round from the mending ritual. (Rank 20 of 40)",
           "effects": [
             "Regenerate 20 hits per round"
           ]
         },
         {
           "rank": 21,
-          "cost": 1,
-          "description": "Regenerate +21 hits per round from the mending ritual. (Rank 21 of 35)",
+          "cost": 3,
+          "description": "Regenerate +21 hits per round from the mending ritual. (Rank 21 of 40)",
           "effects": [
             "Regenerate 21 hits per round"
           ]
         },
         {
           "rank": 22,
-          "cost": 1,
-          "description": "Regenerate +22 hits per round from the mending ritual. (Rank 22 of 35)",
+          "cost": 3,
+          "description": "Regenerate +22 hits per round from the mending ritual. (Rank 22 of 40)",
           "effects": [
             "Regenerate 22 hits per round"
           ]
         },
         {
           "rank": 23,
-          "cost": 1,
-          "description": "Regenerate +23 hits per round from the mending ritual. (Rank 23 of 35)",
+          "cost": 3,
+          "description": "Regenerate +23 hits per round from the mending ritual. (Rank 23 of 40)",
           "effects": [
             "Regenerate 23 hits per round"
           ]
@@ -3811,7 +4391,7 @@
         {
           "rank": 24,
           "cost": 1,
-          "description": "Regenerate +24 hits per round from the mending ritual. (Rank 24 of 35)",
+          "description": "Regenerate +24 hits per round from the mending ritual. (Rank 24 of 40)",
           "effects": [
             "Regenerate 24 hits per round"
           ]
@@ -3819,7 +4399,7 @@
         {
           "rank": 25,
           "cost": 1,
-          "description": "Regenerate +25 hits per round from the mending ritual. (Rank 25 of 35)",
+          "description": "Regenerate +25 hits per round from the mending ritual. (Rank 25 of 40)",
           "effects": [
             "Regenerate 25 hits per round"
           ]
@@ -3827,85 +4407,125 @@
         {
           "rank": 26,
           "cost": 1,
-          "description": "Regenerate +26 hits per round from the mending ritual. (Rank 26 of 35)",
+          "description": "Regenerate +26 hits per round from the mending ritual. (Rank 26 of 40)",
           "effects": [
             "Regenerate 26 hits per round"
           ]
         },
         {
           "rank": 27,
-          "cost": 1,
-          "description": "Regenerate +27 hits per round from the mending ritual. (Rank 27 of 35)",
+          "cost": 3,
+          "description": "Regenerate +27 hits per round from the mending ritual. (Rank 27 of 40)",
           "effects": [
             "Regenerate 27 hits per round"
           ]
         },
         {
           "rank": 28,
-          "cost": 1,
-          "description": "Regenerate +28 hits per round from the mending ritual. (Rank 28 of 35)",
+          "cost": 3,
+          "description": "Regenerate +28 hits per round from the mending ritual. (Rank 28 of 40)",
           "effects": [
             "Regenerate 28 hits per round"
           ]
         },
         {
           "rank": 29,
-          "cost": 1,
-          "description": "Regenerate +29 hits per round from the mending ritual. (Rank 29 of 35)",
+          "cost": 3,
+          "description": "Regenerate +29 hits per round from the mending ritual. (Rank 29 of 40)",
           "effects": [
             "Regenerate 29 hits per round"
           ]
         },
         {
           "rank": 30,
-          "cost": 1,
-          "description": "Regenerate +30 hits per round from the mending ritual. (Rank 30 of 35)",
+          "cost": 3,
+          "description": "Regenerate +30 hits per round from the mending ritual. (Rank 30 of 40)",
           "effects": [
             "Regenerate 30 hits per round"
           ]
         },
         {
           "rank": 31,
-          "cost": 1,
-          "description": "Regenerate +31 hits per round from the mending ritual. (Rank 31 of 35)",
+          "cost": 8,
+          "description": "Regenerate +31 hits per round from the mending ritual. (Rank 31 of 40)",
           "effects": [
             "Regenerate 31 hits per round"
           ]
         },
         {
           "rank": 32,
-          "cost": 1,
-          "description": "Regenerate +32 hits per round from the mending ritual. (Rank 32 of 35)",
+          "cost": 8,
+          "description": "Regenerate +32 hits per round from the mending ritual. (Rank 32 of 40)",
           "effects": [
             "Regenerate 32 hits per round"
           ]
         },
         {
           "rank": 33,
-          "cost": 1,
-          "description": "Regenerate +33 hits per round from the mending ritual. (Rank 33 of 35)",
+          "cost": 8,
+          "description": "Regenerate +33 hits per round from the mending ritual. (Rank 33 of 40)",
           "effects": [
             "Regenerate 33 hits per round"
           ]
         },
         {
           "rank": 34,
-          "cost": 1,
-          "description": "Regenerate +34 hits per round from the mending ritual. (Rank 34 of 35)",
+          "cost": 8,
+          "description": "Regenerate +34 hits per round from the mending ritual. (Rank 34 of 40)",
           "effects": [
             "Regenerate 34 hits per round"
           ]
         },
         {
           "rank": 35,
-          "cost": 1,
-          "description": "Regenerate +35 hits per round from the mending ritual. (Rank 35 of 35)",
+          "cost": 8,
+          "description": "Regenerate +35 hits per round from the mending ritual. (Rank 35 of 40)",
           "effects": [
             "Regenerate 35 hits per round"
           ]
+        },
+        {
+          "rank": 36,
+          "cost": 8,
+          "description": "Regenerate +36 hits per round from the mending ritual. (Rank 36 of 40)",
+          "effects": [
+            "Regenerate 36 hits per round"
+          ]
+        },
+        {
+          "rank": 37,
+          "cost": 8,
+          "description": "Regenerate +37 hits per round from the mending ritual. (Rank 37 of 40)",
+          "effects": [
+            "Regenerate 37 hits per round"
+          ]
+        },
+        {
+          "rank": 38,
+          "cost": 8,
+          "description": "Regenerate +38 hits per round from the mending ritual. (Rank 38 of 40)",
+          "effects": [
+            "Regenerate 38 hits per round"
+          ]
+        },
+        {
+          "rank": 39,
+          "cost": 8,
+          "description": "Regenerate +39 hits per round from the mending ritual. (Rank 39 of 40)",
+          "effects": [
+            "Regenerate 39 hits per round"
+          ]
+        },
+        {
+          "rank": 40,
+          "cost": 8,
+          "description": "Regenerate +40 hits per round from the mending ritual. (Rank 40 of 40)",
+          "effects": [
+            "Regenerate 40 hits per round"
+          ]
         }
       ],
-      "description": "This passive ability adapts the mending rituals whispered in the halls of Vex Thal, knitting flesh between battles. Each rank increases your per-round regeneration.",
+      "description": "This ability raises your regeneration ability by 1 point per ability level up to rank 30. Ranks 31 to 35 add 5 points per level. Ranks 36 and higher add 10 points per level.",
       "aaNumber": 225,
       "sourceCategory": "SoL",
       "_fillSource": "metadata-fallback"
@@ -5148,7 +5768,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Brawn. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 5"
           ]
         },
         {
@@ -5156,7 +5776,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Brawn. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 10"
           ]
         },
         {
@@ -5164,7 +5784,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Brawn. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 15"
           ]
         },
         {
@@ -5172,7 +5792,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Brawn. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 20"
           ]
         },
         {
@@ -5180,7 +5800,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Brawn. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 25"
           ]
         }
       ],
@@ -5203,101 +5823,55 @@
       "expansion": "hot",
       "advanced": false,
       "levelRequired": 85,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Might. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Might. (Rank 1 of 5)",
           "effects": [
-            "Decrease Hitpoints by 3750.",
-            "2% Chance to trigger: Fury of the Forest I"
+            "Increase Strength Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Might. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Might. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Might. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Might. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Might. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Might. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Might. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Might. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Might. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Might. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Might. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Might. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Might. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 25"
           ]
         }
       ],
@@ -5336,7 +5910,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Stability. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 5"
           ]
         },
         {
@@ -5344,7 +5918,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Stability. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 10"
           ]
         },
         {
@@ -5352,7 +5926,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Stability. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 15"
           ]
         },
         {
@@ -5360,7 +5934,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Stability. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 20"
           ]
         },
         {
@@ -5368,7 +5942,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Stability. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 25"
           ]
         }
       ],
@@ -5407,7 +5981,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Alacrity. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 5"
           ]
         },
         {
@@ -5415,7 +5989,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Alacrity. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 10"
           ]
         },
         {
@@ -5423,7 +5997,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Alacrity. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 15"
           ]
         },
         {
@@ -5431,7 +6005,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Alacrity. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 20"
           ]
         },
         {
@@ -5439,7 +6013,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Alacrity. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 25"
           ]
         }
       ],
@@ -5478,7 +6052,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Artistry. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 5"
           ]
         },
         {
@@ -5486,7 +6060,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Artistry. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 10"
           ]
         },
         {
@@ -5494,7 +6068,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Artistry. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 15"
           ]
         },
         {
@@ -5502,7 +6076,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Artistry. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 20"
           ]
         },
         {
@@ -5510,7 +6084,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Artistry. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 25"
           ]
         }
       ],
@@ -5549,7 +6123,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Sagacity. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 5"
           ]
         },
         {
@@ -5557,7 +6131,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Sagacity. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 10"
           ]
         },
         {
@@ -5565,7 +6139,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Sagacity. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 15"
           ]
         },
         {
@@ -5573,7 +6147,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Sagacity. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 20"
           ]
         },
         {
@@ -5581,7 +6155,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Sagacity. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 25"
           ]
         }
       ],
@@ -5620,7 +6194,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Brilliance. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 5"
           ]
         },
         {
@@ -5628,7 +6202,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Brilliance. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 10"
           ]
         },
         {
@@ -5636,7 +6210,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Brilliance. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 15"
           ]
         },
         {
@@ -5644,7 +6218,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Brilliance. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 20"
           ]
         },
         {
@@ -5652,7 +6226,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Brilliance. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 25"
           ]
         }
       ],
@@ -5691,7 +6265,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Allure. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 5"
           ]
         },
         {
@@ -5699,7 +6273,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Allure. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 10"
           ]
         },
         {
@@ -5707,7 +6281,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Allure. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 15"
           ]
         },
         {
@@ -5715,7 +6289,7 @@
           "cost": 5,
           "description": "Further mastery of Earthen Allure. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 20"
           ]
         },
         {
@@ -5723,12 +6297,225 @@
           "cost": 5,
           "description": "Further mastery of Earthen Allure. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 25"
           ]
         }
       ],
       "description": "This passive ability masters the art of Earthen Allure, a discipline that rewards dedicated practice with growing power.",
       "aaNumber": 382,
+      "sourceCategory": "Uf",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-earthen-discipline",
+    "name": "Earthen Discipline",
+    "type": "aa",
+    "system": {
+      "slug": "earthen-discipline",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "underfoot",
+      "advanced": false,
+      "levelRequired": 81,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 5,
+          "description": "Further mastery of Earthen Discipline. (Rank 1 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 5,
+          "description": "Further mastery of Earthen Discipline. (Rank 2 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 5,
+          "description": "Further mastery of Earthen Discipline. (Rank 3 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 5,
+          "description": "Further mastery of Earthen Discipline. (Rank 4 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 5,
+          "description": "Further mastery of Earthen Discipline. (Rank 5 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Earthen Discipline, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "Uf",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-earthen-foresight",
+    "name": "Earthen Foresight",
+    "type": "aa",
+    "system": {
+      "slug": "earthen-foresight",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "underfoot",
+      "advanced": false,
+      "levelRequired": 81,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 5,
+          "description": "Further mastery of Earthen Foresight. (Rank 1 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 5,
+          "description": "Further mastery of Earthen Foresight. (Rank 2 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 5,
+          "description": "Further mastery of Earthen Foresight. (Rank 3 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 5,
+          "description": "Further mastery of Earthen Foresight. (Rank 4 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 5,
+          "description": "Further mastery of Earthen Foresight. (Rank 5 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Earthen Foresight, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "Uf",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-earthen-reason",
+    "name": "Earthen Reason",
+    "type": "aa",
+    "system": {
+      "slug": "earthen-reason",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "underfoot",
+      "advanced": false,
+      "levelRequired": 81,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 5,
+          "description": "Further mastery of Earthen Reason. (Rank 1 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 5,
+          "description": "Further mastery of Earthen Reason. (Rank 2 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 5,
+          "description": "Further mastery of Earthen Reason. (Rank 3 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 5,
+          "description": "Further mastery of Earthen Reason. (Rank 4 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 5,
+          "description": "Further mastery of Earthen Reason. (Rank 5 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Earthen Reason, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
       "sourceCategory": "Uf",
       "_fillSource": "metadata-fallback"
     }
@@ -6493,16 +7280,16 @@
       "maxRanks": 1,
       "activation": "passive",
       "costPerRank": [
-        5
+        15
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
+          "cost": 15,
           "description": "Further mastery of Phantasmic Power. (Rank 1 of 1)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 5"
           ]
         }
       ],
@@ -6529,16 +7316,16 @@
       "maxRanks": 1,
       "activation": "passive",
       "costPerRank": [
-        5
+        15
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
+          "cost": 15,
           "description": "Further mastery of Phantasmic Prowess. (Rank 1 of 1)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 5"
           ]
         }
       ],
@@ -6565,16 +7352,16 @@
       "maxRanks": 1,
       "activation": "passive",
       "costPerRank": [
-        5
+        15
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
+          "cost": 15,
           "description": "Further mastery of Phantasmic Promptitude. (Rank 1 of 1)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 5"
           ]
         }
       ],
@@ -6601,16 +7388,16 @@
       "maxRanks": 1,
       "activation": "passive",
       "costPerRank": [
-        5
+        15
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
+          "cost": 15,
           "description": "Further mastery of Phantasmic Proficiency. (Rank 1 of 1)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 5"
           ]
         }
       ],
@@ -6637,16 +7424,16 @@
       "maxRanks": 1,
       "activation": "passive",
       "costPerRank": [
-        5
+        15
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
+          "cost": 15,
           "description": "Further mastery of Phantasmic Poise. (Rank 1 of 1)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 5"
           ]
         }
       ],
@@ -6673,16 +7460,16 @@
       "maxRanks": 1,
       "activation": "passive",
       "costPerRank": [
-        5
+        15
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
+          "cost": 15,
           "description": "Further mastery of Phantasmic Precocity. (Rank 1 of 1)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 5"
           ]
         }
       ],
@@ -6709,16 +7496,16 @@
       "maxRanks": 1,
       "activation": "passive",
       "costPerRank": [
-        5
+        15
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
+          "cost": 15,
           "description": "Further mastery of Phantasmic Allure. (Rank 1 of 1)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 5"
           ]
         }
       ],
@@ -6726,6 +7513,111 @@
       "aaNumber": 1166,
       "sourceCategory": "RoF",
       "rankCountUncertain": true,
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-phantasmic-determination",
+    "name": "Phantasmic Determination",
+    "type": "aa",
+    "system": {
+      "slug": "phantasmic-determination",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "rof",
+      "advanced": false,
+      "levelRequired": 96,
+      "maxRanks": 1,
+      "activation": "passive",
+      "costPerRank": [
+        15
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 15,
+          "description": "Further mastery of Phantasmic Determination. (Rank 1 of 1)",
+          "effects": [
+            "Increase Self-Discipline Potential by 5"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Phantasmic Determination, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "RoF",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-phantasmic-prescience",
+    "name": "Phantasmic Prescience",
+    "type": "aa",
+    "system": {
+      "slug": "phantasmic-prescience",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "rof",
+      "advanced": false,
+      "levelRequired": 96,
+      "maxRanks": 1,
+      "activation": "passive",
+      "costPerRank": [
+        15
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 15,
+          "description": "Further mastery of Phantasmic Prescience. (Rank 1 of 1)",
+          "effects": [
+            "Increase Intuition Potential by 5"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Phantasmic Prescience, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "RoF",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-phantasmic-cogitation",
+    "name": "Phantasmic Cogitation",
+    "type": "aa",
+    "system": {
+      "slug": "phantasmic-cogitation",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "rof",
+      "advanced": false,
+      "levelRequired": 96,
+      "maxRanks": 1,
+      "activation": "passive",
+      "costPerRank": [
+        15
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 15,
+          "description": "Further mastery of Phantasmic Cogitation. (Rank 1 of 1)",
+          "effects": [
+            "Increase Reasoning Potential by 5"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Phantasmic Cogitation, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "RoF",
       "_fillSource": "metadata-fallback"
     }
   },
@@ -6795,100 +7687,55 @@
       "expansion": "voa",
       "advanced": false,
       "levelRequired": 91,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
-          "description": "Further mastery of Veiled Strength. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Strength. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 5,
-          "description": "Further mastery of Veiled Strength. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Strength. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 5,
-          "description": "Further mastery of Veiled Strength. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Strength. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 5,
-          "description": "Further mastery of Veiled Strength. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Strength. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 5,
-          "description": "Further mastery of Veiled Strength. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Strength. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 5,
-          "description": "Further mastery of Veiled Strength. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 5,
-          "description": "Further mastery of Veiled Strength. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 5,
-          "description": "Further mastery of Veiled Strength. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 5,
-          "description": "Further mastery of Veiled Strength. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 5,
-          "description": "Further mastery of Veiled Strength. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Strength Potential by 25"
           ]
         }
       ],
@@ -6911,100 +7758,55 @@
       "expansion": "voa",
       "advanced": false,
       "levelRequired": 91,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
-          "description": "Further mastery of Veiled Fortitude. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Fortitude. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 5,
-          "description": "Further mastery of Veiled Fortitude. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Fortitude. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 5,
-          "description": "Further mastery of Veiled Fortitude. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Fortitude. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 5,
-          "description": "Further mastery of Veiled Fortitude. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Fortitude. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 5,
-          "description": "Further mastery of Veiled Fortitude. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Fortitude. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 5,
-          "description": "Further mastery of Veiled Fortitude. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 5,
-          "description": "Further mastery of Veiled Fortitude. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 5,
-          "description": "Further mastery of Veiled Fortitude. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 5,
-          "description": "Further mastery of Veiled Fortitude. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 5,
-          "description": "Further mastery of Veiled Fortitude. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 25"
           ]
         }
       ],
@@ -7027,100 +7829,55 @@
       "expansion": "voa",
       "advanced": false,
       "levelRequired": 91,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
-          "description": "Further mastery of Veiled Rapidity. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Rapidity. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 5,
-          "description": "Further mastery of Veiled Rapidity. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Rapidity. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 5,
-          "description": "Further mastery of Veiled Rapidity. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Rapidity. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 5,
-          "description": "Further mastery of Veiled Rapidity. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Rapidity. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 5,
-          "description": "Further mastery of Veiled Rapidity. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Rapidity. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 5,
-          "description": "Further mastery of Veiled Rapidity. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 5,
-          "description": "Further mastery of Veiled Rapidity. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 5,
-          "description": "Further mastery of Veiled Rapidity. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 5,
-          "description": "Further mastery of Veiled Rapidity. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 5,
-          "description": "Further mastery of Veiled Rapidity. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 25"
           ]
         }
       ],
@@ -7143,100 +7900,55 @@
       "expansion": "voa",
       "advanced": false,
       "levelRequired": 91,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
-          "description": "Further mastery of Veiled Cunning. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Cunning. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 5,
-          "description": "Further mastery of Veiled Cunning. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Cunning. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 5,
-          "description": "Further mastery of Veiled Cunning. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Cunning. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 5,
-          "description": "Further mastery of Veiled Cunning. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Cunning. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 5,
-          "description": "Further mastery of Veiled Cunning. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Cunning. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 5,
-          "description": "Further mastery of Veiled Cunning. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 5,
-          "description": "Further mastery of Veiled Cunning. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 5,
-          "description": "Further mastery of Veiled Cunning. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 5,
-          "description": "Further mastery of Veiled Cunning. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 5,
-          "description": "Further mastery of Veiled Cunning. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 25"
           ]
         }
       ],
@@ -7259,100 +7971,55 @@
       "expansion": "voa",
       "advanced": false,
       "levelRequired": 91,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
-          "description": "Further mastery of Veiled Acumen. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Acumen. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 5,
-          "description": "Further mastery of Veiled Acumen. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Acumen. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 5,
-          "description": "Further mastery of Veiled Acumen. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Acumen. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 5,
-          "description": "Further mastery of Veiled Acumen. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Acumen. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 5,
-          "description": "Further mastery of Veiled Acumen. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Acumen. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 5,
-          "description": "Further mastery of Veiled Acumen. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 5,
-          "description": "Further mastery of Veiled Acumen. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 5,
-          "description": "Further mastery of Veiled Acumen. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 5,
-          "description": "Further mastery of Veiled Acumen. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 5,
-          "description": "Further mastery of Veiled Acumen. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 25"
           ]
         }
       ],
@@ -7375,100 +8042,55 @@
       "expansion": "voa",
       "advanced": false,
       "levelRequired": 91,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
-          "description": "Further mastery of Veiled Brilliance. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Brilliance. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 5,
-          "description": "Further mastery of Veiled Brilliance. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Brilliance. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 5,
-          "description": "Further mastery of Veiled Brilliance. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Brilliance. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 5,
-          "description": "Further mastery of Veiled Brilliance. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Brilliance. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 5,
-          "description": "Further mastery of Veiled Brilliance. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Brilliance. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 5,
-          "description": "Further mastery of Veiled Brilliance. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 5,
-          "description": "Further mastery of Veiled Brilliance. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 5,
-          "description": "Further mastery of Veiled Brilliance. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 5,
-          "description": "Further mastery of Veiled Brilliance. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 5,
-          "description": "Further mastery of Veiled Brilliance. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 25"
           ]
         }
       ],
@@ -7491,105 +8113,273 @@
       "expansion": "voa",
       "advanced": false,
       "levelRequired": 91,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5,
-        5
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 5,
-          "description": "Further mastery of Veiled Allure. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Allure. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 5,
-          "description": "Further mastery of Veiled Allure. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Allure. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 5,
-          "description": "Further mastery of Veiled Allure. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Allure. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 5,
-          "description": "Further mastery of Veiled Allure. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Allure. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 5,
-          "description": "Further mastery of Veiled Allure. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Veiled Allure. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 5,
-          "description": "Further mastery of Veiled Allure. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 5,
-          "description": "Further mastery of Veiled Allure. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 5,
-          "description": "Further mastery of Veiled Allure. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 5,
-          "description": "Further mastery of Veiled Allure. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 5,
-          "description": "Further mastery of Veiled Allure. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 25"
           ]
         }
       ],
       "description": "This passive ability deepens your mastery of shadow, making you harder to detect.",
       "aaNumber": 1231,
+      "sourceCategory": "VoA",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-veiled-willpower",
+    "name": "Veiled Willpower",
+    "type": "aa",
+    "system": {
+      "slug": "veiled-willpower",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "voa",
+      "advanced": false,
+      "levelRequired": 91,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 10,
+          "description": "Further mastery of Veiled Willpower. (Rank 1 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 10,
+          "description": "Further mastery of Veiled Willpower. (Rank 2 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 10,
+          "description": "Further mastery of Veiled Willpower. (Rank 3 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 10,
+          "description": "Further mastery of Veiled Willpower. (Rank 4 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 10,
+          "description": "Further mastery of Veiled Willpower. (Rank 5 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Veiled Willpower, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "VoA",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-veiled-insight",
+    "name": "Veiled Insight",
+    "type": "aa",
+    "system": {
+      "slug": "veiled-insight",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "voa",
+      "advanced": false,
+      "levelRequired": 91,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 10,
+          "description": "Further mastery of Veiled Insight. (Rank 1 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 10,
+          "description": "Further mastery of Veiled Insight. (Rank 2 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 10,
+          "description": "Further mastery of Veiled Insight. (Rank 3 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 10,
+          "description": "Further mastery of Veiled Insight. (Rank 4 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 10,
+          "description": "Further mastery of Veiled Insight. (Rank 5 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Veiled Insight, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "VoA",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-veiled-analysis",
+    "name": "Veiled Analysis",
+    "type": "aa",
+    "system": {
+      "slug": "veiled-analysis",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "voa",
+      "advanced": false,
+      "levelRequired": 91,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 10,
+          "description": "Further mastery of Veiled Analysis. (Rank 1 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 10,
+          "description": "Further mastery of Veiled Analysis. (Rank 2 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 10,
+          "description": "Further mastery of Veiled Analysis. (Rank 3 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 10,
+          "description": "Further mastery of Veiled Analysis. (Rank 4 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 10,
+          "description": "Further mastery of Veiled Analysis. (Rank 5 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Veiled Analysis, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
       "sourceCategory": "VoA",
       "_fillSource": "metadata-fallback"
     }
@@ -10355,100 +11145,55 @@
       "expansion": "hot",
       "advanced": false,
       "levelRequired": 85,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Fortitude. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Fortitude. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Fortitude. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Fortitude. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Fortitude. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Fortitude. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Fortitude. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Fortitude. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Fortitude. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Fortitude. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Fortitude. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Fortitude. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Fortitude. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Fortitude. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Fortitude. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Constitution Potential by 25"
           ]
         }
       ],
@@ -10471,100 +11216,55 @@
       "expansion": "hot",
       "advanced": false,
       "levelRequired": 85,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Swiftness. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Swiftness. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Swiftness. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Swiftness. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Swiftness. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Swiftness. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Swiftness. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Swiftness. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Swiftness. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Swiftness. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Swiftness. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Swiftness. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Swiftness. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Swiftness. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Swiftness. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Agility Potential by 25"
           ]
         }
       ],
@@ -10587,100 +11287,55 @@
       "expansion": "hot",
       "advanced": false,
       "levelRequired": 85,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Cunning. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Cunning. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Cunning. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Cunning. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Cunning. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Cunning. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Cunning. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Cunning. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Cunning. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Cunning. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Cunning. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Cunning. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Cunning. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Cunning. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Cunning. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Quickness Potential by 25"
           ]
         }
       ],
@@ -10703,100 +11358,55 @@
       "expansion": "hot",
       "advanced": false,
       "levelRequired": 85,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Sapience. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Sapience. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Sapience. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Sapience. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Sapience. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Sapience. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Sapience. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Sapience. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Sapience. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Sapience. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Sapience. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Sapience. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Sapience. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Sapience. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Sapience. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Empathy Potential by 25"
           ]
         }
       ],
@@ -10819,100 +11429,55 @@
       "expansion": "hot",
       "advanced": false,
       "levelRequired": 85,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Magnetism. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Magnetism. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Magnetism. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Magnetism. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Magnetism. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Magnetism. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Magnetism. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Magnetism. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Magnetism. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Magnetism. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Magnetism. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Magnetism. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Magnetism. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Magnetism. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Magnetism. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Presence Potential by 25"
           ]
         }
       ],
@@ -10935,105 +11500,273 @@
       "expansion": "hot",
       "advanced": false,
       "levelRequired": 85,
-      "maxRanks": 10,
+      "maxRanks": 5,
       "activation": "passive",
       "costPerRank": [
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
+        10,
+        10,
+        10,
+        10,
+        10
       ],
       "prerequisites": [],
       "ranks": [
         {
           "rank": 1,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Intellect. (Rank 1 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Intellect. (Rank 1 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 5"
           ]
         },
         {
           "rank": 2,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Intellect. (Rank 2 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Intellect. (Rank 2 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 10"
           ]
         },
         {
           "rank": 3,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Intellect. (Rank 3 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Intellect. (Rank 3 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 15"
           ]
         },
         {
           "rank": 4,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Intellect. (Rank 4 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Intellect. (Rank 4 of 5)",
           "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 20"
           ]
         },
         {
           "rank": 5,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Intellect. (Rank 5 of 10)",
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Intellect. (Rank 5 of 5)",
           "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 6,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Intellect. (Rank 6 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 7,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Intellect. (Rank 7 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 8,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Intellect. (Rank 8 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 9,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Intellect. (Rank 9 of 10)",
-          "effects": [
-            "PLACEHOLDER"
-          ]
-        },
-        {
-          "rank": 10,
-          "cost": 3,
-          "description": "Further mastery of Dreamlike Intellect. (Rank 10 of 10)",
-          "effects": [
-            "PLACEHOLDER"
+            "Increase Memory Potential by 25"
           ]
         }
       ],
       "description": "This passive ability masters the art of Dreamlike Intellect, a discipline that rewards dedicated practice with growing power.",
       "aaNumber": 8421,
+      "sourceCategory": "HoT",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-dreamlike-tenacity",
+    "name": "Dreamlike Tenacity",
+    "type": "aa",
+    "system": {
+      "slug": "dreamlike-tenacity",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "hot",
+      "advanced": false,
+      "levelRequired": 85,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Tenacity. (Rank 1 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Tenacity. (Rank 2 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Tenacity. (Rank 3 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Tenacity. (Rank 4 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Tenacity. (Rank 5 of 5)",
+          "effects": [
+            "Increase Self-Discipline Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Dreamlike Tenacity, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "HoT",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-dreamlike-premonition",
+    "name": "Dreamlike Premonition",
+    "type": "aa",
+    "system": {
+      "slug": "dreamlike-premonition",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "hot",
+      "advanced": false,
+      "levelRequired": 85,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Premonition. (Rank 1 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Premonition. (Rank 2 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Premonition. (Rank 3 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Premonition. (Rank 4 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Premonition. (Rank 5 of 5)",
+          "effects": [
+            "Increase Intuition Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Dreamlike Premonition, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
+      "sourceCategory": "HoT",
+      "_fillSource": "metadata-fallback"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "aa-dreamlike-deduction",
+    "name": "Dreamlike Deduction",
+    "type": "aa",
+    "system": {
+      "slug": "dreamlike-deduction",
+      "category": "general",
+      "archetype": null,
+      "classes": [],
+      "expansion": "hot",
+      "advanced": false,
+      "levelRequired": 85,
+      "maxRanks": 5,
+      "activation": "passive",
+      "costPerRank": [
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "prerequisites": [],
+      "ranks": [
+        {
+          "rank": 1,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Deduction. (Rank 1 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 5"
+          ]
+        },
+        {
+          "rank": 2,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Deduction. (Rank 2 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 10"
+          ]
+        },
+        {
+          "rank": 3,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Deduction. (Rank 3 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 15"
+          ]
+        },
+        {
+          "rank": 4,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Deduction. (Rank 4 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 20"
+          ]
+        },
+        {
+          "rank": 5,
+          "cost": 10,
+          "description": "Further mastery of Dreamlike Deduction. (Rank 5 of 5)",
+          "effects": [
+            "Increase Reasoning Potential by 25"
+          ]
+        }
+      ],
+      "description": "This passive ability masters the art of Dreamlike Deduction, a discipline that rewards dedicated practice with growing power.",
+      "aaNumber": null,
       "sourceCategory": "HoT",
       "_fillSource": "metadata-fallback"
     }
