@@ -375,6 +375,31 @@ export function evolutionBonuses(item) {
 // ------------------------------------------------------------
 
 /**
+ * Baked caps (user ruling 2026-10-29): a piece's baked totals may
+ * never exceed ONE FULL SOCKET LOAD per key — what baking an entire
+ * 2/2/2/2/1 load (minor/moderate/major/epic/artifact) of augments of
+ * one key yields on the S2 ladders:
+ *   db/ob:    2*5 + 2*10 + 2*15 + 2*20 + 25   = 125
+ *   hp/mana:  2*15 + 2*30 + 2*50 + 2*75 + 100 = 440
+ *   one stat or resist: 2*2 + 2*4 + 2*6 + 2*8 + 10 = 50
+ * Enforced in bakeTiers — the single funnel for fusion and
+ * transition bakes — as headroom: a bake adds at most (cap - current)
+ * and never reduces a total, so pieces already above a cap (baked
+ * before this ruling) are grandfathered and simply gain no more.
+ * Socketed (unbaked) augments are NOT capped; only the permanent
+ * baked layer is. If the augment ladders are ever retuned, recompute
+ * these caps from the same formula.
+ */
+export const BAKED_CAPS = { db: 125, ob: 125, hp: 440, mana: 440, stat: 50, resist: 50 };
+
+/** Add `value` to a baked total, bounded by the key's cap headroom. */
+function bakedAdd(current, value, cap) {
+    const cur = Number(current) || 0;
+    const add = Math.max(0, Math.min(Number(value) || 0, cap - cur));
+    return cur + add;
+}
+
+/**
  * Bake socketed augments of the given tiers into the state's baked
  * totals. Returns a new state.
  */
@@ -385,14 +410,14 @@ export function bakeTiers(state, tiers) {
     const keep = [];
     for (const a of next.augments) {
         if (tiers.includes(a.tier)) {
-            next.bakedDb = (Number(next.bakedDb) || 0) + (Number(a.db) || 0);
-            next.bakedOb = (Number(next.bakedOb) || 0) + (Number(a.ob) || 0);
-            next.bakedHp = (Number(next.bakedHp) || 0) + (Number(a.hp) || 0);
-            next.bakedMana = (Number(next.bakedMana) || 0) + (Number(a.mana) || 0);
+            next.bakedDb = bakedAdd(next.bakedDb, a.db, BAKED_CAPS.db);
+            next.bakedOb = bakedAdd(next.bakedOb, a.ob, BAKED_CAPS.ob);
+            next.bakedHp = bakedAdd(next.bakedHp, a.hp, BAKED_CAPS.hp);
+            next.bakedMana = bakedAdd(next.bakedMana, a.mana, BAKED_CAPS.mana);
             for (const [k, v] of Object.entries(a.stats ?? {}))
-                next.bakedStats[k] = (Number(next.bakedStats[k]) || 0) + (Number(v) || 0);
+                next.bakedStats[k] = bakedAdd(next.bakedStats[k], v, BAKED_CAPS.stat);
             for (const [k, v] of Object.entries(a.resistances ?? {}))
-                next.bakedResists[k] = (Number(next.bakedResists[k]) || 0) + (Number(v) || 0);
+                next.bakedResists[k] = bakedAdd(next.bakedResists[k], v, BAKED_CAPS.resist);
         } else {
             keep.push(a);
         }
