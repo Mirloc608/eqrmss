@@ -34,7 +34,12 @@ export function qualityForRoll(natural) {
 // the evolution ladder values and map ladder-to-ladder (the ladder in
 // evolution-lines.json moved from step 60 to step 40 the same day).
 export const DIFFICULTY_SCALE = 0.30;
-const TECHNIQUE_LADDER = { 25: 25, 85: 65, 145: 105, 205: 145, 265: 185, 325: 225, 385: 265, 445: 305, 505: 345, 565: 385, 625: 425 };
+const TECHNIQUE_LADDER = { 25: 25, 85: 65, 145: 105, 205: 145, 216: 161, 226: 175, 235: 188, 243: 200, 250: 211, 256: 221, 261: 230, 266: 238, 270: 245, 274: 251, 277: 256, 280: 261, 282: 265, 284: 269, 286: 272, 287: 275, 288: 277, 289: 279, 290: 281, 291: 282, 292: 283, 293: 284, 294: 285, 295: 285, 296: 285, 297: 285, 298: 285, 299: 285, 300: 285,
+    // Legacy stored difficulties (pre-retune service data, tiers 5-11):
+    // the data service has no recipe update endpoint, so service-fed
+    // worlds still serve these values; map them to the same retuned
+    // combine trivials as their renumbered repo counterparts.
+    265: 161, 325: 175, 385: 188, 445: 200, 505: 211, 565: 221, 625: 230 };
 export function effectiveDifficulty(recipe) {
     const raw = Number(recipe?.difficulty) || 0;
     if (String(recipe?.id ?? "").startsWith("technique-") && TECHNIQUE_LADDER[raw] != null) {

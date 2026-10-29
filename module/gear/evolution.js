@@ -86,12 +86,15 @@ export function formCap(form) { return Math.max(0, Math.floor(Number(form) || 0)
 
 /** DIY trivial for a combine performed in the given form (tier). */
 export function trivialForTier(cfg, tier) {
-    return (Number(cfg?.trivialBase) || 25) + ((Number(cfg?.trivialStep) || 40) * (Math.max(1, tier) - 1));
+    const t = Math.max(1, tier);
+    const table = cfg?.trivialByTier;
+    if (table && table[String(t)] != null) return Number(table[String(t)]);
+    return (Number(cfg?.trivialBase) || 25) + ((Number(cfg?.trivialStep) || 40) * (t - 1));
 }
 
 /** NPC fee in gold pieces for a combine in the given form (tier). */
 export function npcFeeGp(cfg, tier) {
-    return (Number(cfg?.npcFeeBaseGp) || 50) * Math.pow(2, Math.max(1, tier) - 1);
+    const t = Math.max(1, tier); return (Number(cfg?.npcFeeBaseGp) || 50) * t * t;
 }
 
 // ------------------------------------------------------------
