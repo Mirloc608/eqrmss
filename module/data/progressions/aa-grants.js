@@ -1019,7 +1019,7 @@ export const AA_GRANTS = {
    "hastened-companions-blessing",
    "hastened-first-spire-of-enchantment",
    "hastened-forceful-rejuvenation",
-   "hastened-mezmerization",
+   "hastened-mesmerization",
    "hastened-second-spire-of-enchantment",
    "hastened-third-spire-of-enchantment",
    "intrinsic-efficiency",
