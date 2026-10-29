@@ -34,7 +34,7 @@ export function qualityForRoll(natural) {
 // the evolution ladder values and map ladder-to-ladder (the ladder in
 // evolution-lines.json moved from step 60 to step 40 the same day).
 export const DIFFICULTY_SCALE = 0.30;
-const TECHNIQUE_LADDER = { 25: 25, 85: 65, 145: 105, 205: 145, 265: 185, 325: 225, 385: 265 };
+const TECHNIQUE_LADDER = { 25: 25, 85: 65, 145: 105, 205: 145, 265: 185, 325: 225, 385: 265, 445: 305 };
 export function effectiveDifficulty(recipe) {
     const raw = Number(recipe?.difficulty) || 0;
     if (String(recipe?.id ?? "").startsWith("technique-") && TECHNIQUE_LADDER[raw] != null) {
