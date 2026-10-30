@@ -19123,21 +19123,847 @@
    ]
   }
  },
- "weaponLine": {
-  "forms": [
-   {
-    "form": 1,
-    "name": "Tarnished",
-    "material": "iron",
-    "condition": "worn"
+ "weaponLadders": {
+  "maxEvolvingWeapons": 3,
+  "formats": {
+   "1hs": {
+    "name": "1H Slashing",
+    "itemtype": 0,
+    "skill": "skill-smithing",
+    "floor": {
+     "damage": 4,
+     "delay": 28
+    },
+    "anchor": {
+     "damage": 20,
+     "delay": 30
+    },
+    "forms": {
+     "2": "Short Sword of Slaughter",
+     "3": "Kobold Sword",
+     "4": "Coldain Velium Short Sword",
+     "5": "Forged Firebrand Scimitar",
+     "6": "Tailor-made Whip",
+     "7": "Scimitar of the Leafrunner",
+     "8": "Wandering Halfling Blade",
+     "9": "Coldain Velium Battle Axe",
+     "10": "Refined Mithril Blade",
+     "11": "Green Jade Broadsword",
+     "12": "Ornate Miner's Pick",
+     "13": "Stone Bladed Axe",
+     "14": "Pirate's Best Friend",
+     "15": "Falchion of Flowing Water",
+     "16": "Balanced War Axe",
+     "17": "Sharpened Explorer's Machete",
+     "18": "Elaborate Defiant Kama",
+     "19": "Raging Sword of Eternal Power",
+     "20": "Eulogy, the Bloodthirsty Blade",
+     "21": "Claw of the Lavascale Drake",
+     "22": "Stalwart Leather Whip",
+     "23": "Extravagant Uninfused Onyx Inlaid Hand Axe",
+     "24": "Regal Uninfused Ragged Cutlass",
+     "25": "Wingblade",
+     "26": "August Uninfused Sharpstone Sword",
+     "27": "August Uninfused Buccaneer's Blade",
+     "28": "August Uninfused Dark Harvester",
+     "29": "August Infused Blade of Solace",
+     "30": "August Uninfused Blade of Solace",
+     "31": "Siren's Blade",
+     "32": "Ocean's Wrath Axe",
+     "33": "Instructor's Blade"
+    },
+    "capstones": {
+     "warrior": {
+      "epic": [
+       "Blade of Strategy",
+       "Blade of Tactics"
+      ],
+      "epicTwoHanded": "Jagged Blade of War",
+      "analog": [
+       "Blades of Rile Sathir"
+      ],
+      "analogPair": true
+     },
+     "ranger": {
+      "epic": [
+       "Swiftwind",
+       "Earthcaller"
+      ],
+      "analog": "Thorns of Warslik",
+      "analogPair": true
+     },
+     "shadowknight": {
+      "analog": "Greenmist"
+     },
+     "druid": {
+      "epic": "Nature Walkers Scimitar",
+      "analog": "Scimitar of the Swamp Mother"
+     },
+     "bard": {
+      "epic": "Singing Short Sword",
+      "analog": "Songblade of Drusella"
+     }
+    }
    },
-   {
-    "form": 2,
-    "name": "Forged",
-    "material": "steel",
-    "condition": "normal"
+   "2hs": {
+    "name": "2H Slashing",
+    "itemtype": 1,
+    "skill": "skill-smithing",
+    "floor": {
+     "damage": 8,
+     "delay": 51
+    },
+    "anchor": {
+     "damage": 46,
+     "delay": 37
+    },
+    "forms": {
+     "2": "Dull Velium Battle Axe",
+     "3": "Crude Defiant Greatsword",
+     "4": "Coldain Velium Two Handed Sword",
+     "5": "Forged Firebrand Halberd",
+     "6": "Nathsar Greatsword",
+     "7": "Blackened Iron Bastard Sword",
+     "8": "Icy War Blade",
+     "9": "Gem-Hilted Bastard Sword",
+     "10": "Vehement Sword of Reivaj",
+     "11": "Scythe of Eternal Ice",
+     "12": "Fatecaller",
+     "13": "Silver Plated Great Axe",
+     "14": "Sombrous Claidmore",
+     "15": "Ensorcelled Great Sword of the Night",
+     "16": "Golden Gem-Bladed Bastard Sword",
+     "17": "Pale Golden Great Sword",
+     "18": "Revtu's Axe",
+     "19": "Primal Velium Claidhmore",
+     "20": "Chaotic Korlach Mangler",
+     "21": "Fang of Feratha",
+     "22": "Faraday Stormrider's Fiery Avenger",
+     "23": "Intricately Carved Greatsword",
+     "24": "Extravagant Uninfused Scythe of Blood",
+     "25": "August Uninfused Magic Blade Greataxe",
+     "26": "Regal Uninfused Knight's Hooked Greatblade",
+     "27": "Shifting Glaive",
+     "28": "Dreadstone Ravager's Scythe",
+     "29": "August Infused Divine Runic Greatsword",
+     "30": "August Infused Bloodworked Reaper",
+     "31": "August Uninfused Divine Runic Greatsword",
+     "32": "August Uninfused Bloodworked Reaper",
+     "33": "August Infused Magic Blade Greataxe"
+    },
+    "capstones": {
+     "warrior": {
+      "epic": "Jagged Blade of War",
+      "epicPair": [
+       "Blade of Strategy",
+       "Blade of Tactics"
+      ]
+     },
+     "paladin": {
+      "epic": "Fiery Defender",
+      "analog": "Dawnblade of Ganak"
+     },
+     "shadowknight": {
+      "epic": "Innoruuk's Curse"
+     },
+     "berserker": {
+      "epic": "Kerasian Axe of Ire",
+      "analog": "Waraxe of the Dread Legion"
+     }
+    }
+   },
+   "piercing": {
+    "name": "Piercing",
+    "itemtype": 2,
+    "skill": "skill-smithing",
+    "floor": {
+     "damage": 3,
+     "delay": 24
+    },
+    "anchor": {
+     "damage": 20,
+     "delay": 30
+    },
+    "forms": {
+     "2": "Bekerak's New Spear",
+     "3": "Dagger of Marnek",
+     "4": "Coldain Velium Dagger",
+     "5": "Jagged Metal Shard",
+     "6": "Giant Wolf Fang",
+     "7": "Scaled Bone Rapier",
+     "8": "Bloodied Dirk",
+     "9": "Cazic Quill",
+     "10": "Gloomwater Harpoon",
+     "11": "Spear of Rock",
+     "12": "Pale Velium-Bladed Dagger",
+     "13": "Barbed Velium Spear",
+     "14": "Sharp Stone Shiv",
+     "15": "Siren Song, Dagger of the Sea",
+     "16": "Rough Consigned Stone Dagger",
+     "17": "Fabled Embalmers Skinning Knife",
+     "18": "Blade of Shadow",
+     "19": "Fabled Horn of Hsagra",
+     "20": "Castrum Jeweled Parrying Dagger",
+     "21": "Volatile Blackflame Stiletto",
+     "22": "Gleaming Cliknar Pincer",
+     "23": "Glorious Infused Gem-Tipped Spear",
+     "24": "Deathdrinker's Dirk of Darkness",
+     "25": "Spike of Rituals",
+     "26": "August Uninfused Flamedancer's Sword",
+     "27": "Siren's Knife",
+     "28": "Siren's Rapier",
+     "29": "Tidespear",
+     "30": "Living Dagger",
+     "31": "Rod of the Cuisinier",
+     "32": "Talon of Rexsaurkarus",
+     "33": "Vnayyanye's Transfixion"
+    },
+    "capstones": {
+     "rogue": {
+      "epic": "Ragebringer",
+      "analog": "Fang of Xalgoz"
+     },
+     "shaman": {
+      "epic": "Spear of Fate",
+      "analog": "Spear of the Scaled Mystic"
+     }
+    }
+   },
+   "1hb": {
+    "name": "1H Blunt",
+    "itemtype": 3,
+    "skill": "skill-smithing",
+    "floor": {
+     "damage": 4,
+     "delay": 30
+    },
+    "anchor": {
+     "damage": 20,
+     "delay": 30
+    },
+    "forms": {
+     "2": "Phosphorous Torch",
+     "3": "Silver Wand",
+     "4": "Velium-Headed Mace",
+     "5": "Master Wu's Trance Stick",
+     "6": "Forged Firebrand Mace",
+     "7": "Clockwork Soldier's Scepter",
+     "8": "Decorated Summoner's Staff",
+     "9": "Pale Platinum-Hafted Morningstar",
+     "10": "Runed Velium Battlehammer",
+     "11": "Star of the Guardian",
+     "12": "Club of Slime",
+     "13": "Mace of the Fallen Crusader",
+     "14": "Fabled Stone Thunder",
+     "15": "Tae Ew Mace",
+     "16": "Wand of Stone Mastery",
+     "17": "Rod of Discord",
+     "18": "Cold Iron Hammer",
+     "19": "Castrum Spiked Mace",
+     "20": "Blastertron Mechano-Pylon Mk. IV",
+     "21": "Runewand of Necropotence",
+     "22": "Rod of Battle",
+     "23": "Staff of Clarification",
+     "24": "Fearbrand",
+     "25": "Wohda's Mace of Assuring Death",
+     "26": "Siren's Hammer",
+     "27": "Mace of Violent Waters",
+     "28": "Siren's Bludgeon",
+     "29": "Siren's Mace",
+     "30": "Voracious",
+     "31": "Desperation",
+     "32": "Mariner's Mace",
+     "33": "Vicarium's Hammer"
+    },
+    "capstones": {
+     "cleric": {
+      "epic": "Water Sprinkler of Nem Ankh",
+      "analog": "Censer of the Green Dawn"
+     },
+     "necromancer": {
+      "epic": "Scythe of the Shadowed Soul",
+      "analog": "Rod of the Drowned Court"
+     },
+     "wizard": {
+      "epic": "Staff of the Four",
+      "analog": "Staff of the Skyfire Ash"
+     },
+     "magician": {
+      "epic": "Orb of Mastery",
+      "analog": "Orb of the Sebilite Deep"
+     },
+     "enchanter": {
+      "epic": "Staff of the Serpent",
+      "analog": "Scepter of the Veiled Court"
+     }
+    }
+   },
+   "2hb": {
+    "name": "2H Blunt",
+    "itemtype": 4,
+    "skill": "skill-smithing",
+    "floor": {
+     "damage": 7,
+     "delay": 45
+    },
+    "anchor": {
+     "damage": 71,
+     "delay": 32
+    },
+    "forms": {
+     "2": "Truwian Baton",
+     "3": "Dragon Spine Staff",
+     "4": "Velium Great Staff",
+     "5": "Frozen Great Staff of Permafrost",
+     "6": "Blood Crusted Battle Hammer",
+     "7": "Staff of Elemental Mastery: Water",
+     "8": "Ghoul's Skull Mace",
+     "9": "Sand-Encrusted Hammer",
+     "10": "Black Acrylia Warhammer",
+     "11": "Blackened Iron Staff",
+     "12": "Ethereal Crown of Despair",
+     "13": "Zraxthril Warhammer",
+     "14": "Gorewood Staff",
+     "15": "Facesmasher",
+     "16": "Pale Golden Maul",
+     "17": "Minohten Hero Maul",
+     "18": "Staff of Primordial Summoning",
+     "19": "Wind Thistle",
+     "20": "Scepter of Cracked Heads",
+     "21": "Small Hammer of Cessation",
+     "22": "All-Purpose Longwrench",
+     "23": "Bouncer's Best Friend",
+     "24": "Extravagant Uninfused Crystalline Long Hammer",
+     "25": "Staff of the Indagator",
+     "26": "Narius' Staff",
+     "27": "Fused Coral Quarterstaff",
+     "28": "Etherwood Greatclub",
+     "29": "August Infused Firemage's Staff",
+     "30": "August Infused Military Warsledge",
+     "31": "August Uninfused Firemage's Staff",
+     "32": "August Uninfused Military Warsledge",
+     "33": "Siren's Kraken Staff"
+    }
+   },
+   "2hp": {
+    "name": "2H Piercing",
+    "itemtype": 35,
+    "skill": "skill-smithing",
+    "floor": {
+     "damage": 4,
+     "delay": 23
+    },
+    "anchor": {
+     "damage": 56,
+     "delay": 32
+    },
+    "forms": {
+     "2": "Rujarkian Goblin Spear",
+     "3": "Gray Metal Pike",
+     "4": "Velium-Hafted Long Spear",
+     "5": "Astral Lance",
+     "6": "Two Tined Corpse Pitchfork",
+     "7": "Bloodstained Spear",
+     "8": "Timeworn Desert Spear",
+     "9": "Spear of Fire",
+     "10": "Simple Consigned Spear",
+     "11": "Ornate Defiant Harpoon",
+     "12": "Ornate Long Spear",
+     "13": "Pale Gem-Hafted Broad Spear",
+     "14": "Pale Velium-Hafted Broad Spear",
+     "15": "Charger's Lance",
+     "16": "Finhook Blade Spear",
+     "17": "War Rage Lance",
+     "18": "Dragonrider's Lance",
+     "19": "Warspear of Vexation",
+     "20": "Indigo-Wrapped Spear",
+     "21": "Trainer's Drill Arm",
+     "22": "Stoneheart Spear",
+     "23": "Time's Sundering",
+     "24": "Extravagant Uninfused Naginata",
+     "25": "August Uninfused Spear of Beauty",
+     "26": "Glorious Uninfused Fauchard",
+     "27": "Envenomed Goral-Prod",
+     "28": "Regal Infused Warhoned Glaive",
+     "29": "Regal Uninfused Warhoned Glaive",
+     "30": "Dragoncold Lance",
+     "31": "The Gourdsmasher",
+     "32": "Ethernere Charged Pike",
+     "33": "August Infused Spear of Beauty"
+    }
+   },
+   "archery": {
+    "name": "Archery",
+    "itemtype": 5,
+    "skill": "skill-fletching",
+    "floor": {
+     "damage": 4,
+     "delay": 41
+    },
+    "anchor": {
+     "damage": 41,
+     "delay": 34
+    },
+    "forms": {
+     "2": "Great Bow of Slaughter",
+     "3": "Sarnak War Bow",
+     "4": "Light Velium Bow",
+     "5": "Rujarkian Short Bow",
+     "6": "Shaped Darkwood Recurve Bow",
+     "7": "Bow of the Heartseeker",
+     "8": "Bow of Eternal Ice",
+     "9": "Recurved Velium Bow",
+     "10": "Twisted Longbow",
+     "11": "Bow of Shadows",
+     "12": "Ornate Defiant Bow",
+     "13": "Nightmarewood Compound Bow",
+     "14": "Primal Velium Reinforced Bow",
+     "15": "Farcaster Bow",
+     "16": "Archaic Reef Hunter Bow",
+     "17": "Clockwork Bolt Thrower",
+     "18": "Bentback Bow",
+     "19": "Vae`Aender, Stitch's Bow",
+     "20": "Gilded Bow of the Hunter",
+     "21": "Heartwood Bow",
+     "22": "Stygian Nightmare's Bow",
+     "23": "Longbow of Time's Reflection",
+     "24": "Longbow of Intermittent Flame",
+     "25": "Arcus Spiritus",
+     "26": "Arcus Eminus",
+     "27": "Prick of Fear",
+     "28": "Gilded Prodigal Harrier",
+     "29": "August Infused Glowbow",
+     "30": "August Uninfused Glowbow",
+     "31": "Siren's Hunting Bow",
+     "32": "Siren's War Bow",
+     "33": "Thassis' Pride"
+    }
+   },
+   "throwing": {
+    "name": "Throwing",
+    "itemtype": 19,
+    "skill": "skill-fletching",
+    "floor": {
+     "damage": 3,
+     "delay": 22
+    },
+    "anchor": {
+     "damage": 105,
+     "delay": 22
+    },
+    "forms": {
+     "2": "Tiny Brass Shuriken",
+     "3": "Sifaye Dart",
+     "4": "Velium Throwing Knife",
+     "5": "Forged Velium Shuriken",
+     "6": "Silvered Shuriken",
+     "7": "Forged Velium Throwing Knife",
+     "8": "Hunter's Dirk",
+     "9": "Summoned: Shuriken of Quellious",
+     "10": "Antonian Javelin",
+     "11": "Summoned: Knife of Luclin",
+     "12": "Shissar Fangs",
+     "13": "Owlbear Feather Dart",
+     "14": "Insanity Fangs",
+     "15": "Fleshtear Axe",
+     "16": "Velium Spear of Impaling",
+     "17": "Explosive Bola",
+     "18": "Axe of the Destroyer",
+     "19": "Axe of the Savage",
+     "20": "Axe of the Demolisher",
+     "21": "Steel Longflight Javelin",
+     "22": "Tainted Axe of Hatred",
+     "23": "Guardian Blade",
+     "24": "Well Balanced Throwing Knife",
+     "25": "Ethercharged Bola",
+     "26": "Runic Steel War Javelin",
+     "27": "Frozen Heart Shard",
+     "28": "Frozen Tears",
+     "29": "Clay-Bladed Dagger",
+     "30": "Alaran Throwing Blade",
+     "31": "Etherpiercer Javelin",
+     "32": "Timesplitter Throwing Axe",
+     "33": "Vest Throwing Knife"
+    }
+   },
+   "h2h": {
+    "name": "Hand to Hand",
+    "itemtype": 45,
+    "skill": "skill-fletching",
+    "floor": {
+     "damage": 3,
+     "delay": 24
+    },
+    "anchor": {
+     "damage": 21,
+     "delay": 18
+    },
+    "forms": {
+     "2": "Jagged Claw of Rending",
+     "3": "Silent Fist Clansman Hand Wraps",
+     "4": "Velium Cestus",
+     "5": "Fireclaw Talons",
+     "6": "Claw of the Grunt",
+     "7": "Iced Hand Wraps",
+     "8": "Steward Ritual Claws",
+     "9": "Whitened Treant Fists",
+     "10": "Living Stone Gloves",
+     "11": "Ornate Leather Fist Wraps",
+     "12": "Intricate Defiant Handwraps",
+     "13": "Fist of Mithril",
+     "14": "Sunderock Mineral Claw",
+     "15": "Hero's Quickclaw",
+     "16": "Castrum Golden Orb",
+     "17": "Ball of Sunlight",
+     "18": "Fist of the Acolyte",
+     "19": "Stalwart Ulak",
+     "20": "Swirling Fist of Fog",
+     "21": "Extravagant Infused Honed Ulak",
+     "22": "Glorious Infused Razor-Edged Ulak",
+     "23": "Regal Uninfused Bladed Knuckle Dusters",
+     "24": "Possessed Dreadstone Master's Katar",
+     "25": "Praetor's Claws",
+     "26": "Likato Fistwraps",
+     "27": "Dark Feral Ravagers",
+     "28": "August Infused Knuckle Blade",
+     "29": "August Infused Magesteel Knuckleduster",
+     "30": "August Uninfused Knuckle Blade",
+     "31": "August Uninfused Magesteel Knuckleduster",
+     "32": "Siren's Ulak",
+     "33": "Oaken Knuckledusters"
+    },
+    "capstones": {
+     "monk": {
+      "epic": "Celestial Fists",
+      "analog": "Scaled Fists of Atrebe"
+     },
+     "beastlord": {
+      "epic": "Claw of the Savage Spirit",
+      "epicPair": true,
+      "analog": "Claws of the Feral Brood",
+      "analogPair": true
+     }
+    }
    }
-  ]
+  },
+  "legality": {
+   "warrior": [
+    "1hs",
+    "2hs",
+    "piercing",
+    "1hb",
+    "2hb",
+    "2hp",
+    "archery",
+    "throwing"
+   ],
+   "cleric": [
+    "1hb",
+    "2hb"
+   ],
+   "paladin": [
+    "1hs",
+    "2hs",
+    "1hb",
+    "2hb",
+    "2hp",
+    "archery"
+   ],
+   "ranger": [
+    "1hs",
+    "2hs",
+    "piercing",
+    "1hb",
+    "2hp",
+    "archery",
+    "throwing"
+   ],
+   "shadowknight": [
+    "1hs",
+    "2hs",
+    "piercing",
+    "1hb",
+    "2hb",
+    "2hp",
+    "archery"
+   ],
+   "druid": [
+    "1hs",
+    "1hb",
+    "2hb"
+   ],
+   "monk": [
+    "1hs",
+    "piercing",
+    "1hb",
+    "2hb",
+    "throwing",
+    "h2h"
+   ],
+   "bard": [
+    "1hs",
+    "piercing",
+    "1hb",
+    "2hp",
+    "archery",
+    "throwing"
+   ],
+   "rogue": [
+    "1hs",
+    "piercing",
+    "throwing"
+   ],
+   "shaman": [
+    "piercing",
+    "1hb",
+    "2hb",
+    "2hp"
+   ],
+   "necromancer": [
+    "piercing",
+    "1hb",
+    "2hb"
+   ],
+   "wizard": [
+    "piercing",
+    "1hb",
+    "2hb"
+   ],
+   "magician": [
+    "piercing",
+    "1hb",
+    "2hb"
+   ],
+   "enchanter": [
+    "piercing",
+    "1hb",
+    "2hb"
+   ],
+   "beastlord": [
+    "1hs",
+    "piercing",
+    "1hb",
+    "2hb",
+    "2hp",
+    "archery",
+    "h2h"
+   ],
+   "berserker": [
+    "2hs",
+    "2hb",
+    "2hp",
+    "throwing"
+   ]
+  },
+  "templateFormats": {
+   "broadsword": "1hs",
+   "long_sword": "1hs",
+   "short_sword": "1hs",
+   "cutlass": "1hs",
+   "sabre": "1hs",
+   "scimitar": "1hs",
+   "falchion": "1hs",
+   "axe": "1hs",
+   "handaxe": "1hs",
+   "two_hand_sword": "2hs",
+   "no_dachi": "2hs",
+   "battle_axe": "2hs",
+   "claymore": "2hs",
+   "dirk": "piercing",
+   "foil": "piercing",
+   "rapier": "piercing",
+   "main_gauche": "piercing",
+   "sai": "piercing",
+   "mace": "1hb",
+   "morning_star": "1hb",
+   "war_hammer": "1hb",
+   "club": "1hb",
+   "tonfa": "1hb",
+   "blackjack": "1hb",
+   "whip": "1hb",
+   "cat_o_nine_tails": "1hb",
+   "quarterstaff": "2hb",
+   "war_mattock": "2hb",
+   "pick": "2hb",
+   "flail": "2hb",
+   "lance": "2hp",
+   "boar_spear": "2hp",
+   "trident": "2hp",
+   "halberd": "2hp",
+   "long_bow": "archery",
+   "short_bow": "archery",
+   "composite_bow": "archery",
+   "crossbow_heavy": "archery",
+   "crossbow_light": "archery",
+   "dart": "throwing",
+   "shuriken": "throwing",
+   "bola": "throwing",
+   "boomerang": "throwing",
+   "harpoon": "throwing",
+   "blowpipe": "throwing",
+   "sling": "throwing",
+   "lasso": "throwing",
+   "knuckles": "h2h",
+   "handwraps": "h2h",
+   "weighted-gloves": "h2h",
+   "claws": "h2h",
+   "ulak": "h2h",
+   "knuckleblade": "h2h",
+   "katar": "h2h",
+   "bastard_sword": [
+    "1hs",
+    "2hs"
+   ],
+   "katana": [
+    "1hs",
+    "2hs"
+   ],
+   "cudgel": [
+    "1hb",
+    "2hb"
+   ],
+   "jo": [
+    "1hb",
+    "2hb"
+   ],
+   "nunchaku": [
+    "1hb",
+    "2hb"
+   ],
+   "dagger": [
+    "piercing",
+    "throwing"
+   ],
+   "tomahawk": [
+    "1hs",
+    "throwing"
+   ],
+   "spear": [
+    "2hp",
+    "throwing"
+   ],
+   "javelin": [
+    "2hp",
+    "throwing"
+   ],
+   "pilum": [
+    "2hp",
+    "throwing"
+   ]
+  },
+  "feeders": {
+   "1hs": [
+    "Rusty Axe",
+    "Rusty Bastard Sword",
+    "Rusty Battle Axe",
+    "Rusty Broad Sword",
+    "Rusty Ceremonial Axe",
+    "Rusty Darkore Shortblade",
+    "Rusty Fer`Esh",
+    "Rusty Long Sword",
+    "Rusty Scimitar",
+    "Rusty Shan`Tok",
+    "Rusty Sheer Blade",
+    "Rusty Short Sword",
+    "Tarnished Axe",
+    "Tarnished Bastard Sword",
+    "Tarnished Battle Axe",
+    "Tarnished Broad Sword",
+    "Tarnished Fer`Esh",
+    "Tarnished Long Sword",
+    "Tarnished Mining Pick",
+    "Tarnished Scimitar",
+    "Tarnished Shan`Tok",
+    "Tarnished Sheer Blade",
+    "Tarnished Short Sword",
+    "Tarnished Swashbuckler's Scimitar"
+   ],
+   "2hs": [
+    "Rusty Great Axe",
+    "Rusty Halberd",
+    "Rusty Scythe",
+    "Rusty Two Handed Battle Axe",
+    "Rusty Two Handed Sword",
+    "Tarnished Great Axe",
+    "Tarnished Halberd",
+    "Tarnished Scythe",
+    "Tarnished Two Handed Battle Axe",
+    "Tarnished Two Handed Sword"
+   ],
+   "piercing": [
+    "Rusty Dagger",
+    "Rusty Dagger of Slaying",
+    "Rusty Letter Opener",
+    "Rusty Mining Pick",
+    "Rusty Rapier",
+    "Rusty Shortened Spear",
+    "Rusty Spear",
+    "Tarnished Dagger",
+    "Tarnished Rapier",
+    "Tarnished Shortened Spear",
+    "Tarnished Spear"
+   ],
+   "1hb": [
+    "Rusty Flail",
+    "Rusty Mace",
+    "Rusty Morning Star",
+    "Rusty Warhammer",
+    "Tarnished Flail",
+    "Tarnished Mace",
+    "Tarnished Morning Star",
+    "Tarnished Warhammer"
+   ],
+   "2hb": [
+    "Rusty Staff",
+    "Rusty Two Handed Hammer",
+    "Tarnished Driveshaft",
+    "Tarnished Staff"
+   ],
+   "2hp": [
+    "Rusty Boar Spear",
+    "Rusty Lance",
+    "Rusty Long Spear",
+    "Rusty Pike",
+    "Rusty Trident",
+    "Tarnished Boar Spear",
+    "Tarnished Lance",
+    "Tarnished Long Spear",
+    "Tarnished Pike",
+    "Tarnished Trident"
+   ],
+   "archery": [
+    "Rusty Clockwork Bow",
+    "Rusty Long Bow",
+    "Rusty Short Bow",
+    "Tarnished Clockwork Bow",
+    "Tarnished Long Bow",
+    "Tarnished Short Bow"
+   ],
+   "throwing": [
+    "Rusty Bola",
+    "Rusty Boomerang",
+    "Rusty Dart",
+    "Rusty Harpoon",
+    "Rusty Javelin",
+    "Rusty Shuriken",
+    "Rusty Throwing Axe",
+    "Rusty Throwing Spear",
+    "Tarnished Bola",
+    "Tarnished Boomerang",
+    "Tarnished Dart",
+    "Tarnished Harpoon",
+    "Tarnished Javelin",
+    "Tarnished Shuriken",
+    "Tarnished Throwing Axe",
+    "Tarnished Throwing Spear"
+   ],
+   "h2h": [
+    "Rusty Knuckles",
+    "Rusty Ulak",
+    "Tarnished Knuckles",
+    "Tarnished Ulak"
+   ]
+  }
  },
  "catalysts": {
   "comment": "Crescent Reach redesign (2026-10-27): armor combines burn stackable catalyst materials, not armor pieces. slotCosts = units per combine by vessel slot (every combine, ripening or transition). families are keyed by the vessel's CURRENT form (tier): form 1 burns Decaying, form 2 burns Rubicite, form 3 burns Sebilite. Form 4 has no single family: its pieces ripen on their own faction's molds (families['4'].factions, keyed by the vessel set's faction), and the form-3 TRANSITION burns a chosen faction's mold instead of Sebilite — the mold decides the form-4 set (variants on the form-4 entry). The material within a family follows the vessel's material class (a line may override with catalystCategory — beastlord is leather).",

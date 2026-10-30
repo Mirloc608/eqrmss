@@ -18,6 +18,23 @@
     </div>
 
     {{#if evolvable}}
+    {{#if needsFormat}}
+    <div class="evo-section evo-format-panel">
+        <h3>Begin Evolution — Choose Format</h3>
+        <p class="evo-format-note">The format is chosen once and locked for the life of this weapon. This character runs {{evolvingWeapons}} of {{maxEvolvingWeapons}} evolving weapons.</p>
+        {{#if dualModeNote}}<p class="evo-format-note"><i class="fas fa-thumbtack"></i> {{dualModeNote}}</p>{{/if}}
+        {{#each formatChoices}}
+        <label class="evo-format-choice">
+            <input type="radio" name="evo-format" value="{{key}}" {{#if selected}}checked{{/if}} />
+            {{name}} — form 1: {{floorDamage}} dmg / {{floorDelay}} delay &middot; form 33: {{anchorDamage}} dmg / {{anchorDelay}} delay
+        </label>
+        {{/each}}
+        <button type="button" class="evo-begin-btn" data-action="beginEvolution" {{#if atWeaponCap}}disabled{{/if}}>
+            <i class="fas fa-fire"></i> Begin Evolution
+        </button>
+        {{#if atWeaponCap}}<p class="evo-verdict bad"><i class="fas fa-times"></i> This character already runs the maximum of {{maxEvolvingWeapons}} evolving weapons.</p>{{/if}}
+    </div>
+    {{/if}}
     <div class="evo-section">
         <h3>Reforge</h3>
         {{#if catalystMode}}
@@ -39,6 +56,9 @@
             {{/if}}
         {{/if}}
         {{else}}
+        {{#if needsFormat}}
+        <p class="evo-verdict">Choose a format above and Begin Evolution before feeding this weapon.</p>
+        {{else}}
         <label class="evo-fodder-label">Consume:
             <select class="evo-fodder-select">
                 {{#each candidates}}
@@ -54,6 +74,31 @@
             {{/if}}
         {{else}}
         <p class="evo-verdict">No candidate pieces in this character's inventory.</p>
+        {{/if}}
+        {{#if showCapstone}}
+        <div class="evo-capstone-choice">
+            <p class="evo-capstone-label">Capstone identity (form 33):</p>
+            {{#each capstoneOptions}}
+            <label>
+                <input type="radio" name="evo-capstone" value="{{kind}}" {{#if selected}}checked{{/if}} />
+                {{kind}} — {{namesLabel}}{{#if pair}} (pair){{/if}}
+            </label>
+            {{/each}}
+        </div>
+        {{/if}}
+        {{#if showProcChoice}}
+        <div class="evo-proc-choice">
+            <p class="evo-proc-label">The fed weapon carries a proc ({{fodderProcName}}) — which proc does the vessel keep?</p>
+            <label>
+                <input type="radio" name="evo-proc" value="vessel" {{#if procVesselSelected}}checked{{/if}} />
+                Keep the vessel's proc ({{vesselProcName}})
+            </label>
+            <label>
+                <input type="radio" name="evo-proc" value="fodder" {{#if procFodderSelected}}checked{{/if}} />
+                Take the fed weapon's proc ({{fodderProcName}})
+            </label>
+        </div>
+        {{/if}}
         {{/if}}
         {{/if}}
 
@@ -73,6 +118,11 @@
         <button type="button" class="evo-combine-btn" data-action="combine" {{#unless canCombine}}disabled{{/unless}}>
             <i class="fas fa-fire"></i> Reforge
         </button>
+        {{#if canConvertCapstone}}
+        <button type="button" class="evo-convert-btn" data-action="convertCapstone">
+            <i class="fas fa-exchange-alt"></i> {{convertLabel}}
+        </button>
+        {{/if}}
     </div>
 
     <div class="evo-section">

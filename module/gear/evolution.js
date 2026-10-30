@@ -217,6 +217,171 @@ export function setOf(lines, item) {
     return null;
 }
 
+// ------------------------------------------------------------
+// Weapon ladders (2026-10-29 build)
+//
+// The stub `weaponLine` (material/condition rungs) is superseded
+// by `weaponLadders`: nine format ladders keyed by EQ itemtype
+// (1hs, 2hs, piercing, 1hb, 2hb, 2hp, archery, throwing, h2h).
+// A weapon's format is chosen once (form-1 choice or the
+// reclassification feed) and stamped on its evolution record;
+// damage/delay are owned by the per-format curve, never by the
+// fed weapon. Named same-format feeds transition (free identity);
+// unnamed/feeder same-format feeds ripen.
+// ------------------------------------------------------------
+
+/** Round half to even (Python round()), unlike Math.round. */
+export function pyRound(x) {
+    const n = Number(x) || 0;
+    const fl = Math.floor(n);
+    const frac = n - fl;
+    if (Math.abs(frac - 0.5) < 1e-9) return (fl % 2 === 0) ? fl : fl + 1;
+    return Math.round(n);
+}
+
+/** The formats registry: { key: {name, skill, floor, anchor, forms, capstones} }. */
+export function weaponFormats(lines) {
+    return lines?.weaponLadders?.formats ?? {};
+}
+
+/** Format keys legal for a class slug, per the registry legality matrix. */
+export function legalWeaponFormats(lines, classKey) {
+    const legal = lines?.weaponLadders?.legality?.[classKey] ?? [];
+    const formats = weaponFormats(lines);
+    return (Array.isArray(legal) ? legal : []).filter(k => formats[k] || true);
+}
+
+/**
+ * Damage/delay for a format at a form, interpolated floor (form 1)
+ * -> anchor (form 33) on frac(f) = 0.18 + 0.82*((f-1)/32)^0.75,
+ * round-half-even. Delay interpolates in whichever direction the
+ * endpoints point. Returns null when the format is unknown.
+ */
+export function weaponCurve(lines, formatKey, form) {
+    const fmt = weaponFormats(lines)[formatKey];
+    if (!fmt?.floor || !fmt?.anchor) return null;
+    const f = Math.min(33, Math.max(1, Math.floor(Number(form) || 1)));
+    const frac = 0.18 + 0.82 * Math.pow((f - 1) / 32, 0.75);
+    const at = (a, b) => pyRound(a + (b - a) * frac);
+    return {
+        damage: at(Number(fmt.floor.damage) || 0, Number(fmt.anchor.damage) || 0),
+        delay: at(Number(fmt.floor.delay) || 0, Number(fmt.anchor.delay) || 0)
+    };
+}
+
+/** The registry feeder-list format for an item name, or null. */
+function feederFormatOf(lines, item) {
+    const feeders = lines?.weaponLadders?.feeders;
+    if (!feeders || !item?.name) return null;
+    if (Array.isArray(feeders)) return feeders.includes(item.name) ? formatOfWeapon(lines, item) : null;
+    for (const [key, names] of Object.entries(feeders)) {
+        if (Array.isArray(names) && names.includes(item.name)) return key;
+    }
+    return null;
+}
+
+function isRegistryFeeder(lines, item) {
+    const feeders = lines?.weaponLadders?.feeders;
+    if (!feeders || !item?.name) return false;
+    if (Array.isArray(feeders)) return feeders.includes(item.name);
+    return Object.values(feeders).some(names => Array.isArray(names) && names.includes(item.name));
+}
+
+/**
+ * A weapon's ladder format: the system.weaponFormat stamp wins,
+ * then the evolution record's format, then a single-format
+ * templateFormats mapping (dual-mode templates return null —
+ * their mode is pinned by the player's form-1 choice).
+ */
+export function formatOfWeapon(lines, item) {
+    const s = item?.system ?? {};
+    if (s.weaponFormat) return s.weaponFormat;
+    if (s.evolution?.format) return s.evolution.format;
+    const mapped = lines?.weaponLadders?.templateFormats?.[s.weaponTemplate];
+    if (typeof mapped === "string") return mapped;
+    return feederFormatOf(lines, item);
+}
+
+/**
+ * Classify a weapon for evolution feeds:
+ *   "feeder"  — system.feeder stamp or the registry feeder lists
+ *   "named"   — carries a system.weaponFormat stamp (catalog identity)
+ *   "unnamed" — anything else (composed / generic weapons)
+ * Returns null for non-weapons.
+ */
+export function classifyWeapon(lines, item) {
+    if (!item || item.type !== "weapon") return null;
+    if (item.system?.feeder || isRegistryFeeder(lines, item)) return "feeder";
+    if (item.system?.weaponFormat) return "named";
+    return "unnamed";
+}
+
+/**
+ * How many evolutionary weapons an actor runs: started weapon
+ * evolution records (stamped at format choice, i.e. carrying a
+ * format), with pair members sharing a pairId counting once.
+ */
+export function countEvolvingWeapons(actorItems) {
+    let items = [];
+    if (Array.isArray(actorItems)) items = actorItems;
+    else if (Array.isArray(actorItems?.contents)) items = actorItems.contents;
+    else if (actorItems) { try { items = [...actorItems]; } catch { items = []; } }
+    const pairs = new Set();
+    let count = 0;
+    for (const item of items) {
+        if (item?.type !== "weapon") continue;
+        const stamp = item.system?.evolution;
+        if (!stamp?.format) continue;
+        if (stamp.pairId) {
+            if (pairs.has(stamp.pairId)) continue;
+            pairs.add(stamp.pairId);
+        }
+        count++;
+    }
+    return count;
+}
+
+/**
+ * Capstone overlay options for a class on a format, in choice
+ * order epic / analog / ladder. Each: {kind, names, pair,
+ * twoHanded?, pairNames?}. The ladder option is the format's
+ * designated form-33 identity, when one is authored.
+ */
+export function capstoneOptions(lines, formatKey, classKey) {
+    const fmt = weaponFormats(lines)[formatKey];
+    if (!fmt) return [];
+    const out = [];
+    const cap = fmt.capstones?.[classKey] ?? null;
+    const asNames = (v) => v == null ? [] : (Array.isArray(v) ? [...v] : [v]);
+    if (cap?.epic != null) {
+        const names = asNames(cap.epic);
+        // epicPair === true means one catalog item manifested as
+        // a pair; an epicPair ARRAY is the pair manifestation a
+        // two-handed epic converts to (pairNames), not a pair here.
+        const opt = { kind: "epic", names, pair: names.length > 1 || cap.epicPair === true };
+        if (cap.epicTwoHanded) opt.twoHanded = cap.epicTwoHanded;
+        if (Array.isArray(cap.epicPair)) opt.pairNames = [...cap.epicPair];
+        out.push(opt);
+    }
+    if (cap?.analog != null) {
+        const names = asNames(cap.analog);
+        out.push({ kind: "analog", names, pair: names.length > 1 || !!cap.analogPair });
+    }
+    const ladderName = fmt.forms?.["33"] ?? fmt.forms?.[33] ?? null;
+    if (ladderName) out.push({ kind: "ladder", names: [ladderName], pair: false });
+    return out;
+}
+
+/** The proc a combine keeps: when only one side carries a proc
+ *  that proc wins under either choice; when both carry one, the
+ *  player's choice decides (defaulting to the vessel's). */
+export function resolveProcChoice(vesselProc, fodderProc, choice) {
+    if (!fodderProc) return vesselProc ?? null;
+    if (!vesselProc) return fodderProc;
+    if (choice === "fodder") return fodderProc;
+    return vesselProc;
+}
+
 /** Weapon form from the composer spec (material + condition). */
 export function weaponFormOf(lines, item) {
     const s = item?.system ?? {};
@@ -247,7 +412,7 @@ export function evolutionState(lines, item, ctx = {}) {
     if (!kind) return null;
 
     if (stamp && (stamp.form || stamp.line)) {
-        return {
+        const state = {
             kind,
             line: stamp.line ?? ctx.classKey ?? null,
             form: Number(stamp.form) || 1,
@@ -261,13 +426,29 @@ export function evolutionState(lines, item, ctx = {}) {
             bakedResists: (stamp.bakedResists && typeof stamp.bakedResists === "object") ? stamp.bakedResists : {},
             augments: Array.isArray(stamp.augments) ? stamp.augments : []
         };
+        if (kind === "weapon") {
+            // Weapon stamp additions: the pinned format, the
+            // current identity item name (null until the first
+            // transition), a shared pair id for pair capstones,
+            // the reclassification flag, and the material prefix
+            // last applied by a ripening merge (stripped on the
+            // next one).
+            state.format = stamp.format ?? item?.system?.weaponFormat ?? null;
+            state.identityName = stamp.identityName ?? null;
+            state.pairId = stamp.pairId ?? null;
+            state.reclassified = !!stamp.reclassified;
+            state.prefixApplied = stamp.prefixApplied ?? null;
+        }
+        return state;
     }
 
     if (kind === "weapon") {
-        const form = weaponFormOf(lines, item);
-        if (!form) return null;
-        return { kind, line: ctx.classKey ?? null, form, set: null,
-                 combines: 0, bakedDb: 0, bakedOb: 0, bakedHp: 0, bakedMana: 0, bakedStats: {}, bakedResists: {}, augments: [] };
+        // Any weapon can be a vessel: an unstamped weapon is a
+        // form-1 state with no format chosen yet (the format is
+        // picked in the dialog and stamped at Begin Evolution).
+        return { kind, line: ctx.classKey ?? null, form: 1, set: null,
+                 combines: 0, bakedDb: 0, bakedOb: 0, bakedHp: 0, bakedMana: 0, bakedStats: {}, bakedResists: {}, augments: [],
+                 format: null, identityName: null, pairId: null, reclassified: false, prefixApplied: null };
     }
 
     // Armor derivation from the class line.
@@ -464,6 +645,13 @@ export function socketAugment(state, augment) {
 /** The next form definition for a vessel state (race-aware). */
 export function nextForm(lines, state, ctx = {}) {
     if (state.kind === "weapon") {
+        if (state.form >= 33) return null;
+        const fmt = state.format ? weaponFormats(lines)[state.format] : null;
+        if (fmt) {
+            const name = fmt.forms?.[String(state.form + 1)] ?? fmt.forms?.[state.form + 1] ?? null;
+            return { form: state.form + 1, name, format: state.format };
+        }
+        // Legacy fallback (pre-ladder registries): the stub line.
         return (lines?.weaponLine?.forms ?? []).find(f => f.form === state.form + 1) ?? null;
     }
     const line = lines?.armorLines?.[state.line ?? ctx.classKey];
@@ -621,28 +809,106 @@ export function validateCombine(lines, vessel, fodder, actor) {
         return { ok: false, kind: null, reasons: ["Armor no longer eats armor — reforging burns catalyst materials."] };
     }
 
-    // Weapons.
-    if (fodder.item.type !== "weapon") reasons.push("A weapon can only eat weapons.");
-    if (fodder.templateId !== vessel.templateId) reasons.push("Different weapon type — a weapon only eats its own kind.");
-    const vf = weaponFormOf(lines, fodder.item);
-    if (vf == null) reasons.push("That weapon is not on the weapon ladder (unknown material/condition).");
-    if (vf != null) {
-        if (vf === st.form + 1 && fodder.templateId === vessel.templateId) {
-            return { ok: true, kind: "transition", reasons: [], targetSet: null, targetForm: st.form + 1 };
-        }
-        if (vf !== st.form && vf !== st.form + 1) {
-            reasons.push("Wrong rung — fodder must be the weapon's current rung or the next.");
-        }
-    }
-    if (st.combines >= formCap(st.form)) {
-        reasons.push(`Form ${st.form} is fully ripened (${st.combines}/${formCap(st.form)}) — transition to grow further.`);
-    }
-    return { ok: reasons.length === 0, kind: reasons.length === 0 ? "ripening" : null, reasons };
+    // Weapons: the ladder feed rules live in validateWeaponFeed.
+    return validateWeaponFeed(lines, vessel, fodder, actor);
 }
 
-/** Tradeskill used for a DIY evolution combine on this vessel. */
-export function skillForVessel(item, state) {
+/**
+ * Validate feeding `fodder` to a weapon `vessel` under the ladder
+ * model. vessel / fodder accept either the descriptor shape
+ * validateCombine uses ({item, state, ...}) or a bare item;
+ * actor accepts {classKey, raceKey} or an actor document.
+ *
+ * Kinds:
+ *   "reclassify" — the FIRST feed: a feeder of the chosen format
+ *     fed to a started record (format stamped, form 1, no
+ *     combines, no identity yet). It pins the format for life and
+ *     stamps reclassified on the record; it is not a combine.
+ *   "ripening" — a feeder or unnamed weapon of the vessel's
+ *     format: +1 in-form combine (merges for unnamed fodder).
+ *   "transition" — a NAMED weapon of the vessel's format: form
+ *     +1, the vessel takes the named weapon's identity. At form
+ *     32 the verdict also carries the capstone overlay options.
+ */
+export function validateWeaponFeed(lines, vessel, fodder, actor) {
+    const vesselItem = vessel?.item ?? vessel;
+    const fodderItem = fodder?.item ?? fodder;
+    const classKey = actor?.classKey ?? actor?.system?.fixed_info?.profession ?? null;
+    const st = vessel?.state ?? (vesselItem ? evolutionState(lines, vesselItem, { classKey, raceKey: actor?.raceKey ?? null }) : null);
+    const fail = (reasons) => ({ ok: false, kind: null, reasons, targetForm: null, targetSet: null });
+    if (!st || st.kind !== "weapon") return fail(["The vessel is not an evolvable weapon."]);
+    if (!fodderItem) return fail(["Choose a weapon to consume."]);
+    if (vesselItem && fodderItem.id && fodderItem.id === vesselItem.id) {
+        return fail(["A piece cannot eat itself."]);
+    }
+    if (fodderItem.type !== "weapon") return fail(["A weapon can only eat weapons."]);
+    if (!st.format) return fail(["Choose this weapon's format first — Begin Evolution stamps it before any feed."]);
+
+    const fodderClass = classifyWeapon(lines, fodderItem);
+    const fodderFormat = formatOfWeapon(lines, fodderItem);
+    const reasons = [];
+    if (!fodderFormat) {
+        reasons.push("That weapon's format cannot be determined (no format stamp and no single-format template).");
+    } else if (fodderFormat !== st.format) {
+        reasons.push(`Format mismatch — this vessel is ${weaponFormats(lines)[st.format]?.name ?? st.format}; the fodder is ${weaponFormats(lines)[fodderFormat]?.name ?? fodderFormat}.`);
+    }
+    if (reasons.length) return fail(reasons);
+
+    // Reclassify-first: until the record is reclassified, the only
+    // acceptable feed is a feeder of the vessel's chosen format.
+    // Unnamed and named feeds are refused before reclassification.
+    if (!st.reclassified && fodderClass !== "feeder") {
+        return fail(["This weapon has not been reclassified — feed it a Rusty or Tarnished weapon of its format first."]);
+    }
+
+    // Reclassification: the first feed only, and it must be a feeder.
+    const firstFeed = st.form === 1 && st.combines === 0 && !st.identityName && !st.reclassified;
+    if (fodderClass === "feeder") {
+        if (firstFeed) {
+            const legal = legalWeaponFormats(lines, classKey);
+            if (classKey && legal.length && !legal.includes(st.format)) {
+                return fail([`A ${classKey} cannot wield ${weaponFormats(lines)[st.format]?.name ?? st.format} weapons — that format cannot be set by a feed.`]);
+            }
+            return { ok: true, kind: "reclassify", reasons: [], targetForm: st.form, targetSet: null };
+        }
+        if (st.form === 1 && !st.reclassified) {
+            return fail(["Reclassification is the first feed only — this vessel has already fed, so its format can no longer be set by a feeder."]);
+        }
+    }
+
+    // Named feeds transition (free identity). No per-item class
+    // gate: designated identities carry PEQ class masks that can
+    // exclude classes legal in the format, so legality is gated
+    // once at format choice via legalWeaponFormats.
+    if (fodderClass === "named") {
+        if (st.form >= 33) return fail(["This weapon is at its final form (33) — it cannot transition further."]);
+        const verdict = { ok: true, kind: "transition", reasons: [], targetForm: st.form + 1, targetSet: null };
+        if (st.form + 1 === 33) {
+            const options = capstoneOptions(lines, st.format, classKey);
+            verdict.capstoneOptions = options;
+            verdict.capstone = options[0] ?? null;
+        }
+        return verdict;
+    }
+
+    // Everything else of the format ripens.
+    if (st.combines >= formCap(st.form)) {
+        return fail([`Form ${st.form} is fully ripened (${st.combines}/${formCap(st.form)}) — transition to grow further.`]);
+    }
+    return { ok: true, kind: "ripening", reasons: [], targetForm: st.form, targetSet: null };
+}
+
+/** Tradeskill used for a DIY evolution combine on this vessel.
+ *  Weapons use their format's registry skill when a format is
+ *  known (an optional lines document may be passed; otherwise
+ *  the cached registry is read); the legacy bow fallback covers
+ *  format-less vessels. */
+export function skillForVessel(item, state, lines = null) {
     if (state.kind === "weapon") {
+        const registry = lines ?? evolutionLinesSync();
+        const formatKey = state.format ?? (registry ? formatOfWeapon(registry, item) : null);
+        const fmtSkill = formatKey ? weaponFormats(registry ?? {})[formatKey]?.skill : null;
+        if (fmtSkill) return fmtSkill;
         const t = String(item?.system?.type ?? "");
         const tpl = String(item?.system?.weaponTemplate ?? "");
         if (t.includes("bow") || tpl.includes("bow") || tpl.includes("crossbow")) return "skill-fletching";

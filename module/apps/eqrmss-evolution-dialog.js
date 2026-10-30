@@ -5,8 +5,12 @@
 // redesign, 2026-10-27): combines burn a slot-scaled count of a
 // catalyst material (family by current form, material by vessel
 // class) to ripen the form or transition to the next; the augment
-// combine is mandatory before a transition. WEAPONS: unchanged —
-// eat a same-type weapon to ripen or take the next rung.
+// combine is mandatory before a transition. WEAPONS (ladder build,
+// 2026-10-29): the player picks a format at Begin Evolution (max
+// 3 evolving weapons), the first feeder feed reclassifies, unnamed
+// same-format feeds ripen with merge arithmetic, named same-format
+// feeds transition (free identity; damage/delay from the curve),
+// and the form-33 transition offers capstone overlays.
 // Two routes: DIY (tiered tradeskill combine, technique learned
 // via Smithing, Tailoring, or Fletching) or a paid NPC (fee
 // doubles per tier, 5% failure, fee kept on failure).
@@ -22,7 +26,10 @@ import {
     classesOf, setOf, weaponFormOf, evolutionState, freeSlots,
     augmentsByTier, validateCombine, validateCatalystCombine,
     catalystRequirement, catalystCost, nextForm,
-    ripen, transition, socketAugment, skillForVessel, TIER_NAMES
+    ripen, transition, socketAugment, skillForVessel, TIER_NAMES,
+    weaponFormats, legalWeaponFormats, weaponCurve, formatOfWeapon,
+    classifyWeapon, countEvolvingWeapons, capstoneOptions,
+    resolveProcChoice, validateWeaponFeed
 } from "../gear/evolution.js";
 import { canUseTradeskill, CRIT_FAIL_RANGE, CRIT_SUCCESS_RANGE } from "../tradeskills/tradeskill-engine.js";
 import { normalizeCatalogData } from "../utils/inventory/catalog-picker.js";
@@ -56,7 +63,9 @@ export class EvolutionDialog extends BaseApplication {
         position: { width: 640, height: 640 },
         actions: {
             "combine": this.#onCombine,
-            "socket": this.#onSocket
+            "socket": this.#onSocket,
+            "beginEvolution": this.#onBeginEvolution,
+            "convertCapstone": this.#onConvertCapstone
         }
     };
 
@@ -74,6 +83,9 @@ export class EvolutionDialog extends BaseApplication {
         this._route = "diy";
         this._fodderId = null;
         this._actionId = "ripening"; // armor catalyst combines: ripening | transition
+        this._formatKey = null;      // weapon format-choice panel selection
+        this._procChoice = "vessel"; // weapon proc choice: vessel | fodder
+        this._capstoneKind = null;   // weapon form-33 overlay selection
     }
 
     get title() {
@@ -112,8 +124,31 @@ export class EvolutionDialog extends BaseApplication {
             category: armorCategoryOf(item, this._materialsById()),
             templateId: item?.system?.weaponTemplate ?? null,
             weaponForm: weaponFormOf(lines, item),
+            weaponFormat: formatOfWeapon(lines, item),
+            weaponClass: classifyWeapon(lines, item),
             classes: classesOf(item)
         };
+    }
+
+    /** Display name for a weapon material id (prefix arithmetic). */
+    _materialDisplayName(materialId) {
+        if (!materialId) return null;
+        try {
+            const opts = game.eqrmss?.weapons?.getOptions?.() ?? game.eqrmss?.weapons?.options?.() ?? null;
+            const mat = (opts?.materials ?? []).find(m => m.id === materialId);
+            if (mat?.name) return mat.name;
+        } catch { /* fall through to the capitalized id */ }
+        return String(materialId).split(/[_\-\s]+/).filter(Boolean)
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+    }
+
+    /** A catalog entry by item name, normalized like a catalog add. */
+    async _catalogDataByName(name) {
+        const entries = Object.values(game.eqrmss?.items?.byId ?? {});
+        const entry = entries.find(e => e?.name === name);
+        if (!entry) throw new Error(`Catalog entry missing: ${name}`);
+        const normalized = await normalizeCatalogData(foundry.utils.deepClone(entry));
+        return { name: normalized.name ?? entry.name, img: normalized.img ?? entry.img, system: normalized.system ?? entry.system };
     }
 
     /** Units of a named catalyst material this actor holds. */
@@ -174,7 +209,7 @@ export class EvolutionDialog extends BaseApplication {
         }
         context.evolvable = true;
         const lineName = state.kind === "weapon"
-            ? (lines.weaponLine?.forms ?? []).find(f => f.form === state.form)?.name ?? `Form ${state.form}`
+            ? (state.format ? (weaponFormats(lines)[state.format]?.name ?? state.format) : "Format not chosen")
             : (lines.armorLines?.[state.line]?.forms ?? []).find(f => f.form === state.form)?.name ?? `Form ${state.form}`;
         context.formLabel = `${lineName} — Form ${state.form}`;
         context.combines = state.combines;
@@ -266,17 +301,44 @@ export class EvolutionDialog extends BaseApplication {
             context.selectedIsTransition = context.selectedAction?.kind === "transition";
             selKind = context.selectedAction?.kind ?? null;
             selectionOk = !!context.selectedAction?.ok;
+        } else if (!state.format) {
+            // No evolution record / format yet: the format-choice
+            // panel. The chosen format IS the pin for dual-mode
+            // templates (bastard sword, spear, ...).
+            context.needsFormat = true;
+            const formats = weaponFormats(lines);
+            const legal = legalWeaponFormats(lines, ctx.classKey);
+            if (!this._formatKey || !legal.includes(this._formatKey)) this._formatKey = legal[0] ?? null;
+            context.formatChoices = legal.map(key => {
+                const fmt = formats[key] ?? {};
+                const anchorCurve = weaponCurve(lines, key, 33);
+                return {
+                    key, name: fmt.name ?? key,
+                    floorDamage: fmt.floor?.damage, floorDelay: fmt.floor?.delay,
+                    anchorDamage: anchorCurve?.damage, anchorDelay: anchorCurve?.delay,
+                    selected: this._formatKey === key
+                };
+            });
+            const mapped = lines.weaponLadders?.templateFormats?.[this.vessel.system?.weaponTemplate];
+            context.dualModeNote = Array.isArray(mapped)
+                ? "This weapon's template is dual-mode — the format you choose pins its mode for the life of the weapon."
+                : null;
+            context.maxEvolvingWeapons = Number(lines.weaponLadders?.maxEvolvingWeapons) || 3;
+            context.evolvingWeapons = countEvolvingWeapons(this.actor.items);
+            context.atWeaponCap = context.evolvingWeapons >= context.maxEvolvingWeapons;
+            context.candidates = [];
+            context.selectedFodder = null;
         } else {
             const candidates = [];
             for (const item of this.actor.items) {
                 if (item.id === this.vessel.id) continue;
                 if (item.type !== "weapon") continue;
                 const desc = this._fodderDescriptor(lines, item, state);
-                const verdict = validateCombine(lines, vesselDesc, desc, actorDesc);
+                const verdict = validateWeaponFeed(lines, vesselDesc, desc, actorDesc);
                 candidates.push({
                     id: item.id, name: item.name, img: item.img,
                     ok: verdict.ok, kind: verdict.kind,
-                    kindLabel: verdict.kind === "transition" ? "TRANSITION" : verdict.kind === "ripening" ? "Ripen" : "",
+                    kindLabel: verdict.kind === "transition" ? "TRANSITION" : verdict.kind === "ripening" ? "Ripen" : verdict.kind === "reclassify" ? "Reclassify" : "",
                     reasons: verdict.reasons
                 });
             }
@@ -290,6 +352,55 @@ export class EvolutionDialog extends BaseApplication {
             for (const c of candidates) c.selected = c.id === this._fodderId;
             selKind = context.selectedFodder?.kind ?? null;
             selectionOk = !!context.selectedFodder?.ok;
+
+            // Proc choice: shown when the selected fodder (or the
+            // capstone identity it would bring) carries a proc.
+            const selItem = context.selectedFodder ? this.actor.items.get(context.selectedFodder.id) : null;
+            let fodderProc = selItem?.system?.proc ?? null;
+
+            // Capstone overlay: a form-32 vessel eating any named
+            // fodder transitions into form 33 under the CHOSEN
+            // overlay identity (epic / analog / ladder).
+            if (state.form === 32 && context.selectedFodder?.kind === "transition") {
+                const options = capstoneOptions(lines, state.format, ctx.classKey);
+                if (options.length) {
+                    if (!this._capstoneKind || !options.some(o => o.kind === this._capstoneKind)) {
+                        this._capstoneKind = options[0].kind;
+                    }
+                    context.showCapstone = true;
+                    context.capstoneOptions = options.map(o => ({
+                        kind: o.kind, namesLabel: o.names.join(" + "), pair: !!o.pair,
+                        selected: o.kind === this._capstoneKind
+                    }));
+                    if (!fodderProc) {
+                        const chosen = options.find(o => o.kind === this._capstoneKind);
+                        const entry = Object.values(game.eqrmss?.items?.byId ?? {})
+                            .find(e => e?.name === chosen?.names?.[0]);
+                        fodderProc = entry?.system?.proc ?? null;
+                    }
+                }
+            }
+            if (fodderProc) {
+                context.showProcChoice = true;
+                context.fodderProcName = fodderProc;
+                context.vesselProcName = this.vessel.system?.proc ?? "none";
+                context.procVesselSelected = this._procChoice !== "fodder";
+                context.procFodderSelected = this._procChoice === "fodder";
+            }
+
+            // WAR capstone conversion: pair <-> Jagged Blade of War.
+            if (state.form === 33 && ctx.classKey === "warrior") {
+                const epic = capstoneOptions(lines, state.format, "warrior").find(o => o.kind === "epic");
+                if (state.format === "1hs" && epic?.twoHanded
+                    && (state.pairId || (epic.names ?? []).includes(state.identityName))) {
+                    context.canConvertCapstone = true;
+                    context.convertLabel = `Convert to ${epic.twoHanded} (two-handed)`;
+                } else if (state.format === "2hs" && epic?.pairNames?.length
+                    && state.identityName === epic.names?.[0]) {
+                    context.canConvertCapstone = true;
+                    context.convertLabel = `Convert to the ${epic.pairNames.join(" + ")} pair`;
+                }
+            }
         }
 
         // Routes.
@@ -297,7 +408,7 @@ export class EvolutionDialog extends BaseApplication {
         context.route = this._route;
         context.routeDiy = this._route === "diy";
         context.routeNpc = this._route === "npc";
-        const skillId = skillForVessel(this.vessel, state);
+        const skillId = skillForVessel(this.vessel, state, lines);
         context.skillId = skillId;
         context.skillName = skillId.replace("skill-", "").replace(/^./, c => c.toUpperCase());
         context.trivial = trivialForTier(cfg, tier);
@@ -306,7 +417,7 @@ export class EvolutionDialog extends BaseApplication {
         context.skillRestriction = access.allowed ? null : access.reason;
         const techniques = this.actor.getFlag("eqrmss", "techniques") ?? [];
         context.neededTechnique = selKind === "transition" ? `transition-${tier}`
-            : selKind === "ripening" ? `socketing-${tier}` : null;
+            : (selKind === "ripening" || selKind === "reclassify") ? `socketing-${tier}` : null;
         context.techniqueKnown = context.neededTechnique ? techniques.includes(context.neededTechnique) : false;
         context.techniqueLabel = context.neededTechnique
             ? `Reforge: ${selKind === "transition" ? "Transition" : "Socketing"} (Tier ${tier})` : null;
@@ -366,6 +477,22 @@ export class EvolutionDialog extends BaseApplication {
                 this.render();
             });
         });
+        this.element?.querySelectorAll("input[name='evo-format']").forEach(r => {
+            r.addEventListener("change", ev => {
+                this._formatKey = ev.target.value;
+            });
+        });
+        this.element?.querySelectorAll("input[name='evo-proc']").forEach(r => {
+            r.addEventListener("change", ev => {
+                this._procChoice = ev.target.value;
+            });
+        });
+        this.element?.querySelectorAll("input[name='evo-capstone']").forEach(r => {
+            r.addEventListener("change", ev => {
+                this._capstoneKind = ev.target.value;
+                this.render();
+            });
+        });
     }
 
     // ----------------------------------------------------------
@@ -379,7 +506,7 @@ export class EvolutionDialog extends BaseApplication {
     }
 
     /** Build the vessel update that takes the target piece's identity. */
-    _identityUpdate(targetData, newState) {
+    _identityUpdate(targetData, newState, preserveList = null) {
         const updates = { name: targetData.name, img: targetData.img };
         const targetSystem = foundry.utils.deepClone(targetData.system ?? {});
         const keepLocation = this.vessel.system?.location;
@@ -391,7 +518,7 @@ export class EvolutionDialog extends BaseApplication {
         // boolean system.equipped / system.worn, which catalog
         // targets do not carry — deleting them left transitioned
         // pieces reading as unworn ("No Armor") until re-equipped.
-        const PRESERVE = ["evolution", "location", "quantity", "equipped", "worn"];
+        const PRESERVE = preserveList ?? ["evolution", "location", "quantity", "equipped", "worn"];
         // Foundry V14 deprecates the legacy "system.-=key" deletion
         // syntax in update data; use the ForcedDeletion operator
         // when the core provides it, legacy keys otherwise.
@@ -444,6 +571,19 @@ export class EvolutionDialog extends BaseApplication {
         }
         updates["system.evolution"] = newState;
         return updates;
+    }
+
+    /**
+     * Weapon variant of the identity update: the vessel's template
+     * identity (attack table, material, condition, format, ...)
+     * survives the swap — only the fed identity's name / look /
+     * proc / classes / stats profile lands, merged never-slide-back
+     * for stats, resistances, hp and mana by the base routine.
+     */
+    _weaponIdentityUpdate(targetData, newState) {
+        return this._identityUpdate(targetData, newState,
+            ["weaponTemplate", "type", "attackTable", "criticalType", "material", "condition",
+             "evolution", "location", "quantity", "equipped", "worn", "weaponFormat", "classes"]);
     }
 
     async _targetData(lines, state, fodderItem, verdict) {
@@ -505,7 +645,7 @@ export class EvolutionDialog extends BaseApplication {
             fodderItem = actor.items.get(dialog._fodderId);
             if (!fodderItem) return ui.notifications.warn("Choose a piece to consume.");
             const fodderDesc = dialog._fodderDescriptor(lines, fodderItem, state);
-            verdict = validateCombine(lines, vesselDesc, fodderDesc, { classKey: ctx.classKey, raceKey: ctx.raceKey });
+            verdict = validateWeaponFeed(lines, vesselDesc, fodderDesc, { classKey: ctx.classKey, raceKey: ctx.raceKey });
             consumedLabel = fodderItem.name;
         }
         if (!verdict.ok) return ui.notifications.warn(verdict.reasons[0] ?? "That combine is not legal.");
@@ -548,7 +688,7 @@ export class EvolutionDialog extends BaseApplication {
             const technique = verdict.kind === "transition" ? `transition-${tier}` : `socketing-${tier}`;
             const known = (actor.getFlag("eqrmss", "techniques") ?? []).includes(technique);
             if (!known) return ui.notifications.warn(`The technique "Reforge: ${verdict.kind === "transition" ? "Transition" : "Socketing"} (Tier ${tier})" must be learned first (Smithing, Tailoring, or Fletching).`);
-            const skillId = skillForVessel(vessel, state);
+            const skillId = skillForVessel(vessel, state, lines);
             const access = canUseTradeskill(actor, skillId);
             if (!access.allowed) return ui.notifications.warn(access.reason);
             let toolBonus = 0;
@@ -580,11 +720,91 @@ export class EvolutionDialog extends BaseApplication {
         }
 
         let resultNote = "";
-        if (verdict.kind === "ripening") {
+        if (state.kind === "weapon" && verdict.kind === "reclassify") {
+            // The first feed pins the format for life; it is not a
+            // combine (no ripening count, no merge arithmetic).
+            const next = { ...state, reclassified: true };
+            await vessel.update({ "system.evolution": next, "system.weaponFormat": state.format });
+            resultNote = `${vessel.name} is reclassified as a ${weaponFormats(lines)[state.format]?.name ?? state.format} weapon — its format is locked for life.`;
+        } else if (verdict.kind === "ripening") {
             const { state: next, bakedTiers } = ripen(state);
-            await vessel.update({ "system.evolution": next });
+            if (state.kind === "weapon") {
+                const fodderClass = classifyWeapon(lines, fodderItem);
+                const updates = { "system.evolution": next };
+                if (fodderClass === "unnamed") {
+                    // Merge arithmetic (Ghoulbane rule): the latest
+                    // fed material prefixes the vessel's name
+                    // (replacing any previous prefix; edged formats
+                    // take " Bladed"), weight averages, and the proc
+                    // follows the player's choice.
+                    const materialName = dialog._materialDisplayName(fodderItem.system?.material);
+                    if (materialName) {
+                        const prefix = materialName + (["1hs", "2hs", "piercing"].includes(state.format) ? " Bladed" : "");
+                        let baseName = vessel.name;
+                        if (state.prefixApplied && baseName.startsWith(`${state.prefixApplied} `)) {
+                            baseName = baseName.slice(state.prefixApplied.length + 1);
+                        }
+                        updates.name = `${prefix} ${baseName}`;
+                        next.prefixApplied = prefix;
+                        updates["system.evolution"] = next;
+                    }
+                    const vw = Number(vessel.system?.weight) || 0;
+                    const fw = Number(fodderItem.system?.weight) || 0;
+                    updates["system.weight"] = Math.round(((vw + fw) / 2) * 10) / 10;
+                }
+                if (fodderItem.system?.proc) {
+                    updates["system.proc"] = resolveProcChoice(vessel.system?.proc, fodderItem.system?.proc, dialog._procChoice);
+                }
+                await vessel.update(updates);
+            } else {
+                await vessel.update({ "system.evolution": next });
+            }
             resultNote = `${vessel.name} ${state.kind === "armor" ? "burns" : "consumes"} ${consumedLabel} and ripens (${next.combines}/${formCap(next.form)}).` +
                 (bakedTiers.length ? ` Sockets fused — their augments baked in.` : ` New socket state: [${socketLayout(next.combines).join(", ") || "none"}].`);
+        } else if (state.kind === "weapon") {
+            // Weapon transition: bake, take the fed identity (or
+            // the chosen capstone overlay at form 33), and stamp
+            // damage/delay from the format curve.
+            const next = transition(state, null);
+            let targetData = await dialog._targetData(lines, state, fodderItem, verdict);
+            let capstoneOption = null;
+            if (next.form === 33) {
+                const options = capstoneOptions(lines, state.format, ctx.classKey);
+                capstoneOption = options.find(o => o.kind === dialog._capstoneKind) ?? options[0] ?? null;
+                if (capstoneOption) targetData = await dialog._catalogDataByName(capstoneOption.names[0]);
+            }
+            next.identityName = targetData.name;
+            next.prefixApplied = null; // the identity name carries no ripening prefix
+            if (capstoneOption?.pair) next.pairId = state.pairId ?? foundry.utils.randomID();
+            const oldName = vessel.name;
+            const updates = dialog._weaponIdentityUpdate(targetData, next);
+            updates["system.proc"] = resolveProcChoice(vessel.system?.proc, targetData.system?.proc, dialog._procChoice);
+            const curve = weaponCurve(lines, state.format, next.form);
+            if (curve) {
+                updates["system.damage"] = curve.damage;
+                updates["system.delay"] = curve.delay;
+            }
+            updates["system.weaponFormat"] = state.format;
+            await vessel.update(updates);
+            if (capstoneOption?.pair) {
+                // Pair manifestation: the partner item is created
+                // on the actor carrying a deep copy of the same
+                // evolution record under the shared pairId.
+                const partnerName = capstoneOption.names[1] ?? capstoneOption.names[0];
+                const partnerData = await dialog._catalogDataByName(partnerName);
+                const partnerSystem = foundry.utils.deepClone(partnerData.system ?? {});
+                partnerSystem.evolution = foundry.utils.deepClone(next);
+                partnerSystem.evolution.identityName = partnerName;
+                partnerSystem.weaponFormat = state.format;
+                if (curve) { partnerSystem.damage = curve.damage; partnerSystem.delay = curve.delay; }
+                if (vessel.system?.location !== undefined) partnerSystem.location = vessel.system.location;
+                await actor.createEmbeddedDocuments("Item", [{
+                    name: partnerData.name, img: partnerData.img, type: "weapon", system: partnerSystem
+                }]);
+                resultNote = `${oldName} is reforged into ${targetData.name} — Form ${next.form}, manifested as a pair with ${partnerName}. Socketed augments baked in; slots reset.`;
+            } else {
+                resultNote = `${oldName} is reforged into ${targetData.name} — Form ${next.form}. Socketed augments baked in; slots reset.`;
+            }
         } else {
             const next = transition(state, verdict.targetSet);
             const targetData = await dialog._targetData(lines, state, fodderItem, verdict);
@@ -598,6 +818,97 @@ export class EvolutionDialog extends BaseApplication {
             content: `<p><strong>Reforge complete.</strong> ${resultNote} ${rollNote}</p>`
         });
         ui.notifications.info("Reforge complete.");
+        dialog.render();
+    }
+
+    static async #onBeginEvolution(event, target) {
+        const dialog = this;
+        const actor = dialog.actor;
+        const lines = await loadEvolutionLines();
+        cacheEvolutionLines(lines);
+        const ctx = dialog._ctx();
+        const state = evolutionState(lines, dialog.vessel, ctx);
+        if (!state || state.kind !== "weapon") return ui.notifications.warn("Only a weapon can begin weapon evolution.");
+        if (state.format) return ui.notifications.warn("This weapon's format is already chosen.");
+        const legal = legalWeaponFormats(lines, ctx.classKey);
+        const formatKey = dialog._formatKey ?? legal[0] ?? null;
+        if (!formatKey || !legal.includes(formatKey)) {
+            return ui.notifications.warn("Choose a format this character's class can wield.");
+        }
+        const max = Number(lines.weaponLadders?.maxEvolvingWeapons) || 3;
+        const running = countEvolvingWeapons(actor.items);
+        if (running >= max) {
+            return ui.notifications.warn(`This character already runs ${running} evolving weapons — the limit is ${max}. A new weapon cannot begin evolution.`);
+        }
+        const record = {
+            line: ctx.classKey, form: 1, format: formatKey, combines: 0,
+            bakedDb: 0, bakedOb: 0, bakedHp: 0, bakedMana: 0,
+            bakedStats: {}, bakedResists: {}, augments: [],
+            identityName: null, pairId: null, reclassified: false, prefixApplied: null
+        };
+        await dialog.vessel.update({ "system.evolution": record });
+        ui.notifications.info(`${dialog.vessel.name} begins evolution as a ${weaponFormats(lines)[formatKey]?.name ?? formatKey} weapon. Feed it a rusty or tarnished weapon of that format to reclassify it.`);
+        dialog.render();
+    }
+
+    static async #onConvertCapstone(event, target) {
+        const dialog = this;
+        const actor = dialog.actor;
+        const vessel = dialog.vessel;
+        const lines = await loadEvolutionLines();
+        cacheEvolutionLines(lines);
+        const ctx = dialog._ctx();
+        const state = evolutionState(lines, vessel, ctx);
+        if (!state || state.kind !== "weapon" || state.form !== 33 || ctx.classKey !== "warrior") {
+            return ui.notifications.warn("Only a warrior's form-33 capstone weapon can convert.");
+        }
+        const epic = capstoneOptions(lines, state.format, "warrior").find(o => o.kind === "epic");
+        if (!epic) return ui.notifications.warn("No capstone conversion is authored for this format.");
+
+        if (state.format === "1hs" && epic.twoHanded) {
+            // Pair -> two-handed: the partner is consumed into the
+            // single Jagged Blade manifestation; the evolution
+            // record is preserved and the format flips to 2hs.
+            const partner = state.pairId
+                ? actor.items.find(i => i.id !== vessel.id && i.system?.evolution?.pairId === state.pairId)
+                : actor.items.find(i => i.id !== vessel.id && (epic.names ?? []).includes(i.system?.evolution?.identityName));
+            const targetData = await dialog._catalogDataByName(epic.twoHanded);
+            const next = { ...state, format: "2hs", identityName: epic.twoHanded, prefixApplied: null };
+            const updates = dialog._weaponIdentityUpdate(targetData, next);
+            updates["system.proc"] = targetData.system?.proc ?? vessel.system?.proc ?? null;
+            const curve = weaponCurve(lines, "2hs", 33);
+            if (curve) { updates["system.damage"] = curve.damage; updates["system.delay"] = curve.delay; }
+            updates["system.weaponFormat"] = "2hs";
+            await vessel.update(updates);
+            if (partner) await partner.delete();
+            ui.notifications.info(`${vessel.name} is now the ${epic.twoHanded}.`);
+        } else if (state.format === "2hs" && epic.pairNames?.length) {
+            // Two-handed -> pair: the vessel takes Blade of
+            // Strategy and a Blade of Tactics partner is created,
+            // both sharing the preserved record and one pairId.
+            const [firstName, partnerName] = epic.pairNames;
+            const pairId = state.pairId ?? foundry.utils.randomID();
+            const targetData = await dialog._catalogDataByName(firstName);
+            const next = { ...state, format: "1hs", identityName: firstName, pairId, prefixApplied: null };
+            const updates = dialog._weaponIdentityUpdate(targetData, next);
+            const curve = weaponCurve(lines, "1hs", 33);
+            if (curve) { updates["system.damage"] = curve.damage; updates["system.delay"] = curve.delay; }
+            updates["system.weaponFormat"] = "1hs";
+            await vessel.update(updates);
+            const partnerData = await dialog._catalogDataByName(partnerName);
+            const partnerSystem = foundry.utils.deepClone(partnerData.system ?? {});
+            partnerSystem.evolution = foundry.utils.deepClone(next);
+            partnerSystem.evolution.identityName = partnerName;
+            partnerSystem.weaponFormat = "1hs";
+            if (curve) { partnerSystem.damage = curve.damage; partnerSystem.delay = curve.delay; }
+            if (vessel.system?.location !== undefined) partnerSystem.location = vessel.system.location;
+            await actor.createEmbeddedDocuments("Item", [{
+                name: partnerData.name, img: partnerData.img, type: "weapon", system: partnerSystem
+            }]);
+            ui.notifications.info(`${firstName} and ${partnerName} now manifest as a pair.`);
+        } else {
+            return ui.notifications.warn("This capstone weapon has no other manifestation to convert to.");
+        }
         dialog.render();
     }
 
