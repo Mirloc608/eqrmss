@@ -1139,8 +1139,9 @@ export async function tickConditions(combat) {
                 // (no crits on ticks). Legacy entries (min/max only)
                 // keep their original per-round roll.
                 let dmg;
+                let res = null;
                 if (d.table) {
-                    const res = resolveTableAttack({ tableName: d.table, critType: d.critType ?? null, ob: Number(d.ob) || 0, target: actor, allowCrit: false });
+                    res = resolveTableAttack({ tableName: d.table, critType: d.critType ?? null, ob: Number(d.ob) || 0, target: actor, allowCrit: false });
                     dmg = res ? res.total : 0;
                 } else {
                     const lo = Number(d.min) || 0;
@@ -1228,6 +1229,11 @@ export async function tickConditions(combat) {
                             if (xpCaster) await trackXPHits(xpCaster, actor, dmg);
                         } catch (err) { /* non-fatal */ }
                     }
+                } else {
+                    // User ruling 2026-11-04: a DoT tick that resolves
+                    // to no effect still reports. Silence made failed
+                    // ticks indistinguishable from a broken DoT cycle.
+                    notes.push(`${esc(actor.name)}: ${esc(d.name || "a spell")} fails to bite this round${res ? ` (roll ${res.roll}, net ${res.net} on ${esc(res.table ?? d.table)})` : ""}.`);
                 }
                 const maintained = d.source === "song" && d.maintained && songStillActive(d);
                 const left = maintained ? (Number(d.roundsLeft) || 1) : (Number(d.roundsLeft) || 1) - 1;
