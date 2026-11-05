@@ -19966,7 +19966,8 @@
   }
  },
  "catalysts": {
-  "comment": "Crescent Reach redesign (2026-10-27): armor combines burn stackable catalyst materials, not armor pieces. slotCosts = units per combine by vessel slot (every combine, ripening or transition). families are keyed by the vessel's CURRENT form (tier): form 1 burns Decaying, form 2 burns Rubicite, form 3 burns Sebilite. Form 4 has no single family: its pieces ripen on their own faction's molds (families['4'].factions, keyed by the vessel set's faction), and the form-3 TRANSITION burns a chosen faction's mold instead of Sebilite — the mold decides the form-4 set (variants on the form-4 entry). The material within a family follows the vessel's material class (a line may override with catalystCategory — beastlord is leather).",
+  "weaponCost": 3,
+  "comment": "Crescent Reach redesign (2026-10-27): armor combines burn stackable catalyst materials, not armor pieces. Weapons-fuel ruling (2026-11-04): weapon RIPENING burns the same families — weaponCost units of the family's plate (metal) material per combine (at form 4, any faction's plate mold); weapon TRANSITIONS consume a named weapon key instead of catalyst. slotCosts = units per combine by vessel slot (every combine, ripening or transition). families are keyed by the vessel's CURRENT form (tier): form 1 burns Decaying, form 2 burns Rubicite, form 3 burns Sebilite. Form 4 has no single family: its pieces ripen on their own faction's molds (families['4'].factions, keyed by the vessel set's faction), and the form-3 TRANSITION burns a chosen faction's mold instead of Sebilite — the mold decides the form-4 set (variants on the form-4 entry). The material within a family follows the vessel's material class (a line may override with catalystCategory — beastlord is leather).",
   "slotCosts": {
    "head": 3,
    "chest": 4,

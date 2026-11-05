@@ -24,12 +24,13 @@ import {
     loadEvolutionLines, cacheEvolutionLines, socketLayout, formCap,
     trivialForTier, npcFeeGp, armorLocationOf, armorCategoryOf,
     classesOf, setOf, weaponFormOf, evolutionState, freeSlots,
-    augmentsByTier, validateCombine, validateCatalystCombine,
+    augmentsByTier, validateCatalystCombine,
     catalystRequirement, catalystCost, nextForm,
     ripen, transition, socketAugment, skillForVessel, TIER_NAMES,
     weaponFormats, legalWeaponFormats, weaponCurve, formatOfWeapon,
     classifyWeapon, countEvolvingWeapons, capstoneOptions,
-    resolveProcChoice, validateWeaponFeed
+    weaponCatalystRequirement, weaponCatalystCost, weaponKeyTierOf,
+    validateWeaponCombine
 } from "../gear/evolution.js";
 import { canUseTradeskill, CRIT_FAIL_RANGE, CRIT_SUCCESS_RANGE } from "../tradeskills/tradeskill-engine.js";
 import { normalizeCatalogData } from "../utils/inventory/catalog-picker.js";
@@ -84,7 +85,6 @@ export class EvolutionDialog extends BaseApplication {
         this._fodderId = null;
         this._actionId = "ripening"; // armor catalyst combines: ripening | transition
         this._formatKey = null;      // weapon format-choice panel selection
-        this._procChoice = "vessel"; // weapon proc choice: vessel | fodder
         this._capstoneKind = null;   // weapon form-33 overlay selection
     }
 
@@ -110,7 +110,7 @@ export class EvolutionDialog extends BaseApplication {
         };
     }
 
-    /** Weapon fodder descriptor (weapons still eat weapons). */
+    /** Descriptor for an inventory weapon (armor lines / key checks). */
     _fodderDescriptor(lines, item, vesselState) {
         const setKey = setOf(lines, item);
         const set = setKey ? lines.sets[setKey] : null;
@@ -172,6 +172,21 @@ export class EvolutionDialog extends BaseApplication {
             } else {
                 await item.update({ "system.quantity": qty - remaining });
                 remaining = 0;
+            }
+        }
+    }
+
+    /** Consume `count` units of weapon catalyst fuel, draining
+     *  any of the acceptable material stacks in order (at form 4
+     *  any faction's plate mold counts). */
+    async _consumeWeaponCatalyst(itemNames, count) {
+        let remaining = count;
+        for (const name of itemNames) {
+            if (remaining <= 0) break;
+            const take = Math.min(remaining, this._catalystHeld(name));
+            if (take > 0) {
+                await this._consumeCatalyst(name, take);
+                remaining -= take;
             }
         }
     }
@@ -329,39 +344,64 @@ export class EvolutionDialog extends BaseApplication {
             context.candidates = [];
             context.selectedFodder = null;
         } else {
-            const candidates = [];
+            // Weapons-fuel model (2026-11-04): ripening burns the
+            // current tier's armor catalyst fuel; a transition
+            // consumes a selected named weapon as a stripped tier
+            // key. Both ride one combine-action select.
+            context.weaponMode = true;
+            const wreq = weaponCatalystRequirement(lines, state);
+            const wcost = wreq ? weaponCatalystCost(lines) : 0;
+            const wheld = wreq ? wreq.itemNames.reduce((sum, n) => sum + this._catalystHeld(n), 0) : 0;
+            context.catalyst = wreq ? { name: wreq.itemNames.join(" / "), family: wreq.family, cost: wcost, held: wheld } : null;
+            const ripenVerdict = wreq
+                ? validateWeaponCombine(lines, vesselDesc, { kind: "ripening", held: wheld }, actorDesc)
+                : { ok: false, reasons: ["No catalyst family is authored for this form."] };
+
+            // Transition key candidates: named weapons only —
+            // feeders and unnamed weapons can no longer be fed.
+            const keyCandidates = [];
             for (const item of this.actor.items) {
                 if (item.id === this.vessel.id) continue;
                 if (item.type !== "weapon") continue;
-                const desc = this._fodderDescriptor(lines, item, state);
-                const verdict = validateWeaponFeed(lines, vesselDesc, desc, actorDesc);
-                candidates.push({
+                if (classifyWeapon(lines, item) !== "named") continue;
+                const verdict = validateWeaponCombine(lines, vesselDesc, { kind: "transition", keyItem: item }, actorDesc);
+                const tier = weaponKeyTierOf(lines, item);
+                keyCandidates.push({
                     id: item.id, name: item.name, img: item.img,
-                    ok: verdict.ok, kind: verdict.kind,
-                    kindLabel: verdict.kind === "transition" ? "TRANSITION" : verdict.kind === "ripening" ? "Ripen" : verdict.kind === "reclassify" ? "Reclassify" : "",
-                    reasons: verdict.reasons
+                    ok: verdict.ok, reasons: verdict.reasons,
+                    tierLabel: tier != null ? `Tier ${tier} key` : "Tier unknown"
                 });
             }
-            candidates.sort((a, b) => (b.ok - a.ok) || a.name.localeCompare(b.name));
-            context.candidates = candidates;
-            if (!this._fodderId || !candidates.some(c => c.id === this._fodderId)) {
-                this._fodderId = candidates.find(c => c.ok)?.id ?? candidates[0]?.id ?? null;
+            keyCandidates.sort((a, b) => (b.ok - a.ok) || a.name.localeCompare(b.name));
+            context.keyCandidates = keyCandidates;
+            if (!this._fodderId || !keyCandidates.some(c => c.id === this._fodderId)) {
+                this._fodderId = keyCandidates.find(c => c.ok)?.id ?? keyCandidates[0]?.id ?? null;
             }
-            context.selectedFodder = candidates.find(c => c.id === this._fodderId) ?? null;
-            context.selectedIsTransition = context.selectedFodder?.kind === "transition";
-            for (const c of candidates) c.selected = c.id === this._fodderId;
-            selKind = context.selectedFodder?.kind ?? null;
-            selectionOk = !!context.selectedFodder?.ok;
+            context.selectedKey = keyCandidates.find(c => c.id === this._fodderId) ?? null;
+            for (const c of keyCandidates) c.selected = c.id === this._fodderId;
+            const keyItem = context.selectedKey ? this.actor.items.get(context.selectedKey.id) : null;
+            const transVerdict = validateWeaponCombine(lines, vesselDesc, { kind: "transition", keyItem }, actorDesc);
 
-            // Proc choice: shown when the selected fodder (or the
-            // capstone identity it would bring) carries a proc.
-            const selItem = context.selectedFodder ? this.actor.items.get(context.selectedFodder.id) : null;
-            let fodderProc = selItem?.system?.proc ?? null;
+            const actions = [
+                { id: "ripening", label: `Ripen — ${wcost} × ${wreq?.itemName ?? "catalyst"}`, ok: ripenVerdict.ok, kind: "ripening", reasons: ripenVerdict.reasons },
+                { id: "transition", label: `Transition${nf ? ` to ${nf.name}` : ""} — consume ${context.selectedKey?.name ?? "a named weapon key"}`, ok: transVerdict.ok, kind: "transition", reasons: transVerdict.reasons }
+            ];
+            if (!actions.some(a => a.id === this._actionId)) this._actionId = "ripening";
+            if (!actions.find(a => a.id === this._actionId)?.ok) {
+                const firstOk = actions.find(a => a.ok);
+                if (firstOk) this._actionId = firstOk.id;
+            }
+            for (const a of actions) a.selected = a.id === this._actionId;
+            context.combineActions = actions;
+            context.selectedAction = actions.find(a => a.id === this._actionId) ?? null;
+            context.selectedIsTransition = context.selectedAction?.kind === "transition";
+            selKind = context.selectedAction?.kind ?? null;
+            selectionOk = !!context.selectedAction?.ok;
 
-            // Capstone overlay: a form-32 vessel eating any named
-            // fodder transitions into form 33 under the CHOSEN
-            // overlay identity (epic / analog / ladder).
-            if (state.form === 32 && context.selectedFodder?.kind === "transition") {
+            // Capstone overlay: a form-32 vessel with a valid key
+            // transitions into form 33 under the CHOSEN overlay
+            // identity (epic / analog / ladder) — never the key's.
+            if (state.form === 32 && context.selectedIsTransition && transVerdict.ok) {
                 const options = capstoneOptions(lines, state.format, ctx.classKey);
                 if (options.length) {
                     if (!this._capstoneKind || !options.some(o => o.kind === this._capstoneKind)) {
@@ -372,20 +412,7 @@ export class EvolutionDialog extends BaseApplication {
                         kind: o.kind, namesLabel: o.names.join(" + "), pair: !!o.pair,
                         selected: o.kind === this._capstoneKind
                     }));
-                    if (!fodderProc) {
-                        const chosen = options.find(o => o.kind === this._capstoneKind);
-                        const entry = Object.values(game.eqrmss?.items?.byId ?? {})
-                            .find(e => e?.name === chosen?.names?.[0]);
-                        fodderProc = entry?.system?.proc ?? null;
-                    }
                 }
-            }
-            if (fodderProc) {
-                context.showProcChoice = true;
-                context.fodderProcName = fodderProc;
-                context.vesselProcName = this.vessel.system?.proc ?? "none";
-                context.procVesselSelected = this._procChoice !== "fodder";
-                context.procFodderSelected = this._procChoice === "fodder";
             }
 
             // WAR capstone conversion: pair <-> Jagged Blade of War.
@@ -417,7 +444,7 @@ export class EvolutionDialog extends BaseApplication {
         context.skillRestriction = access.allowed ? null : access.reason;
         const techniques = this.actor.getFlag("eqrmss", "techniques") ?? [];
         context.neededTechnique = selKind === "transition" ? `transition-${tier}`
-            : (selKind === "ripening" || selKind === "reclassify") ? `socketing-${tier}` : null;
+            : selKind === "ripening" ? `socketing-${tier}` : null;
         context.techniqueKnown = context.neededTechnique ? techniques.includes(context.neededTechnique) : false;
         context.techniqueLabel = context.neededTechnique
             ? `Reforge: ${selKind === "transition" ? "Transition" : "Socketing"} (Tier ${tier})` : null;
@@ -480,11 +507,6 @@ export class EvolutionDialog extends BaseApplication {
         this.element?.querySelectorAll("input[name='evo-format']").forEach(r => {
             r.addEventListener("change", ev => {
                 this._formatKey = ev.target.value;
-            });
-        });
-        this.element?.querySelectorAll("input[name='evo-proc']").forEach(r => {
-            r.addEventListener("change", ev => {
-                this._procChoice = ev.target.value;
             });
         });
         this.element?.querySelectorAll("input[name='evo-capstone']").forEach(r => {
@@ -587,10 +609,10 @@ export class EvolutionDialog extends BaseApplication {
     }
 
     async _targetData(lines, state, fodderItem, verdict) {
-        // Weapon transitions: the eaten weapon itself is the template.
-        if (state.kind === "weapon") {
-            return { name: fodderItem.name, img: fodderItem.img, system: fodderItem.system };
-        }
+        // Weapon transitions do not come through here since the
+        // 2026-11-04 ruling: their target is the ladder's own
+        // next-form identity (or capstone overlay), fetched with
+        // _catalogDataByName — never the consumed key.
         // Armor catalyst transition: the target piece (same slot,
         // the line's next form set) comes from the catalog registry,
         // normalized like a catalog add. The set is the verdict's —
@@ -642,11 +664,20 @@ export class EvolutionDialog extends BaseApplication {
             verdict = validateCatalystCombine(lines, vesselDesc, { kind, held, faction }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
             consumedLabel = verdict.requirement ? `${verdict.cost ?? 0} × ${verdict.requirement.itemName}` : "the catalyst materials";
         } else {
-            fodderItem = actor.items.get(dialog._fodderId);
-            if (!fodderItem) return ui.notifications.warn("Choose a piece to consume.");
-            const fodderDesc = dialog._fodderDescriptor(lines, fodderItem, state);
-            verdict = validateWeaponFeed(lines, vesselDesc, fodderDesc, { classKey: ctx.classKey, raceKey: ctx.raceKey });
-            consumedLabel = fodderItem.name;
+            // Weapon combine: the action select picks ripening
+            // (catalyst fuel) or transition (named key).
+            const [kind] = String(dialog._actionId).split(":");
+            if (kind === "transition") {
+                fodderItem = actor.items.get(dialog._fodderId);
+                if (!fodderItem) return ui.notifications.warn("Choose a named weapon to consume as the transition key.");
+                verdict = validateWeaponCombine(lines, vesselDesc, { kind: "transition", keyItem: fodderItem }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
+                consumedLabel = fodderItem.name;
+            } else {
+                const req = weaponCatalystRequirement(lines, state);
+                const held = req ? req.itemNames.reduce((sum, n) => sum + dialog._catalystHeld(n), 0) : 0;
+                verdict = validateWeaponCombine(lines, vesselDesc, { kind: "ripening", held }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
+                consumedLabel = verdict.requirement ? `${verdict.cost ?? 0} × ${verdict.requirement.itemName}` : "the catalyst materials";
+            }
         }
         if (!verdict.ok) return ui.notifications.warn(verdict.reasons[0] ?? "That combine is not legal.");
         // Critical outcomes (2026-10-28, user rulings): a critical failure
@@ -663,6 +694,16 @@ export class EvolutionDialog extends BaseApplication {
                     : fuelOutcome === "critSuccess" ? (cost > 1 ? 1 : 0)
                     : cost;
                 if (qty > 0) await dialog._consumeCatalyst(verdict.requirement.itemName, qty);
+                consumedLabel = `${qty} × ${verdict.requirement.itemName}`;
+            } else if (verdict.kind === "ripening") {
+                // Weapon ripening burns catalyst like armor
+                // (double on a crit fail; 1 — or none at cost 1 —
+                // on a crit success).
+                const cost = verdict.cost ?? 0;
+                const qty = fuelOutcome === "critFail" ? cost * 2
+                    : fuelOutcome === "critSuccess" ? (cost > 1 ? 1 : 0)
+                    : cost;
+                if (qty > 0) await dialog._consumeWeaponCatalyst(verdict.requirement.itemNames, qty);
                 consumedLabel = `${qty} × ${verdict.requirement.itemName}`;
             } else if (fuelOutcome === "critSuccess") {
                 consumedLabel = `nothing (the ${fodderItem.name} survives)`;
@@ -720,65 +761,47 @@ export class EvolutionDialog extends BaseApplication {
         }
 
         let resultNote = "";
-        if (state.kind === "weapon" && verdict.kind === "reclassify") {
-            // The first feed pins the format for life; it is not a
-            // combine (no ripening count, no merge arithmetic).
-            const next = { ...state, reclassified: true };
-            await vessel.update({ "system.evolution": next, "system.weaponFormat": state.format });
-            resultNote = `${vessel.name} is reclassified as a ${weaponFormats(lines)[state.format]?.name ?? state.format} weapon — its format is locked for life.`;
-        } else if (verdict.kind === "ripening") {
+        if (verdict.kind === "ripening") {
             const { state: next, bakedTiers } = ripen(state);
-            if (state.kind === "weapon") {
-                const fodderClass = classifyWeapon(lines, fodderItem);
-                const updates = { "system.evolution": next };
-                if (fodderClass === "unnamed") {
-                    // Merge arithmetic (Ghoulbane rule): the latest
-                    // fed material prefixes the vessel's name
-                    // (replacing any previous prefix; edged formats
-                    // take " Bladed"), weight averages, and the proc
-                    // follows the player's choice.
-                    const materialName = dialog._materialDisplayName(fodderItem.system?.material);
-                    if (materialName) {
-                        const prefix = materialName + (["1hs", "2hs", "piercing"].includes(state.format) ? " Bladed" : "");
-                        let baseName = vessel.name;
-                        if (state.prefixApplied && baseName.startsWith(`${state.prefixApplied} `)) {
-                            baseName = baseName.slice(state.prefixApplied.length + 1);
-                        }
-                        updates.name = `${prefix} ${baseName}`;
-                        next.prefixApplied = prefix;
-                        updates["system.evolution"] = next;
-                    }
-                    const vw = Number(vessel.system?.weight) || 0;
-                    const fw = Number(fodderItem.system?.weight) || 0;
-                    updates["system.weight"] = Math.round(((vw + fw) / 2) * 10) / 10;
-                }
-                if (fodderItem.system?.proc) {
-                    updates["system.proc"] = resolveProcChoice(vessel.system?.proc, fodderItem.system?.proc, dialog._procChoice);
-                }
-                await vessel.update(updates);
-            } else {
-                await vessel.update({ "system.evolution": next });
-            }
-            resultNote = `${vessel.name} ${state.kind === "armor" ? "burns" : "consumes"} ${consumedLabel} and ripens (${next.combines}/${formCap(next.form)}).` +
+            await vessel.update({ "system.evolution": next });
+            resultNote = `${vessel.name} burns ${consumedLabel} and ripens (${next.combines}/${formCap(next.form)}).` +
                 (bakedTiers.length ? ` Sockets fused — their augments baked in.` : ` New socket state: [${socketLayout(next.combines).join(", ") || "none"}].`);
         } else if (state.kind === "weapon") {
-            // Weapon transition: bake, take the fed identity (or
-            // the chosen capstone overlay at form 33), and stamp
-            // damage/delay from the format curve.
+            // Weapon transition (2026-11-04 ruling): the consumed
+            // named weapon is a stripped tier KEY — none of its
+            // stats, clicks or procs carry over. The vessel takes
+            // the ladder's own identity for the new form (or the
+            // chosen capstone overlay at form 33) and damage/delay
+            // from the format curve.
             const next = transition(state, null);
-            let targetData = await dialog._targetData(lines, state, fodderItem, verdict);
+            let targetData = null;
             let capstoneOption = null;
             if (next.form === 33) {
                 const options = capstoneOptions(lines, state.format, ctx.classKey);
                 capstoneOption = options.find(o => o.kind === dialog._capstoneKind) ?? options[0] ?? null;
                 if (capstoneOption) targetData = await dialog._catalogDataByName(capstoneOption.names[0]);
             }
+            if (!targetData) {
+                const ladderName = weaponFormats(lines)[state.format]?.forms?.[String(next.form)] ?? null;
+                if (!ladderName) throw new Error(`No ladder identity authored for ${state.format} form ${next.form}.`);
+                targetData = await dialog._catalogDataByName(ladderName);
+            }
             next.identityName = targetData.name;
-            next.prefixApplied = null; // the identity name carries no ripening prefix
+            next.prefixApplied = null; // legacy ripening prefix never survives a transition
             if (capstoneOption?.pair) next.pairId = state.pairId ?? foundry.utils.randomID();
             const oldName = vessel.name;
+            const keyName = fodderItem.name;
             const updates = dialog._weaponIdentityUpdate(targetData, next);
-            updates["system.proc"] = resolveProcChoice(vessel.system?.proc, targetData.system?.proc, dialog._procChoice);
+            // Proc: the ladder identity's proc applies when it has
+            // one; the vessel's own proc is never slid back when
+            // the ladder identity carries none. The key's proc is
+            // never consulted.
+            if (targetData.system?.proc) {
+                updates["system.proc"] = targetData.system.proc;
+            } else if (vessel.system?.proc) {
+                updates["system.proc"] = vessel.system.proc;
+                delete updates["system.-=proc"];
+            }
             const curve = weaponCurve(lines, state.format, next.form);
             if (curve) {
                 updates["system.damage"] = curve.damage;
@@ -801,9 +824,9 @@ export class EvolutionDialog extends BaseApplication {
                 await actor.createEmbeddedDocuments("Item", [{
                     name: partnerData.name, img: partnerData.img, type: "weapon", system: partnerSystem
                 }]);
-                resultNote = `${oldName} is reforged into ${targetData.name} — Form ${next.form}, manifested as a pair with ${partnerName}. Socketed augments baked in; slots reset.`;
+                resultNote = `${oldName} consumes ${keyName} as a tier key and is reforged into ${targetData.name} — Form ${next.form}, manifested as a pair with ${partnerName}. The key's abilities do not carry over. Socketed augments baked in; slots reset.`;
             } else {
-                resultNote = `${oldName} is reforged into ${targetData.name} — Form ${next.form}. Socketed augments baked in; slots reset.`;
+                resultNote = `${oldName} consumes ${keyName} as a tier key and is reforged into ${targetData.name} — Form ${next.form}. The key's abilities do not carry over. Socketed augments baked in; slots reset.`;
             }
         } else {
             const next = transition(state, verdict.targetSet);
@@ -844,10 +867,10 @@ export class EvolutionDialog extends BaseApplication {
             line: ctx.classKey, form: 1, format: formatKey, combines: 0,
             bakedDb: 0, bakedOb: 0, bakedHp: 0, bakedMana: 0,
             bakedStats: {}, bakedResists: {}, augments: [],
-            identityName: null, pairId: null, reclassified: false, prefixApplied: null
+            identityName: null, pairId: null, reclassified: true, prefixApplied: null
         };
         await dialog.vessel.update({ "system.evolution": record });
-        ui.notifications.info(`${dialog.vessel.name} begins evolution as a ${weaponFormats(lines)[formatKey]?.name ?? formatKey} weapon. Feed it a rusty or tarnished weapon of that format to reclassify it.`);
+        ui.notifications.info(`${dialog.vessel.name} begins evolution as a ${weaponFormats(lines)[formatKey]?.name ?? formatKey} weapon. Ripen it on the tier's catalyst fuel; named weapons of its format and tier key its transitions.`);
         dialog.render();
     }
 

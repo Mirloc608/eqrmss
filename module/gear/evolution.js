@@ -2,9 +2,15 @@
 // EQRMSS Gear Evolution — engine (Stage 2, T1->T2)
 //
 // Crescent Reach redesign (2026-10-27): ARMOR combines burn
-// stackable catalyst materials (see validateCatalystCombine);
-// weapons still eat weapons (see validateCombine). The original
-// model, below, survives for weapons:
+// stackable catalyst materials (see validateCatalystCombine).
+// Weapons-fuel ruling (2026-11-04, supersedes the feeder model
+// for maturation): WEAPON ripening burns the same catalyst
+// families (see validateWeaponCombine); a weapon TRANSITION
+// consumes a named weapon of the vessel's format and the
+// transition's tier as a KEY — the key's abilities do not ride
+// along, the ladder's own next-form identity applies. The
+// original model, below, survives for the shared socket /
+// bake-in machinery both kinds use:
 //
 // A worn piece is never replaced: it is REFORGED by eating other
 // pieces. The vessel keeps its identity, history, baked effects and
@@ -226,8 +232,8 @@ export function setOf(lines, item) {
 // A weapon's format is chosen once (form-1 choice or the
 // reclassification feed) and stamped on its evolution record;
 // damage/delay are owned by the per-format curve, never by the
-// fed weapon. Named same-format feeds transition (free identity);
-// unnamed/feeder same-format feeds ripen.
+// fed weapon. (2026-11-04: ripening burns catalyst and named
+// weapons only key transitions — see validateWeaponCombine.)
 // ------------------------------------------------------------
 
 /** Round half to even (Python round()), unlike Math.round. */
@@ -690,8 +696,8 @@ export function transitionEatSet(lines, state, ctx = {}) {
 // form-3 transition burns a chosen faction MOLD, which selects
 // the form-4 set; form-4 pieces ripen on their own faction's
 // molds. The augment combine is mandatory: a form must be ripened
-// at least once before it can transition. Weapons are unchanged
-// and still combine through validateCombine below.
+// at least once before it can transition. Weapons burn the same
+// families when ripening — see validateWeaponCombine below.
 // ------------------------------------------------------------
 
 /**
@@ -809,8 +815,150 @@ export function validateCombine(lines, vessel, fodder, actor) {
         return { ok: false, kind: null, reasons: ["Armor no longer eats armor — reforging burns catalyst materials."] };
     }
 
-    // Weapons: the ladder feed rules live in validateWeaponFeed.
+    // Weapons: the fodder is validated purely as a transition key
+    // (2026-11-04 ruling) — weapon ripening burns catalyst instead.
     return validateWeaponFeed(lines, vessel, fodder, actor);
+}
+
+// ------------------------------------------------------------
+// Weapon combines (weapons-fuel ruling, 2026-11-04)
+//
+// Supersedes the feeder model for maturation:
+//   RIPENING burns catalyst — the SAME family armor uses at the
+//   vessel's current form (family keyed by form, as armor), in
+//   its plate (metal) material, `catalysts.weaponCost` units per
+//   combine. At form 4 the family is the Velious molds: a weapon
+//   has no faction, so any faction's plate mold counts.
+//   A TRANSITION consumes a named weapon as a tier KEY: the key
+//   must match the vessel's format, be a named (catalog-identity)
+//   weapon, and belong to the transition's tier. The key's own
+//   stats, clicks and procs are stripped — they do NOT ride
+//   along; the vessel takes the ladder's own identity and curve
+//   stats for the new form. No per-item class gate: legality was
+//   gated once at format choice.
+//   A key's TIER: a ladder identity for form L is a tier-(L-1)
+//   key (the same offset as the data files: the tier-12 file
+//   holds the form-13 sets). A non-ladder named weapon reads its
+//   tier from an `evolutionTier` system stamp when one exists;
+//   without either, its tier cannot be determined and it cannot
+//   key a transition yet.
+//   The augment combine is mandatory, as armor: a form must be
+//   ripened at least once before it can transition.
+// ------------------------------------------------------------
+
+/** The ladder form a weapon item is the designated identity of, or null. */
+export function ladderFormOf(lines, item) {
+    if (!item?.name) return null;
+    const own = formatOfWeapon(lines, item);
+    const formats = weaponFormats(lines);
+    const keys = own && formats[own] ? [own, ...Object.keys(formats).filter(k => k !== own)] : Object.keys(formats);
+    for (const key of keys) {
+        for (const [form, name] of Object.entries(formats[key]?.forms ?? {})) {
+            if (name === item.name) return Number(form) || null;
+        }
+    }
+    return null;
+}
+
+/** A named weapon's transition tier (see the section header), or null. */
+export function weaponKeyTierOf(lines, item) {
+    const ladderForm = ladderFormOf(lines, item);
+    if (ladderForm) return ladderForm - 1;
+    const stamped = Number(item?.system?.evolutionTier ?? item?.system?.tier);
+    return Number.isFinite(stamped) && stamped > 0 ? stamped : null;
+}
+
+/**
+ * The catalyst requirement for a weapon vessel state:
+ * { itemName, itemNames, category, family, tier } or null when
+ * no family is authored for the vessel's form. itemNames lists
+ * every acceptable material stack (one entry except at form 4,
+ * where any faction's plate mold counts); itemName is the first.
+ */
+export function weaponCatalystRequirement(lines, state) {
+    if (!state || state.kind !== "weapon") return null;
+    const cfg = lines?.catalysts;
+    if (!cfg) return null;
+    const family = cfg.families?.[String(state.form)] ?? null;
+    if (!family) return null;
+    if (family.materials) {
+        const itemName = family.materials.plate ?? null;
+        if (!itemName) return null;
+        return { itemName, itemNames: [itemName], category: "plate", family: family.name ?? null, tier: state.form, faction: null };
+    }
+    if (family.factions) {
+        const itemNames = Object.values(family.factions).map(f => f?.materials?.plate).filter(Boolean);
+        if (!itemNames.length) return null;
+        return { itemName: itemNames[0], itemNames, category: "plate", family: family.name ?? null, tier: state.form, faction: null };
+    }
+    return null;
+}
+
+/** Catalyst units one weapon ripening combine burns. */
+export function weaponCatalystCost(lines) {
+    return Number(lines?.catalysts?.weaponCost) || 3;
+}
+
+/**
+ * Validate a weapon combine (weapons-fuel ruling, 2026-11-04).
+ *   vessel: { item, state }
+ *   action: { kind: "ripening", held }
+ *         | { kind: "transition", keyItem }
+ *   actor:  { classKey, raceKey }
+ * On success a ripening verdict carries the requirement and cost
+ * so the caller consumes exactly what was validated; a transition
+ * verdict carries the target form (and capstone options at 32).
+ */
+export function validateWeaponCombine(lines, vessel, action, actor) {
+    const st = vessel?.state;
+    const fail = (reasons, extra = {}) => ({ ok: false, kind: null, reasons, targetForm: null, targetSet: null, ...extra });
+    if (!st || st.kind !== "weapon") return fail(["The vessel is not an evolvable weapon."]);
+    if (!st.format) return fail(["Choose this weapon's format first — Begin Evolution stamps it before any combine."]);
+
+    if (action?.kind === "transition") {
+        if (st.form >= 33) return fail(["This weapon is at its final form (33) — it cannot transition further."]);
+        if (st.combines < 1) return fail(["Ripen this form at least once before transitioning — the augment combine is mandatory."]);
+        const keyItem = action.keyItem ?? null;
+        if (!keyItem) return fail(["Choose a named weapon to consume as the transition key."]);
+        if (vessel.item && keyItem.id && keyItem.id === vessel.item.id) return fail(["A piece cannot eat itself."]);
+        if (keyItem.type !== "weapon") return fail(["The transition key must be a weapon."]);
+        if (classifyWeapon(lines, keyItem) !== "named") {
+            return fail(["The transition key must be a named weapon — feeders and unnamed weapons cannot key a transition."]);
+        }
+        const keyFormat = formatOfWeapon(lines, keyItem);
+        if (!keyFormat) return fail(["That weapon's format cannot be determined (no format stamp and no single-format template)."]);
+        if (keyFormat !== st.format) {
+            return fail([`Format mismatch — this vessel is ${weaponFormats(lines)[st.format]?.name ?? st.format}; the key is ${weaponFormats(lines)[keyFormat]?.name ?? keyFormat}.`]);
+        }
+        const keyTier = weaponKeyTierOf(lines, keyItem);
+        if (keyTier == null) {
+            return fail([`"${keyItem.name}" carries no readable tier (not a ladder identity and no evolutionTier stamp) — it cannot key a transition.`]);
+        }
+        if (keyTier !== st.form) {
+            return fail([`Tier mismatch — "${keyItem.name}" is a tier ${keyTier} key; the form ${st.form} transition needs a tier ${st.form} key.`]);
+        }
+        const verdict = { ok: true, kind: "transition", reasons: [], targetForm: st.form + 1, targetSet: null, keyTier };
+        if (st.form + 1 === 33) {
+            const classKey = actor?.classKey ?? actor?.system?.fixed_info?.profession ?? null;
+            const options = capstoneOptions(lines, st.format, classKey);
+            verdict.capstoneOptions = options;
+            verdict.capstone = options[0] ?? null;
+        }
+        return verdict;
+    }
+
+    // Ripening: burn the current tier's armor catalyst fuel.
+    const req = weaponCatalystRequirement(lines, st);
+    if (!req) return fail([`No catalyst family is authored for form ${st.form}.`]);
+    const cost = weaponCatalystCost(lines);
+    const held = Number(action?.held) || 0;
+    const reasons = [];
+    if (held < cost) reasons.push(`Needs ${cost} × ${req.itemName} — you hold ${held}.`);
+    if (st.combines >= formCap(st.form)) {
+        reasons.push(`Form ${st.form} is fully ripened (${st.combines}/${formCap(st.form)}) — transition to grow further.`);
+    }
+    if (reasons.length) return fail(reasons, { requirement: req, cost });
+    return { ok: true, kind: "ripening", reasons: [], targetForm: st.form, targetSet: null, requirement: req, cost };
 }
 
 /**
@@ -829,73 +977,20 @@ export function validateCombine(lines, vessel, fodder, actor) {
  *   "transition" — a NAMED weapon of the vessel's format: form
  *     +1, the vessel takes the named weapon's identity. At form
  *     32 the verdict also carries the capstone overlay options.
+ *
+ * SUPERSEDED 2026-11-04 by validateWeaponCombine (weapons-fuel
+ * ruling): ripening no longer eats weapons at all, and a named
+ * feed is a stripped tier KEY, not an identity donor. This
+ * wrapper is kept for API compatibility and now validates its
+ * fodder purely as a transition key.
  */
 export function validateWeaponFeed(lines, vessel, fodder, actor) {
     const vesselItem = vessel?.item ?? vessel;
     const fodderItem = fodder?.item ?? fodder;
-    const classKey = actor?.classKey ?? actor?.system?.fixed_info?.profession ?? null;
-    const st = vessel?.state ?? (vesselItem ? evolutionState(lines, vesselItem, { classKey, raceKey: actor?.raceKey ?? null }) : null);
-    const fail = (reasons) => ({ ok: false, kind: null, reasons, targetForm: null, targetSet: null });
-    if (!st || st.kind !== "weapon") return fail(["The vessel is not an evolvable weapon."]);
-    if (!fodderItem) return fail(["Choose a weapon to consume."]);
-    if (vesselItem && fodderItem.id && fodderItem.id === vesselItem.id) {
-        return fail(["A piece cannot eat itself."]);
+    if (vesselItem && fodderItem && fodderItem.id && fodderItem.id === vesselItem.id) {
+        return { ok: false, kind: null, reasons: ["A piece cannot eat itself."], targetForm: null, targetSet: null };
     }
-    if (fodderItem.type !== "weapon") return fail(["A weapon can only eat weapons."]);
-    if (!st.format) return fail(["Choose this weapon's format first — Begin Evolution stamps it before any feed."]);
-
-    const fodderClass = classifyWeapon(lines, fodderItem);
-    const fodderFormat = formatOfWeapon(lines, fodderItem);
-    const reasons = [];
-    if (!fodderFormat) {
-        reasons.push("That weapon's format cannot be determined (no format stamp and no single-format template).");
-    } else if (fodderFormat !== st.format) {
-        reasons.push(`Format mismatch — this vessel is ${weaponFormats(lines)[st.format]?.name ?? st.format}; the fodder is ${weaponFormats(lines)[fodderFormat]?.name ?? fodderFormat}.`);
-    }
-    if (reasons.length) return fail(reasons);
-
-    // Reclassify-first: until the record is reclassified, the only
-    // acceptable feed is a feeder of the vessel's chosen format.
-    // Unnamed and named feeds are refused before reclassification.
-    if (!st.reclassified && fodderClass !== "feeder") {
-        return fail(["This weapon has not been reclassified — feed it a Rusty or Tarnished weapon of its format first."]);
-    }
-
-    // Reclassification: the first feed only, and it must be a feeder.
-    const firstFeed = st.form === 1 && st.combines === 0 && !st.identityName && !st.reclassified;
-    if (fodderClass === "feeder") {
-        if (firstFeed) {
-            const legal = legalWeaponFormats(lines, classKey);
-            if (classKey && legal.length && !legal.includes(st.format)) {
-                return fail([`A ${classKey} cannot wield ${weaponFormats(lines)[st.format]?.name ?? st.format} weapons — that format cannot be set by a feed.`]);
-            }
-            return { ok: true, kind: "reclassify", reasons: [], targetForm: st.form, targetSet: null };
-        }
-        if (st.form === 1 && !st.reclassified) {
-            return fail(["Reclassification is the first feed only — this vessel has already fed, so its format can no longer be set by a feeder."]);
-        }
-    }
-
-    // Named feeds transition (free identity). No per-item class
-    // gate: designated identities carry PEQ class masks that can
-    // exclude classes legal in the format, so legality is gated
-    // once at format choice via legalWeaponFormats.
-    if (fodderClass === "named") {
-        if (st.form >= 33) return fail(["This weapon is at its final form (33) — it cannot transition further."]);
-        const verdict = { ok: true, kind: "transition", reasons: [], targetForm: st.form + 1, targetSet: null };
-        if (st.form + 1 === 33) {
-            const options = capstoneOptions(lines, st.format, classKey);
-            verdict.capstoneOptions = options;
-            verdict.capstone = options[0] ?? null;
-        }
-        return verdict;
-    }
-
-    // Everything else of the format ripens.
-    if (st.combines >= formCap(st.form)) {
-        return fail([`Form ${st.form} is fully ripened (${st.combines}/${formCap(st.form)}) — transition to grow further.`]);
-    }
-    return { ok: true, kind: "ripening", reasons: [], targetForm: st.form, targetSet: null };
+    return validateWeaponCombine(lines, vessel, { kind: "transition", keyItem: fodderItem }, actor);
 }
 
 /** Tradeskill used for a DIY evolution combine on this vessel.

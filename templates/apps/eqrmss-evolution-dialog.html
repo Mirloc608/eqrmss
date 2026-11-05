@@ -57,23 +57,35 @@
         {{/if}}
         {{else}}
         {{#if needsFormat}}
-        <p class="evo-verdict">Choose a format above and Begin Evolution before feeding this weapon.</p>
+        <p class="evo-verdict">Choose a format above and Begin Evolution before reforging this weapon.</p>
         {{else}}
-        <label class="evo-fodder-label">Consume:
-            <select class="evo-fodder-select">
-                {{#each candidates}}
-                <option value="{{id}}" {{#if selected}}selected{{/if}} {{#unless ok}}disabled{{/unless}}>{{name}}{{#if kindLabel}} — {{kindLabel}}{{/if}}</option>
+        {{#if catalyst}}
+        <p class="evo-catalyst-line">Catalyst: <strong>{{catalyst.name}}</strong> ({{catalyst.family}} family) — {{catalyst.cost}} per combine &middot; you hold {{catalyst.held}}</p>
+        {{/if}}
+        <label class="evo-fodder-label">Combine:
+            <select class="evo-action-select">
+                {{#each combineActions}}
+                <option value="{{id}}" {{#if selected}}selected{{/if}} {{#unless ok}}disabled{{/unless}}>{{label}}</option>
                 {{/each}}
             </select>
         </label>
-        {{#if selectedFodder}}
-            {{#if selectedFodder.ok}}
-            <p class="evo-verdict ok"><i class="fas fa-check"></i> {{#if selectedIsTransition}}Transition: this piece templates the vessel's next form.{{else}}Ripening: +1 combine in the current form.{{/if}}</p>
+        {{#if keyCandidates.length}}
+        <label class="evo-fodder-label">Transition key (consumed, abilities stripped):
+            <select class="evo-fodder-select">
+                {{#each keyCandidates}}
+                <option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}} — {{tierLabel}}</option>
+                {{/each}}
+            </select>
+        </label>
+        {{/if}}
+        {{#if selectedAction}}
+            {{#if selectedAction.ok}}
+            <p class="evo-verdict ok"><i class="fas fa-check"></i> {{#if selectedIsTransition}}Transition: the key is consumed and stripped — the ladder's next-form identity applies.{{else}}Ripening: +1 combine in the current form.{{/if}}</p>
             {{else}}
-            <p class="evo-verdict bad"><i class="fas fa-times"></i> {{selectedFodder.reasons.[0]}}</p>
+            <p class="evo-verdict bad"><i class="fas fa-times"></i> {{selectedAction.reasons.[0]}}</p>
             {{/if}}
         {{else}}
-        <p class="evo-verdict">No candidate pieces in this character's inventory.</p>
+        <p class="evo-verdict">No combine is available for this weapon.</p>
         {{/if}}
         {{#if showCapstone}}
         <div class="evo-capstone-choice">
@@ -86,18 +98,6 @@
             {{/each}}
         </div>
         {{/if}}
-        {{#if showProcChoice}}
-        <div class="evo-proc-choice">
-            <p class="evo-proc-label">The fed weapon carries a proc ({{fodderProcName}}) — which proc does the vessel keep?</p>
-            <label>
-                <input type="radio" name="evo-proc" value="vessel" {{#if procVesselSelected}}checked{{/if}} />
-                Keep the vessel's proc ({{vesselProcName}})
-            </label>
-            <label>
-                <input type="radio" name="evo-proc" value="fodder" {{#if procFodderSelected}}checked{{/if}} />
-                Take the fed weapon's proc ({{fodderProcName}})
-            </label>
-        </div>
         {{/if}}
         {{/if}}
         {{/if}}
@@ -114,7 +114,7 @@
                 Pay a smith — {{feeGp}} gp (you have {{wealthGp}} gp), 5% failure, fee kept on failure
             </label>
         </div>
-        <p class="evo-stakes">On failure the vessel is returned intact, but the {{#if catalystMode}}catalyst materials are{{else}}consumed piece is{{/if}} lost.</p>
+        <p class="evo-stakes">On failure the vessel is returned intact, but the {{#if catalystMode}}catalyst materials are{{else}}fuel or transition key is{{/if}} lost.</p>
         <button type="button" class="evo-combine-btn" data-action="combine" {{#unless canCombine}}disabled{{/unless}}>
             <i class="fas fa-fire"></i> Reforge
         </button>
