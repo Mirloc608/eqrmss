@@ -39,6 +39,7 @@ import {
     activeStun,
     STUN_LABEL
 } from "./crit-conditions.js";
+import { resolveTableAttack, effectOBFor } from "./table-resolver.js";
 import { isWorn } from "../utils/equipment/equipment-utils.js";
 import { getSpellModifiers } from "../spells/spell-buffs.js";
 import { getSongModifiers } from "../spells/songs.js";
@@ -490,6 +491,93 @@ function elementResistFor(target, element) {
         }
     }
     return (resistances[element] ?? 0) + buffResist;
+}
+
+/**
+ * Damage-shield strike (absolute-damage Stage 3, user ruling
+ * 2026-10-21): a melee attacker who lands a hit on a shielded
+ * defender takes the shield's per-strike result. Shields stamped
+ * by applyDamageShield since Stage 3 carry their table + the
+ * ORIGINAL caster's OB — the strike resolves on the table at
+ * that OB, hits only (no crits), against the striker's DB/AT.
+ * Legacy shields (amount only) keep their flat amount. A reverse
+ * shield (Mark of Karn pattern: negative amount at registration)
+ * heals the striker by the same result instead of damaging them.
+ * Returns the chat-note HTML ("" when the shield does nothing).
+ */
+export async function applyDamageShieldStrike({ ds, striker, targetName }) {
+    if (!ds || !striker) return "";
+    const dsSource = String(ds?.source ?? "damage shield");
+    const reverse = !!ds?.reverse || (Number(ds?.amount) || 0) < 0;
+    let hits = null;
+    let tableNote = "";
+    if (ds.table) {
+        const res = resolveTableAttack({
+            tableName: ds.table, critType: ds.critType ?? null,
+            ob: Number(ds.ob) || 0, target: striker, allowCrit: false
+        });
+        if (res) {
+            hits = res.total;
+            tableNote = ` (${res.table} table: roll ${res.roll} + OB ${res.ob} − DB ${res.db} = ${res.net} → ${res.hits} hits)`;
+        }
+    }
+    // Legacy shields (registered before Stage 3) and the
+    // tables-not-loaded fallback keep the flat EQ amount.
+    if (hits == null) hits = Math.abs(Number(ds?.amount) || 0);
+    if (!(hits > 0)) return "";
+    const aCur = Number(striker.system?.hits?.value) || 0;
+    if (reverse) {
+        const healed = Math.max(0, aCur - hits);
+        await striker.update({ "system.hits.value": healed });
+        await checkHitThresholds(striker);
+        return `<p><em>${esc(striker.name)} is healed ${aCur - healed} by ${esc(dsSource)} (reverse damage shield)${tableNote}.</em></p>`;
+    }
+    await striker.update({ "system.hits.value": aCur + hits });
+    await checkHitThresholds(striker);
+    return `<p><em>${esc(striker.name)} takes ${hits} damage from ${esc(dsSource)} damage shield${tableNote}.</em></p>`;
+}
+
+/**
+ * Vampiric Embrace strike (absolute-damage Stage 3, user ruling
+ * 2026-10-21): on a successful melee hit the attacker's vampiric
+ * buff may proc (vampiricProcFor rolls the chance). The drain is
+ * a lifetap: its damage resolves on the tables like the Stage 1
+ * lifetap pipeline — magic damage on the Fire Bolt table with
+ * Mana crits at the attacker's effect OB (the wearer is the
+ * buff's source; design choice D), crits allowed and applied
+ * through applyCritConditions exactly as applyDamage does — and
+ * the heal equals the proc's percent of the damage dealt (it
+ * does not roll separately). Falls back to the proc's flat EQ
+ * values only when the combat tables are not loaded.
+ * Returns the chat-note HTML ("" when the proc does not fire).
+ */
+export async function applyVampiricStrike({ vamp, attacker, targetActor, targetName }) {
+    if (!vamp || !attacker || !targetActor) return "";
+    const { vampiricProcFor } = await import("../spells/vampiric.js");
+    const proc = vampiricProcFor(vamp);
+    if (!proc) return "";
+    let damage = proc.damage;
+    let heal = proc.heal;
+    let tableNote = "";
+    let critNote = "";
+    const res = resolveTableAttack({ element: "magic", ob: effectOBFor(attacker), target: targetActor, allowCrit: true });
+    if (res) {
+        damage = res.total;
+        heal = Math.max(0, Math.round(damage * (Number(proc.percent) || 0) / 100));
+        tableNote = ` (${res.table} table: roll ${res.roll} + OB ${res.ob} − DB ${res.db} = ${res.net} → ${res.hits} hits${res.critBonus ? ` + ${res.critBonus} critical` : ""})`;
+        if (damage > 0 && res.crits?.length) {
+            for (const c of res.crits) critNote += await applyCritConditions(targetActor, attacker, c.text);
+        }
+    }
+    const vampSource = String(vamp?.source ?? "Vampiric Embrace");
+    const tCur = Number(targetActor.system?.hits?.value) || 0;
+    await targetActor.update({ "system.hits.value": tCur + damage });
+    const aCur = Number(attacker.system?.hits?.value) || 0;
+    const healed = Math.max(0, aCur - heal);
+    await attacker.update({ "system.hits.value": healed });
+    await checkHitThresholds(targetActor);
+    await checkHitThresholds(attacker);
+    return `<p><em>${esc(attacker.name)}'s ${esc(vampSource)} drains ${damage} life from ${esc(targetName)}, healing ${aCur - healed}${tableNote}.</em></p>` + critNote;
 }
 
 export async function rollWeaponAttack(actor, weaponItem, options = {}) {
@@ -1375,42 +1463,27 @@ export async function rollWeaponAttack(actor, weaponItem, options = {}) {
         appliedNote = `<p><em>${totalDamage} concussion hit${totalDamage === 1 ? "" : "s"} applied to ${esc(targetName)}.</em></p>`;
         // Concussion-hit thresholds — unconsciousness (§6.4.1), dying (§3.8).
         await checkHitThresholds(targetActor);
-        // Damage shield (2026-10-07): melee attackers take flat DS damage
+        // Damage shield (2026-10-07): melee attackers take DS damage
         // when they land a hit. Not on misses, not vs missiles.
+        // Stage 3: the strike resolves on the shield's stamped
+        // table at the original caster's OB (applyDamageShieldStrike).
         if (!missileAttack && totalDamage > 0) {
             const ds = targetActor.system?.status?.damageShield;
-            const dsAmount = Number(ds?.amount) || 0;
-            if (dsAmount > 0 && actor && (actor.isOwner || game.user?.isGM)) {
-                const dsSource = String(ds?.source ?? "damage shield");
-                const aCur = Number(actor.system?.hits?.value) || 0;
-                await actor.update({ "system.hits.value": aCur + dsAmount });
-                appliedNote += `<p><em>${esc(actor.name)} takes ${dsAmount} damage from ${esc(dsSource)} damage shield.</em></p>`;
-                await checkHitThresholds(actor);
+            if (ds && actor && (actor.isOwner || game.user?.isGM)) {
+                appliedNote += await applyDamageShieldStrike({ ds, striker: actor, targetName });
             }
         }
         // Vampiric Embrace (2026-10-08): melee lifetap proc. On a
         // successful melee hit the attacker rolls d100 vs procChance;
-        // on success the target takes bonus magic damage and the
-        // attacker heals a percentage of it. Not on misses, not vs
-        // missiles. NOTE: procChance/amount/percent defaults are
-        // placeholders (see module/spells/vampiric.js), flagged for
-        // EQ canon review.
+        // on success the drain resolves on the tables (Stage 3) and
+        // the attacker heals a percentage of the damage dealt. Not
+        // on misses, not vs missiles. NOTE: procChance/amount/percent
+        // defaults are placeholders (see module/spells/vampiric.js),
+        // flagged for EQ canon review.
         if (!missileAttack && totalDamage > 0) {
             const vamp = actor.system?.status?.vampiric;
             if (vamp && typeof vamp === "object" && actor && (actor.isOwner || game.user?.isGM)) {
-                const { vampiricProcFor } = await import("../spells/vampiric.js");
-                const proc = vampiricProcFor(vamp);
-                if (proc) {
-                    const tCur = Number(targetActor.system?.hits?.value) || 0;
-                    await targetActor.update({ "system.hits.value": tCur + proc.damage });
-                    const aCur = Number(actor.system?.hits?.value) || 0;
-                    const healed = Math.max(0, aCur - proc.heal);
-                    await actor.update({ "system.hits.value": healed });
-                    const vampSource = String(vamp?.source ?? "Vampiric Embrace");
-                    appliedNote += `<p><em>${esc(actor.name)}'s ${esc(vampSource)} drains ${proc.damage} life from ${esc(targetName)}, healing ${aCur - healed}.</em></p>`;
-                    await checkHitThresholds(targetActor);
-                    await checkHitThresholds(actor);
-                }
+                appliedNote += await applyVampiricStrike({ vamp, attacker: actor, targetActor, targetName });
             }
         }
         // The ST table's "foe knocked out" is a crit-blow knockout, not

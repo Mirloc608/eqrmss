@@ -14,6 +14,17 @@
 // controls/debuffs/utility/cures become timed spell effects.
 // EQ durations are seconds; 1 round = 6 s (standing ruling).
 //
+// TABLES ROUTING (absolute-damage Stage 3, user ruling
+// 2026-10-21): song damage and hits-heal effects no longer
+// tick their EQ-scaled numbers. Their entries carry the
+// element's bolt table + the bard's performance OB (see
+// songOBFor), stamped at application exactly like the Stage 1
+// pipeline DoT/HoT entries; tickConditions resolves them on
+// the table, hits only. The EQ-scaled min/max and amount ride
+// along for display / legacy fallback, as in the pipeline.
+// Mana regen is not hits healing and stays flat, as does
+// every non-damage/heal effect (buffs, controls, utility).
+//
 // Hostile songs resolve like spells (user ruling 2026-10-23,
 // "more like enchanter spells than any other"): a hostile song
 // gates on a per-target Resistance Roll at application — see
@@ -21,6 +32,7 @@
 // ============================================================
 
 import { durationRounds, rrOpenEnded, rrTargetNumber, RESIST_STAT_BY_REALM } from "./base-spell.js";
+import { tableForElement } from "../combat/table-resolver.js";
 import { casterRealm } from "./spell-failure.js";
 import { CASTING_STAT_BY_CLASS, casterLevelOf, statBonusFor } from "./spell-mapping.js";
 import { applyStatusEffect, hasteSlowExclusion, dispelHaste, baseActorOf } from "./status-wiring.js";
@@ -50,6 +62,24 @@ export function songEffectsOf(songItem) {
 }
 
 function songIdOf(songItem) { return songItem?.id ?? songItem?._id ?? ""; }
+
+/**
+ * The OB a song's absolute effects roll at (absolute-damage
+ * design, Stage 3): the bard's performance skill total — the
+ * bonus of the song's performance skill (system.song.
+ * performanceSkill on the song document, "bard_performance"
+ * by default) read off the singer's skill items exactly as
+ * directedSpellsBonus reads Directed Spells in
+ * spell-mapping.js. Stamped on the song's DoT / regen entries
+ * at application; the ticks resolve on the tables at this OB,
+ * hits only (design choice C).
+ */
+export function songOBFor(bard, songItem) {
+    const slug = String(songItem?.system?.song?.performanceSkill ?? songItem?.system?.performanceSkill ?? "bard_performance");
+    const items = [...(bard?.items?.contents ?? bard?.items ?? [])];
+    const skill = items.find(i => i?.type === "skill" && i.system?.slug === slug);
+    return Number(skill?.system?.bonus) || 0;
+}
 
 function effectValue(eff) {
     const v = eff?.value;
@@ -619,9 +649,17 @@ export async function applySong(bard, songItem, targets = [], opts = {}) {
                 const dots = [...(Array.isArray(target.system?.status?.dots) ? target.system.status.dots : [])];
                 // Scale EQ÷10 (2026-10-07 fix): was storing raw min/max from wrong fields.
                 const scaledDmg = Math.round(effectValue(eff) / 10);
+                // Tables routing (Stage 3): carry the element's
+                // bolt table + the bard's performance OB, the
+                // Stage 1 dot-entry shape — tickConditions
+                // resolves the entry on the table each round,
+                // hits only. min/max ride along for display and
+                // legacy fallback, exactly as in the pipeline.
+                const { attackTable, critType } = tableForElement(String(eff?.element ?? ""));
                 dots.push({
                     name, element: String(eff?.element ?? ""),
                     min: scaledDmg, max: scaledDmg,
+                    table: attackTable, critType, ob: songOBFor(bard, songItem),
                     source: "song", maintained: true,
                     casterId: bard?.id ?? "", songId: songIdOf(songItem),
                     roundsLeft: durationRounds(eff?.duration) ?? 2
@@ -634,10 +672,20 @@ export async function applySong(bard, songItem, targets = [], opts = {}) {
                 // and mana regen had no pool so the tick healed HP instead of mana.
                 const regenStat = String(eff?.stat ?? "").toLowerCase();
                 const regenScaled = scaleSongValue(regenStat || "hp", effectValue(eff) || Number(eff?.amount) || 0);
-                fx.push(maintainedEntry(bard, songItem, label, eff, "regen", {
-                    amount: regenScaled.value,
-                    pool: regenScaled.target === "mana" ? "mana" : "hits"
-                }));
+                const regenPool = regenScaled.target === "mana" ? "mana" : "hits";
+                const regenExtra = { amount: regenScaled.value, pool: regenPool };
+                // Tables routing (Stage 3): hits healing carries
+                // the element table + the bard's performance OB
+                // (the Stage 1 HoT entry shape); the tick heals
+                // the table's hits result against no DB. Mana
+                // regen is not hits healing and stays flat.
+                if (regenPool === "hits") {
+                    const { attackTable, critType } = tableForElement(String(eff?.element ?? ""));
+                    regenExtra.table = attackTable;
+                    regenExtra.critType = critType;
+                    regenExtra.ob = songOBFor(bard, songItem);
+                }
+                fx.push(maintainedEntry(bard, songItem, label, eff, "regen", regenExtra));
                 await target.update({ "system.status.spellEffects": fx });
                 notes += `<p><em>${tName}: ${esc(label)}.</em></p>`;
             } else if (type === "levitate" || String(eff?.effect ?? "").toLowerCase() === "levitate") {

@@ -10,8 +10,14 @@
  *
  * Stored at system.status.vampiric = { procChance, amount, percent,
  * roundsLeft, source }. On each successful melee hit the attacker rolls
- * d100 vs procChance; on success the target takes `amount` bonus magic
- * damage and the attacker heals `percent`% of it (lifetap).
+ * d100 vs procChance; on success the drain resolves on the tables
+ * (absolute-damage Stage 3, user ruling 2026-10-21 — see
+ * applyVampiricStrike in module/combat/combat-rolls.js): magic
+ * damage via the Fire Bolt / Mana table at the attacker's effect
+ * OB, and the attacker heals `percent`% of the damage dealt
+ * (lifetap semantics — the heal equals the damage dealt, it does
+ * not roll separately). `amount` remains the EQ content value and
+ * the fallback when the combat tables are not loaded.
  *
  * Duration is level-scaled per EQ: 17 rounds @L7 → 75 rounds @L65
  * (1.7 min → 7.5 min), linear: rounds = level + 10, clamped [17, 75].
@@ -59,8 +65,12 @@ export async function applyVampiric(target, { procChance, amount, percent, round
 
 /**
  * Pure roll for the melee-hit proc. No actor access, no imports needed.
+ * `damage`/`heal` are the legacy flat values (EQ amount and its
+ * percent), used when the combat tables are not loaded; the Stage 3
+ * table route in combat-rolls.js recomputes both from the table
+ * result using `percent`.
  * @param {object} status the system.status.vampiric object
- * @returns {object|null} { roll, damage, heal } on proc, null otherwise
+ * @returns {object|null} { roll, damage, heal, percent } on proc, null otherwise
  */
 export function vampiricProcFor(status) {
     if (!status || typeof status !== "object") return null;
@@ -72,7 +82,7 @@ export function vampiricProcFor(status) {
     const pct = Number(status.percent);
     const healPct = Number.isFinite(pct) ? Math.max(0, Math.min(100, pct)) : VAMPIRIC_DEFAULTS.percent;
     const heal = Math.max(1, Math.round(damage * healPct / 100));
-    return { roll, damage, heal };
+    return { roll, damage, heal, percent: healPct };
 }
 
 /** @returns {boolean} */

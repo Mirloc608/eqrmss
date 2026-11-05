@@ -60,6 +60,11 @@
  * column. The immunity/weakness/resistance/absorb order below still
  * applies to the table result for damage. Entries registered before
  * the ruling (min/max only, no table) keep their legacy tick.
+ * Stage 3 (songs + damage shields + vampiric) extends the same
+ * routing: damageshield registrations stamp their table + the
+ * original caster's OB on the shield entry (per-strike resolution
+ * in combat-rolls.js, hits only; negative amounts are reverse
+ * shields that heal the striker).
  */
 
 import { hasSpecialTrait } from "../utils/special-traits.js";
@@ -477,32 +482,64 @@ async function applyBuff({ effect, target, source, caster }) {
 }
 
 /**
- * "damageshield" — damage shield (2026-10-07). Melee attackers take flat
+ * "damageshield" — damage shield (2026-10-07). Melee attackers take
  * damage when they hit the shielded defender. Highest wins (EQ rule):
  * a weaker DS does not replace a stronger one.
- * Stored at system.status.damageShield = { amount, roundsLeft, source }.
+ *
+ * TABLES ROUTING (absolute-damage Stage 3, user ruling 2026-10-21):
+ * the entry also carries the element's bolt table + the ORIGINAL
+ * caster's effect OB, stamped here at application (the Stage 1 dot
+ * entry shape); the per-strike resolution in combat-rolls.js rolls
+ * on the table at that OB, hits only. The EQ amount stays as
+ * content — it drives the highest-wins comparison and the legacy
+ * fallback for shields registered before this stage.
+ *
+ * A NEGATIVE amount is a REVERSE shield (Mark of Karn pattern, in
+ * the item-effects data: "heals creatures that strike the marked
+ * target") — the strike heals the striker by the table result
+ * instead of damaging them. Before this stage the sign was clamped
+ * away and such a payload silently became a 1-point damage shield.
+ * Highest-wins compares magnitudes within the same kind; a shield
+ * of the opposite kind replaces (the two can never both be "the
+ * stronger shield" — they do opposite things).
+ * Stored at system.status.damageShield = { amount (signed), reverse,
+ * element, table, critType, ob, casterId, roundsLeft, source }.
  */
-async function applyDamageShield({ effect, target, source }) {
+async function applyDamageShield({ effect, target, source, caster }) {
     const miss = requireTarget(target, "damageshield", source);
     if (miss) return miss;
-    const amount = Math.max(1, Math.round(Number(effect?.amount) || 0));
-    if (!(amount > 0)) {
+    const rawAmount = Math.round(Number(effect?.amount) || 0);
+    if (!rawAmount) {
         return { type: "damageshield", final: 0, notes: ["invalid damage shield payload"], source, applied: false };
     }
+    const reverse = rawAmount < 0;
+    const amount = Math.abs(rawAmount);
     const duration = payloadRounds(effect, 10);
     const existing = target?.system?.status?.damageShield;
-    const existingAmount = Number(existing?.amount) || 0;
-    // Highest wins: do not replace a stronger shield.
-    if (existingAmount >= amount) {
+    const existingRaw = Number(existing?.amount) || 0;
+    const existingAmount = Math.abs(existingRaw);
+    const existingReverse = !!existing?.reverse || existingRaw < 0;
+    // Highest wins within the same kind: do not replace a stronger shield.
+    if (existingAmount > 0 && existingReverse === reverse && existingAmount >= amount) {
         return { type: "damageshield", final: existingAmount, notes: [`damage shield blocked by stronger existing shield (${existingAmount})`], source, applied: false };
     }
     const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Damage Shield";
+    const { attackTable, critType } = tableForElement(effect?.element);
     await persistValue(target, "system.status.damageShield", {
-        amount,
+        amount: rawAmount,
+        reverse,
+        element: String(effect?.element ?? ""),
+        table: attackTable,
+        critType,
+        ob: effectOBFor(caster),
+        casterId: caster?.id ?? "",
         roundsLeft: duration,
         source: dispName
     });
-    return { type: "damageshield", final: amount, notes: [`${amount}-point damage shield for ${duration} rounds (${dispName})`], source, applied: true };
+    const kindNote = reverse
+        ? `reverse damage shield (heals strikers) for ${duration} rounds (${dispName}) — resolves on the ${attackTable} table`
+        : `${amount}-point damage shield for ${duration} rounds (${dispName}) — resolves on the ${attackTable} table`;
+    return { type: "damageshield", final: amount, notes: [kindNote], source, applied: true };
 }
 
 /**
@@ -1455,7 +1492,7 @@ export async function applyEffectPayload({ payload, caster, target, source, obOv
         else if (effect.type === "mez") results.push(await applyMez({ effect, target, source }));
         else if (effect.type === "charm") results.push(await applyCharm({ effect, target, source, caster }));
         else if (effect.type === "summon") results.push(await applySummon({ effect, caster, target, source }));
-        else if (effect.type === "damageshield") results.push(await applyDamageShield({ effect, target, source }));
+        else if (effect.type === "damageshield") results.push(await applyDamageShield({ effect, target, source, caster }));
         else if (effect.type === "absorb") results.push(await applyAbsorb({ effect, target, source }));
         else if (effect.type === "illusion") results.push(await applyIllusion({ effect, target, source }));
         else if (effect.type === "see-invisible") results.push(await applySeeInvisible({ effect, target, source }));
