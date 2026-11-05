@@ -728,7 +728,10 @@ async function syncBardPlaylist(bard) {
         // Check if maintained entries exist for this song on any actor.
         // Entries carry songId + source "song" (both spellEffects and dots).
         let hasEntries = false;
-        const actors = globalThis.game?.actors?.contents ?? [];
+        // Fix A (2026-11-04): song entries register on token actors,
+        // so the sweep covers placed tokens as well as world actors.
+        const actors = [...(globalThis.game?.actors?.contents ?? []),
+            ...(globalThis.game?.canvas?.tokens?.placeables ?? []).map(t => t?.actor).filter(Boolean)];
         for (const a of actors) {
             const fx = a?.system?.status?.spellEffects ?? [];
             const dots = a?.system?.status?.dots ?? [];

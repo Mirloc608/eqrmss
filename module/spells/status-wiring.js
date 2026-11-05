@@ -203,18 +203,19 @@ export async function dispelHaste(target) {
 }
 
 /**
- * Resolve to the base actor for unlinked tokens (2026-10-12).
- * Synthetic token actors don't persist to the base actor, so buffs
- * applied to them are invisible to ticks and sheet displays sweeping
- * game.actors. Returns the base actor if resolvable, else the input.
- * @param {Actor} target - the actor (possibly synthetic)
- * @returns {Actor} the base actor
+ * The actor an effect registration applies to: the actor as passed
+ * (2026-11-04, fix A). Registration used to resolve unlinked tokens
+ * to their base actor (2026-10-12), when the round tick swept
+ * game.actors — but tickConditions sweeps combat (token) actors and
+ * sheets render the token actor, so the stores diverged: DoTs and
+ * buffs registered on the base never ticked and never showed on the
+ * token's sheet (Disease Cloud on an unlinked NPC, live 2026-11-04).
+ * Effects now live where combat, ticks and sheets look: the passed
+ * actor. Kept as a function so the rule has one home if it changes.
+ * @param {Actor} target - the actor (possibly a token's actor)
+ * @returns {Actor} the same actor
  */
 export function baseActorOf(target) {
-    const baseId = target?.token?.actorId;
-    if (baseId) {
-        return globalThis.game?.actors?.get(baseId) ?? target;
-    }
     return target;
 }
 

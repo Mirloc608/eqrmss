@@ -389,12 +389,10 @@ export class EQRMSSActorContextHelper {
     _buildBuffsDebuffs(context) {
         const buffs = [];
         const debuffs = [];
-        // Unlinked tokens (2026-10-09): read from base actor. Synthetic
-        // token actors don't have the spellEffects written by applyBuff.
-        const baseActor = this.actor?.isToken
-            ? (globalThis.game?.actors?.get(this.actor?.token?.actorId) ?? this.actor)
-            : this.actor;
-        for (const effect of baseActor?.effects ?? []) {
+        // Effects live on the sheet's own actor (2026-11-04, fix A):
+        // registration writes to the token actor the scene uses, so
+        // the sheet reads that same actor — no base resolution.
+        for (const effect of this.actor?.effects ?? []) {
             if (effect.disabled) continue;
             const entry = {
                 id: effect.id,
@@ -430,7 +428,7 @@ export class EQRMSSActorContextHelper {
         // Timed spell/clicky/proc effects (HoTs, regen, buffs with
         // durations) live in system.status.spellEffects — show them
         // read-only alongside the other buffs.
-        const timed = baseActor?.system?.status?.spellEffects;
+        const timed = this.actor?.system?.status?.spellEffects;
         if (Array.isArray(timed)) {
             for (const e of timed) {
                 const label = e?.name ?? e?.label ?? "Timed Effect";

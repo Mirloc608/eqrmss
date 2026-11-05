@@ -446,8 +446,7 @@ async function trackBaseDamageXP(caster, target, amount, crits, wasDead) {
  * system.status.spellEffects and tick in tickConditions.
  */
 export async function applyBaseSpellEffect(caster, target, classification, spellItem) {
-    // Unlinked tokens (2026-10-12): resolve to the base actor so effects
-    // persist and are visible to ticks/sheets sweeping game.actors.
+    // Effects register on the passed (token) actor — see baseActorOf.
     target = baseActorOf(target);
     const eff = classification?.effect ?? {};
     const name = spellItem?.name ?? "spell";

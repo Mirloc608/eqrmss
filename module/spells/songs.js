@@ -561,8 +561,7 @@ export async function applySong(bard, songItem, targets = [], opts = {}) {
         && !_xpTypes.some(t => ["damage", "heal", "regen", "dot"].includes(t));
     let _xpFreshLand = false;
     for (let target of list) {
-        // Unlinked tokens (2026-10-12): resolve to the base actor so buffs
-        // persist and are visible to ticks/sheets sweeping game.actors.
+        // Effects register on the passed (token) actor — see baseActorOf.
         target = baseActorOf(target);
         const tName = esc(target.name);
         if (!(target.isOwner || globalThis.game?.user?.isGM)) {
