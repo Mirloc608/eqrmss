@@ -120,12 +120,47 @@ export function classifySpell(spellItem) {
     const hostileTypes = hasBuff
         ? ["damage", "dot", "control", "lifetap"]
         : ["damage", "dot", "control", "debuff", "lifetap"];
+    // Encoded DoT (Disease Cloud shape, found live 2026-11-04):
+    // some catalog records encode a damage-over-time spell as a
+    // same-element damage effect plus a "debuff" disease/poison
+    // record whose amount is the per-tick damage and whose duration
+    // is the DoT's — Disease Cloud deals its damage exactly this
+    // way ("1 damage every 6 seconds" == the debuff record's
+    // amount 1 / duration 360). With no real dot effect present,
+    // synthesize the dot from that record so the spell registers
+    // in status.dots (table + Directed Spells OB ticks) instead of
+    // expiring as a label-only timed effect. Pure counter records
+    // (the Scent line and kin) carry NO same-element damage effect
+    // and stay debuffs — the companion damage effect is what marks
+    // the record as damage rather than a counter.
+    if (!hasBuff && !effects.some(e => e?.type === "dot")) {
+        const enc = effects.find(e => e && e.type === "debuff" && !incidental(e)
+            && ["disease", "poison"].includes(String(e.effect ?? "").toLowerCase())
+            && (Number(e.amount) || 0) > 0 && (Number(e.duration) || 0) > 0
+            && effects.some(d => d?.type === "damage"
+                && String(d.element ?? "").toLowerCase() === String(e.effect).toLowerCase()));
+        if (enc) {
+            const element = String(enc.effect).toLowerCase();
+            return { kind: "base", subtype: "dot",
+                effect: { type: "dot", element, min: Number(enc.amount) || 0, max: Number(enc.amount) || 0, duration: enc.duration, resist: element },
+                element };
+        }
+    }
+    // Priority (2026-11-04): debuffs are the weakest track — the
+    // applier records them as label-only timed effects with no
+    // engine pool — so they classify LAST. A real dot, control,
+    // lifetap or damage effect anywhere in the list outranks a
+    // leading debuff; before this, every spell whose first hostile
+    // effect was a debuff silently lost its mechanical teeth (its
+    // DoT never registered, its control never fired).
     // Feign Death (2026-10-07): a self-targeted control, not a hostile
     // attack — exclude it so feign spells fall through to the
     // announced-cast path instead of demanding a non-caster target.
-    const hostile = effects.find(e => e && hostileTypes.includes(e.type)
+    const pickHostile = types => effects.find(e => e && types.includes(e.type)
         && !incidental(e)
         && String(e?.effect ?? "").toLowerCase() !== "feign-death");
+    const hostile = pickHostile(hostileTypes.filter(t => t !== "debuff"))
+        ?? (hostileTypes.includes("debuff") ? pickHostile(["debuff"]) : undefined);
     if (hostile) {
         return { kind: "base", subtype: hostile.type, effect: hostile, element: String(hostile.element ?? "").toLowerCase() };
     }
