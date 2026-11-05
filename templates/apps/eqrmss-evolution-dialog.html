@@ -55,6 +55,21 @@
             <p class="evo-verdict bad"><i class="fas fa-times"></i> {{selectedAction.reasons.[0]}}</p>
             {{/if}}
         {{/if}}
+        {{#if fxChoices.length}}
+        {{#each fxChoices}}
+        <div class="evo-fx-choice">
+            <p class="evo-fx-label">The new form carries a different {{kindLabel}} ({{targetName}}) — which does this piece keep?</p>
+            <label>
+                <input type="radio" name="evo-fx-{{field}}" data-fx-field="{{field}}" value="vessel" {{#if vesselSelected}}checked{{/if}} />
+                Keep the current {{kindLabel}} ({{vesselName}})
+            </label>
+            <label>
+                <input type="radio" name="evo-fx-{{field}}" data-fx-field="{{field}}" value="target" {{#if targetSelected}}checked{{/if}} />
+                Take the new form's {{kindLabel}} ({{targetName}})
+            </label>
+        </div>
+        {{/each}}
+        {{/if}}
         {{else}}
         {{#if needsFormat}}
         <p class="evo-verdict">Choose a format above and Begin Evolution before reforging this weapon.</p>
@@ -97,6 +112,34 @@
             </label>
             {{/each}}
         </div>
+        {{/if}}
+        {{#if showProcChoice}}
+        <div class="evo-fx-choice">
+            <p class="evo-fx-label">The new form carries a proc ({{targetProcName}}) — which proc does the vessel keep?</p>
+            <label>
+                <input type="radio" name="evo-proc" value="vessel" {{#if procVesselSelected}}checked{{/if}} />
+                Keep the vessel's proc ({{vesselProcName}})
+            </label>
+            <label>
+                <input type="radio" name="evo-proc" value="target" {{#if procTargetSelected}}checked{{/if}} />
+                Take the new form's proc ({{targetProcName}})
+            </label>
+        </div>
+        {{/if}}
+        {{#if fxChoices.length}}
+        {{#each fxChoices}}
+        <div class="evo-fx-choice">
+            <p class="evo-fx-label">The new form carries a different {{kindLabel}} ({{targetName}}) — which does this piece keep?</p>
+            <label>
+                <input type="radio" name="evo-fx-{{field}}" data-fx-field="{{field}}" value="vessel" {{#if vesselSelected}}checked{{/if}} />
+                Keep the current {{kindLabel}} ({{vesselName}})
+            </label>
+            <label>
+                <input type="radio" name="evo-fx-{{field}}" data-fx-field="{{field}}" value="target" {{#if targetSelected}}checked{{/if}} />
+                Take the new form's {{kindLabel}} ({{targetName}})
+            </label>
+        </div>
+        {{/each}}
         {{/if}}
         {{/if}}
         {{/if}}

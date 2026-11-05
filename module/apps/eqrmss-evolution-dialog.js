@@ -30,10 +30,11 @@ import {
     weaponFormats, legalWeaponFormats, weaponCurve, formatOfWeapon,
     classifyWeapon, countEvolvingWeapons, capstoneOptions,
     weaponCatalystRequirement, weaponCatalystCost, weaponKeyTierOf,
-    validateWeaponCombine
+    validateWeaponCombine, resolveProcChoice
 } from "../gear/evolution.js";
 import { canUseTradeskill, CRIT_FAIL_RANGE, CRIT_SUCCESS_RANGE } from "../tradeskills/tradeskill-engine.js";
 import { normalizeCatalogData } from "../utils/inventory/catalog-picker.js";
+import { getItemEffect } from "../data/item-effects/item-effect-loader.js";
 
 const WEALTH_RATES = { pp: 1000, gp: 100, sp: 10, cp: 1 }; // in cp
 
@@ -86,6 +87,11 @@ export class EvolutionDialog extends BaseApplication {
         this._actionId = "ripening"; // armor catalyst combines: ripening | transition
         this._formatKey = null;      // weapon format-choice panel selection
         this._capstoneKind = null;   // weapon form-33 overlay selection
+        this._procChoice = "vessel"; // weapon proc choice: vessel | target
+        // Per-kind effect choice at transitions (user ruling
+        // 2026-11-05): vessel | target, defaulting to the vessel's
+        // (keep existing). Only consulted on a genuine conflict.
+        this._effectChoices = { triggeredEffect: "vessel", wornEffect: "vessel" };
     }
 
     get title() {
@@ -292,7 +298,8 @@ export class EvolutionDialog extends BaseApplication {
                     actions.push({
                         id: `transition:${facKey}`, faction: facKey,
                         label: `Transition${tnf ? ` to ${tnf.name}` : ""} — ${cost} × ${mreq?.itemName ?? "mold"}`,
-                        ok: verdict.ok, kind: "transition", reasons: verdict.reasons
+                        ok: verdict.ok, kind: "transition", reasons: verdict.reasons,
+                        targetSet: verdict.targetSet ?? null
                     });
                 }
             } else {
@@ -302,7 +309,8 @@ export class EvolutionDialog extends BaseApplication {
                 actions.push({
                     id: "transition",
                     label: `Transition${nf ? ` to ${nf.name}` : ""} — ${cost} × ${req?.itemName ?? "catalyst"}`,
-                    ok: verdict.ok, kind: "transition", reasons: verdict.reasons
+                    ok: verdict.ok, kind: "transition", reasons: verdict.reasons,
+                    targetSet: verdict.targetSet ?? null
                 });
             }
             if (!actions.some(a => a.id === this._actionId)) this._actionId = "ripening";
@@ -316,6 +324,17 @@ export class EvolutionDialog extends BaseApplication {
             context.selectedIsTransition = context.selectedAction?.kind === "transition";
             selKind = context.selectedAction?.kind ?? null;
             selectionOk = !!context.selectedAction?.ok;
+
+            // Effect choice (user ruling 2026-11-05): when the
+            // transition target carries a click/worn effect that
+            // conflicts with the vessel's own, the player chooses
+            // per kind which one survives. No conflict, no prompt —
+            // fill-empty and target-only cases stay silent.
+            context.fxChoices = [];
+            if (context.selectedIsTransition && context.selectedAction?.ok) {
+                const targetSystem = this._previewTargetSystem(lines, context.selectedAction.targetSet);
+                if (targetSystem) context.fxChoices = this._fxChoicesFor(targetSystem);
+            }
         } else if (!state.format) {
             // No evolution record / format yet: the format-choice
             // panel. The chosen format IS the pin for dual-mode
@@ -397,6 +416,30 @@ export class EvolutionDialog extends BaseApplication {
             context.selectedIsTransition = context.selectedAction?.kind === "transition";
             selKind = context.selectedAction?.kind ?? null;
             selectionOk = !!context.selectedAction?.ok;
+
+            // Proc + effect choice (user ruling 2026-11-05 —
+            // restores the proc choice the 2026-11-04 fuel rebuild
+            // removed, now against the ladder identity instead of a
+            // consumed feed): when the next form's identity carries
+            // a proc (or click/worn effect) that conflicts with the
+            // vessel's own, the player chooses which survives.
+            context.showProcChoice = false;
+            context.fxChoices = [];
+            if (context.selectedIsTransition && context.selectedAction?.ok && state.format) {
+                const targetSystem = this._previewWeaponTargetSystem(lines, state, ctx);
+                if (targetSystem) {
+                    const vesselProc = this.vessel.system?.proc ?? null;
+                    const targetProc = targetSystem.proc ?? null;
+                    if (vesselProc && targetProc && vesselProc !== targetProc) {
+                        context.showProcChoice = true;
+                        context.vesselProcName = vesselProc;
+                        context.targetProcName = targetProc;
+                        context.procVesselSelected = this._procChoice !== "target";
+                        context.procTargetSelected = this._procChoice === "target";
+                    }
+                    context.fxChoices = this._fxChoicesFor(targetSystem);
+                }
+            }
 
             // Capstone overlay: a form-32 vessel with a valid key
             // transitions into form 33 under the CHOSEN overlay
@@ -515,6 +558,17 @@ export class EvolutionDialog extends BaseApplication {
                 this.render();
             });
         });
+        this.element?.querySelectorAll("input[name='evo-proc']").forEach(r => {
+            r.addEventListener("change", ev => {
+                this._procChoice = ev.target.value;
+            });
+        });
+        this.element?.querySelectorAll("input[data-fx-field]").forEach(r => {
+            r.addEventListener("change", ev => {
+                const field = ev.target.dataset.fxField;
+                if (field in this._effectChoices) this._effectChoices[field] = ev.target.value;
+            });
+        });
     }
 
     // ----------------------------------------------------------
@@ -528,7 +582,7 @@ export class EvolutionDialog extends BaseApplication {
     }
 
     /** Build the vessel update that takes the target piece's identity. */
-    _identityUpdate(targetData, newState, preserveList = null) {
+    _identityUpdate(targetData, newState, preserveList = null, effectChoices = null) {
         const updates = { name: targetData.name, img: targetData.img };
         const targetSystem = foundry.utils.deepClone(targetData.system ?? {});
         const keepLocation = this.vessel.system?.location;
@@ -570,6 +624,16 @@ export class EvolutionDialog extends BaseApplication {
         };
         for (const field of ["triggeredEffect", "wornEffect"]) {
             if (current[field] && !targetSystem[field]) carry(field, current[field]);
+            // Effect choice (user ruling 2026-11-05): on a genuine
+            // conflict — both sides carry an effect of this kind and
+            // they differ — the player's per-kind choice may keep
+            // the vessel's effect over the target's. Without a
+            // "vessel" choice the target's own effect stands, as
+            // before; the dialog defaults the choice to "vessel"
+            // (keep existing), so an untouched prompt also lands
+            // here.
+            else if (current[field] && targetSystem[field] && current[field] !== targetSystem[field]
+                && effectChoices?.[field] === "vessel") carry(field, current[field]);
         }
         // Stat carry-forward (user ruling 2026-10-28): the same
         // never-slide-back rule for numbers — defense / hp / mana and
@@ -602,10 +666,84 @@ export class EvolutionDialog extends BaseApplication {
      * proc / classes / stats profile lands, merged never-slide-back
      * for stats, resistances, hp and mana by the base routine.
      */
-    _weaponIdentityUpdate(targetData, newState) {
+    _weaponIdentityUpdate(targetData, newState, effectChoices = null) {
         return this._identityUpdate(targetData, newState,
             ["weaponTemplate", "type", "attackTable", "criticalType", "material", "condition",
-             "evolution", "location", "quantity", "equipped", "worn", "weaponFormat", "classes"]);
+             "evolution", "location", "quantity", "equipped", "worn", "weaponFormat", "classes"],
+            effectChoices);
+    }
+
+    /** Display name for an item-effect id (falls back to the id). */
+    _effectName(id) {
+        try { return getItemEffect(id)?.name ?? id; } catch { return id; }
+    }
+
+    /**
+     * Per-kind effect-conflict choices for a transition into the
+     * given target system: one entry per kind (click / worn) where
+     * BOTH the vessel and the target carry an effect and they
+     * differ. Anything else resolves silently (the fill-empty carry
+     * or the target's own effect) and never reaches this list.
+     */
+    _fxChoicesFor(targetSystem) {
+        const out = [];
+        const kinds = [["triggeredEffect", "click effect"], ["wornEffect", "worn effect"]];
+        for (const [field, kindLabel] of kinds) {
+            const v = this.vessel.system?.[field] ?? null;
+            const t = targetSystem?.[field] ?? null;
+            if (v && t && v !== t) {
+                out.push({
+                    field, kindLabel,
+                    vesselName: this._effectName(v),
+                    targetName: this._effectName(t),
+                    vesselSelected: this._effectChoices[field] !== "target",
+                    targetSelected: this._effectChoices[field] === "target"
+                });
+            }
+        }
+        return out;
+    }
+
+    /**
+     * Sync preview of an armor transition target's system, resolved
+     * exactly the way _targetData resolves it (the combine path
+     * re-resolves normalized). Only the effect/proc fields are read
+     * from the preview, and normalization never alters those.
+     */
+    _previewTargetSystem(lines, targetSetId) {
+        if (!targetSetId) return null;
+        const targetSet = lines.sets?.[targetSetId];
+        if (!targetSet) return null;
+        const entries = Object.values(game.eqrmss?.items?.byId ?? {});
+        const vesselLoc = armorLocationOf(this.vessel);
+        if (!vesselLoc) return null;
+        const pieceName = (targetSet.pieces ?? []).find(p => {
+            const e = entries.find(x => x?.name === p);
+            const loc = e?.system?.armorLocation ?? e?.system?.slot ?? null;
+            return loc === vesselLoc;
+        }) ?? null;
+        if (!pieceName) return null;
+        return entries.find(e => e?.name === pieceName)?.system ?? null;
+    }
+
+    /**
+     * Sync preview of a weapon transition target's system: the
+     * ladder's next-form identity, or the chosen capstone overlay
+     * at form 33 — the same identities the combine path resolves
+     * through _catalogDataByName.
+     */
+    _previewWeaponTargetSystem(lines, state, ctx) {
+        let targetName = null;
+        if (state.form === 32) {
+            const options = capstoneOptions(lines, state.format, ctx.classKey);
+            const chosen = options.find(o => o.kind === this._capstoneKind) ?? options[0] ?? null;
+            targetName = chosen?.names?.[0] ?? null;
+        } else {
+            targetName = weaponFormats(lines)[state.format]?.forms?.[String(state.form + 1)] ?? null;
+        }
+        if (!targetName) return null;
+        const entries = Object.values(game.eqrmss?.items?.byId ?? {});
+        return entries.find(e => e?.name === targetName)?.system ?? null;
     }
 
     async _targetData(lines, state, fodderItem, verdict) {
@@ -791,15 +929,17 @@ export class EvolutionDialog extends BaseApplication {
             if (capstoneOption?.pair) next.pairId = state.pairId ?? foundry.utils.randomID();
             const oldName = vessel.name;
             const keyName = fodderItem.name;
-            const updates = dialog._weaponIdentityUpdate(targetData, next);
-            // Proc: the ladder identity's proc applies when it has
-            // one; the vessel's own proc is never slid back when
-            // the ladder identity carries none. The key's proc is
-            // never consulted.
-            if (targetData.system?.proc) {
-                updates["system.proc"] = targetData.system.proc;
-            } else if (vessel.system?.proc) {
-                updates["system.proc"] = vessel.system.proc;
+            const updates = dialog._weaponIdentityUpdate(targetData, next, dialog._effectChoices);
+            // Proc (user ruling 2026-11-05): on a conflict the
+            // player's choice decides; otherwise the one proc that
+            // exists wins — the ladder identity's when it has one,
+            // the vessel's own when it does not (never slide back).
+            // The key's proc is never consulted.
+            const resolvedProc = resolveProcChoice(vessel.system?.proc ?? null,
+                targetData.system?.proc ?? null,
+                dialog._procChoice === "target" ? "fodder" : "vessel");
+            if (resolvedProc) {
+                updates["system.proc"] = resolvedProc;
                 delete updates["system.-=proc"];
             }
             const curve = weaponCurve(lines, state.format, next.form);
@@ -832,7 +972,7 @@ export class EvolutionDialog extends BaseApplication {
             const next = transition(state, verdict.targetSet);
             const targetData = await dialog._targetData(lines, state, fodderItem, verdict);
             const oldName = vessel.name;
-            await vessel.update(dialog._identityUpdate(targetData, next));
+            await vessel.update(dialog._identityUpdate(targetData, next, null, dialog._effectChoices));
             resultNote = `${oldName} is reforged into ${targetData.name} — Form ${next.form}. Socketed augments baked in; slots reset.`;
         }
         await consumeFuel();
