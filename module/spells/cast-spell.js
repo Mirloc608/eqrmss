@@ -61,7 +61,8 @@ import { resolveTableAttack, tableForElement } from "../combat/table-resolver.js
 import { applyHealingSpell, checkHitThresholds, activeStun } from "../combat/crit-conditions.js";
 import {
     getCastTimeMode, waitRoundsFor, checkRange,
-    storePendingCast, clearPendingCast
+    storePendingCast, clearPendingCast,
+    rollChannelingSave, fizzleSaveBonus
 } from "./cast-timing.js";
 
 const esc = (s) => globalThis.foundry?.utils?.escapeHTML
@@ -497,11 +498,22 @@ async function castSpellInner(actor, spellItem, opts = {}) {
                 }
             } catch (e) { /* non-fatal */ }
             if (!noInterrupt) {
+                // Channeling fizzle save (user ruling 2026-11-06):
+                // damage taken this round no longer auto-fizzles.
+                // The caster rolls Channeling with a +25 save bonus;
+                // AA "fizzle-save" modifiers add further.
+                const save = await rollChannelingSave(actor, { bonus: 25 + fizzleSaveBonus(actor) });
+                if (!save.success) {
+                    await ChatMessage.create({
+                        speaker: ChatMessage.getSpeaker({ actor }),
+                        content: `<p><em>${esc(actor.name)} tries to cast ${esc(name)} but is reeling from damage — the spell fizzles! (${save.roll} vs ${save.chance}% Channeling save; no mana spent)</em></p>`
+                    });
+                    return { ok: false, reason: "interrupted", mode: "instant" };
+                }
                 await ChatMessage.create({
                     speaker: ChatMessage.getSpeaker({ actor }),
-                    content: `<p><em>${esc(actor.name)} tries to cast ${esc(name)} but is reeling from damage — the spell fizzles! (no mana spent)</em></p>`
+                    content: `<p><em>${esc(actor.name)} holds concentration despite the damage (${save.roll} vs ${save.chance}% Channeling save) — ${esc(name)} proceeds.</em></p>`
                 });
-                return { ok: false, reason: "interrupted", mode: "instant" };
             }
             // no-interrupt: cast proceeds despite damage
         }

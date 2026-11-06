@@ -1,0 +1,228 @@
+diff --git a/module/combat/crit-conditions.js b/module/combat/crit-conditions.js
+index 431e8ba6..438c1b8e 100644
+--- a/module/combat/crit-conditions.js
++++ b/module/combat/crit-conditions.js
+@@ -508,6 +508,24 @@ export async function applyCritConditions(targetActor, attackerActor, critText)
+     const tName = targetActor?.name ?? "Target";
+     const canApply = !!targetActor && (targetActor.isOwner || game.user?.isGM);
+ 
++    // Channeling (user ruling 2026-11-06): a critical hit is an
++    // automatic interrupt of a pending cast — no Channeling roll.
++    // Placed here because every crit that lands flows through this
++    // function, while the damage hook fires on the hits update,
++    // which the damage pipeline lands BEFORE the crit is applied.
++    // interruptPendingCast re-checks capstone no-interrupt and
++    // no-ops when nothing is pending (repeat crits included).
++    if (canApply) {
++        try {
++            const baseTarget = targetActor?.isToken
++                ? (globalThis.game?.actors?.get(targetActor?.token?.actorId) ?? targetActor)
++                : targetActor;
++            if (baseTarget?.system?.status?.pendingCast) {
++                await interruptPendingCast(baseTarget, "crit");
++            }
++        } catch (e) { /* non-fatal */ }
++    }
++
+     const stun = parseStun(critText);
+     // Paralysis (2026-10-20 ruling): full-body crit paralysis is a
+     // non-expiring down-or-out — a flag on the stun pool that
+@@ -758,7 +776,7 @@ async function syncBardPlaylist(bard) {
+ }
+ 
+ // Cast-time pending casts (Option A) tick here on round change.
+-import { clearPendingCast } from "../spells/cast-timing.js";
++import { clearPendingCast, interruptPendingCast } from "../spells/cast-timing.js";
+ 
+ /**
+  * Tick one actor's pending delayed cast (Option A): decrement
+diff --git a/module/spells/cast-spell.js b/module/spells/cast-spell.js
+index 58c6cf68..0bbb11c8 100644
+--- a/module/spells/cast-spell.js
++++ b/module/spells/cast-spell.js
+@@ -61,7 +61,8 @@ import { resolveTableAttack, tableForElement } from "../combat/table-resolver.js
+ import { applyHealingSpell, checkHitThresholds, activeStun } from "../combat/crit-conditions.js";
+ import {
+     getCastTimeMode, waitRoundsFor, checkRange,
+-    storePendingCast, clearPendingCast
++    storePendingCast, clearPendingCast,
++    rollChannelingSave, fizzleSaveBonus
+ } from "./cast-timing.js";
+ 
+ const esc = (s) => globalThis.foundry?.utils?.escapeHTML
+@@ -497,11 +498,22 @@ async function castSpellInner(actor, spellItem, opts = {}) {
+                 }
+             } catch (e) { /* non-fatal */ }
+             if (!noInterrupt) {
++                // Channeling fizzle save (user ruling 2026-11-06):
++                // damage taken this round no longer auto-fizzles.
++                // The caster rolls Channeling with a +25 save bonus;
++                // AA "fizzle-save" modifiers add further.
++                const save = await rollChannelingSave(actor, { bonus: 25 + fizzleSaveBonus(actor) });
++                if (!save.success) {
++                    await ChatMessage.create({
++                        speaker: ChatMessage.getSpeaker({ actor }),
++                        content: `<p><em>${esc(actor.name)} tries to cast ${esc(name)} but is reeling from damage — the spell fizzles! (${save.roll} vs ${save.chance}% Channeling save; no mana spent)</em></p>`
++                    });
++                    return { ok: false, reason: "interrupted", mode: "instant" };
++                }
+                 await ChatMessage.create({
+                     speaker: ChatMessage.getSpeaker({ actor }),
+-                    content: `<p><em>${esc(actor.name)} tries to cast ${esc(name)} but is reeling from damage — the spell fizzles! (no mana spent)</em></p>`
++                    content: `<p><em>${esc(actor.name)} holds concentration despite the damage (${save.roll} vs ${save.chance}% Channeling save) — ${esc(name)} proceeds.</em></p>`
+                 });
+-                return { ok: false, reason: "interrupted", mode: "instant" };
+             }
+             // no-interrupt: cast proceeds despite damage
+         }
+diff --git a/module/spells/cast-timing.js b/module/spells/cast-timing.js
+index 8148cb60..ffac80c9 100644
+--- a/module/spells/cast-timing.js
++++ b/module/spells/cast-timing.js
+@@ -3,10 +3,13 @@
+ // ============================================================
+ // Cast time mode is a GM world setting ("eqrmss", "castTimeMode"):
+ //   "rounds"  — Option A: spells take ceil(castTime/6) rounds; mana
+-//               spent upfront, spell fires after the delay, damage
+-//               or stun while waiting interrupts (mana lost).
++//               spent upfront, spell fires after the delay. Damage
++//               while waiting forces a Channeling roll to keep
++//               casting (user ruling 2026-11-06); critical hits and
++//               stuns interrupt outright (mana lost).
+ //   "instant" — Option B: spells fire immediately, but if the caster
+-//               took damage this round before casting, it fizzles.
++//               took damage this round before casting, they must pass
++//               a Channeling save (+25, AAs can add) or it fizzles.
+ //   "off"     — Option C: no cast-time enforcement (range still enforced).
+ //
+ // Range is always enforced when tokens are measurable: the target
+@@ -130,8 +133,100 @@ export async function clearPendingCast(actor) {
+ }
+ 
+ /**
+- * Interrupt a pending cast (damage or stun while waiting).
++ * Channeling concentration (user ruling 2026-11-06). Damage taken
++ * while casting no longer interrupts automatically: the caster
++ * rolls d100 against their effective Channeling — the skill total
++ * plus worn Channeling mods — read directly as the percent chance
++ * to cast through the hit. The total is clamped to 95: nobody is
++ * ever uninterruptible. Critical hits and stuns bypass the roll
++ * (automatic interrupts). This is what the channeling-mod worn
++ * family (e.g. Shoulderwraps of the Pure) feeds.
++ *
++ * effectiveChannelingChance is the pure math, exported for tests.
++ */
++export function effectiveChannelingChance(skill, wornMod, bonus = 0) {
++    const total = (Number(skill) || 0) + (Number(wornMod) || 0) + (Number(bonus) || 0);
++    return Math.max(0, Math.min(95, Math.floor(total)));
++}
++
++/** The caster's Channeling skill total (0 when unreadable). */
++async function channelingSkillOf(actor) {
++    try {
++        const { resolveActorSkillProfile } = await import("../utils/skills/index.js");
++        const profile = resolveActorSkillProfile(actor, "skill-channeling");
++        return Number(profile?.totalBonus) || 0;
++    } catch (e) {
++        return 0; // registry not ready / no skill item: unskilled
++    }
++}
++
++/** Highest worn Channeling mod on the caster (def stacking: highest). */
++async function wornChannelingModOf(actor) {
++    try {
++        const { getItemEffect } = await import("../data/item-effects/item-effect-loader.js");
++        const { dedupHighestRank } = await import("../item-effects/worn-engine.js");
++        const { isWorn } = await import("../utils/equipment/equipment-utils.js");
++        const worn = (actor?.items ?? []).filter(i => isWorn(i) && i.system?.wornEffect);
++        if (!worn.length) return 0;
++        const resolved = worn.map(item => ({ item, effect: getItemEffect(item.system.wornEffect) }));
++        const { kept } = dedupHighestRank(resolved);
++        let mod = 0;
++        for (const { effect } of kept) {
++            if (!effect || effect.kind !== "worn") continue;
++            for (const p of effect.payload ?? []) {
++                if (p?.type === "modifier" && String(p.modifier ?? "").toLowerCase() === "channeling") {
++                    mod = Math.max(mod, Number(p.value) || 0);
++                }
++            }
++        }
++        return mod;
++    } catch (e) {
++        return 0;
++    }
++}
++
++/**
++ * AA/capstone "fizzle-save" modifiers on the caster (flat points).
++ * Read from spellEffects entries in the same modifier shape the
++ * capstone no-interrupt check uses; AA passives that stamp
++ * source "aa" entries plug straight in. Feeds the Option B save.
++ */
++export function fizzleSaveBonus(actor) {
++    let bonus = 0;
++    try {
++        const effects = actor?.system?.status?.spellEffects || [];
++        for (const e of effects) {
++            if (e.source !== "aa" && e.source !== "capstone") continue;
++            for (const m of (e.modifiers || [])) {
++                if (m.target === "fizzle-save") bonus += Number(m.value) || 0;
++            }
++            if (e.scaledTarget === "fizzle-save") bonus += Number(e.scaledValue) || 0;
++        }
++    } catch (e) { /* non-fatal */ }
++    return bonus;
++}
++
++/**
++ * Roll the Channeling save for a caster. `bonus` adds flat points
++ * (Option B's +25 rides here). Returns the full breakdown so the
++ * caller can narrate the roll.
++ */
++export async function rollChannelingSave(actor, { bonus = 0 } = {}) {
++    const skill = await channelingSkillOf(actor);
++    const wornMod = await wornChannelingModOf(actor);
++    const chance = effectiveChannelingChance(skill, wornMod, bonus);
++    const roll = Math.ceil(Math.random() * 100);
++    return { roll, chance, skill, wornMod, bonus: Number(bonus) || 0, success: roll <= chance };
++}
++
++/**
++ * Interrupt a pending cast (damage, crit or stun while waiting).
+  * Mana was already spent at declaration — it is lost.
++ *
++ * Damage rolls the Channeling save first: a pass keeps the cast
++ * alive (user ruling 2026-11-06). Crits (routed here by
++ * applyCritConditions) and stuns interrupt outright. Capstone
++ * no-interrupt still trumps everything.
+  */
+ export async function interruptPendingCast(actor, reason) {
+     const pending = actor.system?.status?.pendingCast;
+@@ -148,8 +243,26 @@ export async function interruptPendingCast(actor, reason) {
+             }
+         }
+     } catch (e) { /* non-fatal */ }
++    if (reason === "damage") {
++        const save = await rollChannelingSave(actor);
++        if (save.success) {
++            await globalThis.ChatMessage?.create({
++                speaker: globalThis.ChatMessage.getSpeaker({ actor }),
++                content: `<p><em>${actor.name} channels through the hit (${save.roll} vs ${save.chance}% Channeling) — ${pending.spellName} continues!</em></p>`
++            });
++            return false; // Not interrupted: cast survives
++        }
++        await clearPendingCast(actor);
++        await globalThis.ChatMessage?.create({
++            speaker: globalThis.ChatMessage.getSpeaker({ actor }),
++            content: `<p><em>${actor.name}'s ${pending.spellName} is interrupted — concentration lost when damaged (${save.roll} vs ${save.chance}% Channeling)! (mana lost)</em></p>`
++        });
++        return true;
++    }
+     await clearPendingCast(actor);
+-    const why = reason === "stun" ? "stunned" : "damaged";
++    const why = reason === "stun" ? "stunned"
++        : reason === "crit" ? "struck by a critical hit"
++        : "damaged";
+     await globalThis.ChatMessage?.create({
+         speaker: globalThis.ChatMessage.getSpeaker({ actor }),
+         content: `<p><em>${actor.name}'s ${pending.spellName} is interrupted — ${why} while casting! (mana lost)</em></p>`

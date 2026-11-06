@@ -508,6 +508,24 @@ export async function applyCritConditions(targetActor, attackerActor, critText) 
     const tName = targetActor?.name ?? "Target";
     const canApply = !!targetActor && (targetActor.isOwner || game.user?.isGM);
 
+    // Channeling (user ruling 2026-11-06): a critical hit is an
+    // automatic interrupt of a pending cast — no Channeling roll.
+    // Placed here because every crit that lands flows through this
+    // function, while the damage hook fires on the hits update,
+    // which the damage pipeline lands BEFORE the crit is applied.
+    // interruptPendingCast re-checks capstone no-interrupt and
+    // no-ops when nothing is pending (repeat crits included).
+    if (canApply) {
+        try {
+            const baseTarget = targetActor?.isToken
+                ? (globalThis.game?.actors?.get(targetActor?.token?.actorId) ?? targetActor)
+                : targetActor;
+            if (baseTarget?.system?.status?.pendingCast) {
+                await interruptPendingCast(baseTarget, "crit");
+            }
+        } catch (e) { /* non-fatal */ }
+    }
+
     const stun = parseStun(critText);
     // Paralysis (2026-10-20 ruling): full-body crit paralysis is a
     // non-expiring down-or-out — a flag on the stun pool that
@@ -758,7 +776,7 @@ async function syncBardPlaylist(bard) {
 }
 
 // Cast-time pending casts (Option A) tick here on round change.
-import { clearPendingCast } from "../spells/cast-timing.js";
+import { clearPendingCast, interruptPendingCast } from "../spells/cast-timing.js";
 
 /**
  * Tick one actor's pending delayed cast (Option A): decrement
