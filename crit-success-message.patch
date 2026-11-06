@@ -1,0 +1,49 @@
+diff --git a/module/apps/eqrmss-evolution-dialog.js b/module/apps/eqrmss-evolution-dialog.js
+index 7ceef3cd..14ccde55 100644
+--- a/module/apps/eqrmss-evolution-dialog.js
++++ b/module/apps/eqrmss-evolution-dialog.js
+@@ -999,6 +999,11 @@ export class EvolutionDialog extends BaseApplication {
+             return;
+         }
+ 
++        // Burn before narrating (user ruling 2026-11-05): the
++        // success message must report what the combine actually
++        // consumed — on a critical success that is the reduced
++        // burn (or nothing), never the full cost.
++        await consumeFuel();
+         let resultNote = "";
+         if (verdict.kind === "ripening") {
+             const { state: next, bakedTiers } = ripen(state);
+@@ -1030,6 +1035,12 @@ export class EvolutionDialog extends BaseApplication {
+             if (capstoneOption?.pair) next.pairId = state.pairId ?? foundry.utils.randomID();
+             const oldName = vessel.name;
+             const keyName = fodderItem.name;
++            // On a critical success the key is not consumed (the
++            // 2026-10-28 spare-the-key rule) — the message says so
++            // instead of claiming the key was eaten (2026-11-05).
++            const keyClause = fuelOutcome === "critSuccess"
++                ? `uses ${keyName} as a tier key — the critical success leaves the key unconsumed — and is reforged into`
++                : `consumes ${keyName} as a tier key and is reforged into`;
+             const updates = dialog._weaponIdentityUpdate(targetData, next, dialog._effectChoices);
+             // Proc (user ruling 2026-11-05): on a conflict the
+             // player's choice decides; otherwise the one proc that
+@@ -1065,9 +1076,9 @@ export class EvolutionDialog extends BaseApplication {
+                 await actor.createEmbeddedDocuments("Item", [{
+                     name: partnerData.name, img: partnerData.img, type: "weapon", system: partnerSystem
+                 }]);
+-                resultNote = `${oldName} consumes ${keyName} as a tier key and is reforged into ${targetData.name} — Form ${next.form}, manifested as a pair with ${partnerName}. The key's abilities do not carry over. Socketed augments baked in; slots reset.`;
++                resultNote = `${oldName} ${keyClause} ${targetData.name} — Form ${next.form}, manifested as a pair with ${partnerName}. The key's abilities do not carry over. Socketed augments baked in; slots reset.`;
+             } else {
+-                resultNote = `${oldName} consumes ${keyName} as a tier key and is reforged into ${targetData.name} — Form ${next.form}. The key's abilities do not carry over. Socketed augments baked in; slots reset.`;
++                resultNote = `${oldName} ${keyClause} ${targetData.name} — Form ${next.form}. The key's abilities do not carry over. Socketed augments baked in; slots reset.`;
+             }
+         } else {
+             const next = transition(state, verdict.targetSet);
+@@ -1076,7 +1087,6 @@ export class EvolutionDialog extends BaseApplication {
+             await vessel.update(dialog._identityUpdate(targetData, next, null, dialog._effectChoices));
+             resultNote = `${oldName} is reforged into ${targetData.name} — Form ${next.form}. Socketed augments baked in; slots reset.`;
+         }
+-        await consumeFuel();
+         await ChatMessage.create({
+             speaker: ChatMessage.getSpeaker({ actor }),
+             content: `<p><strong>Reforge complete.</strong> ${resultNote} ${rollNote}</p>`
