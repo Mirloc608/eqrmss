@@ -774,21 +774,28 @@ export function validateCatalystCombine(lines, vessel, action, actor) {
     const reasons = [];
     if (!cost) reasons.push("No catalyst cost is authored for this slot.");
     const held = Number(action?.held) || 0;
-    if (cost && held < cost) reasons.push(`Needs ${cost} × ${req.itemName} — you hold ${held}.`);
+    // Item fuel (2026-11-05): selected weapons/shields whose tier
+    // matches the burn's family tier count toward the cost. A mold
+    // transition burns the NEXT form's family, so its fuel tier is
+    // form + 1; every other armor burn reads the current form.
+    const fuel = fuelFromAction(action, moldTransition ? st.form + 1 : st.form);
+    if (cost && held + fuel.value < cost) reasons.push(fuel.value
+        ? `Needs ${cost} fuel — you hold ${held} × ${req.itemName} and ${fuel.value} in item fuel.`
+        : `Needs ${cost} × ${req.itemName} — you hold ${held}.`);
     if (action?.kind === "transition") {
         const nf = nextForm(lines, st, { ...actor, faction: action?.faction });
         if (!nf) reasons.push("This piece is at its line's final form.");
         if (st.combines < 1) reasons.push("Ripen this form at least once before transitioning — the augment combine is mandatory.");
         if (reasons.length === 0) {
-            return { ok: true, kind: "transition", reasons: [], targetSet: nf.set, targetForm: nf.form, requirement: req, cost };
+            return { ok: true, kind: "transition", reasons: [], targetSet: nf.set, targetForm: nf.form, requirement: req, cost, fuel: fuel.items, fuelValue: fuel.value };
         }
-        return { ok: false, kind: null, reasons, requirement: req, cost };
+        return { ok: false, kind: null, reasons, requirement: req, cost, fuel: fuel.items, fuelValue: fuel.value };
     }
     if (st.combines >= formCap(st.form)) {
         reasons.push(`Form ${st.form} is fully ripened (${st.combines}/${formCap(st.form)}) — transition to grow further.`);
     }
-    if (reasons.length === 0) return { ok: true, kind: "ripening", reasons: [], requirement: req, cost };
-    return { ok: false, kind: null, reasons, requirement: req, cost };
+    if (reasons.length === 0) return { ok: true, kind: "ripening", reasons: [], requirement: req, cost, fuel: fuel.items, fuelValue: fuel.value };
+    return { ok: false, kind: null, reasons, requirement: req, cost, fuel: fuel.items, fuelValue: fuel.value };
 }
 
 /**
@@ -899,6 +906,103 @@ export function weaponCatalystCost(lines) {
     return Number(lines?.catalysts?.weaponCost) || 3;
 }
 
+// ------------------------------------------------------------
+// Item fuel (user ruling, 2026-11-05)
+//
+// Weapons and shields may burn as evolution fuel alongside
+// catalysts (which are 1 unit each), feeding weapon and armor
+// combines alike — no separate fuel class. Values come from
+// catalysts.fuel in the line data: by weapon format (piercing /
+// h2h / archery / throwing 1, one-hand 2, two-hand 3) with the
+// Spear attack table reading spearValue even as a 2hp polearm
+// (lances stay 3), and by shield size (small 1, medium 2,
+// large 3). A fuel item's tier is its system.fuelTier stamp
+// (era stamp pass: classic 1, Kunark 2, Velious 3, beyond 4),
+// defaulting to 1 unstamped, and must match the vessel's
+// catalyst family tier. Weapons that can key a transition
+// (ladder identity or an evolutionTier stamp) are key-only and
+// never burn as fuel; evolving vessels are never fuel either.
+// ------------------------------------------------------------
+
+/** The size class of a shield item: small | medium | large. */
+export function shieldSizeOf(item) {
+    const s = item?.system ?? {};
+    const stamped = String(s.shieldSize ?? "").toLowerCase();
+    if (["small", "medium", "large"].includes(stamped)) return stamped;
+    const tpl = String(s.shieldTemplate ?? s.templateId ?? "").toLowerCase();
+    const byTemplate = {
+        target_shield: "small", buckler: "small",
+        normal_shield: "medium", kite_shield: "medium",
+        full_shield: "large", wall_shield: "large", tower_shield: "large"
+    };
+    if (byTemplate[tpl]) return byTemplate[tpl];
+    const name = String(item?.name ?? "").toLowerCase();
+    if (/buckler|target/.test(name)) return "small";
+    if (/tower|pavise|wall|full shield|aegis/.test(name)) return "large";
+    return "medium";
+}
+
+/** True when the item is a shield for fuel purposes (shield-type
+ *  items, plus armor-typed shields such as crafted wood shields). */
+export function isShieldItem(item) {
+    if (!item) return false;
+    if (item.type === "shield") return true;
+    return item.type === "armor"
+        && (item.system?.armorLocation === "shield" || !!item.system?.woodShield);
+}
+
+/** Fuel units an item burns for, or null when it cannot be fuel. */
+export function fuelValueOf(lines, item) {
+    if (!item) return null;
+    const cfg = lines?.catalysts?.fuel ?? {};
+    if (item.type === "weapon") {
+        const format = formatOfWeapon(lines, item);
+        if (!format) return null;
+        if (format === "2hp" && String(item.system?.attackTable ?? "") === "Spear") {
+            return Number(cfg.spearValue) || 1;
+        }
+        const v = Number(cfg.formatValues?.[format]);
+        return Number.isFinite(v) && v > 0 ? v : null;
+    }
+    if (isShieldItem(item)) {
+        const v = Number(cfg.shieldValues?.[shieldSizeOf(item)]);
+        return Number.isFinite(v) && v > 0 ? v : null;
+    }
+    return null;
+}
+
+/** A fuel item's tier: its system.fuelTier stamp, default 1. */
+export function fuelTierOf(item) {
+    const t = Number(item?.system?.fuelTier);
+    return Number.isFinite(t) && t > 0 ? Math.floor(t) : 1;
+}
+
+/**
+ * The fuel descriptor for an item ({ id, name, value, tier }), or
+ * null when the item cannot burn as fuel: not a weapon/shield,
+ * no readable value, a key-only named weapon, or itself an
+ * evolving vessel.
+ */
+export function fuelDescriptor(lines, item) {
+    if (!item) return null;
+    if (item.system?.evolution) return null;
+    if (item.type === "weapon" && weaponKeyTierOf(lines, item) != null) return null;
+    const value = fuelValueOf(lines, item);
+    if (value == null) return null;
+    return { id: item.id ?? null, name: item.name ?? "", value, tier: fuelTierOf(item) };
+}
+
+/**
+ * Sum an action's tier-matching item fuel. `action.fuel` carries
+ * descriptors ({ value, tier }) precomputed by the caller; only
+ * entries matching the wanted tier count.
+ */
+export function fuelFromAction(action, tier) {
+    const list = Array.isArray(action?.fuel) ? action.fuel : [];
+    const items = list.filter(f => Number(f?.tier) === Number(tier) && Number(f?.value) > 0);
+    return { value: items.reduce((sum, f) => sum + Number(f.value), 0), items };
+}
+
 /**
  * Validate a weapon combine (weapons-fuel ruling, 2026-11-04).
  *   vessel: { item, state }
@@ -952,13 +1056,18 @@ export function validateWeaponCombine(lines, vessel, action, actor) {
     if (!req) return fail([`No catalyst family is authored for form ${st.form}.`]);
     const cost = weaponCatalystCost(lines);
     const held = Number(action?.held) || 0;
+    // Item fuel (2026-11-05): tier-matching weapons/shields count
+    // toward the burn, exactly as for armor combines.
+    const fuel = fuelFromAction(action, st.form);
     const reasons = [];
-    if (held < cost) reasons.push(`Needs ${cost} × ${req.itemName} — you hold ${held}.`);
+    if (held + fuel.value < cost) reasons.push(fuel.value
+        ? `Needs ${cost} fuel — you hold ${held} × ${req.itemName} and ${fuel.value} in item fuel.`
+        : `Needs ${cost} × ${req.itemName} — you hold ${held}.`);
     if (st.combines >= formCap(st.form)) {
         reasons.push(`Form ${st.form} is fully ripened (${st.combines}/${formCap(st.form)}) — transition to grow further.`);
     }
-    if (reasons.length) return fail(reasons, { requirement: req, cost });
-    return { ok: true, kind: "ripening", reasons: [], targetForm: st.form, targetSet: null, requirement: req, cost };
+    if (reasons.length) return fail(reasons, { requirement: req, cost, fuel: fuel.items, fuelValue: fuel.value });
+    return { ok: true, kind: "ripening", reasons: [], targetForm: st.form, targetSet: null, requirement: req, cost, fuel: fuel.items, fuelValue: fuel.value };
 }
 
 /**

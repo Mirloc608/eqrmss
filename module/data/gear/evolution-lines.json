@@ -19967,6 +19967,26 @@
  },
  "catalysts": {
   "weaponCost": 3,
+  "fuel": {
+   "comment": "Item fuel (user ruling 2026-11-05): weapons and shields may burn as evolution fuel alongside catalysts (1 unit each), feeding weapon and armor combines alike. Values by weapon format; the Spear attack table reads spearValue even in the 2hp polearm format (the spear carve-out — lances stay 3). Shields value by size (target/normal/full/wall composer templates, else name). A fuel item's tier is its system.fuelTier stamp (era stamp pass: classic 1, Kunark 2, Velious 3, beyond 4), defaulting to 1 unstamped; the tier must match the vessel's catalyst family tier. Weapons that can key a transition (ladder identity or an evolutionTier stamp) are key-only and never burn as fuel; evolving vessels are never fuel.",
+   "formatValues": {
+    "piercing": 1,
+    "h2h": 1,
+    "archery": 1,
+    "throwing": 1,
+    "1hs": 2,
+    "1hb": 2,
+    "2hs": 3,
+    "2hb": 3,
+    "2hp": 3
+   },
+   "spearValue": 1,
+   "shieldValues": {
+    "small": 1,
+    "medium": 2,
+    "large": 3
+   }
+  },
   "comment": "Crescent Reach redesign (2026-10-27): armor combines burn stackable catalyst materials, not armor pieces. Weapons-fuel ruling (2026-11-04): weapon RIPENING burns the same families — weaponCost units of the family's plate (metal) material per combine (at form 4, any faction's plate mold); weapon TRANSITIONS consume a named weapon key instead of catalyst. slotCosts = units per combine by vessel slot (every combine, ripening or transition). families are keyed by the vessel's CURRENT form (tier): form 1 burns Decaying, form 2 burns Rubicite, form 3 burns Sebilite. Form 4 has no single family: its pieces ripen on their own faction's molds (families['4'].factions, keyed by the vessel set's faction), and the form-3 TRANSITION burns a chosen faction's mold instead of Sebilite — the mold decides the form-4 set (variants on the form-4 entry). The material within a family follows the vessel's material class (a line may override with catalystCategory — beastlord is leather).",
   "slotCosts": {
    "head": 3,

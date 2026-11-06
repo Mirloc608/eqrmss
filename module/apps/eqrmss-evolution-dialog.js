@@ -30,7 +30,7 @@ import {
     weaponFormats, legalWeaponFormats, weaponCurve, formatOfWeapon,
     classifyWeapon, countEvolvingWeapons, capstoneOptions,
     weaponCatalystRequirement, weaponCatalystCost, weaponKeyTierOf,
-    validateWeaponCombine, resolveProcChoice
+    validateWeaponCombine, resolveProcChoice, fuelDescriptor
 } from "../gear/evolution.js";
 import { canUseTradeskill, CRIT_FAIL_RANGE, CRIT_SUCCESS_RANGE } from "../tradeskills/tradeskill-engine.js";
 import { normalizeCatalogData } from "../utils/inventory/catalog-picker.js";
@@ -92,6 +92,46 @@ export class EvolutionDialog extends BaseApplication {
         // 2026-11-05): vessel | target, defaulting to the vessel's
         // (keep existing). Only consulted on a genuine conflict.
         this._effectChoices = { triggeredEffect: "vessel", wornEffect: "vessel" };
+        // Item fuel (2026-11-05): ids of held weapons/shields the
+        // player has ticked to burn toward the next combine.
+        this._fuelIds = new Set();
+    }
+
+    /** Fuel descriptors for the currently ticked items. */
+    _selectedFuel(lines) {
+        const out = [];
+        for (const id of this._fuelIds) {
+            const item = this.actor.items.get(id);
+            if (!item) continue;
+            const d = fuelDescriptor(lines, item);
+            if (d) out.push(d);
+        }
+        return out;
+    }
+
+    /**
+     * The fuel panel model for a burn at `tierWanted`: held,
+     * unequipped weapons/shields that may burn (not key-only named
+     * weapons, not vessels), tier-matching, with tick state.
+     */
+    _fuelContext(lines, tierWanted, cost, held) {
+        const options = [];
+        for (const item of this.actor.items) {
+            if (item.id === this.vessel.id) continue;
+            if (item.system?.location === "equipped") continue;
+            const d = fuelDescriptor(lines, item);
+            if (!d || d.tier !== tierWanted) continue;
+            options.push({
+                id: item.id, name: item.name, img: item.img,
+                value: d.value, tier: d.tier,
+                selected: this._fuelIds.has(item.id)
+            });
+        }
+        options.sort((a, b) => (a.value - b.value) || a.name.localeCompare(b.name));
+        const live = new Set(options.map(o => o.id));
+        for (const id of [...this._fuelIds]) if (!live.has(id)) this._fuelIds.delete(id);
+        const value = options.filter(o => o.selected).reduce((s, o) => s + o.value, 0);
+        return { options, value, tier: tierWanted, cost, held, covered: held + value };
     }
 
     get title() {
@@ -272,7 +312,7 @@ export class EvolutionDialog extends BaseApplication {
             context.catalyst = req ? { name: req.itemName, family: req.family, cost, held } : null;
             const actions = [];
             const ripenVerdict = req
-                ? validateCatalystCombine(lines, vesselDesc, { kind: "ripening", held }, actorDesc)
+                ? validateCatalystCombine(lines, vesselDesc, { kind: "ripening", held, fuel: this._selectedFuel(lines) }, actorDesc)
                 : { ok: false, reasons: ["No catalyst family is authored for this form."] };
             actions.push({
                 id: "ripening",
@@ -292,7 +332,7 @@ export class EvolutionDialog extends BaseApplication {
                     const mheld = mreq ? this._catalystHeld(mreq.itemName) : 0;
                     const verdict = mreq
                         ? validateCatalystCombine(lines, vesselDesc,
-                            { kind: "transition", held: mheld, faction: facKey }, actorDesc)
+                            { kind: "transition", held: mheld, faction: facKey, fuel: this._selectedFuel(lines) }, actorDesc)
                         : { ok: false, reasons: ["No mold is authored for this material class."] };
                     const tnf = nextForm(lines, state, { ...actorDesc, faction: facKey });
                     actions.push({
@@ -304,7 +344,7 @@ export class EvolutionDialog extends BaseApplication {
                 }
             } else {
                 const verdict = req
-                    ? validateCatalystCombine(lines, vesselDesc, { kind: "transition", held }, actorDesc)
+                    ? validateCatalystCombine(lines, vesselDesc, { kind: "transition", held, fuel: this._selectedFuel(lines) }, actorDesc)
                     : { ok: false, reasons: ["No catalyst family is authored for this form."] };
                 actions.push({
                     id: "transition",
@@ -324,6 +364,21 @@ export class EvolutionDialog extends BaseApplication {
             context.selectedIsTransition = context.selectedAction?.kind === "transition";
             selKind = context.selectedAction?.kind ?? null;
             selectionOk = !!context.selectedAction?.ok;
+
+            // Item fuel panel for the selected burn (2026-11-05):
+            // a mold transition burns the next form's family, so
+            // its fuel tier and held count follow the mold.
+            {
+                const sel = context.selectedAction;
+                let fuelTier = state.form, fuelHeld = held;
+                if (sel?.kind === "transition" && factions) {
+                    fuelTier = state.form + 1;
+                    const treq = catalystRequirement(lines, state, vesselDesc.category,
+                        { forTransition: true, faction: sel.faction ?? null });
+                    if (treq) fuelHeld = this._catalystHeld(treq.itemName);
+                }
+                context.fuel = this._fuelContext(lines, fuelTier, cost, fuelHeld);
+            }
 
             // Effect choice (user ruling 2026-11-05): when the
             // transition target carries a click/worn effect that
@@ -373,7 +428,7 @@ export class EvolutionDialog extends BaseApplication {
             const wheld = wreq ? wreq.itemNames.reduce((sum, n) => sum + this._catalystHeld(n), 0) : 0;
             context.catalyst = wreq ? { name: wreq.itemNames.join(" / "), family: wreq.family, cost: wcost, held: wheld } : null;
             const ripenVerdict = wreq
-                ? validateWeaponCombine(lines, vesselDesc, { kind: "ripening", held: wheld }, actorDesc)
+                ? validateWeaponCombine(lines, vesselDesc, { kind: "ripening", held: wheld, fuel: this._selectedFuel(lines) }, actorDesc)
                 : { ok: false, reasons: ["No catalyst family is authored for this form."] };
 
             // Transition key candidates: named weapons only —
@@ -416,6 +471,12 @@ export class EvolutionDialog extends BaseApplication {
             context.selectedIsTransition = context.selectedAction?.kind === "transition";
             selKind = context.selectedAction?.kind ?? null;
             selectionOk = !!context.selectedAction?.ok;
+
+            // Item fuel panel: ripening only — a weapon transition
+            // burns its named key, never fuel (2026-11-05).
+            context.fuel = context.selectedAction?.kind === "ripening"
+                ? this._fuelContext(lines, state.form, wcost, wheld)
+                : null;
 
             // Proc + effect choice (user ruling 2026-11-05 —
             // restores the proc choice the 2026-11-04 fuel rebuild
@@ -540,6 +601,15 @@ export class EvolutionDialog extends BaseApplication {
         this.element?.querySelector(".evo-action-select")?.addEventListener("change", ev => {
             this._actionId = ev.target.value;
             this.render();
+        });
+        this.element?.querySelectorAll(".evo-fuel-check").forEach(cb => {
+            cb.addEventListener("change", ev => {
+                const id = ev.target.dataset.fuelId;
+                if (!id) return;
+                if (ev.target.checked) this._fuelIds.add(id);
+                else this._fuelIds.delete(id);
+                this.render();
+            });
         });
         this.element?.querySelectorAll("input[name='evo-route']").forEach(r => {
             r.addEventListener("change", ev => {
@@ -799,7 +869,7 @@ export class EvolutionDialog extends BaseApplication {
             const req = catalystRequirement(lines, state, vesselDesc.category,
                 { forTransition: kind === "transition" && !!lines.catalysts?.families?.[String(state.form + 1)]?.factions, faction });
             const held = req ? dialog._catalystHeld(req.itemName) : 0;
-            verdict = validateCatalystCombine(lines, vesselDesc, { kind, held, faction }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
+            verdict = validateCatalystCombine(lines, vesselDesc, { kind, held, faction, fuel: dialog._selectedFuel(lines) }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
             consumedLabel = verdict.requirement ? `${verdict.cost ?? 0} × ${verdict.requirement.itemName}` : "the catalyst materials";
         } else {
             // Weapon combine: the action select picks ripening
@@ -813,7 +883,7 @@ export class EvolutionDialog extends BaseApplication {
             } else {
                 const req = weaponCatalystRequirement(lines, state);
                 const held = req ? req.itemNames.reduce((sum, n) => sum + dialog._catalystHeld(n), 0) : 0;
-                verdict = validateWeaponCombine(lines, vesselDesc, { kind: "ripening", held }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
+                verdict = validateWeaponCombine(lines, vesselDesc, { kind: "ripening", held, fuel: dialog._selectedFuel(lines) }, { classKey: ctx.classKey, raceKey: ctx.raceKey });
                 consumedLabel = verdict.requirement ? `${verdict.cost ?? 0} × ${verdict.requirement.itemName}` : "the catalyst materials";
             }
         }
@@ -826,23 +896,54 @@ export class EvolutionDialog extends BaseApplication {
         // doubled).
         let fuelOutcome = "normal";
         const consumeFuel = async () => {
+            // Item fuel (2026-11-05): the ticked weapons/shields burn
+            // first, smallest value first, and catalysts cover the
+            // remainder; ticked items the burn does not reach stay in
+            // inventory. The outcome scaling is unchanged (crit fail
+            // doubles the units, crit success burns 1 — or none at
+            // cost 1); it applies to the combined burn.
+            const burnWithFuel = async (units, burnCatalysts) => {
+                let remaining = units;
+                const burned = [];
+                const chosen = [...(verdict.fuel ?? [])].sort((a, b) => a.value - b.value);
+                for (const f of chosen) {
+                    if (remaining <= 0) break;
+                    const item = actor.items.get(f.id);
+                    if (!item) continue;
+                    await dialog._consumeItem(item);
+                    remaining -= f.value;
+                    burned.push(item.name);
+                }
+                const catQty = Math.max(0, remaining);
+                if (catQty > 0) await burnCatalysts(catQty);
+                return { burned, catQty };
+            };
+            const outcomeQty = (cost) => fuelOutcome === "critFail" ? cost * 2
+                : fuelOutcome === "critSuccess" ? (cost > 1 ? 1 : 0)
+                : cost;
             if (state.kind === "armor") {
                 const cost = verdict.cost ?? 0;
-                const qty = fuelOutcome === "critFail" ? cost * 2
-                    : fuelOutcome === "critSuccess" ? (cost > 1 ? 1 : 0)
-                    : cost;
-                if (qty > 0) await dialog._consumeCatalyst(verdict.requirement.itemName, qty);
-                consumedLabel = `${qty} × ${verdict.requirement.itemName}`;
+                const qty = outcomeQty(cost);
+                if (qty > 0) {
+                    const { burned, catQty } = await burnWithFuel(qty,
+                        async (n) => dialog._consumeCatalyst(verdict.requirement.itemName, n));
+                    consumedLabel = [...burned, ...(catQty ? [`${catQty} × ${verdict.requirement.itemName}`] : [])].join(" + ");
+                } else {
+                    consumedLabel = "nothing";
+                }
             } else if (verdict.kind === "ripening") {
                 // Weapon ripening burns catalyst like armor
                 // (double on a crit fail; 1 — or none at cost 1 —
                 // on a crit success).
                 const cost = verdict.cost ?? 0;
-                const qty = fuelOutcome === "critFail" ? cost * 2
-                    : fuelOutcome === "critSuccess" ? (cost > 1 ? 1 : 0)
-                    : cost;
-                if (qty > 0) await dialog._consumeWeaponCatalyst(verdict.requirement.itemNames, qty);
-                consumedLabel = `${qty} × ${verdict.requirement.itemName}`;
+                const qty = outcomeQty(cost);
+                if (qty > 0) {
+                    const { burned, catQty } = await burnWithFuel(qty,
+                        async (n) => dialog._consumeWeaponCatalyst(verdict.requirement.itemNames, n));
+                    consumedLabel = [...burned, ...(catQty ? [`${catQty} × ${verdict.requirement.itemName}`] : [])].join(" + ");
+                } else {
+                    consumedLabel = "nothing";
+                }
             } else if (fuelOutcome === "critSuccess") {
                 consumedLabel = `nothing (the ${fodderItem.name} survives)`;
             } else {

@@ -55,6 +55,17 @@
             <p class="evo-verdict bad"><i class="fas fa-times"></i> {{selectedAction.reasons.[0]}}</p>
             {{/if}}
         {{/if}}
+        {{#if fuel.options.length}}
+        <div class="evo-fuel-panel">
+            <p class="evo-fodder-label">Item fuel (tier {{fuel.tier}}): ticked {{fuel.value}} + {{fuel.held}} catalyst = {{fuel.covered}} of {{fuel.cost}} needed</p>
+            {{#each fuel.options}}
+            <label class="evo-fuel-option">
+                <input type="checkbox" class="evo-fuel-check" data-fuel-id="{{id}}" {{#if selected}}checked{{/if}} />
+                {{name}} — {{value}} fuel
+            </label>
+            {{/each}}
+        </div>
+        {{/if}}
         {{#if fxChoices.length}}
         {{#each fxChoices}}
         <div class="evo-fx-choice">
@@ -101,6 +112,17 @@
             {{/if}}
         {{else}}
         <p class="evo-verdict">No combine is available for this weapon.</p>
+        {{/if}}
+        {{#if fuel.options.length}}
+        <div class="evo-fuel-panel">
+            <p class="evo-fodder-label">Item fuel (tier {{fuel.tier}}): ticked {{fuel.value}} + {{fuel.held}} catalyst = {{fuel.covered}} of {{fuel.cost}} needed</p>
+            {{#each fuel.options}}
+            <label class="evo-fuel-option">
+                <input type="checkbox" class="evo-fuel-check" data-fuel-id="{{id}}" {{#if selected}}checked{{/if}} />
+                {{name}} — {{value}} fuel
+            </label>
+            {{/each}}
+        </div>
         {{/if}}
         {{#if showCapstone}}
         <div class="evo-capstone-choice">
@@ -156,7 +178,7 @@
                 Pay a smith — {{feeGp}} gp (you have {{wealthGp}} gp), 5% failure, fee kept on failure
             </label>
         </div>
-        <p class="evo-stakes">On failure the vessel is returned intact, but the {{#if catalystMode}}catalyst materials are{{else}}fuel or transition key is{{/if}} lost.</p>
+        <p class="evo-stakes">On failure the vessel is returned intact, but the {{#if catalystMode}}fuel is{{else}}fuel or transition key is{{/if}} lost.</p>
         <button type="button" class="evo-combine-btn" data-action="combine" {{#unless canCombine}}disabled{{/unless}}>
             <i class="fas fa-fire"></i> Reforge
         </button>
