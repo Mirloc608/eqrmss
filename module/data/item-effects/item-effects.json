@@ -1225,6 +1225,27 @@
    "stacking": "highest"
   },
   {
+   "description": "Worn effect: +5% Channeling skill. Improves the chance to finish a cast while taking damage (pushback/interruption); cannot raise Channeling past the level cap, and does not prevent stuns.",
+   "family": "channeling-mod",
+   "id": "channeling-mod-5",
+   "kind": "worn",
+   "name": "Channeling +5%",
+   "payload": [
+    {
+     "modifier": "channeling",
+     "type": "modifier",
+     "value": 5,
+     "unit": "percent",
+     "limits": [
+      "skill-cap-applies",
+      "stun-not-prevented"
+     ]
+    }
+   ],
+   "rank": 1,
+   "stacking": "highest"
+  },
+  {
    "id": "clairvoyance-1",
    "kind": "worn",
    "family": "clairvoyance",
@@ -2741,6 +2762,26 @@
      "stat": "ac",
      "amount": 54,
      "duration": 60
+    }
+   ]
+  },
+  {
+   "id": "clicky-form-of-endurance",
+   "kind": "triggered",
+   "name": "Form of Endurance",
+   "description": "Triggered effect: Form of Endurance gives the target an Earth Elemental illusion and +180 maximum hit points for 90 minutes (duration unverified).",
+   "payload": [
+    {
+     "type": "illusion",
+     "race": "earth-elemental",
+     "displayName": "Earth Elemental",
+     "duration": 900
+    },
+    {
+     "type": "buff",
+     "stat": "hp",
+     "amount": 180,
+     "duration": 900
     }
    ]
   },
