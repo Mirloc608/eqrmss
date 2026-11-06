@@ -19,6 +19,3 @@ export { loadEQRMSSTemplates }         from "./template-loader.js";
 // Data loader registration + runtime loader
 export { registerEQRMSSDataLoaders }   from "./register-data-loaders.js";
 export { initializeEQRMSSDataLoaders } from "./initialize-data-loaders.js";
-
-// Optional: re-export the data loader registry itself if needed elsewhere
-export { EQRMSS_DATA_LOADERS }         from "../data/loaders/index.js";

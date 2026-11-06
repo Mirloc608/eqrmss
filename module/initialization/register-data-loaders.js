@@ -1,20 +1,20 @@
 // ============================================================
 // EQRMSS Data Loader Registration
 // ============================================================
+// The data loaders themselves run through
+// initializeEQRMSSDataLoaders (initialize-data-loaders.js),
+// which eqrmss.js invokes during the ready pipeline. This
+// registration only exposes that entry point on game.eqrmss.
+// (The former EQRMSS_DATA_LOADERS registry in
+// module/data/loaders/index.js was removed in the 2026-11-05
+// cleanup: it was never called, and its wrappers referenced
+// identifiers that do not exist.)
+// ============================================================
 
 import { initializeEQRMSSDataLoaders } from "./initialize-data-loaders.js";
-import { EQRMSS_DATA_LOADERS } from "../data/loaders/index.js";
 
 export function registerEQRMSSDataLoaders() {
   console.info("EQRMSS | Registering data loaders");
-
-  for (const entry of EQRMSS_DATA_LOADERS) {
-    if (typeof entry.loader !== "function") {
-      console.error(
-        `EQRMSS | Invalid data loader: ${entry.name}. Expected loader to be a function.`
-      );
-    }
-  }
 
   game.eqrmss = game.eqrmss || {};
   game.eqrmss.initializeDataLoaders = initializeEQRMSSDataLoaders;
