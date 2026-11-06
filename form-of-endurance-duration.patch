@@ -1,0 +1,27 @@
+diff --git a/module/data/item-effects/item-effects.json b/module/data/item-effects/item-effects.json
+index dce8a291..9c18aae2 100644
+--- a/module/data/item-effects/item-effects.json
++++ b/module/data/item-effects/item-effects.json
+@@ -2769,19 +2769,19 @@
+    "id": "clicky-form-of-endurance",
+    "kind": "triggered",
+    "name": "Form of Endurance",
+-   "description": "Triggered effect: Form of Endurance gives the target an Earth Elemental illusion and +180 maximum hit points for 90 minutes (duration unverified).",
++   "description": "Triggered effect: Form of Endurance gives the target an Earth Elemental illusion and +180 maximum hit points for 9 rounds.",
+    "payload": [
+     {
+      "type": "illusion",
+      "race": "earth-elemental",
+      "displayName": "Earth Elemental",
+-     "duration": 900
++     "duration": 9
+     },
+     {
+      "type": "buff",
+      "stat": "hp",
+      "amount": 180,
+-     "duration": 900
++     "duration": 9
+     }
+    ]
+   },
