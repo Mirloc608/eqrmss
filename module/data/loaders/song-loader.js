@@ -89,6 +89,18 @@ export async function loadSongs()
         CONFIG.EQRMSS.songs =
             songs;
 
+        // Bridge into the game.eqrmss namespace (2026-11-06): the
+        // song systems — the spells/songs.js catalog fallback and
+        // the song unlock engine — read game.eqrmss.data.songs,
+        // which was never populated. Songs are bard-only, so the
+        // flat registry is also the bard class list.
+        if (globalThis.game) {
+            game.eqrmss ??= {};
+            game.eqrmss.songs = { songs, songsByClass: { bard: songs } };
+            game.eqrmss.data = game.eqrmss.data || {};
+            game.eqrmss.data.songs = game.eqrmss.songs;
+        }
+
 
         console.info(
             "EQRMSS | Songs loaded",

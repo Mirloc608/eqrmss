@@ -1,0 +1,43 @@
+diff --git a/module/data/loaders/song-loader.js b/module/data/loaders/song-loader.js
+index 4edbc263..e5095710 100644
+--- a/module/data/loaders/song-loader.js
++++ b/module/data/loaders/song-loader.js
+@@ -89,6 +89,18 @@ export async function loadSongs()
+         CONFIG.EQRMSS.songs =
+             songs;
+ 
++        // Bridge into the game.eqrmss namespace (2026-11-06): the
++        // song systems — the spells/songs.js catalog fallback and
++        // the song unlock engine — read game.eqrmss.data.songs,
++        // which was never populated. Songs are bard-only, so the
++        // flat registry is also the bard class list.
++        if (globalThis.game) {
++            game.eqrmss ??= {};
++            game.eqrmss.songs = { songs, songsByClass: { bard: songs } };
++            game.eqrmss.data = game.eqrmss.data || {};
++            game.eqrmss.data.songs = game.eqrmss.songs;
++        }
++
+ 
+         console.info(
+             "EQRMSS | Songs loaded",
+diff --git a/module/initialization/initialize-data-loaders.js b/module/initialization/initialize-data-loaders.js
+index 9e889a85..338c1733 100644
+--- a/module/initialization/initialize-data-loaders.js
++++ b/module/initialization/initialize-data-loaders.js
+@@ -211,6 +211,7 @@ export async function initializeDataLoaders() {
+     if (!game.eqrmss.spells) game.eqrmss.spells = {};
+     if (!game.eqrmss.abilities) game.eqrmss.abilities = {};
+     if (!game.eqrmss.skills) game.eqrmss.skills = {};
++    if (!game.eqrmss.songs) game.eqrmss.songs = { songs: [], songsByClass: { bard: [] } };
+ 
+     // Final filter
+     for (const k of Object.keys(game.eqrmss.races)) {
+@@ -223,6 +224,7 @@ export async function initializeDataLoaders() {
+     game.eqrmss.data.spells = game.eqrmss.spells;
+     game.eqrmss.data.abilities = game.eqrmss.abilities;
+     game.eqrmss.data.skills = game.eqrmss.skills;
++    game.eqrmss.data.songs = game.eqrmss.songs;
+ 
+     console.log("EQRMSS | initializeDataLoaders() v4.14 complete", game.eqrmss._loadStatus);
+     Hooks.callAll("eqrmss:dataLoadersReady", game.eqrmss);

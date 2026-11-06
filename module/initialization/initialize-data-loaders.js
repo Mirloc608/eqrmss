@@ -211,6 +211,7 @@ export async function initializeDataLoaders() {
     if (!game.eqrmss.spells) game.eqrmss.spells = {};
     if (!game.eqrmss.abilities) game.eqrmss.abilities = {};
     if (!game.eqrmss.skills) game.eqrmss.skills = {};
+    if (!game.eqrmss.songs) game.eqrmss.songs = { songs: [], songsByClass: { bard: [] } };
 
     // Final filter
     for (const k of Object.keys(game.eqrmss.races)) {
@@ -223,6 +224,7 @@ export async function initializeDataLoaders() {
     game.eqrmss.data.spells = game.eqrmss.spells;
     game.eqrmss.data.abilities = game.eqrmss.abilities;
     game.eqrmss.data.skills = game.eqrmss.skills;
+    game.eqrmss.data.songs = game.eqrmss.songs;
 
     console.log("EQRMSS | initializeDataLoaders() v4.14 complete", game.eqrmss._loadStatus);
     Hooks.callAll("eqrmss:dataLoadersReady", game.eqrmss);
