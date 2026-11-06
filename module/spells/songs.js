@@ -701,6 +701,25 @@ export async function applySong(bard, songItem, targets = [], opts = {}) {
                 const pacRounds = durationRounds(eff?.duration) ?? 5;
                 notes += await applyPacify(bard, target, { rounds: pacRounds, sourceName: name });
                 if (!_hadSong) _xpFreshLand = true;
+            } else if (String(eff?.stat ?? "").toLowerCase() === "damage-shield") {
+                // Damage shield (2026-11-05): stamp the shield slot
+                // through the item-effects pipeline (the single
+                // writer of system.status.damageShield), at the
+                // bard's performance OB like the song's other
+                // table-routed effects. Maintained re-application
+                // refreshes via the pipeline's same-source rule;
+                // when the song stops, the stamp lingers out its
+                // rounds like the song's other entries.
+                const { applyEffectPayload } = await import("../item-effects/damage-pipeline.js");
+                const slug = String(name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+                const results = await applyEffectPayload({
+                    payload: [{ type: "damageshield", amount: effectValue(eff), element: String(eff?.element ?? ""), rounds: durationRounds(eff?.duration) ?? 2 }],
+                    caster: bard, target, source: `song:${slug}`, obOverride: songOBFor(bard, songItem)
+                });
+                for (const r of results ?? []) {
+                    for (const n of r?.notes ?? []) notes += `<p><em>${tName}: ${esc(n)}.</em></p>`;
+                }
+                if (!_hadSong) _xpFreshLand = true;
             } else {
                 const entry = maintainedEntry(bard, songItem, label, eff, type, { stat: eff?.stat ?? null, value: effectValue(eff) });
                 const stack = checkBuffStacking(target, entry.scaledTarget, entry.scaledStat, entry.scaledValue, entry.songId);

@@ -117,6 +117,16 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
             scaled.stat = null;
             scaled.value = Math.max(1, Math.round(rawValue));
         }
+        // Damage shield (2026-11-05): flat SIGNED amount, NO EQ÷10
+        // scaling — the sign is the reverse marker (Mark of Karn).
+        // Routed through the item-effects pipeline in the apply loop
+        // below, which stamps system.status.damageShield; no
+        // spellEffects entry is created.
+        if (stat === "damage-shield") {
+            scaled.target = "damage-shield";
+            scaled.stat = null;
+            scaled.value = rawValue;
+        }
         // Resists (2026-10-07): EQ÷10, min 1. Creates spellEffects entries
         // with scaledTarget "resist-<element>", read by getTargetModifiers.
         if (stat.startsWith("resist-")) {
@@ -189,6 +199,24 @@ export async function applySpellBuffs(caster, spellItem, target, durationFactor 
                 source: name
             }});
             notes.push(`${esc(target.name)}: absorbs ${scaled.value} damage for ${effRounds} rounds (${esc(name)}).`);
+            continue;
+        }
+        // Damage shield (2026-11-05): the item-effects pipeline is
+        // the single writer of system.status.damageShield (Stage 3),
+        // so spell shields resolve identically to item shields —
+        // table + caster OB stamped at application, sign = reverse.
+        // effRounds already carries the seconds→rounds conversion
+        // (and any duration factor) from the top of this loop.
+        if (scaled.target === "damage-shield") {
+            const { applyEffectPayload } = await import("../item-effects/damage-pipeline.js");
+            const slug = String(name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+            const results = await applyEffectPayload({
+                payload: [{ type: "damageshield", amount: rawValue, element: String(eff.element ?? ""), rounds: effRounds }],
+                caster, target, source: `spell:${slug}`
+            });
+            for (const r of results ?? []) {
+                for (const n of r?.notes ?? []) notes.push(`${esc(target.name)}: ${esc(n)}.`);
+            }
             continue;
         }
         let list = [...(Array.isArray(target.system?.status?.spellEffects) ? target.system.status.spellEffects : [])];

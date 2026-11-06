@@ -505,7 +505,7 @@ async function applyBuff({ effect, target, source, caster }) {
  * Stored at system.status.damageShield = { amount (signed), reverse,
  * element, table, critType, ob, casterId, roundsLeft, source }.
  */
-async function applyDamageShield({ effect, target, source, caster }) {
+async function applyDamageShield({ effect, target, source, caster, obOverride }) {
     const miss = requireTarget(target, "damageshield", source);
     if (miss) return miss;
     const rawAmount = Math.round(Number(effect?.amount) || 0);
@@ -519,11 +519,18 @@ async function applyDamageShield({ effect, target, source, caster }) {
     const existingRaw = Number(existing?.amount) || 0;
     const existingAmount = Math.abs(existingRaw);
     const existingReverse = !!existing?.reverse || existingRaw < 0;
+    const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Damage Shield";
+    // Same-source re-application refreshes (2026-11-05): a shield
+    // never blocks its own source at equal or greater strength —
+    // spell recasts and maintained song pulses re-stamp instead of
+    // bouncing off themselves. A weaker same-name rank still loses
+    // to the stronger stamp, per highest-wins.
+    const sameSource = existingAmount > 0 && existingReverse === reverse
+        && String(existing?.source ?? "") === dispName && amount >= existingAmount;
     // Highest wins within the same kind: do not replace a stronger shield.
-    if (existingAmount > 0 && existingReverse === reverse && existingAmount >= amount) {
+    if (!sameSource && existingAmount > 0 && existingReverse === reverse && existingAmount >= amount) {
         return { type: "damageshield", final: existingAmount, notes: [`damage shield blocked by stronger existing shield (${existingAmount})`], source, applied: false };
     }
-    const dispName = String(source ?? "").split(":").pop().replace(/^clicky-/, "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Damage Shield";
     const { attackTable, critType } = tableForElement(effect?.element);
     await persistValue(target, "system.status.damageShield", {
         amount: rawAmount,
@@ -531,7 +538,7 @@ async function applyDamageShield({ effect, target, source, caster }) {
         element: String(effect?.element ?? ""),
         table: attackTable,
         critType,
-        ob: effectOBFor(caster),
+        ob: (obOverride != null && Number.isFinite(Number(obOverride))) ? Number(obOverride) : effectOBFor(caster),
         casterId: caster?.id ?? "",
         roundsLeft: duration,
         source: dispName
@@ -1492,7 +1499,7 @@ export async function applyEffectPayload({ payload, caster, target, source, obOv
         else if (effect.type === "mez") results.push(await applyMez({ effect, target, source }));
         else if (effect.type === "charm") results.push(await applyCharm({ effect, target, source, caster }));
         else if (effect.type === "summon") results.push(await applySummon({ effect, caster, target, source }));
-        else if (effect.type === "damageshield") results.push(await applyDamageShield({ effect, target, source, caster }));
+        else if (effect.type === "damageshield") results.push(await applyDamageShield({ effect, target, source, caster, obOverride }));
         else if (effect.type === "absorb") results.push(await applyAbsorb({ effect, target, source }));
         else if (effect.type === "illusion") results.push(await applyIllusion({ effect, target, source }));
         else if (effect.type === "see-invisible") results.push(await applySeeInvisible({ effect, target, source }));
