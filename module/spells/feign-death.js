@@ -19,7 +19,7 @@
 //   { type: "feign", chance: <0-100> }
 // ============================================================
 
-import { clearAggro } from "./memblur.js";
+import { clearAggro, sweepActors } from "./memblur.js";
 import { removeStatusEffect } from "./status-wiring.js";
 import { combatCard } from "../combat/chat-card.js";
 
@@ -71,11 +71,14 @@ export async function applyFeignDeath(actor, { chance = 95, sourceName = "Feign 
     }
 
     // Success: fall prone and wipe the feigner from EVERY actor's
-    // aggro record. NPC updates are best-effort (non-GM clients
-    // cannot write NPC actors); failures are silently skipped.
+    // aggro record — sweepActors() covers placed token actors as
+    // well as world actors (2026-11-06: aggro lives token-side in
+    // play; game.actors alone missed the mobs in the encounter).
+    // NPC updates are best-effort (non-GM clients cannot write NPC
+    // actors); failures are silently skipped.
     const fid = String(actor.id);
     try {
-        const allActors = [...(globalThis.game?.actors?.contents ?? [])];
+        const allActors = sweepActors();
         for (const a of allActors) {
             if (String(a?.id) === fid) continue;
             try { await clearAggro(a, fid); } catch (e) { /* non-fatal */ }

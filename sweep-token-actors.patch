@@ -1,0 +1,83 @@
+diff --git a/module/spells/feign-death.js b/module/spells/feign-death.js
+index 12c8449a..7de21a12 100644
+--- a/module/spells/feign-death.js
++++ b/module/spells/feign-death.js
+@@ -19,7 +19,7 @@
+ //   { type: "feign", chance: <0-100> }
+ // ============================================================
+ 
+-import { clearAggro } from "./memblur.js";
++import { clearAggro, sweepActors } from "./memblur.js";
+ import { removeStatusEffect } from "./status-wiring.js";
+ import { combatCard } from "../combat/chat-card.js";
+ 
+@@ -71,11 +71,14 @@ export async function applyFeignDeath(actor, { chance = 95, sourceName = "Feign
+     }
+ 
+     // Success: fall prone and wipe the feigner from EVERY actor's
+-    // aggro record. NPC updates are best-effort (non-GM clients
+-    // cannot write NPC actors); failures are silently skipped.
++    // aggro record — sweepActors() covers placed token actors as
++    // well as world actors (2026-11-06: aggro lives token-side in
++    // play; game.actors alone missed the mobs in the encounter).
++    // NPC updates are best-effort (non-GM clients cannot write NPC
++    // actors); failures are silently skipped.
+     const fid = String(actor.id);
+     try {
+-        const allActors = [...(globalThis.game?.actors?.contents ?? [])];
++        const allActors = sweepActors();
+         for (const a of allActors) {
+             if (String(a?.id) === fid) continue;
+             try { await clearAggro(a, fid); } catch (e) { /* non-fatal */ }
+diff --git a/module/spells/memblur.js b/module/spells/memblur.js
+index 6caa30ed..2257e8c8 100644
+--- a/module/spells/memblur.js
++++ b/module/spells/memblur.js
+@@ -98,6 +98,35 @@ export async function recordAggro(target, attacker, { damage = 0, debuffs = 0, h
+     } catch (e) { /* non-fatal */ }
+ }
+ 
++/**
++ * The sweep universe (2026-11-06): base world actors PLUS the actors
++ * of tokens placed on the active scene. Aggro records — like the
++ * spell effects the bard-playlist "Fix A" sweep hunts (crit-
++ * conditions.js, 2026-11-04) — are stamped on token actors in play,
++ * and unlinked token actors are not in game.actors, so a sweep over
++ * game.actors alone misses the mobs actually in the encounter.
++ * Deduped by actor id: a linked token's actor IS the base actor,
++ * and accumulating sweeps (recordHealAggro) must never count one
++ * mob twice.
++ *
++ * @returns {Actor[]} deduplicated actors to sweep
++ */
++export function sweepActors() {
++    const byId = new Map();
++    try {
++        for (const a of globalThis.game?.actors?.contents ?? []) {
++            if (a?.id && !byId.has(a.id)) byId.set(a.id, a);
++        }
++    } catch (e) { /* ignore */ }
++    try {
++        for (const t of globalThis.game?.canvas?.tokens?.placeables ?? []) {
++            const a = t?.actor;
++            if (a?.id && !byId.has(a.id)) byId.set(a.id, a);
++        }
++    } catch (e) { /* ignore */ }
++    return [...byId.values()];
++}
++
+ /**
+  * Record healing aggro (2026-10-08). When a healer restores hits on a
+  * target, mobs with the target on their hate list gain hate towards
+@@ -107,10 +136,7 @@ export async function recordHealAggro(healer, healTarget, healAmount) {
+     const amt = Math.max(0, Math.round(Number(healAmount) || 0));
+     if (amt <= 0 || !healer || !healTarget) return;
+     if (healer.id === healTarget.id) return; // self-heals: no new aggro
+-    let actors = [];
+-    try {
+-        actors = [...(globalThis.game?.actors?.contents ?? [])];
+-    } catch (e) { return; }
++    const actors = sweepActors();
+     for (const mob of actors) {
+         if (!mob || mob.id === healer.id || mob.id === healTarget.id) continue;
+         const aggro = mob.system?.status?.aggro ?? {};
